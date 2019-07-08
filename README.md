@@ -1,79 +1,83 @@
-Dataset and model for disentangling chat on IRC
+# Disentanglement Baseline and Evaluation
 
-# Data
+This folder contains the code needed to run and evaluate the baseline disentanglement model. The files are:
 
-Total lines labeled:
-- 18,924 from 48 hr x 1   (train 1)
-- 1,000 from 100 x 10 x 3 (test 1)
-- 2,500 from 250 x 10 x 2 (dev 2)
-- 5,000 from 500 x 10 x 3 (test 2)
-- 2,600 from 2600 x 1 x 2 (elsner 2)
-- ?     from 500 x ? x 1  (train 2)
-30,024 + ? labeled
-47,124 + ? labels
+- `README.md`, this file
+- `task-4-evaluation.py`, the evaluation program
+- `disentangle.py`, the baseline
+- `reserved_words.py`, a set of words used by the baseline (kept in a separate file for convenience)
+- `disentangle.model`, a trained model for the baseline
+- `glove-ubuntu.txt`, a set of word vectors trained on all of the Ubuntu data (after applying our tokenisation method)
+- `tokenise.py`, a tool to tokenise the text ~as we have in the provided files
 
-Training chosen by randomly picking start messages and keeping 1500 after that.
-Removed cases with '=== ...' messages dominating or in a huge clump.
-Provided 1,000 messages of context.
+## Baseline
 
-# Code
+The baseline is a feedforward neural network with 2 layers, 512 dimensional hidden vectors, and softsign non-linearities. It uses the DyNet library:
 
-## Build assumptions:
+dynet.readthedocs.io
 
-- Installed DyNet, Eigen
-- Defined environment variables for DYNET and EIGEN, (MKL threads if in use), and the C++ compiler, for example:
+This can usually be installed with:
 
-In `~/.bash_profile`
+`pip3 install dynet`
+
+This will train a model with the same parameters as we have used here:
 
 ```
-export DYNET=/path/to/dynet
-export EIGEN=/path/to/eigen
-export MKL_NUM_THREADS=2
-export CXX=g++
+python3 disentangle.py example-train --train ../task-4/train/*annotation.txt --dev ../task-4/dev/*annotation.txt --hidden 512 --drop 0 --layers 2 --nonlin softsign --word-vectors glove-ubuntu.txt --epochs 20 --dynet-autobatch --learning-rate 0.018804 --learning-decay-rate 0.103 --seed 10 --clip 3.740 --weight-decay 1e-07 --momentum 0.96 --opt sgd > example-train.out 2>example-train.err
 ```
 
-Where the paths are to the root directory of the source, and I assume their make processes were run with their default setup.
-
-## Running code
-
-Example run:
+This will run the trained model on the development set:
 
 ```
-./bin/predictor --dynet-mem 3048 --dynet-autobatch 1 --data-train data/list.quarter.train.splitNA.txt --data-dev data/list.quarter.dev.splitNA.txt --data-eval data/list.quarter.dev.splitNA.txt --log-freq 4000 --dev-freq 1 --trainer sgd --model ff --prefix scratch/feb17.ff.quarter.selection.selu.0.0.0.0 --nonlinearity selu --dropout-input 0.0 --dropout-ff 0.0 --instance-type selection --input-hand-crafted --learning-rate 0.0015 --loss-type kHinge --context-size 1
+python3 disentangle.py example-run --model disentangle.model --test ../task-4/dev/*annotation* --hidden 512 --drop 0 --layers 2 --nonlin softsign --test-start 1000 --test-end 2000 --word-vectors glove-ubuntu.txt > example-run.out 2>example-run.err
 ```
 
-## Data preprocessing
+For a full list of arguments run:
 
-The following preprocessing steps were applied to the training and test data:
-
-```bash
-# Convert to ascii
-tools/preprocessing/make_txt.py ${filename}
-
-# Tokenise and replace unknown tokens
-tools/preprocessing/tokenise.py --replace_usernames --cut_timestamp --cut_username --add_line_boundaries --use_vocab ../train/vocab.100 <filename>
+```
+python3 disentangle.py --help
 ```
 
-To get the `vocab.100` file, and to process the complete logs, we did the following:
+## Evaluation
 
-```bash
-# Download data
-tools/preprocessing/get_raw_data/download.sh
+To evaluate the output of a system use:
 
-# Merged and added date stamps
-grep '.' 20*/*/* > ubuntu-full.raw.txt
+```
+python3 task-4-evaluation.py --gold ../task-4/dev/*anno* --auto example-run.out
+```
 
-# Convert to ascii
-tools/preprocessing/make_txt.py ubuntu-full.raw.txt > ubuntu-full.ascii.txt
+For the provided model, that should give:
 
-# Tokenise
-tools/preprocessing/tokenise.py --replace_usernames --cut_timestamp --cut_username --add_line_boundaries ubuntu-full.ascii.txt > ubuntu-full.ascii.tok
+```
+92.15   1 - Scaled VI
+74.19   Adjusted rand index
+40.53   Matched clusters precision
+41.26   Matched clusters recall
+40.89   Matched clusters f-score
+```
 
-# Get frequent tokens
-tools/preprocessing/count_unique.py < ubuntu-full.ascii.tok > ubuntu-full.ascii.tok.counts
-awk '$1 > 99' ubuntu-full.ascii.tok.counts > ubuntu-full.ascii.tok.counts-100
+The format for output files is:
 
-# Tokenise again, now replacing rare words with unknown tokens
-tools/preprocessing/tokenise.py --replace_usernames --cut_timestamp --cut_username --add_line_boundaries --use_vocab ubuntu-full.ascii.tok.counts-100 ubuntu-full.ascii.txt > ubuntu-full.ascii.tok.unk-100
+```
+anything.../filename:line_number line_number -
+```
+
+For example:
+
+```
+../task-4/dev/2004-11-15.annotation.txt:1000 1000 -
+../task-4/dev/2004-11-15.annotation.txt:1001 1001 -
+../task-4/dev/2004-11-15.annotation.txt:1002 1002 -
+../task-4/dev/2004-11-15.annotation.txt:1003 1002 -
+../task-4/dev/2004-11-15.annotation.txt:1004 1003 -
+../task-4/dev/2004-11-15.annotation.txt:1005 1003 -
+```
+
+## Tokenise
+
+Run to convert text to tokens with unk symbols. NOTE: we have done this for you on all the provided files in task 4. This is mainly here in case you wish to use the same process on task 1 or task 2.
+
+```
+./tokenise.py --vocab vocab.txt --output-suffix .tok ASCII_FILENAME
 ```
 

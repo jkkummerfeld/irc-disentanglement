@@ -1,0 +1,1378 @@
+[06:34] <fairyeneried> where i must place this file?
+[06:34] <VoidedCheck> dmsuperman, I've given help here if only a bit, so stick it
+[06:34] <FastZ> fairyeneried: you're a girl?  thank goodness, the IRC handle had me kind of scared for a minute
+[06:34] <Dr_willis> fairyeneried,  like all . files they go in the users home dir.
+[06:34] <Dr_willis> fairyeneried,  with the other .whatever files. :)
+[06:34] <fairyeneried> .whatever, hehehe
+[06:34] <fairyeneried> ok ;)
+[06:35] <FastZ> ;)
+[06:35] <VoidedCheck> I even helped someone realize that they can't access their PSU info from BIOS
+[06:35] <Dr_willis> dont expect fluxbox to 'do' a whole lot in any case. :) it has a little panel, and some menus. and thats it.
+[06:35] <VoidedCheck> as silly as that sounds
+[06:35] <Dr_willis> VoidedCheck,  i saw someone on irc DEmAND we tell him his own phone #.. since he was on dialup.. we should know what it is!
+[06:36] <Dr_willis> VoidedCheck,  :)
+[06:36] <VoidedCheck> it's 555-XXXX!
+[06:36] <MelbourneBloke> Sure .. whats the rule?
+[06:36] <jdrake> Is there a real small ubuntu image I can use to fix a problem? I need something as small as possible (512kbps connection), and the alternate, desktop and server images are all too big.
+[06:37] <VoidedCheck> like debian business cards?
+[06:37] <VoidedCheck> I don't think so, sorry
+[06:37] <Dr_willis> jdrake,  check out 'dsl' or puppylinux for uber-small live cd's   they are not ubuntu specific however
+[06:37] <dmsuperman> jdrake, you could use the linux recovery cd...not sure the website though
+[06:37] <dmsuperman> jdrake, or that. mine also wasn't ubuntu specific
+[06:37] <MelbourneBloke> why dont you search using google image search?
+[06:37] <dmsuperman> ...
+[06:37] <VoidedCheck> image search?
+[06:37] <VoidedCheck> wtf
+[06:38] <jdrake> Don't feed the trolls
+[06:38] <FastZ> jdrake: are you talking about a liveCD?  use Knoppix or something like that
+[06:38] <eth01> topic, now.
+[06:38] <eth01> bloody read it.
+[06:38] <VoidedCheck> the one that points me at the netherlands?
+[06:38] <jdrake> FastZ: I just need a shell with an editor and the ability to mount regular ext3 :-)
+[06:39] <Dr_willis> jdrake,  dsl = 50mb.  if thers any smaller - i dont know of them
+[06:39] <evilbug> is a firewall necessary for ubuntu?
+[06:39] <VoidedCheck> no
+[06:39] <Dr_willis> evilbug,  depends on what you are doing.. most likely. no
+[06:39] <VoidedCheck> ubuntu closes ports by default
+[06:39] <Starnestommy> evilbug: not usually, but iptables/netfilter is installed by default
+[06:40] <evilbug> i see,thanks!
+[06:40] <Starnestommy> ports automatically open when something starts that requests to use that port
+[06:40] <jdrake> Dr_willis: looks good
+[06:40] <jdrake> Merci
+[06:40] <VoidedCheck> iptables is in the kernel, no?
+[06:40] <zvacet> VoidedCheck but if he want to run server,samba,or something klike that?
+[06:40] <Starnestommy> VoidedCheck: it is
+[06:40] <VoidedCheck> kernel?
+[06:40] <Starnestommy> VoidedCheck: iptables is in the kernel
+[06:40] <Dr_willis> iptables is the tool used to confiure the firewalling features of the kernel. yes.
+[06:41] <mikere> I use a simple iptables script on my dev web servers to shut down all ports to the outside except those I really want available - and those I limit to just hte IP's that really need access to them.
+[06:41] <kittykitty> ok... so i can verify that the packets are making it to my firewall but arn't getting passed through, so anyone have suggestions?
+[06:41] <Starnestommy> but you can compile a kernel without it or set the system to not load its modules
+[06:41] <Gnea> !iptables
+[06:41] <ubotu> Ubuntu, like any other linux distribution, has firewall capabilities built-in. The firewall is managed using the 'iptables' command (see https://help.ubuntu.com/community/IptablesHowTo), or GUI applications such as Firestarter (Gnome) or Guarddog (KDE).
+[06:41] <tiocsti> eh, which distro doesnt have firewall capabilities built in?
+[06:42] <tiocsti> oops nevermind misread
+[06:42] <VoidedCheck> Starnestommy, that's a bit higher level than the vast majority of ubuntu users
+[06:43] <Starnestommy> VoidedCheck: there are GUIs for it and there is also the CLI 'iptables' program
+[06:43] <ArtficialSynapse> How's everybody doin??
+[06:46] <VoidedCheck> Starnestommy, that's still a bit high-level for msot
+[06:46] <VoidedCheck> *most
+[06:47] <kristopher> i know in the bash prompt i execute commands like gimp and then a semi colon to wait and excute another command afterwards
+[06:47] <kristopher> how do i do that in a bash script..
+[06:47] <VoidedCheck> most people when shown a GUI still don't know wtf a firewall (especially not a real firewall, but an ip or packet filter) is supposed todo
+[06:47] <zvacet> In hardy will be easier to work with firewall  http://www.ubuntu.com/testing/hardy/beta
+[06:47] <kristopher> so that it executes perl ./blah.pl and then after thats done executes blah2.pl
+[06:48] <Dr_willis> kristopher,  put a command on each line..  or do it with simicolens same as the shell.
+[06:48] <VoidedCheck> I'm usi8ng hardy right now, and I've never seen anything like a firewall interface
+[06:48] <VoidedCheck> except telneting into my router
+[06:48] <Dr_willis> kristopher,  assuming your commands dont background, it shoulkd work the same way
+[06:48] <kristopher> its not waiting until the perl script finishes
+[06:49] <Boohbah> kristopher: blah.pl && blah2.pl
+[06:49] <Cpudan80> kristopher: They work the same way
+[06:49] <zvacet> VoidedCheck :Ubuntu 8.04 Beta includes ufw (Uncomplicated Firewall), a new host-based firewall application configurable from the command line which is designed to make administering a firewall easier for end users while not getting in the way of network administrators.
+[06:49] <Cpudan80> kristopher: thing1.pl; thing2.pl would also work
+[06:49] <Cpudan80> Boohbah: no
+[06:49] <Dr_willis> unless thing1.pl some how spawns itself to the background and exists..
+[06:49] <Cpudan80> Boohbah: that only executes blah2.pl if blah.pl exits with a successful status code
+[06:50] <VoidedCheck> zvacet, that's nice, especially after installing hardy beta and now rc that I've never seen any config for getting my apps to communicate.
+[06:50] <vido22> hi can i ask here about something about mysql
+[06:50] <VoidedCheck> they just do.
+[06:50] <VoidedCheck> then again, it was the same in gutsy and feisty.
+[06:50] <VoidedCheck> I just don't see it.
+[06:51] <VoidedCheck> I point the app, open my router, and presto.
+[06:51] <Starnestommy> vido22: sure, but #mysql is a channel just for mysql
+[06:51] <VoidedCheck> for like 3 years now.
+[06:51] <zvacet> VoidedCheck :http://www.ubuntugeek.com/ufw-uncomplicated-firewall-for-ubuntu-hardy.html
+[06:52] <vido22> #mysql
+[06:53] <VoidedCheck> zvacet, 404 here
+[06:53] <zvacet> VoidedCheck not for me
+[06:53] <VoidedCheck> well obviously  :)
+[06:54] <VoidedCheck> I'll try again in a bit
+[06:54] <kevcox_> Can anyone tell me how to troubleshoot a network issue?  It seems that in exactly 10 minutes my network connection goes down but I'm not shure why.
+[06:54] <VoidedCheck> there we go
+[06:54] <kevcox_>  It is quickly restored but it goes down 10 minutes later knocking me off SSH
+[06:54] <zvacet> VoidedCheck search the net for that topic
+[06:54] <kevcox_> This occures within my LAN
+[06:54] <Dr_willis> kevcox_,  wireless?
+[06:54] <kevcox_> No
+[06:55] <kittykitty> thank you whoever pointed me to the ubuntu's iptables howto, cause that was easier to understand
+[06:55] <kevcox_> It's like clock work, every 10
+[06:55] <joshaidan> What does SSH say when it disconnects?
+[06:55] <fairyeneried> can i change the xserver to not start whenever i start the system but only when i want to use it?
+[06:55] <VoidedCheck> ooh nice
+[06:55] <kevcox_> Network Error
+[06:55] <VoidedCheck> ty for the link zvacet
+[06:55] <zvacet> VoidedCheck yes
+[06:55] <kevcox_> Software caused connection abort
+[06:56] <zvacet> VoidedCheck np
+[06:56] <fairyeneried> maybe i must edit the runlevel? how can i do that?
+[06:56] <kevcox_> My Webmin resets too so it is the entire network
+=== |Matt is now known as |Matt|AFK|
+[06:56]  * |Matt|AFK| is currently away, Reason: Auto-Away after 30 minutes of idle Time is: 17:56:21
+[06:56] <Starnestommy> !away > |Matt|AFK|
+[06:57] <VoidedCheck> yeah public afk suck
+=== |Matt|AFK| is now known as |Matt
+[06:58]  * |Matt is back Reason: Auto-Away after 30 minutes of idle Was Gone: 1min 41secs
+[06:58] <kevcox_> Are there any network logs that I could monitor?
+[06:58] <Tronic_> |Matt: Please remove public auto away and away nick.
+[06:58] <VoidedCheck> you want to monitor mine?
+[06:59] <VoidedCheck> they're mostly...  ahem, naughty sites
+[06:59] <Tronic_> |Matt: Preferrably also start your nick with an alphabetic.
+[06:59] <kevcox_> No, I'm trying to figure out why my network drops every 10 minutes for a second then restarts exactly every 10 minutes.
+[06:59] <VoidedCheck> your ISP has sucky ping?
+[06:59] <VoidedCheck> just guessing
+[06:59] <kevcox_> No, this is all internal LAN
+[07:00] <VoidedCheck> ouch
+[07:00] <kevcox_> SSH drops, Webmin resets, etc.
+[07:00] <VoidedCheck> bad NIC on the network probably
+[07:00] <VoidedCheck> or bad huyb
+[07:00] <VoidedCheck> *hub
+[07:00] <kevcox_> Looked at all those and they seem fine.
+[07:01] <zero> Hey, i need help installing Ubuntu on my 2 gig flash drive, i want to install the server edition so i can install iceWM as my window manager
+=== kadambi is now known as arvind_khadri
+[07:01] <zero> anyone know how to get that goin?
+[07:01] <kevcox_> They only thing I've done differently was installed ddclient
+[07:02] <Zoem> anybody good at bluetooth?
+[07:02] <shiznit> if i install the 8.04 RC will I be able to upgrade to final?
+[07:02] <zero> anyone know how to install ubuntu on a flash drive?
+[07:02] <VoidedCheck> nothing good about bluetooth]
+[07:02] <zvacet> shiznit yes
+[07:02] <shiznit> word, thx
+[07:02] <Zoem> VoidedCheck: I'm finding that, thx
+[07:03] <Daisuke_Ido> VoidedCheck, what's your rationale for saying that?
+[07:03] <VoidedCheck> 8.04RC will upgrade, but there might be cruft
+[07:03] <Zoem> anyone know how to make my bluetooth headset actually do something?
+[07:03] <zero> Zoem, do a barrel roll
+[07:03] <VoidedCheck> Daisuke_Ido, personal experience and nothing else
+[07:03] <Daisuke_Ido> Zoem, yeah, hook it up to a phone that will recognize it.
+[07:04] <Zoem> Daisuke_Ido: you are saying that there is no way to get it to work?
+[07:04] <Daisuke_Ido> Zoem, just because it's bluetooth doesn't mean it's magically going to work with *anything* that supports bluetooth
+[07:04] <Daisuke_Ido> i'm saying i don't know for sure one way or the other
+=== nl|away is now known as nl
+[07:04] <Zoem> Daisuke_Ido: I got it connected
+[07:04] <VoidedCheck> bluetooth is about as good as 802.11
+[07:04] <VoidedCheck> which is not very
+[07:04] <Daisuke_Ido> but if you can't use a bluetooth mouse with a phone (and it will connect, but it will be useless)
+[07:04] <Zoem> hmmm
+[07:04] <Zoem> this is awesome
+[07:05] <Schypher_> does ubuntu ave backtrack packages ?
+[07:05] <kevcox_> Zero, sorry I got kicked off again but this will help you if you did not already get help:  http://www.pendrivelinux.com/2007/09/28/usb-ubuntu-710-gutsy-gibbon-install/
+[07:05] <VoidedCheck> what are backtrack packages?
+[07:05] <zero> thanks kevcox_
+[07:05] <arvind_khadri> Schypher_: you mean backport
+[07:05] <kevcox_> np
+[07:05] <godjr> im trying to edit my grub but it keeps saying i dont have permission to edit it
+[07:05] <godjr> keeps saying im not the owner
+[07:06] <Schypher_> arvind_khadri: well all the tools available on backtrack distro
+[07:06] <zero> kevcox_, will this install the server edition?
+[07:06] <kevcox_> Yes
+[07:06] <zero> kevcox, thanks
+[07:06] <zero> kevcox_, thanks
+[07:06] <Optimus55> hey does anyone know if the hard drive bug in ubuntu has been resolved?
+[07:06] <kevcox_> np
+[07:06]  * Daisuke_Ido headdesks
+[07:06] <arvind_khadri> godjr: be root
+[07:06] <zvacet> godjr     sudo gedit /boot/grub/menu.lst
+[07:06] <Zoem> does anyone know how to make a usb headset work?
+[07:06] <godjr> thanks
+[07:06] <tag> So how do I reconfigure paste so it's not Button3, but Button4 instead? :-)
+[07:06] <Schypher_> arvind_khadri: I love ubuntu, but I don't want to move to backtrack just because they have all the network security tools
+[07:06] <Starnestommy> godjr: no, use sudo
+[07:06] <VoidedCheck> gksudo /boot/grub/menu.1st
+[07:06] <VoidedCheck> damn too late
+[07:07] <tag> this new mouse I have, when I scroll up it randomly sends a middle click sometimes...this is totally driving me mad
+[07:07] <VoidedCheck> and I missed gedit
+[07:07] <arvind_khadri> schypher i dont have any idea what you are talking about
+[07:07] <VoidedCheck> btw does anyone know why gksudo is supposed to be better for gui progs than sudo?
+[07:07] <zero> kevcox_, hey, this wants me to reboot into a liveCD and install it that way, the server ISO has no livecd
+[07:07] <zero> im already in Ubuntu 7.10 right now,k will that work kevcox_ ?
+[07:08] <Daisuke_Ido> arvind_khadri, apparently he didn't either
+[07:08] <Exteris> !gksu | VoidedCheck
+[07:08] <ubotu> VoidedCheck: If you need to run graphical applications as root, use <unconvertable> gksudo <unconvertable> , as it will set up the environment more appropriately. Never just use "sudo"! (See http://psychocats.net/ubuntu/graphicalsudo to know why)
+[07:08] <Daisuke_Ido> probably a distro that installs wireshark by default
+[07:08] <arvind_khadri> Daisuke_Ido: :)
+[07:08] <VoidedCheck> that really has no answers
+[07:08] <MDFrostT> please help:  using ubuntu 8.04 on a dell inspiron e1705.  wireless shows available networks, but I can't connect to any of them (whether they be b or g, open or protected, WEP or WPA or WPA2).  I found a few references in the forums, but nothing of use.  Anyone have any ideas?
+[07:08] <metalmosesjd> Hello everyone. Just wondering if anyone knew of any software compatible with Windows Mobile phone?
+[07:09] <arvind_khadri> !hardy | MDFrostT
+[07:09] <ubotu> MDFrostT: Hardy Heron is the code name for the next release of Ubuntu (8.04-LTS), due April 24, 2008 - For more info, see: https://wiki.ubuntu.com/HardyHeron - CONSIDER IT TO BE BETA SOFTWARE - Discussion and support in #ubuntu+1, NOT #ubuntu
+[07:09] <kevcox_> You'll need the LiveCD but you can use it just don't load the X Client
+[07:09] <zvacet> VoidedCheck :You should never use sudo to start graphical applications as root. You should use gksudo to run such programs (eg. ALT+F2 gksudo gedit).
+[07:09] <VoidedCheck> why?
+[07:09] <Daisuke_Ido> VoidedCheck, it has answers - using sudo for gui apps can cause issues with permissions later on
+[07:10] <billu> You wanna make a money easy?! Register here and EARN!  http://bux.to/?r=michal_bielecki
+[07:10] <VoidedCheck> it gives one example, and doesn't properly explain that one
+[07:10] <zvacet> VoidedCheck :https://help.ubuntu.com/community/RootSudo
+[07:10] <MelbourneBloke> I like money
+[07:10] <dmsuperman> Suck one, the time machine costs like 20 billion
+[07:10] <Starnestommy> VoidedCheck: gksudo uses the user's settings but the root account.  sudo usually uses root's settings and account
+[07:10] <Dr_willis> MelbourneBloke,  im to lazy for just 'easy' i want free money. :)
+[07:10] <VoidedCheck> huh?
+[07:11] <VoidedCheck> oh
+[07:11] <kevcox_> I'm a bout to ge kicked off again due to my network issue that kicks me off every 10 minutes.  Anyone have a suggestion for researching this issue?
+[07:11] <VoidedCheck> interesting
+[07:11] <ripdisk> help, ubuntu won't apt-get from the net, it just asks for the cd
+[07:12] <kevcox_> modify your sources.conf file under apt
+[07:12] <kevcox_> ripdisk
+[07:12] <Tronic_> ripdisk: You can do that with the graphical tool, too.
+[07:12] <Optimus55> hey does anyone have an idea if the hard disk high cycle bug has been fixed in the new release?
+[07:12] <MelbourneBloke> Kevcox: What other devices do you have on your network?
+[07:12] <ripdisk> tronic, where's the graphical tool
+[07:12] <VoidedCheck> zvacet, that last link you posted didn't even mention gksudo
+[07:12] <zvacet> ripdisk system>admin>software sources check /uncheck CD
+[07:13] <zvacet> VoidedCheck You didnt read it all
+[07:13] <kevcox_> Sorry, got kicked off again...
+[07:13] <ripdisk> oh ok
+[07:13] <ripdisk> cool
+[07:13] <ripdisk> thanks
+[07:13] <VoidedCheck> oh it did once
+[07:13] <VoidedCheck> and it didn't say why
+[07:13] <MelbourneBloke> Kevox: what other devices do you have on your network?
+[07:14] <zvacet> VoidedCheck Im awre of that
+[07:14] <kevcox_> One laptop (the one I'm on), Server (LAMP w/firewall and DHCP)
+[07:14] <kevcox_> And one Ubuntu Desktop
+[07:14] <MelbourneBloke> does the server also lose its connection every ten minutes?
+[07:15] <kevcox_> Good question....I'll run back and kick off a continuous ping and see what happens
+[07:15] <kevcox_> I was looking for a log file to see what might be happeing.
+[07:16] <MelbourneBloke> Kevox: ok thats a good idea ... something else you may want to try is plugging  your laptop directly into your router
+[07:16] <MelbourneBloke> that way you can tell if its something within the network or if it is your ethernet adaptor giving you problems
+[07:17] <VoidedCheck> router != modem
+[07:17] <kevcox_> Okay, I'm using Shorewall with two NICS in the server so i assume a crossover cable is needed for this.
+[07:17] <kevcox_> That was a question... :)
+[07:17] <MelbourneBloke> depends if your NICs are auto negotiate
+[07:17] <tanner> i dont suppose anyone's attempted to use Ekiga with Cisco Call Manager?
+[07:18] <kevcox_> Okay, the server loosing connection will tell me a lot so I'll start there.
+[07:18] <zero> hey im trying to install ubuntu 710 server to my flash drive, but i get this error when trying to copy from CD to flash drive
+[07:18] <zero> http://paste.ubuntu-nl.org/63797/
+[07:18] <kevcox_> Did you mount the flash drive?
+=== Lempfac1 is now known as Lemp
+[07:18] <zoexii> hello, I have started using fluxbox to conserve limited system resources, but would like to be able to have multiple sessions running at once (this is done with switch user in gnome) is there a way to start a new X session from the command line?
+[07:19] <zero> kevcox_, its mounted
+[07:19] <VoidedCheck> startx terminal
+[07:19] <zero> kevcox_, its not seeing the stuff in my drive
+[07:19] <kevcox_> Did you create the proper partitions with file system?
+=== Lemp is now known as Lemface
+[07:19] <Dr_willis> zero,  the 'pendrivelinux' web site has a lot of tutorials on doing that sort of thing.    They may have a guide for you to follow
+[07:19] <VoidedCheck> terminal being the terminal you want it to start on
+=== Lemface is now known as Lempfac1
+[07:20] <zero> thanks Dr_willis
+[07:20] <zoexii> VoidedCheck: ok, so, just a number? 1-12, like the function keys that I would use to switch with?
+[07:20] <zero> thanks kevcox_ , my bad i suck
+[07:20] <kevcox_> brb, I'm about to get kicked off again so I have to check my server to see what it is doing....
+[07:20] <VoidedCheck> not quite
+[07:20] <VoidedCheck> I forgot the details being a long time since I ran more than one x, but it's all in the docs
+[07:21] <VoidedCheck> or google for "multiple x" or smth
+=== Lempfac1 is now known as Lempface
+[07:21] <zoexii> VoidedCheck: cool, am reading manpage now. thanks.
+[07:21] <Dr_willis> Hmm xinit :2     or somtning like that i recall..
+[07:21] <Dr_willis> I forget how also. :)
+[07:21] <VoidedCheck> yeah I remember smth with a colon
+[07:22] <VoidedCheck> not too helpful I know, sorry
+[07:22] <Dr_willis> sudo xinit -- :2
+[07:22] <Dr_willis> :)
+[07:22] <Dr_willis> but that ran it as root... doh
+[07:22] <Dr_willis> note the 2 dashes..
+[07:23] <Dr_willis> (in case your font shows them as 1 long dash, its actually 2 dashes)
+[07:23] <gogeta> Dr_willis ?
+[07:23] <VoidedCheck> that would be one crappy font
+=== cricket[] is now known as cricket[
+[07:23] <Dr_willis> VoidedCheck,  seen it be an 'issue' befor.
+[07:24] <fairyeneried> there's an alternative to ubuntu-desktop? i need to setup gnome and the basic onfiguration programs, but i don't need gimp or openoffice
+=== cricket[ is now known as cricket[b]
+[07:24] <VoidedCheck> uninstall them?
+[07:24] <Dr_willis> fairyeneried,  fire up the package manager and install what you want.
+[07:25] <VoidedCheck> install server ubuntu and install only what you want from that through apt?
+[07:25] <Dr_willis> fairyeneried,  thats why we suggested xubuntu-desktop earlier. :) a smaller 'desktop' with  most of the extra programs you may want
+[07:25] <VoidedCheck> install slackware?  lol jk
+[07:26] <fairyeneried> slackware?
+[07:26] <fairyeneried> no no
+[07:26] <fairyeneried> ubuntu
+=== vova_kubba[Away] is now known as vova_kubba
+[07:26] <vova_kubba> hi all ;)
+[07:26] <VoidedCheck> hullo
+[07:26] <chris062689> Has anyone tested Ubuntu 8.04 RC on the EeePC?
+[07:26] <simion314> hi, what it means if i get this error when i ake apt-get update W: Failed to fetch http://ro.archive.ubuntu.com/ubuntu/dists/hardy/multiverse/source/Sources.gz  Hash Sum mismatch
+[07:27] <VoidedCheck> my buddy did
+[07:27] <VoidedCheck> he barely got it working
+[07:27] <chris062689> !eeepc
+[07:27] <ubotu> Information about installing Ubuntu on an Asus EeePC can be found at https://help.ubuntu.com/community/EeePC
+[07:27] <VoidedCheck> he has the Surf
+[07:27] <VoidedCheck> 2GB hd
+[07:27] <Odd-rationale> simion314: try running "sudo apt-get update" and try again.
+[07:27] <VoidedCheck> it runs, but not well
+[07:28] <Lempface> anyone use IDLE for ubuntu?
+[07:28] <VoidedCheck> the Xandros OS is actually pretty nice
+[07:28] <MelbourneBloke> Faireneried .. try and use sudo apt-get remove gimp
+[07:28] <VoidedCheck> once you cut the kiddy interface
+[07:28] <zvacet> simion314 or in system>admin>software sources put to main server
+[07:30] <narg> does anyone know how to find the specific processor type (ie athlon64) of a machine (more than just arch.) from within linux?
+[07:31] <MelbourneBloke> dmesg
+[07:31] <chronographer> Hello all. I still have an issue with my new 226bw samsung with nvidia drivers. The issue is that there is an intermittened 'flash' where the screen drops to black and pops back up witha mesage from the monitor saying 'warning, non optimum settings, settings should be 1680x1050 60 hz' which is waht I have got it set to. I have discovered one interesting line in my Xorg.0.log " see here for output. http://pastebin.com/m33daa899
+[07:31] <vova_kubba> where is situated relolv.conf?
+[07:31] <chronographer> If I use the 'nv' driver it runs beautifully.
+[07:32] <VoidedCheck> you might want to expand your cli buffer before running dmesg
+[07:32] <chronographer> nvidia driver is OK but blinks, drops out or whatever every now and then
+[07:32] <SnakeyeS> question about dual-booting on a dell with XP
+[07:32] <zvacet> vova_kubba /etc/resolv.conf
+[07:32] <vova_kubba> thanks
+[07:32] <dazfuller> narg: try "cat /proc/cpuinfo"
+[07:32] <MelbourneBloke> Narg:: or you can try more /proc/cpuinfo
+[07:33] <VoidedCheck> more is less  :)
+[07:33] <narg> ah, exactly what I wanted. Thanks.
+[07:33] <bouma> is the closed nvidia driver barred in 8.04beta ?
+[07:33] <narg> but most beats them both ;)
+[07:33] <SnakeyeS> By dual-booting, would nothing from Windows be used when Ubuntu is running, thus having the advantage of using an OS that requires far less resources (memory/cpu) than Windows XP?  I would obviously be sacrificing the hard drive space used by Windows but, since this laptop will be used primarily for surfing, the need for disk space is not a concern (I'll still have several gigs remaining).  Am I missing any considerations?
+[07:33] <VoidedCheck> but none trumps them all
+[07:34] <chronographer> thats right snakeyes
+[07:34] <P1ro> hi!
+[07:34] <SnakeyeS> so nothing from windows is used?
+[07:34] <chronographer> it is completely separate, apart from being on the same hard drive.
+[07:34] <VoidedCheck> closed nvidia driver is available in 8.04 RC
+[07:34] <chronographer> nope
+[07:34] <SnakeyeS> ok
+[07:34] <P1ro> how i can run a .run on ubuntu?
+[07:34] <SnakeyeS> sweet!
+[07:34] <VoidedCheck> and beta driver is available with Envy
+[07:34] <SnakeyeS> This dell doesn't have an internal floppy or cdrom
+[07:34] <chronographer> lookup up wine P1ro
+[07:34] <chronographer> maybe .run works
+[07:34] <SnakeyeS> I've read there are ways to install but it looks painful
+[07:34] <chronographer> or you can go command line on it if its for linux
+[07:34] <SnakeyeS> lol
+[07:35] <Daisuke_Ido> chronographer, look up your answers before giving them to people.
+[07:35] <arvind_khadri> P1ro: ./*.run
+[07:35] <bouma> VoidCheck, ok wierd, probably someone already caught this, if im not tripping, could be a bug, better check the bugzilla
+[07:35] <chronographer> Ubuntu is easy!
+[07:35] <P1ro> i have downloaded the quake3point-release and it en a .run file
+[07:35] <nxusr> hey, how would you writed shell command to rename all files in a directory with digit in the file name to  ...
+[07:35] <chronographer> get the cd, get hardy heron CD and put it in your comp, restart. you are away!
+[07:35] <Daisuke_Ido> a .run is almost always an executable script (plus a binary of some sort)
+[07:35] <SnakeyeS> one other question...
+[07:35] <Gnea> SnakeyeS: if it's still under warranty, you might want to be careful, since the windows backup should be on its own partition (you know, the one that restores the entire windows OS in a few seconds?)
+[07:35] <Daisuke_Ido> P1ro, you might also want to take a look at the open alternatives (openarena, for one)
+[07:35] <nxusr>  hey, how would you write shell command to rename all files in a directory with digit in the file names to  ...?
+[07:36] <SnakeyeS> not under warranty
+[07:36] <SnakeyeS> it's old
+[07:36] <dude_> i need help!
+[07:36] <Gnea> ah ok
+[07:36] <Gnea> !ask | dude_
+[07:36] <ubotu> dude_: Please don't ask to ask a question, ask the question (all on ONE line, so others can read and follow it easily). If anyone knows the answer they will most likely answer. :-)
+[07:36] <timfrost> <unconvertable> vova_kubba: try /etc/resolv.conf
+[07:36] <SnakeyeS> I want the simplest linux experience with the least amount of resources used...is xubuntu a good option?
+[07:37] <VoidedCheck> simplest?
+[07:37] <SnakeyeS> low resource usage is a neccesity
+[07:37] <dude_> I installed ubuntu on my HD, partitioned it in half, then I just installed XP on the other half.  I was expecting to see the dual boot screen but nothing comes up, it goes straight to XP.  Can someone please help me?
+[07:37] <SnakeyeS> most windows-like, sorry to say
+[07:37] <zvacet> SnakeyeS yes
+[07:37] <Gnea> SnakeyeS: you may want to consider fluxbuntu
+[07:37] <VoidedCheck> you installed xp last?
+[07:37] <SnakeyeS> ok
+[07:37] <VoidedCheck> that's the problem
+[07:37] <dude_> voidedcheck, that's correct
+[07:37] <dude_> :(
+[07:37] <VoidedCheck> xp overwrote the mbr
+[07:37] <Gnea> dude_: oh, you installed XP second, not first
+[07:37] <troseph> In Ubuntu 8.04, I can't authenticate to change the configuration of network-admin
+[07:37] <shiznit> you will have to edit the bootloader if you installed XP after ubuntu
+[07:37] <bullgard4> What kind of files have the filename extension '.schemas'? Example: /usr/share/gconf/schemas/gnome-dictionary.schemas
+[07:37] <dude_> gnea, yes I installed it second
+[07:37] <os2mac_> yes yes it did
+[07:38] <Gnea> !dualboot | dude_
+[07:38] <ubotu> dude_: Dual boot instructions: x86/AMD64: https://help.ubuntu.com/community/WindowsDualBootHowTo - MACs: https://wiki.ubuntu.com/MacBookPro https://wiki.ubuntu.com/YabootConfigurationForMacintoshPowerPCsDualBoot
+[07:38] <nxusr> how would you write shell command to rename all files in a directory with digit in the file names to  ...?
+[07:38] <Odd-rationale> !hardy | troseph
+[07:38] <ubotu> troseph: Hardy Heron is the code name for the next release of Ubuntu (8.04-LTS), due April 24, 2008 - For more info, see: https://wiki.ubuntu.com/HardyHeron - CONSIDER IT TO BE BETA SOFTWARE - Discussion and support in #ubuntu+1, NOT #ubuntu
+[07:38] <SnakeyeS> Are they any major differences between Fluxbuntu and Xubuntu?
+[07:38] <dude_> do I have to edit a file to get my ubuntu back?
+[07:38] <VoidedCheck> fluxbuntu is outdated
+[07:38] <Gnea> dude_: windows is a hog like that - it will always takeover the MBR no matter what when you install
+[07:38] <rewati> hi there i am tryin to ssh to my frnds computer in a same room under same router but it say connection refused
+[07:38] <Dr_willis> nxusr,  check out the 'renameutils' package it has some tools that can help. Or you could learn some perl coding.
+[07:39] <rewati> can anybudy help
+[07:39] <troseph> !thanks | Odd-rationale
+[07:39] <ubotu> Odd-rationale: You're welcome! But keep in mind I'm just a bot ;-)
+[07:39] <rewati> me
+[07:39] <dude_> gnea, I looked at the disk manager and it looks like it's still there
+[07:39] <VoidedCheck> and never fixed suxh simple things as automounting partitions
+[07:39] <SnakeyeS> VoidedCheck: do you recommend xubuntu?
+[07:39] <troseph> lol
+[07:39] <troseph> dumb
+[07:39] <Odd-rationale> lol
+[07:39] <simion314> Hi, i used an application launcher(one like katapult or launchy) but i do not remember it's name
+[07:39] <dude_> so I didn't overwrite it thatnk god
+[07:39] <Gnea> dude_: no, you can boot the livecd and recover it that way - when it's done, you should be able to dual-boot with ease
+[07:39] <VoidedCheck> SnakeyeS, over fluxbuntu, yes
+[07:39] <nxusr> Dr_willis, learn perl coding?
+[07:39] <Dr_willis> nxusr,  renameutils - Programs to make file renaming easier
+[07:39] <SnakeyeS> thanks
+[07:39] <n6rej> anyone have any experience with flyspray?
+[07:39] <Gnea> dude_: right, the MBR controls how the system has access to boot
+[07:39] <rewati> hi there i am tryin to ssh to my frnds computer in a same room under same router but it say connection refused can any budy help i need it its urgent
+[07:40] <Dr_willis> nxusr,  depends on the deatils. I tend to use 'qmv' in that package for my megarenaming needs. Theres some other 'bulk' renamer tools out also.
+[07:40] <MelbourneBloke> rewati: is sshd installed on your friends computer?
+[07:40] <dude_> gnea, do I have to do anything when I install the live cd or will ubuntu automatically detect that it's there?
+[07:40] <zvacet> dude_ :http://ubuntuforums.org/showthread.php?t=224351&highlight=grub
+[07:40] <timfrost> rewati: has the friend installed ssh server?  You won't be able to ssh to the computer until that is installed
+[07:40] <Daisuke_Ido> n6rej, not really, but i have used fleapowder.  close?
+[07:40] <n6rej> Daisuke_Ido: lol probably not lol
+[07:40] <Odd-rationale> rewati: does your friends computer have the openssh-server on it?
+[07:40] <joe1> anyone know if there is a quick fix to get the lightning calendar add on to work with the repo thunderbird?
+[07:41] <SnakeyeS> Thanks for the insight guys!
+[07:41] <tiocsti> install the lightning from the repo?
+[07:41] <VoidedCheck> may the ubuntu be with you
+[07:41] <sutabi> Anyone here use mac? trying to see if I can install linux w/o bootcamp :\
+[07:41] <SnakeyeS> lol
+[07:41] <SnakeyeS> thx
+[07:41] <Gnea> dude_: here, read this: https://help.ubuntu.com/community/RecoveringUbuntuAfterInstallingWindows
+[07:41] <Dr_willis> !info mrename | nxusr
+[07:41] <ubotu> nxusr: mrename (source: mrename): A tool for easy and automatic renaming of many files. In component universe, is optional. Version 1.2-11ubuntu1 (gutsy), package size 6 kB, installed size 68 kB
+[07:41] <tiocsti> sutabi, you need bootcamp afaik
+[07:41] <MelbourneBloke> I use a mac .. and yes you can install linux without bootcamp
+[07:41] <shiznit> can I use grub to bypass the vista bootloader?
+[07:41] <tiocsti> oh, you can
+[07:42] <Dr_willis> nxusr,  mrename sounds like what you want
+[07:42] <Gnea> dude_: the exact procedure you need to make it work is there, good luck
+[07:42] <VoidedCheck> gah I heard nightmares about bootcamp
+[07:42] <nxusr> ok will look into it
+[07:42] <Dr_willis> nxusr,  simple way to rename multiple files with a customizable
+[07:42] <Dr_willis> prefix and a progressive number.
+[07:42] <dude_> gnea, thank you so much!
+[07:42] <VoidedCheck> drill sergeant spits in your face
+[07:42] <sutabi> MelbourneBloke: have any links that would explain it? None of my discs boot at startup. and running VMWare is just painfully slow
+[07:43] <zvacet> sutabi can you add more ram to VM
+[07:43] <VoidedCheck> sutabi, what architecture?
+[07:43] <sutabi> VoidedCheck: intel duo 1.66ghz 1gig ram
+[07:44] <VoidedCheck> I take it you know BIOS?
+[07:44] <simion314> is gnash working for anyone on youtube? i get a black video for 1 second after it finishes
+[07:44] <VoidedCheck> and you can't boot install cds?
+[07:44] <bullgard4> What kind of files have the filename extension '.schemas'? Example: /usr/share/gconf/schemas/gnome-dictionary.schemas
+[07:45] <MelbourneBloke> Sutabi: hold down the option key to select a disc to boot from
+[07:45] <sutabi> VoidedCheck: on a PC I nkow how to access it and change boot useage so it can boot a cd
+[07:45] <sutabi> ohhhhhhhhhhhhhhh
+[07:45] <sutabi> >.>
+[07:45] <VoidedCheck> lol
+[07:45] <sutabi> foook I wish I knew that sooner ~_~
+[07:45] <Dr_willis> Hidden mac Secrets
+[07:45] <Dr_willis> :)
+[07:46] <MelbourneBloke> Sutabi or if you want to boot a cd hold down the 'c' key at boot time
+[07:46] <__mikem> There are hidden mac secrets?
+[07:46] <__mikem> Where
+[07:46] <joe1> why was my internet on interface eth1 before with wireless but now it is wlan0?
+[07:46] <VoidedCheck> all over the place
+[07:46] <Dr_willis> __mikem,  Its on a need to know basis..
+[07:46] <sutabi> ok well thank you alll :) i'll be back on ubuntu hopefully
+[07:46] <Dr_willis> How to make them boot from a cd - is one of them.
+[07:46] <VoidedCheck> because you switched from a nic to a wireless?
+[07:46] <joe1> nope wireless the whole time
+[07:46] <VoidedCheck> wow
+[07:46] <joe1> (upgraded from Gutsy to Hardy)
+[07:46] <VoidedCheck> kewl
+[07:47] <MelbourneBloke> Sutabi: Something else that you may find interesting http://refit.sourceforge.net/
+[07:47] <joe1> it's actually screwed some stuff up though :( like I can't ushare right now
+[07:47] <Myxb> how do i prevent network interfaces from going up on boot-up/resume?
+[07:48] <VoidedCheck> disable network?
+[07:48] <VoidedCheck> dunno exactly what you want
+[07:48] <Myxb> VoidedCheck: yes. no eth0 etc on resume. they should be brought up only when needed
+[07:49] <lartza_> Someone please help me. I'm having some serious trouble with my internet connection on this pc. It's incredibly slow or it can't connect. It took more than a minute to get to www.speedtest.net. Is there any program where I can see which programs on my PC use internet connection like top shows cpu and memory usage?
+[07:49] <VoidedCheck> like top?
+[07:50] <joe1> lartza: there are a couple web based programs that do network monitoring
+[07:50] <MelbourneBloke> Mysb: you could try and remove /etc/init.d/networking and the use ifup eth0 when requited
+[07:50] <lartza_> top is a program in linux
+[07:50] <MelbourneBloke> *required
+[07:50] <VoidedCheck> yeah
+[07:50] <tiocsti> get ntop
+[07:50] <lartza_> tiocsti: Ok
+[07:50] <zero> Hey ive been trying to install linux on my pen drive using the guide on pendrivelinux.com, and when i boot up with my USB Flash drive, i get an error saying VMLINUX when i try to select anything, any ideas?
+[07:51] <VoidedCheck> doesn't pendrivelinus.com have like a dozen or more guides?
+[07:51] <zero> http://www.pendrivelinux.com/2007/09/28/usb-ubuntu-710-gutsy-gibbon-install/
+[07:51] <zero> VoidedCheck, this is the guide i was refferred to by someone in here
+[07:51] <lartza_> I just runned network speedtest and I hve got previously donwload speed of 468 and now it shows 341 when only xchat was running. Ping to my country server to 300km away is 234ms!
+[07:52] <zero> VoidedCheck, should i just reformat and start over?
+[07:52] <VoidedCheck> distance means squat online
+[07:52] <lartza_> I'm redoing since I use dnsmasq
+[07:52] <simion314> If you do not know there is an equivalent for katapult or launchy for gnome http://linuxhelp.blogspot.com/2007/12/gnome-do-universal-launcher-for-gnome.html
+[07:52] <lartza_> still 200ping, but it might be the server
+[07:53] <VoidedCheck> zero, that's how I learned every os install to date, but flash drives tend to have problems with many straight fromats
+[07:53] <VoidedCheck> *formats
+[07:53] <Myxb> MelbourneBloke: dosn't work. after resume all interfaces are up and running again
+[07:54] <VoidedCheck> lots of flash drives just die on format, that's why many try to just delete the data on the partition and copy instead of formatting
+[07:54] <MelbourneBloke> myxb: do a ifdown eth0
+[07:54] <zero> VoidedCheck, yeah, but now my Flash Drive is partitioned, and i need to reformat to get it goin again
+[07:55] <MelbourneBloke> myxb: then do a sleep and resume
+[07:55] <zero> nevermind, i got it
+[07:55] <lartza_> ntop
+[07:55] <lartza_> woops
+[07:56] <VoidedCheck> whee
+[07:56] <hatchetman82> hello
+[07:56] <VoidedCheck> wrong cli  :P
+[07:56] <lartza_> what does ntop do?
+[07:56] <hatchetman82> anyone tried installing the aircrack-ng rtl8187 driver on 8.04 yet ?
+[07:56] <VoidedCheck> I'd assume like top, but for your network
+[07:56] <tiocsti> its like a network ver of top, shows hosts you connect to, and how much bandwidth they are using
+[07:56] <gh_> quick question, i just reinstalled ubuntu, i cant remember how to enable it to use tar.gz files, how do i do that
+[07:57] <lartza_> not on me :(
+[07:57] <VoidedCheck> double click?
+[07:57] <MelbourneBloke> lartza: have you proved your internet connection? If you are still experiencing hi latency times report a problem to you ISP
+[07:57] <lartza_> proved internet?
+[07:57] <VoidedCheck> right-click extract here?
+[07:57] <tiocsti> gh: tar -zxf filename.tar.gz? im not sure what you mean by enable the use of them
+[07:57] <lartza_> THese problems started yesterday
+[07:57] <lartza_> !paste
+[07:57] <ubotu> pastebin is a service to post multiple-lined texts so you don't flood the channel. The Ubuntu pastebin is at http://paste.ubuntu-nl.org (make sure you give us the URL for your paste - see also the channel topic)
+[07:58] <MelbourneBloke> proved.. as in tested with a direct connection
+[07:58] <VoidedCheck> tested with a direct connection?
+[07:58] <VoidedCheck> what, downloading?
+[07:58] <gh_> i cant extract them or install them, and its not letting me open it with the terminal, its like its not recognizing tar.gz or .rpm files
+[07:58] <VoidedCheck> how would you install a tar.gz?
+[07:59] <arvind_khadri> gh_: you need .deb to install
+[07:59] <MelbourneBloke> OK .. directly connecting your PC to the modem/router
+[07:59] <lartza_> I don't understand :( I have used this same internet like three months in this CPU and maybe 4 years it has been on this house.
+[07:59] <lartza_> oh
+[07:59] <lartza_> like... how? :P
+[07:59] <VoidedCheck> tarballs are just archives
+[07:59] <lartza_> I'm n00b
+[07:59] <MelbourneBloke> have you tried power cycling the modem/router?
+[07:59] <VoidedCheck> rpms need a transition prog like alien
+[07:59] <lartza_> ...
+[07:59] <arvind_khadri> gh_: you can compile from a source i.e .tar
+[08:00] <lartza_> how? i don't know if I have
+[08:00] <MelbourneBloke> have you tried turning it off and on again?
+[08:00] <VoidedCheck> why do you need to install from .tar.gz or .rpm?
+[08:00] <lartza_> THis comp is connected with a powerline adaptor btw
+[08:00] <lartza_> oh
+[08:00] <lartza_> But other PC's internet work fine
+[08:00] <gh_> cause the nspluginwrapper for ubuntu 64 isint working, thats what im trying to do right now
+[08:00] <VoidedCheck> is there not a repository option or a deb?
+[08:00] <MelbourneBloke> OK .. have you tried turning the power line adapters on and off again?
+[08:01] <VoidedCheck> works fine for me
+[08:01] <VoidedCheck> from the repositories
+[08:01] <lartza_> Last night I took off mine
+[08:01] <lartza_> Haven't powered of the one that's connected to router
+[08:01] <lartza_> Should I turn off whole internet system?
+[08:01] <kubist> hi there! could you help me please with my screen&resolution problem?
+[08:01] <lartza_> I think problem is just in this PC of three of mine
+[08:01] <arvind_khadri> kubist: what problem
+[08:02] <MelbourneBloke> Lartza: that means that the internet connection is working ok. I would be looking at the power line adaptors, they are known to be unreliable.
+[08:02] <VoidedCheck> power line adaptors...  wow
+[08:02] <lartza_> And btw ntop won't start
+[08:02] <kubist> arvind_khadri: cannot set correct resolution, tried reconfigure xserver, did not help
+[08:02] <lartza_> http://paste.ubuntu-nl.org/63798/
+[08:02] <hatchetman82> .... so no aircrack-ng users here ?
+[08:03] <zero> Nigra?
+[08:03] <MelbourneBloke> lartza: you are using ubuntu?
+[08:03] <lartza_> Yes in this cpu
+[08:03] <MelbourneBloke> lartza: have you made any changes of late?
+[08:03] <kubist> arvind_khadri: i have i965 video card, 1280x800 lcd screen and the highest resolution i get is 1024x768 - but i have modelines for 1280x800...
+[08:03] <genericguy> bear
+[08:03] <lartza_> Umm...
+[08:03] <lartza_> I'll checm by terminal history
+[08:03] <arvind_khadri> kubist: resolution is set in the restart gdm once
+[08:03] <zero> hey anyone know if you can install the repos from ubuntu ultimate in your current 7.10 system?
+[08:03] <Myxb> MelbourneBloke: dosn't work.i down everything except lo, and on resume eth0, ath0, wifi0, lo are up again.
+[08:03] <unique> i have a few questions in regards to sound drivers i have a creative xfi card... i tried to install the oss drivers resulting in the system saying no supported drivers found.. is there any way i can restore the system back to normal without doing a complete reinstall of the os...?
+[08:04] <arvind_khadri> kubist: oops i meant just restart gdm
+[08:04] <lartza_> I installed enemy territory
+[08:04] <lartza_> and upx-ucl
+[08:04] <kubist> tried that, no luck
+[08:04] <genericguy> hey, has anyone found that evolution-rss plugin makes evolution crash after upgrading to hardy heron rc?
+[08:04] <zvacet> zero add them to your source list will be one option,
+[08:05] <lartza_> Modified xorg.conf since et crashed(didn't work but havent took it off)
+[08:05] <zero> zvacet, would that harm my OS?
+[08:05] <MelbourneBloke> larta: I would be surprised if ubuntu is the cause of your problems. I would be have a serious look at the power adaptors ... get a laptop and plug it into your end and see if you have the same result.
+[08:05] <lartza_> Load "extmod" to Section "Module"
+[08:05] <zvacet> zero I dont know
+[08:05] <VoidedCheck> zero, ust adding a repository does nothing
+[08:05] <VoidedCheck> *just
+[08:05] <zero> k, thx
+[08:05] <arvind_khadri> kubist: ok so are your drivers installed
+[08:05] <VoidedCheck> it's only when you install from that repository that you open yourself
+[08:05] <lartza_> I installed chromium, fluxbox and openbox
+[08:06] <lartza_> ipdated wine
+[08:06] <zero> VoidedCheck, yeah, i understand that much, so basically, you dont know?
+[08:06] <lartza_> installed and uninstalled googleearth with offical .bin
+[08:06] <VoidedCheck> no more than anyone about anything
+[08:06] <arvind_khadri> kubist: did you check the screen resolution  option in System->Preferences
+[08:06] <lartza_> Then they start to be from time that it still worked
+[08:06] <lartza_> Earlier this week
+[08:06] <kubist> arvind_khadri: yes, i have been through all the basics
+[08:07] <VoidedCheck> even official ubuntu repositories can still fubar your system
+[08:07] <VoidedCheck> it's happened before
+[08:07] <arvind_khadri> kubist: hmm xserver-xorg reconfigured??
+[08:07] <lartza_> Why isn't ntop working? http://paste.ubuntu-nl.org/63798/
+[08:07] <zvacet> zero Ultimate is unofficial so I dont know what to expect
+[08:07] <zero> VoidedCheck, really?
+[08:07] <kubist> arvind_khadri: yes
+[08:07] <zero> zvacet, k thx dude
+[08:07] <VoidedCheck> I'd expect the same thing as installing some codec pack or smth in windows
+[08:08] <VoidedCheck> conflicts and instability
+[08:08] <arvind_khadri> kubist: do you get the resolution options in xorg.conf
+[08:08] <kubist> arvind_khadri: yes i do
+[08:08] <VoidedCheck> like ubuntu-extras or whatever it is
+[08:08] <gh_> ok, i got it, i feel extremely retarded, and have to learn to read.....
+[08:08] <arvind_khadri> kubist: hmm restarted X??
+[08:08] <kubist> arvind_khadri: i think it could be some problem with my screen...
+[08:08] <kubist> arvind_khadri: yes i did
+[08:09] <dude_> i installed windows AFTER ubuntu on my hard drive, and now it messed up the MBR.  It wont display ubuntu as a bootable option.  Can someone please help?  I was given these instructions but I have trouble following them because It didn't work the first time I tried it. https://help.ubuntu.com/community/RecoveringUbuntuAfterInstallingWindows.  Maybe I'm doing something wrong, currently I'm using ubuntu live cd, can someone please
+[08:09] <arvind_khadri> kubist: purge X ... maybe that should help
+[08:09] <WaSrD> I appear to move at the speed of stupidity myself gh, you're not alone
+[08:09] <kubist> arvind_khadri: did not...
+[08:09] <zero> VoidedCheck, k thx for the insight, maybe ill just try before i do a fresh install of 8.04
+[08:09] <arvind_khadri> kubist: purge it and see
+[08:09] <VoidedCheck> I know there's a way to use the livecd to install grub to your mbr but I forgot the details
+[08:09] <jeffimperial> Some help, pls. Deluge won't launch until after I try three times. I'm on an Ubuntu-Gnome machine.
+[08:09] <arvind_khadri> dude_: boot into the live cd
+[08:10] <dude_> arind_khadri, I currently am using the live cd ;)
+[08:10] <monkeybritches> dude_: What do you mean by messed up the MBR?
+[08:10] <VoidedCheck> zero, upgrades just suck, there's plenty of cruft and bloat
+[08:10] <VoidedCheck> fresh installs are pretty and clean
+[08:10] <VoidedCheck> just backup first
+[08:10] <zero> VoidedCheck, thats been my experience as well, there isnt anythingon this machine that isnt backed up anyway
+[08:10] <dude_> monkeybritches, well, XP hogged it and now it won't show ubuntu as a bootable option.  It's already in there as a partition, but it wont show it as a bootable option.
+[08:11] <arvind_khadri> dude_: sudo grub
+[08:11] <rkvirani> hey all
+[08:11] <zvacet> dude_ :did you tried this http://ubuntuforums.org/showthread.php?t=224351&highlight=grub
+[08:11] <rkvirani> anyone got an hp 2133?
+[08:11] <arvind_khadri> dude_: do sudo grub
+[08:11] <monkeybritches> Does it boot into Windows like usual?
+[08:11] <dude_> i tried this but I think I did it wrong
+[08:11] <dude_> https://help.ubuntu.com/community/RecoveringUbuntuAfterInstallingWindows
+[08:11] <kubist> arvind_khadri: as i installed the system the monitor detected and set by default was plug and play... after changing it to generic 1280x800 lcd i was offered the option to set the resolution to 1280x800, after restart the highest option is 1024x768... could it be that my problem is display related?
+[08:11] <VoidedCheck> I hate windows attempt to take over your boot loading options
+[08:11] <zero> k gotta go VoidedCheck
+[08:11] <zero> late
+[08:12] <rkvirani> windows bah
+[08:12] <VoidedCheck> bye zero
+[08:12] <zvacet> dude_ try again then
+[08:12] <dude_> voidedcheck, I KNOW!  It sucks
+[08:12] <arvind_khadri> dude_: after sudo grub do this find /boot/grub/stage1
+[08:12] <rkvirani> so glad I can now use suspend in ubuntu
+[08:12] <rkvirani> windows vista is gone off the laptop
+[08:12] <VoidedCheck> but windows only does it if you let it  :P
+[08:12] <dude_> arvind_khandri, the command returns hd0,0
+[08:13] <arvind_khadri> dude_: ok now do root (hd0,0)
+[08:13] <VoidedCheck> great thing about livecd is you boot it, find your tech problem (in this case grub), and just go from there
+[08:13] <VoidedCheck> as long as livecd gives you inet
+[08:13] <arvind_khadri> kubist: i think some issue with xserver
+[08:13] <rewati> hey any one here can tell me hot to get the voice based time update system as it is in mac
+[08:13] <arvind_khadri> kubist: or the drivers
+[08:13] <dude_> arvind_khandri, ok I did that last time but I'll try again
+[08:13] <monkeybritches> dude_: Look on this page for info about dual-booting http://users.bigpond.net.au/hermanzone/p15.htm
+[08:13] <arvind_khadri> dude_: then setup (hd0)
+[08:13] <VoidedCheck> and for future reference, install windows first and then linux
+[08:13] <jeffimperial> Some help, pls. Deluge won't launch until after I try three times. I'm on an Ubuntu-Gnome machine.
+[08:14] <dude_> arvind_khandri, it says "error 11: unrecognized device string"
+[08:14] <kubist> arvind_khadri: can i post you somehow a picture of my desktop, might be worth to see, because actually i have 1280x800 resolution, only the windows are in 1024x768... cannot explain really good
+[08:14] <rewati> hey my vsftp is givin me problem can anybudy tell how to fix it
+[08:14] <arvind_khadri> kubist: use image hosting
+[08:14] <dude_> was I supposed to do that in the grub prompt?
+[08:15] <AnRkey> rewati, what is it doing wrong?
+[08:15] <rkvirani> whats the package to allow me to open .rar files?
+[08:15] <tiocsti> unrar
+[08:15] <VoidedCheck> unrar
+[08:15] <rewati> when ever i try to connect it it say begning ftp transaction
+[08:15] <rewati> and stucks there
+[08:16] <arvind_khadri> dude_: hmm what command did you use
+[08:16] <monkeybritches> rkvirani: Ark can do it
+[08:16] <rewati> Anrkey when ever i try to connect it it say begning ftp transaction and stucks there
+[08:16] <rkvirani> Ark eh...
+[08:16] <rkvirani> hrm.
+[08:16] <VoidedCheck> not wo unrar
+[08:16] <dude_> arvind_khandri, I typed setup hd0
+[08:16] <AnRkey> rewati, rewati paiste it's logs to a paste bin for me
+[08:16] <arvind_khadri> dude_: before that you need to do root (hd0,0)
+[08:17] <jeffimperial> anyone got ideas as to why Deluge bittorrent client won't launch until you try it three times?
+[08:17] <alessio_> ciao
+[08:17] <rewati> anrkey where can i find its log
+[08:17] <VoidedCheck> because you're impatient?
+[08:17] <VoidedCheck> seriously, dunno
+[08:17] <AnRkey> jeffimperial, open a constole and type deluge
+[08:17] <kubist> arvind_khadri: http://img246.imageshack.us/my.php?image=snapshot1fg4.jpg
+[08:17] <alessio_> speak italian please
+[08:17] <monkeybritches> jeffimperial: Only after the third time, each time?
+[08:17] <AnRkey> jeffimperial, it will then output an error for you to work from if it does not start
+[08:17] <zvacet> alessio_ why?
+[08:18] <AnRkey> jeffimperial, console soz
+[08:18] <alessio_> i'm italian
+[08:18] <jeffimperial> monkeybritches: yep.. both the launcher on my desktop and the one in the panel
+[08:18] <monkeybritches> !it
+[08:18] <ubotu> Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie!
+[08:18] <VoidedCheck> good for you
+[08:18] <VoidedCheck> I'm a mutt
+[08:18] <AnRkey> rewati, gimme a sec to check
+[08:18]  * kindofabuzz gives AnRkey
+[08:18] <arvind_khadri> kubist: that seems to be KDE this is ubuntu please move to #kubuntu
+[08:18] <dude_> arvind_khandri, under the partition editor my partition shows up as /dev/hda1 and hda2(swap), could i be typing in the wrong device under root (hd0,0) ?
+[08:18] <kubist> have the same problem with ubuntu
+[08:19] <arvind_khadri> dude_: its arvind_khadri
+[08:19] <zvacet> alessio_ Im not native Engish speaker too  try t ofind italian one
+[08:19] <monkeybritches> jeffimperial: If you try to launch it from the console it may show you any errors that occur when attempting to execute
+[08:19] <dude_> sorry
+[08:19] <arvind_khadri> dude_: you need to type what find gave you
+[08:19] <jeffimperial> AnRkey: hate to be a newbie, but where do I find the outputed error?
+[08:19] <AnRkey> rewati, what client are you using
+[08:19] <dude_> arvind_khadri, I did
+[08:19] <sutabi> is there a way to eject the cd @ boot when it shows install options for ubuntu. I cant get my mac mini  to bootup anymore cause its booting the b\ubuntu cd and well even after I say boot hard drive it doesn't work
+[08:19] <kubist> arvind_khadri: i tried to use ubuntu, i have now kubuntu installed to see if it goes the same - it does
+[08:20] <rewati> anrkey http://paste.ubuntu-nl.org/63799/
+[08:20] <jeffimperial> monkeybritches: thanks.. leme try that
+[08:20] <dude_> arvind_khadri, It says hd0,0 so i type in root (hd0,0)
+[08:20] <rewati> anrkey i think this is the log
+[08:20] <arvind_khadri> dude_: hmm thats right
+[08:20] <AnRkey> jeffimperial, if you run a graphic app from a terminal it normal outputs some of it's errors to the terminal
+[08:20] <arvind_khadri> kubist: no idea google
+[08:21] <kubist> thanks
+[08:21] <AnRkey> rewati, what client are you using
+[08:21] <dude_> when I push enter for that it doesn't echo anything, just brings me back to the grub prompt
+[08:21] <rkvirani> hrm. time to get nvidia drivers
+[08:21] <rewati> anrkey simple browser
+[08:21] <rewati> firefox
+[08:21] <jeffimperial> monkeybritches, AnRkey: I dont get an error, just
+[08:22] <jeffimperial> oh wait.
+[08:22] <arvind_khadri> dude_: what partitions??
+[08:22] <jeffimperial> it says keyboard interrup
+[08:22] <jeffimperial> *interrupt
+[08:23] <dude_> arvind_khadri, there's 3 total partitions, two for linux (the regular one and the swap) and the windows partition
+[08:23] <Riskbreaker> fellas, i have a problem with the gnome edition of ubuntu. I am running hardy but I dont believe it has anything to do with that so i'm writinga bout it in here. Ubuntu uses a LOT of power. my laptop got around 3,5-4 hours on minimum settings in KDE,
+[08:23] <monkeybritches> Have you tried any other torrent clients?
+[08:23] <arvind_khadri> dude_: on which partition do you have ubuntu??
+[08:23] <Riskbreaker> and now it gets 2.5 hours max in gnome, regardless of CPU power, LCD brightness, etc.
+[08:23] <unique> how do you change the dir to root in the term?
+[08:23] <Riskbreaker> why is it sucking so much juice?
+[08:23] <arvind_khadri> !hardy | Riskbreaker
+[08:23] <ubotu> Riskbreaker: Hardy Heron is the code name for the next release of Ubuntu (8.04-LTS), due April 24, 2008 - For more info, see: https://wiki.ubuntu.com/HardyHeron - CONSIDER IT TO BE BETA SOFTWARE - Discussion and support in #ubuntu+1, NOT #ubuntu
+[08:23] <Starnestommy> unique: cd /
+[08:24] <VoidedCheck> transmission rocks btw
+[08:24] <jeffimperial> omonkeybritches: just kTorrent. didn't have this problem, but it was darn slow to pick up on the files it was downloading so i went with Deluge
+[08:24] <VoidedCheck> deluge pales in comparison
+=== Bonez is now known as BonezAU
+[08:24] <dude_> arvind_khadri, it's listed as /dev/hda1 (ext3 filesystem) and /dev/hda2 (linux swap) under the disk partition editor
+[08:24] <VoidedCheck> the overhead is like nothing
+[08:24] <jeffimperial> VoidedCheck: compared to...?
+[08:25] <VoidedCheck> compared to deluge
+[08:25] <VoidedCheck> duh
+[08:25] <arvind_khadri> dude_: ok so root (hd0,0) has to work ...
+[08:25] <jeffimperial> sorry, man.. which two clients were you comparing
+[08:25] <VoidedCheck> transmission and deluge
+[08:25] <jeffimperial> oh.. just that never heard of transmission 'til today.. doing a google..
+[08:26] <bullgard4> What programming languages or programs evaluate the statement "font-size:1.8em;"?
+[08:26] <dude_> arvind_khadri, you're absolutely right.  I'll try rebooting my system again to find out if it worked this time.
+[08:26] <VoidedCheck> transmission is included in hardy atm
+[08:26] <arvind_khadri> dude_: if it didnt you need to follow some more steps
+[08:26] <Shpook> Hello everyone. How can I open a compressed file with an *.ace extension?
+[08:27] <dude_> arvind_khadri, or is there a way to find out besides restarting the machine?
+[08:27] <arvind_khadri> dude_:nope
+[08:27] <dude_> ok
+[08:27] <dude_> brb
+[08:27] <rewati> anrkey r u there
+[08:27] <arvind_khadri> dude_: hey jus a min
+[08:27] <VoidedCheck> unace?
+[08:27] <dude_> arvind_khadri, wait!  is there a command I'm supposed to use to make it save changes?
+[08:27] <AnRkey> rewati, have you tried login in as a normal user?
+[08:28] <VoidedCheck> sudo apt-get unace-nonfree
+[08:28] <arvind_khadri> dude_: nope jus mount the root partition once
+[08:28] <unique> ok so i type cd /root it says im in root but when i run m-a prepare it says im not in root cannot continue
+[08:28] <Lectrick> what is the name of the ubuntu version that was kinda tailored for music recording purposes?
+[08:28] <VoidedCheck> if you have the repositories enabled
+[08:28] <Starnestommy> unique: type 'cd /'
+[08:28] <AnRkey> rewati, I have just checked and the log file is /var/log/vsftp.log on ubuntu 7.10 server
+[08:28] <mosno> Lectrick, Ubuntu Studio
+[08:28] <dude_> arvind_khadri, how do I mount it?  just restarting the machine?
+[08:28] <jeffimperial> anyone else in the room got recommendations for a bittorrent client?
+[08:28] <Lectrick> thanks mosno i'll check it out
+[08:29] <arvind_khadri> dude_: nope use sudo mount /dev/hda1 /mnt
+[08:29] <dude_> ok
+[08:29] <AnRkey> rewati, try using filezilla, it has  a log window that may give you more insight
+[08:29] <VoidedCheck> mldonkey!  (KIDDING)
+[08:29] <AnRkey> rewati, sudo apt-get install filezilla
+[08:29] <arvind_khadri> dude_: then sudo gedit /boot/grub/menu.lst
+[08:29] <unique> .
+[08:29] <unique>
+[08:29] <dude_> arvind_khadri, ok looks like it's mounted
+[08:30] <arvind_khadri> dude_: then sudo gedit /boot/grub/menu.lst
+[08:30] <Lectrick> jeffimperial check out azureus
+[08:30] <VoidedCheck> don't
+[08:30] <VoidedCheck> azureus sucks ass
+[08:30] <jeffimperial> Voided: why not
+[08:30] <Lectrick> what do you use then?
+[08:30] <VoidedCheck> bloated piece of shit java crap
+[08:30] <VoidedCheck> like I said twice, transmission
+[08:31] <dude_> arvind_khadri, that last command brought up a blank page
+[08:31] <jeffimperial> lectrick: m on deluge but got a prob with it
+[08:31] <zvacet> jeffimperial try transmission
+[08:31] <Boohbah> VoidedCheck: if you're into gtk...
+[08:31] <arvind_khadri> dude_: did you do the mount properly
+[08:31] <VoidedCheck> more so than java on linux
+[08:31] <jussio1> !ohmy | VoidedCheck
+[08:31] <ubotu> VoidedCheck: Please watch your language and topic to help keep this channel family friendly.
+[08:31] <AnRkey> jeffimperial, i think there is a switch for running deluge in debug mode
+[08:31] <dude_> arvind_khadri, I sure did.  it brought up a window with my stuff (on that partition)
+[08:32] <VoidedCheck> my family uses such language all the time
+[08:32] <Boohbah> lol
+[08:32] <dude_> I could even see my files
+[08:32] <Lectrick> i run a laptop from 2001 and it works for me, but i could give deluge a try
+[08:32] <VoidedCheck> it's called communication
+[08:32] <jussi01> VoidedCheck: well its not acceptable in here, please dont use it.
+[08:32] <arvind_khadri> dude_: ok so could you see something as boot??
+[08:32] <VoidedCheck> cry me a river
+[08:32] <Jordan_U> VoidedCheck, Well I guess your family isn't very friendly then :)
+[08:32] <VoidedCheck> we're just not uptight
+[08:32] <kaminix> How do I make Ubuntu load a specific driver on boot?
+[08:32] <VoidedCheck> and we are all fans of George Carlin
+[08:33] <dude_> arvind_khadri, is it ist or Lst? on the menu.(?st)
+[08:33] <arvind_khadri> dude_: .lst l for love s for super t for time
+[08:33] <Lectrick> everything I know about dirty words I learned from Carlin
+[08:33] <arvind_khadri> Lectrick: !ot
+[08:33] <dude_> ok
+[08:33] <n6rej> anyone any good with cron?
+[08:33] <Jordan_U> kaminix, Edit the Driver		"foo" line
+[08:34] <arvind_khadri> !ot | Lectrick
+[08:34] <dude_> arvind_khadri, yes I typed that in correctly.  Should I do the grub commands again?
+[08:34] <ubotu> Lectrick: #ubuntu is the Ubuntu support channel, #ubuntu+1 supports the development version of Ubuntu and #ubuntu-offtopic is for random chatter. Welcome!
+[08:34] <jeffimperial> Voided: Transmission looks like a good choice..though https://bugs.launchpad.net/ubuntu/+source/transmission/+bug/204184 is kinda.. u know
+[08:34] <arvind_khadri> dude_: so what you got
+[08:34] <Jordan_U> kaminix, ... in your /etc/X11/xorg.conf
+[08:34] <Jordan_U> kaminix, Sorry, misread, thought you said graphics driver
+[08:35] <dude_> arvind_khadri, did you want me to list what's under /boot?
+[08:35] <VoidedCheck> jeffimperial, on that I can only give my own anecdotal experience.  It's never given me a problem, and for linux, is one of the easiest GUI apps I've used for torents.
+[08:35] <VoidedCheck> *torrents
+[08:35] <phoenix24> how can I transition from 32bit ubuntu to a 64bit ubuntu ??
+[08:35] <arvind_khadri> dude_: no i want you to edit the file menu.lst in /boot/grub/
+[08:35] <zvacet> VoidedCheck +1
+[08:35] <Lectrick> ot, gotcha. Ubuntu Studio looks like it might not be for me. Can anyone suggest a good app to record to file audio input from a mix board?
+[08:35] <VoidedCheck> phoenix24, install from scratch
+[08:36] <Jordan_U> kaminix, Add it to your /etc/modules
+[08:36] <jeffimperial> Voided: yeah..seems like the bug happens only in certain situations
+[08:36] <arvind_khadri> hey sorry cd into the /mnt dude_
+[08:36] <phoenix24> VoidedCheck, would it be necessary to throw away all the installed 32bit apps ?
+[08:36] <VoidedCheck> no
+[08:36] <arvind_khadri> dude_: then do cd boot/grub/
+[08:36] <VoidedCheck> all 32bit aps run on 64bit
+[08:37] <sirjulio> how do i browse a windows share folder on my network?
+[08:37] <phoenix24> VoidedCheck, Which all would be the necessary components ? - GCC / Kernel / glibc ?
+[08:37] <jussio1> !samba | sirjulio
+[08:37] <ubotu> sirjulio: Samba is the way to cooperate with Windows environments. Links with more info: https://wiki.ubuntu.com/MountWindowsSharesPermanently and http://help.ubuntu.com/ubuntu/serverguide/C/windows-networking.html - Samba can be administered via the web with SWAT.
+[08:37] <n6rej> Lectrick: look at www.ubuntustudio.org
+[08:37] <dude_> arvind_khadri, I see it!
+[08:37] <phoenix24> VoidedCheck, Which all would be the necessary components ? - 64bit GCC / 64bit Kernel / 64bit glibc ?
+[08:37] <sirjulio> ubotu ty
+[08:37] <ubotu> You're welcome! But keep in mind I'm just a bot ;-)
+[08:37] <dude_> arvind_khadri, I'm in the file now, I can edit it.  What am I looking for?
+[08:37] <VoidedCheck> phoenix24, of course that would depend on the progs you want to run
+[08:38] <arvind_khadri> dude_: you need to make some change jus paste it
+[08:38] <arvind_khadri> !paste | dude_
+[08:38] <ubotu> dude_: pastebin is a service to post multiple-lined texts so you don't flood the channel. The Ubuntu pastebin is at http://paste.ubuntu-nl.org (make sure you give us the URL for your paste - see also the channel topic)
+[08:38] <VoidedCheck> but 64bit ubuntu is totally backwards compatible with 32bit sw
+[08:38] <VoidedCheck> and that's a fact
+[08:38] <n6rej> can anyone help me figure out why "ntpdate pool.ntp.org" doesn't work in cron.daily?
+[08:38] <tiocsti> but not 32 bit drivers
+[08:39] <VoidedCheck> yeah drivers suck
+[08:39] <jeffimperial> thanks everyone.. laters
+[08:39] <n6rej> tiocsti: right, you need 64bit drivers for 64bit os
+[08:39] <dude_> arvind_khadri, here ya go!  http://paste.ubuntu-nl.org/63800/
+[08:39] <VoidedCheck> but driver support in linux is getting better practically by the hour
+[08:40] <Michae1> someone can run guild wars on ubuntu?
+[08:40] <onats> how do i exit my gnome into a terminal only?
+[08:40] <dude_> voidedcheck, amen to that
+[08:40] <onats> anyone?
+[08:40] <VoidedCheck> and I'm almost sorry to say it, but we can thank Dell for a lot of that
+[08:40] <arvind_khadri> dude_: did you copy paste completely i cant see the windows options...
+[08:40] <kajo> onats
+[08:40] <onats> yes kajo?
+[08:40] <kajo> do one of the tty terminals?
+[08:40] <tiocsti> how so? dell is only shipping hardware already supported, arent they?
+[08:41] <jussio1> Kaja: ctrl + alt + f2
+[08:41] <jussio1> kajo: ^
+[08:41] <dude_> arvind_khadri, that's everything
+[08:41] <Michae1> can someone help me to get guild wars working in wine?
+[08:41] <onats> kajo, yeah, i can do that, but i need the gnome to exit completely
+[08:41] <kajo> My statement was @ onats.
+[08:41] <VoidedCheck> the fact that dell is running the hw is giving a major push, especially for graphics card manufacturers, to open their source
+[08:41] <arvind_khadri> dude_: try rebooting once i think it wil boot
+[08:41] <kajo> sudo killall gnome?
+[08:41] <Badge1> onats: /etc/init.d/gdm stop
+[08:41] <kajo> pstree, find gnome, and killall.
+[08:41] <Starnestommy> onats: sudo invoke-rc.d gdm stop
+[08:41] <kajo> or that^
+[08:41] <dude_> arvind_khadri, sure thing.  BRB
+[08:42] <onats> lemme write those down
+[08:42] <arvind_khadri> dude_: yep am anxious
+[08:42] <onats> thanks!
+[08:42] <tiocsti> we'll see, i usually go with intel chipsets cuz i know they work well in linux w/o closed source drivers
+[08:42] <kajo> starnestommy, what is invoke-rc.d?
+[08:42] <Starnestommy> to restart it, sudo invoke-rc.d gdm start
+[08:42] <VoidedCheck> my intel chipset choked on gutsy
+[08:42] <Starnestommy> kajo: it calls scripts in /etc/init.d/
+[08:42] <VoidedCheck> worked fine on hardy though
+[08:42] <VoidedCheck> yay for kernel improvements
+[08:43] <onats> brb
+[08:43] <VoidedCheck> though now I'm running a nvidia 8600gt pci-e
+[08:43] <VoidedCheck> just for the purdy rendering
+[08:44] <tiocsti> i run ubuntu in vmware on one of my laptops, cuz not all the hardware is quite supported, its native on the other one though
+[08:44] <VoidedCheck> gah, gotta go to bed...  when I wake up and go to work tomorrow, I see if that $5000 accident cost me my job
+[08:45] <rewati> anrkey thanx
+[08:45] <tiocsti> they'd fire you over 5k?
+[08:45] <Michae1> can someone help me ?:P
+[08:45] <arvind_khadri> dude_: what happend
+[08:45] <rewati> anrkey i am tryin to install filezilla
+[08:45] <arvind_khadri> !ask | michae
+[08:45] <ubotu> michae: Please don't ask to ask a question, ask the question (all on ONE line, so others can read and follow it easily). If anyone knows the answer they will most likely answer. :-)
+[08:45] <dude_> arvind_khadri, :(
+[08:45] <rewati> anrkey but can u  tell me wat can be the problem
+[08:45] <Kamus_H_Zwisch> hello all
+[08:45] <VoidedCheck> 5k in a theater, rendering a projector useless for 2 days, on a weekend
+[08:45] <VoidedCheck> that's like $10000
+[08:45] <dude_> arvind_khadri, no luck, I'm in windows
+[08:46] <Kamus_H_Zwisch> a very stupid question: how do i upload a local file to a remote server via telnet?
+[08:46] <arvind_khadri> dude_: hmm use the super grub live cd then
+[08:46] <dude_> CURSE YOU BILL GATES!  CUUURSSE YOUUUUU!!!!
+[08:46] <tiocsti> kamus: you dont, use scp instead?
+[08:46] <dude_> super grub live cd?
+[08:46] <VoidedCheck> anyway, g'night ubuntu land
+[08:46] <arvind_khadri> dude_: http://forjamari.linex.org/projects/supergrub/
+[08:47] <dude_> arvind_khadri, well can't I just edit the boot.ini file from here?
+[08:47] <arvind_khadri> dude_: :) if thats readable
+[08:47] <arvind_khadri> dude_: use the super grub its easy to setup
+[08:48] <arvind_khadri> dude_: totally for newbies
+[08:48] <dude_> arvind_khadri, wow, floppy based!  Sweet!  my cd burner is screwed so I can use that
+[08:48] <gabbs> How do I get rid of avahi messing up my wifi on boot?
+[08:48] <arvind_khadri> dude_: happy linuxing
+[08:48] <RenaKunisaki> ok, so
+[08:48] <RenaKunisaki> "grub install (hd0) failed - this is a fatal error" - is my hard drive toast?
+[08:48] <arvind_khadri> RenaKunisaki: grub lost??
+[08:49] <RenaKunisaki> arvind_khadri, apparently; I deleted all the partitions and reinstalled it and it failed with that at 94%
+[08:49] <arvind_khadri> RenaKunisaki: you need to install completely
+[08:50] <dude_> arvind_khadri, dammit, how do I work with an .img file?
+[08:50] <dude_> haha
+[08:50] <RenaKunisaki> arvind_khadri, what do you mean completely?
+[08:50] <arvind_khadri> RenaKunisaki: i mean that you might havent done the partitions cleanly so boot into live cd and do everything properly
+[08:50] <Hemebond> Is someone able to help me compile ETQW under an x86_64 system? I'm getting compatibility errors with libstdc++.
+[08:51] <arvind_khadri> dude_: did you find out how to do that
+[08:51] <RenaKunisaki> arvind_khadri, this is the live CD
+[08:51] <arvind_khadri> RenaKunisaki: do the install again
+[08:51] <dude_> arvind_khadri, I'm researching the .img extension right now
+[08:51] <arvind_khadri> dude_: i think you need to just copy paste and then boot from the cd
+[08:51] <c0Ld> i just accidently hit something to enable compiz zooming on hardy...what did I hit? I can't seem to turn it off :/
+[08:52] <arvind_khadri> dude_: i mean the floppy
+[08:52] <bazhang> c0Ld: try asking in #compiz
+[08:52] <dude_> arvind_khadri, I wouldn't think so, it doesn't work that way with an .iso file, it shouldn't be the same for a floppy
+[08:52] <arvind_khadri> bazhang: to the rescue
+[08:52] <bazhang> hi arvind_khadri ;]
+[08:52] <arvind_khadri> bazhang: help in restoring grub
+[08:53] <sajuuk> hey guys im trying to find the program gnome-art and apparently i can download it through synaptic... but i cant find it
+[08:53] <arvind_khadri> dude_: hmm
+[08:53] <bazhang> sajuuk: that would be a website
+[08:54] <arvind_khadri> bazhang: need help to restore grub
+[08:54] <sajuuk> oh no apparently its a downloader called that same name
+[08:54] <Vini> Hi, I had ndiswrapper working before, than it stopped (don't know why). I've followed the same tute I did earlier, but I think the problem is my network settings.  Is there some easy way to make /etc/networks and /etc/network return to defaults from install?
+[08:54] <bazhang> arvind_khadri: sure what's up with grub? did you read the !grub factoid?
+[08:54] <Vini> (without having to re-install everything)
+[08:54] <arvind_khadri> bazhang: not me its dude_
+[08:54] <arvind_khadri> bazhang: we tried everything but it doesnt restore
+[08:55] <Exteris> Vini, get them from someone else?
+[08:55] <Vini> But then it will have their settings in in :(
+[08:56] <arvind_khadri> dude_: you around
+[08:56] <dude_> arvind_khadri, sure am
+[08:56] <arvind_khadri> dude_: well did you read !grub
+[08:56] <RenaKunisaki> arvind_khadri, OK, installing again
+[08:57] <Exteris> Vini, ask some newbie then :P
+[08:57] <arvind_khadri> RenaKunisaki: :)
+[08:57] <Exteris> Vini, there probably is some dpkg-reconfigure command
+[08:57] <unique> You must have the fully configured source for the Linux kernel and
+[08:57] <unique>    ALSA which you want to use for this device driver. Partial
+[08:57] <unique>    installed kernels (For example, from distributor makers) may be
+[08:57] <unique>    unusable for this action.
+[08:57] <FloodBot1> unique: Please don't flood, use http://paste.ubuntu-nl.org to paste, don't use Enter as punctuation.
+[08:57] <RenaKunisaki> arvind_khadri, just failed immediately: "attempt to mount a file system with type vfat in IDE1 master, partition #11 (hda11) at /mnt/files failed"
+[08:57] <dude_> arvind_khadri, I'm trying to make that super grub floppy
+[08:58] <arvind_khadri> RenaKunisaki: you need to have the ext3 for root filesys
+[08:58] <rewati> anrkey r u there???
+[08:58] <sajuuk> that sounds yuk with that problem
+[08:58] <RenaKunisaki> arvind_khadri, I did
+[08:58] <sajuuk> i thought i had problems when i stuffed my Xorg file
+[08:58] <rewati> anrkey this is the output of filezilla
+[08:58] <unique> you must have the fully configured source for the Linux kernel and ALSA which you want to use for this device driver. can some one tell me what that means?
+[08:58] <arvind_khadri> RenaKunisaki: hmm seems like a toast then
+[08:58] <rewati> anrkey this is the output of filezilla http://paste.ubuntu-nl.org/63801/
+[08:59] <RenaKunisaki> arvind_khadri, any way to be sure before I replace it?
+[08:59] <arvind_khadri> RenaKunisaki: try restarting
+[08:59] <roseman> hi everyone, do you know how to create menu like "make menuconfig"?
+[08:59] <tiocsti> man dialog
+[08:59] <arvind_khadri> roseman: thats ncurses
+[09:00] <arvind_khadri> dude_: ask bazhan
+[09:00] <rewati> roseman i dont think make menuconfig is for makin menu
+[09:00] <arvind_khadri> dude_: ask bazhang
+[09:00] <arvind_khadri> rewati: its for displaying a menu
+[09:00] <tiocsti> dialog can be used for menus like that
+[09:00] <RenaKunisaki> arvind_khadri, what happened was I decided to just delete everything and reinstall XP and Xubuntu, but when I started the XP installer it wouldn't even run
+[09:00] <tiocsti> either the library or the program
+[09:00] <unique> i try to run the configure file for my drivers and the system cant open it.. it says not ...application available
+[09:00] <unique> could some one tell me what i need?
+[09:01] <arvind_khadri> RenaKunisaki: do clean the disks properly...format everything
+[09:01] <RenaKunisaki> arvind_khadri, I booted a DOS disk and deleted all partitions with fdisk and then was able to create the partitions and install XP, but then this happened
+[09:01] <dude_> I think I got the floppy made
+[09:01] <dude_> I was right, you need special software
+[09:01] <arvind_khadri> RenaKunisaki: might be the disk of DOS aint proper..use the live cd to format ;)
+[09:02] <arvind_khadri> dude_: hmm njoi ;)
+[09:02] <dude_> arvind_khadri, brb
+[09:02] <arvind_khadri> dude_: sure
+[09:02] <Hemebond> How do I force g++ to use 32bit libs?
+[09:02] <SnakeyeS> how can I install xubuntu on an older dell that doesn't have a floppy or internal hdd?
+[09:02] <Hemebond> On Ubuntu.
+[09:02] <unique> in the term i get /bin/sh: Can't open ./configure
+[09:03] <SnakeyeS> i have an external cdrom/usb
+[09:03] <rewati> hey any budy here can help me with vsftp
+[09:03] <bazhang> SnakeyeS: does it allow boot from usb key
+[09:03] <SnakeyeS> but no option in bios to boot from/to usb
+[09:03] <madrid> hjkhjk
+[09:03] <sanki> ce qualche italiano
+[09:04] <bazhang> SnakeyeS: where were you going to instal *to* then?
+[09:04] <Theo_> If I download and install 8.04 BETA will I be able to upgrade when it is released in 4 days? Or will I have to re-install using the CD of the final 8.04?
+[09:04] <SnakeyeS> windows xp...dual boot scenario
+[09:04] <bazhang> Theo_: yes more more info in #ubuntu+1
+[09:04] <bazhang> !it | sanki
+[09:04] <ubotu> sanki: Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie!
+[09:04] <Theo_> Io parlo un po di italiano
+=== gary is now known as Gary
+[09:04] <sanki> ha
+[09:04] <bazhang> SnakeyeS: either wubi or unetbootin
+[09:05] <SnakeyeS> either more geared toward a dummy>
+[09:05] <SnakeyeS> ?
+[09:05] <SnakeyeS> lol
+[09:05] <bazhang> !wubi | SnakeyeS read the ubuntu forums link
+[09:05] <ubotu> SnakeyeS read the ubuntu forums link: wubi is Wubi advice here: http://ubuntuforums.org/forumdisplay.php?f=234  and  http://wubi-installer.org  [file wubi bugs here:  https://launchpad.net/wubi/+filebug ] (it is included in hardy 8.04 beta CD and will be in the final release)
+[09:06] <sanki> ciao
+[09:06] <bazhang> SnakeyeS: wait four days until it is final to be sure though
+[09:06] <unique> /bin/sh: Can't open ./configure can any one tell me what this means?
+[09:06] <rewati> hey arvind can u help me plz with my vsftp
+[09:06] <theLichKing> wubi fails
+[09:07] <Starnestommy> unique: ./configure doesn't exist, or you need to 'chmod +r ./configure'
+[09:07] <bazhang> theLichKing: not here it does not
+[09:07] <SnakeyeS> bazhang: so wubi is a windows app that assists with the installation?
+[09:07] <bazhang> SnakeyeS: you read any of the links?
+[09:07] <SnakeyeS> reading now
+[09:08] <unique> ok i think that worked...
+[09:08] <tomoyuki28jp> How can I make the size of my menu bars smaller? I am not using gnome. Somebody told me that I can do that with '^/.Xresources', but I could not find how.
+[09:08] <unique> now i have to Run 'make'
+[09:08] <SingAlong> Hi guys!
+[09:08] <unique> but i get bash: Run: command not found
+[09:09] <SingAlong> I have an Acer Extensa 5210 notebook. I am installing Ubuntu 6.06 on it. How can I connect to my wireless modem thru Ubuntu?
+[09:09] <SingAlong> Any settings to be made?
+[09:09] <Starnestommy> unique: just type 'make'
+[09:09] <bazhang> SingAlong: what chipset of the card
+[09:09] <SingAlong> No idea!
+[09:09] <tarelerulz> I just got a ne 8b black nano ipod and I got songs on it via gtkpod .   I it all so has movies in the main menu  and I was wondering if there is way to put a movie on the nano .
+=== po1ter is now known as polter
+[09:10] <unique> lol ty ima serious noob but im learning
+[09:10] <bazhang> SingAlong: how old is that computer
+[09:10] <SingAlong> bazhang: No idea! How do I find that out?
+[09:10] <unique> /bin/sh: cannot create /var/log/creative-installer.log: Permission denied
+[09:10] <SingAlong> bazhang: Its a P4 with 512MB RAM and 80GB HDD. Its around a year old (since the time I bought it from the dealer)
+[09:11] <bazhang> SingAlong: any reason for dapper (6.06)? why not a more recent version
+[09:11] <SingAlong> bazhang: Oh sorry its a celeron (not a P4). other config are right
+[09:11] <unique> how do i gain admin permission on the term...
+[09:11] <SingAlong> bazhang: I dont have a CD. Yet to order it thru Shipit!
+[09:11] <bazhang> SingAlong: no burner?
+[09:12] <SnakeyeS> Wubi is a Ubuntu installer for Windows users that will bring you into the Linux world with a single click.
+[09:12] <SnakeyeS> interesting  :)
+[09:12] <SingAlong> Yeah it has a DVD Reader (and CD-RW)
+[09:12] <compumike> anyone have luck with b43 driver on kernel 2.6.25?
+[09:12] <bazhang> SingAlong: what about downloading the iso and burning to cd and then running the livecd of 7.10
+[09:13] <bazhang> compumike: not even hardy uses that kernel
+[09:13] <SingAlong> bazhang: Yeah will do it. But I am currently running the installation on 6.06 on my notebook (I m on IRC thru comp)
+[09:14] <SingAlong> bazhang: And my internet connection sucks. I am in India and have a 256kbps connection. My download speed is around 25Kbps
+[09:14] <Hemebond> https://bugs.launchpad.net/ubuntu/+source/gcc-4.2/+bug/186730 Dang nabit!
+[09:14] <SnakeyeS> bazhang: wubi's out
+=== Randomtime_ is now known as Randomtime
+[09:14] <bazhang> SingAlong: if you wait a few days you can go from dapper to hardy (next release) in one step
+[09:14] <dmsuperman> I'm using compiz CCSM to edit my shortcut commands. I set a command to "gnome-screensaver-command --lock" and then the hotkey to Super + L. If I press Super + L, nothing happens, but when I run that command it locks linux as it should. any ideas?
+[09:14] <tomoyuki28jp> I wanna do this without using gnome. http://ubuntuforums.org/showthread.php?t=657780  Can anybody teach me how?  I have been struggling so long...
+[09:15] <unique> how do i gain admin permission on the term....
+[09:15] <SingAlong> bazhang: yeah will do it for sure... But just want to know if I can connect to wireless. (I am installing Ubuntu 6.06 in  hurry because my Windows got screwed up. Its corrupted. And I thought its time to switch)
+[09:15] <bazhang> unique: sudo
+[09:15] <SnakeyeS> wubi needs 256mb of memory to install.  I have 128
+[09:15] <unique> ty
+[09:15] <Starnestommy> !sudo | unique
+[09:15] <ubotu> unique: sudo is a command to run programs with superuser privileges ("root"). Look at https://help.ubuntu.com/community/RootSudo for more information.
+[09:16] <bazhang> SingAlong: can you get to a terminal and run a command? if so try lspci and see what the (one line, dont paste here) card is
+[09:16] <bazhang> SnakeyeS: well either up the ram or get some really ultra-lightweight distro
+[09:16] <SingAlong> bazhang: Yeah couple of minutes. My ubuntu installation is just over. Need to reboot the notebook
+[09:18] <tiocsti> im not sure how happy ubuntu would be in 128m ram, might wanna use xubuntu instead
+[09:18] <SingAlong> bazhang: I ran the command thru the livecd itself. I got a whole list of details
+[09:18] <unique> Please install the package with full kernel sources for your distribution dose any one know what syn that would be
+[09:18] <sirjulio> what's the linux equivalent for DAEMON Tools?
+[09:18] <bazhang> xubuntu would not run; perhaps fluxbuntu
+[09:18] <sknh> Hi
+[09:18] <atlas95> sirjulio: I have a bash script for mount iso
+[09:19] <sknh> I installed texvc but when I run it, it says latex command not found
+[09:19] <SingAlong> bazhang: I got a lot of details. About card should I look for?
+[09:19] <bazhang> SingAlong: why dont you reboot first
+[09:19] <SingAlong> bazhang: yeah sure
+[09:19] <sknh> cjk-latex is the package to be installed for latex?
+[09:19] <bazhang> !info texlive
+[09:19] <ubotu> texlive (source: texlive-base): TeX Live: A decent selection of the TeX Live packages. In component main, is optional. Version 2007-10 (gutsy), package size 14 kB, installed size 88 kB
+[09:19] <arvind_khadri> bazhang: tried the new kernel
+[09:19] <SingAlong> bazhang:  while the notebook is rebooting... may I know whether its possible to sun Solidedge on Ubuntu?
+[09:19] <sirjulio> atlas95: gr8, can u share?
+[09:20] <atlas95> yes
+[09:20] <bazhang> SingAlong: what is solid edge
+[09:20] <sknh> texlive or tetex?
+[09:20] <Aldenor> hi
+[09:20] <SingAlong> bazhang: Solidedge is a CAD software. Like AutoCAD
+[09:20] <Aldenor> anybody know a irc channel for ubuntu in spanish?
+[09:20] <kaminix> Okay, how do I blacklist three drivers, and make it autoload another one?
+[09:20] <SingAlong> bazhang: Used to do all those mechanical drawing and stuff. I have it for my university
+[09:20] <Starnestommy> Aldenor: #ubuntu-es
+[09:20] <Aldenor> thankx
+[09:20] <bazhang> SingAlong: that is windows only or linux as well
+[09:20] <atlas95> by DCC accept sirjulio
+[09:21] <gd> if I logon remote desktop by vnc , how to watch the remote host's current desktop ?
+[09:21] <SingAlong> bazhang: Only for windows.
+[09:21] <SingAlong> bazhang: I saw a lot of people asking abt running it thru Wine.
+[09:21] <unique> Please install the package with full kernel sources for your distribution dose any one know what syn that would be
+[09:22] <bazhang> SingAlong: have you checked the !appdb? /msg ubotu appdb for more info
+[09:22] <sirjulio> atlas95: sry, bit of noob, DCC?
+[09:22] <SingAlong> bazhang: hehehe!! Its a paid software (Hussshhhh.... everyone in our class use a pirated version)  :)
+[09:23] <bazhang> SingAlong: please dont talk about that here
+[09:23] <atlas95> I up it somewhere, wait
+[09:23] <SingAlong> bazhang: ok ok... But I found a better solution. Unigraphics, the company that produces Solidedge gives away a free version for 2D drawings.
+[09:24] <SingAlong> bazhang: Thats what we need.
+[09:24] <slacker> hi there
+[09:24] <bazhang> SingAlong: you can try it via wine or in a vm with windows
+[09:24] <R-i-c-k> hola
+[09:24] <SingAlong> bazhang: hmm...
+[09:24] <slacker> is anyone using the videotrans package to make video dvds?
+[09:24] <atlas95> sirjulio: http://www.atlas95.com/fichiers/daemon-tools.sh
+[09:25] <slacker> I can't seem to get the menu images to work. it's all black
+[09:25] <atlas95> * sirjulio: http://www.atlas95.com/fichiers/daemon-tool.sh
+[09:25] <DOOM_NX> how can i make sure, ssh server is using the key i made with ssh-keygen?
+[09:25] <sirjulio> atlas95: thnx mate
+[09:25] <Dr_willis> gd,  vnc can be set up to share the current desktop - or create a 'hidden' virtual desktop that you can only see/connect to with a vnc client.
+[09:26] <atlas95> ;)
+[09:26] <slacker> DOOM_NX: it'll automatically try if your ssh client offers pub key authentication
+[09:26] <SingAlong> bazhang: Oops! I think I forgot the password or typed the wrong case during installation! Anyway to get that working or should I reinstall?
+[09:27] <astro76> DOOM_NX: the public key should be in ~/.ssh/authorized_keys
+[09:27] <heikkus> hello! how come i can't get my old computer to boot from the ubuntu livecd  although it boots fine from a windows xp cd ? :E
+[09:27] <Vasa> hi, I decided to use tahoma font in ubuntu's menu, but font k is disorted. How can I solve that?
+[09:27] <Dr_willis> heikkus,  give more detailas as to what it does do . when you try to boot the live cd
+[09:27] <bazhang> SingAlong: hehe; that has happened to me in the past--just try some variations and if not then boot into the live cd and change it
+[09:27] <Vasa> Or  how can  I disable antialias?
+[09:28] <DOOM_NX> <astro76> DOOM_NX: the public key should be in ~/.ssh/authorized_keys -> yes it's there, but how do i know if it's being used?
+[09:28] <bazhang> heikkus: you need to provide more than just bare bones info
+[09:28] <DOOM_NX> <slacker> DOOM_NX: it'll automatically try if your ssh client offers pub key authentication => i don't have a 2nd pc to test it right now
+[09:28] <sirjulio> atlas95: getting a not found
+[09:28] <astro76> DOOM_NX: if you're not asked for a password
+[09:28] <ranma_1\2> proftpd-mysql courier-authdaemon courier-base courier-imap courier-maildrop courier-pop libberkeleydb-perl libcrypt-blowfish-perl libcrypt-cbc-perl libcrypt-passwdmd5-perl libdate-calc-perl libdate-manip-perl libdbd-mysql-perl libdbi-perl libio-stringy-perl libmail-sendmail-perl libmailtools-perl libmd5-perl libmime-perl libnet-dns-perl libnet-netmask-perl libnet-perl libnet-smtp-server-perl libperl5.8 libsnmp-session-perl libterm-readk
+[09:28] <ranma_1\2> see anything there that shouldnt be removed ??
+[09:28] <SingAlong> bazhang: Does the liveCD have an option to change the password?
+[09:28] <atlas95> sirjulio: I verify sorry :)
+[09:29] <bazhang> SingAlong: you can do it; forgot the command offhand though
+[09:29] <atlas95> sirjulio: http://www.atlas95.com/fichiers/bin/daemon-tool.sh , sorry :p
+[09:29] <ranma_1\2> too late :P
+[09:30] <Dr_willis> you can boot a live cd, then chroot into the installed system, and use the passwd USERNAME command to set a new password. is one way. rescue mode may let you do it also
+[09:30] <heikkus> hmm. it tries to boot from the cd but then just says the cd is unbootable :E i tweaked the bios so that it only boots from the cd-rom and not at all from the hard drive
+[09:30] <Dr_willis> heikkus,  look on the cd. what files are on the cd? what program did you use to burn the iso to cd?
+[09:30] <slacker> DOOM_NX: ssh localhost
+[09:31] <B3NZ1N0> hello all
+[09:31] <bazhang> SingAlong: look at Dr_willis's command above
+[09:31] <B3NZ1N0> please I have a question
+[09:31] <DOOM_NX> it says
+[09:31] <DOOM_NX> The authenticity of host 'localhost (127.0.0.1)' can't be established.
+[09:31] <DOOM_NX> RSA key fingerprint is e4:c0:e5:23:8c:e6:f7:98:70:08:1a:b7:85:0f:f0:90.
+[09:31] <DOOM_NX> Are you sure you want to continue connecting (yes/no)?
+[09:31] <slacker> you're sure
+[09:31] <heikkus> i think the cd is ok cause it installed fine on my newer system
+[09:31] <astro76> DOOM_NX: you'll get that either way the first time
+[09:31] <SingAlong> Dr_willis: the command please (I m a linux noob)
+[09:32] <bazhang> ask B3NZ1N0
+[09:32] <arvind_khadri> !ask | B3NZ1N0
+[09:32] <ubotu> B3NZ1N0: Please don't ask to ask a question, ask the question (all on ONE line, so others can read and follow it easily). If anyone knows the answer they will most likely answer. :-)
+[09:32] <slacker> DOOM_NX: you can remove 'localhost' from the list of known hosts afterwards if you like
+[09:32] <slacker> it's also in ~/.ssh/
+[09:32] <heikkus> i burned it with cdburnedxp pro at the library
+[09:33] <Dr_willis> SingAlong it might be faster if you just reinstall and REMBER your password then.
+[09:33] <DOOM_NX> <slacker> it's also in ~/.ssh/ -> what is there?
+[09:33] <B3NZ1N0> my mIRC is saying 4 days more to chat of because I have not registered I taught there is a way I might be able to get through to regiser  so that I will not be seeing such things and I can chat with mIRC for life
+[09:33] <arvind_khadri> SingAlong: what do you want
+[09:33] <DOOM_NX> the key u mean?
+[09:33] <DOOM_NX> how do i know if it's using it... cause i need to connect from winxp using putty
+[09:33] <bazhang> B3NZ1N0: switch to a linux client or pay up
+[09:33] <Dr_willis> SingAlong,  in short. boot to recovery/rescue mode to get to a shell.  mount the installed system, chroot /mountpoint, passwd username.   Of course all that is total magic to you. :) but i dont know the specifcs of your system.
+[09:34] <slacker> DOOM_NX: known_hosts. don't worry about it
+[09:34] <SingAlong> arvind_khadri: I forgot the password after installation. I tried a lot of variations. Now I got it!
+[09:34] <arvind_khadri> B3NZ1N0: use xchat ;)
+[09:34] <slacker> DOOM_NX: if it asks for a password, it's not using the key.
+[09:34] <Dr_willis> B3NZ1N0,  you can get a free versionof xchat for windows and dump mIRC
+[09:34] <SingAlong> Dr_willis: Thank you! I tried a lot of variations and got it now!
+[09:34] <slacker> DOOM_NX: there are howto's that explain what you have to do to get pub key auth working with putty and opensshd
+[09:35] <arvind_khadri> SingAlong: boot into the recovery mode and add a new user
+[09:35] <SingAlong> bazhang: Now I have to run lspci right?
+[09:35] <SingAlong> arvind_khadri: Oh I need to keep that in mind if I forget the password again :)
+[09:35] <bazhang> SingAlong: yes and !paste the output (not here to pastebin)
+[09:35] <arvind_khadri> !paste | SingAlong
+[09:35] <ubotu> SingAlong: pastebin is a service to post multiple-lined texts so you don't flood the channel. The Ubuntu pastebin is at http://paste.ubuntu-nl.org (make sure you give us the URL for your paste - see also the channel topic)
+[09:35] <Dr_willis> learn to rember your passwords :)
+[09:35] <slacker> DOOM_NX: you can either create a new pub key with putty or import the one you created with ssh-keygen I think
+[09:35] <B3NZ1N0> so no one can help me with the registration code nor a way to break this code?
+[09:35] <arvind_khadri> bazhang: the factiod when calling a name doesnt work ;)
+[09:36] <SingAlong> ubotu: yeah sure friend
+[09:36] <Dr_willis> B3NZ1N0,   No. we dont care about mIRC one way or another...
+[09:36] <arvind_khadri> B3NZ1N0: no piracy
+[09:36] <Dr_willis> B3NZ1N0,  it has NOTHING to do with linux.
+[09:36] <arvind_khadri> B3NZ1N0: sudo apt-get install xchat
+[09:36] <B3NZ1N0> but you are using mirc
+[09:36] <DOOM_NX> <slacker> DOOM_NX: there are howto's that explain what you have to do to get pub key auth working with putty and opensshd -> i was reading that while setting it up
+[09:36] <Dr_willis> B3NZ1N0,  totally WRONG., we are using IRC.
+[09:36] <Dr_willis> B3NZ1N0,  mIRC is one of MANY irc clients.
+[09:36] <bazhang> !piracy > B3NZ1N0
+[09:36] <DOOM_NX> slacker, i created one with ssh-keygen and imported it to putty
+[09:37] <Dr_willis> !irc | B3NZ1N0
+[09:37] <ubotu> B3NZ1N0: A list of official Ubuntu IRC channels, as well as IRC clients for Ubuntu, can be found at https://help.ubuntu.com/community/InternetRelayChat - For a general list of !freenode channels, see http://freenode.net/faq.shtml#channellist - See also !Guidelines
+[09:37] <DOOM_NX> but is the ssh server using the key? cause putty is...
+[09:37] <Boohbah> B3NZ1N0: try xchat
+[09:37] <SingAlong> bazhang: I got a big result. As I said I am on my cop and instaling linux on my notebook(I cant connect to net on notebook. Thats what I need to do). So it would be better if u tell me what kinda card I need to search for?
+[09:37] <slacker> DOOM_NX: did you copy the id_xxx.pub file to ~/.ssh/authorized_keys?
+[09:37] <SingAlong> *comp
+[09:37] <DOOM_NX> slacker yes
+[09:37] <DOOM_NX> i followed this guide: http://linux-sxs.org/networking/openssh.putty.html
+[09:38] <slacker> DOOM_NX: on the linux, what happens after you type ssh localhost?
+[09:38] <B3NZ1N0> !irc
+[09:38] <ubotu> A list of official Ubuntu IRC channels, as well as IRC clients for Ubuntu, can be found at https://help.ubuntu.com/community/InternetRelayChat - For a general list of !freenode channels, see http://freenode.net/faq.shtml#channellist - See also !Guidelines
+[09:38] <JPSman> so I see that you can download a lot of amateur ham radio software, but when i run it it needs /dev/mixer   why?
+[09:38] <bazhang> SingAlong: do you have ethernet for the laptop? or just can run a terminal in it? dont need net access for that, just the laptop running
+[09:38] <DOOM_NX> slacker,  ssh localhost
+[09:38] <DOOM_NX> Enter passphrase for key '/home/doom/.ssh/id_rsa':
+[09:38] <JPSman> er /dev/radio      why?
+[09:39] <unique> wow i want to thank every one that helped me i tryed for 2 weeks to get this sound card to work thank you!
+[09:39] <B3NZ1N0> so whats XCHAT like, can I chat with pple using mirc?
+[09:39] <arvind_khadri> !dev | JPSman
+[09:39] <ubotu> JPSman: Interested in becoming an Ubuntu Developer? Get started here: https://wiki.ubuntu.com/UbuntuDevelopment
+[09:39] <SingAlong> arvind_khadri: I can connect the internet wire.
+[09:39] <slacker> DOOM_NX: that's the password for your key. you can use ssh-agent to manage that. otherwise you have to type it in every time
+[09:39] <SingAlong>  bazhang: I can connect the internet wire.
+[09:39] <Starnestommy> B3NZ1N0: yes. any IRC client can chat with people using any client
+[09:39] <arvind_khadri> JPSman: oops sorry /dev are the device files
+[09:39] <slacker> DOOM_NX: that's NOT your login password
+[09:39] <DOOM_NX> slacker, i typed it... ok what happened?
+[09:39] <B3NZ1N0> and I can scan also?
+[09:39] <bazhang> SingAlong: that would be best really
+[09:40] <SingAlong> bazhang: I have a laptop running.
+[09:40] <slacker> DOOM_NX: it didn't complain?
+[09:40] <arvind_khadri> JPSman: so you would need a receiver for that
+[09:40] <Starnestommy> B3NZ1N0: what do you mean by 'scan'?
+[09:40] <DOOM_NX> slacker, no :(
+[09:40] <DOOM_NX> it said
+[09:40] <slacker> DOOM_NX: should work from windows too
+[09:40] <B3NZ1N0> I mean scan for mailers and so on?
+[09:41] <DOOM_NX> Linux doom-desktop 2.6.22-14-generic #1 SMP Tue Feb 12 07:42:25 UTC .....
+[09:41] <Dr_willis> B3NZ1N0,  mailers?
+[09:41] <JPSman> arwind_khadri : what are the chances that I can build one?
+[09:41] <slacker> DOOM_NX: did you point putty at the right location of the pub key?
+[09:41] <astro76> !ot | B3NZ1N0
+[09:41] <DOOM_NX> what does this mean?
+[09:41] <ubotu> B3NZ1N0: #ubuntu is the Ubuntu support channel, #ubuntu+1 supports the development version of Ubuntu and #ubuntu-offtopic is for random chatter. Welcome!
+[09:41] <slacker> DOOM_NX: means it works. you're logged in to localhost
+[09:41] <bazhang> SingAlong: if you wish, then connect the ethernet wire/cable and then pastebin the output of lspci to the pastebin site--tell us the address then we can go read it without flooding the channel
+[09:41] <B3NZ1N0> mean
+[09:41] <DOOM_NX> slacker, yes but... i don't think it will ever be able to connect because windows is a guest os in vbox... using NAT...
+[09:42] <B3NZ1N0> this cahn sucks
+[09:42] <Dr_willis> B3NZ1N0,   the various irc clients for linux, can do about anytying that mIRC can do.. and many things mIRC cant do. - irc clients connect to irc servers, and join channels so you can chat. :)
+[09:42] <SingAlong> bazhang: yeah will get back
+[09:42] <bazhang> B3NZ1N0: please read the /topic
+[09:42] <DOOM_NX> slacker, how do i unlog? :P
+[09:42] <arvind_khadri> B3NZ1N0: building them is no chance for users ..its a developer thing ...so why dont you get a device.../dev/ points to the devices you have
+[09:42] <DOOM_NX> logout*
+[09:42] <B3NZ1N0> I dont use linux
+[09:42] <slacker> DOOM_NX: ctrl+d
+[09:42] <Dr_willis> B3NZ1N0,   Then why are you hanging in a Linux related channel?
+[09:42] <slacker> DOOM_NX: from your windows, can you ping the linux box?
+[09:42] <bazhang> B3NZ1N0: please exit and go to ##windows thanks
+[09:43] <DOOM_NX> slacker, no because i'm using NAT
+[09:43] <slacker> DOOM_NX: so why are you even trying to get ssh working for it?
+[09:43] <DOOM_NX> i was just trying to see how putty works
+[09:43] <DOOM_NX> i didn't expect it to connect
+[09:44] <slacker> putty doesn't do much without a server to connect to
+[09:44] <DOOM_NX> i know... just the settings
+[09:44] <slacker> ic
+[09:44] <DOOM_NX> so slacker if i import the key to another PC
+[09:44] <DOOM_NX> using putty
+[09:44] <DOOM_NX> and try to connect, will it connect?
+[09:44] <heikkus> wow im gonna try this flubuntu thingy ->
+[09:44] <Redhammer_the_Ol> tv
+[09:44] <root> Hey all
+[09:45] <zvacet> root ask
+[09:45] <thoreauputic> root: Using IRC as root is a silly idea, in case you didn't know :)
+[09:45] <DOOM_NX> slacker, i sued "vncviewer localhost:1" and got this: http://img444.imageshack.us/img444/5290/screenshotvncdoomsxdeskyk0.png
+[09:45] <explorer2> 8.04 looks just like 7.10 :( :((
+[09:46] <root> Im on root
+[09:46] <root> user on Ubuntu
+[09:46] <thoreauputic> root: why?
+[09:46] <root> Forgot to chang
+[09:46] <Dr_willis> we can tell that from your nick. :)
+[09:46] <root> I run my own web server
+[09:46] <thoreauputic> root: your /whois shows "root"
+=== root is now known as Habbotom
+[09:47] <Dr_willis> we are safer now? :)
+=== master_o1_master is now known as master_of_master
+[09:47] <thoreauputic> Habbotom: changing your nick doesn't change the fact that you are using IRC as root :)
+[09:47] <Habbotom> ;)
+[09:47] <Habbotom> thoreauputic: Whats wrong with using it
+[09:48] <slacker> DOOM_NX: putty can do pub key authentication, if you have the settings right. it works for me
+[09:48] <thoreauputic> Habbotom: in some channels you would be kicked :) It's not a secure thing to do
+[09:48] <DOOM_NX> slacker, i guess so, but see what VNC shows...
+[09:48] <thoreauputic> Habbotom: make a user accout and do your on line stuff with that
+[09:48] <newbieu> can someone help me , i can record sound on ubuntu
+[09:49] <slacker> so, nobody around who used videotrans before?
+[09:49] <newbieu> *cnat
+[09:49] <slacker> DOOM_NX: vnc doesn't use ssh
+[09:49] <newbieu> *cant
+[09:49] <Habbotom> Cant use Lammp on any other user
+[09:49] <thoreauputic> Habbotom: nonsense
+[09:49] <Habbotom> Can only start it on root user
+[09:50] <Habbotom> Its normally known as Xammp
+[09:50] <DOOM_NX> slacker, so... how can i use VNC over SSH? server: ubuntu, client: winxp
+[09:50] <Starnestommy> Habbotom: have you tried using sudo?
+[09:50] <slacker> ah well, i shall have a black background then
+[09:50] <popey> DOOM_NX: ssh tunneling
+[09:50] <JPSman> can I watch TV with linux?
+[09:50] <Habbotom> Nope
+[09:50] <explorer2> me +x
+[09:50] <slacker> DOOM_NX: you have to tunnel the correct port using ssh -L
+[09:50] <thoreauputic> Habbotom: yo are missing the point I'm afraid - all you need to do is create a user for other purposes - any linux can do that
+[09:50] <popey> DOOM_NX: putty on windows supports tunneling
+[09:50] <DOOM_NX> slacker, i see... but i can set that on putty, no?
+[09:51] <slacker> DOOM_NX: sorry. you setup port forwarding from withing putty
+[09:51] <Dr_willis> JPSman,  depends on how you define watch tv. My tv tuner card does work with linux. and i can go to most of the web-sites that have tv broadcast/bideos
+[09:51] <DOOM_NX> okai
+[09:51] <thoreauputic> Habbotom: then you simply do "su <otheruser>
+[09:51] <DOOM_NX> so is everything ok in the server's side?
+[09:52] <Vasa> hi, my laptop fan runs 80% on ubuntu, 5% on Live ubuntu, and  5 % on XP runtime. What can cause it?
+[09:53] <slacker> I've gotta go - housewarming
+[09:53] <slacker> DOOM_NX: she'll be right
+[09:53] <slacker> cu guys
+[09:53] <DOOM_NX> slacker, thank u
+[09:53] <DOOM_NX> aw
+[09:53] <DOOM_NX> :(
+[09:54] <Vasa> Could it be, that my cpufreq output says, that no driver installed?
+[09:54] <popey> DOOM_NX: http://martybugs.net/smoothwall/puttyvnc.cgi
+[09:55] <DOOM_NX> what is smoothwall?
+[09:55] <thoreauputic> DOOM_NX: specialised Linux Firewall distribution
+[09:55] <DOOM_NX> popey
+[09:55] <DOOM_NX> why should i need smoothwall?
+[09:56] <Vasa> any idea?
+[09:56] <thoreauputic> DOOM_NX: Usually as a gateway/firewall on a LAN etc.
+[09:56] <astro76> DOOM_NX: perhaps that link tells you how to tunnel vnc over ssh using putty? just a guess...
+[09:57] <DOOM_NX> astro76, yes i know, but do i need smoothwall?
+[09:57] <cherva> can I swap the cannels of my souncard ?
+[09:57] <thoreauputic> DOOM_NX: probably not
+[09:57] <astro76> DOOM_NX: no
+[09:57] <DOOM_NX> okay
+[09:57] <chalcedony> ive got problems with our router dying, comcast told me to unplug it, but it had the same probem 3 times.. not transmitting any pings.
+[09:57] <harmental> hey guys....does anybody know a tool for creating video captures (besides wink and recordmydesktop)??
+[09:57] <astro76> !screencast | harmental
+[09:57] <ubotu> harmental: Some programs to capture your screen are recordmydesktop, Istanbul, Wink, Gvidcap, Xvidcap, vnc2swf, demorecorder.  Also see https://wiki.ubuntu.com/ScreenCasts.
+[09:58] <DOOM_NX> anybody knows why "vncviewer localhost:1" shows: http://img444.imageshack.us/img444/5290/screenshotvncdoomsxdeskyk0.png
+[09:59] <harmental> astro76: thx!!
+[09:59] <Bogaurd> how early in bood are the symlinks in /dev/disk/by-id/ established? would it be before MDADM arrays are started?
+[09:59] <Bogaurd> boot*
+[09:59] <chalcedony> i don't even know where to start to debug the router..
+[09:59] <Vasa> any idea with cpufreq?

@@ -1,0 +1,1428 @@
+[17:21] <aeon-ltd> nophis: is there other disk io happening during this?
+[17:21] <madf0x> radi yeah, there are tons and tons of network monitors, gl hunting though
+[17:21] <ilovefairuz> Rahmat: sudo usermod -a -G audio editor && jackd -r  &
+[17:21] <rednammoc> madf0x: i just want to copy specific images. but i guess it's easier to copy all the stuff via commandline and remove all images i don't wanted to copy ^^
+[17:21] <discozohan> Anyone has idea, what is problem about: i installed ubuntu server on first drive of five available. And the system can't boot, it just waiting with black screen. But everything becomes ok when i unplug other 4 drives. What is this ?
+[17:21] <discozohan> all drives without partition
+[17:21] <litercola> can someone help me with dhcp3 server not starting up on boot with an ltsp server install from the alternate cd.  I have already removed network manager btw
+[17:21] <radi> madf0x: what about some router function ?
+[17:22] <nophis> aeon-ltd, no, just this operation, no md5sum checks, neither other move copy operation
+[17:22] <madf0x> rednammoc lol IF you know the commands :) but thats the benefit of learning the terminal
+[17:22] <madf0x> radi as in?
+[17:22] <madf0x> radi what router 'function'?
+[17:22] <radi> like, everything that goes in and out from the router
+[17:22] <rednammoc> madf0x: cp -n follows symlink i guess
+[17:22] <radi> and gives me a graph or something
+[17:23] <qwd> Anyone know how I can check what size the sectors on my hard drive is? It should be using 4096 byte sectors (it's a wd20EARS) but the hard disk itself apparently says 512. I've read that disk utility sets it up right somewhere (can't remember where) but I want to make sure that the encryption (created with disk utility) and ext4 both use 4096 byte sectors.
+[17:23] <SwedeMike> qwd: the EARS drives exposes themselves as 512 byte sectors, yes. They're only 4k internally.
+[17:23] <pickett> radi, mrtg
+[17:24] <madf0x> radi yeah, tons of them, good luck finding a good one though, and often it needs to be inline of the connection though to monitor it
+[17:24] <pickett> your router needs to support snmp though
+[17:24] <SwedeMike> qwd: so make sure you align the partition at 4k.
+[17:24] <madf0x> radi of course, depending on what kind of monitor you use
+[17:24] <madf0x> radi BUUT...
+[17:24] <madf0x> !ot | radi
+[17:24] <ubottu> radi: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[17:24] <Rahmat> what next?
+[17:24] <qwd> SwedeMike: Well, how do I check if it's setup the correct way?
+[17:24] <madf0x> radi find a network admin channel :)
+=== root is now known as Guest32904
+[17:25] <radi> madf0x: i think i already got my answer here ;p
+[17:25] <radi> just have to check if my wnr2000 supports snmp
+[17:25] <madf0x> radi always happy to help
+[17:25] <Rahmat> ilovefairuz: what next?
+[17:25] <ilovefairuz> Rahmat: run idjc
+[17:25] <SwedeMike> qwd: make sure the partition is at a 8 sector boundary.
+[17:26] <SwedeMike> qwd: personally I only use those drives with md->cryptsetup->lvm, all those are 4k aligned afaik
+[17:26] <radi> "You can clear or email the log, but there is no syslog or SNMP trap support"
+[17:26] <radi> damn :S
+[17:26] <chalcedony> when i $ ssh user@port 22 - i get an error, publickey,gssapi-with-mic,password ?
+=== Guest57263 is now known as Fendaril
+[17:27] <qwd> SwedeMike: But how do I make sure? Disk Utility didn't let me choose anything like that.
+[17:27] <DoubleString> hey, I have a question:
+[17:27] <radi> ok, now that i know i cant do it this way, madf0x, can you tell me any bandwidth tool that can give me weekly graphs for ubuntu ? :P
+[17:28] <aeon-ltd> !ask | DoubleString
+[17:28] <ubottu> DoubleString: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[17:28] <DoubleString> is it possible to make prt screen without getting the a prompt of result
+[17:28] <ilmenite> i have an nvidia graphics card, and using the nvidia proprietary driver, what do i have remove from then blacklist files in /etc/modprobe.d/ so that the splash comes up?
+[17:28] <aeon-ltd> DoubleString: the print screen key maybe?
+[17:28] <DoubleString> just automatically saving into folder
+[17:28] <DoubleString> yes
+[17:28] <DoubleString> but it prompts with Screenshot.png
+[17:28] <madf0x> radi sorry man, Ive never needed such a tool, so I never looked into it myself
+[17:28] <SwedeMike> qwd: fdisk shows that. I'd imagine gparted does the correct thing to begin with.
+[17:28] <DoubleString> but I don't want it to do so
+[17:29] <DoubleString> instead just save into, let's say Pictures folder
+[17:29] <pickett> radi gkrelm does that
+[17:29] <radi> thanks anyway
+[17:29] <aeon-ltd> DoubleString: you could just macro it to the command 'scrot'
+[17:29] <chalcedony> aeon-ltd, can you remind me the way to ssh with a port & pass please?
+[17:29] <radi> pickett: ill give it a try now
+[17:29] <DoubleString> uhm, aeon-ltd, could you expand a little?
+[17:29] <madf0x> radi nut a network channel would be filled with people who use such tools daily, which is why it would be a good idea to ask there
+[17:29] <aeon-ltd> DoubleString: but that will save it to /home/user
+[17:29] <radi> madf0x: ill do that too
+[17:29] <DoubleString> no prob
+[17:30] <aeon-ltd> chalcedony: ssh -p (port number) username@ipaddress
+[17:30] <radi> pickett: isnt it gkrellm?
+[17:30] <aeon-ltd> chalcedony: but why did you ask me?
+[17:30] <radi> with double "L"
+[17:30] <chalcedony> aeon-ltd, you said ask, not ask to ask ;)
+[17:30] <aeon-ltd> chalcedony: oh ok :)
+[17:30] <chalcedony> ty aeon-ltd :)
+[17:31] <aeon-ltd> chalcedony: did it work?
+[17:31] <Rahmat> loading driver ..
+[17:31] <Rahmat> apparent rate = 44100
+[17:31] <Rahmat> creating alsa driver ... hw:0|hw:0|2048|2|44100|0|0|nomon|swmeter|-|32bit
+[17:31] <Rahmat> control device hw:0
+[17:31] <Rahmat> Bus error
+[17:31] <FloodBot3> Rahmat: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[17:31] <madf0x> Rahmat youve been warned alot :/ dont push your luck
+[17:32] <chalcedony> aeon-ltd, Permission denied, please try again.
+[17:32] <madf0x> Rahmat some IRC people are anti-flood freaks and will get the ban hammer down on you
+[17:32] <aeon-ltd> chalcedony: you might need sudo
+[17:32] <sleepingfox> how can you disable a serial port in ubuntu ?my computer crashes when i try to boot it up and i get this message "serial8250: too much work for irq18"
+[17:32] <Rahmat> haha
+[17:32] <Rahmat> lol
+[17:33] <madf0x> sleepingfox sounds like a serious  hardware issue o.o
+[17:33] <chalcedony> aeon-ltd, i never needed sudo before to ssh, but i'm having problems with this one.
+[17:33] <Bucky> hi. can i ask here for a gimp issue too, or is there a "chat" channel?
+[17:33] <WinstonSmith> sleepingfox, go into your bios and disable the serial ports
+[17:34] <WinstonSmith> hi all
+[17:34] <sleepingfox> i know , but sometimes it just boots up normally and sometimes it just freezes when i try to boot it up
+[17:34] <Adrienk> What do you do about org pakages that apprently dont exist in java?
+[17:34] <madf0x> !hi | WinstonSmith
+[17:34] <ubottu> WinstonSmith: Hi! Welcome to #ubuntu! Feel free to ask questions and help people out. The channel guidelines are at https://wiki.ubuntu.com/IRC/Guidelines . Enjoy your stay!
+[17:34] <aeon-ltd> Bucky: you can if its a problem
+[17:34] <stupid> 8-|
+[17:34] <wasutton3> is there a way to disable extents in an ext4 partition without reformatting it?
+[17:34] <WinstonSmith> madf0x, ji :)
+[17:34] <WinstonSmith> hi *
+[17:34] <sleepingfox> i tried getting into the bios i cant find the ports :(
+[17:34] <chalcedony> aeon-ltd, password:
+[17:34] <chalcedony> Connection closed by UNKNOWN
+[17:34] <aeon-ltd> chalcedony: hmmmm. firewall?
+[17:34] <ilmenite> is there anyone who knows a solution to either of these problems? #1: at startup, it says running in low graphics mode, then i click on login via console, login. then so a startx and all runs just fine. why cant it just start up fine directly? #2: what do i do in order to get the ubuntu splash screen at boot up?
+[17:35] <Adrienk> I tried installing the java gnome pakages but apparently they dont exist when imported in netbeans
+[17:35] <gabriele> !list
+[17:35] <ubottu> This is not a file sharing channel (or network); be sure to read the channel topic. If you're looking for information about me, type « /msg ubottu !bot »
+[17:35] <chalcedony> aeon-ltd, dunno i'll try it once more with your format, i guess?
+[17:35] <aeon-ltd> ilmenite: #2 it a kernel boot option 'splash'
+[17:35] <sleepingfox> or how at least can detect the faulty hardware? :(
+[17:35] <Bucky> aeon-ltd: it's not a technical problem with ubuntu, it's something i'm not able to do with gimp, but i'm looking for a crowded gimp community user...
+[17:35] <ilmenite> aeon0-ltd, ah thanks!
+[17:35] <aeon-ltd> chalcedony: has the machine your trying to ssh into worked before?
+[17:35] <machete> hey everyone
+[17:36] <coz_> Bucky,   sorry didnt see your post  what is the issue with gimp ?
+[17:36] <adekoba> is there any way to install packages for users only? i.e. for users who don't have root access, installing packages in their home directory?
+[17:36] <machete> quick question: does anybody know of a twitt application like twitt deck but which doesn't use adobe air?
+[17:36] <madf0x> adekoba  maybe, but generally the policy is to install on the system, and then restrict user access
+[17:36] <ilmenite> gwibber?
+[17:36] <lux`> Hey guys I have a problem, basically every mouse click fire 2 or more clicks
+[17:36] <aeon-ltd> machete: the website? ( i know not a app)
+[17:36] <machete> my wife uses twitt deck but every since she installed that firefox crashes all the time
+[17:36] <chalcedony> aeon-ltd, this is the "in case it dies again, ssh in, here's the place, port, user, pass
+[17:36] <adekoba> madf0x: right... I don't have root access however
+[17:36] <lux`> Tryed to reset xorg config file but still have this behaviour
+[17:37] <madf0x> adekoba  then you wont exactly be installing any packages now will you o.o?
+[17:37] <chalcedony> aeon-ltd, it died, i have a class to teach.. darnit.
+[17:37] <machete> aeon-ltd... I am starting new project and already have quite a lot people to follow, the website isn't good fot me
+[17:37] <Bucky> i have to double a solid line; i have to draw a map, and this line should represent a road, but it's too long to draw both edges...
+[17:37] <coz_> machete,  you mean with adobe air tweetdeck ?
+[17:37] <adekoba> madf0x: That's what I was asking, if that was possible.
+=== nullmeridian is now known as nunatak
+[17:37] <machete> yes zo_ sorry, that's what I meant
+[17:38] <nryan> machete, try gwibber
+[17:38] <machete> adobe get's my ubuntu to go poopoo
+[17:38] <madf0x> adekoba  well, you could look into the world of priv escalation, buut sometimes you can still compile from source as long as the proggy doesnt need access to restricted files
+[17:38] <machete> ok I'll give it a try
+[17:38] <qwd> SwedeMike: fdisk shows this http://pastebin.com/bUJkjxvY
+[17:38] <ilmenite> can someone please post their grub.cfg or tell me how do i regenerate it automatically? its got weird things from my fedora install!
+[17:39] <coz_> machete,   also look here   http://oneforty.com/platform/Linux
+[17:39] <SwedeMike> qwd: tell fdisk to display in sectors instead of cylinders.
+[17:39] <edbian> ilmenite, update-grub  at the clie
+[17:39] <edbian> cli*
+[17:39] <qwd> ilmenite: I ran grub-setup when I had problems. don't know if that's right for you though
+[17:39] <dt_> hey, I've run into a slight nuisance. is there a way to enable an info bubble to appear over a file when I drag my mouse over it ?
+[17:40] <ilmenite> ah cool, thanks!
+[17:40] <ilmenite> will try both, will backup the present conf file
+[17:40] <machete> yeah what I've seen is that most of them use adobe air
+=== fred_ is now known as Guest99381
+[17:40] <Guest99381> what is the latest image of ubuntu?
+[17:40] <coz_> machete,  many on that link do not use adobe air though
+[17:40] <aeon-ltd> Guest99381: 10.04
+[17:40] <ilovefairuz> Guest99381: 10.04.1
+[17:40] <qwd> SwedeMike: both sectors and cylinders start at 1
+[17:40] <machete> ok coz_ im checking
+[17:40] <aeon-ltd> Guest99381: it doesn't change until releases
+[17:41] <SwedeMike> qwd: please pastebin the output when you've switched to sectors.
+[17:41] <Guest99381> thanks aeon- I am asking aboute the image id number. ie 26-??
+[17:42] <qwd> SwedeMike: http://pastebin.com/guwEmXtw
+[17:42] <Bronko> Hi can anybody help me? I'm trying to install that Sun Java Jre/Jdk. I'm supposed to edit /etc/jvm. Problem is it doesn't exist! (JDK/JRE/.bins/sources already installed). Help?!
+[17:42] <Janhouse> I am looking for backup tool that sends backed up files to FTP regularily. Any suggestions? I need backup tool that can be used from terminal.
+[17:42] <Janhouse> with command line interface
+[17:43] <SwedeMike> qwd: well then, you need to recreate that partition because it's clearly not properly aligned.
+[17:43] <ilovefairuz> !java | Bronko
+[17:43] <ubottu> Bronko: To install a Java runtime on Ubuntu, see https://help.ubuntu.com/community/Java. For the Sun Java products and browser plugin, search for the sun-java6- packages in the !partner repository on Lucid (which must be enabled), or !multiverse repository on older releases.
+[17:43] <th0r> Janhouse: write up a simple script to transfer the files and then schedule it with cron
+[17:43] <Guest99381> is this the latest image? initrd.img-2.6.32-24-generic
+[17:44] <Janhouse> th0r, ok, I just hope that there are some tools made for this already...
+[17:44] <Janhouse> *hoped
+[17:44] <ilovefairuz> Janhouse: duplicity
+[17:44] <Bronko> Yeah I did all that. I know the procedure. I'm following the tutorial and I'm supposed to edit /etc/jvm which I cannot find?! It's a minimal install btw
+[17:44] <Janhouse> ilovefairuz, I'l take a look at that thx
+[17:45] <ilovefairuz> Bronko: what tutorial?
+[17:45] <Bronko> This: http://www.cyberciti.biz/faq/howto-ubuntu-linux-install-configure-jdk-jre/ It's allover the web. There are copies of it on other blogs too
+[17:46] <paulmain> ilovefairuz, ok, everything is updated, installed linux-backports-modules-alsa-lucid-generic, and still no sound.  I can go into alsa and monkey with all the faders, but there's no sound coming out of any hole on the card
+[17:47] <qwd> SwedeMike: now it starts at 64, this should be correct, right?
+[17:47] <SwedeMike> qwd: yes!
+[17:47] <qwd> SwedeMike: Sweet! Thanks for the help!
+[17:47] <ilovefairuz> Bronko: that's for 7.10 (outdated)  did you install the sun-java6-* packages and they didn't work?
+[17:48] <machete> ok I found one I really like and by just checking it I could say I would recommend it to anyone on a heart beat... it's called buzzbird
+[17:48] <machete> and it doesn't use adobe air, oh yeah
+[17:48] <ilovefairuz> Bronko: I  use openjdk: sudo apt-get install openjdk-6-jdk .. and everything just works
+[17:48] <Bronko> I installed them that the -version responds correctly. I don't yet know if it's using the correct Jdk though?!
+[17:48] <fred__> is this the latest version? initrd.img-2.6.32-24-generic
+[17:49] <ilovefairuz> Bronko: pastebin: dpkg -l | grep sun-java
+[17:49] <ilmenite> is it usual to have 204 files in /boot/grub ?
+[17:49] <magistr> Ребята, вы извините конечно, но вы СТАДО ДЕБИЛОВ
+[17:49] <ilovefairuz> paulmain: there are a couple of bugs filed on that card but no comments whatsoever
+[17:49] <fred__> quit
+[17:49] <ilovefairuz> !ru | magist
+[17:49] <ubottu> magist: Пожалуйста посетите #ubuntu-ru для получения помощи на русском языке  / Pozhalujsta posetite /join #ubuntu-ru dlya polucheniya pomoshi na russkom yazyke
+[17:49] <patryk49991> hello :D
+[17:50] <magistr> <ilovefairuz> I hate ubuntu
+[17:50] <paulmain> ilovefairuz, huh...  Used to work in gutsy; that's odd
+[17:51] <ilovefairuz> paulmain: that's been mentioned ..
+[17:51] <Bronko> here: http://pastebin.com/download.php?i=UJKxBQPw
+[17:51] <ilovefairuz> ilmenite: grub2 has a lot of files, yeah
+[17:51] <magistr> <ilovefairuz> kills youself
+[17:51] <ilovefairuz> !ops
+[17:51] <ubottu> Help! Channel emergency! (ONLY use this trigger in emergencies) -  elky, Madpilot, tritium, Nalioth, tonyyarusso, PriceChild, Amaranth, jrib, Myrtti, mneptok, Pici, jpds, gnomefreak, bazhang, jussi, Flannel, ikonia, maco, h00k, IdleOne, or nhandler!
+[17:52] <ilmenite> hmmm, then okay...
+[17:52] <magistr> <ilovefairuz> die, bitch
+[17:52] <s5s> is there a way to convert an webpage into a pdf or ps?
+=== nognome is now known as nosoundicewm
+[17:52] <paulmain> exit
+[17:53] <paulmain> oops
+[17:53] <ilovefairuz> Bronko: looks fine. java -version .. ?
+[17:53] <ilmenite> print it!
+[17:53] <ilmenite> s5s, print it from a browser as a pdf/ps
+[17:53] <Bronko> Java version is fine too. I got confused by that tutorial. I guess it's fine than Thanks!
+[17:53] <nosoundicewm> i installed lucid on a Pentium III laptop with 256 MB RAM, everything works ok but at certain point it starts to crawl. So i decided to use icewm instead of gnome but sound stops working when initiate an icewm session. Sound works on gnome but not on icewm . So what gives?
+[17:53] <Frostic> magistr: ill say it for everyone grow the fuck up.
+[17:54] <ilovefairuz> !language | Frostic, we have operators that handle this stuff
+[17:54] <aeon-ltd> nosoundicewm: check alsamixer
+[17:54] <ubottu> Frostic, we have operators that handle this stuff: Please watch your language and topic to help keep this channel family friendly.
+[17:54] <SwedeMike> Frostic: please don't feed the troll.
+[17:54] <s5s> ilmenite: of course :D but I also remember that html2ps formats it in standard GNU documentation however I don't know how to use html2ps
+[17:54] <Duke_Harris> Hey guys, I have a problem on Lucid. everytime I boot, The gnome-network-manager has wireless disabled. I changed /etc/Networkmanager/nm-settings.conf managed=true, and also set WirelessEnabled=true in /var/lib.../NetworkManager.state . But nothing works. How do I get this stupid tool to enable the wireless by default?
+[17:54] <nosoundicewm> sorry! i am a newbie. what do you mean?
+[17:55] <aeon-ltd> nosoundicewm: open a terminal (while in icewm)
+[17:55] <nosoundicewm> if i execute alsamixer as a normal user i get: cannot open mixer: No such file or directory
+[17:55] <Frostic> oh ya sooo many operators here = 0 and 1 bot lol
+[17:56] <fred__> leave
+[17:56] <ilovefairuz> Frostic: there are but not +o
+[17:56] <magistr> <Frostic> fuck youself and die
+[17:56] <wat> Hi! im trying to install ubuntu. i want to keep 2 partitions but wipe the windows one
+[17:56] <wat> but ubuntu shows 4 paritions instead of 3
+[17:56] <aeon-ltd> nosoundicewm: have you got alsa installed?
+[17:56] <guntbert> magic_ninjai: please stop that now
+[17:57] <magistr> <wat> deinstall ubuntu,  please
+[17:57] <guntbert> magic_ninjai: sorry, wron completion
+[17:57] <frameRelay> what are they called wat ?
+[17:57] <guntbert> *wrong even
+[17:57] <wat> i have 500 + 500 + 500. ubuntu shows 250 + 250 + 500 + 500. its not installed yet im trying to
+[17:57] <magistr> DO NO INSTALL UBUNTU
+[17:57] <madf0x> wat running windows 7?
+[17:57] <wat> http://dl.dropbox.com/u/4426780/screenshots/fa46ec72899af67fe7dc6f9b4665c23d.png.png
+[17:57] <ilovefairuz> !ops | magistr
+[17:57] <ubottu> magistr: Help! Channel emergency! (ONLY use this trigger in emergencies) -  elky, Madpilot, tritium, Nalioth, tonyyarusso, PriceChild, Amaranth, jrib, Myrtti, mneptok, Pici, jpds, gnomefreak, bazhang, jussi, Flannel, ikonia, maco, h00k, IdleOne, or nhandler!
+[17:57] <wat> madf0x: yes. and its not working out great
+[17:57] <magistr> <ilovefairuz> suck my dick, please
+[17:58] <guntbert> magistar: please stop that now
+[17:58] <frameRelay> wat - they are all windows partitions.
+[17:58] <madf0x> wat that extra partition is part of the windows boot process keep them lumped in  your head :)
+[17:58] <aeon-ltd> !ops | magistr
+[17:58] <ubottu> magistr: Help! Channel emergency! (ONLY use this trigger in emergencies) -  elky, Madpilot, tritium, Nalioth, tonyyarusso, PriceChild, Amaranth, jrib, Myrtti, mneptok, Pici, jpds, gnomefreak, bazhang, jussi, Flannel, ikonia, maco, h00k, IdleOne, or nhandler!
+[17:58] <magistar> gnutbert, stop what?
+[17:58] <wat> madf0x: ??
+[17:59] <madf0x> wat that extra partition comes with windows 7
+[17:59] <nosoundicewm> aeon-ltd:   alsa-base alsa-utils  are installed
+[17:59] <guntbert> magistar: please be polite, don't use swear words and keep to the topic: ubuntu support
+[17:59] <madf0x> wat the mysterious fourth one is used by windows
+[17:59] <aeon-ltd> nosoundicewm: are you sure you spelt 'alsamixer' correctly, there is no space
+[17:59] <madf0x> wat makes more sense now?
+[18:00] <guntbert> magistar: sorry, just saw that my nick completion went wrong again :-/
+[18:00] <wat> madf0x: no.. cause i have 3 500. it just shows 2
+[18:00] <magistr> <ilovefairuz> die, bitch
+[18:00] <wat> and instead of the third 500, it shows x2 250 ones
+[18:00] <madf0x> wat 3 500 is rather vague
+[18:00] <LjL> nhandler: you aimed wrong
+[18:01] <Frostic> can i take care of him?
+[18:01] <nosoundicewm> if i execute alsamixer as a normal user i get: cannot open mixer: No such file or directory BUT as root I can execute it OK. However, even as root I can not get any sound while on icewm
+[18:01] <Frostic> i want to see him ping out
+[18:01] <nhandler> LjL: Bleh, one character off ;)
+[18:01] <wat> madf0x: vague?
+[18:01] <wat> X3 500 gb
+[18:01] <madf0x> wat x3 GB of what though?
+[18:01] <aeon-ltd> nosoundicewm: ok, launch gnome alsamixer and configure your settings
+[18:01] <ssn> hi guys
+[18:01] <madf0x> wat youre being unclear
+[18:02] <ssn> i need to open/edit these postsscript files http://www.isometrics.uni-osnabrueck.de/qn.htm
+[18:02] <wat> madf0x: partitions
+[18:02] <ssn> evince displays only half of the page
+[18:02] <madf0x> wat K and so whats the issue?
+[18:02] <wat> madf0x: http://dl.dropbox.com/u/4426780/screenshots/fa46ec72899af67fe7dc6f9b4665c23d.png.png
+[18:02] <ssn> scribus cannot open them
+[18:02] <ssn> how do i do this?
+[18:02] <Tempus_Fugit> Hmmm everytime i reboot one of my screenlets keeps loading and I delete it everytime....why wont it go away ????
+[18:03] <Frostic> anyone else want to have fun with this ip 90.188.219.127 ? its magistr
+[18:03] <Frostic> lol he left
+[18:03] <ilovefairuz> Frostic: that's very unacceptable here
+[18:03] <earthling_> Why can't I shutdown or restart the computer?, it just goes back to login
+[18:03] <wat> madf0x: the issue is taht it does not show the patitions right. i want to wipe one partition and keep 2. but i dont know what to do cause ubuntu shows me 4 partitions?
+[18:04] <Tempus_Fugit> Dr_Willis: hey how you been
+[18:04] <jjb123> Hey everyone, I am having a problem with ubuntu server 10.04. So I just installed 10.04 from a usb drive after my 9.04 install died from an apt-get update, and the install went fine. The problem is that when I turn the computer back on it just hangs right after it asks you if you want to boot from a cd, where it is supposed to load the operating system. The cursor just sits there blinking and nothing happens. Any ideas? I am starting to g
+[18:04] <test34> Frostic, how about this one 66.42.217.196
+[18:04] <coz_> earthling_,  how are you trying to do this?
+[18:04] <nosoundicewm> launch gnome alsamixer as root?
+[18:04] <earthling_> the icon at the top right of the screen
+[18:04] <earthling_> coz_
+[18:04] <madf0x> earthling_ sudo init 6 will guarentee a reboot
+[18:04] <madf0x> earthling_ *almost
+[18:04] <coz_> earthling_,   well open a terminal and try   sudo  init 0
+[18:04] <coz_> earthling_,  that shuts down   or    sudo init 6  which reboots
+[18:04] <Tempus_Fugit> brb
+[18:05] <ssn> can someone tell me how to open these files? evince does not display them correctly: http://www.isometrics.uni-osnabrueck.de/qn.htm
+[18:05] <Frostic> good luck i got protocols to block ddos he dont so fuck off test34 lest you be my next target
+[18:05] <earthling_> ok thx
+[18:05] <madf0x> wat well, thats certainly odd .-. im not sure cause idk what setup you have going on
+[18:05] <ilovefairuz> !ot | Frostic, test34
+[18:05] <ubottu> Frostic, test34: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[18:05] <coz_> ssn,   they seem to open with evince here
+[18:05] <madf0x> !ops | Frostic
+[18:05] <ubottu> Frostic: Help! Channel emergency! (ONLY use this trigger in emergencies) -  elky, Madpilot, tritium, Nalioth, tonyyarusso, PriceChild, Amaranth, jrib, Myrtti, mneptok, Pici, jpds, gnomefreak, bazhang, jussi, Flannel, ikonia, maco, h00k, IdleOne, or nhandler!
+[18:06] <madf0x> I alt-three skiddies
+[18:06] <Frostic> oh fuck off madf0x you lil twit befor you die too
+[18:06] <Andy80> hi all
+[18:06] <ssn> coz_: try the german ones. they open, but you can only see half of the page
+[18:06] <ilovefairuz> nhandler ^
+[18:06] <madf0x> Frostic Good luck with that ;)
+[18:07] <Andy80> my CD/DVD are only mounted if I boot Ubuntu with them inserted in the reader. How can I make them work normally? I'm using ubuntu 10.04.
+=== prince_j1mmys is now known as prince_jammys
+[18:07] <coz_> ssn,   ok did you download the files first?
+[18:07] <coz_> ssn,   you are on gnome?
+=== marcuy_ is now known as marcuy
+[18:08] <aeon-ltd> nosoundicewm: no your user
+[18:09] <coz_> ssn,   I downloaded all of them and opened with evince   they seem to be working here
+[18:09] <cablop> mmmm, i want to install ubuntu in a netbook and willing to encrypt the whole data
+[18:09] <cablop> i mean the whole disk... in some place i saw the use the full disk for encryption in a lvm... in a graphic installer... but... i don't see the option in the lucid installer...
+[18:10] <cablop> where is it? or how to enable it?
+[18:10] <ilovefairuz> Andycas: ps aux | grep udisk
+[18:10] <ilovefairuz> Andy80 ^
+[18:10] <Andycas> :O
+[18:11] <Andy80> ilovefairuz: http://pastebin.com/EUPwe2SN this is the output
+[18:11] <magistr>  REMOVE UBUNTU AND SAVE THE WORLD
+[18:11] <Andy80> ilovefairuz: the Ubuntu Disk Utility can detect my DVD/CD drive, but it says "no media detected"
+[18:11] <madf0x> !ops
+[18:11] <ubottu> Help! Channel emergency! (ONLY use this trigger in emergencies) -  elky, Madpilot, tritium, Nalioth, tonyyarusso, PriceChild, Amaranth, jrib, Myrtti, mneptok, Pici, jpds, gnomefreak, bazhang, jussi, Flannel, ikonia, maco, h00k, IdleOne, or nhandler!
+[18:12] <iceroot> cablop: if i am correct, only the alternate-cd can handle it
+[18:12] <aeon-ltd> magistr: save the cheerleader, save the world.
+[18:12] <nosoundicewm> aeon-ltd: gnome-alsamixer as a normal user does not display the same things it does as root. In fact, as anormal user if i choose Sound card properties, it aborts with segmentation fault
+[18:12] <Duke_Harris> Hey guys, I have a problem on Lucid. everytime I boot, The gnome-network-manager has wireless disabled. I changed /etc/Networkmanager/nm-settings.conf managed=true, and also set WirelessEnabled=true in /var/lib.../NetworkManager.state . But nothing works. How do I get this stupid tool to enable the wireless by default?
+[18:13] <ilovefairuz> Andy80: try to mount it manually: sudo mount /dev/cdrom /media/cdrom ... does it work?
+[18:13] <Andy80> ilovefairuz: let me try...
+[18:13] <ssn> coz_: do you see the whole file?
+[18:13] <coz_> ssn,   yes I do
+[18:13] <ilovefairuz> Duke_Harris: intel card?
+[18:13] <coz_> ssn,   give me the link again ,,, I will download and put them on dropbox for you to test again
+[18:14] <ilovefairuz> Duke_Harris: anyhow, try adding this to /etc/rc.local: rfkill unblock wlan
+[18:14] <cablop> iceroot, sigh... so i need to burn that cd
+[18:14] <Andy80> ilovefairuz: nothing.... I tried: andrea@centurion:~$ sudo mount /dev/sr0 /mnt/cdrom/
+[18:14] <Duke_Harris> ilovefairuz, no Broadcom
+[18:14] <Andy80> ilovefairuz: but it stays.... without giving me any output...
+[18:15] <Duke_Harris> when i activate wlan (rightklick in panel -> activate wireless) everything works just fine
+[18:15] <Duke_Harris> its just deactivated by default
+[18:15] <DoubleString> why does teamspeak lag for me?
+[18:15] <ilovefairuz> Duke_Harris: that's a "software kill switch".. try using the command i gave you
+[18:15] <DoubleString> like every 1 sec?
+[18:15] <Duke_Harris> ok, im gonna try
+=== katoen is now known as bramgn
+=== not is now known as Guest13539
+[18:16] <cablop> how is the performance of an encrypted disk?
+[18:17] <Andy80> ilovefairuz: this is what I see in Disk Utility: http://img266.imageshack.us/img266/1526/diskutility.jpg
+[18:17] <iceroot> cablop: no big differences
+[18:17] <cablop> i just wonder if i can setup some partitions as encrypted end some others as not encrypted
+[18:17] <paulmain> ilovefairuz, hey there; I've got sound now.  Threw in a new card, disabled the old one in BIOS...  Now sound is choppy though, after a couple of seconds
+[18:17] <coz_> ssn,   ok these all work  here    http://dl.dropbox.com/u/132551/isometri.tar.gz
+[18:17] <iceroot> cablop: i have a encrypted home an a svn up on 40gb is fast as without an ecrypted drive
+[18:17] <cablop> i was using truecrypt on windows for the netbook, and the swap file just make thigs slow...
+[18:18] <paulmain> ilovefairuz, things like system sounds play fine though (they're short)
+[18:18] <ilovefairuz> paulmain: uninstall the backports package and try
+[18:18] <cablop> and hibernate wake are soooooooo slow
+[18:18] <itsux2bu> i have a 4gb usb thumbdrive.. but its not auto-mounting.. i don't see it mounted in any folder.. i'm lost at this point..
+[18:18] <cablop> i wonder if i can set the swap outside the encrypted set
+[18:18] <ilovefairuz> Andy80: your drive (or its firmware) could be faulty
+[18:18] <iceroot> cablop: sure
+[18:18] <Andy80> ilovefairuz: you mean "broken" ? How can I check it?
+[18:18] <Guest13539> hello. Im am completely new to linux. Can someone direct me to a well rounded "thorough" guide on the inner workings of ubuntu. I intend to put enough time in to be proficient and would like a good jumping off point.
+[18:19] <ilovefairuz> !enter | cablop
+[18:19] <paulmain> ilovefairuz, I did that before I came in
+[18:19] <ubottu> cablop: Please try to keep your questions/responses on one line - don't use the "Enter" key as punctuation!
+[18:19] <cablop> i'm just willing to not to give my safety to a theft in case of loosing the netbook... not willing to use paranoid methiods, lol
+[18:19] <guntbert> !manual | Guest13539
+[18:19] <ubottu> Guest13539: The Ubuntu Manual will help you become familiar with everyday tasks such as surfing the web, listening to music and scanning documents. With an emphasis on easy to follow instructions, it is suitable for all levels of experience. http://ubuntu-manual.org/
+[18:19] <Andy80> Guest13539: help.ubuntu.com :)
+[18:19] <bonhoffer> i had ubuntu and windows on a box, forgot windows password, but can't mount my ntfs, i get "The enclosing drive for the volume is locked"
+[18:19] <ilovefairuz> Andy80: i would suggest trying it with an older or another distro
+[18:19] <bonhoffer> booted up with ubuntu lite
+[18:20] <cablop> ilovefairuz: i was not using enter as punctuation...
+[18:20] <nosoundicewm> aeon-ltd:   will be back in 5 min
+[18:20] <Andy80> ilovefairuz: the fact is that if I boot any Linux distro from CD it doesn't fail... or if I leave a blank CD inserted, then I boot Ubuntu from my hard disk and I can use that CD to burn some data....
+[18:21] <ilovefairuz> cablop: my bad
+[18:21] <Duke_Harris> ilovefairuz, didn't work
+[18:21] <cablop> iceroot: ah! you have an encrypted home... this is another thing... if using the whole disk encryption.... i wonder if swap and common files have performance issues... did you used full disk encryption before?
+[18:21] <ilovefairuz> Andy80: but polling the device doesn't work, being faulty is not equal to be non-functional, there could be a bug
+[18:21] <ha1flosse> sorry..someone a short moment of time answering a question about ubuntu 10.04
+[18:21] <ha1flosse> ????
+[18:22] <bonhoffer> anyone know how i can get to windows files from ubuntu?
+[18:22] <Andy80> ilovefairuz: ok...
+[18:22] <ilovefairuz> Duke_Harris: when it happens check what's blocked in: rfkill list
+[18:22] <cablop> bonhoffer: install ntfs-3g... but i think current versions came with it by default
+[18:22] <maplebeat> exchange?
+[18:22] <iceroot> cablop: its full encrypted but the svn up (io itensiv) was running on /home
+[18:22] <Duke_Harris> ilovefairuz, wireless lan: softblocked: yes, Hard blocked: No
+[18:22] <bonhoffer> i installed ubuntu lite -- bad idea?
+[18:23] <maplebeat> yes
+[18:23] <ha1flosse> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>sorry..someone a short moment of time answering a question about ubuntu 10.04
+[18:23] <maplebeat> say
+[18:23] <cablop> bonhoffer: dunno, it depends on your reqs, so, you just need to add ntfs-3g
+[18:24] <iceroot> !ask | ha1flosse
+[18:24] <ubottu> ha1flosse: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[18:24] <bonhoffer> cablop: i need to get wireless working
+[18:24] <PyjamaSpank> I live in a country prone to power cuts, should I be concerned about EXT4 data loss?
+[18:24] <ha1flosse> ah cool
+[18:24] <karlo> what text editor for terminal you recomended ? (I use vim)
+[18:24] <iceroot> karlo: vim of course
+[18:24] <cablop> PyjamaSpank: afaik, yes
+[18:24] <karlo> ty
+[18:24] <maplebeat> gedit
+[18:24] <iceroot> karlo: and i mean vim, no vi
+[18:24] <ha1flosse> i dont see the objects in trash
+[18:25] <cablop> PyjamaSpank: stick to ext3 except if you need additional issues
+[18:25] <ilovefairuz> Duke_Harris: try adding "rfkill unblock wlan" in a shell script in ~/bin and add it to startup applications in system > preferences > start up
+[18:25] <bonhoffer> trying to get networking going i get /var/run/network/ifstate pemission denied
+[18:25] <karlo> I sad I use vim.. :)
+[18:25] <iceroot> maplebeat: gedit is not for the terminal
+[18:25] <Sir_Leto> use nano
+[18:25] <ha1flosse> there ar some deleted objects but they dont appear in directory window
+[18:25] <iceroot> karlo: ok, mayn people thing the version that comes with ubuntu is the real vim but its only vi
+[18:25] <maplebeat> nano is a good idea
+[18:26] <ha1flosse> in the file explorer
+[18:26] <ha1flosse> option show hidden files is on
+[18:26] <ha1flosse> but nautilus doesnt show
+[18:26] <PyjamaSpank> cablop: not what I was looking for, especially after a fresh 10.04 install as EXT4
+[18:26] <karlo> exit
+[18:26] <ha1flosse> maybe a setting fault?
+[18:26] <karlo> xD
+[18:27] <wesleytelecom> i ae galera
+[18:28] <Duke_Harris> ilovefairuz, still deactivated at startup
+[18:28] <wesleytelecom> oi
+[18:28] <ha1flosse> right click in nautilus window for "trash" and ->properties counts objects in trash but they doesnt appear in file browser window
+[18:29] <cablop> bonhoffer: i think you had less problems using a full ubuntu, it autodetects hardware and read ntfs and so on
+[18:29] <nosoundicewm> aeon-ltd:  someone mentioned it might be a pulseaudio issue
+[18:30] <ha1flosse> someone's a clue?
+[18:31] <ha1flosse> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>right click in nautilus window for "trash" and ->properties counts objects in trash but they doesnt appear in file browser window
+[18:32] <Bleubeard> is it possible to run xlink kai on ubuntu server without gtk. only using the kai web gui
+[18:32] <ha1flosse> maybe a hint so far?
+[18:32] <Bleubeard> run, er install
+[18:32] <Guest13539> I have a log file from rhhunter which is root access only. How do I read it using sudo command
+[18:33] <ha1flosse> yeah kai is a good one
+[18:33] <cablop> PyjamaSpank: then grab an UPS... i don't trust ext4 after reading the way it works
+[18:33] <IdleOne> Guest1090: sudo nano file.name
+[18:33] <Guest13539> ty
+[18:34] <ha1flosse> @cablo: why you dont trust ext4?
+[18:34] <ha1flosse> @cablop..sorry
+[18:35] <PyjamaSpank> cablop: I've had a couple of power cuts and just there it didn't boot up until I restarted. Not much file access going on but I'm dreading the day I move a couple of GB during the day and get a power cut
+[18:36] <ha1flosse> >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>right click in nautilus window for "trash" and ->properties counts objects in trash but they doesnt appear in file browser window
+[18:36]  * Dr_Willis always copies then deletes big files
+[18:36] <ha1flosse> ok
+[18:37] <IdleOne> ha1flosse: no need to use all the >>>>> we can see you
+[18:37] <mkanyicy> lol
+=== MacGyver_ is now known as MacGyverNL
+[18:37] <ha1flosse> ok..thought u might be too busy so i just re.marked
+[18:39] <jrenner> hey guys I'm having some audio issues. mainly that my audio mutes when my speakers are set to 34%
+[18:39] <ha1flosse> but maybe its a silly question..didnt experience something like this problem on fedora or other os
+=== Jenny-uk is now known as Jenny-england
+[18:40] <ha1flosse> so if theres no clue im carrying out the trash - finally without knowing or seeing objects in that trash.can..
+[18:41] <ha1flosse> who cares..
+=== Misterio is now known as Misterio_
+=== Misterio_ is now known as Misterio
+[18:43] <ha1flosse> its just trash
+[18:43] <ha1flosse> cu later
+[18:45] <jibis> bonsoir
+=== Greyscale is now known as Greysc[a]le
+[18:46] <ilovefairuz> !fr | jibis
+[18:46] <ubottu> jibis: Ce canal est en anglais uniquement. Si vous avez besoin d'aide ou voulez discuter en francais, merci de rejoindre #ubuntu-fr, ou #ubuntu-qc. Merci.
+[18:46] <dev001> Where can I download just Ubuntu's kernels?  Specifically, the pvops-enabled vmlinuz/initrd for Lucid?  Using them for Xen DomU installs ...
+[18:47] <babu__> when i'm installing netbeans ,it asks the path of jdk...i installed gcj in my ubuntu10.04....please help
+[18:47] <stegel> i am running into problems getting my dwl-140 to work on 10.1...i instal rt2870usb from ralink and i can see wireless networks, but the connection keeps timing out
+[18:47] <Jenny-england> <babu__> did you download netbeans or instaled it from synaptic?
+[18:47] <stegel> when i watch messages i just see, cannot associate with AP
+=== DoubleString is now known as ZNC_DoubleString
+[18:47] <gnomefreak> babu__: our package shouldnt ask you
+[18:48] <ilovefairuz> dev001: apt-cache search linux-image  .. will list available kernels
+[18:48] <ilovefairuz> babu__: sudo apt-get install openjdk-6-jdk
+[18:48] <dev001> ilovefairuz: That presumes I have Ubuntu installed.  I don't.  I'm looking for a repo to DL from.
+[18:48] <babu__> i have a .bin file of netbeans
+[18:48] <ilovefairuz> dev001: packages.ubuntu.com
+[18:49] <ilovefairuz> babu__: install openjdk before running that bin
+[18:49] <Jenny-england> <babu__> the latest ver of netbeans is 6.9.1 the best is to download it cuz if u install from synaptic u'll get ver 6.8
+[18:49] <infid> is there a way in open office to remove all the hyperlinks from a file at once? eg remove all the underlines of the hyperlinks
+[18:50] <Jenny-england> if u download it there is about 250mb eveyrthing included in it
+[18:50] <babu__> do i want to install openjdk even i install from apt-get
+[18:50] <Jenny-england> i mean java jdk jre
+[18:50] <dev001> ilovefairuz: Sorry, perhaps I'm missing something.  There's none here: http://packages.ubuntu.com/lucid/kernel/
+[18:50] <Jenny-england> <babu__> if u installed from apt-get install netbeans u still need to install jdk
+[18:50] <ilovefairuz> babu__: if you install netbeans from apt-get, the jdk will automatically be installed
+[18:51] <ilovefairuz> dev001: http://packages.ubuntu.com/lucid/linux-image
+[18:51] <gnomefreak> use find or locate to find where bleh is installed if you refuse to use our version of a package
+[18:52] <dev001> ilovefairuz: not in /kernel?  sigh.  thanks!
+[18:52] <Jenny-england> <ilovefairuz> if he install from synaptic he still need to install java
+[18:52] <gnomefreak> his issue is finding java not installing it
+[18:52] <gnomefreak> as i understood it
+[18:52] <itsux2bu> can hardware devices be seen before being mounted..? how do you know what to mount?
+[18:53] <gnomefreak> ok now this is getting old be back in a minute
+[18:53] <ilovefairuz> Jenny-england: no, it depends on jdk, will be pulled automatically
+[18:53] <Jenny-england> i just checked
+[18:54] <ilovefairuz> Jenny-england: netbeans depends on libnb-java3-java, which in turn depends on default-jdk
+[18:54] <Jenny-england> and he need to install sun-java6-jdk
+[18:55] <Jenny-england> i installed i mean tried netbeans 6.8 from synaptic it didnt work i mean i got with it java libs but still had to install sun-java-jdk
+[18:55] <ilovefairuz> Jenny-england: apt solves dependencies automatically if you install like: sudo apt-get install netbeans (including a jdk)
+[18:55] <Jenny-england> what can i do
+[18:55] <Jenny-england> ok if u say so
+[18:56] <Dr_Willis> itsux2bu:  yes.  'dmesg' and 'sudo fdisk -l' can give clues to what the devices are called.
+[18:56] <mobasher> can anyone help me setup grub please :) i have 3 partitions
+[18:57] <ilovefairuz> mobasher: pastebin: sudo fdisk -l
+[18:57] <ilovefairuz> !paste | mobasher
+[18:57] <ubottu> mobasher: For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://tinyurl.com/imagebin | !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+[18:58] <ilovefairuz> Jenny-england: what gets installed by default is OpenJDK which is technically different from SUN JDK but they provide the same functionality
+[18:58] <mobasher> ilovefairuz>>http://pastebin.com/7em8diSA
+[18:58] <Jenny-england> <babu__> if u didnt install netbeans go to http://netbeans.org/ and download it it is better version than from synaptic
+[18:59] <aetaric> ilovefairuz: it is oracle jdk now...just saying
+[18:59] <babu__> i'm banned from one channel..how to get revoked
+[18:59] <ilovefairuz> mobasher: which partition has your ubuntu installation? sda1 or sda5? and are you using a live cd ?
+[18:59] <azlon> how can i connect to my switch in ubuntu? in windows i would use hyperterminal...
+[18:59] <ilovefairuz> aetaric: sadly, yes
+[18:59] <mobasher> ilovefairuz>> sda5 is my boot partition
+[18:59] <wombatguy> ffmpeg for conversion causes my gpu temp to spike to an extreme within seconds. Anyone know a way to turn whatever causes this off?
+[19:00] <ManDay> !audio
+[19:00] <ubottu> If you're having problems with sound, click the Volume applet, then Sound Preferences, and check your Volume, Hardware, Input, and Output settings.  If that fails, see https://help.ubuntu.com/community/Sound - https://help.ubuntu.com/community/SoundTroubleshooting - http://alsa.opensrc.org/DmixPlugin - For playing audio files,  see !players and !mp3.
+[19:00] <ManDay> whats that channel for ubuntu audio again
+[19:00] <ManDay> that other distro
+[19:00] <ArtistXuser> hello.. i spent about 12hrs downloading the ArtistX  via torrent and the md5 sum din't match..
+[19:00] <Dr_Willis> azlon:  theres serial terminal programs in the repositories
+[19:00] <vimalsista> Can anyone help me get the "Custom Visual Effects" in Ubuntu 10.0 version
+[19:00] <Dr_Willis> ArtistXuser:  whats ArtistX ?
+[19:01] <madf0x> vimalsista do you mean compiz?
+[19:01] <wombatguy> my gpu is a little crazy anyways as it's an nvidia in a hp (historically troublesome) but i can manage normally but this ffmpeg thing is just crazy and seems to pay no attention to any options i know
+[19:01] <ilovefairuz> mobasher: do you have separate boot and root partitions ?
+[19:01] <ArtistXuser> it's a distro http://www.artistx.org/site2/
+[19:01] <Jenny-england> <babu__> change ip?
+[19:01] <mobasher> ilovefairuz>> yes
+[19:01] <Dr_Willis> vimalsista:  set up the video card drivers. install the 'ccsm' config too. tweak compiz/effects all day long.
+[19:01] <Dr_Willis> !ccsm | vimalsista
+[19:01] <ubottu> vimalsista: To enable advanced customization of desktop effects in Ubuntu: install 'compizconfig-settings-manager' or 'simple-ccsm'. If you install the latter, a new option will appear in your appearance properties - See also !compiz - Help in #compiz
+[19:01] <ArtistXuser> Dr_Willis: its ubuntu based
+[19:01] <mobasher> ilovefairuz>> http://pastebin.com/kCgsLw9h
+[19:02] <Dr_Willis> ArtistXuser:  dosent really matter if its ubuntu based or not.. You should see the artistx support channels not here. as for the torrent.. restart the torrent and tell it to verify. is about all you can do,
+[19:02] <ilovefairuz> mobasher: so you're not using a live cd? sudo grub-install /dev/sda
+[19:02] <mobasher> ilovefairuz>> i'm on live cd right now
+[19:02] <vimalsista> oops
+[19:03] <vimalsista> I've installed CCSM
+[19:03] <ArtistXuser> i verified.. it after download.. and i don't see any artistx channels
+[19:03] <ArtistXuser> not sure where to go for help
+[19:03] <Dr_Willis> ArtistXuser:  if you have a slow connection. You can order a Ubuntu CD from 'shipit'
+[19:03] <vimalsista> I don't see the open even after installing the Compiz
+[19:03] <slow-motion> hi
+[19:03] <wombatguy> that's the problem with some distros
+[19:03] <ilovefairuz> mobasher: how you're on livecd and have sda1 mounted as root?
+[19:03] <bhang> can anyone please tell me the command to reinstall something (soprano-daemon, libsoprano) and everything that is dependent on it?
+[19:03] <mobasher> ilovefairuz>> http://pastebin.com/t61NxdpS
+[19:03] <Dr_Willis> ArtistXuser:  check their homepage/forums - ive never heard of that variant. and i doubt if you will get much support for it here.
+[19:04] <ArtistXuser> i have a fast connection and have downloaded many distros and never had a problem
+[19:04] <Dr_Willis> ArtistXuser:  could be their image/torrent is bad then
+[19:04] <ilovefairuz> mobasher:  read the question i wrote
+[19:04] <Muelli> bhang: apt-get remove soprano-daemon libsoprano && apt-get install soprano-daemon libsoprano
+[19:04] <mobasher> ilovefairuz>> i mounted it trying to follow some intructions in the fourms
+[19:04] <Dr_Willis> ArtistXuser:  or they dident update the md5 files
+[19:04] <ArtistXuser> Dr_Willis: that's why i wanted to chat before starting the process again
+[19:05] <ilovefairuz> mobasher: reboot and don't mount anything, and come back here
+[19:05] <mobasher> k brb
+[19:05] <cortom63> hi
+[19:05] <vimalsista> I meant I've installed Compiz and I've opened CCSM. Can you walk me through the process to get the "advanced customization"
+[19:05] <ilovefairuz> !hi | cortom63
+[19:05] <ubottu> cortom63: Hi! Welcome to #ubuntu! Feel free to ask questions and help people out. The channel guidelines are at https://wiki.ubuntu.com/IRC/Guidelines . Enjoy your stay!
+[19:05] <ArtistXuser> Dr_Willis: just wanted to see if othersa are having the same issue
+[19:05] <bhang> Muelli: Thx... but does that also reinstall every program that the package manager wants to remove? (a long list...)
+[19:05] <Dr_Willis> vimalsista:  that is the advanced custimiuzation.. set the settings how you want.
+[19:05] <cortom63> hi
+[19:05] <Muelli> bhang: nope :(
+[19:05] <Dr_Willis> ArtistXuser:  i doubt if very many people in here have even heard of that Variant
+[19:06] <ilovefairuz> cortom63: hello, what's your question ?
+[19:06] <ArtistXuser> its on distrowatch
+[19:06] <rantic> Hi everyone, the Ubuntu website is discouraging the 64 bit release for everyday desktop computing. Ordinarily this would be fine but I'd like to use my full 4gb of ram. Is the 64 bit release really that bad in comparison ?
+[19:06] <Muelli> bhang: but I don't see why you would want to remove those reverse dependcies.
+[19:06] <ArtistXuser> Dr_Willis: ok thanks
+[19:06] <cortom63> i am brand new to linux and i am using a livecd of ubuntu 10.04
+[19:06] <Dr_Willis> ArtistXuser:   but it took 12 hrs to torrent.. sounds lik eits not very popular. or needs lots of seeders
+[19:06] <Muelli> bhang: So I'd do a apt-get install --reinstall soprano-daemon libsoprano
+[19:06] <antonio__> ciao
+[19:07] <ilovefairuz> !64 | rantic
+[19:07] <ubottu> rantic: AMD64 and EMT64 are fully supported architectures on Ubuntu. See http://tinyurl.com/3jkole and http://en.wikipedia.org/wiki/Amd64 for more information.
+[19:07] <Dr_Willis> ArtistXuser:  ive seen very few 'variants' that are worth the hassles they seem to have. Easier to stick with ubuntu and add what you want
+[19:07] <ArtistXuser> wish they had an irc channel
+[19:07] <Muelli> "fully supported"? That's not what the website reflects ;-)
+[19:07] <rantic> I'm aware it's fully supported .. but http://www.ubuntu.com/desktop/get-ubuntu/download
+[19:07] <ilovefairuz> Muelli: the statement needs to be removed
+[19:07] <vimalsista> yea...But, I don't see "Custom", open when I right click on the desktop and select "visual Effect"
+[19:07] <rantic> "64-bit - Not recommended for daily desktop usage"
+[19:07] <Dr_Willis> rantic:  use 64bit if you want to..
+[19:07] <Muelli> yeah ilovefairuz. "There is a bug for that" -.-
+[19:08] <smittix> x64 Run's fine here
+[19:08] <Dr_Willis> rantic:  if you understand what 64bit is.. and does. and what issues you may have. then that statement proberly dosent apply to you
+[19:08] <iluminator101> how can i graphically mount private home folder on startup
+[19:08] <bhang> Muelli: so i figured :( I tried a ppa and purged all of it after a while, but those two packages just just won't "go back". I can't build anything from source now for some reason, and they seem to be the problem
+[19:08] <itsux2bu> anyone here with vbox guest os ubuntu and windows host os.. and got ubuntu to use a USB Thumbdrive ?
+[19:08] <stegel> i just installed ubuntu off of a live cd...on a system running win7...after install i never see the boot loader to see win7 or ubuntu, it goes right into ubuntu...
+[19:08] <Dr_Willis> rantic:  if you had no clue what 32/64bit ment.. then that statement is there to point total beginners to 32bit so they are sure to have somthing that will run
+[19:09] <ilovefairuz> itsux2bu: ask in ##windows
+[19:09] <Muelli> bhang: ah, I see. Do a apt-cache policy soprano-daemon libsoprano and pastebin it somewhere
+[19:09] <wombatguy> im just curious why windows would be your host os
+[19:09] <Jenny-england> <itsux2bu> i have ubuntu host windows guest can share files but usb in guest doesnt work
+[19:09] <realcoolguy> itsux2bu: I was just listening to a podcast where the caller did exactly this.  However he said the performance was just too slow.
+[19:09] <rantic> Dr_Willis: Fair enough, I'm kind of a newb transitioning to Ubuntu so I'm not sure. Thanks.
+[19:09] <cortom63> i am trying to install it but it sees my two 200gb sata ll harddrives as one 400gb, after hours of reading online i managed to get ubuntu installation to recognize two 200gb drives, using the terminal and command sudo apt-get remove dmraid, but when i try to install on my 2nd physical harddrive that is empty it always fails, help?
+[19:09] <Muelli> bhang: you can do a apt-get install soprano-daemon=yourversion libsoprano=yourversion once you know the proper version (apt-cache policy will tell you)
+[19:10] <Dr_Willis> rantic:  if you have a 64bit cpu.. may as well go 64bit.. if you got 64bit cpu and 4+GB of ram.. definatly use 64bit
+[19:10] <realcoolguy> itsux2bu:  (wait, I meant to say the other way around, windows guest on usb drive.  my bad)
+[19:10] <iluminator101> how can i graphically mount private home folder on startup?
+[19:11] <Dr_Willis> bye all
+[19:11] <Jenny-england> <Dr_Willis> dont go
+[19:11] <Jenny-england> pls
+[19:11] <Jenny-england> dont leave us
+[19:11] <Jenny-england> :(
+[19:11] <cablop> PyjamaSpank: mmm, i'm not sure, i just avoid ext4 for the not standard behavior of it
+[19:11] <Muelli> iluminator101: Alt+F2 - type "gnome-terminal" and you get a fancy UI where you type stuff into. Like "mount"
+[19:11] <cablop> can i set up a lvm inside another lvm? is that odd?
+[19:11] <coz_> Jenny-england,  looks like you are stuck with the rest of us  :)
+[19:12] <Jenny-england> <coz_> i really dont mind
+[19:12] <coz_> :)
+[19:12] <th0r> cablop: I tried it...ran terribly slow
+[19:12] <Jenny-england> i like ubuntu to be honest i love it
+[19:12] <cablop> hehe, ok, good to know
+[19:12] <ruffleS> any1 here know how to change truecrypt's systray icon?
+[19:12] <mobasher> ilovefairuz>>hey i'm back
+[19:13] <bhang> Muelli: ah, I'll try that right away
+[19:13] <Jenny-england> <mobasher> wb
+[19:13] <cablop> i just wanted tp setup an lvm with some encrypted and non-encrypted volumes inside... then it came to my mind that that could be worse than encrypting the whole thing
+[19:13] <mobasher> thanks :)
+[19:13] <iluminator101> muelli:i know how to mount it manually, i am saying it should mount automatically, via access your private data
+[19:13] <Jenny-england> <mobasher> you welcome my dear
+[19:13] <mobasher> just need some help setting up grub (3 partitions 1 boot 1 filesystem 1 swap) anyone can help :)
+[19:14] <Jenny-england> <mobasher> what for ? what ubuntu do you want to install?
+[19:14] <izatt82> hello world
+[19:14] <Muelli> iluminator101: yeah, it should do it automatically. maybe it's not setup properly.
+[19:14] <mobasher> Jenny-england>> i got OS installed but just need grub help setup
+[19:14] <Muelli> izatt82: Hi :)
+[19:14] <ilovefairuz> mobasher: sudo mkdir /mnt/{root,boot} && sudo mount /dev/sda1 /mnt/root &&  sudo mount /dev/sda5 /mnt/boot && sudo grub-install --root-directory=/mnt/root /dev/sda
+[19:15] <edbian> ilovefairuz, nice
+[19:15] <ilovefairuz> unix ftw.
+[19:15] <cablop> i wonder if a live CD will confuse a crypto partition and do weird things like trying to mount it as other kind of filesystem or even worse using it as swap... like sometimes a liveCd do with raid partitions
+[19:15] <mobasher> Jenny-england>> http://pastebin.com/wkALG0Js
+[19:15] <cablop> am i being toooo paranoid?
+[19:15] <WinstonSmith> hi all :) what command do i use to tell a certain service to start at boot ? thx
+[19:16] <edbian> cablop, It simply won't be able to mount it.
+[19:16] <izatt82> okay guys i am trying to learn how to use the shell better and i missing how to filter this out. I know "who" gets me all logged in users but how would i filter that list by user name length?
+[19:16] <edbian> cablop, That's the point of crypto.  Not that it gets messed up by another OS.  That it can't by booted without the host os or password.
+[19:16] <cablop> how wise is to use an unencrypted swap on a full encrypted system?
+[19:16] <mobasher> Jenny-england>> btw ..i'm on a liveCD
+[19:16] <Muelli> izatt82: hm. I'd look "awk" up. Or write smth in Python
+[19:17] <edbian> cablop, swap is pretty useless to encrypt because it is erased everytime you restart the system (unless you hibernate).
+[19:17] <edbian> cablop, IDK if you even can encrypt swap.
+[19:17] <Jenny-england> <mobasher> so you got ubuntu installed or do you use live cd ?
+[19:17] <mobasher> Jenny-england>> i installed it..but just not booting up
+[19:17] <ruffleS> does anyone here know how to change truecrypt's systray icon?
+[19:17] <izatt82> thanks Muelli. i just kind of got lost digging around. will do thanks for pointing a newbie in the right direction
+[19:17] <Muelli> cablop: well. it's not as easy as edbian suggests. You will leak data unless you encrypt.
+[19:17] <ilovefairuz> mobasher: reboot and test
+[19:18] <Jenny-england> <ilovefairuz> could you please help <mobasher>?
+[19:18] <cablop> Muelli: leak data?
+[19:18] <ilovefairuz> Jenny-england: i am.
+[19:18] <edbian> Muelli, Can you read the swap partition as a typical user on the system?
+[19:18] <Jenny-england> <ilovefairuz> i see sorry :)
+[19:18] <mobasher> ilovefairuz>> i just reboot want me to reboot again ?
+[19:18] <Muelli> cablop: sure. Because you write to a disk unencryptedly. So smbd else can read it.
+=== harrison is now known as harrisonk
+[19:18] <ilovefairuz> mobasher: yes, check if the bootloader now work
+[19:18] <edbian> Muelli, I thought that swap was controlled entirely in kernel space.
+[19:18] <mobasher> k thanks brb
+[19:18] <Muelli> edbian: probably not. But that's not the scenario you're protecting against, when you're fully encrypting your system.
+[19:18] <cablop> Muelli: i want to find a good balance between security and performance
+[19:18] <raven> how to change the dedicated root-space (with tune4fs?)
+[19:19] <Viper> Hi. What is good program to backup Data & settings in Ubuntu 64 bit
+[19:19] <edbian> Muelli, What is the danger of having an unencrypted swap then?  I'm confused
+[19:19] <Muelli> cablop: crypto is not that much of a performance killer. Disk I/O is expensive. Computation is not.
+[19:19] <cablop> edbin... i give it a second thought... if i hibernate and somebody take my disk away he just need to dump the swap info to get it with no encryption at all
+[19:19] <Muelli> edbian: you lose your machine and a third party can read your password and crypto keys because they have been swapped out.
+[19:20] <Muelli> sholdn't happen with passwords though, but other data, such as emails might be as problematic.
+[19:20] <edbian> Muelli, If that stuff was swapped out.  Does it stay on swap even when the system is off?
+[19:20] <cablop> Muelli: well... it's a netbook, so cpu cycles count :P, also CPU usage kills the batery...
+[19:20] <edbian> Muelli, I see.
+[19:20] <azlon> does anybody use ubuntu to connect to their cisco console? im having issues with both putty and minicom
+[19:20] <raven> how to change the dedicated root-space (with tune4fs?)
+[19:20] <Muelli> edbian: sure. unless somebody comes and encrypts or erases it. but swap is *not* erased. it's only overwritten.
+[19:20] <edbian> cablop, The amount of work done by the cryptography is trivial compared to say opening firefox
+[19:21] <edbian> Muelli, Ah I see. Classic problem.  It's not re-written to 0's it's just flagged as empty.  Is that right?
+[19:21] <Muelli> cablop: *shrug* it's up to you of course.
+[19:21] <edbian> cablop, If you really wanna converse run without a GUI! :)
+[19:21] <cortom63> What if i physically disconnect my windows c: drive and leave my empty d: drive connected, then run ubuntu 10.04 livecd, then try to install ubuntu, will that work, and if so when i re-connect my windows harddrive, will i be able to dual boot, or do both drives need to be connected for the grub to do a dual boot?
+[19:21] <cablop> hahaha
+[19:21] <edbian> cablop, s/converse/conserve
+[19:21] <Muelli> edbian: yeah, kind of. I don't know the exact details.
+[19:21] <edbian> Muelli, K.  Thanks
+[19:22] <cablop> no, i need to run a windows inside linux for a time until i can get rid of windows or find a perfect balance on both OSes
+=== harrisonk is now known as harrison
+[19:23] <edbian> cortom63, When you turn on the computer the BIOS scans all the devices.  It distinguishes those which are bootable from those that are not (cd drives, hdds, usb drives).  It has a list (that you can change the order of) that it looks to to decide which device to boot.  Then that device takes over.
+[19:23] <raven> how to change the dedicated root-space (with tune4fs?)
+[19:23] <edbian> cortom63, It wouldn't be a normal dual boot because the system wouldn't ask you which OS to boot.  It would simply follow the list.  If you wanted to boot the "other" os ou
+[19:23] <edbian> cortom63, You'd have to tell the bios to boot the other hdd.  Other than that annoyance it would work.
+[19:23] <sebsebseb> Hi
+[19:24] <bsdpunk_> Sup buddy?
+[19:24] <sebsebseb> bsdpunk_: not much
+=== harrison is now known as harrisonk
+[19:24] <Note-book> well, while installing ubuntu I accidentally dropped my notebook moving it from one room to the other....it's scratched alongside the keyboard and at the back
+[19:24] <Note-book> can I skin the inside of my notebook? It's a HP DV6000.
+[19:24] <edbian> cortom63, You can install ubuntu and windows along side one another in separate partitions on one harddrive.  Then grub would replace the windows bootloader on that HDD and it would ask you which to boot when you turn the computer on and the bios boots the hdd.
+[19:24] <edbian> cortom63, Does all that make sense?
+[19:24] <edbian> sebsebseb, Hi
+[19:24] <sebsebseb> edbian: Hi
+[19:25] <ilovefairuz> !ot | Note-book
+[19:25] <ubottu> Note-book: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[19:25] <edbian> cortom63, The latter is a true dual-boot.
+[19:25] <cortom63> edbian: when i try to install ubuntu , it does not pick up that i have another operating system, and picks up one 400gb hdrive instead of the 2x 200gb
+[19:25] <sebsebseb> Note-book: what do you mean skin the inside of the notebook?
+[19:25] <Note-book> sebsebseb, apply a skin to the inside, like around the kayboard
+[19:26] <ilovefairuz> raven: as in increasing the partition size? use the "parted magic" livecd to resize your partitions
+[19:26] <edbian> cortom63, Are you running raid or something?
+[19:26] <sebsebseb> Note-book: not quite sure what you mean, but since your on about hardware go to ##hardware and ask
+[19:26] <edbian> cortom63, Are these hdds all sata?
+[19:26] <cortom63> sata ll no raid
+[19:26] <cortom63> yes
+[19:26] <k08r4> #join ubuntu-rs
+[19:26] <edbian> cortom63, Try booting with only the windows hdd in.
+[19:26] <jamie_> Anyone to help with conky?
+[19:26] <hellboy316> ubuntu rocks
+[19:27] <jrib> jamie_: best to just ask the channel your actual question (on a single line)
+[19:27] <azlon> can somebody help me connect to my console via serial port? i have putty and minicom but they arent working...
+[19:27] <sebsebseb> hellboy316: correction,  Desktop Linux as a whole, whater the distro, rocks
+[19:27] <dylanc> HI~
+[19:27] <sebsebseb> whatever the distro
+[19:27] <edbian> cortom63, Additionally you could install Ubuntu on the empty hdd.  Then configure grub manually to give you the option to boot ubuntu or windows and then just tell it that windows is on the other HDD (yeah grub can do that).
+[19:27] <dylanc> anybodyhome~?
+[19:27] <cortom63> and then install ubuntu to share that drive?
+[19:27] <Jenny-england> <cortom63> can i say something ? :) i have 350gb other 500gb on 350gb in win 7 i went to control panel disk mgr and deleted 500gb made it be unalocated space then  ibooted up ubuntu live usb and installed ubuntu on 500gb without problem
+[19:27] <ilovefairuz> !details | jamie_, dylanc
+[19:27] <ubottu> jamie_, dylanc: Please give us full details. For example: "I have a problem with ..., I'm running Ubuntu version .... When I try to do ..., I get the following output: ..., but I expected it to do ..."
+[19:27] <vect0rx> I'm trying to get a kernel with 802.15.4 wireless support (ZigBee/6lowpan/etc), but the linux-zigbee people only seem to have a full kernel (2.6.36) download and not a patch available.. how do I reconcile this with the standard ubuntu patches?
+[19:28] <edbian> cortom63, And tell the bios to always boot the Ubuntu drive (which will then boot grub and give you the option).
+[19:28] <karlo> is there any ubuntu ftp community ?
+[19:28] <raven> ilovefairuz, no i mean to reduce the root-space on a partition (to make free and available space equal)
+[19:28] <edbian> cortom63, It is EXTREMELY odd that your 2 hdds are being detected as one big one :)
+[19:28] <jrib> karlo: what would they do?
+[19:28] <Guest82189> I don't have access to my desktop internet so I cant pastebin ...  Sorry can someone help me with logging on error code   " Could not update ICEauthority file/home/me/.ICEauthority    after hitting ok I get   There is a problem with the configuration server.  ( /usr/lib/libgconf2-4/gconf-sanity-check-2 exited with status 256)  after hitting close I get    Nautilus could not create the following required folders:/home/me/Desktop,/home
+[19:28] <Guest82189> /me/.nautilus. One more mess to follow
+[19:28] <edbian> cortom63, If you run the live CD does the output of sudo fdisk -l show 1 big hdd as well? Or does it correctly see 2?
+[19:28] <karlo> jrib, ?
+[19:29] <jamie_> In terminal, 'sensors' works fine, but I can't get any temps on my conky (they all show as 0), and furthermore, whether I put own_window_type normal or dekstop, when I click on the desktop itself, conky disappears.  (I'm on Ubuntu 10.04.1 and I can give code/screenshots)
+[19:29] <jrib> karlo: I don't know what a "ftp community " is
+[19:29] <karlo> or ftp archive..
+[19:29] <edbian> Guest82189, I was helping you earlier.  You need to change the permissions on your /home
+[19:29] <dylanc> I got it ,sorry~!
+[19:29] <Guest82189> Before running Nautilus, please create these folders, or set permissions such that Nautilus can create them..
+[19:29] <sebsebseb> hellboy316: well some, are much better than others
+[19:29] <Guest82189> hey HELLO again edbian
+[19:29] <edbian> Guest82189, yeah see permissions.  You should read up on linux permissions :)
+[19:29] <cortom63> jenny-england: i have got unallocated space on one drive, and empty 2nd one aswell, but everywhere i try to install ubuntu to it fails
+[19:29] <edbian> Guest82189, Hi
+[19:29] <extraclassic> jamie_: window type needs to be override if you don't want it to disappear
+[19:30] <firetux> Hello, I want to create an ad-hoc wireless network but simply I want to change the channel, so NetworkManager is not fit for me... can anyone help me with that ??
+[19:30] <Guest82189> Do I want to delete the applet from configuration
+[19:30] <jrib> karlo: ftp archive of /what/?
+[19:30] <jamie_> extraclassic - trying it now - thanks a billion if that's all it was (I've been googling for a couple days now!)
+[19:30] <edbian> Guest82189, What?  No don't delete anything.  Run this command: "sudo chmod -R 777 ~"
+[19:30] <karlo> of ubuntu programs.. or ftp forum..
+[19:30] <edbian> Guest82189, without quotes of course
+[19:30] <ilovefairuz> !software | karlo
+[19:30] <ubottu> karlo: A general introduction to the ways software can be installed, removed and managed in Ubuntu can be found at https://help.ubuntu.com/community/SoftwareManagement - See also !Packages, !Equivalents
+[19:30] <jrib> karlo: umm, you mean the repositories?
+[19:30] <geirha> edbian: That'll break more than it will fix
+[19:31] <edbian> geirha, It will get it to stop yelling errors.  It just won't be secure.
+[19:31] <cortom63> it shows 2 now
+[19:31] <raven> how to make available and free space qual?
+[19:31] <Kolhal> hello
+[19:31] <geirha> edbian: He'll get new errors because of world writable files
+[19:31] <cortom63> it shows 2
+[19:31] <edbian> geirha, Really?
+[19:31] <test34> guest82189, dont run that sudo chmod command
+[19:31] <karlo> jrib, nothing :) .. I will do a long.. long.. long search on the web.. xD
+[19:31] <edbian> geirha, I trust you.
+[19:31] <jrib> karlo: k, not really sure what your question is still.
+[19:32] <Muelli> edbian: even worse, clicking smth in nautlus might result in programs being executed...
+[19:32] <Fendaril> is there a way to change the time it takes in ubuntu for the monitor to automatically shut off
+[19:32] <Fendaril> like in windows
+[19:32] <geirha> Guest82189, edbian: I'd go with: sudo chown -R "$USER:$USER" ~/
+[19:32] <jamie_> extraclassic that worked :-) (although it's no longer in the far background, i.e. I can put icons behind it, etc, but that's fine.)  Any clue on tempsensors?  I wanted hdd, cpu0/cpu1 and nb/mb/system (one of those)
+[19:32] <Muelli> Fendaril: gnome-screensaver-preferences
+[19:32] <extraclassic> jamie_: no idea
+[19:32] <Fendaril> ok
+[19:32] <firetux> Hello, I want to create an ad-hoc wireless network but simply I want to change the channel, so NetworkManager is not fit for me... can anyone help me with that ??
+[19:33] <edbian> geirha, He's pm-ing me I keep telling him to come back in here.
+[19:33] <ilovefairuz> Guest82189: rm /home/me/.ICEauthority  and try logging in
+[19:33] <edbian> Guest82189, See what geirha said up there?  ^^
+[19:33] <Muelli> firetux: check iwconfig
+[19:33] <Jenny-england> <cortom63> i dont know how it i possible i didnt have any problems i mean when i tried to install ubuntu at first i ben looking to resize partition using ubuntu installer and i couldnt resize it but when i have made separate partition and unalocated space without even little problem installed ubuntu
+[19:33] <Guest82189> yup, ill try it
+[19:33] <raven> how to make available and free space qual?
+[19:33] <ilovefairuz> Fendaril: system > preferences > power management
+[19:33] <jrib> raven: why?
+[19:33] <edbian> ilovefairuz, He was messing with his usernames / passwords because he forgot it then he remembered it.
+[19:33] <Guest82189> first off how do I get the terminal up again...
+[19:34] <edbian> Guest82189, alt + F2
+[19:34] <edbian> Guest82189, then type gnome-terminal
+[19:34] <Guest82189> thx
+[19:34] <blurrr> anything better than "dd if=/dev/sda  of=/dev/sdb" for cloning sda to sdb
+[19:34] <edbian> Guest82189, You should read this when you're done so you understand better: http://www.tuxfiles.org/linuxhelp/filepermissions.html
+[19:35] <edbian> Guest82189, geirha, You'll have to help him now.  I have to go!
+[19:35] <ilovefairuz> Guest82189: alt + f2, type your user name and password, then rm /home/me/.ICEauthority , then alt + f7
+[19:35] <Guest82189> cool... thx and do I go with I Lovefairuz also or no??
+[19:35] <cortom63> sda: 200gb with sda1 hpfs/ntfs system and sda2 dell utility, then sdb: with sdb1 linux, sdb2 extended and sdb5 linux swap / solaris
+[19:35] <jamie_> Temp sensors in Conky always show 0  (for cpu0/1, hdd, etc) Anyone seen this problem before?  'sensors' in terminal works fine
+[19:35] <cheasee> im creating xfs on a raid5 out of 8 disks, ive read on a forum, mkfs.xfs optimizes for software raids (mdadm im using) but it doesnt seem so, default tells: sunit=0      swidth=0 blks
+[19:35] <edbian> Guest82189, Up to you.  I don't really know what his command is going to accomplish besides deleteing that file.
+[19:35] <hellboy316> hey guys how to get iscan run as non root ... its says device busy whenever i run it
+[19:35] <extraclassic> jamie_: i'd ask in #conky
+[19:36] <Fendaril> so GNU is the OSS part and the actual kernel is not so much Open source?
+[19:36] <Guest82189> edbian  Thanks again for your help
+[19:36] <jrib> Fendaril: lol...
+[19:37] <Fendaril> jrib: can you explain
+[19:37] <ilovefairuz> Fendaril: no, and ask in #ubuntu-offtopic
+[19:37] <jrib> Fendaril: the kernel is gpl 2
+[19:37] <jrib> !free | Fendaril
+[19:37] <ubottu> Fendaril: freedom is important. Ubuntu is as free as we can make it, which means mostly free software. See http://www.gnu.org/philosophy/free-sw.html and http://www.ubuntu.com/ubuntu/licensing
+[19:38] <geirha> Guest82189: The output of   ls -ld ~/   would help btw, at least the four first fields it outputs.
+[19:39] <jamie_> #conky is dead.  and $alignr${execi 3600 wget -O – http://whatismyip.org/ | tail} shows absolutely nothing... (is that code correct?)
+[19:39] <Guest82189> geirha ok  I went with your suggestion sorry for the wait the phone rang...  and all I get is the greater than sign..  what should I do next??
+[19:39] <geirha> Guest82189: Hit Ctrl+C, and type it in again, correctly.
+[19:40] <wildc4rd> I have 2 ubuntu pc's on this network, how would I go about finding my shared folder on one PC with the netbook?
+[19:40] <geirha> Guest82189: You were likely missing the closing "-quote
+[19:40] <Guest82189> i didnt think we used "  's in linux newbie sorry
+[19:40] <azlon> how can i list my groups?
+[19:41] <hopkins> hola
+[19:41] <madf0x> azlon the groups on the system or the groups you belong in?
+[19:41] <hopkins>  algun mexicano
+[19:41] <hopkins>  o alguien que hable español
+[19:41] <geirha> Guest82189: It's part of the shell syntax. Quotes are very important.
+[19:41] <azlon> madf0x: both, i will need to add myself to a group if im not in it
+[19:41] <madf0x> azlon ahh either way cat /etc/groups
+[19:41] <joe__> is this the channel for help?
+[19:41] <raven> how to make available and free space qual?
+[19:41] <raven> how to make available and free space equal?
+[19:41] <madf0x> azlon though you dont need to be in EVERY group, no point
+[19:41] <ilovefairuz> azlon: 'groups'
+[19:41] <guntbert> !es | hopkins
+[19:42] <ubottu> hopkins: En la mayoría de canales de Ubuntu se habla sólo en inglés. Si busca ayuda en español o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[19:42] <azlon> madf0x: that didnt work
+[19:42]  * joe__ thinks it is
+[19:42] <mustafam> Hi
+[19:42] <guntbert> joe__: yes.  Do you have an ubuntu support question?
+[19:42] <jk_> azlon, cat /etc/groups|grep $USER
+[19:42] <madf0x> azlon */etc/group
+[19:42] <azlon> ilovefairuz: that worked, thanks
+[19:42] <jamie_> guess I'll try later tonight when more people are on... (when are there more than 1500 people? lol...)
+[19:42] <jk_> group*
+[19:42] <Guest82189> geirha I got chown:invalid user:me
+[19:42] <mustafam> I'm new to ubuntu
+[19:42] <azlon> madf0x: how do i add $USER to the dialout group?
+[19:42] <madf0x> azlon I keep thinking theres a s there when there isnt xD
+[19:43] <mustafam> I have upgraded from 9.04 to 10.04 LTS
+[19:43] <ilovefairuz> azlon: sudo usermod -a -G dialout $USER
+[19:43] <mustafam> and I'm getting cannot mount.... Press S or M for manual mount
+[19:44] <hopkins> */etc/group
+[19:44] <hopkins> /etc/group
+[19:44] <ilovefairuz> mustafam: back up your files with a live cd and do a fresh install
+[19:44] <joe__> does anyone here know how to remove offending resolutions from the monitors control from system->preferences->monitors? My installations of 10.04 lts trips out if anything other than a few basic modes are selected.
+[19:44] <Milp_main> hi i got lxde running via vnc but sometimes i just cant start anything anymore.
+[19:45] <geirha> Guest82189: Hum. That's weird. Does   getent passwd "$USER"   output anything?
+[19:45] <mustafam> I picked one of the recovery entries
+[19:45]  * sebsebseb Is back
+[19:46] <CompuTom> Has anyone installed AVG antivirus on Ubuntu10?
+[19:46] <mustafam> How can I edit fstab using the Live CD
+[19:46] <mustafam> it says I have no permission
+[19:46] <jrib> CompuTom: why do you want to?
+[19:46] <madf0x> CompuTom why would you want to?
+[19:46] <ilovefairuz> !virus | CompuTom
+[19:46] <ubottu> CompuTom: Antivirus is something you don't need on !Linux, except where files are then passed to windows computers (perhaps using samba), See https://help.ubuntu.com/community/Antivirus
+[19:46] <joe__> computom: why would youw ant to do that?
+[19:46] <mustafam> I understand I need to use root user
+[19:46] <jrib> mustafam: mount your install and use sudo
+[19:46] <Guest82189> geirha yes it outputs ,,,:/home/me:/bin/bash
+[19:46] <dev001> Finally found the _right_ sources for DL'ing Ubuntu Lucid kernel+initrd for Xen DomU guest install, @ ".../dists/lucid/main/installer-amd64/current/images/netboot/...".  There, however, ./xen/{vmlinuz,initrd.gz} & ./ubuntu-installer/amd64/{vmlinuz,initrd.gz}.
+[19:46] <dev001> My understanding was that currrent Ubuntu uses pvops-enabled kernels, and that sepearte xen-specific kernels are no longer required.  If true, what's the difference between those 2 URLs' contents?
+[19:46] <mustafam> but how do I specify I want to run the file using root user from the Terminal
+[19:47] <jrib> mustafam: have you mounted your install already?
+[19:47] <joe__> computom: besides if you look at the avg description of it. they say it is to scan the mails and files in your mail/file server setup. it doesn't actually scan linux stuff.
+[19:47] <geirha> Guest82189: And    getent group "$USER"   ?
+[19:47] <Guest82189> geirha interruptions from kids sorry.. I think I need to try the first command again except without any more intterups.. Hold on.
+[19:47] <mustafam> What do you mean mounted my install
+[19:48] <jrib> !who | mustafam
+[19:48] <ubottu> mustafam: As you can see, this is a large channel. If you're speaking to someone in particular, please put their nickname in what you say (use !tab), or else messages get lost and it becomes confusing :)
+[19:48] <jrib> mustafam: why do you want to do this?
+[19:48]  * joe__ will try his request again in borked english
+[19:48] <Guest82189> geirha it outputs me:x:1000:
+[19:48] <joe__> how remove useless resolutions from monitors section. have 10.04 lts
+[19:49] <geirha> Guest82189: So both the user and group exists, yet chown claims they don't. Hm.
+[19:49] <mustafam> jrib:  The advice I was getting was to comment out a line in the ftsab file
+[19:49] <jrib> mustafam: what's the issue?
+[19:49] <jrib> mustafam: and what line?
+[19:50] <geirha> Guest82189: Ok, let's try without the variables;   sudo chown -R me:me ~/
+[19:50] <Guest82189> geirha  ok I tried again and there was NO responce to sudo chown  _R....
+[19:50] <raven> how to make available and free space equal?
+[19:50] <mustafam> jrib: Upon bootup I am asked to Press S or M for manual mount
+[19:50] <mustafam> don't know what this means
+[19:50] <jrib> geirha: note "chown -R foo: bar"   is equivalent to   "chown -R foo:foo bar"
+[19:50] <madf0x> Guest82189 no response generally means success
+[19:50] <geirha> Guest82189: -R, not _R I hope. Though no response is good.
+[19:50] <jrib> madf0x: that is everything it says?
+[19:51] <Guest82189> geirha  oh...  it is on my desktop in terminal!!
+[19:51] <madf0x> jrib how would I know?
+[19:51] <deusr> hi guys!
+[19:51] <jrib> madf0x: don't you have esp? :P
+[19:51] <mustafam> jrib: searched on net and found that I should comment out this line none /sys/bus/usb/drivers usbfs devgid=125,devmode=664 0 0
+[19:51] <ilovefairuz> !hi | deusr
+[19:51] <ubottu> deusr: Hi! Welcome to #ubuntu! Feel free to ask questions and help people out. The channel guidelines are at https://wiki.ubuntu.com/IRC/Guidelines . Enjoy your stay!
+[19:51] <deusr> can someone help me! the sound of my notebook is leaving only boxes external, if I plug a phone, still leaving just externally, does not come in phone
+[19:51] <madf0x> !hi deusr
+[19:51] <raven> how to make available and free space equal?
+[19:51] <jrib> mustafam: is that everything it says?
+[19:51] <geirha> Guest82189: Hm?
+[19:52] <geirha> jrib: Neat, didn't know that :)
+[19:52] <mustafam> jrib: My question: How can I edit fstab using live CD
+[19:52] <joe__> raven: why do you need to do that?
+[19:52] <deusr> I'm with the headset plugged into the notebook now and the sound does not come on the phone, only in cases of notebook
+[19:52] <jrib> mustafam: mount your install and edit the mounted /etc/fstab with sudo.
+[19:52] <madf0x> !sound | deusr
+[19:52] <ubottu> deusr: If you're having problems with sound, click the Volume applet, then Sound Preferences, and check your Volume, Hardware, Input, and Output settings.  If that fails, see https://help.ubuntu.com/community/Sound - https://help.ubuntu.com/community/SoundTroubleshooting - http://alsa.opensrc.org/DmixPlugin - For playing audio files,  see !players and !mp3.
+[19:53] <Guest82189> geirha  let me tell you whats going on.. I am looking at terminal which I can use on my desktop that I cant use.. THere is no applications button and when I right click taskbar to add a window comes up taht is the panel properties and     some of these properties are locked down???
+[19:53] <mustafam> jrib: How do I mount my install?
+[19:53] <joe__> !resolution
+[19:53] <ubottu> The X Window System is the part of your system that's responsible for graphical output. To restart your X, type « sudo /etc/init.d/?dm restart » in a console - To fix screen resolution or other X problems: https://wiki.ubuntu.com/X/Config/Resolution
+[19:53] <jrib> mustafam: mount BLOCK_DEVICE_CORRESPONDING_TO_THE_PARTITION_WITH_FSTAB MOUNT_POINT
+[19:53] <madf0x> mustafam or info mount :)
+=== ManDay_ is now known as ManDay
+[19:53] <geirha> Guest82189: Could you show the first four words of output from this?   ls -ld ~/
+[19:54] <Milp_main> What could be the cause if i cant start any programs in LXDE anymore?
+[19:54] <deusr> madf0x, ok!
+[19:54] <jrib> Milp_main: your computer has transformed into a bean?  Give us more details...
+[19:54] <Milp_main> i cant, because all it does is nothing
+[19:54] <madf0x> deusr I had a similar "problem" till I "fixed" it by playing with the settings :) being exploratory has its benefits
+[19:55] <Milp_main> cpu usge peaks for a second or 2 and then its down to normal and nothing happens
+[19:55] <geirha> Guest82189: Sounds like there's no window decorator running
+[19:55] <Guest82189> geirha dr-x------ 6 me me 4096 2010-08-29
+[19:55] <jrib> Milp_main: all *what* does?  What are you doing that you expect it to do something?
+[19:55] <serengeti> hi, I have two monitors connected to a Radeon 8500 and I can't set the correct resolution on the one plugged to a VGA port (DVI works good). Any clues?
+[19:55] <jrib> !who | Milp_main
+[19:55] <ubottu> Milp_main: As you can see, this is a large channel. If you're speaking to someone in particular, please put their nickname in what you say (use !tab), or else messages get lost and it becomes confusing :)
+[19:55] <winterdj> i'm trying to install ubuntu with wubi off of a CD image I downloaded, however, it says it's downloading a torrent? Shouldn't it use the install files off of the CD rather than downloading another copy?
+[19:55] <geirha> Guest82189: Ah, it's not writable. Run:   chmod u+w ~/
+[19:55] <deusr> madf0x, but managed to solve?
+[19:56] <Milp_main> jrib sorry, im trying to start just about anything, a terminal window, a browser window, a file manager window, anything. Nothing will start until i restart the vncserver hosting the lxde session
+[19:56] <geirha> Guest82189: Then see if you can log in right.
+[19:56] <Cojage> hi, is there a diffirence between the packaged nvidia drivers and the nv drivers from nvidias website?
+[19:56] <PaulEycks> e
+[19:56] <Guest82189> ill try
+[19:56] <madf0x> deusr yeah, just wasn't technically a problem.
+[19:56] <sebsebseb> geirha: by the way I woudn't recommend using Wubi at the moment, because  there a major problem that might happen if you do it seems,  plus partitioned installs are much better
+[19:56] <Cojage> except the versions
+[19:56] <madf0x> deusr just flipped a setting and boom, speakers to headphones
+[19:56] <serengeti> it's a 1280x1024 17" hyundai, and the Monitor Preferences lets me select 1360x768. which doesn't make much sense...
+[19:56] <Guest82189> geirha rebooting
+[19:56] <jrib> Milp_main: using the menu you mean?
+[19:57] <television_> what filesystem should i use for a 500 gb hdd i'm using to store videos and music and pdfs?
+[19:57] <Milp_main> jrib well either that or the desktop shortcuts, if i happen to have a terminal open when that happens, i can still start things from it like synaptic for example
+[19:57] <madf0x> television ext4
+[19:57] <madf0x> television or ext3
+[19:57] <television_> so just format it as ext4 or ext3?
+[19:57] <jrib> Milp_main: does it only happen over vnc?
+[19:57] <madf0x> television pretty much
+[19:57] <geirha> sebsebseb: Think you got the wrong nick.  I don't have windows, but maybe I can run wubi in wine? :)
+[19:58] <deusr> madf0x, ?? what's? how so?
+[19:58] <sebsebseb> geirha: no you must have Windows to run Wubi
+[19:58] <Guest82189> geirha  my speakers are ding ding ding and the screen is locked.. Trying reboot again
+[19:58] <television_> i formatted it as ext4 can't seem to write to it
+[19:58] <mustafam> jrib: Running sudo /etc/fstab did open fstab but did not show all lines
+[19:58] <madf0x> !audio | deusr
+[19:58] <ubottu> deusr: If you're having problems with sound, click the Volume applet, then Sound Preferences, and check your Volume, Hardware, Input, and Output settings.  If that fails, see https://help.ubuntu.com/community/Sound - https://help.ubuntu.com/community/SoundTroubleshooting - http://alsa.opensrc.org/DmixPlugin - For playing audio files,  see !players and !mp3.
+[19:58] <PaulEycks> e
+[19:58] <Milp_main> jrib sorry i cant find that out, the setup of my system does not allow me to start the xserver directly
+[19:58] <sebsebseb> geirha: Why do you watn to run Wubi, if you don't even have WIndows?
+[19:58] <madf0x> deusr :)
+[19:58] <joe__> television: did you give write permissions to your user account?
+[19:58] <jrib> mustafam: erm, "sudo /etc/fstab" makes no sense.  Try: gksudo gedit /etc/fstab
+[19:58] <sebsebseb> geirha: if you want to run Ubuntu inside another OS use a virtual machine
+[19:58] <jrib> Milp_main: see if it happens in a different desktop environment
+[19:58] <geirha> sebsebseb: I don't, it was a joke. You auto-completed the wrong nick I think.
+[19:58] <Cojage> hi, is there a diffirence between the packaged nvidia drivers and the nv drivers from nvidias website?
+[19:58] <sebsebseb> geirha: oh
+[19:58] <madf0x> television did ya mount it -_O
+[19:59] <Milp_main> jrib hmm could you recommend one that is similar to lxde? Gnome or anything based on normal X is too heavy for the machine to run
+[19:59] <sebsebseb> winterdj: see above
+[19:59] <jrib> Milp_main: try fluxbox
+[19:59] <Guest82189> geirha still getting ding.....ding......ding   and a locked screen???
+[19:59] <sebsebseb> winterdj: I started messaging geirha when I was meant to have messaged you
+[19:59] <itsux2bu> when using vbox, a guest os can't use a usb device?
+[19:59] <amaurea> It is time to update to a newer ubunto distribution (I am on 9.10), but I have made some changes to my system, such as removing pulse audio. Is there a way to upgrade without having to redo all those changes every time?
+[19:59] <winterdj> is Wubi not supported anymore?
+[19:59] <hellboy316> hey any light weight window manager like flux box but better
+[19:59] <sergio> !list
+[19:59] <ubottu> This is not a file sharing channel (or network); be sure to read the channel topic. If you're looking for information about me, type « /msg ubottu !bot »
+[19:59] <sebsebseb> winterdj: it is, but
+[20:00] <jrib> itsux2bu: it can if you use the non-opensource version
+[20:00] <sappel> evening folks. quick question: a friend of mine has a intrepid version on his notebook...and he can't find medibuntu sources.list - how to fix that?
+[20:00] <sebsebseb> winterdj: I read about a nasty Wubi bug recently
+[20:00] <geirha> Guest82189: Locked screen?
+[20:00] <Milp_main> jrib im sorry to bother you again, but is there any other like those 2? fluxbox really is a hassle since the device wont let me rightclick either
+[20:00] <sergio> !canali
+[20:00] <sebsebseb> !8.10 | sappel
+[20:00] <ubottu> sappel: Ubuntu 8.10 (Intrepid Ibex) was the ninth release of Ubuntu. End Of Life: April 30th, 2010. See !eol and !upgrade for more details.
+[20:00] <sebsebseb> sappel: Great release sadly no longer supported
+[20:00] <jrib> Milp_main: I don't know, try one of the other boxes?  or xubuntu?
+[20:00] <Guest82189> geirha   yea, I am at the login and all I get is ding every two sec and the login screen cursor everything is frozen
+[20:01] <television_> madf0x: http://pastie.org/1124620 am i mounting it correctly?
+[20:01] <sappel> sebsebseb: I'm just confused since there seem to be hardy sources for medibuntu, but not for the newer intrepid?
+[20:01] <Freejack`> Milp_main: are you looking for a gui with usefullness and low overhead?
+[20:01] <television_> its media/media2
+[20:01] <geirha> Guest82189: Login screen, so before you're even logged in?
+[20:01] <sebsebseb> sappel: of course
+[20:01] <Milp_main> Freejack yes, but not tiling but real window managing
+[20:01] <sebsebseb> sappel: since Hardy is still supported, since its LTS
+[20:01] <joe__> whereis the primary monitor resolutions stored on the system?
+[20:02] <sappel> cuz hardy is lts...yeh just thought of it
+[20:02] <sappel> thanks
+[20:02] <sergio> non si può scaricare file?
+[20:02] <Freejack`> Milp_main: have you tried lubuntu?
+[20:02] <itsux2bu> jrib, how do i tell?  as far i know i'm using free personal use version
+[20:02] <mustafam> jrib: what is the difference between (gksu gedit /etc/fstab) and (gksudo gedit /etc/fstab)
+[20:02] <Milp_main> Freejack what is lubuntu?
+[20:02] <television_> !italian
+[20:02] <ubottu> Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi « /join #ubuntu-it » senza virgolette)
+[20:02] <madf0x> television I rarely use fstab have you tried a more manual mount?
+[20:02] <Guest82189> geirha  Correct, grub, select and wait, see the login screen, cant do anything,, ding    ding    ding
+[20:02] <jrib> itsux2bu: what is the name of the package?
+[20:03] <jrib> mustafam: "gksu is a frontend to su and gksudo is a frontend to sudo"
+[20:03] <geirha> Guest82189: Hm. Weird, never seen those symptoms before
+[20:03] <television_> madf0x:  i was hoping to mount it automatically everytime
+[20:03] <Freejack`> Milp_main: http://lubuntu.net/ light ubuntu nice interface runs well on PII 450mhz with 256mb
+[20:03] <madf0x> television I then info fstab
+=== television_ is now known as Sonjaa
+[20:04] <itsux2bu> jrib, VirtualBox-3.2.8-64453-Win.exe
+[20:04] <Freejack`> Milp_main: also join channel #lubuntu for more
+[20:04] <mustafam> jrib: Is there a difference between su and sudoo?
+[20:04] <mustafam> sudo
+[20:04] <Milp_main> Freejack oh thanks
+[20:04] <jrib> itsux2bu: ask #vbox for support
+[20:04] <madf0x> Sonjaa doing a quick over it looks like you dont have rw in your fstab
+[20:04] <jrib> mustafam: yes
+[20:04] <Guest82189> geirha   OK just kept resetting or restart button and rebooting over and over and over...  Now I am at my WORKABLE desktop
+[20:04] <Sonjaa> madf0x:  thanks... i need to add rw
+[20:04] <jrib> !sudo > mustafam
+[20:04] <ubottu> mustafam, please see my private message
+[20:04] <Guest82189> geirha   U R a genious  Thanks for the help!!!
+[20:05] <Sonjaa> madf0x:  i think this will solve it. rebootin now
+[20:05] <Sonjaa> <3 thx
+[20:06] <hoare> guys I mistakenyl deleted Pictures, Downloads, Documents.... special folders under my Home, how can I restore them? they were empty..
+[20:06] <mnord> Hi, I have a problem with Firefox. When I start it from the menu it appears in the panel for a second, then goes away. I see it in system monitor but that's all. I've tried reinstalling it with "aptitude install firefox" but no luck. Any ideas?
+[20:06] <joe__> exit
+[20:06] <halvors> I got deleted Auto eth0 and now i am offline :(
+[20:06] <halvors> How fix it?
+[20:06] <halvors> Also get them back?
+[20:06] <bifftannen> hi folks, my friends sound has stopped working in totem and on youtube(,etc), but it works fine in audacious and also in the gstreamer-properties tests, any diea what is up?
+[20:06] <jrib> hoare: they'll probably be restored when you login again or just right click -> create directory yourself...
+[20:06] <Freejack`> Anyone good with scripting for processes to be launched at boot like smuxi-server?
+[20:06] <hoare> jrib: their icons do not come back.
+[20:06] <Guest82189> geirha  FULLY funtional and access to all...  Thanks again
+[20:06] <jrib> !startup > Freejack`
+[20:06] <ubottu> Freejack`, please see my private message
+[20:06] <mustafam> jrib and ubottu: Thank you very much.. I am completely terrified by these commands as I still consider myself a novice when using Ubuntu. It's comforting to know that there is a live chat room we can refer to.
+[20:07] <hoare> jrib: they arent restored upon login
+[20:07] <Muelli> !audio | bifftannen
+[20:07] <ubottu> bifftannen: If you're having problems with sound, click the Volume applet, then Sound Preferences, and check your Volume, Hardware, Input, and Output settings.  If that fails, see https://help.ubuntu.com/community/Sound - https://help.ubuntu.com/community/SoundTroubleshooting - http://alsa.opensrc.org/DmixPlugin - For playing audio files,  see !players and !mp3.
+[20:07] <geirha> Guest82189: The login screen suddenly fixed itself?
+[20:07] <Freejack`> jrib: thanks
+[20:07] <jrib> hoare: cat ~/.config/user-dirs.dirs  on a pastebin
+[20:07] <Guest82189> geirha  yea after multiple reboots
+[20:07] <cablop> suppose i have an encrypted system and it fails.... can i recover it with ease?
+[20:08] <halvors> Can anyone help me?
+[20:08] <jrib> !helpme | halvors
+[20:08] <ubottu> halvors: Avoid your questions being followed by a trail of "Please, help me", "Can nobody help me?", "I really need this!", and so on. This just contributes to making the channel unreadable. If you are not answered, ask again later; but see also !repeat and !attitude
+[20:08] <hoare> jrib: all are $HOME except Desktop
+[20:08] <cablop> i mean, maybe the root got damaged or after an update i lost the ability to boot or whatever... can i mount the encrypted filesystem from a different ubuntu with ease?
+[20:08] <jrib> hoare: you know what to do
+[20:08] <halvors> I ask, i got deleted "Auto eth0" how get this restored in network manager?
+[20:09] <hoare> jrib: hmm I am not sure about the names. ie. what is normal name for PUBLICSHARE
+[20:09] <hoare> jrib: can you paste yours?
+[20:09] <jrib> hoare: /etc/xdg/user-dirs.defaults
+[20:09] <jrib> hoare: wait, hold on
+[20:10] <bifftannen> Muelli: sound works through xine though and when I run the test in gstreamer-properties
+[20:10] <SubCool> i cant seem to get my samba to work. could someone help? i have dont a bunch of search, pretty sure i cleared my firewalls. I Have a Kubuntu box and an XP box. - neither can see eachother.
+[20:10] <jrib> hoare: http://paste.ubuntu.com/485550/
+[20:10] <Guest82189> THANKS for all the help everyone,, nice to see live support from caring people Computer fixed and working.. Have a great day!!!
+[20:10] <mnord> Hi, I have a problem with Firefox. When I start it from the menu it appears in the panel for a second, then goes away. I see it in system monitor but that's all. I've tried reinstalling it with "aptitude install firefox" but no luck. Could someone please help me find out what the problem is?
+[20:10] <jrib> mnord: open it from a terminal
+[20:10] <Muelli> mnord: start it from a terminal
+[20:10] <SeanInSeattle> Hey all.  I'm wondering if there's a program/application for ubuntu out there that can give me a better way to watch log files for new entries.  I'm specifically having to deal with apache error logs, but it'd be nice to get something that can watch other logs as well.
+[20:11] <hoare> jrib: thanks a lot
+[20:11] <Muelli> SeanInSeattle: logwatch maybe
+[20:11] <themusicgod1> SeanInSeattle: so other than tail?
+[20:11] <mnord> jrib, Muelli: Empty line, no messages in terminal, no Firefox opens. I see it in the system monitor though. firefox and firefox-bin
+[20:12] <Muelli> mnord: there you go. it is already running.
+[20:12] <Freejack`> jrib: I need the command  line version of that if there is one?
+[20:12] <Muelli> mnord: you might want to kill it, i.e. pkill -HUP firefox. But you might lose data.
+[20:12] <mnord> Muelli, no ït's not. When I kill it and try to start it same thing happens
+[20:12] <cablop> is the ubuntu encryption the same as LUKS?
+[20:12] <Muelli> mnord: it probably is. you haven't killed it thoroughly.
+[20:13] <Muelli> mnord: check with ps aux | grep firefox
+[20:13] <mnord> Muelli, same thing happens after reboot.
+[20:13] <SeanInSeattle> themusicgod1:  Hmm.. being somewhat new to ubuntu, I haven't needed to use tail up to this point.  How would you use it to watch log files?
+[20:13] <Muelli> mnord: it might be autostarted.
+[20:13] <jrib> mnord: kill it now for us
+[20:13] <Freejack`> !boot
+[20:13] <ubottu> Boot options: https://help.ubuntu.com/community/BootOptions - To add/remove startup services, you can use the package 'bum', or update-rc.d - To add your own startup scripts, use /etc/rc.local - See also !grub and !dualboot - Making a boot floppy: https://help.ubuntu.com/community/GrubHowto/BootFloppy - Also see https://help.ubuntu.com/community/SmartBootManagerHowto
+[20:13] <mnord> Muelli, user   2544  0.0  0.0   3340   804 pts/0    S+   21:13   0:00 grep --color=auto firefox
+[20:14] <Muelli> mnord: looks good. then "firefox; echo $?"
+[20:14] <jrib> Freejack`: make sure smuxi-server doesn't already start up by itself...
+[20:14] <SeanInSeattle> themusicgod1:  Nevermind.  I'll look at it online, and I'll come back with questions if I have any.
+[20:14] <cccasket> SeanInSeattle - 'tail -f /some/file'
+[20:15] <Freejack`> jrib: no it doesn't you have to add it
+[20:15] <jrib> Freejack`: k
+[20:15] <mnord> Muelli, same thing happens with the echo command
+[20:15] <cccasket> seaninseattle: 'less' will emulate that behavior too with shift-F inside less
+[20:15] <Muelli> mnord: what is that "same thing"? What does it print on the terminal?
+[20:15] <CompuTom> where can I see a list of installed programs in Ubuntu10?
+[20:15] <mnord> Muelli, that is, firefox appears in the system monitor, but doesn't print anything on terminal or appears as a usable program
+[20:15] <Muelli> CompuTom: dpkg --get-selections
+[20:16] <jrib> CompuTom: aptitude searh '~i'
+[20:16] <jrib> CompuTom: aptitude search '~i'
+[20:16] <Muelli> mnord: hm. not very nice. try to run the profile manager to create a new profile. Check firefox --help.
+[20:16] <tazman> hello :)
+[20:16] <mnord> Muelli, I tried the pkill -HUP firefox command right before doing the echo one so that might be a reason?
+[20:18] <radi> guys, how do you change a directory permission to read/write ?
+[20:18] <radi> from terminal
+[20:18] <jrib> radi: what directory and why?
+[20:18] <radi> doesnt matter
+[20:18] <radi> any
+[20:18] <hoare> radi: chown chgrp
+[20:18] <jrib> radi: it does matter.  Changing permissions is a great way to break your install.
+[20:18] <hoare> radi: be careful while using. try --help
+[20:18] <mnord> Muelli, I created a new profile and with that I could open Firefox, not with the old one though. Thanks for the help!
+[20:19] <jrib> mnord: try firefox --safe-mode on the old profile
+[20:19] <Muelli> mnord: well. at least you know what to look for now. There might be stale lock files in your old profile, so you can go off and search there now.
+[20:19] <radi> jrib: just wanna change permissions to some directory, so other application can write there
+[20:19] <jrib> radi: what directory...?
+[20:19] <radi> empty directory :D
+[20:20] <hoare> mnord: you can try --profile-manager too
+[20:20] <jrib> radi: k, gl
+[20:20] <Muelli> mnord: a very geeky thing to do would be running strace -f and then digging through that pile of output. Maybe it yields results quickly, like a stale read() on a filedescriptor
+[20:20] <radi> ..
+[20:20] <mnord> I think I'll just delete the old profile, use the new one and hope things don't go bad again :) Thanks for all the help!
+[20:20] <jrib> radi: you don't answer a simple question, I can't help you
+[20:21] <radi> jrib: that is the answer, it is an empty directory -.-
+[20:21] <jrib> radi: what path
+[20:21] <cablop> weird...
+[20:22] <cablop> is LUKS what ubuntu use for full disk encryption?
+[20:22] <radi> its /home/user/dir jrib
+[20:22] <jrib> !permissions > radi
+[20:22] <ubottu> radi, please see my private message
+[20:22] <cablop> i just want to know if i can boot a failed system in case of need
+[20:22] <zizzfizzix> guys, where's /boot/grub/menu.lst or any equivalent in latest ubu?
+[20:22] <radi> tnx
+[20:22] <Muelli> cablop: yes.
+[20:22] <jrib> !grub2 | zizzfizzix
+[20:22] <ubottu> zizzfizzix: GRUB2 is the default Ubuntu boot manager since Ubuntu 9.10.  For more information and troubleshooting for GRUB2 please refer to https://help.ubuntu.com/community/Grub2
+[20:23] <Muelli> cablop: you could boot with a Ubuntu CD or pendrive (I think).
+[20:23] <cablop> thanks Muelli... so i think, if i have the pass i can 'mount' it and read the files and recover things...
+[20:23] <Flannel> zizzfizzix: /boot/grub/grub.cfg
+[20:23] <bsdpunk_> Can someone help me upgrade to KDE 4.5 on ubuntu? im a noob
+[20:23] <zizzfizzix> Flannel: thx
+[20:23] <lastidiot> h :) i have slight problem with my Ubuntu, when text moves for example scrolling up the words become mixed or scrambled with other lines, if i highlight it, it become readable, i do have the nvidia drivers installed but its done it since i installed ubuntu
+[20:24] <Flannel> zizzfizzix: But you should read that page, as the functionality is a little bit different (changes to that file don't stick)
+[20:24] <Muelli> cablop: yes. That's what I needed to do once. But back then the live cd didn't ship the LUKS tools (or whatever it was) so I had to apt-get install them. Minor hassle.
+[20:24] <cablop> bsdpunk_: i'm not a KDE user, but afaik you just need to enable the right repositories and install the whole KDE thing
+[20:24] <cablop> Muelli: yes, a minor issue
+[20:24] <bsdpunk_> ;_; I don't know how, lol. @cablop
+[20:24] <cablop> Muelli, do you have a link to see it?
+[20:25] <cablop> well, cause this think is a netbook, i think i'll install a minimal ubuntu just to be able to recover things in case of need :P
+[20:25] <marco_ubuntu_88> Buonasera
+[20:25] <kisuke> oh how do you convert a ext4 FS to est3?
+[20:25] <deusr> hi, my phone is muted, the sound comes out only in cases of my notebook, someone can you help me?
+[20:25] <kisuke> ext*
+[20:25] <cablop> but the hard part is how to tell the stupid grub2 which ubuntu is the default one, sigh
+[20:25] <SubCool> i cant seem to get my samba to work. could someone help? i have dont a bunch of search, pretty sure i cleared my firewalls. I Have a Kubuntu box and an XP box. - neither can see eachother.
+[20:26] <OpenSourceCode> How can you see which kernel you have?
+[20:26] <Gnea> cat /proc/version
+[20:26] <Muelli> OpenSourceCode: uname -a
+[20:26] <Gnea> OpenSourceCode: ^^
+[20:26] <Misterio> kisuke: You can do it with gParted, but it has no sense
+[20:26] <Gnea> kisuke: backup, clean, rinse, restore
+[20:26] <cablop> if i install two ubuntus... how can i tell grub2 wich one is the default one?
+[20:26] <kisuke> Misterio, ok modify a file then puyll the plug and tell me where your modifiactions th that file went.
+[20:27] <cablop> what is the minimal space needed for a minimal ubuntu install?
+[20:27] <kisuke> cablop, why would you install 2 ubuntus?
+[20:27] <slow-motion> n8
+[20:27] <cablop> 4GB? 10 GB?
+[20:27] <SubCool> cablop, goto ur grub editor and change the name...
+[20:28] <cablop> kisuke, one is encrypted, the other for recovery purpose in case of need
+[20:28] <kisuke> cablop, why nott just use recovery mode?
+[20:28] <deusr> hi, someone?
+[20:28] <cablop> kisuke: cause it is a netbook and there's no place to use a CD
+[20:28] <Gnea> deusr: just ask your question
+[20:28] <cablop> kisuke, cause it is encrypted... eguess what could happen if the system fails after a kernel upgrade or something
+[20:28] <deusr> Gnea,  my phone is muted, the sound comes out only in cases of my notebook, someone can you help me?
+[20:29] <Gnea> deusr: what does your phone have to do with it?
+[20:29] <cablop> i think there's an esotheric connection in there
+[20:30] <deusr> Gnea, sorry, is headphone
+[20:30] <Aimee> got ubuntu running on a retardedly slow machine
+[20:31] <Aimee> Hmm
+[20:31] <Gnea> deusr: okay, so the headphone jack could be borked, and the speakers on the notebook are fine?
+[20:31] <kisuke> desur gointo your sound prefrences and click mute external speakers (it something like that its been a while sence ive had to do that)
+[20:31] <Aimee> Is there anyything i can do to minimalize usage of the cpu
+=== Greysc[a]le is now known as Greyscale
+[20:31] <Aimee> like, disabling advanced things
+[20:31] <Gnea> Aimee: funny, it's those 'retardly' slow machines that allow anyone to see what code really does and how it's to be understood
+[20:31] <cablop> deusr: how many places for jack does your notebook have? one or two?
+[20:31] <Aimee> Gnea: Yeah
+[20:32] <Aimee> I enjoyed watching every single screen
+[20:32] <Aimee> but when i mean slow.. i mean
+[20:32] <kisuke> Aimee, you caould disable services you dont use, like blue tooth if you do not have a blue tooth adapter
+[20:32] <deusr> Gnea, my notebook uses sound room
+[20:32] <Gnea> Aimee: well, heh, that's gnome for ya
+[20:32] <cablop> Aimee: you can use xfce4 too
+[20:32] <Gnea> deusr: I don't understand the concept of 'soundroom'
+[20:32] <Aimee> gnea: it's going through the first big update wave now
+[20:32] <cablop> but i think disabling compiz and matacity will work for you
+[20:33] <Gnea> Aimee: using gnome is your first mistake. get rid of that and put something decent on there, like E17
+[20:33] <cablop> aimee, except if your problem is... you don't have drivers enabled and then using slow graphics
+[20:33] <peturi> I'm sharing my computer with another, we both have our own username and we use the 'switch user' button while taking burns using the computer. The problem is that I would like to remotely log into my active session using VNC but all i get is a black screen if the other user session is active and mine is locked. How can i solve this?
+[20:33] <Mp3> hi people :)
+[20:33] <Gnea> or use xubuntu, if you're a purist and need an 'official' version of everything on there :)
+[20:34] <cablop> peturi you can use a different approach, you can use Teamviewer and be sure it opens from the session start
+[20:34] <dart> Aimee, go to startup applications under prefrences  and disable all those you don't want...
+[20:34] <kisuke> peturi, have you tried moving the mouse or fressing a key on the remote machine?
+[20:34] <Gnea> deusr: did you open alsamixer?
+[20:34] <kisuke> Mp3, hey
+[20:34] <peturi> cablop: I'm not sharing the session, i have two concurrent users logged into the computer at all times.
+[20:34] <Mp3> got a wierd issue with my server install. for some reason, i can access my server over the LAN just fine, and DNS works great.. but it apparently cant connect to anything outside of the lan.
+[20:34] <deusr> cablop, an output (sound) and one for input (mic)
+[20:34] <Mp3> kisuke: sup :)
+[20:35] <deusr> Gnea, yes
+[20:35] <Gnea> deusr: do you have any other headphones to try out?
+[20:35] <timbuck> hello
+=== Don is now known as Guest98471
+[20:35] <timbuck> hello  i want to add the MINT repo to ubuntu
+[20:35] <Guest98471> probando
+[20:35] <LinuxGuy2009> Does Gnome have any feature where you can place a graphic file in a folder and have the system automatically see it and set the icon for that folder to the image? Or do you have to manually set them all by hand?
+[20:35] <peturi> kisuke: yes i tried. My session won't work unless i switch back to my own users and log him in (unlock the session). which also makes my user account vulnerable as the computer is unlocked while i'm away.
+[20:35] <cablop> peturi... ah, sorry, what you need to do is to know what x session is your account in, but the black screen sounds just weird, i think you need to move the mouse and the login thing will appear
+[20:35] <timbuck> how can i add the mint repo in ubuntu
+[20:35] <kisuke> !mint > timbuck
+[20:35] <ubottu> timbuck, please see my private message
+[20:35] <deusr> Gnea, is any configuration, because it worked well in gentoo
+[20:35] <Rob235> hey
+[20:36] <timbuck> thx
+[20:36] <peturi> cablop: Won't work, even tried pressing the 'send ctrl+alt+del'.
+[20:36] <Rob235> whats the best way to install nvidia drivers in lucid?
+[20:36] <xangua> timbuck: not a good idea combine repositories
+[20:36] <cablop> what is the minimal disk requirement for lucid?
+[20:36] <Gnea> deusr: what I'm asking is, are you sure your headphones are not broken?
+[20:36] <timbuck> xangua, pleae i want to get the wallpapers and themes
+[20:36] <kisuke> Rob235, look under "restricted drivers" in system>adminstration
+[20:36] <timbuck> xangua, and maybe some other stuff idk
+[20:36] <LinuxGuy2009> !requirements
+[20:36] <ubottu> Hardware requirements to install, boot and comfortably use Ubuntu are listed at https://help.ubuntu.com/community/Installation/SystemRequirements - For a !flavor with lower requirements, see !Xubuntu
+[20:37] <kisuke> cablop, 4GB i beleve, but 5 is better for some breathing room
+[20:37] <Rob235> kisuke, you mean hardware drivers?
+[20:37] <timbuck> can someone please help me
+[20:37] <Rob235> i dont see restricted
+[20:37] <timbuck> please
+[20:37] <deusr> Gnea, no, but that this working, I've tested on two computers. and when I plug it, still leaving sound externally, it is as if I had not plugged into the headphone
+[20:37] <xangua> timbuck: sudo apt-get install gnome-colors shiki-colors (icons and gtk/metacity)
+[20:37] <Gnea> !patience | timbuck
+[20:37] <ubottu> timbuck: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://ubuntu.stackexchange.com
+[20:37] <kisuke> Rob235, thats it
+[20:37] <cablop> peturi disable screensaver, i mean set it to blank in your session and retry... i have an issue related to the screensaver and i changed it to the space slideshow and i can log, if i let an opengl screensaver shows up i can't see any login box, it is there, but invisible
+[20:37] <timbuck> yeah but i want the repo awe but thx for ur help
+[20:38] <Rob235> kisuke, those arent the latest drivers though, i want to use the ones from nvidias site but nouveau has to be disabled
+[20:38] <timbuck> um how do you copy do i have to manually type that dam
+[20:38] <Gnea> deusr: okay, do you have another pair of headphones or speakers to plug in to the computers with?
+[20:38] <Milp_main> Does openbox-session need something else to work with? when i start it on my display it just displays an empty screen.
+[20:38] <cablop> do ubuntu automatically use any swap or do i need to explicitly say it which one to use?
+[20:38] <deusr> Gnea, I'm working perfectly, as I said, I tested on two computers and are working perfectly
+[20:38] <peturi> cablop: The screensaver is disabled. The session is 'locked' and there is another user logged on at the physical machine.
+[20:39] <LinuxGuy2009> Rob235: remove the package called something like "xserver-xorg-video-nouveau" then try and install as the same as older ubuntu versions.
+[20:39] <Rob235> ok thanks
+[20:39] <kisuke> Rob235, not sure how to help you there, for most thinng s the drivers avalible from there will work.
+[20:39] <Gnea> deusr: do you speak spanish well?
+[20:39] <timbuck> hey thats not going to work
+[20:39] <VCoolio> Milp_main: right click the desktop; put a panel and stuff in autostart file, use a howto somewhere
+[20:39] <peturi> cablop: My user is logged in from :0 and the other user from :2 ...
+[20:40] <cablop> peturi... try this, sounds weird but try
+[20:40] <Milp_main> VCoolio i cant rightclick :(
+[20:40] <deusr> Gnea, my god!, I said this phone is working. Last week I was with gentoo and the sound was coming out in the headphones, after I installed ubuntu stopped working, leaves only externally
+[20:40] <timbuck> ok how can i get all the mint wallpapers   including the  extra  and  previous realeases
+[20:40] <peturi> cablop: Thanks, will try once the machine is free again :)
+[20:41] <cablop> when you see the blank screen do nothing, just type your password and press enter and see if it starts your session, maybe there's some lucid bug that avoid showing visibly that promt, but the promt is there
+[20:41] <VCoolio> Milp_main: hmm maybe that also requires a package like openbox-menu or something; find a decent beginners howto on openbox, you just need to set up some things
+[20:41] <kisuke> !mint | timbuck
+[20:41] <ubottu> timbuck: There are some Ubuntu derivatives that we cannot provide support for due to repository and software changes. Please consult their websites for more information. Examples: gNewSense (support in #gnewsense), Linux Mint (see !mintsupport), LinuxMCE (support in #linuxmce), CrunchBang (support in #crunchbang), BackTrack (support in #backtrack-linux)
+[20:41] <Gnea> deusr: Calm down, I asked that because we're obviously having a communication/understanding issue here. There's no need to get upset about it.
+[20:41] <cablop> peturi, when you see the blank screen do nothing, just type your password and press enter and see if it starts your session, maybe there's some lucid bug that avoid showing visibly that promt, but the promt is there
+[20:41] <deusr> Gnea, I understand Spanish well, but I speak Portuguese
+[20:41] <Gnea> deusr: I see.
+[20:41] <deusr> Gnea, sorry:/
+[20:41] <discozohan> how to create primary partition of type "fd" ( Linux raid autodetect ) ? -.-
+[20:41] <Gnea> deusr: no problem
+[20:42] <calk> hello, i have used GParted to lower the space on my ubuntu partition which worked fine and it created unallocated space, how do i merged this unallocated space with another partition ? there is no merge and the other partition doesn't get resized to bigger and can use that space
+[20:42] <VanessaE> Is there a way to get xfce's mixer to *not* show some devices in its drop down menu?  Some of them are making the window ridiculously wide
+[20:42] <Gnea> deusr: it may be to your benefit to ask in #ubuntu-pt, because I know that if we continue like this, *I* will get upset :)
+[20:42] <timbuck> kisuke, yeah  is there a mint channel i can join
+[20:42] <peturi> cablop: I can see the remote mouse cursor, it laags in front of a black screen. I don't want to start a new session.. i already have one running .. would just like to resume it.
+[20:42] <kisuke> calk, just to make sure i under stand you right, you shrunk a partition and wat to ad that space to another partition?
+[20:42] <deusr> Gnea, ok!, thanks!
+[20:42] <Milp_main> Vcoolio thank you, found my mistake ;)
+[20:43] <Gnea> deusr: and good luck!
+[20:43] <timbuck> kisuke, is there a mint channel i can join
+[20:43] <Milp_main> Vcoolio do you happen to know if openbox is as lightweight as fluxbox?
+[20:43] <hiexpo> !mint
+[20:43] <ubottu> There are some Ubuntu derivatives that we cannot provide support for due to repository and software changes. Please consult their websites for more information. Examples: gNewSense (support in #gnewsense), Linux Mint (see !mintsupport), LinuxMCE (support in #linuxmce), CrunchBang (support in #crunchbang), BackTrack (support in #backtrack-linux)
+[20:43] <kisuke> !mintsupport | timbuck
+[20:43] <ubottu> timbuck: Linux Mint is not a supported derivative of Ubuntu, please seek support in #linuxmint-help on irc.spotchat.org
+[20:43] <timbuck> how do i join that
+[20:43] <calk> kisuke: yes, i noticed one is on far left and one is on far right, could this be the problem because the shrunked partition is in the middle ?
+[20:43] <timbuck> \join then what
+[20:43] <hiexpo> #mint
+[20:43] <Gnea> !mintsupport
+[20:43] <timbuck> thx
+[20:44] <timbuck> thx alot yall
+[20:44] <VCoolio> Milp_main: I don't think there is much difference; a link I found: http://urukrama.wordpress.com/openbox-guide/
+[20:44] <hiexpo> hey Gnea
+[20:44] <Gnea> sup hiexpo
+[20:44] <cablop> hey... i think people has some answers... but why they won't come up?
+[20:44] <kisuke> calk, yes the un aloocated space and the partition you want to expand need to be rifght next to eachother
+[20:44] <timbuck> i cant register mint  ( its WAY WAY WAY too complicated)
+[20:44] <Milp_main> vcoolio awesome, hope its faster than lxde
+[20:45] <nebula> !web
+[20:45] <timbuck> kisuke, i dont know how to register mint servers
+[20:45] <timbuck> or any server
+[20:45] <cablop> does ubuntu use automatically any swap partition? or does ubuntu just use them if i say it to use them from /etc/fstab?
+[20:45] <Gnea> timbuck: why would you need to?
+[20:45] <calk> kisuke: can i move the middle part to far right then merge the middle with the left ? (middle part is ubuntu)
+[20:45] <hiexpo> Gnea,  chilling channel hoping   ya know me
+[20:45] <VCoolio> Milp_main: lxde IS openbox with several applications on it
+[20:45] <Gnea> timbuck: 14:45 <ubottu> Linux Mint is not a supported derivative of Ubuntu, please seek support in #linuxmint-help on irc.spotchat.org
+[20:45] <kisuke> timbuck, try clicking: irc://irc.spotchat.org/linuxmint-help
+=== dart is now known as killer999
+[20:46] <cablop> awww
+[20:46] <killer999> how to install google earth in Ubuntu...I got a .bin file from google website
+[20:46] <Gnea> hiexpo: :)
+[20:46] <Gnea> killer999: don't install that, delete it.
+[20:46] <cablop> does ubuntu automount swap partitions? the live-cd do, but i don't know if an installed ubuntu also does
+[20:46] <Gnea> !medibuntu | killer999
+[20:46] <ubottu> killer999: medibuntu is a repository of packages that cannot be included into the Ubuntu distribution for legal reasons - See http://www.medibuntu.org
+[20:46] <erUSUL> cablop: the livecd will use the swaps it finds a installed system only the ones specified afaik
+[20:46] <Gnea> killer999: setup medibuntu and install it from there
+[20:47] <cablop> thanks erUSUL
+[20:47] <cablop> hey erUSUL nice to see you here
+[20:47] <killer999> Gnea, why?
+[20:47] <xangua> !medibuntu | killer999
+[20:47] <xangua> install 'googleearch package  from medibuntu
+[20:47] <ubottu> killer999: medibuntu is a repository of packages that cannot be included into the Ubuntu distribution for legal reasons - See http://www.medibuntu.org
+[20:47] <kisuke> calk, let me get this straight, your hadr drive looks like <partition><ubuntu><partition><free space>?
+[20:47] <erUSUL> cablop: ty
+[20:47] <killer999> Gnea, ok
+[20:47] <Gnea> killer999: because the .bin will just mess things up or get messed up
+[20:47] <xangua> googleearth*
+[20:47] <hiexpo> killer999, just add the repos
+[20:48] <calk> kisuke: to be clear <windows vista with 5mb free><ubuntu with 5GB free><free space which i want to merge with windows vista)
+[20:48] <ELREY> i just added a hard disk and create a partition using cfdisk /dev/sdb, then created a "linux" partition.. how can I mount it now?? mount -t ext3 /dev/sdb /media/disk throws can't find ext3 filesystem on /dev/sdb
+[20:48] <malikeye> how does the netbook version compare to jolicloud?
+[20:48] <erUSUL> ELREY: you have to format it first
+[20:48] <malikeye> jolicloud limits too many things for linux nuts :P
+[20:49] <malikeye> I mean, in what way is it "optimized"?
+[20:49] <discozohan> if i want to create raid10, should i mark all 4 drives with "extended" or "primary" partition ?
+[20:49] <erUSUL> ELREY: sudo mkfs.ext4 /dev/sdxx
+[20:49] <xangua> malikeye: better try the offtopic channel
+[20:49] <erUSUL> discozohan: primary
+[20:49] <kisuke> calk, drag the ubuntu partition to the end of the drive and then expand t5he windows partition
+[20:49] <malikeye> why would it be off topic?
+[20:50] <boldfilter> Anyway to use two internet connection at once? dsl and wired tether.
+[20:50] <discozohan> erUSUL: but as i remember there can be only 4 primary partitions, but i already have a drive for root system. Or its ok ?
+[20:50] <kisuke> ELREY, try ext4 or ext 2
+[20:50] <calk> kisuke: it doesn't get dragged i tried it
+=== drew2121 is now known as drew212
+[20:50] <killer999> how to add medibuntu repos
+[20:50] <kisuke> calk, try from a live CD
+[20:50] <cablop> malikeye: afaik, the netbook edition is alike the normal edition, but optimized for the screen space
+[20:50] <calk> kisuke: ies i'm booted from usb drive now
+[20:50] <calk> yes*
+[20:51] <kisuke> calk, it may not let you move the ubuntu partition because it is inuse
+[20:51] <erUSUL> discozohan: yes, there can only be four primary in each disk. but you are going to have one part. per disk right? (maybe i undertood wrongly )
+[20:51] <malikeye> cablop: what does that mean?
+[20:51] <klappi> is there a channel where i can ask about which mainboard to buy for lucid?
+[20:51] <malikeye> like I'm looking at a screenshot, and it looks like it has an app launcher
+[20:51] <cablop> and i agree with malikeye to talkabout the netbook edition is not offtopic
+[20:51] <calk> kisuke: its not insure i was able to shrink it, why cant i use copy and paste into a newer partition ?
+[20:51] <discozohan> erUSUL: oh, i got it, i thought there can be 4 primary in system at all. My bad ;)
+[20:51] <malikeye> I mean, I guess I'll just install it and see :)
+[20:51] <erUSUL> klappi: any mobo should work ok in linux. most problematic hardware is wifi cards; vga cards and maybe webcams
+[20:52] <erUSUL> discozohan: no problem
+[20:52] <kisuke> calk, have you tried clicking in the middle of the ubuntu partition and draging it to the far right end?
+[20:52] <cablop> malikeye, that it gets rid of window borders and use a different 'taskbar' and other things... but i'm not sure, but as far as is ee in the screensots it's just a stripped down windows manager
+[20:52] <calk> kisuke: yes didn't work, i think because the partition is not formatted ?
+[20:52] <malikeye> cablop: cool, I'll give it a go
+[20:52] <malikeye> thanks :)
+[20:53] <klappi> erUSUL: my current board only boots 1 out 3 tries, and i want to buy a cheap new one
+[20:53] <kisuke> calk, ok now im confused, is there any thing on the ubuntu partiton?
+[20:53] <calk> kisuke: yes around 5GB
+[20:53] <cablop> malikeye, i'm not sure if the current version work this way, but i saw one that's just placed on top of a normal installation, that is you enable it, then your gui changes, you disable it and you get the standard gui, and in a youtube video some compiz effects can work on top a netbook edition, :D
+[20:54] <malikeye> cablop: cool, I have a Dell Mini 1012 and it's pretty nice, but jolicloud dumbs things down too much
+[20:54] <kisuke> calk, then the partition is formated, have you tried expanding the partition to the end of the drive and then shinking it infront of the ubuntu partition?
+[20:54] <cablop> would a small ubuntu, intended just for recovery usage fit inside a 5GB partition?
+[20:55] <erUSUL> !minimal | cablop
+[20:55] <killer999> how to get medibuntu? I want to install google earth
+[20:55] <ubottu> cablop: The Minimal CD image is very small in size, and it downloads most packages from the Internet during installation, allowing you to select only those you want (the installer is like the one on the !Alternate CD). See https://help.ubuntu.com/community/Installation/MinimalCD
+[20:55] <LinuxGuy2009> malikeye: If your considering Ubuntu Netbook, I use it on my Dell Mini 10v and love it.
+[20:55] <erUSUL> !medibuntu | killer999
+[20:55] <ubottu> killer999: medibuntu is a repository of packages that cannot be included into the Ubuntu distribution for legal reasons - See http://www.medibuntu.org
+[20:55] <cablop> malikeye: the guy that sayid you can use the netbook edition on top the normal edition,so you won't be stripped down, jjust the gui :P
+[20:56] <kisuke> LinuxGuy2009, isint that one of the ones with the bcm4312 wifi chipset?
+[20:56] <cablop> no, not a medibuntu, i need to be able to open all files and mount encrypted file systems just if i need to... i don't want to use a stripped down edition, just to install an ubuntu and leave it instaled there :P
+[20:56] <LinuxGuy2009> kisuke: yep
+[20:56] <kisuke> LinuxGuy2009, *shudder* i set up a dell mini 9 with that, didnt sleep for a week.
+[20:57] <LinuxGuy2009> kisuke: haha Its a peice of cake. All the needed packages to enable the driver are on the live CD.
+[20:58] <malikeye> thanks LinuxGuy2009
+[20:58] <kisuke> LinuxGuy2009, which disk did you use?
+[20:58] <LinuxGuy2009> kisuke: just the standard live CD.
+[20:58] <malikeye> cablop: can't even get a terminal really... you can, but you gotta do "Start -> Run-> Gnome Terminal".... no way to add that as an "App" or anything
+[20:58] <malikeye> that is too limiting for me
+[20:59] <Gnea> killer999: by adding it to your repository list. you have to go to the website and read the repository howto to get your system to 'know' where the repository is and what software is there.

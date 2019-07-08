@@ -1,0 +1,1500 @@
+[03:10] <mojtaba> SchrodingersScat: I have lots of files
+[03:10] <Der_Doktor> hi
+[03:12] <SchrodingersScat> mojtaba: you should check out http://mywiki.wooledge.org/BashGuide or maybe even join #bash, but reading bash guide or searching in it should help.  Yes, you can control name length.  http://mywiki.wooledge.org/BashGuide/Parameters#Parameter_Expansion
+[03:14] <SchrodingersScat> mojtaba: also http://mywiki.wooledge.org/BashFAQ/100
+[03:15] <graham_> hello
+=== graham_ is now known as Guest67181
+[03:17] <mojtaba> SchrodingersScat: Thanks. I will check them
+=== OrioaZzZ is now known as Orioa
+=== supergauntlet is now known as boypussy
+[03:50] <arthur_> Hello
+[03:50] <arthur_> Hi
+[03:55] <nomadist> hi
+[03:56] <Ahmuck> Hi.  A script tries to run in the background when using hplip printing.  It appears it is trying to connect to a server when printing is done.  This is a brand new install.
+[03:56] <Ahmuck> A script on this page may be busy, or it may have stopped responding. You can stop the script now, open the script in the debugger, or let the script continue.
+[03:56] <Ahmuck> Script: http://static-hp-eus.s-msn.com/_h/d6ea042c/webcore/externalscripts/jquery/jquery-2.1.1.min.js:2
+[03:57] <Ahmuck> hp script?
+[03:57] <teward> Ahmuck: actually, that looks like jquery embedded in MSN's site
+[03:57] <Jen8> teward are you still here i am still having problems with the server with tcl8.5 you have pastebin i cna show you the problem
+[03:57] <nomadist> I cannot access github. Every other website works fine. How do I debug this?
+[03:57] <Ahmuck> hrm, ok.  maybe coincidence that it happened at the same moment i printed a test page.
+[03:58] <teward> Jen8: use the Ubuntu pastebin if you do
+[03:58] <nomadist> even from the command line
+[03:58] <teward> Ahmuck: probably is, the hplip scripts aren't externally on those locations :P
+[03:58] <Ahmuck> i just now saw the msn reference.  i think i saw the hp reference first
+[03:58] <Jen8> can you give me address of that please
+[03:58] <teward> !pastebin > Jen8
+[03:58] <ubottu> Jen8, please see my private message
+[03:58] <nomadist> telnet github.com
+[03:58] <nomadist> telnet: Unable to connect to remote host: Connection refused
+[03:59] <teward> nomadist: um... why're you telnet-ing them anyways
+[03:59] <teward> nomadist: do other sites work?
+[03:59] <nomadist> teward, yes. Can't open with browser either
+[03:59] <teward> Jen8: check your PMs - ubottu sent you the paste link probably.
+[03:59] <teward> nomadist: and pings are being responded to?
+[04:00] <teward> (or are they too not working with github)
+[04:00] <nomadist> teward, it seems so, for example
+[04:00] <nomadist> ping github.com
+[04:00] <nomadist> PING github.com (59.185.3.14) 56(84) bytes of data.
+[04:00] <nomadist> 64 bytes from static-mum-59.185.3.14.mtnl.net.in (59.185.3.14): icmp_seq=1 ttl=45 time=122 ms
+[04:00] <nomadist> keep getting this until I control-c
+[04:00] <nomadist> 6 packets transmitted, 5 received, 16% packet loss, time 5003ms
+[04:00] <teward> nomadist: that looks like poisoned DNS
+[04:01] <nomadist> teward, huh?
+[04:01] <teward> nomadist: github runs everything from 192.30.252.0/22 - which is NOT 59.185.3.14
+[04:01] <teward> (https://help.github.com/articles/what-ip-addresses-does-github-use-that-i-should-whitelist/ is the source there)
+[04:02] <teward> nomadist: a DNS lookup on Google's DNS shows the same - it looks like your DNS servers that you query for everything are wrong, or possibly poisoned
+[04:02] <nomadist> teward, like everything else on that domain I can't open it
+[04:02] <nomadist> how do I change my DNS servers?
+[04:02] <teward> nomadist: in network manager and the settings for your network of choice
+[04:02] <Ahmuck> my error.  printing works without script error
+[04:03] <teward> Ahmuck: yeah, probably their JQuery got stuck for some reason :)
+[04:03] <teward> nomadist: right click network manager, hit "Edit COnnections"
+[04:03] <teward> select the connection you use
+[04:03] <teward> nomadist: IPv4 settings tab.  Method: (set to Automatic (DHCP) addresses only)
+[04:03] <Jen8> teward  http://paste.ubuntu.com/9585807/
+[04:04] <teward> nomadist: in the DNS Servers: box, add these: 8.8.8.8,8.8.4.4,4.2.2.4
+[04:04] <teward> nomadist: (first two are Google DNS, last one is one of Level3's DNS servers)
+[04:04] <Ahmuck> i moved from Debian basic to Lubuntu.  I've put in two swap partitions at the end of the drive to help things out but it
+[04:04] <Ahmuck> it's quite slow.
+[04:05] <teward> Jen8: what's thea ctual error you see when you're working with the bot
+[04:05] <Ahmuck> Should the swap be in between the root and the home partition?
+[04:05] <teward> Jen8: that what you've shown me is irrelevant, i need to see what's actually being sought after and such
+[04:05] <Jen8> when we install the tcl
+[04:05] <teward> (by eggdrop)
+[04:05] <Ahmuck> the root partition is at the beginning of the drive.
+[04:05] <abator> x11vnc client when move mouse i can see mouse pointer movin on server but i want to see mouse pointer moving when i move mouse on server, how do change this behaviour?
+[04:05] <nomadist> teward, I don't see "Edit connections" how can I get to this?
+[04:05] <teward> Jen8: I need to see what eggdrop is complaining about - and the exact error it generates.
+[04:05] <teward> nomadist: which Ubuntu version?
+[04:05] <nomadist> 14.04 (gnome)
+[04:05] <Jen8> teward thats when we try installing tcl8.5
+[04:06] <Jen8> one you told me do sudo apt-get install tcl8.5
+[04:06] <teward> Jen8: stop
+[04:06] <teward> Jen8: I just asked you: "When you run EggDrop, which needs TCL 8.5, what actually does it say?  Does it error?"
+[04:06] <teward> Jen8: and if the answer to that is "Yes", then show me the error output
+[04:07] <Jen8> okay
+[04:07] <Jen8> brb
+[04:07] <nomadist> teward, 1404 gnome
+[04:07] <teward> nomadist: ahh, okay, I have standard Unity, give me a moment
+[04:09] <Jen8> http://paste.ubuntu.com/9585849/
+[04:09] <teward> nomadist: i'm not sure how exactly to edit the connections in the GNOME variant - so, lets try a temporary alternative method...
+[04:09] <Jen8> teward
+[04:09] <Jen8> thats new one
+[04:10] <teward> nomadist: better, actually, try left-click and right click on your network manager - one of those might show an "Edit" type option to edit your connections
+[04:10] <teward> Jen8: how're you installing eggdrop in the first place
+[04:10] <teward> Jen8: from their source tarball?
+[04:10] <nomadist> i think its better if I go to unity
+[04:10] <nomadist> teward, brb getting into unity
+[04:11] <abator> i want to see mouse movement on both client and server simultaniously but on client mouse pointer does not move when server is moving mouse
+[04:12] <Jen8> i download the eggdrop from http://www.egghelp.org/setup.html 1.6.21 teward
+[04:12] <Ahmuck> is there a program similar to dragon dictate
+[04:13] <teward> Jen8: okay, you need the -dev package not just tcl8.5
+[04:13] <lotuspsychje> good morning
+[04:13] <teward> Jen8: and if you go back to where I told you how to install tcl8.5, I also mentioned you might actually need the tcl8.5-dev package
+[04:13] <teward> (if building things)
+[04:14] <N0byte> How to shom list of menu in irc server by using xchat
+=== Orioa is now known as OrioaZzZ
+[04:16] <lotuspsychje> N0byte: rightmouse inside xchat for more options
+[04:20] <N0byte> Lotuspsychj: i mean written command like /help
+[04:21] <cfhowlett> N0byte, click inside xchat window then hit f1
+[04:21] <Bluewolf> Hi all can some one tell difference between "Ubuntu 14.04.1-Desktop" as aposed to "Ubuntu 14.04-Desktop"?
+[04:22] <lotuspsychje> Bluewolf: .1 is the version up to date
+[04:22] <delinquentme> what functions typically are stored within: /etc/rc.d/init.d/functions
+[04:22] <delinquentme> ?
+[04:22] <abator> is there any help on x11vnc?
+[04:23] <N0byte> Thanks it works
+[04:23] <lotuspsychje> abator: if you ask your question, others can help you
+[04:23] <Bluewolf> lotuspsychje: Okay thought as much, but I also thought it would be higher and confirm it is the better on to download?
+[04:23] <lotuspsychje> Bluewolf: if you download 14.04 and update manual, it will get to 14.04.1 also
+[04:24] <abator> lotuspsychje: i did ask, let me do it again, thanks for responding, i want to see mouse movement on both client and server simultaneously but on client mouse pointer does not move when server is moving mouse
+[04:24] <lotuspsychje> !vnc | abator
+[04:24] <ubottu> abator: VNC is a protocol for remote desktop. https://help.ubuntu.com/community/VNCOverSSH describes how to use it securely.  It works best over fast connections, otherwise look at !FreeNX
+[04:24] <Bluewolf> lotuspsychje: Got it, so it does not matter in the long run?
+[04:25] <lotuspsychje> Bluewolf: if 14.04 LTS is your base, it will update also to newer version of 14.04
+[04:26] <lotuspsychje> Bluewolf: its bugfixing and other security updates etc
+[04:26] <N0byte> Anybody know busy channels for chit chat/ simple talk
+[04:26] <lotuspsychje> !ot | N0byte
+[04:26] <ubottu> N0byte: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[04:26] <cfhowlett> !ot | N0byte
+[04:28] <Bluewolf> lotuspsychje: Last two questions, If I run the Gnome Desktop in Ubuntu will it cause any issues and where and how would I install my Nvidia drivers (GT 240)?
+=== curiousx is now known as Chuck_Norris
+[04:29] <nomadist> where are this IRC channel's logs stored?
+[04:29] <lotuspsychje> Bluewolf: if you want gnome for daily use, its better you choose ubuntu gnome to install
+[04:29] <nomadist> I was given steps to solve a problem, but I needed unity for that.. now that I log in those steps are gone
+[04:29] <lotuspsychje> !logs | nomadist
+[04:29] <ubottu> nomadist: Official channel logs can be found at http://irclogs.ubuntu.com/ . LoCo channels are now logged there too.
+[04:30] <nomadist> thanks
+[04:30] <lotuspsychje> Bluewolf: if you enable cable/updates during setup you grafix driver should be chosen for you
+[04:30] <N0byte> ot
+[04:31] <lotuspsychje> Bluewolf: you dont like unity?
+[04:31] <nomadist> over here: http://irclogs.ubuntu.com/2014/12/21/
+[04:31] <nomadist> which one is this channel
+[04:31] <Wichali> <unconvertable>
+[04:32] <waxhead> has anyone built a system with a SATA RAID controller?
+[04:33] <lotuspsychje> waxhead: join the ##hardware guys
+[04:34] <N0byte> Ubuntu
+[04:35] <lotuspsychje> nomadist: http://irclogs.ubuntu.com/2014/12/21/%23ubuntu.html
+[04:35] <Jen8> ubuntu server saying tcl not installed on this system and me and my netadmin tryed install tcl8.5-dev it installed can i paste what says
+[04:35] <lotuspsychje> !paste | Jen8
+[04:35] <ubottu> Jen8: For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://imgur.com/ !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+[04:35] <Bluewolf> lotuspsychje: Sadly not, we don't see eye to eye. I feel untiy is ridged and does not allow me to customize my desktop. How broad is your knowlage on Ubuntu Gnome?
+[04:36] <lotuspsychje> !gnome | Bluewolf
+[04:36] <ubottu> Bluewolf: GNOME was the default desktop environment on Ubuntu up to 10.10. To install the GNOME Shell, type [ sudo apt-get install gnome-shell ] in a !terminal. For the GNOME-based !flavor of Ubuntu, see !ubuntu-gnome
+[04:36] <azjo> Hi, i installed teamviewer on Live ubuntu 12.04 lts. now it says it has to be run from terminal. how do i install it so its with gui? or run it.
+[04:36] <lotuspsychje> Bluewolf: you can autohide unity left bar if you like and install docky, for a gnome-like feeling
+[04:37] <lotuspsychje> azjo: where did you get this teamviewer?
+[04:38] <azjo> from teamviewer.com
+[04:38] <lotuspsychje> azjo: you installed the .deb ?
+[04:38] <azjo> yes
+[04:38] <waxhead> lotuspsychje, is it a linux/hardware channel?
+[04:38] <nomadist> teward, so i added to the "Additional DNS Servers" box under "IPv4 settings" the following: "8.8.8.8, 8.8.4.4, 4.2.2.4" but still I cant access github
+[04:38] <Jen8> http://paste.ubuntu.com/9585977/
+[04:38] <lotuspsychje> waxhead: no its just a hardware channel
+[04:38] <Bluewolf> lotuspsychje: No the unity look bugs me and makes me feel restricted. I did try my best use it. Now if I install the Gnome shell how well does the system run and how buggy is Ubuntu Gnome?
+=== ubuntu is now known as Guest58978
+[04:39] <cryptodan> nomadist: in a terminal type in "nslookup github.com 8.8.8.8"
+[04:39] <azjo> but it says its terminal only
+[04:39] <lotuspsychje> Bluewolf: gnome runs fine, depending on your hardware ofcourse
+[04:39] <nomadist> Server:		8.8.8.8
+[04:39] <nomadist> Address:	8.8.8.8#53
+[04:39] <nomadist> Non-authoritative answer:
+[04:39] <nomadist> Name:	github.com
+[04:39] <nomadist> Address: 192.30.252.131
+[04:40] <nomadist> @ cryptodan ^
+[04:40] <cryptodan> nomadist: so your issue is your browser
+[04:40] <nomadist> cryptodan, when I try to clone a repo I get an error
+[04:40] <nomadist> so its not just browser
+[04:40] <nomadist> happening since two days
+[04:41] <Bluewolf> lotuspsychje: Thanks, may I pm you. I have other questions relating to distros which are not the right questions for her or I could ask in off topic?
+[04:41] <cryptodan> nomadist: can you do the same with nslookup github.com
+[04:41] <nomadist> git clone https://github.com/scrapy/scrapy.git
+[04:41] <nomadist> Cloning into 'scrapy'...
+[04:41] <nomadist> fatal: unable to access 'https://github.com/scrapy/scrapy.git/': Failed to connect to github.com port 443: Connection refused
+[04:41] <cryptodan> and dpaste.com the results
+[04:41] <lotuspsychje> Bluewolf: rather not mate sorry, i only support ubuntu
+[04:42] <nomadist> cryptodan, I don't understand
+[04:42] <azjo> there is no solution to my problem?
+[04:42] <lotuspsychje> azjo: did you install the graphical installer?
+[04:42] <Jen8> lotuspsychje http://paste.ubuntu.com/9585977/
+[04:42] <cryptodan> nomadist: do "nslookup github.com" and dpaste.com the results
+[04:42] <lotuspsychje> azjo: http://www.teamviewer.com/nl/help/363-how-do-i-install-teamviewer-on-my-linux-distribution.aspx
+[04:42] <azjo> i have no clue. i just installed it using software center
+[04:43] <nomadist> http://dpaste.com/30B2YNG
+[04:43] <azjo> yeah as it says.. with software center
+[04:43] <Bluewolf> lotuspsychje: Fair enough, how close does 14.04's stability come to Debian's Wheezy?
+[04:43] <nomadist> cryptodan, http://dpaste.com/30B2YNG
+[04:43] <azjo> so it should work.
+[04:43] <Guest58978> hello.  i am attempting to install ubuntu 14.10, and need some help.  my computer currently has ubuntu 14.04, windows 7, and linux mint 17 installed on it, and in the installer there was no "replace ubuntu 14.04 with ubuntu 14.10 option" like there sometimes is, so I am forced to select "Something else", and use the partition editor feature.  I am in need of assistance.  my old ubuntu 14.04 install that I wish to replace
+[04:43] <Guest58978> with a new ubuntu 14.10 install is on /dev/sda6, an ext4 filesystem..  please help.  thanks in advance.
+[04:43] <lotuspsychje> Jen8: maybe the #tcl guys might be able to help
+[04:43] <cryptodan> nomadist: can you dpaste.com the results of cat /etc/resolv.conf
+[04:43] <lotuspsychje> azjo: try installing it from the web
+[04:44] <azjo> u mean terminal?
+[04:44] <lotuspsychje> azjo: no, download the .deb package from their website
+[04:44] <nomadist> cryptodan, http://dpaste.com/2CT7KNB
+[04:44] <azjo> yeah thats what i did
+[04:44] <azjo> and it says it is installed
+[04:44] <azjo> but its nowhere to be found in software center installed programs
+[04:44] <cryptodan> nomadist: check your modem to see if you have wrong dns servers there
+[04:45] <nomadist> cryptodan, how do i do that?
+[04:45] <cryptodan> nomadist: login to the router / modem via the web interface
+[04:46] <lotuspsychje> azjo: can you find the teamviewer icon in your dash ?
+[04:46] <Guest58978> i am looking for the simplest way to do this.  i tried double clicking on the partition i wish to use, and selecting "use as ext4 filesystem" and "format the partition", and setting the mount point to "/", and when i then highlight the drive and click "install now", i get the popup which says i need to select a partition for use as swap space.  how do i do that?
+[04:46] <nomadist> cryptodan, I tether from the 3g network on my phone
+[04:46] <nomadist> and this problem never happened
+[04:46] <cryptodan> nomadist: power cycle your phone and see if you get new DNS Servers
+[04:47] <nomadist> cryptodan, ok. Will be disconnected for that. I'll be back.
+[04:47] <lotuspsychje> azjo: you have 32bit or 64bit?
+[04:47] <azjo> 32bit
+[04:47] <scragglez> likecolacola: better?
+[04:47] <azjo> oh! it is in the dash
+[04:48] <azjo> thanks
+[04:48] <lotuspsychje> lol
+[04:48] <azjo> weird its not in the software center..
+[04:48] <lotuspsychje> azjo: did you try to run from terminal maybe?
+[04:48] <scragglez> How do I fix the problem of "wand/MagickWand.h: No such file or directory"
+[04:48] <azjo> never, i dont want terminal so
+[04:48] <scragglez> I've installed libmagickcore-dev and libmagickwand-dev
+[04:48] <lotuspsychje> azjo: so its solved now?
+[04:48] <azjo> so why isnt it in software center, but shows in dash?
+[04:48] <azjo> yes, its starting up now
+[04:49] <Guest58978> ok, i found how to do it, but i do not know which area to make be the swap
+[04:49] <lotuspsychje> azjo: it should show in software centre, maybe click 'show more advanced packages' on bottom
+[04:49] <tyraN|a> good morning :)
+[04:49] <lotuspsychje> !swap | Guest58978
+[04:49] <ubottu> Guest58978: swap is used to move unused programs and data out of main memory to make your system faster. It can also be used as extra memory if you don't have enough. See https://help.ubuntu.com/community/SwapFaq for more info
+[04:49] <tyraN|a> help me pls folks ;-)
+[04:49] <cfhowlett> Guest58978, so you currently have ubuntu live session?
+[04:49] <Guest58978> cfhowlett, yes
+[04:49] <lotuspsychje> tyraN|a: only if you ask a question :p
+[04:49] <cfhowlett> !help | tyraN|a
+[04:49] <ubottu> tyraN|a: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[04:50] <tyraN|a> okies
+[04:50] <tyraN|a> how to connect to undernet whats the command? thanks in advance, hehe :)
+[04:51] <lotuspsychje> tyraN|a: are you on an ubuntu irc client?
+[04:51] <Guest58978> i am wondering which of the smaller partitions already there was the swap for the last install, so i can just assign that partition to be the swap...  sda7 is 3.8 gb (ext4), and sda5 is 4.2gb (unknown), which one is the swap?
+[04:51] <tyraN|a> lotuspsychje yes
+[04:51] <tyraN|a> why?
+[04:51] <lotuspsychje> tyraN|a: wich one
+[04:51] <tyraN|a> Xchat for IRC...
+[04:52] <Guest58978> i figure that one is supposed to be the swap for mint and the other for ubuntu, do i really need both of them?  or can one partition be the swap for both?
+[04:52] <_nomadist> cryptodan, that didn't work
+[04:52] <_nomadist> unfortunately
+[04:52] <lotuspsychje> tyraN|a: open a new server window and connect to undernet..
+[04:52] <cfhowlett> Guest58978, paste the output of this terminal command to fpaste.org         sudo fdisk -l
+[04:52] <tyraN|a> nope whats the command?!
+[04:52] <tyraN|a> plz
+=== paulus68_ is now known as paulus68
+[04:53] <cryptodan> _nomadist: you may want to try this route https://help.ubuntu.com/community/StaticDnsWithDhcp
+[04:53] <tyraN|a> anyone awake? =)
+[04:53] <lotuspsychje> !patience | tyraN|a
+[04:53] <delinquentme> is there a clever way to test out when the last time $ apt-get update was run ?
+[04:53] <ubottu> tyraN|a: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[04:53] <tyraN|a> Ok. Thank you. ehm..
+[04:54] <lotuspsychje> tyraN|a: you can ask details in #xchat
+[04:54] <tyraN|a> oki ;)
+[04:54] <Guest58978> ok, cfhowlett thanks...  here:  http://paste.ubuntu.com/9586027/
+[04:54] <azjo> whats a good wol program?
+[04:55] <tyraN|a> azjo what is wol program? lol ehm..
+[04:55] <azjo> wake on lan
+[04:55] <tyraN|a> Ok.
+[04:55] <likecolacola> scragglez, have you looked for the .h library you'r missing?
+[04:55] <lotuspsychje> delinquentme: you can use history in terminal, not sure howto view time/dates
+[04:55] <Guest58978> cfhowlett, does it matter which one should i use for the swap?
+[04:56] <azjo> apparently i have to download from a source called universe.. but its slow as $)#"?
+[04:56] <tyraN|a> anyone awake? Hehe =)
+[04:56] <cfhowlett> Guest58978, got it.  /swap *should* be safe to share, but I've not seen that in a multiboot system.  might scramble one or both of the sharing OS.  You can always test it - you DO have backups right
+[04:56] <cfhowlett> !patience | tyraN|a, stop
+[04:56] <ubottu> tyraN|a, stop: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[04:57] <tyraN|a> nopes
+[04:57] <tyraN|a> it was something like -m /server eu.undernet.org right?
+[04:57] <azjo> can anyone tell me a good wake on lan program? gwakeonlan is 500mb
+[04:57] <cryptodan> tyraN|a: its /server
+[04:57] <cfhowlett> azjo, repos aren't slow but your software source might be ....
+[04:57] <scragglez> likecolacola: yeah, I have it in /usr/include/ImageMagick/wand
+[04:57] <tyraN|a> and then what?
+[04:58] <tyraN|a> :
+[04:58] <cryptodan> tyraN|a: the server name
+[04:58] <tyraN|a> :D
+[04:58] <purana> azjo,
+[04:58] <azjo> i want one that doesnt require 500mb tho
+[04:58] <tyraN|a> undernet ?
+[04:58] <purana> azjo,  wakeonlan
+[04:58] <purana> azjo, cli tool
+[04:58] <tyraN|a> what should i write in the <port> field? hehe :p
+[04:58] <cryptodan> it should automatically go there
+[04:58] <purana> tyraN|a, dont type anything it will default
+[04:58] <Guest58978> cfhowlett, ok thanks...  is there a way of knowing which one of the swap partitions i currently have is the mint 17 swap space, and which is the ubuntu swap?
+[04:59] <lotuspsychje> azjo: apt-cache search wake on lan, shows a few
+[04:59] <tyraN|a> what you mean it will default? lol
+[04:59] <purana> tyraN|a, it will probably use 6667 by default
+[04:59] <tyraN|a> purana thanks ;)
+[04:59] <_nomadist> hey yo cryptodan. thanks for identifying the problem.
+[04:59] <_nomadist> I found the solution here: http://unix.stackexchange.com/a/154538
+[04:59] <purana> remind me to sleep early tonight I am feeling so tired
+[04:59] <cfhowlett> Guest58978, I see 2 /swaps on your paste ...
+[04:59] <azjo> downloading wakeonlan. which i couldnt find when i searched wake on
+[05:00] <cryptodan> _nomadist: you are welcome
+[05:00] <purana> Guest58978, I saw 2 swaps too, no idea which is whic, as you should of made note during last install which one you used
+[05:00] <lotuspsychje> !yay | azjo
+[05:00] <ubottu> azjo: Glad you made it! :-)
+[05:00] <Guest58978> purana, ok thanks...
+[05:00] <cfhowlett> Guest58978, fuser /dev/ada1
+[05:00] <_nomadist> also thanks to teward
+[05:00] <Guest58978> thanks cfhowlett
+[05:00] <peyam> hi, I have gtk3 installed on y xubuntu. does it mean I can install gnome themes?
+[05:00] <lotuspsychje> !themes | peyam
+[05:00] <ubottu> peyam: Find your themes at: http://www.gnome-look.org - http://art.gnome.org - http://www.kde-look.org - http://kubuntu-art.org - http://themes.freecode.com/tags/theme - http://www.guistyles.com - https://wiki.ubuntu.com/Artwork/ - Also see !changethemes and https://help.ubuntu.com/community/UbuntuEyeCandy
+[05:01] <cfhowlett> Guest58978, eh, fuser is the command to ID a FILE process uuser --- not a partition
+[05:01] <azjo> purana: is wakeonlan with a gui?
+[05:01] <Guest58978> i love linux and ubuntu so much  :)  and seasons greetings to the ubuntu community that makes this os so great!
+[05:01] <purana> Guest58978, boot into gentoo and check the /etc/fstab, it will show which partitation swap is mounted from
+[05:01] <peyam> lotuspsychje, was it a correct anwer?
+[05:01] <purana> azjo, cli only ;) shell use
+[05:01] <purana> azjo, man wakeonlan post install in a terminal/shell window for how to use it
+[05:01] <purana> azjo, super easy one to use though
+[05:02] <lotuspsychje> peyam: you can aks the #xubuntu guys whats the easiest way
+[05:02] <zero00> My monitor resolution and screen refresh rate keeps resetting back to "automatic resolution and 60 hz" after every gaming session. What gives?
+[05:02] <azjo> what do i type to err execute it?
+[05:02] <peyam> lotuspsychje, so it is possible? no #xubuntu is always asleep
+[05:02] <purana> azjo, wakeonlan
+[05:03] <azjo> i figured that out myself. *proud* ;p
+[05:03] <lotuspsychje> peyam: im sure xubuntu can have themese aswell yes, check deviantart.com => search xubuntu for examples
+[05:03] <purana> azjo, wakeonlan [-h] [-v] [-i IP_address] [-p port] [-f file]
+[05:03] <purana>        [[hardware_address] ...]
+[05:03] <peyam> lotuspsychje, do you even read what i writing?
+[05:04] <purana> peyam, eye candy I can live without.. guess others cannot..
+[05:04] <lotuspsychje> peyam: whats that suppose to mean?
+[05:04] <azjo> hmm, i used mac to wol from windows. but there isnt an option regarding mac here?
+[05:04] <purana> azjo, yes hardware address = MAC address
+[05:04] <purana> azjo, same thing
+[05:04] <peyam> purana, me too but i thogh i would test some changes. lotuspsychje that means my question was if i have gtk3 can I use gnome themes?
+[05:05] <azjo> so i simply type wakeonlan -f XX-XX-XX etc?
+[05:05] <purana> azjo, yes probably without the -'s
+[05:05] <lotuspsychje> peyam: did you even read the themes trigger i pasted you?
+[05:05] <azjo> so just the 12 digits in one?
+[05:05] <purana> azjo, I think I have a script I wrote that uses it, let me check
+[05:05] <peyam> lotuspsychje, yes. i expected a Yes or No
+[05:06] <purana> azjo, think my laptop is downstairs..
+[05:06] <cfhowlett> lol
+[05:06] <lotuspsychje> peyam: life is never what You expect..
+[05:06] <devcros7s> .___.
+[05:06] <peyam> lotuspsychje, agree
+[05:06] <azjo> ill try the 12 digit and see what happens
+[05:06] <devcros7s> hola mundo ! :D
+[05:06] <purana> azjo, it will either be in the format of XX:XX:XX... etc
+[05:07] <cfhowlett> !es
+[05:07] <ubottu> En la mayoria de los canales de Ubuntu, se habla solo en ingles. Si busca ayuda en espanol entre al canal #ubuntu-es; escriba " /join #ubuntu-es " (sin comillas) y presione intro.
+[05:07] <purana> azjo, or without
+[05:07] <purana> azjo, been a while since I used it
+[05:07] <azjo> aha
+[05:07] <azjo> its not possible to wol a machine which is on wifi, right?
+[05:07] <purana> azjo, yes its wakeonlan 00:00:00:00:00:00
+[05:08] <purana> azjo, does wifi even support WoL?
+[05:08] <purana> azjo, I dont think it does ;)
+[05:08] <azjo> yeah, kinda impossible heh but i had to ask
+[05:08] <purana> azjo, seems some wifi does according to google.. but I don't like chances on that
+[05:09] <purana> its sunday afternoon, work again tomorrow *sigh*
+[05:09] <azjo> its only to test right now, since im on the machine i want to wol, but im not gonna shut it down now so ill wait
+[05:09] <lotuspsychje> peyam: http://www.deviantart.com/browse/all/?qh=&section=&global=1&q=xubuntu+gtk3
+[05:10] <peyam> thanks
+[05:10] <purana> azjo, I use to have a rpi with webserver and script that when I hit a webpage, it would execute the wakeonlan script to wake up another pc, which I could teamviewer against.. it would sleep again, and I would hit web page on rpi to wake it :)
+[05:10] <purana> azjo, worked rather well ;)
+[05:11] <azjo> clever
+[05:11] <azjo> rpi?
+[05:11] <purana> azjo, think I gave the webserver unix user sudo access to run script explicitly
+[05:11] <purana> rpi = raspberry pi
+[05:11] <azjo> thought so
+=== Tsunami is now known as Guest47817
+[05:12] <purana> azjo, I have 2 celeron based intel nuc's and they sweet gear.. runs Ubuntu out of the box with all hardware detected..
+[05:13] <purana> azjo, they dont run ubuntu now, got Windows 8.1 Pro unfortunately and run alright with 8gb ram
+[05:13] <purana> azjo, like the Intel NUC technology
+[05:13] <azjo> nUc?
+[05:14] <purana> azjo, http://heimic.net/2014/08/05/intel-dn2820fykh-nuc/
+[05:14] <purana> azjo, http://heimic.com/wp/wp-content/uploads/2014/08/NUC_03.jpg (showing the size of the machine)
+[05:15] <azjo> hmm interesting. whats the cost of a nuc with 8gb ram? i want it as cheap as possible
+[05:16] <purana> azjo, you would need to research where you live.. I live in Oz
+[05:16] <azjo> seen the wizard lately?
+[05:16] <purana> azjo, Australia
+[05:17] <azjo> Oz means australia, or its a specific area?
+[05:17] <purana> azjo, slang
+[05:17] <azjo> aha
+[05:17] <purana> azjo, I like outside of Sydney, Australia in the suburbs
+[05:17] <purana> azjo, live not like :)
+[05:18] <azjo> aha
+[05:18] <azjo> what are common speeds in sydney?
+[05:18] <purana> azjo, news had a siege last Monday, was on all over the world..
+[05:18] <azjo> connections
+[05:18] <purana> azjo, shit in my area ;) ADSL2+ only, but I am moving to a newer estate in the next 18 months where my house is fibre to the home
+[05:19] <azjo> oh great
+[05:19] <purana> azjo, so will get 50Mbps/20Mbps link or maybe a 100Mbps/40Mbps.. still deciding
+[05:19] <azjo> im on 60/60mbps fibre now, more than enough for me :p
+[05:19] <purana> azjo, my adsl sync atm is about 16900/1090
+[05:20] <purana> azjo, in Kbps
+[05:20] <purana> haha
+[05:20] <azjo> better
+[05:20] <purana> azjo, it does what I need..
+[05:20] <azjo> acceptable i guess, but i love fibre more for the low pings
+[05:20] <purana> azjo, new house/estate will be better
+[05:21] <lotuspsychje> guys keep it ontopic please
+[05:21] <purana> azjo, sorted wakeonlan yet?
+[05:21] <azjo> i can ping other side of city @ 2ms.. adsl usually means the conversion take 20 ping
+[05:21] <azjo> sorry lotuspsychje
+[05:21] <azjo> yeah, its all done now
+[05:22] <azjo> hmm ubuntu live is not gonna go on sleep mode is it?
+[05:22] <lotuspsychje> delinquentme: init are system services, not sure what the /functions do
+=== b is now known as Guest50165
+[05:23] <Guest50165> hello guys
+[05:23] <lotuspsychje> Guest50165: welcome
+[05:23] <Guest50165> what up here
+[05:24] <lotuspsychje> Guest50165: this room is for ubuntu support questions
+[05:24] <cfhowlett> !topic | Guest50165,
+[05:24] <ubottu> Guest50165,: Please read the channel topic whenever you enter, as it contains important information. To view it at any time after joining, simply type /topic
+[05:24] <Guest50165> ok
+[05:24] <lotuspsychje> delinquentme: http://bash.cyberciti.biz/guide//etc/init.d/functions
+[05:26] <Bluewolf> lotuspsychje: By the way, thank you for your time and help :D
+[05:26] <lotuspsychje> Bluewolf: your issue is solved?
+[05:28] <iampoz> hi guys, anyone know the story about vlc?
+[05:28] <Bluewolf> lotuspsychje: Ah not quite, I'm just reading up on Ubuntu Gnome and trying to figure out the difference between it and plain ubuntu with the gnome shell?
+[05:28] <iampoz> I am getting this error: "Failed to fetch http://download.videolan.org/pub/debian/stable/Sources  404  Not Found"
+[05:28] <lotuspsychje> iampoz: wich ubuntu version are you on?
+[05:28] <cfhowlett> iampoz, what is cat /etc/issue telling you?
+[05:29] <iampoz> this seems to be related http://www.mail-archive.com/ubuntu-bugs@lists.ubuntu.com/msg4572884.html
+[05:29] <iampoz> 14.04
+[05:29] <lotuspsychje> Bluewolf: if your graphics be able to run it, gnome will run smooth
+[05:29] <iampoz> Ubuntu 14.04.1 LTS \n \l
+[05:29] <lotuspsychje> Bluewolf: just go try and install to experience :p
+[05:30] <lotuspsychje> Bluewolf: maybe the #gnome guys might also set you in the right direction
+[05:31] <Bluewolf> lotuspsychje: Oh I am but the choices are going to be my end, suse, debian, ubuntu and now ubuntu Gnome, any idea on the least buggy? :D
+[05:31] <lotuspsychje> iampoz: you added ppa's in some sort?
+[05:31] <iampoz> yes
+[05:31] <lotuspsychje> !ppa | iampoz
+[05:31] <ubottu> iampoz: A Personal Package Archive (PPA) can provide alternate software not normally available in the offical Ubuntu repositories - Looking for a PPA? See https://launchpad.net/ubuntu/+ppas - WARNING: PPAs are unsupported third-party packages, and you use them at your own risk. See also !addppa and !ppa-purge
+[05:31] <iampoz> I am guessing this is not supported here eh?
+[05:31] <cfhowlett> !ppa | iampoz
+[05:32] <purana> cfhowlett, commands for channel operators
+[05:32] <lotuspsychje> Bluewolf: i would advise you a 14.04 ubuntu variant, ubuntu, ubuntu-gnome, xubuntu, lubuntu
+[05:32] <iampoz> humm, I will see if if the vlc irc room can help me out. I just thought some one here might know about it.
+[05:33] <lotuspsychje> Bluewolf: 14.04 is rocksolid and support till 2014
+[05:33] <cfhowlett> purana, since when?  I/we have been using factoid triggers for a LONG time
+[05:33] <purana> zzzgeoffb, hello fellow australian user :)
+[05:33] <purana> cfhowlett, your command generated no output
+[05:33] <lotuspsychje> purana: triggers are for everyone, related to the questions..
+[05:33] <purana> lotuspsychje, good to know
+[05:34] <Bluewolf> lotuspsychje: Yeah I will continue the checking, Ubuntu and Ubuntu Gnome are two separate Os like xubuntu, lubuntu and so on right?
+[05:34] <Cobra> LOL
+[05:34] <cfhowlett> purana, ah.  I triggered it right after the same command was sent by lotuspsyche.  in such cases, trigger #2 is ignored.
+[05:34] <purana> cfhowlett, had a feeling that was possible too
+[05:34] <Cobra> aye guys.
+[05:34] <lotuspsychje> !flavors | Bluewolf
+[05:34] <ubottu> Bluewolf: !Ubuntu-GNOME, !Kubuntu, !Xubuntu and !Lubuntu are simply flavors of Ubuntu that come with GNOME, KDE, Xfce, and LXDE (respectively) installed as default, instead of Unity. Other specialized flavors of Ubuntu include !Edubuntu, Ubuntu !Studio, and !Mythbuntu.
+=== patjuh is now known as Waakhond
+[05:37] <Cobra> hmm.
+[05:38] <Bluewolf> lotuspsychje: That clears things up, you said "14.04 is rocksolid and support till 2014" is that all, were at its end?
+[05:38] <mdanielk> :)
+[05:38] <cfhowlett> Bluewolf, 3 years for 14.04 = 2017 on desktop.  5 years for server
+[05:38] <lotuspsychje> Bluewolf: support til 2020, after that another LTS version come
+[05:39] <cfhowlett> !lts | Bluewolf
+[05:39] <ubottu> Bluewolf: LTS means Long Term Support. Until 12.04 LTS versions of Ubuntu were supported for 3 years on the desktop, and 5 years on the server; since 12.04 (Precise Pangolin) LTS versions will be supported for 5 years on the desktop and server. The latest LTS version of Ubuntu is !Trusty (Trusty Tahr 14.04)
+[05:40] <cfhowlett> Bluewolf, lotuspsychje I was wrong: 14.05 has 5 years support / except for ubuntustudio = 3 years only
+[05:40] <Bluewolf> lotuspsychje: Thanks man, you just might have made my day and christmas :D
+[05:41] <iampoz> is there a way to do an update and skip a particular ppa?
+[05:41] <lotuspsychje> Bluewolf: your xmass will come tru after installing ubuntu version of your dreams :p
+[05:41] <lotuspsychje> !pinning | iampoz maybe this
+[05:41] <ubottu> iampoz maybe this: pinning is an advanced feature that APT can use to prefer particular packages over others. See https://help.ubuntu.com/community/PinningHowto
+[05:42] <lotuspsychje> iampoz: but the most logical way, would be remove your ppa :p
+[05:43] <iampoz> lol well I did, but I know I will forget to add it again later... videolan chat said that download.videolan.org is down right now
+[05:43] <lotuspsychje> iampoz: did you sudo apt-get install vlc?
+[05:44] <lotuspsychje> cfhowlett: you know that trigger for ppa remove?
+[05:44] <iampoz> vlc is already installed, I was just doing an update and it was giving the error that it could not connect
+[05:44] <cfhowlett> lotuspsychje, no idea.  (I staz quiet when I haz no infoz.)
+[05:45] <Bluewolf> lotuspsychje: I'll remember to convert Santa as you have done me :P
+[05:45] <Bluewolf> Thanks again, best wishes!
+[05:45] <lotuspsychje> Bluewolf: cheers
+[05:46] <lotuspsychje> iampoz: maybe try to update ubuntu later on
+[05:46] <lotuspsychje> iampoz: maybe apt-get update and reboot can do miracles
+=== FreeNod is now known as DarthTetris
+[05:48] <iampoz> thanks lotuspsychje, it was a clean boot, but I will reboot after the update I am doing now and add the ppa. maybe it will work then, but I don't think so if the videolan irc chat is saying that it is down
+[05:48] <HZun> is it fine to skip the "select and install software" step of the ubuntu mini.iso expert installer when doing a minimal installation? will it prevent the system from being installed correctly?
+[05:49] <lotuspsychje> !minimal | HZun
+[05:49] <ubottu> HZun: The Minimal CD image is very small in size, and it downloads most packages from the Internet during installation, allowing you to select only those you want.  The installer is text based (rather than graphical as used on the Desktop DVD). See https://help.ubuntu.com/community/Installation/MinimalCD
+[05:50] <lotuspsychje> !ppapurge | iampoz
+[05:50] <ubottu> iampoz: To disable a PPA from your sources and revert your packages back to default Ubuntu packages, install ppa-purge and use the command: <unconvertable> sudo ppa-purge ppa:<repository-name>/<subdirectory> <unconvertable> <unconvertable> For more information, see http://www.webupd8.org/2009/12/remove-ppa-repositories-via-command.html
+[05:50] <waxhead_> first build on an uefi system.... really doing my head in.. :-/
+[05:50] <HZun> lotuspsychje: yes i know what the mini.iso is. the question was weather i can "safely" skip the "select and install software" step.
+[05:52] <waxhead_> in saying that, got the OS building to RAID1 second time around... lets see how things go on reboot
+[05:54] <iampoz> yikes, I don't want to purge my ppas!
+[05:55] <iampoz> i just went into software center and clicked the videolan ppa off and updated. works fine now... I just think I will forget to toggle it back on after a few days when it might be back online so I was asking how to temporarily exclude a ppa from an update. I don't think pinning is what I want, so maybe I  don't understand how to use it.
+[06:08] <shuvojit> whenever i open youtube and open any video page. the whole screen goes black, and only pointer can be seen, the audio of the video can be heard in background. any suggestions? !!
+[06:09] <lotuspsychje> shuvojit: did you install ubuntu-restricted-extras ?
+[06:09] <shuvojit> i guess not.
+[06:09] <cfhowlett> shuvojit, try /html5 not flash
+[06:10] <shuvojit> cfhowlett: how to switch to html5?
+[06:10] <cfhowlett> shuvojit, http://googlesystem.blogspot.com/2013/09/force-youtube-to-use-html5-player.html
+[06:10] <cfhowlett> http://www.htmlgoodies.com/html5/tutorials/how-to-view-html5-videos-on-youtube.html
+[06:11] <shuvojit> cfhowlett : thank you. and by the way, youtube runs fine in firefox, but i cannot change resolution for some reason.
+[06:12] <cfhowlett> shuvojit, ah!  different cause then!  still, flash seems to be dying out, so html5 is the future.
+[06:12] <shuvojit> okay! thanks :D
+[06:19] <roya> hi
+[06:24] <mr_snowf1ake> hey guys, i'm looking for a good eda software with simulation support. any suggestions?
+[06:30] <cfhowlett> mr_snowf1ake, ##linux would know
+[06:30] <mr_snowf1ake> cfhowlett: alright thanks. i already tried asking there and didn't get any responses
+[06:31] <cfhowlett> mr_snowf1ake, http://linuxeda.com/
+[06:32] <mr_snowf1ake> cfhowlett: yeah, thanks, i've seen that. i was more looking for personal experiences
+=== Tsunami is now known as Guest93350
+[06:46] <roya>  /close
+[06:49] <eshadow> hi
+[06:49] <tehgeekmeister> anyone know the status of CVE-2014-9295, beyond what's at this page? http://people.canonical.com/~ubuntu-security/cve/2014/CVE-2014-9295.html
+[06:49] <ubottu> ** RESERVED ** This candidate has been reserved by an organization or individual that will use it when announcing a new security problem.  When the candidate has been publicized, the details for this candidate will be provided. (http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-9295)
+[06:50] <cinnamonrollz> Can someone trace this image? https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-xpa1/t31.0-8/1601852_376486735863510_9167886186754124593_o.jpg
+=== Fudster_ is now known as Fudster
+=== ara is now known as Guest32196
+=== Guest32196 is now known as ararob
+[07:05] <brent> anyone know how i can start x11vnc server from the command line
+[07:06] <brent> or alter session time outs? im having trouble where if i get disconnected from my home wifi (connected to a local vnc server) i cant reconnect for some time
+=== Fudster_ is now known as Fudster
+[07:12] <PK2> Hello everyone..
+[07:12] <brent> :)
+[07:12] <PK2> Ubuntu is refusing to install from mini.iso
+[07:12] <PK2> I'm gonna post the output from ALT + F4 , wait
+[07:14] <PK2> !Drone
+[07:14] <PK2> !drone
+[07:14] <PK2> !be
+[07:14] <PK2> !bd
+[07:14] <ubottu> Bangla te Ubuntu bishoyok alochonar jonno #ubuntu-bd te ashun. Dhonnobad!
+[07:16] <PK2> Takes much time, sorry!
+[07:24] <dharmit> Hello, I am unable to use my laptop with Epson projector. It worked with one model of Epson earlier. But it's not working with another model. I am using 14.10. What should I check from OS side for this issue?
+[07:24] <PK2> OK, the setup restarted again, I'm trying to install again
+[07:29] <ararob> dharmit, dmesg , see if any driver gets loaded....
+[07:33] <dharmit> ararob: Okay. Will try that. Not near a projector right now. Will report back 40-50 mins later.
+[07:35] <azjo> Hi, i have 1x2gb SDcard and 1x2gb USB, id like to install an alternative to raspbian which can fit in just 2gb. any alternatives?
+[07:37] <cfhowlett> azjo, suggest you ask the raspberry pi channel - not ubuntu
+[07:40] <azjo> unfortunaly its very dead :)
+[07:44] <zoli> Hi, I try to install Ubuntu Trsuty (14.04) on fresh new 120GB Kingston SSD. However, when I choose the most basic option (delete all partition and install Ubuntu), it freezes! If I reboot and try another option to handle things manually and I try to create a partition table, it freezes as well. What can I do to overcome this ???
+[07:46] <zoli> Any idea please?
+[07:47] <azjo> maybe you should do a hd error check to make sure the drive is fully functional?
+[07:49] <PK2> https://drive.google.com/file/d/0ByS-I2j_1tLodEdWWFhnU3ZEdnc/view?usp=sharing
+[07:49] <PK2> Why?
+[07:50] <PK2> The Installer refuses to go on with this
+[07:50] <PK2> It can't download the python pkgs.
+[07:50] <PK2> Why?
+[07:50] <PK2> I've working internet
+[07:53] <PK2> Mirror -> in.archive.ubuntu.com
+[07:54] <PK2> So, what should I do !?
+[07:55] <PK2> hello? Someone?
+[07:55] <PK2> It's in a Virtualbox VM with VT-x
+[07:57] <PK2> It's a Ubuntu 64-bit
+[07:57] <PK2> Virtualized with Virtualbox
+[07:59] <azjo> aha, noobs is just an install manager? nothing else? no gui where i can install other programs??
+[07:59] <botnut> hi all - anyway to view threads in each process using the built in system monitor tool with ubuntu desktop 14.04?
+[08:00] <azjo> oops wrong chan
+[08:01] <PK2> Well, there's a command for CUI but I DK about GUI
+[08:03] <batmanisrunning> There's a problem with my PDF viwerer where when I highlight the text it would be black so I can't see what I have highlited. This is the pdf viewer that came with Lubuntu
+[08:04] <PK2> https://drive.google.com/file/d/0ByS-I2j_1tLoZC10Vm5senRlQVU/view?usp=sharing
+[08:04] <PK2> Hello, someone help me, please
+[08:05] <cfhowlett> !patience | PK2,
+[08:05] <ubottu> PK2,: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[08:05] <PK2> :(
+[08:07] <PK2> Changed mirror to de.archive.ubuntu.com
+[08:07] <PK2> !de
+[08:07] <ubottu> In den meisten Ubuntu-Kanalen wird nur Englisch gesprochen. Fur deutschsprachige Hilfe besuche bitte #ubuntu-de, #kubuntu-de, #edubuntu-de oder #ubuntu-at. Einfach "/join #ubuntu-de" eingeben. Danke fur Dein Verstandnis!
+[08:08] <ceplinschi> exot
+[08:08] <ceplinschi> exit
+[08:08] <PK2> Agaqin the same problem
+[08:08] <waxhead_>  Any tricks to this UEFI booting stuff?
+[08:09] <cfhowlett> !uefi | waxhead_
+[08:09] <ubottu> waxhead_: UEFI is a specification that defines a software interface between an operating system and platform firmware. It is meant as a replacement for the BIOS. For information on how to set up and install Ubuntu and its derivatives on UEFI machines please read https://help.ubuntu.com/community/UEFI
+[08:09] <waxhead_> installing to 120G SDD, doesn't seem to be able to boot up
+[08:09] <cfhowlett> waxhead_, that's a NEW SSD?
+[08:10] <waxhead_> cfhowlett, newish...
+[08:10] <waxhead_> cfhowlett, probably 18 months old
+[08:10] <waxhead_> older maybe!
+[08:10] <cfhowlett> waxhead_, never done that but as I understand, the ssd/hdd needs to be prepped before install/use
+[08:10] <PK2> https://launchpad.net/ubuntu/+mirror/ftp.crihan.fr-archive mirror seems to work
+[08:10] <waxhead_> cfhowlett, I'll google it then..
+[08:11] <rwp> waxhead_, Can you change the bios to BIOS booting instead of UEFI? If so that is probably easiest.
+[08:11] <rwp> Many BIOS's have that as an option.
+[08:11] <waxhead_> rwp, yes, did that but it still didn't boot...
+[08:12] <waxhead_> I get the flashing 'underscore'
+[08:12] <waxhead_> it doesn't seem to progress through to booting
+[08:12] <PK2> rwp: mistaked
+[08:12] <rwp> Hmm... Strange. Don't know.
+[08:12] <PK2> BIOSs should be correct
+[08:12] <PK2> Typo. :p
+[08:13] <rwp> Not BIOSes? :-)
+[08:13] <PK2> Nah.
+[08:13] <rwp> BIOSii?
+[08:13] <PK2> Nooo.
+[08:13] <PK2> BIOSs
+[08:13]  * rwp chuckles
+[08:13] <PK2> "s" means it's plural
+[08:13] <PK2> But still "es" is not meant to be there...
+[08:13] <JoshH99> Hey I have an apache install on 14.04. I've set "ServerTokens Prod" and "ServerSignature off" in /etc/apache2/apache2.conf, but apache still exposes its version in the header and on error pages
+[08:14] <cfhowlett> bios'    is the correct form ...
+[08:14] <rwp> In any case my latest hit on the UEFI problem I couldn't get Ubuntu to install either.
+[08:14] <Patser> Hi, does anybody know where to get libhttp-cookie-perl? None of the servers seem to have it and my system is compaining that my packages are broken...
+[08:14] <rwp> But was able to switch to legacy BIOS boot and that worked perfectly fine.
+[08:14] <cfhowlett> joshh20, if no answer here, ask #ubuntu-server
+[08:14] <JoshH99> cfhowlett: ok, wasn't aware of that channel
+[08:14] <PK2> JoshH99: Have you restarted Apache2 so it takes your new configs. ?
+[08:14] <rwp> JoshH99, Did you remember to reload or restart after the change?
+[08:14] <cfhowlett> !server | joshh20
+[08:14] <ubottu> joshh20: Ubuntu Server Edition is a release of Ubuntu designed especially for server environments, including a server specific !kernel and no !GUI. The install CD contains many server applications. Current !LTS version is !Trusty (Trusty Tahr 14.04) - More info: http://www.ubuntu.com/products/whatisubuntu/serveredition - Guide: https://help.ubuntu.com/14.04/serverguide - Support in #ubuntu-server
+[08:15] <JoshH99> PK2: I have, but I'll try again just for the heck of it
+[08:15] <PK2> OK.
+[08:15] <cfhowlett> joshh20, sorry, meant for your older bro, JoshH99
+[08:15] <PK2> Aaand: well, that mirror worked fine. o.O
+[08:15] <JoshH99> PK2: Just ran again for sanity check. Still exposes server as "Apache/2.4.7 (Ubuntu)"
+[08:15] <rwp> JoshH99, Also, the /etc/apache2/conf.d/security file sets it on. So if you don't change it there it will be on.
+[08:15] <JoshH99> rwp: will check that file
+[08:15] <PK2> lol
+[08:16] <rwp> JoshH99,
+[08:16] <rwp> JoshH99, Meanwhile I don't think turning it off has any security merit.
+[08:16] <waxhead_> rwp, I'll have another go then back at legacy
+[08:17] <rwp> waxhead_, This reference is Debian not Ubuntu but I happened to have read it today. http://blog.einval.com/2014/12/21#Jessie-EFI_2
+[08:17] <PK2> Oh God...
+[08:17] <PK2> It's written today !?
+[08:18] <JoshH99> rwp: Yeah, it's a very little thing. I'm paranoid and so I like to reduce information I give out in headers if possible. I edited /etc/apache2/conf-enabled/security.conf and restarted, and the problem is fixed.
+[08:18] <rwp> Yes. Is that shocking?
+[08:18] <JoshH99> thanks PK2 and rwp
+[08:18] <rwp> JoshH99, Good deal.
+=== _sic__ is now known as _sic_
+[08:18] <PK2> Welcome..
+[08:19] <rwp> JoshH99, Yes, mostly there is no need to edit the apache.conf file.  Most edits go into conf.d/foo-something-file instead.
+=== Zer0legend is now known as Ankoran
+[08:19] <JoshH99> rwp: When was this changed? Was it in one of the last ubuntu releases?
+[08:19] <rwp> I always put my own files into a foo-local.conf something so that upgrades won't overwrite it and/or I don't need to merge at upgrade time.
+[08:19] <JoshH99> rwp: Assuming all the files get included into the apache config automatically?
+[08:19] <rwp> JoshH99, It has been that way for years and years.
+[08:20] <JoshH99> rwp: Hmmm. I don't remember that being the case and almost all docs I find on the i-net say that, but ok :)
+[08:20] <rwp> Basically they keep an apache.conf so that people who come from upstream apache installations via tar.gz will have what they are comfortable with.
+[08:20] <PK2> !GUI
+[08:20] <ubottu> The graphical user interface (GUI) in Ubuntu is composed of many elements, including the !X server, a window manager, and a desktop environment such as !GNOME or !KDE (which themselves use the !GTK and !Qt toolkits respectively)
+[08:20] <JoshH99> rwp: Yeah, makes sense.
+[08:20] <rwp> But it is easier to put individual things into a file by itself.
+[08:21] <rwp> So I have rails passenger stuff in a rails-passenger.conf file.
+[08:21] <PK2> !XFCE
+[08:21] <ubottu> Xubuntu is Ubuntu with Xfce as the desktop environment. More info at http://www.xubuntu.org/ - To install from Ubuntu: <unconvertable> sudo apt-get install xubuntu-desktop <unconvertable> - Join #xubuntu for support - See also: !Ubuntu and !Xubuntu-Channels
+[08:21] <nully> rwp: =P
+[08:21] <PK2> !Qt
+[08:21] <ubottu> the Qt toolkit (pronounced "cute"), which forms the base of !KDE, is a cross-platform C++ application framework for !CLI and !GUI applications. Install libqt4-dev and see !build to compile Qt4 applications, join #qt for development support
+[08:21] <rwp> And so on with each individual area of configuration.  For me it makes it easier to keep organized.
+[08:22] <cfhowlett> PK2, /msg ubottu !commandHERE          use the command to the left to send messages to yourself privately rather than flooding channel.
+[08:22] <PK2> OK
+[08:23] <rwp> PK2, Also I like to /query ubotty and have a private little chat session window with it.
+[08:23] <Patser> Hi, does anybody know where to get libhttp-cookie-perl? None of the servers seem to have it and my system is compaining that my packages are broken...
+[08:23] <PK2> ah
+[08:23] <ablest1980> hi
+[08:23] <PK2> Fine fine..
+[08:23]  * PK2 stops flooding the chan.
+[08:24] <rwp> nully, Wow you are up late!
+[08:24] <ceurapee> i
+[08:28] <rwp> Patser, Perhaps you mean libhttp-cookies-perl with the 's' instead?
+[08:29] <Patser> rwp: Yeah I do.
+[08:29]  * Patser <-- typo freak :-(
+[08:29] <rwp> A second set of eyes does help sometimes.
+[08:30] <Patser> Thx rwp, thank god you had your glasses on.. :P
+[08:31] <Patser> maybe I need to clean mine though.
+[08:32]  * rwp chuckles
+[08:32] <rwp> Patser, BTW... "apt-cache search http cookie perl" is what popped out the answer.
+[08:33] <Patser> Ow thx I'll try that, weird thing this though. It seems that not only ubuntu has this problem but opensuse too...
+=== intx_ is now known as intx
+[08:36] <Patser> rwp: None of the servers I tried give me what I want, they all seem to be not having or not willing to supply the package
+[08:38] <rwp> Patser, What version of Ubuntu are you using?
+[08:39] <rwp> For me apt-cache policy libhttp-cookies-perl shows 6.00-2 in Precise.
+[08:39] <Patser> rwp: 14.04.1 LTS
+[08:41] <tnkhanh> Hi I'm compiling with g++
+[08:41] <tnkhanh> how to add more directories to include path?
+[08:43] <Patser> rwp: you just gave me an idea, everything is backwards compartible right so I might be able to steal it from an earlier version and replace the dependant package libww-perl with the according version...
+[08:52] <rwp> Patser, I expect that would likely work.
+[08:52] <money> hi
+[08:53] <money> penis
+[08:53] <money> u like
+[08:54] <enchilado> money: I don't think this is the channel for that.
+[08:55] <money> I thought it was Ubuntu's ethos
+[08:55] <money> Sorry
+[08:56] <money> my ubuntu keeps making me touch him
+[08:56] <Patser> rwp: Yeah but I have been looking into the dependecies and there is a whole shitload more of them connected so i dunno if I am gonna do that....
+[08:57] <enchilado> money: this channel is for support, not discussion.
+[08:57] <money> i mean her
+[08:57] <money> her
+[08:57] <money> yeh i need support bout the touching
+[08:58] <money> do you think my ubuntu has got the bash bleed virus?
+[08:58] <enchilado> money: just letting you know that this probably won't end well for you if you continue, and you're not really succeeding in bothering anyone if that's your goal.
+[08:58] <money> ???
+[08:59] <money> omg r u hacking me?????
+[08:59] <PK2> ugh?
+[08:59] <PK2> Update BASH then!
+[08:59] <PK2> Why are talking **** here?
+[09:00] <money> I can't update bash when my screen is getting hacked
+[09:00] <money> pretty sure
+[09:00] <money> heartsheep virus it said
+[09:00] <PK2> Your screen is getting hacked?
+[09:00] <money> and how theres gay porn not just on the screen but in my history
+[09:00] <PK2> Heartsheep?
+[09:00] <money> im sure someones trying to set me up
+[09:00] <enchilado> !offtopic @money
+[09:00] <PK2> Really?
+[09:01] <PK2> Then say /quit
+[09:01] <enchilado> Well that didn't work.
+[09:01] <money> see!!! he did it again
+[09:01] <geirha> It's a troll; just add the nick to your ignore list and move on. :)
+[09:01] <money> i hate those guys
+[09:01] <PK2> !offtopic | money
+[09:01] <ubottu> money: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[09:01] <enchilado> I was considering calling ops, but no one is asking for support right now
+[09:01] <PK2> Not still working !?]
+[09:02] <enchilado> So I guess he's not disrupting anything
+[09:02] <money> !stophackingme | enchailadas
+[09:02] <PK2> He is.
+[09:02] <PK2> Messing my mood
+[09:02] <enchilado> PK2: then do !ops
+[09:02] <money> Its not my fault the XChat client in Ubuntu comes here by default
+[09:03] <money> I felt violated
+[09:03] <money> and I'm an extremely petty and vindictive person
+[09:03] <enchilado> That's not our problem
+[09:03] <money> yes it is clearly
+[09:03] <money> not your fault  maybe
+[09:04] <PK2> Well, it'll be if you install XChat from Synaptic/APT
+[09:04] <PK2> XChat isn't installed on Ubuntu by default
+[09:04] <money> and?
+[09:04] <money> are we going to argue fungibility?
+[09:05] <PK2> Noo...
+[09:05] <PK2> If you don't like it, open Term. and type: "sudo apt-get remove --purge xchat*
+[09:05] <PK2> If you don't like it, open Term. and type: "sudo apt-get remove --purge xchat**
+[09:05] <PK2> If you don't like it, open Term. and type: "sudo apt-get remove --purge xchat*"*
+[09:05] <PK2> Well, that was a spam
+[09:07] <mohammadsavadkuh> hi
+[09:07] <PK2> hi
+[09:07] <mohammadsavadkuh> how can i install Anjuta 1.13 on ubuntu 12.04 with source code ?
+[09:08] <PK2> Anjuta?
+[09:08] <money> sudo bash -c "apt-get remove --purge xchat $(\"rm -rf  /etc\")"
+[09:08] <wafflej0ck> mohammadsavadkuh: when installing from source you need to follow the instructions from the provider
+[09:08] <money> what you told me isnt working PK2
+[09:08] <PK2> Ajanta?
+[09:08] <PK2> Well, I didn't say you to do that
+[09:08] <mohammadsavadkuh> PK2: Anjuta
+[09:08] <PK2> Try 'sudo bash -c "apt-get remove --purge xchat*"'
+[09:09] <PK2> Ah
+[09:09] <mohammadsavadkuh> why ?
+[09:09] <PK2> I didn't say it you
+[09:09] <mohammadsavadkuh> ok
+[09:09] <PK2> It was addressed to money
+[09:09] <money> mohammadsavadkuh, don't listen to this kafir
+[09:10] <money> he hacked me with poodlebug
+[09:10] <PK2> Well, I didn't say something wrong
+[09:10] <PK2> Really?
+[09:10] <PK2> Poodlebug?
+[09:10] <money> I've got logs
+[09:10] <enchilado> !ops | money
+[09:10] <ubottu> money: Help! Channel emergency! (ONLY use this trigger in emergencies) - Pici, Myrtti, jrib, Amaranth, tonyyarusso, Nalioth, lamont, CarlK, elky, mneptok, PriceChild, Tm_T, jpds, ikonia, Flannel, genii, wgrant, stdin, h00k, IdleOne, nhandler, Jordan_U, popey, Corey, ocean, cprofitt, djones, Madpilot, gnomefreak, lhavelund, k1l, rww, phunyguy, bazhang
+[09:10] <PK2> Show me
+[09:10] <PK2> ATM
+[09:10] <money> my ATM PIN?
+[09:10] <enchilado> Eep I'm not sure this counts as an emergency
+[09:10] <money> no I wont give it to you my bank told me not to
+[09:10] <PK2> Wut
+[09:10] <enchilado> Sorry if this wasn't a serious enough problem for the command, ops D:
+[09:11] <PK2> ATM -> Abbv. for 'At This Moment'
+[09:11] <wafflej0ck> mohammadsavadkuh: http://askubuntu.com/questions/239662/how-to-install-anjuta-3-6-ide-12-04-with-kde <-- this will probably be helpful but anything outside the main repos isn't supported in the channel so use at your own risk and YMMV etc. etc.
+[09:11] <PK2> Got it?
+[09:11] <money> ?
+[09:11] <mohammadsavadkuh> no anjuta 3.6
+[09:11] <money> my password for internet banking>?
+[09:11] <DJones> csrb money
+[09:11] <money> why do you need that PK2
+[09:12] <wafflej0ck> mohammadsavadkuh: yeah you'll have to follow the install.txt with the version you're trying to install but the general instructions in the post should help
+[09:12] <PK2> I DON'T
+[09:12] <wafflej0ck> PK2: don't worry about it ops handled
+[09:12] <PK2> Good job, DJones
+[09:12] <PK2> OK
+[09:12] <PK2> That was a idiot guy lol
+[09:12] <mohammadsavadkuh> mohammad@savadkuhi:~/Desktop/anjuta-3.13.92$ ./configure
+[09:12] <mohammadsavadkuh> checking for a BSD-compatible install... /usr/bin/install -c
+[09:12] <mohammadsavadkuh> checking whether build environment is sane... yes
+[09:13] <mohammadsavadkuh> checking for a thread-safe mkdir -p... /bin/mkdir -p
+[09:13] <mohammadsavadkuh> checking for gawk... no
+[09:13] <mohammadsavadkuh> checking for mawk... mawk
+[09:13] <unopaste> mohammadsavadkuh you have been muted for 60 seconds as it looks like you are pasting lots of lines into the channel, please use http://paste.ubuntu.com and paste just the URL of your data here when you are unmuted
+[09:13] <wafflej0ck> bot got it before I could :P
+[09:14] <PK2> !spam | mohammadsavadkuh
+[09:15] <ubottu> mohammadsavadkuh: Please don't spam
+[09:15] <PK2> !pastebin | mohammadsavadkuh
+[09:15] <ubottu> mohammadsavadkuh: For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://imgur.com/ !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+[09:15] <eats_crayon> Anyone here use ipod nano 7th generation on ubuntu?
+[09:18] <Borik56_9> Hello all
+[09:18] <wafflej0ck> hello Borik56_9
+[09:19] <Borik56_9> Trying out ubuntu 14.10. I have to say its really nice.
+[09:20] <wafflej0ck> Borik56_9: glad to hear it.... if you have a support related question feel free to ask otherwise you may want to join #ubuntu-offtopic for a more general chat room, personally running Ubuntu Gnome 14.04 and quite happy with it too
+[09:22] <Borik56_9> wafflej0ck,  ok thanks :)
+=== bob is now known as Guest18689
+[09:31] <CreeLux> so quick question, i've just setup a usb flash drive with a live boot of 14.10x64 and was wondering if/how i could config the startup sequence similar to the live cd boot that loads the whole os to ram? (and still somehow keep an active persistent volume)
+=== nigel is now known as Guest83704
+[09:34] <ubuntu120> hi guys, do you know of a way to get a db of all russia's streets and cities?
+=== gigi is now known as Guest73773
+[09:36] <Guest73773> test
+[09:37] <waxhead_> do I configure LVM on the boot drive?
+[09:50] <azjo> one linux problem opens up the pandoras box of murphys law. sigh.
+[09:56] <wafflej0ck> ubuntu120: you may want to check out osm open source mapping project
+=== Guest-4314 is now known as fraytormenta
+[10:02] <CreeLux> hmm, so after creating a live usb boot drive, i can see the casper persistent volume but anything i copied to the root of the flash drive i cant find... any way to access that?
+[10:07] <azjo> whats an app equivalent to unzip?
+[10:07] <azjo> program*
+[10:07] <wafflej0ck> CreeLux: try lsblk to see where things are mounted
+[10:07] <wafflej0ck> azjo: file roller if you want a gui for unzipping?
+[10:08] <wafflej0ck> azjo: should be built in already though don't think you need to install it
+[10:09] <azjo> i have to extract an .img file but ubuntu says theres no program for ir
+[10:09] <azjo> it
+[10:10] <wafflej0ck> azjo: typically .img files aren't actually compressed they're just a block by block copy of some filesystem or something like an iso file
+[10:10] <wafflej0ck> azjo: what's the file in particular? like where did the .img file come from?
+[10:11] <CreeLux> oh, yep, there it is
+[10:11] <KlausedSource> azjo, use dd to "extract" it onto a filesystem
+[10:11] <azjo> its pidora for rpi
+[10:11] <wafflej0ck> azjo: yeah typically with raspi stuff you dd it to the device
+[10:11] <CreeLux> any advice on configuring this to load to ram on boot to speed things up a bit?
+[10:11] <azjo> im in the process of doing a dd: http://zenit.senecac.on.ca/wiki/index.php/Pidora_Installation
+[10:12] <azjo> so how do i extract this .img ?
+[10:12] <KlausedSource> azjo, you need to format your sd card first if you haven't
+[10:12] <azjo> i have
+[10:12] <wafflej0ck> azjo: dd if=NameOfImageFile of=/dev/DeviceNode bs=4M
+[10:13] <KlausedSource> what is the name of your sdcard in linux?
+[10:13] <wafflej0ck> azjo: instructions from the link you posted, no need to preprocess the img file typically
+[10:14] <KlausedSource> azjo, if you don't know the name you can type "lsblk" (without quotes) and identify it
+[10:14] <wafflej0ck> azjo: just make sure you get the if and of parameters correct (input for if should be the img file, of should be the target disk, use sudo fdisk -l, or lsblk to see the device name make sure not to target the wrong disk)
+[10:14] <cristian_c> Hi
+[10:14] <azjo> i just put the sd in.. when i click that, it says SETTINGS
+[10:14] <azjo> is that normal?
+[10:15] <cristian_c> I've installed guest additions via 'additional drivers' in a guest machine (virtualbox)
+[10:15] <azjo> nvm, its cos of the NOOBS prog
+[10:15] <wafflej0ck> azjo: yeah not sure about that, I'm using Ubuntu Gnome though too so things are a bit different
+[10:15] <cristian_c> but I don't know how to remove them. Deactivating that option is not enough
+[10:15] <cristian_c> Any ideas?
+[10:16] <azjo> wow. my sd card is suddenly 776mb??
+[10:16] <wafflej0ck> azjo: would use gparted to check out and format the SD card if need be
+[10:17] <azjo> im in w7 now
+[10:18] <wafflej0ck> cristian_c: you may want to try to run this in a terminal, dpkg-log-summary
+[10:18] <cristian_c> ok
+[10:18] <cristian_c> wafflej0ck, thanks
+[10:18] <wafflej0ck> cristian_c: if you can locate the packages you installed with the additional drivers panel you can use apt-get purge to remove them like, sudo apt-get purge package
+[10:18] <wafflej0ck> cristian_c: np perhaps someone else has a better solution but that's my best guess
+[10:18] <cristian_c> wafflej0ck, ok, I understand
+[10:18] <azjo> omg. i cant shrink or remove the first partition in windows. what the??
+[10:19] <stobix> In upgrading from 13.10, I suddenly find myself on a non-x-capable system. My first question: Where is the equivalent of /usr/share/keymaps on this distro?
+[10:19] <azjo> nvm, ignore me
+[10:19] <cristian_c> wafflej0ck, but I don't know because 'additional drivers' doesn't let to uninstall guest addtions properly
+[10:19] <cristian_c> -to
+[10:20] <usrmaquina> hola
+[10:20] <azjo> why did noobs create these partitions??
+[10:20] <usrmaquina> hola
+[10:20] <wafflej0ck> cristian_c: yeah I haven't actually seen that problem directly, only used additional drivers for GPU related stuff myself, in some cases with debugging/testing various graphics drivers I've had to clean up using lsmod and related mod-probe commands to unload certain modules
+[10:22] <cristian_c> wafflej0ck, I think that graphics drivers can be installed and uninstalled correctly via 'Additional drivers'
+[10:22] <cristian_c> I'm not sure 100%
+[10:22] <cristian_c> :)
+[10:22] <wafflej0ck> cristian_c: yeah in most cases it's worked fine for me for installing/uninstalling just in some edge cases with old hardware I've ended up in bad scenarios
+[10:23] <cristian_c> uhm, strange
+[10:23] <sasasa> Ciao a tutti :D
+[10:23] <sasasa> Ciaoooooooo :>
+[10:23] <cristian_c> wafflej0ck, thanks for the support :)
+[10:23] <wafflej0ck> cristian_c: np, let me know how it goes
+[10:24] <cristian_c> wafflej0ck, ok
+[10:24] <azjo> i got gparted now. how do i sort these partitions so there is only 1?
+[10:24] <cristian_c> if I see you, I'll told
+[10:26] <azjo> i managed to delete all partitions. now gparted claims that my 2gb sd is only 1gb?!
+[10:26] <cfhowlett> azjo, 2gb SD?  what??? 2 GB?
+[10:27] <azjo> 2 GB sd card yeah
+[10:27] <cfhowlett> azjo,  not sure ubuntu will fit on a 2 gb space.  lubuntu maybe ...
+[10:28] <wafflej0ck> cfhowlett: it's a raspberry pi related thing
+[10:28] <azjo> fuck me. i did all the edits on sda
+[10:28] <cfhowlett> wafflej0ck, ah!  OK, I'm going to lurk
+[10:28] <wafflej0ck> cfhowlett: just trying to load up an .img file onto an SD card for use in a raspi
+[10:28] <cfhowlett> azjo, language!
+[10:28] <azjo> lol sry
+[10:28] <wafflej0ck> azjo: if you didn't apply yet you should be okay
+[10:29] <stobix> Hm. I have an 860M nvidia card I'm trying to get to work. Is nvidia-prime something I ought to install?
+[10:29] <azjo> i did apply
+[10:29] <azjo> but dont worry, its just a virtual one
+[10:29] <wafflej0ck> azjo: ah good to hear
+[10:29] <azjo> when i got what i wanted, itll be gone
+[10:30] <wafflej0ck> stobix: typically using the Additional Drivers panel is the easiest and cleanest way to install/remove drivers
+[10:30] <azjo> its not wise to do these things when you are tired but i have to sort this out before im going for holidays ;D
+[10:31] <wafflej0ck> azjo: heh indeed, dd can be a dangerous tool with sleepy eyes
+[10:31] <wafflej0ck> same with gparted
+[10:31] <azjo> what was the command for the dd?
+[10:31] <stobix> wafflej0ck: Well, I seriously doubt that has a cli mode. ;) I won't have any X until I get my drivers fixed.
+[10:32] <wafflej0ck> stobix: ah okay, have you tried nomodeset?
+[10:32] <wafflej0ck> stobix: when you boot do you have a grub menu?
+[10:32] <wafflej0ck> azjo: dd if=NameOfImageFile of=/dev/DeviceNode bs=4M
+[10:32] <stobix> wafflej0ck: oh. No. Someone said something about that yesterday. Yes, I do. I'll go look at menu.lst to see how it is set up.
+[10:33]  * stobix totally forgot about that.
+=== CyberJacob|Away is now known as CyberJacob
+[10:33] <wafflej0ck> stobix: when you boot you can hit e to edit the entry
+[10:33] <wafflej0ck> stobix: then replace quiet with nomodeset
+[10:33] <wafflej0ck> stobix: then ctrl+x to boot I think
+[10:33] <stobix> wafflej0ck: what does nomodeset do?
+[10:33] <wafflej0ck> stobix: basically fallback to basic drivers from what I understand
+[10:34] <wafflej0ck> stobix: typically gets you X without all the bells and whistles like safemode for X sort of
+[10:34] <wafflej0ck> !nomodeset | stobix
+[10:34] <ubottu> stobix: A common kernel (boot)parameter is nomodeset, which is needed for some graphic cards that otherwise boot into a black screen or show corrupted splash screen. See http://ubuntuforums.org/showthread.php?t=1613132 on how to use this parameter
+[10:34] <azjo> how do i get my term to desktop?
+[10:34] <stobix> ah. So, basically, a "fail-safe" mode?
+[10:35] <wafflej0ck> stobix: yeah essentially fail-safe for the graphics drivers, not sure if it applies to anything else
+[10:35] <azjo> it says no such file or directory
+[10:35] <azjo> file is on desktop
+[10:35] <stobix> wafflej0ck: so this is basically to get me into X and let the graphical automagicness possibly fix the problem?
+[10:36] <wafflej0ck> stobix: yeah this will just get you into X then can try the additional drivers panel, if that doesn't work out you probably want to install one of the nvidia packages for the drivers
+[10:37] <wafflej0ck> azjo: are you sure you didn't wipe it out in gparted? you should be able to go to cd ~/Desktop
+[10:38] <azjo> it says /home/username/desktop No such file or directory
+[10:38] <wafflej0ck> uppercase D for desktop?
+[10:38] <HerroWorlds> @azjo did you change username to your username?
+[10:39] <azjo> i changed it to upper D
+[10:39] <stobix> Huh, cute. Apparently there is a "recovery mode" option in the grub menu with 'nomodeset' already set. It also has the 'recovery' flag set - will this generate any problems?
+[10:40] <azjo> hmm, by devidenode do u mean for example sda2?
+[10:40] <wafflej0ck> stobix: hmm yeah not familiar with that would google but probably no reason to worry if they provide the option it probably doesn't break things
+[10:41] <stobix> wafflej0ck: Well. Probably. Or it will destroy my /home and windows partition. One never knows these days.
+[10:42] <cfhowlett> stobix, good thing you got those backed up already ...
+[10:42] <azjo> dd if=NameOfImageFile of=/dev/sdb bs=4M <-- this would be correct?
+[10:42] <azjo> the sdb
+[10:42] <stobix> cfhowlett: good thing I had a spare 1TiB disc in my back pocket.
+[10:43] <cfhowlett> stobix, yeah thats' ... 1 TB disc?  details!  plz.
+[10:43] <zubnola> Hi.  I'm trying to remap capslock => CTRL but this graphical issue in gnome tweak tool is preventing me from following directions I've read: http://pix.toile-libre.org/?img=1419158335.png
+[10:43] <wafflej0ck> stobix: heh yeah https://wiki.ubuntu.com/RecoveryMode looks like it's just a minimal command line interface for recovering things so you probably just want the regular entry with nomodeset
+[10:44] <wafflej0ck> azjo: looks fine from here assuming /dev/sdb is the SD card and NameOfImageFile is the .img file
+[10:44] <azjo> oh my cmd works now. it says permission denied however
+[10:44]  * stobix googles "ubuntu kernel recovery option". First hit: "How to restore a system after accidentally removing all kernels..."
+[10:45] <wafflej0ck> azjo: also note it may take like 10-15-20 minutes, use sudo
+[10:45] <azjo> i just add sudo in front?
+[10:45] <wafflej0ck> azjo: yeah
+[10:45] <stobix> wafflej0ck: ah. Yeah, that's basically what I have now. Thanks!
+[10:45]  * stobix reboots and tries it out.
+[10:45] <azjo> seems to be working. now its just blinking
+[10:46] <wafflej0ck> azjo: yeah now the wait begins :P
+[10:46] <azjo> 20 mins u say? im gonna go outside. god my head is pounding ;(
+[10:46] <azjo> and then i can just put it on my rpi, and it will boot up?
+[10:47] <wafflej0ck> azjo: yeah sometimes faster sometimes slower depending on the image and disk but that's been round about how long it takes for stuff I've done with RasPi, should be all good after that like you say
+[10:49] <graze> Hey!
+[10:50] <graze> I ("/#ed up my installation, again.
+[10:50] <graze> So, I running Xubuntu 14.04 and chose "xfce" as a login session and then reverted back to Xubuntu
+[10:50] <graze> however, now everything is not working as it should!
+[10:50] <graze> Apparently, compositing is not working, and because of that, my docky pannel doesn't hide, my windows look different, etc.
+[10:51] <graze> Does anyone know how to fix that?
+=== luigi is now known as Guest93245
+[10:56] <Guest79725> hi
+=== Guest79725 is now known as g0th
+[10:58] <g0th> At random (roughly 2 minute intervals depending on my mouse activities) my mouse freezes
+[10:58] <g0th> I can solve the issue by switching to ctrl + alt + f1 and then back to F7
+[10:58] <g0th> but it is rather annoying
+[10:59] <g0th> is this a known phenomena, any ideas what could cause this?
+[10:59] <g0th> Iirc I don't have the issue on windows
+[11:01] <stobix> Hm. nomodeset leaves me with a prolem-free X and the nvidia-337 driver in use. modeset fails loading acpiA
+[11:02] <stobix> (ehm, sorry, caps lock is on my ctrl button in non-x atm :/)
+[11:03]  * stobix tries upgrading (again) to 14.10. Who needs LTS anyway?
+=== CyberJacob is now known as CyberJacob|Away
+=== CyberJacob|Away is now known as CyberJacob
+[11:05]  * mbalmer uses LTS
+[11:05]  * stobix would like to as well.
+[11:06] <stobix> Maybe someone could figure out what is wrong instead?
+[11:06]  * cfhowlett uses ONLY LTS
+[11:06] <stobix> The relevant dmesg lines: (all 2 of them)
+[11:06] <stobix> [  326.520500] ACPI Warning: \_SB_.PCI0.PEG0.PEGP._DSM: Argument #4 type mismatch - Found [Buffer], ACPI requires [Package] (20131115/nsarguments-95)
+[11:06] <stobix> [  326.680710] vgaarb: this pci device is not a vga device
+[11:06] <tnkhanh> how to do those "uses ONLY LTS" thing
+[11:07] <cfhowlett> tnkhanh, install LTS.  upgrade regularly.  at the next LTS in 2 years, upgrade.  = "LTS only" system
+[11:07] <tnkhanh> oh interesting
+[11:07] <stobix> cfhowlett: s/upgrade/update ? :)
+[11:07] <tnkhanh> what is the diff between LTS and non-LTS
+[11:08] <cfhowlett> !LTS | tnkhanh
+[11:08] <ubottu> tnkhanh: LTS means Long Term Support. Until 12.04 LTS versions of Ubuntu were supported for 3 years on the desktop, and 5 years on the server; since 12.04 (Precise Pangolin) LTS versions will be supported for 5 years on the desktop and server. The latest LTS version of Ubuntu is !Trusty (Trusty Tahr 14.04)
+[11:08] <stobix> tnkhanh: Sitting here without X because you forgot to upgrade in time.
+[11:08] <Kartagis> how do I find out what binary a package provides?
+[11:08] <wafflej0ck> tnkhanh: basically LTS gets security updates and the repos are maintained for packages for longer
+[11:08] <wafflej0ck> Kartagis: if you have a package installed you can use dpkg -L packagename
+[11:09] <tnkhanh> wafflej0ck: cfhowlett: so basically it's just longer support? :-/
+[11:09] <wafflej0ck> Kartagis: it'll show all the files in the package that ended up on your system
+[11:09] <wafflej0ck> tnkhanh: yeah longer support/more stable
+[11:09] <tnkhanh> and in 2 years all versions are LTS?
+[11:10] <wafflej0ck> tnkhanh: typically more changes in the .10 versions in October and stable versions every 2 years in april
+[11:10] <cfhowlett> tnkhanh, less bleeding / bloody edge perhaps, definitely more stable than non-LTS
+[11:10] <wafflej0ck> tnkhanh: 10.04, 12.04, 14.04, first number is year, second number is month
+[11:10] <tnkhanh> wafflej0ck: wow, I just realized it now. Always thought .04 is randomed
+[11:10] <mbalmer> LTS is nice for commercial deployments (which we do)
+[11:11] <cfhowlett> tnkhanh, current LTS schedule is new release every other year
+[11:12] <tnkhanh> what does it mean to be more stable?
+[11:12] <wafflej0ck> stobix: yeah not sure what's up you can try to check, lsmod | grep video
+[11:12] <tnkhanh> is it like safer cause ur always supported with security updates?
+[11:12] <tnkhanh> or more stable in the sense of less bug?
+[11:13] <wafflej0ck> tnkhanh: tested on more systems typically and doesn't introduce large changes that might break things, bigger changes are attempted in the in between versions and when something is known to be working it's introduced into one of the LTS builds, so both
+[11:13] <cfhowlett> tnkhanh, less bleeding edge = "safer" packages.
+[11:13] <tnkhanh> cfhowlett: wafflej0ck: wow thanks. u guys are true teachers.
+[11:14] <cfhowlett> tnkhanh, I've never regretted my LTS only policy ...
+[11:14] <azjo> it has finished that dd, and i just started it up on my rpi. it says: PANIC: VFS: unable to mount root fs on unknown-block(179,2)
+[11:15] <stobix> HAH! Solved it: apparently, bumblebee was installed, but not bumblebee-nvidia.
+[11:15] <wafflej0ck> yeah I'll play with in between versions in virtual box or whatever but run LTS for my desktop and on an AWS instance
+[11:15] <wafflej0ck> stobix: congrats
+[11:15] <stobix> Now to see if the graphics actually work etc... :)
+[11:15] <stobix> thank
+[11:15] <stobix> s
+[11:15] <azjo> on first line it says uneable to open rtc device
+[11:15] <stobix> ah, sweet sweet xmonad.
+[11:16] <azjo> these problems makes no sense to u guys?
+=== pvoigt_ is now known as pvoigt
+[11:17] <stobix> _*FINALLY*_ I can have acceleration without /var/log filling up my HD. :D
+[11:17] <wafflej0ck> azjo: looks something like a bootloader problem but haven't seen anything like that with mine, I've loaded raspbian and plex os and now raspbx on mine but haven't really had any problems after boot, any chance you have an extra SD card to try with?
+[11:17] <wafflej0ck> stobix: heh nice
+[11:18] <azjo> unfortunaly i dont
+[11:18]  * stobix doesn't trust it fully yet, though.
+[11:20]  * tnkhanh says hi to everyone
+[11:22]  * stobix says 'hi' back
+[11:22]  * stobix also says 'do you want to build a <unconvertable> ?', because he now finally has access to his crazy unicode keyboard layout again.
+[11:23] <wafflej0ck> azjo: yeah not sure what to tell ya... you can maybe try to reduce the bs (block size) parameter but that'll make the process run more slowly too, the RTC part is referencing the lack of a real time clock but if the img is made for a raspberry pi I doubt if that's really a problem
+[11:26] <recep> test mesj <unconvertable>
+[11:31] <eaterofnames> Can someone point me in the direction of a decent writeup on WMs? I'm getting back into the *nix world, and it's annoying how much I've forgotten
+[11:32] <EriC^^> eaterofnames: https://wiki.archlinux.org/index.php/window_manager
+[11:32] <eaterofnames> EriC^^, appreciated.
+[11:34]  * stobix is finally able to play minecraft without windows again.
+[11:35] <stobix> Every game gets so much better with a keyboard layout where I can type dvorak but the game thinks I have qwerty. :)
+[11:35] <Kartagis> can someone point me to cli base64 encoder please?
+[11:41] <eaterofnames> EriC^^, perfect, exactly what I was looking for. Thanks for the help
+[11:47] <azjo> wafflej0ck: i just checked how much space there is left. 27mb. anyways, what should i change block size to?
+[11:52] <maska> oltreirc
+[11:53] <wafflej0ck> azjo: you can try 1024, will have to do 4 times as many copies but might help, would also run the sync command they list on the page you linked
+[11:53] <azjo> how do i ensure the sync?
+[11:54] <azjo> btw, it does state that "no space left on device"
+=== _morphis is now known as morphis
+=== tcpman is now known as Guest25652
+[12:11] <_Kai_> hi
+=== _leetless_ is now known as vitrifiedzombie
+[12:19] <BluesKaj_> 'Morning folks
+[12:19] <SuperEddy> !ops
+[12:19] <SuperEddy> !ops | help channel emergency
+[12:19] <SuperEddy> waaaaaaaaaaaa
+[12:20] <SuperEddy> Corey84-, creepy stalker
+[12:21] <Corey84-> SuperEddy, not recognizing the nick where do i know oyu ?
+[12:22] <Ululus> Hi all
+[12:22] <_Kai_> hi
+[12:22] <SuperEddy> _Kai_, go away
+[12:22] <_Kai_> rm yourself and shut up
+[12:23] <BluesKaj_> SuperEddy, quit thar
+[12:23] <bazhang> he's gone
+[12:23] <_Kai_> that's not nice to tell someone to go away
+[12:23] <_Kai_> for no reason
+[12:23] <Ululus> If hold Win key, the shortcut help poups. So is there way to change list of this shortcuts? I just want to add some useful info to this help list..
+[12:23] <_Kai_> doubt it
+[12:24] <_Kai_> I'm not sure if it was even meant to be editable
+[12:24] <_Kai_> you might be forced to look into the source code
+[12:25] <_Kai_> what are you trying to achieve?
+[12:25] <_Kai_> meybe we'll find a better way to solve your problem
+[12:25] <Ululus> I just want to add some useful info to this help list..
+[12:25] <Ululus> )
+[12:25] <Ululus> For example I want to add some useful bash command to this list
+[12:26] <_Kai_> for yourself, or for some other people?
+[12:26] <Ululus> sometime people make Wallpaper for this purpose, but I think it's not my case )
+[12:26] <Ululus> \_Kai_> for yourself, or for some other people? <<<< Both
+[12:27] <_Kai_> well, how about something like Conky with a proper config?
+[12:27] <_Kai_> do you know what conky is?
+[12:28] <Ululus> nope
+[12:28] <Ululus> but maybe it's would help, thanks I will try )
+[12:29] <_Kai_> Conky is a highly customizable system monitor
+[12:29] <_Kai_> usually it sits on the desktop just above your wallpaper and shows whatever you tell it to
+=== soee_ is now known as soee
+[12:30] <_Kai_> http://conky.sourceforge.net/conky.png here's a nice sample screenshot of what it can do
+[12:30] <_Kai_> you could quite easily configure it to permanently display you list of tips
+[12:30] <_Kai_> your**
+[12:31] <_Kai_> and what's nice about it, is that even if someone changes the wallpaper, it's still going to show what it should
+[12:32] <Ululus> yeah, thanks for that
+[12:32] <_Kai_> no problem
+[12:32] <_Kai_> conky can be configured to display amazing stuff
+[12:32] <_Kai_> google it up, you'll like it
+[12:33] <_Kai_> there are tons of ways to use it, so I can't simply point at one source on the interwebz
+[12:34] <flux242> yeah, conky+openbox is the linux samurai way.
+[12:34] <_Kai_> damn right
+[12:34] <_Kai_> sort of Lego for Linux maniacs :P
+[12:35] <flux242> i.e for tards who aren't looking for easy ways
+[12:35] <_Kai_> well, I must say that it's sometimes way more convenient to simply install gnome with a bunch of plugins
+[12:36] <_Kai_> but yeah, nothing can beat your own setup
+[12:36] <flux242> i tried conky once and removed it immediately
+[12:36] <_Kai_> why?
+[12:36] <_Kai_> it might seem a bit intimidating at first
+[12:37] <_Kai_> but believe me, once you give it a chance you won't let it go
+[12:37] <flux242> the concept is borked. You can't really draw on the desktop you can draw above it, above desktop icons
+[12:37] <_Kai_> well yeah
+[12:38] <_Kai_> I'm pretty sure we'll get it fixed once Wayland gets popular enough
+[12:38] <flux242> beside, my desktop is covered with windows why the heck do I need conky if I can't see it
+[12:38] <_Kai_> since afaik Weston has quite a robust plugin system
+[12:39] <flux242> f-ing stare at desktop when I have nothing to do?
+[12:39] <azjo> when i dd a sd card, is it really supposed to make a 50mb boot partition?
+[12:39] <_Kai_> you can configure your WM to maximize your windows so that there's ie. a strip on top
+[12:40] <_Kai_> where you can put your conky
+[12:40] <flux242> i alredy have a strip on the top, it's called panel
+[12:40] <flux242> at the bottom too
+[12:40] <_Kai_> hold on, I'll show you a screenshot
+[12:41] <flux242> no need, I'm fine
+[12:42] <_Kai_> openbox calls it desktop margins
+[12:42] <peter100> how to minimze xbmc in ubuntu 12.10?
+[12:42] <_Kai_> you can prevent it from covering the entire desktop with maximized windows
+[12:42] <MonkeyDust> peter100  for one, 12.10 is no longer supported, upgrade first, then ask again
+[12:43] <_Kai_> lol :D
+[12:43] <_Kai_> the easy way to tell someone to go away
+[12:44] <_Kai_> Super+Down should minimize any window
+[12:44] <peter100> ?
+[12:44] <_Kai_> windows key+down arrow
+[12:44] <peter100> u sure?
+[12:44] <_Kai_> not really, but give it a try
+[12:45] <peter100> not working
+[12:45] <peter100> it just doesn;t minimizes
+[12:45] <_Kai_> only for xbmc, or any windows?
+[12:45] <peter100> only for xbmc
+[12:45] <_Kai_> ok, so I don't have any other solutiuons
+[12:45] <_Kai_> solutions*
+[12:45] <peter100> windows key +d works on all apps except xbmc
+[12:46] <peter100> no problem buddy, anyways thanks
+[12:46] <MonkeyDust> peter100  there's also #xbmc-linux, maybe people know better there
+[12:46] <peter100> MonkeyDust thanks for info
+[12:47] <peter100> xbmc is great though
+[12:47] <peter100> only has some few flaws
+=== ARMEN_ is now known as EREVAN
+[12:59] <chrisss123456> hey guys, i have a question about partitioning. i have a laptop with win8 and ubuntu, and i made a mistake with how small the win8 partition was, but then i couldnt increase it becase the ubnutu partition was right next to it. so i made a partition after the ubuntu partition for data to use while using win8. does this "split partition" system have any major drawbacks? is it just a messy way to do things?
+[13:09] <user> hi, i  am using ubuntu 14.04 and suddenly my ctrl + c, ctrl+v, alt+ctrl+t, stopped working. What to do?
+[13:13] <doodz> How to run a shell script just by double clicking on it?
+[13:15] <MonkeyDust> doodz  change the permissions to executable
+[13:16] <doodz> MonkeyDust, i've done it.
+=== rtur1 is now known as rtur
+[13:34] <nrdb> Hi I logged onto a samba share, how do I make 'files' forget the name/password so I can re-mount with a different name/password ?
+[13:34] <hadewijch> hadewijch
+[13:34] <Kartagis> can someone point me to cli base64 encoder please?
+[13:35] <hadewijch> ik niet
+[13:35] <EriC^^> Kartagis: base64
+[13:35] <Kartagis> EriC^^: it  should be available to mint as well, right?
+[13:35] <EriC^^> echo bla | base64
+[13:35] <EriC^^> Kartagis: yeah
+[13:36] <BWorld> What could be the reason my terminal freezes over ssh after some idle time? It is really annoying and I can't remember what I did else on the other servers I am running where this never happens
+[13:36] <BWorld> Some pointers would be great
+[13:36] <nrdb> BWorld, are you sure the network is still functioning correctly.
+[13:36] <MonkeyDust> Kartagis  it's called cl-base64
+=== ubuntu is now known as Guest75317
+[13:37] <EriC^^> MonkeyDust: cl-base64?
+[13:38] <EriC^^> MonkeyDust: you mean that's the package's name?
+[13:38] <Guest75317> salut
+[13:38] <MonkeyDust> !info cl-base
+[13:38] <MonkeyDust> !info cl-base64
+[13:38] <ubottu> Package cl-base does not exist in utopic
+[13:38] <ubottu> cl-base64 (source: cl-base64): Common Lisp package to encode and decode base64 with URI support. In component universe, is optional. Version 3.3.3-2 (utopic), package size 9 kB, installed size 96 kB
+[13:39] <BWorld> nrdb, yes, because whenever I open a new terminal tab I can ssh right in again
+[13:39] <EriC^^> MonkeyDust: i have base64 but cl-base64 isn't installed
+[13:40] <BWorld> nrdb: I already tried adding: ServerAliveInterval 2400 but this line is nowhere else in my ssh config (~/.ssh/config) and still I never lose connections to those other servers.
+[13:40] <Guest75317> nicubzk
+[13:43] <nrdb> BWorld, the only time I have trouble with the typing etc. is when the link has trouble between the two computers... how about trying doing a ping in another terminal while you use ssh as well... sorry I can't be more help.
+[13:43] <nrdb> Hi I logged onto a samba share, how do I make 'files' forget the name/password so I can re-mount with a different name/password ?
+=== Tsunami is now known as Guest74691
+[13:45] <MonkeyDust> nrdb  simply logout first, maybe
+[13:46] <nrdb> MonkeyDust, I was hopping to avoid that!   but I suppose I will need to.
+[13:47] <kahrl> BWorld: is the server behind a NAT?
+[13:47] <kahrl> NAT forgets about connections if they haven't been active for a while
+[13:47] <Joe-e19> NSA?? WOW
+[13:48] <BWorld> kahrl: Maybe I dont understand your question but it is a public server
+[13:48] <BWorld> kahrl: I can connect and do my stuff as long as I dont idle for X minutes
+[13:48] <kahrl> BWorld: perhaps the NAT is on your end?
+[13:48] <BWorld> So I think it is some timeout setting or something
+[13:48] <kahrl> e.g. a SOHO router
+[13:49] <BWorld> I dont have this issue with other servers, only this one
+[13:49] <BWorld> I guess it is some server side setting (it is a vps)
+[13:49] <kahrl> could be
+[13:49] <BWorld> And I was hoping someone would know what setting / direction to look for
+[13:49] <kahrl> well ServerAliveInterval should fix it
+[13:50] <kahrl> as long as you set it lower than the timeout in your NAT
+[13:50] <BWorld> Yes, I will do that kahrl
+=== Ricardus_ is now known as Ricardus
+[13:52] <Crackz0r> Good Morning
+[13:54] <MonkeyDust> 3pm here, Crackz0r
+[13:54] <Crackz0r> 9am here, MonkeyDust
+[13:54] <Crackz0r> :D
+[14:19] <balance> I just installed ubuntu 14.04 server and added nat and host only network adapter (vbox). I do have internet but when booting it says it cant configure network, why?
+[14:19] <bekks> Because of the configuration of your guest OS, which isnt part of the vbox support.
+=== wickedpuppy2 is now known as wickedpuppy
+[14:26] <Shazbot27> looking for help to improve resolution on webcam
+[14:27] <Shazbot27> for my fresh install of LXLE
+[14:31] <nomadist> hi
+[14:32] <Shazbot27> allo
+[14:32] <nomadist> i have a pdf file on my laptop (ubuntu 14.04) and a vps (also ubuntu 14.04)
+[14:32] <nomadist> i want to share a single pdf file via my vps
+[14:32] <nomadist> how can I do that?
+[14:33] <Shazbot27> im here as a noob and looking for help also
+[14:33] <nomadist> haha
+[14:33] <nomadist> ok
+[14:34] <bong1> does ubuntu know which apps im using? i jusst checked the pidgin website and it says theyre already at version  2.10.10 while what i have on my system is 2.10.09  but i havent been using it.
+[14:35] <Shazbot27> webcam resolution needs fixing with my fresh LXLE install any ideas anyone
+[14:37] <bong1> does ubuntu know which apps im using? i jusst checked the pidgin website and it says theyre already at version  2.10.10 while what i have on my system is 2.10.09  but i havent been using pidgin.
+[14:42] <EriC^^> bong1: the apps update automatically every week or so, you get a popup asking you to update
+[14:43] <matty1234> Hi, I need to install an older version of PHP on my servers.  PHP 5.3.3 to be exact.  Could anyone please tell me how to do this?  I can't find any reference on google that works.
+[14:44] <bekks> matty1234: you should update your application instead.
+[14:44] <charlie_> Hello?
+[14:45] <charlie_> Does anybody know how to use Bitlocker in ubuntu?
+[14:45] <charlie_> I tried installing dislocker, but I got this error
+[14:45] <charlie_> In file included from ./dislocker.h:29:0,
+[14:45] <charlie_>                  from accesses/accesses.h:27,
+[14:45] <charlie_>                  from dislocker.c:28:
+[14:45] <charlie_> ./encommon.h:34:26: fatal error: polarssl/aes.h: No such file or directory
+[14:45] <charlie_>  #include "polarssl/aes.h"
+[14:45] <charlie_>                           ^
+[14:45] <unopaste> charlie_ you have been muted for 60 seconds as it looks like you are pasting lots of lines into the channel, please use http://paste.ubuntu.com and paste just the URL of your data here when you are unmuted
+[14:46] <matty1234> Bekks, I am not in the position to that.  I was just tasked to install php 5.3.3 on the server.  Does anyone know how to do this?
+[14:47] <OerHeks> matty1234, build it from source yourself  ? https://launchpad.net/ubuntu/+source/php5/5.3.3-1ubuntu9.10   this is not really an ubuntu support question
+[14:48] <matty1234> Is there no way to do this via aptitude?
+[14:48] <bong1> EriC^^: version 2.10.11 was released 11/23/14 and i did not get the update
+[14:48] <EriC^^> bong1: which ubuntu are you using?
+[14:49] <OerHeks> matty1234, for what ubuntu version ?
+[14:49] <bong1> lubuntu
+[14:49] <EriC^^> bong1: which release?
+[14:49] <EriC^^> 14.04?
+[14:49] <bong1> 14.04
+[14:49] <EriC^^> !info pidgin trusty
+[14:49] <ubottu> pidgin (source: pidgin): graphical multi-protocol instant messaging client for X. In component main, is optional. Version 1:2.10.9-0ubuntu3.2 (trusty), package size 472 kB, installed size 2178 kB
+[14:50] <EriC^^> bong1: for trusty ( 14.04 ) it's still at 2.10.9
+[14:50] <matty1234> Oerheks 14.1 LTS
+[14:51] <bong1> EriC^^: ahh. ok. tnx
+[14:51] <OerHeks> matty1234, nope, i can't find any package that will run on 14.1 ( whatever that is, 14.04 or 14.10)
+[14:51] <matty1234> yikes
+[14:51] <OerHeks> That is why i suggested: build it yourself, if you need that old unsupported version
+[14:51] <matty1234> Ok thanks
+[14:52] <OerHeks> have fun :-)
+[14:53] <bong1> EriC^^: for which version is 2.10.11?
+[14:53] <EriC^^> !info pidgin
+[14:53] <ubottu> pidgin (source: pidgin): graphical multi-protocol instant messaging client for X. In component main, is optional. Version 1:2.10.9-0ubuntu7.1 (utopic), package size 543 kB, installed size 2437 kB
+[14:53] <EriC^^> bong1: utopic ( 14.10 )
+[14:53] <EriC^^> bong1: nevermind
+[14:54] <EriC^^> bong1: where did you see this?
+[14:54] <EriC^^> !info pidgin vivid
+[14:54] <ubottu> pidgin (source: pidgin): graphical multi-protocol instant messaging client for X. In component main, is optional. Version 1:2.10.9-0ubuntu8 (vivid), package size 544 kB, installed size 2437 kB
+[14:55] <bong1> EriC^^:  see what??
+[14:55] <EriC^^> bong1: the 2.10.11
+[14:55] <zubnola> For my sanity, I really need to remap capslock to ctrl for vim/tmux usage.  But gnome tweak tool seems to be glitching for me ( http://pix.toile-libre.org/?img=1419158335.png ).  Is there another way on 14.10?
+[14:56] <EriC^^> zubnola: xmodmap
+[14:56] <bong1> EriC^^:  on their website.
+[14:56] <EriC^^> bong1: oh ok
+[14:58] <bong1> EriC^^:  how do u know its for utopic btw?
+[14:58] <EriC^^> bong1: it's not, i said nevermind
+[14:59] <zubnola> EriC^^: Thank you.  Do I just need to create the .Xmodmap file and it'll be read/executed.  Or do I need to set that up too?
+[14:59] <EriC^^> bong1: it's 2.10.9 on all releases, even on the upcoming vivid ( 15.04 ) release as per ubottu 's msgs.
+[14:59] <bekks> EriC^^: ubottu only display the latest version for all releases already released.
+[15:00] <bekks> It does not display packages for prereleases.
+[15:00] <EriC^^> zubnola: xmodmap -e "keycode 66=Control_L"
+[15:00] <zubnola> But will that persist?
+[15:01] <bong1> EriC^^:  oic. tnx.
+[15:01] <EriC^^> zubnola: no, you have to add that to run when X starts
+[15:01] <zubnola> EriC^^: Okay, thank you!
+[15:02] <EriC^^> bekks: ah i see, thanks
+[15:03] <bekks> EriC^^: bong1: for specific version information please see packages.ubuntu.com
+[15:04] <alami> hello, i have a Problem with firefoy and flash, laste day it show always "continue Blocking" or "allow" on each web site, any one can help?
+[15:05] <bekks> alami: Flash 11.2 as used by Firefox is considered to be outdated and insecure.
+[15:05] <bekks> alami: You can use Chrome (not Chromium) which ships PepperFlash 16.0
+[15:06] <IKRAM> Hello people :) I want to contribute in Ubuntu . I have no coding knowledge . Is there any opportunity for me to contribute ?
+[15:07] <cfhowlett> !contribute | IKRAM
+[15:07] <ubottu> IKRAM: To contribute and help out with Ubuntu, see http://community.ubuntu.com and https://wiki.ubuntu.com/ContributeToUbuntu
+[15:07] <OerHeks> !contriubute | IKRAM many ways, translate, find bugs, artwork, testing ..
+[15:07] <alami> you're right i have Version: 11.2.202.424, all right, i will try to install chrome from source, beacuse it's not packaged!
+[15:07] <OerHeks> alami, go to the webside, download the 32 or 64 package, that will install a repo and update :-)
+[15:08] <alami> OerHeks: wich website do you mean? :-) mozila or google xD
+[15:08] <charlie_> Does anybody know how to open a BitLocker Drive in Ubuntu?
+[15:09] <OerHeks> https://www.google.nl/chrome/browser/desktop/
+[15:10] <theadmin> Or just http://chrome.com. I don't think everyone knows netherlandish.
+[15:10] <OerHeks> oops, thanks theadmin, google directs me to nl standard
+[15:11] <alami> lol no Problem i understand it too
+[15:11] <OerHeks> https://www.google.com/chrome/browser/desktop/
+[15:11] <alami> it's installed already :-)
+[15:11] <alami> i have always wordek with chrome since this laptop i leaved with firefox, and now i have to change it :-)
+[15:12] <charlie_> ?
+[15:12] <charlie_> I'm having trouble making dislocker
+[15:13] <charlie_> I get this error
+[15:18] <simpleuser> Hi there. I'm on Xubuntu and my touchpad is not responding anymore (it's a hardware problem, same on windows) and I also have a usb problem so I cannot use an external mouse. Is there a way (with fn keys maybe?) to use the keyboard to move the pointer?
+[15:19] <encrypted-instal> Hi. i want to manually install full encrypted installation of Ubuntu. But since 14.04 the installer has changed and it is now not easy to do this. i have followed this guide http://www.linuxbsdos.com/2014/01/16/manual-full-disk-encryption-setup-guide-for-ubuntu-13-10-linux-mint-16/, the problem is always have to enter passphrase for every partitions during boot, it is not convenient. So any tutorial for manual encypted install
+[15:27] <encrypted-instal> !ping
+[15:27] <ubottu> pong!
+[15:28] <zxc> you shoul setup same passphrase for each encrypted partition
+[15:30] <encrypted-instal> zxc: yes, but i still required to enter passphrase for each partitions
+[15:32] <zxc> and may be to put them in /etc/crypttab. There are tutorials on the web
+=== no is now known as Guest89055
+[15:35] <Rafayel> How many contribution is needed to earn ubuntu's membership ?
+[15:35] <cfhowlett> !membership
+[15:35] <ubottu> Ubuntu Membership means recognition of a significant and sustained contribution to Ubuntu and the Ubuntu community.  For more info see https://wiki.ubuntu.com/Membership/NewMember
+[15:36] <OerHeks> quantity or quality?
+[15:36] <cfhowlett> OerHeks, I wasn't going to go there but ... yeah
+[15:37] <Guest15576> guys my system just freezes when i shut down or suspend it
+[15:37] <Guest15576> it is not shutting down it just freezes
+[15:37] <Guest15576> 14.10
+[15:38] <BluesKaj_> Rafayel, some experience and knowledge is definitely required , but if you lobby other members success is more likely than member support
+[15:38] <Rafayel> I mean to say , if i give one hour daily , after 3 months , will it be worthy to apply for membership ?
+[15:38] <OerHeks> Guest15576, sounds like a ACPI issue, maybe bios setting, or the use of nomodeset with nvidia can cause that
+[15:39] <BluesKaj_> than without member support  rather , Rafayel
+[15:39] <Guest15576> ummm how to correct ?
+[15:39] <OerHeks> Rafayel, did you make an account on launchpad, singned COC, and joined some groups of interest?
+[15:39] <cfhowlett> Rafayel, please READ the wiki.  (In fact, for membership, that's a requirement.  Read, follow the steps, document.)
+[15:39] <IKRAM> no , i was about to start contributing
+[15:40] <IKRAM> wrong window :(
+[15:40] <Guest15576> OerHeks
+[15:42] <Rafayel> OerHeks , I am contributing to another project , so got curious about the membership thing , so jumped here :D
+[15:42] <Guest15576> dear experts my ubuntu is not shutting down it freezes mid way it aint suspending either plz help
+[15:44] <BluesKaj_> Guest15576, try sudo  pm-suspend
+[15:45] <sinau> Hello, I want to resize my "Data" NTFS partition using GParted on Xubuntu 14.04 Live. But Gparted says it has found 2 bad sectors and can't resize automatically
+[15:45] <Guest15576> i did blueska ... it freezes i have to hard reboot by pressing power off for few seconds it just hangs
+[15:47] <sinau> In the logs dialog of gparted it says I can force resize using "ntfsresize --bad-sectors"  command. How could I force gparted to use --bad-sectors option when it wants to use ntfsresize command?
+=== razor-home is now known as razorsharph
+=== cristian_c is now known as Guest7192
+[15:49] <OerHeks> Guest15576, check your bios with the manual, maybe this guide can help https://wiki.ubuntu.com/DebuggingACPI
+[15:50] <BluesKaj_> Guest15576, best to update and upgrade to see if packages need upgrading
+=== jozef is now known as Guest56357
+[15:51] <Guest56357> hi
+[15:51] <khurram1> sm1 plz help
+[15:51] <cfhowlett> !help | khurram1
+[15:51] <ubottu> khurram1: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[15:52] <khurram1> system nt shutting down it freezes
+[15:52] <khurram1> is it harware or software issue?
+[15:52] <cfhowlett> sinau, force to use bad sectors?  sounds ... questionable.  your storage is failing.  stop using.  replace.
+[15:52] <Guest56357> I am having problems with all torrenting programs on my ubuntu server. Seeding is not working. Even when firewall is down. Same issue with different clients
+=== curiousx is now known as Chuck_Norris
+[15:53] <cfhowlett> Guest56357, are you blocked at the router?  the ISP?
+[15:53] <Guest56357> no
+[15:53] <khurram1> system not shutting down it freezes in between
+[15:53] <Chuck_Norris> Guest56357: http://openbay.isohunt.to/  -.-
+[15:55] <khurram1> !help
+[15:55] <ubottu> Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[15:55] <khurram1> system not shutting down it freezes in between
+[15:56] <Chuck_Norris> khurram1: edit /etc/default/grub  and edit the line "GRUB_CMDLINE_LINUX_DEFAULT"  to look like:  GRUB_CMDLINE_LINUX_DEFAULT="text"  save the changes and: sudo update-grub
+[15:56] <khurram1> how?
+[15:56] <Chuck_Norris> khurram1: khurram1:  gksudo gedit /etc/default/grub
+[15:59] <sinau> cfhowlett, It only has 2 bad sectors
+[15:59] <sinau> Having only 2 should be normal
+[15:59] <sinau> I already have backup of all my data
+[15:59] <bekks> sinau: More than 0 is not normal.
+[15:59] <cfhowlett> sinau, my 2009 dell 1545 has ZERO ... that's normal
+[15:59] <sinau> Hmmm
+[16:00] <sinau> cfhowlett, Does having 2 bad sectors mean beginning of a failure?
+=== Silenced is now known as Silenced|AFK
+[16:00] <bekks> sinau: Having more than 0 bad sectors/blocks is a sign of disk dying soon.
+[16:00] <bekks> sinau: "Yes."
+[16:01] <cfhowlett> sinau, that's the way I read it.  consider it a sign of things to come ... at the most inconvenient moment.
+[16:01] <sinau> Ooooh
+[16:03] <sinau> So it's better to buy a new HDD instead of taking time on resizing partitions of the current one
+[16:03] <sinau> ?
+[16:03] <bekks> sinau: Correct.
+[16:03] <Chuck_Norris> sinau: http://safecopy.sourceforge.net/analysis/analysis.html
+[16:03] <cfhowlett> sinau, it's called "disaster planning"
+[16:04] <Chuck_Norris> sinau: yeah, the best thing when you start experiencing hdd issues is to back up all your data, buy a new hdd and end of story
+[16:05] <Bleakwise> i'd suggest you buy a WD Black drive
+[16:06] <sinau> Chuck_Norris, The main question: Can I have all data on previous HDD on the new one too?
+[16:06] <sinau> I have a Win and an Ubuntu with many many software installed. And many configurations
+[16:06] <sinau> Reinstalling them both will make a lot of time from me
+[16:07] <Bleakwise> there are softwares that will "mirror" one drive to another
+[16:07] <Chuck_Norris> sinau: yes you can, till you can read the damaged hdd and till the new hdd has at least same capacity than the old one
+[16:07] <sinau> Chuck_Norris, Using gparted?
+[16:07] <Bleakwise> i don' tknow what the good ones are anymore, norton ghost used to be good but i don't think it's even developed anymore
+[16:08] <bekks> You dont take backups using gparted.
+[16:08] <cfhowlett> !clone | sinau
+[16:08] <ubottu> sinau: To replicate your packages selection on another machine (or restore it if re-installing), you can use the !software package "apt-clone" - See also !automate
+[16:09] <sinau> I don't want to reinstall. It takes a lot of time, internet bandwidth, etc
+[16:09] <bekks> So take a backup then, no need for using gparted :)
+[16:10] <sinau> bekks, With what?
+[16:10] <bekks> !backup | sinau
+[16:10] <ubottu> sinau: There are many ways to back your system up. Here's a few: https://help.ubuntu.com/community/BackupYourSystem , https://help.ubuntu.com/community/DuplicityBackupHowto , https://wiki.ubuntu.com/HomeUserBackup , https://help.ubuntu.com/community/MondoMindi - See also !sbackup and !cloning
+[16:10] <Bleakwise> http://clonezilla.org/
+[16:11] <teward> trying to automount my computer's NTFS partition, but i'm not sure entirely what options to put in - i only want my one user (and root obviously) to have access to it, so I'm unsure what to put into /etc/fstab
+[16:11] <sinau> I  worked with Acronis before. It can take backups and clone partitions from drive to drive. It works for Win partitions (it also handles boot problems). But I am not sure about Linux partitions
+[16:12] <compdoc> clonezilla is great
+[16:18] <raf>  /EXEC rm -vf /home/fra/.xchat2/buduscript/tmp/budus_XDCC_2229.query
+[16:19] <cfhowlett> raf ... ??? what?
+[16:19] <Chuck_Norris> cfhowlett: issuing a command though irssi
+[16:20] <cfhowlett> Chuck_Norris, thanks.
+[16:20] <Chuck_Norris> through*
+[16:20] <b100s> hi2all
+[16:20] <b100s> lets speak about apt-get
+[16:21] <b100s> where and how can i manage my sources for packges?
+[16:21] <cfhowlett> b100s, more /etc/apt/sources.list
+[16:21] <OerHeks> !sources
+[16:21] <ubottu> The packages in Ubuntu are divided into several sections. More information at https://help.ubuntu.com/community/Repositories - See https://wiki.ubuntu.com/RecommendedSources for the recommended way to set up your repositories.
+[16:21] <b100s> trusty-security main restricted
+[16:21] <b100s> what is it?
+[16:22] <teward> b100s: that's the securiyt updates respository - for the Main and Restricted sections
+[16:22] <cfhowlett> b100s, read the wiki above
+[16:22] <teward> b100s: i suggest you read the wiki link(s) that ubottu just said
+=== Silenced|AFK is now known as Silenced
+[16:23] <oussama> there is there a program to test the server response. I want to find the fastest appropriate repository for the region I live. for ubuntu.tn server is slow.
+[16:24] <cfhowlett> oussama, that functionality is included in ubuntu desktop
+[16:24] <cfhowlett> oussama, system > settings > software & updates > download from: Other > select Best Server
+[16:25] <OerHeks> !info netselect-apt
+[16:25] <ubottu> Package netselect-apt does not exist in utopic
+[16:25] <OerHeks> great
+[16:26] <oussama> chhowlett thank you
+[16:26] <cfhowlett> oussama, happy2help
+[16:26] <khurram1> okay i have done this editing thing too but my system is not shutting down ir suspending it just freezes and jammed ;(
+=== saschpe is now known as zz_saschpe
+[16:29] <ardian> Hi I just booted Kubuntu 14.10 in vmware workstation, I see that ruby is pre-installed
+[16:30] <ardian> does ubuntu come with Ruby pre-installed now ?
+[16:30] <cfhowlett> !info ruby | ardian
+[16:30] <ubottu> ardian: ruby (source: ruby-defaults): Interpreter of object-oriented scripting language Ruby (default version). In component main, is optional. Version 1:2.1.0.0~ubuntu3 (utopic), package size 5 kB, installed size 46 kB
+=== megabit|away is now known as megabitdragon
+[16:31] <ardian> cfhowlett: I have it pre-installed
+[16:31] <khurram1> my system is not shutting down ir suspending it just freezes and jammed ;(
+[16:31] <cfhowlett> ardian, as do I ... "optional" seems to mean something other than what I thought it did
+[16:32] <vks> guys, some of my keys comb. are not working , ctrl + c , ctrl+ v, alt + ctrl+t
+[16:32] <vks> any help
+[16:33] <OerHeks> ruby isn't standard, so i guess you didn't load a standard installed kubuntu
+[16:34] <ardian> OerHeks: yes I know
+[16:34] <ardian> ruby was never pre-isntalled
+[16:34] <ardian> Maybe some vmware feature
+[16:34] <cfhowlett> OerHeks, I've got it too and I've added nothing developer like other than virtualbox ...
+[16:35] <EriC^^> cfhowlett: something must have pulled it, i have it too but it's not in the initial packages list
+[16:36] <OerHeks> some IDE ?
+[16:36] <cfhowlett> EriC^^, mind fart: what's the command to check dependencies?
+[16:36] <ardian> cfhowlett: you have ruby too ?
+[16:36] <cfhowlett> ardian, yes
+[16:37] <joshh20> Lol, cfhowlett thanks but I am not sure who JoshH99 is :) I am an only child
+[16:38] <EriC^^> cfhowlett: that depend on ruby?
+[16:38] <cfhowlett> EriC^^, right.
+[16:38] <EriC^^> cfhowlett: i was just going over them, i have no idea what pulled mine in. apt-cache rdepends ruby
+[16:39] <ardian> I am on live-session
+[16:39] <ardian> and ruby is pre-installed
+[16:39] <cfhowlett> EriC^^, inkscape!  I've got ubuntustudio so ... yeah
+[16:39] <vks> some of my keys comb. are not working , ctrl + c , ctrl+ v, alt + ctrl+t, guys any help?
+[16:39] <vks> dnt know what to do?
+[16:41] <EriC^^> ardian: it's preinstalled on kubuntu i think
+=== flavio is now known as Guest25554
+[16:56] <b100s> so, looks like 'trusty' is a name of my distribution ?
+[16:57] <bubbasaures> !cookie | b100s
+[16:57] <ubottu> b100s: Wow! You're such a great helper, you deserve a cookie!
+[16:57] <bubbasaures> ;)
+[16:58] <bubbasaures> b100s, 14.04 is trusty.
+[16:59] <b100s> ok. continue reading
+=== rika is now known as bernkastel
+[17:00]  * bubbasaures pulls out their copy of fear and loathing
+=== k_ is now known as h93ldu
+[17:10] <karim> hello
+=== karim is now known as mirak
+[17:10] <jozefk> how do I get oracle java 8 working in Midori 0.5.9 ?
+[17:10] <ProfessorKaos64> how do I use --showformat with dkpg-duery?
+[17:11] <bubbasaures> jozefk, This is ubuntu support is all.
+[17:11] <cfhowlett> jozefk, ask a midori or java channel for support of their products
+[17:12] <mirak> hello
+[17:12] <jozefk> yeah, on Ubuntu 14.04 32 bit
+[17:12] <mirak> why there is no locate by default in ubuntu ?
+[17:12] <mirak> what is supposed to replace it ?
+[17:12] <EriC^^> mirak: there is a locate
+[17:12] <mohcine> hi all
+[17:12] <cfhowlett> mirak, man locate and read
+[17:12] <mohcine> please help me :'(
+[17:13] <cfhowlett> !help | mohcine
+[17:13] <ubottu> mohcine: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[17:13] <mirak> cfhowlett, there is no man locate
+[17:13] <cfhowlett> mirak, false.
+[17:13] <cfhowlett> http://paste.ubuntu.com/9589640/
+[17:13] <mirak> EriC^^, so what is it ?
+[17:13] <mirak> cfhowlett, because you installed it
+[17:13] <EriC^^> mirak: type which locate
+[17:13] <cfhowlett> mirak, false again.
+[17:13] <cfhowlett> mirak, i've a standard ubuntu studio 14.04.1
+[17:14] <mirak> EriC^^, I am telling you, it's not installed
+[17:14] <mirak> I have ubuntu-desktop and it's just not installed
+[17:14] <mirak> by efault
+[17:14] <mirak> default
+[17:14] <cfhowlett> mirak, paste the output of  cat /etc/issue
+[17:14] <EriC^^> mirak: ok, we're trying to see why not, play ball
+[17:14] <ProfessorKaos64> mirak, just about every install I have of late had it installed...
+[17:14] <EriC^^> mirak: type "which locate"
+[17:14] <mirak> EriC^^, it returns nothing. wich is te reason why I asked the question the first place
+[17:15] <Blaster> How do you diagnose the reason Ubuntu 14.10 keeps freezing?
+[17:15] <EriC^^> mirak: ok, type echo $PATH
+[17:15] <cfhowlett> mirak, paste the output of  cat /etc/issue
+[17:15] <mirak> PATH :  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+[17:15] <mirak> cfhowlett, Ubuntu 14.04.1 LTS \n \l
+[17:15] <mohcine> I have a problem in the heat high on my laptop and also the problem of the definition graphics card nvidia Geforce Gt 520M
+[17:16] <mohcine> ubuntu mate
+[17:16] <EriC^^> mirak: ok type apt-cache policy mlocate
+[17:16] <bubbasaures> Blaster, depends on on what seems to be the issue, hardware, or software.....etc.
+[17:16] <EriC^^> mirak: does it say it's installed?
+[17:16] <mirak> EriC^^, can I  paste 5 lines ?
+[17:16] <mirak> mlocate:
+[17:16] <mirak>   Installed: (none)
+[17:16] <mirak>   Candidate: 0.26-1ubuntu1
+[17:16] <mirak>   Version table:
+[17:16] <mirak>      0.26-1ubuntu1 0
+[17:16] <unopaste> mirak you have been muted for 60 seconds as it looks like you are pasting lots of lines into the channel, please use http://paste.ubuntu.com and paste just the URL of your data here when you are unmuted
+[17:17] <EriC^^> no just the installed line
+[17:17] <cfhowlett> mirak, use fpaste.org or pastebinit
+[17:17] <EriC^^> mirak: ok, that should be installed by default
+[17:17] <EriC^^> mirak: sudo apt-get install mlocate
+[17:17] <EriC^^> mirak: is it a fresh install?
+[17:18] <mohcine> <ubottu> I have a problem in the heat high on my laptop and also the problem of the definition graphics card nvidia Geforce Gt 520M
+[17:18] <mirak> hello
+[17:19] <mirak> EriC^^, yes it's fresh
+[17:19] <EriC^^> mirak: ok, no ppa's added etc?
+[17:19] <mirak> EriC^^, i noticed that since some release
+[17:19] <mirak> EriC^^, there was
+[17:19] <mirak> but I have another fresh install I can check
+[17:19] <b100s> so, i have question how can i install old package version ?
+[17:19] <mirak> but I am pretty sure they removed it
+[17:19] <bubbasaures> Blaster, Give us some details if you think it might help. ;)
+[17:19] <EriC^^> mirak: was the iso checksummed ?
+[17:20] <Blaster> I have no details, it just happens sometimes...
+[17:20] <mirak> EriC^^, a debootstrap install, no iso
+[17:20] <b100s> for example i want to install php 5.3.29, but current package php5 is php 5.5.x if i'm right
+[17:20] <bubbasaures> Blaster, Have you checked if it is swapping?
+[17:20] <Blaster> bubbasaures:  One of my VM is low on disk space without swap, but my host OS has plenty of disk space.
+=== nexus is now known as Guest93793

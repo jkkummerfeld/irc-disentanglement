@@ -1,0 +1,1500 @@
+[03:29] <ddilinger> shcherbak: i just checked sources.list, its lucid
+[03:30] <pfifo> perhaps they put syslinux on it?
+[03:30] <ddilinger> moonchild: hmm, guess i'll try again holding the shift key, before i was pressing it repeatedly
+[03:30] <shcherbak> ddilinger: sudo vim /etc/default/grub , and apdate grup after edit.
+[03:30] <ubuntu_recover> 10.10 is what i'm on... but i can but into rescue, then have acess to hd..(on it now)...all i need to get is some pics of my children out of encrypted home dir then i can flatten, and start new..when i follow guides online for them i get You do not own that encrypted directory
+[03:30] <ddilinger> shcherbak: perfect, thanks
+[03:30] <moonchild> shcherbak: thanks for your help
+[03:31] <jorell> so. Is there a program for ubuntu that'll let me use the desktop as a wireless AP?
+[03:31] <edbian> ubuntu_recover: It's encrypted.  You literally cannot.
+[03:31] <bazhang> !ics > jorell
+[03:31] <ubottu> jorell, please see my private message
+[03:31] <shcherbak> jorell: You chipset need to support master mode.
+[03:31] <jorell> I tried using webmin, but I did it wrong
+[03:31] <KINGOFSWORDS> how do i put a file over 4gb on usb?
+[03:32] <KINGOFSWORDS> is it fat32?
+[03:32] <ubuntu_recover> ecryptfs-mount-private
+[03:32] <edbian> jorell: Well yes.  But only if your hardware supports it.  I looked once and learned my hardware does not support it acting as an AP
+[03:32] <pfifo> KINGOFSWORDS, you can not, fat32 does not support files that big, you can use a utility like tar to split it into smaller chuncks
+[03:33] <KINGOFSWORDS> ok
+[03:33] <alpha> I want to install windows (dual boot) and I am wondering how one makes a bootable USB-stick with an iso-file. The "Startup Disc Creator" seems to work with ubuntu iso files only
+[03:33] <KINGOFSWORDS> is that on synapic ?
+[03:33] <ouyes> how to search the file containing content "0x7c00"
+[03:33] <ubuntu_recover> I followed these instructions: http://blog.dustinkirkland.com/2009/03/mounting-your-encrypted-home-from.html but i get i don't own them.. (useradd)
+[03:33] <bazhang> alpha, iso of what
+[03:33] <pfifo> KINGOFSWORDS, tar is a cli program you already have it
+[03:33] <KINGOFSWORDS> ah ok thx
+[03:33] <jorell> I see
+[03:34] <shcherbak> ouyes: cat <files> | grep <content> (use common sense)
+[03:34] <edbian> ubuntu_recover: what don't you own?  Can you sudo chown those things?
+[03:34] <KINGOFSWORDS> has it a gui?
+[03:34] <pfifo> KINGOFSWORDS, nautilus might have a suitable front end if you right clck and choose to compress/archive the file, but im not 100% sure if it will make a split archive
+[03:34] <alpha> bazhang, I have windows 7 on an iso file (it's a legal version through MSDNAA) and want to make a bootable USB stick so that I can install windows.
+[03:35] <alpha> *as an iso file
+[03:35] <bazhang> alpha, ##windows please
+[03:35] <ubuntu_recover> just did chown...did'nt work
+[03:35] <Soares> c/cllose
+[03:35] <KINGOFSWORDS> ok...would it be better to make the usb a bootableusb...as it is a iso file
+[03:35] <ubuntu_recover> sorry...
+[03:36] <ubuntu_recover> did chown name and then ecryptfs-mount and that worked...
+[03:36] <ubuntu_recover> thanks you all rock!
+[03:36] <pangaea> hey all, i just upgraded from 10.10 to the 11 beta
+[03:36] <alpha> bazhang, am using ubuntu and need help with how one makes bootable usb sticks in ubuntu (regardless of what the iso file is).
+[03:36] <edbian> ubuntu_recover: no problem
+[03:36] <edbian> ubuntu_recover: glad I could help
+[03:36] <pfifo> KINGOFSWORDS, yes if you format it as ext2 and install grub3 on it youll be able to boot it directly
+[03:36] <xcc234> hello
+[03:36] <pfifo> grub2*
+[03:36] <edbian> alpha: use the usb creator.  Point it at the ISO
+[03:36] <bazhang> alpha, that does not work with ubuntu tools. ##windows for support please
+[03:37] <jorell> how can I tell if the adapter supports being used as an access point?
+[03:37] <edbian> jorell: what is your chipset?
+[03:37] <KINGOFSWORDS> would the usb work in windows if its a different format thou?
+[03:37] <pangaea> i upgraded to 11 from 10.10, when i boot with the normal kernel i get a blank screen with a flashing caps lock key
+[03:37] <pfifo> KINGOFSWORDS, you could also use NTFS im pretty sure grub2 can boot with it
+[03:38] <bazhang> pangaea, #ubuntu+1 please
+[03:38] <pangaea> thanks
+[03:38] <KINGOFSWORDS> ok thx pfifo
+[03:38] <shcherbak> jorell: sudo iwconfig <interface> mode master
+[03:38] <alpha> edbian, I tried but it created a bunch of ubuntu specific files in the usb, such as "wubi", "syslinux" etc
+[03:39] <edbian> alpha: It created an Ubuntu install only?
+[03:39] <edbian> alpha: I'm not on an Ubuntu machine.  I don't remember if it has an option to choose another ISO but I thought it did.  Does it not?
+[03:39] <bazhang> edbian, no
+[03:39] <bazhang> edbian, specifically not windows
+[03:39] <edbian> bazhang: ?
+[03:40] <jorell> ebian: what do you mean by chipset?
+[03:40] <edbian> bazhang: not windows?
+[03:40] <FloodBot2> edbian: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[03:40] <pfifo> alpha, windows does not support booting from an iso without heavy cracking, we cant help you here, ##windows probbally cant even help, your best off to burn it to a DVD
+[03:40] <alpha> edbian, as far as I can see, nope
+[03:40] <bazhang> edbian, he wants to create a windows usb stick, which the usb-creator cannot do, nor is it ontopic here
+[03:40] <edbian> jorell: Do what shcherbak said.  If you want to find the chipset look at the output of sudo lspci.  The chipset of my wifi card is BCM4306
+[03:40] <edbian> bazhang: a-ha!
+[03:40] <edbian> alpha: sneaky devil
+[03:41] <alpha> pfifo, hmm, too bad
+[03:41] <ouyes> how to search the file containing content "0x7c00"?
+[03:41] <Jasonn> I get this error when running OpenVPN http://pastebin.ubuntu.com/595019/ <-- Installed from deb from openvpn.net
+[03:41] <bazhang> ouyes, you were just given an answer to that
+[03:42] <shcherbak> jorell: try, to see hardware: lspci , see if you can find your network adapter on the list.
+[03:42] <egypt> Hi
+[03:42] <egypt> I want to install grub on dev/sda 12 ?
+[03:42] <edbian> jorell: If the list is overwhelming you can pastebin it (paste.ubuntu.com)
+[03:42] <edbian> egypt: That's a question?
+[03:42] <alpha> I think I've found my answer: http://www.webupd8.org/2010/10/create-bootable-windows-7-usb-drive.html
+[03:43] <Jasonn> edbian: lol
+[03:43] <sam_> ah i need help - my monitor is really weird messed up looking. how do i reset the display properties?
+[03:43] <ouyes> bazhang, no man , i put "0x7c00" in the search row, nothing come out
+[03:43] <Jasonn> edbian: Have you ever installed openVPN??
+[03:43] <edbian> Jasonn: no :(
+[03:43] <jorell> edbian: thanks
+[03:43] <sam_> my menu bar is on my left monitor which is all fuzzy, i only have my right monitor to workspace and i cant access the menu
+[03:43] <edbian> Jasonn: Looking at your output.  Install those packages?  (sudo apt-get install iptables_openvpn)  ?
+[03:44] <egypt> edbian ,yes
+[03:44] <Jasonn> edbian: Can you look at this error for me? Its a networking problem.. http://pastebin.ubuntu.com/595019/
+[03:44] <Jasonn> edbian: I have to install that?
+[03:44] <egypt> edbian ,yes That's a question
+[03:44] <edbian> Jasonn: I just read that and answered you before you could even ask the question.
+[03:44] <edbian> I'm good...
+[03:44] <edbian> Jasonn: I'm guessing actually.  I think so yes.
+[03:44] <shcherbak> ouyes: Have: cat <files> | grep 0x7c00 , give you clue how to get it?
+[03:44] <Jasonn> edbian: Yeah, just saw that.. Ok, ill try that :)
+[03:44] <jorell> edbian: I see the wireless, but it doesn't say a chipset
+[03:44] <edbian> egypt: You need to install grub if you don't have a boot loader already.
+[03:44] <Nick_Meister> hi guys through ssh how can i grab the contents of an xsession
+[03:45] <edbian> jorell: What does it say for that line?
+[03:45] <Nick_Meister> more towards how do i see an xsession in progress, so whatever the user has up on the screen
+[03:45] <jorell> 04:01.0 Ethernet controller: Atheros Communications Inc. Atheros AR5001X+ Wireless Network Adapter (rev 01)
+[03:45] <skullboy> how do i do this in gimp http://www.photoshoparchive.com/tutorials/liquid-blood-background/index.php
+[03:45] <Nick_Meister> its important for me because i want to continue reading a comic from the bathroom ....
+[03:45] <Jasonn> edbian: sudo apt-get install iptables_openvpn <-- unable to locate package
+[03:45] <edbian> jorell: Your chipset is AR%001X
+[03:45] <edbian> Jasonn: Lemme google
+[03:45] <Jasonn> edbian: Thanks :
+[03:45] <Jasonn> :)
+[03:46] <jorell> AR5001X
+[03:46] <edbian> jorell: yeah that
+[03:46] <ouyes> shcherbak, bash: syntax error near unexpected token `|'
+[03:46] <egypt> edbian ,   This is because I use Mac
+[03:46] <egypt> edbian ,   This is because I use Mac Os
+[03:46] <jorell> so... I google it and find out if it supports AP'ing
+[03:46] <edbian> Jasonn: I found this: http://ejd021-linux.blogspot.com/2010/08/service-failed-to-start-due-to.html
+[03:46] <bazhang> egypt, anything ubuntu related in your support question?
+[03:46] <shcherbak> ouyes: sorry: cat */path/to/files/* | grep 0x7c00
+[03:47] <edbian> jorell: Yeah.  Or run this: sudo iwconfig wlan0 mode master
+[03:47] <shcherbak> ouyes: Do not use ** in path
+[03:47] <edbian> egypt: Are you installing ubuntu?
+[03:47] <mouse> Someone told me you can't legally watch dvds on linux.  Is this true or has he been misinformed?
+[03:47] <pfifo> skullboy, maybe start with a few basic gimp tuts to learn what tools are available for gimp so you can try to emulate a photoshop tut
+[03:47] <bazhang> mouse, false
+[03:47] <bazhang> !dvd > mouse
+[03:47] <ubottu> mouse, please see my private message
+[03:47] <jorell> Error for wireless request "Set Mode" (8B06) :
+[03:47] <jorell>     SET failed on device wlan0 ; Invalid argument.
+[03:47] <egypt> yes
+[03:47] <edbian> bazhang: perhaps it depends on your country?
+[03:48] <AlexRamallo> sg NickServ identify 0141302371
+[03:48] <edbian> jorell: Your device does not support master mode. (not surprising most don't)
+[03:48] <jorell> sad day
+[03:48] <edbian> AlexRamallo: you probably wanna change your password
+=== pyrofallout_ is now known as pyrofallout
+[03:48] <AlexRamallo> fuck
+[03:48] <bazhang> egypt, whats your specific ubuntu question then
+[03:48] <jorell> oh well haha
+[03:48] <edbian> jorell: just get a router :)
+[03:48] <AlexRamallo> stupid freenode
+[03:48] <edbian> AlexRamallo: haha
+[03:48] <AlexRamallo> i mean xchat
+[03:48] <bazhang> AlexRamallo, watch the cursing
+[03:48] <jorell> edbian: I have an engenius long range client bridge/AP
+[03:48] <edbian> egypt: If you install ubuntu it will automatically install grub (regardless of this being a mac(
+[03:48] <pfifo> ha
+[03:48] <shcherbak> AlexRamallo: Be good for yourself, use irssi
+[03:48] <edbian> jorell: IDK what that is.
+[03:48] <Jasonn> edbian: I am running the one with the webUI, i think its talking about a completely different thing. I got mine from the website, not from the repos
+[03:49] <edbian> jorell: a wifi ap ?
+[03:49] <ouyes> shcherbak, is there a gui way to do this?
+[03:49] <jorell> it's a business AP
+[03:49] <jorell> yeah pretty much
+[03:49] <AlexRamallo> go
+[03:49] <jorell> it's mostly for big buildings and universities
+[03:49] <bazhang> AlexRamallo, ?
+[03:49] <egypt> edbian ,How to install grub on deve/sda12
+[03:49] <egypt>  ?
+[03:49] <edbian> Jasonn: I am out of my comfort zone.  I'm afraid I can't offer much more help :(
+[03:49] <shcherbak> ouyes: Not to my knowledge. Are you searching logs?
+[03:49] <Jasonn> edbian: Nah, thats alright, thanks mate
+[03:49] <edbian> jorell: Why do you need your wifi card to share the signal then?  Just use that AP
+[03:50] <jorell> well, I'm not sure how to make it work
+[03:50] <edbian> egypt: I just said.  The Ubuntu installer should do it by default
+[03:50] <ouyes> shcherbak, i just want to find a file contain some content
+[03:50] <edbian> jorell: haha.  Does it have a web interface?  (do you have a typical home router with wifi ?)
+[03:50] <jorell> edbian: negative
+[03:51] <jorell> edbian: at least, I don't think so
+[03:51] <jorell> edbian: it doesn't have multiple ports
+[03:51] <shcherbak> ouyes: And do you know (more less) where it can be?
+[03:51] <edbian> jorell: does it have 1 port?
+[03:51] <jorell> edbian: it has 1 port
+[03:52] <edbian> jorell: plug the industry AP into your router.  connect the computer to the router (through wifi or a cable) check the router's dhcp table.  look for the address of the industry AP.  Put that IP into your firefox address bar.
+[03:52] <sam_> sorry can anyone help me with my monitor problems
+[03:52] <ouyes> shcherbak, in my home dirctory
+[03:52] <jorell> ebdian: oh, I see.
+[03:53] <jorell> edbian: oh, I see
+[03:53] <egypt> edbian , I will make the Mac's bootloader
+[03:53] <egypt> Is the default
+[03:53] <egypt> Therefore, we must install grub on its own partition
+[03:53] <edbian> jorell: :)
+[03:53] <shcherbak> ouyes: Gui: http://regexxer.sourceforge.net/
+[03:53] <mama21mama> "I have 2 new bugs"
+[03:54] <edbian> egypt: ?  If you install Ubuntu it will install grub automatically.  Please don't make me say it again!
+[03:54] <mama21mama> bugs.launchpad.net/bugs/763089 bugs.launchpad.net/bugs/763249
+[03:54] <edbian> mama21mama: In quotes no less
+[03:54] <ouyes> shcherbak, ok now I know how to search thanks
+[03:55] <Chubcorp> Does anybody know of a way to send emails automatically, I need to spam a spammer.
+[03:55] <bazhang> Chubcorp, no of course not
+[03:55] <bazhang> Chubcorp, dont ask again
+[03:55] <hiexpo> regexer nice tool
+[03:55] <ohsix> well people know, but they aren't going to tell you :]
+[03:55] <edbian> Chubcorp: why don't you ask us how to identify your spammer?
+[03:56] <bazhang> edbian, lets move on please
+[03:56] <sam_> how do i change my resolution when i can't access the monitors menu
+[03:56] <edbian> bazhang: ot?
+[03:56] <Chubcorp> Ok, How do I identify my spammer?
+[03:56] <bazhang> edbian, illegal
+[03:56] <bazhang> Chubcorp, please stop
+[03:56] <ohsix> sam_: xrandr is available on the command line
+[03:56] <linuxtech> A couple days ago I had a power failure and my X just comes up with some funky colors for a second and crashes...  I tried manually running fsck.ext4, reinstalling kernels, xorg packages dkms, nvidia packages and a few other things, but it still screwed.  Any suggestion on how I recover this thing without just blowing it away and reinstalling?
+[03:56] <jorell> edbian: where is the dhcp table?
+[03:56] <sam_> once i get into the command line  what do i type? and how do i go from command line back to ubuntu
+[03:57] <edbian> jorell: It's a list the router keeps of all the addresses it's given out.  THe AP should have an entry in the list.
+[03:57] <hiexpo> Chubcorp, we do not promote nor teach that kind of behavior
+[03:57] <Chubcorp> bazhang, I don't see the problem. Why is this wrong?
+[03:57] <edbian> sam_: ctrl + alt + F7 to switch back to gui
+[03:57] <edbian> sam_: IDK, why don't you log in?
+[03:57] <pfifo> ohh thoswe aare natty bugs, and here i thought i might actually do something useful
+[03:57] <ohsix> you can't control what people do with information, and your morality isn't theirs
+[03:57] <sam_> what do you mean idk why dont you log in
+[03:57] <sam_> log into command line?
+[03:57] <jorell> edbian: yes, but... I can't find the lost
+[03:58] <jorell> edbian: list*
+[03:58] <edbian> jorell: Are you logged into the router?
+[03:58] <jorell> edbian: yes, I am
+[03:58] <edbian> jorell: It might also be called a DHCP table or a client table
+[03:58] <edbian> jorell: What brand of router?
+[03:58] <jorell> edbian: netgear
+[03:59] <MarioMaster100> danieltux, is that you from irc.saurik.com?
+[03:59] <edbian> jorell: attached devices ?
+[03:59] <jorell> edbian: what do you mean?
+[04:00] <jorell> edbian: desktop, ps3, and now the wireless ap
+[04:00] <edbian> jorell: I'm guessing what to click based on forum posts I found:  http://forum1.netgear.com/showthread.php?t=62237
+[04:01] <edbian> jorell: Perhaps this is helpful to you: http://documentation.netgear.com/dgfv338/enu/202-10161-01/DGFV338_RM-08-17.html
+[04:02] <dmoney> does anyone know how to set up a network printer? a cannon mp620
+[04:02] <Cpudan80> dmoney: How is it connected to the network ?
+[04:02] <bazhang> dmoney, checked linuxprinting.org database yet?
+[04:03] <dmoney> its a wifi printer
+[04:03] <mouse> What would it take to buy the license to a file format and make it opensource?
+[04:03] <dmoney> no
+[04:03] <Afteraffekt> where can i download Ubuntu 9.10
+[04:03] <bazhang> dmoney, best check there first
+[04:03] <syrinx_> mouse: why would you need to buy a license for something opensource?
+[04:04] <hiexpo> Afteraffekt, it is no more support
+[04:04] <Cpudan80> mouse: money, legal expertise --- not on topic
+[04:04] <itilious> anyone here been able to get starcraft 2 working with ubuntu/wine?
+[04:04] <Cpudan80> syrinx_: He wants to buy it and make it open source
+[04:04] <dmoney> thanks bazhang
+[04:04] <bazhang> itilious, check the appdb
+[04:04] <Afteraffekt> hiexpo i know but i need a file from it to make my headphone jack work
+[04:04] <shcherbak> Afteraffekt: torrent?
+[04:04] <hiexpo> Afteraffekt, oh ok what file ?
+[04:04] <itilious> bazhang, i did i just can't get past one of the terminal input commands :/
+[04:05] <Afteraffekt> /var/lib/alsa/asound.conf
+[04:05] <knightautwell> anyone know if theres a way to add site to the banshee music player extension so that it can find more song lyrics?
+[04:05] <jorell_> hmm
+[04:05] <jorell_> I think my client froze
+[04:05] <hiexpo> Afteraffekt, oh so you need the config file
+[04:06] <Afteraffekt> hiexpo yea, the headphone jack worked in 9.10 but not in 10.10
+[04:06] <hiexpo> Afteraffekt, one seclet me see
+[04:06] <Afteraffekt> hiexpo, ok
+[04:06] <skullboy> how do i do this in gimp http://www.photoshoparchive.com/tutorials/liquid-blood-background/index.php
+=== jorell_ is now known as jorell
+[04:07] <Afteraffekt> why is it tab lists the users in the chat, and doesnt cycle through them in the input box? bah
+[04:07] <edbian> skullboy: There is a gimp channel :)  #gimp  (they might be annoyed translating photoshop into gimp for you though)
+[04:09] <pfifo> Afteraffekt, looks like they removed karamic stuff, maybey try 9.04 http://old-releases.ubuntu.com/releases/jaunty/ubuntu-9.04-desktop-i386.iso
+[04:09] <hiexpo> Afteraffekt, http://releases.ubuntu.com/karmic/
+[04:10] <pfifo> wth i just tried that and got a 404
+=== root is now known as Guest59149
+[04:10] <Afteraffekt> lol
+[04:10] <Guest59149> hi all how do i make a name for myself?
+[04:10] <bazhang> Guest59149, /nick newnickname
+[04:10] <edbian>  / nick
+[04:10] <Afteraffekt>  you /nick (nickname)
+[04:10] <Afteraffekt> then
+=== Guest59149 is now known as L1T
+[04:10] <L1T> thankyou :P
+[04:10] <edbian> L1T: hi
+[04:10] <Magicka> Hello
+[04:10] <shcherbak> HI
+[04:10] <Afteraffekt> you /msg nickserv register pass email
+[04:11] <Magicka> Can you guys help me out with my 11.04 Wireless Drivers.
+[04:11] <jorell> edbian: I have searched every link on the netgear file
+[04:11] <pfifo> ohh i was at old-releases
+[04:11] <Afteraffekt> thanks hiexpo and again pfifo
+[04:11] <jorell> edbian: and nothing says dhcp log
+[04:11] <hiexpo> i just check the torrent and it is fine
+[04:11] <Magicka> My 10.10 had my Wireless drivers in the additional drivers but 11.04 seems to not.
+[04:11] <Afteraffekt> i hope this works
+[04:11] <bazhang> Magicka, using 11.04 now?
+[04:11] <Magicka> Im on windows atym
+[04:12] <Magicka> atm*
+[04:12] <shcherbak> Magicka: That would be still beta, so #ubuntu+1, but more details.
+[04:12] <Magicka> i can use wired on my ubuntu 11.04 though
+[04:12] <bazhang> Magicka, what ubuntu version
+[04:12] <dmoney> printer: canon mp620 network setup. anyone knw how?
+[04:12] <Magicka> I have Windows XP and Ubuntu 11.04
+[04:12] <Magicka> IM on my windows xp atm
+[04:12] <edbian> jorell: You're back :)
+[04:12] <bazhang> Magicka, #ubuntu+1 then please
+[04:12] <Magicka> oh ok
+[04:12] <jorell> edbian: yup
+[04:13] <edbian> jorell: there is definitely a way to find the DHCP clients connected to your network.  I suppose we could just guess.  What is your private address.  What is the router's private address?
+[04:14] <jorell> edbian: 192.168.0.1
+[04:14] <edbian> jorell: that's the router I presume.  What is your machine's IP ?
+[04:14] <dmoney> can someone help me with a printer network setup. its a canon mp620
+[04:15] <jorell> uhh... 192.168.0.2?
+[04:15] <edbian> jorell: Are you guessing?  run ip addr in the terminal
+[04:16] <jorell> well, that's what the netgear router said
+[04:16] <jorell> I think I messed up my stuff earlier when I was messing around with webmin
+[04:16] <pfifo> dmoney do you need a guide or do you have a specific question in mind?
+[04:17] <edbian> jorell: ... your router told you the IP of your computer?
+[04:17] <furtat> e ai gente
+[04:17] <dmoney> pfifo: i cant get my computer to recognize my printer
+[04:17] <jorell> edbian:  Address Reservation Table
+[04:17] <jorell> 192.168.0.2 is reserved for the desktop
+[04:17] <edbian> jorell: That is the thing we were looking for :)  That's equivalent to the DHCP table.
+[04:18] <edbian> jorell: what is the address for your industrial AP ?
+[04:18] <jorell> edbian: it only has my tower and the ps3
+[04:18] <pfifo> dmoney, you said its wifi? did you do any configuration yet? try any forum threads?
+[04:18] <jorell> edbian: it doesn't have the AP
+[04:18] <edbian> jorell: Connect the industial ap to it?
+[04:18] <jorell> edbian: it is
+[04:18] <jorell> edbian: ;)
+[04:18] <edbian> jorell: mmmm... Something is up with this thing.
+[04:19] <jorell> edbian: so it would appear
+[04:19] <dmoney> yea its a wifi printer. tried configuring but im new at this
+[04:19] <edbian> jorell: I assumed it would connect to the router when plugged in.  Unfortunately I have to idea how to use it so we're stuck again.  What brand / model is it?
+[04:19] <jorell> edbian: the lan button in front is lit, signifying it's connected....
+[04:19] <edbian> jorell: Perhaps it isn't DHCP.
+[04:19] <jorell> edbian: the ap or the lan router
+[04:19] <edbian> jorell: the AP
+[04:19] <Charbo> Can someone help me get ubuntu to install on my pc?
+[04:19] <edbian> Charbo: What's the issue?
+[04:20] <jorell> edbian: engenius senao long range wireless client bridge/ap
+[04:20] <Charbo> i have an xfx mobo with amd 750a chipset and it doesnt seem to recognize the sata ports
+[04:20] <Chubcorp> dmoney, I had a similar problem, you have to download the driver on the Austrailian Canon website.
+[04:20] <dmoney> pfifo yea its a wifi printer. tried configuring but im new at this
+[04:20] <Charbo> i can run it fine from the live cd but it wont access my internal drive, only my external
+[04:20] <pfifo> dmoney, start here and if you run into any trouble, ask us some specific questions https://help.ubuntu.com/community/HardwareSupportComponentsPrintersCanonPrintersCanonMP620
+[04:21] <edbian> jorell: I'm just googling for a manual for the thing...
+[04:21] <dmoney> pfifo, alright.  thanks
+[04:21] <he1net> Gvim how did you set?
+[04:21] <jorell> edbian: easier searched than found
+[04:21] <edbian> jorell: what's the model number?  ECBXXXX ?
+[04:21] <edbian> jorell: so far yes
+[04:21] <Afteraffekt> 9.10 is taking a while to download hha
+[04:22] <edbian> jorell: FYI  This has NOTHING to do with Ubuntu.  I think the ops are giving us the benefit of the doubt here ;)
+[04:22] <pfifo> Afteraffekt, you could try a mirror
+[04:22] <Afteraffekt> has 25 min left, ill live
+[04:22] <Charbo> here is my board http://xfxforce.com/en-gb/products/motherboards/7series/750.aspx
+[04:22] <Charbo> ive ran it fine on multiple other computers
+[04:23] <jorell> edbian: yeah
+[04:23] <edbian> jorell: I can't find it
+[04:23] <jorell> edbian: I was thinking I should take this to my boss on monday
+[04:23] <wizonesolutions> How can I make rsync sync recursively like with the --relative switch but exclude part of the source path up to a certain point? So that it doesn't sync /home/myuser/ and so on but just the main directory I want and below?
+[04:23] <edbian> jorell: good call
+[04:23] <jorell> edbian: my original question was only about the ubuntu/adapter used as a desktop AP
+[04:23] <edbian> wizonesolutions: -r for recursive
+[04:24] <Sivik> why would it be reading two MBR records when i'm trying to get windows added to the grub folder
+[04:24] <jorell> edbian: which we determined was infeasible since it can't go into master mode
+[04:24] <Sivik> grub menu*
+[04:24] <jorell> edbian: but, thanks. For help with both. I really appreciate it :)
+[04:24] <edbian> wizonesolutions: -F for exclude.  Look at the man page
+[04:24] <wizonesolutions> edbian: Yes, I'm using -a so that is on there. However, it doesn't actually copy the parent directories for single files. Just any directories underneath directories that I specify. So halfway there, but not quite.
+[04:24] <wizonesolutions> edbian: Ohhhhh yeah that might do it actually...for some reason I thought it'd exclude the file itself
+[04:24] <edbian> jorell: I know.  I wanted to get the AP to work if we could but we couldn't.  :(
+[04:25] <wizonesolutions> edbian: Will give it a try, thanks. Have been looking at the man page, couldn't figure out what I needed
+[04:25] <Tux19> heyall
+[04:25] <shcherbak> Uhm, looking for hardware lists, any format (for last 10-15 years).
+[04:25] <edbian> wizonesolutions: I'm just reading the man page.  Try what I said but it's possible something more elaborate is needed
+[04:25] <jorell> edbian: sure couldn't. It could be broken
+[04:26] <edbian> jorell: Hopefully not.  It looks like a big ticket item
+[04:26] <jorell> edbian: m'eh. Got it from work
+[04:26] <bazhang> Tux19, hi
+[04:26] <Sivik> anyone here good with getting windows to be picked upin grub?
+[04:26] <edbian> jorell: pardon?
+[04:26] <jorell> edbian: I work in a tech office
+[04:26] <edbian> Tux19: let's talk here please
+[04:26] <Tux19> just telling edbian i was on here
+[04:26] <edbian> jorell: oh, got it 'from' work
+[04:26] <jorell> edbian: well, i'm a work study at the I.T. dept of my university
+[04:27] <Tux19> i woud but peaple has a problem with that
+[04:27] <edbian> Tux19: hello
+[04:27] <edbian> Tux19: Do you have an Ubuntu question?
+[04:27] <edbian> jorell: neat :)  Good luck with it!
+[04:27] <LorgonJortle> Hey there!
+[04:27] <jorell> edbian: I'll ask my boss if he knows, or if it's defective
+[04:27] <jorell> edbian: easy to replace
+[04:27] <edbian> jorell: :)
+[04:27] <korejora> Hey, is someone available to inform me a little about dual-booting Ubuntu with Windows?
+[04:27] <edbian> LorgonJortle: hello.  Ubuntu question?
+[04:28] <edbian> korejora: people are here.  Ask your question and if people know the answer they'll answer
+[04:28] <LorgonJortle> I'm wondering how I can change the size of the grip on each window's border. I find it very hard to grab them when resizing.
+[04:28] <shcherbak> LorgonJortle: Alt-F8 can help you.
+[04:29] <edbian> LorgonJortle: different themes have different widths.  You can't change it wihtout changeing the theme.  System -> Preferences -> Appearances
+[04:29] <edbian> Tux19: if you wanna chat why not join #ubuntu-offtopic  ?
+[04:29] <LorgonJortle> shcherbak: That's great, thanks!
+[04:29] <shcherbak> LorgonJortle: In gnome, borders are there specific, you can use emerald (different decorator) to edit size of borders.
+[04:29] <he1net> Gvim how did you set?..
+[04:30] <LorgonJortle> edbian: I'll take a look at my theme and see if I can't change the size. Thanks. :)
+[04:30] <Sivik> can someone help me with a grub issue?
+[04:30] <shcherbak> *theme*
+[04:30] <edbian> LorgonJortle: I'm not aware of any theme that lets you change the size.  I meant that some themes are thicker than others.
+[04:30] <LorgonJortle> Ahh
+[04:30] <Bite> I'm having constant issues with boot cds.
+[04:30] <edbian> shcherbak: emerald is deprecated isn't it?
+[04:30] <shcherbak> edbian: Emerald can.
+[04:30] <edbian> Bite: What is the issue?
+[04:30] <LorgonJortle> Ok. Alt + F8 is perfect for my needs, anyway.
+[04:31] <Bite> I'm trying to identify the issue. It's either cd-r itself, writer, reader, or program.
+[04:31] <edbian> shcherbak: Isn't Emerald deprecated or unmaintained or something?
+[04:31] <edbian> LorgonJortle: oh good
+[04:31] <shcherbak> edbian: Yes, it is, like many others usefull things
+[04:31] <edbian> Bite: What is the problem more specifically?
+[04:31] <edbian> shcherbak: which? deprecated?
+[04:31] <Bite> ediban: Every boot cd i burn is somehow broken once booted.
+[04:31] <korejora> Okay. I'm a little fuzzy on how partitions work, but think I have two NTFS partitions. One has Windows installed on it and has other files, and the other one is empty. Can I have Ubuntu "take" the empty partition for itself and format it into a more Linux-happy filesystem during the installation?
+[04:31] <edbian> Bite: Details please.
+[04:31] <edbian> korejora: yes
+[04:32] <Bite> ediban: Say for ubuntu's cd, every time i boot to install i have an issue.
+[04:32] <edbian> korejora: If you boot the live CD you can use gparted to get a very clear idea of your partitions
+[04:32] <Bite> ediban: sometimes there's no taskbar.
+[04:32] <edbian> Bite: Other examples?
+[04:32] <LorgonJortle> Another: When Compiz is enabled, I find that menus (where I mouse over them, and they move further to the right) are unresponsive on the first mouse over. I have to, say, right click, mouse over the menu (same with main menu for GNOME), then move my mouse off, then back on in order for the sub menu to show.
+[04:32] <Bite> ediban: other times their is a glitch when i am typing in the name.
+[04:32] <c4ctus> is there any dedicated channel to JACK, or do i just ask here?
+[04:32] <LorgonJortle> I've found that this is only when visual effects are enabled.
+[04:32] <shcherbak> edbian: No idea, look quite deserted.
+[04:32] <Bite> ediban: entering my username in the fields.
+[04:33] <Bite> ediban: also; using xpud, my cursor is strange.
+[04:33] <bazhang> Bite, uppercase or all lowercase
+[04:33] <pfifo> Bite, try running the md5 checksum make sure you have a good image,and a good cd afterwards
+[04:33] <Bite> ediban: their are some strange white patches on the cursors.
+[04:33] <edbian> Bite: make sure your username is all lowercase.  That is a common issue.  The installer doesn't explain well.  The other problems just sound like a problem with the CD
+[04:33] <edbian> Bite: you're spelling my name wrong
+[04:34] <he1net> Gvim how did you set?..Thanks.I want to open multiple documents and titles in the top of the display.
+[04:34] <Bite> pfft, i wasn't looking. i'm sorry. It's kind of the way i proccess information.
+[04:34] <pfifo> !tab | Bite
+[04:34] <ubottu> Bite: You can use your <tab> key for autocompletion of nicknames in IRC, as well as for completion of filenames and programs on the command line.
+[04:34] <edbian> Bite: no worries
+[04:34] <Bite> So usernames need to be in all lowercase or uppercase? also, my current client doesn't support tab autocomplete.
+[04:35] <edbian> Bite: They need to be all lowercase ( bazhang was asking if yours has uppercase letters in it)
+[04:35] <pfifo> wow even mIRC does that
+[04:35] <Bite> pfifo: I'm using webchat.freenode.net.
+[04:35] <Bite> on an xpud deriv.
+[04:35] <Bite> it's just a temp.
+[04:36] <Bite> I think the issue may lie in my reader, as i've had faulty installs before.
+[04:36] <Bite> I can't boot from my newer sata reader however.
+=== johnny is now known as Guest47983
+[04:36] <LorgonJortle> No vertical split?
+[04:37] <Bite> edbian: pfft, nevermind, i do have tab-autocomplete.
+[04:37] <edbian> Bite: In my experience you can just ignore those quarks and install.  I think you got stuck because of the username
+[04:37] <Bite> well, edbian, the issue may lie in the reader...
+[04:38] <Bite> edbian: it's making strange noises.
+[04:38] <edbian> Bite: Well then I agree!  It probably should only make regular noises
+[04:38] <Bite> edbian: but i for some reason can't boot from my sata reader.
+[04:38] <edbian> Bite: I have no idea about that.  Sounds like the motherboard doesn't support it
+[04:38] <shcherbak> LorgonJortle: To get tiling in gnome, you would want xmonad, or ride on gnome3
+[04:39] <edbian> shcherbak: gnome3 does tiling?
+[04:39] <Bite> edbian: i'll be right back. i'll test the cds on a different computer and see if i still have similar issues.
+[04:39] <edbian> Bite: cya
+[04:39] <shcherbak> edbian: Talking of famous vertical split.
+[04:39] <wizonesolutions> edbian: Seems like I'd need a little script to do it, so given that it's more of an edge case I was curious about than anything...I'll just do it with several rsync commands
+[04:39] <itilious> how can i find out the video memory available for my ubuntu?
+[04:39] <edbian> shcherbak: I don't even know what that is
+[04:40] <edbian> wizonesolutions: sounds good
+[04:40] <RoDiMuS-X> Is there anyway to automatically arrange your windows in GNOME
+[04:40] <edbian> wizonesolutions: the simplest solution is usually the best
+[04:40] <RoDiMuS-X> Such as cascade the windows
+[04:40] <shcherbak> RoDiMuS-X: devilspie, one way to do it.
+[04:40] <wizonesolutions> edbian: Yep, I'm guilty of trying to get too complex...all. the. time. But hey, I learn a couple things occasionally. Win some, lose some.
+[04:40] <itilious> or how much ubuntu reserves of my MAIN memory for Video memory because i have onboard, where can i find this?
+[04:41] <edbian> wizonesolutions: :)
+[04:41] <edbian> itilious: I believe that is a setting in the BIOS
+[04:41] <shcherbak> RoDiMuS-X: hm, cascade, may be difficult in devilspie.
+[04:41] <RoDiMuS-X> oh
+[04:42] <itilious> edbian, is there no ubuntu utilitity that will show this?
+[04:42] <edbian> itilious: I don't know.
+[04:42] <LorgonJortle> shcherbak: I'm familiar with tiling. However, that's not at all what I was asking.
+[04:43] <RoDiMuS-X> shcherbak: any other suggestions?
+[04:43] <shcherbak> LorgonJortle: vertical split (you meant two windows, each occupying 50% of screen, in symmetrical fasion, right?)
+[04:44] <pfifo> itilious, im not sure abot a utility, but if its available to the system as a readable stringit will be in a file somewhere in /proc
+[04:44] <RoDiMuS-X> shcherbak: Doesn't Compiz Fusion already do that?
+[04:45] <shcherbak> RoDiMuS-X: Not, really... Well Awesome window manager have few modes to deal with arrangement, but it is rather not what you looking for.
+[04:46] <shcherbak> RoDiMuS-X: Compiz, maybe, never came across such plugin.
+=== fernando is now known as Guest65158
+[04:49] <RoDiMuS-X> I found a site that says Compiz has a plugin but I cannot find one
+[04:49] <NeedSomeHelp> Hi, I just upgraded to latest Ubuntu version, now the colours on videos are very blue/green'ish, how can i fix it?
+[04:49] <shcherbak> RoDiMuS-X: It is called "grid plugin", just considering installation ;)
+[04:49] <bazhang> RoDiMuS-X, asked in #compiz yet? also apt-cache search compiz may have something
+[04:50] <bazhang> NeedSomeHelp, what version
+[04:50] <RoDiMuS-X> alright thanks guys
+=== lilstevie|lagche is now known as lilstevie
+[04:50] <NeedSomeHelp> bazhang, 10.04. Have tried both with Totem and VLC, same odd colour schemes.
+[04:51] <bazhang> NeedSomeHelp, 10.10 is the latest
+[04:51] <bazhang> NeedSomeHelp, try disabling compiz, for one
+[04:51] <NeedSomeHelp> bazhang, how to disable compiz ?
+[04:51] <NeedSomeHelp> bazhang, what is compiz ?
+[04:51] <NeedSomeHelp> bazhang, the colours were right in 9.04
+[04:51] <Nuge> NeedSomeHelp, it's like Linux's explorer.exe
+[04:52] <bazhang> Nuge, no its not
+[04:52] <bazhang> NeedSomeHelp, try alt f2 metacity --replace
+[04:52] <pcpower> more like aero
+[04:52] <Afteraffekt> hey all, where would i find /var/lib/alsa/asound.conf on a live disk/
+[04:53] <Nuge> Does anyone know how to get your wireless interface's mac address?
+[04:53] <Khisanth> ifconfig
+[04:53] <The_Anarchist> I am stuck between Fedora and Ubuntu, I'm wondering what you guys think the pros and cons are since you're the experts?
+[04:53] <bazhang> Nuge, ifconfig ?
+[04:53] <Diamondcite> Nuge: Try the "Connection Information" when you right click on the network icon?
+[04:53] <bazhang> The_Anarchist, #ubuntu-offtopic please
+[04:54] <EmuAlert> How quickly do applications get updated on the repositories? When can I expect to see firefox 4?
+[04:54] <Nuge> Thank you bazhang and Diamondcite. Both worked.
+[04:54] <bazhang> EmuAlert, now
+[04:54] <NeedSomeHelp> fixed it, the hue setting was set
+[04:54] <bazhang> !fx4
+[04:54] <ubottu> Firefox 4 is the current stable version of Firefox. Current versions of Ubuntu do not have it (see !latest), but there is an unofficial and unsupported PPA that you can use by running the following command: sudo add-apt-repository ppa:mozillateam/firefox-stable && sudo apt-get update && sudo apt-get install firefox
+[04:54] <bazhang> EmuAlert, ^
+[04:55] <wizard1> guys, i am having a problem with the ibus system icon, i have ibus-daemon set to launch on startup, but when i reboot, the icon doesn't show up in the system tray until i mainly shut down the daemon and restart it?  any ideas on how i can get the icon to work? ibus doesnt seem to function without the system tray icon even if the daemon is running
+[04:55] <EmuAlert> Will that correctly upgrade my installation of firefox or install a separate version?
+[04:55] <bazhang> wizard1, did you run ibus-setup?
+[04:55] <MethedMan> how does one watch .ram files in ubuntu
+[04:55] <bazhang> EmuAlert, it'll get the PPA version, which is fx4
+[04:56] <wizard1> bazhang: yeah it even shows the show the icon in the systems tray as checked
+[04:56] <bazhang> MethedMan, mplayer
+[04:56] <Afteraffekt> wow i still cant find this file
+[04:56] <MethedMan> bazhang: is there a specific plug-in that i need
+[04:56] <MethedMan> bazhang: i prefer to use vlc if possible but the .ram is not working in vlc or mplayer
+[04:57] <bazhang> MethedMan, the ubuntu-restricted-extras and possibly w32codecs from medibuntu.org
+[04:57] <bazhang> MethedMan, works a treat here in both
+[04:57] <DaGeek247> !medubuntu
+[04:57] <EmuAlert> bazhang: Yeah I know it'll install the latest version but will it update the version I have from Canonical (keeping all of the settings) or give me a new installation?
+[04:57] <DaGeek247> whats medubuntu?
+[04:58] <huibuuh> hey, can someone help me with xmodmap?
+[04:58] <bazhang> DaGeek247, its medibuntu.org
+[04:58] <DaGeek247> ...
+[04:59] <Afteraffekt> hey all, where would i find /var/lib/alsa/asound.conf on a live disk it appears that it doesnt exist?
+[04:59] <itilious> where did the "software sources" go to in ubuntu 10.10?
+[04:59] <pfifo> Afteraffekt, is your headphone jack working
+[04:59] <bazhang> EmuAlert, keep all your old bookmarks and such? I'm not quite clear on your question
+[04:59] <Afteraffekt> pfifo not yet
+[04:59] <Afteraffekt> still trying to find that file
+[04:59] <bazhang> itilious, in synaptic package manager
+[05:00] <RoDiMuS-X> whats the option to turn on window preview when hovering over a unity launcher icon
+[05:00] <pfifo> Afteraffekt, i mean right now, test it on the livecd
+[05:00] <Afteraffekt> im not booted into live cd, guess ill pull a cd out
+[05:00] <pfifo> Afteraffekt, ahh, well that file is autogenerated most likely
+[05:00] <Afteraffekt> was my fear
+[05:01] <EmuAlert> bazhang: Yeah. I'm wondering if it'll keep my bookmarks, addons and other settings despite being technically being an installation of a new package rather than an upgrade of an old one.
+[05:02] <bazhang> EmuAlert, no idea, not upgraded as I dont use but a single PPA on my system
+[05:02] <pfifo> if not then alsactr store 0 would generate it, if your headphone jack is workign then it would be useful
+[05:02] <slakcphil> i have a t630 network printer and was wondering if it gets a device file in /dev so I could output error messages to it like an old unix box
+[05:03] <slakcphil> i noticed it has a device uri in the gui config in gnome
+[05:03] <Afteraffekt> pfifo making my bootable usb now, ill find out i guess lol
+[05:05] <MethedMan> bazhang: i installed the packages app-install-data-medibuntu AND apport-hooks-medibuntu.  still not working.
+[05:05] <n-iCe> hi
+[05:06] <EmuAlert> bazhang: Huh, I'm not that desprate so I guess I won't risk it. Which bring me back to my original question: how long is it usually between when a package is updated by the developer and when it's updated in the official repository?
+[05:06] <RoDiMuS-X> Hello n-iCe
+[05:06] <shcherbak> RoDiMuS-X: Just tested it, nice, Grid stays.
+[05:07] <edbian> EmuAlert: Ubuntu updates all the packages at once at release time
+[05:07] <n-iCe> can i install ubuntu in my blackberry?
+[05:07] <edbian> EmuAlert: so, 6 months
+[05:07] <EmuAlert> edbian: Thanks
+[05:07] <edbian> EmuAlert: yep
+[05:08] <edbian> n-iCe: No.  It is not x86 ( you might be able to install linux on it though )
+[05:08] <MethedMan> bazhang: i have 64-bit ubuntu and the codec file is for 32-bit
+[05:08] <pfifo> EmuAlert, they might make ff4 a bit faster tho, its something users probbally want
+[05:08] <bazhang> MethedMan, then w64codecs
+[05:08] <edbian> pfifo: ff4 will come in natty
+[05:09] <MethedMan> bazhang: yeah, what was i thinking
+[05:09] <bazhang> MethedMan, the main thing is ubuntu-restricted-extras , and keep in mind that not all files will be playable (even in Mac OS and various versions of Windows)
+[05:10] <pfifo> edbian, yeah i thought it might get a bit of priority
+[05:10] <edbian> pfifo: I don't think it got any special treatment.  Not that I'm aware of.
+[05:10] <bazhang> MethedMan, so there is zero reason to try installing realplayer, for example.
+[05:12] <pfifo> edbian, i dont see a factoid for libsdl-ttf 2.10
+[05:12] <edbian> pfifo: ?
+[05:12] <RoDiMuS-X> Whats a good ubuntu news site?
+[05:12] <MethedMan> bazhang: i am trying to watch lectures from berkeley cs61a.  do you know if realmedia metafiles work?
+[05:13] <gaelfx> hey, I'm replacing my hard drive and I'm wondering what the best way is to copy my /home folder to the new hd. Is there a simple CLI tool that I can use to copy everything, including the hidden preferences files and whatnot?
+[05:13] <bazhang> MethedMan, got a link?
+[05:13] <edbian> !home
+[05:13] <ubottu> Your home directory is where all of your personal files are usually kept. For moving your home directory to a separate partition, please see: http://psychocats.net/ubuntu/separatehome
+[05:13] <edbian> gaelfx:  ^^^
+[05:13] <bazhang> RoDiMuS-X, please discuss in #ubuntu-offtopic
+[05:13] <jiltdil> when i start ubuntu the screen was showing that udev 215 connection refused something like that what does it mean?
+[05:13] <jiltdil> please tell me
+[05:13] <pfifo> in comparison to ff's factoid... i had some bugs cause of outdated sdl-ttf but noone really uses it knowingly like ff
+[05:14] <MethedMan> http://wla.berkeley.edu/main.php?func=watchNode&nodeID=1158&smil=1
+[05:14] <gaelfx> edbian: my /home is already on a separate partition, I'm talking about copying it over from a different hard drive that has a separate install of ubuntu on it
+[05:14] <bazhang> MethedMan, checking now
+[05:14] <edbian> gaelfx: I don't understand.  You have 2 harddrives each with Ubuntu installs?
+[05:15] <bazhang> MethedMan, works fine here
+[05:15] <MethedMan> bazhang: what am i doing wrong
+[05:15] <gaelfx> edbian: yes, that is correct. one of the drives is causing problems with my sata and I can't use a DVD drive when it is running, so I need to replace it with a different hard drive
+[05:15] <MethedMan> bazhang: installed the w64codec no problem
+[05:16] <bazhang> MethedMan, you have firefox open with mplayer?
+[05:16] <edbian> gaelfx: dd if=/dev/sda1 of=/dev/sdb1   (sda1 is the /home you'd like to copy, sdb1 is the partition you wanna copy it to.
+[05:16] <MethedMan> bazhang: not sure if i have mplayer in firefox.  is it possible to plug the link into vlc?
+[05:17] <edbian> gaelfx: Make sure you get the sda1 and sdb1 thing correct.  Those are just examples.  I don't know what the real partitions are.
+[05:17] <edbian> gaelfx: also, make sure /dev/sdb1 is big enough to hold all the data in /dev/sda1
+[05:17] <bazhang> MethedMan, it launches mplayer
+[05:17] <van7hu> hello, how could I install bind in ubuntu?
+[05:18] <erict15> test
+[05:18] <bazhang> bot7425, hi
+[05:18] <[V13]Axel> van7hu: sudo apt-get install dns-server
+[05:18] <gaelfx> edbian: I prefer to do a fresh install on the new drive to make sure any quirks in the previous one don't find their way over, I only want the files from /home copied to the new drive, not a clone of the old one
+[05:18] <stryakr> anyone using dwm?
+[05:18] <MethedMan> bazhang: perfect.  thank you for your help.
+[05:18] <bazhang> MethedMan, works?
+[05:19] <gaelfx> edbian: and I need the preferences from my previous setup to retain things in Transmission and other such software
+[05:19] <van7hu> [V13]Axel: could not find package
+[05:19] <[V13]Axel> van7hu: What version of Ubuntu are you running?
+[05:19] <van7hu> [V13]Axel: 10.04
+[05:19] <edbian> gaelfx: You have /home on a separate partition right now?
+[05:20] <[V13]Axel> van7hu: Go to the Ubuntu Software Center, and search for GADMIN-BIND.
+[05:20] <gaelfx> edbian: yeah, I always keep it on a separate partition
+[05:20] <edbian> gaelfx: What partition is it on?
+[05:21] <gaelfx> edbian: it's on the second partition of both disks
+[05:21] <gaelfx> edbian: no encryption or anything tricky like that
+[05:21] <edbian> gaelfx: What?  How do you have 2 /home partitions?
+[05:21] <gaelfx> edbian: I have one on each install
+[05:21] <gaelfx> edbian: two hard drives
+[05:21] <van7hu> [V13]Axel: yeah, thanks
+[05:22] <edbian> gaelfx: Are both installs the same version?
+[05:22] <gaelfx> edbian: yes
+[05:22] <edbian> gaelfx: What the heck is the goal here then?
+[05:22] <[V13]Axel> van7hu: No problem.
+[05:22] <gaelfx> edbian: I want to copy everything from /home on the old drive to the /home on the new drive
+[05:22] <edbian> gaelfx: You wanna erase the /home that's on the new drive?
+[05:23] <MethedMan> bazhang: it works but i have no sound
+[05:23] <dios_mio> !compiz
+[05:23] <ubottu> Compiz (compositing window manager), for a howto see http://help.ubuntu.com/community/CompositeManager and more help #compiz
+[05:23] <Sample> is there a good music library/player program that I can run through a terminal (well, SSH, because that box has the speakers in my house)
+[05:24] <gaelfx> edbian: if that's what I have to do, then I will
+[05:24] <edbian> gaelfx: I'm not sure what the point of this is but dd if=/dev/sda2 of=/dev/sdb2   should do what you want.  Does it make sense to you?
+[05:25] <edbian> Sample: You can run any of them over ssh using X forwarding  (graphical ones!)
+[05:25] <trix`G> Hi guys!
+[05:25] <gaelfx> edbian: I guess that would work, it's just a byte by byte copy, isn't it?
+[05:25] <edbian> gaelfx: yes
+[05:25] <edbian> gaelfx: bit by bit I believe
+[05:26] <pentester123> any good guides for ssh x forwarding?
+[05:26] <trix`G> Does anyone know how to tell ubuntu to automatically activate my wireless driver when booting?
+[05:26] <gaelfx> edbian: I'll give it a try then, thanks for the advice
+[05:26] <edbian> gaelfx: sure have a good night
+[05:26] <edbian> pentester123: I do
+[05:26] <edbian> pentester123: you just do something like this:  ssh -X user@host
+[05:26] <gaelfx> (daytime in the Eastern Hemisphere ;))
+[05:28] <trix`G> This laptop has broadcom b43 wireless, which ubuntu detected and through the "restricted drivers" gave me the option to enable.  I enabled and all was well, except when I reboot wlan0 vanishes from the list.  When I hit the restricted drivers dialog it says the driver is install but not active
+[05:28] <gaelfx> is there a decent guide for setting up apt-p2p in the ubuntu documentation? cause I can't seem to find one...
+[05:28] <trix`G> how do I activate them, and more importantly, how do I tell it to activate them automatically when booting up?
+[05:29] <Ricksna> hello
+=== nef_ is now known as pneftali
+[05:30] <Juv1228> any reason in ubuntu my numpad doesnt work?
+[05:30] <Juv1228> and the 5 button on it registers as right click?
+[05:30] <Sample> edbian: that sounds crazy. well okay what's a recommended/popular graphical ones which I suppose I will then somehow magically run in a terminal using X forwarding? (haha)
+[05:31] <[V13]Axel> Juv1228: What keymapping do you have?
+[05:31] <Juv1228> oh
+[05:31] <Juv1228> shit
+[05:31] <Juv1228> i just noticed its moving the mouse
+[05:31] <Juv1228> each button is a direction
+[05:31] <Juv1228> layout is USA
+[05:32] <Juv1228> oh
+[05:32] <RoDiMuS-X> numlock on or off
+[05:32] <Juv1228> nvm
+[05:32] <Juv1228> somehow the default is to allow cursor to be controlled by numpad??
+[05:32] <RoDiMuS-X> I take it numlock is off
+[05:33] <Juv1228> on and off it did it
+[05:33] <pfifo> shift+num lock will turn mousekeys off
+[05:33] <MethedMan> bazhang: any ideas about why i have no sound.  ubuntu-restricted-extras is also installed
+[05:34] <trix`G> so nobody knows why ubuntu deactivates my fully installed and working fine wifi driverss every time I reboot the laptop?
+[05:35] <pfifo> trix`G, tick the auto connect and allow all users in network manager
+[05:36] <trix`G> pfifo:  How do I reactivate the driver to do that?  The "proprietary (restricted) drivers" app lists my wifi drivers as "installed but not active" and wlan0 is no longer present in wireless-tools
+[05:36] <erict15> a
+[05:36] <Sample> what are your guys favorite music library/player programs ?
+[05:36] <korejora> Hey, could I get some help with installing Ubuntu? I'm trying to allocate hard drive space, but I'm not sure what it means by "mount point".
+[05:36] <RoDiMuS-X> Banshee
+[05:37] <Sample> cool ill look into that one
+[05:37] <gaelfx> Sample: if you're not opposed to KDE, I would suggest Amarok, it's pretty good
+[05:37] <Sample> gaelfx: im a total noob so im sticking to gnome stuffs
+[05:37] <gaelfx> fair enough
+[05:37] <Aftermath> pfifo you there
+[05:37] <psycho_oreos> korejora, it means where do you want to set it on the rootfs hierarchy
+[05:37] <pfifo> trix`G, ahh thats a bit different problem than what i offered a solution for. it could be blacklisted, or perhaps you need to blacklist the original driver, or maybe use autoload
+[05:38] <pfifo> Aftermath, yup
+[05:38] <DaPenguin> korejora: means where in the filesystem the partition gets mounted, / will be for your main partition
+[05:38] <Aftermath> pfifo this is Afteraffekt, headphones DO work on 9.10
+[05:38] <Aftermath> i can plug in and out and works as it should
+[05:38] <korejora> Oh, so the OS will get installed in "/" ?
+[05:38] <erict15> test
+[05:38] <pfifo> Aftermath, try copying that file, does it exist?
+[05:38] <bazhang> !uptime
+[05:38] <Aftermath> where was it
+[05:38] <Aftermath> i lost it
+[05:38] <Sample> so building on what edbian said... would I be able to use Banshee through an SSH terminal via "X Forwarding" to manage my music playing on my linux machine (which has the speakers) ?
+[05:38] <DaPenguin> korejora: yes. nix systems put all filesystems as subdirs of / aka "root"
+[05:38] <Sample> anyone know anything about this
+[05:39] <pfifo> /var/lib/alsa/asound.conf
+[05:39] <hiexpo> !alsa
+[05:39] <ubottu> If you're having problems with sound, click the Volume applet, then Sound Preferences, and check your Volume, Hardware, Input, and Output settings.  If that fails, see https://help.ubuntu.com/community/Sound - https://help.ubuntu.com/community/SoundTroubleshooting - http://alsa.opensrc.org/DmixPlugin - For playing audio files,  see !players and !mp3.
+[05:39] <RoDiMuS-X> Sample: I have never tried this my self but I know a few people that were able to get it to workj
+[05:39] <korejora> What type should I use for the main partition? ext4?
+[05:40] <Sample> k i suppose ill just go for it ,haha
+[05:40] <pfifo> hiexpo, not even close :)
+[05:40] <Aftermath> pfifo that folder is empty
+[05:40] <pfifo> Aftermath, `sudo alsactl store 0`
+[05:41] <Aftermath> k
+[05:41] <stiltzkin> Good evening folks. Wondering if anyone can tell me how to force an application to route requests through an HTTP proxy. I've tried setting the http_proxy environment variable (via Preferences -> Network Proxy) but that seems to have no effect.
+[05:41] <pfifo> stiltzkin, what application, most do not respect http_proxy
+[05:41] <erict15> yo
+[05:41] <trix`G> pfifo: where is the blacklist located?  It doesn't seem to be in /etc/modprobe.d
+[05:42] <trix`G> pfifo: nevermind found it, sorry
+[05:42] <stiltzkin> pfifo, wine...the faq for which states that you should use the env variable
+[05:43] <stiltzkin> I have also tried tsocks and proxychains, also to no avail
+[05:43] <Ben64> stiltzkin: wine isn't an application...
+[05:43] <hiexpo> wow snubs has 8,000plus
+[05:43] <Aftermath> pfifo i have no more space
+[05:43] <pfifo> stiltzkin, what appliication  in wine?
+[05:43] <Aftermath> i have ubuntu on an 8gb usb drive
+[05:43] <erict15> huh
+[05:44] <bazhang> erict15, ubuntu support question?
+[05:44] <Aftermath> i have no clue how its out of space tho
+[05:44] <stiltzkin> pfifo, spotify client. shouldn't really matter much though right? Wouldn't wine be handling the network connections?
+[05:44] <hiexpo> oops wrong channel
+[05:44] <dboyd2> hello all
+[05:44] <Trihope> noob here, installing first linux os on my comp, have a laptop with windows 7, 320 gb hard drive, about 170 gb available, looking to install ubuntu dual boot, but want to make sure I 1) don't overwrite files, and 2) setup the appropriate partitions.
+[05:44] <dboyd2> i need some help with a network issue
+[05:44] <pfifo> Aftermath, try `alsactl -f ~/asound.conf store 0`
+[05:44] <Ben64> stiltzkin: wine only lets programs work on linux, it's not like a VM
+[05:45] <dboyd2> i was just wondering if it is possible to use a drac 4 card as my network card
+[05:45] <pfifo> stiltzkin, wine should be providing winsock
+[05:45] <dboyd2> and if so how would i go about getting ubuntu to recognize it
+[05:45] <Ben64> dboyd2: what is a "drac 4" card
+[05:45] <dboyd2> dell remote access card
+[05:45] <stiltzkin> Ben64, I'm quite well aware of that. Just a little unclear on how it handles network connections
+[05:45] <dboyd2> it does the whole network kvm thing
+[05:45] <pfifo> stiltzkin, im not sure why its not respecting it, perhaps its unable to use the proxy and falls back to  direct connection
+[05:46] <korejora> What all do I need to make a partition for when I'm installing? Just "/" and "/home", and a swap?
+[05:46] <stiltzkin> pfifo, I doubt it, I've tested the connection and it works (at least in my browser)
+[05:46] <Ben64> stiltzkin: have you tried setting a proxy for spotify?
+[05:46] <Aftermath> pfifo, that should be sending the file where?
+[05:46] <pfifo> stiltzkin, maybe try #winehq see if theres a known problem/solution
+[05:46] <MethedMan> anyone have any ideas how to get .ram to play sound
+[05:47] <Ben64> korejora: all you _need_ is "/" and swap
+[05:47] <stiltzkin> Ben64, in my web browser? sure. that all works fine. What I need is to get the client to log me in over the proxy
+[05:47] <Aftermath> pfifo lawl, the file is empty
+[05:47] <pfifo> Aftermath, to /home/ubuntu/asound.conf your home directory should b e writeable
+[05:47] <Ben64> stiltzkin: i mean set it up in the program
+[05:47] <Aftermath> pfifo lawl, the file is empty
+[05:47] <Trihope> how do I make sure I don't overwrite files when I install ubuntu dual boot setup?
+[05:47] <Ben64> stiltzkin: pretend you're on windows and want to use a proxy
+[05:47] <korejora> @Ben64 - Okay, but isn't it better to separate the OS from the rest of your stuff?
+[05:47] <stiltzkin> Ben64, moot point, can't launch the program without the proxy
+[05:47] <pfifo> Aftermath, try `alsactl -f ~/asound.conf store 1`
+[05:48] <RoDiMuS-X> MathedMan: Did you install the Helix Player?
+[05:48] <mk> panel autohide is taking ages to hide/show the panel. How do I set the delay to 0ms?
+[05:48] <pfifo> Aftermath, try adding sudo to both commands
+[05:48] <|System|> vmware
+[05:48] <Ben64> korejora: personal preferences mostly, you can have as many partitions as you want
+[05:48] <dboyd2> MethedMan: http://wiki.videolan.org/Talk:RealMedia
+[05:48] <Aftermath> pfifo same problem
+[05:49] <pfifo> Aftermath, then perhaps try moving that file out of its proper path and using no file on your install ^^
+[05:49] <Aftermath> like on my 10.10 install, delete that file/
+[05:49] <Aftermath> ??
+[05:50] <steven> :)
+[05:50] <korejora> Supposing I wanted the OS install to have its own partition, how much room should I give it?
+[05:50] <pfifo> not delete just move to see if it works, youll need a reboot since you cant alsactl init without the file
+[05:51] <Aftermath> so i could sudo copy asound.conf asound.conf.bak
+[05:51] <Aftermath> er
+[05:51] <Aftermath> rn
+[05:51] <Khisanth> I have 11G for that but using around half
+[05:51] <Aftermath> wtf is the command for rename
+[05:51] <Ben64> Aftermath: mv
+[05:51] <Aftermath> thank
+[05:52] <Aftermath> i feel like an idiot...my college degree involved alot of linux lol
+[05:52] <pfifo> heh
+[05:52] <mk> how can I change panel autohide delay?
+[05:52] <Technicus> Hello . . . I am using the open driver for Radeon HD 3200, it is working great . . . but now I am trying to run OpenSCAD, yet when I initiate the program it issues this statement: [  Warning: No support for OpenGL 2.0 found!  OpenCSG View has been disabled.  ].  That is a very critical feature of this program.  I looked in the repo, but OpenGL does not seem to have it's own package, so I figure that it is part of the video driver.  How do
+[05:53] <Ben64> Technicus: you could try the closed source driver
+[05:53] <Trihope> anybody available to help a noob out?
+[05:54] <stiltzkin> Trihope, sure what's up
+[05:54] <Technicus> What are you trying to du/ubderstand Trihope?
+[05:54] <Aftermath> pfifo, on 10.10 the file is called asound.state.conf
+[05:54] <Trihope> i'm installing for the first time and want to see if there is a way to make sure I don't overwrite files (dual boot with windows 7)
+[05:55] <Technicus> Ben64; I was thinking of trying that, is it a messy transition?
+[05:55] <Ben64> Technicus: shouldn't be
+[05:55] <Aftermath> or rather that file is the file in that directory
+[05:55] <MethedMan> dboyd2: thanks.  not working in vlc.  works in mplayer but without sound.  are there certain codes to install for mplayer?
+[05:55] <KM0201> Trihope, yes, pay attention.
+[05:55] <Technicus> Aftermath; what are you doing with the asound.conf?
+=== eledesmar_ is now known as eledesmar
+[05:56] <stiltzkin> Trihope, as long as you use the partitioner correctly you shouldn't be in danger of overwriting files. That said, make frequent backups.
+[05:56] <pfifo> Aftermath, mine has no conf... but im on xubuntu, not sure but its allowed to have a different name at any rate
+[05:56] <dboyd2> how can i tell if a network card is really dead?
+[05:56] <Aftermath> its just asound.state
+[05:56] <Aftermath> no conf
+[05:56] <[V13]Axel> dboyd2: What do you mean?
+[05:57] <Aftermath> i renamed it and am rebooting
+[05:57] <pfifo> ok
+[05:57] <dboyd2> well i don't get any lights on this integrated nic
+[05:57] <dboyd2> but i get it's mac address
+[05:57] <KXTwo> Im taking a unix class and having some difficulties with scripts, anyone feel like helping?
+[05:57] <hiexpo> dboyd2, give it mouth to mouth if after 60 seconds it's a gonner
+[05:57] <dboyd2> and ubuntu sees it
+[05:57] <Technicus> Trihope; If you are trying it for the first time, you can start the install from Windows, and it will install into a Windows partition.
+[05:57] <dboyd2> funny heixpo
+[05:57] <Some_Person> dboyd2: Ask it "Are you dead?"
+[05:57] <korejora> How big should my swap partition be if I have 4GB of RAM?
+[05:57] <[V13]Axel> dboyd2: Hmm. Do you have another OS to try it on?
+[05:57] <dboyd2> i was wondering is there anything i can do to check and make sure it's really dead
+[05:57] <dboyd2> short of trying another os
+[05:58] <pfifo> korejora, 8GB or larger
+[05:58] <[V13]Axel> korejora: You shouldn't NEED one, but you should go around 2GB.
+[05:58] <Some_Person> dboyd2: <serious> Tried it with another cable?
+[05:58] <stiltzkin> So does anyone know of any alternative ways to route traffic from specific applications (whether in wine or otherwise) through an HTTP proxy, besides the environment variable? I need a stronger solution than that - something that's not an optional flag. iptables or something, idk
+[05:58] <Trihope> sorry having a hard to focusing with all the conversations
+[05:58] <KM0201> korejora, general rule of thumb is 2x your physical ram.
+=== tiago is now known as Guest94999
+[05:58] <korejora> Okay, one of those answers was not like the other.
+[05:58] <[V13]Axel> dboyd2: Best idea is to try another OS.
+[05:58] <korejora> Others.
+[05:58] <Trihope> @technicus are there disadvantages to that?
+[05:59] <KXTwo> Im taking a unix class and having some difficulties with scripts, anyone feel like helping?
+[05:59] <[V13]Axel> korejora: With 4GB of RAM, you won't need a swap partition unless you're doing a bullshitload of work at once.
+[05:59] <Trihope> i have always heard of a seperate partition
+[05:59] <KM0201> korejora, one person said 8gigs, i said "2x your physical ram"... you have 4gigs.. 4x2=8  how were they different?
+[05:59] <hiexpo> try it on a live os and what card is it  dboyd2
+[05:59] <KXTwo> korejora Axel is right, I have 3 on my laptop and have no issues, just dont hibernate
+[05:59] <korejora> @KM0201 - Axel said "You shouldn't need one, but go with ~2GB."
+[05:59] <pfifo> korejora, should is 2x the size of the ram, but to be reaal, youll never touch a single byte of it unless you compile chromium from source with -ggdb
+[05:59] <[V13]Axel> KM0201: I told him 2GB-- With 4GB of RAM, you don't need that much.
+[05:59] <Technicus> Trihope; the install will be fully functional, however Ubuntu will not have it's own partition.
+[05:59] <Flannel> With that much RAM, you generally don't need 2X, 1X would be if you planned on hibernating, and you may be able to survive with 0X if you want
+[05:59] <Some_Person> dboyd2: Well, usually the lights should come on regardless of the OS -- but maybe it's a weird card
+[06:00] <Aftermath> pfifo
+[06:00] <Aftermath> renaming tha file and rebooting fixed it
+[06:00] <Aftermath> wtf
+[06:00] <Aftermath> lol
+[06:00] <KM0201> [V13]Axel, thats not entirely accurate... if he's using suspend/hibernate, he'll needed that swap
+=== Kasjopaja23 is now known as Kasjopaja
+[06:00] <KXTwo> I dont think im getting any script help lol
+[06:00] <pfifo> !yay | Aftermath, HAHA
+[06:00] <ubottu> Aftermath, HAHA: Glad you made it! :-)
+[06:00] <korejora> Well, I have like 400+ GB on the Ubuntu partition alone, so it doesn't really matter to me how big it is. It is on a laptop, though.
+[06:00] <Aftermath> ima start renaming files that dont work more often
+[06:00] <Aftermath> lol
+=== Kasjopaja is now known as Guest27618
+[06:00] <[V13]Axel> dboyd2: Different driver model, MIGHT work. It's worth a try.
+[06:01] <pfifo> Aftermath, its porbbally someone trying to fix audio being muted by default for similiar chipsets
+[06:01] <Technicus> Trihope; I avoid dual booting with Windows, because sometimes it likes to be a bully and mess with the boot loader.
+[06:01] <[V13]Axel> korejora: If you're hibernating a lot, go with just over 4GB. If you're not, don't worry about it and go with as much as you want.
+[06:01] <KM0201> korejora, then just to be safe(in case you start hibernating, etc.. make it 8gigs)
+[06:01] <Technicus> Trihope; it does work though.
+[06:01] <Afteraffekt> yay
+[06:01] <Afteraffekt> pfifo thanks alot for your help
+[06:01] <Technicus> Trihope; do you have a single hard drive, or multiple?
+[06:01] <zerothis> can remote desktop. My vnc ports are forwarded internal, external, both types, to my local ip. nmap reports them open. Remote desktop reports only local usually, once in a while it reports my outside IP for a short time but then revers right in front of my eyes.
+[06:01] <pfifo> sure thing
+[06:02] <KXTwo> Does anyone want to help a novice with a script?
+[06:02] <[V13]Axel> KXTwo: I'd help if I weren't a novice as well-- But what do you need to do with said script?
+[06:02] <zerothis> can't remote desktop, rather
+[06:02] <korejora> Okay, other than the swap, should I just allocate the rest to the main partition "/"?
+[06:02] <Technicus> Trihope; if you have a single harddrive, how many partitions are on it?
+[06:03] <[V13]Axel> korejora: It's recommended to set aside another partition to /home/, so if you need to reinstall the OS, you won't have to backup your home folders. You can simply reinstall the OS and set that partition as the /home/ folder.
+[06:03] <Technicus> Trihope; if you do not have sufficient space for an install . . . you will have to shrink a partition . . . that is where thing can get messy.
+[06:03] <KXTwo> wellt here are several questions but to start:  If on a command line I type " ready directory" then enter "text" and then echo $directory it gives me "text" but if I do the same thing via script it echos a blank line?
+[06:04] <korejora> In that case, should I set aside a small partition for the OS, and allocate the rest to /home/, or the other way around?
+[06:04] <KXTwo> [V13]Axel,  wellt here are several questions but to start:  If on a command line I type " ready directory" then enter "text" and then echo $directory it gives me "text" but if I do the same thing via script it echos a blank line?
+[06:05] <[V13]Axel> KXTwo: Send me a private message about it-- We'll spam the main channel otherwise.
+[06:05] <Technicus> Trihope; I've got to go . . . hope you can get your dual boot working.
+[06:05] <Some_Person> KXTwo: use "directory=text" and "echo $directory"
+[06:05] <esquilax> anyone have any thoughts on my ~ on whois?  I have oidentd running and the port is forwarded to it and if i telnet to it, it works and responds, but anytime i connect to an irc server, there isnt even a request
+[06:05] <Some_Person> KXTwo: without quotes
+[06:06] <KXTwo> Some_Person, I cant because I need a user to be able to enter a directory then I store it in a variable
+[06:06] <KXTwo> I already got one script working perfectly but for some reason even the basics on this one is not working for me
+[06:07] <korejora> Should I allocate the majority of my space to "/", or to "/home"?
+[06:07] <Some_Person> KXTwo: then you want "read directory"
+[06:08] <pfifo> korejora, /home would probbally be more suitable for most people
+[06:08] <KXTwo> Some_Person, yes that much I do know, when I put that in my script then echo it, I get a blank line.  Unlike if I do it manually where it actually echos the directory I want
+[06:08] <Some_Person> KXTwo: strange, it works for me
+[06:08] <korejora> @pfifo - Then how much should I give to the main partition "/"? 5 GB? 10? 30?
+[06:08] <KXTwo> Some_Person, if I type read directory then enter "/home, then cd $directory it works fine, but its not working in my script even though its written the same way and yes I am using bash
+[06:10] <pfifo> korejora, ubuntu needs at minimum 4, 10 would be good more if you really want to spare it but you might not need it
+[06:10] <erict15> a
+[06:10] <Some_Person> KXTwo: So you have "read directory" and "echo $directory" in your script?
+[06:10] <korejora> @pfifo - I have more space than I could possibly use, so I'd rather err on the side of giving it too much space.
+[06:11] <pfifo> korejora, 20 is way overkill but if you have it you might as well
+=== kanji is now known as Laggg
+[06:11] <KXTwo> Some_Person, ive not even gotten into the deeper part of the script.  I simply have: line1: #!/bin/bash, line2: read directory, line3 cd $directory.  I enter the directory but nothing happens it just stays where it is, then when I echo the $directory is blank
+[06:12] <korejora> Do you know what type I should use, i.e. ext4 or whichever?
+[06:12] <pfifo> korejora, ext3 is a bit more mature
+[06:12] <Some_Person> KXTwo: That's expected. When you execute it, it runs in a new instance of bash, so when it exits $directory is undefined and the current directory is whatever it was before
+[06:13] <KXTwo> Some_Person, omg I was just thinking that
+[06:13] <KXTwo> Some_Person, so when im done with the script bash is reset
+[06:13] <KXTwo> Some_Person, that explains why when I just did a manual echo I got it from when I was doing it manually
+[06:14] <korejora> @pfifo - So do you think I should use ext3, then, seeing as how this would be pretty much my first time using a Linux system?
+[06:14] <erict15> hi
+[06:14] <erict15> what
+[06:14] <rand_u> does anybody know how to list my available printers in the terminal?
+[06:14] <Some_Person> KXTwo: When the script is done, the instance of bash it's running in exits, and you're thrown back to where you were.
+[06:15] <Some_Person> KXTwo: So if you use $directory or change directory in your script, it will work as expected, but not when you get back to the console afterwards
+[06:15] <KXTwo> Some_Person, ok  so why isnt this working my script is in /home/kkrauss1/scripts.  my script(titled crazy2) is coded echo "please enter directory", read directory, cd $directory.  But if I enter /home it doesnt change to it
+[06:16] <pfifo> korejora, well if you dont have a specific reason to use one over the other then they are all pretty much doing the same task
+[06:16] <korejora> @pfifo - Okay, thanks.
+[06:16] <Some_Person> KXTwo: Same problem. It did change directories, but didn't do anything with it. Then the script exited, and you ended up with your previous bash session. If you add "touch somefile" as the last line, it will create a file called "somefile" in $directory
+[06:17] <KXTwo> Some_Person, so I have to finish the rest of the script, I cant test it the way I expected.  This was never explained in the book.  This is the assignment: 7. 	Write a script to do the following:
+[06:17] <KXTwo> 	a.	Display a 4 line histogram of all the files in a given directory, sized to fit a standard screen.
+[06:17] <KXTwo> b.	Prompt the user for a directory, capture it into a variable and change to that directory in your script.
+[06:17] <KXTwo> c.	List and count all the files that begin with lowercase a-g, store that number in a variable.
+[06:17] <KXTwo> d.	List and count all the files that begin with lowercase h-m, store that number in another variable.
+[06:17] <FloodBot2> KXTwo: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[06:17] <KXTwo> e.	List and count all the files that begin with lowercase n-s, store that number in another variable.
+[06:17] <korejora> What's the difference between a primary and logical partition?
+[06:18] <Some_Person> KXTwo: I'm not doing your homework for you
+[06:18] <NightMonkey> KXTwo: Ah, homework?
+[06:18] <KXTwo> Some_Person, Im not asking you to
+[06:19] <pfifo> korejora, you can only have 4 primary partitions, one of which may be a 'extended partition' and contain additional logical partitions (for a maximum of 32 partitions)
+[06:19] <KXTwo> but thanks for assuming :)
+[06:19] <Sample> so with screen.. if you close your terminal window (or detach via Ctrl+a d).. and you ssh back in and do 'screen' but NOT 'screen -r' .. what happens to that original session? does it die/go away/get overwritten ?
+[06:19] <Some_Person> KXTwo: You can also use "echo $PWD" to echo the current directory
+[06:19] <NightMonkey> Sample: A second screen session is created, with a different session ID.
+[06:20] <Sample> whoa
+[06:20] <SLruan> how to creat a live usb of debian ?
+[06:20] <korejora> @pfifo - So should I be telling it to make all of these (my swap, my main "/" and my file "/home" partitions) logical partitions?
+[06:20] <KXTwo> Some_Person, well you explaining how everything happens inside the bash I call explains a lot, now I just need to figure out how to count the files from a-g etc etc
+[06:20] <Sample> NightMonkey: k that's interesting.. so say then that you have a few screen sessions.. how do you get a list of all of them when you first enter a terminal?
+[06:20] <SLruan> How to creat a live usb of debian
+[06:20] <Some_Person> KXTwo: good luck. I'm going to bed now
+[06:20] <NightMonkey> Sample: Just try running screen, detaching, running screen, then try reattaching, and you'll see that screen asks you which session to attach.
+[06:21] <Sample> i see
+[06:21] <Sample> neat, thanks
+[06:21] <bazhang> SLruan, likely the same as in ubuntu ; unetbootin #debian for support
+[06:21] <NightMonkey> Sample: Sure. Screen rocks.
+[06:21] <erict15> .
+[06:21] <DaPenguin> screen is my DE :)
+[06:21] <erict15> whoops
+[06:21] <bazhang> erict15, please stop that
+[06:21] <rigved> SLruan: System > Administration > Startup Disk Creator. <-- use this to create the debian live usb
+[06:22] <pfifo> korejora, if your going to be using all of your harddrive for 3 partitions then you dont NEED and extended and logicals, so all primary would work.... or another option is to make / and swap primary partitions, and then have /home as a logical. either way there isnt too much of a difference
+[06:22] <hiexpo> SLruan, dd
+[06:23] <MacByte> hello
+[06:23] <Sample> NightMonkey: and say I do "screen" on accident instead of "screen -r" and end up creating myself a new session, how do I fully kill that one rather than simply detaching it and keeping it around next time I "screen -r"
+[06:23] <pfifo> korejora, you may want to reserve a partition for a second install and dual boot
+[06:23] <SLruan> How to do this  in  windows ?
+[06:23] <bazhang> SLruan, ##windows
+[06:23] <MacByte> i am having an issue with flash playback issues on ubuntu... when watching youtube videos the video stutters and then repeats a clip while the video is frozen and then completely dies out... any ideas what I can do?
+[06:24] <NightMonkey> Sample: Well, the better way to rid yourself of screen sessions is to attach to them, then exit all the virtual terminals one by one.
+[06:24] <Sample> NightMonkey: by just typing 'exit' in there?
+[06:24] <NightMonkey> Sample: So, if you accidentally type "screen" when you meant "screen -r", just type "exit" immediately, and you'll be good.
+[06:25] <Sample> gotcha, this is awesome
+[06:25] <NightMonkey> Sample: Yep.
+[06:25] <Sample> thanks for the clarifications
+[06:25] <NightMonkey> Sample: If you happen to *kill* screen, it might leave detritus around for session files, but you'll get a warning about that, explaining what to do.
+[06:26] <Eliezer> is there a driver for atheros in monitor mode ?
+[06:26] <NightMonkey> Sample: Note that if you decide to be mean and just kill screen yourself, it will kill all child sessions.
+[06:26] <rigved> SLruan: there are free softwares available online for windows as well. these can create live usb systems. just google it.
+[06:26] <MacByte> any ideas?...
+[06:26] <NightMonkey> Sample: (kill with a "kill -9", for example)
+[06:26] <Sample> gotcha
+[06:26] <SLruan> If i use a microSDHC to creat live usb instead usb,OK?
+[06:26] <NightMonkey> Sample: When you get really into screen, take a look at "multiuser screen".
+[06:27] <hiexpo> Eliezer, what you trying to do why you want monitor mode
+[06:27] <Sample> by child sessions do you mean all other sessions, or just the 'pseudo terminals' (for lack of a better word) within that session (which has that PID that you killed)
+[06:27] <NightMonkey> Sample: And I always set up a large scrollback buffer in screen for sessions, and a nice status bar.
+[06:27] <NightMonkey> Sample: Psuedo terminals, yes.
+[06:27] <Sample> NightMonkey: i'd love a status bar actually, how do you get one? So far I do the Ctrl+a w to get a bit of one
+[06:28] <NightMonkey> Sample: Here's mine:
+[06:28] <NightMonkey> Sample: caption always " %w --- %c:%s"
+[06:28] <NightMonkey> Sample: In .screenrc in my $HOME.
+[06:28] <korejora> While installing Ubuntu, it's asking me which device to use for the boot loader installation. What does that mean?
+[06:28] <Sample> NightMonkey: sweet/interesting i'll give that a look
+[06:29] <NightMonkey> Sample: And one more line:
+[06:29] <NightMonkey> Sample: termcapinfo  * '' 'hs:ts=\E_:fs=\E\\:ds=\E_\E\\'
+[06:29] <Sample> what's that one?
+[06:29] <NightMonkey> Sample: To set the scrollback: defscrollback 65535
+[06:29] <Eliezer> hiexpo:) i want to avoid or reduce interferences in my network
+[06:29] <Sample> what's the termcapinfo
+[06:29] <pfifo> korejora, a bootload is designed to alloe you to choose different options for booting, normally youll install to /dev/sda unless you have a reason to install it elsewhere or not at all.
+[06:30] <Sample> NightMonkey: also are there any problems/performance or memory issues/etc with a huge scrollback?
+[06:31] <hiexpo> Eliezer, so what does monitor mode have to do with that what ap you trying to use that requires monitor mode ?
+[06:31] <NightMonkey> Sample: You could lessen the scrollback to taste. I haven't had any, even on my Sheevaplug. ;)
+[06:31] <korejora> @pfifo -- The space I'm allocating to Ubuntu is all on "/dev/sdc". Should I put the boot loader in the same place?
+[06:31] <Sample> I'ven't a clue what a sheevaplug is
+[06:32] <Sample> oh i looked it up, haha. that's cool
+[06:32] <NightMonkey> Sample: The termcapinfo line is fixes some character display issues, IIRC.
+[06:32] <pfifo> korejora, do you currently have windows or another OS on your computer?
+[06:32] <Eliezer> hiexpo:) im having problems in regular mode connecting
+[06:32] <Sample> NightMonkey: could you give me an example just so I have an idea?
+[06:32] <weez> Hi, Does anyone know how I could turn a bunch of still images into a video?
+[06:33] <Eliezer> so i figure switching mabe help
+[06:33] <korejora> @pfifo -- Yes. I have something like 400+ GB devoted to Windows 7, and this other partition, also over 400 GB, I'm devoting to Ubuntu.
+[06:33] <Sample> NightMonkey: also this may be a silly question but screen doesn't allow for accidental nesting or anything crazy right? i dont want to try it but im basically saying, what if you don't realize youre in screen and do 'screen'
+[06:33] <NightMonkey> Sample: It's been a while since I mucked with my screenrc. I also set up a reattach password, but that might be too paranoid. It does mean, however, that someone who gets root on your box can't as easily su - into your account and attach.
+[06:33] <pfifo> korejora, do you mean disk drive?
+[06:33] <NightMonkey> Sample: I did. :)
+[06:33] <aaron_wayne> can someone tell me how to add a line?
+[06:34] <hiexpo> Eliezer, well monitor mode will not solve that issue > if you explain exactly what it is you are trying to do maybe someone can or will help you
+[06:34] <Sample> i mean as far as what characters have display issues
+[06:34] <korejora> @pfifo - I don't think so, but it's possible I just don't know.
+[06:34] <sss314> How can I temporarily stop GNOME and use a text terminal?
+[06:34] <NightMonkey> Sample: That's why I have a status line. But, yes, you could screen yourself into a tizzy, Russian Doll style.
+[06:34] <kaushal> hi
+[06:34] <kaushal> anyone using terminator ?
+[06:34] <Sample> lol okay
+[06:34] <hiexpo> !hello | kaushal
+[06:35] <kaushal> hiexpo: hi
+[06:35] <Eliezer> hiexpo:) http://pastebin.com/5ZtggRZf
+[06:35] <aaron_wayne> http://imagebin.org/148633
+[06:35] <kaushal> Can someone recommend good terminal application ?
+[06:35] <KXTwo> I know how to use the read command to write something to a variable but how do you output something like ls to a variable
+[06:35] <NightMonkey> kaushal: rxvt-unicode.
+[06:35] <hiexpo> kaushal, feel free to ask your ?  and after wait till someone that may help you will
+[06:36] <bhavesh> aaron_wayne: with gedit?
+[06:36] <kaushal> NightMonkey: ok
+[06:36] <hiexpo> Eliezer, works fine
+[06:37] <NightMonkey> kaushal: Eterm.
+[06:37] <kaushal> is there a shortcut key to focus the cursor to the first tab,I mean i do ssh IP1 term1 and then so and so forth so lets say if i need to work on term3
+[06:37] <pfifo> korejora, sometimes installing a bootloader can cause problems with the manufacturer system restore utility, if your window is on /dev/sda, you can probbally install a bootloader on /dev/sdc and then use your bios to swithc hard drive priority. If your not worried about a system restore utility you can install on /dev/sda (your first hard drive) and it will allow you to choose between ubuntu and windows at boot time.
+[06:37] <kaushal> so how do i focus it ?
+[06:37] <grendal-prime> hey guys i have a machine in the living room and i want to watch movies from its dvd player onto my netbook.  Ive used vlc to do this but i want to not have to run the desktop on that mchine
+[06:37] <Eliezer> hiexpo:) you mean that i dont need anny driver for monitor mode,,just typing what i type works for me
+[06:37] <aaron_wayne> bhavesh, so is it just literally a line of text that i would save to that dir?
+[06:38] <grendal-prime> i guess what im asking is ...is there a streaming solution where i can login via an http or curses console?
+[06:38] <anthony_2409> has anyone here tried using plank?
+[06:39] <bhavesh_> sorry I went offline before?
+[06:39] <bhavesh_> remove that "?"
+[06:39] <kaushal> is there a shortcut key to focus the cursor to the first tab,I mean i do ssh IP1 term1 and then so and so forth so lets say if i need to work on term3,
+[06:40] <hiexpo> Eliezer, nope atheros is okthat is a 5kcardso your fine you just need to go to aircrack-ng site and read the wikis on how it works and how to use it is all you just entered the wrong command and me or anyone else in this channel or aircrack-ng is gonnaspoon feed you on that
+[06:40] <weez> Hi, Does anyone know how I could turn a bunch of still images into a video?
+[06:40] <enovativ> i am trying to set up the wireless on my XPS m1530, and I have used lspci and determine that it is a Broadcom chipset, and I installed and configured wl.ko, and no success
+[06:40] <aaron_wayne> or a better question i guess would be, what is the easiest way to install tor proxy?
+[06:40] <korejora> @pfifo - Okay, thanks for your help.
+[06:40] <Sample> NightMonkey: so having created a .screenrc in my /home/myname directory I don't see anything new going on in screen, do I need to like... 'reboot' the app or something? or perhaps does my screen not care to look in my home directory for that file?
+[06:40] <pfifo> korejora, no problem
+[06:40] <enovativ> i then install ndiswrapper and installed the windows driver Bcm43xx (inf file) and no success
+[06:40] <bhavesh_> weez: group them into a animated gif image
+[06:40] <NightMonkey> grendal-prime: If you connect to that box via "ssh -Y <host>", you can run vlc, and the window will be forwarded to your netbook. (Assuming your netbook is running X.)
+[06:41] <Eliezer> hiexpo:)  ok thanks
+[06:41] <bhavesh_> is there any way to decrease the size of all ubuntu desktop icons..?
+[06:41] <hiexpo> Eliezer, no problem and you dont need a driver the ubuntu one works fine
+[06:41] <bhavesh_> the option in preferences reduce them from 100% to 66% directly
+[06:42] <bhavesh_> but I need something like 75 - 80%
+[06:42] <weez> bhavesh_: I was hoping for something more along the lines of a mkv or avi file. This might be a little too big for a gif.
+[06:42] <NightMonkey> Sample: You have to start a new screen session to see anything.
+[06:42] <korejora> @pfifo -- Is there anything on Ubuntu that the boot loader could interfere with, or is it safe to put it on the same drive and change the boot priority?
+[06:42] <NightMonkey> Sample: .screenrc is only read on startup.
+[06:42] <Sample> NightMonkey: hm does screen know to look in the $HOME ? when I 'screen -r' things look the same as before the file
+[06:43] <gartral> umm.. how do i initiate a distrobution jump? isnt it "update-manager -d"?
+[06:43] <Sample> mlocate screenrc shows one in /usr/share/doc/screen/examples/
+[06:43] <NightMonkey> Sample: Ah, you need to run a *completely* new screen to read .screenrc. Detached sessions aren't new.
+[06:43] <grendal-prime> NightMonkey, ya but man that chews up a lot of bandwidth and then if i cluse the ssh connection i believe the app shuts down.
+[06:43] <NightMonkey> grendal-prime: Yes.
+[06:43] <aaron_wayne> any recommendations?
+[06:44] <enovativ> can anyone hel wtih a wirelss problem on a dell xps m1530 with a broadcom chipset
+[06:44] <grendal-prime> remote admin is not the problem..i think there is probably a web front end for this somewhere.
+[06:44] <pfifo> korejora, ubuntu is designed to work seamlessly with a bootloader, if you are paranoid you should make a backup of your mbr that you could restore later if there is any problems. http://embraceubuntu.com/2005/10/20/backing-up-the-mbr/
+[06:44] <Sample> NightMonkey: ohh okay. so you have to manually end and then re-create your session if you make a change to the screenrc?
+[06:44] <enovativ> can anyone help with a wireless problem on a dell xps m1530 with a broadcom chipset ?
+[06:44] <NightMonkey> Sample: Yep.
+[06:44] <enovativ> i have installed wl.ko , no success
+[06:45] <enovativ> i install ndiswrapper, restart, and then installed windows driver, no success
+[06:45] <Sample> NightMonkey: also should I be taking the one thats in /usr/share/doc/screen/examples/ ,copying it to my $HOME, and then adding your 3 lines? it seems like the example one is pretty full-featured with auto detach and whatnot
+[06:45] <NightMonkey> Sample: Does /etc/screenrc exist on the machine you're running screen on?
+[06:45] <Sample> let me check
+[06:45] <aaron_wayne> any help, with tor proxy?
+[06:46] <hiexpo> !tor
+[06:46] <ubottu> Tor is a program to route connections through several servers for anonymity. It is not in Ubuntu's repositories. For setup info, see option (2) of https://www.torproject.org/docs/debian.html.en | To use Tor on freenode, see !tor-sasl
+[06:46] <rigved> so, if i use X11Forwarding in ssh, does that mean that the process is actually being executed on the remote machine but i am seeing the display in my own machine? this is in reference to what NightMonkey said above^^
+[06:46] <Sample> NightMonkey: ah yep looks like there is one there
+[06:46] <NightMonkey> Sample: So, for me, keeping a very simple .screenrc in my $HOME is good, and then I trust the /etc/screenrc to do "sensible" stuff.
+[06:47] <Sample> okay gotcha. I didn't know that it had a 'master' screenrc and that it would read "additional bits" from my $HOME .screenrc
+[06:47] <gartral> update-manager -c is not showing the 11.04 upgrade, how do i force it?
+[06:47] <NightMonkey> Sample: But, do read the examples! :)
+[06:47] <Sample> im a total linux newb
+[06:47] <Sample> but enjoying it much thus far =)
+[06:47] <korejora> @pfifo -- I think it'll be fine. Thanks again for all of your help.
+[06:47] <NightMonkey> Sample: Yeah, /etc/screenrc first, then $HOME/.screenrc.
+[06:47] <pfifo> of course
+[06:48] <NightMonkey> Funny, wonder why tor isn't in Ubuntu?
+[06:48] <rigved> gartral: 11.04 has not yet been released. it will release on 28th April. you can update from 10.10 to 11.04 after 28th April. please ask all 11.04 questions on #ubuntu+1 till then
+[06:49] <NightMonkey> rigved: You got it.
+[06:49] <Nuge> I've always been bothered by the duplicate options in the grub menu. Anyone know how to resolve this glitch?
+[06:49] <rigved> NightMonkey: what, is this in reference to my X11 question?
+[06:50] <NightMonkey> rigved: That's the one you directed at me, yep. :)
+[06:50] <rigved> NightMonkey: oh ok. thanks! :)
+[06:51] <Sample> NightMonkey: hmm I just tried running 'moc player' though screen and instead of getting the straight lines (borders) around the window it uses as a sort of terminal GUI.. I get a's with ^ over them. is this a product of the character issues you mentioned or am i for some fundamental reason i dont grasp not supposed to run an app like that in screen?
+[06:51] <Shield> @Nuge:  How-to-geek has a walk through on where you need to go to clean up the grub boot loader.  http://www.howtogeek.com/howto/ubuntu/clean-up-ubuntu-grub-boot-menu-after-upgrades/
+[06:51] <Awolf_> Greetings all
+[06:51] <NightMonkey> Sample: One reason I keep my .screenrc simple, and maybe wasn't so careful in the past, is that I had a few <facepalms> after setting up tons of sessions for work, only to find some setting made screen fall short.
+[06:52] <bhavesh> do I need swap partitions if I have 2GB of RAM (sorry for asking again)
+[06:52] <NightMonkey> Sample: Try running the app with "TERM=rxvt-unicode <app>" instead.
+[06:52] <Awolf_> What does it take to become a programmer
+[06:52] <Awolf_> ?
+[06:52] <weez> Nuge: You can edit the config - location depends on your ubuntu version, or there is a graphical program called grub cutomizer - info at http://goo.gl/hbPxU
+[06:52] <bhavesh> Awolf_ programming..?
+[06:52] <Sample> NightMonkey: what's that do? set a variable on the system and then run the app?
+[06:52] <NightMonkey> Sample: You might not have a complete termcap db. Screen sets TERM to "screen", which doesn't do line art.
+[06:52] <Shield> @Nuge:  My bad the link I posted in my reply was for the grub boot loader from Ubuntu 9.04 and older.  Go to http://www.howtogeek.com/howto/17787/clean-up-the-new-ubuntu-grub2-boot-menu/
+[06:52] <Awolf_> Yeah Bhavesh
+[06:53] <Awolf_> where do I start
+[06:53] <rigved> bhavesh: you need a swap partition always. this is part of the standard linux partition system.
+[06:53] <Awolf_> ?
+[06:53] <pfifo> Awolf_, a text editor and compiler/intrepreter/assembler and time
+[06:53] <Sample> NightMonkey: i dont know what complete termcap db means O_O
+[06:53] <bhavesh> rigved: but I have 4 swap partitions..
+[06:53] <NightMonkey> Sample: Yep. Try "echo $TERM" outside screen, then inside screen.
+[06:53] <bhavesh> rigved: this is my partition setup, http://paste.ubuntu.com/594737/
+[06:54] <NightMonkey> Sample: TERM is a special shell variable which, by convention, informs programs of what kind of
+[06:54] <NightMonkey> Sample: terminal it is run under.
+[06:54] <pfifo> bhavesh, you dont NEED a swap but its recommended, and standard is usually 2x your RAM, but you probbally wont use it.
+[06:54] <Sample> so would "TERM=rxvt-unicode <app>" mean set the TERM variable differently on my system and then run the app.. or does it mean, run the app and pass it a TERM variable with this value but don't alter the original
+[06:54] <rigved> Awolf_: check out http://www.codechef.com
+[06:54] <Nuge> Thanks, weez.
+[06:54] <NightMonkey> Sample: By doing 'TERM="rxvt-unicode" <program>', you are temporarilty setting a new TERM.
+[06:55] <NightMonkey> s/temporarilty/temporarily/
+[06:55] <Awolf_> thank you Rigved
+[06:55] <Sample> by temporarily what do you mean exactly in terms of duration (how temporary)
+[06:55] <rigved> Awolf_: you are welcome
+[06:55] <bhavesh> pfifo: but does it seem that I have assigned a lot more swap space than required ? (http://paste.ubuntu.com/594737/)
+[06:56] <NightMonkey> Sample: Only for that app you're running on the same line.
+[06:56] <Sample> k
+[06:56] <rigved> bhavesh: yes, that one too many
+[06:56] <bhavesh> rigved: ok so I need to unwap my 3 partitions..
+[06:56] <bhavesh> ?
+[06:56] <rigved> bhavesh: you only need one swap partition
+[06:56] <NightMonkey> Sample: To make it "permanent" for that terminal session, you'd type 'export TERM="rxvt-unicode"'. But try it first before doing that.
+[06:57] <bhavesh> rigved: unsawp and format them?
+[06:57] <pfifo> bhavesh, imo you have made a mess of your partition table. but if you have the resoure to spare its not going to hurt anything
+[06:57] <NightMonkey> Sample: And later to make it even more permanent, should apps "look right", then you'd add it to .bash_profile or .bashrc.
+[06:57] <bhavesh> pfifo: I need to rearrange the stuff... dunno what to do exactly
+[06:57] <Sample> whoa okay thats a lot to parse
+[06:58] <pfifo> bhavesh, its probbally more trouble than its worth unless wor willing to delete everything and start over
+[06:58] <rigved> bhavesh: first check which swap partition your linux OS is using from /etc/fstab. then use 'sudo swapoff'. format the other swap partitions that you do not use and run 'sudo swapon'.
+[06:58] <gaelfx> I need to copy a /home folder from an old install over to a new install  on a separate disk, what's the best way to do it?
+[06:58] <bhavesh> rigved: k
+[06:59] <bhavesh> ill download gparted
+[06:59] <Awolf_> Rigved that is one hell of a site I'm out to start my life Thanks a lot yet again.
+[06:59] <Sample> NightMonkey: just for clarification, when you say export TERM do you mean doing 'export TERM="rxvt-unicode" <program>'
+[06:59] <Sample> just like the original way you mentioned
+[06:59] <NightMonkey> Sample: This might also be useful for you: http://www.catonmat.net/blog/screen-terminal-emulator-cheat-sheet/
+[06:59] <rigved> Awolf_: :)
+[06:59] <pfifo> !best | gaelfx
+[06:59] <ubottu> gaelfx: Usually, there is no single "best" application to perform a given task. It's up to you to choose, depending on your preferences, features you require, and other factors. Do NOT take polls in the channel. If you insist on getting people's opinions, ask BestBot in #ubuntu-bots.
+[06:59] <NightMonkey> Sample: Ah, no, that's later.
+[06:59] <Nuge> weez, what is the difference between generic and generic-pae?
+[06:59] <gaelfx> I need to copy a /home folder from an old install over to a new install  on a separate disk, what's the EASIEST way to do it?
+=== william is now known as Guest29867
+[07:00] <NightMonkey> Sample: Just 'TERM="rxvt-unicode" <program>', just to see that that's the right TERM for you (there's a few to try to fix your lineart issue.)
+[07:00] <Sample> okay
+[07:00] <pfifo> gaelfx, i would say tarball it and burn it to a cd, unless it is huge then rsync over a network becomes an otpiton
+[07:01] <Heylookitsbret> is there a way to extend the gnome menu to two monitors?
+[07:01] <weez> Nuge: can you be a bit more specific?
+[07:01] <gaelfx> pfifo: way too huge for tarring and burning, ca I rsync if I put them both in the same machine?
+[07:02] <Guest29867> Can the gnu c compiler be run on Eclipse  anyone here done that?
+[07:02] <pfifo> gaelfx, if you can move both drives to the same machine then the copy command is the easiest
+[07:02] <gaelfx> pfifo: will that take care of hidden files and whatnot?
+[07:03] <Nuge> Weez, on the grub menu, there's an entry that is Linux 2.6.38-8-generic-pae and Linux 2.6.38-8-generic along with their respective recovery modes.
+[07:03] <pfifo> Guest29867, yes eclipse supports gcc, g++ and the objective c options that i know of
+[07:03] <Guest29867> <--need sample test code beyond "helloworld" that works
+[07:03] <Jordan_U> !pae | Nuge
+[07:03] <ubottu> Nuge: To use more than ~3.2GB RAM on a 32bit system you can install the PAE-enabled kernel. See https://help.ubuntu.com/community/EnablingPAE for more info
+[07:05] <pfifo> gaelfx, with the correct switch, i usually do `sudo cp -a /home/pfifo /mnt/pfifo` you could also leave offf the username to copy more than one user
+[07:05] <weez> Nuge: I believe that pae lets 32 bit computers use more RAM, like a 64 bit. Dont quote me on that though.
+[07:05] <weez> Nuge:I see that ubottu agrees
+[07:05] <Nuge> Jordan_U, thank you.
+[07:05] <Jordan_U> Nuge: You're welcome.
+[07:06] <Sample> NightMonkey: when I ran screen with that TERM command it said "aborted because of window size change" or something similar
+[07:06] <pfifo> gaelfx, rsync is perfectly fine if your already familiar
+[07:06] <NightMonkey> Sample: You might need to increase the size of your terminal window, since screen takes a line off the bottom.
+[07:06] <NightMonkey> Sample: (I'm don't know your program "moc"...)
+[07:06] <Sample> oh oh okay
+[07:07] <Sample> i think i know what i did wrong
+[07:07] <Sample> i was trying to run screen itself through that TERM command
+[07:07] <Sample> not just the moc player
+[07:07] <Guest29867> ...oh yeah..."anyone here on an IBM POWER7 system?"
+[07:07] <NightMonkey> Sample: Ah, yeah, that's backwards. ;)
+[07:07] <Sample> but alas that didnt fix it
+[07:08] <Sample> made things look a bit crazy in fact =P
+[07:08] <NightMonkey> Sample: The TERM stuff is to change the value of TERM within the screen session.
+[07:08] <Sample> ohhh
+[07:08] <Sample> ok
+[07:08] <NightMonkey> Sample: Ah, okay, another to try is the value your terminal sets. So, to find that, type 'echo $TERM' in a non-screen-ified terminal.
+[07:09] <Sample> xterm
+[07:09] <Sample> but doing TERM='xterm' mocp still no luck
+[07:09] <NightMonkey> Sample: OK, great. You normally run moc through an xterm?
+[07:09] <Sample> the terminal-based UI border that should appear as ---- appears as aaaa
+[07:10] <Sample> yes
+[07:10] <Sample> i guess
+[07:10] <Sample> moc is a terminal based music player/library
+[07:11] <NightMonkey> Sample: Weird. Get rid of that termcap line I suggested. See if that helps.
+[07:11] <tux19> what is the ubuntu chat room
+[07:12] <NightMonkey> tux19: What is the tux19?
+[07:12]  * PurpleSmoke is away: Away
+[07:12] <tux19> whats the chat room
+[07:12] <yo> i hate unity and gnome 3 whats alternatives
+[07:12] <Sample> very zen
+[07:13] <rww> !away > PurpleSmoke
+[07:13] <ubottu> PurpleSmoke, please see my private message
+[07:13] <rww> tux19: #ubuntu is for Ubuntu technical support. #ubuntu-offtopic is for non-support chatter.
+[07:14] <tux19> thanks i just wanted the now the chat room
+[07:14] <pfifo> yo, there are many, kde, xfce4 are other popular options, you should still be able to use gnome2 for a while longer as well
+[07:14] <Sample> tux19 does not pass the turning test
+[07:14] <NightMonkey> Sample: Heh! :)
+[07:15] <Heylookitsbret> can anybody help me create a network bridge?
+[07:15] <NightMonkey> Sample: Oh, and I have a better caption line for you:
+[07:15] <bot_killer> can anyone suggest a good compilation tool? I'm new to linux, and I'm looking for something easy and efficient
+[07:15] <NightMonkey> Sample: caption always " %?%F%{.R.}%?%3n [%h]%?"
+[07:15] <NightMonkey> bot_killer: gcc. Quite popular.
+[07:15] <yo> ayuda
+[07:16] <yo> ayuda
+[07:16] <bot_killer> oh sorry I meant configuration and make tool?
+[07:16] <bot_killer> I have certain C codes
+[07:16] <bot_killer> I want it all to get installed
+[07:16] <NightMonkey> bot_killer: autoconf?
+[07:16] <pfifo> bot_killer, what does the package require?
+[07:16] <bot_killer> yes I read about it in wikipedia... do you think that's good?
+[07:17] <bot_killer> the wiki page was very critical about it
+[07:17] <bot_killer> said it was old and did unnecesarry things
+[07:17] <NightMonkey> bot_killer: Sounds like me.
+[07:17] <bot_killer> pfifo what do you mean?
+[07:17] <bot_killer> I have some basic C programs
+[07:17] <Jordan_U> bot_killer: What are you trying to install?
+[07:17] <bot_killer> that use certain libraries like fftw
+[07:17] <Heylookitsbret> i went an enabled the ipv4 tab to share to other computers, and its still not working? any suggestions?
+[07:17] <pfifo> bot_killer, what kind of tools are you currently using? and on what OS?
+[07:18] <Ziber> I seem to have deleted the bottom panel showing the applications. How can I restore that? ubuntu 10.10...
+[07:18] <Jordan_U> !resetpanel | Ziber
+[07:18] <ubottu> Ziber: To reset the GNOME panel to defaults, type this in a !terminal: <unconvertable> gconftool --recursive-unset /apps/panel && killall gnome-panel <unconvertable>
+[07:18] <bot_killer> I'm writing my codes in C in ubuntu, and compiling it using g++ (gcc)
+[07:18] <bot_killer> now I have a group of codes
+[07:18] <bot_killer> (.C files)
+[07:18] <bot_killer> and .o files
+[07:19] <pfifo> bot_killer, but are they currently designed to work with anything special?
+[07:19] <Ziber> Jordan_U: thanks :)
+[07:19] <Jordan_U> Ziber: You're welcome.
+[07:19] <NightMonkey> bot_killer: Yah, lots of folks like cmake.
+[07:20] <bot_killer> they are designed to work using pipelining. example -    input.dat | myfile | output.dat
+[07:20] <hiexpo> cmake is ok i use it
+[07:20] <bot_killer> myfile will process the input file, perform certain operations (like the fourier transform), and output it in output.dat
+[07:20] <bot_killer> ohk then cmake it is!
+[07:20] <pfifo> bot_killer, you seem to be able to chose any option you want, autoconf is nice and mature, and the kids love cmake
+[07:21] <bot_killer> I'll go with the kids :P
+[07:22] <bot_killer> thanks a lot pfifo NightMonkey
+[07:22] <NightMonkey> bot_killer: BTW, that criticism section on WP is pretty poorly sourced. Like everything, if you don't read the manual, things might break.
+[07:22] <optidude> hey all
+[07:22] <optidude> have a question,
+[07:22] <sqqqrly> Hello channel
+[07:23] <sqqqrly> anyone a screen expert?
+[07:23] <optidude> what is the easiest way to install Ubuntu along side windows 7
+[07:23] <sqqqrly> use a thumb drive
+[07:23] <robbiethe1st> Opti: Uh, install W7, pop the Ubuntu CD in the drive and go from there?
+[07:23] <sqqqrly> or vmware / vertualbox
+[07:23] <Jordan_U> optidude: Follow the instructions @ http://www.ubuntu.com/download
+[07:23] <Ziber> anyone familiar with using compiz inside a virtualbox VM of ubuntu? trying to take a screenshot of the cube...
+[07:24] <sqqqrly> k
+[07:24] <robbiethe1st> Ziber: You want to take a screenshot of your (virtualized) ubuntu desktop?
+[07:25] <Ziber> robbiethe1st: yes.
+[07:26] <robbiethe1st> Ziber: Um, you may be able to simply hit the printscreen key. Alternately, I like to install and use 'scrot'; it's a command-line tool and can be used for custom-screenshots etc.
+[07:26] <Ziber> robbiethe1st: ive tried both of those. inside virtualbox, with 3d acceleration, they dont know what to do so they basically take a blank picture.
+[07:26] <optidude> well I did that the first time around and I messed up my original partition with vista, so my question is when Ubuntu asked me to split the partitions I just say yes???
+[07:27] <robbiethe1st> Ziber: Scrot? really?
+[07:27] <Ziber> robbiethe1st: Mhm. I did scrot -d 10 -c ubuntu_ss.jpg, and positioned the cube how I wanted it.
+[07:27] <HeliusCron> anyone here know Mint
+[07:27] <Ziber> Gave me a blank picture.
+[07:27] <robbiethe1st> That's odd...Something to do with the driver most likely
+[07:27] <Jordan_U> optidude: Messed up how?
+[07:27] <rww> !mintsupport > HeliusCron
+[07:27] <ubottu> HeliusCron, please see my private message
+[07:28] <robbiethe1st> Ziber: You have the 3D driver installed, right?
+[07:28] <optidude> wrote over my vista install...LOL
+[07:28] <HeliusCron> its empty lol
+[07:28] <Ziber> robbiethe1st: Vbox didnt give me an error about it, so I imagine I do.
+[07:28] <optidude> could not load back into vista... :-(
+[07:28] <Ziber> robbiethe1st: How would I confirm that?
+[07:28] <robbiethe1st> Ziber: what I'd do is run "glxinfo".
+[07:28] <bot_killer> robbiethe1st why don't u run unity, and then take a screenshot via windows... if that's possible
+[07:28] <Ziber> robbiethe1st: In the guest?
+[07:28] <optidude> so i re-installed with win 7 and still wanted to put on Ubuntu
+[07:29] <robbiethe1st> Ziber: Yes.
+[07:29] <Ziber> robbiethe1st: alright, lets see here.
+[07:29] <robbiethe1st> bot_killer: Uh, he didn't say he's running unity. Just compiz.
+[07:29] <gaelfx> if I drag and drop my home folder to a new install, will the hidden files be copied as well, or do I need to use CLI for that?
+[07:29] <optidude> so should i just reboot like i did the first time with Ubuntu and just make sure I seperate the partitions and will it give me a boot menu?
+[07:29] <robbiethe1st> bot_killer: But the point still stands; it may be as much of a pain to do it that way what with it being somewhat accelerated... possibly
+[07:29] <Ziber> robbiethe1st: Got a crapload of output from that. WHat am I looking for specifcally?
+[07:30] <ali_> hi
+[07:30] <robbiethe1st> Ziber: If it doesn't give an error, look at the first few lines, including "direct rendering" and "server glx vendor"
+[07:30] <Shield> optidude:  thats what I did about 3 hours ago
+[07:30] <Ziber> 'direct rendering: yes'
+[07:30] <optidude> shield: seperate the partitions?
+[07:30] <ali_> hi
+[07:30] <ruan> is ksplice-apply initrd.img-2.6.35-28-generic   correct syntax?
+[07:30] <optidude> shield: that is what you did
+[07:31] <robbiethe1st> Ziber: then yea, it's using the VirtualBox driver. Why not try taking a screenshot from windows?
+[07:31] <robbiethe1st> (or your host)
+[07:31] <Shield> correct.  I made sure that I had a seporate partition for linux, and then booted to the CD i made
+[07:31] <Ziber> robbiethe1st: Because I cant keep the cube in place and take a screen shot. :(
+[07:32] <Ziber> robbiethe1st: that would work (and did, for other effects), but the cube wont stay without my key bindings.
+[07:32] <Shield> let it install, do it's updates, then installed the needed video drivers, and then rebooted.  No problems.  bootloader came up fine
+[07:32] <robbiethe1st> Ziber: Hm... You need a delayed screenshot tool;
+[07:32] <Ziber> robbiethe1st: Tried gimp on windows, didnt work :/
+[07:32] <Shield> gave each install its own 1TB partition
+[07:33] <optidude> hmmmm
+[07:33] <optidude> well i already installed win 7.....does that already mess it up
+[07:33] <Shield> nope
+[07:33] <robbiethe1st> Ziber: http://code.google.com/p/zscreen/
+[07:33] <optidude> can i repartition with Ubuntu?
+[07:33] <Shield> I had win7 on my box before i did the dual boot
+[07:34] <robbiethe1st> Ziber: Back when I used Windows, I used that. It's great, and can have delayed screenshots
+[07:34] <ejsejs> Hey, this may be a silly question, but my friend's computer is running ubuntu, and she is having problems.  I think pressing Fn F7 may help her.  What is the symbol of the Fn function of F7 here?  http://tftscdn.nexus404.com/Blog/wp-content/uploads2/2008/11/pink-aspire-one-aoa150-1949-detail.jpg
+[07:34] <Shield> I didnt use ubuntu to repartiton I just went into the device manager, and shrunk the C:\
+[07:34] <optidude> how did you do that?
+[07:35] <optidude> sorry, never shrunk a partition before....
+[07:35] <Ziber> robbiethe1st: It refuses to see anything inside the VM window, though... :/
+[07:35] <Shield> go into the control panel, and then open the device manager
+[07:35] <bot_killer> ejsejs are you searching for the f7 key on the keyboard you mean?
+[07:35] <Ziber> Shows exactly what Virtualbox's preview shows.
+[07:35] <joshmc> optidude: go to disk manager in the admin tools I believe, under windows. iirc that's how I did it.
+[07:35] <robbiethe1st> Ziber: Hm, shoot.
+[07:35] <ejsejs> bot_killer: I want to know what the fn function is there
+[07:36] <ejsejs> I can't tel what it is
+[07:36] <Shield> joshmc: thats it i forgot what it was called
+[07:36] <robbiethe1st> Ziber: See http://www.linuxjournal.com/video/quick-compiz-screenshots perhaps?
+[07:36] <Shield> Optidude: when you go into the disk manager just right click the C:\ partition, and you should see the option to shrink
+[07:36] <optidude> ok, in device manager
+[07:36] <robbiethe1st> i.e. try it direct through compiz
+[07:36] <rww> ejsejs: if you hold it down and press a button with blue text or picture on it, it does something different (indicated by the blue stuff) than what the button would usually do.
+[07:37] <ejsejs> rww: right, I want to know what the alternate function is, pelase
+[07:37] <optidude> cool, how much room do i need for Ubuntu....I have a 140gb for win 7 right now
+[07:37] <bot_killer> while holding the fn key, you can press any other key
+[07:37] <ejsejs> before I tel my friend (not with me right now) what it is
+[07:37] <Ziber> robbiethe1st: Lets see here.
+[07:37] <Shield> what size is your hhd?
+[07:37] <bot_killer> then please send a better wuality picture
+[07:37] <ejsejs> http://www.acceport.com/images/Laptop%20US%20Keyboard%20For%20Acer%20Aspire%20One%20531H.jpg
+[07:37] <Ziber> How can I do that while holding the cube in place?
+[07:37] <ejsejs> this better?
+[07:37] <knoppies> optidude, ubuntu can run in 10GB of space, depends what you want to do with it.
+[07:37] <Starminn> optitdude: During install it says you should have at least 2.5 for best performance. I'd say 20GB should be fine for all of your files and such. 15-20GB
+[07:38] <rww> ejsejs: google says it enables and disables the touchpad
+[07:38] <ejsejs> okay, thank you!
+[07:38] <pehden> QUESTION: what is the easiest way to ssh tunnel the desktop from one ubuntu to another I have seen this done but they never clearly explain how.
+[07:38] <optidude> total 160gb, after win 7 says 148gb
+[07:38] <rww> I haven't used one though, so...
+[07:38] <optidude> wow, thanks
+[07:38] <optidude> still trying to shrink win 7 partition...lol
+[07:39] <knoppies> pehden, I hope you find out, because I tried it a few times but never had any good results.
+[07:39] <knoppies> optidude, I hope that goes well.
+[07:39] <Sample> NightMonkey: just for update, moc claims it doesn't have a proper display in a UTF8 console. this seems to be something of the problem though i dont know why it would display in my normal terminal but not screen
+[07:39] <robbiethe1st> pehden: "ssh user@ip_of_computer_to_connect_to"
+[07:39] <bot_killer> esjesj http://netbooked.net/images/uploads/reviews/acer-aspire-one-751/acer-aspire-one-751-26.jpg ... if this your keyboard, the pressinf fn + f7 will disable toupad
+[07:39] <totem> Alan Pope is here?
+[07:39] <optidude> hmmmm, dont see an option to shrink partition...lol
+[07:39] <CaliUbuntuguy> QUESTION: Does anybody know if Firefox4 is going to be an official update in the Ubuntu package manager? Or am I going to have to install it myself, not that it is out?
+[07:40] <knoppies> robbiethe1st, I think he wants the WHOLE DESKTOP, a bit like remote desktop, but using X11 forwarding.
+[07:40] <pehden> optidude: in windows 7 right click the hard drive make sure compression is off so it will give correct file size then you can strink it in linux
+[07:40] <CaliUbuntuguy> now* that it is out
+[07:40] <CaliUbuntuguy> typo
+[07:40] <knoppies> optidude, I recommend you use gparted (on a liveCD) to edit partitions.
+=== batman is now known as Guest10526
+[07:41] <robbiethe1st> knoppies: In that case, I'd use vnc, especially if the computer's not right across the LAN.
+[07:41] <pehden> knoppies optidude if your getting the dumb unable to error in ubuntu its the compression
+[07:41] <ruan> where is the kernel gzip image located?
+[07:41] <CaliUbuntuguy> Sorry, I meant to say: Ubuntu Update Manager
+[07:41] <pehden> knoppies correct im trying to do remote desktop via ssh
+[07:41] <knoppies> robbiethe1st, I find VNC takes a while to refresh the image, I want a way to tunnel it over SSH with X11 forwarding, I have tried it before, but never with good results.
+[07:41] <ruan> ssh -X  ?
+[07:42] <pehden> ruan tried that says X: user not autherized
+[07:42] <knoppies> robbiethe1st, in my case, it is across the LAN.
+[07:42] <robbiethe1st> knoppies: Well, it'll be somewhat slow. VNC can be set to have a lot lower delay, you know...?
+[07:42] <knoppies> ruan, something like that, and then if I remember correctly your run gnome-desktop, but that didn't work out so well for me.
+[07:43] <gaelfx> how can I copy /home from one hard drive to another, including hidden files? is drag and drop enough to do it?
+[07:43] <knoppies> robbiethe1st, I don't remember seeing those options, but I don't doubt they are there.
+[07:43] <daniel> hey were can i talk about beta 2 ?
+[07:43] <NightMonkey> Sample: Huh, I'm at a loss there. UTF8 stuff is getting into locale issues.
+[07:43] <ruan> daniel: ubuntu+1
+[07:43] <ruan> daniel: #ubuntu+1
+[07:43] <robbiethe1st> knoppies: I always use TightVNC; seems to do well
+[07:43] <CaliUbuntuguy> @ gaelfx, drag and drop should be enough
+[07:44] <daniel> ruan, how do i get there using smuxi ?
+[07:44] <knoppies> gaelfx, if you drag the /home and not everything in it, then yes, but be careful, drag and drop might move the files.
+[07:44] <totem> popey: hey how are you doing. i love your screencasts/podcast. :)
+[07:44] <gaelfx> CaliUbuntuguy: thanks :D
+[07:44] <ruan> daniel: try /join #ubuntu+1
+[07:44] <pehden> robbiethe1st knoppies the best solution is teamviewer but in order to install or set that up you would have to login to the desktop and its way faster. They catch is got to login first with desktop view to set it up cause its GUI only
+[07:45] <pehden> robbiethe1st knoppies im doing this on a server that has no mouse or monitor
+[07:45] <jhala> can someone point to a package where i can design a circuit with logic gates
+[07:45] <Sirkill2> hello
+[07:45] <optidude> wow, cool found out where it was, shrinking by 20 gig
+[07:45] <knoppies> jhala, logisim
+[07:45] <robbiethe1st> pehden: Why not just tunnel individual X applications over x forwarding?
+[07:46] <jhala> knoppies can i cut nd paste it  into a pdf report also?
+[07:46] <optidude> if i put Ubuntu on that 20, on the reboot will I get a boot menu to choose what OS i want to boot?
+[07:46] <Sirkill2> how would i go about getting wifi connection on my virtual machine it doesnt work when i try to use my wifi stick becuase it doesnt have the approproate drivers
+[07:46] <Sirkill2> and i cant install them
+[07:46] <robbiethe1st> optidude: If you've got two OS's on the PC it'll give you a menu.
+[07:46] <Sirkill2> because i dont understand the instructions
+[07:46] <knoppies> jhala, its not a package in the repos, its a java application. Let me find the link. There are plenty of packages in the repos. jhala you can export it to .jpg or .png, Im not 100% sure about .pdf, let me have a look.
+[07:46] <pehden> robbiethe1st that would be with ssh -CX ip program
+[07:47] <robbiethe1st> optidude: If you /only/ have linux then  - by default- it won't show the menu
+[07:47] <robbiethe1st> pehden: yea
+[07:47] <Sirkill2> anyone?
+[07:47] <robbiethe1st> pehden: Or skip the program(which will give you a terminal), then launch whatever you want
+[07:48] <pehden> robbiethe1st  does it have to be filename or  can i do /dir/location/filename
+[07:48] <knoppies> jhala, you can export it to .jpg .png or .gif If you want to convert it to PDF then I think you might have to print it to pdf.
+[07:48] <jhala> knoppies : yes please have a look. i did install geda but it does not provide gates but is very good with flipflops transistors ics and other microchips. i need something to work with logical gates like and nand etc
+=== Lorthirk`ZNC is now known as Lorthirk
+[07:48] <robbiethe1st> pehden: I'd read 'man ssh' if I were you.. but with any Linux thing, /path/to/file is always good.
+[07:49] <kwtm> Hi. Sometimes Ubuntu thinks my Alt (or sometimes Ctrl or Shift) key is held down when in fact it isn't.  How can I trigger a "
+[07:49] <Ycarene> I've installed oss v4, I'd like to not have to re-install it every time I update my kernel, is there a way to get the update process to re-compile the oss drivers?
+[07:49] <knoppies> jhala, logisim does that. It also enables you to make your own ICs that you can then import into other projects.
+[07:49] <pehden> robbiethe1st  all the examples i have found only show the filename not the entire location so i was like maybe/maybe not
+[07:50] <robbiethe1st> pehden: Uh... remember to RTFM. That's the one source you can trust. ;)
+[07:50] <jhala> knoppies : wonder why ubuntu doesnot have a repo
+[07:50] <robbiethe1st> jhala: Uh... 'course it does.
+[07:50] <kwtm> Hi. Sometimes Ubuntu thinks my Alt (or sometimes Ctrl or Shift) key is held down when in fact it isn't.  How can I trigger a "release Alt" or "release Ctrl" signal of some sort the keyboard will work again? Then I can set up the GUI to do this when I click on an icon, allowing me to use the keyboard.
+[07:50] <knoppies> jhala, what do you mean, ubuntu does have a repo.
+[07:50] <kwtm> I know it's a software problem because when I switch users (e.g. Ctrl-Shift-F8) then the keyboard works again, until I switch back.
+[07:51] <pehden> robbiethe1st  sorry RTFM>
+[07:51] <jhala> knppies: repo with logisim
+[07:51] <ubuntu> estoy instalando lubuntu...
+[07:51] <ubuntu> que tal_-=-
+=== Lopi is now known as Lopi|idle
+[07:51] <pehden> robbiethe1st  nvm
+[07:51] <pehden> robbiethe1st  had to think bout it
+[07:51] <robbiethe1st> :P
+[07:52] <ubuntu> alguien habla espa;ol
+[07:52] <pehden> robbiethe1st  its 1:52AM
+[07:52] <pehden> robbiethe1st  been long day
+[07:52] <robbiethe1st> Yea, I know the feeling.
+[07:52] <kwtm> !es > ubuntu
+[07:52] <ubottu> ubuntu, please see my private message
+=== yoda is now known as Guest73613
+[07:52] <bullgard4> Where is the Gajim config file in GNOME? .config/gajim does not exist.
+[07:52] <Sample> how can I find my vim plugins directory? that is to say, i installed via apt-get and i dont know where it put everything. id' like to "whereis vim" but tell that command, please show me "whereis vim" IF.. it contains a directory 'plugins'
+[07:52] <Sample> or some such thing
+[07:52] <kwtm> ubuntu: Hablo un poquito espanol, pero estaria mejor si usa la canale #ubuntu-es
+[07:53] <kwtm> Sample: "dpkg -L <pkgname>"   In your case, <pkgname> is vim
+[07:53] <Sample> ok ill check that out
+[07:55] <knoppies> jhala, http://ozark.hendrix.edu/~burch/logisim/
+[07:55] <knoppies> jhala, thats logisim.
+[07:55] <Sample> kwtm: still doesn't tell me where the plugins directory is, and im sure there is one because vim always has one
+[07:55] <kwtm> Sample: That's not necessarily true.  I'll go look for my plugins on my own version of vim, but vim itself doesn't come with a plugins directory.
+[07:56] <Sample> oh o.O
+[07:56] <CaliUbuntuguy> QUESTION: Does anybody know if Firefox 4 is going to be an official update in the Ubuntu Update Manager? Or am I going to have to install it myself, now that Firefox 4 is out?
+[07:56] <Sample> then how on earth am i suppose to know where to create it o.O
+[07:56] <kwtm> Sample: Okay, I have ~/.vim/ftplugin for the filetype plugin, but there may be other plugins.
+[07:56] <Sample> there's also a /colors directory for themes and stuff
+[07:56] <knoppies> QUESTION: Other than SBackup, do you guys know of any good 'backup on click'? I have about 5 groups of things I would like to backup, with the option of only backing up one or two this time.
+[07:56] <Sample> i dont see them listed and i woudlnt know where im supposed to create them (where vim looks)
+[07:57] <Sample> this is a reoccuring problem for me on linux so far
+[07:57] <knoppies> Sample, I would google where to install vim plugins, but yes, it is an issue.
+[07:57] <NightMonkey> Sample: Here's a trick for vim:
+[07:57] <pehden> back some how i guess i closed this
+[07:58] <kwtm> Sample: #vim
+[07:58] <NightMonkey> Sample: 'vim -V8boo.out'
+[07:58] <NightMonkey> Sample: Exit vim.
+[07:58] <jhala> knppies: thanks
+[07:58] <NightMonkey> Sample: 'less boo.out'
+[07:58] <kwtm> Sample: I don't think there's a particular place.  Just depends on how your .vimrc is set up.
+[07:59] <Sample> i just had to Cd into the various directories provded by "whereis"
+[07:59] <Sample> and then finally found both the plugin and the colors directory
+[07:59] <Sample> but this doesnt seem ideal
+=== KB1JWQ is now known as Corey
+[07:59] <NightMonkey> Sample: Take my tip, and you'll find what you seek.
+[07:59] <Sample> k
+[07:59] <bullgard4> [soved]
+[07:59] <bullgard4> [solved]
+[08:01] <Ycarene> I have installed a .deb that includes a kernel module.  Anytime I update the kernel through the updater, it recompiles all of my necessary modules except this one, how do I add this one to the list that it upgrades?
+[08:01] <CaliUbuntuguy> QUESTION: Does anybody know if Firefox4 is going to be an official update in the Ubuntu Update Manager? Or am I going to have to install it myself, now that it is out?
+[08:01] <ruan> !ff4
+[08:01] <ubottu> Firefox 4 is the current stable version of Firefox. Current versions of Ubuntu do not have it (see !latest), but there is an unofficial and unsupported PPA that you can use by running the following command: sudo add-apt-repository ppa:mozillateam/firefox-stable && sudo apt-get update && sudo apt-get install firefox
+[08:01] <Starminn> !ff4
+[08:01] <ruan> CaliUbuntuguy: it will be in natty
+[08:02] <NightMonkey> Sample: Most important: have fun.
+[08:02] <CaliUbuntuguy> thanx ubottu
+[08:02] <ruan> how do i do ksplice?
+[08:02] <Ycarene> !oss
+[08:02] <Sample> oh i am =) (generally)
+[08:02] <Sample> my biggest loss is the linux file structure
+[08:03] <crackguy> how can i mount a NTFS USB HDD to linux (citrix xenserver)
+[08:03] <Sample> "how do i know where screen reads its screenrc, how do i know where vim reads vimrc, how do i know where irssi stores its scripts when i want to make one, how do i know where my vim colors directory is so i can wget a theme into it"
+[08:03] <Sample> etc etc, those are my only annoyances so far
+[08:04] <ruan> !info oss4-base
+[08:04] <ubottu> oss4-base (source: oss4): Open Sound System - base package. In component universe, is optional. Version 4.2-build2003-1ubuntu1 (maverick), package size 575 kB, installed size 1080 kB (Only available for alpha amd64 arm armeb armel avr32 hppa i386 ia64 lpia m32r m68k mips mipsel powerpc ppc64 s390 s390x sh3 sh3eb sh4 sh4eb sparc all)
+[08:04] <Diamondcite> Sample: It seems to make more sense than having programs everywhere in multiple pieces with no way to tell which went where?
+[08:04] <Sample> i dare say its more managable/straight forward in windows. everything the app needs is in its install directory in Program Files, The End! *gets ready to be beaten*
+[08:04] <operatorplik> jakarta
+[08:05] <Sample> Diamondcite: that's what I feel like is going on.
+[08:05] <pehden> Sample are you aware of nano?
+[08:05] <ruan> Sample: settings are stored in home
+[08:05] <pehden> Sample it is alot easier to use then vim
+[08:05] <NightMonkey> Sample: man vim, man screen, man irssi would have answered those questions.
+[08:06] <Diamondcite> Sample: So.. all things you can run go into /usr/bin, all configuration defaults in /etc, all system data logs(event viewer) in /var/log ... anything else important?
+[08:06] <ruan> ^^
+[08:06] <evstevemd> I want to migrate my Podcasts from GPodder to Rhythmbox, but the problem is RB wants to redownload everything. How can I migrate yet not re download Gigs of already there files. Thanks
+[08:06] <Sample> pdhden: oddly enough though im coming off windows im totally proficient in vim =)
+[08:07] <NightMonkey> Sample: But, there are lots of tools that are not available in the stock Windows install which are in most Linux distros. For instance, *if* you wanted to, you could actually trace exactly where vim seeks it's files.
+[08:07] <NightMonkey> Sample: But, Windows and Linux have very different philosophies behind their working models.
+[08:07] <Sample> Diamondcite: well it's sort of like.. k so i apt-installed irissi and now it's in 5 directories. and one of those i guess ill throw the scripts into (i hope) and so i go prowling around until i find the scripts directory
+[08:07] <Sample> (and it happens to be /usr/share/irssi)
+[08:08] <pehden> evestevmd you could import the folder
+[08:08] <pehden> evestevemd you could import the folder
+[08:08] <Sample> windows just has (for example) Program Files/mIRC/scripts (nothing else)
+[08:08] <pehden> evetevemd you could import the folder
+[08:08] <pehden> sorry

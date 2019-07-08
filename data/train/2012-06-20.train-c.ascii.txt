@@ -1,0 +1,1500 @@
+[07:36] <llutz_> basil60: netstat -tulpen    shows those port as listening?
+[07:37] <llutz_> basil60: sudo iptables -L            has no block rules on them?
+[07:37] <llutz_> basil60: portforwarding in your router is correct and directs to the right ip?
+[07:39] <basil60> the IP address of the server internally seems to be correct
+[07:40] <llutz_> basil60: "seems to be" is no answer. it is correct or it is not
+[07:40] <basil60> I believe its correct
+[07:40] <CrystalVoid> basil60: maybe the isp is blocking it ?  (my isp blocks 25)
+[07:40] <llutz_> well, some people believe in flying spaghettimonster...
+[07:41] <Cerrdor> basil60: whats going on?
+[07:41] <basil60> I was able to access these ports ..at least 2 weeks ago.
+[07:41] <CrystalVoid> a resent change maybe ?
+[07:42] <basil60> the only "change" is an attempted Opensim installation...which fell over
+[07:44] <ki4ro> Any Success with the Cube in Compiz in 12.04?
+[07:44] <basil60> Cerrdor -I have an ubuntu 11.04 server, which has been running with ports 7000, 7777, 8000, 8888 open...among a few others. It seems those ports no longer are available to the outside world. I've checked the IP of the server, checker my router for port forwarding, and checked my server firewall rules. Currenlty, only port 80 is working. The IP is 124.254.81.40......and I'm a linux noob.
+[07:45] <Cerrdor> Ok gimme a few
+[07:45] <tripppy> hi, any clues why i can rename a folder but not delete it?
+[07:45] <Cerrdor> trippy user permissions?
+[07:45] <Cerrdor> try ls -l
+[07:45] <Cerrdor> see who the owner is
+[07:46] <tripppy> im the owner. but ive noticed its all the folders on the one particular drive that are RO
+[07:47] <auronandace> ki4ro: the cube won't work in unity
+[07:47] <tripppy> ok ive run mount and i get this in return /dev/sdg2 on /media/TV type ext4 (rw)
+[07:47] <Cerrdor> wierd
+[07:48] <ki4ro> auronandace: Okay...how about in Gnome or ???
+[07:48] <tripppy> thats the mounted hdd
+[07:48] <Cerrdor> basil60: check your PMs
+[07:48] <auronandace> ki4ro: gnome3 no, xfce yes
+[07:49] <basil60> PMs - permissions? how?
+[07:49] <zamba> how do i write a whole partition to an image file by using dd?
+[07:50] <ki4ro> auronandace: Well, thanks.  More gray hairs for nothing! LOL
+[07:50] <llutz_> zamba: sudo dd if=/dev/sdXY of=/foo.img bs=4k    replace sdXY
+[07:51] <zamba> llutz_: will that also fill out the empty space?
+[07:51] <Cerrdor> basil60: PM=Private messages
+[07:51] <zamba> llutz_: like if the partition is 128 GB, will it create a 128 GB file? or will it actually just fill out what's used?
+[07:51] <Cerrdor> means somewhere on your chat thingy there is a message from me
+[07:51] <llutz_> zamba: it will copy blockwise, including empty blocks
+[07:51] <Dr_Willis> zamba: will be  12gb
+[07:52] <llutz_> 128gb
+[07:52] <Jacta> mornings in here :)
+[07:52] <dazonic> I just created a fresh 10.04 VPS, I seem to be missing the `at`, `atq` commands?
+[07:53] <llutz_> dazonic: install them
+[07:54] <dazonic> llutz_: how? i've googled, 'at' is hard to find, too generically named!
+[07:54] <llutz_> dazonic: sudo apt-get install at
+[07:54] <llutz_> !info at
+[07:54] <ubottu> at (source: at): Delayed job execution and batch processing. In component main, is standard. Version 3.1.13-1ubuntu1 (precise), package size 39 kB, installed size 167 kB
+[07:54] <auronandace> !info at lucid
+[07:54] <ubottu> at (source: at): Delayed job execution and batch processing. In component main, is standard. Version 3.1.11-1ubuntu5.1 (lucid), package size 45 kB, installed size 224 kB
+[07:55] <llutz_> it always has been package at
+[07:55] <dazonic> llutz_ thanks brother, was scared to try that
+[07:55] <llutz_> dazonic: install apt-file and use "apt-file search bin/at "  next time. its helpful to find packages
+[07:56] <dazonic> klutz i'll write the down, cheers mate
+[07:56] <dazonic> appreciate it
+[07:56] <llutz_> dazonic: then "apt-cache show <packagename>" to make sure it is what you want
+[08:04] <magn3ts> anyone using the FISH shell?
+[08:04] <magn3ts> (and know the equivalent of "source" for it?)
+[08:06] <decci> Hi Guys
+[08:07] <decci> I have installed Squid on Ubuntu 12.04. All I need to know how shall i configure the server so that I can know what all website are blocked and what website user are busy accessing?
+[08:08] <MrNaz> http://pastebin.com/jekgQxta  <-- only the first of those loops executes... can anyone tell me what i've done wrong?
+[08:09] <vsMS> Hi. I need to delete files by a cronjob that are older than 12-48 hours
+[08:09] <gr33n7007h> MrNaz, /join #bash
+[08:09] <vsMS> how do I do this with find?
+[08:10] <llutz_> vsMS:  man find (-mtime)
+[08:10] <decci> want the squid to be able to tell me which users has been visiting which websites
+[08:10] <Dr_Willis> there should be sites with find examples of that vsMS
+[08:10]  * Dr_Willis always has to look up examples..
+[08:11] <decci> i also want the squid able to generate the report of which user is doing what
+[08:11] <hotea1313> how do i install ubuntu from a usb drive after formattign the computer i have the iso file for install?
+[08:12] <Dr_Willis> hotea1313:  yoou have to put the iso on the usb in a useable fashion so its a boota b le usb.
+[08:12] <Dr_Willis> bootable
+[08:12] <hotea1313> how do i do that
+[08:12] <Dr_Willis> then you boot hte usb and follow directions
+[08:12] <gr33n7007h> MrNaz, list=*.mp4; for file in $list do command; for file in $list do command; for file in $list do command; done; done; done
+[08:12] <Dr_Willis> hotea1313:  tools at pendriveli  ux site for various os's
+[08:12] <Dr_Willis> ubuntu.com also has a tool i belive for windows
+[08:12] <hotea1313> thanks
+[08:12] <decci> hotea1313: unetbootin.sourceforge.net/
+[08:12] <Dr_Willis> live cd c an do it also
+=== mputtr|away is now known as mputtr
+[08:13] <peetaur> vsMS, you can find that easily in the find man page. But I have a warning: many files that look older than 12-48 hours are not. For example if I download something in a tarball, and extract it, it might extract files with dates in 2009. Or if you copy something over samba from OSX, the client will set the timestamps to whatever they were on the client side rather than the creation time in the samba share.
+=== NayanShah1 is now known as zyxt
+[08:14] <FusionX> Can i retain the same gui environment of ubuntu 10.10 yet upgrade it to the latest verion?
+[08:14] <FusionX> *version
+[08:14] <hotea1313> middle of backing up my computer onto a hard drive if i have nay probelmes ill be back here
+[08:14] <Dr_Willis> FusionX: gnome2 is basically dead. and unsupported
+[08:15] <Dr_Willis> FusionX:  theres forks of it. but not supported by this channel
+[08:15] <llutz_> peetaur: use -atime/-amin then, not mtime/mmin
+[08:15] <FusionX> Dr_willis: but it's soft on my old hardware
+[08:15] <FusionX> alright
+[08:15] <FusionX> but is it possible?
+[08:16] <kalacoa> hey
+[08:17] <peetaur> atime? if I read the files, it changes the atime... so atime does not tell you the age of the file
+[08:17] <Dr_Willis> FusionX:  theres unity2d for older hardware. or try the  much  lighter lubuntu desktop
+[08:17] <decci> Any auditing tool for Squid server
+[08:17] <llutz_> peetaur: it tells you when a file last was accessed.
+[08:17] <rampr> hello, how to add ability to reload in an upstart script
+[08:17] <peetaur> I know, and reading a file is accessing it, which means the file is suddenly no longer old when you read it, if you consider atime an accurate metric for age.
+[08:18] <llutz_> peetaur: since there is no "creation time" saved on ext-fs you always have to decide what time you take (mtime/atime)
+[08:18] <judgen> can i use adobe flash without pulseaudio somehow? i have perfect sound in all other applications and not pulseaudio installed.
+[08:19] <Dr_Willis> i dident think flash  used pulse audio
+[08:20] <judgen> me neither
+[08:20] <judgen> ill be back soon
+[08:20] <anonymous1> anyone feeling helpful? semi newb experiencing GRUB related homicidal rage
+[08:21] <Dr_Willis> beenusing this  'flashpluginreplacer' extension fore firefox - it makes flash videos play with  vlc. :) or totem, or  mpleyer
+=== adjtimex is now known as sig_wall
+[08:21] <anonymous1> *Triple booting ubuntu12.4 backtrack5(r2?) and linux mint (12) booted up earlier and every grub entry sent me to "busybox"prompt. was finally able to load backtracks recovery mode.. attempted Reconfig Grub option this allowed me to reboot and start BT5 like normal. now when i boot i have no keyboard support..Bt5 loads as its my 1st grub entry. any ideas on how i can get my keyboard to work at grub again? edit grub? bypass it co
+[08:22] <anonymous1> also have a PartdMagic , puppy linux, and dsl live cd/usb... if that helps. alas, no ubuntu disc/iso
+=== srinivas is now known as csrins
+[08:22] <Dr_Willis> only time  ive  seen  keyboard not work at grub. i had to use the 'legacy usb' option in the bios
+[08:23] <Dr_Willis> so has the  keybord ever worked in grub?
+[08:23] <aelen_v> In live session: how to install nvidia-current without reboot - how to rmmod -r nouveau?
+[08:23] <anonymous1> yeah always   im familiar w/that option.. unfortunately thats not the prob
+[08:24] <Dr_Willis> aelen_v:  not sure you can. do it without a reboot.  you can blacklist nouveau where it  never loads via a kernel/grub option.
+[08:24] <anonymous1> usually at boot the light for caps lock would go on after post screen and then id b at grub
+[08:25] <anonymous1> keyboard works in bios and everywhere but grub
+[08:26] <Dr_Willis> id be  curious if you  had a 'full install' on  a flash drive. with grub. it it would work there...
+[08:26] <Dr_Willis> or bootable usb hd.
+[08:26] <judgen> how annoying.. i have sound in every app except flash... tried it out on several video sites now
+[08:26] <Dr_Willis> judgen:  i belive that used to be a common bug/issue. not seen  it  mentioned  in   ages
+[08:27] <aelen_v> Dr_Willis: it used to be possible (dkms related, maybe before nouveau). But how to do it in Precise P. live session? Is there easier way than to prepare a custom live-usb or -CD?
+[08:27] <anonymous1> i do have PartdMagicLive on a usb.. also puppy on cd.  looking for iso atm
+[08:27] <judgen> oh i figured it out
+[08:28] <Dr_Willis> aelen_v:  i just normally set up a live-usb with a persistant save file. but i dont really  need to do that in 12.04 for my  systems
+[08:28] <kapz> I want to remote ubuntu with ubuntu, both running gnome-shell but the speed is *Painfully* slow...whereas remmina with realvnc on windows works 10x faster on same setup...what is wrong with vino?
+[08:29] <aelen_v> Dr_Willis: Yeah, I therefore cannot set a correct resolution and earlier there have been black screen of deaths.
+[08:29] <Dr_Willis> aelen_v:  you have tried the nomodeset option?
+[08:30] <aelen_v> I'll do that next! Thanks.
+[08:30] <anonymous1> Dr_Willis , when / if you get a min  i can send u a screen cap of another possible cause ? getting a little out of my comfort zone here :]
+[08:31] <Dr_Willis> anonymous1:  you can apstebin it. Im on my phone. so chatting and websurfing  push the little android a bit hard.
+[08:32] <anonymous1> ha  no worries
+=== Youri is now known as Iruoy
+[08:34] <lamaz> which do you think is better KDE or GNOME?
+[08:34] <theadmin> !poll | lamaz
+[08:34] <ubottu> lamaz: Usually, there is no single "best" application to perform a given task. It's up to you to choose, depending on your preferences, features you require, and other factors. Do NOT take polls in the channel. If you insist on getting people's opinions, ask BestBot in #ubuntu-bots.
+[08:34] <fidel> !poll
+[08:34] <fidel> ups
+[08:34] <Dr_Willis> lamaz:  use both  and decide for yourself
+[08:34] <fidel> i wonder if those 'better' questions will ever end ;)
+[08:34] <theadmin> fidel: Nope, that's just how people are
+[08:35] <Dr_Willis> is it better to try them yourself or ask in a channel ? ;)
+[08:35] <lamaz> have to start with one or the other :P
+[08:35] <fidel> buddha once mentioneD: experience yourself ;)
+[08:35] <lamaz> hard to decide
+[08:35] <Dr_Willis> you can  easially install both.
+[08:36] <lamaz> i can, but i still need to start with one or the other :D
+[08:36] <theadmin> lamaz: You can start with a plain CLI environment :P
+[08:36] <Dr_Willis> sudo apt-get install kubuntu-desktop ubuntu-desktop lubuntu-desktop xubuntu-desktop
+[08:36] <fidel> lamaz: im short: KDE offers tons of config options - while gnome seems a bit more minimal on the gui
+[08:36] <theadmin> lamaz: KDE is closer to Windows in the user experience, GNOME is plain weirdness, same applies to the default (Unity)
+[08:36] <lamaz> thanks :)
+[08:37] <Dr_Willis> did i miss any  -desktops :)
+[08:37] <fidel> Dr_Willis: edu ;)
+[08:37] <theadmin> Dr_Willis: I suppose not, but installing those is actually a bad idea, you get multiple office suites/browsers/etc. I say install the base desktop packages
+[08:37] <avelldiroll> lamaz: there is no "better", there is "choice" and that's always the best situation, as a beginner using ubuntu, it might be easier to find documentation related to gnome (as it is the default on ubuntu), but the best way is to test both.
+[08:38] <llutz_> Dr_Willis: edubuntu
+[08:38] <lamaz> avelldiroll, i was asking for opinions, people usually prefer something
+[08:38] <Jacta> is it possible to get gnome3 to work under 12.04 in virtualbox? Tried two ways - a guide or in update center - but it doesnt look like gnome3 :/
+[08:38] <Jacta> can I be missing something?
+[08:38] <llutz_> lamaz: and this is the wrong channel to ask for opinions, sapere aude
+[08:39] <lamaz> llutz_, yeah i noticed :)
+[08:39] <Jacta> is looks like this now: http://screenshotuploader.com/s/01/K7IcUV7cM
+[08:39] <theadmin> Jacta: You need to have Guest Additions installed
+[08:39] <avelldiroll> lamaz: in that case you will find out that a lot of people use neither gnome or kde but another desktop
+[08:39] <Jacta> theadmin ah- didnt think i have that now - ill try
+[08:40] <Dr_Willis> or just a window manager
+[08:41] <lamaz> yeah, i don't really need a desktop environment at all, at least not currently but figured i could test something anyway
+[08:41] <AxonetBE> I have only mysql running on 1 server the load is never higher then 1 but at some points all the cpu% load goes to 0 and the server freeze, what to check first?
+[08:42] <dregin> Hi, Is there a list of webcams that are compatible with Ubuntu 12.04?  Thanks!
+[08:42] <theadmin> dregin: Check the v4l2 website
+[08:42] <dregin> Will do. Cheers.
+[08:42] <Jacta> theadmin: almost done, and after that I should.. restart or?
+[08:43] <fidel> Jacta: restart the vm
+[08:43] <theadmin> Jacta: Well I guess so, you can simply restart X
+=== bran is now known as Guest44160
+[08:43] <Jacta> its kinda slow right now, ill get back asap :)
+[08:43] <Jacta> and thanks
+[08:43] <avelldiroll> AxonetBE: the logs at the time of the freeze
+[08:45] <avelldiroll> AxonetBE: if you get nothing specific from the log, test your hardware (smart for the disk, memtest for the memory, lm-sensors for temperature)
+[08:46] <Mandalord> dregin: https://wiki.ubuntu.com/HardwareSupportComponentsMultimediaWebCameras
+=== zosk is now known as zoski
+[08:47] <dregin> thanks Mandalord !
+[08:47] <c0rnel> hello all
+[08:48] <dregin> theadmin: I couldn't find a result for v4l2 in google that was the site....
+[08:48] <dregin> Just a load of talk about using the v4l2 API
+[08:48] <theadmin> dregin: Hm yeah, I'm pretty sure I've seen it somewhere before though :/
+[08:49] <breebreebrannn> Anyone want to help me?
+[08:49] <satyanash> Okay, I have set the option to login automatically and remove the password for the only user on the system, I cannot set the password again now.! Help!
+[08:50] <theadmin> satyanash: sudo passwd username
+[08:50] <Mandalord> breebreebrannn: just ask:|
+[08:50] <satyanash> theadmin, my old password is failing.
+[08:50] <satyanash> theadmin, I tried that, cannot sudo.
+[08:50] <fidel> !ask > breebreebrannn
+[08:50] <ubottu> breebreebrannn, please see my private message
+[08:50] <breebreebrannn> Okay.
+[08:50] <theadmin> satyanash: D'oh. Boot into the recovery mode then
+[08:51] <Jacta> fidel / theadmin - still building the guest additions :)
+[08:51] <llutz_> satyanash: if you "removed" the password, there is no old-password. "passwd" as user
+[08:51] <theadmin> I thought passwd doesn't allow empty passwords :/ How can you "remove" one anyway
+[08:51] <satyanash> theadmin, ahh Thank you.
+[08:52] <satyanash> theadmin, using passwd without sudo did the trick
+[08:52] <theadmin> satyanash: Cool
+[08:52] <satyanash> theadmin, I used the GUI. It has a option to remove the password
+[08:52] <theadmin> satyanash: meh, bad idea
+[08:52] <llutz_> satyanash: stupid idea, because it breaks sudo (as you've seen)
+[08:52] <satyanash> Exactly!
+[08:52] <satyanash> The first time I use the GUI, it breaks sudo
+[08:53] <breebreebrannn> I had Ubuntu 11.10 installed alongside Windows 7. But then I was using EaseUS partition manager on Windows to make a new partition and the process froze halfway through so I had to reboot. Now Ubuntu isnt in my boot menu. I downloaded ext2explorer to see if my partition was sstill there but it cant find it. Is my partition gone or is it just corrupt?
+[08:53] <satyanash> I told it to login automatically without a password.
+[08:53] <Mandalord> breebreebrannn: omg reboot when partitioning
+[08:54] <breebreebrannn> I didnt want to but it was completely frozen so I had no other wway out.
+[08:54] <cvr> Does anyone know what the support for the AMD/ATI HD 76XXM cards are like? cannot find anything in my googling
+[08:54] <theadmin> !fglrx | cvr
+[08:54] <ubottu> cvr: For Ati/NVidia/Matrox video cards, see https://help.ubuntu.com/community/VideoDriverHowto
+=== lloir is now known as Lloir|phoneinter
+[08:54] <illusion> !amd | cvr
+=== Lloir|phoneinter is now known as Lloir|afk
+[08:55] <anonymous1> any GRUB masters in the house
+[08:55] <cvr> theadmin: I dont see anything regarding the 7600 cards on there
+[08:55] <Mandalord> breebreebrannn: do you have live cd/usb
+[08:55] <breebreebrannn> Yeah thats how I installed it. Live cd
+[08:55] <theadmin> cvr: I think fglrx has support for those. Not sure though.
+[08:55] <Mandalord> breebreebrannn: use gparted or sudo fdisk -l to find out
+[08:56] <theadmin> cvr: Try it. I mean, that's what livecd's are for ;)
+[08:56] <peetaur> anonymous1 that is a bad question. Nobody knows 100% of every topic, so you need to ask a specific question to find the few that know your sub-topic. (eg. dual booting? I know little; fixing boots with raid,lvm,etc. I am an expert)
+[08:56] <cvr> theadmin: I havent brought the laptop yet, just trying to see if it will work before I buy it
+[08:57] <theadmin> cvr: Oh... I see
+[08:57] <Mandalord> breebreebrannn: just try using gparted or sudo fdisk -l after booting with live cd
+[08:57] <anonymous1> ok, new to IRC protocol :]  didnt want to interrupt
+[08:57] <anonymous1> *Triple booting ubuntu12.4 backtrack5(r2?) and linux mint (12) booted up earlier and every grub entry sent me to "busybox"prompt. was finally able to load backtracks recovery mode.. attempted Reconfig Grub option this allowed me to reboot and start BT5 like normal. now when i boot i have no keyboard support..Bt5 loads as its my 1st grub entry. any ideas on how i can get my keyboard to work at grub again? edit grub? bypass it co
+[08:57] <anonymous1> also have a PartdMagic , puppy linux, and dsl live cd/usb... if that helps. alas, no ubuntu disc/iso
+[08:58] <lamaz> cvr, go to some store and ask if you can try it with the live cd, they allow it quite often
+[08:58] <anonymous1> *also , keyboard has always worked at grub in the past. it works at the bios and everywhere else excepr grub
+[08:59] <anonymous1> im looking at a few suspicious looking grub / boot files/cfgs right now...
+[08:59] <cvr> lamaz: hmmm might be worth a shot I guess if they want a sale they might be willing
+[08:59] <lamaz> cvr, if they know anything about computers it should be ok :)
+[09:00] <pikaro> hi! i'm working for an it magazine as a summer job, and i noticed we have an old test of ultamatix laying around, older than the various damning reviews by ubuntu devs. i thought i should probably include those, but i cannot find any definite info if the project is still alive, only one forums thread mentions it to be dead. does anybody know anything more specific?
+[09:00] <cvr> lamaz: haha, yeh well that might be the issue then..
+[09:00] <Cerrdor> pikaro: not I
+[09:03] <Dr_Willis> pikaro: check the distrowatch web site. if its not   been updated or mentioned in 6 Mo.. id consider it dead
+[09:03] <Jacta> theadmin it still looks like an old gnome - tookt "Gnome" in list (there was three) - can it be that update center overwritten to an older version - and can I check
+[09:03] <theadmin> Jacta: Do you have the gnome-shell package installed?
+[09:03] <anonymous1> my god.. grub is insufferable
+[09:04] <aelen_v> r_Willis: Thanks, the nomodeset helped. The bad resolution was there still there, but nouveau could now be removed (rmmod -f).
+[09:04] <peetaur> anonymous1: you're going to need an Ubuntu rescue CD... the server CDs have it; I assume the desktop one would too.  And this boot CD has a useful feature of dumping a GRUB analysis report to a pastebin after you boot: http://sourceforge.net/p/boot-repair/home/Home/
+[09:04] <Dr_Willis> aelen_v: theres a kernel option to blacklist nouveau so  it dosent load
+[09:04] <Jacta> theadmin it says "gnome-shell" is allready the newest version
+[09:04] <theadmin> Jacta: Hm... Odd. I'm not sure then.
+[09:05] <anonymous1> thanks peetaur
+[09:05] <Dr_Willis> Anom01y:  theres a grub-repair cd mentioned at the 1fixgrub wiki pages also  that has some nice grub fixing tools also
+[09:05] <Dr_Willis> the !fixgrub wiki  page url i mean.
+[09:05] <anonymous1> excellent  the smaller the iso the better :]
+[09:05] <pikaro> dr_willis: it's a repository and a software manager, not a distro. and there are very few packages tracked by distrowatch.
+[09:05] <aelen_v> How to scale my desktop size, so that it won't "bleed" edges out of sight. Using a crappy LG TV as a display.
+[09:05] <theadmin> Jacta: It loads the GNOME Fallback session in your case (which happens when it can't load the standard Shell for some reason, or when you pick it from the list)
+[09:05] <Dr_Willis> pikaro:  totally never heard of it then.
+[09:05] <Jacta> theadmin -> http://screenshotuploader.com/i/01/qcQvXQTBH.jpg
+[09:06] <Jacta> hrm, damn!
+[09:06] <theadmin> Jacta: Well, try to pick the "other" GNOME from the list then
+[09:06] <theadmin> What can I say %)
+[09:06] <gribouille> how can I know if a given package is available on 12.04 (I'm using 11.10 right now)?
+[09:06] <Jacta> gnome - gnome classic - gnome classics (no effects)
+[09:07] <Cerrdor> gribouille: sudo apt-cache search <package name>
+[09:07] <Jacta> just tried the classic, looks 100% as the other :]
+[09:07] <llutz_> gribouille: check packages.ubuntu.com   or use the !info packagename factoid here
+[09:07] <gribouille> !info perl
+[09:07] <ubottu> perl (source: perl): Larry Wall's Practical Extraction and Report Language. In component main, is optional. Version 5.14.2-6ubuntu2 (precise), package size 3590 kB, installed size 11259 kB
+[09:07] <theadmin> gribouille: http://packages.ubuntu.com
+[09:08] <pikaro> !info ultamatix
+[09:08] <ubottu> Package ultamatix does not exist in precise
+[09:08] <pikaro> hm ok, dead then ^^
+[09:08] <avelldiroll> pikaro: if I remember well ultimatix was a successor of automatix, before ubuntu-tweak appeared ... and as far as i remember it was (like the other two) more of a problem than a solution
+[09:09] <pikaro> exactly, avelldiroll
+[09:09] <pooltable>  gb but i not sure if it is even working some gave to me about a year ago???
+[09:09] <kai> hi folks
+[09:09] <pooltable> hard dive
+[09:09] <Dr_Willis> automatix - *shudder* *horrors*
+[09:10] <cvr> Jacta: do you have 3d enabled in your VM?
+[09:10] <pooltable> also i do not see my use hard drive ???
+[09:10] <kai> I'm trying to get a backtrace from a crashing program, but installing the respective -dbg package didn't change anything, gdb still claims that it can't find debug symbols.. any idea how to fix this?
+[09:10] <Jacta> was just out to check, cvr, it was not .. :) - Trying to enable and fire up again
+[09:10] <pikaro> ok, i'll just mention it a quasi-dead. thanks for helping! bye
+[09:12] <Dr_Willis> id say its a definatly dead.. ;)
+[09:13] <avelldiroll> Dr_Willis: and in that specific case, death might a good thing
+[09:13] <Dr_Willis> yep.
+[09:14] <pooltable> how to add a hard drive ?
+[09:14] <Dr_Willis> pooltable: plug it in.. power on...
+[09:14] <anonymous1> :]
+[09:14] <Dr_Willis> vague questions... get vague answers. ;)
+[09:14] <pooltable>  gb ?
+[09:15] <cvr> pooltable: tb
+[09:15] <pooltable> i do not see it
+[09:15] <avelldiroll> pooltable: and if needed create a partition tables and partions with gparted (or some other tool if you prefer)
+[09:15] <pooltable> tb/
+[09:15] <Dr_Willis> try mounting it by haand if its not auto mounting. Its possible its got some filesystem errors that need checked.
+[09:15] <Dr_Willis> of course if its brand new.. it needs to  be partioned and formated..
+=== Cerrdor is now known as init[dot]d
+[09:16] <pooltable> dr willis how to mount it?
+[09:16] <gr33n7007h> how can i play .mov files in linux or convert them somehow?
+[09:16] <anonymous1> gparted > mount "your hdd"
+[09:16] <anonymous1> or disk utility
+[09:16] <avelldiroll> pooltable: the real question here is: is there already some data on the disk or not ? in short, give some context to your problem
+[09:17] <Mandalord> pooltable did you format it?
+[09:17] <Dr_Willis> !mount
+[09:17] <ubottu> mount is used to attach devices to directories. See also https://help.ubuntu.com/community/Mount
+=== SushiDude is now known as Guest50755
+[09:17] <pooltable> avelldiroll manalord i do not know just found it had it years ago
+[09:17] <anonymous1> gr33n7007h i use a app called transarmageddon for quick converting
+[09:18] <Dr_Willis> gr33n7007h:  vlc can play .mov files i  belive. i imagine most of the other video players can also
+[09:18] <gr33n7007h> Dr_Willis, tried vlc and mplayer both wont play ;{
+[09:18] <Dr_Willis> gr33n7007h: arista, winff, and other apps can reendode videos
+[09:18] <Mandalord> pooltable: plug it in, power on and type sudo fdisk -l in terminal
+[09:19] <Dr_Willis> gr33n7007h:  where did the file come from?
+[09:19] <sacarlson> gr33n7007h: you might need to add some codecs with sudo apt-get install ubuntu-restricted-extras
+[09:19] <gr33n7007h> anonymous1, is transarmageddon in repos
+[09:19] <avelldiroll> pooltable: so get some information about it before trying anything ... plug it in and launch "fdisk -l" in a terminal
+[09:19] <Dr_Willis> gr33n7007h:  try running vlc from terminal, play the .mov look for error messages
+[09:19] <avelldiroll> arf too late
+[09:19] <gr33n7007h> sacarlson, thanks
+[09:19] <anonymous1> gr33n7007h it should be.. ubuntu 12.04
+[09:19] <gr33n7007h> [mov,mp4,m4a,3gp,3g2,mj2 @ 0x9e4abf0]moov atom not found
+=== Lloir|afk is now known as Lloir
+[09:20] <anonymous1> gr33n7007th are you using synaptic or what
+[09:21] <pooltable> manalord and avelldiroll fdisk -1 not found
+[09:21] <gr33n7007h> yes
+[09:21] <avelldiroll> pooltable: -l not -1
+[09:21] <Dr_Willis> pooltable:  its a l as in list..
+[09:21] <gr33n7007h> I'm on ubuntu 10.04.3 LTS
+[09:21] <pooltable> ok
+[09:21] <anonymous1> oops sorry :] sacarlson suggested restricted xtras already
+[09:21] <gr33n7007h> downloading them now
+[09:22] <Mandalord> pooltable sudo fdisk -l (the lower case of L)
+[09:22] <pooltable> ok how  to read it?
+[09:22] <gr33n7007h> still no luck with restricted extras
+[09:22] <anonymous1> does dual bootin bt5 and ubuntu12.4 even make sense? lol
+[09:23] <Mandalord> post on http://paste.ubuntu.com/ and give us the link
+[09:23] <avelldiroll> pooltable: pastebin it and tell how your other harddrives are partitionned
+[09:23] <sacarlson> anonymous1: that only adds to the posibility that it's a good idea
+[09:23] <avelldiroll> !pastebin | echo pooltable
+[09:23] <ubottu> echo pooltable: For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://imagebin.org/?page=add | !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+[09:23] <Jacta> cvr / theadmin seems like I got it to work now \0/ thaaaanks
+[09:24] <anonymous1> sacarlson hahaha
+[09:24] <theadmin> !yay | Jacta
+[09:24] <ubottu> Jacta: Glad you made it! :-)
+[09:24] <gr33n7007h> http://paste.ubuntu.com/1050569/
+[09:24] <Jacta> theadmin - do you use it , or ?
+[09:24] <gr33n7007h> same with vlc aswell
+[09:24] <theadmin> Jacta: Use what?
+[09:24] <gr33n7007h> can linux use quicktime player
+[09:24] <Jacta> theadmin gnome3
+[09:25] <theadmin> Jacta: No, I use Xfce
+[09:25] <Dr_Willis> gr33n7007h: ive definatly played .mov in linux befor withoutneeding quicktime
+[09:25] <theadmin> gr33n7007h: Unlikely, but I think other players can handle its formats
+[09:25] <cvr> Jacta: one of my machines runs gnome shell, but it gets annoying pretty quickly
+[09:25] <Dr_Willis> gr33n7007h:  is this some video/movie you bought? ir could have DRM.
+[09:25] <Jacta> cvr what do you prefer then?
+[09:25] <gr33n7007h> from my iphone
+[09:26] <anonymous1> ah ha
+[09:26] <Dr_Willis> a recording? or what exactly:
+[09:26] <cvr> Jacta: my main desktop runs xfce 4.10, closest thing i've found to what im looking for
+[09:26] <gr33n7007h> me on trampoline
+[09:26] <gr33n7007h> bout 2 mins long
+[09:26] <anonymous1> lmao  oh man
+[09:26] <Dr_Willis> post it... ;)
+[09:26] <gr33n7007h> lol
+[09:27] <Jacta> have to try that cvr :)
+[09:27] <gr33n7007h> I though vlc would play them straight out
+[09:27] <bkerensa_> !offtopic | gr33n7007h
+[09:27] <ubottu> gr33n7007h: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[09:27] <Dr_Willis> see what  'file whater.mov' says about it...
+[09:27] <schnuffle> Jacta:  cinamon is really ice as it uses gnome3 but is usable like a normal desktopmy favorite
+[09:27] <schnuffle> nice
+[09:27] <gr33n7007h> Yeah will do
+[09:28] <cvr> Jacta: its very customisable don't think your stuck with the default desktop you get when you boot if it doesnt suit
+[09:28] <gr33n7007h> IMG_0095.MOV: ISO Media, Apple QuickTime movie
+[09:28] <Jacta> schnuffle ill try that too
+[09:28] <Jacta> cvr great! and I have an expert in you :P
+[09:29] <gr33n7007h> can sox convert
+[09:29] <schnuffle> Jacta: maybe one drawback itslinuxmint which is another distro based on ubuntu
+[09:29] <pooltable> this is what i see http://paste.ubuntu.com/1050573/
+[09:29] <Iszak> I'm trying to mount a device /dev/cdrom to /mnt/iso with options map=off and check=relaxed, is this the correct way to do it "mount /dev/cdrom /mnt/iso -o map=off,check=relaxed"
+[09:29] <cvr> Cinamon is alright, I just found the shell isnt as stable as it could be
+[09:30] <Jacta> tried the 'zorin thingie?
+[09:30] <schnuffle> cvr: no problems up to now
+[09:30] <Mandalord> pooltable, paste all the thing on terminal after using sudo fdisk -l
+[09:30] <Dr_Willis> gr33n7007h:  sox is for sounds. winff is easy to use.
+[09:30] <gr33n7007h> is that in repos
+[09:30] <Jacta> http://www.noobslab.com/2012/06/zorin-os-6-is-released-based-on-ubuntu.html that one
+[09:30] <schnuffle> gr33n7007h: ave you libquicktime2 installed?
+[09:30] <pooltable> i did look irc://freenode/avelldiroll,isnick
+[09:30] <Dr_Willis> yes.. time to learn the search feature..  ;)
+[09:30] <Mandalord> pooltable: use Ctrl+Insert instead of Ctrl+C
+[09:31] <gr33n7007h> schnuffle, 1 sec i'll check
+[09:31] <pooltable> this is what i see http://paste.ubuntu.com/1050573/
+[09:31] <gr33n7007h> no
+[09:31] <sacarlson> gr33n7007h: might try some of these test video find out if your codecs are installed and working http://support.apple.com/kb/HT1425
+[09:32] <schnuffle> gr33n7007h: install it and recheck if mplayer can play it
+[09:32] <Dr_Willis> wonder if he needs the goodl old medibuntu w32codecs ;)
+[09:32] <avelldiroll> pooltable: please pastebin the full output of fdisk -l, not only the part you think is relevant
+[09:32] <Jacta> cvr - do I need the compiz something?
+[09:32] <gr33n7007h> schnuffle, will do then try with mplayer
+[09:32] <pooltable> ok
+[09:32] <gr33n7007h> sacarlson,
+[09:32] <gr33n7007h> thanks
+[09:32] <cvr> Jacta: for gnome shell? no
+[09:32] <Jacta> cvr for xfce :)
+[09:33] <Mandalord> pooltable: i says paste all the thing, since i cannot get any useful information
+[09:33] <pooltable> ok
+[09:33] <Jacta> cvr "After you install/upgraded XFCE you might want to get Compiz/Emerald working on it"
+[09:33] <schnuffle> gr33n7007h: and install the w32codecs as well
+[09:34] <gr33n7007h> schnuffle, on it sir
+[09:34] <cvr> Jacta: you'd like to have compiz? xfce has its own compositing window manager
+[09:34] <Jacta> cvr: not really sure what it is and do :/
+[09:35] <schnuffle> !compiz
+[09:35] <ubottu> Compiz (compositing window manager), for a howto see http://help.ubuntu.com/community/CompositeManager and more help #compiz
+[09:35] <gr33n7007h> vlc definently plays avi's, right?
+[09:35] <pooltable_> here http://paste.ubuntu.com/1050585/
+[09:35] <schnuffle> gr33n7007h: avi is a conainer and can hold different codecs
+[09:35] <Dr_Willis> gr33n7007h:  its all about the codec in the file.  not its extension
+=== pooltable_ is now known as pooltable
+[09:35] <bkerensa_> gr33n7007h: if you have the appropriate codecs
+[09:36] <Dr_Willis> ive found very few things vlc cant play
+[09:36] <Jacta> I dont need that, atlest not for now :D
+[09:36] <schnuffle> Dr_Willis: +1
+[09:36] <cvr> Jacta: I wouldn't really worry about it too much at this stage
+[09:36] <gr33n7007h> lets try now then
+[09:36] <avelldiroll> pooltable: so fdisk only sees your actuel disk ... or you sure you plugged a second one ?
+[09:37] <Jacta> cvr just changed from windows(all my life) to at work to have 12.04 only
+[09:37] <Dr_Willis> only 2 things i can think of that vlc couldent play. DRM protected  videos.. and those malware-virus-porn-auto-downloading-codec-things from a few years past.
+[09:37] <pooltable> yes sata
+[09:37] <cvr> Jacta: you can get the built in from settings->window manager tweaks->compositor and enable that
+[09:37] <avelldiroll> pooltable: check /var/log/syslog for disk errors during the init
+[09:37] <Mandalord> .pooltable: check that the device is plugged in and some sign of electricity
+[09:38] <cvr> Jacta: your work uses 12.04?
+[09:38] <avelldiroll> pooltable: it is time to consider that your disk might be unusable
+[09:38] <Jacta> cvr my workspaces do, the other guy using a mac, but they cant afford it to me
+[09:38] <vampirnata> is the only difference between xubuntu, kubuntu, and ubuntu that they use different desktop environments?
+[09:38] <pooltable> avelldiroll should it be quite?
+[09:39] <Dr_Willis> vampirnata:  basically yes
+[09:39] <abys> I'm running on ubuntu 12.04 usb live and I try to access the casper-rw partition I've created but I can't mount it. If I mounted from a xubuntu live usb it works... what is wrong? Thx
+[09:39] <vampirnata> Dr_Willis: basically? is there something else?
+[09:39] <Dr_Willis> vampirnata:  dont forget lubuntu
+[09:39] <cvr> Jacta: looks like you might have won out there :)
+[09:39] <vampirnata> Dr_Willis: lubuntu?
+[09:39] <Dr_Willis> vampirnata:  i think lubuntu uses a different default kernel.
+[09:39] <pooltable> avelldiroll what was that soft ware g some thing for hadr
+[09:39] <pooltable> hard drive
+[09:39] <Dr_Willis> since its for low end  machines
+[09:40] <schnuffle> vampirnata: LXDE as dektop env
+[09:40] <vampirnata> ahh i see
+[09:40] <Jacta> cvr mostly right now I'm suffering due old habbits
+[09:40] <Dr_Willis> then theres edubuntu, with educational apps insgtalled by default
+[09:40] <DieSel> Ieaao anai
+[09:40] <sacarlson> abys: maybe you can't mount from a partition that's already mounted?
+[09:40] <Jacta> cvr "use dafault panel" or "empty panel" at startup
+[09:40] <vampirnata> there's a bit too many distros out at the moment :/
+[09:40] <DieSel> Caanu onneea anou?
+[09:40] <Dr_Willis> vampirnata:  not reall
+[09:40] <Dr_Willis> really
+[09:41] <angs> is it possible to have virus in ubuntu?
+[09:41] <cvr> Jacta: default to start with, you can customise panels how u want and how many later
+[09:41] <schnuffle> vampirnata:  i like to ave the choice
+[09:41] <gr33n7007h> sorry it does play .mov just not that paticular one, weird why would tht be?
+[09:41] <avelldiroll> vampirnata: nope, more choice is always the best option
+[09:41] <Dr_Willis> angs:  not that ive ever seen in the real word.. theres always a posibillity
+[09:41] <DJones> Caanu onneea anou?
+[09:41] <h1ghte3h> :)
+[09:41] <DJones> Ugh
+[09:41] <pooltable> got it gparted
+[09:41] <abys> sacarlson : what do you mean? is this partition mount in the background and you can't access it through the folders?
+[09:41] <chu> angs: Possible? Yes. Plausible? Not likely.
+[09:41] <Dr_Willis> gr33n7007h:  Drm protection perhaps
+[09:42] <sacarlson> abys: it wouldn't boot if it didn't already mount
+[09:42] <gr33n7007h> is that what you think it is, is their anyway round that possibly?
+[09:42] <Dr_Willis> gr33n7007h:  fire up winff and see if it can convert it
+[09:42] <sacarlson> abys: am I wrong I think you see it at root /
+[09:43] <gr33n7007h> Dr_Willis, Will try now actually thanks man
+[09:43] <DieSel> Here is a Russian?
+[09:43] <DJones> !ru | DieSel
+[09:43] <ubottu> DieSel: <unconvertable> <unconvertable> /join #ubuntu-ru <unconvertable> <unconvertable> <unconvertable> <unconvertable> <unconvertable> <unconvertable> . | Pozhalujsta naberite /join #ubuntu-ru dlya polucheniya pomoshi na russkom yazyke.
+[09:43] <Dr_Willis> gr33n7007h:  other  posibility - its using some newer codec/thing that your older system cant handle
+[09:43] <gr33n7007h> possibly yeah
+[09:43] <abys> sacarlson: I don't think so because when I try to install stuff on the system, I'm running out of space, even If I created a bigger casper partition
+[09:44] <DieSel> ie ianea
+[09:44] <DieSel> #ubuntu-ru Cannot join channel (+b) - you are banned  :(
+[09:45] <abys> sacarlson: That's the reason why I want to use casper partition. But when I click on it i've got:  could not find /cow, please check the spelling and try again
+[09:45] <gr33n7007h> Dr_Willis, thats the only video took when jailbroke do you think that as something to do with it!
+[09:45] <sacarlson> abys: running out of mem space?  as I think it creates a ramdisk and puts casper stuf in that
+[09:45] <gr33n7007h> gonna try convert anyways
+=== DieSel is now known as DieSel0
+[09:46] <tdhz77> My desktop is wired to the router, but when I try and stream big buck bunny 720p I get buffering every 10 seconds. Any ideas to why?
+[09:46] <sacarlson> abys: I must be wrong then,  I haven't played with it in too long
+[09:46] <TheRedMood> I'm on my knees here
+[09:46] <TheRedMood> I need help to boot into the powermac g4
+[09:46] <abys> sacarlson: I think the system is locked in a separated partition with fat32 limitation
+[09:46] <TheRedMood> bios
+[09:46] <TheRedMood> so i can set the boot priority of cd higher than the hardisjk
+[09:47] <TheRedMood> The arch linux guys just told me to
+[09:47] <TheRedMood> RTFM
+[09:47] <Dr_Willis> a powerpc mac?
+[09:47] <TheRedMood> So im coming to you guys
+[09:47] <Jacta> cvr do you have a screenshot of your current setup? :)
+[09:47] <Jacta> I'm not really sure wahts possible and not
+=== Youri is now known as Iruoy
+[09:47] <ActionParsnip> TheRedMood: read the screen as the BIOS loads, you will be offered to enter setup. F2 and DEL are common
+[09:47] <tdhz77> Does a 100 MBPS ethernet good enough to stream out a 720p movie?
+[09:48] <ActionParsnip> tdhz77: should be ok
+[09:48] <TheRedMood> tried it
+[09:48] <sacarlson> abys: well they make dvd install iso and they must be the same format and can be like 4gig
+[09:48] <schnuffle> TheRedMood: press the c key while booting
+[09:48] <TheRedMood> I've also googled it but it seemd
+[09:48] <TheRedMood> Tried it
+[09:48] <Dr_Willis> there is a #mac and #apple challen i belive
+[09:48] <tdhz77> actionparsnip, If I'm getting lag. What could be some other factors? My ubuntu server is a pretty old computer.
+[09:48] <ActionParsnip> TheRedMood: is this on a Mac system?
+[09:48] <gr33n7007h> tdhz77, thats more than enough
+[09:48] <abys> sacarlson: yes, but iso is not fat32
+[09:48] <ActionParsnip> tdhz77: what are you sharing the folder with?
+[09:49] <tdhz77> samba to xbmc
+[09:49] <schnuffle> TheRedMood: tried what?
+[09:49] <sacarlson> abys: you playing with the squashfs file?
+[09:49] <szal> ActionParsnip: [11:46:15] <TheRedMood> I need help to boot into the powermac g4
+[09:49] <ActionParsnip> tdhz77: you can set different samba settings to improve throughput, I'd try it as stock first
+[09:49] <tdhz77> My ubuntu desktop to my ubuntu laptop (wireless)
+[09:49] <abys> sacarlson: nop. The casper partition is just an ext2 partition created in the usb stick
+[09:50] <tdhz77> Could the router affect performance? It's a 2wire router. :(
+[09:50] <szal> tdhz77: there you have it -> wireless, that's the bottleneck
+[09:50] <abys> sacarlson : I've created it with gparted and is empty, so there is no system in it.
+[09:50] <TheRedMood> yes
+[09:50] <tdhz77> szal ok, thank you.
+[09:50] <TheRedMood> But someone stupid
+[09:51] <TheRedMood> tried to clone the filesystem
+[09:51] <sacarlson> abys: if your not playing with the squashfs file yet then you need to read https://help.ubuntu.com/community/LiveCDCustomization
+[09:51] <TheRedMood> and only got some parts of it seems
+[09:51] <TheRedMood> It loads up
+[09:51] <TheRedMood> but only to the terminal
+[09:51] <FloodBot1> TheRedMood: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[09:51] <TheRedMood> when i try the diffrent commands
+[09:51] <TheRedMood> it gives me errors
+[09:51] <TheRedMood> dbus and so on
+[09:52] <ActionParsnip> TheProvider: please can you not use ENTER as punctuation...
+[09:52] <sacarlson> abys: most of the stuf that's in your live cd are in that squashfs
+[09:52] <TheProvider> o_O
+[09:52] <TheProvider> sorry?
+[09:52] <abys> sacarlson: cool, looks interesting
+[09:52] <Dr_Willis> heh..
+[09:52] <chu> TheProvider: Don't worry, it wasn't directed at you
+[09:52] <tdhz77> I'm trying to stream a bluray from the drive. :) I love ubuntu.
+[09:52] <TheProvider> lol aright
+[09:53] <ActionParsnip> TheProvider: quit hitting ENTER so much, you can type very VERY longh lines as I am showing you now. Try typing a lot of text, then hit enter
+[09:53] <nibbler_> what happened to iputils-clockdiff in ubuntu? i can't find the package in 10.4 lts :/
+[09:53] <Dr_Willis> tdhz77:  may be worth it to reencode the movie to somthing a little more suited for whatevggers playing it.
+[09:53] <DJones> ActionParsnip: You were talking to TheRedMood who the bot kicked from the channel
+[09:53] <MonkeyDust> ActionParsnip  theredmood has already left
+[09:53] <TheProvider> im guess that wasnt for me either.
+[09:53] <TheProvider> brb
+[09:53] <schnuffle> ActionParsnip: you are wrong it was TheRedMoon
+[09:54] <ActionParsnip> nibbler_: https://launchpad.net/ubuntu/+source/iputils
+[09:54] <Dr_Willis> so many lines.. it lagged everyone
+[09:54] <ActionParsnip> schnuffle: gah
+[09:54] <ActionParsnip> MonkeyDust: d'oh
+[09:54] <schnuffle> :)
+[09:54] <dwakar> i can't use mouse wheel to scroll in ubuntu 12.04 , does uninstalling overlay scrollbars solve the problem?
+[09:54] <nibbler_> thanks ActionParsnip
+[09:54] <ActionParsnip> nibbler_: you can grab the deb there if you want, obviously get the right arch for your Ubuntu install
+[09:55] <tdhz77> dr_willis is ffmpeg the best to transcode it? Is it possible to transcode on the fly?
+[09:55] <ActionParsnip> !info iputils-clockdiff lucid
+[09:55] <ubottu> Package iputils-clockdiff does not exist in lucid
+[09:55] <Dr_Willis> tdhz77:  you could try the various upnp servers. like Plex, ushare,, or others.  I know plex can transcode on the fly. others may  be able to also
+[09:56] <tdhz77> dr_willis you have so many answers. Where can I send you money?
+[09:56] <Womkes> When I input the following command I get a segfault on the server
+[09:56] <Dr_Willis> donate to teh local animal shelter..  its The PuppyLeft License.. :)
+[09:56] <Womkes> mysqld --version | grep -oE '([0-9]+\.[0-9]+\.[0-9]+.* )'
+[09:57] <Womkes> also when i try to nano -w a file it segfaults
+[09:57] <Womkes> any idea how I can troubleshoot this/
+[09:57] <Dr_Willis> 'NoPuppyLeftBehind' License
+[09:57] <Womkes> seems something more sinister going on
+[09:57] <tdhz77> Dr_willis :) lol Will do.
+[09:58] <ActionParsnip> Womkes: if you run it as another user, is it ok?
+[09:58] <sacarlson> Womkes: how did you install mysqld?
+[09:58] <sacarlson> Womkes: sounds more like hardware posiblly
+[09:59] <Womkes> No idea, it is one of the many virtual machines in my company, I am tasked with making an inventory of all the hosting services on all servers in our network
+[09:59] <Womkes> I use this command to get the mysqld version
+[09:59] <Womkes> mysqld --version | grep -oE '([0-9]+\.[0-9]+\.[0-9]+.* )' | cut -d\  -f 1
+[09:59] <aussie> hi all im having trouble with my compiz settings on ubuntu 12.04
+[09:59] <aussie> help?
+[09:59] <Womkes> but somehow this causes a segfault on this server
+[09:59] <Dr_Willis> aussie:  details would help..
+[09:59] <Womkes> only one giving me this problem
+[10:00] <Womkes> I think something is broken, when I try to random make a file using nano
+[10:00] <Womkes> like nano -w test
+[10:00] <Womkes> it segfauls
+[10:00] <Womkes> but touch test works
+[10:00] <Womkes> and editting in vim also works
+[10:00] <Womkes> very strang behaviour
+[10:00] <schnuffle> Womkes: please one line or you'll get kicked by the bot
+[10:00] <MonkeyDust> aussie  start with a question
+[10:00] <aussie> gconftool-2 --recursive-unset /apps/compiz-1
+[10:01] <aussie> I typed that in
+[10:01] <schnuffle> Womkes: whattype of virtualization?
+[10:01] <aussie> when I was initially having trouble with the compiz settings
+[10:01] <MonkeyDust> aussie  that's to reset to defaults
+[10:01] <Womkes> All the servers are xen based
+[10:01] <aussie> the forum did say use it at your own risk
+[10:01] <dwakar> does  uninstalling overlay scrollbars solve the problem?
+[10:01] <dwakar> does  uninstalling overlay scrollbars solve the problem?
+[10:01] <aussie> well ever since then i havent been able to use my previous settings on compiz
+[10:01] <dwakar> does  uninstalling overlay scrollbars solve the problem?
+[10:02] <Womkes> I am running a script which rsyncs another script to a server, runs it, outputs an XML file which all the inventory data and that XML file is parsed by PHP which puts all the xen clients in a database with some meta information like mysql version, php version etc
+[10:02] <aussie> btw how do I privately talk to one person?
+[10:02] <MonkeyDust> aussie  try MyUnity, it's in the repos, you can easily install it
+[10:02] <schnuffle> dwakar: stoprepeating yourself
+[10:02] <ActionParsnip> aussie: you can use:   /msg name text
+[10:02] <Dr_Willis> dwakar: try it and see if  it does?
+[10:03] <Womkes> You know what, screw it, I think I'll just put this server on the skip list and let system administration deal with it :P I am a developer.
+[10:03] <Womkes> But they are so slow, so I was hoping to fix this myself
+[10:03] <dwakar> i can't use mouse wheel to scroll in firefox in 12.04 LTS, will uninstalling overlay scrollbars help?
+[10:04] <dwakar> dr_willis ok
+[10:04] <aussie> Hmm installed it, not sure what to do with it
+[10:04] <sacarlson> Womkes: ya doesn't sound like your responsibility,  but might md5sum like nano or mysqld  and see if they are corupted
+[10:04] <yoski> I have broadcom bcm4312. ifconfig only shows lo and eth0. Wifi was working but now not. please help.
+[10:04] <aussie> Apparently im in 2D mode
+[10:04] <aussie> I will logout and be back
+[10:06] <yoski> help with wifi please anyone.
+[10:06] <ActionParsnip> !broadcom | yoski
+[10:06] <ubottu> yoski: Help with Broadcom bcm43xx can be found at https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx
+[10:06] <Womkes> sacarlson, managed to get hold of one of our sys admins, he's coming to my desk in a couple of minutes :)
+[10:07] <Womkes> I'll show him the issue and let him work out a solution
+[10:07] <sacarlson> Womkes: cool
+[10:07] <Womkes> thanks anyway :)
+[10:09]  * Dr_Willis bets it works for him....
+[10:09] <Dr_Willis> 'i dont see any mrpblem'
+[10:10] <manzamanna> hello, I need to set up some NAT rules and I feel ufw not usable. Is there an "official guide" to switch to classic the iptables?
+[10:10] <Dr_Willis> 'switch to classic' ?
+[10:11] <Dr_Willis> !firewall
+[10:11] <ubottu> Ubuntu, like any other Linux distribution, has firewall capabilities built-in. The firewall is managed using the 'ufw' command - see https://help.ubuntu.com/community/UFW | An alternative to ufw is the 'iptables' command - See https://help.ubuntu.com/community/IptablesHowTo | GUI frontends such as Gufw (GNOME) and Guarddog (KDE from Lucid onwards) also exist.
+[10:16] <manzamanna> thanks ubottu
+[10:19] <decci_> I am trying to install squid
+[10:19] <decci_> on Ubuntu
+[10:19] <Dave-Maydew> I have a quick, possibly simple question
+[10:19] <decci_> I want to test when I run yahoo.com it shudnt open and restridt on the server itself..
+[10:20] <chu> Dave-Maydew: Sure, ask away.
+[10:20] <Dr_Willis> !squid
+[10:20] <ubottu> squid is a caching proxy for the Web.  See: https://help.ubuntu.com/community/SquidGuard  See: http://www.squid-cache.org
+[10:21] <kodo_> has anyone installed eclipse on ubuntu 11.10 with sdk tools for android programming?
+[10:21] <Dave-Maydew> I have a Sony VGC-V2M which is a all-in-one media PC with the GeForce FX5700 in, and it runs smooth with 10.04LTS but I have issues with 12.04 with the 173 driver, has this been fixed?
+[10:21] <ActionParsnip> Dave-Maydew: what is the issue?
+[10:22] <Dave-Maydew> grey screen with a cut out where unity should be and not able to display anything
+[10:22] <Dave-Maydew> does the latest driver fix this issue?
+[10:23] <decci_> Anyone who have experience with squid
+[10:23] <ActionParsnip> Dave-Maydew: tried Unity2D?
+[10:23] <ActionParsnip> decci_: could try in #squid
+[10:24] <Dave-Maydew> As it's a all in one PC the GPU is on the motherboard
+=== rampr1 is now known as rampr
+[10:26] <Dave-Maydew> If the issue with the 173 driver has been fixed, I'll install Ubuntu 12.04LTS today
+[10:27] <sacarlson> decci_: I've never used squid for redirection,  I have used bind9 and iptables to do the same but I guess it can be done with squid also
+[10:28] <ActionParsnip> Dave-Maydew: could try it in live CD to test
+[10:28] <Dave-Maydew> I did, but the grey screen
+[10:28] <Dave-Maydew> the driver shipped with the live CD has issues
+[10:29] <Dr_Willis> thats the nouveu driver
+[10:29] <Dave-Maydew> is it??
+[10:29] <Dr_Willis> nvidia driver must be installed seperatly
+[10:30] <Dr_Willis> !nomodeset
+[10:30] <ubottu> A common kernel (boot)parameter is nomodeset, which is needed for some graphic cards that otherwise boot into a black screen or show corrupted splash screen. See http://ubuntuforums.org/showthread.php?t=1613132 on how to use this parameter
+[10:30] <Dave-Maydew> I know I'm not the only one that has this issue
+[10:30] <sacarlson> decci_: seems to be docs for squid to do redirection http://www.shorewall.net/Shorewall_Squid_Usage.html
+[10:30] <ActionParsnip> Dave-Maydew: try the boot option:  nouveau.blacklist=1
+[10:31] <Dave-Maydew> OK I shall try it, I may even dual boot 12.04 and 10.04 till I've fixed it
+[10:32] <Dave-Maydew> Have been running Ubuntu since moving from the darkside totally since 2009
+[10:32] <Dave-Maydew> and
+[10:32] <Dave-Maydew> I don't want to go back
+=== karol_beech_it_ is now known as YourMum
+[10:34] <Dave-Maydew> cheers, and i'll give it a try and will dual boot this machine
+=== ubuntu is now known as Guest58346
+[10:41] <bilel> hi, I'm trying to add myself to www-data group, I'm doing sudo usermod -aG www-data bilel , but then when I type 'groups' I don't see www-data in the list, why?
+=== YourMum is now known as ChuckNorris
+[10:42] <ferni> newgrp www-data or logout / back in again
+[10:43] <ejcweb> Hi. I've got an external USB hard drive (500GB) which seems to have become corrupted somehow - it shows just a few random file names. Can anyone advise me as to the best route to proceed? (I remember using some recovery software once before when something like this happened to my USB memory stick)
+[10:44] <Mandalord> ejcweb: virus maybe?
+[10:45] <balou_fr> @ejcweb: http://www.cgsecurity.org/wiki/PhotoRec
+=== zz_Htbrdd is now known as Htbrdd
+[10:45] <ActionParsnip> ejcweb: when you want to detatch the device, do you just yank it out or do you safetly remove the device, then unplug?
+[10:45] <sacarlson> ejcweb: I gues fsck /dev/sdXX  when it's not mounted
+[10:46] <Jacta> anyone managed to get skype inside empathy? Saw a thread about it with a "fix"
+[10:46] <ejcweb> Mandalord, ActionParsnip: Not 100% sure, since it's been given to me by a friend. Just trying to work out what I can do for him.
+[10:46] <ejcweb> My guess is that the data is all there somewhere.
+=== Htbrdd is now known as zz_Htbrdd
+[10:46] <bilel> ferni: ok I've done this, but I also made sudo newgrp by mistake, should I revert this or it doesn't matter?
+[10:46] <bilel> sudo newgrp www-data
+[10:47] <balou_fr> @ejcweb - give a try to that tool - pretty good at recovering stuff, including lost partitions, files, etc.
+[10:47] <Jacta> https://bugs.launchpad.net/ubuntu/+source/empathy/+bug/970885 that one
+[10:47] <ubottu> Launchpad bug 970885 in pidgin-skype (Ubuntu) "Empathy 3.4 and pidgin-skype" [Undecided,Incomplete]
+[10:47] <Jacta> is there a way that someone have builded or compiled that allready? im all new :/
+[10:48] <ActionParsnip> ejcweb: what file system is it using?
+[10:50] <ActionParsnip> ejcweb: NTFS? FAT32? Ext2/3/4 ??
+[10:51] <ejcweb> ActionParsnip: It says msdos under properties. How do I check?
+[10:51] <Mandalord> ejcweb: sudo fdisk -l
+[10:51] <bipul> Mandalord: it will shows the Disk space
+[10:51] <Jacta> gueess its the same as skypeforpidgin - skype4empathy - anyone into that?
+[10:52] <Mandalord> bipul: we still know the file system right?
+[10:52] <bipul> Mandalord:  Yes i know the File system
+[10:52] <ejcweb> ActionParsnip: 'W95 FAT32 (LBA)'
+[10:53] <bipul> ejcweb:  what you doing Exactly ?
+[10:54] <ejcweb> bipul: Trying to work out if the data on the disk (lots of photographs) is recoverable.
+[10:54] <pappijo> some applications can create pushbuttons with icons also in themes without button icons. How can I achieve that?
+[10:55] <balou_fr> @ejcweb - no kidding - have a look at photoRec, the link I gave you before - it s a simple tool that will recover any file still on the disk, even if erased or "loast
+[10:55] <balou_fr> just beware not to use that disk anymore so your disk sectors don't get overwritten
+[10:55] <ActionParsnip> ejcweb: oh jeez
+[10:55] <ActionParsnip> ejcweb: I suggest you fsck the partition, may help
+[10:56] <ejcweb> balou_fr: Will check that out.
+[10:56] <ejcweb> ActionParsnip: What does fsck do exactly?
+[10:56] <ActionParsnip> ejcweb: its like chkdsk in windows
+[10:56] <balou_fr> fsck : filesystem check
+[10:56] <balou_fr> might repair some of the filesystem but not recoer files
+[10:58] <ejcweb> ActionParsnip: If the drive shows up as /media/HD-CUE2 then I can just fsck /media/HD-CUE2?
+[10:58] <geirha> ejcweb: No, the filesystem must be unmounted
+[10:58] <ubo0> just installed 12.04 64-bit, now trying to install google-chrome-stable, dpkg is saying I have unmet dependencies for libnss3-1d and libxss1. libnss3 is already installed, libnss3-1d is not available, libxss1 is not available. Anyone have any clue how to get chrome installed? googling did not help
+[10:59] <ActionParsnip> ejcweb: you need to unmount the partition first
+=== sexysarah is now known as Alpha
+=== Alpha is now known as decrisky
+[10:59] <ejcweb> geirha: Ah yes, I see.
+[10:59] <ActionParsnip> ubo0: then run:  sudo apt-get -f install
+=== decrisky is now known as liannamianna
+[10:59] <deepspeed> How do I disable the login prompt on boot in lucid?
+[10:59] <bilel> I have a folder owned by www-data, I'm in www-data group and permissions are 770 so I can create files in that folder, but when I do so, the files belongs to me, www-data isn't in my group so he can't edit it, is tehre a way to put www-data as group owner automatically when I create a file in this folder?
+[11:00] <liannamianna> baseball bat
+[11:00] <ubo0> ActionParsnip: despite not having libxss1?
+[11:00] <deepspeed> lol
+[11:00] <ActionParsnip> deepspeed: do you want autologin?
+[11:00] <deepspeed> yes
+[11:00] <ActionParsnip> ubo0: it should satisfy deps
+[11:00] <deepspeed> I want to also do away with the keyring thing that I have to use to get online, too, ActionParsnip.
+[11:00] <ActionParsnip> deepspeed: https://help.ubuntu.com/community/AutoLogin
+[11:00] <geirha> bilel: give the directory mode 2770
+[11:00] <ActionParsnip> deepspeed: set a blank keyring pasword and you won't get bothered for a password
+[11:01] <geirha> bilel: See http://mywiki.wooledge.org/Permissions
+[11:01] <ActionParsnip> ubo0: make sure you are fully updated too
+[11:01] <deepspeed> ActionParsnip, thanks a lot.
+[11:02] <ejcweb> ActionParsnip: fsck says 'Bad short file name (\031\000\000\000B \000I.\000n\000).', and gives options to drop file, rename etc. What is this doing/what should I do?
+[11:02] <ejcweb> Maybe cancel and try PhotoRec?
+[11:02] <bilel> geirha: ok I'm checking ;)
+[11:02] <balou_fr> @ejcweb - yes
+[11:02] <balou_fr> if you do so it will overwrite your disk
+=== liannamianna is now known as Happymeal
+[11:03] <ejcweb> balou_fr: You mean, if I continue?
+[11:03] <balou_fr> just make sure you have some space somewhere on another disk where to copy the recovered files
+[11:03] <balou_fr> no stop
+[11:03] <deepspeed> ActionParsnip, that link you gave me is why I asked here, lol.  I'm using enlightenment, and don't have a 'system' tab on my taskbar.  Do you know how to get to the menu in enlightenment?
+[11:03] <balou_fr> yes :) if you continue :)
+[11:03] <zimbres> hi, what is the status of ubuntu on android? I cannot find if it is already available
+=== Happymeal is now known as lianna
+[11:04] <Anomie21> What is daisy.ubuntu.com ?
+[11:04] <ejcweb> balou_fr: Can PhotoRec scan for files without restoring them first? I don't currently have a 500GB disk spare, but it would be good to check if it can find any files.
+[11:04] <balou_fr> apt-get install testdisk
+[11:05] <deepspeed> ActionParsnip, nvm, I found it.  Thanks.
+[11:05] <balou_fr> mmh I don t recall exactly, I think it first scan the disk and then ask if you want to recover them
+[11:05] <ejcweb> Also, is it safe to Ctrl-C out of fsck at the point where it is asking me what to do?
+=== thomas_ is now known as Jambon-beurre
+[11:06] <inertial> ejcweb: what is it asking you to do?
+[11:06] <balou_fr> yes - no data will have been changed on the disk at that point
+[11:07] <bilel> geirha: I don't really get what you mean by directory mode? in the doc they talk about mask? is it this?
+[11:08] <geirha> bilel: changing umask will allow you to create files with write-permission for group by default, but it's the last part of that page I intended; what setgid on a directory means.
+=== jacta_ is now known as CreazioN
+[11:10] <geirha> bilel: umask may not be sufficient for your case though, you may want to enable acl on that filesystem and set a default acl on that dir
+[11:11] <ActionParsnip> ejcweb: Fat32 isn't very robust. I suggest you chkdsk in Windows
+[11:12] <ejcweb> ActionParsnip: With the hope that chkdsk might do what?
+[11:12] <bilel> geirha: I'm currently looking at the setgid part, for the umask I will put 007, so when www-data user creates a file, I'll be able to write and edit, but it won't work if I create a file myself, so I need to take a look at acl for that? not setgid?
+[11:12] <ActionParsnip> ejcweb: repair the file system. Sounds like it's not being used correctly (afe removal in the OS before pysical removal)
+[11:12] <kodo_> anyone can help me with the installation of Java JDK 7.x?
+[11:13] <ejcweb> ActionParsnip: Ok. I will reboot into windows and try chkdsk, and if that doesn't do the trick, give PhotoRec a try.
+[11:13] <ActionParsnip> kodo_: do you mean for a browser plugin?
+[11:13] <ejcweb> Thanks for your advice :)
+[11:13] <schnuffle> kodo_: http://www.liberiangeek.net/2012/04/install-oracle-java-jdk-7-in-ubuntu-12-04-precise-pangolin/
+[11:13] <ActionParsnip> ejcweb: tell your buddy to get a backup in place
+[11:13] <Mandalord> ejcweb chkdsk /r
+[11:13] <geirha> bilel: If you set umask before creating the file it will give the file the "right" mode. The setgid will help with the group ownership.
+[11:13] <kodo_> no i need it for set Eclipse to android programming
+[11:14] <ActionParsnip> !java
+[11:14] <ubottu> To just use java you need a "Java Runtime Environment" (JRE) and/or a browser plugin. If that is not sufficient you will need a "Java Development Kit" (JDK) aka "Software  Development Kit" (SDK).  Please see https://help.ubuntu.com/community/Java about how to install one of three current implementations.
+[11:14] <kodo_> i'm on ubuntu 11.10 at the moment
+[11:14] <ActionParsnip> kodo_: schnuffle's guide looks decent :)
+[11:14] <ejcweb> Mandalord: That's the command I should run, right? Does that go through all disks?
+[11:14] <kodo_> thanks
+=== pico is now known as Guest20449
+[11:15] <schnuffle> kodo_: at least it uses alternatives to set it up correclty :)
+[11:15] <balou_fr> personally I d still run photoRec first before u make any change on the disk, then run chkdsk to repsir the filesystem ...
+[11:16] <balou_fr> if you repair first, then you alter the disk and reduce the chance to get more data
+[11:16] <kodo_> ok let me try then ;-)
+[11:17] <ejcweb> balou_fr: So photoRec doesn't modify the disk at all?
+[11:17] <balou_fr> no
+[11:17] <ejcweb> That sounds like a safe approach I guess.
+[11:18] <balou_fr> it recover files, write them on another disk of your choice
+[11:18] <bilel> geirha: great so it looks good for me, I will also enable the setgid and it should be ok,
+=== Guest20449 is now known as JasonDC
+[11:18] <balou_fr> if you check at its manual they even recommend to do a dd of the disk to another file so you have the exact bytes of your disk
+[11:19] <balou_fr> but dd 500GB I don t really see that coming in the next 10 min :D
+[11:19] <bilel> geirha: I've just found out 'chmod 2555' to enable the setgid , that's what you were telling me at the beginning with change the usermod, now I understand ;) thanks
+[11:20] <geirha> bilel: you probably mean 2775 or 2770
+[11:20] <CreazioN> I'm in Xfce right now, is there a way to keep all "window buttons" on the same line - as it is right now it only shows from current desktop window
+[11:20] <CreazioN> does it make sense what I wrote? Otherwise tell me
+[11:20] <balou_fr> you can try first on a small disk / usb key to have an idea of the results, you ll be amazed how much data you had removed you can still recover
+[11:21] <bilel> geirha: yes I've just copy pasted, I'll use 2770
+[11:21] <ActionParsnip> CreazioN: do you mean close, minimize, maximize etc?
+[11:22] <ejcweb> balou_fr: dd would just do a byte-for-byte copy, right?
+[11:22] <balou_fr> yup
+[11:22] <ejcweb> But since photorec won't change the disk this isn't totally necessary?
+[11:22] <vampirnata> ejcweb: do you have a windows machine handy?
+[11:23] <ejcweb> vampirnata: Yes (dual-boot).
+[11:23] <CreazioN> AceFace, ive made a panel with "window buttons" - when chaging desktop it only shows active desktops windows
+[11:23] <vampirnata> I recently deleted a whole disk of music accidently and Recurva undeleted it all
+[11:23] <vampirnata> it's free and for windows. (from the makers of ccleaner)
+[11:23] <auronandace> CreazioN: check the preferences, you can set it to all workspaces
+[11:23] <rodent> anyone good with UFW?? i'm trying to preconfigure UFW before I enable it, but it doesn't seem to take, I'm working remotely, I for sure have user.rules set with 22 open and other ports, but when I enable UFW, it blocks everything as if it was still default... anyone have any suggestions??
+[11:23] <ejcweb> vampirnata: Ok. Maybe I'll give that a try later.
+[11:24] <vampirnata> it allows you to redirect the undelete to another drive (actually recommends it)
+[11:24] <CreazioN> auronandace, thanks - that was really embarrassing :)
+[11:25] <auronandace> CreazioN: no worries, xfce is my favourite
+[11:25] <Norwegian> Does linux have any decent rss readers?
+[11:26] <CreazioN> auronandace, do you by any luck have a screenshot of your setup, I would really much like to see such
+[11:26] <szal> Norwegian: akregator (from what I hear; don't use it myself)
+[11:26] <avelldiroll> Norwegian: plenty, but that depends how you define "decent", i.e. you need to explain what features you seek
+[11:26] <bilel> geirha: there is something I don't understand, when I create a new file it's www-data as owner group it's ok, but the others have read access, but the umask I have set is 007, shouldn't it be no permission at all for others?
+[11:27] <auronandace> CreazioN: not at the mo, i'm on unity here (not as bad as i thought it would be)
+[11:27] <ActionParsnip> Norwegian: http://www.ubuntugeek.com/list-of-rss-readers-available-in-ubuntu.html
+[11:27] <Norwegian> Something like netnewswire or reeder on mac.
+[11:27] <balou_fr> ejcweb: it s always a safety precaution (not mandatory though), especially if your disk is slowly dying and you are not sure how long it will last
+[11:27] <ejcweb> balou_fr: Ok.
+[11:28] <avelldiroll> Norwegian: i am using newsbeuter ... which suits my needs as i want an rss client in the command line ... but there is rssowl, liferea, akregator
+[11:28] <ActionParsnip> Norwegian: I use feedindicator as it siin the tray :)
+[11:28] <blackshirt> nothing wrong
+[11:28] <ejcweb> I suspect I don't have enough 500GB drives free to manage this copy, plus another one to recover to.
+[11:28] <balou_fr> probably overkill in this case, it was more of a general advice :)
+[11:28] <geirha> bilel: umask only applies to the shell you run it in, and all child processes spawned from there. If you ran umask 007 in a terminal, then created a file with gedit that was not started from that same terminal, gedit will have the default umaks
+[11:28] <geirha> bilel: That's why I said umask may not be sufficient for your case.
+[11:29] <avelldiroll> Norwegian: i don't know this 'netnewswire', so you should explain why you find it better than others ... else you'll have to check for yourself
+[11:29] <CreazioN> auronandace, why are you using that atm if xfce is your favourite?
+[11:30] <nafcool> hey!
+[11:30] <nafcool> I want to use the Unity Launcher API (on Precise)
+[11:30] <rodent> anyone good with cli UFW?
+[11:30] <auronandace> CreazioN: i like to keep my options open, its good to see new things to see if you can improve your setup
+[11:30] <Norwegian> Right now I use reeder on my Mac. It has great design, readability, twitter support, google sync. Design is key to me.
+[11:30] <nafcool> and I'm using - http://ubuntuforums.org/showthread.php?t=1758443
+[11:30] <nafcool> but when I compile the source code
+[11:31] <nafcool> the error occurs saying that glib.h not found
+[11:31] <kapz> I want to remote ubuntu with ubuntu, both running gnome-shell but the speed is *Painfully* slow...whereas remmina with realvnc on windows works 10x faster on same setup...what is wrong with vino?
+[11:31] <nafcool> I've installed libunity-dev
+[11:31] <auronandace> CreazioN: my main rig is a t510 with archlinux on it (xfce), this one i'm speaking on is my t61 allways on ubuntu install
+[11:31] <MacroMan_> I'm having some trouble with tar on the terminal. I'm calling: tar -czfv base_backup_2012_06_20_01.sql.tar base_backup_2012_06_20_01.sql
+[11:31] <nafcool> for the header file which contains the functions for the API
+[11:31] <nafcool> plz. help me
+[11:31] <nafcool> :D
+[11:31] <MacroMan_> And getting: tar: base_backup_2012_06_20_01.sql.tar: Cannot stat: No such file or directory
+[11:31] <Mandalord> rodent: how about gufw
+[11:31] <ActionParsnip> kapz: what are you doing on the remote system?
+[11:31] <CreazioN> auronandace, aah - smaaart :) - do you by any chance use pidgin+
+[11:32] <MacroMan_> But the .tar file shouldn't exist yet as I haven't yet compressed the file
+[11:32] <avelldiroll> Norwegian: so i am the wrong one to talk to ... i don't care about looks, only about functionality
+[11:32] <bilel> geirha: hm ok, ok I don't think it's a big problem as long as others don't have write access, is the default umask 022?
+[11:32] <kapz> ActionParsnip, running updates, configuring apps etc...
+[11:32] <Norwegian> Design is how it works. Design is everything.
+[11:32] <schnuffle> MacroMan_:  IF YOU USE THE Z FLAG YOU SHOULD CALL IT TGZ OR TAR:GZ
+[11:32] <ActionParsnip> kapz: you can run updates via SSH, it'll be a tonne quicker
+[11:32] <auronandace> CreazioN: i use pidgin, but hardly ever chat on it, mainly on as an email notifier
+[11:32] <schnuffle> ooops sorry
+[11:33] <MacroMan_> schnuffle: So .tar.gz ?
+[11:33] <ActionParsnip> MacroMan_: or install unp, then you don't have to worry about what switches are needed
+[11:33] <CreazioN> auronandace, do you by any chance know if its by default its possible to toggle the client - or makeable?
+[11:33] <rodent> Mandalord: same thing.. yes....
+[11:33] <MacroMan_> or .tar:gz ? <- I've not seen that type of file extension before
+[11:33] <ActionParsnip> MacroMan_: just use unp for all archives and they will be extracted
+[11:33] <rodent> Mandalord: that is what i'm using...
+[11:33] <kapz> ActionParsnip, yeah OR I can use gnome-2d and do a lots of stuff but why is vino slow with gnome-shell?
+[11:33] <auronandace> CreazioN: toggle what exactly?
+[11:34] <MacroMan_> ActionParsnip: This is on a server (which isn't mine) so I can't install that here
+[11:34] <ActionParsnip> kapz: maybe its a bug. Is one reported. I suggest you use ssh for updates
+[11:34] <schnuffle> MacroMan_: yep tar czvf: c: create z:use gzip, v:verbose, f:filename
+[11:34] <CreazioN> auronandace, toggle the visibility of the client
+[11:34] <avelldiroll> Norwegian: in general sense yes ... in the way its use by apple as a marketing term, not so ... as i mostly consider macOS and macos apps in general to be utterly bloated, but that's my opinion, and that's probably offtopic
+[11:34] <ActionParsnip> MacroMan_: if you have sudo acces sthen you can
+[11:34] <schnuffle> MacroMan_: .tar.gz of course
+[11:34] <rodent> Mandalord: http://pastebin.com/9vmH30zZ
+[11:34] <ActionParsnip> MacroMan_: the 'file' command will tel you what it is
+[11:35] <auronandace> CreazioN: whether someone is visable in your list if they are offline? that what you mean?
+[11:35] <tty> running a virtual machine of ubuntu and the network interface sleeps after some period. is this normal?
+[11:35] <MacroMan_> ActionParsnip: It's possible for me to, but I can't because it's not my server. ie I don't have permission from the owner  to
+[11:35] <kapz> ok...also is there a way where I can remotely login/logout to the computer so I can configure lightdm while logging in?
+[11:35] <glitsj16> nafcool: looks like you're missing libglib2.0-dev .. sudo apt-get install libglib2.0-dev
+[11:35] <ActionParsnip> MacroMan_: what does file say the file is??
+[11:35] <nibbler_> quiet often in ubuntu 12.4 gnome classic, the upper and lower bars are "always on top" - annoying when running other stuff in fullscreen. any hint?
+[11:35] <nafcool> glitsj16: it is installed........what to do now?
+[11:35] <Norwegian> You're mistaken. "Design is not just what it looks like and feels like. Design is how it works. " - Steve Jobs
+[11:35] <MacroMan_> schnuffle: I get the same error with tar -czfv base_backup_2012_06_20_01.sql.tar.gz base_backup_2012_06_20_01.sql
+[11:36] <CreazioN> auronandace, if i click the [x] in pidgin its hidden - but it still runs - to get it visible again I go thru empathy and click pidgin - what I want is like ctrl+alt+a to toggle the appwindow to show
+[11:36] <MacroMan_> ActionParsnip: -rw-r--r-- 1 my_username www-data    177464325 2012-06-20 12:25 base_backup_2012_06_20_01.sql
+[11:38] <auronandace> CreazioN: go through empathy? never had to do that. pidgin should have an option about whether or not to minimise to system tray when you close it
+[11:39] <glitsj16> nafcool: i don't know
+[11:40] <nafcool> glitsj16: :(
+[11:40] <nafcool> glitsj16: np
+[11:40] <rodent> Mandalord: http://pastebin.com/9vmH30zZ  any ideas?
+[11:40] <glitsj16> nibbler_: have you seen http://www.webupd8.org/2012/06/fix-gnome-panels-on-top-of-fullscreen.html yet?
+[11:41] <avelldiroll> Norwegian: i know, and i agree with the definition, but i disagree about how he chose to implement it
+[11:41] <Norwegian> He chose to implement it to the masses.
+[11:42] <nibbler_> glitsj16, thanks, trying
+[11:43] <purencool> I am in the terminal and cd myself an amazing path but now I am in that dir how do I get the path to stop being displayed on the lefthand side of the $
+[11:43] <ActionParsnip> MacroMan_: try -zxvf
+[11:43] <ActionParsnip> purencool: you will need to change the PS1 variable
+[11:44] <purencool> sorry what is the PS1
+[11:44] <avelldiroll> 10% of the market is not the masses ... it focuses more on graphic/musical producers types of users ... "artsy", people who consider that looks is more important compare to the masses
+[11:44] <kapz> I'll rephrase..how can I remotely control/use lightdm from ubujnhtu to ubuntu?
+[11:44] <avelldiroll> but this is far to much offtopic to keep discussing it here
+[11:45] <ActionParsnip> purencool: its the variable that defines the prompt, a basic search online wold have told you that
+[11:46] <user-09> guys does anyone knows how to send a pop up msg in ubuntu? just like net send in xp without install any software
+[11:46] <MonkeyDust> kapz  there's XDMCP
+[11:47] <rodent> anyone good with GUFW?? i'm trying to preconfigure UFW before I enable it, but it doesn't seem to take, I'm working remotely, I for sure have user.rules set with 22 open and other ports, but when I enable UFW, it blocks everything as if it was still default... anyone have any suggestions??
+[11:47] <rodent> http://pastebin.com/9vmH30zZ  any ideas?
+[11:47] <ActionParsnip> user-09: if you can ssh to the system you can use notify-send
+[11:48] <ActionParsnip> user-09: you can run: export DISPLAY=:0.0; notify-send "Title of message" "message text"
+[11:48] <CreazioN> auronandace, could'nt really find it - just could be cool with a toggle I think
+[11:48] <MonkeyDust> kapz  http://tldp.org/HOWTO/XDMCP-HOWTO/
+[11:48] <user-09> Action: thank you.
+[11:48] <avelldiroll> rodent: configuring a firewall remotly without being 100% of what you are doing is a disaster waiting to happen
+[11:48] <ActionParsnip> user-09: you can even script it to connect and run the command then disconnect :)
+[11:48] <schnuffle> rodent: you enable the firewall which leads to no more packages accetped
+[11:49] <avelldiroll> rodent: launch a VM and test your configuration on a similar system before trying to set up one remotly
+[11:49] <Norwegian> avelldiroll: You're thinking about the pc world. Apple is a lot bigger with iPhone and iPad. Your definition of mac users is also outdated.
+[11:50] <avelldiroll> Norwegian: no, i am comparing things that are comparable ... and i was speaking about MacOS, i thought my precedent sentences were clear about that
+[11:51] <llutz> rodent: why don't you just define an iptables-ruleset and load that when starting up? and if you fiddle with "firewall" from remote, always make sure to have a cron-job running, resetting the rules after xx minutes
+=== MacroMan is now known as Guest46606
+[11:51] <kapz> thanks MonkeyDust, am gonna give it a shot.
+[11:51] <Norwegian> iOS is built up on os x so there you go.
+[11:54] <avelldiroll> Norwegian: so you are implying that the desktop market and the smartphone market are comparable ? ouch ... but it is definitely not a debate for this channel
+[11:54] <lolcat> Norwegian: Er du norsk erller wannabefag?
+[11:54] <Norwegian> lolcat: Norsk ja
+[11:54] <MonkeyDust> mentalt ute av balanse!
+[11:55] <lolcat> Dasa
+[11:55]  * lolcat vandrer vidre
+[11:56] <ActionParsnip> usr13: ssh user@host "source ~/.bashrc; export DISPLAY=:0.0; notify-send "Title of message" "message text""     should work
+[11:56] <rodent> llutz: i can do it all by hand, sure, but that defeats the purpose of using ufw... you can see in the pastebin, that 22/ssh is defined, but i'm stilll locked out of it...
+[11:56] <mint_> hi
+[11:56] <rodent> avelldiroll: done that
+[11:56] <mint_> i have a question. how to convert laptop wireless to a Hot-Spot?
+[11:57] <MonkeyDust> mint_  are you in Mint right now?
+[11:57] <rodent> schnuffle: i enable the firwall with allt he rules already pre-defined in user.rules, and i also && re-allow ssh, but i still lose all connectivity to my box...
+[11:57] <ActionParsnip> mint_: what is the output of:  lsb_release -sc
+[11:57] <llutz> rodent: well and just because those misbehaviours i'd prefer plain iptables-rules instead of any obscure code to handle those
+[12:00] <schnuffle> rodent: sure that the second command gets executed when the firewall is up and already blocking you. Write a bash script  with your commands and execute it in a screen to see if it makes a difference. Maybe add a iptables -L > ufw.log to see what happened
+[12:00] <reza_99999> how to convert laptop wireless to a Hot-Spot?
+[12:00] <rodent> schnuffle: it does, as it says " rule exists skipping.. "
+[12:01] <rodent> absolutely it gets ran
+[12:01] <rodent> i'm waiting for the colo to fix my remote consoel access so i can diagnose it out of band...
+[12:01] <rodent> otherwise i'll just reboot the box and examine logs as you suggested.
+[12:01] <Defusal> is there a technical ubuntu channel?
+[12:02] <ActionParsnip> reza_99999: what is the output of:  lsb_release -sc    plese
+[12:02] <woozly> guys, how to get tabbed 'screen' ?
+[12:02] <woozly> in my terminal
+[12:02] <Defusal> ie. a ubuntu channel for more advanced things?
+[12:02] <reza_99999> lsb_release -sc
+[12:02] <reza_99999> lisa
+[12:02] <ActionParsnip> reza_99999: not supported here
+[12:02] <ActionParsnip> reza_99999: mint has it's own channel
+[12:02] <ActionParsnip> !mint | reza_99999
+[12:02] <ubottu> reza_99999: Linux Mint is not a supported derivative of Ubuntu. Please seek support in #linuxmint-help on irc.spotchat.org
+[12:02] <schnuffle> Defusal: just ask
+[12:03] <reza_99999> mint and ubuntu are same. plz say if you know. its important
+[12:03] <ActionParsnip> reza_99999: its not
+[12:03] <ActionParsnip> reza_99999: mint is mint, ubuntu is ubuntu
+[12:03] <reza_99999> ok.tnx
+[12:03] <realzippy> mint is ubuntu for the lazy
+[12:04] <DJones> Quincy119
+[12:04] <ActionParsnip> mint is ubuntu for those who like a smaller support network
+[12:04] <DJones> Ugh, stupid odd windows
+[12:05] <ActionParsnip> guess how I knew: http://paste.ubuntu.com/1050768/   ;)
+[12:05] <avelldiroll> mint and ubuntu differ far to much to not separate the support ... I believe mint irc support channel are not on freenode but on spotchat if i remember well
+[12:06] <ActionParsnip> avelldiroll: yes, ubottu even states the server for users asking for mint support here
+[12:06] <reza_99999> mint support is in poor status
+[12:06] <avelldiroll> reza_99999: and that's mint problem
+[12:06] <schnuffle> I'm in both both channels ubuntu:~1700 people mint:~150
+[12:06] <ActionParsnip> ha
+=== ecthiender_ is now known as ecthiender
+[12:07] <fidel> quantitiy != quality
+[12:08] <avelldiroll> reza_99999: the ting is, if you want to ask a question here, you should first try to reproduce your problem on ubuntu (a VM a liveUSB ...) and try to solve it on ubuntu ... once that done you may try to transpose the obtain solution to mint
+[12:17] <hotea1313> hi im running a dell inspiron 1420 and it wont connect to the wifi someone on here helped me last time to revert it to a different driver somehow
+[12:18] <ActionParsnip> hotea1313: what wifi chip is it?
+[12:18] <hotea1313> i forgot
+[12:19] <ActionParsnip> hotea1313: run:  sudo lshw -C network    it will tell you
+[12:19] <hotea1313> k
+[12:19] <_Ethan_> hi, im thinking about buying a laptop, 600-800 eur, i thought about a dell but ill be outside my country and i only can buy it throught internet, can someone give me an advice please? thank you.
+[12:19] <hotea1313> im jsut on diffferent computer since i cant plug it in to the router
+[12:19] <manananana> i am on ubuntu 11.04 and i cant log in to my account just in recovery mode or in guest how can i fix it
+[12:20] <ActionParsnip> hotea1313: you can still run the command then copy the wifi chip by sight...
+[12:20] <hotea1313> i am
+[12:20] <hotea1313> i cant copy paste
+[12:20] <ActionParsnip> hotea1313: yes but we need only one line, so you don't need to copy and paste
+[12:21] <ActionParsnip> hotea1313: think about it
+[12:21] <hotea1313> caps lock was on
+=== Monte is now known as Guest41248
+[12:21] <tenshi> test
+[12:21] <ActionParsnip> !test | tenshi
+[12:21] <ubottu> tenshi: Testing... Testing... 1. 2.. 3... ( by the way, remember that you can use #test )
+[12:21] <tenshi> ._.
+[12:21] <tenshi> lol hi
+[12:21] <vampirnata> _Ethan_: you can buy mine if you want :)
+[12:21] <ActionParsnip> !hcl | _Ethan_
+[12:21] <ubottu> _Ethan_: For lists of supported hardware on Ubuntu see https://wiki.ubuntu.com/HardwareSupport - To help debugging and improving hardware detection, see https://wiki.ubuntu.com/DebuggingHardwareDetection
+[12:22] <hotea1313> its showing up hardware lister
+[12:22] <schnuffle> _Ethan_: I've about 30 Dell Laptop in my job. They are okay but not perfect. Check out Lenono as well and stay away from brand new stuff that will run you in driver problems and stay away from double graphic laptops as well
+[12:22] <hotea1313> says b.02.15
+[12:23] <ActionParsnip> hotea1313: the product line will state what it is. Common ones are Intel, Broadcom, Atheros
+[12:23] <hotea1313> its intel
+[12:23] <hotea1313> i rember that
+[12:23] <MacroMan_> I currently connect via ssh to a server using: 'ssh username@192.168.2.2' and then I put in my password. Is it possible to send the password in this command also as I want to run it from a bash script.
+[12:23] <ActionParsnip> hotea1313: ok, read the output of lshw and find out which intel
+[12:23] <_Ethan_> mmm ok
+[12:23] <ActionParsnip> MacroMan_: you can use ssh keys
+[12:24] <hotea1313> its not showing up
+[12:24] <hotea1313> showing up as a bucnh of options
+[12:24] <_Ethan_> schnuffle ok, thank you
+[12:24] <ActionParsnip> hotea1313: sudo lshw -C network       lshw = LSHW    in lower case
+[12:24] <_Ethan_> the problem is that i have no time to buy deel
+[12:24] <_Ethan_> dell
+[12:24] <MacroMan_> I have ssh keys already set up, but it's set up so it still needs my password;
+[12:24] <_Ethan_> im going abroad from my country :(
+[12:24] <hotea1313> says hardware lister lsh -d network b.02.15
+[12:24] <_Ethan_> was thinking about other brand
+[12:24] <hotea1313> then format options
+[12:25] <ActionParsnip> MacroMan_: then you'll need to tweak /etc/ssh/sshd_config   to not need passwords etc
+[12:25] <ActionParsnip> _Ethan_: system76 if you can :)
+[12:25] <ActionParsnip> hotea1313: or:   lspci   will show you
+[12:25] <MacroMan_> ActionParsnip: Thanks
+[12:25] <manananana> i am on ubuntu 11.04 and i cant log in to my account just in recovery console but i guest its ok
+[12:26] <manananana> i am on ubuntu 11.04 and i cant log in to my account just in recovery console but in guest its ok
+[12:26] <MonkeyDust> manananana  what happens when you try
+[12:26] <ActionParsnip> manananana: what GPU do you use? Please don't post like that
+[12:26] <manananana> sorry
+[12:26] <manananana> gma950
+[12:27] <hotea1313> broadcom corporation bcm4311
+[12:27] <Defusal> the latest cpuset package says "ImportError: No module named cpuset.main" when running "cset", does anyone know how i can fix this?
+[12:27] <manananana> ActionParsnip i have a black screen after login the arrow goes in the middle and then nothing back to the log in screen
+[12:27] <ActionParsnip> !broadcom | hotea1313
+[12:27] <ubottu> hotea1313: Help with Broadcom bcm43xx can be found at https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx
+[12:27] <ActionParsnip> manananana: what if you log in to the Unity2D session?
+[12:28] <hotea1313> its a clightly complex probelm i remember that
+[12:28] <manananana> ActionParsnip same thing
+[12:28] <hotea1313> took me about 2 hours last time to fix it
+[12:28] <hotea1313> in the end they person told me how to revert to a not as stable  thing
+[12:28] <ActionParsnip> manananana: if you press CTRL+ALT+F1   and make a new user, is it ok there?
+[12:29] <hotea1313> *driver
+[12:29] <manananana> ActionParsnip yes it works i can log in to the guest as well but not on my old account
+[12:29] <zorael> Does anyone what I can do to make udev wait until it can read /lib/firmware before trying to load modules? I'm not using an initrd, so as to speed up boot.
+[12:29] <usr13> manananana: Forgot your password? See https://help.ubuntu.com/community/LostPassword
+=== Lupinedk is now known as lupinedk
+[12:30] <manananana> usr13 lol i know my password its not that
+[12:30] <Defusal> i rate i will be installing debian on all my future servers
+[12:30] <Defusal> ubuntu just gives problems that have no solutions
+[12:31] <Defusal> the only google result for "ImportError: No module named cpuset.main" is a pastebin from last year
+[12:32] <Pici> Defusal: You could try asking in #ubuntu-kernel, but be aware that it is a working channel for our developers.
+[12:32] <usr13> manananana: Boot the live CD, edit the /etc/group file and add the new user to all the groups as the original user and just use the new user.  (But, why is it you can not log into the original user?)
+[12:32] <Defusal> Pici, i asked in there, after #ubuntu-server had no responses, maybe someone will respond at some point
+[12:32] <kesroesweyth> hi all, htop says polkitd is using 55% memory, is that normal? my system has been running pretty slowly lately and i'm trying to figure out why
+[12:33] <Defusal> the issue itself is messed up though
+[12:33] <MonkeyDust> kesroesweyth  make sure you don't have too many kernels installed in /
+[12:33] <Defusal> i don't understand how the latest package can have a major python issue for about a year and there is still no info online about it
+[12:34] <manananana> usr13 thats what i am asking :D i will try to copy my home folder via guest
+[12:34] <kesroesweyth> MonkeyDust how do I check?
+[12:34] <MonkeyDust> Defusal  maybe nobody noticed
+[12:34] <usr13> manananana: What happens when you try to login original user?
+[12:35] <MonkeyDust> kesroesweyth  you could use ubuntu-tweak
+[12:35] <manananana> usr13 not much black screen and back to the log in screen
+[12:35] <usr13> manananana: black login screen?
+[12:35] <kesroesweyth> MonkeyDust sounds gimmicky lol i'd like to learn to troubleshoot this type of thing using common linux tools if possible
+[12:36] <sulaiman> Hi
+[12:36] <manananana> usr13 no i type my password and then black screen after few sec i got back to the log in screen
+[12:36] <sulaiman> Is it possible to have two zip packages with the same md5 checksum, but with different file contents?
+[12:36] <usr13> manananana: Sounds like wrong password.
+[12:36] <vincent> nick Vin100
+=== vincent is now known as Vin100
+[12:36] <usr13> manananana: See https://help.ubuntu.com/community/LostPassword
+[12:37] <manananana> usr13 nope when you type wrong password you have wrong password error
+[12:37] <Defusal> MonkeyDust, since the only other reliable way to restrict processes to certain cpus using a kernel parameter is completely ignored by ubuntu server, i'd think someone would have noticed...
+[12:37] <manananana> usr13 its loging in but after 1 sec its loging out
+[12:37] <usr13> manananana: Well, I'm at a loss trying to figure out why it will login another user and not the original user.
+[12:38] <usr13> manananana: Oh I see....
+[12:39] <erinaceus_> Evening, anyone in here using an asus u33jc or any bamboo series? Cause mine keeps typing \6=] without me hitting the keyboard ..
+[12:39] <usr13> manananana: Try doing that again, but first go to a console screen Ctrl-Alt-F6 and log in as same user, run:  "tail -f /var/log/messages"  see what it says afterward.
+[12:40] <usr13> manananana: You CAN login via console, right?
+[12:40] <manananana> y
+[12:40] <eQuiNoX__> hello everyone. I just installed a very early version of Ubuntu(8.10) on a VM - and I found that I could not update the package repositories. Is there any way I can install packages using apt-get on an 8.10?
+[12:40] <usr13> manananana: Ok then do that and see what errors you see.
+[12:40] <erinaceus_> \join #asus
+[12:41] <usr13> eQuiNoX__: !EOL
+[12:41] <usr13> !EOL | eQuiNoX__
+[12:41] <ubottu> eQuiNoX__: End-Of-Life is the time when security updates and support for an Ubuntu release stop, see https://wiki.ubuntu.com/Releases for more information. Looking to upgrade from an EOL release? See https://help.ubuntu.com/community/EOLUpgrades
+[12:41] <UndiFineD> Defusal, what are you tring to accomplish ? I think i found something and if it is related it seems quite obvious why there is no fix
+[12:42] <eQuiNoX__> usr13: I see, thanks!
+[12:42] <usr13> NP
+[12:42] <manananana> usr13 sec
+[12:42] <erinaceus_> Well then, can anyone direct me to better keyboard drivers for asus?
+=== Superbo31 is now known as Superbonk
+[12:43] <ActionParsnip> erinaceus_: the drivers are in the default install
+[12:43] <Defusal> UndiFineD: I am trying to use cset, the cpuset configuration script, but it is broken. i wanted to rather use the kernel.isolcpus sysctl option, but it is completely ignored by ubuntu after a reboot
+[12:43] <ActionParsnip> erinaceus_: what issues do you see?
+[12:43] <erinaceus_> ActionParsnip: It keeps inserting \6=] without any reason
+[12:43] <manananana> usr13 no such file
+[12:44] <usr13> manananana: /var/log/messages
+[12:44] <killer> hi ....when i log in to the unity i get no dock (on left ) and no panels.......the error is : unity-panel-service (no process found)
+=== MacroMan is now known as Guest93610
+[12:44] <UndiFineD> Defusal, http://code.google.com/p/cpuset/source/browse/cpuset/main.py?r=7ad4f65b2572fc6cd1c54403bca6f21858a07a94 <- developed by Novell in 2007 and thus not maintained anymore
+[12:44] <Defusal> UndiFineD, which would explain why it is borked, but that doesn't help me :(
+[12:44] <ActionParsnip> erinaceus_: have you exercised the keys (press each one in turn)
+=== araya is now known as Guest34571
+[12:45] <UndiFineD> well, perhaps its time to learn some python kungfu Defusal ? :)
+[12:45] <manananana> usr13 nope still cant find directory
+[12:45] <erinaceus_> ActionParsnip: ^+}What do you mean?
+[12:46] <ActionParsnip> erinaceus_: press each key in turn, makes sure its not pressed
+[12:46] <Defusal> UndiFineD, looks like i will have to learn about /dev/cpuset so i can make my own implementation
+[12:46] <usr13> manananana: can't find /var/   or can't find /var/log/
+[12:46] <usr13> ?
+[12:46] <Defusal> what a waste of time
+[12:46] <Defusal> i still don't understand how ubuntu can just ignore a kernel parameter
+[12:47] <UndiFineD> Defusal, well at least you now know the issue will not be resolved by switching debian either
+[12:47] <manananana> usr13 var
+[12:47] <erinaceus_> ActionParsnip: Ill\6= \6c=ome\6= b\a6=ck it's impossible to type \6=]right now \6=-.\6=\6=]
+[12:47] <erinaceus_> ...
+[12:47] <usr13> manananana: sudo tail -f /var/log/syslog
+[12:47] <ActionParsnip> erinaceus_: try the boot option:  i8024.reset    may help
+[12:48] <Defusal> UndiFineD, the cpuset package should really be removed from ubuntu, it is even in precise, broken packages are not cool!
+[12:48] <manananana> usr13 no
+[12:48] <manananana> usr13 looks like no var
+[12:49] <usr13> manananana: Really?  No /var/  directory?     ls /var    #What does that say?
+[12:50] <manananana> usr13 i can see it no
+[12:50] <manananana> w
+[12:51] <usr13> manananana: Try this one, (as original user):
+[12:51] <usr13> tail /var/log/auth.log
+[12:51] <manananana> usr13 no messages in log
+[12:52] <Twinkletoes> I read somewhere that is was a bad idea to redirect mail for root by changing its alias, and to put a .forward file in root's homedir instead.  I can't remember where I read it, but why is one better than the other?
+[12:52] <usr13> manananana:  tail /var/log/syslog
+[12:52] <ActionParsnip> erictr1ck: what is the model of the system?
+[12:53] <erinaceus_> ActionParsnip: Okay, So i wiggled them rather ungently, let's hope that there really was something underneath and i crushed it ..
+[12:53] <usr13> manananana: See anything interesting?
+[12:53] <manananana> usr13 console kit failed whats that
+[12:53] <ActionParsnip> erinaceus_: great. testing all keys on a keyboard when you get issues is a great first step
+[12:53] <usr13> manananana: Where did you see that?
+[12:54] <erinaceus_> ActionParsnip: Yeah, I didnt think the problem could be that, cuz I had it for some time know but it keeps disappearing and reappearing ..
+[12:54] <manananana> usr13 sys log and deamon startup failed
+[12:54] <UndiFineD> Defusal, well maybe it does not fit the stable brand, but at least it is in LP https://launchpad.net/ubuntu/+source/cpuset
+[12:55] <UndiFineD> Defusal, file a bug and contact the maintainer
+[12:55] <usr13> manananana: What exactly does it say?
+[12:56] <marco87> ciao
+[12:56] <marco87> hi
+[12:56] <manananana> usr13 seems like pusle audio failed
+[12:57] <marco87> !list
+[12:57] <ubottu> marco87: No warez here! This is not a file sharing channel (or network); read the channel topic. If you're looking for information about me, type <unconvertable> /msg ubottu !bot <unconvertable> . If you're looking for a channel, see <unconvertable> /msg ubottu !alis <unconvertable> .
+[12:57] <manananana> usr13 org.freedesktop.consolekit failled
+[12:58] <usr13> manananana: Has your system recently been upgraded?  (What version of Ubuntu is this?  I don't remember...)
+[12:59] <usr13> manananana: Try this:  sudo /usr/sbin/console-kit-daemon   #Tell me what errors you see, if any.
+[13:00] <manananana> usr13 its 11.10 i have a lot of updates didnt had time to update it
+[13:00] <manananana> have*
+[13:03] <usr13> manananana: Maybe just do updates from the console:   "sudo apt-get update ; sudo apt-get upgrade"
+[13:03] <manananana> usr13 command not found :D
+[13:04] <usr13> manananana: That's interesting.....
+=== iRabbit_ is now known as iRabbit
+[13:04] <L3top> manananana: make sure you didn't mistype.
+[13:05] <manananana> sudo /usr/sbin/console-kit-daemon
+[13:05] <manananana> usr13 sudo /usr/sbin/console-kit-daemon there isnt a command
+[13:05] <L3top> oh... that
+[13:06] <usr13> manananana: Try updates, (as shown above).
+[13:06] <manananana> yyy
+[13:08] <L3top> manananana: apt-cache policy consolekit | grep -i installed
+[13:09] <usr13> manananana: Do as L3top  suggested, and let us know what it says.
+[13:10] <manananana> usr13 i am updating i cant
+[13:10] <manananana> :)
+[13:11] <usr13> manananana: You can open another terminal, Ctrl-Alt-F5
+[13:11] <L3top> manananana: you can open...
+[13:11] <usr13> manananana: But it's good that you are doing updates, (it may solve problems).
+[13:12] <manananana> still i can do one operatiot at a time
+[13:12] <usr13> manananana: Ok, well, just wait
+[13:13] <budus> ciao
+[13:14] <blackbear008> ?
+=== root is now known as Guest30859
+=== esm is now known as Guest50318
+[13:17] <redbrain> the sounds menu in ubuntu where you can control banshee is that app in aptitude and if so what is the name?
+[13:18] <JMS32> Hello! When i'm booting my new machine i'm see this: http://img13.imageshost.ru/img/2012/06/20/image_4fe1cf63c75fc.jpg  What does it mean?
+[13:19] <MonkeyDust> JMS32  it's a RAID error
+[13:19] <JMS32> MonkeyDust, How to know more about this error?
+[13:20] <MonkeyDust> JMS32  how familiar are you with RAID?
+[13:21] <L3top> apt-cache != apt-get. You can do both at the same time.
+[13:21] <JMS32> MonkeyDust, so-so. It's my first try to build RAID-1 in ubuntu
+[13:21] <Jacta> Does anyone know how to compile a pidgin plugin - I found one but it looks like I have to compile myself :/ - its called Status_Hot_keys
+[13:22] <jrib> Jacta: have you checked the official pidgin docs at pidgin.im?
+[13:22] <JMS32> But if i'm type I all is working :)
+[13:22] <Mandalord> http://www.castledragmire.com/Projects/Status_Hot_Keys they have binary
+[13:23] <L3top> Jacta: things that need to be compiled almost always have a README which explain what needs to be done.
+[13:23] <Jacta> L3top tried to, seems nonsens to me - not really easy explained
+[13:23] <Jacta> jrib its only in dll format and a version you can compile
+[13:24] <jrib> Jacta: http://developer.pidgin.im/wiki/Scripting%20and%20Plugins#HowdoIcompileapluginUNIX-likeplatforms
+[13:25] <darksifer> hi everyone i installed ubuntu with gnome-tweak-tool. yesterday it was working fine but today the application does not run. i get the same problem as http://ubuntuforums.org/showthread.php?t=1950745. so i applied the solution as stated on the page but it does not do the trick. can someone help or guide concerning this issue please. gnome shell is really very difficult to use in stock mode. thank you
+[13:26] <Jacta> jrib - I got alot of errors when trying to
+[13:26] <Mandalord> Jacta: gcc Linux.c
+[13:26] <jrib> Jacta: you should probably pastebin them...
+[13:26] <jrib> Jacta: and include what you did...
+[13:26] <Jacta> http://www.castledragmire.com/ProjectContent/StatusHotKeys/StatusHotKeys_v1.5.2_Source.zip - this is the file - feels also like somethings missing in there
+[13:26] <Jacta> cant really judge cause im not a scriptguru
+[13:27] <lolychocopop> anyone can help me?
+=== john__ is now known as ki4ro
+[13:28] <Jacta> it says something about what you need, but cant really find thoose things :/
+[13:29] <jrib> Jacta: you're being too vague for anyone to actually help you.
+[13:29] <Lo> ciao
+=== Lo is now known as Guest7370
+[13:29] <ElLocoGato> Howdy folks.  I'm hoping somebody can help me figure out why, after upgrade to 12.04, my USB microphone works right after reboot but after some time disappears from the system and won't come back until another reboot.
+[13:30] <Wiz_KeeD> hey guys, in ubuntu 10.04 Lucid, does anyone know why the wireless connection doesn't work anymore an tried to connect and always keeps asking for the password, but on the windwos os or from android phone wireless works perfectly
+[13:30] <Wiz_KeeD> furthermore if i boot ubuntu and leave it untouched it automatically connects to the wireless network, and then in a matter of minutes it freezes completly
+[13:31] <Wiz_KeeD> and if i disconnect and try to connect the behaviour from above keeps hapening and doesn't connect
+[13:31] <Wiz_KeeD> any ideeas why?
+[13:31] <Mandalord> Jacta: i think you should install glibc, gtk
+[13:31] <MonkeyDust> Wiz_KeeD  password or wpa key ?
+[13:31] <Wiz_KeeD> MonkeyDust, works perfectly from windows, android phone
+[13:32] <Wiz_KeeD> and if i leave it untouched from boot it connects to it
+[13:32] <ikonia> Mandalord: glibc is already installed, or the system word not run
+[13:32] <ikonia> would
+[13:32] <MonkeyDust> Wiz_KeeD  password or wpa key ?
+[13:32] <Wiz_KeeD> i'm not at home right now but i'm not sure which one
+[13:32] <Wiz_KeeD> why?
+[13:32] <Mandalord> uhm since it installed with gcc
+[13:32] <Jacta> Mandalord glibc?
+[13:32] <darksifer> nevermind
+[13:33] <Mandalord> wait i'm searching for the list of package
+[13:33] <SkippersBoss> ElLocoGato: Is Pulse Audio running ok? is the input vivble in PAVU control
+[13:33] <Wiz_KeeD> why you ask MonkeyDust ?
+[13:34] <MonkeyDust> Wiz_KeeD  to be able to give advice, we need to know what's wrong
+[13:34] <Wiz_KeeD> let me try to find out
+[13:34] <ikonia> Jacta: what are you actually trying to do ?
+[13:34] <Alexander_> How to know what's wrong with RAID?
+[13:34] <ikonia> Alexander_: use the raid tools to diagnose the problem
+[13:35] <ikonia> Alexander_: analyise the error
+[13:35] <Jacta> ikonia i want to add a plugin into pidgin
+[13:35] <ElLocoGato> SkippersBoss, originally (right after boot) everything is OK.  Input is in PAVU.  Can record with Audacity.  After some time, the input is no longer in PAVU (or alsamixer).  Unplug/plug USB cable shows device info in dmesg, but the input is not restored.  Occasionally I will see the input flash momentarily in PAVU on replug.
+[13:35] <ikonia> Jacta: right, so what's the actual issue ?
+=== Youri is now known as Iruoy
+[13:36] <Wiz_KeeD> MonkeyDust, wpa key
+[13:36] <Jacta> ikonia if I just do "make lib" as it says: http://codepad.org/m194rdPj
+[13:36] <ikonia> Jacta: you are missing headers
+[13:36] <ikonia> Jacta: install the package "build-essential"
+[13:36] <blackbear008> hello,everyone. please do me a favour. Ubuntu 12.04 has a game, asking you questions and you answer it. what's the name?
+[13:36] <Wiz_KeeD> but MonkeyDust why would everything freeze if i let it connect on boot?
+[13:37] <Brayn> Hey. I have some problems with my ubuntu 12.04. More details: http://askubuntu.com/questions/153490/ubuntu-12-04-login-screen-flickers-could-not-write-bytes-broken-pipes  Thanks
+[13:37] <SkippersBoss> ElLocoGato: I am not an expert Just some one who's been working with Ubuntu since 2007. I have had some previous issues with a microphone setup as well and this turned out to be caused by PA. Disabling PA solved the issue for me
+=== Guest7370 is now known as LoBello
+[13:37] <Wiz_KeeD> MonkeyDust, any ideeas?
+[13:38] <MonkeyDust> Wiz_KeeD  make sure the wpa key is saved in the connection settings
+[13:38] <Jacta> ikonia installed it now - error is 100% the same
+[13:38] <Mandalord> ikonia: Readme says The libraries and includes for the following libraries/products are required: Pidgin [includes libpurple], GLIB, GTK, Cairo, Pango, ATK
+[13:38] <ikonia> Jacta: you're misssing a header from a dependency
+[13:38] <ElLocoGato> SkippersBoss, yeah, PA has never been completely stable for me.  But this mic has been fine since 10.04 using PA.
+[13:38] <ikonia> ok, so it's probably tthe gtk/pango/atk development packages that are missing
+[13:38] <Jacta> Mandalord but the names it not like that to find - and some of them have more :/
+[13:39] <Wiz_KeeD> it is saved under wireless security
+[13:39] <SkippersBoss> EllocoGato: However with 12.04 Pulse works fine. Disable pulse by entering autospawn=0 in ~/.pulse/client.conf
+[13:39] <Jacta> ikonia guess thats the problem - dunno really what to install to catch thoose libs and prod..
+[13:40] <ikonia> Jacta: gtk-dev for example
+[13:40] <ikonia> Jacta: search for the -dev packages of those products
+=== companion_ is now known as companion
+[13:41] <Brayn> The problem is that I get <unconvertable> Could not write bytes: broken pipes <unconvertable> just before I can login. I can see the login screen but it alternates with the console that has the "could not write" error on top of the screen
+[13:41] <Jacta> ikonia: gtk-dev/cairo-dev is not found - guess more not are too
+[13:41] <ikonia> Jacta: you guess wrong
+[13:41] <ikonia> Jacta: search
+[13:42] <Jacta> is there a search for apt? o_O
+[13:43] <schnuffle> Jacta: apt-cache search ...
+[13:43] <MonkeyDust> Jacta  apt-cache search
+[13:43] <MonkeyDust> schnuffle  was faster :
+[13:43] <Jacta> aah
+[13:43] <schnuffle> Jacta: or install aptitude wihich does both
+[13:43] <Pici> Jacta: apt-file is also very useful when looking for specific files needed for compilation, just make sure you use CommonSenseTM when picking the right package to install.
+[13:43] <ndlovu> can anyone help me resolve dependency problems with samba? http://paste.ubuntu.com/1050894/
+[13:44] <Jacta> Guess its my problem now - got 8 matches
+[13:44] <ndlovu> resulting from failed 10.04->12.04 upgrade
+[13:44] <Jacta> apt-cache search cairo-dev
+[13:44] <ElLocoGato> brb
+[13:45] <schnuffle> ndlovu: install libwbclient0 and then retry
+[13:45] <Joshun> hu
+[13:45] <schnuffle> ndlovu: what happens when you do a dist-upgrade?
+[13:45] <Joshun> hi
+[13:45] <Joshun> does anybody know how to stop the annoying gnome-keyring popup in chromium/google chrome?
+[13:46] <ActionParsnip> Joshun: set a blank keyring password
+[13:46] <ndlovu> schnuffle, both result in unmet dependency warnings with samba
+[13:46] <Joshun> ActionParsnip: that doesn't work. it just gets reset back to your login password the next time you log in
+[13:46] <Joshun> it only worked on older versions
+[13:47] <schnuffle> ndlovu: then try sudo apt-get install libwbclient0
+[13:47] <usr13> I hate the keyring thing.  Wish we could do away with it.
+[13:47] <kms11> hi, yesterday i use it "apt-get update" in my ubuntu and now my file manager does not open,i dont know what happen?
+[13:47] <vampirnata> I hate my laptop's gpu :/
+[13:47] <Mandalord> Jacta: maybe libgtk for GTK
+[13:47] <vampirnata> It's useless
+[13:47] <ndlovu> schnuffle, that also fails because of samba dependency problems
+[13:47] <helphelphelp> HOLY FUCK IT WORKING
+[13:47] <Mandalord> libgtk-3-0
+[13:48] <Akash> how to install gcc-arm-linux
+[13:48] <Joshun> yeah the keyring is utterly pointless
+[13:48] <ActionParsnip> Joshun: you could delete your keyring file and make a new one, then set a blank password
+[13:48] <Joshun> sometimes it prompts for a password, sometimes it doesn't
+[13:48] <ActionParsnip> usr13: same dude :(
+[13:48] <helphelphelp> Greetings lady's and gentlman
+=== ubuntu is now known as myhero
+[13:48] <helphelphelp> i would require a particular help
+[13:48] <vampirnata> anyone else running an ATI x1250 gpu?
+[13:48] <Joshun> ActionParsnip - that doesn't work in ubuntu 12.04
+[13:48] <helphelphelp> for a patient mate
+[13:48] <helphelphelp> would be awesome
+[13:48] <Joshun> the password just gets reset
+[13:48] <Jacta> Mandalord libgtk-3-dev?
+[13:48] <myhero> any virtual cd/dvd mounting app for ubuntu ?
+[13:48] <schnuffle> ndlovu: then you need to go down to the package causing the problem, upgrade it and then try again
+[13:48] <ActionParsnip> myhero: mounty is pretty sweet
+[13:48] <Joshun> deleting the file makes no difference
+[13:49] <myhero> ActionParsnip: ok
+[13:49] <ActionParsnip> myhero: the OS can do it already using the mount command
+[13:49] <myhero> ActionParsnip: how ?
+[13:49] <ActionParsnip> myhero: sudo mkdir /media/iso; sudo mount -o loop /path/to/file.iso /media/iso
+[13:49] <helphelphelp> is anyone here up for gimme a quick help !
+[13:49] <kms11> no idea about my file manager??? plzzzzzz
+[13:49] <Mandalord> Jacta: no the name is libgtk-3-0
+[13:49] <SkippersBoss> !ask |helphelphelp
+[13:49] <ubottu> helphelphelp: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[13:49] <myhero> ActionParsnip: ok
+[13:49] <DJones> helphelphelp: You have to ask your question first before people will know
+[13:49] <ActionParsnip> myhero: obviously you can mount where you wish, but you get the idea
+[13:50] <myhero> ActionParsnip: yea
+[13:50] <Mandalord> Jacta: i think it the lib for gtk
+[13:50] <Jacta> Mandalord its allready in :/
+[13:50] <Jacta> and same error as in link
+[13:50] <schnuffle> Jacta: the dev package as well?
+[13:50] <Mandalord> then libcairo2
+[13:50] <MonkeyDust> helphelphelp  and 'quick questions' are always the most difficult to answer
+[13:50] <helphelphelp> ok. So first, if i get a RTFM, please forgive, 48hrs ago, i didnt knew how to launch the shell
+[13:51] <Joshun> if you run chromium --password-store=basic you don't need your keyring password
+[13:51] <ActionParsnip> myhero: better than windows that needs 3rd party apps :)
+[13:51] <Joshun> but you have to run that from the cmdline every time
+[13:51] <Jacta> schnuffle yep libgtk-3-dev
+[13:51] <myhero> ActionParsnip: my motive was to mount the iso so system sees it as a cd or dvd n not just mount and open the iso...
+[13:51] <Jacta> Mandalord allready there :/
+[13:51] <ActionParsnip> myhero: the 2 are the same in ubuntu, what is your aim?
+[13:51] <ndlovu> I get this message "samba : Depends: samba-common (= 2:3.6.3-2ubuntu2.2) but 2:3.6.3-2ubuntu2.3 is installed", but the version listed on packages.ubuntu.com is 2:3.6.3-2ubuntu2.1. What's the significance of the 2.1,2.2 and 2.3? I seem to have a version installed which is too recent.
+[13:51] <Mandalord> and libpango1.0-0
+[13:52] <ikonia> ndlovu: do you have a PPA installed.
+[13:52] <ikonia> (configured)
+[13:52] <indieross> i keep getting flash objects bleeding through other apps any ideas how to fix this
+[13:52] <schnuffle> ndlovu: use pastebinit to paste your sources.list
+[13:52] <helphelphelp> well im logged as root, for sure. Threw the user comand, I add one, "wam" as i dont want to fuck my unix sys because i still running root, even if i put a protection of the root thanks the the bash config
+[13:52] <ikonia> schnuffle: that won't help if the sources are in sources.list.d
+[13:52] <ElLocoGato> SkippersBoss, disable PA and logout/login restored the mic.  We'll see if it lasts...
+[13:52] <Jacta> Mandalord also there
+[13:52] <ndlovu> ikonia, I had a partner ppa but I've disabled that now
+[13:52] <schnuffle> ikonia: true but I have to start somewhere :)
+[13:53] <ndlovu> but it could have installed from there during the upgrade
+[13:53] <ikonia> ndlovu: you'll find that's probably caused the conflict
+[13:53] <SkippersBoss> ellocogato: Always glad to help :-)
+[13:53] <myhero> ActionParsnip: i was using aptoncd....and it creates iso...but when mounting the same iso....system mounts it as a virtual iso n not cd/dvd and aptoncd does'nt recognizes it and keeps on asking to insert cd/dvd.....
+[13:53] <ndlovu> ikonia, can I remove samba and reinstall?
+[13:53] <Mandalord> and libatk1.0-0
+[13:53] <ActionParsnip> myhero: hmm, is there a tweak in config to use a folder?
+[13:53] <ActionParsnip> !aptoncd
+[13:53] <ubottu> APTonCD is a tool with a graphical interface which allows you to create one or more CDs or DVDs with all of the packages you've downloaded via apt-get or aptitude, creating a removable repository that you can use on other computers - See also !offline
+[13:53] <Mandalord> :-/
+[13:53] <ikonia> ndlovu: I don't think it will make a difference, but it's possible it could work (I'd have to follow the dependency tree through properly for you to confirm)
+=== anant is now known as anant_
+[13:54] <myhero> ActionParsnip: what tweak ?
+[13:54] <MonkeyDust> myhero  you need aptoncd again to recover the packages in the iso
+[13:54] <ActionParsnip> myhero: in aptoncd
+[13:54] <zykotick9> ikonia: without removing the source that provided the updated samba, remove and reinstall seems pointless... (just comment from peanut gallery)
+[13:54] <Jacta> Mandalord can't you try?
+[13:54] <ActionParsnip> MonkeyDust: do you need tro mount the iso for aptoncd to use it?
+[13:54] <myhero> ActionParsnip: yea....
+[13:55] <ikonia> zykotick9: I agree, which is why I Said it won't work
+[13:55] <schnuffle> ndlovu: you can do following: install apt-show-versions, run  apt-show-versions | grep 'No available' then you have the packages that have no repo candidate and you can delete them or replace them
+[13:55] <MonkeyDust> ActionParsnip  myhero no, it's just a regular file, like .tar or zo
+[13:55] <myhero> ActionParsnip: but i have saved aptoncd deb files from apt cache and install from there
+[13:55] <Ormie> ikonia, pm.
+[13:55] <ndlovu> zykotick9, ActionParsnip, I've disabled all PPA sources now
+[13:55] <zykotick9> ndlovu: did you use ppa-purge?
+[13:55] <ActionParsnip> MonkeyDust myhero : yes but does aptoncd actually need a burned CD, or can it use an ISO file...
+[13:55] <ikonia> Ormie: no thanks
+[13:56] <ndlovu> I would have expected the Update Manager to do that automatically before I started the upgrade, but that's another issue
+[13:56] <zykotick9> ndlovu: just removing the ppa sources, is going to leave you system in an inconsistent state
+[13:56] <maciejjo> hi
+[13:56] <kms11> hi, yesterday i use it "apt-get update" in my ubuntu and now my file manager does not open,i dont know what happen?
+[13:56] <MonkeyDust> ActionParsnip  myhero not sure and cannot test now, rsync is running
+[13:56] <maciejjo> I've got a problem with printing pdf file
+[13:56] <Mandalord> well it seem that we have to point out the location of all the libs in file config.linux
+[13:56] <Jacta> schnuffle do you got other clues :/?
+[13:56] <ndlovu> zykotick9, I commented out all sources in each file in /etc/apt/sources.list.d/
+[13:56] <Joshun> kms11 - what happens if you run it from terminal
+[13:56] <myhero> MonkeyDust: thats only i m saying.....it needs burned cd dvd so i was asking any app to spoof system for iso as virtual cd dvd
+[13:56] <maciejjo> the file has 4 pages, but the printer prints 4 blank pages
+[13:57] <schnuffle> Jacta: what do you want to compile?
+[13:57] <myhero> !rsync
+[13:57] <zykotick9> ndlovu: well good luck (i'm adding you to /ignore so i won't see your issue further)
+[13:57] <ubottu> rsync is a fast remote file copy and synchronization program - For more see: https://help.ubuntu.com/community/rsync
+[13:57] <kms11> Joshun, i see my directories at terminal, but in grapjical mode no.
+[13:57] <maciejjo> It was generated by posterazor
+[13:57] <ndlovu> thanks zykotick9
+[13:57] <indieross> my flash problem looks like this http://i.imgur.com/gh3k4.jpg
+[13:57] <Jacta> schnuffle a pidgin plugin, can only find it as source and a dll :/
+[13:57] <maciejjo> and when i print to file, it also generates 4 blank pages
+[13:57] <maciejjo> other pdf is working fine
+[13:57] <schnuffle> Jacta: which plugin?
+[13:57] <ActionParsnip> myhero: if you go into the packages folder in the ISO there is all the deb files and you can install from there
+[13:57] <Dshoe> anyone know the best way to sync music with mtp? such as my galaxy nesu?
+[13:58] <Dshoe> nexus*
+[13:58] <Joshun> does it launch properly though - what happens if you run nautilus (or whatever you use) from terminal [kms11]
+[13:58] <Jacta> schnuffle http://www.castledragmire.com/Projects/Status_Hot_Keys
+[13:58] <Dshoe> rhythmbox and banshee both fail to sync properly
+[13:59] <myhero> ActionParsnip: yea that i can but the problem is that it contains all the debs of all apps installed on system which i dont want......in aptoncd i can which apps ddebs i wanna install n i can install that app only with its dependencies which also cannot be seen in iso folder
+[13:59] <Joshun> is there anyway of setting chromium/google chrome to use its own password store, system-wide?
+[14:00] <kms11> Joshun, when i run nautilus, it say this:
+[14:00] <kms11> Gtk-ERROR **: GTK+ 2.x symbols detected. Using GTK+ 2.x and GTK+ 3 in the same process is not supported
+[14:00] <kms11> Trace/breakpoint trap
+[14:00] <schnuffle> Jacta: okay end the error kine from make?
+=== gartral|Away is now known as gartral
+[14:00] <Iluvalar> Hello, the warzone2100 game need the port 2100 open to run in multiplayer. It seem like that port was shut while I upgraded to 12.04 . Someone could help please ?
+[14:00] <ActionParsnip> myhero: i guess, if there isn't an option to use the ISO file, or it can't be made to use a folder of the mounted ISo then I'm not sure
+[14:00] <Jacta> schnuffle it came from "make lib" yes
+[14:00] <Joshun> kms11 - try reinstalling nautilus - sudo apt-get --reinstall install nautilus
+[14:00] <myhero> ActionParsnip: so any 3rd party app for mounting iso as virtual cd dvd
+[14:00] <kms11> Joshun, ok,
+[14:01] <lgp171188> What is the recommended way to install java plugin for firefox on 12.04 64-bit? I have installed openjdk-6-jdk package, but couldn't find the usual .so file to symlink to firefox plugins folder.
+[14:01] <ActionParsnip> myhero: https://answers.launchpad.net/aptoncd/+question/97721
+[14:02] <Joshun> kms11 - you could also try resetting your user config - rm -rf ~/.gconf  ~/.gnome2
+[14:02] <DMTamey> hello does anyone know in how i can fix ubuntu load that has failed with wubii i updated the software and now it wont load.
+[14:02] <Joshun> beware though you may lose settings
+[14:02] <ActionParsnip> Joshun: why force?
+[14:02] <Joshun> force
+[14:02] <Joshun> what
+[14:02] <Joshun> you cannot remove directories with rm without using -rf
+[14:02] <schnuffle> Jacta: can you paste it?
+[14:03] <ActionParsnip> Joshun: you only need -r to delete direcorys
+[14:03] <Jacta> the error again, schnuffle?
+[14:03] <schnuffle> yes
+[14:03] <Joshun> well if there are any permissions problems it may work around them
+[14:03] <Jacta> schnuffle -> http://screenshotuploader.com/s/01/bY1PW91CR
+[14:03] <kms11> Joshun, it open now. but my desktop changes not back yet. i try to reset now and use something u say. tanks
+=== Jikan is now known as Jikai
+[14:03] <Joshun> prevents having to deal with unnecessary errors
+[14:03] <ActionParsnip> Joshun: its the users own data, they will be no permission issues
+[14:03] <Jacta> easier for me with picture, is that okay, schnuffle?
+[14:03] <Joshun> there may be
+=== Jikai is now known as Jikan
+[14:03] <ActionParsnip> Joshun: its a bad habit
+[14:04] <blogorge> Hi!  I was using ubuntu as root and had some files on my desktop, then when I upgraded to 12.04 I can no longer log in as root so, how can I recover the files I had on my root desktop?
+[14:04] <Mandalord> Jacta: open file config.linux and you will see why they cause error
+[14:04] <schnuffle> Jacta: libnotify-dev installed?
+[14:04] <Joshun> not for user-space config. for system wide then yes it would be
+[14:04] <ndlovu> ikonia, if I run "dpkg --configure -a" then it's now only samba that comes up with dependency problems: http://paste.ubuntu.com/1050936/. Can this be resolved? Or am I better off just doing a reinstall?
+[14:05] <Jacta> it was not, schnuffle - but didnt help
+[14:05] <Jacta> Mandalord, yes, im there now?
+[14:05] <ikonia> ndlovu: you could try removing samba, but again, I can't confirm unless I walk the dependency tree
+[14:05] <Mandalord> Jacta: look at USER CONFIGURATION
+[14:06] <Mandalord> they are the path of the libraries
+[14:06] <ndlovu> ikonia, sudo apt-get remove samba ?
+[14:06] <schnuffle> Jacta: but it should provide notify.h
+[14:06] <Mandalord> but they are NOT correct
+[14:06] <ikonia> ndlovu: yes
+[14:06] <Iluvalar> I'll try a router reboot... but if it fail, you gonna hear about me again >:P
+[14:06] <blogorge> Hi!  how can I recover the files I had on my root desktop before upgrading to 12.04?
+[14:06] <myhero> ActionParsnip: so i only need to add that iso source to the source list......????? n what do i give when i give that source....deb or iso file:///....../......iso
+[14:06] <Jacta> this is really complicated schnuffle / Mandalord
+[14:06] <schnuffle> blogorge: under ~/Desktop maybe
+[14:07] <ndlovu> ikonia, then apt-get update; apt-get install samba ?
+[14:07] <Joshun> kms11 - is it ok now? if you reset your config, you will have to change your wallpaper etc. back again. don't worry though - it won't touch the actual images files.
+[14:07] <ikonia> ndlovu: make sure you have no PPA's enabled
+[14:07] <avelldiroll> blogorge: what do you mean by "using ubuntu as root" ? you were logged in as root on an X session ?
+[14:07] <ndlovu> ikonia, I have commented them all out, but I'm not sure what ppa-purge does that's different?
+[14:08] <ikonia> ndlovu: that will remove all dependencies (hopefully) installed by the PPA
+[14:08] <schnuffle> ndlovu: it uninstall packages
+[14:08] <Mandalord> Jacta: well since you have downloaded and installed all the necessary libs, i think our jobs is to find out the right location of those lib and correct the config.linux, then make install
+[14:08] <ndlovu> ikonia, schnuffle, are you saying I should run ppa-purge before reinstalling samba?
+[14:09] <ikonia> ndlovu: worth trying it
+[14:09] <myhero> ActionParsnip: u there ??
+[14:09] <schnuffle> ndlovu: +1
+[14:09] <ikonia> ndlovu: others rate it highly, I'm not convinced personally, but it's worth a try
+[14:09] <ActionParsnip> myhero: not sure of the syntax, but i'm sure its possible
+[14:09] <helphelphelp> 1* Why cant I get a display when im not logged as root.
+[14:10] <myhero> ActionParsnip: kk
+[14:10] <zykotick9> !noroot | helphelphelp
+[14:10] <ubottu> helphelphelp: We do not support setting a root password. You're free to do it on your own machine, but please don't offer instructions on how to set a root password or ask for help with setting it. See !root and !wfm for more information.
+[14:10] <ikonia> helphelphelp: you shouldn't be logged into ubuntu as root, the root account is disabled
+[14:10] <intrader> I have formatted a usb stick /dev/sdb according to http://nikste.wordpress.com/2007/01/12/how-to-format-usb-memory-stick-in-linux/ with the fdisk -l results shown in http://paste.ubuntu.com/1050941/ . There is no partition table in the stick. What can I do to make the usb stick proper?
+[14:10] <ActionParsnip> myhero: http://linuxconfig.org/add-iso-image-to-apt-sourceslist
+[14:11] <Jacta> Mandalord: i dont have /usr/lib/glib-2.0/ but I have /usr/include/glib-2.0
+[14:11] <Jacta> so, first one is correct path - second = not sure
+[14:11] <ActionParsnip> myhero: mount the ISO, then add the mount point in sources.list
+[14:11] <ndlovu> ikonia, schnuffle then would I need to then reinable the PPAs before running ppa-purge?
+[14:11] <schnuffle> ndlovu: yep
+[14:12] <kms11> Joshun, it's not ok at all. there are alot of things that missed now in my ubuntu
+[14:12] <intrader> I would like to name the volume 'Backup' to be used in linux 12.4 'deja' backup.
+[14:12] <ndlovu> schnuffle, then the process would be install ppa-purge, enable ppas, apt-get update and then apt-get purge each one?
+[14:12] <schnuffle> yep
+[14:13] <ndlovu> schnuffle, thanks, will give it a go
+[14:14] <Joshun> kms11 - does the file manager open ok - i did warn you only to reset your config if you really needed to, after you had tested the first solution
+[14:16] <ironhalik> Guys - is there an up to date PPA for Eclipse 4.x?
+[14:16] <kms11> Joshun, unfortunately i reset it, but i confused  what did before that it get crazy now:( .
+[14:17] <helphelphelp> so why cant i log as "Wam" then start "startx"? If its the same question for you, spare your time, dont answer
+[14:17] <ikonia> helphelphelp: if you login as a non-root user and startx - what happens
+[14:18] <myhero> ActionParsnip: ok..thnx

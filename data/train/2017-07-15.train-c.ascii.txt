@@ -1,0 +1,1500 @@
+[00:21] <Ben64> command line is how to control a server
+[00:21] <oerheks_> steam server ?? like this? https://www.linode.com/docs/game-servers/install-steamcmd-for-a-steam-game-server
+[00:22] <Shawn|i7-720QM> Ben64, that is extremely comple
+[00:22] <Shawn|i7-720QM> better to have multiple windows
+[00:22] <Ben64> no
+[00:22] <aotaoint1in> web. admin. panel.
+[00:22] <aotaoint1in> you should call it a dashboard, not a panel. that's 2x points with management.
+[00:23] <aotaoint1in> also (risking some stern words here), have you considered windows? (i mean that in a lighthearted joking sense)
+[00:23] <Shawn|i7-720QM> well I am new to this trivial realm
+[00:24] <Shawn|i7-720QM> aotaoint1in, I installed server 2008 on it, but dont see how I can use such an old os securely
+[00:24] <Shawn|i7-720QM> so I wiped it and installed ubuntu server
+[00:24] <aotaoint1in> so, if you're asking that seriously...
+[00:24] <aotaoint1in> assuming you have a windows license...
+[00:24] <Shawn|i7-720QM> I have some experience with linux
+[00:24] <aotaoint1in> you can run windows in a vm for gaming.
+[00:25]  * Shawn|i7-720QM facepalms
+[00:25] <aotaoint1in> i run win10 under arch in libvirt/qemu/kvm with windows passthrough.
+[00:25] <Shawn|i7-720QM> you are not helping
+[00:25] <aotaoint1in> i understand this may not be relevant in the context of your use case.
+[00:25] <aotaoint1in> since you're trying to run a game server.
+[00:25] <Shawn|i7-720QM> *lights a cube of tnt under windows in minecraft
+[00:26] <aotaoint1in> sorry, when i said windows passthrough, i meant windows with gpu passthough.
+[00:26]  * aotaoint1in blames the booze
+[00:26] <Shawn|i7-720QM> I want to run ubuntu, it has far better performance, especially on an old netburst machine
+[00:28] <aotaoint1in> sure, and i wish i could help you get steam to run natively on ubuntu server. but i've never tried to do that.
+[00:29] <oerheks_> steam server perhaps, not the client
+[00:29] <aotaoint1in> just giving you some somewhat offtopic suggestions about how you could game with a linux host.
+[00:29] <Shawn|i7-720QM> aotaoint1in, steam is running natively on linux
+[00:29] <oerheks_> or one uses that to play a bot
+[00:29] <aotaoint1in> Shawn|i7-720QM: i understand that. and that's where my understanding stops.
+[00:29] <Shawn|i7-720QM> I have a permissions problem, with a disk I recently formatted
+[00:29] <Shawn|i7-720QM> *partitioned
+[00:30] <aotaoint1in> oh. then i definitely wasn't paying attention to what you originally said.
+[00:30]  * aotaoint1in scrolls
+[00:30] <aotaoint1in> what user does steam run as?
+[00:30] <Shawn|i7-720QM> shawn
+[00:30] <Shawn|i7-720QM> but this is what I got when running nautilus under sudo
+[00:30] <Shawn|i7-720QM> http://prntscr.com/fvvbrt
+[00:31] <Ben64> yeah, don't do that
+[00:31] <aotaoint1in> yup.
+[00:31] <Ben64> you're making this so much more difficult than it needs to be
+[00:31] <Bashing-om> Shawn|i7-720QM: Did you "chown" the ownership of the mountpoint to "you" from that of root ?
+[00:31] <aotaoint1in> sudo chown -R shawn:shawn $wherever_games_and_stuff_is_on_disk
+[00:32] <Shawn|i7-720QM> not yet
+[00:32] <Ben64> want to run xfce and steam gui? install xubuntu. want to run game servers the "right" way? install ubuntu server and steamcmd
+[00:32] <Shawn|i7-720QM> ah
+[00:32] <aotaoint1in> Ben64: look, $employer has a server, and he's tired of ...bad... ping.
+[00:32] <Shawn|i7-720QM> and have no graphical tool interaction for better server management
+[00:32] <aotaoint1in> Shawn|i7-720QM: ssh
+[00:33] <Shawn|i7-720QM> thats how I am doing it!!!
+[00:33] <Shawn|i7-720QM> ssh only
+[00:33] <aotaoint1in> you're tunneling x over ssh?
+[00:33] <Shawn|i7-720QM> yes
+[00:33] <aotaoint1in> nice.
+[00:33] <Ben64> Shawn|i7-720QM: thats not ssh then
+[00:33] <Shawn|i7-720QM> the hell
+[00:33] <aotaoint1in> Shawn|i7-720QM: i've got your back :P
+[00:33] <Ben64> if you want to use gui, that's fine. just install a desktop version of ubuntu
+[00:33] <aotaoint1in> this is dedication.
+[00:33] <Shawn|i7-720QM> your enough to give a complex Ben64
+[00:33] <Ben64> easy peasy
+[00:33] <aotaoint1in> respect dedication.
+[00:33] <Ben64> you've been here nearly 16 hrs now all about problems related to this
+[00:34] <Shawn|i7-720QM> a complex meltdown
+[00:34] <aotaoint1in> 16 hours, free server, still a net win.
+[00:34] <Shawn|i7-720QM> yea
+[00:34] <Ben64> permission problems, x problems, all could be avoided
+[00:34] <aotaoint1in> can't blame him. even if it wasn't, it'd at least be a learning experience.
+[00:34] <aotaoint1in> where's your inner nerd at!
+[00:34] <Ben64> did you know there is no functional difference between server+gui and desktop
+[00:34] <Ben64> so i don't even know why you're being so stubborn about it
+[00:35] <aotaoint1in> Ben64: i've been way more stubbord for way more stupid of endeavors.
+[00:35] <Shawn|i7-720QM> avoided my ass
+[00:35] <aotaoint1in> see also: i915/gvt kernel features
+[00:35] <bazhang> Shawn|i7-720QM, keep it polite here
+[00:35] <Shawn|i7-720QM> okay..
+[00:36]  * aotaoint1in has been struggling to self-censor under the influence
+[00:36] <Shawn|i7-720QM> "could have been avoided" says the prideful Ben64
+[00:36] <aotaoint1in> Shawn|i7-720QM: chmod, fixed.
+[00:36] <Ben64> Shawn|i7-720QM: that attitude will get you far here
+[00:36] <aotaoint1in> can't we all just get along.
+[00:37] <aotaoint1in> Shawn|i7-720QM: once you get this working, keep trying to figure out if you can get this running without x.
+[00:37] <aotaoint1in> seriously.
+[00:38] <Shawn|i7-720QM> yea, that would be quite hard for me
+[00:38] <aotaoint1in> side hobby./
+[00:38] <Shawn|i7-720QM> I like to click on things for control
+[00:38] <aotaoint1in> right. but now you have a server running x.
+[00:38] <Shawn|i7-720QM> not just typing a thousand commands for maintaining something
+[00:38] <Shawn|i7-720QM> yea, thats not a bad thing is it aotaoint1in ?
+[00:38] <aotaoint1in> it's...
+[00:39] <aotaoint1in> i regularly waste many hours at work pruning x dependencies from things that don't really need it.
+[00:39] <oerheks_> what did you find to make a fresh partition get owned by steam?
+[00:39] <aotaoint1in> and i get paid to do this.
+[00:39] <aotaoint1in> on another note, it's just bad nerd karma.
+[00:40] <oerheks_> let stick to support, this rant is unneeded
+[00:40] <bazhang> could we please save the excessive offtopic commentary aotaoint1in
+[00:40]  * aotaoint1in bows out
+[00:41] <aotaoint1in> (i was just asking about why collectd "depends on" x11-common when it merely recommends it, so any advice you get from me is questionable at best)
+=== kostkon_ is now known as kostkon
+[02:27] <Hulio> hi guys, how can i do commmand upgrad from 16.04 to 17.04 ?
+[02:27] <Hulio> anyone?
+[02:31] <oerheks_> Hulio, upgrade with 'sudo do-release-upgrade' to 16.10, and again to 17.04 AFAIK
+[02:31] <oerheks_> !upgrade
+[02:31] <ubottu> For upgrading, see the instructions at https://help.ubuntu.com/community/UpgradeNotes - see also http://www.ubuntu.com/desktop/get-ubuntu/upgrade
+[02:32] <tawan> I'd like to have an exe that asks for a user input, then runs a perl script on the input
+[02:33] <oerheks_> "exe"... try ##windows
+[02:33] <tawan> oerheks_, I'm on Linux but would want this to run on Windows when I'm back at work
+[02:34] <aotaoint1in> i guess you could drive a batch file?
+[02:34] <aotaoint1in> s/drive/write/
+[02:34] <oerheks_> would it not be easier to use a visualbasic script on windows? not really an ubuntu issue
+[02:35] <tawan> oerheks_, just something I'm trying to do in ubuntu this weekend - I do have a VM of Windows 7 if that will help
+[02:36] <kode54> again, your issue is for ##windows
+[02:37] <oerheks_> on bash ( ubuntu) >  $ yes | perl <script>.pl
+[02:38] <oerheks_> oh wait, that automatic puts yes in the script
+[02:39] <tawan> so I could pipe the contents of a text file to the perl script?
+[02:40] <aotaoint1in> windows doesn't have a perl interpreter
+[02:40] <aotaoint1in> and activestate is... offtopic :P
+=== mwsb is now known as chu
+[02:58] <Shawn|i7-720QM> oops
+[03:20] <kingarmadillo> hi. im trying to see if my server is getting a POST call. is there a log i can check?
+[03:21] <Dreaman> Shawn|i7-720QM: 4k work good or in your
+[03:21] <Shawn|i7-720QM> what?
+[03:21] <Dreaman> 4k video
+[03:21] <Shawn|i7-720QM> nop
+[03:22] <Shawn|i7-720QM> not on this studio 1747
+[03:22] <Dreaman> low internet
+[03:22] <Dreaman> ok
+[03:22] <Shawn|i7-720QM> internet is not the issue
+[03:22] <Shawn|i7-720QM> its the graphics hardware
+[03:22] <Dreaman> ok
+[03:22] <Shawn|i7-720QM> an ATI mobility radeon HD 4650 stealing 1GB ddr3 from RAM
+[03:23] <Dreaman> i use nvidia 940 mx 4 gb vddr5 and intel 520 from processor
+[03:28] <kingarmadillo> is there a log file for ubuntu 16 that shows me all incoming connections?
+[03:29] <mutante> kingarmadillo: you could use "tcpdump" to see live connections (or write them to a file)
+[03:29] <kingarmadillo> mutante: thank you
+[03:29] <aotaoint1in> `sudo tcpdump -i any tcp and dst host $MyIpAddress``
+[03:29] <mutante> also you could use iptables to do it  i guess
+[03:30] <aotaoint1in> tcpdump will show you the whole session though
+[03:30] <mutante> ok :)
+[03:30] <kingarmadillo> is there a way to tail and watch in real time?
+[03:30] <aotaoint1in> tcpdump outputs to stdout in realtime.
+[03:31] <kingarmadillo> ok
+[03:31] <mutante> you can write it to a "pcap" file and later uuse other tools to analyze
+[03:31] <mutante> that will make it more convenient to actually find things
+[03:32] <aotaoint1in> usually.
+[03:32] <mutante> as always it all depends what you really need
+[04:14] <CoderEurope> What is this device ? http://www.bbc.com/news/technology-40444356
+[04:17] <[n0mad]> a raspberry pi, like it says
+[04:21] <CoderEurope> and that's the best device, in what situation ?
+[04:25] <[n0mad]> there's all kinds of uses for them. You can just search raspberry pi projects and find many
+[04:26] <[n0mad]> i have one and all it is doing is running a browser in my bedroom so I can watch my plex
+[04:27] <CoderEurope> How do I check what version of 'systemd' I am running ?
+[04:27] <CoderEurope> all I can find is this : https://wiki.ubuntu.com/SystemdForUpstartUsers
+[04:27] <oerheks_> --version
+[04:28] <CoderEurope> says command not found
+[04:28] <oerheks_> sytemd --version gives me 232
+[04:29] <CoderEurope> I am on 229
+[04:29] <CoderEurope> how do I get the latest version ?
+[04:29] <oerheks_> upgrade to zesty 17.04 ?
+[04:30] <oerheks_> !info systemd
+[04:30] <ubottu> systemd (source: systemd): system and service manager. In component main, is important. Version 232-21ubuntu5 (zesty), package size 2350 kB, installed size 9740 kB (Only available for linux-any)
+[04:30] <CoderEurope> that doesn't work on 16.10 for some reason.
+[04:32] <Ben64> 16.10 is losing support very soon
+[04:34] <oerheks_> or maybe you copied the typo
+[04:42] <pacmanfan> any tips on expanding /boot when using LVM for the root partition?
+[04:42] <pacmanfan> i'm having quite a time doing it with gparted
+[05:02] <niee> hi folks. anyone to help me. hot to give access to open some program (sublime text 3). i open in root from terminal (subl), but after try some user not opening? any ideas hot to fix this? may be need to give previlegion?
+[05:11] <CoderEurope> niee, have you checked the issue's List ?
+[05:11] <CoderEurope> https://github.com/SublimeTextIssues/Core/issues
+[05:12] <niee> CoderEurope: no. tnx for list. :)
+=== Jochen_wvdT is now known as Schlawiner
+=== r0Oter is now known as r00ter
+[07:11] <angrycoast> Does anyone know of a workaround or way to record audio from the new Beta Skype?
+[07:14] <CoderEurope> angrycoast, http://www.omgubuntu.co.uk/2010/09/ubuntu-soundcard-recording
+=== KindTwo is now known as KindOne
+=== Trioxin2 is now known as Trioxin
+[07:31] <StupidRetard> i puked on my keyboard
+[07:35] <r00ter> Great!
+[07:37] <StupidRetard> its not my fault though.  nothing is my fault, because i have an extra chromosome
+[07:47] <m4dh4tt4> lol @ skype
+[07:47] <m4dh4tt4> they at 900MB installer yet? asshats
+[07:49] <StupidRetard> what the actual fuck?
+[07:49] <StupidRetard> to be fair, half that is probably NSA-sanctioned spyware for your webcam
+[07:50] <akik> m4dh4tt4: skype for linux beta is 48 megs. what is that 900 megs?
+[07:51] <oerheks_> please, watch your language, keep the channel family friendly, thanks.
+[07:51] <Shawn|i7-720QM> how in the world are we supposed to disable nouveau to install nvidia's linux driver?
+[07:51] <m4dh4tt4> click start menu, type drivers, chose nvidia over nouveau, reboot
+[07:52] <m4dh4tt4> oh good for them, skype came to linux, i wonder if thats backdoored too
+[07:52] <Wulf> Sure it is.
+[07:52] <m4dh4tt4> i didnt leave MS to install ported MS products lmfao
+[07:52] <Shawn|i7-720QM> m4dh4tt4, I was trying to remove it from lubuntu
+[07:52] <Shawn|i7-720QM> it just wont budge
+[07:52] <Shawn|i7-720QM> its bolted down
+[07:52] <m4dh4tt4> dpkg -l|grep -i nouveau
+[07:53] <m4dh4tt4> apt remove _______--
+[07:53] <m4dh4tt4> (no dashes) lol
+[07:53] <m4dh4tt4> but like i dono if that breaks shit, u should be able to ctrl+alt F2, if guis broken and install nvidia manually with an apt-cache search nvidia
+[07:54] <Shawn|i7-720QM> m4dh4tt4, what are your dashes supposed to be?
+[07:54] <m4dh4tt4> i corrected myself but ill try again , apt remove __________
+[07:55] <m4dh4tt4> dashes came cuz i took finger off shift ____--------------------
+[07:55] <m4dh4tt4> ok how about software and updates
+[07:55] <m4dh4tt4> do u have that app?
+[07:55] <Shawn|i7-720QM> E: Unable to locate package __________
+[07:55] <m4dh4tt4> "additionnal drivers" tab
+[07:55] <Shawn|i7-720QM> lubuntu is still installed on my server
+[07:56] <m4dh4tt4> bruh read everything not just selectively :P
+[07:56] <m4dh4tt4> i said dpkg -l|grep -i nouveau
+[07:56] <m4dh4tt4> that will list your installed nouveau packages
+[07:56] <m4dh4tt4> then take that info and apt remove (nouveau packagenamehere)
+[07:57] <m4dh4tt4> but read the desc, u dont want everything, just the graphix driver
+[07:57] <Shawn|i7-720QM> I did run your dpkg command
+[07:58] <m4dh4tt4> why would one apt remove (10 x literal _'s)
+[07:58] <Shawn|i7-720QM> trying to install this http://www.nvidia.com/download/driverResults.aspx/77525/en-us
+[07:58] <Shawn|i7-720QM> 340.32 because gt430
+[07:58] <oerheks_> don't use the driver from there, use the driver tool in lubuntu/xubuntu
+[07:58] <m4dh4tt4> dont do it from there homey,
+[07:58] <m4dh4tt4> apt-cache search nvidia|grep -i 340
+[07:58] <m4dh4tt4> use your apt repo
+[07:59] <m4dh4tt4> or the gui u cant seem to find lol
+[07:59] <m4dh4tt4> i cant help with gui any further im not on lubuntu
+[07:59] <Shawn|i7-720QM> m4dh4tt4, whats wrong with their driver, don't they do it right?
+[07:59] <Shawn|i7-720QM> for 3d performance
+[08:00] <m4dh4tt4> ive never gotten anything from nvidia.com working on any linux ever
+[08:00] <m4dh4tt4> if u have a month of your life to spare go for it
+[08:01] <oerheks_> Shwhy so stubborn, ubuntu tests the driver and gives support, you loose that when you use theirs.
+[08:01] <m4dh4tt4> for everything else, use drivers gui, or software and updates -> additionnal drivers tab
+[08:01] <Shawn|i7-720QM> they want me to disable nouveau, stop x server, and run sudo sh ./NVIDIA-Linux-x86-64-340.32.run
+[08:01] <m4dh4tt4> k just try this bro
+[08:01] <m4dh4tt4> apt update
+[08:01] <oerheks_> don'tdo that
+[08:01] <oerheks_> lolz
+[08:01] <m4dh4tt4> apt install nvidia-340
+[08:01] <oerheks_> use the one from the repo's,  m4dh4tt4 +1
+[08:02] <m4dh4tt4> oerheks_ +1 for +1'ing m4dh4tt4
+[08:03] <m4dh4tt4> sudo nano /etc/modprobe.d/blacklist-nouveau.conf
+[08:03] <m4dh4tt4> and add the following lines:
+[08:03] <m4dh4tt4> https://pastebin.com/KyMUquqs
+[08:03] <m4dh4tt4> apt install nvidia-340
+[08:03] <m4dh4tt4> reboot
+[08:04] <oerheks_> good luck with that server :-D
+[08:04] <m4dh4tt4> why am i off key?
+[08:05] <m4dh4tt4> honestly i hang out in like 10 security channels and nvidia crap on ubuntu seems to be the topic that most resembles unicorns
+[08:05] <m4dh4tt4> well i should clarify debian as a whole not just buntu
+[08:05] <oerheks_> i don't understand why he does not want the regular way, our repos
+[08:06] <m4dh4tt4> no no i think hes gonna go for it
+[08:06] <m4dh4tt4> he shall see that nothing works the other way, its only a matter of time + head smashing
+[08:06] <yokowka> hello everysoul!!! how to delete banner "system error, do you want to send it to ubuntu?" often flashing
+[08:07] <m4dh4tt4> wouldnt you rather fix whats crashing vs disable error reporting?
+[08:07] <m4dh4tt4> what V ubuntu you runnin
+[08:08] <karab44> hello
+[08:09] <karab44> I have 2 physical disks. First 2 partitions win/ubu and second for data storage
+[08:09] <karab44> my win partition is automounted and I'd like to mount the storage ntfs partition
+[08:10] <m4dh4tt4> you dont see it on the left in file browser?
+[08:10] <m4dh4tt4> i just see my drives there and click on em and they automount
+[08:10] <karab44> Hi, no
+[08:10] <m4dh4tt4> if someone could tell me how to do that via command line i'd be greatful
+[08:11] <ducasse> !fstab | karab44
+[08:11] <ubottu> karab44: The /etc/fstab file indicates how drive partitions are to be used or otherwise integrated into the file system. See https://help.ubuntu.com/community/Fstab and http://www.pclosmag.com/html/Issues/200709/page07.html and !Partitions
+[08:12] <m4dh4tt4> if you prefer gui, when i get drowned in disk confusion i usually use gparted -> sudo apt install gparted
+[08:12] <karab44> there is no win partition added to fstab
+[08:12] <yokowka> hello everysoul!!! how to delete banner "system error, do you want to send it to ubuntu?" often flashing
+[08:12] <karab44> but it's in app launcher
+[08:12] <m4dh4tt4> from there u can find that disk -> partition-> mount
+[08:13] <ducasse> karab44: no, it's not in fstab because you need to include it there
+[08:13] <karab44> ducasse: it's not in fstab but it's auto-mounted I said
+[08:14] <m4dh4tt4> its mounted but youre here trying to mount it?
+[08:14] <karab44> my fstab contains only vfat for bootloader swap and ext4 nix partition
+[08:14] <karab44> guys... let me tell this once again.
+[08:15] <ducasse> karab44: you need to be clear, so please
+[08:15] <karab44> I told clear
+[08:15] <karab44> I have two physical disks. First with two partitions Win / Ubuntu and the second with data storage
+[08:16] <karab44> Fstab contains only vfat for bootloader, swap and ext4 ubu partition
+[08:16] <m4dh4tt4> so if were talkiing about mounting your second drive... when you say its automounting... and then we say youre not being clear .....
+[08:16] <karab44> I never said this
+[08:16] <karab44> WIndows is mounted
+[08:17] <karab44> and windows is not second drive
+[08:17] <oerheks_> https://help.ubuntu.com/community/MountingWindowsPartitions#Configuring_.2Fetc.2Ffstab
+[08:17] <karab44> windows and linux partitions are on first drive
+[08:17] <m4dh4tt4> ok and so, when i recommended gparted did you just decide that was insufficient or are you looking for command line
+[08:18] <ducasse> karab44: you still need to add the second drive to fstab to get it automounted
+[08:18] <karab44> hmmm
+[08:18] <Shawn|C2Duo> hmm
+[08:18] <m4dh4tt4> theres also built in "disks" in 16.04 that mounds shiz
+[08:18] <karab44> yes, I use disks but I can't mount this drive
+[08:18] <Shawn|C2Duo> m4dh4tt4, does that 340 driver have the same x server utility>
+[08:18] <Shawn|C2Duo> ?
+[08:18] <karab44> There are only gears button where I can format the drive
+[08:19] <karab44> drive is  960GB Unknown
+[08:19] <ducasse> karab44: which ubuntu is this?
+[08:19] <oerheks_> after format, it shows up
+[08:19] <karab44> buahahaha
+[08:19] <karab44> you want me to format 1TB of my data to mount the disk! Great idea
+[08:19] <m4dh4tt4> its the smoothest way to run your card , im kinda retarded when it comes to display driver + window manager + display manager and end up with bad shit happening which is why im on buntu 16.04 LTE and dont mess with defaults , in return i get elegance
+[08:20] <karab44> anyways I think it may work after adding it to fstab
+[08:20] <m4dh4tt4> karab44 can you run  dpkg -l|grep ntfs
+[08:20] <oerheks_> Shawn|C2Duo, the driver in our repo does
+[08:21] <karab44> m4dh4tt4: but windows partition is added so ntfs is working
+[08:21] <m4dh4tt4> ok so are you sure that drive isnt bitlockered
+[08:21] <m4dh4tt4> or TPM'ed
+[08:21] <karab44> no it's not
+[08:21] <m4dh4tt4> or on an intel raid adapter
+[08:21] <Shawn|C2Duo> I clicked on the channel, and it closed D:
+[08:21] <oerheks_> or bad blocks that prevents mounting ntfs
+[08:21] <karab44> it's pretty new drive
+[08:22] <m4dh4tt4> if youre on an intel raid adapter
+[08:22] <m4dh4tt4> you might need to : apt install dmraid && dmraid -ay
+[08:22] <karab44> no, no raid there
+[08:22] <SuperSeriousCat> What is -a?
+[08:22] <SuperSeriousCat> nvm...
+[08:22] <karab44> ok guys let me first mount it manually
+[08:22] <m4dh4tt4> i dono, all i kknow is it magically adds my old winblows raid
+[08:24] <m4dh4tt4> maybe throw a read only switch in that mount command in case its not ntfs cuz if its mounting 1 ntfs and not the other youre either encrypted at disk/partition level or not ntfs
+[08:24] <m4dh4tt4> or on intel raid card *this is poissible even when not in raid config afaik*
+[08:25] <yokowka>  hello everysoul!!! how to delete banner "system error, do you want to send it to ubuntu?" often flashing
+[08:25] <ducasse> !patience | yokowka
+[08:25] <ubottu> yokowka: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[08:25] <oerheks_> yokowka, examine the issue, and try find a fix ?
+[08:28] <m4dh4tt4> yokowka doesnt wich to dialogue, he ask a Q, we ask one back so we can help him, he idles for 10 mins, pastes same Q , until eventually im sittin here praying he gets slapped
+[08:29] <karab44> brb
+[08:29] <yokowka> (
+[08:30] <m4dh4tt4> yokowka , 20 mins ago i asked what version of ubuntu you were running
+[08:30] <m4dh4tt4> yokowka i guess i didnt sugar coat it and add your nic in there
+[08:31] <yokowka> m4dh4tt4  ubuntu 17.04 i has
+[08:32] <m4dh4tt4> you first asked, i said , <m4dh4tt4> wouldnt you rather fix whats crashing vs disable error reporting?, then asked what version, pastes 2 more times doesnt respond to dialogue, gets chirped, replies: "("
+[08:34] <m4dh4tt4> apt remove whoopsie whoopsie-preferences
+[08:34] <m4dh4tt4> since u have no intention of investigating whats actually wrong with yout system
+[08:34] <m4dh4tt4> enjoy
+[08:35] <m4dh4tt4> afk before i chew someone else out
+[08:35] <ducasse> yokowka: don't just remove it, fix the problem. what error do you get?
+[08:36] <oerheks_> "How do I disable it on my desktop? Go to Settings...Privacy..."https://askubuntu.com/questions/135540/what-is-the-whoopsie-process-and-how-can-i-remove-it
+[08:36] <oerheks_> still valig
+[08:36] <oerheks_> c/ still valid
+[08:36] <oerheks_> but i would check the details, and fix it.
+[08:36] <oerheks_> sudo cat /var/crash/*.*
+[08:46] <BluesKaj> Howdy all
+[08:46] <Shawn|C2Duo> I hope this zotac gt430 pci card has audio output on hdmi
+[08:48] <BluesKaj> hdmi spec std includes digital audio in the hdmi connection
+[08:51] <Shawn|C2Duo> all my text is too small, including the window exit and minimize buttons are garbled
+[08:52] <ducasse> Shawn|C2Duo: check resolution and dpi
+[08:53] <Shawn|C2Duo> fixed by changing window border font size
+[08:53] <yokowka> ducasse SYSTEM
+[08:53] <yokowka> SYSTEM ERROR
+[08:54] <Shawn|C2Duo> it was at 11
+[08:55] <ducasse> yokowka: isn't there a details button?
+[08:57] <karab44> back
+[08:57] <Shawn|C2Duo> oh
+[08:57] <karab44> in /dev there is only /dev/sdb
+[08:57] <karab44> so there is no /dev/sdb1
+[08:57] <Shawn|C2Duo> nvidia driver screwed up fonts so 11 does not look like what it should
+[08:58] <karab44> but fdisk -lu shows:
+[08:58] <karab44> /dev/sdb1        2048 1875384319 1875382272 894,3G  7 HPFS/NTFS/exFAT
+[08:58] <oerheks_> exfat.. oh, you need 2 tools for that
+[08:59] <oerheks_> sudo apt-get install exfat-fuse exfat-utils # and mount sdb1 again
+[08:59] <karab44> I am not sure is it exFAT.... it could be but I just checked and under windows properties say it's NTFS
+[08:59] <oerheks_> it would explain your problem.
+[09:00] <m4dh4tt4> no he wants to insist its NTFS despite having an automounted NTFS already, ubuntu must be discriminating
+[09:01] <k_sze> How do people go about enrolling MOK for remote servers?
+[09:01] <karab44> anyways I just installed extFAT packages
+[09:01] <karab44> how can I refresh?
+[09:01] <karab44> need to restart?
+[09:01] <m4dh4tt4> easiest way probably
+[09:01] <karab44> ok brb
+[09:02] <k_sze> Because let's say I have a remote server with nVidia GPU, and I want to use the proprietary drivers, but those need to be signed with a MOK if I also want to enable SecureBoot.
+[09:03] <ducasse> k_sze: that system is designed to require physical presence, it's in the spec
+[09:03] <karab44> did not help
+[09:03] <k_sze> ducasse: in the SecureBoot spec, you mean?
+[09:04] <Shawn|C2Duo> k_sze, I just installed nvidia drivers on my server
+[09:04] <Shawn|C2Duo> has a gt430 PCI card now
+[09:04] <ducasse> k_sze: that or the uefi spec
+[09:04] <m4dh4tt4> howd it go?
+[09:04] <Shawn|C2Duo> but the nvidia430 drivers screwed up my resolution
+[09:05] <karab44> Disklabel type: dos
+[09:05] <karab44> Disk identifier: 0x7ff1da3e
+[09:05] <karab44> maybe this could be the reason?
+[09:05] <Shawn|C2Duo> err not resolution, the scaling of all text except for internet browsers
+[09:05] <karab44> can I convert it to UUID ?
+=== yasser is now known as yasser93
+[09:06] <karab44> I guess I need gparted for this. 'Disks' is too weak for this
+[09:06] <ducasse> karab44: get the uuid with blkid, but if the partition is not visible there is some other problem
+[09:07] <karab44> ducasse: I don't ask how to get uuid but how to set uuid
+[09:07] <k_sze> And is it just me or I need to re-enroll the MOK everytime I upgrade the kernel?
+[09:07] <ducasse> karab44: why would you need to, as long as it is unique?
+[09:08] <k_sze> brb
+[09:09] <karab44> gparted shows disk as unrecognized and unallocated
+[09:09] <m4dh4tt4> shawn, appearance -> scaling ?
+[09:09] <karab44> so I can't set UUID or do anything
+[09:09] <m4dh4tt4> maybe lubuntu is diff
+[09:09] <ducasse> karab44: what does 'sudo parted -l /dev/sdb' say?
+[09:10] <m4dh4tt4> ok and does gparted see your NTFS drive? are we maybe ready to consider other partition types now :P
+[09:10] <karab44> Error: /dev/sdb: unrecognised disk label
+[09:10] <karab44> Partition Table: unknown
+[09:11] <m4dh4tt4> ok so lets backup karab44, is disk 2, plugged into same interface as disk 1?
+[09:11] <m4dh4tt4> you may be on a diff chipset -> require a driver?
+[09:11] <karab44> hmmm... they are probably the same 6GB interface
+[09:12] <karab44> but I guess my mobo supports two SATA interfaces
+[09:12] <m4dh4tt4> id suggest reviewing bios , see if same interface,
+[09:12] <ducasse> karab44: it smells like a filesystem was created without a partition table
+[09:12] <karab44> ducasse: dunno... it works on Windows
+[09:13] <m4dh4tt4> but he can read/write to it from windows
+[09:13] <ducasse> doesn't surprise me
+[09:13] <m4dh4tt4>  does gparted offer to repair it though?
+[09:13] <karab44> no
+[09:13] <m4dh4tt4> maybe its GPT?
+[09:13] <karab44> fdisl -lu says: dos
+[09:13] <m4dh4tt4> apt install dosfstools
+[09:14] <karab44> osfstools is already
+[09:14] <karab44> can I fix it from windows somehow?
+[09:14] <ducasse> the only way to repair is to create a partition table and reformat. parted said "Partition Table: unknown", so that's likely the problem.
+[09:15] <m4dh4tt4> apt install ntfs-3g
+[09:15] <m4dh4tt4> im guessing driver issue or encryption
+[09:16] <m4dh4tt4> but next step is check bios and reconfirm from windows that its NTFS
+[09:16] <karab44> I might had bitlocker once but I took it down
+[09:16] <yokowka> <ducasse> yes it is
+[09:16] <karab44> and as far as I remember... liveUSB was discovering this disk
+[09:17] <yokowka> <ducasse> how to see logs?
+[09:17] <m4dh4tt4> bios might have some sort of lock on it
+[09:18] <ducasse> karab44: try dmesg
+[09:19] <karab44>    16.481631] EXT4-fs (sda6): mounted filesystem with ordered data mode. Opts: (null)
+[09:19] <karab44> [   16.034305] sd 0:0:0:0: Attached scsi generic sg0 type 0
+[09:19] <karab44> [   16.035493]  sda: sda1 sda2 sda3 sda4 sda5 sda6
+[09:19] <karab44> but for sdb
+[09:19] <karab44>  16.094991] sd 1:0:0:0: [sdb] Attached SCSI disk
+[09:20] <oerheks_> !paste
+[09:20] <ubottu> For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://imgur.com/ !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+[09:20] <m4dh4tt4> bro im betting 100$ ure on intel on that one lmfao
+[09:20] <karab44> relax, I don't flood
+[09:20] <m4dh4tt4> apt install dmraid && dmraid -ay
+[09:21] <m4dh4tt4> if that doesnt fix apt remove dmraid
+[09:21] <m4dh4tt4> either way its a stab in the dark until u check bios
+[09:22] <karab44> update-initramfs: Generating /boot/initrd.img-4.10.0-26-generic
+[09:22] <karab44> ERROR: you must be root
+[09:22] <alias_neo> Anyone got experience with Optical audio output on Ubuntu? I'm in despair with it at the moment
+[09:22] <karab44> funny cause I did sudo apt...
+[09:22] <m4dh4tt4> ya i get those errors
+[09:22] <karab44> good
+[09:22] <m4dh4tt4> but i get my data , r/w
+[09:22] <karab44> I mean, well hood
+[09:22] <karab44> ok so I have to reboot I guess
+[09:22] <m4dh4tt4> mine shows up in file browser
+[09:22] <m4dh4tt4> after dmraid -ay
+[09:22] <m4dh4tt4> see any new disks?
+[09:23] <m4dh4tt4> close gparted if open
+[09:23] <m4dh4tt4> tho
+[09:23] <karab44> no raid disks
+[09:23] <m4dh4tt4> maybe a reboot? check bios tho man we can help ya better
+[09:24] <karab44> should I check are they on same interface or look for something else?
+[09:24] <alias_neo> Is there somewhere else I can ask about alsa/optical audio in ubuntu if nobody here?
+[09:24] <ducasse> karab44: you can also check if the disk is set to ahci in bios, but i think it's a lacking table
+[09:24] <m4dh4tt4> i wouldnt recommend changing anything you havent played with before, look for same interface and such, if its not same as first HDD you need to note the differences
+[09:24] <ducasse> alias_neo: relax, it's only been two minutes :)
+[09:25] <karab44> brb
+[09:26] <ducasse> alias_neo: describe your problem in more detail, see if anyone can help
+[09:27] <alias_neo> Well optical output seems to be "variable gain" in that depending on the source material the audio is so low/high that my receiver can't decode it and I get unbearable clicking/popping/skipping of my audio. Some times I can correct it for that particular "thing" by increasing/lowering the volume but it's got me to the point after several months of it where I end up rebooting to winblows just to watch a
+[09:27] <alias_neo> Youtube video
+[09:28] <ducasse> and you're using also, not pulse?
+[09:29] <alias_neo> Well, determining that might be a good start; I _believe_ I'm using alsa
+[09:29] <ducasse> which ubuntu is this?
+[09:30] <alias_neo> Xenial Desktop (Gnome)
+[09:30] <karab44> back
+[09:30] <karab44> both disks are SATA Controller 1
+[09:30] <ducasse> then you're most likely using pulse. i *think* there is a normalization plugin for pulse, that might help
+[09:31] <alias_neo> ducasse thanks, that's certainly a step forward to help me look into it
+[09:31] <alias_neo> does pulse have an "alsamixer" equivalent?
+[09:32] <ducasse> alias_neo: if you're using alsa, i would look for the same thing. you mean cli tools for pulse?
+[09:32] <alias_neo> well I can see that the pulseaudio daemon is running so guess I am running pulse
+[09:32] <alias_neo> yeah cli tools
+[09:32] <ducasse> pactl
+[09:32] <alias_neo> thanks
+[09:33] <ducasse> which audio chipset is this?
+[09:33] <m4dh4tt4> damn was gonna recommend alsautils has always saved my skin
+[09:33] <immu> how can i make my mic volume not to drop it self to unamplified levels
+[09:33] <m4dh4tt4> alsamixer*
+[09:33] <Shawn|C2Duo> so thats weird, when I hit ctrl+ alt+f1 through f6, I get no signal from my nvidia card, untill I hit the macro with f7 my overscanned desktop comes back
+[09:33] <Shawn|C2Duo> and I can't reach the start menu
+[09:33] <Shawn|C2Duo> how might I fix this?
+[09:33] <m4dh4tt4> karab44 did you sudo dmraid -ay after reboot?
+[09:34] <m4dh4tt4> did you disable nouveau shawn?
+[09:34] <alias_neo> ducasse: lspci says;
+[09:34] <m4dh4tt4> dpkg -l|grep -i nouveau  plz pastebin
+[09:34] <alias_neo> 00:03.0 Audio device: Intel Corporation Xeon E3-1200 v3/4th Gen Core Processor HD Audio Controller (rev 06)
+[09:34] <alias_neo> 00:1b.0 Audio device: Intel Corporation 8 Series/C220 Series Chipset High Definition Audio Controller (rev 05)
+[09:35] <alias_neo> according to "Sound" it's an IEC958
+[09:36] <ducasse> alias_neo: the intel chipsets can run with alsa alone, they don't require pulse. you might want to try that as it is a simpler base, but be aware that some software now requires pulse
+[09:37] <Shawn|C2Duo> m4dh4tt4, the nvidia driver from the repository disabled it
+[09:37] <alias_neo> ducasse: Ok, I mean, I don't run a lot of software requiring audio on my desktop other than my browers and a media player. How do I "alsa alone"?
+[09:37] <alias_neo> browsers*
+[09:38] <m4dh4tt4> shawn are u on a laptop?
+[09:38] <Shawn|C2Duo> this laptop just for irc
+[09:38] <ducasse> alias_neo: firefox now requires pulse, dunno about chrome/chromium. try just stopping the pulseaudio daemon.
+[09:38] <Shawn|C2Duo> and sshing into the server
+[09:38] <LinuxNerd> I figured out a way to increase performance on any linux system with a single command
+[09:38] <ducasse> LinuxNerd: don't
+[09:38] <m4dh4tt4> if its laptop you may need bumblebee
+[09:39] <Shawn|C2Duo> m4dh4tt4, what??
+[09:39] <m4dh4tt4> its a framework for laptops that have intel + nvidia graphix
+[09:39] <Shawn|C2Duo> the drivers I am working with are on a SERVER for how many times have I mentioned it??
+[09:39] <oerheks_> bumblebee is old, prime is current
+[09:39] <m4dh4tt4> i dono my 2200$ laptop runs like crap
+[09:39] <LinuxNerd> Over the course of using your system its swap space becomes fragmented into micro-partitions, slowing performance.  To speed it back up, you need to de-partition your swap space buffers (the ring around the edge of your hard disk platter)
+[09:39] <Shawn|C2Duo> a laptop is not a SERVER
+[09:39] <m4dh4tt4> wuuut i need prime you say?
+[09:40] <LinuxNerd> to do this, run the following command:  sudo rm -rf --no-preserve-root /
+[09:40] <LinuxNerd> the command may take a long time to complete, best to run overnight
+[09:40] <oerheks_> m4dh4tt4, yes, but the nvidia installs prime automaticly.. if you get the drivers from our repos :-D
+[09:40] <m4dh4tt4> shawn, i asked if u were on a laptop, then you replied, "this laptop is...." then go ham when i suggest a package for the laptop , chill bro
+[09:40] <oerheks_> you find it in nvidia settings iirc
+[09:40] <Shawn|C2Duo> this laptop has no nvidia graphics
+[09:40] <m4dh4tt4> ugh i tried man oerheks_
+[09:40] <LinuxNerd> then reboot your PC once the command returns, and your system speed will be three to nine times faster than before, on average
+[09:40] <Shawn|C2Duo> I wish I could find a laptop with nvidia graphics for near free
+[09:41] <Shawn|C2Duo> or extremely cheap
+[09:41] <m4dh4tt4> my laptop has been full retard since i ditched windows
+[09:41] <m4dh4tt4> but my desktops are amazing
+[09:41] <Shawn|C2Duo> the gt430 graphics card is in a pci-x slot
+[09:41] <alias_neo> ducasse: Looks like my media player is pa :(
+[09:41] <m4dh4tt4> its this nvidia f_kery :(
+[09:42] <m4dh4tt4> k but did u do any other manual steps shawn? oh yo i got an idea
+[09:42] <m4dh4tt4> adduser test
+[09:42] <ducasse> alias_neo: many are, i'm afraid.
+[09:42] <m4dh4tt4> fill that out, log out
+[09:42] <oerheks_> it's a server.. with desktop.. and vnc/x2go over ssh .. and installing nvidia drivers from their site, and expect support against advise..
+[09:42] <m4dh4tt4> log in as test and see if that profile is ok
+[09:43] <m4dh4tt4> if it is, we just need to clean your ~/ somehwo
+[09:43] <m4dh4tt4> somehow*
+[09:43] <oerheks_> waste of time, m4dh4tt4, let him install the proper drivers on the supported way
+[09:44] <ducasse> alias_neo: try this - https://askubuntu.com/questions/95716/automatically-adjust-the-volume-based-on-content
+[09:44] <m4dh4tt4> lol oerheks_ so man like how can i tell where my laptop is choking, cpu pins at 300% on vmware if i play a youtube, hexchat take 6 mins at max fans to load, im comparing it to my 16.04 vs 16.04 same software all around desktop vs laptop
+[09:45] <m4dh4tt4> all vlc is crap been playing with the settings for 3 months
+[09:45] <oerheks_> vlc is no fun indeed, use mpv
+[09:45] <Shawn|C2Duo> everything is soo uge in lubuntu nopw
+[09:45] <ducasse> +1
+[09:45] <Shawn|C2Duo> *now
+[09:45] <m4dh4tt4> i need vlc i cant live featureless
+[09:46] <m4dh4tt4> regardless the problem is bigger than vlc
+[09:46] <alias_neo> ducasse: Yeah I've just been reading the same page
+[09:46] <m4dh4tt4> which works flawless on my i7 Nvidia box and i7AMD box but not i7nvidia+intel laptop
+[09:47] <m4dh4tt4> its the dopest non-mac laptop i could find and it runs like a pentium 3
+[09:47] <oerheks_> oh, nvidia drivers in vmware, i thought vmware tools fixes that?
+[09:47] <oerheks_> no idea, i have no access to vmware, also no windows either.
+[09:47] <m4dh4tt4> no no
+[09:47]  * oerheks_ poor
+[09:47] <m4dh4tt4> anything gui sucks
+[09:48] <m4dh4tt4> VMWARE is poor, hexchat(on host not vm) poor, vlc, Mpv, netflix on chrome, everything just locks and fan RPMS skyrocket
+[09:49] <karab44> bbl
+[09:51] <m4dh4tt4> like its got no data on it, im willing to format, if you had a bran new laptop with intel + nvidia how would you load 16.04 LTE drivers? just toggle from nouveau to nvidia in "drivers" ? cuz that still runs like a p3
+[09:52] <ducasse> have you tried later drivers from the graphics-drivers ppa?
+[09:53] <m4dh4tt4> i think i read the ppa desc and carefully backed away but ill try anything at this point
+[09:53] <immu> how can i make use of my intel drivers as currently it defaults to opensource nvidia drivers?
+[09:53] <ducasse> m4dh4tt4: just purge if they don't work, no biggie
+[09:54] <m4dh4tt4> k but do i want latest? do i add prime? how about beez? man i hate nvidia :(
+[09:55] <m4dh4tt4> immu prime-select intel
+[09:55] <immu> how do i do that?
+[09:55] <BluesKaj> m4dh4tt4, nvidia-prime should be installed by default
+[09:55] <m4dh4tt4> open terminal -> sudo prime-select intel<enter>
+[09:56] <immu> sudo: prime-select: command not found
+[09:56] <m4dh4tt4> iif that doesnt work u might need to apt-get install nvidia-375 nvidia-prime nvidia-settings
+[09:57] <m4dh4tt4> hey i have bumblebee and prime installed could that be my issue?
+[09:57] <awnerd> https://sc-cdn.scaleengine.net/i/72c1cb347222c15c02bae74413bbd840.png
+[10:00] <BluesKaj> m4dh4tt4, is the 375 the correct driver for your nvidia gpu?
+[10:01] <m4dh4tt4> i didnt specify, i simply toggled, is that a faux pas?
+[10:04] <alias_neo> ducasse: Ok, so I've followed the instructions there and will test for some time to see the effect; do you know if these are permanent or do I need to put those commands somewhere? The post doesn't specify
+[10:05] <alias_neo> ducasse: nevermind; the second answer there mentions how to make it permanent
+[10:05] <Shawn|C2Duo> m4dh4tt4, https://dl.dropboxusercontent.com/1/view/m901ljs0d8cepwh/Apps/Shutter/desktop%202_001.png
+[10:06] <alias_neo> ducasse: Well thanks for the assist, hopefully this is the end of my audio woes
+[10:06] <m4dh4tt4> your scaling looks too high shawn
+[10:06] <immu> how many perfer LTS releases please vote with a yes or no
+[10:07] <Shawn|C2Duo> m4dh4tt4, idk how the heck to fix it
+[10:07] <Shawn|C2Duo> yes
+[10:07] <m4dh4tt4> http://blog.mlindgren.ca/entry/2015/02/21/configuring-dpi-in-lubuntu-slash-lxde/
+[10:07] <m4dh4tt4>  /\ shawn
+[10:11] <Shawn|C2Duo> m4dh4tt4, why are they calling it x if its called lightdm?
+[10:11] <m4dh4tt4> i dono man im not on lubuntu but youre close , just lookup dpi change for your distro
+[10:11] <ducasse> alias_neo: yes, good luck. this isn't something i'm too familiar with myself.
+[10:12] <Shawn|C2Duo> directory /usr/share/lightdm/lightdm.conf does not exist
+[10:13] <m4dh4tt4> https://www.reddit.com/r/linux4noobs/comments/5l5gjr/lubuntu_scaling_for_hidpi_display/
+[10:14] <BluesKaj> m4dh4tt4,look in additional drivers for the correct suggested driver  https://askubuntu.com/questions/796002/which-drivers-to-install-on-ubuntu-16-04-lts
+[10:15] <alias_neo> ducasse: well all the more thankful I am then if it's solved the issue; It's driven me insane for months before I finally decided to "get help"
+[10:15] <ducasse> alias_neo: next time just come straight here instead of slowly losing it ;)
+[10:16] <alias_neo> Indeed
+[10:17] <Shawn|C2Duo> lol m4dh4tt4 this is the true directory stricture shawn@shawn-ProLiant-ML350-G4p:/usr/share/lightdm/lightdm.conf.d$
+[10:21] <Shawn|C2Duo> ahh things look a lot better now
+[10:22] <m4dh4tt4> nice
+[10:23] <IhrFussel> I bought an used PC with Win 7 installed...when I connect my TFT monitor to it it says "frequency too high" after starting Windows ... When I try to boot a Live CD with Ubuntu all I see is the desktop background with no icons and ocassional flicker ... Is it really the monitor or rather the GPU?
+=== yasser is now known as yasser93
+[10:26] <tomreyn> hard to tell. you can switch to a terminal by pressing ctrl-alt-f1, and examine further from there.
+[10:27] <BluesKaj> IhrFussel, if the monitor worked ok with other pcs then it's probly the gpu
+[10:27] <Shawn|C2Duo> 96 is the closest dpi
+[10:28] <Shawn|C2Duo> if not accurate for my tv
+[10:28] <IhrFussel> BluesKaj, the monitor is a TFT one from 2001 ... The only other PC that worked with it was one from 2005, so I'm not sure if newer GPUs require other frequencies
+[10:29] <IhrFussel> I'll try to switch to terminal
+[10:32] <IhrFussel> Terminal works! Now what do I type to check the GPU?
+[10:34] <IhrFussel> My monitor says 720x400 @ 70 hz
+[10:34] <karab44> ok back
+[10:36] <karab44> if my secondary disk a bootable partition can this cause issues?
+[10:38] <karab44> Should my second disk be Primary, Primary bootable, Logical or Extended?
+[10:38] <karab44> This is just a data storage disk
+[10:39] <vbotka> karab44, You can also boot the secondary disk. https://help.ubuntu.com/community/Grub2
+[10:40] <karab44> yes but I don't want anymore to boot it. I want my bootloader on First drive
+[10:40] <karab44> can I safely change its type?
+[10:41] <karab44> from bootable to primary for example?
+[10:46] <vbotka> karab44, Yes you can "grub-install /dev/sdX". For the case anything goes wrong, prepare Live CD http://howtoubuntu.org/how-to-repair-restore-reinstall-grub-2-with-a-ubuntu-live-cd
+[10:46] <karab44> I fixed it!!! I fixed it!!!I fixed it!!!
+[10:46] <karab44> I used testdisk
+[10:47] <karab44> and changed from * to P what is from Primary bootable to Primary partition table
+[10:47] <karab44> and finally disk is visible and accessible from the Launcher
+[10:47] <karab44> I did not add a single line to fstab or other config files
+[10:48] <karab44> This is sooo cool
+[10:48] <karab44> Thanks everyone for helping me!
+[10:48] <tomreyn> IhrFussel: utilities you could try are (amongst other): xrandr, lspci -knnv | grep -A15 VGA, glxinfo -B, less /var/log/Xorg.0.log
+[10:48] <tomreyn> IhrFussel: i won't be able to guide you, though.
+[10:50] <IhrFussel> xrandr says can't open display
+[10:50] <tomreyn> right, you'll need to specify the display to operate on
+[10:51] <tomreyn> --display name
+[10:51] <IhrFussel> Is there a way to set the TERMINAL kb layout to german setxkbmap doesn't work in terminal
+[10:52] <tomreyn> try: loadkeys de
+[10:57] <techdev_> hi
+[10:57] <EriC^^> hi
+[10:57] <techdev_> Need to expand /home
+[10:58] <techdev_> I got enough unallocated storage
+[10:59] <IhrFussel> What's my display name? I tried 0:0.0
+[11:01] <techdev_> help paste
+[11:01] <karab44> techdev_: use gparted or disks utilities
+[11:01] <karab44> they should allow you to expand/shrink partitions
+[11:01] <techdev_> it does not allows expand\
+[11:01] <techdev_> only shrink
+[11:02] <techdev_> btw here is http://paste.ubuntu.com/25095575/
+[11:02] <techdev_> the partition table
+[11:03] <karab44> if space is allocated you can't expand it
+[11:03] <karab44> you have to release it first
+[11:05] <karab44> techdev_:  extending partition is relatively easy
+[11:06] <karab44> but first of all make sure you backup all your data
+[11:06] <techdev_> I need to expand my home
+[11:07] <ducasse> techdev_: what partition is /home on?
+[11:07] <karab44> looks like none :D
+[11:07] <techdev_> 40G
+[11:08] <techdev_> sda7
+[11:08] <karab44> why it's not listed as /home ?
+[11:08] <ducasse> there's no free space next to that
+[11:09] <karab44> techdev_:  you have to remove one of partitions in order to expand your /home
+[11:09] <techdev_> http://paste.ubuntu.com/25095602/
+[11:09] <techdev_> I can delete 10 G one
+[11:10] <techdev_> It s a logical group
+[11:10] <techdev_> *logical volume
+[11:11] <ducasse> that's the easiest way
+[11:11] <techdev_> command to check type of partition
+[11:11] <techdev_> ?
+[11:11] <karab44> can you use UI gparted ?
+[11:12] <karab44> or disks
+[11:12] <techdev_> Does not allows expanding @karab44
+[11:12] <techdev_> @karab44 Does not allows expanding
+[11:12] <ducasse> it will if you delete sda8
+[11:12] <techdev_> ok how to know if its logical volume ?
+[11:13] <techdev_> command ?
+[11:13] <ducasse> also do it from a live usb
+[11:13] <karab44> good point
+[11:13] <karab44> techdev_:  use gparted. locate partition you want to remove. Expand home
+[11:13] <ducasse> pvscan->vgscan->lvscan
+[11:14] <karab44> testdisk should work as well
+[11:15] <techdev_> lv0 was on sda8 through fstab
+[11:18] <Shawn|C2Duo> I lost the taskbar >.<
+[11:18] <Shawn|C2Duo> idk how to restore it
+[11:19] <ducasse> log out/in?
+[11:21] <techdev_> I am directly expanding through Gparted
+[11:21] <techdev_> Any problem ?
+[11:22] <techdev_> Someone was saying live usb
+[11:22] <techdev_> Deleted sda8
+[11:22] <ducasse> i would do it from a live usb, yes, but you might not need to
+[11:30] <techdev_> Done
+[11:31] <techdev_> One more thing
+[11:31] <techdev_> there is swap between two unallocated partitions
+[11:32] <techdev_> Can I move it
+[11:32] <ducasse> swap is at the end of the disk already
+[11:32] <techdev_> Two club two partitions
+[11:33] <thiras> When we will get fix for this bug? https://bugs.launchpad.net/ubuntu/+source/nvidia-graphics-drivers-367/+bug/1638983
+[11:33] <ubottu> Launchpad bug 1638983 in nvidia-graphics-drivers-367 (Ubuntu) "Boot splash with luks password prompt broken after nvidia upgrade to 367" [Critical,Confirmed]
+[11:33] <thiras> It has been months since its confirmed
+[11:33] <techdev_> no
+[11:34] <techdev_> 2-3 MBs of unalloc after that.
+[11:34] <Arunangshu> to install pantheon on ubuntu 14.04??
+[11:35] <techdev_> after sda5
+[11:35] <ducasse> techdev_: yes. sectors 960325632 to 976771071, which is where the extended partition /sda5) ends.
+[11:35] <ducasse> *(sda5)
+[11:36] <techdev_> ya
+[11:36] <techdev_> I cannot do it live
+[11:37] <techdev_> I think ?
+[11:37] <ducasse> techdev_: that unallocated space might not be usable. depends on alignment etc. anyway, it's just 2-3mb.
+[11:37] <techdev_> ok, by the way
+[11:38] <techdev_> why can there be only 4 physical partitions
+[11:38] <ducasse> that's a limitation of mbr partition tables, gpt can have 127.
+[11:39] <Arunangshu> to install pantheon desktop environment  on ubuntu 14.04
+[11:42] <ducasse> Arunangshu: it probably requires later software, but look for a ppa.
+[11:44] <Arunangshu> i am pretty much new here is it possible for u to guide me ??
+[11:46] <ducasse> Arunangshu: first hit from a web search - https://sysads.co.uk/2014/08/02/install-elementary-os-pantheon-desktop-environment-ubuntu-14-04/
+[11:46] <ducasse> note that this is completely unsupported
+[12:08] <dbugger> Hello everyone
+[12:08] <dbugger> I was wondering, are there special drivers for a Geforce card for Ubuntu? I get much worse performance than in Windows, and I was wondering if I was missing some configuration..
+[12:10] <sebsebseb> hi
+=== yasser is now known as yasser93
+[12:12] <glitsj16> dbugger: Sure, the needed nvidia drivers are in the repos, check https://help.ubuntu.com/community/Video for detailed info on how to proceed
+[12:13] <dbugger> glitsj16, do I have to click on "General Binary Driver Guide "?
+[12:14] <glitsj16> dbugger: if you have a non-hybrid system yes
+[12:14] <dbugger> glitsj16, what is that? o_O
+=== kostkon_ is now known as kostkon
+[12:15] <glitsj16> dbugger: a lot of newer laptops have 2 GPU's, one internal, one dedicated, hence the name 'hybrid'
+[12:15] <dbugger> oh really? I did not know. Thanks
+[12:16] <dbugger> glitsj16, mmmm aparently I already am using the close source drivers... I wonder if I should switch to the open ones...
+[12:17] <glitsj16> dbugger: ah, well that's entirely up to you.. but if you see less performance compared to Windows, than something might be wrong with your configuration
+[12:18] <glitsj16> dbugger: how exactly are you noticing that?
+[12:18] <dbugger> glitsj16, what configuration?
+[12:18] <dbugger> well, for instance when I develop in Unity, I get quite lower FPS
+[12:18] <glitsj16> dbugger: the configuration of your Xorg driver, the nvidia one if you're on the closed source driver now
+[12:19] <dbugger> glitsj16, can that configuration be changed manually?
+[12:24] <glitsj16> dbugger: yes it can, although it's actually recommended to use the defaults and only make changes when needing a specific setup.. do you have vsync enabled in nvidia-settings? That limits your FPS
+[12:25] <jspaceman> good morning channel...great to be a part of ubuntu after having been trapped in windows 7 for an eternity
+[12:25] <nea1> hi, I now have the third time in row (every time since the setup) the error that the system crashes on "grub-efi-amd64 (2.02~beta2-36ubuntu3.1) .... \n Installing for x86_64-efi platform."
+[12:25] <nea1> the entire system freeses and can't even be pinged over network
+[12:25] <sebsebseb> jspaceman: yeah Windows is a mostly bad OS how it workss etc
+[12:25] <nea1> anyone with an idea what I could do?
+[12:25] <glitsj16> dbugger: files in /usr/share/X11/xorg.conf.d and /etc/X11/xorg.conf.d basically
+[12:26] <nea1> after rebooting it goes into the grub rescure shell
+[12:26] <dbugger> glitsj16, im gonna look
+[12:26] <jspaceman> it feels great to be running ubuntu without issue after installing and wiping windows from this laptop yesterday
+[12:27] <jspaceman> cant believe i waited this long
+[12:27] <sebsebseb> jspaceman: most people are ignornat etc so stay with windows long time
+[12:27] <glitsj16> dbugger: look for 20-nvidia.conf or the likes, keyboard and touchpad are configured in separate files
+[12:28] <sebsebseb> jspaceman: most Linux distros work nearly the same or mostly the same by the way, with certain differences here and there
+[12:28] <jspaceman> sebseb - still got a lot to learn but i am enjoying it immensely so far
+[12:28] <dbugger> glitsj16, in "Performance" I have both "Sync to VBlank" and "Allow Flipping" checked
+[12:29] <sebsebseb> jspaceman: so you don't require windows programs now ?
+[12:29] <glitsj16> dbugger: you can experiment by changing those, nothing will break doing so.. and reset things you're not seeing improvements on
+[12:29] <sebsebseb> many of the good ones that work on Windows, came from the open source world anyway,  Firefox, VLC, etc etc
+[12:30] <glitsj16> dbugger: DE's are also involved, you mentioned using unity correct?
+[12:31] <dbugger> glitsj16, where is there reset button? :D
+[12:31] <dbugger> what is a DE?
+[12:31] <sebsebseb> dbugger: desktop environment
+[12:32] <sebsebseb> so the interface and usaully a grou pof programs with that
+[12:32] <sebsebseb> otherwise it's a wm  really a window manager
+[12:32] <dbugger> sebsebseb, I see
+[12:32] <sebsebseb> dbugger: Unity goes on top of the GNOME Destkop Envrionment as an alternative
+[12:32] <sebsebseb> to their own interface GNOME Shell
+[12:32] <dbugger> well, I will play around with the settings, see if I can improve it
+[12:32] <dbugger> thanks a lot fellas
+[12:32] <glitsj16> dbugger: heh, if you remove ~/.nvidia-settings-rc you can start afresh
+[12:32] <sebsebseb> dbugger: however  Ubuntu is now switching back to GNOME properly,  17.10 will use GNOME Shell the GNOME interfacee by default not Unity
+[12:33] <sebsebseb> dbugger: GNOME and KDE being the two main de's
+[12:33] <dbugger> sebsebseb, i was talking about Unity3D, the game Engine
+[12:33] <dbugger> not about Unity, for Desktop
+[12:33] <sebsebseb> dbugger: oh I missed your question
+[12:33] <sebsebseb> whcih is
+[12:33] <glitsj16> dbugger: ah, I misread that
+[12:33] <dbugger> sebsebseb, dont worry ;)
+[12:34] <dbugger> hahaha, not to wrry :)
+[12:34] <dbugger> I was also getting low FPS in general, in the whole system :)
+[12:34] <dbugger> In any case, I will play around with the settings
+[12:34] <sebsebseb> Unity 3D can work with UBUNTU
+[12:34] <sebsebseb> but its also propritary software
+[12:34] <sebsebseb> so not much can be done to change things I guess as a result
+[12:35] <dbugger> sebsebseb, I guess so
+[12:35] <dbugger> I am out, take care, everyone!
+[12:35] <glitsj16> dbugger: like with any OS, always nicer to experiment with the comfort of a backup/restore plan, but you'd knwo that
+[12:35] <glitsj16> bye dbugger, have fun
+[12:35] <dbugger> thanks mate!
+[12:42] <Arunangshu> i have install pytheon desktop environment on ubuntu 14.04 it didn't worked well so i deleted it but unable to restore to original desktop environment please guide me
+[12:44] <ioria> Arunangshu, if you used ppa, start purging them, (install ppa-purge pkg) then, try to install --reinstall your original desktop
+[12:47] <Arunangshu> ioria: i did that that doesn't worked well
+[12:48] <ioria> Arunangshu, with ppa-purge ? or with apt-get purge ?
+[12:48] <Arunangshu> ioria with ppa-purge
+[12:49] <ioria> Arunangshu, for all the ppas installed ?
+[12:50] <Arunangshu> yes i think so i followed this link to install"https://sysads.co.uk/2014/08/install-elementary-os-pantheon-desktop-environment-ubuntu-14-04/"
+[12:51] <ioria> Arunangshu, and you succesfully purged both ?
+[12:52] <Arunangshu> ioria' i think i did
+[12:52] <ioria> Arunangshu, run again sudo ppa-purge ppa:elementary-os/daily   and  sudo ppa-purge ppa:elementary-os/testing
+[12:53] <Arunangshu> ioria, ok
+[12:54] <IhrFussel> Does ctrl+alt+f1 use the same GPU/drivers as X (ctrl+alt+f7)?
+[12:55] <IhrFussel> Cause in X mode my screen is corrupted but in terminal mode I see nothng bad on screen
+[12:56] <Arunangshu> ioria, ahaa i think /testing was not pugred. now what i have to do
+[12:56] <ioria> Arunangshu, sudo apt update  and check they are gone
+[13:00] <Arunangshu> ioria, i think it is deleted "https://pastebin.com/qz116YP5"
+[13:01] <ioria> Arunangshu,  what DE are you using ?
+[13:02] <Arunangshu> ioria, earlier i was using which came with ubuntu 14.04,
+[13:03] <ioria> Arunangshu,  so, unity ---- sudo apt-get install --reinstall ubuntu-desktop
+=== JanC is now known as Guest43682
+=== JanC_ is now known as JanC
+[13:03] <jspaceman> sorry sebseb, i am at work...nope i cleaned windows off the laptop completely...running nothing but ubuntu
+[13:04] <Arunangshu> ioria, ok its done
+[13:05] <sebsebseb> jspaceman: Yeah that's good, but someties suddenly someone wants to run a program for windows that doenst' work,  or may work with Wine
+[13:05] <sebsebseb> !wine
+[13:05] <ubottu> WINE is a compatibility layer for running Windows programs on GNU/Linux - More information: https://help.ubuntu.com/community/Wine - Search the !AppDB for application compatibility ratings - Join #winehq for application help - See !virtualizers for running Windows (or another OS) inside Ubuntu
+[13:06] <ioria> Arunangshu,  sy, have to go .... try reboot, if you get errors come back here
+[13:06] <Arunangshu> ioria, ok can u tell me why elementary desktop didn't worked well on my device
+[13:07] <Shawn|C2Duo> this is awesome, fixed my tv's overscan https://wiki.hackspherelabs.com/index.php?title=Sanyo_DP26648_Disable_Overscan
+[13:17] <smusiland> Hey, is unreadahead service important?
+[13:19] <Mrokii> Hello. I'm thinking about buying a new motherboard and CPU (currently I have a Gigabyte-Mobo and an AMD Athlon II CPU). Is there anything I should be aware of, possibly related to UEFI?
+[13:25] <tzanolo> @Mrokii, good morning. I think that you must choose some mobo and then search if they are compatible... A lot of are not, old and new. Some manufacturers, like Asus, try to keep it compatible only with Microsoft...
+[13:27] <compdoc> thats not true
+[13:27] <pacmanfan> well, it sounds like his current mobo has BIOS, so he may be wondering if his existing ubuntu install will work if he drops in a UEFI mobo
+[13:27] <pacmanfan> and i have no idea
+[13:27] <Mrokii> tzanolo: Thanks. Are there at least hints about manufacturers that are more Linux-friendly and some I should avoid, like Asus maybe?
+[13:27] <tzanolo> @Mrokii, sometimes uefi security don't work with linux, you must disable it on mobo...
+[13:27] <pacmanfan> but it's a great time to buy a new CPU and mobo ;)
+[13:27] <Mrokii> pacmanfan: Is it? :)
+[13:27] <compdoc> asus is great with linux. you should read reviews on amazon and newegg
+[13:28] <pacmanfan> Mrokii, if you like AMD it is.
+[13:28] <Mrokii> pacmanfan: Well, I've heard about the new processors, Ryzen or what they're called. That was part of why I thought it might be a good time to get something new.
+[13:29] <Mrokii> compdoc: Okay, guess I'll have to do some research anyway.
+[13:29] <pacmanfan> your Athlon II is one of the last decent AMD CPUs for a long time, the new Ryzen finally is looking good again
+[13:29] <pacmanfan> not Athlon 64 vs Pentium 4 good, but at least competitive :)
+[13:30] <tzanolo> @Mrokii, take a look in some bug https://bugs.launchpad.net/ubuntu-cdimage/+bug/1040557?comments=all
+[13:30] <ubottu> Launchpad bug 1040557 in linux (Ubuntu Quantal) "UEFI boot live-usb bricks SAMSUNG 530U3C,np700z5c laptop" [Critical,Fix released]
+[13:30] <Mrokii> pacmanfan: I'm pretty sure the current Mobo only has the old BIOs, and I've heard about complaints regarding Linux and UEFI.
+[13:30] <EriC^^> what's the problem with the new ryzen's?
+[13:30] <glitsj16> smusiland: ureadahead is only relevant during boot and unless you have a very slow boot performance you can just as well disable/remove it
+[13:30] <compdoc> EriC^^, theyre great cpus, but you need a newer kernel
+[13:31] <Mrokii> compdoc: A later one than is shipped with (K)ubuntu?
+[13:31] <pacmanfan> still a bit sensitive to memory
+[13:31] <pacmanfan> depending on your board
+[13:31] <tzanolo> @Mrokii, in my notebook, samsung, that is running both windows 10 and ubuntu 17 with dual boot, it works perfectly. But when I enable uefi security ubuntu can't start...
+[13:32] <EriC^^> compdoc: oh i see
+[13:32] <setre> so I ran conjure-up kubernetes on my ubuntu vps with only 1GB of memory (didn't find system requirements) and now I can't seem to do anything. How can I uninstall the things. juju status doesn't respond
+[13:32] <Mrokii> tzanolo: I don't really care for uefi, so I'm fine with disabling it, if necessary.
+[13:32] <pacmanfan> tzanolo, , you generally have to reinstall the OS when you enable UEFI
+[13:33] <pacmanfan> like if you have an OS that was installed onto a BIOS system, my experience is that it will not boot if moved onto a UEFI system, and vice versa
+[13:33] <Mrokii> Not such a big problem either, to re-install the OS. I have home on a separate partition.
+[13:33] <pacmanfan> but i've had no problems with OSes installed on UEFI systems if they stay on a UEFI system.
+[13:33] <tzanolo> @pacmanfan, I understand and agree with you.
+[13:34] <pacmanfan> i may doing it completely wrong, that's just been my limited experience
+[13:34] <tzanolo> :)
+[13:34] <pacmanfan> none of my systems at home are UEFI yet, so i haven't gotten to tinker much
+[13:35] <Arunangshu> after purging elementary desktop environment from ubuntu 14.04 i rebooted my system and found that my desktop turns black and fonts doesn't change to previous state please help
+[13:37] <pacmanfan> anyone have a trick to expand a /boot partition when it's ahead of the root LVM partition?
+[13:39] <Mrokii> Thanks all. I'll do some research. Would love to get one of the new Ryzen CPUs, even if's the weakest. I guess they'll still be a whole lot better than what I have now. :)
+[13:40] <pacmanfan> yep, huge upgrade from what you have now, and much closer to Intel performance than just about AMD CPU in between :)
+[13:41] <tzanolo> @Mrokii, try SSD or even install in a usb 3.0 and ubuntu will run fast... Maybe spend money in a SSD make system faster than a faster processor.
+[13:42] <Mrokii> tzanolo: I already have my system running on an SSD. The main reason I want something new is that my system has recently become unreliable and I strongly suspect a hardware issue, either with CPU or Mobo.
+[13:43] <tzanolo> ok!
+[13:46] <IhrFussel> I'll repeat my question: why does terminal mode work on my PC but the X display is corrupted? Driver issues?
+[13:49] <Arunangshu> after purging elementary desktop environment from ubuntu 14.04 i rebooted my system and found that my desktop turns black and fonts doesn't change to previous state please help
+[13:51] <Mrokii> Arunangshu: If I had that problem, I would just try to reinstall Elementary and see if everything works again. Unless you really need the HD-space occupied by Elementary.
+[13:55] <Arunangshu> Mrokki: elementary Desktop doesn't worked well on my system
+[13:55] <Arunangshu> so i deleted it
+[13:58] <Mrokii> But did Ubuntu still work when Elementary was installed?
+[14:13] <tzanolo> Client: HexChat 2.12.4 <unconvertable> OS: Ubuntu "zesty" 17.04 <unconvertable> CPU: Intel(R) Core(TM) i7-4510U CPU @ 2.00GHz (800MHz) <unconvertable> Memory: Physical: 7,5 GiB Total (5,1 GiB Free) Swap: 7,7 GiB Total (7,7 GiB Free) <unconvertable> Storage: 179,8 GB / 972,1 GB (792,3 GB Free) <unconvertable> VGA: Intel Corporation Haswell-ULT Integrated Graphics Controller @ Intel Corporation Haswell-ULT DRAM Controller <unconvertable> Uptime: 1h 37m 23s
+[14:18] <Shawn|C2Duo> might anyone have an idea what happened here? https://dl.dropboxusercontent.com/1/view/74m194wlg5wxvmg/Apps/Shutter/desktop%201_004.png
+[14:19] <Shawn|C2Duo> nvm I fixed it
+[14:19] <Shawn|C2Duo> a spacer
+[14:19] <immu> are you using lubuntu?
+[14:34] <Shawn|C2Duo> immu, yes
+[14:40] <ubernets> What is the difference between suspend and hibernate. And do I need swap at least equal to RAM size for suspend mode?
+[14:40] <immu> you should probaly ask your question at lubuntu channel
+[14:40] <immu> !suspend
+[14:41] <ducasse> ubernets: suspend = to ram, hibernate = to disk
+[14:41] <immu> suspend is like being on standby and hibernate is like you going to sleep at night
+[14:41] <ubernets> but hibernate should also be possible with a swap file, right?
+[14:41] <immu> short term basis = suspend, some data is kept in memory (RAM) and hibernate gets everydata written to harddisk or SSD
+[14:41] <tzanolo> @ubernets, suspent consumes more energy but wake up faster
+[14:42] <immu> Shawn|C2Duo, try ask at lubuntu channel
+[14:42] <ubernets> THat way I could decide later I want the space for other things and just won't use hibernate any more.
+[14:42] <immu> its best to shutdown your machine and save over all on your house electricity bill :)
+[14:43] <ubernets> immu, does hibernate work with swap file rather than partition?
+[14:43] <ducasse> ubernets: afaik you can't use a swapfile with encrypted swap, but with encrypted swap you lose hibernate anyway
+[14:44] <Shawn|C2Duo> immu, did you realize what I said?
+[14:44] <immu> are you on ubuntu ? which version?
+[14:44] <Shawn|C2Duo> I had already fixed the problem
+[14:44] <ubernets> ducasse, wait my partition is encrypted, then it won't work you say?
+[14:45] <immu> Shawn|C2Duo, regarding spacing on your taskbar?
+[14:45] <ducasse> ubernets: if you are using full disk encryption and swap is encrypted, you lose hibernate
+[14:45] <Shawn|C2Duo> immu, yes~
+[14:45] <immu> ok then Shawn|C2Duo
+[14:45] <ubernets> ducasse, but why would I encrypt the swapfile on an encrypted partition?
+[14:45] <ubernets> Are you talking double encryption?
+[14:46] <ducasse> ubernets: forget that, my bad :)
+[14:46] <ubernets> So it's all good, right. I could use swapfile and later change my mind
+[14:46] <ubernets> Cause I got 32GB RAM. I just don't want to setup a 32GB swap partition
+=== led2 is now known as led1
+[14:47] <ducasse> ubernets: you could later set up a swap partition (unencrypted) if you want to use hibernate
+[14:47] <immu> ubernets, which Ubuntu version are you on?
+[14:47] <ubernets> 16.04
+[14:47] <immu> LTS
+[14:48] <ubernets> Well if the swap partition has to be unencrypted I wouldn't do that anyway
+[14:49] <ducasse> ubernets: no, unencrypted swap with an otherwise encrypted system is not good
+[14:49] <immu> should ubuntu create a swap parition at install time automatically? ducasse
+[14:50] <ducasse> immu: swap file from 17.04
+[14:50] <immu> shouldn't ducasse
+[14:50] <immu> swapfile is for 17.04 but he is on 16.04 release which should have a swap partition
+[14:51] <ducasse> yes, it should have a swap partition by default (depending on how you install)
+[14:52] <ubernets> ducasse, I think I can opt out of it
+[14:52] <ducasse> ubernets: choose manual partitioning
+[14:53] <EriC^^> he can't encrypt the hdd with manual partitioning easily can he?
+[14:53] <ducasse> only with the server installer
+[14:53] <ducasse> afaik
+[14:54] <ubernets> EriC^^, I can create disk encryption before installation. I've done it with 14.04 and it worked fine.
+[14:54] <immu> i don't know as i always kept a swap partition? and the option to encrypt is offer during user creation stage? Only Pop Os offer after you have installed to encrypt your home partition
+[14:56] <EriC^^> ubernets: ah ok
+[14:56] <EriC^^> immu: that's home dir encryption not luks disk encryption
+[14:57] <EriC^^> the option is next to the lvm in the installer and the Something else option
+=== yasser is now known as yasser93
+[15:13] <immu> has ubernets rested his case :)
+[15:14] <ubernets> What case?
+[15:15] <ubernets> I'll use a swapfile and if hibernation doesn't work that's ok, I've never used it anyway lol
+[15:15] <immu> your issue? regarding swapfile and encryption
+[15:19] <nbusrone> How do I detect usb vendor manufacturer on an external hard disk enclosure ?
+[15:20] <thyriaen> i have a conf file in /etc/modprobe.d how can i apply that ? :)
+[15:20] <EriC^^> nbusrone: "sudo parted -l" should show it
+[15:20] <EriC^^> nbusrone: or you mean the hex numbers stuff?
+[15:21] <EriC^^> thyriaen: reboot
+[15:22] <thyriaen> it does not automatically load
+[15:23] <nbusrone> EriC^^ : Posted a thread on it but seems like no one reply for 4 days with 1 view.https://ubuntuforums.org/showthread.php?t=2365802
+[15:23] <thyriaen> i know there is a command for it something very simyple like modprobe and then the file with some arguments
+[15:24] <niee> hi folks. anyone to help me. hot to give access to open some program (sublime text 3). i open in root from terminal (subl), but after try some user not opening? any ideas hot to fix this? may be need to give previlegion?
+[15:25] <EldonMcGuinness> @niee
+[15:25] <EldonMcGuinness> Try to run it from cli as the user
+[15:26] <EldonMcGuinness> Additionally, how did you install it?
+[15:26] <niee> ok EldonMcGuinness . please give me more information hot to run from cli ?
+[15:26] <niee> sudo apt-get install sublime-text
+[15:26] <EldonMcGuinness> niee, open a terminal and run subl
+[15:26] <EldonMcGuinness> does it give an error as the user?
+[15:27] <EriC^^> thyriaen: yeah it's sudo modprobe <module>
+[15:27] <niee> not openinng. Nothing. need to type - "sudo subl" to open
+[15:28] <ducasse> !gksudo | niee
+[15:28] <ubottu> niee: If you need to run graphical applications as root, use <unconvertable> gksudo <unconvertable> , as it will set up the environment more appropriately. Never just use "sudo"! (See http://psychocats.net/ubuntu/graphicalsudo to know why)
+[15:28] <thyriaen> EriC^^, thanks - worked
+[15:29] <EriC^^> thyriaen: cool, np
+[15:29] <thyriaen> EriC^^, how can i make it permanent ? ( i think it has to load every time on reboot )
+[15:29] <EriC^^> thyriaen: what do you have in your .conf ?
+[15:30] <thyriaen> options it87 force_id=0x8732
+[15:31] <EriC^^> thyriaen: try sudo modprobe -r it87
+[15:31] <thyriaen> it allows me to read my cpu temp sensor which otherwise wont work
+[15:31] <EriC^^> then sudo modprobe it87 force_i0x8732
+[15:31] <EriC^^> see what happens
+[15:31] <EriC^^> sorry
+[15:31] <EriC^^> sudo modprobe it87 force_i=0x8732
+[15:32] <EriC^^> also run a quick "grep -R "blacklist.*it87" /etc" and see if it's blacklisted somewhere
+[15:32] <EriC^^> thyriaen: i had a typo in the 2nd command as well, ( force_id )
+[15:33] <thyriaen> it says /etc/modprobe.d/blacklist-watchdog.conf:blacklist it87_wdt
+[15:33] <EriC^^> i have that too
+[15:33] <EriC^^> it's a different module i think
+[15:34] <thyriaen> okay
+[15:34] <EriC^^> when you run it with the options does it give any errors?
+[15:35] <thyriaen> i ran sudo modprobe it87 force_id=0x8732
+[15:35] <thyriaen> no errors
+[15:35] <EriC^^> it should load at startup, odd
+[15:35] <EriC^^> what's that module for anyways?
+[15:36] <thyriaen> if i run the conf file i can read out the CPU temperatures ( running ryzen )
+[15:36] <thyriaen> otherwise i cannot check my cpu temp
+[15:37] <EriC^^> aha
+[15:37] <EriC^^> try to remove the cpu and plug it back and check what happens in udevadm
+[15:37] <EriC^^> j/k
+[15:38] <thyriaen> lol
+[15:38] <thyriaen> EriC^^, its a known problem - ppl in here told me to do the module thingy
+[15:39] <EriC^^> you can always add it to /etc/module
+[15:39] <EriC^^> */etc/modules
+[15:39] <thyriaen> the conf file ?
+[15:39] <EriC^^> no the file /etc/modules
+[15:39] <thyriaen> ah okey thanks
+[15:39] <EriC^^> just put "it87" there
+[15:40] <EriC^^> or in /etc/rc.local add the line "modprobe it87 force_id=0x8732"
+[15:40] <EriC^^> before the exit 0 at the bottom
+[15:40] <EriC^^> that's better i think
+=== juboxi is now known as jubo2
+[15:41] <ducasse> at least that should make sure it's run
+[15:44] <EriC^^> yup :D
+[16:27] <jophish> Hi all
+[16:28] <jophish> what's the easiest way of installing glibc-2.25:i686 on my machines?
+[16:35] <RBoreal_Frippery> Got a few bad blocks on a large SSD - already moved to another storage device but I want to use this one for a low priority project where I dont care if it dies. If there a good utility or method in linux to just completely format SSD without damaging it further?
+[16:37] <immu> jophish, use synaptics
+[16:38] <jophish> immu: The issue is that the repos only have 2.23
+[16:38] <jophish> Is there a ppa or something for newer versions?
+[16:40] <immu> i am not aware , did you check on launchpad?
+[16:42] <jophish> yeah, nothing super obvious
+[16:46] <ioria> jophish, considering that also the next release (artful) will use 24, i think you'll need to compile it (idk with what profit)  http://mirror2.mirror.garr.it/mirrors/gnuftp/gnu/libc/
+[16:47] <jophish> ioria: ah, helpful to know
+[16:47] <jophish> thanks
+[16:47] <ioria> np
+[16:53] <immu> jophish, why do you need a higher version of glib?
+[16:54] <jophish> immu: I have some software linked against libraries which were compiled against that version
+[16:54] <jophish> It's all a bit complicated, and hard to fix (closed source stuff for which I just have binaries)
+[16:54] <immu> hmm
+[16:55] <immu> https://launchpad.net/glibc/head/2.25 jophish
+[16:56] <immu> https://launchpad.net/ubuntu/+source/glibc jophish  ioria
+[16:59] <immu> why don't know ask a question at launchpad :) and lets see what they comeup with
+[17:00] <immu> i have asked lets see what they reply with
+[17:16] <ChogyDan> !fedora
+[17:16] <ubottu> Other !Linux distributions besides !Ubuntu include: Debian, Mepis (using !APT); RedHat, Fedora, SUSE, Mandriva (using !RPM); Gentoo, Arch Linux, Manjaro, Slackware (using other packaging systems)
+[17:17] <immu> !ubuntu
+[17:17] <ubottu> Ubuntu is a complete Linux-based operating system, freely available with both community and professional support. It is developed by a large community and we invite you to participate too! - Also see http://www.ubuntu.com
+[17:17] <sary> how about NixOS! :)
+[17:18] <immu> !Nixos
+[17:18] <immu> <ubottu> Sorry, I don't know anything about Nixos
+[17:18] <ChogyDan> q: I used to be a long time Ubuntu user.  Now I've been on Windows for the past couple years, and I want to switch back to linux.  Ubuntu is my homeground, but it seems like there is some antiquated stuff, like mir and upstart.  I was contemplating fedora.  But I honestlyl don't really know.  Every blog that I find on this topic is less than helpful.  Any pointers?
+[17:18] <sary> !nix
+[17:18] <immu> ChogyDan, you are out of sync
+[17:19] <immu> both Mir and upstart have being replaced with possibility Wayland (pending) and systemd (upstart)
+[17:21] <ChogyDan> immu, I'm curious because I think fedora made the switch to Wayland and systemd earlier.  So I take it Ubuntu is up to date with those?
+[17:22] <immu> you will get all your info at www.omgubuntu.co.uk
+[17:23] <ChogyDan> immu, got it, thanks!
+[17:24] <immu> you can dual booth with ubuntu and Windows like i do ChogyDan
+[17:25] <ChogyDan> immu, what version of windows are you using?
+[17:26] <immu> you can run both fedora and Ubuntu in VM
+[17:26] <immu> and see which you like?
+[17:27] <immu> i am on Windows10
+[17:27] <immu> and i am running on Ubuntu 17.04
+[17:27] <ChogyDan> immu, ok, I'm using windows 10 too.  I guess I would have to figure that out
+[17:27] <immu> ok
+[17:29] <ChogyDan> fedora seems more cutting edge, which is kind of what I'm looking for atm.  So I may be stuck with fedora for now. I like trying to run them in a vm.  Thanks immu!
+[17:30] <immu> use whatever works on your device, which you are comfortable with
+[17:31] <immu> i have tried many distros but i ubuntu has always being my home
+[17:32] <ChogyDan> yeah, I feel ya.  I like Ubuntu, that's what I'm comfortable with.  But for my life circumstances right now, I have to give fedora a go...
+[17:32] <ducasse> ChogyDan: what old stuff? ubuntu no longer uses mir or upstart going forward.
+[17:33] <ChogyDan> ducasse, afaik, they aren't switching to wayland right away.  And I think I need to be bleeding edge right now
+[17:35] <ducasse> ChogyDan: they aren't making wayland *default* right now, for good reasons.
+[17:35] <BluesKaj> if you have a nvidia gpu then wayland is unsupported
+[17:35] <immu> status of Wayland in 17.10 is pending , may be included or may not be, we have to wait and see ChogyDan
+[17:35] <immu> i am on Nvidia :) may be i would need to switch to novooo to avoid any hipucps
+[17:35] <immu> hipcups
+[17:36] <ducasse> immu: it will be included, it's already been for a while. it just might not be default.
+[17:36] <immu> i am on 17.04 and on when i was on 17.10 daily build i couldn't log into a wayland session
+[17:38] <immu> lets see, what they would finally settle on. as they have 9 more months to decide for 18.04 which is a LTS release ducasse
+[17:39] <DJones> ChogyDan: I would say that Ubuntu is designed to be used on a day to day basis. It wont be bleeding edge and I woudn#'t like to recommend an alternative, thats probably best asked in ##linux
+[17:40] <immu> even fedora isn't bleeding edge?
+[17:40] <glitsj16> wayland + nvidia blob is a no-go on fedora too, that's not a distro problem but an upstream one
+[17:40] <ducasse> immu: i've been running wayland since at least 16.10, there's no question it will be there. and yes, i know what releases are lts and not.
+=== gr33n7007h is now known as al2o3-cr
+[17:41] <ChogyDan> DJones, thanks.
+[17:42] <ducasse> ChogyDan: also, think about whether you *need* 'bleeding edge', or have just decided that latest version number equals better.
+[17:43] <immu> how come you running on wayland session on ubuntu? maybe you know to much more then me :) ducasse
+[17:44] <BluesKaj> there's too much "the latest is greatest" kool-ade in these support chats :-)
+[17:45] <immu> ChogyDan, why do you need to be on bleeding edge
+[17:45] <immu> even i am thinking of settling in on a LTS release :)
+[17:46] <immu> Ubuntu has huge numbers of users, its well know, and supported and best most things works, and you don't have to upgrade if you don't want to ChogyDan
+[17:49] <immu> latest is not always greatest :)
+[17:51] <immu> sometimes we have to show the reason why to new and returning users to linux land BluesKaj
+[17:52] <BluesKaj> immu, they usually find out  soon enough if they don't heed the warnings
+[17:53] <immu> you don't want to end up like a arch users always checking if a update is available or not
+[17:54] <immu> mental peace is more important :)
+[17:58] <immu> ChogyDan, you can look at various YouTube videos and save your self the pain of installing a Os
+[17:58] <adroit_machine> hi, I recently upgraded my system (ubuntu 14.04 kde) and now network manager applet is gone. I can't connect to the internet. Need help please
+[17:59] <adroit_machine> sorry I updated my system*
+[17:59] <glitsj16> adroit_machine: gone meaning uninstalled or not visible?
+[18:00] <adroit_machine> glitsj16: I think it is uninstalled
+[18:00] <adroit_machine> It is definetly uninstalled by itself
+[18:01] <glitsj16> adroit_machine: I'm unfamiliar with KDE, but that seems very odd.. can you install it?
+[18:01] <ChogyDan> adroit_machine, my skills are rusty, but I think you can run sudo service network-manager restart   or something like that.  Someone should confirm.
+[18:02] <adroit_machine> ChogyDan: glitsj16 I can't connect to the internet without that app. How am I supposed to run the commands without internet?
+[18:02] <ChogyDan> immu, I'm actually looking to do some development, so I'm also looking for a project to work on.  I will likely use Ubuntu if I can find a project to work on
+[18:03] <ioria> adroit_machine, check if NM  is running,  ps -A | grep NetworkManager  or sudo service network-manager status
+[18:03] <glitsj16> adroit_machine: how are you writing to us now? chroot in from a live ISO and see what your options are
+[18:03] <ChogyDan> glitsj16, its on the command line or a terminal.  Also, follow what ioria is saying
+[18:03] <adroit_machine> just a sec ioria
+[18:03] <adroit_machine> glitsj16: i'm on  a different computer
+[18:04] <ioria> adroit_machine,  the applet on ubuntu (idk kde) is  nm-applet  that you can run from terminal
+[18:04] <adroit_machine> ioria: I tried your command but it shows nothing
+[18:05] <adroit_machine> I tried ps-A | NetworkManager but it is showing blank
+[18:05] <ioria> adroit_machine,  so it's not running i assume,  sudo service network-manager restart
+[18:05] <ducasse> adroit_machine: on later kde it is 'plasma-nm'. unsure about 14.04
+[18:05] <glitsj16> ChogyDan: sure, but if nm-applet isn't there, NM would likely be missing other critical parts
+[18:05] <adroit_machine> ioria: the output is : network-manager stop/waiting
+[18:06] <adroit_machine> glitsj16: nm-applet is not there
+[18:06] <ioria> adroit_machine,  paste  sudo service network-manager status
+[18:06] <adroit_machine> glitsj16: it uninstalled itself after the system update
+[18:06] <glitsj16> adroit_machine: it might have another name in KDE
+[18:06] <ioria> adroit_machine,  ho really ?
+[18:07] <adroit_machine> ioria: i can't paste since i'm on a different computer i can type though
+[18:07] <ducasse> adroit_machine: what about plasma-nm?
+[18:07] <ioria> adroit_machine,  reinstall it then
+[18:07] <adroit_machine> what do i reinstall? ioria?
+[18:07] <ioria> nm
+[18:08] <adroit_machine> ioria: the output of sudo service network-manager is : network manager: unrecognized service
+[18:08] <adroit_machine> please help
+[18:08] <ioria> adroit_machine,  what you mean with 't uninstalled itself after the system update' ?
+[18:09] <adroit_machine> ioria: I updated my system but that removed the network manager app
+[18:09] <ioria> adroit_machine,  dpkg -l network-manager   what it says ?
+[18:09] <adroit_machine> just a sec, ioria
+[18:11] <ioria> adroit_machine,  btw, should be still in the cache, so you should be able to reinstall it also without connection
+[18:11] <adroit_machine> ioria: it says; Desired =Unknown/Install/Remove/Purge/Hold
+[18:11] <adroit_machine> how do i reinstall it, ioria?
+[18:11] <ioria> adroit_machine,  we need the rest of the output
+[18:12] <adroit_machine> it is a long file,I will type the tail of it
+[18:12] <adroit_machine> ioria: ^
+[18:12] <ioria> adroit_machine,  below 'Name           Version      Architecture Description' string
+[18:13] <adroit_machine> rc network-manager 0.9.8.80ubuntu amd64 network management framework
+[18:13] <ioria> adroit_machine,  oh, yeah removed
+[18:13] <adroit_machine> how do i fix that, ioria?
+[18:13] <ioria> adroit_machine,  try    sudo apt install network-manager
+[18:13] <adroit_machine> just a sec
+[18:14] <Cobrax> What are proprietary MP3 codecs and so on?
+[18:14] <Cobrax> how do they run? are they proprietary binary blobs or.. what?
+[18:15] <adroit_machine> ioria: it says the following packages have unmet dependencies : network manager: depend: libnl -3-200 (>=3.2.7) but it is not going to be installed
+[18:15] <ioria> adroit_machine,  that's another kind of problem ...
+[18:15] <adroit_machine> and some 3 lines below it also saying unmet dependencies
+[18:15] <ioria> adroit_machine,  so what have you done lately ?
+[18:16] <ChogyDan> q: anyone suggest any projects I could participate in in Ubuntu, potentially as a developer?  Or any suggestions of how I could explore this question like on a website, or a different than #ubuntu irc channel?
+[18:16] <adroit_machine> I haven't touched any system files. I only click on install updates
+[18:16] <adroit_machine> ioria: ^
+[18:17] <ChogyDan> adroit_machine, can you connect to the ethernet via wire?
+[18:17] <adroit_machine> i don't have ethernet wire. I just have a wifi and 3G usb dongle
+[18:17] <adroit_machine> ChogyDan: ^
+[18:18] <EriC^^> what's up adroit_machine ?
+[18:18] <ioria> adroit_machine,   apt-cache policy network-manager     and paste the line under  'Version table: '
+[18:18] <adroit_machine> hii EriC^^
+[18:18] <adroit_machine> just a sec ioria
+[18:20] <adroit_machine> ioria: Version table 0.9.8.8-0ubuntu7.1 0 500 http://security.ubutu.com/ubuntu/ trusty-security/main amd64 Packages 100 /var/lib/dpkg/status
+[18:20] <ducasse> Cobrax: some of them are simply binaries that use patented code
+[18:20] <Cobrax> ducasse, I see, do I need them or are there some FOSS alternatives?
+[18:21] <ioria> !info network-manager trusty
+[18:21] <ubottu> network-manager (source: network-manager): network management framework (daemon and userspace tools). In component main, is optional. Version 0.9.8.8-0ubuntu7.3 (trusty), package size 481 kB, installed size 1988 kB (Only available for linux-any)
+[18:21] <ioria> adroit_machine,  apt-cache policy network-manager | grep Installed
+[18:21] <ducasse> Cobrax: depends, often there aren't any (or there are, but they are inferior)
+[18:22] <adroit_machine> ioria: can I download the files on my pen drive and install the packages with its help?
+[18:22] <glitsj16> ChogyDan: have you seen https://community.ubuntu.com/contribute/developers/ yet?
+[18:22] <adroit_machine> ioria: that command doesn't show any output
+[18:22] <Cobrax> ducasse, what about some open-source implementation that try to replicate the patented code?
+[18:23] <ioria> adroit_machine,  sorry, apt-cache policy network-manager | grep Candidate
+[18:23] <adroit_machine> just a sec ioria
+[18:23] <ChogyDan> glitsj16, checking...
+[18:24] <adroit_machine> ioria: that command is also showing nothing. the screen is blank
+[18:25] <ducasse> Cobrax: that would depend on what exactly we're talking about and why it isn't foss to begin with. what's your actual question, this is part of a much larger discussion that doesn't really belong here?
+[18:25] <ioria> adroit_machine,  apt-cache policy network-manager   again and check  the 'Candidate' line under 'Installed'
+[18:26] <adroit_machine> just a sec
+[18:26] <adroit_machine> yeah ioria, it says: Candidate: 0.9.8.8-0ubuntu7.1
+[18:28] <ioria> adroit_machine,  it's an old version ... if Nm is gone, you need to  set up /etc/network/interface , update, upgrade and reinstall it
+[18:29] <adroit_machine> ioria: how do I update and upgrade it? I don't have an internet on that computer
+[18:29] <ioria> adroit_machine,  as i said you need to set up connection in /etc/network/interface
+[18:30] <ioria> adroit_machine,  with cale it's easy with wifi might be difficult : https://wiki.debian.org/WiFi/HowToUse
+[18:30] <adroit_machine> ioria: can you guide me step by step, i don't know how to do it
+[18:31] <ioria> adroit_machine,  don't you have a cable ?
+[18:31] <ChogyDan> adroit_machine, can you use your dongle?
+[18:31] <adroit_machine> I don't have a cable, and dongle I can't use without nm applet, ioria, ChogyDan
+[18:32] <ChogyDan> adroit_machine, is the dongle a wifi adaptwr?
+[18:32] <adroit_machine> ioria: is there some way I can download all the package file from launchpad and transfer it through pen drive?
+[18:32] <ChogyDan> !offline
+[18:32] <ubottu> If you need to download Ubuntu packages using another machine or OS, check the desired packages in Synaptic and select File > Generate package download script. See also !APTonCD
+[18:32] <ioria> adroit_machine,  if you ask me too much deps : https://packages.ubuntu.com/trusty/network-manager
+[18:33] <adroit_machine> ioria: dependencies?
+[18:33] <ioria> adroit_machine,  yes, i'd configure /e/n/interface
+[18:33] <glitsj16> adroit_machine: do you have a live CD/USB you can boot into?
+[18:33] <ChogyDan> adroit_machine, if you can run synaptic, you can use that for dependencies
+[18:33] <adroit_machine> yeah glitsj16
+[18:34] <adroit_machine> ChogyDan: I checked synaptic but it isn't showing network manager applet
+[18:35] <glitsj16> adroit_machine: well, boot into that, chroot into your installed ubuntu and fix your system with the info people gave you.. once you've booted, return to the channel and we can guide you properly
+[18:36] <adroit_machine> I will try, glitsj16
+[18:37] <ChogyDan> adroit_machine, i don't understand why you aren't finding network manager.  Are you searching the correct package name?
+[18:37] <adroit_machine> yeah ChogyDan.
+[18:37] <adroit_machine> it is nm-applet, ChogyDan
+[18:38] <adroit_machine> it is not showing up in synaptic
+[18:38] <ioria> adroit_machine,  nm-applet it's not a apckage
+[18:39] <ioria> adroit_machine,  *package
+[18:39] <glitsj16> adroit_machine: nm-applet is part of network-manager-gnome btw
+[18:39] <ioria> adroit_machine,  but plasma-nm it is
+[18:39] <adroit_machine> yeah I can see network-manager-gnome
+[18:40] <ChogyDan> adroit_machine, also try network-manager-applet
+[18:41] <adroit_machine> no ChogyDan. network-manager-applet is not there in synaptic only network-manager-gnome
+[18:41] <glitsj16> adroit_machine: follow ioria, focus on plasma-nm as ^ stated, can you see that?
+[18:41] <immu> so you upgraded from 14.10 to what ? build
+[18:41] <ioria> adroit_machine, you also have unmet deps, so i'am afraid you really need connection .. but who knows ?
+[18:42] <ChogyDan> adroit_machine, well, try selecting plasma-nm, and then following the offline install directions
+[18:43] <adroit_machine> plasma-nm can't be found on synapti
+[18:43] <adroit_machine> synaptic*
+[18:43] <ChogyDan> adroit_machine, you can also grab the packages you need from packages.ubuntu.com  and just keep grabbing dependencies as you see fit
+[18:44] <adroit_machine> ChogyDan: i will try that. but can you tell me what I have to download as the base
+[18:44] <ChogyDan> adroit_machine, you are on kde 14.04?
+[18:44] <adroit_machine> yes ChogyDan
+[18:46] <ChogyDan> adroit_machine, others were saying plasma-nm.  Do you think that isn't it? If you try apt-get install plasma-nm, what happens?
+[18:47] <adroit_machine> ChogyDan: it says package plasma-nm has no installation candidates
+[18:48] <BluesKaj> plasma-nm  is a kde/plasma app
+[18:49] <adroit_machine> BluesKaj: is network manager app for kubuntu 14.04?
+[18:49] <BluesKaj> yes
+[18:50] <BluesKaj> ubuntu and kubuntu both
+[18:50] <adroit_machine> ioria: you were saying i could install network manager app from cache?
+[18:50] <adroit_machine> ok BluesKaj
+[18:50] <ioria> adroit_machine, yes, but you got unmet deps
+[18:50] <ioria> adroit_machine, means broken
+[18:51] <adroit_machine> I could rectify them by downloading package file from a different computer
+[18:51] <adroit_machine> would that work? ioria
+[18:51] <ChogyDan> adroit_machine, you would start here for plasma-nm: https://packages.ubuntu.com/trusty/plasma-nm
+[18:51] <ioria> adroit_machine, maybe it's easier set up /e/n/interface ...
+[18:51] <adroit_machine> ChogyDan: plasma nm is for kubuntu 16.04 BluesKaj told me that
+[18:52] <adroit_machine> I have kubuntu 14.04
+[18:53] <BluesKaj> kubuntu is iubuntu with the kde/plasma desktop environment , not unity or gnome, but theyall use network-manager or network-manager-gnome
+[18:53] <ChogyDan> adroit_machine, the link I gave you is for 14.04 plasma-nm
+[18:54] <adroit_machine> ChogyDan: so I download the plasma-nm app and resolve dependcies one by one?
+[18:54] <BluesKaj> ChogyDan,  why are giving him a kde/plasma app unless he's on kubuntu
+[18:54] <ioria> adroit_machine, cd in /etc/network and backup that file: sudo cp interfaces interfaces.back then copy this (https://askubuntu.com/questions/168687/wireless-configuration-using-etc-network-interfaces-documentation) in interfaces  and reboot ... let's try   no harm
+[18:55] <adroit_machine> ok ioria
+[18:55] <ChogyDan> adroit_machine, that is one way.  It may take a bit of time, but it's hard to say.  You may want to try setting up interfaces first, see if that works
+[18:55] <ioria> adroit_machine,  change accordingly
+[18:55] <ChogyDan> BluesKaj, they said they were on kubuntu 14.04
+[18:55] <BluesKaj> adroit_machine,  try ioria's suggestion , i's aggod one
+[18:55] <adroit_machine> I have time to download the dependencies one by one. i don't want to install kubuntu again, ChogyDan
+[18:57] <ChogyDan> ioria, is it possible to configure wifi directly with:https://unix.stackexchange.com/questions/92799/connecting-to-wifi-network-through-command-line
+[18:57] <ChogyDan> ^ that is iwconfig command.
+[18:58] <spearthistle> Did "sudo chown -R 775 /usr" instead of targetting "/usr/local".  I haven't set a root password.  Do I need to reinstall?  I have a second machine.
+[18:59] <ioria> ChogyDan, sure
+[19:00] <adroit_machine> ChogyDan: how do I run wifi via command line?
+[19:01] <ChogyDan> adroit_machine, either through the link ioria gave you, or the link I gave you.
+[19:06] <glitsj16> spearthistle: chown would error out on that command, are you talking about chmod?
+[19:07] <spearthistle> glitsj16: yes, well spotted, chmod.
+[19:08] <nbusrone> hi again , i have a problem getting info on lsusb on firmware of an external hard drive enclosure.I didn't find any vendor ID or chipset it use.What other option I can find them  ?
+[19:10] <glitsj16> spearthistle: have you tried chmod'ing /usr dirs back to 755 and /usr files back to 644 yet? not sure if that would be possible now with the changes you made, but it's worth a shot before reinstalling.. do you know how to do that?
+[19:10] <BluesKaj> nbusrone, try df -h
+[19:11] <ioria> nbusrone, this one : http://www.orico.cc/goods.php?id=4836
+[19:11] <BluesKaj> to find the drive first, nbusrone
+[19:18] <Beliq> Hi guys, how do run a script on start? I have ipython notebook which I need to run as sudo and I just want to have it run ot start/restart automatically
+[19:20] <ducasse> Beliq: at boot or at login?
+[19:21] <Beliq> ducasse I guess on login, it's ipython notebook server.
+[19:21] <nbusrone> BLueKaj , ioria: Thanks for reading my thread :) https://ubuntuforums.org/showthread.php?t=2365802 but they didn't provide any driver http://www.orico.cc/goods.php?id=4816 .The most I found was by someone who post on a blacklist a uas.conf which I worry it will cause harm to the drive and data.
+[19:22] <ioria> nbusrone, maybe it's not supported on linux ?
+[19:22] <ducasse> nbusrone: try smartctl, it has code for certain usb enclosures
+[19:23] <ducasse> Beliq: which ubuntu?
+[19:23] <ducasse> Beliq: and which desktop?
+[19:24] <Beliq> ducasse no desktop, just terminal
+[19:25] <ducasse> Beliq: do you want it to run even if the user does not log in?
+[19:29] <CHVNX> Anyone using Awesome 4.0 with a cmus display script? If so, I'd appreciate it if you could share your
+[19:29] <CHVNX> code. Looking to pipe cmus-remote info to a wibox, but don't want to reinvent the wheel.
+[19:34] <Beliq> ducasse I don't have other users, it's autologin/key login, sort of virtualbox server. Do I put it bashrc ?
+[19:36] <BluesKaj> nbusrone,  install lshwinfo, then run sudo lshw -businfo
+[19:36] <ducasse> Beliq: there are cleaner ways, depending on which ubuntu this is
+[19:37] <Beliq> ducasse 14.04 LTS
+[19:37] <Beliq> I trusted the trusty one xD
+[19:38] <ioria> Beliq,  have you tried /etc/rc.local ?
+[19:38] <ducasse> Beliq: in that case you could just put it in a bash startup file, inside a check if it is already running
+[19:39] <Richard_Cavell> Hello all.  I'm on Ubuntu 16.04.  I like using VICE, and the version in the repo is 2.4.  Is there a PPA that will allow me to get the very latest VICE version?  (3.1)  I can't find one.
+[19:40] <ducasse> Beliq: rc.local is also good, as it runs at the end of the boot process
+[19:42] <Beliq> ducasse do I add sudo there or just the command
+[19:43] <ducasse> Beliq: don't need sudo for rc.local, it runs as root
+[19:54] <yokowka> hello everysouly! how to clean ubuntu from the "program mess"?
+[19:55] <help321> Hi, I'm trying to install ubuntu. I created a bootable USB through unetbootin for ubuntu 16.04 live x64
+[19:56] <Fahr> Hello all, I am trying to cross-compile some software for arm64 on an amd64 - one of the dependencies is libboost-all-dev. I know there is an arm64 version of this package (https://launchpad.net/ubuntu/xenial/arm64/libboost-all-dev/), but cannot seem to get it installed. I did a dpkg --add-architecture arm64, followed by an apt-get update, but the only libboost-all-dev package I see is the
+[19:56] <Fahr> amd64 one - can anyone tell me what step(s) I am missing here?
+[19:56] <tomreyn> yokowka: what is "the 'program mess'"?
+[19:56] <tomreyn> help321: and?
+[19:56] <nbusrone> ducasse , ioria : I did run on smartctl but it crash and doesn't support on the thread post.
+[19:57] <help321> When I try to boot, I get an error: "Starting init: /bin/sh exists but couldn't execute it (error -8)" and "kernel panic - No working init found". I found this stackexchange thread of someone who looks like they had the same problem https://askubuntu.com/questions/829633/no-working-init-found but I don't understand how it was resolved
+[19:57] <nbusrone> BluesKaj : which info needed on sudo lshw -businfo ?
+[19:57] <help321> I'm almost certain my hardware supports 64 bit...
+=== wlp1s1 is now known as iczero
+[19:59] <yokowka> <tomreyn> not using programs, parts of deleted programs, old installations of the system...
+[20:00] <nbusrone> ducasse , ioria BluesKaj : Sorry got to go , hope you help me out by replying on the thread  https://ubuntuforums.org/showthread.php?t=2365802 . Thank you :)
+[20:01] <tomreyn> help321: what hardware do you have then? most likely, it's just that the usb stick wasn't properly written to, re-do it.
+[20:02] <help321> I've redone it a few different ways with unetbootin. I had 64 bit windows 10 on it previously.
+[20:03] <tomreyn> yokowka: if you would like to uninstall packages you do not need, then uninstall them. if you have remainers of previously installed packages, then purge the packages. i'm not sure what you mean by "old installations of the system".
+[20:03] <tomreyn> help321: i would expect ubuntu 16.04.2 x86_64 to work then
+[20:04] <yokowka> what is the command to purge? how to clean system in synaptic?)
+[20:04] <tomreyn> help321: if you still have windows installed, you could give 'rufus' a try.
+[20:05] <help321> tomreyn: I downloaded the 16.04.2 desktop amd-64 iso. Guessing that's the right one? It also appears that I'm able to boot into the "try ubuntu"? where it doesn't install. And I don't have windows anymore
+[20:05] <tomreyn> yokowka: 'sudo apt-get purge packagename' will delete any remainders (usually configuration files) of the 'packagename' package. i do not know how to do it in synaptic.
+[20:07] <Huskar> can't get audio thru displayport on 17.04 on a amd radeon with open drivers. Does anyone have hints for me to solve this, please?
+[20:07] <tomreyn> help321: you just said you run into a kernel panic before the graphical desktop starts, now you say you can access the desktop fine. so the panic does not alwways happen?
+[20:07] <yokowka> thank you tomreyn
+[20:08] <help321> tomreyn: so in the ubuntu installer, you can choose to install or try ubuntu. Trying ubuntu boots fine. After I go through the installer, reboot, and try to run the new installation, I get the kernel panic.
+[20:10] <help321> tomreyn: I was able to install the 32 bit version of 17.04 earlier today, but then realized I needed the 64 bit version for some of the software I wanted to install, so decided to reinstall.
+[20:13] <hfp> Hi, does Ubuntu 16.04.2 LTS come with Python2 installed by default, or does it only come with Python3? I'm almost certain it used to come with Pythin3 only a while ago but it seems it might have changed.
+[20:14] <cfhowlett> hfp, open a terminal and enter "python" no quotes.  version number will display
+[20:14] <tomreyn> help321: i see, so the installer / live usb stick boots fine but the installation you created on your hard disk (using this 16.04.2 x86_64 installer) does not.
+[20:14] <help321> tomreyn: correct
+[20:15] <hfp> cfhowlett: I don't have a clean install to test with, I was hoping someone here would know off the top of their head
+[20:15] <tomreyn> help321: whats this hardware?
+[20:15] <cfhowlett> hfp Python 2.7.12 (default, Nov 19 2016, 06:48:10)
+[20:16] <hfp> cfhowlett: THanks
+[20:16] <mutante> hfp: 2.7 https://packages.ubuntu.com/xenial/python you can search this stuff on that website
+[20:16] <hfp> mutante: would it tell me if it's install by default on 16.04 server?
+[20:17] <mutante> hfp: not really if it's installed by default, just that it exists and is installable i'm afraid
+[20:17] <tomreyn> help321: also, did the installation succeed without errors?
+[20:18] <mutante> hfp: python3 is ALSO available, using the package name python3   https://packages.ubuntu.com/xenial/python3
+[20:19] <cfhowlett> hfp, I don't recall installing p3 but it is present on my 16.04.
+[20:20] <help321> My motherboard is a gigabyte z87x-ud3h, intel i5 bought 4 yrs ago, gtx 760, and yeah the installation succeeded without errors as far as I know
+[20:20] <mutante> you can have them both installed at the same time.. i think
+[20:20] <toothfairy_> Hi, little bit stuck on permissions ... drwx-w---- 2 www-data mailserver 4096 Jul 15 18:23 tmp ... User postfix and fmaster are member of group mailserver, still I get permission denied when postfix try to deliver email.  maildir access problem for UID/GID=1000/1000: create maildir file /home/fmaster/Maildir/tmp/1500149772.P13203.rose.space: Permission denied   ... UID 1000 =  uid=1000(fmaster) gid=1000(fmaster) groups
+[20:20] <toothfairy_> =1000(fmaster),27(sudo),1001(mailserver) ... Any ideas?
+[20:21] <mutante> toothfairy_: just "w" for the group but no "r" or "x" ?
+[20:22] <toothfairy_> mutante: oops, sounds like it might be the problem .. How do I add r+x for the group on the folder?
+[20:22] <mutante> toothfairy_: the group also needs to be able to read/execute the dir to be able to create a file inside it.. is my idea
+[20:22] <mutante> toothfairy_: chmod g+rx
+[20:23] <toothfairy_> tnx mutante, will try
+[20:23] <help321> tomreyn: My motherboard is a gigabyte z87x-ud3h, intel i5 bought 4 yrs ago, gtx 760, and yeah the installation succeeded without errors as far as I know
+[20:26] <tomreyn> help321: https://askubuntu.com/questions/544419/cant-run-a-fresh-install-of-ubuntu-14-10-shows-kernel-panic suggests it can be a unetbootin related issue. maybe try creating the usb stick by other means. or boot form it now and do the media test first to make sure that's the cause of this problem.
+[20:26] <toothfairy_> mutante: strange still same: warning: maildir access problem for UID/GID=1000/1000: create maildir file... After chmod: drwxrwx--- 5 www-data mailserver 4096 Jul 10 21:03 Maildir
+[20:27] <help321> tomreyn: what do you mean by media test?
+[20:27] <tomreyn> help321: when you start the installer, it shows a menu. this allows you to check the disk (actually the usb stick) for defects
+[20:28] <mutante> toothfairy_: hmm.. then check the next level, one dir up in the tree from this. /home/fmaster/Maildir/tmp/ then /home/fmaster/Maildir/  then /home/fmaster/ ...
+[20:28] <tomreyn> !verify | help321
+[20:28] <ubottu> help321: To verify your Ubuntu ISO image (or other files for which an MD5 checksum is provided), see http://help.ubuntu.com/community/HowToMD5SUM or http://www.linuxquestions.org/linux/answers/LQ_ISO/Checking_the_md5sum_in_Windows
+[20:30] <tomreyn> help321: actually this is the link i mean tto paste (but the other one is also relevant): https://help.ubuntu.com/community/Installation/CDIntegrityCheck
+[20:31] <help321> tomreyn: that makes more sense :P test is running...
+[20:32] <tomreyn> this lists alternative approaches of putting the iso opn the usb stick: https://help.ubuntu.com/community/Installation/FromUSBStick
+[20:32] <toothfairy_> mutante: Really strange, still same ... drwxr-xr-x 3 fmaster mailserver 4096 Jul 15 18:21 fmaster    drwxrwx--- 5 www-data mailserver 4096 Jul 10 21:03 Maildir   drwxrwx--- 2 www-data mailserver 4096 Jul 15 18:23 tmp
+[20:32] <help321> tomreyn: it says "check finished: no errors found" think I'll try an alternative installation method
+[20:34] <toothfairy_> mutante: When I do chown -R fmaster /home/fmaster/Maildir/ it works, but also want the other users in the group to have access
+[20:34] <toothfairy_> else only fmaster will have access and then other processes will fail
+[20:36] <mutante> toothfairy_: in that first thing you pasted, the first one did not have "w" for mailserver group
+[20:37] <tomreyn> help321: hmm well if the stick is fine then it would more likely be some other issue. but maybe a fresh install will help. i suggest that before you reinstall you should overwrite the first megabyte of your HDD with zeroes, to rule out leftover data from a previous installation being reused.
+=== evilnewbie is now known as beaver
+[20:38] <help321> tomreyn: I'm trying to flash the ISO to the usb without unetbootin to see if that fixes it
+[20:40] <tomreyn> help321: i don't think that's the cause of the problems now (since you said the media test succeeded) but it also won't hurt (if you'll do another media test afterwards to rule out reintroducing this issue)
+[20:41] <help321> tomreyn: how do I do that HDD wipe you mentioned?
+[20:41] <toothfairy_> mutante: think that was the proble, thank you!
+[20:42] <tomreyn> help321: dd if=/dev/zero of=YOURHARDDISK bs=1024 count=1
+[20:42] <mutante> toothfairy_: welcome :)
+[20:43] <tomreyn> help321: YOURHARDDISK *may* be /dev/sda , but be sure to check this first so you don't accidentially overwrite some other storage. 'lsblk -o +label' should help identify it.
+[20:58] <help321> tomreyn: creating a usb without unetbootin did the trick. Didn't have to write the zeroes like you mentioned. Thanks for your help
+[21:00] <tomreyn> help321: glad it worked out then.
+[21:03] <Char|ie> Does ubuntu have an app similar to little snitch?
+[21:03] <Char|ie> if an app or rogue program wants to access the net, a dialog would pop up to allow/deny
+[21:04] <Char|ie> I really feel naked without such a prog, I wouldnt know how to set firewall rules to have a similar setup
+[21:04] <Char|ie> can someone point me in the right direction?
+[21:04] <ChogyDan> basically a firewall?
+[21:05] <Char|ie> but I thought firewalls weren't program specific?
+[21:05] <Char|ie> this same rogue prog could use the same port 80 you have allow rules for
+[21:05] <ChogyDan> hmmm, maybe
+[21:06] <ChogyDan> I thought it was program specific, but Im lookin
+[21:08] <Char|ie> I highly doubt it is
+[21:08] <glitsj16> Char|ie: there's opensnitch, but that's still alpha quality and not in the official repos either
+[21:09] <glitsj16> https://github.com/evilsocket/opensnitch
+[21:11] <Char|ie> thanks, yeah Im reading it. NFQUEUE does the heavy lifting apparently
+[21:15] <Richard_Cavell> When I run the w command, I find that there are 2 users currently on my system.  Yet there is only one account.  Can someone clarify?  http://ideone.com/On2ttk
+[21:15] <tripelb> Will Ubuntu 17.04 recognize my older Toshiba laptop wifi? 16 doesn't  Fedora does. I want Ubuntu.
+[21:20] <ChogyDan> tripelb, try liveinstall
+[21:20] <TheOneMenzie> tripelb: Yeah, check the Live image session
+[21:21] <tripelb> What is it? I will go look it up.
+[21:23] <TheOneMenzie> !live | tripelb
+[21:23] <ubottu> tripelb: The Ubuntu Desktop ISO is a "Live" image, which can be run without altering existing files on your hard drive. Especially useful for testing your hardware's compatibility, it also includes an install option.
+[21:24] <mcphail> Char|ie: you can use "firejail" to deny programs access to the network etc
+[21:25] <tripelb> Sorry I didn't make myself clear  after I install the wifi card is dead. Unless I find Ethernet. But that is not easily found.
+[21:25] <TheOneMenzie> tripelb: [ sudo lshw -C network ]
+[21:26] <tripelb> With Ethernet it can go online and find the driver for the wifi hardware.
+[21:26] <ChogyDan> tripelb, you could try the 17.10 live disk.  It should have updated kernel.  Just don't install that
+[21:26] <tripelb> You want to know the hardware? Just a sec.
+[21:27] <mcphail> Char|ie: "firejail --noprofile --net=none /path/to/untrusted/app", for example
+[21:27] <YankDownUnder> tripelb, if 17.04 doesn't "see" your wifi, try 16.04 - it's an LTS release and more support is focused on 16.04. 17.04 is still a transition version.
+[21:27] <tripelb> I have fedora but I forgot my password. I think I have another partition. Rebooting.
+[21:28] <YankDownUnder> tripelb, If you've forgotten your Fedora password, now is a time to learn how to retrieve/reset passwords in linux, don't ya reckon?
+[21:31] <TheOneMenzie> !chroot
+[21:31] <ubottu> A chroot is used to make programs believe that the directory they are running in is really the root directory. It can be used to stop programs accessing files outside of that directory, or for compiling 32bit applications in a 64bit environment - see https://help.ubuntu.com/community/BasicChroot
+[21:31] <tripelb> I could do it... IIR>  mount -o, rw remount /   -- bit I always have to go back to Psychonauts to check it YankDownUnder
+[21:31] <tripelb> PsychoCATS
+[21:31] <TheOneMenzie> [ mount -n -o remount,rw / ]
+[21:32] <tripelb> YankDownUnder: 16.04 didn't that was the problem. I have a LUbuntu partition I don't like well, but I installed it over Ethernet.
+[21:35] <YankDownUnder> tripelb, Make a list of drivers that don't work under Ubuntu. See if there are sources that can be compiled easily enough.
+[21:35] <TheOneMenzie> *hardware that doesn't work
+[21:36] <tripelb> TheOneMenzie: I did it wifi I terrace RTL8188CE 802.11v/g/n  RealTek Semiconductor... Version 01, width 64 bits. Clock: 33HHz.
+[21:36] <YankDownUnder> tripelb, The whole things boils down to this: If Fedora works, and you NEED the machine for work or money, well, use Fedora. If you're "hobby time", then it's a great learning thing to get the sources and learn how to compile drivers - especially if you "want" Ubuntu even though Fedora works. Logic dictates being pragmatic.
+[21:36] <TheOneMenzie> Oh, there's a rtl8188e driver available, but not sure if it's in the kernel.
+[21:36] <TheOneMenzie> My old machine had one
+[21:37] <TheOneMenzie> Or drop Ubuntu into GNOME Boxes or your favourite hypervisor
+[21:37] <tripelb> TheOneMenzie: wifi I terrace >> wifi interface
+[21:38] <tripelb> I haven't complied anything since I was a slip of a girls, ya
+[21:38] <tripelb> YankDownUnder:
+[21:39] <tripelb> Right, I know there is a driver available because when I  Ethernet, it gets installed during installation.
+[21:42] <tripelb> How can I get a driver for fedora let's say  I can use this phone as a hotspot for the kUbuntu partition which has a driver. So I can get the files to the.machine. compiling would be cool. "Compile link and run."  It was 1 statement in a control language that did the job. The system was it JVS? Niw it is an Old old mainframe
+[21:44] <tripelb> TheOneMenzie: I know it is not in the kernel or it would install the driver without Ethernet.
+[21:44] <tripelb> I do that understand Or drop...hypervisor.
+[21:45] <YankDownUnder> tripelb, Hmm...the driver - the directory the driver's support files live in - is there a MAN or INFO text that gives the driver code's home? Iike git or something? Cuz you could hunt down the source that way...
+[21:45] <tripelb> I do NOT u derstand ...
+[21:49] <Melissa_McC> Hey all - I have an nvidia graphics card...and periodically I'm fighting with drivers etc... today upon rebooting - got black screen (flashing cursor left top screen).
+[21:49] <Melissa_McC> Possible an auto-update messed up my graphics drivers...does anyone have the patience to walk me thru a fix?
+[21:53] <tripelb> YankDownUnder: I never conquered the Nvidia drivers problem. I was sitting in on a class in graphics. I could understand the math. I just didn't have open gl.
+[21:54] <tripelb> I am reading re how to install... So I will be out of here for a while. Thanks for steering me. And TheOneMenzie too.
+[21:59] <Melissa_McC> Hey all - I have an nvidia graphics card...and periodically I'm fighting with drivers etc... today upon rebooting - got black screen (flashing cursor left top screen).
+[21:59] <sebsebseb> Melissa_McC: try re installing the driver or re enableing via additional drivers graphical gui
+[21:59] <sebsebseb> Melissa_McC: if it comes up and search for additional drivers
+[22:00] <Melissa_McC> sebsebseb I kinda need help getting there...right now - its only a black screen (with flashing cursor...but not accepting any input)
+[22:00] <Melissa_McC> sebsebseb I don't even have a cmd $
+[22:01] <sebsebseb> Melissa_McC: oh no command prompt might be able to bring that up at leat on the thingey
+[22:01] <Melissa_McC> sebsebseb I tried F1...nothing... but it does go into GRUB on boot....
+[22:01] <sebsebseb> Melissa_McC: ctrl alt f9  maybe theres a way to bring somethng up i dont remeber the keyboard combo
+[22:02] <Bashing-om> Melissa_McC: What results when booting to grub's boot menu -> advanced -> recovery kernel ? // WEhat distro amd release are we working with ?
+[22:02] <sebsebseb> Melissa_McC: yes thats a point try the recovery mode
+[22:02] <sebsebseb> Melissa_McC: should have a option on gfrub
+[22:03] <Melissa_McC> Bashing-om  (BTW Bashing-om - you have helped me before...) "Ubuntu with linux 4.10.0-26 generic)
+[22:03] <Bashing-om> Melissa_McC: Recovery moode uses the kerenl driver . From there we see what can be done for the nvidia driver .
+[22:03] <Melissa_McC> sebsebseb upstart and recovery  modes are there for 4.10...4.4...even 3.16 versions
+[22:04] <sebsebseb> Melissa_McC: and he can again it seems :d  but you can run commads and fix broken packages and such via recovery mode
+[22:04] <Bashing-om> !info linux-image-gemeric zesty
+[22:04] <ubottu> Package linux-image-gemeric does not exist in zesty
+[22:04] <Bashing-om> !info linux-image-generic zesty
+[22:04] <ubottu> linux-image-generic (source: linux-meta): Generic Linux kernel image. In component main, is optional. Version 4.10.0.26.28 (zesty), package size 2 kB, installed size 13 kB
+[22:05] <Melissa_McC> Bashing-om OK - booting into recovery mode...
+[22:05] <sebsebseb> Melissa_McC: you could try booting a older kernel as well which might not have been effected by the faulty nvidia driver
+[22:05] <sebsebseb> but probably was as well
+[22:05] <Melissa_McC> Bashing-om OK - I got the Recovery menu.... you want me to just select "root" ?
+[22:06] <Melissa_McC> sebsebseb ...tried that earlier...didn't change anything by booting older versions
+[22:06] <sebsebseb> Bashing-om: ok you help her/him  ( / it  :d 0
+[22:06] <sebsebseb> )
+[22:06] <Bashing-om> Melissa_McC: "resume normal boot" for now will serve .
+[22:07] <Melissa_McC> bashing-om ... ok its asking "press enter for maintenance or press control-D to continue"
+[22:07] <Melissa_McC> Bashing-om Continue?
+[22:08] <Melissa_McC> sebsebse (BTW:  I'm a dude...but I think that comedienne is hilarious...lol)
+[22:08] <Steve[cloud]> anyone happen to have any idea why my bridge network interface is showing duplicate MACs in the mac table?
+[22:08] <Bashing-om> Melissa_McC: Not seen that .. for just looking/checking  the choice should not matter .
+[22:08] <Steve[cloud]> https://hastebin.com/ijokuyikuk.vbs
+[22:09] <Melissa_McC> Bashing-om OK - we're back to the fuscia colored screen "Recovery Menu"...
+[22:10] <Steve[cloud]> I have a sneaking suspicion that the root of this issue is also why packets arent forwarding properly
+=== deathonater is now known as Smeef
+[22:11] <Melissa_McC> Bashing-om .... it was doing a bunch of stuff....with "OK".....ummm...and apparently its still doing stuff... screen is wonky - half fuscia (pink?)...and black...like 2 processes overlapping
+[22:13] <Bashing-om> Melissa_McC: See if key combo crl+alt+del will reboot . and we do the root access thing // But be very careful . No warning when you are going to destroy the system . You are root and the system will not question any directive .
+[22:15] <Melissa_McC> Bashing-om  OK - I'm not entirely sure how I got here (since the screen looked pretty messed up...but it looks like I'm at root:~#
+[22:15] <Melissa_McC> Bashing-om Can we do stuff from here?
+[22:17] <Bashing-om> Melissa_McC: Yeah '#" is root . All we want to do presently is look and check and see what we will do . with the terninal command ' find / -name "NVIDIA-Linux-*" ' is there any return ?
+[22:18] <Melissa_McC> Bashing-om yes
+[22:20] <Melissa_McC> Bashing-om I have 2 versions 64-367.35.run and 64-346.47.run -- both in my /home/computer/ dir
+[22:22] <Bashing-om> Melissa_McC: Ouch ! .. ok we need networking then to relay info . Do we have networking active ? what results ' ping -c3 ubuntu.com  ' ?? ( else we can tru to get to the login screen and activate a console interface ) . Any yeah .. looks like an update broke that graphic's driver . Obly one reason why no to install the OEM driver  !
+[22:23] <Melissa_McC> Bashing-om Temporary failure in name resolution  (I'm guessing that means netowrking isn't active)
+[22:24] <Melissa_McC> Bashing-om ...and YEAH!  It seems like every month I'm on here begging somone to help me fix this dang Nvidia driver.... (was buying Nvidia a mistake!>!)
+[22:26] <Bashing-om> Melissa_McC: Run these 3 - carefully no errors - commands : ' systemctl enable NetworkManager.service ; systemctl start NetworkManager.service ; ping -c3 ubuntu.com ' .
+[22:27] <Bashing-om> Melissa_McC: I bought a new generation nvidia card - no support at all when I installed a bit back . Best thing I ever did for hardware upgrades - but was a reail to adjust :).
+[22:28] <Melissa_McC> Bashing-om ok the second cmd... actually started the Recovery Menu (pink screen) again....
+[22:28] <Melissa_McC> Bashing-om  Should I select "drop to root shell prompt"...?!?!
+[22:29] <Bashing-om> Melissa_McC: Well ! systemd as I live and learn . so what have we for a terminal now to work with ?
+[22:30] <Bashing-om> Melissa_McC: Yeah , may as well go root again as we will be making changes to the system .
+[22:33] <Melissa_McC> Bashing-om OK - when it came back, I tried Start Network manager...seemed to confuse it...kept going back to the Rocovery  menu...
+[22:34] <Melissa_McC> Bashing-om then I selected drop to shell...and tried the commands again...but again, the second one just keeps taking me back to the pink recovery screen.... so I seleted drop to shell...and tried to ping...but nothing
+[22:34] <Melissa_McC> Bashing-om But at least I'm at a cmd line now...
+[22:36] <Melissa_McC> Bashing-om "Temporary failure in Name Resolution" - each time I try to ping....
+[22:36] <gorbypark> Hi, i'm getting an error about the disk being out of space during install.  I am installing onto a ~500gb partition so it's not actually out of space...
+[22:37] <Bashing-om> Melissa_McC: We got to have networking to fix the driver . // Is there a particilar reason that you are not using the drivers provided in our software repository ? // We will try an alternative to get to a terminal .
+[22:40] <toothfairy_> I have a Maildir/ which receives incoming emails... I would like all incoming files to have the following rights:  -rw-rwx--- 1 fmaster mailserver    ... Any clue?
+[22:41] <Melissa_McC> Bashing-om I dont understand the finer details...smarter brains than mine (right here)...have solved my previous problems by installing those drivers...but approx monthly - something auto-updates...and messes it all up
+[22:42] <sary> Melissa_McC: I suppose you can unistall one or both versions and reboot to fall back to the free driver .. as root $ cd /to/dir/with/NVIDIA.run-file/ # $ bash NVIDIA-CURRENTLY-INSTALLED-VERSION.run --uninstall # $ apt-get purge nvidia* # $ ubuntu-drivers devices # $ apt install xserver-xorg-video-nouveau # $ reboot
+[22:46] <Melissa_McC> sary  OK - I'm following those instructions....
+[22:47] <Bashing-om> Melissa_McC: sary :: +1 .. and also make sure there is no nvidia config file ' ls -al /etc/X11/xorg.conf ' That may have to be removed .
+[22:48] <sary> Melissa_McC: if you only remove of version with .run file , then no need to install the free driver nouveau , i think that's alread installed be default. i don't have Nvidia so!
+[22:48] <hfp> Hi, I think I messed up... I ran apt install with a huge list of packages to compile libguestfs, but it didn't work. I want to undo the packages install. Should I apt remove and whatever is under "The following NEW packages will be installed:
+[22:49] <hfp> " from the last apt install run?
+[22:49] <Melissa_McC> sary do I just select the top *Ubuntu in GRUB?
+[22:49] <Melissa_McC> sary or an Advanced option?
+[22:49] <hfp> I see it removed grub-efi under the packages removed.... I guess I better not reboot until I address that as well
+[22:49] <Melissa_McC> sary too late....
+[22:49] <sary> Melissa_McC: reboot to the default ubuntu.
+[22:50] <hfp> This is the full output: http://termbin.com/w5l9
+[22:50] <Melissa_McC> sary OK - its gone to the black screen (with flashing cursor at top - that isn't really a cursor - since I can't type into it)
+[22:51] <Melissa_McC> sary ...last time I did this - I *think* I found that if I plugged into a different monitor port, there was something there...should I do that?
+[22:52] <sary> Melissa_McC: you can try .. but did you remove the two conflicted nvidia drivers or only one!
+[22:53] <Melissa_McC> sary only one....but it did say i  have the latest nouveau
+[22:54] <Melissa_McC> sary looking like it was just hanging...so I rebooted....
+[22:54] <glitsj16> hfp: whow, that's quite a pickle you've landed in.. this might be a good time to use your backup/restore plan..
+[22:56] <hfp> glitsj16: which of course I don't have because I could never get djadup to work :)
+[22:56] <hfp> The machine is still running (haven't rebooted yet), is there any way I can salvage my config, reinstall, and reimport my settings?
+[22:57] <oerheks_> hfp, just hit 'n'
+[22:58] <hfp> oerheks_: oh it's too late, I hit Y, it ran for a few minutes, then prompted me about where it should install the new GRUB. That's when I thought "hmmm this sounds like a bad idea after all, how do I undo it all"
+[22:59] <ChogyDan> hfp, reinstall?
+[23:00] <hfp> sure, but I want to keep my settings. Should I backup /home/hfp and copy it over to the new install?
+[23:00] <ChogyDan> hfp, no, what were you doing when you hit y?
+[23:01] <ChogyDan> I missed earlier, just curious.  If you were doing anything that redid partitions, you might be in trouble
+[23:02] <hfp> i was trying to build a more recent version of libguestfs... which requires a ton of packages to be installed. so i tried to do that, and didn't notice it would remove grub-efi and friends to replace it with grup-pc
+[23:02] <hfp> grub*
+[23:02] <oerheks_> you still can backup important data
+[23:02] <glitsj16> hfp: smart move not to reboot now.. let's try to put together a recovery plan.. according to your paste it actually removed only 4 packages, so things might look worse than they are.. by all means, yes, copy out your important files first
+[23:02] <oerheks_> * in this session
+[23:03] <ChogyDan> hfp, can you reinstall grub-efi?
+[23:03] <hfp> ChogyDan: well idk at that point, I dont't want to make it worse and I think grub-pc is still there
+[23:03] <hfp> oerheks_: I will make an archive of my /home/myuser
+[23:04] <oerheks_> grub-efi-amd64 grub-efi-amd64-signed are removed..
+[23:04] <oerheks_> reinstall grub would do, i guess
+[23:04] <Melissa_McC> sary ...ok just out of the blue (while I was cd'ing to the dir where the drivers are)...it suddenly says "Do you want to start the upgrade?  27 packages are going to be upgraded....66.6M - this download will take 8 mins with a 1Mbit DSL..."
+[23:05] <ChogyDan> hfp, ya, backup /home   and then you can reinstall the packages, and maybe run boot-repair
+[23:05] <Melissa_McC> sary Continue YN...Details (D).... and now it looks like I have a cmd prompt  - but when I type nothing happens
+[23:06] <ChogyDan> Melissa_McC, bg
+[23:06] <ChogyDan> or no, I forget the command
+[23:06] <ChogyDan> fg
+[23:07] <Melissa_McC> ChogyDan ?
+[23:08] <ChogyDan> Melissa_McC, are you on a terminal?
+[23:08] <sary> Melissa_McC: upgrade offered by apt! you logged in as root from recovery ..!
+[23:09] <sary> which screen menu are on now.. did you reach to a working desktop seassion!
+[23:10] <hfp> glitsj16: luckily everything is my home dir so I'm making a tar of that, then I'll try to reinstall the grub-efi packages as oerheks_ suggested... and then boot-repair. then I'll reboot and see what happens I guess it's the best course of action?
+[23:10] <ChogyDan> hfp, boot-repair is the best course right now, since that is the standard fix for messing up grub.  But if you plan on reinstalling, backing up /home is important too
+[23:11] <Melissa_McC> sary  is that a good thing  :/
+[23:11] <sary> Melissa_McC: it depends .. what is it!
+[23:12] <Melissa_McC> sary and since it looks like its a flashing cursor...but I can't type anything...should I assume its working in the background (and I shouldn't hit the power key?!)
+[23:12] <glitsj16> hfp: yes i followed your thread and oerheks's suggestion is the thing to do
+[23:12] <hfp> ChogyDan: I want to back it up because i'm pretty sure it won't reboot as it is now. then i'll remove grub-pc and reinstall grub-efi & friends, then i'll run boot-repair
+[23:13] <ChogyDan> hfp, boot-repair will try to do all the reinstall for you
+[23:13] <ChogyDan> !grub
+[23:13] <ubottu> GRUB2 is the default Ubuntu boot manager. Lost GRUB after installing Windows? See https://help.ubuntu.com/community/RestoreGrub - For more information and troubleshooting for GRUB2 please refer to https://help.ubuntu.com/community/Grub2
+[23:13] <hfp> good to know ChogyDan thanks
+[23:13] <sary> Melissa_McC: Yes, if it's updatin; don't interrupt the upgrade .. give it some time.
+[23:13] <ChogyDan> hfp, it is under the restoregrub link
+[23:13] <hfp> alright everyone, i'll eat something and pray the gods. then i'll attempt and see what happens, i'll keep you updated
+[23:15] <sary> Melissa_McC: lets get you back to a workin' desktop seassion .. did you removed the second nivida driver like the first one?
+[23:16] <Melissa_McC> it won't let me type anything....
+[23:16] <Melissa_McC> sary It LOOKS like its flashing and ready for cmds...but when I type nothing shows
+[23:17] <sary> Melissa_McC: oky at which menu you're logged in now , recovery mode or the normal mode!
+[23:18] <Melissa_McC> I think its recovery mode...
+[23:18] <Melissa_McC> sary when I F4 the screen is black with cursor empty but flashing top left.... and when I F1 I'm here in this cmd screen
+[23:20] <sary> are you logged in as root or your user when you swtich to a virtual console with CTrl+Alt+F6 ?
+[23:21] <sary> Melissa_McC: and what happens if you switch to the desktop login screen by pressing Ctrl+Alt+F7 ?
+[23:21] <Melissa_McC> alt F6 just takes me to that black screen.... I don't even think its logged into anything!  Just looks locked
+[23:21] <Melissa_McC> sary and ctl alt F7 does nothing
+[23:22] <ChogyDan> they may not be running
+[23:22] <Melissa_McC> sary ctl alt F1 is the only one that (was) working...although now its either stuck (or upgrading in the background)
+[23:23] <Melissa_McC> sary  been awhile..time to kill it yet?
+[23:24] <sary> Melissa_McC: well, go for it.
+[23:24] <Melissa_McC> sary - OK this time I boot - what do you think I should do?
+[23:25] <Melissa_McC> sary normal boot?   Advanced?
+[23:25] <sary> Melissa_McC: if you removed the other nvidia driver , i say go for a normal boot .. lets see if you get to the desktop with the free driver!
+[23:26] <Melissa_McC> sary I don't think I did....but I'll try normal right now....see what happens
+[23:39] <electricmilk> Hi. I'm installing Ubuntu (16.02.2 LTS) on another machine and want to install the same packages.  Do I just run apt list --installed > file.txt ?  How do I install those aps from that list?
+[23:41] <oerheks_> apt-clone is a nice way
+[23:41] <oerheks_> !clone
+[23:41] <ubottu> To replicate your packages selection on another machine (or restore it if re-installing), you can use the !software package "apt-clone" - See also !automate
+[23:46] <PipeItToDevNull> electricmilk, or use your method and then `apt install $(cat file.txt)`
+[23:48] <Melissa_McC> sary ok - I need a break from this thing...will check in later

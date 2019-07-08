@@ -1,0 +1,1500 @@
+[02:51] <Seveas> pfp, better use shutdown...
+[02:51] <Ironfrost> thanks both of you
+[02:51] <HawkeVIPER> pfp, halt/reboot is insecure
+[02:51] <Ironfrost> I'll make a shortcut to that and just use that to shutdown
+[02:51] <Ubuntian> i3dmaster, oh thanks a lot i was wondering what the difference was
+[02:51] <pfp> hmm, afaik halt uses shutdown (?)
+[02:51] <Seveas> pfp, yes, so why use halt :)
+[02:52] <Seveas> Ironfrost, use gksudo then
+[02:52] <shanon> Is any one here using ffmpeg for encoding ?
+[02:52] <pfp> shorter, and it sounds good :)
+[02:52] <Ng> HawkeVIPER: how are they insecure?
+[02:52] <HawkeVIPER> pfp, only if the runlevel !=0/6
+[02:52] <Seveas> HawkeVIPER, ubuntus default runlevel is 2
+[02:52] <HawkeVIPER> maybe these days they're ok
+[02:53] <Ironfrost> Seveas - gksudo?
+[02:53] <HawkeVIPER> back in the day, calling them directly was bad
+=== huerlisi [~shuerlima@212-41-113-251.adsl.solnet.ch]  has joined #ubuntu
+[02:53] <Ironfrost> (I've still got a lot to learn about Linux)
+[02:53] <Seveas> Ironfrost, GUI for sudo
+[02:53] <Ironfrost> OK, thanks!
+[02:53] <pfp> HawkeVIPER: but 0 and 6 are halt/reboot, so you cant run anything in them anyway
+=== xsdg_ is now known as xsdg
+=== xsdg [xsdg@xsdg.staff.freenode]  has joined #ubuntu
+=== Ironfrost [~adsfkjask@82-36-124-129.cable.ubr04.king.blueyonder.co.uk]  has left #ubuntu []
+=== Chameleon22 [~Chameleon@60-240-237-137-vic-pppoe.tpgi.com.au]  has joined #ubuntu
+=== Jonex [~Jonex@217.145.28.242]  has joined #ubuntu
+=== din [~din@24.144.4.35]  has joined #ubuntu
+=== shinu_ is now known as shinu
+=== afonit [~afonit@199.72.169.10]  has joined #ubuntu
+[02:55] <Jonex> If I have ideas on how to inprove the installations interface, would anyone bother to care?
+[02:56] <Hatred> lol
+=== deng [~virtuaL@218.111.55.185]  has joined #ubuntu
+[02:56] <kev0r> for ((i="00";i<10;i++));do echo $i;done
+[02:56] <kev0r> this line boosts 0-9 on screen
+[02:56] <kev0r> how can i make it do 00-09?
+[02:56] <kev0r> so if i do i<50 it echos 00-50
+[02:57] <kev0r> 49 even
+[02:57] <kev0r> OBO's suck ;)
+=== tuppa [~tuppa@c211-30-44-38.mirnd1.nsw.optusnet.com.au]  has joined #ubuntu
+[02:57] <pfp> kev0r: use printf instead of echo
+[02:57] <tuppa> thom: around?
+[02:58] <tuppa> or anyone knows about acpid and acpi-support
+[02:58] <reka> hello.  on boot-up, a check of the root filesystem was done (i had that countdown that tells you it will check in 'x' mounts) and errors were found. i ran fsck. and a lot of errors were found.  i said yes to all the fixes and everything seems normal.  question: why did it find errors?  afaik, i haven't done anything risky (haven't updated kernel or anything).
+[02:58] <reka> background: i reinstalled ubuntu about 3 weeks ago becuase dpkg, among other things was borked.  i was prompted to run fsck on bootup, and i said yes to all the fixes.  upon loading gnome however, nautilus sorted my folders strangely, so i just reinstalled to fix everything.  so the system now should be clean.  i don't understand [1]  why i needed to fsck in the first place. [2]  where the errors are coming from
+=== spacey [~spacey@145.33.144.151]  has joined #ubuntu
+[02:58] <kev0r> pfp, does not matter
+[02:58] <kev0r> only difference is that printf  does same as echo -n
+[02:58] <tuppa> can anyone suspend with mysqld running?
+[02:59] <deng> have error screen when starting ubuntu
+[02:59] <deng> ihave error screen when starting ubuntu
+[02:59] <tuppa> it seems like despite mysql is in STOP_SERVICES in /etc/default/acpi-support, mysqld doesn't seem to die
+[02:59] <tuppa> yet if I do as prepare.sh says (invoke-rckd mysql stop), mysql stops properly
+=== bowman^2 [johanf@h5n1fls308o1120.telia.com]  has joined #ubuntu
+[03:00] <pfp> kev0r: you need to specify a format string, man printf
+[03:00] <Seveas> reka, it sounds like your disk is falling apart
+[03:01] <kev0r> pfp: i'm not using it to echo, i'm using it to unrar multiple files
+[03:01] <Seveas> reka, that answers both [1]  and [2]
+[03:01] <reka> Seveas: thanks for the reply.  hmm, that's not good :-(
+[03:01] <kev0r> so just need the var $i itself to be 2 chars
+=== reka makes a note to backup his data soon
+[03:01] <Seveas> reka, make that NOW instead of soon :)
+[03:02] <pfp> reka: or some trouble with the chipset  / ide drives / ram
+[03:02] <reka> pfp: well, that narrows it down. :-/
+[03:02] <reka> :-)
+=== nalioth_zZzZzZzZ is now known as nalioth_wrkn
+[03:02] <pfp> kev0r: then why not something like for i in *.rar ; do rar x "$i" ; done
+=== jono [~jono@193.60.136.66]  has joined #ubuntu
+[03:03] <jono> hi all
+[03:03] <pfp> reka: yeah :) :(
+[03:03] <jono> how can I format my iriver to vfat?
+[03:03] <kev0r> pfp: that seems prety usefull :P
+[03:03] <kev0r> haha
+[03:03] <deng> hi jono
+[03:03] <Seveas> jono, mkfs.vfat /dev/your_iriver_disk
+[03:03] <reka> damn it.  well i'm not going back to *that* computer dealer.
+[03:04] <deng> i try to run mirc with ubuntu but i have lagg ... i use winehq for running mirc applications
+[03:04] <jono> hi deng
+[03:04] <pfp> kev0r: or something like rar x file`printf "%0d" $n`.rar
+[03:04] <jono> Seveas, cheers
+[03:05] <pfp> jono: if you want fat32 (large disk), mkfs.vfat -F 32 /dev/yourdisk
+=== ealden is now known as ealden|dinner
+=== makoto [~pablo@toronto-HSE-ppp3951085.sympatico.ca]  has joined #ubuntu
+[03:05] <jono> Seveas, should I unmount the disk first?
+=== orospakr [~orospakr@ip-182.81.126.206.dsl-cust.ca.inter.net]  has joined #ubuntu
+[03:06] <goye2cz> seveas: I ran that command... the mount one. Was I supposed to replace "somwhere" with somethign else?
+[03:06] <makoto> Is anyone able to help me in KDE here? Kubuntu is dead silent....
+[03:06] <pfp> jono: yes
+=== rickie [~rickie@86.112.34.215]  has joined #ubuntu
+[03:07] <deng> anyone running mirc ubuntu here..
+[03:07] <rickie> mIRC Ubuntu?
+[03:07] <rickie> I thought it was windows only?
+[03:07] <kev0r> mIRC is a windows prog right, it's runnable under Wine
+[03:08] <Hatred> deng- you mean running mirc under wine in ubuntu ??
+[03:08] <kev0r> but still
+[03:08] <jono> Seveas, should it only take a few seconds
+[03:08] <Siropel> is ubuntu suitable for a server ? ...
+[03:08] <deng> ye Hatred
+[03:08] <rickie> lads, i can't get http://www.ubuntuguide.org/#codecs to work
+[03:08] <Vjaz> why on earth would anyone want to run mIRC (on Ubuntu)?
+[03:08] <Hatred> deng- yea, i can use mirc under wine without any issues
+[03:08] <Hatred> oh
+=== martinhj [~martinhj@host-81-191-103-214.bluecom.no]  has joined #ubuntu
+[03:08] <rickie> when i try the gstreamer lame thing i get an error
+[03:08] <Hatred> i can't open the remotes windw
+[03:08] <deng> but i have lagg when i connecting it
+=== Fleck [~Fleck@2001:618:400:d782:211:11ff:febc:4fc1]  has joined #ubuntu
+[03:09] <Vjaz> Siropel: Well yes you can use Ubuntu for a server, but I would probably recommend vanilla Debian for servers.
+=== leonel [~leonel@201.135.55.161]  has joined #ubuntu
+=== ilba7r [~ilba7r@d141-64-4.home.cgocable.net]  has joined #ubuntu
+[03:10] <Siropel> Vjaz i`m talking about a router for let`s say 25 computers ... routing with iptables
+=== seby [~seby@p54A24BE2.dip.t-dialin.net]  has joined #ubuntu
+=== jind [~jind@216-220-56.7002.adsl.tele2.no]  has joined #ubuntu
+[03:11] <pfp> debian tends to have older s/w, but maybe it's not an issue for a router
+[03:11] <jind> Is there a startup script I can use to put som custom boot stuff in Ubuntu?
+[03:12] <steven> jind, update-rc.d ?
+[03:12] <reka> rickie: what problems are you having?
+[03:12] <Siropel> jind just make a bash script and ad it to rc.d
+[03:12] <jind> rc.d alright
+[03:12] <Siropel> jind i`ll help you if you want
+[03:12] <steven> siropel, it's not for fun guys have developed the update-rc.d
+[03:12] <rickie> Errors were encountered while processing:
+[03:12] <rickie>  /var/cache/apt/archives/liblame0_3.96.1-1_i386.deb
+[03:12] <rickie> E: Sub-process /usr/bin/dpkg returned an error code (1), that's what i get in terminal when i try it
+[03:12] <Seveas> jind, /etc/init.d/bootmisc.sh
+[03:13] <jind> I just need a fast way to add echo 1024 > /proc/sys/dev/rtc/max-user-freq to the boot :-)
+[03:13] <pfp> jind: make a script in /etc/init.d/myfoo and use update-rc.d to create a symlink from rc2.d to it
+[03:13] <steven> seveas, you still need to install thta script
+[03:13] <steven> else it won't run
+[03:13] <Seveas> steven, no
+[03:13] <Seveas> bootmisc.sh is already there
+[03:13] <jind> Alright. I'm new with debian/ubuntu. I am used to /etc/rc.local :-)
+=== swarms [~swarm@host80-151.pool80181.interbusiness.it]  has joined #ubuntu
+=== BockBilbo [~Bock@85.84.43.70]  has joined #ubuntu
+[03:14] <reka> rickie: what command produces that?
+[03:14] <rickie> sudo apt-get install gstreamer0.8-lame
+=== tekkah [~tekk@209.213.64.215]  has joined #ubuntu
+=== swarms is now known as swarm
+=== mgalvin [~mgalvin@host-66-202-95-170.spr.choiceone.net]  has joined #ubuntu
+[03:15] <reka> mhmm, i think the lame package has been removed from the repos
+[03:15] <reka> unless it's in marillat
+[03:16] <jind> Am i supposed to use bootmisc.sh? Or should I leave it alone and make a new script?
+[03:16] <reka> rickie: do you actually need it?
+[03:16] <steven> reka, you won't find it in hoary
+[03:16] <Seveas> reka, it's in multiverse
+=== TheNose [~TheNose@p83.129.199.239.tisdip.tiscali.de]  has joined #ubuntu
+[03:16] <BockBilbo> hello
+[03:16] <rickie> Reka: any other way i can get media files working without those?
+[03:16] <Seveas> steven, you will
+=== rickie is now known as Rickie
+[03:16] <BockBilbo> does anyone know where does mysql save its databases in the disk?
+[03:16] <TheNose> hi
+[03:16] <reka> Seveas: hmm, i have multiverse enabled.
+[03:16] <Seveas> jind, you can use both
+[03:17] <Seveas> dennis@vsl1:~$ apt-cache policy lame
+[03:17] <Seveas> 500 http://nl.archive.ubuntu.com hoary/multiverse Packages
+[03:17] <steven> seveas, ah, is there somekind of definitions on what multiverse, universe is?
+=== xxenon [xxenon@81.13.238.141]  has joined #ubuntu
+[03:17] <pfp> BockBilbo: /var/lib/mysql/
+[03:17] <TheNose> respect! ubuntu is so great! just installed it tody!
+[03:17] <xxenon> hi
+[03:17] <Seveas> steven, www.ubuntulinux.org/ubuntu/components
+[03:17] <xxenon> how do I prevent linux-image-*.deb to touch my grub.conf ?
+[03:17] <BockBilbo> pfp, will it backaup the whole server if i save that directory?
+[03:17] <Seveas> xxenon, you can't...
+[03:17] <BockBilbo> im chaging my server pc
+[03:17] <xxenon> excellent...
+[03:17] <BockBilbo> ...
+=== TheNose [~TheNose@p83.129.199.239.tisdip.tiscali.de]  has joined #ubuntu
+[03:18] <reka> Rickie: you pretty much only need w32codecs (video) and gstreamer0.8-mad (mp3 support in totem) .  you can ditch the gstreamer ones if you install a seperate music player like beep-media-player
+[03:18] <Seveas> xxenon, why would you want that, updating grub is very useful...
+[03:18] <steven> seveas, thanks!
+[03:18] <Seveas> BockBilbo, see the upgrade notes on the mysql site
+[03:18] <hondje> I bet he could chmod a-x `which update-grub`
+[03:18] <Seveas> a-w
+[03:18] <pfp> BockBilbo: hmm, i've used mysqldump command
+[03:18] <Seveas> ehm yeah, for update grub :)
+[03:18] <hondje> :)
+[03:18] <BockBilbo> Seveas, im not upgrading mysql
+[03:18] <Seveas> but that will cause dpkg to fail
+=== Triffid_Hunter [~Splat@funkmunch.net]  has joined #ubuntu
+[03:18] <xxenon> Seveas - the thing, I need to add  a particular boot option to my kernel
+=== Gesu`` [~kentoo@host241-170.pool80116.interbusiness.it]  has joined #ubuntu
+[03:19] <BockBilbo> im chaging my computer
+[03:19] <Seveas> BockBilbo, i meant migration notes :)
+[03:19] <hondje> oh yes, that it would
+[03:19] <Seveas> xxenon, you can add that in the default options
+[03:19] <xxenon> Seveas - the parameter is for one kernel only.
+[03:19] <Seveas> there's a line that stats with #kopt, change that
+[03:19] <BockBilbo> i seee
+[03:19] <Seveas> xxenon, ahh..
+[03:19] <Seveas> well, put that kernel outside the automagic kernel list then :)
+[03:20] <xxenon> yeah ..
+[03:21] <Seveas> xxenon, you can also replace /sbin/update grub with a simple shell script that does nothing :)
+=== sinnlos [~sinnlos@217-68-167-72.cable.primacom.net]  has joined #ubuntu
+[03:21] <Seveas>  /sbin/update-grub
+[03:21] <sinnlos> hi
+[03:22] <xxenon> Seveas - :)
+[03:22] <xxenon> why not.
+=== flodine [~flodine@c-24-4-174-71.hsd1.ca.comcast.net]  has joined #ubuntu
+[03:22] <sinnlos> know anywhere goot servers where i can apt-get using to become mplayer ?
+=== ealden|dinner is now known as ealden
+[03:23] <Seveas> sinnlos, deb http://archive.ubuntu.com/ubuntu hoary multiverse
+[03:23] <sinnlos> so easy ?
+[03:23] <Seveas> sinnlos, ja
+[03:23] <sinnlos> german ?
+[03:23] <Seveas> sinnlos, nein, hollndisch
+[03:24] <sinnlos> ist ja das selbe lol
+[03:24] <Seveas> but i'm playing german music now ;)
+[03:24] <sinnlos> :)
+[03:24] <Seveas> Rammstein - Los (inspiriert vin deine nickname ;))
+[03:24] <xxenon> haha Rammstein
+[03:24] <sinnlos> macht es was wenn ich nicht hoary hab sondern eineltere version ?
+[03:24] <Seveas> sinnlos, do hast warty noch?
+[03:24] <sinnlos> ja
+[03:24] <sinnlos> schlimm ?
+=== chrissturm [~chris@83-65-247-211.dynamic.xdsl-line.inode.at]  has joined #ubuntu
+[03:25] <theD3viL> Which programm can be used for net limmiter ?
+[03:25] <Seveas> hmm, dan musst du marillat bentzen
+[03:25] <sinnlos> miri was ?
+[03:25] <Seveas> oder upgraden nach hoary
+[03:25] <sinnlos> wie geht upgraden ?
+[03:25] <chrissturm> #ubuntu-de ?
+=== lurah|off is now known as lurah
+=== _4strO [~astro@AStrasbourg-251-1-49-120.w82-126.abo.wanadoo.fr]  has joined #ubuntu
+[03:26] <Seveas> sehr einfach, nur ein kommando auf der kommandozeiele on 600 MB downloaden ;)
+[03:26] <Seveas> sinnlos: One-line upgrade: sudo sed -e 's/warty/hoary/' -i /etc/apt/sources.list && sudo aptitude update && sudo aptitude dist-upgrade
+[03:26] <Seveas> chrissturm, that channel has been reported to be quite empty...
+=== toran [~me@d6-75.rb3.clm.centurytel.net]  has joined #ubuntu
+[03:26] <sinnlos> well are there problems with ati ?
+=== exwindowsuser [~exwindows@65.173.12.60]  has joined #ubuntu
+=== mgalvin [~mgalvin@host-66-202-95-170.spr.choiceone.net]  has left #ubuntu ["Leaving"]
+[03:27] <sinnlos> or knows anywhere of this ?
+[03:27] <Seveas> sinnlos, if you have the restricted-modules package installed, it will upgrade the ati drivers too
+=== Seveas has an ati card
+[03:27] <chrissturm> seveas: its not empty at all
+=== magog [~magog@68-168-15-129.miamfl.adelphia.net]  has joined #ubuntu
+[03:27] <sinnlos> i have a radeon 9200se (PCI)
+[03:27] <Seveas> chrissturm, ah, is there activity too or just idle people?
+[03:27] <sinnlos> and i will 3d using like here
+[03:28] <Seveas> sinnlos, that'll work well with the restricted-modules driver
+[03:28] <chrissturm> seveas: schaut schon aktiv aus :)
+[03:28] <sinnlos> well == good ?
+[03:28] <Seveas> sinnlos, ja
+[03:29] <sinnlos> super
+=== CarlFK [~CarlK@c-67-163-11-11.hsd1.il.comcast.net]  has joined #ubuntu
+[03:29] <sinnlos> upgrade runing .....
+[03:29] <Seveas> sinnlos, und in #ubuntu-de kansst du mehr deutschsprchige hilfe finden :)
+[03:30] <sinnlos> is mir relativ egal welche sprache ;) kann mich auch mit englisch anfreunden
+[03:30] <jind> root@ras:/etc/init.d # update-rc.d -n ruben start 99 2S  <- what am I doing wrong here?
+[03:30] <shanon> hmmmm itt is a little anoying that ubuntu compiles programs without restricted formats enabled (eg xvid).
+[03:30] <Seveas> shanon, well, there's a good reason for it (legal issues)
+[03:31] <Eighth> i think it's a copyright CYA thing on their part
+[03:31] <shanon> Hmmmm.
+[03:31] <Seveas> jind, read the manpage...
+[03:31] <jind> I do
+[03:31] <chrissturm> shanon: in the marillat repo you will find versions with restricted formats enabled
+[03:31] <Seveas> the syntax is quite different
+[03:31] <reka> ignorant question: do other distros provide out of the box mp3/video codecs?
+[03:31] <chrissturm> reka: no free ones
+[03:31] <shanon> chrissturm: How do I enable that
+[03:32] <chrissturm> reka: its legally impossible
+[03:32] <Seveas> jind        Equivalent command using explicit argument sets:
+[03:32] <Seveas>           update-rc.d foobar start 20 2 3 4 5 . stop 20 0 1 6 .
+[03:32] <Turoq> hmm i have cedega and cs works perfectly in it
+[03:32] <Turoq> but
+[03:32] <Turoq> i dont hear any sounds
+[03:32] <jind> Ah. Thanks. I read the utdate-rc.d --help here
+[03:32] <Turoq> also quake3 and i hear no sound
+[03:32] <Turoq> but in warcraft 2 i hear sounds
+[03:32] <Seveas> Turoq, either kill esd or teach cedega/quake to use it
+[03:32] <Rickie> Isn't there a native version of Quake3 for Linux anyway?
+[03:32] <Turoq> i killed esd
+[03:33] <Turoq> but still no sound
+[03:33] <reka> chrissturm: wow ok.  i was a mandrake user before and only used it for programming etc. so you'll forgive my ignorance about the multimeda side.
+[03:33] <Turoq> i know
+[03:33] <Turoq> i play native version
+[03:33] <Turoq> but no sound :S
+[03:33] <Turoq> in warcraft 2 there was sound
+[03:33] <Rickie> oO
+[03:33] <Turoq> but in cs = no sound
+[03:33] <reka> Rickie: yes there is
+[03:33] <Turoq> dont get this :S
+[03:33] <Seveas> Turoq, look at the HoarySondProblems page on the wiki
+[03:33] <chrissturm> shannon, reka: add this to /etc/apt/sources.list: deb ftp://ftp.nerim.net/debian-marillat/ unstable main
+[03:33] <Turoq> ok i try
+[03:33] <Seveas> chrissturm, NO!
+[03:34] <Seveas> unstable should NOT be used with hoary
+[03:34] <theD3viL> How to play wma files in xmms ?
+[03:34] <Seveas> even stable is bad now sarge is released
+[03:34] <chrissturm> seveas: really? what would you recommend?
+[03:34] <reka> chrissturm: yes, i've sorted out my ubuntu system for mmedia thanks.  i just did'nt understand the legality side of it.
+[03:35] <Seveas> chrissturm, well, selective downloading can be ok, but lots of packages can cause dependency problems
+[03:35] <Eighth> what is gdm's equivalent to xdm's /etc/X11/xdm/Xservers ?
+[03:35] <Hylas> has ubuntu stopped their free postage?
+[03:36] <Rickie> Meh, xmms and BPM crash when i try to play music, Amarok 'plays' it but i can't hear anything (The visulizations move and such),  is it somthing to do with my gstreamer settings?
+=== ffm [~ffm@12.23.248.179]  has joined #ubuntu
+[03:37] <reka> Rickie: change the output plugin to esound
+[03:37] <reka> in xmms or bmp
+[03:37] <Seveas> in ~/.xmms/config or ~/.bmp/config
+[03:38] <reka> through preferences might be easier.
+=== huerlisi [~shuerlima@212-41-113-251.adsl.solnet.ch]  has joined #ubuntu
+[03:38] <Rickie> Woo!, thanks :)
+[03:40] <shanon> I just had a look on the ubuntu guide and it now says to use the backport repos
+[03:40] <Seveas> ubuntuguide is bad
+[03:40] <shanon> Does anyone know what these are ?
+[03:40] <Seveas> backports are worse :)
+[03:40] <reka> shanon: yep, a lot of people have problems with that site.
+[03:40] <shanon> Seveas: Excellent!
+[03:40] <reka> shanon: what are you trying to do?
+=== keffo [~keffo@user150.82-197-233.netatonce.net]  has joined #ubuntu
+[03:41] <shanon> reka: I need ffmpeg with xvid and mp3 enabled but the standard one doesn't come with them enabled
+=== ABPSoft [beck@momo.ibh.net]  has joined #ubuntu
+=== shock [~shockwave@dsl-082-082-155-209.arcor-ip.net]  has joined #ubuntu
+[03:41] <ABPSoft> Hi
+[03:42] <shanon> I can just build it from source but then it is not managed for upgrades etc...
+=== Elyseum [~Elyseum@d5153EF05.access.telenet.be]  has joined #ubuntu
+[03:42] <reka> shanon: ah, ok. i never used ffmpeg.
+[03:42] <Seveas> shanon, you could use apt-get source ffmpeg, change the makefiles and use dpkg-buildpackage
+=== Zet [zet@blue.zerodistance.fi]  has left #ubuntu []
+[03:43] <shanon> Seveas: Hmmm that sounds interesting. What will happen when a new version is available ?
+[03:43] <ABPSoft> Anyone here knows how the LiveCD gets dm-snapshot over cloop?
+=== cart [~samuel@200.150.139.248]  has joined #ubuntu
+=== r0bby__ [~rob@cpe-204-210-133-115.hvc.res.rr.com]  has joined #ubuntu
+=== r0bby__ [~rob@cpe-204-210-133-115.hvc.res.rr.com]  has left #ubuntu []
+[03:44] <Seveas> it will be upgraded, so you will lose the divx etc... again but you can again do the apt-get source trick
+=== something_else [~something@82-35-42-201.cable.ubr02.camd.blueyonder.co.uk]  has joined #ubuntu
+[03:44] <ABPSoft> I've tried that myself and cloop just shredders most of the data
+[03:44] <Seveas> ABPSoft, maybe the livecdcustomizationhowto page can shed some light
+=== beyond [~beyond@200-171-140-32.dsl.telesp.net.br]  has joined #ubuntu
+=== zeuclas [~chatzilla@84.5.254.154]  has joined #ubuntu
+[03:45] <ABPSoft> Seveas: No, it doesn't really
+[03:45] <shanon> So apt-get source ffmpeg .. change ... then dpkg-buildpackage ffmpeg ?
+[03:45] <ffm> hey all, anyone know an easy command-line email program, preferably one I can get with apt-get?
+[03:45] <Seveas> no just dpkg-buildpackage
+[03:45] <ABPSoft> Seveas: It doesn't give a hint where I may find the patch that Ubuntu apparently uses to get a working cloop into the kernel
+[03:45] <shanon> Seveas: How does it know which package to build ?
+[03:45] <Seveas> in the directory where you type apt-get source (or where you moved the sources to)
+[03:45] <olorin> ffm: email program ?
+[03:46] <shanon> ah I see
+[03:46] <ffm> Yeah, where I can send automated emails from my linux serer to my workstation
+[03:46] <Seveas> ABPSoft, hmm, maybe in ubuntu-kernel-patch oslt
+[03:46] <olorin> ffm: mail (sendmail) , mutt, pine ...
+[03:47] <shanon> Seveas: I will try that... Thanks
+[03:47] <olorin> ffm: so try 'mail'
+[03:47] <bob2> ffm: mutt
+[03:47] <ABPSoft> Seveas: I'll have a look. Didn't find any kernel-* packages so far, but didn't look for onews starting with u ;)
+[03:47] <Seveas> ABPSoft, kernel packageas are called linux-imag-*
+=== incubii [~incubii@61.68.45.37]  has joined #ubuntu
+[03:47] <Seveas> ABPSoft, kernel packageas are called linux-image-*
+[03:47] <ffm> okay, and one more question... if I want it to send one email per day... where would I put that?
+[03:47] <Seveas> ffm cron?
+[03:48] <ffm> ah yes... cron
+[03:48] <ffm> sorry for the newb questions,
+[03:49] <reka> we're relatively newbie friendly here :-)
+[03:49] <ABPSoft> Seveas: No ubuntu-kernel* in /ubuntu/pool/main/u so far
+=== student [~student@80.87.69.76]  has joined #ubuntu
+[03:50] <student> hello everyone
+[03:50] <Seveas> ABPSoft, linux-patch-ubuntu
+[03:50] <Seveas>  linux-patch-ubuntu-2.6.12 - Ubuntu patches to Linux 2.6.12
+[03:50] <ffm> alright, thanks for all the help everyone
+[03:50] <Seveas> that's for the .12 kernel, but on hoary you need 2.6.10
+=== count0nz [~phillip@60-234-131-154.bitstream.orcon.net.nz]  has joined #ubuntu
+[03:50] <student> whois aegr
+[03:51] <ABPSoft> Seveas: My goodnes, they released .12 ;)
+=== Madeye [~Jad@213.186.177.28]  has joined #Ubuntu
+[03:51] <Seveas> ABPSoft, ONLY IN BREEZY
+[03:51] <Seveas> oops, caps...
+[03:51] <ABPSoft> Seveas: Also found loop-modules, I'll look further
+=== chocoIate [~choco@ppp-62-10-127-4.dialup.tiscali.it]  has joined #ubuntu
+[03:52] <chocoIate> where do i get a package for x
+[03:52] <Seveas> chocoIate, can you be a bit more specific...
+[03:53] <chocoIate> :P
+[03:53] <shanon> Hmmmm unfortunatly you need to install all the dev packages... Oh well setting it up anyway
+[03:53] <chocoIate> well here it says "If you are running X, you will want to use the wonderful new X-based kernel configuration tool"
+[03:53] <chocoIate> i'd like to run x, where do i get it from :o
+=== jaakko [~jaakko@21-244.adsl.lpoy.dnainternet.fi]  has joined #ubuntu
+[03:53] <chocoIate> x.org :o
+[03:53] <jaakko> how do i make a shortcut to a folder???
+[03:53] <chocoIate> is there a package for ubuntu somewhere without my having to compile the source
+=== mikl [~mikkel@mikl.active.supporter.pdpc]  has joined #ubuntu
+[03:54] <Seveas> jaakko, ln -s /path/to/folder
+[03:54] <Seveas> chocoIate, sudo aptitude install x-window-system
+[03:55] <jaakko> ok thanks
+[03:55] <Eighth> i'm trying to get my pilot to sync with gnome-pilot running hoary.
+[03:55] <Seveas> chocoIate, x is the GUI stuff
+[03:55] <chocoIate> Seveas : i'm still not connected online
+[03:55] <chocoIate> i'd like to download it from the ubuntu ftp
+[03:55] <Eighth> each time i reboot, /dev/pilot goes away and i have to recreate it (symlink)
+[03:55] <chocoIate> do you have a direct link :o
+[03:55] <Seveas> chocoIate, it's on the ubuntu install cd
+[03:55] <Eighth> how can i get it to stay?
+[03:55] <chocoIate> oh ok
+[03:55] <chocoIate> thanks
+[03:55] <Seveas> chocoIate, if you have a desktop system, you have X installed already :)
+=== zul [~chuck@CPE0006258ec6c2-CM000a73655d0e.cpe.net.cable.rogers.com]  has joined #ubuntu
+[03:56] <chocoIate> well, i get an error
+=== Kentoo [~kentoo@host241-170.pool80116.interbusiness.it]  has joined #ubuntu
+=== melodie [~melodie@dyn-213-36-128-50.ppp.tiscali.fr]  has joined #ubuntu
+=== Hatred [~Purity@wopr-p-144-134-185-13.prem.tmns.net.au]  has left #ubuntu []
+[03:57] <count0nz> mines a bit squeesed so i run server :P
+[03:57] <reka> Eighth: what is /dev/pilot?
+=== raptoid [~raptoid@81.214.243.254]  has joined #ubuntu
+[03:58] <Eighth> reka: it's a symlink to /dev/ttyUSB1
+[03:59] <paulfox> how can i ftp to a machine with a diff username from that on my local machine?
+[03:59] <reka> Eighth: i'm guessing you'll need to edit /etc/fstab and add an automount entry
+[03:59] <paulfox> i remember doing it, but forgotten now :S
+[03:59] <Eighth> really? for a symlink?
+[03:59] <brum> paulfox ftp user@host
+[04:00] <paulfox> brum, ta very much
+[04:00] <paulfox> brum, that gives me "unknown host"
+[04:00] <reka> Eighth: ah.  i defer to someone else...
+[04:01] <reka> sorry
+[04:01] <Eighth> s'ok
+[04:01] <brum> paulfox: where are you trying to ftp to?/
+[04:01] <paulfox> my personal ftp
+[04:01] <paulfox> website
+[04:02] <shanon> paulfox: ??? ftp host ...... then enter the user name and password
+[04:02] <ABPSoft> Seveas: Ok, the cloop stuff is indeed in this patch. No I'll try to port that into my kernel.
+[04:02] <paulfox> shanon, can the username not be passed on the initial command line?
+[04:03] <shanon> paulfox: yes it is done the way brum said. depending on your client
+[04:03] <paulfox> ah right
+[04:03] <paulfox> ok thanks brum, shanon
+[04:03] <magog> i jus set back up my ubunutu, which codes do i need for mp3 and avi?
+[04:05] <paulfox> magog, look at ubuntuguide
+[04:05] <reka> magog: w32codecs for video.  if you're using totem for mp3s, you'll need gstreamer0.8-mad
+[04:05] <magog> err i knew you guys were gonna tell me to look at the guide and honestly ive taken alot of pills and am pretty incoherent
+[04:06] <bob2> magog: wiki.ubuntu.com/RestrictedFormats
+[04:06] <shanon> magog: lol
+=== androxxl [~andro@BSN-77-248-167.dsl.siol.net]  has joined #ubuntu
+[04:07] <magog> hmm ihave gstreamer installer but no mp3 support
+[04:07] <magog> i know i got it working before
+[04:07] <bob2> so
+[04:07] <magog> jus dont remember how
+[04:07] <bob2> install gstreamer0.8-mad, like the page says
+[04:07] <bob2> then gstreamer-based programs will support mp3 files
+[04:07] <magog> i dont see -mad
+=== lotusleaf [~lotusleaf@lotusleaf.user]  has joined #ubuntu
+[04:08] <bob2> then, read the page
+=== dreumah [~dreumah@spc1-derb1-6-0-cust133.bagu.broadband.ntl.com]  has joined #ubuntu
+[04:09] <shanon> grrr.. how do I tell dpkg-buildpackage to use the configure options I specified instead of rerunning ./configure with its own ?
+[04:09] <bob2> shanon: by editing debian/rules
+[04:09] <bob2> that's how debian packages work
+[04:09] <shanon> bob2: thanks I see it
+[04:09] <Seveas> shanon, aptitude install maint-guide
+[04:09] <Seveas> that'll give you a nice intro into packaging
+[04:10] <flodine> why is there no update for gdesklets 35
+=== lamont__ [~lamont@15.238.6.6]  has joined #ubuntu
+=== Daylighthater [~fredoflob@dD5763E92.access.telenet.be]  has joined #ubuntu
+=== maruko` [~maruko@203.131.73.94]  has joined #ubuntu
+[04:11] <flodine> hello is ubuntu behind
+=== themcrox [~themcrox@213.82.70.194]  has joined #ubuntu
+[04:11] <maruko`> hey when entering my password on the password field on GDM.. instead of the "asterisks ( or dots)" appearing.. boxes are appearing.. boxes with numbers on them
+[04:11] <Seveas> flodine, hoary will only receive security updates...
+[04:11] <Seveas> flodine, it's a *stable* distro
+[04:12] <shanon> Seveas: Where does it install it to ?
+[04:12] <flodine> what if i want to update
+=== umarmung [~Schreiber@p54AA0C76.dip0.t-ipconnect.de]  has joined #ubuntu
+[04:12] <Seveas> maruko`, like
+[04:12] <maruko`> yes
+[04:12] <cyphase> Firefox on Jeopardy - http://blakeross.com/index.php?p=134
+[04:12] <JuNkPhreak|UnIx> apt-get update :}
+[04:12] <Seveas> maruko`, have you changed fonts lately?
+[04:12] <flodine> im stuck like chuck
+=== nalioth_wrkn is now known as nalioth
+[04:12] <Seveas> flodine, either install manually or wait for breezy to stabilize
+[04:12] <maruko`> Seveas : nope.. just recently installed unbuntu with "server-expert"
+[04:13] <JuNkPhreak|UnIx> i just installed ubuntu and upgraded still rock solid
+[04:13] <Seveas> maruko`, hmm, odd
+[04:13] <Seveas> maruko`, try dpkg-reconfigure locales and make sure utf8 locales are generated
+[04:13] <reka> JuNkPhreak|UnIx: to breezy?
+[04:13] <JuNkPhreak|UnIx> no
+[04:13] <JuNkPhreak|UnIx> to new for me
+[04:13] <maruko`> Seveas : ok, will try that. thanks
+=== bcroq [~bertrand@sud35-1-82-67-113-39.fbx.proxad.net]  has joined #ubuntu
+[04:14] <JuNkPhreak|UnIx> using this for my media box
+[04:14] <shanon> Seveas: ?
+[04:14] <Seveas> shanon, ?
+[04:14] <JuNkPhreak|UnIx> old 1 gig pen III
+[04:14] <synd> JuNkPhreak|UnIx: nice
+[04:14] <shanon> Seveas: Sorry you must of missed my question. Where does it install the guide to ? As in how can I read it
+[04:14] <Seveas> ah, dpkg -L packagename
+[04:15] <reka> JuNkPhreak|UnIx: then what did you mean by upgrade?
+[04:15] <Seveas> so, dpkg -L maint-guide in this case
+[04:15] <Seveas> that'll tell you where it is
+[04:15] <shanon> thanks
+=== omni_lonnie [~lonnie@leepcG-132.sub-g.lee.net]  has joined #ubuntu
+[04:15] <JuNkPhreak|UnIx> apt-get upgrade  <---
+[04:15] <shanon> ah it is html cool
+[04:15] <magog> hmmm theese codecas are source and ginving me errors installing, i remeber doing this in synaptic too
+[04:15] <synd> JuNkPhreak|UnIx: i have a 1ghz P3 and a 650Mhz P3 lappy that i revived from the dead with ubuntu
+[04:15] <JuNkPhreak|UnIx> yea
+[04:15] <JuNkPhreak|UnIx> old compaq EN desktop
+[04:16] <synd> nic
+[04:16] <synd> e
+[04:16] <JuNkPhreak|UnIx> 384 sdram
+=== phoenix_atlantis [~Phoenix@atlantis.dolphins.ch]  has joined #ubuntu
+[04:16] <bob2> magog: you don't need to compile anything
+[04:16] <magog> bob2, i didnt think so
+[04:16] <JuNkPhreak|UnIx> 2940 uw card ans 18gig 10,000 rpm Hd / 68pin
+[04:16] <magog> cant i jus do it in synaptic
+[04:16] <magog> make life easier
+[04:17] <bob2> magog: yes, the page I pointed you at explains how
+[04:17] <synd> JuNkPhreak|UnIx: 10K RPM?!
+=== PhantomFreak [~PhantomFr@82.133.106.43]  has joined #ubuntu
+[04:17] <maruko`> 10K?
+=== CarlFK [~CarlK@c-67-163-11-11.hsd1.il.comcast.net]  has joined #ubuntu
+[04:17] <JuNkPhreak|UnIx> yea
+[04:18] <JuNkPhreak|UnIx> old sun  drive
+[04:18] <magog> bob2, im sorry to bother you but im fkked up right now...too many pills.....can you tell me the name of the codecs i can get off synaptic?
+[04:18] <synd> JuNkPhreak|UnIx: is the performance a big diff from a regular 7200 rpm?
+[04:18] <Seveas> synd, ultra wide scsi disks can do that :)
+[04:18] <bob2> magog: no, sorry
+[04:18] <magog> lol
+[04:18] <bob2> magog: (I did tell you what to install already)
+[04:18] <synd> Seveas: i see. nuts
+=== spiral [~spiral@lafilaire-4-82-224-249-43.fbx.proxad.net]  has joined #ubuntu
+[04:18] <JuNkPhreak|UnIx> well had 1 laying around
+[04:18] <PhantomFreak> Does anyine know how to hot-swap drive in Thinkpads?
+[04:18] <magog> and that mad pachage isnt on synaptic
+[04:18] <JuNkPhreak|UnIx> so i put it in barely fit :}
+[04:18] <bob2> magog: so, perhaps you should read the page I pointed ou at
+[04:18] <magog> i remember doing it all in synaptic last time
+[04:18] <magog> ok
+[04:18] <bob2> and learn how to enable the universe repository
+[04:18] <magog> ill try
+[04:19] <magog> i remmebrr doing it quick and easy in synaptic
+[04:19] <bob2> if you're on medication, perhaps you should go to bed or something
+[04:19] <bob2> yes, it is very simple to do
+[04:19] <reka> yeah. kids these days.  "dude, i just took some pills.  what do i feel like doin? i know, i'll try and install my codecs."
+=== themcrox [~themcrox@213.82.70.194]  has joined #ubuntu
+[04:19] <magog> reka, its prescribed to mefor legit reasons
+[04:19] <maruko`> how can i choose what scripts to run during startup ? ( like i dont want lvm to run during startup ) something like slackware's services program
+[04:20] <Seveas> maruko`, update-rc.d
+[04:20] <PhantomFreak> What is the command to safely remove a DVD rom drive which is hot-swapable?
+[04:20] <JuNkPhreak|UnIx> whats uninstall in debian
+[04:20] <Seveas> PhantomFreak, rmmod the modules it uses and remove it..?
+[04:20] <JuNkPhreak|UnIx> like rpm -e in rpm distros
+[04:20] <maruko`> thanks again
+[04:20] <WhiteRabbit> PhantomFreak, laptop? just remove it
+[04:20] <nalioth> JuNkPhreak|UnIx: apt-get remove
+[04:21] <Seveas> or aptitude purge
+[04:21] <PhantomFreak> REmoving just hangs it!
+[04:21] <ABPSoft> Seveas: *Thanks* - applied that patch, used the new cloop, works as it have should yesterday with the vanilla package
+[04:21] <reka> magnon: no offence intended.  i was just pointing out that if i was off my face, tinkering with my computer isn't usually top on my list. :-)
+[04:21] <Seveas> apt-get remove --purge is better than apt-get remove, it purges config files too...
+[04:21] <bob2> PhantomFreak: hangs *what*?
+[04:21] <reka> magog rather.
+[04:21] <Seveas> ABPSoft, nice!
+[04:21] <WhiteRabbit> PhantomFreak, thats a shame cause on mine I can hotswap by just doin it
+[04:21] <nalioth> Seveas: it all depends on what you want the end result to be
+[04:22] <Seveas> nalioth, of course
+[04:22] <ABPSoft> Seveas: Any idea who did this patch? It should really be fed back to Klaus Knopper et al
+=== make_a_friend [~Muhamad@202.159.118.164]  has joined #ubuntu
+[04:22] <JuNkPhreak|UnIx> ty nalioth
+[04:22] <ABPSoft> Seveas: Or ideally, to Linus for inclusion in the vanilla kernel ;)
+[04:22] <Seveas> ABPSoft, is there no author mentioned in the patch?
+[04:22] <ABPSoft> Seveas: Didn't spot one
+[04:23] <Seveas> ABPSoft, then ENOCLUE :)
+[04:23] <reka> bob2: can i get a second opinion on a question i asked earlier?  do errors found by fsck usually indicate HDD failure?
+[04:23] <ABPSoft> Seveas: But alas, I didn't read the metadata yet, just ar x'ed the .deb...
+=== tenshiKur0 [~tenshiKur@S0106000d93cb5211.vc.shawcable.net]  has joined #ubuntu
+=== bigbootay [~bigbootay@207.61.210.167]  has joined #ubuntu
+=== qPid [~qpid@a81-14-179-192.net-htp.de]  has joined #ubuntu
+=== outlier [~tyoung@70.246.97.140]  has joined #ubuntu
+[04:24] <bob2> reka: depends.  fsck finds problems on the filesystem level, so they could also come from an unclean shutdown or from the kernel going nuts
+=== make_a_friend [~Muhamad@202.159.118.164]  has joined #ubuntu
+[04:24] <nalioth> reka: depends on what the error is (and if you hear horrible clacking sounds)
+[04:24] <qPid> moin
+=== naderman [~naderman@p508B5287.dip.t-dialin.net]  has left #ubuntu ["Leaving"]
+=== jason [~jason@burgmann224.anu.edu.au]  has joined #ubuntu
+=== _mage_ is now known as _mage_afk
+[04:24] <nalioth> bob2: is there a SMART program in linux? (for HDs?)
+[04:25] <Seveas> bob2, but fsck errors followed by a reinstall followed by correct function followed by again lots of fsck errors tells me that the drive is dying
+[04:25] <bob2> nalioth: yes, apt-cache search smart
+[04:25] <bob2> Seveas: oh, yeah, indeed
+[04:25] <bob2> reka: what Seveas says does point at hard ware problems
+[04:25] <Seveas> and that's his situation :)
+[04:25] <bob2> reka: which could be as simple as the cable being loos or dodgy
+[04:25] <Seveas> hmm, good point
+[04:25] <nalioth> bob2: thx
+[04:26] <bob2> reka: but could also be a bad hard disk or motherboard or ...
+[04:26] <reka> nalioth: no. no sounds.  the errors were found on the boot-up filesystem check.
+[04:26] <bob2> reka: it could also be from an underpowered PSU...do you have lots of disks/add on cards?
+=== Absenth [~nein@host-64-179-40-194.ind.choiceone.net]  has joined #ubuntu
+=== Absenth [~nein@host-64-179-40-194.ind.choiceone.net]  has left #ubuntu ["Leaving"]
+[04:26] <reka> bob2: ah.  you're adding possibilities to my list :-)
+=== neo16 [~neo16@adsl-200-119-233-188.manquehue.net]  has joined #ubuntu
+=== gazoo [~norely@d209-89-81-142.abhsia.telus.net]  has joined #ubuntu
+[04:27] <reka> so far the possibilities are my HDD, the chipset, IDE drives, ram,
+=== Xero84 [~Xero84@cpe-65-24-30-40.columbus.res.rr.com]  has joined #ubuntu
+[04:28] <reka> hmmm, the PSU could be an interesting one.  i *did* replace t a while ago, but it had been used for ~2yrs.
+=== weedar [~weedar@230.80-202-220.nextgentel.com]  has joined #ubuntu
+=== synd- [~dsl@h87.43.55.139.ip.alltel.net]  has joined #ubuntu
+[04:29] <nalioth> reka: reka as far as PSU's go, bigger (and more stable) is better
+[04:29] <reka> nalioth: naive question: so generally HDD problems are accompanied by bad sounds?  i haven't heard any.
+=== jamin [~jamin@sys-216.87.56.250.primary.net]  has joined #ubuntu
+[04:29] <jason> have question about insmod in Ubuntu
+[04:29] <bob2> reka: that is a good sign
+=== Garathor [~Unknown@213-145-178-167.dd.nextgentel.com]  has joined #Ubuntu
+[04:30] <jason> i do: insmod hello.ko
+[04:30] <bob2> reka: bad noises = disk physically screwed
+[04:30] <Seveas> jason, insmod is deprecated
+[04:30] <nalioth> reka: my HD on my ibook here failed over a period of 3 weeks. the grinding started out as ticking and continued to the point of making the machine move
+[04:30] <PhantomFreak> Now that I can remove the CD, how do I activate the floppy!
+[04:30] <Seveas> you should use modprobe
+=== robertj [~rcaskey@cai17.music.uga.edu]  has left #ubuntu ["Leaving"]
+[04:30] <reka> bob2: hehe.  yes i think that would be a signal. :-)
+[04:30] <Seveas> PhantomFreak, modprobe the floppy modules?
+[04:30] <jason> but thats what i have to use in my labs
+[04:30] <jason> i cant use modprobe
+[04:30] <Seveas> jason, ok :)
+=== r0bby__ [~rob@cpe-204-210-133-115.hvc.res.rr.com]  has joined #ubuntu
+[04:30] <bob2> jason: so, explain to us how it doesn't work
+[04:30] <jason> anyway the error is: Invalid module format
+[04:30] <Seveas> jason, then do go on with the problem :)
+[04:30] <reka> nalioth: well i haven't heard any weird noises so it seems like it must be something else.
+[04:31] <bob2> jason: is your lab based on the 2.4 kernel?
+[04:31] <Seveas> jason, build it with the correct kernel headers and compile options.
+[04:31] <jason> Seveas sorry didnt mean to be mean with my reply... :-)
+[04:31] <bob2> jason: and are you on an amd64 machine?
+=== MaRcIo [MaRcIo@host6-101.pool8257.interbusiness.it]  has joined #ubuntu
+[04:31] <MaRcIo> hi
+[04:31] <jason> no im using warty and kernel 2.6.8.1
+[04:31] <Seveas> jason, you weren't
+[04:31] <MaRcIo> i was trying to install ubuntu
+[04:31] <jason> intel x86
+[04:31] <bob2> jason: how did you compile the kernel?
+[04:32] <MaRcIo> but the partion program doesnt work
+[04:32] <jason> make xconfig
+[04:32] <bob2> jason: er, the module
+[04:32] <jason> then make
+[04:32] <nalioth> reka: bob2 i found no SMART hd proggy via apt
+[04:32] <jason> make -C /usr/src/linux-xxx SUBDIRS=$PWD modules
+[04:33] <jason> please dont type too fast gi
+=== CarlFK [~CarlK@c-67-163-11-11.hsd1.il.comcast.net]  has joined #ubuntu
+[04:33] <Seveas> nalioth, smartmontools
+[04:33] <bob2> nalioth: smartmontools - control and monitor storage systems using S.M.A.R.T.
+[04:33] <jason> guys am trying to peruse your replies :-)
+[04:33] <bob2> nalioth: apt-cache search smart hard
+[04:33] <nalioth> bob2: Seveas need to refine my search skills
+[04:33] <jason> has anyone got the same problem before?
+[04:33] <nalioth> reka, there ya go
+=== VVeIrD [~vveird@port-212-202-190-235.dynamic.qsc.de]  has joined #ubuntu
+[04:33] <nalioth> smartmontools
+=== `psycho [~psycho@83-131-77-8.adsl.net.t-com.hr]  has joined #ubuntu
+[04:34] <jason> please please i have exam soon :-)
+[04:34] <reka> jason: you haven't seen the channel in *peak* hour.  this is slow. :-)
+[04:34] <reka> nalioth: thanks
+[04:34] <jason> reka lol
+[04:34] <bob2> jason: that sounds very much like it was built for a 2.4 kernel
+[04:34] <shanon> jason: He is not joking
+[04:34] <BockBilbo> i have a question
+[04:34] <bob2> or for another architecture
+[04:34] <bob2> jason: what does 'file hello.ko' print?
+[04:34] <BockBilbo> i have just tried the hoary live cd in a new pc i just bought
+[04:34] <BockBilbo> and the resolution of the screen is really poor
+[04:35] <Seveas> jason, are you sure that linux-xxxx points to the sources of your currently running kernel?
+[04:35] <jason> which one was built for the 2.4 kernel? the module im installing?
+[04:35] <BockBilbo> and the config of the frecuency rate is wrong
+[04:35] <jason> or the make package?
+[04:35] <bob2> BockBilbo: nvidia or i810 chipset?
+[04:35] <BockBilbo> bob2, no idea
+[04:35] <BockBilbo> :S
+[04:35] <bob2> jason: what does 'file hello.ko' print?
+[04:35] <bob2> BockBilbo: then find out
+[04:35] <BockBilbo> its not an nvidea
+[04:35] <jason> bob just hello
+[04:35] <reka> nalioth: uh, why does smartmontools need mailx? :-)
+[04:35] <nalioth> reka: http://smartmontools.sourceforge.net/
+[04:35] <bob2> jason: no, paste the output here
+[04:35] <nalioth> reka: i don't know
+[04:36] <bob2> reka: it emails you to tell you when your disk is screwed
+[04:36] <BockBilbo> its an intergrated graphic card
+[04:36] <nalioth> reka: i just found its existence myself
+[04:36] <bob2> reka: (it on;y Recommends mailx, tho)
+[04:36] <bob2> BockBilbo: then presumably i915, known bug
+[04:36] <jason> Seveas yes theres only one source installed
+[04:36] <nalioth> bob2: must be thinking of server machines, cuz its woulednt work too well on itself, lol
+[04:36] <bob2> BockBilbo: it's possible to get it working with a small amount of fiddling in an installed system
+[04:36] <MaRcIo> help
+[04:36] <JuNkPhreak|UnIx> mmmmmmm  lshw :}
+[04:36] <reka> bob2: ah, true.  misread the apt-cache entry.
+[04:36] <bob2> nalioth: er? postfix is installed on all ubuntu machines.
+[04:37] <reka> nalioth: thanks again.  i'll have a look
+[04:37] <Seveas> JuNkPhreak|UnIx, try lshal too ;)
+[04:37] <bob2> jason: please show us what 'file hello.ko' prints out
+[04:37] <nalioth> bob2: but if your HD is screwed, you might not get the mail to yourself
+[04:37] <BockBilbo> bob2, will it work fine if i install hoary?
+[04:37] <MaRcIo> can anyone help me in pvt?
+[04:37] <jason> it should output the ff: hello world
+[04:37] <jason> the actual line in code is: len = sprintf(page, "hello world\n"
+[04:37] <BockBilbo> i dont really care about it right now cause i wont use the x server... but just wondering if i ever have to use it
+[04:37] <Seveas> MaRcIo, we are a help channel, so you get help in the channel :)
+[04:37] <bob2> BockBilbo: yes, as I said, with a small amount of fiddling
+[04:38] <bob2> BockBilbo: it will work out of the box when hoary gets a new X server soon, I think
+[04:38] <Seveas> jason, ehmm
+[04:38] <bob2> jason: that's not what it prints out
+[04:38] <BockBilbo> i see
+[04:38] <bob2> jason: please run the command
+[04:38] <MaRcIo> the partition program doesn't see my partitions
+[04:38] <BockBilbo> yo by upgrading the system it will work in the future
+[04:38] <BockBilbo> right?
+[04:38] <MaRcIo> i have mdk swap e windows
+[04:38] <BockBilbo> *so
+[04:38] <bob2> BockBilbo: yes
+[04:38] <MaRcIo> i'd like to remove mdk to put ubuntu
+[04:38] <jason> guys i cant print out the actual output because i cant even insmod it...
+[04:38] <BockBilbo> great
+[04:38] <BockBilbo> :)
+[04:38] <bob2> BockBilbo: the only issue is with the autoconfiguration
+[04:38] <bob2> jason: dude
+[04:38] <jason> if you meant the error wait...
+[04:38] <bob2> jason: ignore that
+[04:39] <bob2> jason: run the command "file hello.ko", and show us what it prints out
+[04:39] <BockBilbo> just wondering, how do i get to know the architecture of my pc?
+[04:39] <theD3viL> Is any program for convert wma to mp3 ?
+[04:39] <BockBilbo> i know its an i386 based one
+=== SlackFart [~el_fart0@soundscape.demon.nl]  has joined #ubuntu
+[04:39] <JuNkPhreak|UnIx> darn need pci 3d accell card :{
+[04:39] <JuNkPhreak|UnIx> finnsh off this old 1 gig lol
+[04:39] <Seveas> BockBilbo, cat /proc/cpuinfo
+[04:39] <BockBilbo> thanks
+[04:39] <jason> i ran it and spit out: hello.ko: ELF 32-bit LSB relocatable, Intel 80386, version 1 (SYSV), not stripped
+[04:39] <bob2> BockBilbo: then it's i386
+[04:40] <bob2> jason: excellent, thank you
+[04:40] <jason> guys your being very helpful i appreciate :-)
+[04:40] <bob2> jason: so, presumably it just wasn't compiled correctly
+[04:40] <bob2> jason: can't your lecturer/tutor/teacher help you with that?
+=== goff [~goff@adsl-68-95-239-83.dsl.rcsntx.swbell.net]  has joined #ubuntu
+[04:41] <goff> Hey
+[04:41] <jason> i think its too late too ask :-)
+[04:41] <Nermal> #kernelnewbies ?
+[04:41] <reka> nalioth: have you had a look at smartmontools?  can i run it in an active system? (running xchat, other proggies atm)
+[04:42] <jason> it cant be not compiled correctly because i ahvent changed anything and it works in the labs... and just tryng to emulate in my pc
+[04:42] <bob2> yeah, was gonna suggest that
+[04:42] <Seveas> jason, have you read the lkmpg (linux kernel module programming guide) from tldp.org?
+[04:42] <goff> I ripped a dvd with the dvdbackup program, but it riped it all into several .vob files. What should I do to get them into a smaller format?
+[04:42] <bob2> jason: what kernel the computers in the lab run?
+[04:42] <bob2> Seveas: has that been updated for 2.6?
+[04:42] <jason> same 2.6.8.1
+[04:42] <bob2> reka: sure
+[04:42] <Seveas> bob2, hmm, lemme check
+[04:42] <reka> bob2: ok, thanks.
+[04:42] <jason> i tried to copy as much configuration in the labas possible
+[04:42] <Seveas> haven't used it since 2.4 :)
+[04:43] <nalioth> reka: have you been to the sourceforge page?
+[04:43] <bob2> reka: it just polls the hard disk until the hard disk says "OH MY GOD THE SKY IS FALLING", and then it tells you
+=== BROKEN_LADDER [~pral@h-67-101-148-106.snfccasy.dynamic.covad.net]  has joined #UBUNTU
+[04:43] <nalioth> reka: there appears to be a an on-demand proggy and a daemon
+[04:43] <Seveas> bob2, it has been updated
+[04:43] <bob2> ah, neat
+=== zAo^ [~zao@zAo.xs4all.nl]  has joined #ubuntu
+=== mruiz [~mruiz@pc-124-65-104-200.cm.vtr.net]  has joined #ubuntu
+[04:44] <synd> are there any podcasting clients for linux?
+=== Chetic [~Chetic@gate13.lidnet.net]  has joined #ubuntu
+=== mruiz [~mruiz@pc-124-65-104-200.cm.vtr.net]  has left #ubuntu ["Abandonando"]
+=== swarm [~swarm@host80-151.pool80181.interbusiness.it]  has joined #ubuntu
+=== spiderworm [~spiderwor@70.58.125.120]  has joined #ubuntu
+[04:46] <jason> #kernelnewbies is pretty quiet
+[04:46] <reka> nalioth, bob2: i've skimmed the page.  working out how to invoke the scan.
+[04:46] <jason> welp thanks anyways guys
+[04:46] <bob2> jason: #kernelnewbies on irc.oftc.net
+[04:46] <nalioth> reka: just add another daemon to your zoo
+[04:47] <nalioth> reka: and have it flash your xserver on and off when doomsday comes. lol
+=== xoz [~xoz@p7170-ipad204souka.saitama.ocn.ne.jp]  has joined #ubuntu
+=== xoz [~xoz@p7170-ipad204souka.saitama.ocn.ne.jp]  has left #ubuntu []
+=== synd- [~dsl@h87.43.55.139.ip.alltel.net]  has joined #ubuntu
+[04:48] <synd-> hm
+=== jwsh [~jwsh@c-65-96-209-153.hsd1.ma.comcast.net]  has joined #ubuntu
+=== synd- [~dsl@h87.43.55.139.ip.alltel.net]  has left #ubuntu []
+=== synd- [~dsl@h87.43.55.139.ip.alltel.net]  has joined #ubuntu
+[04:49] <JuNkPhreak|UnIx> is there a pkg for lm_sensors for ubuntu ?
+=== d8rt [~chatzilla@cderr3.simons-rock.edu]  has joined #ubuntu
+=== cpdiety [~cpdiety@jpi-min-160-122.dmisinetworks.net]  has joined #ubuntu
+[04:50] <bob2> yes
+[04:50] <reka> nalioth: god i am a newbie.  so i'm not supposed to run a binary executable to check the disk, it'll just tell me when something's wrong?
+=== GNAM [~GNAM@host61-241.pool80183.interbusiness.it]  has joined #ubuntu
+=== reka looks up daemon
+[04:51] <nalioth> reka: the smartctl is "when you feel like it" and the smartd (with configuration) runs all the time and tells you when a parameter starts to slip
+[04:51] <bob2> daemon = process that runs in the background, doing it's thing
+[04:52] <bob2> e.g. apache, bind, a sound server
+[04:52] <nalioth> reka: purty much any proggy ending in "d" is a daemon
+[04:52] <reka> ah, thank you both for your patience.
+[04:52] <nalioth> reka: ntpd, nntpd, ircd, etc
+[04:52] <Nermal> apart from sed
+[04:52] <Seveas> lol :)
+[04:52] <Nermal> and ed
+[04:52] <Seveas> jed
+[04:52] <Nermal> and dd
+[04:52] <Nermal> ;)
+=== reka starts reading the smartctl man page
+[04:53] <nalioth> reka: just run smartctl -h (for help)
+[04:53] <reka> nalioth: ah, that's better. :-)
+=== r4ndy^ [~r4ndy@b7ee5ae89684fda5.session.tor]  has joined #ubuntu
+=== Xnalz [~xnalz@adsl-61-8-160.asm.bellsouth.net]  has joined #ubuntu
+[04:54] <Seveas> invoke-rc.d / update-rc.d chmod dd lsmod mknod pwd iwgetid depmod insmod rmmod abiword parted and LOTS more :)
+[04:54] <nalioth> reka: most every terminal app in *nix, when run w/o parameters gives you a helpful msg
+=== Efwis [~Efwis@colo-02-172.dsl.netins.net]  has joined #ubuntu
+[04:54] <Seveas> also -h or --help as parameter will be useful
+=== encKe` [~cosm0z@ppp-65-67-227-161.ded.swbell.net]  has joined #ubuntu
+[04:54] <nalioth> y'all i said "purty much" <<<thats texan for some of em
+[04:55] <Xnalz> lol fell asleep last night at the desk installing ubuntu, how do I check to if my md5sums are good?
+=== jason [~jason@burgmann224.anu.edu.au]  has joined #ubuntu
+[04:55] <Xnalz> *check to see
+[04:55] <Seveas> lol nalioth :)
+[04:55] <jason> umm how do i add the irc.oftc.net server again?
+[04:55] <Seveas> jason, /newserver irc.otfc.net (for xchat)
+[04:55] <reka> "Testing has begun: Please wait 44 minutes for test to complete: Test will complete after Fri Jun 10 01:38:29 2005"
+[04:56] <reka> meanwhile, things seem to have slowed down a bit :-)
+[04:56] <reka> HDDresponse-wise
+=== Do-It-Now [~Now@cable-62-205-120-65.upc.chello.be]  has joined #ubuntu
+[04:56] <jason> thanks@
+[04:56] <Do-It-Now> hi all
+[04:56] <nalioth> reka: well i can't imagine why...
+[04:56] <Seveas> reka, :)
+[04:56] <Xnalz> can anyone tell me how to test the integraty of the md5sums?
+[04:57] <Chetic> uhm.. I'm about to install the new ATi drivers, it says it needs POSIX Shared Memory support.. how do I know if I have that?
+[04:57] <Seveas> md5sum -c filename.md5
+[04:57] <Xnalz> sevas: where do i type that at?
+[04:57] <Seveas> Chetic, you have that, but why don't you use the ati drivers from Ubuntu?
+[04:57] <nalioth> i'm ruined by OSX (there it is called "md5")
+[04:57] <Seveas> Xnalz, in a terminal
+[04:57] <nalioth> Xnalz: in a terminal
+=== awan_biru [~awan_biru@222.124.50.48]  has joined #ubuntu
+[04:57] <reka> nalioth: it's because it's scanning the drive.  and you call yourself a guru. :-P
+[04:58] <jason> is hoary any good?
+[04:58] <Seveas> jason, it rocks :)
+[04:58] <Xnalz> sevas& nalioth: but it won't install so no terminal
+[04:58] <jason> why so?
+=== awan_biru is now known as anak-indonesia
+[04:58] <Do-It-Now> hellow, someone know CST Blue Tooth Keyboard/Mouse working has synaptics driver?
+[04:58] <lotusleaf> jason, it's better than god
+[04:58] <Do-It-Now> for a touchpad
+[04:58] <Seveas> rofl :)
+[04:58] <nalioth> reka: you silly user, i was exuding sarcasm, positively exuding it
+[04:58] <jason> lightning will stike you!!!
+[04:58] <jason> lol
+[04:58] <lotusleaf> jason, ubuntu will strike back
+=== dressed_in_black [~andy@dsl-80-46-187-101.access.as9105.com]  has joined #ubuntu
+[04:59] <reka> nalioth: my nose must be blocked.
+[04:59] <jason> rofl
+=== Stuttergart [~Stutterga@64.191.138.41]  has joined #ubuntu
+[04:59] <dressed_in_black> what is the minimum spec for installing ubuntu as a server
+[04:59] <Stuttergart> I'm upgrading a Debian stable box to Hoary and I'm getting an error message with apt:
+[04:59] <Stuttergart> Install these packages without verification [y/N] ? n
+[04:59] <Stuttergart> ?
+[04:59] <dressed_in_black> eg from the boot screen typing inmstall server
+[04:59] <jason> windows3.1 must be your god :-)
+[04:59] <Stuttergart> I can't find a way to fix the apt signing in the wiki
+[05:00] <Chetic> Seveas, Because THEY DON'T WORK.
+[05:00] <lotusleaf> jason, windows3.1, doesn't he hang out with the lepers?
+[05:00] <Seveas> Chetic, that's a good reason :)
+[05:00] <nalioth> Stuttergart: just means that your deb supplier has no gpg key on file
+[05:00] <jason> lotus :-)
+[05:01] <Do-It-Now> snif
+[05:01] <jason> anyways nuff funny stuff.. so iwas trying to get helpfrom oftc.net kernelnewbies but seems quiet as well
+=== Xabbu|powerplant is now known as Xabbu|
+[05:02] <jason> whats a good forum to ask Ubuntu kernel-related probs from? with like relatively quick response? thansk
+=== ahuman01 [~ahuman01@141.152.253.158]  has joined #ubuntu
+=== nayif [~nayif@84.22.254.34]  has joined #ubuntu
+=== warty [~warty@a81-14-179-192.net-htp.de]  has joined #ubuntu
+=== warty is now known as qpid
+[05:02] <reka> jason: you'll get a quick response from #debian.  might not be a pleasant one though.
+[05:03] <reka> jason: (note: don't ask in #debian)
+[05:03] <lotusleaf> reka, lol
+=== BuzW [~BuzW@w034.z064003218.dfw-tx.dsl.cnc.net]  has joined #ubuntu
+[05:03] <jason> reka: yea i read the sarcasm :-)
+[05:03] <lotusleaf> cue "#debian isn't #ubuntu" with or without the # any time
+[05:03] <reka> jason: must have rubbed off from nalioth
+[05:03] <lotusleaf> that would just be asking for a spanking
+=== reka has been spanked
+[05:03] <reka> :-)
+[05:04] <bob2> that's kinda unfair
+[05:04] <bob2> #debian may be sometimes rude, but it certainly has some very very smart people
+[05:04] <jason> ummm the last spanking i got was quite pleasant tho
+[05:04] <jason> lol
+=== Madeye [~Jad@213.186.184.236]  has joined #Ubuntu
+=== spiral [~spiral@lafilaire-4-82-224-249-43.fbx.proxad.net]  has joined #ubuntu
+=== jon__ [~jon@208.Red-80-38-244.pooles.rima-tde.net]  has joined #ubuntu
+[05:04] <reka> bob2: i'd never question that.
+=== TroyMaclure [~troymaclu@dsl-fixed-62-69-44-72.surfdsl.murphx.net]  has joined #ubuntu
+[05:05] <lotusleaf> bob2, oh yes #debian does
+=== mark2 [~mark2@p83.129.194.227.tisdip.tiscali.de]  has joined #ubuntu
+[05:05] <bob2> annnyway
+[05:05] <bob2> OOH-OOH-OOH-BUN-TOO
+=== lotusleaf cracks an avacado like an egg and watches the guacamole demon emerge
+[05:05] <bob2> woah
+[05:05] <bob2> jason: you're doing COMP3300?
+[05:05] <maruko`> BUN as in BUNny ?
+=== MaRcIo [MaRcIo@host6-101.pool8257.interbusiness.it]  has left #ubuntu []
+[05:06] <nayif> what will happen if i uninstall - remove - ubuntu-desktop ?
+[05:06] <jason> yes how do you know? you from anu>?
+[05:06] <bob2> jason: hah, yeah
+[05:06] <bob2> jason: I did it last year
+[05:06] <jason> really
+[05:07] <bob2> nayif: nothing, except you'll have problems upgrading to breezy when it releases
+[05:07] <bob2> jason: with 2.4 kernels, tho
+[05:07] <jason> are you doing adv RT this next sem?
+[05:07] <nayif> is ubuntu 2005-10 will be based last debian 3.1 ?
+[05:07] <bob2> not sure what that is?
+[05:07] <bob2> nayif: no
+[05:07] <Seveas> nayif, no ubuntu version so far has been based on sarge...
+[05:07] <jason> advance real time systems
+[05:07] <bob2> ah
+[05:08] <bob2> probably not
+[05:08] <bob2> jason: who's teaching comp3300 this semester?
+=== redtech [~reddog@redtech.user]  has joined #ubuntu
+[05:09] <jason> Dr Eric Mcreath he's a really good teacher
+[05:09] <bob2> ah, I had him, he was awesome
+=== endy [~endy@cpc4-nfds8-3-0-cust143.leic.cable.ntl.com]  has joined #ubuntu
+[05:09] <nayif> bob2, i need to uninstall -ubnuntu-desktop- to intall hpldp driver for my hp lasser printer what i shuled i do than ? if upgrude will comeing soon
+=== dts [~dennis@h-68-165-7-219.snvacaid.dynamic.covad.net]  has joined #ubuntu
+=== endy is now known as endy_
+[05:09] <lotusleaf> bob2, but you may reinstall it later prior to upgrading to breezy though without complications right?
+=== SteveA_ [~steve@adsl-213-190-44-43.takas.lt]  has joined #ubuntu
+[05:09] <bob2> lotusleaf: right
+[05:09] <bob2> nayif: october
+[05:10] <lotusleaf> bob2, cool, I thought so, thanks. :)
+[05:10] <jason> bob2 could you help me with this kernel stuff i'll pay :-)
+[05:10] <Stuttergart> Anyone done a Sarge -> Hoary migration and been able to get the apt signing stuff to work ?
+[05:10] <bob2> jason: haha, in what, uni bar beer? ;p
+[05:10] <bob2> Stuttergart: you need to sort out the key manually
+=== kjoonlee [kjoonlee@221.153.157.102]  has joined #ubuntu
+=== kjoonlee [kjoonlee@221.153.157.102]  has left #ubuntu []
+[05:11] <Stuttergart> bob2: Is there a document on what needs to be done?
+[05:11] <jason> uni bar beer is good tho i'm not really a bar person...
+[05:11] <bob2> Stuttergart: gpg --import <whateverkeyiditomcplainsabout> ; gpg --export <whateverkeyiditomcplainsabout> | sudo apt-key add -
+[05:11] <jason> beer and programming = buggy codes
+[05:11] <endy_> anyone know how to stop ubuntu deleting '/usr/lib/tls/libnvidia-tls.so.1.0.7664' each reboot. i have custom kernel and nvidia's driver package :S
+[05:11] <bob2> jason: that's what tests are for ;p
+[05:11] <nayif> is there how to or something to read more about ubuntu-desktop and hpldp driver ?
+=== sijp [~sijp@DSL217-132-176-20.bb.netvision.net.il]  has joined #ubuntu
+[05:11] <bob2> jason: let me see check the course notes
+[05:11] <bob2> jason: assuming they're not in webct
+=== herpes [~mat@222-152-115-248.adsl.ihug.co.nz]  has joined #ubuntu
+[05:11] <jason> its public
+[05:12] <bob2> good
+[05:12] <bob2> or I'd have to start my "webct is the spawn of the devil" rant
+[05:12] <jason> lol
+=== nalioth thought winduhs was the spawn of the devil .. .. ..
+[05:13] <bob2> hah, go dcs, the student page is broken
+[05:13] <jason> gosh those guys in debian really are freaksih arent they? :-)
+[05:13] <bob2> no, you were just highly silly for starting off like that
+[05:13] <jason> woot? you cant access?
+[05:13] <jason> ah ok
+[05:13] <bob2> that's more or less considered trolling
+[05:13] <nayif> if am noob on prgramming or something like that can i do something like this http://udu.wiki.ubuntu.com/BreezyBounties or google-code ?
+=== Chetic [~Chetic@gate13.lidnet.net]  has joined #ubuntu
+[05:14] <bob2> hm
+[05:14] <bob2> jason: where're the lecture notes and stuff?
+[05:14] <jason> whats trolling? thats new to me
+[05:14] <bob2> jason: it's not on cs/student/comp3300/
+=== newz2000 [~chatzilla@12-226-91-204.client.mchsi.com]  has joined #ubuntu
+[05:14] <jason> go to cs/student/comp3300
+=== dressed_in_black [~andy@dsl-80-46-187-101.access.as9105.com]  has left #ubuntu ["Leaving"]
+[05:14] <jason> then click lab/tutorials
+[05:14] <bob2> oh, duh
+[05:14] <jason> sorry tutorial/lab exercises
+=== dwa_ [~dwa@dwa.xs4all.nl]  has joined #ubuntu
+[05:15] <bob2> which lab?
+[05:15] <newz2000> Any Help? I'm getting an OOPS during install (configuring iptables) http://rafb.net/paste/results/YQ1PlQ51.html
+[05:15] <jason> any i just want to be able to insmod a module
+=== toonx [~toonx@114.Red-81-34-88.pooles.rima-tde.net]  has joined #ubuntu
+[05:15] <jason> try lab1 hello.c
+=== joe_ [~joe@cpe-65-24-30-40.columbus.res.rr.com]  has joined #ubuntu
+[05:15] <bob2> nayif: you'd probably better off working on something a lot simpler
+[05:16] <toonx> hi all! can i use ubuntu repositories with debian?
+[05:16] <bob2> jason: yes, I know, but the reason you can't insmod it is because the module wasn't compiled correctly
+[05:16] <bob2> afaict
+[05:16] <bob2> toonx: no
+[05:16] <jason> the hello module?
+[05:16] <toonx> bob2: uhmm , what happends if i do?
+[05:16] <Chetic> HELP - "glxinfo: error while loading shared libraries: libGL.so.1: cannot open shared object file: No such file or directory"
+[05:16] <reka> bob2, jason: out of curiosity, what uni are you talking about?
+[05:16] <bob2> reka: www.anu.edu.au
+=== reka pulls out book labelled "stalk victims"
+[05:16] <jason> howd you know its not compiled correctly? i used the same commands:
+[05:17] <bob2> toonx: then you'll get to fix it yourself, since debian and ubuntu people will tell you to go away
+[05:17] <toonx> bob2: apt-get update seems not to be bodered..
+[05:17] <bob2> toonx: of course
+=== blueyed [~daniel@iD4CC12C5.versanet.de]  has joined #ubuntu
+[05:17] <jason> make -C /usr/src/linux-xxx SUBDIRS=$PWD modules
+[05:17] <toonx> bob2: uhm , i dont get it , if its starts with deb why ther's no common support?
+[05:18] <bob2> toonx: because you're making some mix that no one else has
+=== James-C [~jamesc@oucs-jamesc.oucs.ox.ac.uk]  has joined #ubuntu
+[05:18] <bob2> toonx: if you don't understand what the problem is, you won't understand how to fix it
+[05:18] <jason> bob2: are you looking at it or just CBF?
+=== det [chris@sharkzone.com]  has joined #ubuntu
+[05:18] <Chetic> How do I make applications find my libGL.so.1 file? I want to add it to some kind of PATH
+[05:18] <bob2> jason: looking
+[05:18] <bob2> Chetic: you put it where it should belong
+[05:19] <toonx> bob2: makes sense, but what i dont get it is what there is no common support for something that has the same root
+[05:19] <nayif> bob2, thanks but can you tell me more :) "a lot simpler" exp.
+[05:19] <James-C> Has anyone got persistent home directories on a usb key with a Hoary Ubuntu live CD to work? re: http://ubuntuforums.org/showthread.php?t=9893
+=== det [chris@sharkzone.com]  has left #ubuntu ["Leaving"]
+[05:19] <Chetic> bob2, it IS where it belongs
+[05:19] <bob2> Chetic: but if you're playing with the nvidia or ati binary modules, you won't be having much fun
+[05:19] <jason> thanks mate
+[05:19] <Chetic> bob2, please just tell me how
+[05:19] <bob2> toonx: you're welcome to start providing it
+[05:19] <bob2> Chetic: no
+[05:19] <toonx> bob2: ;)
+[05:19] <Seveas> Chetic, or add the folder where it is in to /etc/ld.so.conf
+[05:19] <Chetic> Seveas, thank you
+[05:19] <bob2> Chetic: just put it where it should belong
+[05:19] <bob2> and you're going to break your computer doing things like this
+[05:19] <Chetic> bob2, you tell me where it belongs if not /usr/lib
+[05:19] <toonx> bob2: or if they are so different one from the other why does ubuntu repositories start with deb ?
+[05:19] <jason> is anyone else scared about the "not raining" thing happening in ACT lately?
+=== mtron25 [~michael@trandsl.bb.netvision.net.il]  has joined #ubuntu
+=== michael__ [~michael@trandsl.bb.netvision.net.il]  has joined #ubuntu
+[05:20] <jason> its strange...
+[05:20] <Seveas> Chetic, if it is in usr lib, you have another problem
+=== mtnman2 [~user@c-67-174-152-248.hsd1.ca.comcast.net]  has joined #ubuntu
+[05:20] <bob2> Chetic: find / -name libGL.so
+[05:20] <Seveas> because /usr/lib is already used...
+[05:20] <bob2> jason: hah
+[05:20] <toonx> bob2: no offense mate, im just asking some silly questions maybe
+[05:20] <bob2> jason: some rain forecast for the weekend
+[05:20] <bob2> toonx: you mean in /etc/apt/sources.list? because that's the format for sources.list.
+[05:20] <jason> ah ok... that's great!!! cept its a weekend
+[05:20] <bob2> ubuntu hasn't patched apt to change that
+[05:20] <Chetic> Seveas, It's there but it's not in ld.so.conf
+[05:21] <jason> but shouldnt matter anyways its exam week
+[05:21] <Seveas> Chetic, /usr/lib doesn't have to be in ld.so.conf
+[05:21] <BockBilbo> bob2, i have just installed ubutnu on the machine
+=== mxpxpod [~BryanForb@mxpxpod.user]  has joined #ubuntu
+[05:21] <Chetic> Seveas, Then why can't the applications find the file?
+[05:21] <BockBilbo> and i still cant see the screen correctly
+=== SloMoSnail [~slomo@p5487F5E1.dip.t-dialin.net]  has joined #ubuntu
+[05:21] <BockBilbo> Seveas, you told me to do cat /proc/cpuinfo
+=== vexen [~vexen@darkman.teteny.elte.hu]  has left #ubuntu []
+[05:21] <toonx> bob2: yes sources.list i ment, i see now .. there's now real answer
+[05:22] <BockBilbo> but it doesnt say anything about the arch
+[05:22] <jason> bob2: sorry mate i forgot why is it again you said the module wasnt compiled correctly? thanks
+[05:22] <Seveas> BockBilbo, what do you mean with arch then..?
+[05:22] <bob2> jason: because the kernel thinks it isn't a module
+[05:22] <bob2> BockBilbo: yes, as I said, you will need to twiddle the X config to get it to work properly
+=== James-C sighs at usb key.
+[05:22] <bob2> toonx: the real answer is "Of course yo ucan use Debian packages on ubuntu, but you'll break if you don't know what you're doing."
+=== nalioth is now known as nalioth_wrkn
+=== graabein [~graabein@212.80-203-123.nextgentel.com]  has joined #ubuntu
+[05:23] <bob2> jason: so, it works for me
+[05:23] <BockBilbo> bob2, is there any tutorial about how to twidle it?
+[05:23] <bob2> BockBilbo: first, find if you actually have a i915
+[05:23] <toonx> bob2: thanks dude, that was what i wanted to know
+[05:23] <jason> bob2 you in canberra now?
+[05:23] <michael__> need help with firefox please. it crashes with the error  (Details: serial 104 error_code 8 request_code 147 minor_code 3), when visiting a page with flash content.. any indeas
+[05:24] <BockBilbo> bob2, thats what im trying to do
+[05:24] <BockBilbo> but not sure where to start from to know that
+[05:24] <jason> you from perth? i have a friend there with same last name as you
+[05:24] <bob2> BockBilbo: what does "lspci | grep VGA" print out?
+[05:24] <bob2> jason: yeah, I'm at home
+[05:24] <bob2> jason: no, no family in perht afaik
+[05:24] <jason> you can install the module?
+[05:24] <BockBilbo> hold on
+[05:24] <bob2> jason: yes
+[05:24] <bob2> jason: I downloaded it, compiled it, and ran "sudo insmod hello.ko"
+[05:24] <jason> hmmm... am getting relly frustrated
+[05:25] <bob2> hello: module license 'unspecified' taints kernel.
+[05:25] <bob2> init_module: done
+=== chocoIate [~choco@ppp-62-10-127-100.dialup.tiscali.it]  has joined #ubuntu
+[05:25] <bob2> jason: maybe you built the kernel wrongly or such...it works fine with the default ubuntu kernel
+=== yccheok [~yccheok@60.49.91.132]  has joined #ubuntu
+[05:25] <graabein> how do i switch to a closer ubuntu repository mirror?
+[05:25] <graabein> can i use uri: ftp.uninett.no/linux/ubuntu in synaptic repositories?
+[05:25] <jason> could the problem be from make xconfig?
+[05:26] <BockBilbo> bob2, : lscpi | grep VGA --> 0000:01:00.0 VGA compatible controller: VIA Technologies, Inc VT8378 [S3 UniChrome]  Integrated Video (rev 001)
+[05:26] <bob2> jason: that's the kernel config, yes
+[05:26] <bob2> BockBilbo: oh, suck
+[05:26] <jason> sorry i remember i used make menuconfig
+[05:26] <bob2> right
+=== reka [~reka@WNPP-p-203-54-44-11.prem.tmns.net.au]  has joined #ubuntu
+[05:26] <BockBilbo> bob2, i know it sucks
+[05:26] <jason> and just "yes-ed" om in all options
+[05:27] <Chetic> Why can't my GL applications find the libGL.so.1 file?
+[05:27] <BockBilbo> this pc is ment to be a web server
+=== Echylo [~echylo@120-146.246.81.adsl.skynet.be]  has joined #ubuntu
+[05:27] <BockBilbo> not for personal use
+[05:27] <bob2> BockBilbo: it should work out of the box, tho
+[05:27] <bob2> jason: erk
+[05:27] <bob2> jason: well, if you boot the default ubuntu kernel, I think it will work
+[05:27] <nayif> time to go
+[05:27] <jason> ok thanks bob2
+[05:27] <bob2> Chetic: why don't you just use the ubuntu packages?
+[05:27] <BockBilbo> bob2, so... what might happen?
+[05:28] <Chetic> bob2, They use older drivers which do not support my graphics card (PCI-E X800XL)
+[05:28] <chocoIate> everytime i try to run "make xconfig" in my linux directory i get the following error : http://pastebot.nd.edu/1300
+[05:28] <bob2> chocoIate: you don't need to compile a kernel for isdn drivers, btw
+[05:28] <bob2> chocoIate: sudo aptitude install libqt3-mt-dev build-essential
+[05:28] <chocoIate> well, i need to set some variables
+[05:28] <Seveas> chocoIate, install libqt3-dev
+[05:29] <chocoIate> ok thanks
+[05:29] <bob2> I'd be surprised if you did have to set any variables
+[05:29] <nayif> oh i have this on boot " waring : udevdb alraedy exit on the old /dev/! "
+=== gianni [~gianni@213-140-22-71.fastres.net]  has joined #ubuntu
+=== truz24 [~r@12-220-103-82.client.insightBB.com]  has joined #ubuntu
+=== michael__ is now known as mtron
+[05:29] <chocoIate> well dont be bob2, i'm just following the readme files that come accompained with the drivers
+[05:29] <bob2> nayif: delete it from /dev/
+[05:29] <chocoIate> this is my 3rd modem by the way :P
+[05:29] <jason> where do i get a copy of that libqt3-dev?
+[05:29] <bob2> chocoIate: the readme is probably wrong
+[05:29] <bob2> jason: 01:28:43           bob2 | chocoIate: sudo aptitude install libqt3-mt-dev build-essential
+[05:29] <chocoIate> i currently have 4 new modems
+[05:30] <bob2> jason: that command will install it
+[05:30] <Seveas> jason, through apt-get
+=== Kamping_Kaiser [~kaiser@ppp220-164.lns3.adl2.internode.on.net]  has joined #ubuntu
+[05:30] <jason> yse but i have to get a copy of libqt3-dev first before i apt-get rght?
+[05:31] <bob2> no
+=== nosilver4u [~sbishop@ftth124.ftth.eldl.drtel.net]  has joined #ubuntu
+[05:31] <bob2> apt-get goes and gets it off the intarweb for you
+[05:31] <bob2> or the cd if you have that
+[05:31] <jason> cant find it in install cd of ubuntu
+=== mcmillan_33 [~jacques@a81-14-180-42.net-htp.de]  has joined #ubuntu
+[05:31] <bob2> it's probably not on the warty cd
+=== TJORVEN [~admin@1-1-11-6a.j.j.bostream.se]  has joined #ubuntu
+[05:31] <bob2> I wonder if anyone took the warty cds I left in DCS a few months ago
+[05:31] <Seveas> probably on no cd at all
+=== spiral [~spiral@lafilaire-4-82-224-249-43.fbx.proxad.net]  has joined #ubuntu
+[05:32] <mcmillan_33> hi guys. does anyone know how xmms-rep works? i would like to map some xmms shortcuts into my sawfish... can't figure it out.
+[05:32] <jason> apt-get libqt3-dev is the syntax?
+=== Niko__ [~niko@a81-197-21-53.elisa-laajakaista.fi]  has joined #ubuntu
+[05:32] <bob2> 01:29:56           bob2 | jason: 01:28:43           bob2 | chocoIate: sudo aptitude install libqt3-mt-dev build-essential
+[05:32] <bob2> jason: that is the command to run
+=== qbeek [~qbeek@sete.idealx.com]  has joined #ubuntu
+[05:32] <Daylighthater> q: How can I install ubuntu default with kde
+[05:32] <Daylighthater> ??
+[05:32] <Daylighthater> isntead of gnome
+[05:32] <bob2> Daylighthater: get a kubuntu cd
+[05:32] <mcmillan_33> download kubuntu @ daylighthater
+[05:32] <Seveas> Daylighthater, sudo aptitude install kubuntu-desktop if you already have ubuntu installed
+[05:33] <Seveas> otherwise do what the others said :)
+[05:33] <bob2> mcmillan_33: I've used it in the past
+[05:33] <graabein> how do i switch to a closer ubuntu repository mirror?
+[05:33] <graabein> can i use uri: ftp.uninett.no/linux/ubuntu in synaptic repositories?
+[05:33] <bob2> mcmillan_33: I'd just shell out to xmms-shell tho, nowadays
+[05:33] <Daylighthater> k.. but I'm reinstalling ubuntu on my laptop now
+[05:33] <bob2> graabein: edit /etc/apt/sources.list or edit it in synaptic
+=== SirGrok [~yeahright@adsl-4-252-251.mem.bellsouth.net]  has joined #ubuntu
+[05:33] <chocoIate> bob : http://pastebot.nd.edu/1301
+[05:33] <Daylighthater> so it will be the apt-get theory I will folow
+[05:33] <mcmillan_33> bob2: when i was on debian there was a different programm to handle it...can't remember but maybe it was xmms-shell
+[05:33] <graabein> bob2, so ftp.* is okay?
+=== something_else [~something@82-35-42-201.cable.ubr02.camd.blueyonder.co.uk]  has left #ubuntu ["Leaving"]
+[05:34] <mcmillan_33> bob2: can i pass commands directly to xmms-shell?
+[05:34] <chocoIate> i just need to verify that those settings are correct as in the readme
+[05:34] <bob2> graabein: I don't know what you mean
+[05:34] <bob2> graabein: it is ok to use other mirror, tho, yes
+[05:34] <jason> am getting E: Invalid operation libqt3-dev.deb with that command
+[05:34] <TJORVEN> how do i unrar a splitted Rar archive???
+[05:34] <Daylighthater> other questiong doe anybody know a desend driver fot ati, more exactly Rage Mobility M/P on a laptop
+[05:34] <Seveas> jason, you forgot the install
+[05:34] <nayif> bob2, delete what ? i dont find ! on dev
+[05:34] <graabein> bob2, it's listed as a mirror site so i guess i can try it... thanks
+[05:34] <SirGrok> I have a question: I have Ubuntu installed on my old ThinkPad and it isn't connected to the internet. ubuntu auto-detects the resolution as low (620x480 or something), but i want to manually bump thta up... How do I do this?
+[05:34] <Seveas> sudo aptitude install ....
+[05:35] <bob2> chocoIate: read /boot/config-2.6.10-5
+=== `psycho is now known as paja_munjeni
+[05:35] <Seveas> SirGrok, sudo dpkg-reconfigure xserver-xorg
+[05:35] <bob2> nayif: ls -la /dev/
+[05:35] <bob2> TJORVEN: unrar the rar file and it will get the other bits as needed
+[05:35] <Daylighthater> cause the ati driver delivered with the installation isn't sufficiant and the fglrx driver is to new for that graphics card :s
+[05:35] <bob2> jason: no, run the exact command I said
+[05:35] <bob2> mcmillan_33: yes
+[05:35] <bob2> graabein: sure
+[05:35] <TJORVEN> bob2, just says failed
+[05:36] <bob2> TJORVEN: perhaps you need unrar-nonfree then
+[05:36] <SirGrok> Seveas, thanks. I will go try that.
+[05:36] <mcmillan_33> bobs2 do you know how off hand?
+[05:36] <bob2> mcmillan_33: er, echo blah | xmms-shell
+[05:36] <Daylighthater> I've been looking for three weeks now for a solution, but the only thing that "solved" my screen problem was vesa, and that isn't really a solution
+[05:37] <nayif> bob2, oh i found .udevdb "thanks :)" is this what i shoud to delete ?
+[05:37] <bob2> nayif: hrm
+[05:37] <nayif> hrm ?
+=== spectro [~spectro@200.44.195.233]  has joined #ubuntu
+[05:37] <TJORVEN> bob2. what's that?
+[05:37] <bob2> TJORVEN: another version of the unrar command
+[05:37] <jason> sorry for the following.. i had these sample of errors from apt-get install lib***
+[05:37] <jason>   libqt3-dev: Depends: xlibs-static-dev (>= 4.3.0.dfsg.1-4) but it is not installable
+[05:37] <jason>               Depends: libxext-dev (>= 4.3.0.dfsg.1-4) but it is not installable              Depends: libxrandr-dev (>= 4.3.0.dfsg.1-4) but it is not installable
+[05:37] <jason>               Depends: x-dev (>= 4.3.0.dfsg.1-4) bu
+[05:38] <TJORVEN> bob2, ok is there a apt-get?
+=== toonx [~toonx@114.Red-81-34-88.pooles.rima-tde.net]  has left #ubuntu []
+[05:38] <bob2> TJORVEN: yes, it's in multiverse
+[05:38] <bob2> jason: er
+[05:38] <TJORVEN> bob2, thanks
+[05:38] <bob2> jason: you're not using ubuntu
+[05:38] <chocoIate> bob2 : is libqt3-dev avaialbe online where i can download it :o
+[05:38] <jason> you mean kernel?
+[05:38] <bob2> jason: your system is Debian, not Ubuntu
+[05:38] <jason> im quite sure am using ubuntu
+[05:39] <mcmillan_33> bob2 cheers.
+[05:39] <bob2> oh
+[05:39] <bob2> you're using warty
+[05:39] <encKe`> anyone here have Novell Client for Linux?
+[05:39] <bob2> chocoIate: you *still* have no network access?
+=== mdz [~mdz@ca-studio-bsr1o-251.vnnyca.adelphia.net]  has joined #ubuntu
+=== lpb-Anonymous [~anonymous@p54B6C08C.dip.t-dialin.net]  has joined #ubuntu
+[05:40] <chocoIate> nope, i'm trying to my current new modem
+[05:40] <Raskall> is there a known problem with flashplayer in ubuntu? normal text isn't displayed in flash-things.
+[05:40] <chocoIate> plus i ordered two new ones
+[05:40] <jason> yes warty and kernel 2.6.8.1
+=== jind [~jind@216-220-56.7002.adsl.tele2.no]  has joined #ubuntu
+[05:40] <bob2> jason: paste your /etc/apt/sources.list to #flood, not to here
+[05:40] <chocoIate> the last order i made is an isdn router that way i wont have to deal with drivers :P
+[05:41] <jason> sorry how do you do that when you repply to me your nick is highlighted in yellow...
+=== Chetic [~Chetic@gate13.lidnet.net]  has joined #ubuntu
+[05:41] <jason> just wanna make it easier for you to see my reply
+[05:41] <chocoIate> however it takes time to arrive, so in the meantime i want to try and fix what i have if i can :P
+[05:41] <bob2> jason: I start lines with your nick, and your client makes it yellow
+[05:41] <chocoIate> all these bullshit modems claim they work in linux and claim they have drivers but have only build packages for suse or redhat :/
+[05:42] <chocoIate> and bad documentation
+[05:42] <JuNkPhreak|UnIx> no dsl in your area or line of sight wireless ?
+[05:42] <jason> bob2: like now... do you get yellow?
+[05:42] <bob2> jason: well, red, but same deal ;)
+[05:42] <chocoIate> no dsl, no broadband, only ISDN dialup
+=== IcemanV9 [~nobody@adsl-68-79-58-157.dsl.emhril.ameritech.net]  has joined #ubuntu
+=== JovenComunista [~e1980@201.249.81.219]  has joined #ubuntu
+[05:43] <JuNkPhreak|UnIx> well new r`thing is wireless like panaband and others
+[05:43] <JuNkPhreak|UnIx> my moms got one
+[05:43] <JuNkPhreak|UnIx> she lives middle of BFE
+[05:43] <chocoIate> the latest modem i purchased was a fritz!card usb isdn and they claimed to have unsupported drivers for linux
+[05:44] <jason> bob2 i just pasted it to #flood
+[05:44] <bob2> jason: so
+[05:44] <JuNkPhreak|UnIx> chocoIate : where abouts do you live ?
+[05:44] <bob2> jason: I know you pay tons of money for bandwidth, but you do need to download some stuff
+[05:44] <chocoIate> i purchased and tried to compile the driver and it dont work, i just end up with tons of erros and all the documentation is in german
+[05:44] <nayif> bob2, thanks a lot , now i will gone to reboot my sys to test it thanks again
+[05:44] <jason> ok which one?
+[05:44] <bob2> nayif: np
+[05:44] <jason> bob2 ok which do i have to d/l? thanks
+[05:45] <chocoIate> suburbs of italy, remote area where there is no braodband/dsl coverage :P
+[05:45] <jason> man i cant thank you enough... :-)
+[05:45] <bob2> jason: uncomment (remove the # character) from the "# deb http://archive.ubuntu.com/ubuntu warty main restricted" line, then add the word "universe" at the end (no quotes)
+[05:45] <JuNkPhreak|UnIx> ahh wild they dont have wireless towers :}
+[05:45] <JovenComunista> how can i change the size of the linux partition?
+[05:45] <jason> am sorry which do i need to download?
+[05:46] <chocoIate> bob2 : any help for me, a link to an online download of the libqt-dev package :P
+[05:46] <JovenComunista> i have 4 partitions... 2 fat32,  swap  and the linux partition
+[05:46] <bob2> jason: edit the file like I said
+[05:46] <lleberg> I'm at some relatives, and am using their computer..
+[05:46] <bob2> chocoIate: packages.ubuntu.com/libqt3-mt-dev
+[05:46] <lleberg> i'm*
+[05:46] <bob2> chocoIate: but it probably depends on lots of stuff
+[05:46] <wm_eddie> JovenComunista, parted can do it.
+[05:46] <JovenComunista> parted?
+[05:46] <chocoIate> i hope not bob2
+[05:46] <lleberg> it's a pentium II cpu with win 98 from IBM
+[05:46] <lleberg> would ubuntu work better? ;=
+[05:47] <wm_eddie> JovenComunista, Try installing gparted
+[05:47] <Chetic> Why can't any application find the libGL.so.1 file?!
+[05:47] <JovenComunista> ok... i'll try
+[05:47] <JovenComunista> :) thanx
+[05:47] <wm_eddie> lleberg, I run ubuntu Warty on a PII that came with WindowsNT
+[05:47] <bob2> Chetic: presumably you're putting it in the wrong place
+[05:47] <bob2> Chetic: I did tell you how to find the correct place, tho
+[05:47] <lleberg> wm_eddie: Oh
+[05:47] <IcemanV9> lleberg: yes. you could have brought livecd to test it! :)
+[05:48] <Chetic> bob2, Then I must have missed that. I never put it anywhere, it was all done automatically.
+[05:48] <jason> bob2 i just edited it... universe is already at the end however....
+[05:48] <lleberg> wm_eddie: But on the other hand they probably won't let me do that anyway, paranoid suckers :(
+[05:48] <bob2> jason: show me the whole line (in here)
+=== chocoIate crosses fingers and beings to dpkg libqt3-dev :P
+[05:48] <chocoIate> brb
+[05:48] <bob2> Chetic: then why do you think it's not finding it?
+[05:48] <jason> deb http://archive.ubuntu.com/ubuntu warty universe
+[05:48] <jason> bob2
+[05:48] <wm_eddie> paranoid and Windows 98...
+[05:48] <lleberg> And now, i got to go!
+[05:48] <lleberg> Heya
+[05:48] <Chetic> bob2, I have no idea whatsoever, I don't have the same experience as others
+=== Pop_pa_FrEaK [~patrick@CPE000ae6c702bb-CM000e5ce665ba.cpe.net.cable.rogers.com]  has joined #ubuntu
+[05:48] <lleberg> wm_eddie: fabric-settings-paranoid
+[05:49] <bob2> Chetic: so why do you think there is a problem?
+[05:49] <bob2> jason: did you uncomment this line, too: 01:43:34          jason |  # deb http://archive.ubuntu.com/ubuntu warty main restricted
+[05:49] <lleberg> IBM knows best, and so on
+[05:49] <bob2> ?
+=== deathwing [~glenn@210.4.55.8]  has joined #ubuntu
+[05:49] <jason> did you guys see the english hacker arrested in the states? :-)
+=== Balthazar [~Tim@24.70.172.248]  has joined #ubuntu
+[05:49] <deathwing> hello im glenn and new to ubuntu
+[05:49] <Chetic> bob2, Because the ATi installer doesn't do it right?
+[05:49] <bob2> Chetic: I don't know what that means
+[05:49] <r0bby__> jason, where was this?
+[05:49] <bob2> Chetic: or why you think yhat
+[05:50] <deathwing> im a php programmer and migrating to ubuntu
+[05:50] <r0bby__> ??
+[05:50] <Chetic> bob2, I don't know why! Why won't you help me?
+[05:50] <deathwing> ive used fedora and mandrake but ubuntus the best for me so far
+[05:50] <r0bby__> ok...
+[05:50] <jason> robby__ have a look at cnn
+[05:50] <bob2> Chetic: because you're making no sense at all
+[05:50] <Balthazar> Is there anyway to have some persistant data stay around when using the live cd?  either by accessing the hd, or a USB key or some such.  I want to play around with subversion, and would like to get away with not doing a full install if I can.
+=== toxicfume [toxicfume@58.10.68.61]  has joined #ubuntu
+[05:50] <jason> he hacked at like whos who of the us agencies
+[05:50] <bob2> Chetic: why do you think there is a problem at all?
+[05:50] <bob2> Chetic: you had a libGL to begin with
+=== lpb-Anonymous [~anonymous@p54B6C08C.dip.t-dialin.net]  has left #ubuntu ["Verlassend"]
+[05:51] <jason> he's got a really huge problem now tho
+[05:51] <wm_eddie> deathwing, Ubuntu does that.
+[05:51] <deathwing> could anyone advise me with a good editor that runs on ubunt
+[05:51] <jason> bob2 i just did
+[05:51] <bob2> jason: cool
+[05:51] <r0bby__> ew and he's butt ugly
+[05:51] <bob2> jason: now run "sudo apt-get update" and "sudo apt-get install libqt3-mt-dev"
+[05:51] <deathwing> eddie, what does ubuntu do?
+=== yccheok [~yccheok@60.49.91.132]  has joined #ubuntu
+[05:51] <Chetic> bob2, Yeah, I still have libGL files, it makes no sense that they can't be found by the applications
+=== qbeek [~qbeek@sete.idealx.com]  has joined #ubuntu
+[05:51] <bob2> Chetic: lord
+[05:52] <mark2> does anybody know a FTP-tool for Ubuntu, I have already vsftpd
+[05:52] <wm_eddie> deathwing, put other distros to shame
+=== sijp [~sijp@DSL217-132-176-20.bb.netvision.net.il]  has joined #ubuntu
+[05:52] <bob2> Chetic: so, what you really mean is "When I run a program that uses GL, I get an error from ld saying "unable to find libGL.so" or something"?
+[05:52] <r0bby__> ew
+[05:52] <jason> sorry i made a mistake there is no such last line you referred to,.
+=== rayen [~rayen@c529cabae.cable.wanadoo.nl]  has joined #ubuntu
+[05:52] <jason> but it has this
+[05:52] <jason> bob2: deb http://security.ubuntu.com/ubuntu warty-security main restricted
+[05:52] <deathwing> hehehe ur right, it detected all my hardware and it was easy configuring my internet connection
+=== wdh [~KlaasVaag@82-197-199-218.dsl.cambrium.nl]  has joined #ubuntu
+[05:52] <jason> is that what you wanted to uncomment as well?
+[05:52] <r0bby__> he gains access to american govt computers...but expects the us govt to sit on thair hands?
+[05:52] <deathwing> eddie are u a programmer
+[05:52] <toxicfume> hi all
+[05:52] <Chetic> bob2, I don't know if ld is saying it but yes, I get an error like that
+[05:52] <r0bby__> he must be smoking crack
+[05:53] <wm_eddie> deathwing, yup
+=== _kevin [~Kevin@CPE0006255ab096-CM400049887786.cpe.net.cable.rogers.com]  has joined #ubuntu
+[05:53] <toxicfume> can someone here help me configure kismet on kubuntu?
+[05:53] <jason> bob2 still there?
+=== Echylo [~echylo@120-146.246.81.adsl.skynet.be]  has joined #ubuntu
+[05:53] <bob2> jason: yes
+[05:53] <bob2> jason: I have no idea what you've done now
+[05:53] <_kevin> I want to completley remove OpenOffice 1.13 and I want to download and install the new OpenOffice 1.9.+ Beta, How would i go about doing this?
+=== InitMass [~InitMass@c83-248-181-3.bredband.comhem.se]  has joined #ubuntu
+[05:53] <jason> bob2 something tells me i should save our convo for future ref
+[05:53] <deathwing> i am wondering, what is a good choice for an editor for ubuntu, because in windows i use maguma studio
+[05:53] <mark2> does anybody know a FTP-tool for Ubuntu, I have already vsftpd ????????????
+[05:53] <_kevin> Synaptic?
+[05:53] <bob2> jason: paste the whole file to #flood again
+[05:53] <bob2> mark2: please stop it
+[05:53] <Seveas> mark2, as a server you mean>
+[05:54] <jason> bob2 aw wait now i get you...
+[05:54] <deathwing> i am using screem now but maybe there is a better editor
+[05:54] <mark2> yes as a server
+[05:54] <wm_eddie> mark2, ProFTPD.
+[05:54] <Seveas> then vsftpd is the best, so you're set already :)
+[05:54] <Seveas> wm_eddie, Priftpd is about the least secure there is...
+[05:54] <wm_eddie> deathwing, I use Emacs mostly.
+[05:54] <mark2> thx eddie, i will look after
+[05:54] <r0bby__> what an idiot
+[05:54] <Seveas> deathwing, vim :)
+[05:55] <Seveas> r0bby, please keep it nice nere
+[05:55] <r0bby__> hack us military computers, be charged under our legal system
+[05:55] <r0bby__> plain and simple
+=== astro76 [~james@astro76.user]  has joined #ubuntu
+[05:55] <deathwing> ok ill try it, and proftd sounds good cause i use gftp
+[05:55] <r0bby__> no
+[05:55] <r0bby__> I was referring to this: http://www.cnn.com/2005/WORLD/europe/06/08/hacking.extradition/index.html
+[05:55] <deathwing> wait ill install emacs, vim and proftd
+[05:55] <Seveas> r0bby, then leave.,,
+[05:55] <r0bby__> not any one person here
+[05:55] <bob2> r0bby__: #politics
+[05:55] <r0bby__> ah
+[05:55] <r0bby__> sry
+[05:55] <wm_eddie> deathwing, Why proftpd?
+[05:55] <jason> i've flooded now... have a look
+=== IcemanV9 says bum is a nifty tool! :)
+[05:56] <deathwing> well for ftp ill try it, just see what it does
+=== braam [~braam@71-33-175-108.dnvr.qwest.net]  has joined #ubuntu
+[05:56] <bob2> jason: ok, that's fine now
+[05:56] <deathwing> eddie are u a php programmer as well
+[05:56] <bob2> jason: sudo apt-get update ; sudo apt-get install libqt3-mt-dev
+[05:56] <jason> ok ill run the commands you be here still?
+[05:57] <wm_eddie> I've done php, but I mostly do Python, C#, and C.
+[05:57] <Balthazar>  Is there anyway to have some persistant data stay around when using the live cd?  either by accessing the hd, or a USB key or some such.  I want to play around with subversion, and would like to get away with not doing a full install if I can.
+=== rabo [~rabo23@217.Red-80-36-55.pooles.rima-tde.net]  has joined #ubuntu
+[05:57] <rabo> buenas
+[05:57] <deathwing> wow phyton, like c++ in windows
+[05:57] <bob2> Balthazar: you can use subversion on windows and mac os
+[05:57] <jason> bob2 am removing the sudo since im in sudo -s shell
+=== rsilva [~rsilva@dhcp047.ime.usp.br]  has joined #ubuntu
+[05:57] <bob2> Balthazar: but yes, you can store things on a usb key or whatever
+[05:58] <wm_eddie> deathwing, ?
+[05:58] <bob2> deathwing: python isn't anything like C++
+[05:58] <deathwing> well, im more into c++ hehehe but more familiar with pphp
+[05:58] <rabo> alguien me podria facilitar unos repositorios deb, para la ubuntu hoary ??
+[05:58] <Seveas> jason, in a sudo -s shell you can still use sudo
+[05:58] <deathwing> oh i must be mistaken, i think its perl im talking about
+[05:58] <Seveas> jason, by the way: better use sudo -i instead of sudo -s
+[05:58] <Balthazar> bob2, Yes, but the svn server I plan on implementing on Linux.  I just want to mess with it so I don't break a live system
+[05:58] <wm_eddie> rabo, deb  http://public.planetmirror.com/pub/ubuntu-backports/ hoary-extras main universe multiverse restricted
+[05:58] <Seveas> rabo, va en #ubuntu-es por espaol
+[05:58] <bob2> deathwing: perl is even less like C++
+[05:58] <IcemanV9> perl != C++
+[05:58] <bob2> Balthazar: ok
+[05:58] <jason> ok will do... please have a look at flood
+[05:59] <deathwing> i saw perl scripting looks more like c++
+[05:59] <Seveas> deathwing, ehm....
+[05:59] <_kevin> I want to completley remove OpenOffice 1.13 and I want to download and install the new OpenOffice 1.9.+ Beta, How would i go about doing this? Synaptic?
+[05:59] <Seveas> perl is nothing like c++
+[05:59] <Xnalz> hmm got a question
+[05:59] <bob2> _kevin: er, you know openoffice 2 is in hoary, right?
+[05:59] <Seveas> Xnalz, just ask :)
+[05:59] <bob2> jason: that is bizaare
+[05:59] <_kevin> no
+[05:59] <Xnalz> ok
+[05:59] <_kevin> i have hoary
+[06:00] <jason> bob2 please have a look at flood i got those same errors
+[06:00] <Xnalz> so installing
+[06:00] <jason> bob2 you think its better to just do a fresh install of hoary?
+[06:00] <Xnalz> got through tage one
+[06:00] <jason> what do you think?
+[06:00] <Xnalz> *stage one
+[06:00] <rsilva> Hello. I am trying to compile some Fortran 77 code that uses the blas library. I have the library installed (using atlas) and there is a file named /usr/lib/libblas.so.3. Howeer, g77 complains that it can't find -lblas library. What may be wrong?
+[06:00] <Seveas> _kevin, aptitude install openoffice.org2
+[06:00] <deathwing> well im not familiar with perl and phyton hehehe
+[06:00] <bob2> jason: yes, I know, that is bizarre
+[06:00] <deathwing> but ive seen perl scripting
+[06:00] <jason> bob2 what's your exact Ubuntu config?
+[06:00] <synd> radeon
+[06:00] <Chetic> Somebody help, I've installed the new ATi drivers and everything seems to work except GL applications which give me this error: "glxgears: error while loading shared libraries: libGL.so.1: cannot open shared object file: No such file or directory"
+[06:00] <bob2> jason: hoary
+=== pitti_ [~pitti@box79162.elkhouse.de]  has joined #ubuntu
+[06:00] <Xnalz> but after the reboot everything is fine then when it starts to rebuild dependency tree everything freezes
+[06:00] <deathwing> beggining and ending brackets looks the same
+[06:00] <bob2> Chetic: ask on the mailing list
+[06:00] <bob2> Chetic: and mention everything you've done so far
+[06:00] <_kevin> will it install over the 1.13, i don't want space to be used up by haveing two versions installed
+[06:00] <bob2> _kevin: then install it
+[06:01] <wm_eddie> deathwing, Python is pretty cool.  and Ruby is beautiful.  You should learn one.
+=== Balthazar [~Tim@24.70.172.248]  has left #ubuntu []
+[06:01] <jason> default hoary runs 2.6.8.1 kernel?
+[06:01] <bob2> _kevin: so remove openoffice 1 if you don't want it
+[06:01] <Xnalz> it goes to the please wait.... and then eventually everything turns black
+[06:01] <bob2> jason: no, 2.6.10
+[06:01] <jason> bob2 default hoary runs 2.6.8.1 kernel?
+[06:01] <_kevin> bob2 that was my question HOW?
+[06:01] <jason> its all backward compatible right?
+=== deadbattery [~deadbatte@68-113-62-210.ca.charter.com]  has joined #ubuntu
+[06:01] <bob2> _kevin: dude
+[06:01] <deathwing> ill try phyton but it looks difficult, now im in php because of web programming
+[06:01] <bob2> _kevin: chill out
+[06:01] <bob2> _kevin: how do you normally install and remove things?
+[06:01] <jason> bob2 so i should be able to do the labs in hoary?
+[06:01] <deathwing> ive done some websites using php and pg sql
+[06:01] <_kevin> i don't
+[06:01] <Xnalz> I have tried 4 different burned cds, and 2 different downloads
+[06:01] <bob2> deathwing: python is simple if you know how to program in anything
+[06:01] <wm_eddie> deathwing, I use python for web programming
+[06:01] <Xnalz> nothing is working
+[06:01] <_kevin> i install with apt-get
+[06:01] <bob2> _kevin: you've never ever removed or installed a package?
+[06:01] <rsilva> deathwing: Actually Python is well known for being easy for beginers.
+[06:01] <JuNkPhreak|UnIx> <---  2.6.10-5
+[06:02] <_kevin> fromt he ubuntu guide
+[06:02] <bob2> _kevin: so, use apt-get to remove it
+[06:02] <_kevin> i never uninstalled anything
+[06:02] <bob2> jason: sure
+[06:02] <wm_eddie> python is super easy.  Ruby not as much.
+[06:02] <bob2> jason: you won't be able to transfer binaries from hoary to warty, but your source should certainly compile
+[06:02] <deathwing> well but most of the opensource projects i download and use is written in php
+[06:02] <_kevin> i need the name of the package to remove it
+[06:02] <Chetic> ...
+=== Xero84 [~Xero84@cpe-65-24-30-40.columbus.res.rr.com]  has joined #ubuntu
+[06:02] <jason> bob2: did you get hoary from mirror.aarnet?
+[06:02] <deathwing> for example phpbb and php chat
+[06:02] <bob2> Chetic: which bit of that was confusing?
+[06:02] <bob2> jason: from au.archive.ubuntu.com
+[06:02] <deathwing> most of the websites use php
+[06:02] <bob2> which is, amusingly, in england
+[06:03] <Chetic> bob2, leave me alone, you're just being a bastard
+[06:03] <deathwing> but ill take ur advise and try phyton
+[06:03] <bob2> Chetic: dude
+[06:03] <jason> shees this is gonna cost me a lot of money :-
+[06:03] <Xnalz> guess no one knows...?
+[06:03] <bob2> Chetic: please stop playing the victim
+=== pmazer_ [~pmazer@c-67-191-170-172.hsd1.ga.comcast.net]  has joined #ubuntu
+[06:03] <jason> bob2 shees this is gonna cost me a lot of money :-\
+[06:03] <deathwing> it thought phyton was used to create programs in linux
+[06:03] <wm_eddie> Python is good for Desktop programming.
+[06:03] <bob2> Chetic: I'm suggetsing another place to ask, since it seems no one here knows
+[06:03] <IcemanV9> _kevin: use synaptic if you're not sure; it's fairly easy.
+=== DuckBot [~pmazer@c-67-191-170-172.hsd1.ga.comcast.net]  has joined #ubuntu
+[06:03] <Heart|> wm_eddie: could you paste a site from you which is written in python?
+[06:03] <bob2> deathwing: it runs well on windows, too
+[06:03] <deathwing> of course
+[06:03] <_kevin> Thanks IcemanV9
+[06:03] <deathwing> did u write it yourself
+[06:03] <bob2> er, no
+[06:03] <Seveas> bob2, some people cannot take advice and do not appreciate help or directions they did not expect :)
+[06:04] <bob2> jason: yeah, I know
+[06:04] <wm_eddie> deathwing, A lot of programs are written in python.
+=== scorpix [~scorpix@62.150.147.46]  has joined #ubuntu
+[06:04] <bob2> jason: what odd things have you done to apt on that machine?
+[06:04] <maruko`> yey normally apt-get asks me "Do you want to continue [Y/n] ?" before it downloads and install the package
+[06:04] <goldfish> yeah
+[06:04] <deathwing> could paste a sample of one sight

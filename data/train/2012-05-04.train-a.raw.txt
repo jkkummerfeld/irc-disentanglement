@@ -1,0 +1,1211 @@
+[00:20] <iceroot> !info nip2 oneiric
+[00:20] <ubottu> nip2 (source: nip2): spreadsheet-like graphical image manipulation tool. In component universe, is optional. Version 7.24.1-2 (oneiric), package size 5912 kB, installed size 11384 kB
+[00:20] <Zopiac_> Praxi: I can't even get zoneminder to bloody install T~T
+[00:20] <iceroot> doki_pen: also universe, just enable universe
+[00:20] <phaidros> kesav: for special hardware #alsa is the place
+[00:20] <iceroot> !universe | doki_pen
+[00:20] <ubottu> doki_pen: The packages in Ubuntu are divided into several sections. More information at https://help.ubuntu.com/community/Repositories and http://www.ubuntu.com/project/about-ubuntu/components - See https://wiki.ubuntu.com/RecommendedSources for the recommended way to set up your repositories
+[00:21] <doki_pen> iceroot: i have universe
+[00:21] <iceroot> doki_pen: sudo apt-get update
+[00:21] <doki_pen> https://gist.github.com/2590644
+[00:21] <Jordan_U> Djeff-o: Can you pastebin the output of "dmesg"?
+[00:21] <Praxi> Zopiac_, I installed it from source on a fresh server, the package in the repositories wasn't very useful
+[00:21] <ichat> whoooot
+[00:21] <phaidros> BrokenCog: on temrinal do "sudo apt-get install -f" and afterwards "sudo do-release-update" if that doesn help "sudo apt-get dist-upgrade" depending on the state of the update one might work
+[00:21] <doki_pen> iceroot: i've done that, I haven't edited sources.list
+[00:22] <iceroot> doki_pen: i dont know what mirror.rackspace.com is, try to use the real repos
+[00:22] <ichat> phaidros - i may have fixed it
+[00:22] <phaidros> ichat: great :)
+[00:22] <ichat> i removed lightdm  forcing it to go to non grafical mode......
+[00:22] <iceroot> !text | ichat
+[00:22] <ubottu> ichat: To start your system in text-only mode append 'text' (without the quotes) to the kernel line in the grub menu. You can access the grub menu by pressing Esc (Grub legacy) or Shift (Grub2) during boot. For more info see https://help.ubuntu.com/community/BootOptions#Text%20Mode
+[00:22] <phaidros> ichat: well, not a solution, but a login screnn tho :)
+[00:23] <doki_pen> iceroot: right.. that is what rackspace has on their default ubuntu image.  I Just realized that..
+[00:23] <BrokenCog> phaidros thanks, I'll try it now.
+[00:25] <BrokenCog> phaidros so it returned that bpkg --configure -r was needed ... looks like it's getting back on track.  thanks for the tip.  I need to learn this apt-get system ... Slackware has something a bit different.
+[00:25] <phaidros> BrokenCog: apt-get is nice, aptitude even more handy sometimes .. and *very* convenient compared to slack ;)
+[00:26] <Djeff-o> Jordan_U,  http://pastebin.com/PzZnQEJP
+[00:26] <taxman> aptitude is obsolete on 12.04. i have tested it
+[00:27] <iceroot> taxman: aptitude is still the better tool from both
+[00:27] <taxman> there is no gnome classic on 12.04 either
+[00:27] <phaidros> BrokenCog: what actually happend, is that apt realized that the underlying tool (dpkg) wasnt finished in some state and told ya the right command to let dpkg finish its current job. afterwards run that apt command again, as not all dpkg jobs might have been queeued yet
+[00:27] <xangua> !nounity | taxman
+[00:27] <ubottu> taxman: Ubuntu 11.10 uses GNOME 3 with the !unity shell by default.  To use GNOME Shell instead, install the "gnome-shell" package and investigate "gnome-tweak-tool".  For GNOME Fallback mode, which is similar to GNOME 2, install "gnome-panel". Both packages will place entries in the Sessions dropdown. Using Natty? See !classic
+[00:27] <phaidros> taxman: well, really? my aptitude works as always
+[00:27] <BrokenCog> phaidros roger.
+[00:27] <jagginess> !selinux
+[00:27] <ubottu> SELinux is available on Ubuntu, but not officially supported. Ubuntu uses another security framework by default, see https://help.ubuntu.com/community/AppArmor
+[00:27] <xangua> taxman: that it's not preinstalled doesn't mean obsoloete
+[00:28] <iceroot> taxman: there are some tools which are better then the default but they are not installed by default (gimp, vim, zsh, aptitude)
+[00:28] <iceroot> taxman: mostly because of disc-space by the iso
+[00:28] <phaidros> ichat: I dont agree on vim and zsh!
+[00:29] <phaidros> iceroot: ^^
+[00:29] <iceroot> phaidros: vim is better then vi of course
+[00:29] <phaidros> vim is a sickness ...
+[00:29]  * phaidros runs ducks and covers enjoying the flames
+[00:29] <iceroot> phaidros: compared to vi
+[00:29] <phaidros> boring!
+[00:29] <iceroot> phaidros: no its a silly try for a flamewar so nithing will happen
+[00:29] <phaidros> anyone say "eeeemaaaacs"
+[00:29] <taxman> unity is not a bad idea on 12.04. it takes only about 500mb of ram
+[00:29] <iceroot> phaidros: stop it please
+[00:30] <phaidros> who needs zsh anyways ;)
+[00:30] <Myrtti> !offtopic | phaidros
+[00:30] <ubottu> phaidros: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[00:30] <taxman> on 11.04, my gnome takes about 1gb of ram
+[00:30] <iceroot> phaidros: people which like a good interactive shell
+[00:30] <phaidros> Myrtti: I was helping for ~2 hours and do a joke, before saying good bye, stop parenting me ;)
+[00:30] <iceroot> phaidros: with a very powerfull globing
+[00:31] <phaidros> iceroot: yes, you are right, sure.
+[00:31] <phaidros> bad trolling is bad and I wish everyone a good night ;)
+[00:31] <phaidros> (shame on me)
+[00:31] <Myrtti> phaidros: if you've helped for two hours, you should know better then ;-)
+[00:32] <Myrtti> phaidros: good night
+[00:32] <phaidros> Myrtti: dont let me troll you, don't you dare!!
+[00:32] <phaidros> n8
+[00:32] <Tecan> can someone help me?
+[00:33] <Tecan> with peergaurdian
+[00:33] <tychus> what is it
+[00:33] <Tecan> a program to help privacy
+[00:33] <taxman> from china?
+[00:33] <Tecan> no
+[00:33] <taxman> hahaha
+[00:33] <Tecan> lmao
+[00:33] <Tecan> isps so i dont get fucked up the ass
+[00:34] <xangua> !language | Tecan
+[00:34] <ubottu> Tecan: Please watch your language and topic to help keep this channel family-friendly, polite, and professional.
+[00:34] <jack_^> !caps
+[00:34] <ubottu> PLEASE DON'T SHOUT! We can read lowercase too.
+[00:34] <Tecan> sorry ubottu
+[00:34] <aardmark> for anyone out there that has encountered this issue: I've been having a tough time figuring out how to transfer ~100GB of data from my Mac to my Ubuntu box, and coming across several lame issues. Best resolution: direct ethernet link between the Mac and the Ubuntu box, and I'm able to transfer roughly 1GB per minute
+[00:35] <aardmark> could probably go even faster if I wasn't using SCP, but hey - this is much less painful than shuttling a thumbdrive
+[00:35] <taxman> mac has thunderbolt
+[00:35] <tarwich> aardmark: Why didn't you boot into Target Disk Mode and read from that? Was it slower? (might have been, not sure)
+[00:36] <aardmark> using target disk mode over ethernet with ubuntu
+[00:36] <aardmark> ?
+[00:36] <aardmark> taxman: my mac doesn't have thunderbolt
+[00:37] <taxman> O.o
+[00:37] <tarwich> Negative. Mac has a mode called target disk mode where the mac functions as a glorified USB stick — allowing you to copy to and from it by plugging it into a usb or firewire port.
+[00:37] <tarwich> aardmark: Sorry, I should have used your name! :-|
+[00:38] <aardmark> tarwich: oo mount the drive over USB in target mode... that'd have been interesting - I thought it only worked over firewire
+[00:38] <aardmark> tarwich: I'll have to try that
+[00:38] <tarwich> aardmark: checking...
+[00:38] <ztag100> tarwich, Is there a way to do that with ubuntu?
+[00:38] <aardmark> tarwich: that'd have probably been faster because SCP does the encryption with the transfer
+[00:39] <tarwich> ztag100: negative. It's a mac bios thing.
+[00:39] <taxman> mac has no bios
+[00:39] <tarwich> taxman:  LOL… Let's not get into wars over technicalities on something off-topic.
+[00:39] <ztag100> It would be cool
+[00:40] <tarwich> aardmark: TDM does not work with USB http://osxdaily.com/2010/04/07/how-to-boot-a-mac-in-target-disk-mode/
+[00:40] <aardmark> taxman: btw - Mac is built off of Unix, which has BIOS.
+[00:41] <aardmark> tarwich: ahh - ok... woulda been cool tho
+[00:41] <aardmark> well.. I guess as of 2010 (when the article was posted)
+[00:41] <ztag100> Isn't BIOS seperate from OS?
+[00:42] <taxman> !@#$#$%^&&*
+[00:43] <tarwich> BIOS is the basic input output system that is used to coordinate between your things like a keyboard and the operating system. All computers have a BIOS, but some people think of BIOS is the user-friendly screens that come up on a PC
+=== Guest36520 is now known as Bogdaniel
+=== Bogdaniel is now known as Guest71605
+[00:45] <ztag100> tarwich: isn't BIOS something on the motherboard, not something reliant on the Os?
+[00:45] <jo-linux> !Topic
+[00:45] <ubottu> Please read the channel topic whenever you enter, as it contains important information. To view it at any time after joining, simply type /topic
+[00:45] <ztag100> OS*
+[00:45] <jo-linux> topic
+[00:46] <Alex_Kee> hi
+[00:46] <Jordan_U> ztag100: tarwich: aardmark: and anyone else: Please move the discussion about semantics and Apple hardware / Firmware to #ubuntu-offtopic.
+[00:46] <Alex_Kee> advise please eq for all system
+[00:46] <Alex_Kee> ubuntu 12.04
+[00:48] <hellllppppmeeee> How do I make my system's performance as apart of my ubuntu desktop background?
+[00:48] <tarwich> hellllppppmeeee: I use conky for that. You can install it from the software manage or apt-get
+[00:49] <ztag100> Do alot of people use Software Center
+[00:49] <Zarathust> I'm trying to upgrade from lucid to latest (12.04). However sudo do-release-upgrade says "No new release found"
+[00:49] <hellllppppmeeee> tarwich: brilliant, thank you
+[00:49] <Zarathust> lsb_release -a does tell me that I run 10.04
+[00:49] <SyphirX> okay
+[00:49] <SyphirX> so i have a major problem
+[00:50] <Zarathust> what should i look for?
+[00:50] <taxman> i can see load and temperature and change cpu government on the fly, on unity of 12.04
+[00:50] <SyphirX> During the LiveCD test, i had two of my three monitors working
+[00:50] <SyphirX> now that I have it installed, its only detecting one
+[00:50] <SyphirX> Anyone have any clue on how to fix this?
+[00:50] <taxman> my unity almost works as well as old gnome classic
+[00:51] <Alex_Kee> Guys are there any full bass and EQ support for asus xonar DS ?
+[00:51] <Alex_Kee> sound is so ulgy :(
+[00:51] <taxman> asus sonar? no, thanks
+[00:51] <Alex_Kee> what no thanks?
+=== thomas is now known as thomasu
+[00:52] <Alex_Kee> I`m asking about support and advise for system equlizer support
+[00:52] <taxman> can you control asus sonar by alsa and pulseaudio?
+[00:52] <Alex_Kee> trying to control by alsa
+[00:52] <taxman> hardware eq or software eq?
+[00:53] <taxman> media players have software eq already
+[00:53] <Alex_Kee> well if its available to control sowtware FOR ALL SYSTEM not for one software it could be useful
+[00:53] <taxman> it's hardware eq
+[00:53] <Alex_Kee> oh
+[00:53] <Alex_Kee> ok
+[00:53] <Alex_Kee> so?
+[00:54] <taxman> you need the driver from asus
+[00:54] <Alex_Kee> hahah ))) thanks i think that its not exist
+[00:54] <Alex_Kee> pity :(
+[00:54] <taxman> lol
+[00:54] <ozpy> Hi
+[00:54] <Alex_Kee> There is some sweet things like FLEX BASS GX mode etc... that works in win platform
+[00:54] <taxman> i will stay with normal ac97/intel hda
+[00:55] <Alex_Kee> but for nix couldnt find (
+[00:55] <ozpy> Hi. I was running ubuntu USB drive on Mac. Now it
+[00:55] <Alex_Kee> And when I listen to the music from facebook or something like this - eq is apsent(
+[00:56] <taxman> i am running ubuntu 12.04 on a fast and small pendrive, no hdd or other storage
+[00:56] <bazhang> !ot | taxman
+[00:56] <ubottu> taxman: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[00:56] <ozpy> I was running ubuntu 11.04 usb drive on Mac. Now it's froze. how to shut it off? On/off switch does not work and can't pull the battery out
+[00:57] <ulkesh> ozpy, have you held down the on/off switch?
+[00:57] <SyphirX> Anyone have any ideas as to why dual-monitors would work during LiveCD but not even detect the second once installed?
+[00:57] <ozpy> ulkesh: thanks! It worked. My mistake.
+[00:57] <tarwich> ozpy: I have yet to see a computer that ulkesh's solution doesn't work on. Even mac. It is supposed to take about 10 seconds of holding the button down.
+[00:57] <tarwich> cool
+[00:57] <ozpy> tarwich: i didn't hold it long enough
+[00:57] <ozpy> It's fixed. Thanks
+[00:57] <ulkesh> np, glad to help!
+[00:58] <ulkesh> good luck
+=== Garr255_ is now known as Guest12546
+[00:58] <cannonball> I'm downloading and compiling a portion of the exim tarball (the test suite utilities).  On my 11.04 box with openssl 0.9.8 it compiles just fine.  On my 12.04 box with openssl 1.0.1, it fails to compile, complaining about various SSL_* functions when compiling.  Anybody else see openssl issues on the upgrade from 11.* to 12.04?
+=== jsec is now known as jsec[AFK]
+[01:00] <SyphirX> Can anyone help? Any ideas would work wonders right now.
+=== fayimora_ is now known as fayimora
+=== MrCongress is now known as IQ150
+[01:00] <tarwich> SyphirX: Well I have an idea, but it's not great. Perhaps during the install you downloaded updated drivers that no longer support the feature.
+[01:01] <SyphirX> I did the standard install but once it restarted, the second monitor just wasnt being detected
+[01:02] <SyphirX> its even saying my computer is a laptop in the display settings
+[01:02] <tarwich> SyphirX:  And it's not?
+[01:02] <SyphirX> its a desktop computer
+[01:02] <SyphirX> Albeit custom built
+[01:03] <tarwich> SyphirX: Still… It shouldn't say that… Sorry, man. There has to be a way to fix your hardware mappings, but I don't know Ubuntu well enough. I only answered because I felt bad for you.
+[01:04] <walbert> SyphirX: My desktop shows the same thing, with nvidia's binary drivers - but it works fine
+[01:04] <Jordan_U> SyphirX: Can you pastebin your /var/log/Xorg.0.log?
+[01:04] <drPoO> is it possible to make custom collections of wallpapers to cycle through in the day?
+[01:05] <lotus-blade> ho do you fix /usr/bin/ld: cannot find -lncurses in 12.04
+[01:05] <Jordan_U> SyphirX: And possibly boot from the LiveCD again and post the /var/log/Xorg.0.log from there?
+=== Guest12546 is now known as Garr255
+[01:05] <Jordan_U> lotus-blade: What command gives you that error?
+[01:05] <SyphirX> How do I open bash? Unity is being a bitch.
+[01:05] <walbert> lotus-blade:  try sudo apt-get install libncurses5-dev
+[01:05] <Jordan_U> !language | SyphirX
+[01:05] <ubottu> SyphirX: Please watch your language and topic to help keep this channel family-friendly, polite, and professional.
+[01:05] <citizenkeys> i installed proftpd using apt-get install proftpd.  when i did, i chose the wrong mode (inetd) instead of standalone mode.
+[01:06] <Jordan_U> SyphirX: Search for "gnome-terminal".
+[01:06] <SyphirX> My apologies. Crappy day compounded with this.
+[01:06] <citizenkeys> so i removed proftpd.  but now when i try to reinstall it with apt-get install proftpd, it doesn't ask me which mode to use.
+[01:07] <wylde> citizenkeys: use apt-get purge , so it will remove configurations before you re-install
+[01:07] <SyphirX> I cant even SU
+[01:07] <SyphirX> permission denied
+[01:07] <wylde> sudo -i
+[01:08] <SyphirX> permission denied for /var/log/Xorg.0.log
+[01:08] <tucemiux_mob> anyone knows of an "official" fix to the dreaded waiting up to 60 more seconds for network configuration...
+[01:08] <walbert> SyphirX: What brand of Linux are you accustomed to using?  Debian derivatives, expecially Ubuntu, have a tendency to do things differently - perhaps there's a guide that could help you.
+[01:08] <SyphirX> Debian but it
+[01:08] <SyphirX> 's been forever
+[01:09] <IdleOne> SyphirX: use sudo -i for extended admin privs but please be careful
+[01:09] <walbert> SyphirX: try gksudo gedit /var/log/Xorg.0.log from the Terminal (bash).  To get to bash, hit your meta key, and start typing "terminal"
+[01:09] <Xeneth> tucemiux_mob, The main reason I think for the extra time is because it's a script in the gnome/unity that is doing it, so that must first load.  If you enter the configurations in the network file, that may speed things up.
+[01:10] <wylde> SyphirX: or if you're in a gui you can just ctrl+alt+t to open the terminal.
+[01:10] <tucemiux_mob> Xeneth, you mean if I configure dhchp manually?
+[01:10] <walbert> wylde: pow, you just made a couple hours of idling in this channel completely worth it :)
+[01:11] <wylde> walbert: :)
+[01:11] <Djeff-o> Hello, I'm using Ubuntu 12.04 and I can't format a usb stick to ext2, ext3 or ext4 using gparted. When I do, a red icon with an exclamation mark appears. When I unplugg it and re-insert it again i get the error message: "Error mounting: mount: wrong fs type, bad option, bad superblock on /dev/sdb1, missing codepage or helper program, or other error In some cases useful info is found in syslog - try dmesg | tail  or so"
+[01:11] <Djeff-o> demesg output  http://pastebin.com/PzZnQEJP
+[01:11] <Xeneth> tucemiux_mob, correct.  I have never done it on a system with a GUI, so there may be some side-effects, but worth a try.
+[01:11] <wylde> Djeff-o: typically usb thumb/pen drives are foramtted fat
+[01:11] <connelly> hey all, I'm pretty sure that a problem I'm having is bug #969535 and it looks like they have a fix for it in -proposed - how do I download that fix?
+[01:11] <ubottu> Launchpad bug 969535 in gnome-settings-daemon (Ubuntu Precise) "[power]: gnome-settings-daemon crashed with SIGSEGV in engine_get_icon_priv()" [High,Fix committed] https://launchpad.net/bugs/969535
+[01:12] <SyphirX> You know what? I give up. I can't do it. I thought I'd give Linux a shot again but if I have to go through this again (Dealt with the same thing on OpenSUSE/Ubuntu/etc on my laptop years ago) it's not worth it. Not until Steam comes out.
+[01:12] <SyphirX> Sorry to waste your time.
+[01:12] <Djeff-o> wylde, yes, and i can format it in fat 32, but not in ext2
+[01:12] <SyphirX> Reinstalling Windows, have fun. I appreciate the help but... I can't. Not today.
+[01:13] <Guest7047> ..
+[01:13] <cookiemon5ter> SyphirX, good luck
+[01:13] <wylde> Djeff-o: ext2 is not the same as fat. Just curious why you want to format it as extX anyway.
+[01:13] <ulkesh> Poor sap, was about to suggest to him he run Ubuntu on a VM on Windows like I do :)  I get the benefits of Ubuntu, full acceleration, and can still game when I want
+[01:13]  * leonel Ola pessoal ... alguem ai?
+[01:14] <IdleOne> !br | leonel
+[01:14] <ubottu> leonel: Por favor, use #ubuntu-br para ajuda em português. Para entrar no canal por favor faça "/join #ubuntu-br" sem as aspas. Para a comunidade local portuguêsa, use #ubuntu-pt. Obrigado.
+[01:14] <leonel> Thanks so much friend !
+[01:14] <tucemiux_mob> Xeneth, my config is pointing to eth0, i'm using eth1 and disabled inboard nic, lets see if it worked, rebooting now
+[01:15] <tucemiux_mob> ulkesh, you game in ubuntu or winblows?
+[01:15] <Djeff-o> wylde, lol, i guess i could have it in fat32, but i want to know why i cant format it to ext2...
+[01:15] <cookiemon5ter> tucemiux_mob, he games in linux and uses windows for cmd
+[01:16] <ulkesh> tucemiux_mob, I game in Windows...I'd like to run Ubuntu natively, but a VM seems to work almost as well.
+[01:16] <ulkesh> lol cookiemon5ter
+[01:16] <tucemiux_mob> ulkesh, woohohooooooooooooooo
+[01:16] <wylde> Djeff-o: I don't know the specifics offhand. Just that FAT is universally accessible by most if not all OS's.
+[01:16] <tucemiux_mob> cookiemon5ter,  but can you use the acceleration on ubuntu on a vm?
+[01:17] <ulkesh> I have nice wobbly windows, but I haven't tried gaming in Ubuntu as a VM.
+[01:17] <cookiemon5ter> tucemiux_mob, not sure i've only used linux for the last 11 years
+[01:18] <cookiemon5ter> windows broke on me in 2001 and never looked back
+[01:18] <ulkesh> I'm eager to see what Valve does with Steam on Ubuntu.  I hope it brings more development to this side.
+[01:19] <cookiemon5ter> never been into gaming so i had it easy i suppose
+[01:19] <tucemiux_mob> ulkesh, only reason i ever boot to windows is to synchronize my phone but it looks like pretty soon that's going to be the end of it, im going to upgrade my phone
+[01:19] <IdleOne> !ot
+[01:19] <ubottu> #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[01:20] <tucemiux_mob> gaming is actually FASTER in ubuntu, the main game i play is UrT, ubuntu uses my weak card a lot better than windows,  but with every upgrade I have to tweak something, right now my drivers are broken
+[01:20] <Ben64> tucemiux_mob: UrT?
+[01:21] <ulkesh> Probably Unreal Tournament
+[01:21] <tucemiux_mob> Urban Terror, it works on ubuntu
+[01:21] <ulkesh> nvm
+[01:21] <Djeff-o> wylde, thank you for your time... I just thought if i only use this particular usb stick on ubuntu it should be better to have it formated to extX.
+[01:21] <Ben64> Unreal Tournament = UT
+[01:21] <tucemiux_mob> urban terror is open source and free
+=== bill is now known as Guest11428
+[01:22] <josten> I just upgraded from 11.10 to 12.4.  I'm having problems with the dash.  In the previous version, once you opened and application, the dash would hide.  Now the dash stays in view.  If I change the settings for it to be hidden, it stay that way even on the desktop.  Any cures?
+[01:22] <LinuxMonkey> anyone heard of a fix to the Unknown LVM metadata header errors yet?
+[01:22] <mnogueira> Hey
+[01:22] <mnogueira> sorry again, but there is no one in fedora channel
+[01:22] <tucemiux> ok ive got my rig upgraded, nic working good, how do you change the theme? I can't see items in the taskbars
+[01:23] <mnogueira> Please guys, may you help me with my not much hard problem
+[01:23] <OerHeks> mnogueira, not an ubuntu problem., is it?
+[01:23] <mnogueira> no
+[01:23] <ejv> there's like 400 people in #fedora, lies
+[01:23] <tucemiux> !ask | mnogueira
+[01:23] <ubottu> mnogueira: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[01:23] <mnogueira> Problem installing fedora 16
+[01:23] <tucemiux> fedo who?
+[01:23] <mnogueira> The graphical installer specifically
+[01:23] <cookiemon5ter> mnogueira, ##linux is a good channel
+[01:23] <tucemiux> !ot | cookiemon5ter
+[01:23] <ubottu> cookiemon5ter: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[01:23] <Ben64> mnogueira: that is not within the scope of this channel. If you want to install ubuntu we could help you out
+[01:24] <mnogueira> Ok ok, but can i first tell you guys, my problem?
+[01:24] <ejv> tucemiux is supreme commander of the triggers ha
+[01:24] <tensorpudding> i'm pretty sure there are people in #fedora
+[01:24] <tucemiux> :-)
+[01:24] <mnogueira> and if you could not help me.. then i go away
+[01:24] <IdleOne> mnogueira: don't waste your time, ask in #fedora or ##linux
+[01:24] <tensorpudding> maybe no one is talking though
+[01:24] <bazhang> mnogueira, fedora is not supported here
+[01:24] <ejv> im curoius now, let him ask :D
+[01:24] <tucemiux> sorry monsta, im trigger happy
+[01:24] <mnogueira> k...
+[01:24] <ejv> s/curoius/curious/g
+[01:24] <Ben64> ejv: you could go join #fedora :P
+[01:25] <ejv> i'm in there already
+[01:25] <ejv> ha
+[01:25] <IdleOne> ejv: you can join either of those channels to help him there
+[01:25] <ejv> nice find on urban terror, thx tucemiux
+[01:26] <tucemiux> ejv, youre welcome, look for me on the weekends and i'll camp you till you cry!
+[01:26] <ejv> tucemiux: what's the more recent, better looking FPS that runs on Ubuntu?
+[01:26] <tucemiux> zombie survivor mode
+[01:26] <dors> hello, i'm trying to get HUD to work in this ubuntu 12.04 but the ppa seems offline, i get a 404 for  http://ppa.launchpad.net/unity-team/hud/ubuntu/dists/precise/main/source/Sources and the other urls related to HUD, any ideas? thanks
+[01:27] <tucemiux> ejv, try the software center, it's incredibly revamped, has a huge inventory, havent had a chance to check it out yet
+[01:27] <ejv> join offtopic tucemiux
+[01:27] <ejv> before i get spanked, they are... retentive here :D
+[01:27] <tucemiux> is it possible to install theme on ubuntu and have them appear on the themes menu??
+[01:28] <tucemiux> ejv, thats ok, i do the spanking around here
+[01:28] <IdleOne> I'm gonna mute you both very soon
+[01:28] <ejv> i can't pick your brain on open source fps'es here, join offtopic !
+[01:29] <tucemiux> ejv, sorry but im more into ubuntu, what works on ubuntu and the like
+[01:29] <josten> I have had a lot of questions answered on here.  What is going on now?
+[01:29] <tucemiux> how do you search the software center?
+[01:30] <LinuxMonkey> josten still answering questions and asking some too
+[01:30] <ejv> yea i get that, i wanted your opinion on the other fps's that happen to run on ubuntu, if you have experience in that realm that is; if you change your mind: -> #ubuntu-offtopic
+[01:30] <josten> LinuxMonkey: Sorry.  Thanks.
+[01:31] <LinuxMonkey> tucemiux:  search bar in the top right hand corner (white rectangle with a magnefying glass)
+[01:32] <tucemiux> LinuxMonkey, thanks, i had to maximize the screen to see it
+[01:32] <josten> Didn't know if I was connected or not.  Sorry.
+[01:32] <tucemiux> thats a big flaw, if you make the software center smaller, you dont have a horizontal bar
+[01:33] <josten> LinuxMonkey: be back in a few
+[01:33] <wylde> tucemiux: in the software center?
+[01:33] <tucemiux> anyone knows if it's possible to install themes in ubuntu?
+[01:34] <ulkesh> The software center seems to have a min res, around 640x480 or so...everything repositions well for me...at least in 12.04.
+[01:34] <tucemiux> wylde, yeah i made the window smaller and couldnt see the search square, i didnt have a horizontal bar
+[01:34] <wylde> tucemiux: the only somewhat stable way I've found so far is using ubuntu-tweak
+[01:34] <tucemiux> what's ubuntu-tweak? what does that thing do?
+[01:34] <monvillalon> IM looking for way to add a repo, but only use it for cherry picked packages…. I can't seem to google fu it
+[01:34] <wylde> tucemiux: you could file a bug about it :)
+[01:35] <tucemiux> Reconfiguring X.org video drivers is not possible: /etc/X11/xorg.conf is invalid.
+=== Garr255 is now known as Guest16586
+[01:35] <wylde> tucemiux: http://ubuntu-tweak.com/ their project is hosted in Launchpad as well.
+[01:36] <tucemiux> wylde, ok but im wondering what does ubuntu tweak has?
+[01:36] <chsados> can anyone help me... first time ubuntu user: installed ubuntu 12.04 onto my 2nd HDD on my computer (D:) have win7 installed on C:  i used the webui.exe to install ubuntu onto D: and when i restart i get the option to select windows or ubunty - i select ubuntu and it tells me im missing files or something.... i can get a screen shot if this isnt making any sense
+[01:37] <wylde> tucemiux: it lets you use themes you can find in the repos.
+[01:37] <monvillalon> chsados: I've nerves heard of webui.exe do you mean Wubi?
+[01:38] <chsados> i assume so.. its the small file you download from the website that downloads ubuntu and installs it through windows
+[01:38] <tucemiux> wylde, thanks im goign to look into it but for now im going to fix my video drivers
+[01:38] <wylde> tucemiux: alrighty.
+[01:38] <Jordan_U> chsados: I would recommend that you uninstall Wubi and install Ubuntu in a normal dual boot.
+[01:39] <Mauhdeeb> Having a weird problem opening Windows share that wasn't present on 11.10. Keeps asking for the username and password but if I enter them it says "opening" and eventually falls back to asking again
+[01:39] <chsados> im thinking the problem is im not installing it on the C drive
+[01:39] <wylde> +1 on Jordan_U 's recommendation.
+[01:39] <Mauhdeeb> Anyone seen this behavior?
+[01:40] <chsados> i dont want to install it on C: bc i am going to format C and reinstall windows after i get ubuntu functional i want ubuntu on my D drive and windows on my C
+[01:40] <conkyhelp> i just installed conky. im trying to use a some conky scripts (conkytransmission), but i dont see a .conkyrc file after install and reboot. does anyone know how to customize conky?
+[01:41] <Jordan_U> chsados: First, remove Wubi using Add/Remove programs from Windows.
+[01:41] <chsados> ok
+[01:41] <chsados> i guess reformat D again?
+[01:41] <wylde> conkyhelp: are you enabling show hidden files?
+[01:41] <monvillalon> chsados: Wubi , creates a virtual disk , its not a "real" ubuntu installation as I understand it.  Its tied to Windows because it lives inside a Windows file, its a weird thing that I don't recoment
+[01:41] <conkyhelp> wylde: ls -al, yes
+[01:41] <chsados> ahhh i see monvillalon
+[01:41] <monvillalon> chsados: Install from scratch
+[01:42] <chsados> problem is i dont have cd/dvd drive on comp and my thumb drive is in a friends hand (gave her first 2 seasons of game of thrones :D)
+[01:42] <wylde> conkyhelp: alrighty, just checking :)
+[01:42] <chsados> so i currently have no way of installing it via iso
+=== decaf is now known as Guest71519
+[01:42]  * taxman has a dozen of fast pendrives for ubuntu
+[01:43] <monvillalon> chsados: As Jordan_U said , remove with windows installer, get a dvd, reboot computer with dvd inside, install.  Btw if you are not versed in the ways of the multi boot create a backup :)
+[01:43] <Jordan_U> chsados: Do you absolutely need to install it now, or can you wait until you have a blank CD or a flash drive?
+[01:43] <chsados> i can wait.... if i must
+=== Guest71519 is now known as decaf
+[01:44] <Jordan_U> chsados: Then I recommend you just wait.
+[01:44] <chsados> i wont have any internet connectivity until my cat6 cable comes from ebay anyways... ubuntu doesnt like my netgear wireless dongle
+[01:44] <monvillalon> chsados: I see no other way, there is a network install but its not worth the trouble
+[01:44] <ulkesh> chsados, I would suggest VirtualBox as an option as well, depending on what you're trying to do (if you're just trying out Ubuntu, it can be a good way to go if you have enough RAM)
+[01:44] <monvillalon> chsados: ulkesh idea is great if you just want to try it out
+[01:45] <chsados> i just want ubuntu for secure browsing/usage CISPA got me all pissy
+[01:45] <kion> I am trying to install postgresql on a remote server that I can ssh into, after sudo apt-get install postgresql, it says it is installed but it is not… any ideas?
+[01:45] <monvillalon> chsados: As for the dongle, read a little about ndiswrapper ( maybe there is something newer )
+=== Guest71605 is now known as Bogdaniel
+[01:45] <Ben64> chsados: OS doesn't really matter for secure browsing. you should look into a VPN or something along those lines
+[01:45] <chsados> yea ive read hours on end about it... its a dead end w my particular browser
+=== Bogdaniel is now known as Guest86184
+[01:46] <Pelo> evening folks , I have  my brother with me , he's having issues with his acer aconia 100 tablet since he upgraded to andriod 4.0.3,  he uses it to stream media from his home pc over wifi and now the videos are getting shoppy has hell , it does the same on my network , can he downgrade back to 3 ?
+[01:46] <chsados> i have VPN and all that jaz... just want to get away from MS and have ubuntu installation with a hidden trucrypt volume
+[01:46] <chsados> trucrypt works w linux yes?
+[01:46] <kion> Chsados it works perfectly under linux
+[01:47] <chsados> cool
+[01:47] <wylde> conkyhelp: http://conky.sourceforge.net/docs.html  did you check for .conkyrc in /etc/conky/.conkyrc  ?
+[01:47] <Pelo> sorry , wrong channel
+[01:47] <conkyhelp> wylde: yes, its not there either. only conky.conf
+[01:47] <wylde> conkyhelp:  hmmm ok.
+[01:47] <chsados> on another note.... what r advantages over i2p vs tor?
+[01:48] <WickedWiccan> Where do i go to ask questions about ubuntu arm
+[01:48] <wylde> conkyhelp: ok, could try 'locate conkyrc' I suppose
+[01:49] <conkyhelp> wylde: file not found
+[01:49] <hellopeiyang> hello everyone, i am a beginner
+[01:51] <OccupyDemonoid> hellopeiyang, Hello, do you need help with something?
+[01:51] <chsados> is this ubuntu on android dual core smartphone vaporware or is it gunna actually happen?
+[01:51] <ki4ro> any ham radio operators here tonight?
+[01:51] <wylde> conkyhelp:  ... or maybe I could actually read the link I posted to you lol. /etc/conky/conky.conf is the sample configuration, 'cp /etc/conky/conky.conf /home/$USER/.conkyrc
+[01:52] <ulkesh> ki4ro, I'm a tech class, but haven't talked on the radio in years
+[01:52] <conkyhelp> wylde: im trying to get this running using my install of conky http://gnome-look.org/content/show.php/conkytransmission?content=129001
+[01:52] <taxman> ki4ro, no more, they are playing knoppix
+[01:52] <usa> hey how do I get gnome 2 on ubuntu 12.04??
+[01:52] <ki4ro> ulkesh: Hello.  Do you use logging software?  If so which one?
+[01:53] <ki4ro> taxman: What's knoppix?
+[01:53] <ulkesh> ki4ro, nope, sorry
+[01:54] <digitalj> damn i wish my name was rinzler
+[01:54] <ki4ro> ulkesh: Okay.  Thanks.  73
+[01:54] <wylde> conkyhelp: line 1 in the instructions. Do you have conky installed?
+[01:54] <rinzler> digitalj: Got it first! :D
+[01:54] <digitalj> Lucky.
+[01:55] <rinzler> digitalj: also grabbed d-_-b
+[01:55] <conkyhelp> wylde: obviously..., its installed, i can run it, but there is no .conkyrc so the install script will not allow me to customize it. i try to create an artificial / fake one, and no effect
+[01:55] <digitalj> Well aren't you special
+[01:55] <javierf_> Hi! Are changes in shutdown dialog or time menu (pictures: http://linuxconfig.net/media/featured/ubuntu-12-04-precise-pangolin-review.html) real in ubuntu 12.04? I installed every actualization from beta2 but don't get them. Do I need to trigger them?
+=== steve-o_ is now known as GeoGeek
+[01:55] <digitalj> I bet you own internet.com or something with how things are turning out
+[01:55] <usa> hey how do I get gnome 2 on ubuntu 12.04?? I hate unity I can't do anything with it there are no options..!
+[01:56] <Fyodorovna> usa, gnome 2 is not in 12.04 there is a fallback gnome that looks somewhat and can be tweaked to be close to it. run sudo apt-get install gnome-shell and you will also get the gnome 3 desktop as a choice as well.
+=== root is now known as Guest73254
+[01:56] <wylde> conkyhelp: alright, then I should assume you installed transmission-cli and edited the preferences there.... according to the instructions, install.sh should create the sample .conkyrc for you, so it isn't then?
+[01:57] <thoong> can i change color scheme in ubuntu - say instead of orange highlight to blue highlight. blue seems to be choice for many os.
+[01:57] <thoong> ?
+[01:57] <conkyhelp> wylde: yes, exactly. this is the problem
+[01:57] <GeoGeek> Hey all. I have a database publishing project I need to do. Want to use it as an opportunity to learn some new linux tools. I need a good database frontend  that can output data tagged for a page layout program. Any recommendations? I am looking at Kile to do layout but the data fields would need to be tagged on the way out of the database.
+[01:57] <thoong> preferbably with gui.
+[01:57] <kion> can anybody hel me install postgresql?
+[01:59] <wylde> conkyhelp: then you should be seeking help from the author of that package.
+[01:59] <leonel> quit
+[02:02] <thoong> i dont hate unity. but i dislike global menu and close,min, max on the left. is there a way to get it back the other side?
+[02:02] <dr_willis> trivial
+[02:02] <arulmozhi> I hav installed so many packages through online. and I used APTonCD to backup those packages. but now can't restore them.  when click the load button in Restore window of APTonCD it throws errors into the console[http://www.pasteall.org/pic/show.php?id=31246]. is there any way to add the backuped packages back to var/cache/apt and make ubuntu that the packages are there in. Last time APTonCD worked for me on Karmic Koala(9.10). Internet speed is very
+[02:02] <arulmozhi>  slow here. I can't download all again. help me out.
+[02:03] <FloodBot1> arulmozhi: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[02:03] <dr_willis> !controls
+[02:03] <ubottu> Starting in Lucid, the minimize, maximize, and close buttons have been moved to the left side. For more information and workarounds, please see http://pad.lv/532633
+[02:03] <thoong> thanks
+[02:03] <wylde> conkyhelp: see if 'cp ~/.conkytransmission/example.conkyrc ~/.conkyrc' creates it, that's all the install script does if you don't have one anyway.
+[02:03] <agu10^> http://tinyurl.com/7zg74b7 <- Inception on Linux Facebook
+[02:04] <bazhang> agu10^, dont spam here
+[02:04] <agu10^> uh sorry
+[02:05] <Static2009> Is there somebody that may be able to help me connect an Ubuntu client to Windows server 2008?
+[02:05] <arulmozhi> @FloodBot1: wat about pics??
+[02:07] <MonkeyDust> earlier today, somebody here posted a link for ubuntu-fix or fix-ubuntu, can someone post it again?
+[02:08] <x_XP> -
+[02:08] <x_XP> I need some help with upgrade from 11.04 to 12.04 on DELL E6400 laptop. Can someone please help guide me trough since I am running to some serious problems
+[02:08] <conkyhelp> wylde: bloody hell, it created it, but it broke conky lol!
+[02:08] <arulmozhi> I hav installed so many packages through online. and I used APTonCD to backup those packages. but now can't restore them.  when click the load button in Restore window of APTonCD it throws errors into the console[http://www.pasteall.org/pic/show.php?id=31246]. is there any way to add the backuped packages back to var/cache/apt and make ubuntu that the packages are there in. Last time APTonCD worked for me on Karmic Koala(9.10). Internet speed is very
+[02:08] <arulmozhi>   slow here. I cant download all again. help me out. sorry for posting aggain. but pls help me out anybody???
+[02:08] <wylde> conkyhelp: figures >.<
+[02:08] <FloodBot1> arulmozhi: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[02:09] <conkyhelp> wylde: thanks for your help, ill fiddle with the script to see if i can fix the conkyrc file
+[02:09] <wylde> conkyhelp: np
+[02:10] <thoong> night thanks for the help.
+[02:10] <spybrook> Does anybody know why the youtube web page wont work with 12.04?
+[02:11] <LinuxMonkey> spybrook: works fine for me
+[02:11] <GeoGeek> spybrook: Youtube works fine for me.
+[02:11] <spybrook> I can view hulu...
+[02:11] <GeoGeek> clear your cache
+[02:11] <LinuxMonkey> spybrook: did you install the restricted package?
+[02:13] <wylde> arulmozhi: did you make an actual cd/dvd with aptoncd?
+[02:13] <spybrook> I think I have the restricted package...will verify
+=== Garr255_ is now known as Guest4227
+[02:14] <arulmozhi> wylde: no I hav the iso image
+[02:14] <arulmozhi> no cd or dvd
+[02:14] <wylde> arulmozhi: at any rate mount the disk/disk image in the packages directory should be the debs you require to re-install.
+[02:14] <wylde> arulmozhi: that's fine just mount the iso.
+[02:15] <arulmozhi> image mounted. the??
+[02:16] <wylde> packages directory on the iso.
+[02:16] <arulmozhi> wylde: yeah it is there...
+=== james is now known as Guest10566
+[02:16] <Guest135> hi room. anyone able to advise how i can check the usb speed/connection of an external hdd on a remote server using putty. i tried hdparm but it can only seem to access the internal hdd :/
+[02:16] <Guest10566> quit
+[02:17] <Datz> Hi, how do I get the workspace switcher to 4 horizontal windows in gnome-session-fallback?
+[02:17] <wylde> arulmozhi: If you wanted to avoid manually installing you could write a script or get someone to help write one. Otherwise probably manually install.
+[02:17] <wylde> arulmozhi: but at least you don't have to re-download everything :)
+[02:18] <ki4ro> Any active amateur radio operators here?
+[02:18] <arulmozhi> yes thats ok. but on script side wat it has to do???
+[02:18] <nwp_> Can anybody help me? http://paste.ubuntu.com/965988/
+[02:19] <wylde> arulmozhi: I you may find help scripting in #bash, or maybe someone here can help. I'm barely proficient with basic bash scripts.
+[02:19] <LinuxMonkey> !details | nwp_
+[02:19] <ubottu> nwp_: Please give us full details. For example: "I have a problem with ..., I'm running Ubuntu version .... When I try to do ..., I get the following output: ..., but I expected it to do ..."
+[02:19] <myersg> das ist gut..ja?
+[02:19] <vectory__> Guest135: try lsusb -v
+[02:19] <a7i3n> Hate to say it... but I actually like Unity... there I said it... I feel better now... :)
+[02:20] <arulmozhi> wylde: thanx for the help...
+[02:20] <LinuxMonkey> a7i3n: many of us do :)
+[02:20] <nwp_> I installed Precise the other day, but I cannot use networking with the 3.2 kernel
+[02:20] <wylde> arulmozhi: hmmm wait I had a thought, when you made the disk, did you tell it to make a meta package?
+[02:20] <nwp_> I get the pastebinned message in dmesg
+[02:20] <myersg> unity...love it, I had problems with light dm not picking up my background, I fixed it, thanks
+[02:21] <iHarp> Question:   Why would opening a game. 1. Open Ubuntu Software center    2. Place me on the default screen without prompting me to download anything?
+[02:21] <nwp_> So I rebooted into old 3.0 kernel and am using that at this point
+[02:21] <wylde> arulmozhi: does one of the packages have aptoncd-metapackage in the name?
+[02:21] <a7i3n> I'm an old geezer... I remember editing settings by hand on my first linux install on a bondi iMac...
+[02:21] <nwp_> I just want networking to work with 3.2 kernel
+[02:22] <LinuxMonkey> iHarp: did you use the search menu, it may have been a uninstalled game thus asking you to install it
+[02:22] <SarahsButt> How does one update GRUB?
+[02:22] <Fyodorovna> a7i3n, lol on fondness for unity, nice change from other comments.
+[02:22] <a7i3n> I've despised Unity for a long time but I have to give credit: Canonical did a great job on 12.04
+[02:22] <wylde> arulmozhi: if so open a terminal where the packages are and 'sudo dpkg -i aptoncd-metapackage*'
+[02:23] <LinuxMonkey> SarahsButt: iin what sense do you want to update it?
+[02:23] <Datz> is there a way to get gadgets onto the gnome-session-fallback bar?
+[02:23] <a7i3n> <--- Windowmaker user for just about forever...
+[02:23] <iHarp> LinuxMonkey: I just installed it lastnight. Didn't do anything but, "apt-get update". Came back today and now it wont open.   After reinstalling the bin file it now sends me to ubuntu software center
+[02:23] <SarahsButt> LinuxMonkey: It's just old and needs an updating. I heard 2.8 just came out no?
+[02:24] <Sky_test> chmod wat does it do
+[02:25] <iHarp> changes permissions
+[02:25] <iHarp> !chmod
+[02:25] <ubottu> An explanation of what file permissions are and how they can be manipulated can be found at https://help.ubuntu.com/community/FilePermissions
+[02:26] <Joen> I've been trying to install Ubuntu 12.04 all day. I'm not using a CD or USB stick (as I don't have any large enough unfortunately), so I mounted the downloaded .iso file with Daemon Tools. The setup said it could boot without a CD by configuring the boot or something. So when it was done, I rebooted and then I got this: "(initramfs) Unable to find a medium containing a live file system"
+[02:26] <Joen> I have searched on google with other people with this problem, but none of the solutions work for me.
+=== Garr255 is now known as Guest46290
+[02:26] <SarahsButt> Joen: where are you trying to boot linux from? are you using windows right now?
+[02:26] <Joen> Yes
+[02:27] <Joen> When I reboot now, the Windows boot manager shows Ubuntu and windows
+[02:27] <iHarp> " I'm not using a CD or USB stick"   then what are you using?
+[02:27] <Joen> But when I pick Ubuntu it goes through the logo screen and then shows that
+[02:27] <vectory__> he used the cd, virtually
+[02:27] <Joen> The setup from the iso image said it was able to edit the boot configuration so it booted from it from boot.
+[02:28] <SarahsButt> Can't you just use Wubi?
+[02:28] <yugnip> joen try plop http://www.plop.at/en/bootmanagers.html
+[02:28] <LinuxMonkey> SarahsButt: nope grub2 is still on version 1.99
+[02:28] <Guest135> thank you vectory__ :)
+[02:28] <vectory__> Joen: the cd expects to still be there after reboot, where else would it all the files from needed for install (or did it copy a lot to disk)
+[02:28] <ki4ro> Any active amateur radio operators here?
+[02:29] <LinuxMonkey> SarahsButt:  you must be thinking of Gimp 2.8
+[02:29] <Joen> So how exactly do I use this boot manager?
+[02:29] <wylde> !mini | Joen
+[02:29] <ubottu> Joen: The Minimal CD image is very small in size, and it downloads most packages from the Internet during installation, allowing you to select only those you want (the installer is like the one on the !Alternate CD). See https://help.ubuntu.com/community/Installation/MinimalCD
+[02:29] <SarahsButt> LinuxMonkey: My mistakae it seems. Thanks for the clear up.
+[02:30] <yugnip> joen plop instruction http://www.pendrivelinux.com/boot-from-usb-without-bios-support-via-plop-cd/
+[02:30] <iHarp> LinuxMonkey: Any idea after what I posted up there? ^^
+[02:30] <Joen> Thanks, I'll try plop and then see if I have any CDs or USBs that are small enough for the small image.
+[02:31] <yugnip> i believe with plop you can also use a floppy?
+[02:31] <Jordan_U> Joen: I would definitely go with the minimal install image rather than trying to mess with plop (in fact I'm not sure how plop is a solution at all).
+[02:31] <LinuxMonkey> iharp thats very odd, ive never come across that
+[02:31] <Joen> Ok.
+[02:32] <blocky> what does it mean when booting the livecd says Can not mount /dev/loop1 on /cow
+[02:32] <Jordan_U> Joen: Make sure to also remove Wubi through Add/Remove programs in Windows.
+[02:32] <Joen> I don't have Wubi.
+[02:32] <Jordan_U> Joen: "The setup said it could boot without a CD by configuring the boot or something." That's wubi.
+[02:32] <iHarp> Anyone know why a freshly installed game would send me to ubuntu software center without prompting me to download anything?
+[02:33] <Joen> But I didn't install anything. I just mounted the iso image.
+[02:33] <iHarp> Game = Savage XR
+[02:33] <wylde> Jordan_U: he was attempting to install from a mounted iso.
+[02:33] <yugnip> Jordan_U: i must have misunderstood, i assumed the issue was unable to boot from usb
+[02:33] <Jordan_U> yugnip: No, the issue is that his USB drive is not large enough for the normal Ubuntu image.
+[02:34] <Joen> Actually, I am unable to find mine.
+[02:34] <Joen> I can buy one tomorrow if it's necessary, but I'd just prefer to get it going to tonight without it if possible. So now I'm going to look for a CD.
+[02:34] <Guest135> re my previous question anything i can run on putty to see what mode (pio, udma6 etc etc) an attached usb drive is in? id usually use hdparm for this but it's not liking working on an external hdd.
+[02:34] <wylde> Joen: for the minimal you only need 30MB :)
+[02:35] <Joen> Would an external hard drive work?
+[02:35] <Joen> Through USB
+[02:35] <Jordan_U> Joen: Yes.
+[02:35] <blocky> how reliable is Install ubuntu alongside widows 7
+[02:35] <blocky> I just clicked it thinking it would allow me to review the partitioning changes...
+[02:36] <Jordan_U> Joen: It's easier to configure if the drive uses fat32. With an external drive that's large enough I would definitely go with the normal rather than minimal install image.
+[02:36] <iHarp> blocky: I do it. I've had relatively no issues.
+[02:36] <blocky> relatively no :P
+[02:36] <Joen> Can the filesystem of the hard drive be messed up if I use it?
+[02:37] <Jordan_U> Joen: Instructions here: http://www.ubuntu.com/download/help/create-a-usb-stick-on-windows
+[02:37] <Joen> Thanks
+[02:37] <wylde> blocky: I have no issues....but then I haven't used windows for almost a year now :)
+[02:37] <Jordan_U> Joen: Not unless you select an explicit option to wipe the drive, which would be very difficult to do accidentily.
+[02:37] <iHarp> blocky: Standard issues such as finding the right drivers and such, but that has notthing to do with windows
+[02:37] <oscar76> hi! anybody knows  where to find instructions to  instal ubuntu on a tablet?
+[02:37] <hailey> I'm unable to figure out what to do with this BCM4311 wireless NIC.
+[02:38] <blocky> how does it choose which partition to shrink, or even which device
+[02:38] <wylde> !broadcom | hailey
+[02:38] <ubottu> hailey: Help with Broadcom bcm43xx can be found at https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx
+[02:38] <aaas> i cant ping my windows computers from ubuntu, after disabling the firewall on the windows machine and pinging by ip not hostname, windows machines see ubuntu machine fine
+[02:38] <iHarp> blocky: Is it installed yet?
+[02:38] <LinuxMonkey> Lol ive installed it alongside windows 7 2 weeks ago with no issues, today I formated the drive and installed ubuntu over the entire disk :)
+[02:38] <wylde> LinuxMonkey: +1
+[02:39] <blocky> says retrieving file 16 of 57
+[02:39] <iHarp> Blocky open up disk utilities and take a look at what your hard drive looks like/
+[02:39] <iHarp> gotcha
+[02:39] <rinzler> does anyone know of a way to incite the distribution update from terminal? for the 11.10 update, my vps told me a command that would upgrade the distro automatically, but I don't know how to make it see the update. I only have ssh access...
+[02:39] <blocky> I ran the installer, not the livecd
+[02:39] <blocky> livecd gave me an error about /cow
+[02:39] <wylde> rinzler: do-release-upgrade?
+[02:39] <LinuxMonkey> wylde only issue I have is the complaint of Unknown LVM metadata headers but its just a bug
+[02:39] <iHarp> I prefer the manual approach.
+[02:40] <rinzler> wylde: command not found
+[02:40] <wylde> LinuxMonkey: yeah, you reported it I hope? Or at least added extra info if you could? :)
+[02:40] <iHarp> Setup windows with minimal resources. Add 6G of swap space for my 4G of ram. And the rest of my drive goes to ubuntu
+[02:40] <blocky> can I import thunderbird emails from windows?
+[02:41] <iHarp> edit* 100G  goes to my free FAT space
+[02:41] <LinuxMonkey> wylde its allready reported on a major scale.lol
+[02:41] <tohuw> When invoking ftp from the CLI, how can I get all files in a given folder?
+[02:41] <oscar76> iHarp: 6G of swap !  wish I had 6G to spend !
+[02:41] <wylde> LinuxMonkey: alrighty, just making sure :)
+[02:41] <aaas> blocky do you have imap or pop?
+[02:41] <hailey> I'm unable to figure out what to do with this BCM4311 wireless NIC with  3.2.0-24-generic  kernel.  Any advise?
+[02:41] <hilikus> how can i change the permission on a drive that is automounted. it is in /media/foo and its owned by my user but i need to either change the owner or give go+r. just doing chmod or chown doesn't work for some reason
+[02:42] <wylde> rinzler: you're upgradin TO 11.10 or FROM 11.10?
+[02:42] <aaas> hilikus i think you need to change the options in /etc/fstab
+[02:42] <hilikus> aaas: its not in fstab, its a removable drive that's automounted
+[02:42] <rinzler> wylde: FROM. I was citing my upgrade TO in my original question.
+[02:42] <blocky> aaas, pop but nvm that
+[02:43] <blocky> I have Unable to install GRUB in /dev/mapper
+[02:43] <shawn_> hi,do you guy use ubuntu 64bit or 32bit?
+[02:43] <napalm54> Hey all, For QT Creator is it best to install through the Ubuntu software center or from debian package from the official website?
+[02:43] <taxman> 64 bit
+[02:43] <blocky> Executing 'grub-install /dev/mapper' failed. This is a fatal error.
+[02:43] <iHarp> oscar76: How much ram and hard drive space do you have
+[02:43] <aaas> hilikus ok then you have to check the udev stuff...umm /etc/defaults/udev.... i cant remember where the file is
+[02:43] <bandit5432> depends on the laptop its 32 on the desktop its 64
+[02:43] <tohuw> !best | napalm54
+[02:43] <ubottu> napalm54: Usually, there is no single "best" application to perform a given task. It's up to you to choose, depending on your preferences, features you require, and other factors. Do NOT take polls in the channel. If you insist on getting people's opinions, ask BestBot in #ubuntu-bots.
+[02:43] <k_sze> What's the best utility to simulate low bandwidth and/or high latency network connection on (X)ubuntu? I don't mind command line.
+[02:43] <wylde> rinzler: ok thanks, just wanted to be clear is all :)
+[02:43] <shawn_> is 64bit better for AMD64 CPU
+[02:43] <taxman> but it's a fusion of 64- and 32- bit for 12.04
+[02:44] <tohuw> napalm54: sorry, wrong factoid. Your answer is: it depends on what you are looking for.
+[02:44] <taxman> look at mtrr, it's set up for 32-bit
+[02:44] <shawn_> TO taxman  : thank you
+[02:44] <bandit5432> my laptop only supports 32bit and i have 12.04 installed
+[02:44] <aaas> blocky well the profile should be universal (I think) so if you point it to yoru profile it shoudl be able to read your mailbox
+[02:44] <taxman> inside 4gb of space
+[02:44] <k_sze> I want to simulate high latency between my LAN and my Xubuntu box.
+[02:44] <taxman> 12.04 is not like a pathetic 64-bit linux
+[02:44] <napalm54> tohuw: I guess I am wondering if there are any drawbacks to using the ubuntu software center vs .deb from the official website
+[02:44] <blocky> aaas, thanks, I'll try that once I figure out why grub has failed
+[02:44] <aaas> blocky is there an "import" feature in thunderbird
+[02:44] <wanna> I just installed 12.4 and can't get my wireless connection working on my laptop. Got any sugestions?
+[02:45] <agu10^> ubuntu is like worse than web OS !
+[02:45] <OerHeks> taxman, it is, 64 bit is multi-arch
+[02:45] <oscar76> iHarp: I only have 512M and 2G free disk.  I have to stop using Transmission ;)
+[02:45] <rinzler> getting: "mosh : Depends: libprotobuf5 but it is not installable" how do I correct this?
+[02:45] <blocky> why would it be installing grub to /dev/mapper, what is /dev/mapper?
+[02:45] <taxman> iirc, it's debian's multi-lib like solution
+=== Guest86184 is now known as Bogdaniel
+[02:46] <blocky> it's asking me to choose a different device to install the bootloader on
+[02:46] <taxman> OerHeks, i prefer to use a pure 64-bit linux, just my taste
+[02:46] <oscar76> iHarp: I was just wandering if 6G for swap is a little too much
+[02:46] <tohuw> napalm54: In general, using distribution-specific packages mean it has been compiled and tested on that distribution. It also often (but not always) means the package is not the latest release. Typically, you are trading bleeding-edge for tested compatibility. Examine the versions, check the project's official documentation and the distribution's provided documentation (if any), decide.
+=== Bogdaniel is now known as Guest26432
+[02:46] <shawn_> taxman: I just can't make a decision  to migrate from 32bit to 64bit.....
+[02:47] <taxman> shawn_, my 12.04 is 64-bit and i can watch youtube without issues
+[02:47] <blocky> anybody know what device I should install grub to?
+[02:48] <SarahsButt> blocky: sda1
+[02:48] <shawn_> but what will happen when you install some package without 64bit build? xD
+[02:48] <iHarp> oscar76: It's not too much.. there is actually a formula to it
+[02:48] <oscar76> blocky: preferably your first hd, and never a removable disk i guess
+[02:48] <OerHeks> shawn_, it will run on ubuntu multiarch
+[02:48] <blocky> parted is saying /dev/sr0 unrecognized disk label
+[02:48] <Datz> what's up with the dependency problems when I try and install php5 on 12.04 gnome-session-fallback?
+[02:48] <Guest135> re my previous question anything i can run on putty to see what mode (pio, udma6 etc etc) an attached usb drive is in? id usually use hdparm for this but it's not liking working on an external hdd.
+[02:49] <blocky> how can I get a list of options
+[02:49] <iHarp> oscar76: for 2G you would want atleast 4G; For 3 you would want 5 and for 4 you  would want 6
+[02:50] <Somnio> hi! anyone on the mood to answer a couple of questions about gnome-shell on Ubuntu?
+[02:50] <Ycarene> is there a way to force a package to ignore dependency conflicts and make it install.
+[02:50] <wylde> Ycarene: yes, but it's not recommended.
+[02:50] <rebe> is it possible to change terminal font size to float number like 10.5 instead of whole 10 or 11 ?
+[02:51] <Ycarene> I think it'd be fine for what I want at least.
+[02:51] <shawn_> OerHeks, do you mean the 64bit ubuntu can run 32bit program?
+[02:51] <iHarp> rebe: Never tried that..lol good question
+[02:51] <OerHeks> shawn_, yes, since 11.10 ubuntu is supporting multi-arch
+[02:52] <Datz> Could someone tell me what these dependency problems are about when trying to install php5: http://pastebin.com/eq8cpUq1
+[02:52] <OerHeks> no need for ia32 libs
+[02:52] <wanna> :-(
+[02:52] <blocky> Anyone know what it means when the LiveCD dumps you to BusyBox shell?
+[02:53] <Datz> OerHeks: that's not directed towards me?
+[02:53] <shawn_> OerHeks, Thank you, btw. how to shift my 32 ubuntu to 64 ?  should I re-install the  whole system
+[02:53] <oscar76> iHarp: really? good to know.   For me it stills sounds so much.  Maybe because my hd is only 80G :(
+[02:53] <OerHeks> Datz, no, it was ment for shawn.
+[02:53] <shellcode28> how u create another hard disk
+[02:53] <Ycarene> wylde - how do I do it with apt-get, I can't get --nodeps to work.
+[02:53] <OerHeks> shawn_, only reinstall possible.
+[02:54] <oscar76> shellcode28: you mean another partition?
+[02:54] <shellcode28> yea
+[02:54] <wylde> Ycarene: moment, I don't know off the top of my head. I only did it once a very long time ago heh.
+[02:54] <oscar76> shellcode28: when you are installing ubuntu or afterwards?
+[02:54] <iHarp> oscar76: Yea, you are looking at about 1G
+[02:55] <shellcode28> I have already ubuntu
+[02:55] <awunui> Hi
+[02:55] <shawn_> Thanks,OerHeks&taxman,  When you get notice that 'shawn_ has quit()'  It means I am reinstalling ubuntu xD
+[02:55] <blackmatrix_ny> hi all...why does netstat not show process for apache running on port 80...It just displays - for it
+[02:55] <shellcode28> I already have ubuntu*
+[02:55] <SarahsButt> shellcode28: download Gparted
+[02:55] <shellcode28> I have gparted lol
+[02:55] <oscar76> shellcode28: you can use Partition Manager or Gparted, but be careful
+[02:56] <SarahsButt> shellcode28: that's what you gotta use
+[02:56] <iHarp> << uses Gparted
+[02:56] <shellcode28> I have Gparted
+[02:56] <taxman> i trust only fdisk for performance proof
+[02:56] <taxman> fdisk can control each detail
+[02:57] <oscar76> iHarp: do you know if is it a hd size limit for ubuntu?
+[02:57] <OerHeks> shellcode28, be sure the partition is not mounted.
+[02:57] <shellcode28> OK,how can u tell if is not mounted
+[02:57] <shellcode28> ?
+[02:57] <wylde> Ycarene: you may need to use 'apt-get download <packagename>' then force the installation with dpkg....still checking
+[02:58] <shellcode28> so do i have unmount?
+[02:58] <alFReD-NSH> Anyone got any explanation why screendump 7 doesn't work?
+[02:58] <alFReD-NSH> alfred@ubuntu:~$ sudo screendump 7
+[02:58] <wylde> If anyone else knows off the top of their head feel free btw! :)
+[02:58] <alFReD-NSH> couldn't read /dev/vcs/a7
+=== Garr255_ is now known as Guest20383
+[02:58] <oscar76> shellcode28: use df on the shell
+[02:58] <LinuxMonkey> !enter | alFReD-NSH
+[02:58] <ubottu> alFReD-NSH: Please try to keep your questions/responses on one line. Don't use the "Enter" key as punctuation!
+[02:58] <oscar76> shellcode28: or mount -l
+[02:59] <iputued> hi
+[02:59] <taxman> shellcode28, gnome disk utility can tell you
+[02:59] <LinuxMonkey> hahaha taxman you beat me to it
+[02:59] <taxman> ???
+[02:59] <LinuxMonkey> about disk util
+[02:59] <blackmatrix_ny> shitty netstat
+[03:01] <alFReD-NSH> The tty that the x org is run on, is it 63?
+[03:01] <blackmatrix_ny> why couldn't they just port the unix netstat to linux...just like google
+[03:01] <LittleBallOfHate> alFReD-NSH: 7
+[03:02] <alFReD-NSH> LittleBallOfHate: but it doesn't exist in /dev/tty7
+[03:02] <wylde> Ycarene: once you have the package you can 'dpkg --force-depends -i <packagename>'
+[03:02] <LittleBallOfHate> alFReD-NSH: what do you mean?
+[03:03] <alFReD-NSH> w8 it does
+=== SushiDude is now known as Guest34778
+[03:03] <alFReD-NSH> but it doesn't exist on /dev/vcs7
+[03:04] <alFReD-NSH> There is vcs for 1 to 6, and also 63
+[03:04] <JonEdney> Noob Question incoming!
+[03:05] <JonEdney> Can I download WIN fonts and use them on Ubuntu?
+[03:05] <oscar76> JonEdney: you can use ttf fonts
+[03:05] <kion> can anybody explain me what are locales?
+[03:06] <LittleBallOfHate> JonEdney: ttf-mscorefonts or something like that
+[03:06] <Ycarene> wylde - Meh, I can't even install it as source, looks like pidgin is dead in ubuntu/ming.
+[03:06] <Ycarene> ming==mint
+[03:06] <alFReD-NSH>  JonEdney: install wine and ruin your whole font eco system!(sarcasm...)
+[03:06] <vectory__> kion: i gather you mean localization
+[03:06] <Xlaits> Anyone a wiz on jnlp files?
+[03:06] <wylde> Ycarene:  it is? I haven't bothered with any messengers as of yet.
+[03:06] <kion> Vectory: on my terminal there is something called locale
+[03:07] <JonEdney> Oh Wine.  I forgot about that program.  Thank you/
+[03:07] <Xlaits> I can't seen to open any...
+[03:07] <iHarp> oscar76:  None that I know. Files can be up into the terabyte range. The Wikipedia limit for a volume is 16 Terabytes.
+[03:07] <LittleBallOfHate> JonEdney: mscorefonts if you want things like Tahoma in X
+[03:07] <vectory__> kion: a local is a localization setting, changing inpuit/output to a given languageset, i.e. keyboard layout
+[03:07] <blackmatrix_ny> sudo apt-get remove netstat ...I cant even remove this shit
+[03:07] <kion> Thankss
+[03:08] <bobweaver> sudo apt-get --puge remove foobar
+[03:08] <bobweaver> sudo apt-get --purge remove foobar
+[03:08] <Xlaits> Hey, can anyone help me get my firefox to open jnlp files? It's really important...
+[03:08] <oscar76> iHarp: tnx, I'll get me a bigger hd !
+[03:08] <iHarp> go for it! :p
+[03:09] <shawn_> kion, locale means something related to language, timezone...etc.
+[03:09] <LittleBallOfHate> Xlaits: aren't those java related?
+=== Guest34778 is now known as SushiDude
+[03:09] <LittleBallOfHate> Xlaits: java webstart or something like that?
+[03:09] <Xlaits> LittleBall ofHate: Yeah, exactly.
+[03:09] <iHarp> xlaits: I shot my firefox.. Chome loves me more..lol
+[03:10] <iHarp> Chrome*
+[03:10] <LittleBallOfHate> Xlaits: openjdk kind of sucks, look up how to install oracle's java
+[03:10] <LittleBallOfHate> Xlaits: might help
+[03:10] <Xlaits> iHarp, is there even a Chrome for Ubuntu?
+[03:10] <LinuxMonkey> Xlaits: did you try renaming them to .xml lol
+[03:10] <iHarp> yup
+[03:10] <Xlaits> LittleBallOfHate: I've tried doing it myself... and failed...
+[03:10] <blackmatrix_ny> do the authors of linux netstat fred bumgarten and alan cocks ever show up here...I want to slap them with their stupid netstat tool
+[03:10] <Xlaits> LinuxMonkey: Haha, I need them open in java...
+[03:10] <iHarp> just go to google.com then look for the download chrome.. then download the deb file and it will put you through the ubuntu software center
+[03:10] <Ben64> !language | blackmatrix_ny
+[03:10] <ubottu> blackmatrix_ny: Please watch your language and topic to help keep this channel family-friendly, polite, and professional.
+[03:11] <Xlaits> iHarp: thanks, I'll try that.
+[03:11] <iHarp> cool
+[03:11] <L3top> Xlaits: a jnlp file is a web file that connects to a (java) jar file.
+[03:11] <bobweaver> netstat is awesome and so is allen cox
+[03:11] <LinuxMonkey> oh kk Xlaits
+[03:11] <blocky> is it possible that on this motherboard, IDE devices are listed as SATA
+[03:11] <blackmatrix_ny> bobweaver, you must know little about networking then my friend
+[03:11] <Xlaits> l3top: I know that already...
+[03:12] <bobweaver> blocky:  yes there are bugs like that
+[03:12] <blackmatrix_ny> bobweaver, what kind of networking tool gives you the message 'Not all processes could be identified, non-owned process info
+[03:12] <blackmatrix_ny>  will not be shown...'
+[03:12] <L3top> Is this file on a server or local Xlaits?
+[03:12] <bobweaver> blackmatrix_ny:  try    netstat -antp
+[03:13] <oscar76> blocky: It happens to me too
+[03:13] <Xlaits> L3top: Originally, Server. But I managed to download said file, because firefox is an arsehole.
+[03:13] <blackmatrix_ny> bobweaver, still cannot identify a simple application like apache running on port 80 'LISTEN      -        '
+[03:13] <blocky> I think this installation is choking because of something to do with the hard drive configuration
+[03:13] <shawn_> firefox is good
+[03:14] <blocky> there are 3 SATA disks and 2 more on IDE
+[03:14] <LittleBallOfHate> blackmatrix_ny: try lsof -i4
+[03:14] <bobweaver> umm blackmatrix_ny  are you sure apache is running ?
+[03:15] <blackmatrix_ny> bobweaver, you are asking me if I the pc is plugged in or not...cmon man
+[03:15] <L3top> Xlaits: so presumably the server works correctly, it is just firefox having a problem?
+[03:15] <blocky> When the livecd boots, I get [sdg] attached SCSI removable disk
+[03:15] <Xlaits> L3top: That is correct.
+[03:15] <L3top> Xlaits: and do you have oracles jre or the openjre installed?
+[03:15] <blocky> then it drops to a shell and says Mount a filesystem
+[03:15] <blocky> Can not mount /dev/loop1 on /cow
+[03:16] <Xlaits> L3top: Whatever Pangolion installed. (Meaning OpenJRE)
+[03:16] <L3top> Xlaits: I am not sure it makes a difference, just a thought if you cant get it rolling in anything else...
+[03:16] <bobweaver> blackmatrix_ny:  lets see the out put of     sudo apt-get install pastebinit && ps auc
+[03:16] <bobweaver> crap
+[03:16] <bobweaver> blackmatrix_ny:  lets see the out put of     sudo apt-get install pastebinit && ps aux | grep [a]pache2
+[03:16] <blackmatrix_ny> huh ?
+[03:17] <blackmatrix_ny> i will show you the output of ps -aef | grep -i apache
+[03:17] <LittleBallOfHate> blackmatrix_ny: try "lsof -i4"
+[03:17] <blackmatrix_ny> I dont install shit from nowhere man...
+[03:17] <blocky> I don't have any SCSI disks ,this is a fairly recent pc, core 2 duo
+[03:17] <bobweaver> !info pastebinit | blackmatrix_ny
+[03:17] <ubottu> blackmatrix_ny: pastebinit (source: pastebinit): command-line pastebin client. In component universe, is optional. Version 1.3-2ubuntu2 (precise), package size 15 kB, installed size 172 kB
+[03:17] <LittleBallOfHate> blocky: sata is identified as scsi
+[03:18] <iHarp> Great repo for linux games: http://www.lgdb.org/games/popular
+[03:18] <Xlaits_> L3top: Sorry, firefox crashed.
+[03:19] <oscar76> !quit
+[03:19] <blackmatrix_ny> bobweaver, http://pastebin.com/UuTi0T8Q
+[03:19] <bobweaver> blackmatrix_ny:  sorry cant look I have bo gui :P
+[03:19] <bobweaver> s|bo|no
+[03:19] <blackmatrix_ny> bobweaver, a what ?
+[03:19] <L3top> Understood... I was just suggesting that if you cannot get it going otherwise, you may need the oracle jre Xlaits. Just a thought.
+[03:20] <bobweaver> blackmatrix_ny:  a gui a graphical user interface
+[03:20] <aaas> how far along is samba4, can i install this instead of samba?
+[03:20] <blackmatrix_ny> bobweaver, so you cant view the url in a browser ? I dont get it
+[03:21] <FRodrigues_> Is there a site that i can see if a graphic card is working all right in 12.04?
+[03:21] <Xlaits_> L3top: True, but I've tried installing it myself... and I fraggn' fail at it...
+[03:21] <LittleBallOfHate> FRodrigues_: what card?
+[03:21] <bobweaver> blackmatrix_ny: I am installing links now
+[03:22] <FRodrigues_> LittleBallOfHate:  ati radeon hd 3200
+[03:22] <blackmatrix_ny> bobweaver, installing links ? ok I get it...you're joking right lol
+[03:22] <L3top> Xlaits_: what version of ubuntu are you on
+[03:22] <taxman> why not japanese w3m?
+[03:22] <taxman> w3m > elinks > links > lynx
+[03:22] <LittleBallOfHate> FRodrigues_: should work fine, may need to install additional drivers though
+[03:23] <Xlaits_> L3top: As stated subtly before, Precise Pangolion...
+[03:24] <L3top> Xlaits_: 32 or 64
+[03:24] <blackmatrix_ny> netstat a tool written by dimwits
+[03:25] <blackmatrix_ny> can't wait to get on my UNIX box tomorrow
+[03:25] <Xlaits_> L3top: I believe 32.
+[03:25] <LittleBallOfHate> blackmatrix_ny: hey
+[03:25] <blackmatrix_ny> LittleBallOfHate, yes sir
+[03:25] <LittleBallOfHate> blackmatrix_ny: netstat -an doesn't work?
+[03:26] <LittleBallOfHate> blackmatrix_ny: or lsof -i4?
+[03:26] <bobweaver> blackmatrix_ny:  there is no link there
+[03:26] <ki4ro> Any active amateur radio operators here?
+[03:26] <blocky> is there any guides anywhere on how to boot the livecd? I'm having a lot of problems
+[03:26] <L3top> Xlaits uname -m
+[03:26] <L3top> http://www.oracle.com/technetwork/java/javase/downloads/jdk-7u4-downloads-1591156.html   lets try again, go ahead and grab the sdk
+[03:27] <Fyodorovna> ki4ro, On the ubuntu support channel that is what is done here.
+[03:27] <L3top> If you want Xlaits_
+[03:27] <zig> Im trying to add a user to the system and i want my new user to inherit my alias commands. How may i do this?
+[03:27] <bobweaver> blocky:  the 1st thing I do is check the md5sum if that is all good I then setup my bios to make sure that cd is reading 1st if that is what I am booting from. the bot will send you more info
+[03:27] <bobweaver> !md5sum >> blocky
+[03:28] <Xlaits_> L3top: i686
+[03:28] <blackmatrix_ny> LittleBallOfHate, both commands+options don't catch the apache running on port 80
+[03:28] <LittleBallOfHate> zig: cp your .bashrc .profile or .zshrc to their home
+[03:28] <bobweaver> !md5sum > blocky
+[03:28] <ubottu> blocky, please see my private message
+[03:28] <L3top> ok grab the 32 bit Xlaits_
+[03:28] <blackmatrix_ny> bobweaver, you give ubuntu a bad name man...stop playing
+[03:28] <LittleBallOfHate> blackmatrix_ny: but ps aux|grep apache shows it running?
+[03:28] <L3top> I will grab a smoke while it dlds
+[03:28] <Xlaits_> L3top: RPM or tar.gz?
+[03:28] <zig> littleBallofHate - from root user profile?
+[03:28] <blocky> well I think the iso is okay because I used it to install on my laptop
+[03:28] <L3top> tar.gz Xlaits_
+[03:28] <blocky> it's possible it was corrupted when I copied it to my flash drive
+[03:29] <LittleBallOfHate> zig: whoever you log in as and have the aliases setup as
+[03:29] <blackmatrix_ny> LittleBallOfHate, yea...and my worry is that what other processes (trojans) is it not catching if it misses a big fish like apache
+[03:29] <bobweaver> facepalm
+[03:29] <zig> for now, i only have root account. want to create new user and still have alias. I will try that and get back with you
+[03:29] <LittleBallOfHate> blackmatrix_ny: and /etc/apache2/sites-enabled/000-default is configured to put it on 80?
+[03:30] <blackmatrix_ny> another reason to migrate to openbsd for more security
+[03:30] <LittleBallOfHate> zig: make sure permissions are right when you copy
+[03:30] <LittleBallOfHate> blackmatrix_ny: openbsd rocks
+[03:30] <zig> what should they be?
+[03:30] <LittleBallOfHate> zig: just owned by the new user
+[03:30] <blocky> what's the best way to create a bootable flash drive from an existing ubuntu system
+[03:30] <blackmatrix_ny> LittleBallOfHate, cmon dude...I know apache is running...http://pastebin.com/UuTi0T8Q
+[03:31] <LittleBallOfHate> blackmatrix_ny: just checking, i wasn't watching the whole convo
+[03:31] <blackmatrix_ny> LittleBallOfHate, yea...I'm a stickler for security and ubuntu is making me feel invaded
+[03:31] <Xlaits_> L3top: about a minute left. Thanks for this.
+[03:31] <LittleBallOfHate> blackmatrix_ny: check /tmp for odd executable files please
+[03:32] <ClientAlive> when I installed 12.04 server not long ago, I choose "use landscape to manage the system" during installation. From what little I've seen I'm starting to question that decision. Apart from paying for the service, is there any good reason for me to use it?
+[03:32] <L3top> Xlaits_: take a look at this to begin with http://docs.oracle.com/javase/7/docs/webnotes/install/linux/linux-jdk.html#install-32
+[03:32] <blackmatrix_ny> LittleBallOfHate, I actually developed a scanning script on my AIX box and wanted to port it to Ubuntu but the netstat tool is so weak on ubuntu linux
+[03:32] <LittleBallOfHate> blackmatrix_ny: if it's not showing stuff running you've got more problems than netstat
+[03:33] <L3top> Xlaits_: and we are going to uninstall the openjre
+[03:33] <bobweaver> !usb > blocky
+[03:33] <ubottu> blocky, please see my private message
+[03:33] <Xlaits_> L3top: Awesome. Maybe Minecraft will run better from this as well...
+[03:33] <blocky> thanks
+[03:33] <blackmatrix_ny> LittleBallOfHate, you lost me there buddy ? what should be showing stuff running ?
+[03:34] <bobweaver> blocky:  np
+[03:34] <LittleBallOfHate> blackmatrix_ny: netstat. I'd bet you've been rootkitted
+[03:34] <blocky> unity is starting to grow on me, or at least I find it less loathsome than before
+[03:34] <blackmatrix_ny> LittleBallOfHate, lol...ok getting a bit ahead of yourself but please elaborate
+[03:34] <LittleBallOfHate> blackmatrix_ny: only time i've EVER seen processes not listed in normal tools
+[03:35] <arooni-mobile> curious about the benefits of adding a second hard drive (SSD) to my computer.  i mostly program and surf the web... dont know how bug a difference id see from a 7200rpm 500gb drive that i have in my lenovo t420 now.
+[03:35] <LittleBallOfHate> blackmatrix_ny: check /tmp for executable files. I'd bet you got pwned and the reverse shell that allowed them to rootkit you is there
+[03:35] <blackmatrix_ny> LittleBallOfHate, tcp6       0      0 :::80                   :::*                    LISTEN      -
+[03:35] <Xlaits_> L3top: ok, DLed.
+[03:35] <LittleBallOfHate> blackmatrix_ny: LOL
+[03:36] <LittleBallOfHate> blackmatrix_ny: it's listening on ipv6
+[03:36] <hailey> I have installed 12.04 on this Compaq Presario V6000 and with it fully updated, I am unable to get the BCM4311 wirless NIC to work, doesn't seem possible.  I thought maybe if I could revert to one of the 2.6 kernels, I might have a shot but after the upgrades I can only boot the 3.2.0-24 kernel and I can only guess that this BCM-4311 is useless with this kernel.  Anyone know what can bee done here?
+=== Garr255__ is now known as Garr255
+[03:36] <blackmatrix_ny> LittleBallOfHate, I get that...my problem is why is not the PID or process name is not displayed but only '-' is displayed
+[03:36] <bobweaver> hailey:  please open terminal and enter in    lspci -nn | grep 14e4       then paste the part in red plz
+[03:37] <bobweaver> hailey:  like [14e4:4313]
+[03:38] <LittleBallOfHate> blackmatrix_ny: that was netstat -an output?
+[03:38] <foobArrr> is there a way to block screensaver activation when a movie player is running? caffeine can do that, but it's not working for me on 12.04.
+[03:38] <hailey> http://paste.ubuntu.com/966096/
+[03:39] <bobweaver> foobArrr:  it is under system settings battary
+[03:39] <bobweaver> hailey:  I have no browser what is the part that was in red ?
+[03:40] <hailey> 02:00.0 Network controller [0280]: Broadcom Corporation BCM4311 802.11b/g WLAN [14e4:4311] (rev 01)
+[03:40] <bobweaver> halakar: nm
+[03:40] <L3top> Xlaits_: please dpkg-query -l "openjdk*"     and tell me if any are installed
+[03:40] <bobweaver> thanks
+[03:40] <bobweaver> hailey:  lsmod | grep -e b43 -e wl
+[03:41] <L3top> Xlaits_: also dpkg-query -l "*jre*" and tell me if any are installed
+[03:41] <bobweaver> hailey:  which one shows up the wl or the b43 or nothing ?
+[03:41] <LittleBallOfHate> blackmatrix_ny: and forgive me, I'm drunk
+[03:41] <Xlaits_> http://pastebin.com/afJTk1Tg
+[03:41] <hailey> lsmod | grep -e b43 -e wl Returns nothing.
+[03:41] <Xlaits_> L3top: http://pastebin.com/afJTk1Tg
+[03:42] <bobweaver> hailey:  apt-cache policy dump b43 && apt-cache policy dump wl
+[03:42] <bobweaver> hailey:  get anything back ?
+[03:42] <blackmatrix_ny> LittleBallOfHate, yea you should have said that first
+[03:43] <waheed> hey guys, I need a sticky notes program like the one in windows seven that sticks "keep visible" to the desktop, I tried many from the software centre and all of them are trivia
+[03:43] <waheed> ??
+[03:43] <LittleBallOfHate> blackmatrix_ny: I know my shit though :)
+[03:43] <L3top> Xlaits_: sudo apt-get remove openjdk*
+[03:43] <hailey> bobweaver: nada
+[03:43] <Xlaits_> L3top: Purge?
+[03:44] <bobweaver> hailey:  sudo apt-get install b43-fwcutter && sudo apt-get install firmware-b43-installer && sudo modprobe b43 && sudo iwlist scan
+[03:44] <bobweaver> hailey:  do you have wireless ?
+[03:45] <L3top> Xlaits_: I am not sure. Lets do this instead... sudo apt-get -s remove --purge openjdk*          and pastebin the result. I want to see what all it wants to chunk out.  (-s will do a simulation)
+[03:46] <Psykus> where would I start trying to troubleshoot the display not turning off after an amount of idle time on a laptop? i have the power settings set to turn off the display after 5 minutes instead of using a screen saver, and it just makes the screen black but doesn't actually turn off the screen
+[03:47] <hailey> I seem to have wlan0 now.  Let me  see of there is anything I can do with it.
+=== Guest26432 is now known as Bogdaniel
+[03:47] <blocky> anyone know of a way to get win7-like resizing of windows to the left and right half of the screen, super key + left/right arrow?
+[03:47] <shaneo> hey guys whats a good app for pasting from teminal to ubuntu pastebin
+[03:47] <Xlaits_> L3top: Alright. I did the former. I'll do the latter now, just to be sure.
+[03:47] <LittleBallOfHate> blocky: that's the onlhy thing I miss from windows 7
+[03:47] <LittleBallOfHate> blocky: you figure it out, let me know
+[03:47] <wylde> blocky: ctrl+super+ left or right
+[03:47] <bobweaver> !info pastebinit > shaneo
+=== Bogdaniel is now known as Guest32270
+[03:47] <blocky> I've got the up and down set in keyboard shortcuts
+[03:47] <L3top> !pastebinit | shaneo
+[03:47] <ubottu> shaneo: pastebinit is the command-line equivalent of !pastebin - Command output, or other text can be redirected to pastebinit, which then reports an URL containing the output - To use pastebinit, install the « pastebinit » package from a package manager - Simple usage: command | pastebinit -b http://paste.ubuntu.com
+[03:47] <blocky> which is a start
+[03:47] <Xlaits_> L3top: Done, and done.
+[03:48] <shaneo> thanks L3
+[03:48] <shaneo> thanks L3top
+[03:48] <zig> what is the thing called at the left of the command line like… root@127.0.0.1:
+[03:48] <LittleBallOfHate> zig: prompt
+[03:48] <LittleBallOfHate> zig: PS1
+[03:48] <L3top> Xlaits_: lets move that tar.gz to /usr/share
+[03:49] <blocky> what on earth... the partition manager shows everything as a subfolder of /dev/mapper
+[03:49] <twig11> How can I add images to be shown in the default desktop backgrounds list in the Appearance settings? I found instructions saying to add an image to /usr/share/backgrounds, then navigate there from the Appearance settings app and select it, but it still doesn't show up in the selection of default backgrounds. What's the trick to getting an image included as a background which any user can choose from the defaults and have shown as the lightdm background as wel
+[03:49] <twig11> l?
+[03:50] <Xlaits_> L3top: Permission denied...
+[03:50] <LittleBallOfHate> Xlaits_: sudo?
+[03:50] <L3top> sudo
+[03:50] <Xlaits_> L3top: it would be helpful if I was using the command line...
+[03:51] <zig> well, when i log in as my new user, i dont have a promt, it just says $
+[03:51] <zig> is this normal?
+[03:51] <LittleBallOfHate> zig: make sure their shell is set the same as yours
+[03:51] <Xlaits_> L3top: Or knew the command for that period...
+[03:51] <LittleBallOfHate> zig: if you copied your rc file there
+[03:51] <L3top> What directory is it in currently Xlaits_
+[03:51] <jrib> zig: how did you create this user?
+[03:51] <Xlaits_> L3top: Downloads
+[03:51] <L3top> Perhaps we should move to pm so as to not flood the channel.
+[03:52] <zig> useradd zack
+[03:52] <jrib> zig: use adduser, not useradd
+[03:52] <Xlaits_> L3top: Yeah...
+[03:52] <LittleBallOfHate> zig: you missed lots of options
+[03:52] <blackmatrix_ny> LittleBallOfHate, sorry to break it to you but no you dont
+=== jsec[AFK] is now known as jsec
+[03:52] <LittleBallOfHate> blackmatrix_ny: you come up with something?
+[03:52] <LittleBallOfHate> blackmatrix_ny: I can admit being wrong
+[03:52] <jrib> !away > jsec
+[03:52] <ubottu> jsec, please see my private message
+[03:52] <zig> so should i deluser?
+[03:53] <jrib> zig: that would be the easy solution
+[03:53] <blackmatrix_ny> LittleBallOfHate, when I get the proper unix netstat
+[03:54] <zig> what options would you recommend i adduser with?
+[03:54] <jrib> zig: you don't need any options with adduser
+[03:55] <LittleBallOfHate> jrib: useradd
+[03:55] <jrib> LittleBallOfHate: ?
+[03:55] <LittleBallOfHate> jrib: he's creating a new user not adding to groups
+[03:55] <jrib> LittleBallOfHate: adduser creates a new user as well
+[03:55] <zig> oh wow, adduser is much nicer
+[03:55] <LittleBallOfHate> blah
+[03:56] <LittleBallOfHate> i like to make sure things are how I want them :)
+[03:56] <mohit> hi there. i need help. i have downloaded 12.04 twice, ripped the cd and tried to use it but eerytime, it turned out to be wubi. is anyone else finding a similar problem?
+[03:56] <zig> and that way also set my prompt up how i was used to
+[03:56] <zig> thanks
+[03:56] <wylde> mohit: uhhhh... if you don't wany wubi, boot from the cd?
+[03:56] <wylde> want*
+[03:57] <paulus68> I run 12.04 server with 2 nics, under vmware 1 nic is comming up automaticly the 2nd doesn't but can be launched manually how do I get the 2nd nic up automaticly?
+[03:57] <jrib> zig: one of the differences is that adduser will automatically copy the contents /etc/skel/ into your user's home
+[03:57] <footvilla> hey guys is there like a package that installs some sort of system monitor? that you can access remotely
+[03:57] <mohit> the problem is that i have tried to download the installer iso but when i brn a cd from it, it turns out to be wubi
+[03:57] <footvilla> to check on system health cpu
+[03:57] <footvilla> etc
+[03:57] <bobweaver> mohit:  I know that this might sound silly but what happens when you turn the computer on with the cd in the drive . if it goes too windows you have to boot you cd in the 1st order of boot or load the boot menu if you have one
+[03:57] <zig> yes, that was what i was looking for.
+[03:57] <zig> i have the alias, and the promt im used to. Thanks.
+[03:58] <wylde> mohit: all the install images have wubi on them.
+[03:58] <blocky> hmm okay same problem as before, grub-install /dev/mapper failed
+[03:58] <bobweaver> mohit:  all that can be done from the bios unless this is a mac ?
+[03:58] <blocky> Why is it not assigning regular drive numbering?
+[03:58] <Psykus> <Psykus> where would I start trying to troubleshoot the display not turning off after an amount of idle time on a laptop? i have the power settings set to turn off the display after 5 minutes instead of using a screen saver, and it just makes the screen black but doesn't actually turn off the screen
+[03:58] <twig11> How can I add images to be shown in the default desktop backgrounds list in the Appearance settings? I found instructions saying to add an image to /usr/share/backgrounds, then navigate there from the Appearance settings app and select it, but it still doesn't show up in the selection of default backgrounds. What's the trick to adding an image to the default set so any user can choose it and have it also show up as the lightdm background?
+[03:58] <mohit> ok. its not a mac. an acer runing on windows vista
+[03:58] <Psykus> figured this out by the way, xfce's power manager wasn't working correctly
+[03:59] <Psykus> had to set the monitor settings in the screensaver menu instead
+[03:59] <mohit> woud you have an idea, why the boot freezes when i try to use the cd?
+[03:59] <bobweaver> mohit:  have you checked the md5sum ?
+[03:59] <wylde> mohit: reboot with the cd in the drive. If it doesn't load from the cd you'll have to edit bios settings, or possibly hit f12 while the bios loads.
+[03:59]  * paulus68 I hate vista
+[04:01] <mohit> i checked the bios and it is set to boot from cd as the first preference.
+[04:01] <hariom> I want to run my python script which has module import from the non standard location python (so python won't work but /opt/mylib/bin/python). I want to run this every 24 hours and any output of this should go to /var/log/myscript.log file. What should be the content of the cron script and where to keep it
+[04:01] <Wildbat> is there a tools for tidying up indent for php/html ?
+[04:01] <hariom> * 23 * * * /opt/mylib/bin/python /home/user/myscript.py > /var/log/myscript.log 2>&1       Is this correct?
+[04:02] <paulus68> mohit: does the cd work on another pc/laptop
+[04:02] <mohit> however i have not checked md5sum. how should i do that? i am trying to get back into ubuntu installed on my computer after installing vista
+[04:02] <bobweaver> !md5sum | mohit
+[04:02] <ubottu> mohit: To verify your Ubuntu ISO image (or other files for which an MD5 checksum is provided), see http://help.ubuntu.com/community/HowToMD5SUM or http://www.linuxquestions.org/linux/answers/LQ_ISO/Checking_the_md5sum_in_Windows
+[04:02] <mohit> paul, dont have another comp to work on.
+[04:03] <dr_willis> i was thinking the ccd had some sort of 'verify' item in its boot menus.. but that checks  the md5's of  the files. not the whole iso
+[04:04] <hailey> After reboot, the BCM4311 works.  For some reason, I have to use CLI commands to connect, but it works.  Thanks all
+[04:04] <mohit> will be back after checking md5s. thanks guys!
+[04:04] <bobweaver> np hailey  enjoy
+[04:04] <paulus68> mohit: ok if you burn another iso for instance server version, does it allow you to install server edition just a thought
+[04:05] <paulus68> I run 12.04 server with 2 nics, under vmware 1 nic is comming up automaticly the 2nd doesn't but can be launched manually how do I get the 2nd nic up automaticly?
+[04:05] <mohit> think no harm in trying. will try that as well. right now downloading from alternate source as well
+[04:06] <dr_willis> paulus68:  quick fix.. put command in rc.local to  set it up. ;)
+=== jd is now known as Guest97419
+[04:06] <paulus68> dr_willis: how do you do this?
+[04:07] <dr_willis> paulus68:  look at /etc/rc.local  its a script that gets ran at the end of the boot  process.
+[04:07] <dr_willis> after all the other services start
+[04:07] <simonp> hi all. why network upgrade from lucid to precise is still not possible? http://changelogs.ubuntu.com/meta-release-lts still don't have precise...
+[04:07] <Guest97419> updated 12.04 now am stuck in "low graphics" mode and any selection I pick goes to *checking battery state"  how do I get back to booting the os
+[04:08] <blocky> does anyone know why the livecd creates a partition called /cow?
+[04:08] <Guest97419> * you can response to "JD"
+[04:09] <dr_willis> blocky:  cant say ive noticed that.
+[04:09] <blocky> it's a filesystem called /cow which is mounted as /
+[04:09] <blocky> in the filesystem
+[04:09]  * Xlaits_ looks confused
+[04:09] <blocky> something weird is going on with my system, I can't seem to get a bootloader installed
+[04:09] <Guest97419> updated 12.04 now am stuck in "low graphics" mode and any selection I pick goes to *checking battery state"  how do I get back to booting the os
+[04:10] <dr_willis> Guest97419:  you mean you can boot to the desktop. but its in low gfx mode?
+[04:10] <bobweaver> Guest97419:  what is you gfx card ?
+[04:10] <paulus68> dr_willis: what do I enter there?
+[04:11] <dr_willis> paulus68: whatever commands you need to configure what it is you are trying to configure.
+[04:11] <Guest97419> can not get to desktop...do not know gfx card...sony vaio...pentium 4
+[04:11] <hnsz> Hello. I'm having a slight problem. I have no windows just what is in them. Also I haave a problem with certain flash videos. They have undiscernable video with only the basic colours. Others are fine. I don see how the two things are related but they started at the same time.
+[04:11] <dr_willis> How can it be in 'low graphics mode;' if its snot getting to the desktop....
+[04:11] <Guest97419> It starts up to "Ubuntu" and logo buttons
+[04:11] <bobweaver> Guest97419:  are you looking at that computer can you talk here and type stuff on that one ?
+[04:12] <bobweaver> Guest97419:  how many operating systems are installed on this computer ?
+[04:12] <Guest97419> then goes to low graphics mode...am on separate pc...can't access anyting but black screen
+[04:12] <dr_willis> hnsz:  if you mean you  have no window borders/decoration - thats a sign that compiz crashed..  try 'compiz --replace' in a terminal if  you  can
+[04:12] <Guest97419> only one os...PP 12.04
+[04:12] <bobweaver> Guest97419:  press ctrl+alt+f1
+[04:12] <bobweaver> Guest97419:  sign in
+[04:13] <paulus68> dr_willis: so basicly when I add there the command to bring the eth1 card up I will be good to go ?
+[04:13] <dr_willis> paulus68:  yes. be sure its befor that last exit command in the file. and dont start anything that will take over the shell, or start things in the background. (common mistakes i see people make in here)
+[04:14] <Guest97419> okay will try...be back soon
+[04:14] <user1> hi, how to isntall bugzilla3 in ubuntu 10.04 server LTS, pls help me...
+[04:14] <paulus68> dr_willis: just entering the things to bring the eth1 up and that's it
+[04:15] <dr_willis> user1:  if its not in the repos. or a PPA. use the source.
+[04:15]  * paulus68 **** never to old to learn**** thanks dr_Willis
+[04:15] <Guest97419> woo hoo
+[04:15] <Guest97419> that worked!
+[04:15] <Guest97419> thanks!
+[04:15] <bobweaver> Guest97419:  np you need to fix you gfx driver thou
+[04:16] <user1> dr_willis, can u send me the link how to install bugzilla3
+[04:16] <bobweaver> you can install bugzilla unser dev tools on mozilla
+[04:16] <dr_willis> user1:  nope.. ive never used it.. the stndard routine is. check the repos.. check for  ppas or if all else fails resouirt to using the source for apps not in the repos.ppas
+[04:17] <kameron> can someone help me with some basic drive mounting? I'm having a problem accessing the mounted drive by anyone except root.
+[04:17] <Guest97419> ok bob...will do that...i know how to do that...not the cnl/alt/f1 thingy...but woo hoo anyway
+[04:17] <dr_willis> kameron:  what filesystem is the FS in question
+[04:17] <bobweaver> Guest97419:  glade too see that you are happy :)
+[04:17] <kameron> dr_willis, ext4.
+[04:18] <dr_willis> kameron:  then you need to set the proper ownersshiop or  permissions on the files   and dirs you  want the users to  access.
+[04:18] <Guest97419> had the power go out yesterday and mucked up all the computers...lost a modem...had to fix win7 ip address...router settings...and it was a pain...but this...this is easy
+[04:18] <paulus68> dr_willis: small question do I just enter ifconfig with all the parameters or would the syntax be different?
+[04:18] <mohit> Guys MD5s are matching. trying different instances but have a feeling that there is something fundamentally wrong with what i might be doing!!
+[04:19] <kameron> dr_willis, i have a drive that's completely blank and users can't create a directory or do anything. i'll paste my fstab for you to see.
+[04:19] <dr_willis> paulus68:  same as you would use in the shell. since rc.local is ran as a shell script
+[04:19] <kameron> dr_willis, http://paste.ubuntu.com/966145/
+[04:19] <paulus68> dr_willis: but no need to add sudo I presume just to be sure
+[04:19] <dr_willis> kameron:  you set permissions/ownership  on the mountpoint after you  mount it.. that  sets the permissions for the 'root' of the drive. OR make a directory and chown/chmod that. and let theusers access tghat dir
+[04:19] <Guest97419> btw...do you suppose the outage or the update messed up the graphics?
+[04:19] <dr_willis> paulus68:  rc.local  IS ran by the system.. so  its  allready  ran as root
+[04:19] <bobweaver> mohit:  please explain too me like I ma a 7 yr old how you are trying too do this . (sometimes I act like a 7yr old) :)
+[04:20] <kameron> dr_willis, all my drives i can access just fine except for the ext4 drive mounted to "StoreSwap"
+[04:20] <dr_willis> kameron:  it all depoends on the filesystem in use and the ownership/modes/permissions of the drives filesystemjs
+[04:20] <Guest97419> thanks bob  thanks much
+[04:20] <dr_willis> kameron:  the other drives are what filesystem?
+[04:21] <kameron> dr_willis, ext4 and ntfs
+[04:21] <dr_willis> ntfs - is setable at mounttime - because it does NOT support the normal linux  permissions.
+[04:21] <dr_willis> thats the only  way to set the permissions.ownership on ntfs.
+[04:21] <mohit> i downloaded the iso file "ubuntu-11.04-desktop-i386.iso" burned it to a dvd successfully and am trying to boot from dvd (have set it as first preference in bios). the boot just freezes. i have done this with 4 dvds now.
+[04:22] <dr_willis> for normal linuxx filesystems you normally follow the standard permission 'rules'
+[04:22] <bobweaver> mohit:  where does it frezze ?
+[04:22] <kameron> mohit try adding option "nomodeset" when you boot.
+[04:23] <dr_willis> mohit:  you  are burning a cd image to  a dvd disk: no  cd disks? why not try a usb flash:
+[04:23] <bobweaver> mohit: meaning .... do you get a spash screen anything or does it just go to windo z ?
+[04:23] <kameron> dr_willis, i see what i did wrong. i didn't set permissions of the folder it's being mounted to. it's working now. thanks!
+[04:23] <dr_willis> mohit:  how did you burn it to  disk
+[04:23] <dr_willis> kameron:  the permissions of the 'folder' after its mounted.. is a reflection of the permissions of the root of  the drive.  BEFOr  the mount.. the permissions dont matter.
+[04:24] <kameron> dr_willis, that was my problem
+[04:24] <mohit> after getting through bios.it dosnt go to windows. a "_" in the top left corner of the screen just flashes as the dvd tries hard to read. after a while, as i eject th dvd, the boot quickly jumps to windows.
+[04:25] <dr_willis> i always just make a directory called 'UsersStorage' on the root of  the drive and chown/chmod  that.. the useres dont need to  see the LOST+FOUND directory :)
+[04:25] <mohit> i used imgburn for one and cdburnerxp another time on a different pc
+[04:25] <bobweaver> mohit:  what kind of computer is this ?
+[04:26] <L3top> did you check the md5sum mohit?
+[04:26] <dr_willis> mohit:  id try a usb boot. and test out  those disks on a differnt pc.  Ive  heard of  mixxed results burning the cd iso  image to a blank  DVD also.,
+[04:26] <mohit> i tried burning a CD as well. exactly the same result.
+[04:26] <mohit> acer aspire 6930
+[04:26] <dr_willis> bbl.
+[04:26] <mohit> ok. let me try a usb boot
+=== peps is now known as Guest49748
+[04:30] <worm> I have a small problem on ssh.
+[04:31] <hnsz> How can I invoke a fsck?
+[04:31] <worm> I used ssh to connect to another's computer, but the wall command cannot show him any information.
+[04:31] <worm> I want to tell him something by a pop-up window, but how?
+[04:32] <bobweaver> worm:  notify-send "this is a message about foo "
+[04:32] <hnsz> that's cute :)
+[04:34] <wylde> !fsck | hnsz
+[04:34] <ubottu> hnsz: fsck is the FileSystem ChecKer, which runs automatically when you boot if you didn't shutdown cleanly. Type "man fsck" for information on running it manually. The command "sudo touch /forcefsck && sudo shutdown -r now" will force a reboot and a filesystem check; "sudo touch /fastboot" will skip a filesystem check at next reboot
+[04:35] <aaas> i cant ping my windows machines from ubuntu or my dd-wrt router, any ideas?
+[04:35] <hnsz> wylde: Thanks
+[04:35] <wylde> hnsz: np
+[04:35] <worm> aaas: Any error message? Type ifconfig to see your network status.
+[04:36] <aaas> worm network is fine, i can get out to internet on all boxes
+[04:36] <aaas> worm ping error is "destination host unreachable"
+[04:36] <aaas> worm firewall disabled on both sides
+[04:37] <worm> aaas: That means you might have the wrong ip address of them.
+[04:37] <bobweaver> aaas: are you on wifi ?
+[04:37] <aaas> worm bobweaver no
+[04:37] <aaas> not on wifi
+[04:37] <aaas> windows machines can ping each other
+[04:37] <aaas> dd-wrt sets static ips of all machines
+[04:37] <aaas> cant ping by hostname or ip
+[04:37] <bobweaver> are the other  machines up ?
+[04:38] <aaas> bobweaver yes
+[04:38] <worm> aaas: can you paste your ifconfig here?
+[04:38] <bobweaver> aaas:  what does traceroute do ?
+[04:38] <aaas> bobweaver traceroute to where?
+[04:38] <aaas> worm one sec
+[04:39] <bobweaver> to the other machines aaas
+[04:39] <violinappren> worm:  before calling notify-send, you have to: export DISPLAY="0.0"
+[04:39] <violinappren> worm: correction:  it's :0.0 not 0.0
+[04:39] <aaas> bobweaver unknown host
+[04:39] <aaas> bobweaver ill try from the router
+[04:39] <hnsz> I have not windows. Reboots don't work.
+[04:40] <aaas> bobweaver same from routers
+[04:40] <hnsz> I do have the unitybar and the menubar
+[04:40] <bobweaver> aaas try angry ip scanner ?
+[04:41] <aaas> angry ip scanner?
+[04:41] <aaas> worm http://pastebin.com/0T6S2MfX
+[04:42] <blocky> okay now I've done something really bad
+[04:42] <worm> aaas try ping 192.168.1.255 -b
+[04:42] <blocky> I changed a bios setting from SATA enhanced to SATA compatible and now when I power on the machine it just says Express Gate
+[04:42] <blocky> caps lock doesn't even work
+[04:43] <aaas> worm works
+[04:43] <hnsz> blocky: bios reset?
+[04:43] <wylde> blocky: can you get back into bios to fix it? If not you're going to have to reset the bios :)
+[04:43] <blocky> no, can't even get to bios
+[04:43] <worm> aaas: Have you received some "DUP"?
+[04:43] <hnsz> blocky: check your motherboard manual :)
+[04:43] <aaas> worm "dup"?
+[04:43] <blocky> what the hell asus, not cool
+[04:44] <wylde> blocky: yep, what hnsz said
+[04:44] <worm> aaas: something like time **ms (DUP!) or duplicates.
+[04:44] <wylde> blocky: just because you CAN change a bios option, doesn't mean you should! lol >.<
+[04:45] <aaas> worm no
+[04:45] <worm> aaas try arp.
+[04:45] <blocky> wylde I don't think it's supposed to lock up
+[04:45] <worm> aaas:  it will show you the ip address and the mac address of the computers connected to yours.
+[04:45] <aaas> worm windows machines show (incomplete) for hwtyp hwaddress flag amsk
+[04:46] <worm> aaas then arping the ip address of the router and the windows machine.,
+[04:46] <wylde> blocky: I would imagine not
+[04:47] <rychusj> does anyone have any advice on how to fix a duplicate source.list entry?
+[04:47] <worm> aaas: If everything works well, the reply of them included a broadcast and a lot of unicasts.
+[04:47] <aaas> worm shows same info as 'arp' alone
+=== Guest32270 is now known as Bogdaniel
+[04:47] <bobweaver> rychusj:  sudo apt-get --fix-broken update
+=== Bogdaniel is now known as Guest98362
+[04:48] <rychusj> bobweaver: tried it and still getting the same message
+[04:49] <worm> aaas: How many broadcasts?
+[04:49] <aaas> worm how do i know
+[04:50] <worm> aaas: is that arping but not arp?
+[04:50] <blocky> motherboard manual doesn't address this problem
+[04:50] <hnsz> blocky: Which motherboard?
+[04:50] <blocky> asus p5q pro
+[04:50] <wylde> blocky: look for "bios reset"
+[04:50] <bobweaver> rychusj:  could you use paste.ubuntu.com and paste the error that you are getting and also    cat /etc/apt/source.list
+[04:51] <aaas> worm ah ok sorry, from router i get nothing
+[04:51] <worm> aaas: at the end you can see the broadcasts and responds .(After you typed ^C)
+[04:52] <aaas> worm 65 broadcasts
+[04:52] <worm> aaas: no respond?
+[04:52] <aaas> worm no, same from router #2
+[04:52] <worm> aaas: can you try to ping those things again?
+[04:52] <aaas> worm same with ubuntu machine
+[04:53] <hnsz> blocky: you know what a jumper is?
+[04:53] <aaas> worm from ubuntu -> windows #1 ('destination host unreachable'
+[04:54] <aaas> worm same with router #1 and #2
+[04:54] <aaas> worm routers -> ubuntu ping fine
+[04:54] <blocky> hnsz, yeah I found it, back in bios now, thanks
+[04:54] <hnsz> blocky: On the bottom you have two pci slots, right to those slot are three little pins on pin 1 and 2 there is a jumper. You have to put the jumper on pin 2 and 3 and then back on pin 1 2 again
+[04:54] <rhizmoe> what can i use for arin lookups? like whois -a used to be
+[04:55] <worm> aaas how about 192.168.1.151 and 192.168.1.1?
+[04:55] <aaas> worm windows #1 to #2 ping fine
+[04:55] <aaas> worm what about them?
+[04:55] <blocky> I think there is some sort of RAID I was not aware of here
+[04:56] <rychusj> bobweaver: http://paste.ubuntu.com/966172/
+[04:56] <rychusj> bobweaver: is cat/etc/apt/source.list a terminal command?  not sure how to get to that
+[04:57] <hnsz> blocky: Itś scary isn it :p
+[04:57] <blocky> I have no clue what is happening with this system
+[04:57] <bobweaver> rychusj:  yes it is but there is a space like   cat   /ect/apt/sources.list
+[04:57] <blocky> hnsz, yeah I was panicked
+[04:57] <blocky> I've installed grub to two locations so far, still can't get linux to boot
+[04:58] <blocky> seem to have found a disk that boots windows though
+[04:58] <worm> aaas: I am not sure what's up then... So sorry. Can anyone else help aaas?
+=== torm3nt is now known as Oddman
+[04:58] <aaas> its ok worm thanks for trying...it might be dd-wrt..the fact that i can do windows to windows and ubuntu to routers seems like it's not a perticular machine
+=== James is now known as Guest33870

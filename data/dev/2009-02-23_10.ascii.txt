@@ -1,0 +1,1250 @@
+[07:35] <eepberries> int256: was this using gparted or gpart?
+[07:35] <Incarus> hitman1985, tell me
+[07:35] <Incarus> hitman1985, or make a screenshot
+[07:35] <popmadness> Incarus: http://mypopmadness.com/phpsysinfo .
+[07:35] <int256> eepberries: gparted
+[07:35]  * SinPro slaps Incarus around a bit with a large trout
+[07:35] <eepberries> int256: i'm pretty sure that's a different program
+[07:35] <eepberries> int256: from what i'mm reading, gpart is the program for trying to recover lost partitions
+[07:36] <int256> eepberries: ok wait, i will install
+[07:36] <SinPro> Incarus, how do i get kqemu?
+[07:36] <hitman1985> Incarus: http://i44.tinypic.com/25k0eoi.png
+[07:36] <Incarus> popmadness, "ps -u root | grep xorg"
+[07:36] <eepberries> int256: i should let you know though that i've never actually used it, i only have experience with the program testdisk for windows xp
+[07:36] <Incarus> SinPro, if you want kqemu, you have to compile it
+[07:37] <SinPro> oh
+[07:37] <popmadness> Incarus: <blank>
+[07:37] <eepberries> have any of you ever recovered lost partitions using linux? if so please chime in
+[07:37] <Incarus> hitman1985, your ntfs is broken
+[07:37] <Incarus> popmadness, good
+[07:37] <SinPro> Incarus, Im such a newbie... how can i comile it ...
+[07:38] <Incarus> popmadness, adobes flash player or gansh?
+[07:38] <Incarus> SinPro, use vmware, its easier
+[07:38] <SinPro> ok
+[07:38] <hitman1985> Incarus: wow great, meaning ubuntus coders just cost me my family pics, :(
+[07:38] <int256> eepberries: i used apt-get to install gpart. how to use it ?
+[07:38] <SinPro> Incarus, kqemu can run directx?
+[07:38] <b1n42y> whatver you do dont interrupt gparted processes once youve clicked apply
+[07:38] <Incarus> hitman1985, no, you can rescue it
+[07:38] <popmadness> I've tried Adobe installed alone, gansh alone, both installed together.  Just Adobe right now.
+[07:38] <eepberries> int256: http://www.brzitwa.de/mb/gpart/index.html
+[07:38] <eepberries> that page seems to have some good information on using it
+[07:38] <Incarus> SinPro, could be
+[07:39] <Incarus> hitman1985, wait a sec
+[07:39] <eepberries> int256: i've never used it myself, though i've done the same thing with a different program in windows xp
+[07:39] <Am3ndment> Now i dont get any errors in xorg.log file :/
+[07:39] <bkruse1> Hey guys, we just had to pull the drives out of a raid 1 server, and put them back in an hour later (after testing), however, they won't boot, and when we fdisk either one of the drives, the ext3 partition shows up as "Swap/Linux (146Gig)" Any idea? Anything we can do?
+[07:39] <Incarus> hitman1985, "sudo mkdir /media/Vista", "sudo mount /dev/sda1 /media/Vista"
+[07:40] <Incarus> hitman1985, we can rescue your private things, but i think you have to reinstall vista
+[07:40] <hitman1985> Incarus: it says you must specify the filesystem
+[07:41] <Incarus> hitman1985, k , mom
+[07:41] <eepberries> Incarus: do you know anything about finding lost partitions using linux?
+[07:41] <b1n42y> bkruse1: fstab needs modifying by the sounds of it... dont know
+[07:41] <rdw200169> eepberries, you can use testdisk for that...
+[07:41] <eepberries> rdw200169: oh is that available on linux?
+[07:41] <rdw200169> eepberries, it'll seek out and find old partition tables
+[07:41] <rdw200169> eepberries, yup
+[07:41] <eepberries> oh okay
+[07:41] <eepberries> cool
+[07:41] <Incarus> hitman1985, "sudo mount -t ntfs /dev/sda1 /media/Vista"
+[07:42] <Incarus> eepberries, yes, use testdisk or something like that
+[07:42] <bkruse1> b1n42y: I appreciate it, but it won't even boot right now, so we have it in a PC with knoppix running, just trying to save the mysql database
+[07:42] <bkruse1> we just need the mysql database :/
+[07:42] <hitman1985> Incarus:  that where it says file system type ?
+[07:42] <rdw200169> eepberries, you *are* talking about finding partitions that have been deleted, right?
+[07:42] <Incarus> hitman1985, ?
+[07:42] <Incarus> hitman1985, try the command
+[07:42] <eepberries> rdw200169: not sure, it isn't my problem. i'm trying to help int256 figure out why some of his partitions are missing
+=== tmanternach is now known as trvr
+[07:42] <rdw200169> eepberries, not just hard to detect, like ext3 on windows
+[07:42] <eepberries> or if they're just gone
+[07:43] <hitman1985> Incarus: Failed to mount '/dev/sda1': Invalid argument
+[07:43] <hitman1985> The device '/dev/sda1' doesn't have a valid NTFS.
+[07:43] <hitman1985> Maybe you selected the wrong device? Or the whole disk instead of a
+[07:43] <hitman1985> partition (e.g. /dev/hda, not /dev/hda1)? Or the other way around?
+[07:43] <rdw200169> eepberries, b/c parted will show everything, regardless of whether or not its mountable
+[07:43] <eper3z> some1 help me with this display issue plz!
+[07:43] <Incarus> hitman1985, shit, wait
+[07:43] <rdw200169> eepberries, same thing w/gparted, the gtk parted frontend
+[07:43] <eepberries> rdw200169: well he said gparted showed the hard drive as being unallocated
+[07:43] <Incarus> hitman1985, "sudo mount -t ntfs-3g /dev/sda1 /media/Vista"
+[07:43] <popmadness> Incarus: Switching back to gnash.
+[07:44] <Incarus> popmadness, i wouldnt do that, but you can try
+[07:44] <eepberries> rdw200169: would that be scanning for partitions that could be lost?
+[07:44] <int256> eepberries: scaning.
+[07:44] <hitman1985> Incarus: same thing
+[07:44] <Incarus> hitman1985, k
+[07:44] <Incarus> hitman1985, just a sec
+[07:44] <rdw200169> eepberries, no, go with testdisk.  it can also repair screwed up partition tables
+[07:44] <popmadness> Incarus: Fail either way.
+[07:44] <eepberries> rdw200169: alright well int256's using a program called gpart right now
+[07:45] <rdw200169> eepberries, int256 refer to the documentation here for help, this may do what you want: http://www.cgsecurity.org/wiki/TestDisk
+[07:45] <b1n42y> Incarus: do you think qemu is better than virtuabox and is kqemu for cpu capable emulation?
+[07:45] <tuntun> Hi, I am looking for an open-source app that can convert an .bin to a .iso. Does anyone know one?
+[07:45] <SinPro> there's 32bit and 64bit files, which one should I get?
+[07:45] <rdw200169> eepberries, yeah, but gparted said that it was 'unallocated' that's not very useful
+[07:45] <SinPro> My laptop is T9300
+[07:45] <eepberries> rdw200169: yeah if gpart doesn't find it (i don't know anything about this program) i'll have int256 installtestdisk
+[07:45] <eepberries> rdw200169: gpart, not gparted
+[07:45] <eepberries> i think they're different
+[07:46] <Seveas> !iso | tuntun
+[07:46] <ubottu> tuntun: To mount an ISO disc image, type <unconvertable> sudo mount -o loop <ISO-filename> <mountpoint> <unconvertable> - There is a list of useful cd image conversion tools at http://wiki.linuxquestions.org/wiki/CD_Image_Conversion - Always verify the ISO using !MD5 before !burning.
+[07:46] <SinPro> there's 32bit and 64bit files, which one should I get? my laptop cpu is t9300
+[07:46] <aram> .
+[07:46] <Incarus> b1n42y, 1. yes, 2. yes
+[07:46] <rdw200169> eepberries, ah, testdisk and gpart do about the same thing... i prefer testdisk personally... (also int256 )
+[07:46] <bryhoyt> hi, have a USB drive problem in Intrepid. I plugin a drive, it shows up in Nautilus ("Places" sidebar). Then I unplug the device (after unmounting it) and the icon remains in "Places". When I plug it in again, a new icon appears. Each time I plug/unplug, another icon gets added. Furthermore, the folder in "/media" doesn't always disappear on unmount, so I can't rely on a consistent filename.
+[07:46] <int256> eepberries: estimated time to complete scan.
+[07:47] <eepberries> int256: what is it saying so far
+[07:47] <Incarus> hitman1985, ok. know error
+[07:47] <error404notfound> any help on: http://pastebin.com/m7886fa9
+[07:47] <bryhoyt> I've had it since hardy & possibly even before. It was working perfectly on intrepid till recently (it's not related to updates tho -- I haven't updated since installing 3 months ago, and updating today hasn't fix it).
+[07:47] <b1n42y> tuntun: bin2iso
+[07:47] <b1n42y> Incarus: ta
+[07:47] <SinPro> Incarus, I have a question
+[07:47] <plsd> SinPro, Depends :) Take a look in the ubuntu forums in the 64-bit forum, there you can read about the "problems" with 64-bit. If you use any programs that aren't available in 64-bit then go with 32, flash used to be problematic before but not anymore, I don't know if there's anything problematic now. I'm using 64. Choose whichever
+[07:48] <int256> eepberries: http://pastebin.ubuntu.com/121705/
+[07:48] <hitman1985> Incarus: so you know the error or your asking me ?
+[07:48] <tuntun> Seveas, b1n42y, thanks.
+[07:48] <bryhoyt> anyone experienced this USB bug & does anyone have ideas where to start investigating?
+[07:48] <eepberries> int256: that's looking great. are those the partitions you're missing?
+=== TIMME is now known as TIMM1337
+[07:48] <TIMM1337> hey how are yall
+[07:48] <Incarus> hitman1985, hm, boot the windows cd and boot into windows and enter in terminal "fixmbr", this should work
+[07:48] <SinPro> hmmmmmmm
+[07:49] <Am3ndment> im getting pretty hopeless :/
+[07:49] <Incarus> hitman1985, https://bugs.launchpad.net/ubuntu/+source/gparted/+bug/298169
+[07:49] <SinPro> plsd, 64 is faster than 32?
+[07:49] <TIMM1337> ive got a real big problem ... can someone help me?
+[07:49] <int256> eepberries: ya, but one remaining to show
+[07:49] <TIMM1337> ok ;)
+[07:49] <plsd> SinPro, http://www.phoronix.com/scan.php?page=article&item=616&num=1
+[07:49] <eepberries> SinPro: that depends entirely on how well your apps were programmed
+[07:49] <Seveas> TIMM1337, not really. You haven't told us the problem so there's not much we can do :)
+[07:50] <Incarus> hitman1985, ok. forgett it, was wrong
+[07:50] <SinPro> hmm
+[07:50] <eepberries> int256: cool. is it finished scanning yet?
+[07:50] <int256> eepberries: no
+[07:50] <Incarus> hitman1985, install "testdisk" and start it
+[07:50] <hitman1985> Incarus: i m running the same crakc then he is talking about but dont think this has anything to do with it :)
+[07:50] <TIMM1337> xD ok .. so .. i installed ubuntu on my usb stick ... but now i cant boot myhard drive if the stick isnt connectet
+[07:51] <TIMM1337> it always boots the grup
+[07:51] <TIMM1337> that booting windows and its tells me "error"
+[07:51] <cooldduuudde> timm1337 even if pen drive is removed?
+[07:51] <Incarus> hitman1985, crack?
+[07:51] <eepberries> TIMM1337: you screwed up. how did you install it on the usb stick
+[07:51] <TIMM1337> no just when its removed
+[07:51] <Seveas> TIMM1337, boot from windows cd and run the fixmbr command. Then reinstall grub onto the usb stick
+[07:51] <hitman1985> Incarus: activator for vista ;) i am not paying the ms cartell :)
+[07:52] <Incarus> TIMM1337, dont do this
+[07:52] <rww> hitman1985: please don't discuss stuff like that in here.
+[07:52] <cooldduuudde> you installed grub on hdd while OS on pen drive timm1337
+[07:52] <Incarus> TIMM1337, install grub on the hd
+[07:52] <TIMM1337> my stick works perfect
+[07:52] <kizza> hi
+[07:52] <Incarus> hitman1985, k
+[07:52] <Incarus>  8-)
+[07:52] <TIMM1337> i just need to remove grub but how ^^
+[07:52] <eepberries> TIMM1337: that isn't the problem, your computer now looks for your usb drive for booting
+[07:52] <Seveas> Incarus, that won't work if /boot/grub is on the usb stick and he wants to boot without it
+[07:52] <TIMM1337> ok so i have to change the boot device?
+[07:52] <Incarus> hitman1985, install, testdisk on live linux and run
+[07:53] <hitman1985> Incarus: how ? all i see is a archive
+[07:53] <eepberries> TIMM1337: do you have only windows installed on your hard drive?
+[07:53] <Incarus> Seveas, ...
+[07:53] <TIMM1337> yes
+[07:53] <cooldduuudde> TIMM1337 you have 2 run windows recovery console or sumthing. but even without it i think it shud b possible 2 boot windows from grub
+[07:53] <Incarus> hitman1985, terminal (in linux live cd) and "sudo apt-get install testdisk"
+[07:54] <eepberries> TIMM1337: well i dont know if it will mess up your usb linux installation or not, but doing what Seveas said will fix the windows problem
+[07:54] <TIMM1337> it doesnt even oopen grub cause error
+[07:54] <Incarus> Seveas, wrong, i think
+[07:54] <Seveas> Incarus, in case you don't know: grub is a 2-stage bootloader. Stage2 lives in /boot/grub and is needed for booting
+[07:54] <hitman1985> Incarus: couldnt find package
+[07:54] <SuperMoot> is it possible to use wget for --load-cookies file along with --http-user=user --http-password=pass , and have it login to two places (one with the cookie) and the other site with the user:pass ?
+[07:54] <Incarus> Seveas, yes, he have to install it on hd
+[07:54] <Seveas> eepberries, it will make the usb dongle unbootable, hence the 'then reinstall grub onto the usb drive' thing
+[07:54] <Seveas> Incarus, no, he needs grub not to touch his hd and use bios boot order to boot from usb
+[07:54] <TIMM1337> so kk thanks guys for your help im coming back when i fixed the prob
+[07:55] <TIMM1337> thanks very much
+[07:55] <TIMM1337> cyq
+[07:55] <eepberries> int256: still scanning?
+[07:55] <SuperMoot> oops
+[07:55] <SinPro> Ubuntu downloading takes an hour.
+[07:55] <Am3ndment> puzanov: you have any other ideas? Just installed again xserver and no help
+[07:55] <int256> eepberries: ya, still
+[07:55] <Incarus> Seveas, k , my mistake
+[07:55] <Incarus> SinPro, good to know
+[07:55] <SinPro> :)
+[07:56] <eepberries> int256: has it found all the partitions yet? if not, how many are missing?
+[07:56] <Incarus>  8-)
+[07:56] <int256> eepberries: not done yet. still 2 missing...
+[07:56] <Incarus> int256, where is a way to rescue lost partition taboes
+[07:57] <int256> Incarus: ya, i am also searching for that..
+[07:57] <eepberries> int256: okay, i guess let it keep running
+[07:57] <int256> Incarus: use gpart
+[07:57] <kizza> hi
+[07:57] <int256> eepberries: ok
+[07:57] <StyleSheep> halp: i am having trouble mounting a network device, smbclient works fine, but smbmount times out...
+[07:58] <kizza> any of u play wow
+[07:58] <SinPro> I've seen some articles about installation from USB stick, can i do that? If I can. how?
+[07:58] <Incarus> kizza, never say hi in an irc with 1327 users
+[07:58] <Seveas> !ot | kizza
+[07:58] <ubottu> kizza: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics. Thanks!
+[07:58] <Incarus> SinPro, no
+[07:58] <Incarus> SinPro, install wubi on ubuntu usb live and then install ubuntu
+[07:58] <Am3ndment> Anyone? Booted today and i cant start X, first got error with "No screen" even tho, xorg had entry for screen section. Then tried X -config /root/xorg.new with no help. And while ago just reinstalled xserver with no hel
+[07:58] <chris4585> someone else asked a question, could someone answer for me? <Haela> ok so IF i want to listen to my itunes music...does the linux itunes play my music that i have
+[07:59] <Seveas> Sindacious, you can :) No need to use wubi at all
+[07:59] <Seveas> SinPro*
+[07:59] <hitman1985> Incarus: i dont see me running this stuff all tonight its 2 am here
+[07:59] <chris4585> I'd just like to know if any linux media players can play itunes music?
+[07:59] <Incarus> hitman1985, oh, we got 9 am in germany
+[07:59] <kizza> how do i upgrade ubuntu 8.04 to the lastest
+[07:59] <StyleSheep> can anybody help me please with a problem regarding smbmount???
+[07:59] <DMZ_> is there a backtrack channel?
+[07:59] <hitman1985> Incarus: haha mach kein joke :)
+[07:59] <Seveas> !usb | SinPro
+[07:59] <SinPro> how?
+[07:59] <ubottu> SinPro: For information about installing Ubuntu from USB flash drives, see https://help.ubuntu.com/community/Installation/FromUSBStick - For a persistent live USB install, see: https://wiki.ubuntu.com/LiveUsbPendrivePersistent
+[07:59] <Incarus> hitman1985		, was?
+[08:00] <Seveas> you want the first link
+[08:00] <hitman1985> Incarus:  not funny,
+[08:00] <Seveas> !upgrade | kizza
+[08:00] <ubottu> kizza: For upgrading, see the instructions at https://help.ubuntu.com/community/UpgradeNotes
+[08:00] <Incarus> hitman1985, you can speak german?
+[08:00] <int256> eepberries: TATA...
+[08:00] <eepberries> kizza: http://www.ubuntu.com/getubuntu/upgrading
+[08:00] <hitman1985> Incarus: i am german :)
+[08:00] <eepberries> int256: all found?
+[08:00] <Incarus> hitman1985, k, privat chat
+[08:00] <int256> eepberries: means bye...
+[08:00] <Seveas> !upgrading =~ s/$/ - see also http://www.ubuntu.com/getubuntu/upgrading/
+[08:00] <Am3ndment> Anyone
+[08:00] <eepberries> int256: so you fixed them?
+[08:00] <kizza> ty
+[08:00] <StyleSheep> where can i get help regarding smbmount problems?
+[08:00] <lwizardl> hi
+[08:01] <int256> eepberries: ya ya. all gone...
+[08:01] <eepberries> int256: nice. congrats
+[08:01] <eepberries> int256: oh wait
+[08:01] <Orochium> YES
+[08:01] <Orochium> awesome
+[08:01] <eepberries> int256: you found them all, or they're all gone
+[08:01] <Orochium> 8.04 server is installing
+[08:01] <Seveas> StyleSheep, not entirely sure if smbmount is still 'the right way'. Try 'mount -t cifs'
+[08:01] <Orochium> it was just 8.10 server thats screwed up
+[08:01]  * Orochium does an awesome dance
+[08:02] <glitsj16> Am3ndment: anything usefull in /var/log/Xorg.0.log to start debugging your issue ? Look for lines starting with (EE) for errors ..
+[08:02] <int256> eepberries: all gone... i am restarting. see you soon. if any partition remains..
+[08:02] <StyleSheep> Seveas, i tried both, but with the same result
+[08:02] <Meshezabeel> is ubuntu 9.04 slated to come out April 30th. Or, is there a set date before that that it will come out on?
+[08:02] <eepberries> int256: what happened? didn't the scan find some of the partitions?
+[08:02] <int256> eepberries: any way thanks. i will not forgot you...
+[08:03] <StyleSheep> Seveas, if i navigate with nautilus i can access the share, but i cant mount it
+[08:03] <lwizardl> anyone here ever setup a PXE linux distro install server
+[08:03] <Seveas> StyleSheep, any errors, or is it hanging or timing out?
+[08:03] <eepberries> int256: before giving up, you should try testdisk
+[08:03] <Am3ndment> glitsj16: no errors.
+[08:03] <int256> eepberries: its still going on. i started it aging now only the first drive is showning.
+[08:03] <Am3ndment> glitsj16: only warning is that there is some font missing
+[08:03] <int256> eepberries: ok. wait
+[08:03] <StyleSheep> Seveas, just hanging and timing out...
+[08:04] <eepberries> int256: try stopping that and trying testdisk
+[08:04] <SinPro> ???????????
+[08:04] <int256> eepberries: installing it..
+[08:04] <Seveas> StyleSheep, any useful logentries in dmesg or on the windows box? Maybe it's refusing multiple simultaneous connections?
+[08:04] <arturgam3r> hello. i have problem with gdm. i've removed it and now i use the console to login. but now i have not any rights (cant mount, use network...)
+[08:05] <Orochium> WHo would I talk to about why the ide_generic module is missing from Ubuntu Server 8.10...was that intentional?
+[08:05] <Incarus> arturgam3r, "sudo apt-get -f install"
+[08:05] <kizza> whats the highest ubuntu update out
+[08:05] <kizza> is it 8.10
+[08:05] <Orochium> stable or ?
+[08:05] <Seveas> kizza, 8.10
+[08:05] <Orochium> 8.10 is stable yeah
+[08:05] <kizza> ohh ty
+[08:06] <VADiUM> stupid cock suckers, why cant i set a specific ip for my fuckin network adapter to be used on boot
+[08:06] <glitsj16> Am3ndment: yep, that's a pretty regular font warning, that wouldn't be causing serious issues though .. not sure i follwed all your remarks here, could you summarize what is happening exactly ?
+[08:06] <Orochium> but I just tried to install it on an old netfinity and found out all the generic ide modules = don't exist on the distro
+[08:06] <Seveas> !ops | VADiUM
+[08:06] <ubottu> VADiUM: Help! Channel emergency! (ONLY use this trigger in emergencies) - Mez, LjL, elkbuntu,  imbrandon, DBO, gnomefreak, Hobbsee, rob, Madpilot, CarlK, crimsun, ajmitch, tritium, Nalioth, thoreauputic, apokryphos, tonyyarusso,  PriceChild, Amaranth, jrib, jenda, nixternal, Myrtti, mneptok, Pici, Jack_Sparrow, nickrud, jpds, bazhang, jussi01, Flannel or ikonia!
+[08:06] <Orochium> so it was screwing with anything IDE on the system
+[08:06] <Seveas> tx Myrtti
+[08:06] <kizza> im having trouble with the speail effects on ubuntu like the cube it dosnt work
+[08:06] <Myrtti> Seveas: np, sweetie
+[08:06] <Am3ndment> glitsj16: basically X just doesnt start. I cant remember doing any changes yesterday. So far i have tried to reinstall xserver and X -config /root/xorg.conf with no help
+[08:07] <dust_t> hi i am using ubuntu server 8.04 . I changed the hostname by adding it to /etc/hostname and reloaded postfix. Now when I do telnet localhost 25 it still shows the older hostname
+[08:07] <kizza> or any other effects
+[08:07] <Myrtti> dust_t: did you change it to /etc/hosts as well?
+[08:07] <arturgam3r> Incarus, ??
+[08:07] <Seveas> dust_t, look im /etc/postfix/main.cf as well
+[08:07] <Am3ndment> glitsj16: Before backtrace latest log is for "Loading extension XFree86-DRI"
+[08:07] <dust_t> Myrtti, yes
+[08:07] <Incarus> arturgam3r, ?
+[08:07] <Seveas> dust_t, and you might need to restart postfix instead of reload
+[08:08] <eepberries> int256: have you installed testdisk?
+[08:08] <int256> eepberries: using it now
+[08:08] <eepberries> int256: are you following the step by step guide/
+[08:08] <Incarus> arturgam3r, repair your system, its a bug, your system is missing a package
+[08:08] <kizza> can someone help me with my ubuntu effects they dont work
+[08:08] <int256> eepberries: ya.
+[08:08] <eepberries> int256: okay
+[08:08] <Incarus> arturgam3r, try to set you in sudoers or something
+[08:08]  * int256 will be back in 5min
+[08:08] <dust_t> Seveas, its the older one here. Should I run the dpkg-reconfigure command or change it manually ?
+[08:08] <glitsj16> Am3ndment: thanks, looks odd, can't say i can come up with anything usefull straight off. What errors do you get when you try to run startx from terminal ?
+[08:09] <Seveas> dust_t, manually
+[08:10] <dust_t> Seveas, works :)
+[08:10] <Am3ndment> glitsj16: Nothing, it just says "Starting X server   [OK]" :/
+[08:10] <eper3z> hey guys how can i make my computer initiate this commands, sudo /etc/init.d/samba restart, upon boot?
+[08:11] <Seveas> eper3z, why would you do that? Samba starts fresh at boot, surely there's no need to restart it right away?
+[08:11] <bohemian_> anyone has an idea to make nvidia fx5500 work properly with userful multiplier?
+[08:11] <eper3z> my network doesnt pickup the folder unless its restarted
+[08:11] <Am3ndment> "Gnome server" even ^
+[08:11] <eper3z> im trying to access files froma windows computer
+[08:12] <Seveas> eper3z, for that you don't need a samba server running at all
+[08:12] <kizza> help
+[08:12] <Incarus> kizza, ?
+[08:12] <eepberries> kizza: what's up
+[08:12] <eper3z> well that was the only way i was able to navigate, im a newb
+[08:13] <Seveas> eper3z, are you accessing the windows machine by name or by ip?
+[08:13] <kizza> my effects for ubuntu dont work like the cube
+[08:13] <Am3ndment> glitsj16: i got a hint from other channel. Latest driver update messed up someone else, how can i get older driver release?
+[08:13] <dust_t> How do I test that it is setup properly for sending emails ?
+[08:13] <eper3z> by name
+[08:13] <StyleSheep> Seveas, [ 4357.748382]  CIFS VFS: Error connecting to socket. Aborting operation
+[08:13] <StyleSheep> [ 4357.748427]  CIFS VFS: cifs_mount failed w/return code = -110
+[08:13] <b1n42y> !qemu
+[08:13] <ubottu> qemu is an emulator you can use to run another operating system - see https://help.ubuntu.com/community/WindowsXPUnderQemuHowTo
+[08:13] <eepberries> kizza: do you have compiz installed
+[08:13] <StyleSheep> Seveas, mount error 110 = Connection timed out
+[08:13] <kizza> wats that
+[08:13] <Incarus> kizza, "glxinfo | grep direct"
+[08:13] <eepberries> kizza: is this what you're talking about? http://shikai.shadowraith.com/images/xgl-compiz.jpg
+[08:14] <StyleSheep> but i've connected a windows box to the share, so maybe its the other thingy you mentioned
+=== iron_man_ftw is now known as away_man_ftl
+[08:14] <eper3z> i access the folder by name!
+[08:14] <eper3z> Seveas
+[08:14] <Seveas> eper3z, might be nmbd starting too early
+[08:14] <Seveas> hang on
+[08:14] <eper3z> ahh
+[08:14] <eper3z> cool
+[08:14] <vicmen> Is php 5.2.8 available for ubuntu 8.04?
+[08:15] <kizza> yeah
+[08:15] <eepberries> kizza: yeah to what
+[08:15] <glitsj16> Am3ndment: i'd try looking in bugs.launchpad.net to check if something of a fix is available
+[08:15] <kizza> thats wat im trying to do how do u do it
+[08:15] <eepberries> kizza: you have to install compiz
+[08:15] <kizza> were from
+[08:15] <StyleSheep> Seveas, but even if i unmount the share on the windows box i cannot mount it...
+[08:15] <Seveas> eper3z, run this: echo /etc/init.d/samba restart | sudo tee /etc/network/if-up.d/samba && sudo chmod +x /etc/network/if-up.d/samba
+[08:16] <kizza> or how
+[08:16] <error404notfound> anybody here using ssmtp?
+[08:16] <eepberries> kizza: you can probably get it using apt-get
+[08:16] <Incarus> kizza, "glxinfo | grep direct"
+[08:16] <Seveas> eper3z, that creates a small script that restarts samba when your network is up
+[08:16] <int256> eepberries: yes it shows all partitions
+[08:16] <int256> eepberries: now what ?.
+[08:16] <Seveas> !anyone | error404notfound
+[08:16] <eepberries> int256: great, now use testdisk to save that
+[08:16] <ubottu> error404notfound: A large amount of the first questions asked in this channel start with "Does anyone/anybody..."  Why not ask your next question (the real one) and find out?
+[08:16] <eepberries> int256: it should tell you how to do that in the guie
+[08:16] <Am3ndment> glitsj16: thanks
+[08:16] <hateball> Is there a way to "invert" ping replies? Make it show dropped packets instead of the ones that go through
+[08:16] <int256> eepberries: how to save it ?
+[08:16] <eepberries> *guide
+[08:16] <quibbler> vicmen: no 5.24
+[08:16] <eepberries> int256: hang on
+[08:17] <Seveas> hateball, try mtr. It'll display questionmarks for things not received
+[08:17] <kizza> it said yes to glxinfo | grep direct
+[08:17] <Incarus> kizza, thats good
+[08:17] <Incarus> kizza, install compiz
+[08:17] <eepberries> Incarus: kizza wants compiz
+[08:17] <Seveas> hateball, when mtr starts, hit d a few times until it shows rows of dots
+[08:17] <Incarus> eepberries, know
+[08:17] <eepberries> yeah
+[08:17] <eepberries> int256: select write
+[08:18] <kizza> how
+[08:18] <Incarus> kizza, are you under gnome or kde?
+=== Orochium is now known as Oro|finallyinsta
+[08:18] <error404notfound> I have followed http://www.linux.com/feature/132006 and used mailhub as smtp.nayatel.com and when I try to send email  get "Feb 23 13:15:16 nextcube sSMTP[4638]: Unable to locate , Feb 23 13:15:16 nextcube sSMTP[4638]: Cannot open :25"
+[08:18] <hateball> Seveas: oh, neat. cheers :D
+[08:18] <kizza> im sort of new
+[08:18] <eepberries> int256: actually wait
+=== Oro|finallyinsta is now known as Orochium
+[08:18] <kizza> how do i find out
+[08:18] <MrGoodkat_> is there a command to clear ram?
+[08:19] <Incarus> kizza, have you got a panel on the top of the screen?
+[08:19] <kizza> yes\
+[08:19] <Incarus> MrGoodkat_, yes, you can wipe your ram
+[08:19] <Incarus> kizza, k, so you are under gnome or xfce
+[08:19] <eper3z> Seveas, thanks!
+[08:19] <Incarus> kizza, you dont need compiz for effects in gnome
+[08:19] <eepberries> int256: yeah, you should be able to write it now
+[08:19] <eepberries> int256: have you done that?
+[08:19] <int256> eepberries: selected deeper search..pls wait..
+[08:19] <kizza> kk
+[08:20] <eepberries> int256: was there a missing partition?
+[08:20] <kizza> kk well how do i do it
+[08:20] <MrGoodkat_> Incarus, how do i do it?
+[08:20] <theCarpenter> i want to setup my laptop as a portable wireless router with internet-sharing. however, my builtin wifi device can't do iwconfig mode master.
+[08:20] <theCarpenter> question 1- even if it could, could i set it up as a wireless router and use it as im using it right now (a regular wifi adapter) at the same time?
+[08:20] <theCarpenter> question 2 - are there any drivers or anything i could install specially to enable setting iwconfig mode master? or is there some way of doing it that doesn't require that setting?
+[08:20] <eper3z> brb going to test it, seveas!
+[08:20] <int256> eepberries: yes just one..
+[08:20] <eepberries> int256: ah
+[08:21] <kizza> is there a hotkey
+[08:21] <eepberries> kizza: do you know how to use the terminal
+[08:21] <kizza> yes
+[08:21] <kizza> sort of
+[08:21] <Incarus> kizza, no, you have to activate desktop effects
+[08:21] <error404notfound> when I try to send email from another server using smtp.nayatel.com as relayhost, it works fine, but from here I get "send-mail: RCPT TO:<user@gmail.com> (550 5.7.1 <user@gmail.com>... Relaying denied)"
+[08:21] <bohemian_> >	anyone has an idea to make nvidia fx5500 work properly with userful multiplier?
+[08:21] <bohemian_> >	i am using driver 173.14.12
+[08:21] <eepberries> enter in sudo apt-get install compiz
+[08:21] <kizza> kk
+[08:21] <bohemian_> and nvidia config tool 177.78
+[08:21] <dust_t> Right now postfix is denying relay for any email id except the local ones. How do I enable this ? And also not make it an open relay
+[08:21] <dash84> i just got kicked out of ubuntu-offtopic
+[08:21] <Incarus> MrGoodkat_, dont know, search in google "ubuntu ram wipe"
+[08:21] <dash84> :[
+[08:21] <MrGoodkat_> <Incarus> kizza, no, you have to activate desktop effects <-- arent the desktop effects compiz based?
+[08:22] <eepberries> MrGoodkat_: yeah i think so
+[08:22] <eepberries> at least the one kizza wants anyway
+[08:22] <MrGoodkat_> i just thought, couz he said you dont need compiz for desktop effects
+[08:22] <Incarus> MrGoodkat_, no, gnome got his own effect windows manager
+[08:23] <eepberries> Incarus: does gnome have that 3d box effect though
+[08:23] <Incarus> eepberries, i think so
+[08:23] <MrGoodkat_> compiz is already pre-installed since gutsy or intrepid, im not sure, thats what you control via the desktop effects panel
+[08:23] <kizza> i went to system / appearance/ visual effects and clicked it but it said cant be enabled
+[08:24] <Incarus> kizza, your graca is not compatible
+=== mike is now known as Guest48646
+[08:24] <MrGoodkat_> <kizza> i went to system / appearance/ visual effects and clicked it but it said cant be enabled <-- why cant it be enabled, most likely a problem with your graphic driver
+[08:24] <kizza> well that suks
+[08:24] <kizza> can i fix it
+=== drage is now known as [Nor]D_rage
+[08:24] <eepberries> on the other hand, is there any way to completely disable gnome desktop effects? i tried, but it still does that annoying shrink to the taskbar thing, except it only shows the window border instead of the window picture. i'd like to completely remove that effect
+[08:25] <Incarus> eepberries, yes, gconf
+[08:25] <Incarus> eepberries, search in google
+[08:25] <eepberries> alright
+[08:25] <Incarus> kizza, yes
+[08:25] <b1n42y> can anyone tell me if its possible to run kde 3.5.* instead of 4.2 and how
+[08:25] <kizza> how
+[08:25] <Incarus> kizza, its difficult
+[08:25] <lwizardl> anyone here ever configured a PXE server to do network OS installs?
+[08:25] <kizza> im ready to do it
+[08:26] <MrGoodkat_> eepberries, yes, system - preferences - appearance - visual effects - none
+[08:26] <Incarus> MrGoodkat_, wrong
+[08:26] <glitsj16> kizza: perhaps starting with a script called compiz-check is worthwile, look at http://forlong.blogage.de/entries/pages/Compiz-Check for more info
+[08:27] <Incarus> MrGoodkat_, where are standard effects, you cant deactive with that
+[08:27] <MatBoy> mhh, my 8.04 install just shutsdown when I boot it and get my login screen :S
+[08:27] <MatBoy> just @ once
+[08:27] <MrGoodkat_> <Incarus> MrGoodkat_, where are standard effects, you cant deactive with that <--- what standard effects, im sure i dont have any effects
+[08:27] <mandar> how to create dial up connection for cable net in ubuntu 8.1
+[08:27] <StyleSheep> how can i find out the ip adress of a local server when i have a hostname?
+[08:27] <MatBoy> StyleSheep: ifconfig ?
+[08:28] <eepberries> MrGoodkat_: the windows will still do that annoying shrink into the taskbar thing, except it will just show an outline of the window
+[08:28] <Incarus> MrGoodkat_, under gnome are some effects, like minimizing
+[08:28] <eepberries> pretty stupid if you ask me
+[08:28] <MrGoodkat_> StyleSheep, ping hostname, should give back ip too
+[08:28] <Incarus> eepberries, yes, moment
+[08:28] <MatBoy> annoying... can't use my pc anymore :D
+[08:28] <StyleSheep> MrGoodkat_, ping: unknown host
+[08:28] <luddite> g'day all - i have 2 problems. First one first. i backed up my laptop with clonezilla - now i am going to instasll xp onto the laptop then put the clonezilla partition onto it. XP was never on the laptop before but i need it for flash cs
+[08:29] <Daft_Punk> is there a way to make the text on the icons on desktop, readable on both light AND dark backgrounds?
+[08:29] <StyleSheep> MrGoodkat_, but i can use smbclient with that hostname
+[08:29] <StyleSheep> o_O
+[08:29] <dust_t> how do i ensure that my mail server is not an open relay?
+[08:29] <eepberries> MatBoy: are you sure your hardware isn't busted?
+[08:29] <Incarus> eepberries, http://ubuntuforums.org/showthread.php?t=152251
+[08:29] <Scix> sorry off topic, but how can i disable all those "user joined" and "user quit" messages in xChat?
+[08:30] <Daft_Punk> Scix, that is not off topic
+[08:30] <mandar> does any one know.. how to create dial up connection for cable net in ubuntu 8.1
+[08:30] <Incarus> mandar, yes
+[08:30] <Incarus> mandar, try it yourself, its easy
+[08:30] <Incarus> eepberries, http://ubuntuforums.org/showthread.php?t=152251
+[08:31] <kizza> this is wat it said Gathering information about your system...
+[08:31] <kizza>  Distribution:          Ubuntu 8.04
+[08:31] <kizza>  Desktop environment:   GNOME
+[08:31] <kizza>  Graphics chip:         ATI Technologies Inc M9+ 5C63 [Radeon Mobility 9200 (AGP)] (rev 01)
+[08:31] <kizza>  Driver in use:         radeon
+[08:31] <kizza>  Rendering method:      AIGLX
+[08:31] <kizza> Checking if it's possible to run Compiz on your system...
+[08:31] <kizza>  Checking for texture_from_pixmap...               [ OK ]
+[08:31] <kizza>  Checking for non power of two support...          [ OK ]
+[08:31] <eepberries> Incarus: thanks, i accidentally hit close window instead of copy link :)
+[08:31] <kizza>  Checking for composite extension...               [ OK ]
+[08:31] <mandar> actually i am new to ubuntu. so can u please help??
+[08:31] <kizza>  Checking for FBConfig...                          [ OK ]
+[08:31] <kizza>  Checking for hardware/setup problems...           [FAIL]
+[08:31] <Incarus> !paste
+[08:31] <ubottu> pastebin is a service to post multiple-lined texts so you don't flood the channel. The Ubuntu pastebin is at http://paste.ubuntu.com (make sure you give us the URL for your paste - see also the channel topic)
+[08:31] <kizza> There has been (at least) one error detected with your setup:
+[08:31] <kizza>  Error: Laptop using radeon driver.
+[08:31] <kizza> Would you like to know more? (Y/n) y
+[08:31] <kizza>  It has been detected, that you are running a laptop with an ATI chip.
+[08:31] <kizza>  The radeon driver supports Compiz out-of-the-box but because of a nasty bug
+[08:31] <Incarus> eepberries, k
+[08:31] <MrGoodkat_> ahh eepberries i know what you mean
+[08:31] <Daft_Punk> STOP FLOODING
+[08:31] <kizza>  in the driver that causes X to freeze on some cards, this particular
+[08:31] <kizza>  combination had to be blacklisted in Ubuntu "Hardy Heron".
+[08:31] <Incarus> kizza
+[08:31] <kizza>  In case you already used Compiz successfully on Ubuntu 7.10 (Gutsy), it is
+[08:31] <kizza>  safe to skip the blacklist.
+[08:31] <Incarus> kizza, stop it
+[08:31] <kizza> Do you want to skip blacklist checks by Compiz? (y/N)
+[08:31] <kizza> yeah
+[08:31] <vicmen> what is the correct way to instll mcrypt on Ubuntu 8.04?
+[08:31] <kizza> sorry
+[08:31] <Incarus> !paste
+[08:32] <MrGoodkat_> eepberries, you can disable that in gconf-editor, app-global-panel and then smth with effects
+[08:32] <Daft_Punk> !pastbin | kizza
+[08:32] <ubottu> Sorry, I don't know anything about pastbin
+[08:32] <eepberries> MrGoodkat_: okay
+[08:32] <Daft_Punk> !pastebin | kizza
+[08:32] <ubottu> kizza: pastebin is a service to post multiple-lined texts so you don't flood the channel. The Ubuntu pastebin is at http://paste.ubuntu.com (make sure you give us the URL for your paste - see also the channel topic)
+[08:32] <saadi559596> how to configure sane for my scanner?
+[08:32] <Incarus> MrGoodkat_, i did tell him
+[08:32] <MrGoodkat_> sorry then Incarus
+[08:32] <Incarus> np
+[08:32] <MrGoodkat_> wasnt reading every line
+[08:33] <kizza> There has been (at least) one error detected with your setup:
+[08:33] <kizza>  Error: Laptop using radeon driver.
+[08:33] <Incarus> vicmen, "sudo apt-get install mcrypt"
+[08:33] <vicmen> thanks lncarus, same for curl?
+[08:33] <Incarus> kizza, yes, not compatible
+[08:33] <kizza> so dose that mean i cant use effects
+[08:33] <MatBoy> woei !
+[08:33] <saadi559596> how to configure sane with my scanner can anyone help me out please
+[08:33] <Incarus> vicmen, dont know, try it
+[08:34] <MatBoy> removing a broken nut fixes it
+[08:34] <kizza> so i cant use them
+[08:34] <eepberries> int256: how's the scan going
+[08:34] <Incarus> kizza, no, but forgett the effects
+[08:34] <kizza> ty bye
+[08:34] <Incarus> saadi559596, check scanner driver first
+[08:35] <Amendment> glitsj16, I got it working, removed xorg.conf and booted
+[08:35] <saadi559596> how to do that incarus
+[08:35] <Incarus> saadi559596, google your scanner
+[08:35] <CJari> hi
+[08:36] <Incarus> CJari, never say hi in an irc with 1337 users
+[08:36] <Scix> It there a way to distribute the NM settings to multiple computers? I have like 120 computers wjo is supposed to be able to use 5 different networks, without user interferense
+[08:36] <Daft_Punk> CJari, hi
+[08:36] <CJari> im trying the new make usb startup stick feature, but im unable to boot from the usb.. i know the mother board supports booting from usb
+[08:36] <Incarus> Scix, nm?
+[08:37] <dannz> join #gentoo
+[08:37] <dannz> oops
+[08:37] <Incarus> CJari, have you got the latest bios version?
+[08:37] <CJari> lotsa users
+[08:37] <Incarus> dannz, /
+[08:37] <prezes_> ubuntu.pl
+[08:37] <CJari> well, Incarus it has booted other usb linuxes....
+[08:37] <Incarus> CJari, k
+[08:37] <Incarus> CJari, check usb mbr
+[08:37] <CJari> so would there be ddifference?
+[08:37] <Scix> Incarus, NetowrkManager
+[08:38] <glitsj16> Amendment: great, one less thing :)
+[08:38] <CJari> ok so maybe the linux installer failed to set that? =/
+[08:38] <Amendment> glitsj16, true, thanks for your help. Is there any cons for running without xorg.conf?
+[08:38] <CJari> or is it supposed to be done manuall?
+[08:38] <djshotglass> nice random question for the largest chan, anyone used quicktax? :P
+[08:38] <Incarus> CJari, could be, or checksum the iso
+[08:38] <CJari> or is it all automatic...?
+[08:39] <Incarus> automatic
+[08:39] <CJari> alright.. thats i thought.. maybe there was error
+[08:39] <glitsj16> Amendment: not really no, the new Xorg uses a lot less config settings to be able to 'hotplug' any chnages in your hardware setup
+[08:39] <Amendment> Great :)
+[08:40] <Incarus> Amendment, the xsever automatically replacer your xorg
+[08:40] <Amendment> Now that i have this fixed, next i need to get better OpenGL support my graphics driver so i can mess it up again :D
+[08:40] <CJari> thank u bye
+[08:40] <Incarus> CJari, np
+[08:41] <Incarus> Amendment, "glxdemo"
+[08:41] <Incarus> Amendment, "glxgears"
+[08:41] <kraut> moin
+[08:42] <Amendment> glxgears gives about ~615 fps :/
+[08:42] <Incarus> Amendment, "glxinfo | grep direct"
+[08:42] <djshotglass> INTUIT.TURBOTAX.PREMIER.2008-EDGEISO
+[08:42] <djshotglass> :)
+[08:42] <djshotglass> pz
+[08:42] <Amendment> Rendering is on
+[08:42] <Incarus> Amendment, and paste your xorg.0.log
+[08:44] <Amendment> Incarus, http://pastebin.com/m3a1180b3
+=== AdamS42b is now known as AdamS42
+[08:46] <Incarus> Amendment, line 215, 286
+[08:46] <jacks_> I am looking for a command line tool that will let me connect to ports on an integrated system. Any suggestions?
+[08:46] <Incarus> Amendment, vesa must exist!
+[08:47] <Incarus> Amendment, 343-378
+[08:48] <Incarus> Amendment, update your system
+[08:48] <Orochium> question
+[08:48] <Orochium> not sure if anyone knows this or not
+[08:48] <Orochium> if I have a domain, thats hosted remotely
+[08:49] <sujr> hi! what is ubuntu using /dev/dsp for audio input and output or output has i different device name?
+[08:49] <Incarus> Orochium, ask in one line
+[08:49] <Orochium> then set up a dyndns service, say like...http://home.demonpop.com <-- that, can the Dyndns service use that name to jump to my home server?
+[08:49] <Amendment> Incarus, you mean... what
+[08:50] <sujr> hi! is ubuntu using /dev/dsp for audio input and output or output has i different device name?*
+[08:50] <Orochium> Sorry Inca, essentially, can I use a sub-domain of a domain I already own to DynDNS to my home server
+[08:50] <Incarus> Amendment, "sudo apt-get update" "sudo apt-get upgrade"
+[08:50] <|HSO|SadiQ> can I access my music if I have it in another user's home dir on my system???
+[08:51] <eepberries> int256: you there?
+[08:51] <Incarus> |HSO|SadiQ, yes, but read only
+[08:51] <|HSO|SadiQ> rean only is what I want Incarus
+[08:51] <|HSO|SadiQ> read*
+[08:51] <Incarus> |HSO|SadiQ, works
+[08:51] <|HSO|SadiQ> ok...ty :)
+[08:51] <Amendment> Incarus, nothing updated
+[08:52] <Incarus> Amendment, "driinfo"
+[08:52] <Incarus> Amendment, "xdriinfo"
+[08:52] <Incarus> sry
+[08:52] <Incarus>  8-)
+[08:52] <Amendment> jouko@jouko-laptop:~$ driinfo
+[08:52] <Amendment> bash: driinfo: command not found
+[08:52] <Amendment> jouko@jouko-laptop:~$ xdriinfo
+[08:52] <Amendment> Screen 0: i915
+[08:52] <Amendment> jouko@jouko-laptop:~$
+[08:53] <Incarus> Amendment, k, you got direct rendering and it should work, but you've only the speed of software rendering
+[08:53] <Incarus> Amendment, (II) intel(0): direct rendering: Enabled
+[08:55] <Rioting_pacifist> nothing will run this morning, last thing i did was install some tools and run prelink, (but ive run prelink -ua since) yet just about everything is segfaulting on me
+[08:55] <Amendment> is there way to fix it?
+[08:55] <Incarus> Amendment, seems to be a bug, you can search it
+[08:56] <Incarus> Rioting_pacifist, restart xserver
+[08:56] <Incarus> Rioting_pacifist, strg+alt+backspace
+=== solid_li` is now known as solid_liq
+[08:57] <dichtbijzee> which channel for jaunty testing (dual screen problems)? tia
+[08:58] <quibbler> dichtbijzee: #ubuntu+1
+[08:58] <dichtbijzee> quibbler, kthnx
+[08:58] <Futurama140> Hey could someone help me install drivers for my video? its an integrated intell video
+[08:59] <ActionParsnip> Futurama140: can you give the output of: lspci | grep VGA
+[08:59] <Futurama140> 00:02.0 VGA compatible controller: Intel Corporation 82945G/GZ Integrated Graphics Controller (rev 02)
+[08:59] <Futurama140> \
+[08:59] <ActionParsnip> cool, gimme a sec
+[09:00] <crdlb> Futurama140: the only driver for that GPU is already installed and provides full functionality
+[09:00] <Tyrath> does anyone know how to get winetools working with the latest version of wine?]
+[09:00] <eepberries> does su not work in ubuntu for switching to another user? i know you can't use it switch to root, but does it not work at all for any account?
+[09:00] <g33k_gir1> how do I give a user permission to alter files in a directory?
+[09:01] <g33k_gir1> !permissions
+[09:01] <ubottu> An explanation of what file permissions are and how they can be manipulated can be found at https://help.ubuntu.com/community/FilePermissions
+[09:01] <Incarus> Tyrath, try apt-get install
+[09:01] <Incarus> eepberries, try sudo --help
+[09:01] <Incarus> g33k_gir1, sudo chmod
+[09:01] <ActionParsnip> Futurama140: seems to use the i810 driver which is part of a standard install
+[09:02] <ActionParsnip> Futurama140: http://ubuntuforums.org/showthread.php?t=729735
+[09:02] <gogeraver> go
+[09:02] <Amendment> Incarus, could you please provide me some keywords
+[09:02] <ActionParsnip> Tyrath: add te winehq repo and then upgrade, then sudo apt-get install winetools
+[09:02] <eepberries> isn't the only point of sudo to do a command as root though?
+[09:02] <ActionParsnip> hi g33k_gir1
+[09:02] <ActionParsnip> eepberries: correct
+[09:02] <Incarus> Amendment, "ubuntu intel rendering direct fps"
+[09:03] <eremite> Hey guys, I've got no audio in my browser, out of the blue.  It was working 5 minutes ago but now its dead.  I get sound from music players etc, still.  This is the third time its happened.  Nothing new has been installed to make this happen, to my knowledge.  Im on Ubuntu Wubi.  Any ideas?
+[09:03] <ActionParsnip> eepberries: it promotes your access for a single command
+[09:03] <Amendment> Thank you
+[09:03] <eepberries> so, if i wanted to switch to another user in a termain window, is that possible? it doesn't seem like su is usable at all
+[09:03] <Incarus> eepberries, "login"
+[09:03] <ActionParsnip> eremite: what if you restart your browser?
+[09:03] <Incarus> Amendment, and slow
+[09:03] <eremite> No, retsarting browser does not work.  Only restarting the PC.
+[09:04] <ActionParsnip> eremite: i'd restart your pc, next time it dies and as soon as it dies run: dmesg | tail
+[09:04] <ActionParsnip> eremite: you could also try restarting hal / alsa / pulse
+[09:04] <Futurama140> glxinfo | grep rendering is telling me that its turned off and it cant turn on cause my drivers suck, how do i fix that?
+[09:04] <ActionParsnip> Futurama140: you need to edit your xorg.conf (gksudo gedit /etc/X11/xorg.conf)
+[09:04] <eremite> Thanks for the advice.  Ive taken notes.  L8r.
+[09:05] <ActionParsnip> Futurama140: to make the system use the driver
+[09:05] <Incarus> Amendment, paste "glxinfo"
+[09:05] <KazaLite> hi all
+[09:05] <Futurama140> yes
+[09:06] <Amendment> Incarus, http://pastebin.com/d61f354b7
+[09:06] <KazaLite> i m going to install ubuntu....i selected option to install and it took me to busybox builtin shell
+[09:06] <KazaLite> now what to do?
+[09:06] <ActionParsnip> KazaLite: did you md5 check the iso you downloaded as well as check your cd for defects?
+[09:07] <KazaLite> i just downloaded it and burnt it on a cd:(
+[09:07] <Incarus> Amendment, your graca driver is not full compatible, so the fps under glxgears is normal
+[09:07] <KazaLite> how to check md5?
+[09:07] <Amendment> damn... :(
+[09:07] <ActionParsnip> KazaLite: go check the iso you downloaded, the first boot screen on the cd also has a verification part
+[09:08] <Futurama140> actionparsnip: i am editing the xorg.conf, how do i turn DRI on?
+[09:08] <KazaLite> oka
+[09:08] <Incarus> Amendment, yes
+[09:08] <ActionParsnip> KazaLite: verification is ESSENTIAL. TCP is very good at making sure stuff is ok but in now way is it flawless and files can become damaged in transport
+[09:08] <Amendment> Incarus, is there anything with what i could increase performance?
+[09:09] <louq> hi
+[09:09] <Incarus> Amendment, no, you could programm your own driver
+[09:09] <louq> how can i disable services running in the background which i do not need?
+[09:09] <Amendment> ooor not :) Thanks for your help
+[09:10] <Incarus> Amendment, np, look at line 66-113
+[09:10] <ActionParsnip> Futurama140: http://www.gentoo.org/doc/en/dri-howto.xml
+[09:10] <KazaLite> cool
+[09:10] <quibbler> louq: system-administration-services uncheck what you do'nt want
+[09:10] <Incarus> Amendment, you can also try to manually update your graca driver
+[09:10] <ActionParsnip> Futurama140: that xorg.conf I gave you in the first link should be fairly complete you just need to copy the majority of the video card, monitor and screen sections
+[09:11] <eepberries> is there some reason "sudo -i -u username" doesn't work?
+[09:11] <ActionParsnip> Futurama140: you will be wrestling that file til you get an acceptible display
+[09:11] <NativeAngels> can anyone tell me why a ftp server on a linux box wouldnt allow a user to upload files to a folder called public_html for that user
+[09:11] <quibbler> louq: be careful
+[09:11] <Incarus> eepberries, no
+[09:12] <Incarus> eepberries, update your system
+[09:12] <Incarus> eepberries, where was a "sudo" update
+[09:12] <eepberries> Incarus: oh wow, nevermind. it actually did work, it just displayed the "to run a command as adminstrator bla bla" message anyway
+[09:12] <louq> quibbler: i realized that the ubuntu gnome is much more slower than the debian gnome, so maybe there are to many services running
+[09:12] <Incarus> eepberries, k
+[09:12] <Milkeh> I accidently changed the icon on my rubbish bin, how do I change it back?
+[09:12] <Incarus> NativeAngels, 1. maybe iptables 2. change permission to 777
+[09:13] <NativeAngels> how do i change permision
+[09:13] <ActionParsnip> eepberries: i've not seen -u but its intruiging.
+[09:13] <KazaLite> it again took me to shell of buildroot after 20seconds
+[09:13] <quibbler> louq: that is true...just make sure you don't stop things you need ...if in doubt do research
+[09:13] <ActionParsnip> NativeAngels: chmod and chown
+[09:13] <Incarus> NativeAngels, "sudo chmod 777 file"
+[09:13] <Incarus> NativeAngels, be carefullw ith that
+[09:13] <eepberries> ActionParsnip: yeah, it doesn't really make sense, but i guess they had to replace su somehow
+[09:13] <louq> quibbler: you hink it is also because of some services?
+[09:13] <Amendment> How about enabling vesa? Is there way?
+[09:13] <louq> *think
+=== administrator_ is now known as dos6
+[09:14] <ActionParsnip> eepberries: sudo -i   instead of sudo su
+[09:14] <Amendment> and what are these MESA drivers?
+[09:14] <akahige1> all of a sudden, I have a weird audio problem... sonata started playing everything through my headphones which are only set for skype chat. all other audio/video apps play through the speakers and everything through pulse. anybody got any ideas?
+[09:14] <ActionParsnip> eepberries: sudo -i configures the environment correctly
+[09:14] <eepberries> ActionParsnip: right, that's what i'm doing
+[09:14] <ActionParsnip> eepberries: good lad
+[09:14] <vicmen> Does ubuntu create an apache user?
+[09:14] <Incarus> Amendment, vesa couldnt rendering direct, so your system will become slow
+[09:14] <quibbler> louq: true i had for example bluethooth on which i turned off because i don't have bluethooth devices
+[09:14] <vicmen> or rather apache httpd service create an apache user and apache group or is called something else
+[09:14] <magnetron> akahige1 <unconvertable> install the 'pavucontrol' package and use it to move the apps between your sound devices
+[09:14] <Incarus> Amendment, and mesa drivers are software rendering
+[09:15] <Amendment> no victory there :D
+[09:15] <Incarus> Amendment, yes, shit
+[09:15] <eepberries> vicmen: yeah, it does something like that
+[09:15] <ActionParsnip> !apache | vicmen
+[09:15] <ubottu> vicmen: LAMP is an acronym for Linux-Apache-MySQL-PHP. However, the term is often used for setups using alternative but different software, such as Perl or Python instead of PHP, and Postgres instead of MySQL. For help with setting up LAMP on Ubuntu, see  https://help.ubuntu.com/community/ApacheMySQLPHP - See also the Server CD installation process (different in Edgy+)
+[09:15] <NativeAngels> Incarus would that only allow that user to access that folder
+[09:15] <NativeAngels> its a folder not a file Incarus
+[09:15] <Myrtti> !language | Incarus
+[09:15] <ubottu> Incarus: Please watch your language and topic to help keep this channel family friendly.
+[09:15] <KazaLite> i tested Cd but it automatically entered into buildroot shell after say 20-30seconds
+[09:15] <Incarus> NativeAngels, 777 means sytsem wide reading
+[09:15] <ActionParsnip> KazaLite: test your iso
+[09:16] <NativeAngels> ok
+[09:16] <Incarus> Myrtti, ...
+[09:16] <KazaLite> how can i test that?
+[09:16] <Myrtti> Incarus: yes?
+[09:16] <vicmen> apache is not recognized as a user on my ubuntu 8.04 installation
+[09:16] <ActionParsnip> !md5 | KazaLite
+[09:16] <ubottu> KazaLite: To verify your Ubuntu ISO image (or other files for which an MD5 checksum is provided), see http://help.ubuntu.com/community/VerifyIsoHowto or http://www.linuxquestions.org/linux/answers/LQ_ISO/Checking_the_md5sum_in_Windows
+[09:16] <Incarus> Myrtti, you're an american?
+[09:16] <vicmen> how do I list all users of a system
+[09:16] <akahige1> magnetron: pavucontrol? is that anything like the pulse audio prefs util?
+[09:16] <eepberries> vicmen: it probably isn't called apache
+[09:16] <ActionParsnip> KazaLite: why do you think there are md5sum files next to linux iso files?
+[09:16] <quibbler> louq: this may interest you: http://ubuntuforums.org/showthread.php?t=89491
+[09:16] <eepberries> by default i think the user's name is something like "www-data"
+[09:17] <eepberries> not terribly sure though, it's been a while
+[09:17] <vicmen> likely, ive seen that
+[09:17] <rww> vicmen: cat /etc/password"
+[09:17] <magnetron> akahige1 <unconvertable> yeah, but it got more options
+[09:17] <vicmen> that sounds right eepberries
+[09:17] <Myrtti> Incarus: no? since when has the desire of have this channel to be family friendly, approachable by all cultures been something that would require me to be an American? it's the channel policy.
+[09:17] <rww> vicmen: eek. "cat /etc/passwd" should work, but it's a little messy.
+[09:17] <KazaLite> errr...its busybox shell....sorry for repeatedly saying buildroot by mistake
+[09:17] <ActionParsnip> its /etc/passwd
+[09:17] <yogi_> anybody know why ubuntu wont recognise my graphics card?  there are only two resolution options available. 800*600, etc.  is there any easy way too get this sorted... otherwise ubuntu gets the boot... because i';ve being trying for the last few days without any luck... any help??
+[09:18] <ActionParsnip> rww: could grep :D
+[09:18] <rww> ActionParsnip: I know. I hit Enter by mistake >.>
+[09:18] <ActionParsnip> ;)
+[09:18] <Incarus> yogi_, activate vesa drivers
+[09:18] <eepberries> vicmen: also i think you can change the user in httpd.conf or one of those other config files if you want to
+[09:18] <louq> quibbler: but does this also speed up the system after booting?
+[09:18] <yogi_> tried that
+[09:18] <yogi_> no luck
+[09:18] <Incarus> yogi_, which graca?
+[09:18] <akahige1> magnetron: according to synaptic, it's installed, so I need to figure out how to fire it up.  does this actually explain why this started happening in the first place, though?
+[09:18] <yogi_> 8.10
+[09:19] <Incarus> yogi_, no, graphic card
+[09:19]  * ActionParsnip is hating his VMs today
+[09:19] <quibbler> louq: a little for me but not significantly
+[09:19] <Milkeh> if I accidently change an icon, how do I change it back
+[09:19] <yogi_> its an intel celeron processor
+[09:20] <ActionParsnip> !icon
+[09:20] <ubottu> Sorry, I don't know anything about icon
+[09:20] <yogi_> i think the graphics card is embedded... ie. intel
+[09:20] <ActionParsnip> Milkeh: http://ubuntuforums.org/archive/index.php/t-302549.html
+[09:20] <magnetron> akahige1 <unconvertable> if you don't see any icon for it, just hit alt+f2 and type "pavucontrol" <enter>
+[09:20] <Incarus> yogi_, i think you have to install the drivers by your own, but i have to go now
+[09:20] <Futurama140> i do not have a /etc/make.conf file, how do i fix that?
+[09:21] <yogi_> what you mean?
+[09:21] <yogi_> what driveers?
+[09:21] <ActionParsnip> Futurama140: you make one, are you using gentoo?
+[09:21] <Incarus> yogi_, ask somebody else
+[09:21] <Futurama140> i dont know
+[09:21] <Incarus> ciao
+[09:21] <yogi_> thanks
+[09:21] <hardaysknight> does anyone know how to fix my alsamixer settings? everytime i reboot i goes to zero. i cant remember how to save the settings
+[09:21] <ActionParsnip> Futurama140: gentoo is an operating system like Windows or Ubuntu
+[09:22] <Futurama140> oh, no im using ubuntu
+[09:22] <eepberries> yogi_: what intel chip is it specifically
+[09:22] <ActionParsnip> Futurama140: then why do you need a /etc/make.conf file?
+[09:22] <yogi_> processor = d220
+[09:22] <yogi_> how do i find out?
+[09:22] <Futurama140> to configure to make room for xorg
+[09:23] <akahige1> magnetron: that's totally cool.  worked just like you said. thanks for the help
+[09:23] <ActionParsnip> Futurama140: you have xorg, its a package from the repositorys
+[09:23] <Milkeh> ActionParsnip, that wont work because I've made the icon custom
+[09:23] <NativeAngels> how do you check the permisions on a folder then ?
+[09:23] <eepberries> yogi_: try installing xserver-sorg-video-intel
+[09:23] <Milkeh> ActionParsnip, I've actually gone to properties and changed it
+[09:24] <ActionParsnip> Milkeh: then simply undo what you did
+[09:24] <eepberries> don't blame me if your computer blows up though
+[09:24] <yogi_> it is already installed
+[09:24] <Futurama140> ok.ok so how do i configure xorg to use DRI?
+[09:24] <ActionParsnip> Milkeh: just set it to something else
+[09:24] <eepberries> hmm
+[09:24] <Milkeh> ActionParsnip, but I want it as the default rubish bin icon :(
+[09:24] <yogi_> through the synaptic package manager
+[09:24] <ubd> how can i write a script to ping an address regularly and when there is response execute a command?
+[09:24] <ActionParsnip> Futurama140: its in that guide I gave you, you add a few lines to xorg.conf and it does it
+[09:24] <vicmen> after toying around with a CentOS box and learning some chops, i decided to jump on an Ubuntu thinking it was goint to be easy after learning a few things on CentOS and I have to say I find all of this ubelievably frustrating.
+[09:25] <ActionParsnip> Milkeh: try: sudo find / -name *.png | grep -i trash
+[09:25] <magnetron> akahige1 <unconvertable> cheers
+[09:25] <ActionParsnip> Milkeh: failing that try *.xpm
+[09:26] <ActionParsnip> Milkeh: sudo just gets rid of some errors that pop up about access violations
+[09:26] <eepberries> wait yogi_ what is the name of the intel chip
+[09:26] <Flannel> vicmen: Did you have a question we could help you with today?
+[09:26] <yogi_> not sure
+[09:26] <shear> how do i check if a user is a member of a group? I'm having problems writing to /var/www, which is owned by www-data
+[09:26] <bohemian_> hi
+[09:27] <Flannel> shear: `groups username` will list the groups that user is in.
+[09:27] <vicmen> Flannel this actually has been the most helpfull forum Ive been in years
+[09:27] <shear> Flannel, TY
+[09:27] <hardaysknight> does anyone know how to fix my alsamixer settings? everytime i reboot i goes to zero. i cant remember how to save the settings
+[09:27] <eepberries> yogi_: find out by looking up your computer's specs. is this a laptop?
+[09:27] <NativeAngels> sounds like you have the same problem as me sheer
+[09:27] <shear> well, that both helped, and made my problem stranger.
+[09:27] <Futurama140> actionparsnip: that guide tells me how to install any driver but the one i have, intel.
+[09:27] <yogi_> intel celeron processor
+[09:27] <yogi_> ya its a laptop
+[09:28] <eepberries> yogi_: what brand / model
+[09:28] <Flannel> shear: If you're in the group (and just added yourself) you'll need to log in again for it to take effect
+[09:28] <Rioting_pacifist> "segfault at 7fc7da63600c rip 3000009a1a rsp 7fff67077950 error 4" < does that mean much
+[09:28] <bohemian_> after i updated my driver from 173 to 177 i get an error that says "You do not appear to be using NVIDIA X Driver." when I open nvidia settings
+[09:28] <bohemian_> also the second monitor just flickers
+[09:28] <ActionParsnip> Futurama140: read this: http://ubuntuforums.org/showthread.php?t=729735
+[09:28] <shear> Flannel, I've logged in and out a few times since changing the group membership
+[09:28] <yogi_> asus
+[09:28] <Rioting_pacifist> i get that when i run nearly anything, only konversation & konsole run ok
+[09:28] <bohemian_> what should be the problem?
+[09:28] <ActionParsnip> Futurama140: you need to edit the xorg.conf file to look like that one somewhat
+[09:29] <yogi_> 15.4 wxga laptop
+[09:29] <NativeAngels> have you got a ftp serve working shear
+[09:29] <yogi_> intel d220 cpu
+[09:29] <shear> hopefully, but i havn't checked yet
+[09:29] <eepberries> yogi_: actually, are you sure the graphics card isn't recognized? what are you basing that on?
+[09:29] <bohemian_> anyone?
+[09:29] <Kinshuk> hey
+[09:29] <Kinshuk> where do the font files go in ubuntu ?
+[09:29] <Flannel> !font | Kinshuk
+[09:29] <ubottu> Kinshuk: Font installation basics here: https://help.ubuntu.com/community/FontInstallHowto - No fonts in Flash? Install "msttcorefonts" (from !Multiverse), "gsfonts", and "gsfonts-x11". No fonts in MPlayer? see !MPlayer
+[09:30] <yogi_> cant change the resolution
+[09:30] <Kinshuk> ubottu thx
+[09:30] <ubottu> Sorry, I don't know anything about thx
+=== Abracadabr4 is now known as Abracadabra
+[09:30] <yogi_> its stuck on 800*600
+[09:30] <eepberries> yogi_: how have you tried changing it, only throught he gui?
+[09:30] <ActionParsnip> yogi_: have you installed video drivers?
+[09:31] <shear> NativeAngels, it looks like the ftp server is working
+[09:31] <eepberries> ActionParsnip: yogi_'s using an intel graphics chip, they should already be installed by default
+[09:31] <yogi_> i'm a bit new to  ubuntu
+[09:31] <ActionParsnip> eepberries: but they wont be autoconfigured in xorg.conf
+[09:31] <NativeAngels> ok
+[09:31] <ActionParsnip> eepberries: the driver files are sat on the system but are not being used by the system
+[09:31] <yogi_> so ya i think i have tried to use the drivers through the package manager
+[09:32] <ActionParsnip> yogi_: can you give the output of: lspci | grep VGA
+[09:32] <bohemian_> anyone can help with my xorg  problem with nvidia?
+[09:32] <yogi_> how do i kick start them?
+[09:32] <ActionParsnip> bohemian_: can you give the output of lspci | grep VGA
+[09:32] <Futurama140> so how do i turn on DRI with Intel Corporation 82945G/GZ Integrated Graphics Controller?
+[09:32] <NativeAngels> ive been trying to upload files to a public_html folder for a user shear but getting permissions error
+[09:32] <ActionParsnip> yogi_: give me the output of that command
+[09:32] <yogi_> ok
+[09:33] <bohemian_> ActionParsnip: how do i get that? what command?
+[09:33] <yogi_> just let me boot up
+[09:33] <eepberries> ActionParsnip: what is that command supposed to do anyway
+[09:33] <ActionParsnip> yogi_: run the command, i can help, if you dont, i can't help
+[09:33] <bohemian_> ActionParsnip: 01:05.0 VGA compatible controller: nVidia Corporation NV34 [GeForce FX 5500] (rev a1)
+[09:34] <bohemian_> ActionParsnip: what can we see this?
+[09:34] <yogi_> hold on
+[09:34] <b1n42y> by the way if anyone is interested in running kde 3.5.+ instead of 4.2 > http://forum.kde.org/how-get-kde-kubuntu-10-t-11996.html
+[09:34] <yogi_> just booting up
+[09:34] <shear> alrighty, time to try logout-login one more time
+[09:34] <vicmen> Flannel, Im just venting... I learned a little bit of CentOS  and I find it difficult to apply it to Ubuntu, jumping from yum to apt and sometimes installing .deb and, I mean this is all really punishing. I am an infant to the world of Linux so you can imagine my frustration. However, I will say this, this is by far the most enegetic, eager, no question is too simple chat I have ever been in. I am beginning to see why when a few
+[09:34] <b1n42y> intrepid*
+[09:34] <ActionParsnip> Futurama140: you know that link i gave you, scroll to the bottom of the xorg.conf example, where it says Load "glx"  Load "GLcore" etc, you need a section like that with Load "DRI"
+[09:35] <bohemian_> what do you with mine?
+[09:35] <eepberries> vicmen: yeah ubuntu community support is fantastic in general
+[09:35] <bohemian_> ActionParsnip: what do you say with my result?
+[09:35] <ActionParsnip> bohemian_: sudo apt-get install nvidia-glx-173; gksudo nvidia-settings
+[09:35] <rwat> vicmen: there's a learning curve involved. People here seem quite happy to help with any part, but its orth remembering that it's a long term thing really.
+[09:35] <ActionParsnip> bohemian_: if you are told to run a command as root then run: sudo <command> and restart x
+[09:36] <shear> Flannel, logout/login again didn't work. Tried sudo chown -R www-data /var/www; sudo chgrp -R www-data /var/www; sudo chmod -R 755 /var/www
+[09:36] <yogi_> i dunno what after happening.... i have to reinstall again
+[09:36] <bohemian_> ActionParsnip: just letting you know i updated from 173 to 177 as i can make it work with userful
+[09:36] <eepberries> shear: what are you trying to do
+[09:36] <milligan_> Is it possible, in a dhcp server, so define a range for dhcp .. and after a client has connected, make his ip static? Like, define 192.168.0.100-200 as dhcp range, and then make 192.168.0.120 static .. ?
+[09:36] <yogi_> was messing last night with earlier versions
+[09:36] <eepberries> yogi_: ubuntu isn't loading?
+[09:36] <yogi_> i'll get back
+[09:36] <Futurama140> Actionparsnip: i dont have a section with loading,
+[09:36] <bullgard4> Synaptic writes: "gnomemeeting is a dummy package to ease the transition to ekiga. You may safely remove this package and keep the ekiga package instead." What kind of 'transition' is meant here?
+[09:36] <vicmen> well, i certainly appreciate you folks here...
+[09:36] <shear> eepberries, i'm trying to get write permissions for my login into /var/www
+[09:37] <ActionParsnip> bohemian_: if 177 works then cool, i just websearched and didnt se 177, only 173 and 96
+=== solid_li` is now known as solid_liq
+[09:37] <bohemian_> ActionParsnip: ok i'll try that again
+[09:37] <ActionParsnip> bullgard4: my guess is its like "movie player" which is really totem. Same thing different namre
+[09:37] <eepberries> shear: for what account
+[09:37] <rww> bullgard4: gnomemeeting changed its name to ekiga. Some users might have the gnomemeeting package installed and want to upgrade it easily, or may not know about the name change, so the gnomemeeting package is a pointer to the ekiga package.
+[09:38] <shear> my personal login, which is a member of the www-data group
+[09:39] <KazaLite> checksum was incorrect
+[09:39] <magnetron> shear <unconvertable> does the www-data group have rwx rights on the the directory
+[09:39] <eepberries> shear: i think to add group access with chown, you're supposed to use : in front of the group name
+[09:39] <bullgard4> ActionParsnip, rww Thank you for answering.
+[09:39] <eepberries> like chown -R www-data :/var/www
+[09:40] <rww> eepberries: your : is in the wrong place ;)
+[09:40] <eepberries> rww: yeah haha
+[09:40] <eepberries> i was just looking at that and thinking "wait"
+=== T5 is now known as __T5__
+[09:40] <eepberries> chown -R :www-data /var/www <- this is what he wants, right?
+[09:40] <Futurama140> someone: could someone please walk me through this?
+[09:41] <bohemian_> ActionParsnip: i was taken to NVIDIA X server settings and it says "You do not appear to be using the NVIDIA X driver. Please edit your X configuration file (just run `nvidia-xconfig` as root), and restart the X server. " what do i do next?
+[09:41] <rww> eepberries: yeah, I think so
+[09:41] <eepberries> shear: did you get that?
+[09:42] <ActionParsnip> bohemian_: like i said: sudo nvidia-xconfig
+[09:42] <ActionParsnip> bohemian_: then restart x
+[09:42] <ActionParsnip> eepberries: not quite
+[09:42] <shear> eepberries, magnetron, yeah. 'sudo chmod -R ug+rwx /var/www'  Looked through history, I *had* tried it before, but for some reason it didn't work. worked now though
+[09:43] <ActionParsnip> eepberries: chown -R some <username> /path/to/thing
+[09:43] <Orochium> woohoo...success
+[09:43] <Orochium> and now
+[09:43] <Orochium> bed
+[09:43] <Orochium> later folks
+[09:43] <eepberries> ActionParsnip: ActionParsnip: well, shear was trying to add ownership to a group
+[09:44] <magnetron> shear <unconvertable> cheers
+[09:44] <ActionParsnip> eepberries: he could see what group owns the folder and add hiimself to that group
+[09:44] <Milkeh> does does anybody know how I can reset my rubbish bin icon
+[09:44] <ActionParsnip> eepberries: then chmod the folder to allow the group full access
+[09:44] <yogi_> i just reinstalling ubuntu... do i need to use (tick)  the boot loader for a solo installation?
+[09:44] <shear> now we're cooking with gas, thanks guys
+[09:45] <eepberries> yogi_: what went wrong
+[09:45] <koshari> Milkeh by emptying it
+[09:45] <lstarnes> yogi_: you always need the bootloader
+[09:45] <yogi_> dont know
+[09:45] <NativeAngels> how do you make a group then
+[09:45] <yogi_> my fault
+[09:45] <yogi_> im at my wits end
+[09:45] <Futurama140> how do i configure my video drivers to use DRI when my driver isnt listed in the help webpage?
+[09:45] <NativeAngels> so that everyone in that group has ftp access
+[09:45] <ActionParsnip> yogi_: if you are new to linux you will have teething problems
+[09:45] <yogi_> i reinstall and get back to you... thanks!
+[09:46] <ActionParsnip> Futurama140: its the same for all video drivers as they all use xorg.conf, ive already told you how to do it
+[09:47] <ActionParsnip> Futurama140: I'll now show you exactly so you get it
+[09:47] <ActionParsnip> Section "Module"
+[09:47] <ActionParsnip> Load "dri"
+[09:47] <ActionParsnip> EndSection
+[09:47] <bohemian_> ActionParsnip: i ran sudo nvidia-xconfig no, message prompt. now how do i restart x? restart the entire system? sorry for too much question
+[09:47] <ActionParsnip> Futurama140: if you'd looked at the post I gave, it was there
+[09:47] <ActionParsnip> bohemian_: ctrl+alt+backspace
+[09:49] <Wille_eee> Phones output won't work while pc speakers work prop, why is that?
+[09:50] <Milkeh> koshari, that did nothing
+[09:50] <NativeAngels> so to allow users to have ftp access to there own folders you have to make a group of users for ftp access
+[09:50] <Futurama140> the webpage you gave me is about screen resolution, i searched all 3 pages and it did not say anything about DRI
+[09:50] <ubd> i want an application only to use eth1 and not use eth0 how can i do this
+[09:51] <ubd> or i want eth0 to be used only by for file tranfer (samba) and nothing else
+[09:51] <ActionParsnip> Futurama140: I showed you the section it needs to be added to and how the line is worded. You could then add it yourself. Yes it dodnt say EXACTLY those things but i kinda hoped you'd work it out a little
+[09:51] <ActionParsnip> ubd: you could pull eth0 down
+[09:52] <ActionParsnip> ubd: sudo ifdown eth0
+[09:52] <ubd> what do you mean pull it down
+[09:52] <ActionParsnip> ubd: it means the device will be there but not usable
+[09:52] <ActionParsnip> ubd: it will be up next time you reboot
+[09:53] <ubd> i want it to be used for file transfer?
+[09:53] <bohemian_> ActionParsnip: i am now able to use twinview, thanks. now i will install userful multiplier to use multiseat and what do i need to do next to make sure i can make the multiseat work?
+[09:53] <illumin8_> couple questions, 1: can network options and profile be exported and imported into other linux versions. 2: if it is indeed possible, would importing a network profile from 8.10 cause issues in 8.04?
+[09:53] <eepberries> Wille_eee: is the headphone output enabled in the mixer?
+[09:53] <ActionParsnip> bohemian_: np bro :)
+[09:54] <Futurama140> i just dont get it
+[09:54] <savvas> ubd: have you tried asking in samba's channels? http://www.samba.org/samba/irc.html
+[09:55] <ubd> okthanks
+[09:55] <savvas> ubd: I think this is what you're looking for: http://www.linuxhomenetworking.com/wiki/index.php/Quick_HOWTO_:_Ch03_:_Linux_Networking#How_to_Configure_Two_Gateways
+[09:55] <quibbler> Futurama140: open a terminal and run this   gksudo gedit /etc/X11/xorg.conf
+[09:55] <ActionParsnip> Futurama140: you need to make your xorg.conf file look a lot like the one in that post, with the video card config, the monitor and the screen sections
+[09:55] <bohemian_> ActionParsnip: i have tried this earlier, after installing userful multiplier it won't just detect and separate screen properly. what should you think the reason for this?
+[09:57] <Wille_eee> eepberries <unconvertable> ok, there are foure diffrent mix tracks i could choose upon, i'll try it out! thanks
+[09:57] <ActionParsnip> !dualhead
+[09:57] <ubottu> Information about dual-head on linux can be found on http://wiki.linuxquestions.org/wiki/DualHead - See also !Xinerama
+[09:57] <bohemian_> also the Nvidia settings only detects 1 X Screens, is that normal?
+[09:57] <ActionParsnip> bohemian_: its not something ive ever done
+[09:57] <bohemian_> i see
+[09:57] <savvas> ubd: you won't find a more general answer than that one, because I believe it requires network structure knowledge and routing
+[09:57] <ubd> allright savvas THANK YOU
+[09:57] <ActionParsnip> bohemian_: but the driver you have are working so you are halfway
+[09:57] <savvas> no problemo :P
+[09:57] <Futurama140> could you tell me what exactly to type? im completely unfamiliar with the structure of whatever the file is structure
+[09:57] <ActionParsnip> bohemian_: you could manually edit xorg.con, usually the nvidia config app does dualhead nice
+[09:58] <bohemian_> ActionParsnip: yeah , thanks... i'll see if I can do it
+[09:58] <Futurama140> i dont know any operator symbols or even the line end command
+[09:58] <quibbler> Futurama140: copy and paste in the terminal     gksudo gedit /etc/X11/xorg.conf
+[09:58] <Futurama140> ok
+[09:58] <Futurama140> im in the xorg
+[09:58] <Futurama140> i have been for an hour
+[09:59] <Futurama140> comparing it to the one on the webpage
+[09:59] <Futurama140> but i see no relevant comparisons pertaining to DRI?
+[09:59] <quibbler> Futurama140: look for  Section "Module"
+[10:00]  * ActionParsnip gives quibbler a spoon
+[10:00] <quibbler> ActionParsnip: ;-)
+[10:00] <subodh> hi plz tell me if photoshop CS2 can be install in ubuntu ?
+[10:00] <Futurama140> it does not exist
+[10:01] <cooldduuudde> subodh use gimp man
+[10:01] <eepberries> subodh: no
+[10:01] <eepberries> subodh: you can try installing it using wine though
+[10:01] <quibbler> Futurama140: then add it on the end of the file
+[10:01] <cooldduuudde> eepberries but that may not be reliable
+[10:01] <Futurama140> ok
+[10:01] <eepberries> cooldduuudde: better than not being able to use it at all
+=== mrak_ is now known as mrak
+[10:01] <eepberries> somet things actually works really well in wine
+[10:02] <cooldduuudde> true. but gimp is gud enough eepberries
+[10:02] <eepberries> i hate gimp
+[10:02] <cooldduuudde> ms office 2003 works rlly bad in wine eepberries
+[10:02] <subodh> eepberries - can you give me the command for this
+[10:02] <eepberries> subodh: sudo apt-get install wine
+[10:02] <Futurama140> Section "module"
+[10:02] <Futurama140> EndSection
+[10:02] <eepberries> that will install a windows emulator
+[10:03] <eepberries> then you will be able to run windows executable programs, so you'll be able to install and run photoshop hopefully
+[10:03] <subodh> eepberries, wine already running ...i need photoshop command to run in wine
+[10:03] <eepberries> there aren't any guarantees though. it could work perfectly or not work at all
+[10:03] <cooldduuudde> subodh just double click on the setup file
+[10:03] <eepberries> subodh: you don't need any special commands. you can run the exe files the same way you would any other file
+[10:04] <arvind_k> !appdb > subodh
+[10:04] <ubottu> subodh, please see my private message
+=== arvind_k is now known as arvind_khadri
+[10:04] <Futurama140> actionparsnip: is that right?
+[10:04] <ActionParsnip> Futurama140: you didnt specify DRI, I gave you the exactl lines you need to add earlier
+[10:04] <subodh> ubottu, thanks i'll first run exe from wine :)
+[10:04] <ubottu> Error: I am only a bot, please don't think I'm intelligent :)
+[10:04] <ActionParsnip> Futurama140: scroll up, its there
+[10:05] <quibbler> Futurama140: between Section "module" and EndSection add: 	Load		"dri"
+[10:05] <eepberries> what gets weird is when you use wine to run an emulator. emulating an emulator is just a strange concept
+[10:05] <ActionParsnip> Futurama140: and now quibbler has given you the lines,
+[10:06] <cooldduuudde> eepberries lol. why would someone do dat
+[10:06] <Futurama140>  Section "module"
+[10:06] <Futurama140> Load "DRI"
+[10:06] <Futurama140> EndSection
+=== solid_li` is now known as solid_liq
+[10:07] <eepberries> cooldduuudde: windows has the best emulators
+[10:07] <quibbler> Futurama140: save the file and do ctrl+alt+backspace  to restart x
+[10:08] <cooldduuudde> eepberries yeah. if you are talkin about psp and gameboy emulators
+[10:08] <ActionParsnip> quibbler: wow he's hard work
+[10:09] <quibbler> ActionParsnip: thanks for the spoon i needed it ;)
+[10:09] <eepberries> cooldduuudde: i wonder if pcsx2 runs in wine :)
+[10:09] <ActionParsnip> no...he needs it :(
+[10:09] <cooldduuudde> hmm never tried dat
+[10:09] <cooldduuudde> :)
+[10:09] <amruthraj> Hi, I am looking at the smaps data for a particular process. My understanding of the Private_dirty part of a particular library is that it constitutes the global/static data present in that library. Is this correct?
+[10:10] <ActionParsnip> dont you just wish you could ssh onto users systems and fix their rigs in like 3 seconds
+[10:10] <theCarpenter> im trying to setup my ubuntu laptop as a wireless router. any advice?
+[10:10] <eepberries> it would be funny to try if only to see how horrible it would perform
+[10:10] <b1n42y> 2hrs later xp is still installing via qemu ...
+[10:10] <ActionParsnip> !ics | theCarpenter
+[10:10] <ubottu> theCarpenter: If you want to share the internet connection of your ubuntu machine with other machines in the network see https://help.ubuntu.com/community/InternetConnectionSharing - You may also use !firestarter: http://www.fs-security.com/docs/connection-sharing.php
+[10:10] <cooldduuudde> eepberries yeah. hey duz disabling loggin make your system faster?
+[10:11] <quibbler> ActionParsnip: ja i do that sometimes with a daughter
+[10:11] <shear> ubuntu and ssh was the best thing that ever happened to my parent's computer. I'm not a guru, but there's very little they can break that I can't fix that way, it's awesome
+[10:11] <rww> eepberries: Wine Is Not an Emulator.
+[10:12] <eepberries> i know
+[10:12] <b1n42y> hehe
+[10:12] <eepberries> loose terminology
+[10:12] <quibbler> shear: saves a lot of tears
+[10:12] <shear> quibbler, and traveltime
+[10:12] <cooldduuudde> rww WINE=WINdows Emulator
+[10:12] <quibbler> shear: ;)
+[10:12] <cooldduuudde> :)
+[10:12] <Nytrix> wine=crossover
+[10:13] <Nytrix> !crossover
+[10:13] <ubottu> Sorry, I don't know anything about crossover
+[10:13] <Nytrix> !codeweavers
+[10:13] <ubottu> Sorry, I don't know anything about codeweavers
+[10:13] <Nytrix> hmm ok
+[10:13] <yogi_>  hi again. i have just re-installed ubuntu. it is now a fresh install without the updates.  should i go ahead and do the updates or is there something you think i should check?
+[10:13] <rww> !botabuse > Nytrix
+[10:13] <ubottu> Nytrix, please see my private message
+[10:13] <Wille_eee> eepberries <unconvertable> That didn't work it out :(
+[10:13] <zhangsha> is there Market Analysis System with ubuntu
+[10:13] <cooldduuudde> !ubottu
+[10:13] <ubottu> Hi! I'm #ubuntu's favorite infobot, you can search my brain yourself at http://ubottu.com/factoids.cgi - Usage info: http://wiki.ubuntu.com/UbuntuBots
+[10:14] <stevr1it> hello anyone can help me to install my webcam ubuntu intrepid  Z-Star Microelectronics Corp. Luxya WC-1200 USB 2.0 Webcam on ubuntu intrepid
+[10:14] <ActionParsnip> yogi_: yes get fully updated
+[10:14] <yogi_> ok straight away
+[10:14] <ActionParsnip> stevr1it: run lsusb, you will get a hex identifier, you can use this to websearch
+[10:14] <ActionParsnip> !webcam | stevr1it
+[10:14] <ubottu> stevr1it: Instructions for using webcams with Ubuntu can be found at https://help.ubuntu.com/community/Webcam - Supported cams: https://wiki.ubuntu.com/HardwareSupportComponentsMultimediaWebCameras
+[10:15] <b1n42y> stevr1it: ActionParsnip: isnt there an application in repos that identifies it and uses it
+[10:15] <cooldduuudde> !pidgin
+[10:15] <ubottu> The Instant Messenger Client Pidgin (formerly Gaim) (http://help.ubuntu.com/community/Pidgin) supports MSN, XMPP (Jabber, GTalk and variants), AIM, Gadu-Gadu, Novell Groupwise, ICQ, YIM, IRC and others. See also !Kopete
+[10:15] <stevr1it> gosh i am trying
+[10:16] <ActionParsnip> b1n42y: lsusb will identify it
+[10:16] <stevr1it> Bus 005 Device 003: ID 0ac8:0323 Z-Star Microelectronics Corp. Luxya WC-1200 USB
+[10:16] <yogi_> what about my softwaresources option?
+[10:17] <rogerio> hi
+[10:17] <yogi_> should i leave that default?
+[10:17] <ActionParsnip> stevr1it: ok then websearch for: ubuntu 0ac8:0323
+[10:17] <b1n42y> ActionParsnip:  yeah i messed with an application about 4 months ago , from memory no setup, just ran app and pic was up.. might read the wiki...
+[10:17] <ActionParsnip> yogi_: default is fine
+[10:17] <stevr1it> "bln42y" no application in the reporsitory,i have already installed camorama, but i have a blank screen
+[10:17] <stevr1it> I already did it
+[10:18] <arvind_khadri> stevr1it, cheese?
+[10:18] <b1n42y> stevr1it: maybe it was 3rd party
+[10:18] <stevr1it> cheese is a software?
+[10:18] <ActionParsnip> !info cheese | stevr1it
+[10:19] <ubottu> cheese (source: cheese): A tool to take pictures and videos from your webcam. In component universe, is optional. Version 2.24.2-0ubuntu0+intrepid1 (intrepid), package size 2339 kB, installed size 7152 kB
+[10:19] <rogerio> someone can give a help
+[10:19] <ActionParsnip> !ask | rogerio
+[10:19] <ubottu> rogerio: Please don't ask to ask a question, simply ask the question (all on ONE line, so others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[10:20] <alfatah3> HAY..
+[10:20] <stevr1it> !info cheese
+[10:20] <ubottu> cheese (source: cheese): A tool to take pictures and videos from your webcam. In component universe, is optional. Version 2.24.2-0ubuntu0+intrepid1 (intrepid), package size 2339 kB, installed size 7152 kB
+[10:20] <stevr1it> i don't understand
+[10:21] <alfatah3> ??
+[10:21] <ActionParsnip> stevr1it: looks like it uses the gspcav1 driver, look into how to install it. I gotta test some WIs
+[10:21] <b1n42y> is it me or are simultaneous writes to hard disks slow in linx, or is it my 5400rpm HD (laptop)
+[10:21] <ActionParsnip> b1n42y: could look into hdparm (can be risky if yu go silly with it)
+[10:21] <stevr1it> ok i try
+[10:21] <Silicium> i have created a bootsplash with gimp, 16 indexed colors, and compiled into a shared object, but it wouldnt be loaded, the bootscreen is just black with a blinking cursor while booting...
+[10:21] <b1n42y> ActionParsnip: been there seems like all options are correct
+[10:22] <ActionParsnip> b1n42y: you can throttle your drive a little to get more speed
+[10:22] <b1n42y> ActionParsnip: thanks, might get into it hardcore and give it another go
+[10:24] <Nytrix> [pErry], ok
+=== gnu is now known as Guest52926
+=== Qtpaxa_ is now known as Qtpaxa
+[10:29] <VSpike> Am i right that in 8.04 the option in Sound Preferences called "Enable software sound mixing (ESD)" actually controls whether pulseaudio is started at login?
+[10:31] <yogi_> ok i think is fully updated
+[10:31] <Nytrix> bergman, hi
+=== mitchell is now known as Mitchell
+[10:32] <Ethosser> anyone know how I can query / connect to mssql database on a windows server machine?
+[10:33] <VSpike> Ethosser: freetds
+[10:34] <Ethosser> thanks mate, i'll look into it :)
+[10:34] <stevr1it> I have stried to install gspcav but with the folllowing result: http://pastebin.com/m4b0d15cb
+[10:34] <VSpike> Ethosser: not the greatest, but it does kinda work :)
+=== eric is now known as Guest27865
+[10:35] <TUCKER1979> Hi, Can anyone help me with a graphic problem, i am using a Nvidia Gforce 7 Card, DVI Cable, when Ubuntu start up i see the logo for the boot up but when i get to the log in screen, i just see a mess of graphics and i couple of mouse points
+[10:36] <Ethosser> VSpike, ;)
+[10:37] <Silicium> TUCKER1979:
+[10:37] <Silicium> actually i mean thats a bug
+[10:37] <Silicium> i had the same Problem on my dualhead environment mit GF7
+[10:38] <Silicium> there are some Problem with incompatible b0rked DVI protocol statements from cheap panels
+[10:38] <TUCKER1979> what do i do then,
+[10:38] <Silicium> TUCKER1979: you can use a DVItoVGA adapter to fix it
+[10:38] <Silicium> then after screen is up change from VGA to DVI again
+[10:38] <Silicium> (if needed)
+[10:39] <Silicium> i run only at DVI for now
+[10:39] <Silicium> err
+[10:39] <Silicium> only on VGA
+[10:39] <TUCKER1979> i think i got a apadter
+[10:39] <Silicium> there should be one shipped with the GFXCard or the screen
+[10:40] <TUCKER1979> yeah i know, will that sort the problem
+[10:40] <Silicium>  to the log in screen, i just see a mess of graphics and i couple of mouse points
+[10:40] <Silicium> but this is really funny
+[10:40] <Silicium> it coult be the same Problem
+[10:40] <Silicium> or it could be not :D
+[10:40] <TUCKER1979> yeah, i do not see the login box, just the background and mouse points
+[10:41] <Silicium> hmm
+=== edgex-_ is now known as edgex[[a]]][[][]
+[10:41] <Silicium> then i think it is another PRoblem
+[10:41] <Silicium> have you tried to kill X and run startx ?
+[10:41] <TUCKER1979> how do i do that
+[10:41] <Silicium> startx as user
+[10:41] <Silicium> ctrl+alt+backspace
+[10:41] <chu_> hey, just wondering, stupid question but if I had a directory of .tex files, sequentially named (1.tex, 2.tex, ... n.tex), what would be I be looking for to do a loop, I guess in BASH (i.e. for i = 0 to n; textopdf (i+1).tex)
+[10:41] <Silicium> or ctrl+alt+F2
+[10:41] <yogi_> i have a 15.4" wxga intel celeron laptop. not sure what kind of graphics card it is, but i think its 'intel' or maybe 'sis'. i am having a problem with the resolution of the screen. there are only two option given - 800*600 & 640*480. otherwise all is well. is there any way too resolve this?
+[10:42] <Silicium> then login as root
+[10:42] <Silicium> and killall gdm
+[10:42] <Silicium> respectivley ps aux |grep -in gdm
+[10:42] <Silicium> respectivley ps aux |grep -i gdm
+[10:42] <stevr1it> with cheese it give me the following error: libv4l2: error dequeuing buf: Errore di I/O
+[10:44] <Futurama140> im trying to install a windows program using wine, but when i insert the cd into the drive i cannot find its contents anywhere in the system
+[10:45] <Nytrix> futsuriai, what program are you trying to install?
+[10:45] <Nytrix> Futurama140, what program are you trying to install?
+[10:45] <Futurama140> world of warcraft
+[10:45] <franic> hi all
+[10:46] <ghoulsblade> hi, any makefile experts here ? i've got a var like    LIBSRC_A = a1.c a2.c a3.c            and i need to add a prefix path like    LIBSRC_A_FULL = include/myliba/a1.c include/myliba/a2.c include/myliba/a3.c                         any nice tricks for that ?
+[10:46] <fofanaseedy> fofanaseedy
+[10:46] <vicmen> where is a good resource for learning how to move or copy files from one directory to another in Ubuntu?
+[10:46] <Nytrix> Futurama140, probably will not work with wine
+[10:46] <fyrestrtr> !shell | vicmen
+[10:46] <ubottu> vicmen: The linux terminal or command-line interface is very powerful. Open a terminal via Applications -> Accessories -> Terminal (Gnome) or K-menu -> System -> Konsole (KDE).  Guide: https://help.ubuntu.com/community/UsingTheTerminal
+[10:46] <Futurama140> Nytrix: why not
+[10:46] <fyrestrtr> vicmen: try the link
+[10:47] <Nytrix> have you tried in a windows machine to see if there is any files in the cd?
+[10:47] <yogi_> i have a 15.4" wxga intel celeron laptop. not sure what kind of graphics card it is, but i think its 'intel' or maybe 'sis'. i am having a problem with the resolution of the screen. there are only two option given - 800*600 & 640*480. otherwise all is well. is there any way too resolve this?
+[10:47] <vicmen> thanks
+[10:47] <stevr1it> i have found that the webcam works with gspca_vc032x , where can i find this driver?
+[10:47] <Nytrix> Futurama140, have you tried in a windows machine to see if there is any files in the cd?
+[10:47] <franic> Futurama140: Wow works fine with the latest Wine, I use it myself :)
+[10:47] <fyrestrtr> !fixres | yogi_
+[10:47] <ubottu> yogi_: The X Window System is the part of your system that's responsible for graphical output. To restart your X, type <unconvertable> sudo /etc/init.d/?dm restart <unconvertable> in a console - To fix screen resolution or other X problems: https://wiki.ubuntu.com/X/Config/Resolution
+=== wiz_ is now known as Wiz-
+[10:48] <Futurama140> yes it works in windows
+[10:48] <Nytrix> Futurama140, msg me
+[10:48] <Futurama140> how do i install wow using wine step by step?
+[10:48] <rogerio> sorry i working
+[10:48] <Nytrix> Futurama140, try http://www.codeweavers.com/products/cxgames/
+[10:49] <ghoulsblade> solved ($(patsubst pattern,replacement,text))
+[10:49] <Futurama140> i have no money to buy a program
+[10:49] <franic> Futurama140: in a Terminal something like "wine /media/cdrom/Setup.exe"
+[10:49] <rogerio> I have a laptop acer aspire 5051
+[10:50] <rogerio> installed ubuntu 8:10
+[10:50] <yogi_> ubottu: thanks. i'll have a go at that... should i just copy and paste the command? what will the command actually do to the machine? is that not just like a restart?
+[10:50] <ubottu> Error: I am only a bot, please don't think I'm intelligent :)
+[10:50] <franic> someone knows if there is a way to redirect the output of ALSA to a WAV file?
+[10:51] <yogi_> does that work with ubuntu 8.10?
+[10:51] <fyrestrtr> yes
+=== shyke2a is now known as shryke2a
+[10:51] <rogerio> in getting me error
+[10:52] <rogerio> boot args(cat /proc/cmdline)
+[10:53] <yogi_> i have a 15.4" wxga intel celeron laptop. not sure what kind of graphics card it is, but i think its 'intel' or maybe 'sis'. i am having a problem with the resolution of the screen. there are only two option given - 800*600 & 640*480. otherwise all is well. is there any way too resolve this?
+=== urkki is now known as Finnish
+[10:53] <rogerio> check root=(did the system wait long enough?)
+[10:54] <SERVER_08> hello
+[10:54] <Scix> What's the point of the K and S prefix in rc#.d folders?
+[10:54] <eanda> morning all,  anyone have experience with ubuntu client authentication to ldap?  I have been following guides and all instruct to modify pam_ldap.conf and libnss.conf but in 8.10 those are not available in /etc/...  any hel here
+[10:54] <rogerio> check root=(did the system wait for the right device?)
+[10:55] <rogerio> missing modules (cat /proc/modules; ls /dev)
+[10:55] <yogi_> anyone?
+[10:55] <fyrestrtr> Scix: startup/shutdown
+[10:56] <WoTL> Greetings
+[10:56] <Neocicak> gday..... i've just tried to install nvidia driver from nvidia website..but i kept getting the following error in Xorg log file: Failed to initialize GLX extension ... any idea?
+[10:56] <Nytrix> why i do i get a black screen when i Remote Desktop someone's computer?
+[10:56] <Scix> fyrestrtr, where K is shutdown and S is startup?
+[10:57] <taz_> hello guys
+[10:57] <WoTL> I was wondering, anyone knows what the alternative api way of calling /usr/bin/gnome-www-browser <url> is? would like a clean function to open default gnome browser.
+[10:57] <rogerio> alert! /dev/disk/by-uuid/67821a1b-b152-4992-9f74-e50dd6c7864e does not exist dopping to a shell!
+[10:58] <rogerio> Anybody know that this error is?
+[10:59] <taz_> u know HTML ?  i  have other OS with windows xp it have frontpage 2003 but not on ubuntu.. which one i should  get download with "add/remove? which one ?
+[10:59] <rogerio> the machine does not boot
+[10:59] <Iradieh> Does anyone know what bash loads for .profile/.bashrc when using the terminal with an x-session. Seems like when i login using SSH my user .profile is used, but when using the x-session terminal something else gets used instead
+[10:59] <Neocicak> has anyone have any success with installing nvidia driver on 8.10 ?
+[11:01] <taz_> ubuntu it does have program HTML ?
+[11:01] <error404notfound> I am following http://prantran.blogspot.com/2007/01/getting-postfix-to-work-on-ubuntu-with.html on ubuntu hardy, but I can't find /etc/ssl/certs/Thawte_Premium_Server_CA.pem
+[11:01] <rogerio> taz_: nvu
+[11:02] <taz_> rogerio: ok thanks i will look  in add/remove
+[11:03] <rogerio> look in synaptic too
+[11:03] <taz_> rogerio:  i did check in nvu and it dont have one ?
+[11:03] <Neocicak> hmm......
+[11:04] <Hans_> what irc client do you use???
+[11:04] <Hans_> i use Xchat gnome . and you?
+=== Anto is now known as Anto_afk
+[11:05] <Futurama140> can anyone help me set up world of warcraft using wine?
+=== Anto_afk is now known as Anto
+[11:05] <Nytrix> why i do i get a black screen when i Remote Desktop someone's computer?!
+[11:05] <ikonia> Futurama140: you may get more specialised support in #winehq
+[11:06] <ikonia> Nytrix: what are you using to remote desktop from - and what are you remote desktoping too

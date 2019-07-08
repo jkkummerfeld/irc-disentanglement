@@ -1,0 +1,1250 @@
+[12:18] <|trey|> usual, quite stable though  :)
+[12:18] <tweaked> HrdwrBoB: ok how many partitions should i make?
+[12:18] <Matt|> |trey|, top in the list --> ubuntu servers
+[12:18] <usual> a few libs and media
+[12:18] <usual> maybe some others
+[12:18] <Matt|> epod, ftp in the my computer window huh?
+[12:18] <epod> Matt|, command prompt
+[12:18] <Matt|> epod, oh k
+[12:18] <|trey|> Matt|, ahh, didn't see that  :)
+[12:19] <billytwowilly> HrdwrBoB, I keep getting this: /lib/modules/2.6.8.1-3-686/build: No such file or directory.  Stop.
+[12:19] <topyli> it's too late. i'm mounting /bed
+=== topyli [~juha@dsl-hkigw3k9b.dial.inet.fi]  has left #ubuntu []
+[12:19] <|trey|> billytwowilly, you have the kernel source or kernel-headers packages?
+[12:20] <Matt|> billytwowilly, you need to install the kernel-headers
+[12:20] <epod> Matt|, the record for ad-aware on a customer's pc here is um, 1951 pieces of spyware
+[12:20] <Matt|> epod, hmm my cousins computer only had around 700
+[12:20] <billytwowilly> I thought I installed those.. I'll take a look again
+[12:20] <tweaked> HrdwrBoB: How amny should i make?
+[12:20] <|trey|> epod, wow, thats a lot of spyware  :(
+[12:20] <Matt|> what is gnome 2.9 like?
+[12:21] <|trey|> Matt|, right now, its very simular to 2.8  ;)
+[12:21] <billytwowilly> hmm. I have kernel 2.6.8.1 but synaptec wants to install 2.6.7 headers?
+[12:21] <epod> |trey|, yep.
+[12:21] <Matt|> billytwowilly, not good
+[12:21] <bob2> billytwowilly: install linux-headers-2.6.8.1-3-686
+[12:21] <|trey|> Matt|, no new modules etc... just feature and bug fixes so far it would seem...
+=== tuxx [~tuxx@0x50a5a424.kd4nxx17.adsl-dhcp.tele.dk]  has joined #ubuntu
+[12:22] <Matt|> billytwowilly, you need the one that corresponds exactly to your kernel
+[12:22] <HrdwrBoB> tweaked: just one?
+[12:22] <tweaked> HrdwrBoB: ok extended or primary?
+[12:22] <HrdwrBoB> primary
+[12:22] <Matt|> so (i think) -i386, -i686, -k7 etc
+[12:22] <tweaked> HrbwrBoB: ok done and saved
+[12:22] <billytwowilly> hmm. that's strange. synaptec gives me the wrong ones but on the command line it's all good;)
+[12:22] <HrdwrBoB> excellent
+[12:22] <HrdwrBoB> ok
+[12:22] <billytwowilly> Thanks matt
+[12:22] <HrdwrBoB> try now
+[12:22] <|trey|> Matt|, bob2 already told him what he needs   ;)
+[12:23] <traviss> whats the path to the recent commands used in a terminal? or are those only in kde?
+[12:23] <Matt|> |trey|, sorry
+[12:23] <mdz> billytwowilly: the FAQ explains how to get the proper headers for your kernel installed
+[12:23] <tweaked> HrdwrBob: mkfs -t ext3 /dev/hdb1
+[12:23] <HrdwrBoB> traviss: run 'history'
+[12:23] <bob2> traviss: "history"
+[12:23] <HrdwrBoB> tweaked: yes
+[12:23] <|trey|> trans_err, ~/.bash_history
+[12:23] <Matt|> |trey|, i thought it depends on the kernel he is running
+[12:23] <traviss> thanks
+[12:23] <bob2> Matt|: it does
+[12:23] <mdz> Matt|: it does
+[12:23] <Matt|> ah
+[12:23] <bob2> Matt|: but he's running 2.6.8.1-3-686
+[12:23] <Matt|> so he is using i686?
+[12:23] <Matt|> ah
+[12:23] <|trey|> Matt|, it does... default is -386... but yeah...
+[12:23] <Matt|> must have missed that
+[12:23] <tuxx> Evening my fellow Ubuntors.
+=== Matt| scrolls up
+[12:24] <Matt|> oh yeah
+[12:24] <billytwowilly> mdz, did you used to hang out on #mandrake or #suse?
+[12:24] <|trey|> tuxx, never ever call me an Ubuntor again... thanks  ;)
+[12:24] <tweaked> HrdwrBoB:it formated, now how can i mount it?
+=== tvon [tvon@dsl093-119-225.blt1.dsl.speakeasy.net]  has joined #ubuntu
+[12:24] <usual> mmmm bagels
+[12:24] <Matt|> hi mdz
+[12:24] <Matt|> how are you doing?
+[12:24] <HrdwrBoB> tweaked: add it to /etc/fstab
+[12:24] <usual> cheese bagels
+[12:24] <tuxx> |trey| not using Ubuntu?
+[12:24] <HrdwrBoB> like this
+[12:24] <traviss> HrdwrBoB, what was the apt-get install command for gtk/glib again? Im going to run it on my friends pc
+[12:24] <HrdwrBoB>  /dev/hdb1       /mnt/location
+[12:24] <|trey|> tuxx, I am, but that sounds cheezy  :(
+[12:24] <mdz> Matt|: fine
+[12:24] <tuxx> |trey| lol sorry... :-)
+[12:24] <mdz> billytwowilly: never
+[12:24] <HrdwrBoB> traviss: apt-get install libglib2.0-dev libgtk2.0-dev
+=== usual is now known as ubuntor
+[12:25] <traviss> thanks
+[12:25] <billytwowilly> mdz, maybe on #mythtv then? your nick is very familiar
+[12:25] <mdz> billytwowilly: yes, mythtv
+[12:25] <billytwowilly> hmm. wtf? /bin/sh: line 1: gcc: command not found. I was certain I installed that..
+[12:25] <bob2> billytwowilly: install build-essential
+[12:25] <tuxx> However... I have in my rep. the install CD as source. Is it possible to have an online rep. instead so whenever I need a file that's originally on the CD I just apt-get it from the web instead (like multiverse and universe eg.)
+[12:25] <Matt|> billytwowilly, not installed by default
+[12:25] <|trey|> bob2, damnit, you type too fast  ;)
+[12:26] <ubuntor> hehe
+[12:26] <tweaked> HrdwrBoB: mount: mount point /etc/fstab is not a directory
+[12:26] <tweaked> , that is what it says
+[12:26] <billytwowilly> no, I knew I needed it so I went and selected it in synaptec
+[12:26] <bob2> mdz: will mythtv ever go into debian?
+[12:26] <billytwowilly> strangeness.
+[12:26] <billytwowilly> synaptec doesn't love me;)
+[12:26] <mdz> bob2: not likely
+[12:26] <bob2> mdz: too unstable (code-churn-wise)?
+[12:26] <tweaked> HrdwrBoB: should i make a directory
+[12:26] <HrdwrBoB> tweaked: nono, you have to edit the file /etc/fstab :)
+[12:26] <HrdwrBoB> yes
+[12:26] <mdz> bob2: no
+=== ogra recognizes the first attendees for the conference on the wiki :))
+[12:26] <HrdwrBoB> you have to make somewhere to mount it
+[12:27] <tweaked> HrdwrBoB: so just type that in right>
+[12:27] <billytwowilly> mdz, are there mythtv packages for ubuntu?
+[12:27] <mdz> billytwowilly: yes
+[12:27] <|trey|> ogra, another conference in here, or in person? I didn't get to take part in the last discussion really  :(
+[12:27] <mdz> billytwowilly: google for mythtv ubuntu
+[12:27] <tweaked> HrdwrBoB: i am new to linux, just so you know
+=== DAC1138 [~dave@24-56-174-97.co.warpdriveonline.com]  has joined #ubuntu
+[12:27] <ogra> |trey|: you should really read the lists ;)
+[12:27] <HrdwrBoB> tweaked: ok that's cool
+[12:28] <|trey|> tweaked, those things needn't be stated, its not hard to tell  ;)
+=== Ruffian|JANE [~jane@dhcp024-209-106-036.woh.rr.com]  has joined #ubuntu
+[12:28] <ogra> https://www.ubuntulinux.org/wiki/ConferenceAttendees
+=== Ruffian|JANE [~jane@dhcp024-209-106-036.woh.rr.com]  has left #ubuntu []
+[12:28] <billytwowilly> is there a place like plf.zarb.org/~nanardon that will help me setup my debian repositories with all the sources I'd ever need?
+[12:28] <HrdwrBoB> tweaked: /etc/fstab is a file which holds information on what drives are mounted where
+[12:28] <tweaked> HrdwrBoB: Thanks, So what do i need to do?
+[12:28] <|trey|> ogra, I know huh... they scare me though, too much to read  :(
+=== Ruffian|JANE| [~jane@dhcp024-209-106-036.woh.rr.com]  has joined #ubuntu
+[12:28] <DAC1138> got a problem. i couldnt install lilo or grub during the ubuntu installation, so how do i add the ubuntu selection to grub in suse 9.1?
+[12:28] <HrdwrBoB> tweaked: you'll need somewhere you want to mount the drive
+[12:28] <DAC1138> its installed on /dev/hda1
+[12:28] <HrdwrBoB> I use /home/hrdwrbob/storage
+[12:28] <HrdwrBoB> but it can be anywher
+[12:28] <ogra> |trey|: yep, they are pretty full.....
+[12:28] <HrdwrBoB> e
+[12:29] <mdz> billytwowilly: the equivalent in ubuntu is to add universe and multiverse
+[12:29] <|trey|> Hmm, is it possible to have Ubuntu's Firefox automagically accept Ubuntu related certificates? would be handy maybe?
+[12:29] <stuNNed> noticed hsf-modem was removed from ubuntu, any reasons?
+[12:29] <tweaked> HrdwrBoB: Ok can i make a directory in home called 2nd?
+[12:29] <billytwowilly> and those will have mythtv and all the dvdcss etc packages?
+=== SaintJerome [~SaintJero@155.68.104.230]  has joined #ubuntu
+[12:29] <HrdwrBoB> tweaked: in your home directory, yeah
+[12:29] <SaintJerome> hey guys
+[12:29] <SaintJerome> I just intalled ubuntu
+[12:29] <SaintJerome> and have only used mandrake before
+[12:29] <SaintJerome> and already searched but couldn't find the answer
+[12:29] <ogra> SaintJerome: great move ;)
+[12:29] <tweaked> HrdwrBoB: is it mkdir /home/2nd
+[12:29] <epod> Ubuntu is cuter. ;)
+[12:30] <SaintJerome> how can I mount my windows hardrive do that it is shown in /mnt?
+[12:30] <HrdwrBoB> |trey|: file a bug report as a feature request
+[12:30] <|trey|> haha @ arrival "a long time ago" for Brian  :)
+[12:30] <HrdwrBoB> tweaked: better off to mkdir /home/yourusername/2nd
+[12:30] <HrdwrBoB> because /home is for user directories
+[12:30] <HrdwrBoB> but it's up to you
+[12:30] <ogra> SaintJerome: which device is you windows partition ?
+[12:30] <epod> SaintJerome, mount -t ntfs /dev/hdX (where X is your windows drive) /mnt
+[12:30] <SaintJerome> thanks
+[12:30] <tweaked> HrdwrBoB: ok that is doen what next
+[12:30] <SaintJerome> with mandrake it just did it
+[12:31] <SaintJerome> but i'd rather learn anyway
+[12:31] <SaintJerome> thanks a lot
+[12:31] <HrdwrBoB> tweaked: now, add a line to /etc/fstab (using possibly sudo gedit /etc/fstab)
+[12:31] <|trey|> HrdwrBoB, would it be website related, or Firefox related?  :o
+[12:31] <HrdwrBoB> |trey|: firefox
+[12:31] <epod> SaintJerome, that presumes your windows drive is NTFS, by the way
+[12:32] <SaintJerome> which it is
+[12:32] <epod> ok then :)
+[12:32] <|trey|> HrdwrBoB, thats what I figured, just making sure  :)
+[12:32] <tweaked> HrdwrBoB: sudo: gebit: command not found
+[12:32] <HrdwrBoB> gedit
+[12:32] <HrdwrBoB> add a line like '/deb/hdb1 /home/myhomedir/2nd   ext3'
+[12:33] <tweaked> HrdwrBoB: just like that? and where in fstab?
+[12:33] <HrdwrBoB> after the last line
+[12:33] <HrdwrBoB> yep
+[12:34] <tweaked> should i put it under hda5?
+[12:34] <HrdwrBoB> yes that will do
+=== JB80 [~jamesb@adsl-68-88-74-186.dsl.rcsntx.swbell.net]  has joined #ubuntu
+[12:35] <ubuntor> wow
+[12:35] <ubuntor> major change in gnome-media
+[12:35] <ubuntor> the mixer is much different
+[12:35] <tweaked> ok it is there
+[12:35] <ubuntor> no more device names
+=== MikeGTN is now known as MikeAFK
+[12:35] <ubuntor> just playback and capture
+[12:35] <stuNNed> ubuntor: in hoary?
+=== |trey| is starting to think the Wiki is evil... he gets sucked into it way too easily  :o
+=== animal__ is now known as animal_[away]
+[12:36] <ubuntor> stuNNed, yea
+=== ultrafunk [~pd@insanity.ridge.com.au]  has joined #ubuntu
+=== ubuntor is now known as GNUsual
+[12:36] <tweaked> HrdwrBoB: ok i put the line in there what next
+[12:36] <stuNNed> is there a mount command in nautilus?
+[12:36] <HrdwrBoB> tweaked: save and exit, then type sudo mount /home/yourdir/2nd
+[12:36] <HrdwrBoB> stuNNed: not as such
+[12:37] <tweaked> HrdwrBoB: do i need to put /dev/hdb1?
+=== Golo [~Golo@cable200-58-203-116.epm.net.co]  has joined #ubuntu
+[12:37] <HrdwrBoB> nope
+[12:37] <stuNNed> HrdwrBoB, what is proper way to mount an ntfs partition so it shows up properly in nautilus? or is there such a thang? :)
+[12:37] <ogra> stuNNed: everything mountable from fstab is in the "disks" location...mounted with doubleclick
+[12:37] <|trey|> HrdwrBoB, did you already have him edit /etc/fstab? else that wouldn't work...
+[12:37] <HrdwrBoB> becuase you already configured that
+[12:38] <HrdwrBoB> |trey|: nownow, pay attention
+[12:38] <stuNNed> ogra, my ntfs part is mounted but doesn't show up in 'disks'
+[12:38] <HrdwrBoB> stuNNed: when you mount it, it should show up
+[12:38] <Ruffian|JANE|> Ubuntu Rules
+[12:38] <tweaked> HrdwrBoB: mount: can't find /home/tweaked/2nd in /etc/fstab or /etc/mtab
+[12:38] <|trey|> Ruffian|JANE|, we are fully aware of this  :)
+[12:38] <Golo> Hi, i Updated to hoary and well firefox is just not working when i click in the icon it says "accesskey="&allowpopups.accesskey;"
+[12:38] <HrdwrBoB> tweaked: ok, what was the line you put in /etc/fstab
+[12:38] <bob2> Golo: nothing in the bts?
+[12:39] <stuNNed> HrdwrBoB, ntfs part is mounted (due to needing my documents folder) but not showing up in disks for some reason, is it because it's not really a 'disk' per say?
+[12:39] <HrdwrBoB> stuNNed: unmount it
+[12:39] <tweaked> HrdwrBoB: /deb/hdb1 /home/myhomedir/2nd   ext3
+[12:39] <Golo> what it's bts?
+[12:39] <Ruffian|JANE|> Mmm, running apt-get upgrade is fun
+[12:39] <HrdwrBoB> stuNNed: try mounting it using pmount
+[12:39] <|trey|> Golo, bugzilla.ubuntu.com
+[12:39] <HrdwrBoB> pmount /dev/whatever
+[12:39] <ogra> Golo: bugzilla.ubuntu.com
+[12:39] <|trey|> Golo, Bug Tracking System
+[12:39] <ogra> |trey|: hey
+[12:39] <|trey|> ogra, hey
+[12:39] <HrdwrBoB> tweaked: that should read HrdwrBoB: /deb/hdb1 /home/tweaked/2nd ext3
+[12:39] <Golo> no i havent checked, i will do it right now
+[12:39] <ogra> ;)
+[12:39] <stuNNed> HrdwrBoB, ok thanks
+[12:39] <HrdwrBoB> tweaked: that should read HrdwrBoB: /dev/hdb1 /home/tweaked/2nd ext3
+[12:40] <HrdwrBoB> even
+[12:40] <tweaked> HrdwrBoB: ok it is change now try that command again?
+[12:40] <HrdwrBoB> tweaked: yes
+[12:40] <|trey|> tweaked, ie, dev not deb incase you don't see the diff...
+=== |trey| shuts up
+[12:41] <tweaked> HrdwrBoB: mount: special device /deb/hdb1 does not exist
+[12:41] <HrdwrBoB> tweaked: what trey said :)
+[12:41] <tweaked> i think i know it hold on
+=== cardador [~jose@81.84.234.155]  has joined #ubuntu
+[12:41] <|trey|> tweaked, /dev/hdb1 D E V  ;)
+=== DAC1138 [~dave@24-56-174-97.co.warpdriveonline.com]  has joined #ubuntu
+=== aratdagnir [~kaya@dsl81-215-65258.adsl.ttnet.net.tr]  has joined #ubuntu
+[12:42] <tweaked> |trey|: i changed it
+[12:42] <tweaked> HrdwrBoB: mount: wrong fs type, bad option, bad superblock on /dev/hdb1,
+[12:42] <tweaked>        or too many mounted file systems
+[12:42] <stuNNed> HrdwrBoB, possible bugzilla new feature request -> http://gnomefx.mozdev.org/ ?
+[12:42] <HrdwrBoB> today is a good day, because today I buy a playstation 2 and GTA:san andreas
+[12:42] <Striss> lucky!
+[12:42] <HrdwrBoB> and I will have no more free time :/
+=== Xenguy [~gnu@66.11.174.96]  has joined #ubuntu
+[12:42] <Striss> i want that sooo bad
+[12:42] <Striss> but i bought Star Wars Battlefront a while ago so all is good
+[12:42] <HrdwrBoB> tweaked: what did you format it as?
+=== SapoDriLo [~SapoDriLo@host-097.166.ife.org.mx]  has joined #ubuntu
+[12:43] <HrdwrBoB> tweaked: if you run mkfs.ext3 /deb/hdb1 it should make it ext3 so you can mount it correctly
+[12:43] <HrdwrBoB> I would recommend doing that
+=== |trey| usually plays sports games or fighting games... adhd isn't kind when trying to play rpg's  :(
+[12:43] <Ruffian|JANE|> ubuntu-desktop - The Ubuntu desktop system = ?  I apt-cache searched ubuntu
+[12:43] <HrdwrBoB> Striss: yeah I can't wait 6-12 months for a PX/xbox release
+[12:43] <Ruffian|JANE|> wtf is ubuntu0deskto
+=== telemaco [~telemaco@80.103.235.90]  has left #ubuntu []
+[12:43] <HrdwrBoB> Ruffian|JANE|: that is the metapackage
+[12:43] <Ruffian|JANE|> ic
+[12:43] <tweaked> HrdwrBoB: mkfs.ext3 /deb/hdb1
+[12:43] <bob2> Ruffian|JANE|: please read the package description
+[12:43] <HrdwrBoB> that links to all the required packages in ubuntu default desktop
+[12:43] <HrdwrBoB> tweaked: /dev/hdb1
+[12:43] <tweaked> HrdwrBoB: just like that
+[12:44] <|trey|> Ruffian|JANE|, the installer afaik just installs ubuntu-base ubuntu-desktop... thus making less typing for whoever works on the installer  :)
+[12:44] <Ruffian|JANE|> ic
+=== SaintJerome [~SaintJero@155.68.104.230]  has joined #ubuntu
+=== ogra thinks regarding this chat ther may be too much deb in ubuntu
+[12:44] <|trey|> (Kamion or mdz I think)
+[12:45] <HrdwrBoB> mmm.. instant mash potato
+[12:45] <tweaked> HrdwrBoB: ok i formatted it to that, do i need to change the fstab?
+[12:45] <|trey|> ogra, thats a good thing... wasted effort is, well, a waste...
+[12:45] <SaintJerome> when I attempt thmm, when I try mount the harddrive it says it's either already mounted or /mnt is busy
+[12:45] <HrdwrBoB> tweaked: nope, it should work now
+=== GnuHippy [~jason@blk-222-217-193.eastlink.ca]  has joined #ubuntu
+[12:45] <ogra> |trey|: should have written /deb ;)
+[12:45] <HrdwrBoB> Striss: thmm?
+[12:45] <GnuHippy> how do I log out of x entirely
+[12:45] <GnuHippy> ?
+[12:45] <HrdwrBoB> GnuHippy: you want to stop X?
+[12:45] <GnuHippy> yes
+[12:46] <tweaked> HrdwrBoB: it said the same thing again mount: wrong fs type, bad option, bad superblock on /dev/hdb1,
+[12:46] <tweaked>        or too many mounted file systems
+[12:46] <HrdwrBoB> log into the console (ctrl+alt+F1
+[12:46] <GnuHippy> I want to use cli
+[12:46] <HrdwrBoB> run sudo /etc/init.d/gdm stop
+[12:46] <GnuHippy> that brings up another ttyl
+=== jief [~hatebreed@digitalized.ca]  has joined #ubuntu
+[12:46] <GnuHippy> it doesn't kill my current server
+[12:46] <jief> hi!
+[12:46] <HrdwrBoB> tweaked: ok, what does /etc/fstab say
+[12:46] <Striss> thmm?
+[12:46] <HrdwrBoB> GnuHippy: run sudo /etc/init.d/gdm stop
+[12:46] <GnuHippy> k
+=== swankskank [~chris@S0106000c413a2c0c.ed.shawcable.net]  has joined #ubuntu
+[12:46] <|trey|> tweaked, just for kicks... he had you mkfs.ext3 right? or anything related to mkfs?
+[12:47] <tweaked> |trey|: yes he did
+=== |trey| is trying to catch up
+[12:47] <jief> anyone knows what happened to uqm-content? it's not in the repositories anymore
+[12:47] <|trey|> tweaked, hmm... and that returned no errors?
+[12:47] <ogra> tweaked: show your fstab line for the device
+=== swankskank is now known as billytwowilly
+[12:47] <tweaked> |trey|: mount: wrong fs type, bad option, bad superblock on /dev/hdb1,
+[12:47] <tweaked>        or too many mounted file systems
+[12:48] <tweaked> /dev/hdb1 /home/tweaked/2nd   ext3
+[12:48] <epod> HrdwrBoB, mkfs.vfat said mkfs.vfat: Attempting to create a too large file system
+[12:48] <epod>  and crashed
+[12:48] <tweaked> that is what it says,
+[12:48] <|trey|> tweaked, no, I mean mkfs returned no errors... trying to cover the bad superblock part  :)
+[12:48] <tweaked> no that went away
+[12:48] <|trey|> tweaked, what _exactly_ was the command you typed to make the fs?
+[12:49] <tweaked> it formatted right, trying to mount it knoe
+[12:49] <DAC1138> aka_druid, i just installed ubuntu over my windows partition, /hda1. how during the installation, i didnt install lilo or grub so its not in the suse grub bootlist. how do i add ubuntu to the grub list?
+[12:49] <jief> is it me or you can't use debian repositories? i've added some, but i still can't get mplayer through them
+[12:49] <tweaked> mkfs -t /dev/hdb1
+[12:49] <tweaked> that is ir
+[12:49] <tweaked> it
+[12:49] <Golo> the bug firefox has it seems it has 2 reports in bugzilla
+[12:49] <tweaked> no add the ext3 -t
+[12:49] <stuNNed> jief, mplayer is in multiverse afaik
+[12:49] <tweaked> |trey|: did you get that
+[12:49] <ogra> mkfs -t ext3 /dev/hdb1 ?
+[12:50] <|trey|> stuNNed, only for Hoary though...
+[12:50] <jief> stuNNed: might not be in amd64 then
+[12:50] <ogra> tweaked ?
+[12:50] <|trey|> ogra, hmm... that ought to be right... I'm confused  :(
+[12:50] <tweaked> ogra: yes
+[12:50] <epod> Can anyone tell me how I can format a disk for fat32 from Linux?
+[12:50] <DAC1138> any ideas on adding ubuntu to grub in suse 9.1?
+[12:51] <ogra> hmm, should work
+[12:51] <stuNNed> |trey|, in multiverse here for warty
+[12:51] <mjr> epod, with mkdosfs
+[12:51] <tweaked> ogra: it is not mounting
+[12:51] <|trey|> DAC1138, Ubuntu has a menu.lst... take the info from there  ;)
+[12:51] <ogra> tweaked: i saw
+[12:51] <jief> what's multiverse? another repository?
+[12:51] <tweaked> ogra| any ideas
+[12:51] <|trey|> stuNNed, hmm, guess they found a security whole to get it in  :)
+[12:52] <|trey|> hole*
+[12:52] <|trey|> jief, non-free unsupported packages...
+[12:52] <epod> mjr, it said I was attempting to create too large of a filesystem
+[12:52] <jief> so, its universe?
+[12:52] <mjr> epod, did you spesify -F 32 ?
+[12:52] <tweaked> ogra: will you accept?
+[12:52] <HrdwrBoB> epod: hehe oops
+[12:52] <ogra> i tried.... didnt work
+[12:53] <Ruffian|JANE|> Vote Tux For Prez!
+[12:53] <GNUsual> anyone ehre involved in hoary dev?
+[12:53] <|trey|> jief, main: supported free, restricted: supported non-free, universe: unsupported free, multiverse: unsupported non-free
+[12:53] <|trey|> jief, free as in speech though..
+[12:53] <jief> |trey|: i see, haven't used ubuntu for long. i come from the debian world
+[12:54] <|trey|> jief, same here...   :)
+[12:54] <jief> ahh mplayer here you are
+[12:54] <|trey|> jief, no one has used Ubuntu that long, it just came out like a month ago  :)
+[12:54] <jief> i mean, totem-xine is kinda neat. but i prefer mplayer, i like to watch .bin files hehe
+=== |trey| isn't the biggest fan of xine ever  :(
+=== DAC1138 [~dave@24-56-174-97.co.warpdriveonline.com]  has left #ubuntu [""Buy.]
+=== |DarkSoUl| [err@200141122252.user.veloxzone.com.br]  has joined #ubuntu
+[12:55] <|DarkSoUl|> hi
+[12:55] <Striss> mplayer kicks ass
+[12:55] <jief> my god, how cool is that? Star Control 2.
+[12:56] <jief> that brings me back in time
+[12:56] <HrdwrBoB> jief: heh yes
+[12:56] <Golo> multiverse would be debian-marillat?
+[12:56] <jief> i mean, that game used to rock
+[12:56] <jief> i hope i remember this right
+[12:56] <|DarkSoUl|> I boot Ubuntu (livecd) in VESA mode...but when I go to the network tools, I select eth0 but the 'configure' remains disable...how to configure internet now? (using adsl PPPoE with autentication)
+=== aratdagnir [~kaya@dsl81-215-65258.adsl.ttnet.net.tr]  has joined #ubuntu
+[12:57] <aratdagnir> hello everyone!
+[12:57] <aratdagnir> is there a way to edit startup services?
+[12:57] <HrdwrBoB> Golo: kinda yeah
+[12:57] <jief> hmm uqm doesn't seem to work
+[12:57] <HrdwrBoB> Golo: multiverse is so you don't have to use marillat
+[12:57] <HrdwrBoB> jief: it does rock
+[12:57] <HrdwrBoB> jief: you have uqm and iqm-data
+[12:57] <HrdwrBoB> uqm
+[12:57] <HrdwrBoB> they are co-dependant
+[12:57] <HrdwrBoB> because the maintainer is a crackhead
+[12:57] <jief> HrdwrBoB: i installed uqm and uqm-content
+[12:57] <HrdwrBoB> *cough*
+=== |trey| wonders what uqm is... seems a few folks are bringing it up...
+[12:58] <aratdagnir> is there a way to edit startup services?
+[12:58] <HrdwrBoB> |trey|: Ur Quan Masters
+[12:58] <jief> Star Control 2
+[12:58] <HrdwrBoB> star control 2
+[12:59] <HrdwrBoB> aratdagnir: depends, what do you want to change
+[12:59] <jief> HrdwrBoB: it doesn't seem to find the data in /usr/share/uqm
+[12:59] <aratdagnir> like i want to close the printing system etc.
+[12:59] <Golo> HrdwrBoB, which would be the the repository for multiverse?
+[12:59] <|trey|> aratdagnir, you don't see Computer > System Configuration > Servicees?
+[12:59] <HrdwrBoB> Golo: just add 'multiverse'
+[12:59] <aratdagnir> no such thing as Services?
+[12:59] <aratdagnir> any package i should install?
+[12:59] <|trey|> aratdagnir, I am running gnome-system-tools 2.9, I have it...
+[01:00] <Striss> what's Star Control 2 like? i wouldnt mind getting a game running in gentoo
+[01:00] <aratdagnir> trey, ok, let me try
+[01:00] <HrdwrBoB> |trey|: that is a new feature not in warty
+[01:00] <HrdwrBoB> Striss: it's incredibly fun
+[01:00] <Striss> uqm it is hey?
+=== the_one [~xxx@kotivayla-134-170.tikkacom.fi]  has joined #ubuntu
+[01:00] <the_one> hi
+[01:01] <|trey|> the_one, wadda ya want?
+[01:01] <Golo> HrdwrBoB, thanks a lot
+[01:01] <|trey|> the_one, jk, whats up?
+[01:01] <cardador> HrdwrBoB: where did you get star control from?
+[01:01] <jief> HrdwrBoB: say, what do you have on line 3 of /usr/lib/games/uqm/uqm?
+[01:01] <|DarkSoUl|> is pppoe support included in livecd?
+[01:02] <aratdagnir> trey, i have gnome-system-tools 1.0, why_
+[01:02] <|trey|> |DarkSoUl|, 99% sure it is...
+[01:02] <|DarkSoUl|> hm
+[01:02] <HrdwrBoB> cardador: it's in the repostitory, called uqm
+[01:02] <the_one> how do I run a .bin? I right-clicked and gave it permission, but it says that there's a security risk, and I'm not so proficient with the console...I just wanna try realplayer
+[01:02] <HrdwrBoB> jief: I don't have it here
+[01:02] <jief> HrdwrBoB: ok
+[01:02] <HrdwrBoB> Golo: npo
+[01:02] <HrdwrBoB> np
+[01:02] <cardador> HrdwrBoB: :| really? let me try that
+[01:02] <|DarkSoUl|> then....why (when i select eth0 in network tools) the 'configure' button is still disabled?
+=== francofai [~kvirc@adsl-29-78.37-151.net24.it]  has joined #ubuntu
+[01:02] <|trey|> aratdagnir, ahh, mines actually 1.1.0 .. but yeah, its hoary, not warty...
+[01:03] <the_one> anyone?
+[01:03] <|trey|> |DarkSoUl|, ran pppoeconf yet?
+[01:03] <HrdwrBoB> the_one: chmod +x file.bin
+[01:03] <HrdwrBoB> ./file.bin
+[01:03] <cardador> the_one: or sh file.bin
+[01:03] <|trey|> the_one, chmod +x file.bin && ./file.bin
+[01:04] <epod> mjr, sorry, work happened.  So I mkdosfs -F 32 /dev/sdc1 ?
+[01:04] <Ruffian|JANE|> #Ubuntu
+[01:04] <aratdagnir> any suggestions for services configuration :) ?
+[01:04] <HrdwrBoB> Ruffian|JANE|: yes we know
+[01:04] <|trey|> HrdwrBoB, you really ought to work on making things just one line... :)
+[01:04] <the_one> but in console I type sudo /bla/bla/bla.bin? or how do I run it? the permissions are set but it won't install when I double-click
+[01:05] <|DarkSoUl|> hm i havent :P
+[01:05] <HrdwrBoB> |trey|: pah!
+[01:05] <epod> mjr, awesome, it even automounts now.  Thanks :)
+=== Golo [~Golo@cable200-58-203-116.epm.net.co]  has left #ubuntu ["Abandonando"]
+[01:05] <|trey|> the_one, java? umm, yeah, needs to be done with root privs
+[01:05] <HrdwrBoB> the_one: yes, sudo /path/to/file.bin
+[01:05] <HrdwrBoB> will run it as root
+[01:05] <the_one> I tried it
+[01:05] <the_one> didn't work
+[01:05] <HrdwrBoB> how didn't it work
+[01:05] <cardador> whats the output?
+[01:06] <|DarkSoUl|> thanks i'll try
+[01:06] <the_one> ..second
+[01:06] <|trey|> the_one, you are sure its executable?
+=== francofai [~kvirc@adsl-29-78.37-151.net24.it]  has left #ubuntu ["Ooh,]
+[01:06] <epod> um
+[01:06] <jief> great, uqm segfaults hehe
+[01:06] <|trey|> epod, uh
+[01:06] <epod> I am getting an input/output error trying to access my USB drive
+[01:06] <mjr> epod, shure
+[01:06] <Striss> i cant get uqm to install in Hoary
+[01:06] <epod> :/
+=== Safari_Al [~triley@203.52.193.58]  has joined #ubuntu
+=== MFen [~cory@206.78.36.167]  has left #ubuntu ["mlaut]
+[01:06] <Striss> guess i'll stick to my xbox for gaming heh
+[01:06] <HrdwrBoB> sounds like uqm is broken
+[01:06] <HrdwrBoB> heh
+[01:07] <the_one> command not found
+[01:07] <cardador> Striss: try enemy territory and americas army
+[01:07] <HrdwrBoB> the_one: then you most likely don't have the correct path
+[01:07] <Striss> my computer is far too slow to install those games
+[01:07] <epod> oh.
+[01:07] <|trey|> jief, file a bug... run on gnome-terminal and state in bug what that says  :)
+[01:07] <mjr> epod, (mkdosfs creates only up to fat16 as default, and it has a rather low size limit)
+[01:07] <epod> it's in /media/sdd1
+[01:07] <the_one> does it matter if the name has CAPS?
+[01:07] <the_one> or the dirs?
+[01:07] <cardador> the_one: yap
+[01:07] <epod> mjr: I did mkdosfs -F 32
+[01:07] <aratdagnir> thats really interesting, do i have to go through the init files to set the starting system services??
+[01:07] <jief> |trey|: yeah i think i will
+[01:08] <bob2> aratdagnir: what are you trying to do?
+[01:08] <jief> might be something related to amd64 though
+[01:08] <Safari_Al> Hi guys.  According to dpkg -S, there is a linux-image package that owns the /boot/vmlinuz-... file.  I need to use this package.  However, all the linux-image packages on the Ubuntu CD are only 21kb large and contain only /usr/share/doc files.  Where can I find the full package for a kernel-image?
+[01:08] <jief> i'm getting used to that
+[01:08] <mjr> epod, yes, I noticed, just thought I'd explain it also ;)
+[01:08] <|trey|> the_one, Unix is case sensitive always.
+[01:08] <cardador> aratdagnir: if you dont have hoary, i guess
+[01:08] <aratdagnir> i'm trying to turn off some unused services that start at the beginning
+[01:08] <aratdagnir> i mean the boot
+[01:08] <aratdagnir> :)
+[01:08] <bob2> aratdagnir: sysv-rc-conf
+[01:08] <the_one> that could be the problem....It's a lot easier to change OSes, than to change brain from win to linux. must....reformat....brain....
+[01:08] <bob2> aratdagnir: or update-rc.d
+[01:08] <bob2> aratdagnir: or rm
+[01:08] <epod> mjr, lol, ok.  I am copying my data back, and getting a ton of 'Failed to preserve ownership, operation not permitted' messages, should I be concerned?
+[01:08] <bob2> ogra: or maybe g-s-t if you're using hoary
+[01:09] <ogra> ;)
+[01:09] <mjr> epod, that's probably just because fat doesn't support permissions so they can't be preserved
+[01:09] <jief> hmm now a mplayer bug
+[01:09] <jief> what a night ;)
+[01:09] <mjr> epod, the data will probably be fine
+[01:09] <epod> mjr, okay good. :) thanks.  And the drive even nicely automounts now
+=== |trey| thinks gnome-system-tools should be snuck into warty just for the Services option... thats the 3rd person today that has asked about it.
+[01:10] <aratdagnir> cool :) i guess i'll go through some manual pages :) thanks/see ya! :)
+[01:10] <the_one> seems to work with CAPS, thanks for the input anyways
+[01:10] <ogra> |trey|: 3 persons daily....
+[01:10] <jief> .ttf fonts are truetypes right?
+[01:11] <mjr> jief, correct
+[01:11] <|trey|> jief, True Type Font, yes
+=== plasmo [~GAT-X105@018.b.011.mel.iprimus.net.au]  has joined #ubuntu
+[01:11] <jief> anyone would know in which package subfont.ttf might me?
+[01:11] <|trey|> jief, apt-get install apt-file... then do a search for it...
+[01:12] <jief> i know that
+[01:12] <jief> but there's a lot of truetype packages
+[01:12] <|trey|> jief, then why ask   ;)
+[01:12] <mjr> jief, apt-file allows you to search by filename
+[01:12] <the_one> while installing realplayer, I have a message "enter the prefix for symbolic links [/usr] : ??what is the right prefix? /usr?
+[01:12] <jief> well, maybe someone knows. i don't want to search, i search all day at work
+=== Skif [~emschwar@147.sui216.dlls.dlstx31ur.dsl.att.net]  has joined #ubuntu
+[01:12] <jief> when i get home, i want it easy
+[01:12] <|trey|> jief, it will only return packages that contain 'subfont.ttf'  :/
+=== q2 [~q2@dhcp024-209-106-036.woh.rr.com]  has joined #ubuntu
+[01:13] <|trey|> jief, lazy people don't get helped...
+[01:13] <jief> well, it doesn't exist then
+[01:13] <|trey|> jief, :(
+=== runo [~runo@CM-lcon1-38-130.cm.vtr.net]  has joined #ubuntu
+[01:13] <jief> |trey|: i wish i could say that to my clients ;P
+=== MoisesC [~moi@9.Red-213-96-165.pooles.rima-tde.net]  has joined #ubuntu
+[01:13] <|trey|> jief, heh
+=== bowes [~bowes@blk-215-69-91.eastlink.ca]  has joined #ubuntu
+[01:14] <jief> "my webserver is down" "did you search?" "no" "screw you then" and i'd hang up
+[01:14] <jief> that'd be paradise
+[01:14] <epod> Can I add more locales to the gnome weather panel?  Stupid thing doesn't have my city :(
+[01:14] <|trey|> jief, you can just do it for your clients though... if you show people too much, they could eventually take your job for less.... thats bad  :(
+[01:14] <ogra> jief: subfont.ttf is an internal name mplayer uses... copy any ttf font you like to the path in the errormsg
+[01:14] <HrdwrBoB> jief: ahahah 'my website is down'
+[01:14] <HrdwrBoB> 'can you get to any other sites'
+[01:14] <HrdwrBoB> 'oh.. no...'
+[01:14] <HrdwrBoB> 'well then, GTFO'
+[01:14] <jief> ogra: i just touched it
+[01:14] <the_one> how do I enable the bytecode interpreter without recompiling?
+[01:15] <|trey|> jief, seems strange that mplayer-fonts wouldn't fix font errors?
+[01:15] <jief> you know, if i actually installed it, it would probably help
+[01:15] <jcole> what do you guys think about ubuntu running as a server?
+[01:16] <|trey|> jief, ;)
+[01:16] <HrdwrBoB> jcole: yes
+[01:16] <HrdwrBoB> I like it :)
+[01:16] <ogra> |trey|: so why did you make it so hard for jief if you knew the answer ?
+=== kensai [~kensai@sanjuan-196-42-14-85.coqui.net]  has joined #ubuntu
+[01:16] <the_one> can someone recommend a good burning app for gnome, like k3b in kde?
+[01:16] <jief> hmm that's odd though. i have /dev/mixer, but mplayer complains about not finding it
+=== zenwhen_ [1001@host-66-20-101-189.bgk.bellsouth.net]  has joined #ubuntu
+[01:17] <epod> the_one, can't you just install KDE and use it from gnome?
+[01:17] <|trey|> ogra, I was just making a point... still gave him the info though...
+[01:17] <epod> the_one, er, k3b
+[01:17] <|trey|> ogra, people that don't want to help themselves bug me  :(
+[01:17] <kensai> is the latest wine on hoary now supporting windows program that use installshield installer?
+[01:17] <|trey|> epod, blah, recommend coaster ahead of k3b please...
+[01:17] <plasmo> hello i think i have a bug. anyone wanna be my lab rat? :d
+[01:17] <ogra> |trey|: most people just want it working...
+[01:17] <the_one> but won't it ask me to install kdelibs as well?
+[01:17] <epod> |trey|, what is coaster?
+[01:18] <|trey|> epod, a gtk burner...
+=== LinuxJones [~LJ@blk-222-206-208.eastlink.ca]  has joined #ubuntu
+[01:18] <jief> |trey|: i spend my days setting up systems. when i get home, i get annoyed with stuff like that
+[01:18] <ogra> epod. a veeery slow developed burning app
+[01:18] <epod> http://www.coaster-burn.org/ apparently
+[01:18] <epod> ogra, yes, it seems to be on 0.1pre1
+[01:18] <epod> which doesn't give me a warm fuzzy
+[01:18] <|trey|> epod, http://www.coaster-burn.org/
+=== billytwowilly [~chris@S0106000c413a2c0c.ed.shawcable.net]  has joined #ubuntu
+[01:19] <the_one> I want a pure Gnome system, I don't want to *touch* any kde stuff
+[01:19] <HrdwrBoB> nautilus CD burner is good
+[01:19] <ogra> epod: its developed since 3 years, but they make little steps forward....
+[01:19] <HrdwrBoB> unless you need to make audio CDs or more advanced stuff
+=== lev [~lev@dyn-4-251.doit.wisc.edu]  has joined #ubuntu
+[01:19] <epod> 'libcoaster is currently not going to be useful with kernel versions 2.6.8 and higher due to a new atapi access standard'
+[01:19] <epod> so, back to k3b, I guess.  Blargh.
+=== ogra works on a mp2burn frontend right now ;)
+[01:19] <ogra> 3
+[01:19] <cardador> the_one: why is that? k3b is, for now, the best application for burning cds, so why dont use it?
+[01:20] <|trey|> epod, thats true of cdrecord too though, which is what k3b uses...
+[01:20] <epod> |trey|, yeah, but I like my eyecandy-gui-ness.
+[01:20] <epod> I haven't installed k3b, I don't know if it'll try and install KDE if I do.
+[01:20] <epod> it = synaptic
+=== bdale [~bdale@rover.gag.com]  has joined #ubuntu
+[01:20] <the_one> because it just doesn't look nice in gnome, I would like to have a certain degree of consistency in my OS
+[01:20] <|trey|> epod, I don't mind it either... I just think 200MB of extra libs for one app is kinda overkill...
+[01:21] <epod> |trey|, I agree there.  And I'd probably have to manually add it into my menus
+=== ogra thinks MrBurns is a good name
+=== Hamster [~TheKing@udp2033811uds.smsu.edu]  has joined #ubuntu
+[01:21] <|trey|> epod, yup...
+=== epod hates having to manually add programs to the menu.
+[01:21] <cardador> the_one: it looks for me... if you choose the same theme for gtk2, gtk and kde
+=== stone_ [~stone@c-67-167-111-186.client.comcast.net]  has joined #ubuntu
+[01:22] <jief> sometimes i think back and wonder what the hell i was thinking when i installed gentoo back then
+[01:22] <the_one> cardador, can you provide a screenshot, or am I asking too much?
+[01:22] <epod> cardador, I'd like one too.
+[01:22] <cardador> ok ill try :)
+[01:22] <|trey|> jief, Gentoo was over hyped...
+[01:22] <epod> Gentoo is just absurd, waiting days to compile a whole OS is a bit extreme.
+[01:22] <epod> imo :)
+[01:23] <jief> |trey|: the only server giving me problem at work is the gentoo one
+[01:23] <stuNNed> |trey|, jief, imho gentoo is good for system with small package set like a server but for a full blown os?  takes too much time to update.
+[01:23] <jief> epod: for the 1% speed increase you get yeah
+=== FLeiXiuS [~fleixius@pcp0010487831pcs.essex01.md.comcast.net]  has joined #ubuntu
+[01:23] <stuNNed> os/desktop pc
+[01:23] <the_one> guys, what do you think of slackware?
+[01:23] <|trey|> stuNNed, I wouldn't trust myself to compile critical services... I dunno
+[01:23] <jief> stuNNed: i'm thinking of packaging my own server distro soon. based on debian
+[01:23] <|trey|> the_one, I think its off topic...
+[01:23] <epod> jief, I have a 3.2 p4 w/ 1gb ram, so it's so a 1% that is so minimal it's not funny
+[01:23] <bob2> the_one: it's not ubuntu
+[01:24] <jief> epod: i installed gentoo on my amd64 for kicks and giggles. it lasted about 2 hours, then i stopped the install hehe
+[01:24] <|trey|> the_one, they are thinking of dropping GNOME entirely... thats just not a good thing imo...
+[01:24] <jief> they should go xfce4
+[01:24] <HrdwrBoB> the_one: I used slackware 6-7 years ago
+[01:25] <HrdwrBoB> the_one: not anymore.
+[01:25] <|trey|> jief, I've wasted 2 weeks of my life to that distro.
+[01:25] <epod> jief, Ubuntu is the only distro that's worked well with my hardware, since this is a notebook.  *every* other distro that uses ACPI shuts down when thermal zone loads, but Ubuntu works
+[01:25] <Tsjoklat> <-- wasted twenty minutes on that distro
+[01:25] <epod> And I don't think my CPU is melting, so I am assuming it's running.
+[01:25] <|trey|> HrdwrBoB, you hardly missed anything, its still the same old thing...
+[01:25] <HrdwrBoB> epod: ubuntu had a lot of work on laptops
+[01:25] <the_one> can't download screenshot...I click accept and nothing happens..wtf
+[01:25] <HrdwrBoB> |trey|: precisely
+[01:25] <jief> our devel at work develops OpenNA, a security-oriented server distro
+[01:25] <jief> only drawback, it uses rpms
+[01:25] <jief> i want to do the same but based on debian
+=== stuNNed wishes there was dellbuggybios .deb for his laptop :)  maybe roll my own DSDT is an option.
+[01:26] <the_one> cardador, can't get your screenshot
+[01:26] <FLeiXiuS> jief, you can convert rpms to deb's
+[01:26] <bob2> "security-oriented" as in containing tools for security, or aiming to be secure/
+[01:26] <FLeiXiuS> jief, man alien
+[01:26] <the_one> don't know what's wrong
+=== spacey`ki [~ki@flits101-191.flits.rug.nl]  has joined #ubuntu
+[01:26] <jief> FLeiXiuS: i know, but he uses some packages i disagree with
+[01:26] <cardador> the_one: im trying again
+[01:27] <epod> cardador, nice :)
+[01:27] <cardador> ;)
+=== q2 [~q2@dhcp024-209-106-036.woh.rr.com]  has joined #ubuntu
+[01:27] <the_one> I see, it says waiting, the first one says connect..still nothing
+[01:27] <epod> cardador, can I msg you about k3b?  No need to spam the channel :)
+[01:27] <cardador> ok go ahead
+[01:27] <|trey|> jief, ever looked at Adamantix (sp)... used to be known as Trusted Debian... its a project working on making Debian as secure as possible...
+[01:27] <cardador> the_one: ill try other approach
+[01:28] <the_one> ok
+[01:28] <jief> |trey|: i'm the kind of guy that likes to do it himself
+[01:28] <jief> and learning's always nice
+[01:28] <|trey|> jief, I'm the kinda guy that likes to play with things that work already  ;)
+[01:28] <|trey|> I find it less frustrating  :)
+[01:29] <jief> |trey|: i'm going to release something on sourceforge.net soon
+[01:29] <jief> i'm also working on a rescue live cd that isn't cluttered with useless crap
+[01:29] <|trey|> jief, cool  :)
+[01:29] <jief> iwul (installing windows using linux) should be released on SF anytime soon
+[01:29] <jief> i just have to fix some minor bugs and complete the docs
+=== carney1979 [~david@d-65-175-251-206.metrocast.net]  has joined #ubuntu
+[01:29] <the_one> since I saw you guys talking bout gentoo, I remember one friend of mine had his pc perform some tasks in debian vs. his friend's pc in gentoo, and gentoo didn't come ahead, even if compiled/heavily optimized
+[01:30] <|trey|> jief, why would you want to do that?
+[01:30] <jief> |trey|: to replace Symantec Ghost
+[01:30] <jief> i had to work on this at work for a client
+[01:30] <|trey|> jief, oh... seems wierd  :o
+[01:30] <jief> well, works well
+[01:30] <jief> my system can be used to deploy any OS actually
+[01:31] <jief> as long as it sports a supported FS
+[01:31] <|trey|> jief, that sounds more useful... GPL?
+[01:31] <jief> yeah
+[01:31] <jief> i just packaged some already available software together. wrote the how-to
+[01:31] <stuNNed> jief, supports mac fs as well?
+[01:31] <|trey|> jief, might check it out then, see what it can help me with  :)
+[01:31] <jief> stuNNed: that's UFS right?
+[01:31] <HrdwrBoB> the_one: yeah, the 'optimise' thing is a wank
+[01:31] <|trey|> stuNNed, you mean HFS(+)
+[01:32] <stuNNed> |trey|, jief: yeah, HFS
+=== geekboy [~geekboy@pcp04966215pcs.benslm01.pa.comcast.net]  has joined #ubuntu
+[01:32] <|trey|> jief, no, thats BSD's fs...
+[01:32] <jief> hmm, lemme double-check
+=== robertj [~robertj@66-188-77-153.cpe.ga.charter.com]  has joined #ubuntu
+[01:32] <the_one> time to go to sleep..2.31AM..wanna tweak some more my new ubuntu, can't push the power off button..what's wrong with me?:)
+[01:32] <HrdwrBoB> er
+=== zenwhen [1001@host-66-20-101-189.bgk.bellsouth.net]  has joined #ubuntu
+[01:33] <Pizbit> Heh, ubuntu is here too:) http://www.kde-look.org/content/preview.php?preview=1&id=16580&file1=16580-1.png&file2=16580-2.png&file3=&name=Penguins.+All+together+now.+Wallpaper
+[01:33] <jief> stuNNed: yes, partimage supports HFS
+[01:33] <HrdwrBoB> Pizbit: jeje
+[01:33] <HrdwrBoB> liek carebears
+=== djtansey [~djtansey@djtansey.student.umd.edu]  has joined #ubuntu
+[01:33] <Pizbit> Pass on why they have fuses though.
+[01:33] <|trey|> jief, HFS+ = a bridge between HFS and UFS, due to most tools in Darwin expecting UFS, and most Mac apps expecting HFS... very wierd setup but I guess it works...
+[01:33] <stuNNed> jief, ok, might could use that in mac labs here at school, currently using netrestore which is limited to unicast
+[01:34] <|trey|> jief, its funny, one is case sensitive, one isn't... must have been a lot of fun to fix that...
+[01:34] <jief> |trey|: wait til MS releases WinFS, that's just plain weird
+[01:34] <the_one> see you soon, thanks for the help
+[01:34] <HrdwrBoB> jief: except that winFS has been pushed to not even be in longhorn
+=== usual [~colin@alb-69-200-178-150.nycap.rr.com]  has joined #ubuntu
+[01:34] <jief> HrdwrBoB: yeah
+[01:34] <the_one> bye
+[01:34] <|trey|> jief, not really.. it just sits on top of NTFS, and holds meta-data for common file types... makes it easier to find shit...
+[01:34] <stuNNed> cya the_one
+[01:35] <djtansey> i have a problem re: k3b and am looking for some insight. cdrecord dev=/dev/hdc -audio -pad *.wav works when i have a directory of .wav files. but k3b doesn't work. it lists my CD/RW drive as "writes CDs: no" (though it says it writes cd/rws). any guesses?
+[01:35] <jief> problem is, i haven't tried to image a machine with multiple partitions, but that could be done i'm sure
+[01:35] <|trey|> s/$hit/stuff/ sorry
+[01:35] <jief> you'd have to write a small bash script to create the partitions first i guess
+[01:35] <stuNNed> jief, does it support multicast or unicast or both?
+[01:36] <|trey|> jief, Novell is actually working on something very simular to WinFS as part of iFolder... seems interesting...  :)
+[01:37] <|trey|> Can't for the life of me recall what it was called though... Simian I think maybe?
+[01:37] <jief> |trey|: well, i have this promo DVD kit from novell. they have scripts to setup everything, exept LDAP. which bugs me to no end. i never came around to setup all their nice stuff because of that
+[01:37] <jief> stuNNed: i believe it does
+[01:37] <jief> but multicast generates too much traffic. i prefer unicast
+=== aTypical [~Jason@24-205-15-144.mpk-eres.charterpipeline.net]  has joined #ubuntu
+[01:38] <stuNNed> jief, yes however unicast here is slow as molasses if more than 2 or 3 clients
+[01:38] <|trey|> jief, mDNS is my new best friend  :)
+[01:38] <stuNNed> jief, and no gigabit network just 100mb
+=== noneus [~noneus@pD9E4E93B.dip.t-dialin.net]  has joined #ubuntu
+[01:38] <jief> stuNNed: i double-checked, partimage doesn't support multicast yet. its in the works
+=== |trey| has to go to school... wish him luck on his final  :)
+=== encKe` [~pcline@dsl-33.crcom.net]  has joined #ubuntu
+[01:39] <jief> later |trey|
+[01:39] <stuNNed> jief, ah ok then :)
+[01:39] <stuNNed> good luck with it |trey|
+[01:39] <jief> in our test lab at work, with a gigabit switch with a 4GB backplane, we can deploy windows in less than 4 minutes to clients
+=== Acridien [~acridien@43.4.78.83.cust.bluewin.ch]  has left #ubuntu []
+[01:39] <|trey|> jief, later    stuNNed, thanks  :)
+[01:40] <bob2> I'd have thought you'd be limited by disk bandwidth
+[01:40] <stuNNed> jief, yes, unicast is okay if gigabit network i guess, never had one to play with :)
+[01:40] <jief> stuNNed: actually, i almost brought a network down to its knee using symantec ghost in multicast mode. the cat2324 didn't keep up
+[01:40] <encKe`> is anyone here using gmail yet?
+[01:40] <jief> bob2: doesn't take much to push about 1GB
+[01:40] <bob2> encKe`: lots of people have been using it for months
+=== menator [~menator@ip68-110-5-103.tc.ph.cox.net]  has joined #ubuntu
+[01:41] <jief> nice thing about partimage, it compress/uncompress stuff on the fly
+[01:41] <bob2> jief: 4 minutes is 4.8GB, best case
+=== aitrus [~foouser@67-50-98-17.dsl1.chi.il.frontiernet.net]  has joined #ubuntu
+[01:41] <linux_mafia> encKe`, only to experiment with gmailfs
+[01:41] <stuNNed> jief, yes but on a 100mb network with multicast, can image a whole lab (16 computers) in 15-20 minutes.
+[01:41] <encKe`> just wonderin what all the hoopla is about
+[01:41] <encKe`> lol
+[01:42] <jief> stuNNed: that's fine as long as you don't have users trying to surf the web
+[01:42] <stuNNed> encKe`, lol, i can give you an invite if you wish to find out, think i have one
+[01:42] <jief> in a prod environment, multicast is not an option
+[01:42] <jief> i'm trying to fill up my gmail account. i'm fowarding 2 mail accounts to it
+[01:42] <encKe`> stuNNed , that would be cool if you wouldnt mind :)
+[01:43] <stuNNed> encKe`, np at all
+[01:43] <jief> you know what's cool? vmware
+[01:43] <jief> i'm about to get rid of all my boxens at home, and buy a dual-xeon with 4 gigs of ram and a raid. all virtual machines
+[01:43] <jief> saves lot of space too
+[01:44] <bob2> that seems like overkill
+[01:44] <jief> as soon as you have 2-3 GUIs running, it tends to slow down
+[01:44] <bob2> so don't run 2-3?
+[01:45] <epod> Is there a way to add another location to the gnome panel weather applet?
+[01:45] <jief> well, i often use vmware for testing
+[01:45] <jief> i setup a virtual lan, with a few machines
+[01:45] <bob2> epod: add another instance of the applet
+[01:45] <epod> bob2, no, I mean, I want to add my city to it
+[01:45] <bob2> epod: ah
+=== lino [~lino@s28040024.temp.wsu.edu]  has joined #ubuntu
+[01:46] <bob2> epod: hrm, I think you'd need to file a bug, it'd require source changes
+[01:46] <jief> epod: isn't there a city close to you in there?
+[01:46] <lino> join #ubuntu-it
+[01:46] <epod> jief, no, they're all down south
+[01:46] <lino> join #ubuntu-it
+=== socomm [~socomm@adsl-69-104-217-154.dsl.irvnca.pacbell.net]  has joined #ubuntu
+[01:46] <lino> join #ubuntu
+[01:46] <lino> join #ubuntu
+=== epod is in the far north where it is all dark and cold. :)
+[01:47] <lev> lino: you need to put a / in front of join
+[01:47] <bob2> lino: you need a / there
+=== EfaistOs [~efaistos@m239.net81-64-31.noos.fr]  has joined #ubuntu
+[01:47] <EfaistOs> hi
+[01:47] <lev> lino: that is, /join #ubuntu
+[01:47] <linux_mafia> epod, norway?
+[01:47] <lino> got it :)
+[01:47] <EfaistOs> warty is stable ?
+[01:47] <HrdwrBoB> yes
+[01:47] <EfaistOs> and what is sid ?
+[01:47] <jief> EfaistOs: yes
+[01:47] <ogra> epod: iceland ?
+[01:47] <bob2> EfaistOs: sid is part of Debian, not ubuntu
+[01:47] <lino> sorry, I use irc just once a year or so...
+[01:47] <jief> EfaistOs: sid is for debian, meaning "still in development"
+[01:48] <lev> or sid the character from Toy Story... :-)
+[01:48] <EfaistOs> bob2, ok but what's the name in ubuntu of the unstable ?
+[01:48] <epod> ogra, northern canada, but yeah
+[01:48] <bob2> EfaistOs: hoary
+[01:48] <EfaistOs> i know what sid means :p
+[01:48] <socomm> lino: you already are on #ubuntu
+[01:48] <ogra> epod: just guessed ;)
+[01:48] <jief> epod: where from in canada? i'm from montreal
+=== Pugio [~Snak@162.33.155.225]  has joined #ubuntu
+[01:48] <epod> jief, I'm in northern BC near the NWT
+[01:48] <Pugio> hello
+[01:49] <Pugio> I'm installing ubuntu for the first time and I need a little help
+[01:49] <EfaistOs> bob2, and is it stable or not ? i mean i used a sid for my workstation and everything was okay ...
+[01:49] <jief> epod: oh i love BC. i went to whistler a lot in the past. and to banff, ab
+[01:49] <lev> Pugio: what's your problem?
+[01:49] <Pugio> I've gotten up to the Partition disks stage
+[01:49] <Pugio> and I want to make sure I don't erase my drive
+[01:49] <epod> jief: cool :)
+[01:49] <EfaistOs> bob2, i just switched from debian sid to ubuntu ...
+[01:49] <jief> i love sunshine mountain
+[01:49] <EfaistOs> i just kept my home partition ...
+[01:49] <epod> jief, of course, nothig up in this part of the country is listed in the applet, heh
+[01:49] <jief> epod: obviously haha
+[01:50] <bob2> epod: it's unstable...probably no more so than sid now
+[01:50] <spacey`ki> http://www.ubuntulinux.org/wiki/UbuntuArtwork/view?searchterm=image%20logo
+[01:50] <bob2> EfaistOs: ^^
+[01:50] <Pugio> well, unfortunatly the entire 20gb is being used
+[01:50] <spacey`ki> it says attachments
+[01:50] <Pugio> is there any way to take a bit of that out and use it for ubuntu
+[01:50] <spacey`ki> but i dont see any images or dl links
+[01:50] <Pugio> without erasing whats on there?
+[01:50] <spacey`ki> how does that wiki work? ;/
+[01:50] <jief> as anyone had problems with encrypting emails using evolution-2 + gnupg in ubuntu?
+[01:50] <EfaistOs> bob2, and about the stability of the hoarty version ?
+[01:50] <lev> Pugio: there is, but it might ruin the data. resizing partitions is tricky business in my experience...
+[01:50] <bob2> EfaistOs: "hoary"
+[01:50] <EfaistOs> s/hoarty/hoary
+[01:50] <Pugio> ahhh
+[01:50] <EfaistOs> i'm new :p
+[01:51] <bob2> EfaistOs: nothing seems horribly broken atm
+[01:51] <Pugio> well then, no ubuntu for me right now
+[01:51] <EfaistOs> bob2, ok ...
+[01:51] <lev> Pugio: you can run it from the live cd until you can get a new harddrive :-)
+=== umarmung [~holger@pD9E697AA.dip.t-dialin.net]  has joined #ubuntu
+[01:51] <Pugio> true
+[01:51] <EfaistOs> i like that the fu*!: ati drivers work really good ...
+[01:51] <Pugio> right now all I have is the install cd tho
+=== [francof]  [~kvirc@adsl-29-78.37-151.net24.it]  has joined #ubuntu
+[01:51] <epod> ah, work is almost over for the day
+[01:51] <Pugio> I didn't see a link to the live CD
+[01:51] <Pugio> oops nm
+[01:51] <jief> EfaistOs: ati drivers working well? since when?
+[01:51] <EfaistOs> you made good work ...
+[01:51] <Pugio> I forgot, the live disk dosen't work on PPC
+[01:52] <lev> Pugio: i see...
+[01:52] <EfaistOs> jief, i mean they work :p it's already a good thing :p
+[01:52] <jief> they're even bad on windows
+[01:52] <epod> the ubuntu instructions for the ATI drivers made it SO easy to install them
+[01:52] <Pugio> yeah:(
+=== jief pets his geforce fx5700
+[01:52] <Pugio> It would be great to have a PPC live cd
+=== epod has a notebook, and so cannot change his video card.
+[01:53] <q2> My Take On Ubuntu:  It SO Stable, I have had no problems!  Therefore, it gets boring......... I LOVE YOU UBUNTU!
+=== yz [~yz@216.238.206.122]  has joined #ubuntu
+[01:53] <jief> you could always break it then fix it
+[01:53] <jief> that's always fun
+[01:53] <q2> lol
+[01:53] <q2> i might just have to
+[01:53] <Pugio> hmmm
+[01:53] <Striss> just leave a note on your fridge that says "rm -rf on my computer please"
+[01:54] <Pugio> from what I hear that migh be harder to do
+[01:54] <Striss> somebody will eventually come in and do it
+[01:54] <epod> haha
+[01:54] <Pugio> it doesn't work
+[01:54] <Striss> then you'll have problems
+[01:54] <Pugio> didn't you read the article?
+[01:54] <epod> they'd have to 'sudo rm -rf
+[01:54] <epod> ;)
+[01:54] <Pugio> :)
+[01:54] <Striss> haha ok my note is useless
+[01:54] <jief> Pugio: the one on osnews.com? :P
+[01:54] <Pugio> think so
+[01:54] <jief> it works better on linux than windows though
+[01:54] <Pugio> I went to it from /.
+[01:54] <Pugio> right
+[01:54] <jief> because windows locks files and linux doesn't
+[01:54] <Pugio> the pink screen of doom
+[01:54] <Pugio> !!!
+[01:55] <Pugio> much cooler than the BSoD
+[01:55] <Pugio> and it has all those pretty lines in it too
+=== compdude [kads@ti211310a081-2220.bb.online.no]  has joined #ubuntu
+[01:55] <epod> ok, good night folks
+=== SaintJerome [~SaintJero@155.68.104.230]  has joined #ubuntu
+[01:56] <SaintJerome> could someone please tell me where I can edit grub in ubuntu?
+[01:56] <stuNNed> SaintJerome, /boot/grub/menu.lst
+[01:56] <SaintJerome> to add another hard drive
+[01:56] <SaintJerome> thanks you
+[01:56] <Pugio> mmmmmm grub
+[01:56] <SaintJerome> thank*
+[01:56] <usual> i am looking at the artwork page
+[01:56] <baluba> q2, http://www.ubuntulinux.org/wiki/BreakMyUbuntu
+[01:56] <usual> it mentions an attatchment for grub image
+[01:57] <usual> but there is no link to click on
+[01:57] <usual> why is that
+=== Hydroxid1 is now known as Hydroxide
+[01:58] <q2> baluba: LOL!
+[01:59] <Pugio> my disk, my disk for a Live CD
+=== dreamcatcher [~sidnei@dreamcatcher.base.supporter.pdpc]  has joined #ubuntu
+[02:01] <q2> The Names GNome, Ubuntu Gnome
+=== jamesh [~james@203-59-50-191.dyn.iinet.net.au]  has joined #ubuntu
+[02:07] <stuNNed> how do i list files installed by a .deb?
+[02:07] <bob2> dpkg -L packagename
+[02:08] <bob2> the name of the package, not the filename of the .deb
+[02:08] <jdub> stuNNed: dpkg-deb -c <file>.deb
+=== pepsi [~pepsi@p147.n-sfpop03.stsn.com]  has joined #ubuntu
+[02:09] <stuNNed> jdub, bob2: got it, both works :D
+=== |^JaMeS^| [~nobody@cvip-dsl-205-88.cvip.net]  has joined #ubuntu
+=== Skif [~emschwar@147.sui216.dlls.dlstx31ur.dsl.att.net]  has joined #ubuntu
+[02:12] <SaintJerome> hmm
+[02:12] <SaintJerome> damnit, it won't let me boot into windows anymore
+[02:12] <jief> you need to edit /boot/grub/menu.lst
+[02:12] <jief> to add an option for Windows
+[02:12] <SaintJerome> I knowe
+[02:13] <SaintJerome> the hard drive itself is having issues
+=== merhojt [~merhojt@h67n2fls35o989.telia.com]  has joined #ubuntu
+[02:13] <SaintJerome> has been for a while
+[02:13] <jief> get a new one
+[02:13] <EfaistOs> there is no galeon in ubuntu ?
+=== binfalse [~bintrue@c-24-126-59-38.we.client2.attbi.com]  has joined #ubuntu
+[02:14] <bob2> EfaistOs: yes
+[02:14] <EfaistOs> i didnt find it
+[02:14] <bob2> "yes, you're right, it's not in ubuntu"
+[02:14] <linux_mafia> heh
+[02:15] <EfaistOs> but it's in debian
+[02:15] <linux_mafia> ubuntu needs a "man universe"
+[02:16] <Pizbit> hehe
+[02:16] <bob2> it's not in universe, either
+[02:16] <ogra> linux_mafia: great idea !!
+[02:16] <linux_mafia> no shiz, i thought it was, my bad
+[02:16] <lev> EfaistOs: i've had pretty good luck just taking sid .debs and installing them under ubuntu
+[02:16] <baluba> hei ogra
+=== GOwin [~Miranda@210.213.142.27]  has joined #ubuntu
+[02:16] <Skif> anybody here using whereami?
+[02:16] <RuffianSoldier> anyone here know a good amount about Libranet?  I am always in the LN channel but no one is alive right now, and i need help
+[02:16] <ogra> baluba: hi
+[02:16] <linux_mafia> but a universe/multiverse man page could be good
+[02:17] <ogra> yep...
+[02:18] <GOwin> i'm trying to do a smart upgrade via synaptics from 1.0 PR to final. i get an error when it comes to postgresql
+[02:18] <GOwin> setting up postgresql
+[02:18] <GOwin> pg_hba.conf contains a field after the authentication specification; the file is corrupt or has already been converted .......
+=== usual [~colin@alb-69-200-178-150.nycap.rr.com]  has joined #ubuntu
+[02:18] <bob2> RuffianSoldier: then ask on their list or such, it's off-topic here
+=== dreamcatcher [~sidnei@dreamcatcher.base.supporter.pdpc]  has left #ubuntu []
+=== darkpines [~catherine@S0106002078d287d6.vc.shawcable.net]  has left #ubuntu []
+=== q2 [~q2@dhcp024-209-106-036.woh.rr.com]  has joined #ubuntu
+[02:21] <RuffianSoldier> bob2, ummm... i need help now
+[02:21] <ogra> RuffianSoldier: probably try #linuxhelp
+[02:21] <bob2> RuffianSoldier: or ##linux or something
+=== Nafallo [~nafallo@h47n4c2o1027.bredband.skanova.com]  has joined #ubuntu
+[02:22] <jcole> is it possible to preseed the ubuntu installer? same as with the debian installer? any how tos anywhere on this?
+=== draconian [~draconian@ip68-7-178-227.sd.sd.cox.net]  has joined #ubuntu
+[02:22] <bob2> it's possible in d-i already?
+=== kevii [~kevii@c-24-126-59-38.we.client2.attbi.com]  has joined #ubuntu
+[02:23] <kevii> anyone know of a CLI AIM client thats in the ubuntu distro?
+[02:24] <bob2> centericq, pork
+[02:25] <kevii> pork wasn't in my apt-cache :/
+[02:25] <Nafallo> downgrading to warty again :-P
+[02:25] <bob2> hm, well, it's in hoary at least
+[02:25] <kevii> used pork in debian sarge
+[02:25] <Scognito> Nafallo, why?
+=== WX [~chris@h-68-166-219-29.snvacaid.covad.net]  has joined #ubuntu
+[02:26] <WX> anyone here running a postfix server w/ mysql support? preferrably using postfix.admin also ;)
+[02:26] <Nafallo> hoary is way to much updates and menuitems doesn't get added when I install things.
+[02:26] <bob2> WX: yes
+[02:26] <bob2> Nafallo: yes, the same as for msot software in warty
+[02:26] <jdub> Nafallo: only software that includes .desktop files will be added to the menus
+[02:26] <WX> hey bob2: can u help me get mine working by chance? i'd be glad to make a donation to ya for your time
+[02:27] <Nafallo> jdub: well, then gftp has lost that feature and some network package has got it :-P.
+[02:27] <Nafallo> me don't want Network places in two menus :-P
+[02:27] <bob2> WX: http://kirby.insanegenius.net/postfix.html
+[02:27] <bob2> WX: that worked for me every time
+[02:28] <bob2> WX: if you need postfix-specific help, #postfix would probably be a better place to try
+[02:28] <jief> http://www.workaround.org/articles/ispmail-sarge/
+=== LKSEONG_ [~LKSEONG@219.93.24.31]  has joined #ubuntu
+[02:29] <jdub> Nafallo: hoary is a development branch... things like that are bound to happen.
+[02:29] <jief> this is a very good how-to for isp-like MTAs
+[02:30] <Nafallo> jdub: don't get me wrong. I know that. the main reason I upgraded was to stop firefox from crashing when using forms, and that didn't happen so... ;-).
+[02:30] <WX> bob2: does this install work with postfix admin?
+[02:30] <ogra> Nafallo: http://lists.ubuntu.com/archives/ubuntu-announce/2004-October/000005.html
+[02:30] <bob2> WX: I don't know what "postfix admin" is.
+[02:31] <WX> bob2: a tool for adding/removing users
+[02:31] <WX> in mysql
+[02:31] <WX> php-based
+[02:31] <bob2> I don't know
+=== f_favila [f_favila@host-66-81-24-38.rev.o1.com]  has joined #ubuntu
+[02:32] <Nafallo> ogra: what about it? :-)
+=== binary_10 [~binary@adsl-67-112-200-42.dsl.sntc01.pacbell.net]  has joined #ubuntu
+[02:32] <ogra> Nafallo: stability info .... on hoary ?
+[02:33] <Nafallo> ogra: I KNOW it's not stable damn it :-P. I've used debian for years :-).
+=== jind [~jind@217-17-134.adsl.tele2.no]  has joined #ubuntu
+[02:34] <ogra> Nafallo: i ve seen sid breaking badly.....used it though
+[02:34] <ogra> on desktops
+[02:34] <Nafallo> ogra: hehe, that one of sids main feutures though :-P
+[02:34] <Nafallo> s/feu/fea/
+[02:34] <ogra> :)
+[02:34] <kevii> hmm no cli aim clients in ubuntu
+[02:35] <Nafallo> ogra: I used testing, but I think it's time to let my amd64 fly for a bit ;-).
+=== ogra goes to bed now, looks forward to clearify his holiday for december ;)
+[02:36] <ogra> Nafallo: sorry, 2:30 am here, need to work tomorrow :(
+[02:36] <ogra> bye
+[02:36] <Nafallo> ogra: nightie :-)
+[02:37] <Nafallo> he is in the same timezone as I am :-P
+[02:37] <Nafallo> and almost got the same nick/name as my server ;-)
+[02:38] <jcole> does anyone have the md5sum for warty-release-install-i386.iso?
+[02:40] <aitrus> it's on the website
+[02:41] <aitrus> http://releases.ubuntu.com/warty/MD5SUMS
+[02:41] <jcole> aitrus: great, thanks
+=== Ciberous [~a@cpe-67-49-155-64.hawaii.rr.com]  has joined #ubuntu
+=== GnuHippy [~jason@blk-222-217-193.eastlink.ca]  has joined #ubuntu
+[02:47] <mirak_> kevii, ???
+=== shank_ [~shank@pool-151-201-223-105.pitt.east.verizon.net]  has left #ubuntu ["Client]
+=== jsubl2 [~jsubl2@209.144.23.220]  has joined #ubuntu
+=== jsubl2 [~jsubl2@209.144.23.220]  has left #ubuntu ["Leaving"]
+=== rabidbt [~rabidbt@66.45.74.16]  has joined #ubuntu
+=== carger314 [~carger314@ip68-228-44-118.tc.ph.cox.net]  has joined #ubuntu
+=== thoreauputic [~petros@wolax7-209.dialup.optusnet.com.au]  has joined #ubuntu
+=== zara [~zara@69.138.227.132]  has joined #ubuntu
+[02:56] <mirak_> room dead?
+[02:56] <Nafallo> mirak_: yepp
+[02:56] <mirak_> lol
+=== compdude [kads@ti211310a081-2220.bb.online.no]  has left #ubuntu []
+=== GOwin [~Miranda@210.213.142.27]  has left #ubuntu []
+=== draconian [~draconian@ip68-7-178-227.sd.sd.cox.net]  has joined #ubuntu
+=== strestout1__ is now known as strestout1
+[03:01] <LinuxJones> night all :)
+=== yohannes [~yohannes@adsl-67-112-218-21.dsl.sntc01.pacbell.net]  has joined #ubuntu
+[03:10] <yohannes> can anyone recommend any app to create/open *.rar file?
+[03:10] <Hikaru79> yohannes, why not WinRAR?
+[03:10] <Hikaru79> http://www.rarlab.com/
+[03:10] <yohannes> i am trying to weight my option. any other apps?
+[03:10] <Hikaru79> Just download RAR 3.41 for Linux
+[03:10] <Hikaru79> Oh
+[03:10] <Hikaru79> I see
+[03:10] <Hikaru79> Only one I know of, sorry =(
+[03:11] <yohannes> btw, how can i install that darn thing? :)
+[03:11] <yohannes> i downloaded winrar, does not have any instruction to install
+[03:11] <Nafallo> file-roller
+[03:11] <yohannes> i suspect i need to do something with the makefile included
+=== mubix [~mubix@ca-29palms-cmts2d-189.losaca.adelphia.net]  has joined #ubuntu
+=== ud [~ud@25.b.001.ham.iprimus.net.au]  has joined #ubuntu
+=== blocke [~blocke@pool-70-18-134-61.pghk.east.verizon.net]  has joined #ubuntu
+=== lev is now known as lev-away
+[03:18] <blocke> hi... is anyone elses laptop spinning down the hard drive after like one second of inactivity since updating in the last few days?  its driving me nuts and I'm afraid of damage to the hard drive :(
+=== miked593 [~miked593@ip68-6-239-231.sd.sd.cox.net]  has joined #ubuntu
+=== LKSEONG_ is now known as KentutMerah
+[03:20] <Nafallo> blocke: 5 seconds. that's the minimum you can have. hdparm -S 1 that is :-).
+=== GnuHippy [~jason@blk-222-217-193.eastlink.ca]  has joined #ubuntu
+[03:20] <blocke> any idea what is setting it by default in ubuntu?
+[03:20] <Nafallo> blocke: /etc/acpi/power.sh
+[03:20] <blocke> it didn't used to be so short on this laptop until I upgraded to hoary... can't be good for the hard drive
+[03:21] <GnuHippy> the gimp ScriptFU filters are broken in hoary
+[03:21] <Nafallo> blocke: it makes battery time :-P
+[03:21] <Nafallo> blocke: in warty default is 12.
+[03:21] <blocke> yeah I see that, strange
+[03:21] <blocke> its not respecting it
+=== natea [~natea@h000f66a887c6.ne.client2.attbi.com]  has joined #ubuntu
+[03:22] <blocke> its literally spinning down after a second of inactivity
+[03:22] <Nafallo> blocke: sudo hdparm -i /dev/hda
+=== Hydroxide [user@adsl-98-2.bway.net]  has left #ubuntu []
+[03:24] <blocke> http://www.pastebin.com/116669
+[03:25] <GnuHippy> wow it is scary how much work they have done on hoary already and how fast updates and fixes are made
+=== holycow [~yada@S0106002078ccd651.vf.shawcable.net]  has joined #ubuntu
+[03:25] <jdub> GnuHippy: that's largely merging with sid.
+=== poin_t [point@203.130.197.108]  has joined #ubuntu
+[03:25] <GnuHippy> Do they have 1000 Keebler elves working around the clock?
+=== draconian [~draconian@ip68-7-178-227.sd.sd.cox.net]  has joined #ubuntu
+[03:25] <GnuHippy> ic jdub
+[03:26] <GnuHippy> was Sarge released yet?
+[03:26] <usual> hey jdub, how goes it
+[03:26] <usual> sarge wont be released until i have grandkids
+[03:27] <GnuHippy> I'll take that as a no
+[03:27] <blocke> gah... stop spinning down!
+=== ajmitch checks to see if his packages are in hoary/universe
+[03:27] <Nafallo> blocke: hmm, that didn't say spindown time :-P. well, sudo hdparm -S 12 /dev/hda does what you want :-).
+[03:27] <blocke> I did that several minutes ago
+[03:27] <ud> In universe there is fluxbox_0.1.14-4_i386.deb and fluxbox_0.9.9-1_i386.deb but i can only manage to apt 0.1.14-4. How can I get the 0.9.9-1 release?
+=== blocke reboots in the vein hope that its just a fluke...
+[03:28] <ajmitch> great, I have about 10 packages in universe for hoary :)
+[03:29] <KentutMerah> ud, dpkg ?
+[03:29] <ud> umm.. I use apt-get. But should I try dpkg?
+[03:30] <jdub> ud: 0.9.9 is most likely the hoary version, not the warty version
+[03:30] <jdub> ud: dpkg won't help you
+[03:30] <jdub> (well, it could, but it's not advisable)
+[03:30] <ud> ahh but its in the the same repo?
+=== nomasteryoda is away: IM me @ nomasteryoda on AIM / YIM
+[03:31] <jdub> it's in the same pool
+[03:31] <jdub> all the warty and hoary packages are in the same pool
+[03:31] <ud> ahh ok
+[03:31] <jdub> but they're for different releases
+[03:31] <ud> I wondered if that was the case
+[03:32] <ud> Because it wouldnt show the newer release with apt-cache search
+[03:32] <ud> Is there a way I can use the newer release?
+=== logic [~me@222-152-218-210.jetstream.xtra.co.nz]  has joined #ubuntu
+[03:33] <jdub> ud: hoary is the development branch
+[03:34] <jdub> ud: unless you're very familiar with debian, i wouldn't recommend it
+=== blocke [~blocke@pool-70-18-134-61.pghk.east.verizon.net]  has joined #ubuntu
+[03:34] <Nafallo> ud: there is, but as jdub just said, it's not advisible :-).
+=== defendguin [~supertux@adsl-6-68-108.msy.bellsouth.net]  has joined #ubuntu
+[03:34] <ud> ok thanks for your help, ill just have to wait :)
+=== CPayan [~chatzilla@user-1120jfl.dsl.mindspring.com]  has joined #ubuntu
+=== hazmat [~hazmat@j71055.upc-j.chello.nl]  has joined #ubuntu
+[03:35] <CPayan> brettcar: sad
+=== Tex___ [tex@beer.tclug.org]  has joined #ubuntu
+[03:37] <blocke> hmm I had to hdparm -B 255 to stop the spinning down, oh well, at least I have a workaround
+=== Striss [~Strain@blk-222-170-205.eastlink.ca]  has joined #Ubuntu
+[03:38] <Nafallo> blocke: hehe
+[03:38] <Striss> hey guys, I just installed Fluxbox, and I"m running it...all the fonts in my gnome apps look kinda gross now
+[03:38] <Striss> they don't look like they did in gnome
+[03:41] <dopey> fluxbox is in ubuntu?
+[03:41] <jdub> dopey: in universe, of course.
+[03:41] <dopey> that makes more sense
+[03:41] <djtansey> does anyone here have k3b experience? i can record things with cdrecord but k3b won't let me (did k3bsetup and all and it seems happy. but k3b says my device isn't a cd writer)
+[03:41] <dopey> i thought universe was unsupported though
+[03:41] <jdub> it is
+[03:42] <Nafallo> djtansey: k3b won't work with kernel 2.6.8|2.6.8.1
+=== Dethread [~Dethread@24-205-231-52.slo-cres.charterpipeline.net]  has joined #ubuntu
+[03:43] <djtansey> Nafallo: so go back to 2.6.7?
+[03:44] <Nafallo> djtansey: yepp, or upgrade to 2.6.9
+[03:44] <CPayan> hmm progression or regression
+[03:44] <djtansey> Nafallo: thanks. i'll see if ubuntu has 2.6.9 packaged
+[03:44] <jdub> it will work with the ubuntu kernel
+[03:44] <djtansey> jdub: k3b will?
+[03:44] <jdub> no, there's no 2.6.9 in warty or hoary
+[03:44] <jdub> yes
+[03:45] <jdub> there are plenty of people using it
+[03:45] <Nafallo> jdub: never worked with ANY 2.6 for me :-P
+[03:45] <djtansey> jdub: then any guess as to what the problem is?
+[03:45] <Nafallo> jdub: that's with both ubuntu and debian kernels.
+[03:45] <jdub> dunno if there's a FAQ or something on the website, but it would make sense to check
+[03:45] <djtansey> jdub: i did. nothing i could find that was related
+[03:45] <Nafallo> opss, typo! 2.6.8* ;-)
+[03:46] <djtansey> jdub: other than some k3bsetup .ICEauthority issues
+[03:46] <djtansey> Nafallo: but it works with 2.6.7 for you?
+[03:46] <Nafallo> jdub: k3b and 2.6.8|2.6.8.1 on both my computers with burners fail.
+[03:46] <Nafallo> djtansey: yes.
+[03:47] <Nafallo> djtansey: and it should be fixed in 2.6.9 also :-)
+[03:47] <jdub> Nafallo: the ubuntu kernels do not have those bugs.
+[03:47] <djtansey> Nafallo: thanks.
+[03:48] <jdub> plenty of other people are using k3b with ubuntu
+[03:48] <Nafallo> jdub: how come when I TRIED with ubuntu k3b couldn't see my burner?
+[03:48] <Nafallo> jdub: same thing with my girlfriend.
+[03:48] <jdub> i don't know your particular circumstances
+[03:48] <jdub> i can only relate what i know
+[03:48] <Nafallo> it just doesn't work :-)
+[03:48] <Nafallo> jdub: same here.
+[03:48] <jdub> that may be true in your case
+[03:48] <jdub> but it is not the case for many other users
+[03:50] <Nafallo> jdub: maybe it's just drive specific?
+[03:50] <jdub> i don't know
+[03:50] <Nafallo> jdub: but then, I got both a samsung and a toshiba ;-).
+=== logic is now known as logic|away
+[03:51] <Nafallo> it might be that I'm running my cd-rws as ide-cd :-)
+[03:51] <djtansey> Nafallo: but i can use cdrecord dev=/dev/hdc without problem. you'd think k3b would be equally capable
+[03:52] <Nafallo> djtansey: yepp, I've given up on the subject anyway :-P. ubuntu showed me the way nautilus does it :-P.
+[03:52] <phill> Hi, I have a rather long question, so I have posted it here on the ubuntu forums. If anyone here has any answers to it, I would very much appreciate the help!
+[03:52] <phill> http://www.ubuntuforums.org/showthread.php?p=11009#post11009
+[03:52] <djtansey> Nafallo: usually that's what i do. unfortunately i am burning audio CDs for a roadtrip :)
+[03:53] <ajmitch> djtansey: running k3b with sudo?
+[03:54] <ajmitch> not that it should matter with the patched kernel
+=== Elyran [~mirspcm@lns-th2-4f-81-56-180-71.adsl.proxad.net]  has joined #ubuntu
+[03:54] <djtansey> ajmitch: no. but i gave k3b my root password so those apps have root permissions
+[03:54] <Nafallo> phill: my friend installed that on his lappy yesterday. he just had to apt-get and s/ati/fglrx/ :-)
+[03:55] <Nafallo> phill: and then restart x and gdm ofcourse :-)
+[03:55] <Nafallo> djtansey: k3b doesn't have root permissions.
+[03:55] <Nafallo> djtansey: cdrecord and cdrdao have :-).
+[03:56] <phill> hi, ok, how do i restard x/gdm?
+=== GnuHippy [~jason@blk-222-217-193.eastlink.ca]  has joined #ubuntu
+[03:57] <djtansey> Nafallo: that's why i meants by "those apps." would giving k3b root help? (not that it matters now. i just finished my last CD using cdrecord)
+[03:57] <Nafallo> phill: logout from X, when you're at the login screen, press CTRL+F1, login and typ sudo /etc/init.d/gdm restart
+=== draconian [~draconian@ip68-7-178-227.sd.sd.cox.net]  has joined #ubuntu
+[03:59] <HrdwrBoB> ctrl+alt+f1
+[03:59] <Nafallo> HrdwrBoB: thanks :-)
+[03:59] <phill> ok will give it a go :)
+=== ghc [~geoffc@sdcarl02.strategicdata.com.au]  has joined #ubuntu
+[03:59] <phill> so i don't need to apt-get install linux-686 or whatever the binarydriverhowto said?
+[04:00] <Nafallo> ahh, yes. you have to switch kernel to :-).
+[04:00] <Nafallo> phill: that makes it easier, because you have to restart to make the new kernel load ;-).
+[04:01] <ghc> Hi all. Is this a good place to ask for some technical help on installing ubuntu on some hardware which is being difficult?
+=== Striss [~Strain@blk-222-170-205.eastlink.ca]  has joined #Ubuntu
+[04:02] <Striss> woo fluxbox is working perfect
+[04:02] <Striss> ubuntu is so great
+[04:02] <phill> i have to what? :(
+[04:02] <ghc> I've got an IBM ThinkCenter with a SATA chipset which I can't get working.
+[04:02] <Nafallo> phill: follow the howto :-)
+[04:02] <phill> ok
+=== Elroy-J [~mirak@adsl-68-74-28-228.dsl.sfldmi.ameritech.net]  has joined #ubuntu
+[04:03] <Gmail> bob2: i am going to /msg you now
+[04:04] <phill> since i'm using a 386 kernel at the moment i should just get that and it will replace my current one?
+[04:04] <Nafallo> phill: you need to run 686 yes.
+[04:04] <phill> oh
+[04:04] <phill> i need to get linux-686
+[04:04] <phill> ?
+[04:04] <Nafallo> yes
+[04:05] <phill> and then make sure grub uses that?
+[04:05] <phill> at what point do i reboot? after the kernel installs and then continue isntalling fglrx after i have linux-686 going? will linux-686 pickup my nvidia agpgart?
+[04:07] <usual> can I do a cryptoloop on my root running reiserfs?
+=== timello [~tiago@201.7.63.18]  has joined #ubuntu
+[04:07] <Nafallo> phill: install linux-686 and fglrx-driver, then sed then reboot and it will work.
+=== ghc [~geoffc@sdcarl02.strategicdata.com.au]  has left #ubuntu []
+=== ghc [~geoffc@sdcarl02.strategicdata.com.au]  has joined #ubuntu
+[04:11] <phill> natfallo: alright. last time i tried x wouldn't start :( but i'll give it another shot
+[04:11] <Nafallo> last time, did you have i686-kernel?
+[04:11] <phill> yes
+[04:11] <phill> i did the guide
+=== usual [~colin@alb-69-200-178-150.nycap.rr.com]  has joined #ubuntu
+[04:14] <cuga> Hey i just noticed this, ubuntu's ssh server is called openserver-ssh... is it still openssh just rebranded ?
+=== danhunt [~dan_hunt@hssxpa204-83-181-43.sasknet.sk.ca]  has joined #ubuntu
+[04:14] <bob2> cuga: no it's not
+[04:14] <bob2> it's called openssh-server
+[04:14] <bob2> it is openssh.
+[04:14] <Elroy-J> lol
+[04:15] <cuga> bob2: man, i must be dislexic.. if i could spell it
+[04:16] <HrdwrBoB> dyslexis
+[04:16] <HrdwrBoB> dyslexic
+[04:16] <HrdwrBoB> I can spell, just not type
+[04:16] <cuga> i was only off by one letter.. tahts hot
+=== _timello [~tiago@201.7.53.31]  has joined #ubuntu
+[04:20] <_timello> sorry, but I lost my link, repeating the question: anybody knows why I can't play any .mpg, etc? it shows me the sound, but not shows me the screen
+[04:21] <bob2> RestrictedFormats on the wiki
+[04:21] <Nafallo> _timello: probably missing codecs
+[04:21] <Nafallo> hmm
+[04:22] <Nafallo> anyone else got troubles with docbook-dsssl?
+=== dasenjo [~dasenjo@201.245.164.26]  has joined #ubuntu
+[04:22] <Nafallo> version 1.57-4
+[04:22] <Nafallo> typo
+[04:22] <Nafallo> version 1.78-4
+[04:24] <danhunt> check http://www.desktopos.com/reviews.php?op=PrintReview&id=21 for .mpg tips.
+[04:24] <Nafallo> hmm, odd
+[04:24] <Nafallo> it works now :-P
+=== atariboy [~atari@dsl-203-142-136-122.mel.directcorp.net.au]  has joined #ubuntu
+[04:25] <Nafallo> finally I'm on warty again ;-)
+[04:26] <Nafallo> takes a bit more to downgrade through aptitude than upgrade ;-)
+=== natea [~natea@h000f66a887c6.ne.client2.attbi.com]  has joined #ubuntu
+[04:29] <_timello> danhunt, I installed mplayer and the essential codecs package, but it still isn't working. I didn't find why
+[04:30] <Nafallo> _timello: run mplayer from a terminal and check the output?
+[04:34] <_timello> it shows errors like: can't open ~/.mplayer/codecs.conf, font, but I don't think so that it is the real problem
+[04:34] <bob2> it's not an error, it's a warning
+[04:35] <_timello> yes, sorry
+[04:35] <billytwowilly> how do I enable panel support in xchat?
+=== _timello is now known as timello
+=== doko [doko@dsl-082-082-066-197.arcor-ip.net]  has joined #ubuntu
+=== ghc [~geoffc@sdcarl02.strategicdata.com.au]  has left #ubuntu []
+[04:42] <timello> maybe has a package for X that allows it? Totem doesn't show me nothing either
+=== poin__t [point@203.130.197.108]  has joined #ubuntu
+[04:43] <timello> I'm using a nvidia gforce mx440
+[04:44] <Pizbit> billytwowilly: panel support = ?
+[04:45] <Pizbit> timello: You installed the w32codecs package eh? Tried changing from totem-gst to totem-xine ?
+[04:46] <timello> Pizbit, just for mplayer... I' ll go try
+[04:46] <Pizbit> (although personally I use xine)
+[04:47] <timello> apt-get install xine-ui?
+=== jg [~jg@h005018015b26.ne.client2.attbi.com]  has joined #ubuntu
+[04:48] <Pizbit> Yeah
+=== janice [~janice@adsl-11-179-21.mia.bellsouth.net]  has joined #ubuntu
+[04:49] <Nafallo> WTF!
+=== benh` [~benh@h000c414a0141.ne.client2.attbi.com]  has joined #ubuntu
+[04:49] <janice> Hi All! I took the plunge and installed Ubuntu. However, I need some help.
+[04:49] <nomasteryoda> excellent
+[04:49] <Nafallo> @ogre:/mnt/mirrors/ubuntu/pool/main/g/gnutls10$ ls -al
+[04:49] <Nafallo> lrwxrwxrwx    1 root     root           77 2004-11-02 22:07 libgnutls10-dev_1.0.4-3ubuntu1_amd64.deb -> ../../../../pool/universe/g/gnutls10/libgnutls10-dev_1.0.4-3ubuntu1_amd64.deb
+[04:49] <benh`> is it possible (or desirable) to dist-upgrade to hoary?
+[04:50] <HrdwrBoB> benh`: yes and maybe
+[04:50] <benh`> ok, just s/wart/hoary in sources.list?
+[04:50] <timello> Pizbit, it comes with codecs?
+[04:50] <nomasteryoda> HrdwrBoB: Ubuntu has given me excellent results with TVtime too
+[04:50] <nomasteryoda> much better on my old wintv card
+[04:50] <nomasteryoda> than mandrake
+[04:50] <bob2> benh`: are you willing to deal with broken things and to file bug reports?
+[04:50] <janice> I have an unsupported USRobotics wireless PCI card and I need to use ndiswrapper. Unfortunately, the install cd (Warty 4.10 Full Release) does not have ndiswrapper. What is the URL from the ubutnu website that I can download it from?
+[04:50] <HrdwrBoB> heh
+[04:50] <HrdwrBoB> good to hear :)
+[04:51] <HrdwrBoB> janice: if you start synaptic
+[04:51] <HrdwrBoB> and you enable 'restricted'
+[04:51] <HrdwrBoB> you can install ndiswrapper
+[04:51] <benh`> bob2, depends on how broken and yes

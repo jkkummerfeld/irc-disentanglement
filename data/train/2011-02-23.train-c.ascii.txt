@@ -1,0 +1,1500 @@
+[09:05] <MACscr> gmachine_24: without an emulator, thats impossible
+[09:05] <cast> MACscr: no it's not.
+[09:05] <MACscr> Stormx2: ive tried that. Im confused by the term sink though
+[09:05] <MACscr> cast: of course it is, you cant simply run a os on top of another os
+[09:06] <rockman125> can you guys help me with this http://pastebin.com/fUSbMXTc ?
+[09:06] <MACscr> without some sort of virtualization/emulation
+[09:06] <gmachine_24> so is that a yes or a no?
+[09:06] <immy> thx coz
+[09:07] <extra11> heh
+[09:08] <gmachine_24> "Download and install the Android SDK (Software Development Kit), which comes with an Android Emulator."
+[09:08] <gmachine_24> happy now?
+[09:09] <mickster04> gmachine_24: well do  it and tell #ubuntu-offtopic what happens
+[09:09] <gaelfx> what can I do to fix choppy playback using vdpau in smplayer?
+[09:09] <gmachine_24> okie
+[09:09] <coz_> gaelfx,   are all codecs installed?  and also try vlc to see if you get the same results
+[09:09] <MACscr> gmachine_24: you never said you wanted to install the sdk
+[09:10] <gaelfx> coz_: yeah, the codecs are installed, vlc runs it fine, but vlc doesn't use vdpau
+[09:10] <coz_> gaelfx,  mm hold on let me check on t hat
+[09:11] <gmachine_24> zzzzzzzzzzzzzzz
+[09:11] <MACscr> i cant stand morons
+[09:11] <joeoshawa> i am playing wmv files using video player but i have to close and restart it after each video any idea why?
+[09:11] <gaelfx> coz_: thanks
+[09:11] <joeoshawa> if i double click a second video i just get a black screen
+[09:13] <joeoshawa> it just started today
+[09:13] <coz_> gaelfx,  apparenlty on this forum there are links to vlc  git  with vdpau patches   http://forum.videolan.org/viewtopic.php?f=13&t=53928&start=30
+[09:14] <coz_> gaelfx,  also make sure the system is completely updated   sudo apt-get update && sudo apt-get dist-upgrade
+[09:14] <p896gbm> hi folks. i have a RAID question. i have an external 1TB usb harddrive which had been flaking out for a few weeks and stopped responding entirely, so i disassembled it and found two regular 512MB drives. i took them out and added them to my computer and both seem to work fine; no smart failures or anything. one of them contains the start of the filesystem; fsck says the filesystem size is twice the drive size. the other has no superblock.
+[09:14] <p896gbm> since this appears to be a simple raid array, my question is how do i assemble it so i can rescue the data?
+[09:15] <gaelfx> coz_: yes, the system is totally updated, but you don't understand, I didn't have this problem in 10.04 and I really would prefer not to use git just to get vlc working
+[09:15] <ikonia> p896gbm: what technology is controlling the raid array
+[09:15] <bullgard> [LAN] '~$ arp' shows on computer T43 "Address=noname", "HWaddress=00:0a:e4:...". But that computer shows '~$ hostname; MD97600'. How to accomplish that on computer T43 '~$ arp' will show  "Address=MD97600", "HWaddress=00:0a:e4:..."?
+[09:16] <ikonia> bullgard: that is a networking question
+[09:16] <joeoshawa> strange it stoped doing it
+[09:16] <coz_> gaelfx,  mm  then I am not sure where to go from here... hold on let me check one more thing
+[09:16] <joeoshawa> thanks anyway
+[09:16] <MACscr> anyone know what "sink-inputs" means in pacmd? They mention the term sink many times
+[09:16] <joeoshawa> odd i didn't do anything
+[09:17] <gaelfx> coz_: thanks again
+[09:17] <p896gbm> ikonia: no clue. it's just a very small circuit board that connected both drives. it has two sata ports, two hdd power connectors, a connector for a power adapter and a usb port, that's it
+[09:17] <ikonia> p896gbm: is it mdadm based on a hardware raid solution ?
+[09:17] <coz_> gaelfx,  no I couldnt find any other channel that could help with t his...although stay here and ask again ... others may have a solution that I do not...also you could ask in ##linux  ,,, its possible someone there may also have a solution
+[09:18] <p896gbm> ikonia: i have no clue. i tried assembling it with mdadm but i don't really know what i'm doing. i'm hoping it's just a raid-0 array but i don't know
+[09:18] <ikonia> p896gbm: before touching it with mdadm you need to know the technology that the device was put together with
+[09:18] <greenIT> hi, does any1 know how to install javaME on ubuntu?
+[09:18] <p896gbm> ikonia: i assume the circuit board implemented a hardware raid array; the usb drive showed up as a single partition whenever you plugged it into a computer, no drivers needed
+[09:19] <ikonia> p896gbm: if it's hardware array, then you'll need the hardware array to build it
+[09:19] <p896gbm> ikonia: ok. is there a way i can find that out? i thought i would first try assembling it as raid-0. it seems the most logical thing the hardware would do
+[09:19] <p896gbm> ikonia: why? isn't raid-0 a standard way of assembling drives? i should be able to emulate that with a software like mdadm, no?
+[09:19] <ikonia> p896gbm: using mdadm to assemble it if it's a hardware controlled array will help
+[09:19] <p896gbm> k
+[09:19] <beliveyourdream> is there a software for vector graphics with a command line like autocad ?
+[09:19] <ikonia> p896gbm: sorry, typed that terrible
+[09:19] <p896gbm> do you know the commands to mdadm to assemble it? they have different uuids
+[09:20] <ikonia> p896gbm: assembling a hardware array with mdadm will never happen
+[09:20] <p896gbm> ok
+[09:20] <p896gbm> why?
+[09:20] <greenIT> how can i install javaME on ubuntu?
+[09:20] <ikonia> p896gbm: because they are two different technologies that relay on their own software controlled methods that are different
+=== cftygv is now known as ededdy
+[09:21] <p896gbm> so? there's gotta be a way i can reassemble the filesystem on here. if i can figure out how it's striped, i could in theory create a 1gb file, copy all the chunks in, and then loopmount the file
+[09:21] <p896gbm> i mean the data is all there, it's mountable *somehow*
+[09:21] <ikonia> p896gbm: why does there have to be a way ?
+[09:21] <p896gbm> i'm not sure why i need the hardware. the hardware is dead
+[09:21] <p896gbm> ikonia: there has to be a way because the drives are fine, it's the controller that died
+[09:21] <ikonia> p896gbm: you need the hardware as it knows and understands (and builds and presents) the finished array
+[09:22] <p896gbm> k
+[09:22] <ikonia> p896gbm: yes, but the controller is what makes the raid array, if that is dead a different raid technology doesn't understand how it's built
+[09:22] <p896gbm> ikonia: yes i know that, that's why i figured i would start by assuming it's raid-0
+[09:22] <p896gbm> isn't raid-0 a standard? different controllers would mount it the same way, no?
+[09:22] <ikonia> p896gbm: assuming it's raid-0 is pointless if you don't know how it's built
+[09:23] <p896gbm> k
+[09:23] <ikonia> p896gbm: raid 0 is a "standard" not an implimentation, different methods/controllers build and present it in different ways
+[09:23] <p896gbm> k
+[09:24] <greenIT> i need javaME on my ubuntu machine... how can i install it?
+=== red_ is now known as red
+[09:24] <p896gbm> can't i start by just guessing a few common ways it would assemble it? there's gotta be a few 'most common' ways the data is striped across the drives
+[09:24] <ikonia> greenIT: download it from Oracle and install it
+[09:24] <p896gbm> if i can force mdadm to mount it with different striping parameters i can test each one to see if it's a valid filesystem
+[09:24] <ikonia> p896gbm: no, you're not listening
+[09:25] <greenIT> ikonia: isn't there only a version for windows?
+[09:25] <ikonia> p896gbm: the raid array is built with a software chip on that hardware controller, other software components don't know how that software works
+[09:25] <ikonia> greenIT: contact Oracle and ask for support
+[09:25] <greenIT> ikonia: ok, thx
+[09:25] <Talicom> greenIT: http://ubuntuforums.org/showthread.php?t=137149
+[09:25] <p896gbm> yeah i know ikonia, but i can *guess* how it works
+[09:25] <p896gbm> that's what i'm trying to do
+[09:25] <ikonia> p896gbm: no "you" can't
+[09:25] <ikonia> p896gbm: the software can't
+[09:26] <greenIT> yay, thx Talicom :)
+[09:26] <p896gbm> i don't want the software to guess, *I* want to guess. i want to tell it different ways to stripe the data and test whether it's a valid filesystem
+=== tobias is now known as Guest92453
+[09:26] <ikonia> p896gbm: mdadm has no idea how LSI presents array, so asking mdadm to build an LSI controlled array is like asking a someone who doesn't speak English to write shakespear
+[09:26] <cast> MACscr: actually, you can
+[09:27] <ikonia> p896gbm: it's not telling it how to stripe, guessing it's raid-0 is fine, but the layout of the disks and how it's assembled and intergrity depends on the device that built it
+[09:27] <p896gbm> k
+[09:27] <ikonia> p896gbm: you need the same tool that built it to re-assemble it
+[09:27] <MACscr> cast: prove it? ive never seen such a thing without an emulator or virtualization
+[09:27] <MACscr> or a "container"
+[09:27] <cast> chroot
+[09:28] <MACscr> but that would mean they would have to share the same kernel, correct?
+[09:28] <cast> yip, sure
+[09:28] <cast> what kernel does android use again?
+[09:29] <cast> one wouldn't use chroot, but....i think you're getting my point
+[09:29] <p896gbm> ikonia: i'm not convinced of that. i'm sure it's simple, because it looks simple. i can even mount the first drive alone, and see the directory structure. this is a simple ext2 filesystem
+[09:29] <cast> for what its worth, linux can run under linux as a process, aka UML
+[09:29] <[deXter]> cast: depends on the android version. for instance mine is running 2.6.37.1
+[09:29] <p896gbm> ikonia: if i fsck the first drive, it recognizes the ext2 filesystem and can even repair it. it says the filesystem is twice the size of the drive
+[09:29] <ikonia> p896gbm: if you can mount the first drive, it probably isn't a raid disk
+[09:30] <cast> [deXter]: right, so it uses linux :P
+[09:30] <ikonia> p896gbm: if it was a raid device you wouldn't be able to mount the first disk unless it was raid 1 possibly
+[09:30] <wonderwal-> hi which kernel does 10.10 server come with?
+[09:30] <wonderwal-> !kernels
+[09:30] <cast> with linux its pretty trivial to seperate OS instances with the likes of vserver and openvz,
+[09:30] <MACscr> cast: yeah, i see your point. Im not a big fan of chroot setups
+[09:31] <llutz_> wonderwal-: 2.6.35-22
+[09:31] <p896gbm> ikonia: ok. so it's probably not raid then. it's something simpler. do you think the controller just put the two drives back to back? maybe i should just cat the two devices together into a file and try loopmounting it
+[09:31] <cast> though...back to the original question, i was more thinking it would be feasible to install android on a piece of similar hardware, such as an ARM laptop
+[09:32] <wonderwal-> llutz_: whats the -22 for? theyre on 2.6.35.11
+[09:32] <ikonia> p896gbm: no, I don't think the second drive was but back to back as that would be raid 1 and I don't think there is any raid on it
+[09:32] <cast> ikonia: that would not be raid 1
+[09:32] <p896gbm> ikonia: well raid-1 would replicate the data, no? there's no replication here
+[09:32] <ikonia> sorry raid 0
+[09:32] <ikonia> typo, had raid 1 on the brain
+[09:32] <cast> ikonia: that would not be raid 0, either, unless you set the strip size to the size of the disks
+[09:32] <p896gbm> i thought raid-0 striped it for better speed
+[09:33] <ikonia> cast: I agree it would not be raid 0, which is what I said
+[09:33] <p896gbm> cast: do you know if i can tell mdadm, or some other tool, to mount it as a raid array with the strip size == the size of the disks?
+[09:33] <ikonia> p896gbm: yes, but to make two disks presented as one file system would have to be done through some sort of raid or lvm
+[09:33] <cast> p896gbm: rather than catting the two devices together you could suggest using a dmsetup to create a virtual device that was the concat of the two drives
+[09:33] <MACscr> grrr, this audio thing is driving me crazy. Why the heck is ubuntu not switching my sound output back to the correct device. its showing that it switched, yet all apps still use hdmi
+[09:33] <ikonia> p896gbm: 1.) there is no raid used on your disks 2.) you cannot tell mdadm to build arrays out of other raid technology disks/arrays
+[09:33] <p896gbm> ikonia: is there a linux tool to do that in software? or should i try telling my motherboard it's a raid array and booting from a livecd?
+[09:34] <ikonia> p896gbm: its NOT a raid array
+[09:34] <MACscr> here is some of my pacmd output: http://pastebin.com/9pxHujxf. Any help is sincerely appreciated
+[09:34] <p896gbm> cast: that would be great. so dmsetup will let me do that?
+[09:34] <p896gbm> cast: k i will try that
+[09:34] <wonderwal-> what is kernel 2.6.35-22 ?  is that 2.6.35.0 with patches or something?
+[09:34] <cast> ikonia: actually, you can, mdadm surprising supports non-mdadm native arrays...it won't support all the various HW and fake and soft raid formats, but i believe it supports a few
+[09:35] <ikonia> cast: it never works
+[09:35] <wonderwal-> :'(
+[09:35] <ikonia> cast: the main ones, LSI/3com/HPciss it never works due to the private region data not being accessible
+[09:35] <ikonia> or in an understan
+[09:35] <ikonia> oops
+[09:36] <cast> that private region is enforced by the raid controller :P if you have the raid controller, you'd use that for raid...
+[09:36] <ikonia> cast: totally agree
+[09:37] <cast> it is annoying how some raid cards don't obviously have a way to just act as a normal sata/sas controller
+[09:38] <cast> p896gbm: dmsetup will, using linear mappings. the devicemapper is how cryptsetup/mdadm/lvm implement their functionality
+[09:38] <ikonia> p896gbm: why do you think the 2 disks where used together
+[09:38] <ikonia> p896gbm: what makes you believe that the 2 disks are somehow linked ?
+[09:38] <ali___> hi
+[09:38] <cast> p896gbm: actually, the first example in man dmsetup is joining two disks together :D
+[09:38] <ali___> i added utf8 to my sda1 on the fstab
+[09:38] <ali___> but now pc doesnt start
+[09:39] <bbalajirao> hello all. How do I see the bookmarks stored in my UbuntuOne account
+[09:39] <ali___> i m on the black scren with irssi
+[09:39] <cast> ali___: oh, so do a mount -a and report back the error
+[09:39] <ali___> i tried nano /etc/fstab but error says
+[09:39] <ali___> file read-only bla bla
+[09:39] <ali___> how can i delete this word on fstab
+[09:39] <ikonia> ali___: then re-mount it read/write - blah blah blah
+[09:39] <ali___> i also try use sudo and chmod
+[09:40] <YankDownUnder> ali___, "sudo nano /etc/fstab" => make a backup first.
+[09:40] <ikonia> YankDownUnder: it's read only, he can't
+=== bbalajirao is now known as heyboy
+[09:40] <gaelfx> what can I do to fix choppy playback using vdpau in smplayer?
+[09:40] <heyboy> Hello. I want to see what bookmarks are stored in UbuntuOne. How do I do it?
+[09:41] <heyboy> My account on UbuntuOne
+[09:41] <p896gbm> cast: do you have much experience with the table format to dmsetup? the man page isn't super clear
+[09:41] <dustin_> pms ,how do you commandline update
+[09:42] <p896gbm> cast: nm gonna try a couple things
+[09:43] <usuario> OLAAA
+[09:43] <usuario> SNVH
+[09:43] <usuario>  QUE ASE
+[09:43] <YankDownUnder> !es | usuario
+[09:43] <ubottu> usuario: En la mayoria de canales de Ubuntu se habla solo en ingles. Si busca ayuda en espanol o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[09:43] <MACscr> how do i know if pulseaudio or Alsa is being used?
+[09:43] <PATRI> OLAAAAAAAAAAAAAAAAAA
+[09:44] <PATRI> MAE KE NO ABLA NADIE IO
+[09:44] <heyboy> the UbuntuOne Dashboard page (displayed after logging in) shows tabs- Dashboard, Files, Notes, Contacts & Account.
+[09:44] <heyboy> nothing related to Bookmarks.
+[09:44] <Gnea> !caps | PATRI
+[09:44] <ubottu> PATRI: PLEASE DON'T SHOUT! We can read lowercase too.
+[09:44] <heyboy> I am lost
+[09:44] <PATRI> MAE KE NO ABLA NADIE IO
+[09:44] <cast> p896gbm: theres some documentation in the linux tarball, too
+[09:44] <PATRI> EN  ESPANOL IJO
+[09:45] <Jordan_U> !es | PATRI
+[09:45] <ubottu> PATRI: En la mayoria de canales de Ubuntu se habla solo en ingles. Si busca ayuda en espanol o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[09:45] <Gnea> !it | PATRI
+[09:45] <ubottu> PATRI: Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi <unconvertable> /join #ubuntu-it <unconvertable> senza virgolette)
+[09:45] <iqpi> PATRI: este canal es en ingles, como pretendes que te hablen en espanol?
+[09:45] <usuario>  HAHAHA
+[09:45] <iqpi> PATRI: ademas, no hace falta que GRITES
+[09:45] <usuario>  YO NO TI GRITYANDO
+[09:46] <p896gbm> cast: the part i'm confused about is that each entry in the table wants me to specify the logical start/end sectors. how do i know how big a sector is? isn't this filesystem dependent?
+[09:46] <usuario> VB
+[09:46] <vadimkolchev> hi everyone
+[09:46] <iqpi> usuario: escribir en mayusculas es gritar en un chat (to write with caps is the same as being shouthing)
+[09:46] <usuario> HOLAA
+[09:47] <usuario> ME CAGO EN VUSTROS MUERTOS IJOS DE PUTA MARICONES
+[09:47] <p896gbm> cast: nevermind, it seems to imply 512 bytes is the sector size. gonna try it
+[09:48] <Gnea> !caps | usuario
+[09:48] <ubottu> usuario: PLEASE DON'T SHOUT! We can read lowercase too.
+[09:48] <MACscr> i thought this channel was english only
+[09:48] <Jordan_U> MACscr: It is.
+[09:48] <usuario> ME CAGO EN VUSTROS MUERTOS IJOS DE PUTA MARICONES' <unconvertable>
+[09:48] <usuario> ESPAOLEEEES
+[09:48] <Gnea> usuario, PATRI: we know you're the same person.
+[09:48] <MACscr> then someone shut that guy up
+[09:48] <usuario> PORFAVFORRRRRRRRRR
+[09:48] <gaelfx> !es | usuario
+[09:48] <ubottu> usuario: En la mayoria de canales de Ubuntu se habla solo en ingles. Si busca ayuda en espanol o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[09:48] <iqpi> usuario: entrando en un canal en el que casi nadie te entiende a insultar, y encima escribiendo como nino de 5 anos, demuestra que tu grado de madurez es de prenatal
+[09:48] <usuario> IJOS DE PUTAAAAAAAAAAAAAAAAA
+[09:48] <cast> p896gbm: you can blockdev --getbsz to see what it is
+[09:49] <Gnea> usuario: you'll type /join #ubuntu-es and do it now.
+[09:49] <llutz_> iqpi: stop arguing with a troll
+[09:49] <gaelfx> that's a pretty good way to get blocked from the channel
+[09:49] <usuario> GRADOS DE MADURES
+[09:49] <usuario> EL DE TU PUTA
+[09:49] <usuario> MDRE+<
+[09:49] <usuario> SO MARICOM
+[09:49] <MACscr> thanks
+[09:50] <gaelfx> thanksomuch
+[09:50] <oopepe> Hi, where is a good place to store my custom iptables script in ubuntu so that it gets loaded on server reboot? Im running ubuntu server 10.04. I dont want to use ufw.
+[09:50] <p896gbm> cast: cool. the filesystem size (indicated when i fsck it) seems to imply that the number of sectors used is slightly less than the number on the drive. blockdev gives me 976773105, but if i work out half the filesystem size it's 976768032. i'll try it both ways
+[09:50] <MACscr> hmm, could my pulseaudio be failing and alsa is being used instead? Seems none of my pulseaudio options are working
+[09:51] <MACscr> i cant even use the master volume controls (aka, they dont apply)
+[09:51] <Gnea> oopepe: I just save it somewhere like this:  iptables-save > /etc/network/firewall  then call it at boottime in /etc/network/interfaces like this:  post=up iptables-restore < /etc/network/firewall
+[09:51] <Gnea> oopepe: er, post-up
+[09:51] <YankDownUnder> oopepe, You can use /etc/rc.local => put the contents of the script there, or call it from that script.
+[09:51] <oopepe> Gnea: Ok, thank you
+[09:51] <oopepe> Thank you
+[09:51] <Gnea> MACscr: the loss of pulseaudio can never be a bad thing
+[09:52] <cast> i like the interfaces idea :)
+[09:52] <MACscr> Gnea: isnt it what ubuntu uses by default? id prefer to stick with it
+[09:52] <iDope> hi guys, I just installed Ubuntu 10.10 and I want to connect to a Wireless network using 802.1X Authentication with WEP (Dynamic WEP). I only see WEP WPA Passhprase WPA2 personal in Wireless Authentication options when I try to set the security parameters in Network Manager. What do I need to install to get the 802.1x auth option available
+[09:52] <MACscr> plus i dont like that none of my management software work
+[09:52] <MACscr> aka, sound contorls
+[09:53] <MACscr> controls
+[09:53] <MACscr> how do i know which is being used?
+[09:53] <Gnea> MACscr: alsa is the driver that makes the sound hardware work - pulseaudio is nothing more than an application layer that attempts to form a mold around it. alsa has historically been better, is better, and will always be better than using a sound daemon. pulse works good for some hardware situations, though.
+[09:54] <Talicom> I am dual booting with windows 7. how would i be able to mount the partition that my windows files are in on startup?
+[09:54] <erUSUL> !ntfs | Talicom
+[09:54] <ubottu> Talicom: To view your Windows/Mac partitions see https://help.ubuntu.com/community/AutomaticallyMountPartitions - For write access, see !NTFS-3g or !FUSE
+[09:54] <Gnea> MACscr: you can easily control alsa (And have more fine-tuned control) by using alsamixer
+[09:54] <MACscr> Gnea: everything worked fine until a yesterday when i changed the default output to my hdmi temporarily
+[09:54] <Talicom> thanks
+[09:54] <llutz_> oopepe: use iptables-save / -restore and place it in /etc/network/if-up.d  if-down.d
+[09:54] <MACscr> now i cant change it back
+[09:55] <Gnea> MACscr: aaah, so was that just for audio or video and audio or just video?
+[09:56] <MACscr> Gnea: well i have changed it back and it shows correctly and when i run tests within the ubuntu sound utility, it works correctly, but even after rebooting, every app uses my hdmi
+[09:56] <bullgard> Is there a Ubuntu command to print the known hosts in the LAN?
+[09:57] <Gnea> MACscr: if you open the sound preferences, what do you have selected for your output?
+[09:57] <llutz_> bullgard: you could use nmap -sP <network>
+[09:57] <MACscr> analog stereo (aka, my headset)
+[09:57] <Gnea> MACscr: okay, keeping the pref window open, what other sound apps are you trying to use?
+[09:58] <yeah> i m on blackscreen
+[09:58] <yeah> but it must be ali@ali-netbook but i m on ali@locakhost
+[09:58] <yeah> so i cant change anything
+[09:58] <MACscr> Gnea: been using totem for testing. But even on boot, the ubuntu startup music is using hdmi
+[09:59] <fredrik_> When I log in to my ubuntu there is something wrong with compiz and/or window manager. My awn dock is messed up and windows misses the frame. My solusion is to load "compiz fusion icon" and threw that "reload window manager". How can I resolve this?
+=== ogra_ is now known as ogra
+[10:00] <Gnea> MACscr: okay, would you please separately pastebin the output of the files contained in /etc/pulse/ ?
+[10:00] <YankDownUnder> fredrik_, You can add the "fusion-icon" to your startup programs (SYSTEM => PREFERENCES => START UP APPLICATIONS)
+[10:00] <satya> could not create directories for the normal users
+[10:00] <satya> after creating the users with useradd
+[10:01] <MACscr> Gnea: http://pastebin.com/qh326X4q
+[10:02] <satya> could not create directories for the normal users
+[10:02] <satya> after creating the users with useradd
+[10:03] <Gnea> MACscr: I meant the contents of each file, please
+[10:03] <MACscr> Gnea: the files havent changed as you can see since last year. So obviously its not a change within those files
+[10:03] <MACscr> that caused the problem
+[10:04] <fredrik_> YankDownUnder, Yes, I have done that now. But still. I have to do a reload everytime I start my computor. Why doesn't  compiz load correctly? Or most important. How can I make this happend automaticaly?
+[10:04] <Gnea> MACscr: what about in ~/.pulse/ ?
+[10:05] <YankDownUnder> fredrik_, Make sure you have the settings correct for "fusion-icon" - as well, you could always use gconf-editor to change the window manager as well.
+[10:05] <terrid> hi all
+[10:05] <terrid> I'm having a problem trying to install APC on my local machine
+[10:05] <Gnea> terrid: what do you mean by 'APC'?
+[10:06] <MACscr> Gnea: you need to see the contents of each of those files in .pulse?
+[10:06] <MACscr> brb, going to try something
+[10:06] <terrid> Gnea: http://php.net/manual/en/book.apc.php
+[10:07] <Gnea> MACscr: yes, please. it's easy: sudo apt-get install pastebinit
+[10:08] <Gnea> terrid: what's the problem?
+[10:09] <andreylosev> are the floodbots going through a coup?
+[10:09] <YankDownUnder> I think they're fighting.
+=== raya is now known as raia
+[10:10] <andreylosev> yeah, and FloodBot2 is the agessor
+=== raia is now known as Raia
+[10:10] <fredrik_> YankDownUnder, I just checked the "default window manager" with gconf-editor. It is set to "compiz" (exaclty like the attribute "current". Still.. everytime I log in to ubuntu the window manager doesn't load correctly
+[10:10] <YankDownUnder> fredrik_, As well, did you setup "fusion-icon" to load in your startup-applications?
+[10:11] <fredrik_> nope. Do I have to do that? Thought that this was just a "launchbar" for some compiz-applicaitons
+[10:12] <YankDownUnder> fredrik_, Give it a go - and test it - lemme know how it goes mate. (Missus just got home)
+[10:12] <fredrik_> ok.. I'll do that!
+[10:12] <fredrik_> thanks
+[10:14] <SPaz> Hi
+[10:16] <MACscr> Gnea: deleting the .pulse audio folder and rebooting resolved the issue. woo hoo =P
+[10:16] <heyboy> hi
+[10:16] <rockman125> if i want to chroot on my file system i just need to do like this chroot and the folder where my / is mounted?
+[10:17] <Israfel-Laptop> UBuntu seems to have the british spell checker enabled by default. How do I fix that?
+[10:17] <erUSUL> rockman125: from a livecd? i would bind mount /dev/, /sys/ and /proc/ before chrooting
+[10:18] <erUSUL> rockman125: i.e <unconvertable> sudo mount --bind /dev/ /mount/point/dev/ <unconvertable> and the ssame for the other two
+=== Dementio is now known as Dem|away
+[10:18] <rockman125> ah and then chroot?
+[10:19] <rockman125> after mounting the other two also what would be the command to chroot
+[10:20] <erUSUL> rockman125: the command is <unconvertable> sudo chroot /mount/point/ <unconvertable>
+[10:20] <p896gbm> cast: ok, so i figured out how to properly mount this thing. however the second device seems to be reporting its size as 160gb rather than 500gb. turns out maybe this drive is bad after all.
+[10:20] <Gnea> MACscr: oh, okay lol
+[10:20] <rockman125> good i will do it ty erUSUL
+[10:20] <rockman125> what does this error means >> Error unpacking rpm package net-tools-1.60-81.el5.x86_64
+[10:20] <rockman125> error: unpacking of archive failed on file /bin/netstat: cpio: rename
+[10:20] <MACscr> Gnea: yeah, i gave up as i had been working on the issue for 45 mins and just said screw it, lets try this =P
+[10:20] <erUSUL> rockman125: dunno; ubuntu does not use rpm
+=== Freejack is now known as Guest3098
+[10:21] <Israfel-Laptop> Anyone else annoyed that the default spell checker is using the british english spelling?
+[10:21] <rockman125> alright ty erUSUL for the commands :)
+[10:21] <ylmfos> hi
+[10:21] <cast> given the queen is from britain, no
+[10:22] <satya> hello
+[10:22] <satya> newly created users, having the shell as /bin/sh. why is it happened?
+[10:24] <fredrik_> YankDownUnder, Nope. It did not help. Compiz-fusion Icon starts but I still have to right-click on it and choose "reload window manager"
+[10:25] <satya> in my /etc/passwd file, users have the shell /bin/sh. i created the users with useradd
+[10:25] <ylmfos> what labs dos it need in osd lyrics?
+[10:26] <satya> if i su username, pwd= /
+[10:26] <ylmfos> i can't run it
+[10:27] <Gnea> satya: what's the problem?
+[10:28] <erUSUL> satya: check /etc/adduser.conf
+[10:28] <bullgard> Is there a Ubuntu command to print the known hosts in the LAN?
+[10:29] <Gnea> bullgard: well you could ping the broadcast and then look at the arp table
+[10:29] <fredrik_> Anyone that knows how I can fix so I don't have to reload the window manager everytime I log in?
+[10:29] <[biabia]> in ubuntu software center i downloaded the gmail app. when i open links in gmail, what program are they running in
+[10:30] <llutz_> bullgard: you still could use nmap -sP <network>
+[10:30] <blagorod> blagorod/nick
+[10:30] <blagorod> username/blagorod
+[10:30] <blagorod> hi to all
+[10:30] <jd> hi
+[10:31] <blagorod> hows you?
+[10:31] <TheSarge> how can I change the port the built in RDP server uses?
+[10:32] <bullgard> Gnea: What do you mean by "ping the broadcast"?
+[10:33] <Gnea> bullgard: get your broadcast address from ifconfig, then: sudo ping -b broadcast-ip
+[10:33] <p896gbm> cast: do you know why fdisk might show the wrong size? my bios says the correct size, 500gb, and does not signal any SMART failure. fdisk seems to think it's 160 GB
+[10:33] <Gnea> bullgard: then look at the arp table: arp -a
+[10:33] <p896gbm> cast: and when i try to mount with dmsetup it says the device is not big enough
+[10:33] <cast> p896gbm: what does blockdev think?
+[10:34] <Gnea> bullgard: nmap could work too, you might have false positives using both so they are good together
+[10:34] <cast> p896gbm: or the line in dmesg for that matter
+[10:34] <_Rix> guys i have a question
+[10:34] <_Rix> will it blend
+[10:35] <Phlosten> _Rix: always
+[10:35] <p896gbm> blockdev says 160041885696 == 160 gb exactly (not 166, slightly less than a third), and dmesg says the same, 160gb
+[10:35] <FrEaKmAn_> hi.. I have windows7 and ubuntu with dual boot.. today I started my PC and grub boot menu wont show up..
+[10:35] <p896gbm> very strange
+[10:35] <FrEaKmAn_> before that menu there is a new message but I cant read it because it disappers really fast
+[10:36] <FrEaKmAn_> any ideas how I could read it
+[10:36] <erUSUL> FrEaKmAn_: what is showing up instead?
+[10:36] <FrEaKmAn_> erUSUL, nothing...
+[10:36] <FrEaKmAn_> just that underscore blinks...
+[10:36] <TheSarge> Can anyone tell me how I can change the port the built in RDP server uses please?
+[10:36] <erUSUL> FrEaKmAn_: so a black screen? you boot directly into ubuntu? into windows? the machine explodes?
+[10:36] <p896gbm> cast: so both blockdev and dmesg say 160gb. what do you think? is the device just busted?
+[10:37] <FrEaKmAn_> erUSUL, no. I dont boot into anything.. because grub menu doesnt show up
+[10:37] <cast> p896gbm: its an interesting way for a device to break wouldn't you say
+[10:37] <erUSUL> FrEaKmAn_: i would boot into a livecd to check that the disk is ok; mount partitions and see if everything is still there and finally reinstall grub
+[10:37] <erUSUL> !grub2 | FrEaKmAn_
+[10:37] <ubottu> FrEaKmAn_: GRUB2 is the default Ubuntu boot manager since 9.10 (Karmic). Lost GRUB after installing Windows? See https://help.ubuntu.com/community/RestoreGrub - For more information and troubleshooting for GRUB2 please refer to https://help.ubuntu.com/community/Grub2
+[10:37] <p896gbm> cast: i agree, heh. i'm installing smartmontools
+[10:38] <cast> p896gbm: so whats written on the drives label? :P
+[10:38] <blagorod> can somebody tell me how to install 3g modem driver on ubuntu 10.04? HP pavilion dm3 1010
+[10:39] <p896gbm> cast: shit, i think i'm retarded. this isn't even the right device
+[10:39] <p896gbm> cast: i have so many damn drives plugged into this computer now
+[10:39] <TheSarge> No one knows how to change the RDP port?
+[10:39] <FrEaKmAn_> erUSUL, Im doing that right now.. everything mounts great.. btw are there any hd diagnostic tools in ubuntu?
+[10:40] <erUSUL> FrEaKmAn_: yu can use Admin>disk utilitie and check drive health ( is smart test )
+[10:40] <erUSUL> you*
+[10:40] <gryffongrey> ello
+[10:41] <theos>  hi :) is there a way to use m4b files in ubuntu?
+[10:41] <p896gbm> cast: ok i got it. it remapped it to sdb, not sde, which is why my fstab was all fucked when i booted with these drives in it. smartctl says it's fine, blockdev says it's 500gb, fdisk says there's no partition table (which is correct). this is promising
+[10:41] <gryffongrey> sudo make me a sandwich
+=== sre-su_ is now known as sre-su
+[10:42] <cast> p896gbm: ahhh. linux device enumeration is often a PITA
+[10:42] <theos> :|
+[10:42] <erUSUL> theos: http://robert.penz.name/94/convert-m4b-to-ogg-on-linux/
+[10:43] <p896gbm> cast: yeah. i switched up my fstab to use all uuids
+[10:43] <gryffongrey> @theos - vlc
+[10:43] <FrEaKmAn_> erUSUL, actually.. I cannot mount ubuntu partition..hm
+[10:43] <theos> erUSUL, thanks :)
+[10:43] <b0tz> Hi, I accidently cleared my package cache using ubuntu tweak, I forgot I was supposed to make a APTonCD backup before I did that. when i reload the package cache in aptoncd it doesnt find anything. Can I make a cache again of all apt-installed packages for aptoncd?
+[10:43] <TheSarge> Does anyone know the default RDP port in Ubuntus RDP client?
+[10:43] <TheSarge> or how to change it?
+[10:43] <carrera> hi
+[10:43] <erUSUL> FrEaKmAn_: check it with gparted 8 or directly with e2fsck in command line )
+[10:44] <cast> b0tz: i don't know what aptoncd is, but unlikely, the debs don't exist on your system now that the cache is cleared
+[10:44] <b0tz> anyone have any ideas?
+[10:44] <b0tz> Yeah thats what i figured
+[10:44] <mah454> who i can send file.gz with mail command ?
+[10:44] <b0tz> But I mean theres still installed versions
+[10:44] <cast> b0tz: there is no way to work backwards and create them from an installed set of packages
+[10:44] <b0tz> so i was hoping i could just remake the cache
+[10:44] <b0tz> Grrrr...
+[10:44] <TheSarge> wow big help here..
+[10:44] <b0tz> AptonCD lets you 'burn' a iso of your currently cached apt installed stuff so you can do an easy restore of them
+[10:45] <b0tz> This sucks..
+[10:45] <erUSUL> TheSarge: try another rdp client?
+[10:45] <erUSUL> !find rdp
+[10:45] <ubottu> Found: freerdp-dbg, freerdp-x11, gnome-rdp, libfreerdp-dev, libfreerdp-plugins-standard, libfreerdp0, libmcardplugin, librrdp-perl, libtext-recordparser-perl, remmina-plugin-rdp (and 6 others) http://packages.ubuntu.com/search?keywords=rdp&searchon=names&suite=maverick&section=all
+[10:45] <wildman> hello. I'm using 10.04 x86 here, and sometimes (cannot tell precisely when, it seems to be random), I get my USB pendrives mounted as read-only. if I disconnect them and reconnect them, they are mounted R/W again. Any ideas?
+[10:45] <erUSUL> !info tsclient
+[10:45] <ubottu> tsclient (source: tsclient): front-end for viewing of remote desktops in GNOME. In component main, is optional. Version 0.150-4ubuntu1 (maverick), package size 307 kB, installed size 592 kB
+[10:45] <cast> b0tz: that seems like a 1 line of sh, kind of program
+[10:46] <TheSarge> erUSUL: why? I want to use the built in one, surely there is some config file to change the port?
+[10:46] <b0tz> how would I do that
+[10:46] <b0tz> aptoncd makes it easy  anyways
+[10:46] <b0tz> Im screwed now that I cant remake my cache though. ffs..
+[10:47] <cast> you'd just burn /var/cache/apt/archives/ to cd/dvd
+[10:47] <erUSUL> TheSarge: maybe it accepts the common address format of  ip.of.machine.here:porthere
+[10:47] <b0tz> meh.
+[10:47] <wildman> forget it, I got my answer: the FAT FS is damaged :( thanks anyway :)
+[10:48] <blagorod> did somebody dance with 3g modem on ubuntu 10?
+[10:49] <gryffongrey> yep used sprint 3g modem- pretty straight forward
+[10:49] <llutz_> blagorod: works fine here with 10.10, aao 531h and internal Option-3G modem
+[10:49] <b0tz> cast what shell command would give you a list of all the currently installed ones then? atleast can have a list of them
+[10:49] <TheSarge> erUSUL: Its a server not a client...
+[10:49] <cast> dpkg --get-selections
+[10:49] <TheSarge> erUSUL: You are not understanding.. I am trying to change the listen port of the server
+[10:50] <takuan> damn
+[10:50] <takuan> when is this stupid fqdn issue with network-manager going to be resolved
+[10:50] <erUSUL> TheSarge: 11:43 < TheSarge> Does anyone know the default RDP port in Ubuntus RDP client? 11:43 < TheSarge> or how to change it?
+[10:51] <wildman> bye ppl, have a nice one
+[10:51] <blagorod> llutz_: Ive ubuntu 10.04
+[10:51] <erUSUL> TheSarge: i should have added emphasys on *client* above
+[10:51] <takuan> because of that my /etc/host file is not correct and openoffice.org takes 5 seconds extra to start up...
+[10:51] <b0tz> cash: is there a wya to take install out of the whole list without going down each line? im not too good with awk..
+[10:51] <b0tz> pretty much format it so its apt-get install :paste: able
+=== Freejack is now known as Guest56070
+[10:52] <blagorod> can I get working 3g modem in ubuntu 10.04?
+[10:52] <TheSarge> erUSUL: lol my bad
+[10:52] <llutz_> blagorod: usb-device?
+[10:52] <TheSarge> SERVER!
+[10:52] <TheSarge> 'lol
+[10:52] <blagorod> not, its internal\
+[10:52] <llutz_> blagorod: mine is internal too, but still usb. use" lsusb "
+[10:52] <erUSUL> TheSarge: ubuntu uses vnc not rdp if i recall correctly
+[10:53] <llutz_> blagorod: get the vendor/prod-id and do some googling with it
+[10:53] <mah454> How i can attach file with mail command ?
+[10:53] <TheSarge> erUSUL: Really? Its called remote Desktop...
+[10:53] <TheSarge> erUSUL: Its rdp
+[10:53] <erUSUL> TheSarge: either way i really dunno if you can chenge the port sorry
+[10:54] <TheSarge> erUSUL: Well it not connecting with the default.. you can change it. Just cant remember.
+[10:55] <Kiriko> hi guys! :)
+[10:55] <blagorod> thanx has installed lsusb but thinking its useless package
+[10:55] <witek> igkjfkgd
+[10:55] <witek> kjfkgjkdgd
+[10:55] <witek> kglgkdf
+[10:55] <witek> lkglfdgldkg
+[10:55] <FloodBot1> witek: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[10:55] <witek> kfgkfdlgkfdkgldfkglfdkglfdgklgdfkglfdglfdkgldkg
+[10:55] <DJones> witek: Please don't do that
+[10:55] <witek> ok
+[10:55] <blagorod> witek: are you drank?
+[10:55] <llutz_> blagorod: does it list your 3g-modem?
+[10:55] <witek> no i am not a drunk
+[10:56] <blagorod> witek: are you a narkoman?
+[10:56] <witek> :-)))
+[10:56] <toresbe> the noun and adjectives are different things
+[10:56] <witek> i am not a narkoman
+[10:56] <blagorod> witek: thats good
+[10:56] <Lint> request devoice
+[10:56] <witek> blagorod you are drunk ..?
+[10:56] <witek> :-)
+[10:57] <toresbe> blagorod: Eto slovo ne sushchestvuet v angliiskom yazyke :)
+[10:57] <takuan> anybody in here knows about fqdn and network-manager?
+[10:57] <blagorod> llutz_: how can I check it?
+[10:57] <llutz_> could someone please show witek the door?
+[10:57] <llutz_> blagorod: use "lsusb" and watch output
+[10:57] <witek> gawarisz pa ruski jazyk .?
+[10:57] <witek> :-)
+[10:57] <witek> \blagorad .:-)
+[10:57] <DJones> !pl | witek
+[10:57] <ubottu> witek: Na tym kanale uzywamy tylko jezyka angielskiego. Mozesz uzyskac pomoc w jezyku polskim na #ubuntu-pl.
+[10:57] <witek> ok
+[10:57] <Kiriko> I was trying to install the new Ubuntu 10.10 on my win xp sp3 as a dualboot, and i am having problems making the partition
+[10:58] <witek> what problem ..?
+[10:58] <witek> it is very simple
+[10:58] <Kiriko> it wont make the partition at all
+[10:58] <blagorod> witek: da im a russian
+[10:58] <Lint> who's 'it'?
+[10:58] <witek> hard drive i good.?
+[10:59] <Kiriko> yes it is in good condition
+[10:59] <Lint> also software cannot 'will to do', they are inanimate
+[10:59] <ech0Asus> helo
+[10:59] <witek> ok if hd is good condition
+[10:59] <Lint> which software do you use and what is error?
+[10:59] <witek> you have use a cfdisk an made partition
+[11:00] <tittn> hello can somebody help me get my vpn from my plesk panel working on ubuntu or have a guide or howto
+[11:00] <witek> probably table of patiton is fixed
+[11:00] <Kiriko> i only used the default setup that ubuntu has
+[11:00] <ech0Asus> i'm having an issue, my computer randomly freezes usually when playing a video fullscreen.. i'm thinkin somethin to do with the gfx driver. here is a pastbin of my lspci http://pastebin.com/jkm28TPR
+[11:00] <Lint> Kiriko, and...
+[11:00] <witek> use fdisk or cfdisk
+[11:00] <tittn> i mean connection not install :p
+[11:01] <bullgard> Gnea: '~$ arp -a; fritz.fonwlan.box (192.168.178.1) at 00:1c:4a:a:b:c [ether] on eth0'. May I conclude that there is only one known host in this LAN?
+[11:01] <blagorod> llutz_: Bus 007 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+[11:01] <blagorod> Bus 006 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+[11:01] <blagorod> Bus 005 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+[11:01] <blagorod> Bus 004 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+[11:01] <blagorod> Bus 003 Device 001: ID 1d6b:0001 Linux Foundation 1.1 root hub
+[11:01] <FloodBot1> blagorod: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[11:01] <blagorod> Bus 002 Device 002: ID 03f0:241d Hewlett-Packard
+[11:01] <blagorod> Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+[11:01] <Gnea> bullgard: well, as long as you run the command shortly after you run the ping command, it's possible
+[11:01] <blagorod> above is an output
+[11:02] <Gnea> blagorod: going to ask you to use http://paste.ubuntu.com, please
+[11:02] <rockman125> has anyone faced key press issue while on kvm using java?
+[11:02] <kyo> is there someone can solve problem of iptux?!
+[11:02] <bullgard> Gnea: Yes, I have run the command shortly after the ping command.
+[11:03] <llutz_> blagorod: google for "03f0:241d ubuntu" it should give you some info
+[11:03] <Kiriko> im going to try doing the setup again and see if it works
+[11:03] <blagorod> llutz_: this is an output of lsusb: http://paste.ubuntu.com/571049/
+[11:03] <Gnea> bullgard: okay, so now try nmap
+[11:03] <Gnea> bullgard: etherape is good, too
+[11:03] <ech0Asus> i have an on board video and pcie video adapter installed... should one be disabled some how and not seen in lspci?
+[11:04] <rockman125> has anyone faced key press issue while on kvm using java?
+[11:04] <Gnea> ech0Asus: only if you don't intend to use both
+[11:04] <zwamkat> Crew, what is the correct way to disable (by default) blanking/powersave on a console?
+[11:04] <Gnea> !repeat | rockman125
+[11:04] <ubottu> rockman125: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[11:05] <Gnea> rockman125: please wait at least 15 minutes before asking again. most of us keep timestamps.
+[11:05] <flor> hello, how can i set up an existing printer for printing via wlan modem?
+[11:05] <madstein> hey any one using arpon on a wifi network with 3 or more computers in it ?
+[11:05] <Gnea> flor: what's a wlan modem?
+[11:06] <Gnea> !ask | madstein
+[11:06] <ubottu> madstein: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[11:06] <madstein> cable modem if u are conected tru a cable WLAN
+[11:06] <madstein> ?
+[11:06] <madstein> gnea whats the idea?
+[11:07] <Gnea> madstein: the idea is, don't ask if anyone has done this or that, just ask your question about the problem you're having and we'll try to help
+[11:07] <blagorod> llutz:_ Ive working this
+[11:07] <blagorod> llutz_: Ive working this modem when I load from live CD
+[11:07] <flor> Gnea, its a wlan device that connects with dsl for internet access. it's got an additional function, printing via wlan: I plug the printer into the wlan-modem. and should be able to print, but i'm Not ;-)
+[11:08] <blagorod> llutz_: can I copy that driver to my OS?
+[11:08] <Gnea> flor: okay, well just to be clear here, it's just a dsl modem that allows computers to connect wirelessly to it?
+[11:09] <flor> Gnea, yep, exactly.
+[11:09] <tittn> anybody know good tool to connect to my plesk vpn from ubuntu im having problems setting it up with the tools available in software manager
+[11:09] <Gnea> flor: ah okay, so if you plugged the printer in and if it has an IP, you should be able to set it up using the printing configuration tool
+[11:09] <Gnea> !printer | flor
+[11:09] <ubottu> flor: Printing in Ubuntu is done with cups. See https://help.ubuntu.com/community/Printers - https://wiki.ubuntu.com/HardwareSupportComponentsPrinters - http://linuxprinting.org - Printer sharing: https://wiki.ubuntu.com/NetworkPrintingFromWindows
+[11:09] <alp82> i am searching a good uml editor
+[11:10] <Gnea> flor: just make sure you tell it that you're looking for a network printer
+[11:10] <alp82> doesnt matter if online or desktop or eclipse/netbeans plugin
+[11:10] <alp82> it just has to have a nice user interface
+[11:11] <bullgard> llutz_: I have cursorily read 'man nmap'. But I still do not know what to substitute for <network> in my case.
+[11:12] <flor> Gnea, trying out something
+[11:15] <Back4More420> where would I find the drivers for wireless card in this OS to copy and use with the linux I want to use?
+[11:16] <Jonii> Wubi installer left my windows booting thing with this annoying "select if you want to use ubuntu or windows", where ubuntu-choice doesn't work, and windows ubuntu uninstaller doesn't work. How do I destroy that manually?
+[11:16] <Jean1> hi, I keep getting 'access denied' if i want to delete something in /var/www, I guess I have to use chown, but with what parameters ? Thanks
+[11:17] <Erdj> ubuntu spanish
+[11:17] <Erdj> <unconvertable> ?
+[11:17] <Jonii> Wubi uninstaller says something like "py<something> not found"
+[11:17] <bullgard> Back4More420: Please specify your operating system and your wireless card so that people can help you.
+[11:17] <Back4More420> I haxw ubumtu 10.4
+[11:18] <Back4More420> 64 bit
+[11:18] <spidla> Jonii, you probably need to restore your Windows master boot record
+[11:18] <flor> Gnea, i've done the following: (1) duplicated my existing printer in -> system -> printers. (2) changed settings: device-uri  -> change -> network-printer -> lpd/lpr-host (3) entered as host: socket://<IP-address> (4) sEARCH for printers/printer queues. it didn't work
+[11:18] <Gnea> Back4More420: are you just trying to get wireless to work correctly in ubuntu?
+[11:18] <Jonii> spidla, ok, how? Also, where did wubi-installer put its stuff?
+[11:19] <MegaHerz> Hi all. How to create screencast on Ubuntu? Two apps which I found in Applications and then tried - failed to do anything. One creating gif's which I don't and another (Istanbul) - just hangs
+[11:19] <spidla> Jonii, you can use Windows install CD to reach recovery console
+[11:19] <shal3r> http://pastebin.com/mWuKXmzx - Any ideas how to fix that?
+[11:19] <spidla> Jonii, there is an option to recover MBR
+[11:19] <Gnea> flor: I see, what's the make/model of the printer?
+[11:19] <Jonii> I don't have Windows install CD
+[11:19] <flor> Gnea, it's a kyocera mita 1020 d
+[11:19] <Back4More420> no I have it working in this version but want to get it working in the UE 2.8
+[11:19] <Jean1> hi, I keep getting 'access denied' if i want to delete something in /var/www, I guess I have to use chown, but with what parameters ? Thanks
+[11:20] <Gnea> Back4More420: what's UE?
+[11:20] <Jonii> Also, with dual boot ubuntu thing, wouldn't MBR-recovery destroy my ability to boot into Ubuntu?
+[11:20] <Back4More420> ultimate eddition 2.8
+[11:20] <spidla> Jonii, which version of Windows do you have ?
+[11:20] <Jonii> spidla, Vista
+[11:21] <penalvch> Jean1: You could also try at the Terminal sudo rm (file)
+[11:21] <dr0id> any difference between rm -f -r folder and rm -fr folder ?
+[11:21] <Back4More420> if I can get the drivers from this OS I could then put them in the UE
+[11:21] <Jean1> penalvch: I don't want to use sudo all the time
+[11:22] <spidla> Jonii, I thought that you want to get back to Windows install only . Then the proble is probably in the GRUB loader configuration. Try to boot from Ubuntu live-cd and then you can access your Ubuntu partition and repair GRUB
+[11:23] <Jonii> spidla, hmm... GRUB is this Ubuntu-related OS-choice-manager-thing?
+[11:23] <Lint> dr0id, not for rm
+[11:23] <spidla> Jonii, well I assume you are using GRUB as you boot-loader ... it is a deafult one in Ubuntu
+[11:23] <dr0id> Lint: maybe some speed differencee ? :)
+[11:23] <p896gbm> hey guys, if i use dmsetup to assemble a drive that has a partition table in it, how do i then mount one of the partitions?
+[11:23] <Lint> dr0id, lol no
+[11:24] <dr0id> ok
+[11:24] <Jonii> If it is, it works just fine. It's just that when I choose to start windows from it, Windows, before launching, asks if I want to launch Windows Vista or Ubuntu(this Wubi-installation of Ubuntu doesn't work)
+[11:24] <dr0id> Lint: I thought -fr would be faster than -f -r :)
+[11:24] <Jonii> And I want to get rid of this Wubi-installation entirely
+[11:25] <Gnea> Back4More420: I think you'll want to ask in #ultimateedition
+[11:25] <spidla> Jonii, ouch I understand... this may be the result of chainloading process used while booting Windows from GRUB
+[11:25] <Back4More420> Thank You @Gnea
+=== nikhil_ is now known as nikhil_away
+[11:26] <spidla> the second menu is probably installed in windows partition .. not in MBR where the GRIB lives
+[11:26] <spidla> *GRUB
+[11:26] <Back4More420> this is the OS I want drivers from, where are they stored?
+[11:26] <Gnea> flor: can you print if you connect the printer directly?
+[11:27] <Gnea> Back4More420: they're not really 'stored' anywhere, it's part of the kernel usually, you'll need to identify your wifi card and which driver it's supposed to use and find a suitable package or driver in UE
+[11:28] <takuan> anybody in here knows about fqdn and network-manager?
+[11:29] <Back4More420> Gnea, Thanks
+[11:29] <tittn> !openvpn
+[11:29] <ubottu> OpenVPN is a vpn technology in Ubuntu, sudo apt-get install openvpn and then see http://openvpn.net/ and see the documentation "HOWTO" noting you have already installed it. ;-) It rocks!
+[11:29] <spidla> Jonii, maybe PartitionMagic could help ?
+[11:29] <Jean1> hi, I keep getting 'access denied' if i want to delete something in /var/www, I guess I have to use chown, but with what parameters ? I want to be able to delete from a filemanager or even from a samba share. Thanks
+[11:30] <MegaHerz> What device should I use in an sound recording application if /dev/dsp doesn't work?
+[11:30] <Gnea> Jean1: chown -R user.group dir/  will recursively change it
+[11:30] <spidla> Jonii, or there might be some useful settings in your boot.ini in your Windows installation
+[11:30] <Jonii> spidla, if you know any keywords I could try googling, it'd help. Like, what's the name of that boot loader that let's me choose between Windows and Wubi.
+[11:31] <Gnea> Jonii: wubi just uses NTLDR
+[11:31] <Jean1> Gnea: chown -R jean.group /var/ww/* ? and what is 'group' ?
+[11:31] <Gnea> !wubi | Jonii
+[11:31] <ubottu> Jonii: Wubi is an Ubuntu installer for Windows users that allows you to install and uninstall Ubuntu like a Windows application, in a simple and safe way. http://wubi-installer.org/support.php and https://wiki.ubuntu.com/WubiGuide for troubleshooting. Please  file bugs at http://launchpad.net/wubi/+filebug. For Ubuntu Maverick/10.10 http://releases.ubuntu.com/maverick/wubi.exe
+[11:31] <Gnea> Jean1: whatever your group name is set to
+[11:31] <cecilio> wenas
+[11:32] <cecilio> estas sonia
+[11:32] <cecilio> t kero acer el amor c
+[11:32] <Gnea> !es | cecilio
+[11:32] <ubottu> cecilio: En la mayoria de canales de Ubuntu se habla solo en ingles. Si busca ayuda en espanol o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[11:32] <spidla> Jonii, well it seems that Wubi is really updating your boot.ini in Windows ! try to find those lines and edit them
+[11:32] <cecilio> sorry
+[11:32] <Jean1> Gnea How do I know what my group name is, and will apache/php be able to do their stuff after that?
+[11:33] <Jahon> anus
+[11:33] <Gnea> Jean1: by using the id command, or just do something like this:  touch ~/test.file && ls -l test.file  to see what gid it uses
+[11:33] <Gnea> !language | Jahon
+[11:33] <ubottu> Jahon: Please watch your language and topic to help keep this channel family-friendly, polite, and professional.
+[11:33] <Jean1> Gnea thanks , gonna try
+[11:34] <Jonii> http://www.vistaheads.com/forums/microsoft-public-windows-vista-installation-setup/30225-vista-equivalent-boot-ini.html
+[11:34] <bibic682> hello, anyone please help ....need philips 7130 tv card set up properly....seems like a lotta hoops to jump thru
+[11:34] <flor> Gnea, yes, that's working fine, printing directly.
+[11:34] <pirx> hi! i have a situation where a software is making a lot of requests to an external API, and i would like to check for how long those sockets are open. it will take some time before i am able to add that to the loggaing of the application. any ideas? (e.g. how to check for how long sockets are open, to some certain IP, during say 1minute)
+[11:34] <spidla> Jonii, there should be a list of available operating systems. There you can delete the Wubi lines and you can set your Vista installation as a default operating system. Second boot menu should disappear
+[11:34] <Gnea> !tv | bibic682
+[11:34] <ubottu> bibic682: http://www.linuxtv.org/ has extensive information about using TV cards under Linux. Available viewers for analog cards: Zapping, tvtime (GTK/GNOME), Kaffeine, kdetv (KDE), xawtv, motv. For digital cards: Me-TV (GNOME), Klear (KDE), dvb-utils. For both analog and digital cards, !MythTV is a powerful framework. Your card may work the !IVTV drivers. See also !TV-Out
+[11:35] <bibic682> thanks all...will check it out
+[11:36] <Gnea> flor: so what's preventing you from adding the new printer instead of copying the currently working printer?
+[11:36] <spidla> Jonii, In your boot.init you should see something like this http://pastebin.com/3iFa8QmN
+[11:36] <flor> Gnea, got it! i had to type in the ip address only without "socket://" in front of it. yeah!!! thanks for your support!!
+[11:36] <Jean1> Gnea it worked, thanks, have a good day :)
+[11:36] <Gnea> flor: oh, awesome :)
+[11:36] <spidla> Jonii, the last line represents the modification made bu Wubi
+[11:36] <Gnea> Jean1: cheers :)
+[11:37] <Jonii> spidla, windows Vista doesn't have boot.ini, but yeah, it seems wubiguide has good tutorial to how to remove it
+[11:37] <spidla> Jonii, well I am Linux user :-) in Windows XP there was boot.ini
+[11:37] <goggle-eyed_bear> do u have windows iso disks?
+[11:38] <spidla> Jonii, well good luck
+[11:38] <flor> Gnea, have a good day from me too! : ) bye, everybody!
+[11:39] <flor> Gnea, ps: you gave me the idea to try a network-printer-conection. for windows, its differently...
+[11:39] <Jonii> ty
+[11:39] <Gnea> flor: ah yes, that is true - glad you figured it out
+=== martins is now known as Guest41809
+[11:41] <shal3r> http://pastebin.com/mWuKXmzx - Any ideas how to fix that?
+[11:42] <flor> ,ot?
+[11:42] <flor> !ot
+[11:42] <ubottu> #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[11:43] <CASSANO> need shell, irssi screen q me
+=== nikhil_away is now known as nikhil_
+[11:45] <navin> how can i customize the code of webkit..any help plz?
+[11:48] <sacarlson> shal3r: it apears your repository is out of service try another repository mirror site
+[11:49] <shal3r> sacarlson, it's working - i can access it via web browser. Also i tried another repository  - same problem
+[11:50] <sacarlson> shal3r: try japan
+[11:50] <Gnea> shal3r: bad network connection? try again
+[11:50] <sacarlson> shal3r: unless your isp is mad at you
+[11:51] <shal3r> Gnea, sacarlson i tried again, this time with Japan - http://pastebin.com/xnn5yKRL
+[11:52] <Gnea> shal3r: what does your /etc/apt/sources.list file look like? and did you throw anything into /etc/apt/sources.list.d/ ?
+[11:52] <bullgard> On my Maverick computer 'man arp' is dated 6-Mar-1999. On my Lucid computer 'man arp' is dated 01-Dec-2007. How come?
+[11:53] <shal3r> ok, sorry - it's really ISP which blocks http conections because of unpaid bill. thanks for your time
+[11:53] <Gnea> bullgard: *weird*! you're right.... wow
+[11:53] <sacarlson> shal3r: well as you can see it's not the same
+[11:54] <Gnea> shal3r: could you use an ftp mirror?
+=== anonymous is now known as Guest43809
+[11:55] <sacarlson> shal3r: there is a slight posibility it's an mtu thing
+[11:56] <sacarlson> shal3r: do you use wifi?
+[11:56] <xinxin> ,
+[11:56] <scothost> Hi Folks
+[11:56] <erUSUL> !cn | xinxin
+[11:56] <ubottu> xinxin: For Ubuntu help in Chinese : /join #ubuntu-cn <unconvertable> <unconvertable> /join #ubuntu-tw  <unconvertable> <unconvertable> /join #ubuntu-hk
+[11:58] <shal3r> sacarlson, no no, it's just my ISP
+[11:58] <GeekMan> how do i increase the maximum brightness on my notebook for some reason it is dimmer than usual
+[11:58] <sacarlson> shal3r: well try change mtu to 1492 http://ubuntuforums.org/showthread.php?t=289077
+[12:00] <b0tz> does anyone have an answer to this thread http://ubuntuforums.org/showthread.php?t=1554280
+=== QuBit is now known as QuB1t
+[12:04] <xinxin>  /join #ubuntu-cn
+=== nikhil_ is now known as nikhil_away
+[12:07] <Neosano> Hello guys, I'm sure it's a wrong place to ask, but how can I detect that there is some program running in fullscreen?
+[12:10] <fuzzybunny69y> hey guys I am sure you get this a lot but how do you disable the login sound on the login screen(the annoying drum sound)?
+=== MindWarper_ is now known as MindWarper
+[12:11] <Neosano> fuzzybunny69y, http://www.howtogeek.com/howto/ubuntu/disable-the-login-sound-on-ubuntu/
+[12:11] <GeekMan> is gdm simple-greeter like a message kinda deal where i have a message that i can have popup every time you login
+=== fernando is now known as Guest91744
+[12:14] <Neosano> GeekMan, http://ubuntuforums.org/showthread.php?t=597011
+[12:15] <Neosano> Lol it's kinda fun googling other's questions and giving them the first link
+[12:15] <Neosano> but would someone answer my question, lol? :D
+[12:15] <halvors> Howto generate md5 checksum for my .deb package?
+[12:15] <fuzzybunny69y> Neosano, sorry I tried that
+[12:15] <cdbs> !lol | Neosano
+[12:15] <ubottu> Neosano: Please don't use "LOL" and "OMG" and so forth on a regular basis. This is IRC, not IM, and using those lines on their own is not required, and it is rather annoying to the rest of the people in the channel; thanks.
+[12:15] <fuzzybunny69y> and it still doesn't work
+[12:15] <fuzzybunny69y> I have set my sound scheme to no sunds
+[12:15] <fuzzybunny69y> sounds
+[12:16] <fuzzybunny69y> went into the login screen prefs and unchecked the "play login sound"
+[12:16] <Neosano> halvors, https://help.ubuntu.com/community/HowToMD5SUM
+[12:16] <fuzzybunny69y> and it still plays the annoying drum sound
+[12:16] <Neosano> cdbs, thanks a lot
+[12:16] <halvors> Neosano: Thanks :D
+[12:16] <london5634> guys i need some help...i want to dual boot,i have recently decided to add a secondary hard drive with windows 7,how to i reinstall the grub again or anything else to dual boot
+[12:17] <GeekMan> Neosano maybe im thinking of a MOTD
+[12:17] <GeekMan> but either way
+[12:17] <fuzzybunny69y> oh and I have also unchecked Gnome login sound from the startup applications
+[12:18] <Tyrz> hi
+[12:18] <halvors> Neosano: But how do it for a folder?...
+[12:18] <Neosano> halvors, folder?
+[12:18] <halvors> I have to generate MD5 checksum for a package.
+[12:18] <halvors> Folder that contain. fIles.
+[12:18] <Neosano> halvors, what kind of a packed?
+[12:19] <Neosano> package*
+[12:19] <halvors> .deb
+[12:19] <Neosano> you said it's deb, just do it for the .deb file
+[12:19] <halvors> source for that
+[12:19] <halvors> It's not packed yet.
+[12:19] <halvors> have to include md5sum in package....
+[12:19] <Neosano> oh :O
+[12:20] <halvors> Neosano: Know how to do that?
+[12:20] <Neosano> halvors, no, sorry
+[12:20] <fuzzybunny69y> hey guys to disable the login sound you run this to disable the login sound you run this command "sudo -u gdm gconftool-2 --type=bool --set /desktop/gnome/sound/event_sounds false"
+[12:21] <Neosano> halvors, http://www.linuxquestions.org/questions/linux-software-2/how-to-create-md5sum-for-a-directory-689242/
+[12:22] <Neosano> fuzzybunny69y, nice, thanks for replying a solution.
+=== mark_ is now known as markskilbeck
+[12:27] <Satauros> ok, who do I have to annoy to get some answers :D
+[12:28] <Gatekeeper-ZA> ola can someone help me pls...
+[12:29] <Neosano> Gatekeeper-ZA, just ask the question
+[12:29] <halvors> got it...
+[12:29] <halvors> :D
+[12:29] <Neosano> Satauros, just ask
+[12:29] <Neosano> halvors, ;)
+[12:29] <Satauros> and what if I have several ones :p
+[12:29] <Neosano> Satauros, just ask them one by one
+[12:29] <halvors> Using this: http://ptspts.blogspot.com/2010/02/how-to-create-debianubuntu-package-deb.html
+[12:29] <halvors> :D
+[12:29] <Satauros> noted
+[12:29] <Gatekeeper-ZA> kk mmm i installed ubuntu 8.10 but sunaptics cant find packages.. i installed cause newer ubuntu does not support my display card.
+[12:29] <helghareeb> Gatekeeper-ZA: can I help you?
+[12:30] <BHXSpecter> I have my ubuntu drive separated into /swap, /, and /home somehow GDM got removed.....is there a way to use the live CD to reinstall GDM?
+[12:30] <helghareeb> Gatekeeper-ZA: I have the same problem with my nvidia display
+[12:30] <Neosano> halvors, aha, good that you found it
+[12:30] <Satauros> first question, to set a time server in Ubuntu (10.04.2 LTS) server, i just have to edit / create the /etc/ntp.conf file, correct?
+[12:30] <helghareeb> I used additional drivers, however it keeps crashing
+[12:30] <bullgard> Gnea: Thank you for commenting.
+[12:30] <helghareeb> I recommend you using 10.10 edition, and don't force ubuntu using external drivers
+[12:31] <Gatekeeper-ZA> yeah its an old ati now i know it works in 8.10 but cant seem to get the sources
+[12:31] <helghareeb> ubuntu are experiementing 3D drivers in Unity ( 11.04) now. Hopefully it will be available soon
+[12:31] <helghareeb> my advice as I told you: stick to the default now, and wait for the new release. Hopefully it will handle the issue
+[12:32] <Gatekeeper-ZA> no the issue is i cant recive the sources list so synaptics cant let me add packages ets. it doesnt list
+[12:33] <helghareeb> aha, I c
+[12:33] <Gatekeeper-ZA> Failed to fetch http://ubuntu.mirror.ac.za/ubuntu-archive/dists/intrepid/main/binary-i386/Packages.gz  404 Not Found
+[12:33] <Gatekeeper-ZA> yes lol
+[12:33] <Neosano> Satauros, can't you use gui for this? http://www.howtogeek.com/howto/ubuntu/sync-your-system-clock-with-internet-time-servers-in-ubuntu/
+[12:33] <helghareeb> :) sounds weired to me
+[12:33] <Gatekeeper-ZA> then i get at the end ailed to fetch http://mirror.in.th/ubuntu/dists/jaunty/universe/source/Sources.gz  301 Moved Permanently
+[12:33] <Gatekeeper-ZA> Some index files failed to download, they have been ignored, or old ones used instead.
+[12:34] <Gatekeeper-ZA> how would i add a working sources list.
+[12:34] <Gatekeeper-ZA> for  8.10
+[12:34] <Satauros> Neosano, running Ubuntu server, no GUI available :)
+[12:34] <helghareeb> sounds a good start Gatekeeper
+[12:34] <Neosano> Satauros, ahaa
+[12:35] <Satauros> otherwise it would be piece of cake :p
+[12:35] <Gnea> bullgard: did you get it sorted?
+[12:35] <jrib> Satauros: https://help.ubuntu.com/10.04/serverguide/C/NTP.html
+[12:36] <Neosano> Satauros, here's a nice man https://help.ubuntu.com/community/UbuntuTime
+[12:36] <BlankVerse> ethtool eth0 shows
+[12:36] <BlankVerse> link detected : yes
+[12:37] <Satauros> so I was doing the right thing :), thx, on to the next question
+[12:37] <BlankVerse> but after a few minutes , it changes to know
+[12:37] <BlankVerse> and my lan port light stops also
+[12:37] <BlankVerse> is it a hardware problem?
+[12:37] <jrib> !enter | BlankVerse
+[12:37] <ubottu> BlankVerse: Please try to keep your questions/responses on one line - don't use the "Enter" key as punctuation!
+[12:38] <Satauros> the ubuntu server I mentioned will be running drupal, so the system should be able to send emails using our mail relay servers
+[12:38] <bullgard> Gnea: I am struggeling on 2 fronts at the moment. I did not solve yet the question how to determine the known host computers in my LAN.
+[12:38] <Satauros> how do i configure this on the server?
+[12:38] <Satauros> i already figured out that i'll be needing sendmail :p, but then what?
+[12:39] <jrib> Satauros: https://help.ubuntu.com/10.04/serverguide/C/email-services.html
+[12:39] <Thalius> Satauros: I had the same problem. Ended up using Exim4.
+[12:41] <Satauros> Thalius, and that worked? (i'll be configuring a primary and secondairy mail relay, is this possible?)
+[12:42] <Satauros> jrib, the link you gave doesn't mention anything about sendmail, any other suggestions?
+[12:42] <Thalius> Satauros: You can try. It can easy be configured using exim-config.
+[12:42] <Satauros> without GUI?
+[12:43] <jrib> Satauros: you can use postfix or exim.  If you really want to use sendmail, sure use that.  Each of these projects have their own irc channel for configuration questions
+[12:43] <Satauros> ok, *searches for the sendmail irc channel :p*
+[12:43] <Thalius> Satauros: It has a commandline gui, really easy to config
+[12:44] <jrib> Satauros: out of curiousity, why do you want to use sendmail if you don't know how to configure it?
+[12:44] <CASSANO> need shell, irssi screen q me
+[12:44] <jrib> !ot | CASSANO
+[12:44] <ubottu> CASSANO: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[12:44] <CASSANO> bla bla bla
+[12:44] <Satauros> due to lack of other options, jrib
+[12:44] <jrib> Satauros: but we just gave you two other options
+[12:45] <Satauros> my boss told me to set the mail relay on the ubuntu server
+[12:45] <Satauros> so first option i noticed, sendmail
+[12:45] <jrib> Satauros: I've always used exim, mostly because sendmail is notorious for being difficult to configure :/
+[12:45] <Satauros> first come, first serve
+[12:45] <bfri> any one help me find where my temp files are when i open a youtube page?
+[12:45] <Satauros> ok, exim it is
+[12:45] <Satauros> you've convinced me
+[12:45] <Satauros> ^^
+[12:46] <Satauros> i suppose a simple sudo apt-get install exim will do the trick?
+[12:46] <Thalius> Satauros: yes
+[12:46] <jrib> Satauros: might be exim4, check the link
+[12:46] <Satauros> i'll try right away
+[12:47] <Thalius> Satauros: exim4 indeed. After that use sudo exim4-config, youll get this: http://library.linode.com/web-applications/project-management/redmine/images/redmine-debian-5-exim-config-1.png
+[12:47] <Satauros> ok installed  - i'm so happy it automatically uninstalled sendmail :D -
+[12:48] <bfri> any one help me find where my temp files are when i open a youtube page?
+[12:49] <Satauros> don't you mean sudo dpkg-reconfigure exim4-config Thalius?
+[12:49] <jrib> bfri: /home/jrib/.mozilla/firefox/p26rxi5a.default/Cache ?
+[12:49] <jrib> bfri: or whatever your *.default directory is.
+[12:50] <Satauros> so that worked Thalius, now, in order to make this work (using our primary and secondairy mail relay), which option should i choose best?
+[12:50] <Satauros> (yes i have entered n00b mode)
+[12:51] <Thalius> Satauros: Dont know tbh. Been some while since i configged it, and i only use 1 relay
+[12:51] <bfri> jrib: i dont have that location you mentioned and i just up graded to 10.04 and my default directory no longer has them
+[12:52] <doodie> how do I join 2 empty partitions using gparted?
+[12:52] <jrib> bfri: you don't have ~/.mozilla/firefox/*.default/Cache?
+[12:52] <Thalius> Satauros: I picked the internetsite option, since that matched my needs/requirements
+[12:53] <Satauros> Thalius, i suppose i should be choosing 'mail send by smarthost, no local mail'?
+[12:53] <Satauros> in my case
+[12:53] <Thalius> Satauros: would make sense since you dont want to host a mailserver on the same host, and only want to send out forgot-my-passwords mail
+=== peregrinator_six is now known as dial_up_br
+[12:54] <Thalius> Satauros: You can always check if the relay works by sending a mail from commandline.
+[12:55] <bfri> any one help me find where my temp files are when i open a youtube page?
+[12:55] <jrib> bfri: can you answer my question?
+[12:57] <bfri> jrib: no i dont have that directory
+[12:57] <jrib> bfri: type "about:cache" in your firefox and see what the directory for Disk cache device is
+[12:58] <Satauros> ok, thx Thalius, in case of any problems i'll notify (today or tomorrow, probably tomorrow :p)
+[12:58] <elvissilva> tem algum usuario brasileiro na rede?
+[12:58] <Thalius> Satauros: Yw. and goodluck :)
+[12:58] <jrib> !br | elvissilva
+[12:58] <ubottu> elvissilva: Por favor, use #ubuntu-br para ajuda em portugues. Para entrar no canal por favor faca "/join #ubuntu-br" sem as aspas. Para a comunidade local portuguesa, use #ubuntu-pt. Obrigado.
+[12:58] <Satauros> next question, to set my primary and secondary DNS, i suppose i only have to edit the /etc/resolv.conf file?
+[12:58] <bfri> jrib: ok there it is i was trying to just go to that directory manually
+[12:59] <Thalius> Satauros: Yup. considering you dont have a daemon generating the config file
+[12:59] <Satauros> yes I read that the dhcp3 client reconfigures that resolv.conf file
+[13:00] <Satauros> but i'll be using a static IP, so probably will remove the dhcp client, if possible
+[13:00] <bfri> Jrib: if i just start in the "/" directory and follow the path i get stopped at ".mozilla" why is that
+[13:00] <rams_pandu> how can I install a dictionary in ubuntu?
+[13:00] <doodie> how do I join 2 empty partitions using gparted? Copy and PAste?
+[13:00] <Thalius> Satauros: No need to remove it, just set the /etc/network/interfaces to static and it wont be used
+[13:01] <Satauros> noted
+[13:01] <jrib> bfri: show me what you are doing in pastebin, I do not understand what you said
+[13:01] <Thalius> doodie: why not remove on partition and extend the other?
+[13:02] <Reventlov> !ping
+[13:02] <Reventlov> !ping
+[13:02] <ubottu> ping-pong, a fun game for all the family
+[13:02] <bullgard> Gnea: [solved]
+[13:02] <Thalius> rams_pandu: http://ubuntuforums.org/showthread.php?t=468861
+[13:03] <Satauros> Thalius, I believe that are all the questions I have (today), thank you kindly for the support, and if I run in to any other problems, i'll visit once more :)
+[13:03] <Satauros> thx to jrib as well ;)
+[13:04] <Thalius> Any time.
+[13:04] <oxodesign> hi i did pack a folder like this "tar -cvf tarFileName directory/" who do I unpack that file?
+[13:05] <jrib> oxodesign: tar xf filename
+=== fernando is now known as Guest55103
+[13:08] <shane4ubuntu> ok, question, when I run: sudo service --status-all    I get a bunch of + and - and ?  beside the daemon, however what does that mean?
+[13:10] <BartHH> Hi there, Does someone know if it is possible with dual head seperate X to hide all the gnome stuff from the second monitor?
+[13:11] <Bohemian_Cow> What are you trying to accomplish BartHH?
+=== cat__ is now known as sapphirecat
+[13:12] <BartHH> I need to have 1 app running on my second screen without all the panels around it
+[13:12] <pilas> hello ubuntu world... been on linux since monday... the world is a happier place
+[13:12] <pilas> need help with linux partitions... simple questions... pleas pm
+[13:13] <Neosano> pilas, just ask here
+[13:13] <pilas> ok...
+[13:13] <AbhijiT> pilas, ask here only. with all details on one line
+[13:13] <BartHH> Bohemian_Cow: do you know if it is even possible?
+[13:13] <Neosano> BartHH, it's linux, everything is possible
+[13:14] <MaslowK> Except being windows.
+[13:14] <MaslowK> lol.
+[13:14] <pilas> Ok, so I am doing my first hard disk install on a 500GB ATA with one NTFS partition with my windows on. Ubuntu needs its own linux partition: Can I trust linux to do the partition without fucking up windows?
+[13:14] <BartHH> I mean possible without creating ubuntu from scratch
+[13:14] <Bohemian_Cow> Well you could just manually set the length of the panel in question?
+[13:15] <Bohemian_Cow> Ie not having it "Expand"
+[13:15] <pilas> panel?
+[13:15] <BartHH> the panels are duplicates of the ones running on my main screen
+[13:15] <BartHH> If I change the settings, they change both
+[13:15] <Neosano> pilas, oh wait, you have to resize ntfs partition first
+[13:15] <BartHH> or mmm
+[13:15] <BartHH> maybe not
+[13:16] <BartHH> where are all those panel settings saved?
+[13:16] <Neosano> pilas, you can do it from GParted, I've done it several times successfully, but I'll recommend you to save data first
+[13:16] <pilas> tks neosano... im in the middle of saving it up
+[13:16] <Bohemian_Cow> Do you have Gnome-Configuration editor installed?
+=== sapphirecat is now known as sapphirepaw
+[13:17] <Bohemian_Cow> aka gconf
+[13:17] <BartHH> ah yes found it in /apps/panel
+[13:17] <shane4ubuntu> I linked ddclient into /etc/init.d/  is there an easy way to make sure it is running?  I ran sudo service --status-all and ddclient shows up as:  -  ddclient  does that mean it isn't running?
+[13:18] <Neosano> pilas, so you have to run live cd, try ubuntu without installing, run GParted to resize ntfs partition.
+[13:18] <rams_pandu> can I access windows vista desktop from ubuntu10.04?
+[13:18] <MaslowK> rams_pandu: Sure can.
+[13:18] <Neosano> rams_pandu, desktop?
+[13:18] <MaslowK> Well
+[13:18] <Neosano> you mean desktop folder?
+[13:19] <rams_pandu> MaslowK, can you tell me how?
+[13:19] <MaslowK> Depends on what you mean by that
+[13:19] <jrib> shane4ubuntu: what do you mean, you linked it?  When you install ddclient it should automatically be there
+[13:19] <MaslowK> If you mean having both installed and being able to switch between them, you can do that.
+[13:19] <AbhijiT> rams_pandu, use teamviewer
+[13:19] <shane4ubuntu> jrib hmm, mine wasn't at least I don't think it was, yes, I linked it.
+[13:19] <rams_pandu> Neosano, I mean i have many apps on windows, I want to access all of then from ubuntu. like start button, programs etc
+[13:19] <jrib> shane4ubuntu: how did you install it?  Surely, you used apt?
+[13:19] <shane4ubuntu> jrib: if it was in there it is possible that I linked over top of it, but I'm about 90% sure it wasn't running
+[13:19] <MaslowK> Oh, well.
+[13:20] <Neosano> that's a different thing..
+[13:20] <shane4ubuntu> jrib yep apt
+[13:20] <MaslowK> Not really rams_pandu
+[13:20] <AbhijiT> rams_pandu, is this vista and ubuntu installed on the same hard disk?
+[13:20] <jrib> shane4ubuntu: ddclient package includes /etc/init.d/ddclient
+[13:20] <Neosano> rams_pandu, mostly no. though you can install windows on a virtual machine and use windows from linux.
+[13:20] <shane4ubuntu> jrib, it didn't seem to be running though, is there a way to check if it is running/configured correctly?
+[13:20] <rams_pandu> AbhijiT, yeah, both are installed on the same harddisk
+[13:21] <jrib> shane4ubuntu: furthermore, what exactly did you link?  /etc/init.d/ contains init scripts, it's not just links to executables
+[13:21] <AbhijiT> rams_pandu, hmm then you cant access vista menus programs from ubuntu. you can only access files, folders, data, music, videos, etc
+[13:21] <shane4ubuntu> jrib: sudo ln -s /usr/sbin/ddclient /etc/init.d/
+[13:21] <jrib> shane4ubuntu: yeah, that's not correct
+[13:22] <shane4ubuntu> jrib, ok, should I remove the link and re-install ddclient?
+[13:22] <jrib> shane4ubuntu: yeah, purge and install again
+[13:22] <rams_pandu> AbhijiT, yeah, I know that. In my hard disk windows and ubuntu are installed in different partitions
+[13:22] <Neosano> Do you guys know how can I catch window events? I need to see if there's any window fullscreened.
+[13:22] <AbhijiT> rams_pandu, still you cant
+[13:22] <jrib> shane4ubuntu: https://help.ubuntu.com/community/DynamicDNS walks you through the configuration
+[13:22] <shane4ubuntu> jrib, ok, thanks a bundle, let me give that a try, however is there a way to confirm it is running?  --status-all should show with a plus if it is running?
+[13:23] <ufk> hi
+[13:23] <rams_pandu> Neosano, thank you
+[13:23] <ufk> i installed debug version of flash 32 bit version on my firefox-bin (using amd64). the problem is that whenever a flash error occur a popup doesn't comes up with the proper error. i need to install flashbug to actually see in the firebug window the error. any ideas how to resolve the issue?
+[13:23] <rams_pandu> AbhijiT, thank you
+[13:24] <Attivism> ragazzi eccomi di nuovo
+[13:24] <jrib> shane4ubuntu: just do <unconvertable> ps -ef | grep ddclient <unconvertable> as service --status-all probably only works well for upstart type jobs
+[13:24] <jrib> !it | Attivism
+[13:24] <ubottu> Attivism: Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi <unconvertable> /join #ubuntu-it <unconvertable> senza virgolette)
+[13:24] <BluesKaj> Hey folks
+[13:24] <shane4ubuntu> jrib ok, thanks!
+[13:24] <Attivism> jrib
+[13:24] <jacksonje> My me menu and sound menu have vanished from the panel. How do I repair it?
+[13:25] <mikhas> Hi, when using launchpad PPA's, can I somehow configure on the website that a package is made available for Lucid *and* Maverick? Or do I really have to re-upload the package, even if only the debian changelog changes ...
+[13:26] <oliver_> jacksonje: just rightclick -> add to panel.. and search what u don't have
+[13:26] <shane4ubuntu> jrib  hmmm,  seems I missed this important note last time I installed it:  * To run ddclient as a daemon, please set run_daemon to 'true' in /etc/default/ddclient
+[13:26] <AbhijiT> mikhas, #launchpad
+[13:27] <mikhas> oy, thanks
+[13:27] <Voita> Hi u alll :) I have just mad an old computer come to life again with xubuntu.  Does anyone know how to make an application load on stratup with this dist?
+=== WamPIRe_ is now known as wampire__
+[13:29] <Neosano> Voita, Xfce Menu | Settings | Autostarted Applications
+[13:29] <Neosano> Voita, I hope it works :)
+[13:29] <Neosano> Voita, though Lubuntu is a better choice for an old computer, imho
+[13:29] <Voita> thx Neosano :) will check!
+[13:29] <Satauros> another question, a quick one, to set the FQDN, is there an ubuntu help page for this?
+[13:30] <Voita> Oh ok havent even heard of Lubuntu... :)
+[13:30] <Neosano> Voita, so did I
+[13:31] <Neosano> Voita, now I switched to it even on my powerful desktop
+[13:31] <oliver_> Voita: u should be able to define the startup applications under     /home/yourusername/.config/autostart/
+[13:31] <Bilz> hello
+[13:31] <Neosano> Bilz, just ask
+[13:31] <Bilz> i get an error when i run sudo apt-get update
+[13:31] <Bilz> W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: http://extras.ubuntu.com maverick Release: The following signatures were invalid: BADSIG 16126D3A3E5C1192 Ubuntu Extras Archive Automatic Signing Key <ftpmaster@ubuntu.com>
+[13:31] <Bilz> and a couple of others
+[13:31] <Bilz> where should i look for the problem
+[13:31] <FloodBot1> Bilz: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[13:32] <Bilz> http://paste.ubuntu.com/571105/
+[13:32] <Bilz> there's my problem
+[13:32] <Voita> ok guys I cannot seem to find xfce. you know where to look?
+=== candrea is now known as Guest89707
+[13:34] <Satauros> How do I set the fully qualified domain name for my server? (FQDN)
+[13:36] <Pici> Satauros: Modify /etc/hostname  but make sure that the hostname itself matches the entry in /etc/hosts
+[13:38] <Voita> found tha autostart cataloge  but there is only file:///home/myname/.config/autostart/xfce4-settings-helper-autostart.desktop
+[13:38] <EmpoyLayaw> Hello! Has anyone have an Android Froyo phone who can sync contacts with birthdays in Evolution?
+[13:39] <Satauros> Pici, could this work? http://paste.ubuntu.com/571107/
+[13:39] <juk> EmpoyLayaw: #android ?
+[13:40] <shane4ubuntu> jrib: JFYI  it was on the page you sent me:  sudo service ddclient status  which I ran before but didn't report nothing because I had messed up the init.d thing, all is good now and running fine, thanks for the help.
+=== Molly is now known as Guest83757
+=== gui_ is now known as kryl
+[13:40] <Guest83757> So, I got the "Window Selector" applet on my panel in Ubuntu 10.10 - one problem: i want to change a setting so it will show the names of all workspaces when I go to select a window.
+[13:40] <Guest83757> Ubuntu is refusing to let me modify the applet's settings. What do I do?
+[13:41] <EmpoyLayaw> juk, it doesn't seem to help because they'll point you to sync-ing with gmail account. what I want is to use Evolution mail to sync my phone contacts. Just as how you would sync a Windows mobile phone with Outlook. Not sure if that is possible in Ubuntu yet
+[13:41] <EmpoyLayaw> So what I want to know if it is possible to use Ubuntu's preloaded Evolution to sync my Android Froyo phone
+[13:42] <acid> hello ppl
+=== randyJ is now known as Guest49209
+[13:43] <Guest83757> Any ideas guys? How do I change the properties/setting for my Window Selector applet in Ubuntu 10.10?
+[13:43] <juk> EmpoyLayaw: ah, dont know, i dont use myself evolution and android
+=== oxodesign_ is now known as oxodesign
+[13:44] <acid> problem :-> while installing or removing i get this error "Package operation failed" anyone ?
+=== mark_ is now known as markskilbeck
+[13:44] <EmpoyLayaw> juk: yeah.... same here, until the day I got an android phone. Thanks!
+=== Guest83757 is now known as super_elite
+[13:45] <Voita> hmm Im stuck here.... need to find startup applications in xubuntu
+[13:45] <super_elite> Any ideas guys? How do I change the properties/setting for my Window Selector applet in Ubuntu 10.10? It works in Xubuntu, so why won't it work in Ubuntu?
+[13:45] <juk> EmpoyLayaw: yes, that's a reason a went for n900
+[13:46] <oliver_> Voita: and whats in that file u found?
+[13:47] <Voita> oliver... file:///home/vikingrehab/.config/autostart/xfce4-settings-helper-autostart.desktop
+[13:47] <Voita>  it says [Desktop Entry] Hidden =False
+[13:48] <azizLIGHTS> i got cli right now, but i want to use firefox or chrome to browse internet, whats the lightest gui for this purpose
+[13:49] <psycho_oreos> either lxde or xfce
+[13:49] <azizLIGHTS> whats the command to install the thing
+[13:49] <oliver_> Voita: after what I read is that u also have a ~/Desktop/Autostart directory and there u can simply write a script which calls the programs you want
+[13:49] <psycho_oreos> {l,x}ubuntu-desktop
+[13:50] <sirlark> Hi, I've got a pg_dump backup of a mediawiki installation, which have to restore on a new server due to hardware failure. It's a fresh ubuntu install, and I've copied over the original LocalSettings.php; I created originally named user (role) and database in postgresql, and ran the dump though psql. This has created all the tables in the mediawiki schema, and none in the public schema. In LocalSettings.php $wgDBmwschema = "mediawiki", a
+[13:51] <Voita> ok oliver I will check for it. You have any idea what this script need to say?
+[13:52] <Voita> Im sorry oliver but I can seem to find a /desktop/autostart directory
+[13:53] <hvnsweeting> Voita: ./config/autostart
+[13:54] <hvnsweeting> .config/autostart
+[13:54] <hvnsweeting> you should press ctrl + H to show hidden folder
+[13:54] <Voita> alright tnx hvnsweeting... feel a little stupid now :)
+[13:54] <oliver_> Voita: well for me it's exactely that directory    hvnsweeting is saying
+[13:54] <s7r> hello i am missing system-library-fopen
+[13:54] <s7r> how can i install it ?
+[13:55] <s7r> i have a vps ubuntu 10.04
+[13:55] <s7r> us=285966 Cannot open dh1024.pem for DH parameters: error:02001002:system library:fopen:No such file or directory: error:2006D080:BIO routines:BIO_new_file:no such file
+[13:55] <s7r> Wed Feb 23 13:50:21 2011 us=285977 Exiting
+[13:55] <FloodBot1> s7r: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[13:55] <Voita> thnx gyus I found the folder
+[13:55] <oliver_> Voita: but the  file u told me confuses me
+[13:55] <juk> Voita: dont be, that's why we all are here, well some of us
+=== Claudinux_ is now known as Claudinux
+[13:55] <oliver_> Voita: i have some    .desktop file in there
+[13:55] <Bilz> http://paste.ubuntu.com/571105/ <- final few lines of what i get one i run sudo apt-get update, any ideas?
+[13:56] <xtbgod> How do i make my ubuntu primary boot OS i got it installed with Win7
+[13:56] <Voita> well I am listing hidden files but only have the previous file there?
+[13:57] <oliver_> Voita: maybe u should just create for each program u wanna start  a separate  .desktop file
+[13:57] <alisalaah> lo
+[13:57] <BluesKaj> xtbgod, it shoiuld be the default boot OS if you installed it after windows
+[13:58] <oliver_> Voita: one moment i give u an example
+[13:58] <Voita> ok not my area of knowledge... any idea what to put in that file? I have an open office pres which I would like to start up automatically
+[13:59] <Howler> I am trying to set my domainname, so that sendmail will stop complaining. Do I need to set it to anything specific (like my ISPs' domain or anything), should I use my web domain name, or just make up a name for my local network?
+[13:59] <oliver_> Voita: http://pastebin.com/i9djSsMN
+[13:59] <juk> Howler: #postfix
+[14:00] <Voita> thnx oliver Im checking
+[14:00] <sipior> Howler: you really shouldn't just make up a name, no :-) do you really need sendmail?
+[14:01] <Voita> ok so if I want to configure that script to start an openoffice pres. what do i type?
+[14:01] <sipior> Howler: if your dns provider has set an MX record for your domain, you can of course use the domain name you're paying for.
+[14:01] <Howler> sipior: Of course I don't *need* it =). I'm using it for my redmine account to send emails about my projects.
+[14:01] <oliver_> Voita: I'm not sure but just try to take only the top 3 lines and change  the exec command   my file is called  yakuake.desktop    urs should be called (the command to start ur wordpress)
+[14:02] <sandhu> hi  pl tell how to download  you tube videos
+[14:02] <Voita> ok I will play around for a while and see what happens :)
+[14:02] <Howler> My question is more about what I should really set my local domain to be, so I can have a FQDN. sendmail is just the program that alerted me to the fact that I don't have it.
+[14:02] <mikebot> In UNR, is there a way to change the systray icons in the top-right corner?
+[14:03] <sandhu> hi  pl tell how to download  you tube videos
+[14:03] <sandhu> hi  pl tell how to download  you tube videos
+[14:03] <alisalaah> sandhu, like flv to mp3 conversion?
+[14:03] <Godslastering> what is the proper way to change the system hostname?
+[14:04] <sipior> Howler: you could try using dynamic dns in conjunction with your preferred dns provider.
+[14:04] <Sirgado> Godslastering: I guess edit /etc/hostname
+[14:04] <sandhu> no  i wanna download  videos
+[14:04] <oliver_> Voita: i would try      calling the file like        mypresentation.desktop     and change the command to     openoffice.org /path/to/your/presentation
+[14:04] <Sirgado> Godslastering: or using GUI
+[14:04] <Godslastering> Sirgado: is this permanent? and which GUI tool?
+[14:04] <supreme> created some vpn tunnel, connection to the server works, but i want that ALL traffic is routed through this connection, how should i set the route for this ?
+[14:04] <Voita> tnx oliver.... will give it a try
+[14:05] <alisalaah> sandhu, http://ubuntuforums.org/showthread.php?t=547848
+[14:05] <alisalaah> forums/google had an easily searchable  topic, that looks liek what you want
+[14:06] <Howler> sipior: Yeah, I have my domain name pointed at my IP address (and my router updates it, should it change).  What you're saying is that I should really make the machines on my local network use that as their domain?
+[14:07] <alisalaah> Ubuntu 10.10 on a new 2010 model Macbook Pro :: Saying I have no bluetooth adapters, I want to setup with my magic mouse, is there a way to get it to work?  i checked forums and did bluez with no success.
+[14:07] <sipior> Howler: if your domain is already pointed there, yes. but if you don't expect the machines on your local network to be reached directly from the larger internet, there's no need for an fqdn. each machine with a fqdn should be listed in an authoritative name server. that's probably overkill for a home network.
+[14:08] <supreme> hmm anybody around who can tell me the route add command to route all traffic to ppp0 ?
+[14:08] <sipior> Howler: if your domain points to the internet side of your home router, you can use port forwarding to direct service requests from that external address to the appropriate internal machines, without involving the dns further.
+[14:09] <ashka`> hello, I have a problem with a usb key
+[14:10] <ashka`> http://pastebin.com/EGszSpgE
+[14:11] <elfranne> anyone know how to remove the x first characters on all files in a folder ?
+[14:11] <Voita> oliver do I type the pathway under exec=?
+[14:12] <Howler> sipior: Sure, I understand that. No reason for the outside world to reach any machine except my webserver. I just saw that sendmail kept complaining about not knowing its fqdn, and I didn't know that I should have one =). But, that makes sense, I really only need a fqdn for machines that can be seen by the outside world. That's why sendmail cares...because why would it be on a machine the outside world can't see.
+[14:12] <Howler> sipior: Thanks for helping me understand.
+[14:13] <sipior> Howler: sure. are you really running sendmail, and not postfix? postfix is much easier to configure (and the machine itself doesn't need an fqdn, you simply have to tell the mailer what to use).
+[14:13] <sipior> Howler: you might also look into ssmtp, which probably fits better with your expected usage.
+[14:14] <erUSUL> elfranne: from the filename? or the file contents?
+[14:14] <elfranne> erSUL filename
+[14:14] <sipior> Howler: you're just forwarding all delivery to your isp mail server as a relay, i assume?
+[14:14] <xtbgod> How do i make my ubuntu primary boot OS i got it installed with Win7
+[14:14] <oliver_> Voita: i found an xfce example of a .desktop file http://pastebin.com/dCpLdM3f
+[14:15] <oliver_> Voita: yeah i would write it there if you want to start exactely that one presentation
+=== joaopinto_ is now known as joaopinto
+[14:16] <randyJ> supreme:  try route add default gw ppp0
+[14:17] <Voita> ok tnx oliver I will check that one too
+[14:17] <slutgarden> hello
+[14:17] <oliver_> Voita: :D don't u have a xfce menu?
+[14:17] <Howler> sipior: Yeah, it's just a forward. Redmine just uses the local mail server to email updates (when I change the status on one of my projects). I'm using sendmail, because that's what the tutorial used. It's working fine, just complains in my logs about not knowing it's fqdn
+[14:17] <Voita> no only about xfce
+[14:17] <extra11> ubuntu rocks
+[14:17] <Voita> I browse ny directories to find it
+[14:18] <extra11> got cc compiling stuff now
+[14:18] <erUSUL> elfranne: sonmething like this should work --> for f in ./*; do mv -- "$f" "${f:3}"; done
+[14:18] <Bilz> http://paste.ubuntu.com/571105/ <- final few lines of what i get one i run sudo apt-get update, any ideas?
+[14:18] <erUSUL> elfranne: check first adding an echo -->  for  f in ./*; do echo mv -- "$f" "${f:3}"; done
+[14:19] <oliver_> Voita: just drop that i guess u won't find anything
+[14:19] <elfranne> erSUL  how many characters does it remove ?
+[14:19] <erUSUL> elfranne: btw 3 is the number of chars you want to get rid off
+[14:19] <elfranne> erSUL thx a lot
+[14:19] <erUSUL> !tab | elfranne
+[14:19] <ubottu> elfranne: You can use your <tab> key for autocompletion of nicknames in IRC, as well as for completion of filenames and programs on the command line.
+[14:20] <oliver_> Voita: here another site which might help you -       https://wiki.archlinux.org/index.php/Xfce#Customizing_Startup_Applications              search for "startup applications"
+[14:20] <Voita> no im trying the previous one but it won run the script... says there is no such file or directory
+[14:20] <NeoSentient> Hi all :) Is there anyone lurking here with knowledge of wireless networking on ubuntu 10.10 (Running xubuntu distro based on 10.10)
+[14:20] <erUSUL> elfranne: oops sorry;  logic error.
+[14:21] <Cube``> is it a problem to remove NetworkManager and use Wicd instead? my question is whether removing the package "NetworkManager" will cause any problems by itself
+[14:21] <erUSUL> elfranne: cd direrctory &&  for f in *; do echo mv -- "$f" "${f:3}"; done
+[14:22] <Cube``> is it a problem to remove NetworkManager and use Wicd instead? my question is whether removing the package "NetworkManager" will cause any problems by itself
+[14:23] <skorv> need some help running kismet without sudo
+[14:23] <skorv> keeps telling me kismet_capture should be suid-root
+[14:23] <skorv> but i dont know hot to do it
+[14:24] <elfranne> erUSUL: it does only show the new filenames does not actually rename them
+[14:24] <alisalaah> Ubuntu 10.10 on a new 2010 model Macbook Pro :: Saying I have no bluetooth adapters, I want to setup with my magic mouse, is there a way to get it to work?  i checked forums and did bluez with no success.
+[14:24] <erUSUL> elfranne: with the echo it will not; just remove the echo when you checked that all looks sane
+[14:24] <Cube``> is it a problem to remove NetworkManager and use Wicd instead? my question is whether removing the package "NetworkManager" will cause any problems by itself??
+[14:24] <elfranne> erUSUL:  ah ok thx
+[14:24] <BluesKaj> Cube``, that depends on your /etc/network/interface settings for ethernet , but if your prob is wifi , some have found success with it as I have with the ralink belkin usb wifi adapter
+[14:24] <sipior> skorv: "sudo chmod u+s kismet_capture". obviously not something you would do lightly.
+[14:25] <jrib> Cube``: should be fine
+[14:25] <sipior> skorv: that assumes root owns the above-mentioned file, of course.
+[14:25] <skorv> ah... ok then
+[14:25] <skorv> that i know
+=== endeavormac is now known as rednovae
+[14:25] <Cube``> BluesKaj: well Networkmanager works perfectly, but i need something to connect to the internet when using a tiling WM
+[14:26] <jrib> Cube``: erm, you can use network manager in a tiling wm.  You could still use the applet, or just use nmcli
+[14:27] <oliver_> alisalaah: maybe u need to check if theres a new release of "Linux guest tools"
+[14:27] <Cube``> jrib: i dont have a panel
+[14:27] <jrib> Cube``: then see my second option
+[14:27] <Cube``> ahh nmcli!
+[14:27] <skorv> now to find kismet files
+[14:27] <Cube``> sounds nice
+[14:28] <Cube``> jrib: how to install it? there is no package nmcli
+[14:28] <jrib> Cube``: you already have it
+[14:29] <petesy> Hey if anyone wants to take a look at a small sh script that im having a little trouble with the cancel option it will be appreciated. http://pastebin.com/UyN6iRP2
+[14:30] <jrib> petesy: might try #bash
+[14:30] <petesy> jrib, there not to fond of sh there lol
+[14:31] <jrib> petesy: huh?
+[14:31] <petesy> jrib, yea they freak
+[14:31] <jrib> petesy: your script is a bash script
+[14:31] <BluesKaj> jrib, Cube`` it's cnetworkmanager
+[14:32] <jrib> BluesKaj: although cnetworkmanager also exists, nmcli is a way to interact with nm through the terminal and is part of nm by default in ubuntu
+[14:32] <petesy> jrib, yea but because it says /bin/sh they hated me lol
+[14:32] <jrib> petesy: your script says /bin/bash
+[14:32] <oliver_> Voita:  check out the xubuntu channel #xubuntu
+[14:32] <petesy> jrib, o sorry i must have not changed it back
+[14:33] <BluesKaj> jrib, ok i wasn't aware of that , is it the engine under /etc/network/interfaces ?
+[14:33] <jrib> BluesKaj: no, i believe it's just an interface to nm, with commands instead of clicking
+[14:33] <NeoSentient> Hi all :) My wireless has been running straight "out of the box" with fresh install, but I just noticed in my connection properties it is registering as 150mbps connection, the network is 300mbps, is this just a display error or do I need to configure something to utilise full speed wireless?
+[14:33] <BluesKaj> jrib, intersting , good to know
+[14:35] <gaelfx> NeoSentient: It's probably an issue with the driver not being able to utilise the card fully. What kind of wifi card is it?
+[14:36] <NeoSentient> I'm running 10.10 on a HP Pavilion Dv6 Laptop, the network cards installed are atheros for wifi and realtek for lan as far as I am aware
+[14:37] <ashish> hi pl tell me about download from you tube
+[14:38] <ashish> how to download frm u tube
+[14:38] <compdoc> ashish, there are videos on youtube abot how to d/l videos from youtube
+[14:39] <ashish> yes
+[14:39] <zhou> hi
+[14:39] <LjL> !info youtube-dl | ashish
+[14:39] <ubottu> ashish: youtube-dl (source: youtube-dl): download videos from youtube. In component universe, is extra. Version 2010.08.04-1 (maverick), package size 28 kB, installed size 140 kB
+[14:39] <Jonii^> So, I've finally switched over to Ubuntu. Now I need to figure out how the Linux works. Like, how to become a power user?
+[14:40] <greppy> !sudo | Jonii^
+[14:40] <ubottu> Jonii^: sudo is a command to run command-line programs with superuser privileges ("root") (also see !cli). Look at https://help.ubuntu.com/community/RootSudo for more information. For graphical applications see !gksu (GNOME, Xfce), or !kdesudo (KDE). If you're unable to execute commands with sudo see: http://www.psychocats.net/ubuntu/fixsudo
+[14:40] <ashish> tell me pocudere
+[14:41] <Jonii^> A power user as in "Knows how the system works, and is able to use it effectively to accomplish wide range of tasks"
+[14:41] <ashish> way how to d/l
+[14:41] <LjL> ashish: "sudo apt-get install youtube-dl", then "youtube-dl http://www.youtube.com/blah"
+[14:41] <Cube``> BluesKaj: ahh ok
+=== king is now known as Guest93103
+[14:42] <dustin_> Jonii, i wish
+[14:42] <Cube``> BluesKaj: nope, i dont see it
+[14:42] <steven__> lu les filles :)
+[14:42] <lirakis> i have been using compiz for a while now and i love it ... but i can not seem to find a plugin that allows me to maximize and minimize windows with a keybinding
+[14:42] <BluesKaj> Cube``, see ?
+[14:42] <lirakis> does any one know how to do this?
+[14:42] <jrib> Jonii^: just use the system and explore things to understand how they work (read lots of documentation, setup a vm and break things, read source code).  The rute book is nice too.
+[14:42] <lirakis> i have googled and am not able to find
+[14:43] <jrib> !rute | Jonii^
+[14:43] <ubottu> Jonii^: documentation is to be found at http://help.ubuntu.com and http://wiki.ubuntu.com - General linux documentation: http://www.tldp.org - http://rute.2038bug.com
+[14:43] <simonadameit> hello
+[14:43] <Cube``> BluesKaj: see what?
+[14:43] <Shogoot> Hi guys. I got a old machine with newest Ubunto on. Its really amazing with one flaw i cannot get the wifi to work. I had a friend tell em to use ndiswrapper and followed a guide, but its not working for me. And when i do iwconfig it says lo no wireless extensions eth0 no wireless extensions. Any clue on how to solve this problem of mine?
+[14:43] <Disturbed1> hello
+[14:43] <jrib> lirakis: ask #compiz if there is a more integrated way, but you could use wmctrl
+[14:44] <BluesKaj> Cube``, what don't you see?
+[14:44] <steven__> hello
+[14:44] <steven__> do you have probleme ?
+[14:44] <Cube``> BluesKaj: i do neither have cnetworkmanager, nor do i have nmcli
+[14:44] <jrib> Cube``: what ubuntu version is this?
+[14:44] <Cube``> jrib: 10.04
+[14:45] <BluesKaj> cnetworkmanager is in the repos, Cube``
+=== Glider is now known as sud0
+[14:45] <Dr_Willis> !find nmcli
+[14:45] <ubottu> File nmcli found in knm-runtime, network-manager, plasma-widget-networkmanagement-dbg
+[14:45] <Cube``> BluesKaj: there is no sudo apt-get install cnetworkmanager
+[14:45] <jrib> Cube``: BluesKaj and myself are saying things about maverick
+[14:45] <simonadameit> I have a server with hardy and want to use a new git version on it, ... its not in hardy backports, so what options do I have and which is best? (compiling myself, using some other repo, etc..)
+[14:45] <simonadameit> ?
+[14:45] <Cube``> jrib: ah, that is 1010?
+[14:45] <jrib> Cube``: yes
+[14:46] <Cube``> ah i should upgrade
+[14:46] <erUSUL> simonadameit: i would compile it myself.
+[14:46] <Bilz> http://paste.ubuntu.com/571105/ <- final few lines of what i get one i run sudo apt-get update, any ideas?
+=== shane is now known as JDM_SOHC
+[14:46] <Jonii^> Hey, I think there is a quick key combination that opens some sort of quick search window where you can type stuff and it searches for programs and such
+[14:47] <simonadameit> erUSUL:  that requires installing all the develpment tools on the server, which I wanted to avoid, but maybe its best.
+[14:47] <Cube``> Jonii^: either Alt+F2 or gnome do
+[14:47] <jrib> simonadameit: look for a ppa or official repository from the git project
+[14:47] <erUSUL> simonadameit: in that case why not compile it in your workstation or a vm?
+[14:48] <Jonii^> Cube``, gnome?
+[14:48] <dustin_> how do you command line uninstall all of mythtv( front,and backend)
+[14:48] <steven__> en francais le tchat ?
+[14:48] <Cube``> Jonii^: yes, but my goal is to use xmonad and still be able to connect to wpa2 wifi
+[14:48] <ps3_> hey, is someone able to help me with with ps3vram swap??
+[14:48] <BluesKaj> jrib, no cnetworkmanager or nmcli on 10.04 ?
+[14:48] <Cube``> steven__: cela serait #ubuntu-fr
+[14:48] <jrib> Cube``: if you don't want to upgrade, use wicd-curses (that's what I did in 10.04)
+[14:48] <steven__> merci
+[14:49] <dustin_> ps3_, whats that?
+[14:49] <dustin_> how do you command line uninstall all of mythtv( front,and backend)
+[14:49] <ps3_> its the ram on the ps3 linux
+[14:49] <B-r00t> dustin_: sudo apt-get remove --purge mythtv*
+[14:49] <jrib> Cube``: you can even run regular old wicd-client -n in xmonad too
+[14:49] <ps3_> i think i changed the restrictions
+[14:49] <Dr_Willis> dustin_:  determine the packages names.. watch out for it removeing stuff you might want to keep. the way apt/ubuntu uses meta-packages can make it annoying to remove things
+[14:50] <g[r]eek> Hi is there a flash animation program for ubuntu? I want to make a SWF flash animation
+[14:50] <Dr_Willis> !swf
+[14:50] <g[r]eek> Dr_Willis, I'm guessing that's a no...?
+[14:50] <teolicy> Hi. I'm using 9.10, which has Python 2.6.4. I'd like to upgrade it to 2.6.6 (latest 2.6 release, and the version in 10.10). What's the 'correct' way to go about doing this?
+[14:50] <Dr_Willis> ive seen video -> flash video befor.. but i dont use the stuff
+[14:51] <ps3_> sudo: /etc/sudoers.d/admin is mode 0644, should be 0440
+[14:51] <Dr_Willis> teolicy:  i would check the ppa's  or backports for updated versions
+[14:51] <ps3_> how can i change from 0644 to 0440??
+[14:51] <g[r]eek> ok thanks
+[14:51] <jrib> ps3_: why is it 644 instead of 440?  What exactly did you do to make it that way?
+[14:51] <dustin_> Dr_Willis, i want it all gone
+[14:52] <gaelfx> what can I do to fix choppy playback using vdpau in smplayer?
+[14:52] <Dr_Willis> dustin_:  start removing then.. pay attention to anything else it may try to remove
+[14:52] <ps3_> i think..... i changed it when changing eth1 to eth0... but that is a complete guess...
+[14:52] <^cheeky> hello, iam trying to mount a nfs directory using this comand sudo mount -v 192.168.10.3:files/ /files but i get an internal error message back, in my NFS my export file has these two lines unchecked /files 192.168.10.0/24(rw,no_root_squash,async) and /files 192.168.10.3(rw,async). i also ran sudo exportfs -a  and then restarted the  nfs-kernal server. in the client side i have installed portmap and nfs-common and both are running but i
+[14:52] <^cheeky> still get internal error
+=== Kramer is now known as Guest23084
+[14:52] <jrib> ps3_: what did you run?
+[14:52] <g[r]eek> Oh the other question I had, is it possible to get tabbed chat in Skype?
+[14:52] <roasted_> ping drc
+[14:52] <ps3_> sudo mkswap /dev/ps3vram
+=== Guest23084 is now known as COSMO
+[14:53] <silverlightning> hi
+=== COSMO is now known as COSMO_
+[14:53] <ps3_> im running lxde ubuntu on my ps3.. apprantly it should be an easy swap of VRAM
+[14:54] <ps3_> /dev/ps3vram: Device or resource busy
+[14:54] <Shogoot> Hi guys. I got a old machine with newest Ubunto on. Its really amazing with one flaw i cannot get the wifi to work. I had a friend tell em to use ndiswrapper and followed a guide, but its not working for me. And when i do iwconfig it says lo no wireless extensions eth0 no wireless extensions. Any clue on how to solve this problem of mine?
+[14:54] <Disturbed1> Can anyone tell me how to login to a shell as linuxmce?
+[14:54] <teolicy> Dr_Willis: Sorry, I'm not sure I understand. I didn't find a PPA where someone already pre-pacakged and tested Python 2.6.6 <unconvertable> for 9.10. By "backport" do you mean I should head to https://launchpad.net/ubuntu/+source/python2.6/2.6.6-5ubuntu1, download 2.6.6 sources and patch them with the diff of 10.10, then install that? <unconvertable>
+[14:54] <gaelfx> Shogoot: do you know what kind of card it is?
+[14:54] <shentino> Don't get sued by sony! :P
+[14:54] <jrib> !wifi > Shogoot
+[14:54] <ubottu> Shogoot, please see my private message
+[14:55] <ps3_> hahah.. dontworry, i think im safe from them :P
+=== ps3_ is now known as MaVrIcK
+=== MaVrIcK is now known as Rickycoe
+[14:55] <mikael69> !list
+[14:55] <ubottu> This is not a file sharing channel (or network); be sure to read the channel topic. If you're looking for information about me, type <unconvertable> /msg ubottu !bot <unconvertable>
+[14:56] <Rickycoe> so you guys have any ideas on the reasons why im getting this damn 0644
+[14:57] <WeThePeople> how would i uninstall lubuntu-desktop
+[14:57] <DarkPsy_> hi
+[14:57] <ruan> WeThePeople: sudo apt-get remove lubuntu-desktop?
+[14:58] <NeoSentient> Hmm I was just trying out the youtube-dl command line app but it responds with the error "unable to download video (format may not be available)" the format in question, I assume, is .FLV
+[14:58] <erUSUL> !details | Rickycoe
+[14:58] <ubottu> Rickycoe: Please give us full details. For example: "I have a problem with ..., I'm running Ubuntu version .... When I try to do ..., I get the following output: ..., but I expected it to do ..."
+[14:59] <Bilz> http://paste.ubuntu.com/571105/ <- final few lines of what i get one i run sudo apt-get update, any ideas?
+[14:59] <ruan> hmm
+[14:59] <Rickycoe> im running lxde kubuntu.... need a vram swap
+[14:59] <ruan> is there a way to open a link from irssi with lynx?
+[15:00] <gaelfx> does apt-p2p also work with PPAs?
+=== Rickycoe is now known as Ps3_
+[15:00] <calijames> hi can anyone see me?
+[15:01] <ruan> calijames: yes
+[15:01] <kaspharm> i have 10.10 and compiz fusion - why when i disable compiz i gave nice animation of panel "sliding" from top, but with compiz panel just appering without that animation?
+[15:01] <calijames> ok just checking.
+[15:01] <zamba> calijames: i can even see what you're wearing
+[15:01] <calijames> i just installed ubuntu on my pc
+[15:01] <calijames> i cant really figure out the terminal yet. but i am trying
+[15:01] <simonadameit> how can I check which package would provide a certain file?
+[15:01] <calijames> it's reall neat. i like it better than mac osx
+[15:02] <calijames> where is everyone located?
+[15:02] <calijames> i am in florida
+[15:02] <kaspharm> poland
+[15:02] <calijames> i want to move though it kind of sucks
+[15:02] <ruan> slightly offtopic.
+[15:02] <jrib> Ps3_: stop changing your name please.  It's confusing.  And you never answered my question
+[15:02] <calijames> florida has the weather, it's nice
+[15:02] <calijames> poland  .. i never been. how is it?
+[15:03] <kaspharm> ugly
+[15:03] <jrib> !ot | calijames
+[15:03] <ubottu> calijames: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[15:03] <Disturbed1> am in florida as well calijames
+[15:03] <kaspharm> cold
+[15:03] <Ps3_> im sorry, i keep getting the damn registered nicks
+[15:03] <calijames> really.
+[15:03] <calijames> well florida is ok, but, its just hard to make friends here
+[15:03] <randyJ> Disturbed1:  try sudo su - linuxmce
+[15:03] <calijames> like, you need a lot of money
+[15:03] <jrib> calijames: this channel is dedicated to support.  You can chat in #ubuntu-offtopic
+[15:03] <Disturbed1> Okay, thank you randyJ.
+[15:03] <calijames> how do i join a different channel?
+[15:04] <jrib> calijames: /join #ubuntu-offtopic
+[15:04] <ruan> calijames: /j #[channel]
+[15:04] <calijames> are there people in there?
+[15:04] <kaspharm> is there channel with compiz support?
+[15:04] <jrib> kaspharm: #compiz
+=== 13WAA7M3T is now known as eniac_petrov
+[15:04] <kaspharm> thx
+[15:04] <tcg_> How do I register my nick?
+[15:04] <Reventlo1>  /msg Nickserv help
+[15:05] <Reventlo1> btw, read the man :)
+[15:05] <Disturbed1> randyJ: terminal tells me Unknown id: linuxmce
+=== Reventlo1 is now known as reventlov
+[15:06] <gaelfx> in the apt-p2p package, the description says "The configuration is very simple, and only involves prepending 'localhost' and the port to your current sources.list lines (similarto other apt-proxy-like software)." Does this mean I have to do that manually for this to work, or does that mean the package will take care of it?
+[15:06] <skorv> cant find kismet files in ubuntu 10.04
+[15:07] <skorv> anyone has any idea where they are?
+[15:07] <ruan> is it possible to view images in terminal or am i going too far?
+[15:07] <ActionParsnip> info kismet
+[15:07] <jrib> ruan: it's possible... see fbi
+[15:07] <adub__> running xfce my wireless icon in the upper right has disappeared dunno why how can i get it back???
+[15:07] <randyJ> Disturbed1: so, linuxmce is not a user-id on your computer?
+[15:07] <gaelfx> Launchpad is sooooo slow in China
+[15:08] <Disturbed1> i guess not.  i really don't know.  i'm still a noob at that, and at using terminal.
+[15:08] <Disturbed1> lol
+[15:08] <skorv> info kismet doesnt give me the path :P
+[15:08] <WeThePeople> what is an openbox session
+[15:08] <ruan> terminal has an irc client and a browser, so it is quite good
+[15:08] <juk> !kismet | scrooloose
+[15:08] <ruan> if installed
+[15:09] <juk> oops
+[15:09] <juk> !kismet | skorv
+[15:09] <souterrain> Is it preferable to use x86 or amd64 when installing ubuntu on macbook2,1?
+[15:09] <souterrain> i.e., are there any driver caveats to be concerned with using 64-bit?
+[15:09] <ActionParsnip> souterrain: how much ram do you have
+[15:09] <ruan> souterrain: depends on the specifications
+[15:09] <souterrain> 2GB RAM
+[15:09] <ruan> souterrain: 32bit then
+[15:09] <geekbri> anybody know of good documentation for creating your own init scripts on ubuntu ?
+[15:09] <jrib> souterrain: 64-bit installer for 10.10 won't work (see release notes), so if you want 64bit 10.10, use 10.04 and upgrade
+[15:09] <juk> somebody removed it, was yesterday
+[15:09] <ActionParsnip> souterrain: then either is fine
+[15:10] <ActionParsnip> geekbri: bum can help
+[15:10] <jrib> !upstart | geekbri
+[15:10] <ubottu> geekbri: Upstart is meant to replace the old Sys V Init system with an event-driven init model.  For more information please see: http://upstart.ubuntu.com/
+[15:10] <ruan> so it's possible to see an image in terminal?
+[15:11] <geekbri> yes i was trying to use init.d so as to make it easily usable on my debian boxes as well :)
+[15:11] <souterrain> Any benefit from using 64-bit other than "zomg 64 bit!"
+[15:11] <gaelfx> ruan: you can watch movies in terminal using vlc, it's trippy and awesome
+[15:11] <ruan> gaelfx: wow
+[15:11] <geekbri> souterrain: double the amount of addressable space for the cpu ?
+[15:11] <jrib> geekbri: then read /etc/init.d/skeleton
+[15:11] <geekbri> jrib: thanks
+[15:11] <souterrain> geekbri: yes, but only 2GB RAM...
+[15:11] <gaelfx> ruan: it's all ascii artish, but often the colors aren't wrong
+[15:12] <ActionParsnip> souterrain: if you do a lot of sound manipulation of video rendering it will help
+[15:12] <souterrain> geekbri: 32-bit should go to... 4GB is it?
+[15:12] <ruan> i dont mind acii :D
+[15:12] <ruan> ascii*
+[15:12] <gaelfx> geekbri: double? you're kidding, right?
+[15:12] <shaullx> hi, i can't mount my sd card, dmesg prints this: [ 2492.912847] usb-storage: device scan complete [ 2492.913465] scsi 17:0:0:0: Direct-Access     Motorola A853             0001 PQ: 0 ANSI: 2 [ 2492.913855] sd 17:0:0:0: Attached scsi generic sg3 type 0 [ 2492.917820] sd 17:0:0:0: [sdc] Attached SCSI removable disk
+[15:12] <ActionParsnip> souterrain: you can install PAE to access 64Gb RAM but each process will only be able to use 3.2Gb RAM
+[15:12] <WeThePeople> ActionParsnip: i have deleted my admin pass for WinXP through knoppix using chntpw, but i still cant login into it, any ideas
+[15:12] <gaelfx> !pb | shaullx
+[15:12] <ubottu> shaullx: For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://imagebin.org/?page=add | !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+[15:12] <souterrain> gaelfx: hah, yeah, you're right
+[15:12] <ActionParsnip> WeThePeople: did you set a blank pass?
+[15:12] <jrib> ruan: you'll see the actual image with something like fbi
+[15:12] <shaullx> it wasn't that long x.x
+=== Craig_Dem_ is now known as Craig_Dem
+[15:12] <WeThePeople> ActionParsnip: yes
+[15:13] <Roasted__> Has anybody used Wifi Radar? I'm using it to map out the MAC addresses of which access points are where in our buildings, but I noticed Wifi Radar is returning me a Mac address that isn't 100% to the sticker on the AP I'm looking at. It's off by 2 digits. Uhh??
+[15:13] <ActionParsnip> WeThePeople: and did you let the chkdsk complete?
+[15:13] <souterrain> ActionParsnip: oh, the registers are also 64-bit, ok
+[15:13] <ActionParsnip> Roasted__: nmap is good like that
+[15:13] <ActionParsnip> souterrain: ?
+[15:13] <Roasted__> ActionParsnip, it'll handle what I need?
+[15:14] <ActionParsnip> souterrain: yes in the cpu the registers are 64bits long
+[15:14] <WeThePeople> ActionParsnip: idk, i let the chntpw complete, but i didnt use chkdsk
+[15:14] <ActionParsnip> Roasted__: if you are finding mac addresses, it should be fine
+[15:14] <souterrain> ActionParsnip: regarding your comment about video/audio editing, I imagine large registers would help in this regard
+[15:14] <ActionParsnip> WeThePeople: usually windows panics and chkdsks after you use the app
+[15:14] <gaelfx> is launchpad really slow for anyone else?
+[15:14] <souterrain> But ultimately I was concerned with certain hardware drivers being 32-bit only.
+[15:15] <paulina> yeas you do mbi cos
+[15:15] <ActionParsnip> souterrain: yes, SQL servers also benefit too, anything data intensive benefits. Standard word processing and web browsing doesn't benefit much at ll
+[15:15] <paulina> ola
+[15:15] <gaelfx> souterrain: most drivers are built-in to the kernel, so I wouldn't worry about that so much
+[15:15] <WeThePeople> ActionParsnip:  so should i run chkdsk in knoppix for the windows F.S.?
+[15:15] <ActionParsnip> gaelfx: its the central point for hundreds of projects, so its usually busy and therefore, slow
+[15:16] <souterrain> gaelfx: the weird one is the internal Apple iSight
+[15:16] <gui_> yl
+[15:16] <gaelfx> souterrain: when the 64-bit kernel first came out, it was a mess getting anything to work, but nowadays, it's pretty awesome
+[15:16] <paulina> Hola mi nombre es Paulina hablo espanol y un poco de ingles.
+[15:16] <gui_> hi
+[15:16] <Aiden> First time IRC, relatively new Linux user.  Suggested IRC sites?
+[15:16] <ActionParsnip> WeThePeople: i'd make sure you reset the password ok
+[15:16] <erUSUL> !es | paulina
+[15:16] <ubottu> paulina: En la mayoria de canales de Ubuntu se habla solo en ingles. Si busca ayuda en espanol o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[15:16] <paulina> ya eske yo hablo espanol
+[15:17] <manuel_> 1515
+[15:17] <gaelfx> who do I give money to to set up a launchpad server in china?
+[15:17] <compdoc> <- only speaks american
+[15:17] <calijames> hahah
+[15:17] <gaelfx> !es | paulina
+[15:17] <ubottu> paulina: En la mayoria de canales de Ubuntu se habla solo en ingles. Si busca ayuda en espanol o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[15:17] <erUSUL> paulina: Escribe "/join #ubuntu-es" (sin comillas) y dale a enter para entrar en el canal en espanol. en este canal solo se puede hablar ingles
+[15:17] <aeon-ltd> Aiden: uhh none, got a question about irc ask in freenode or your client's channel
+[15:17] <geekbri> im sorry if my dumbing down of 64bit vs 32bit was too simple of an answer.  2^32 vs 2^64.  better?
+[15:17] <souterrain> jrib: iirc, I installed xubuntu 10.10 x86_64 without issue... different installer I suppose?
+[15:17] <COSMO_> mi sa ch enon ho capito come devo rinominare
+[15:17] <souterrain> (different machine)
+[15:18] <AbhijiT> !64 | geekbri
+[15:18] <ubottu> geekbri: AMD64 and Intel 64 are fully supported architectures on Ubuntu. See https://help.ubuntu.com/community/CommonQuestions#AMD64%20Processors and http://en.wikipedia.org/wiki/Amd64 for more information.
+[15:18] <DJones> !it | COSMO_
+[15:18] <ubottu> COSMO_: Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi <unconvertable> /join #ubuntu-it <unconvertable> senza virgolette)
+[15:18] <gaelfx> geekbri: the acceptable response was "A butt-load more RAM to access"
+[15:18]  * gaelfx needs to start thinking before he types
+[15:18] <jrib> souterrain: https://bugs.launchpad.net/ubuntu/+source/linux/+bug/633983 is the relevant bug
+[15:18] <ubottu> Ubuntu bug 633983 in linux (Ubuntu Maverick) "Can't boot Maverick beta amd64 live cd on macbook (EFI)" [High,Incomplete]
+[15:19] <paulina> hola por favor yo hablo espanol no ingles.
+[15:19] <BajK> to make a /usr/share/autostart not being triggered, is it enough to just rename it to .desktop_ ?
+[15:19] <Roasted__> ActionParsnip, is zenmap what you were referring to? Isn't nmap an actual terminal app or command?
+[15:20] <paulina> hello my name is paulina i love you.
+[15:20] <souterrain> jrib: ah, specific to macbook EFI, ok, thanks for the warning.
+=== marienz_ is now known as marienz
+[15:20] <paulina> hello.
+[15:20] <paulina> hello
+[15:20] <gaelfx> !es > paulina
+[15:20] <ubottu> paulina, please see my private message
+[15:20] <Okley> please paulina
+[15:20] <juk> !gui | Roasted__:
+[15:20] <ubottu> Roasted__:: The graphical user interface (GUI) in Ubuntu is composed of many elements, including the !X server, a window manager, and a desktop environment such as !GNOME or !KDE (which themselves use the !GTK and !Qt toolkits respectively)
+[15:20] <juk> !cli | Roasted__:
+[15:20] <ubottu> Roasted__:: The linux terminal or command-line interface is very powerful. Open a terminal via Applications -> Accessories -> Terminal (Gnome) or K-menu -> System -> Konsole (KDE).  Guide: https://help.ubuntu.com/community/UsingTheTerminal or type in it: man intro
+[15:20] <juk> !es | paulina
+[15:20] <ubottu> paulina: En la mayoria de canales de Ubuntu se habla solo en ingles. Si busca ayuda en espanol o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[15:21] <paulina> whats my no inges hablo spain
+[15:21] <Roasted__> juk, yes. I already knew that. Thank you so much!
+[15:21] <ruan> indeed powerful.
+[15:21] <juk> Roasted__: nice :)
+[15:21] <juk> Roasted__: smarty :)
+[15:21] <Okley> lets make small wonder babies paulina
+[15:22] <vadik> =)
+[15:22] <ActionParsnip> Roasted__: nmap is a command line app to find stuff on networks
+[15:23] <erUSUL> paulina: tienes que escribir "/join #ubuntu-es" sin las comillas y darle a enter en donde escribes normalmente para entrar en el canal en castellano.
+[15:23] <Roasted__> ActionParsnip, well my goal is to walk into an area and based on signal strength determine exactly whcih access point is placed where based on mac address. How would nmap via terminal help in that case? Would it be able to tell me that info?
+[15:24] <paulina> hello
+[15:24] <BajK> it, was sufficient :)
+[15:24] <paulina> hello floo
+[15:24] <paulina> i am yo
+[15:24] <Bilz> http://paste.ubuntu.com/571105/ <- final few lines of what i get one i run sudo apt-get update, any ideas?
+[15:25] <AbhijiT> hi paulina do you have ubuntu question?
+[15:25] <theos> erUSUL, hi! i tried the way you suggested to convert m4b to ogg. but it didnt work for me. any other ways?
+[15:25] <paulina> wats?
+[15:25] <paulina> yes,yes
+[15:25] <DJones> paulina: This channel is for ubuntu support, if you have a support question please ask it in the channel in English, otherwise the channel isn't appropriate for general chat
+[15:25] <AbhijiT> :-o
+[15:26] <paulina> :D
+[15:26] <theos> paulina, no hablo englise? :)
+[15:27] <paulina> no no hablo ingel
+[15:27] <mix22891> hello!
+[15:27] <dtcrshr> !es | paulina
+[15:27] <ubottu> paulina: En la mayoria de canales de Ubuntu se habla solo en ingles. Si busca ayuda en espanol o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[15:27] <Pici> !es | paulina
+[15:27] <BluesKaj> !es | paulina
+[15:27] <paulina> no hablas tu ingles
+[15:27] <theos> lol
+[15:27] <ruan> lol
+[15:27] <dtcrshr> combo!
+[15:27] <paulina> mmm lol
+[15:27] <mix22891> i can't find the racly bin
+[15:27] <paulina> haber kien habla espanol
+[15:27] <BluesKaj> hehe , no hablas espanol
+[15:27] <bastidrazor> thats like 5 !es triggers to someone who is obviously ignoring them.. funny
+[15:27] <gaelfx> paulina: Si busca ayuda en espanol o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[15:27] <paulina> <unconvertable> ?
+[15:27] <theos> :)
+[15:27] <ruan> lol
+[15:28] <juk> jeez
+[15:28] <dtcrshr> bastidrazor, probably trolling
+[15:28] <mix22891> the trash kan
+[15:28] <dtcrshr> well, flamebait sucessful implemented
+[15:28] <paulina> q_a_z_steve, uien habla espanpol
+[15:28] <gaelfx> there is a simple solution for trolling
+[15:28]  * BluesKaj shakes his head ...female trolls , a rare occurrence
+[15:28] <mix22891> i can't find the trash kan
+[15:28] <dtcrshr> thats a good one
+[15:28] <Pici> Lets get back to support folks.
+[15:29] <ActionParsnip> Roasted__: not sure, the guys in #networking may know.I'd hang here too, others may be able to advise
+[15:29] <juk> nice
+[15:29] <dtcrshr> mix22891, the sortcut?
+[15:29] <adub__> how do i determine a drives uuid ??
+[15:29] <gaelfx> BluesKaj: how did you know she was a she?
+[15:29] <ruan> mix22891: is the trash kan on the panel?
+[15:29] <Roasted__> ActionParsnip, thanks bro
+[15:29] <Pici> mix22891: Are you looking for an icon, or the location of the trash on your drive?
+[15:29] <bastidrazor> adub__: sudo blkid
+[15:29] <mix22891> yes, anything
+[15:29] <theos> yeah so talking about ubuntu, anyone has an idea how to play .m4b files?
+[15:29] <Pici> !trash | mix22891
+[15:29] <ubottu> mix22891: The location of Trash has changed since 8.04, it is now located in ~/.local/share/Trash | Looking for the trash in previous versions: ~/.Trash
+[15:29] <mix22891> icon
+[15:29] <BluesKaj> gaelfx, I guessed , by the name
+[15:29] <erUSUL> !uuid > adub__

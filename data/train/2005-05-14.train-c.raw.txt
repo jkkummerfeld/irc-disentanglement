@@ -1,0 +1,1500 @@
+[09:07] <jacquesmerde> well, its on DHCP
+[09:07] <ivoks> jacquesmerde so what?
+=== subhankar [~bunty@202.177.162.242]  has left #ubuntu []
+[09:07] <karsten> jacquesmerde: Dude.  Static.
+[09:07] <ivoks> jacquesmerde u steel need dns
+[09:07] <thoreauputic> jacquesmerde, you need your computer's name and IP in the other machines' /etc/hosts
+[09:07] <jacquesmerde> ivoks, how do i use this DNS mastery? why doesnt ubuntu do it be default? archlinux does, and it does NOTHING for me by default
+[09:07] <ivoks> jacquesmerde u are wrong, man
+[09:07] <karsten> jacquesmerde: Ubuntu aims for desktop.  It doesn't install servers by default.
+[09:08] <karsten> jacquesmerde: aptitude install bind9 and RTFM.
+[09:08] <ivoks> jacquesmerde no software knows what computers are on network
+[09:08] <jacquesmerde> thoreauputic, thats hard if its DHCP though
+[09:08] <karsten> jacquesmerde: The usual DHCP solution is to provide DNS for IPs, hand them out arbitrarially, and the result is that the hostname doesn't tie to any one computer.
+[09:08] <jacquesmerde> ivoks, what i plug in 192.168.1.1 into my browser and look at my routers setup, i can click on "dhcp table" and it shows me a "client hostname" for every computer connected EXCEPT for the ubuntu machine
+[09:09] <karsten> jacquesmerde: Which *still* isn't going to solve your problem.
+=== fdr [~fdr@62.97.40.10]  has joined #ubuntu
+[09:09] <IIIEars> won't a router referee DHCP for a LAN?
+[09:09] <fdr> hello
+[09:09] <karsten> jacquesmerde: Hint, and I'm going to whisper this in your ear
+[09:09] <ivoks> jacquesmerde ?
+[09:09] <cyphase> jacquesmerde, i've had that problem as well. i have to hand set it
+=== jowe [~jowe@67-41-229-200.slkc.qwest.net]  has joined #ubuntu
+[09:09] <karsten> jacquesmerde: YOU DON'T NEED TO USE DHCP FOR WHAT YOU'RE DOING, AND IN FACT, YOU DON'T *WANT* TO USE DHCP FOR WHAT YOU'RE DOING.  FIND AN IP _OUTSIDE_ THE LEASE RANGE, AND ASSIGN IT TO YOUR BOX.
+[09:09] <jacquesmerde> cyphase, hand set it as in manually set the IP? or set the IP manually on each connection
+[09:10] <karsten> jacquesmerde: You've been rambling on this crap for hours.  Last clue, dude.
+[09:10] <c-sic> hi:)
+[09:10] <cyphase> jacquesmerde, i had to hand set a hostname. the IP address was already set
+=== freewoody [~bill@202.79.52.59]  has joined #ubuntu
+[09:10] <jacquesmerde> karsten, yeah, i figure that's my contingency plan. but somehow what i'm wanting to do seems so basic i feel i shouldnt need to
+[09:10] <thoreauputic> jacquesmerde, static IP is quite easy for a small LAN
+[09:10] <IIIEars> ah
+=== karsten ignors jacquesmerde
+[09:10] <ivoks> he's trying to say that all windows machines provide their hostname to dhcp server
+[09:10] <ivoks> but ubuntu doesn't
+[09:11] <ivoks> i guess
+[09:11] <ivoks> :)
+[09:11] <karsten> ivoks: That's WINS, not DNS.
+[09:11] <jowe> I'm having trouble getting the driver working for my wireless...:( any ideas? I'm not sure if I found the real driver for windows. I guess I need the bcmwl5.inf one.
+[09:11] <jacquesmerde> ok, let me put my question in one final form: what are the keywords related to what i'm trying to understand here, so i can google and RTFM
+[09:11] <ivoks> karsten no, no...
+[09:11] <karsten> jowe: Talk to metalsand
+[09:11] <karsten> ivoks: yes yes yes.
+[09:11] <ivoks> karsten when u bring up dhcp server
+[09:11] <jacquesmerde> jowe, my computer uses that .inf
+[09:11] <ivoks> karsten and it starts to give leases
+[09:11] <karsten> ivoks: ... Default Windows name resolution order is WINS, then BIND.
+[09:11] <ivoks> karsten usually it writes something like:
+[09:11] <karsten> ivoks: Your host announces itself to the network via WINS.  That's how it's found.
+[09:11] <jowe> jacquesmerde - do you know where I can download the .inf?
+[09:12] <Fahim> morgning.. somebody here who speaks german?
+[09:12] <karsten> Fahim: Nur ein bisschen.
+[09:12] <karsten> Fahim: Velleicht #debian-de ?
+[09:12] <freewoody> Hi all
+[09:12] <thoreauputic> Fahim,  /join #ubuntu-de
+[09:12] <ivoks> karsten May  6 09:11:59 localhost dhcpd: DHCPREQUEST for 192.168.0.230 from 00:11:2f:7e:f5:03 (demosi1) via eth1
+[09:12] <Fahim> :)
+[09:12] <freewoody> How do I setup mrtg in Ubuntu to monitor my network connections
+[09:12] <Fahim> thx but they are all sleeping there :)
+[09:12] <karsten> Fahim: ...oder #ubunt-de
+[09:12] <jacquesmerde> jowe, no! i had to get someone on this channel to email it to me
+[09:12] <ivoks> karsten but then u have: May  6 09:12:08 localhost dhcpd: DHCPREQUEST for 192.168.0.42 from 00:08:02:c8:7b:0e via eth1
+[09:12] <metalsand> Woah, German
+=== metalsand [~veritas@ip68-231-196-244.oc.oc.cox.net]  has left #ubuntu ["Leaving"]
+=== metalsand [~veritas@ip68-231-196-244.oc.oc.cox.net]  has joined #ubuntu
+=== Fac51 [~oteroj@pcp0011969723pcs.indpnd01.mo.comcast.net]  has joined #ubuntu
+[09:12] <karsten> ivoks: Oi.  That's DHCP...
+[09:12] <metalsand> Ack.
+[09:12] <Fac51> yO!
+[09:13] <jowe> jacquesmerde - lol thanks anyway. I'll have to do the same.
+[09:13] <ivoks> karsten and that isn't over WINS
+=== concept10 [~chatzilla@c-67-166-167-125.hsd1.tx.comcast.net]  has joined #ubuntu
+[09:13] <Fac51> all i need is a link... i think
+[09:13] <fdr> hello... I'm trying to use heartbeat under ubuntu, but I'm experiencing some problems. I've heard that downgrading to a kernel 2.6.9 or 2.4.x could help... Is there any such image in the ubuntu repositories? I cannot find any. :-(
+[09:13] <Fac51> i need sndconfig, but can't seem to find one that will install on Hoary
+[09:13] <c-sic> metalsand, woah german...
+[09:13] <karsten> ivoks: Welcome to port 67
+[09:13] <Fahim> SO I will try it in english: I want to connect with WLAN WEP to my router... but my router does not give my laptop with ubuntu a IP With DHCP....
+[09:13] <Fahim> does anybody know what I am doing wrong?
+[09:13] <fdr> thanks to whoever may help
+[09:13] <metalsand> German is crazy
+[09:13] <ivoks> karsten u see, some does send hostname, some doesn't
+[09:13] <concept10> gosh, ubuntu is taking forever to install on my spare celeron 333mhz box
+[09:13] <metalsand> I'm 50% german, my dad is full.
+[09:14] <Seveas> fdr, it's called linux-image-SOME_VERSION_NUMBER
+[09:14] <metalsand> Although I know like 6 words.
+[09:14] <ivoks> karsten this are both windows machines
+[09:14] <karsten> ivoks: DHCP request an IP from a MAC address.  Your point?
+=== poornima [~poornima@203.145.183.210]  has joined #ubuntu
+[09:14] <ivoks> karsten but look at first request... it writes hostname "(demosi1)"
+[09:14] <karsten> ivoks: Want the RFC references?
+[09:14] <jowe> does anyone here have the bcmwl5.inf driver? I need it to get my wireless working.
+[09:14] <ivoks> karsten :)
+[09:14] <holycow> karsten is in a fitin' mood tonite!
+=== holycow hides his matador suit
+[09:14] <stuNNed> heh
+[09:15] <karsten> holycow: Get stuffed ;-)
+[09:15] <metalsand> Jowe: You ARE trying to get this working for Ubuntu, aren't you?
+[09:15] <holycow> hehe :)
+[09:15] <metalsand> karsten, how do you know German?
+[09:15] <ivoks> karsten i'm just trying to exaplin what jacquesmerde is complaining about
+[09:15] <karsten> metalsand: Good beer.
+[09:15] <stuNNed> karsten: so what offeres up the hostname to the dhcp server?
+=== mlh [~mlh@c211-30-62-11.belrs1.nsw.optusnet.com.au]  has joined #ubuntu
+=== oferw [~chatzilla@HFA62-0-188-36.bb.netvision.net.il]  has joined #ubuntu
+[09:15] <metalsand> karsten, har har
+[09:15] <da_bon_bon> hey, has the ubuntu ftp archive key changes ?
+[09:15] <Seveas> stuNNed, the dhcp client
+[09:15] <da_bon_bon> *d
+[09:15] <stuNNed> Seveas: ah ok thanks
+[09:15] <fdr> Seveas, : yeah, I did that, but I can only find 2.6.10 and 2.6.11
+[09:16] <karsten> stuNNed: Unless I'm grossly mistaken (and this is a posibility), your typical Windows LAN nameservice is *WINS*, *not* DNS.
+[09:16] <jacquesmerde> ivoks, am i REALLY an idiot?
+[09:16] <jowe> metalsand, yeah for ubuntu (well, kubuntu I guess.)
+[09:16] <Seveas> fdr, apt will not show it if you're on hoary, but you can download the deb from archive.ubuntu.com
+[09:16] <ivoks> jacquesmerde yes
+[09:16] <ivoks> :))
+[09:16] <stuNNed> karsten: unless WINS is disabled i would guess
+[09:16] <karsten> stuNNed: Now that's an empirically testable hypothesis.
+[09:16] <ivoks> jacquesmerde go to /etc/dhcp3 dir
+[09:17] <Seveas> karsten, a dhcp client can send a hostname in a dhcp request...
+[09:17] <karsten> ivoks: You sure your windows host doesn't have a locally assigned name it's passing on, or that your logging tool isn't assigning it a name based on a WINS IP lookup?
+[09:17] <ivoks> jacquesmerde and remove comment "send host-name"
+[09:17] <Seveas> no need to use wins
+[09:17] <jacquesmerde> ivoks, /etc/dhcpc?
+[09:17] <stuNNed> Seveas: how does the dhcp client get the hostname?
+[09:17] <ivoks> karsten it isn't about logging tool, it's about dhclient
+[09:17] <Seveas> stuNNed, that's set in /etc/hostname
+[09:18] <ivoks> jacquesmerde /etc/dhcp3/
+[09:18] <Seveas> just the name you gave it upon install
+[09:18] <Seveas> or another name if you changed it...
+[09:18] <ivoks> jacquesmerde there is file dhclient.conf
+[09:18] <karsten> Seveas: DHCP (and also BOOTP with Vendor Extensions) provide a mechanism whereby the server can provide the client with information about how to configure its network interface (e.g., subnet mask), and also how the client can access various network services (e.g., DNS, IP routers, and so on).
+[09:18] <karsten> Seveas: From TFM>
+[09:18] <karsten> Seveas: ...dhcpd.
+[09:18] <karsten> ivoks: What's your logger?
+[09:18] <jacquesmerde> ivoks, sorry
+[09:18] <ivoks> karsten syslogd
+[09:18] <c-sic> evoks...lol
+[09:19] <karsten> ivoks: Try tcpdump
+[09:19] <ivoks> :)
+[09:19] <jacquesmerde> ivoks, cool. then what's the ubuntu equivalent of /etc/rc.d/network restart?
+=== thomo [~thomo@203-59-133-220.dyn.iinet.net.au]  has joined #ubuntu
+[09:19] <ivoks> karsten man, dhcp clients can send or don't send their hostnames
+[09:19] <ivoks> jacquesmerde u don't need to do that
+[09:19] <ivoks> karsten period
+[09:19] <Seveas> karsten, please read a bit more you obviously don;t know all about it
+[09:19] <jacquesmerde> editing that text file will spontaneously start hostname sending?
+[09:20] <jacquesmerde> i had a feeling hostname sending was a simple togglable thing
+[09:20] <stuNNed> Seveas: heh
+=== fahim_ [~fahim@c141071.adsl.hansenet.de]  has joined #ubuntu
+[09:20] <metalsand> karsten is so mysterious.
+[09:20] <da_bon_bon> hey, gpg key has chnaged ??
+[09:20] <da_bon_bon> W: GPG error: http://archive.ubuntu.com hoary-updates Release: The following signatures were invalid: BADSIG 40976EAF437D05B5 Ubuntu Archive Automatic Signing Key <ftpmaster@ubuntu.com>
+[09:20] <karsten> Seveas: Didn't say I did.
+[09:20] <ivoks> jacquesmerde u can try ifup eth0 down and then ifup eth0 up
+[09:20] <jacquesmerde> ivoks, oh yeah
+[09:20] <da_bon_bon> jacquesmerde: use gui
+[09:20] <jacquesmerde> cheers
+[09:20] <Seveas> karsten, then please stop telling nonsense and stop confusing others
+[09:20] <karsten> Seveas: What I *don't* see is anything saying DHCP (w/o proprietary vendor extensions) is communicating hostname to client.
+[09:20] <jacquesmerde> da_bon_bon, how do i use the gui?
+=== poornima is now known as bhoomi
+[09:20] <karsten> Seveas: Prove me wrong.
+[09:20] <holycow> http://www.ifilm.com/?sctn=help&pg=player <-- heh
+[09:20] <Seveas> karsten, read the rfc
+[09:21] <karsten> Seveas: That's not a challenge.
+[09:21] <fdr> Seveas : is there any search function for archive.ubuntu.com please?
+[09:21] <Seveas> or even the dhcp client's documentation
+[09:21] <karsten> Seveas: As it happens, I'm googling for same ATM.
+[09:21] <Seveas> fdr, packages.ubuntu.com
+[09:21] <karsten> fdr: Google.
+[09:21] <stuNNed> karsten: what's the deal?  a dhcp client can or cannot send the hostname, it seems.
+[09:21] <holycow> basically ifilm is telling everyone f.u. turn off popup blocking, antispyware, and all other protection on a machine
+[09:21] <holycow> amazing
+[09:21] <stuNNed> holycow: lol
+=== xris [~xris@xris.forevermore.net]  has left #ubuntu []
+[09:22] <Seveas> karsten, read the SAMPLE section for man dhclient.conf
+[09:22] <karsten> stuNNed: The deal is I think the information's wrong.  Point me at an authoritative source that says otherwise and I'll be happy to concede the point.
+=== pce-matty [~matty@202.9.60.14]  has joined #ubuntu
+[09:22] <karsten> stuNNed: Hand waving's shit.
+[09:22] <karsten> Seveas: Sec.
+[09:23] <cyphase> New IRC channel for The ShoutNet Project ----- Find it at #shoutnet on irc.freenode.com
+=== manzanita [~manzanita@166.Red-80-59-173.pooles.rima-tde.net]  has joined #ubuntu
+[09:23] <ivoks> u can even change MAC address
+[09:24] <Seveas> karsten, and man dhcp-options can enlighten you too
+=== amandine [~amandine@81.56.251.166]  has joined #ubuntu
+=== mz2 [~mz2@81.1.89.151]  has joined #ubuntu
+[09:24] <thomo> hi everyone, any fluxbox users about?
+[09:25] <stuNNed> karsten: what does WINS have to do with a dhcp server listing hostnames?  i think nothing.  a dhcp server does not support WINS in any form or fashion.
+[09:25] <ivoks> stuNNed it does
+[09:25] <ivoks> stuNNed it can provide WINS info to clients :)
+[09:25] <stuNNed> ivoks: aha, thanks for the correction
+[09:25] <karsten> stuNNed: Stop playing rhetoric.
+[09:25] <karsten> Seveas: Reading.
+[09:26] <metalsand> eth2      IEEE 802.11-DS  Nickname:"Prism  I"
+[09:26] <metalsand>           Mode:Managed
+[09:26] <metalsand>           RTS thr:off
+[09:26] <metalsand> Why does my eth2 display so little data?
+[09:26] <karsten> metalsand: ifconfig?
+[09:26] <ivoks> iwconfig
+=== dabaSlon [~dbernar1@wnpgmb02dc1-56-236.dynamic.mts.net]  has joined #ubuntu
+[09:26] <metalsand> bigpaste... warning
+[09:26] <metalsand> Link encap:Ethernet  HWaddr 00:02:6F:36:90:11
+[09:26] <metalsand>           inet6 addr: fe80::202:6fff:fe36:9011/64 Scope:Link
+[09:26] <metalsand>           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+[09:26] <metalsand>           RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+[09:26] <metalsand>           TX packets:0 errors:80 dropped:0 overruns:0 carrier:0
+[09:26] <metalsand>           collisions:0 txqueuelen:1000
+[09:26] <stuNNed> karsten: be nice, fella
+[09:26] <metalsand>           RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+[09:26] <Seveas> metalsand, DONT PASTE HERE
+[09:26] <metalsand>           Interrupt:3 Base address:0x100
+[09:26] <metalsand> Link encap:Ethernet  HWaddr 00:02:6F:36:90:11
+[09:26] <metalsand>           inet6 addr: fe80::202:6fff:fe36:9011/64 Scope:Link
+[09:26] <metalsand>           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+[09:26] <metalsand>           RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+[09:26] <ivoks> jesus...
+[09:26] <metalsand>           TX packets:0 errors:80 dropped:0 overruns:0 carrier:0
+[09:27] <metalsand>           collisions:0 txqueuelen:1000
+[09:27] <Seveas> metalsand, fool!!
+[09:27] <stuNNed> in the name of...
+[09:27] <metalsand>           RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+[09:27] <karsten> stuNNed: Be relevant.
+[09:27] <metalsand>           Interrupt:3 Base address:0x100
+[09:27] <metalsand> sorry :x
+[09:27] <ivoks> warning, kickban
+[09:27] <ivoks> :)
+[09:27] <karsten> Seveas: What's the server do with the host-name option?
+[09:27] <Seveas> metalsand, there's #flood for that or use a pastebin
+[09:27] <jacquesmerde> ivoks, grrrrr. didnt work
+[09:27] <metalsand> I'm in flood
+[09:27] <metalsand> But i started talking in here
+[09:27] <metalsand> karsten, there's no inet address for eth2
+[09:27] <ivoks> jacquesmerde yes it did
+[09:28] <Seveas> karsten, the server gets this info from the client if in the client the send host-name directive is used
+[09:28] <Seveas> and that's what is displayed
+[09:28] <jacquesmerde> ivoks, lol. no
+[09:28] <da_bon_bon> someone, please tell me the main server gpg key is screwed up ?
+[09:28] <ivoks> jacquesmerde ur dhcp server now knows the name of ur host
+[09:28] <ivoks> jacquesmerde but that doesn't mean that u can ping that machine by it's hostname
+=== jsg [~jsg@202.57.71.236]  has joined #ubuntu
+[09:28] <ivoks> jacquesmerde u need DNS for that
+[09:28] <fdr> I'm sorry to bother you again, people... but I cannot find any kernel image version 2.6.8/9 nor 2.4.x for i386... could you please have a look and tell me if I'm doing something wrong or it is not there? I searched with packages.ubuntu.com and browsed archive.ubuntulinux.org
+[09:28] <karsten> Seveas: Got it.   dhcpd.conf(5):  " The DHCP server determines the client's hostname ..."
+[09:29] <Seveas> May  6 09:11:59 localhost dhcpd: DHCPREQUEST for 192.168.0.230 from 00:11:2f:7e:f5:03 (demosi1) via eth1
+[09:29] <jacquesmerde> ivoks, i beg to differ
+[09:29] <da_bon_bon> HELP!!! W: GPG error: http://archive.ubuntu.com hoary-updates Release: The following signatures were invalid: BADSIG 40976EAF437D05B5 Ubuntu Archive Automatic Signing Key <ftpmaster@ubuntu.com>
+[09:29] <thoreauputic> da_bon_bon, "The main server gpg key is screwed up" happy now ? *G*
+[09:29] <Seveas> that says that the client sends the hostname 'demosi1' in the dhcp request
+[09:29] <Seveas> da_bon_bon, try an apt-get update
+[09:29] <bob2> da_bon_bon: please chill out
+[09:29] <jacquesmerde> ivoks, i edited the file, ifdown'ed and ifup'ed...
+[09:29] <da_bon_bon> thoreauputic: no jokes
+[09:29] <thoreauputic> da_bon_bon, actually I have no idea if that's true BTW
+[09:29] <da_bon_bon> Seveas: did it 7 times
+[09:30] <da_bon_bon> thoreauputic: please try apt-get update and u will know
+[09:30] <ivoks> jacquesmerde now check out ur DHCP server and search for ur hostname
+[09:30] <da_bon_bon> bob2: any idea what i must do now ?
+[09:30] <metalsand> bob2: can you help me out with some troubleshooting?
+[09:30] <Seveas> da_bon_bon, then simply wait, these errors sometimes happen. They will resolve...
+[09:30] <karsten> Seveas: How does the server resolve name collisions?
+[09:30] <thoreauputic> da_bon_bon, I'm doing that as we speak
+[09:30] <da_bon_bon> thoreauputic: thnx
+[09:30] <Seveas> karsten, no idea, check out the documentation :)
+[09:30] <bob2> metalsand: unless it's very specific, I don't have time atm, sorry
+=== harsha_ [~harsha@202.71.143.90]  has joined #ubuntu
+[09:30] <karsten> Seveas: Checking, damnit!
+[09:30] <da_bon_bon> it still is
+[09:31] <Seveas> da_bon_bon, here too, just wait for an hour or so
+[09:31] <karsten> Seveas: I stand corrected.
+[09:31] <Seveas> it will resolve...
+[09:31] <IIIEars> Windows Gotcha No #1346 created a 8gig DVD image and windows can't lift anything that big and move it from one drive to another. Linux to the rescue! - any hints?
+[09:31] <da_bon_bon> great
+[09:31] <da_bon_bon> so i am not the only one :)
+[09:31] <da_bon_bon> anyway, see ya guys after an hours
+[09:31] <da_bon_bon> gotta run
+[09:31] <da_bon_bon> bye all
+[09:31] <jacquesmerde> ivoks, i went to dhclient.conf, commented out the line "send host-name "andare.fugue.com"" (NO idea where that line came from), ifdown'ed if up'ed. and checked my router's dhcp client table..
+[09:31] <Seveas> IIIEars, fat32 file size limit is 4gb
+[09:31] <Seveas> if your dest. partition is fast32, there's no way of doing this
+[09:31] <IIIEars> am i stuck?
+[09:31] <ivoks> jacquesmerde u fool
+[09:32] <ivoks> jacquesmerde why didn't u put in ur hostname??
+[09:32] <IIIEars> can i DD or something?
+[09:32] <karsten> IIIEars: What version of 'Doze?  What FS?
+[09:32] <Seveas> IIIEars, very bad idea
+[09:32] <metalsand> IIIEars, Rar it into smaller pieces, and create .isos from those?
+[09:32] <jacquesmerde> ivoks, why should it make a difference?
+[09:32] <IIIEars> Fat 32 XP
+[09:32] <Seveas> IIIEars, no eay of doing it
+[09:32] <karsten> IIIEars: Move on one system, or move to another location?
+[09:32] <jacquesmerde> ivoks, do i put my hostname in "s?
+[09:32] <ivoks> jacquesmerde put in ur hostname without .xx.com
+[09:32] <karsten> metalsand: man split.
+[09:32] <Seveas> fat32 cannot handle files that are bigger than 4 gb
+[09:32] <karsten> IIIEars: 'man split'
+[09:32] <Seveas> so you're screwed :)
+[09:32] <IIIEars> move to an external USB drive
+[09:32] <ivoks> jacquesmerde ifdown ethx
+[09:32] <jacquesmerde> so "myhost" or myhost?
+[09:32] <ivoks> jacquesmerde killall -9 dhclient3
+[09:33] <Seveas> IIIEars, usb disks generally are fat32 too
+[09:33] <karsten> IIIEars: How big's the file, what's the source of it?
+[09:33] <ivoks> jacquesmerde send host-name "imafool"
+[09:33] <karsten> Seveas: They can be reformatted ;-)
+[09:33] <Seveas> karsten, :o)
+[09:33] <IIIEars> Great! - Linux power. - you guys keep feeding it. :)
+[09:33] <Seveas> IIIEars, if you format (under windows) your >8gb usb drive into fat32, that's an option
+[09:33] <karsten> IIIEars: Where is the image now, what FS, and how do you know it's a valid image?
+[09:33] <Seveas> into ntfs i meant*
+[09:33] <ivoks> jacquesmerde don't forget ; as a lst latter
+[09:33] <ivoks> letter
+[09:34] <IIIEars> Dual Layer DVD it must be at least 8gigs in a single file a few megs in a descritpor file.
+=== damien [~damien@AFontenayssB-152-1-28-226.w83-114.abo.wanadoo.fr]  has joined #ubuntu
+[09:34] <karsten> IIIEars: I'm partial to split and/or netcat myself.
+[09:34] <IIIEars> It's on an NTFS drive
+[09:34] <Seveas> why not leave it on there?
+[09:35] <karsten> IIIEars: So you created it OK, but can't move it elsewhere, right?
+[09:35] <IIIEars> I see trouble comming though my USB is Fat32
+[09:35] <transgress> hey anyone know if i need to activate something else to get my lappy to hibernate?
+[09:35] <IIIEars> Exactly - "Super Glued" in place
+[09:35] <IIIEars> lol
+[09:35] <jacquesmerde> ivoks, its working fine now. i knew it would be a simple task if i wasnt such a moron
+[09:35] <bhoomi> i am getting dpkg error when i try to upgrade / install a package
+[09:36] <Seveas> bhoomi, a GPG error?
+[09:36] <IIIEars> Thank You you threw me a line. i can google the rest. :)
+=== ish [~jason@S0106000024c002e0.ss.shawcable.net]  has joined #ubuntu
+[09:36] <ivoks> jacquesmerde end of story
+[09:36] <karsten> IIIEars: Try this under linux:  cd /tmp; mkdir foo; cd foo; dd if=/dev/zero of=bigfile bs=1m count=20m; split -b 1m bigfile
+[09:36] <ish> open(2) mentions a O_LARGEFILE flag.. Where is this defined? a grep of /usr/include reveals nothing...
+[09:36] <bhoomi> Seveas, dpkg: error processing /var/cache/apt/archives/zope-groupuserfolder_3.1.1-3ubuntu2_all.deb
+[09:36] <karsten> IIIEars: ...that creates a 20 MB file, then splits it into 20 1 MB chunks.
+[09:37] <Seveas> ish, most likely in a bits/something include file
+[09:37] <karsten> IIIEars: the chunks are named bigfile.aa bigfile.ab bigfile.ac ...
+[09:37] <karsten> IIIEars: ...and you can cat them back together:  cat bigfile.* > bigfile-new
+[09:37] <Seveas> i think stdio.h should include that too, so try including stdio.h
+[09:37] <jacquesmerde> ivoks, i'd add a page to the wiki to save people like me a lot of time, but i still dont quite understand what i did
+[09:37] <IIIEars> Okay - I can do that. :)
+[09:37] <Seveas> bhoomi, sorry, no clue on that, maybe someone else...
+[09:38] <ivoks> jacquesmerde dhclient3 is program that get's IP from dhcp server
+[09:38] <bhoomi> Seveas, :)
+[09:38] <ivoks> jacquesmerde /etc/dhcp3/dhclient.conf is configuration file for that program
+=== garrut [~gerrit@garrut.xs4all.nl]  has joined #ubuntu
+=== fonsken [~fonsken@d54C32D13.access.telenet.be]  has joined #ubuntu
+[09:39] <karsten> IIIEars: Slight syntax fix:   cd /tmp; mkdir foo; cd foo; dd if=/dev/zero of=bigfile bs=$((1024*1024)) count=20; split -b 1m bigfile ; ll
+[09:39] <jacquesmerde> ivoks, putting the hostname in ServerName in etc/cups/client.conf still doesnt work. all is for naught
+[09:39] <IIIEars> "; ll" ?
+=== holycow [~a@S0106000fb51e6051.vf.shawcable.net]  has left #ubuntu ["Leaving"]
+=== holycow [~a@S0106000fb51e6051.vf.shawcable.net]  has joined #ubuntu
+[09:40] <ivoks> jacquesmerde do u know anything about networking?
+[09:40] <jacquesmerde> ivoks, obviously not
+=== Bazzi [~Bastian@p5484FCA1.dip.t-dialin.net]  has joined #ubuntu
+=== dwa_ [~dwa@garrut.xs4all.nl]  has joined #ubuntu
+[09:40] <karsten> IIIEars: 'ls -l' Sorry, an alias.
+[09:40] <ivoks> jacquesmerde then how could i explain enything to u? :)
+=== Fator_Dee [~fatordee@adsl-85-217-19-53.kotinet.com]  has joined #ubuntu
+[09:40] <IIIEars> :)
+[09:40] <karsten> IIIEars: ...and you should use a prefix, so:  cd /tmp; mkdir foo; cd foo; dd if=/dev/zero of=bigfile bs=$((1024*1024)) count=20; split -b 1m bigfile bigfile.; ls -lh
+[09:40] <ivoks> jacquesmerde cat /etc/resolv.conf
+[09:40] <jacquesmerde> ivoks, oh, i wasn't asking you to. i thought it was well understood that i was a lost cause
+[09:41] <karsten> IIIEars: ...which I've actually run, so it works as badvertised.
+[09:41] <jacquesmerde> ivoks, i have a nameserver, 210.15.254.240
+[09:41] <thomo> for some reason fluxbox takes much longer to load than gnome. I know that ubuntu is optimised to start gnome fast (very impressive) but does this affect the speed of other window managers?
+[09:41] <thoreauputic> karsten, "badvertised" is a nice typo ;)
+[09:41] <ivoks> jacquesmerde so u see, u have nameservers of ur ISP
+[09:42] <IIIEars> the dd command got me interested in linux i love it's power. :)
+[09:42] <ivoks> jacquesmerde if u put a name in /etc/cups/client.conf it will search that name on couple of places
+[09:42] <karsten> thoreauputic: Who says it's a typo?
+[09:42] <karsten> IIIEars: It should get you interested in JCL.
+[09:42] <ivoks> jacquesmerde first it will look in /etc/hosts to find it there, if it isn't there, it will contact namservers
+[09:42] <thoreauputic> karsten, heheh OK, just checking - a nice coinage then ;)
+=== jbmigel [~jbm@S0106000625f62bc1.ed.shawcable.net]  has joined #ubuntu
+[09:43] <ivoks> jacquesmerde nameservers can't know anything about ur local network and they won't have that name too
+=== Clintology [~Clint@nr30-66-161-249-18.fuse.net]  has joined #ubuntu
+[09:43] <jacquesmerde> ivoks, i thought the nameserver is what resolves internet url's
+[09:43] <IIIEars> Hm to google and look smart or ask admit being new and baffled. okay i'll bite. what is "JCL"?
+[09:43] <ivoks> jacquesmerde yes, that's name resolving, conecting IP with hostname
+=== poningru [~Poningru@pool-71-101-0-144.tampfl.dsl-w.verizon.net]  has joined #ubuntu
+[09:44] <jacquesmerde> ivoks, yeah, but i want to do that locally...
+[09:44] <karsten> IIIEars: Job Control Language.
+[09:44] <ivoks> jacquesmerde u have two options
+[09:44] <thoreauputic> jacquesmerde, you can run dns for your LAN, but it isn't necessary
+[09:44] <karsten> IIIEars: dd is actually a mainframe command ported to Unix back in the early days.
+[09:44] <ivoks> jacquesmerde u can enter all ur hosts in /etc/hosts
+[09:44] <IIIEars> Great! - can i use it to back up an entire disk?
+[09:45] <ivoks> jacquesmerde or u can setup local DNS
+=== Dutchy [~Dutchy@ipd50ae694.speed.planet.nl]  has joined #ubuntu
+[09:45] <karsten> IIIEars: Yeah, but in general you wouldn't want to.
+[09:45] <jacquesmerde> ivoks, i now know that my router definitely knows my ubuntu machine's hostname. do i have to go a further step to let other computers on the LAN to be able to use that information?
+[09:45] <metalsand> testest
+[09:45] <karsten> IIIEars: dd ~= Norton Ghost.  But for Linux, tar and equivalents are far more useful.
+[09:45] <karsten> metalsand: failfail
+[09:45] <ivoks> jacquesmerde read again what i just said
+[09:45] <jacquesmerde> ivoks, i can't set up hosts because i'm on DHCP, yeah?
+[09:45] <ivoks> jacquesmerde well... right
+[09:45] <metalsand> I really wish I got my PCMCIA card set up :(
+[09:46] <ivoks> jacquesmerde so u can setup dns on ur router
+[09:46] <metalsand> I have a feeling it's going to take a lot of tweaking to get it working
+[09:46] <ivoks> jacquesmerde and connect it with dhcp
+[09:46] <jbmigel> I seem to be having some trouble with my firefox flash plugin, when i goto a flash site that does a content pop-up I can only see like 1/5 of the flash page in the new window, the rest of window is white. Has anyone experienced this?
+[09:46] <jacquesmerde> ivoks, is that hard? am i better off just biting the bullet and switching to static IP's?
+[09:46] <IIIEars> Ghost is nice. backing up an open OS with proprietary software just doesn't hit me right though. - lol
+[09:46] <ivoks> jacquesmerde with dhcp-dns
+[09:46] <karsten> metalsand: No, it's going to take one tweak.
+[09:46] <ivoks> jacquesmerde well, it isn't simple :)
+[09:47] <karsten> metalsand: ...all the other tweaks _won't_ get it working.
+[09:47] <thoreauputic> jacquesmerde, how many machnes do you have on your LAN ?
+[09:47] <metalsand> karsten, which tweak is that?
+[09:47] <karsten> metalsand: ...they'll just stand between you and that one.
+[09:47] <karsten> metalsand: The one that works, duh!
+[09:47] <metalsand> karsten, which tweak is that?
+[09:47] <metalsand> :P
+[09:47] <karsten> metalsand: Recursion:  See recursion.  See also:  tail-recursion.
+[09:47] <jacquesmerde> thoreauputic, 4
+[09:47] <ivoks> lol
+[09:48] <ivoks> put them on static IP
+[09:48] <thoreauputic> jacquesmerde, just do static IP
+=== conor [~conor@halls-129-31-67-239.hor.ic.ac.uk]  has joined #ubuntu
+[09:48] <metalsand> i need some kind of Linux mastermind
+[09:48] <metalsand> That knows EVERYTHING.
+[09:48] <ivoks> i had over 200 machines, and didn't use DHCP
+[09:48] <ivoks> :)
+[09:48] <thoreauputic> jacquesmerde, I have 4 machines too, and I use static IP
+[09:48] <Seveas> metalsand, you called me?
+[09:48] <jacquesmerde> ivoks, i'm sorry. i didnt realise what i was asking to do wasnt trivial. i thought i was just a newb. forget it
+[09:48] <Seveas> ;)
+[09:48] <ivoks> now i have over 400, so i have to :)
+[09:48] <metalsand>  Seveas: make my PCMCIA Wireless NIC work.
+[09:48] <metalsand> Now.
+=== jsg [~jsg@202.57.71.236]  has joined #ubuntu
+[09:48] <metalsand> Please. :)
+[09:48] <Seveas> metalsand, which chip?
+[09:48] <metalsand> Seveas, Prism 2.5
+[09:49] <Seveas> there are prism drivers in ubuntu...
+[09:49] <Seveas> modprobe them
+[09:49] <jacquesmerde> ivoks, just editing dhcpd.conf was easy enough to get my router to get the client's hostname, i thought it would be equally trivial to get other computes on the lan to be able to refer to that hostname
+[09:49] <metalsand> I have wlan-ng
+[09:49] <ivoks> hostap-utils
+[09:49] <conor> Hi, any ideas why my bittornado on ubuntu can't connect to any peers while bittorrent, gnome-bittorrent and so on work without problems?
+[09:49] <Seveas> (if not automatically modprobed)
+=== jsg is now known as jsgotangco
+[09:49] <ivoks> jacquesmerde i don't know what ur router is
+[09:49] <IIIEars> Hm. will windows want to open the entire file if i pull it using FTP?
+[09:49] <metalsand> I got a deb package with synaptic, Seveas
+[09:49] <thoreauputic> jacquesmerde, just put your 4 machines IPs and names in /etc/hosts on each machine
+[09:49] <Seveas> metalsand, which?
+[09:49] <metalsand> wlan-ng
+[09:49] <ivoks> jacquesmerde i just know it sends public DNS, and they don't know anything about ur local network
+[09:49] <Seveas> ah
+[09:49] <karsten> IIIEars: Dunno, that depends on the FTP client.
+[09:49] <jacquesmerde> thoreauputic, yeah, well i'll have to set up static IP's first
+=== jsgotangco is now known as jsg
+[09:50] <IIIEars> never mind i'll give the ubuntu live cd a shot.
+[09:50] <metalsand> Seveas, it still isn't working.
+=== Dethread is now known as Dethread|sleep
+[09:50] <thoreauputic> jacquesmerde, it isn't hard
+[09:50] <Seveas> have you modprobed the modules?
+[09:50] <metalsand> Nope, I don't even know what that is
+[09:50] <jacquesmerde> ivoks, what if i put "hostname@localhost"?
+=== jsg is now known as jsgotangco
+[09:50] <metalsand> I have, however, update-modules
+[09:50] <Seveas> can you run iwconfig eth1 (or whatever it is)
+[09:50] <ivoks> jacquesmerde ? :))
+[09:50] <karsten> IIIEars: I ran into a problem years back on Sun.  IIRC I could either send or receive large (>2 GB) files, but not the other.  Or was it piping output to something else?
+[09:50] <metalsand> should I paste in #flood
+[09:50] <metalsand> ?
+[09:50] <IIIEars> I love puzzles :)
+[09:50] <jacquesmerde> or hostname@localhost.localdomain
+[09:50] <karsten> IIIEars: ...I don't recall, but it was a tad problemenatic.
+[09:50] <Seveas> metalsand, no just answer whether you can or not :)
+[09:51] <thoreauputic> jacquesmerde, you only need the name, not the @localhost part
+[09:51] <metalsand> Oh, I can.
+[09:51] <ivoks> jacquesmerde man.. do u have email?
+[09:51] <karsten> metalsand: Yes.
+[09:51] <Seveas> metalsand, what kind of encryption does your network use?
+=== muempf [~muempf@byrt-d9bb6847.pool.mediaWays.net]  has joined #ubuntu
+[09:51] <metalsand> Currently none
+[09:51] <jacquesmerde> ivoks, yeah. i have email. thats the one part of networking i CAN get working
+[09:51] <Seveas> ok
+[09:51] <metalsand> I had WPA when I was using Windows only
+[09:51] <dabaSlon> metalsand: welll dont paste here again anyhow...
+[09:51] <Seveas> iwconfig eth1 essid "YOUR_SSID"
+[09:51] <karsten> IIIEars: ...the upshot of which is, your FTP client might or might not like getting a large file, depends on how its implemented.
+[09:51] <ivoks> jacquesmerde so, is it hotmail@hotmail.com or jacq@hotmail.com?
+[09:51] <Seveas> iwconfig eth1 commit
+[09:51] <metalsand> Now I'm frightened to use WEP using Linux, I don't want to break anything.
+[09:52] <jacquesmerde> the latter
+[09:52] <thoreauputic> jacquesmerde,  man interfaces
+[09:52] <ivoks> jacquesmerde so.. it's allways username@hostname
+[09:52] <ivoks> jacquesmerde localhost IS hostname
+[09:52] <Seveas> and then try iwconfig eth1
+[09:52] <Seveas> and paste the result in a private chat
+[09:52] <ivoks> jacquesmerde it's a special hostname, referring to local host :)
+[09:52] <metalsand> Seveas: done
+[09:53] <ivoks> jacquesmerde in /etc/hosts u need something like:
+[09:53] <ivoks> jacquesmerde 192.168.0.2 gaetway
+[09:53] <Seveas> metalsand, except that i didn't get the private chat :)
+[09:53] <ivoks> jacquesmerde 192.168.0.4 mywindowsbox
+[09:53] <jacquesmerde> ivoks, but that's for static IP
+[09:53] <ivoks> jacquesmerde etc... then will ping gateway work
+[09:53] <ivoks> jacquesmerde u have 4 machines! dhcp is overhead
+[09:54] <jacquesmerde> if i'm connected to a router which can translate hostnames to IP addresses, why cant i just ask my router what a hostname's IP address is?
+[09:54] <ivoks> jacquesmerde i give up on u
+=== AvvY|WinXP [~AvvY@CPE-144-133-95-243.vic.bigpond.net.au]  has joined #ubuntu
+[09:54] <Seveas> jacquesmerde, in dhhclient.conf you should set the option to always use the router as dns server
+[09:55] <ivoks> jacquesmerde ur router doesn't translate hostnames, DNS does that, and u are using public DNS
+[09:55] <karsten> metalsand: Remove all heavy and sharp objects from the room.
+[09:55] <Seveas> prepend domain-name-servers 127.0.0.1;
+[09:55] <AvvY|WinXP> im installing ubuntu on a comp that cant boot CDs. i have a win98 floppy and boot with cd support, but cant figure out how to get into the ubuntu setup process
+=== Garathor [~Unknown@213-145-178-167.dd.nextgentel.com]  has joined #Ubuntu
+[09:55] <Seveas> AvvY|WinXP, it won't work that way
+[09:55] <AvvY|WinXP> why not?
+[09:55] <ivoks> but CDROM
+[09:55] <ivoks> buy
+=== AvvY|WinXP is now known as AvvY
+[09:56] <AvvY> is there any other way to do it?
+[09:56] <Seveas> because the booted does does not understand the linux programs
+[09:56] <Seveas> AvvY, there is a guide on dooing netboot installs, but your computer has to be able to do netboots for that to work
+=== Echylo [~echylo@252-162.246.81.adsl.skynet.be]  has joined #ubuntu
+[09:56] <AvvY> whats netboots?
+[09:57] <Seveas> i believe there is ongoing work to do a floppy-based install, but it's not functional yet
+[09:57] <karsten> AvvY: There's alway another way to do it.
+[09:57] <Razor-X> AvvY: how old is the machine?
+[09:57] <karsten> AvvY: Always....
+[09:57] <ivoks> time to go...
+[09:57] <AvvY> its rather old, old enough to not boot cds. im just wanting it to play with
+=== lhurgoyf [~can@195.174.23.195]  has joined #ubuntu
+[09:57] <karsten> AvvY: Move the HD to another system that can boot from CD.  Install there.  Shuttle back.
+[09:57] <Razor-X> well, itt boots CDs
+=== da_bon_bon [~rohandhru@203.212.221.132]  has joined #ubuntu
+[09:57] <Razor-X> just, doesen't boot El Torito
+[09:57] <ivoks> maybe he can use debian's floppy?
+[09:58] <AvvY> i wouldnt bother moving the HDD around
+[09:58] <Razor-X> lemme see if I can make a floppy out of a Kubuntu (sorry ,that's the only ISO Ihave) ISO
+[09:58] <Seveas> ivoks, that could be an idea...
+=== mathew [~mathew@gb.ja.105.110.revip.asianet.co.th]  has joined #ubuntu
+[09:58] <karsten> ivoks: Should work AFAIK.  It's a standard bootcfg AFAIK.
+[09:58] <da_bon_bon> why is everyone telling to disable marillat before installing mplayer ?
+[09:58] <Razor-X> *ISO bootsector
+[09:58] <ivoks> Seveas he would have problems with kernel install
+=== karsten notes that the Ubuntu live CD is based on Morphix...
+[09:58] <ivoks> Seveas or maybe not... hm...
+[09:58] <AvvY> ok im gonna download a debian boot disk
+[09:59] <Seveas> karsten, only the warty cd
+[09:59] <Seveas> the hoary cd isn't
+[09:59] <ivoks> AvvY only boot.img
+=== Xyrouz [~Xyrouz@0x3e42bd6c.adsl.cybercity.dk]  has joined #ubuntu
+[09:59] <Fator_Dee> da_bon_bon: because you are npt supposed to install it from marillat? I dunno though :-p
+[09:59] <Fator_Dee> *npt = not
+[09:59] <karsten> Seveas: OK.  That's what I've seen.
+[09:59] <karsten> Seveas: I noticed the boot message.
+[09:59] <ivoks> da_bon_bon couse they don't know for -t switch for apt-get
+[09:59] <karsten> Seveas: Amused me slightly.
+[09:59] <Seveas> da_bon_bon, because hoary is frozen and you will get dependency problems when using marillat unstable
+[10:00] <Razor-X> can fdisk /mbr work with NTFS partitions?
+[10:00] <da_bon_bon> karsten: hoary live cd is not on morphix. warty is
+[10:00] <jacquesmerde> Seveas, how do i set dhcpclient.conf to do that?
+[10:00] <AvvY> Razor-X yes
+[10:00] <Seveas> Razor-X, fdisk /mbr has nothing to do with partitions
+[10:00] <ivoks> well, bye all
+[10:00] <da_bon_bon> Fator_Dee, ivoks: what Seveas said is most logical :P
+[10:00] <karsten> da_bon_bon: Yeah, I think I heard that somewhere....
+[10:01] <Razor-X> Seveas: mmm, please elucidate ;-P
+[10:01] <karsten> Seveas: Well, outside the first 512 bytes...
+[10:01] <da_bon_bon> karsten: then switch to hoary live
+=== veritas_ [~veritas@ip68-231-196-244.oc.oc.cox.net]  has joined #ubuntu
+=== manzanita [~manzanita@166.Red-80-59-173.pooles.rima-tde.net]  has joined #ubuntu
+=== ztonzy [~ztonzy@ztonzy.artist.blender]  has joined #ubuntu
+=== stoffe [~stoffe@c80-216-217-12.cm-upc.chello.se]  has joined #ubuntu
+[10:01] <ivoks> da_bon_bon :p too u to. live in ignorance
+[10:01] <veritas_> Back. My connection died
+[10:01] <Seveas> Razor-X, fdisk /mbr only writes to the boot record (the first 512 bytes of the disk). There is no partition in there...
+[10:01] <karsten> Razor-X: fdisk /mbr creates a MSFT master boot record.  That's not part of your partitions.
+[10:01] <veritas_> seveas: Where were we?
+=== telemaco [~telemaco@112.Red-81-35-234.pooles.rima-tde.net]  has joined #ubuntu
+[10:01] <Seveas> veritas_, hmm??
+[10:02] <veritas_> Configuring my PCMCIA NIC
+[10:02] <da_bon_bon> ivoks: :)
+[10:02] <Seveas> ah :)
+[10:02] <ivoks> :)
+=== matt1987 [~matt@host81-154-68-204.range81-154.btcentralplus.com]  has joined #ubuntu
+[10:02] <Seveas> veritas_, iwconfig eth1 essid "your_ssid" && iwconfig eth1 commit && iwconfig eth1
+=== veritas_ is now known as metalsand
+[10:02] <Razor-X> karsten, Seveas: yeah, but I was wondering if what it writes to the boot record can boot NTFS
+[10:02] <Seveas> paste the output in a private chat
+=== NicP [~NicP_@c211-28-151-227.brasd1.vic.optusnet.com.au]  has joined #ubuntu
+[10:02] <Fator_Dee> da_bon_bon: I was just guessing :-p
+[10:02] <Seveas> Razor-X, sure
+[10:02] <metalsand> #flood?
+[10:02] <Razor-X> or, is it that, over so many years, the Windows bootloaders doesen't change?
+[10:02] <matt1987> is there ne1 that can tell me an alternative to wine
+[10:03] <Razor-X> *hasn't
+[10:03] <matt1987> a better emulation software
+[10:03] <Seveas> sure, #flood is ok too
+[10:03] <da_bon_bon> matt1987: vmware
+=== kurros [~wade@92-14.26-24.tampabay.res.rr.com]  has joined #ubuntu
+=== lionel_ [~lionel@10.21.96-84.rev.gaoland.net]  has joined #ubuntu
+=== freewoody [~bill@202.79.52.59]  has left #ubuntu []
+[10:03] <matt1987> where can i get vmware
+[10:03] <AvvY> i cant find a debian floppy
+[10:03] <Razor-X> it's expensive
+[10:04] <da_bon_bon> mathew: www.torrentspy.com
+[10:04] <Seveas> da_bon_bon, vmware is something completely different
+=== adnans [~adnans@linuxgoeroe.demon.nl]  has joined #ubuntu
+[10:04] <Seveas> and please don't advertise using illegal programs
+[10:04] <Razor-X> yeah, I was just going to say that
+=== mirak [~mirak@AAubervilliers-152-1-39-6.w83-114.abo.wanadoo.fr]  has joined #ubuntu
+[10:04] <Razor-X> what you do, you do on your own time
+=== Mistiry [~mark@202.0.205.68.cfl.res.rr.com]  has joined #ubuntu
+[10:04] <AvvY> Seveas: do u know where i an find a debian boot floppy?
+[10:04] <Mistiry> How do I get Totem Movie player to play WMV files?
+[10:04] <Fator_Dee> under your blanket with only the flaslight on :-p
+[10:05] <Seveas> Mistiry, you need to install the w32codecs package for that
+[10:05] <Mistiry> how do i do that?
+[10:05] <Razor-X> AvvY: http://people.debian.org/~dwhedon/boot-floppies/
+[10:05] <karsten> matt1987: Beer.
+[10:05] <Seveas> Mistiry, the easyest way is to go to http://wiki.ubuntulinux.org and search for w32codecs
+[10:05] <Seveas> there you will find instructions
+[10:05] <da_bon_bon> Razor-X: i dont use vmware at all
+[10:06] <Mistiry> ok i will see what i see. thanks
+[10:06] <Amaranth> Seveas: That won't make totem play WMV.
+[10:06] <Seveas> Amaranth, then what does?
+[10:06] <AvvY> Seveas: which .iso do u tink i should get?
+[10:06] <Amaranth> pitfdll
+[10:06] <Amaranth> it's a gstreamer plugin
+[10:06] <thoreauputic> Mistiry, http://www.ubuntulinux.org/wiki/RestrictedFormats
+[10:06] <karsten> matt1987: wine, Crossover Office, Win4Lin, are your basic choices.
+[10:06] <cyphase> New IRC channel for The ShoutNet Project ----- Find it at #shoutnet on irc.freenode.com
+[10:07] <Amaranth> cyphase: ...
+[10:07] <Seveas> cyphase, stop spamming please
+[10:07] <dabaSlon> Mistiry: http://www.ubuntulinux.org/wiki/RestrictedFormats should have that information, if you had not found it already...
+[10:07] <da_bon_bon> Seveas: i think cyphase is a bot
+[10:07] <Seveas> Amaranth, i actually think it's a bot that does this on intervals
+[10:07] <Seveas> lol :)
+[10:07] <cyphase> lol, sorry
+[10:07] <cyphase> no, im not a bot
+=== amichai [~amichai@bzq-84-108-2-221.cablep.bezeqint.net]  has joined #ubuntu
+=== amichai is now known as yahalom
+[10:07] <Seveas> well, than just stop spamming :)
+[10:07] <AvvY> Seveas: which .iso do u tink i should get?
+[10:07] <da_bon_bon> nice bot, cyphase, real good code
+[10:07] <thoreauputic> cyphase, are you sure ?
+[10:07] <cyphase> haha
+[10:07] <dabaSlon> its then
+[10:08] <yahalom> can someone tell me how to get my CDs? I ordered them over 2 months ago.
+[10:08] <karsten> da_bon_bon: If it's a bot, it's got really bad grammar.
+[10:08] <thoreauputic> yahalom, wait patiently
+[10:08] <Amaranth> yahalom: You'll get a notice when they ship
+[10:08] <IIIEars> lol - no need to feed the trolls - keep isolated or give them the boot.
+[10:08] <da_bon_bon> AvvY: u want what ? ubuntu ? or kubuntu ?
+[10:08] <AvvY> Ubuntu
+[10:09] <Razor-X> take the Ubuntu x86 Install disc
+[10:09] <yahalom> it just takes this long? I give them to my PC customers, and it just sucks to give them my own burned ones...look very unprofessional.
+[10:09] <AvvY> no, i need a boot floppy
+[10:09] <Razor-X> AvvY: I gave you the link
+[10:09] <AvvY> yeah, which link tho? they are huge .isos
+[10:10] <yahalom> anyone know how i can get xterm to wrte right to left?
+[10:10] <yahalom> wrte=write
+[10:10] <da_bon_bon> karsten: lol
+[10:10] <Amaranth> cyphase: You're turning a shoutbox into a chat room?
+[10:10] <da_bon_bon> Amaranth: hey, where does one get notice ? i didnt get any notice for the warty cds
+[10:10] <Amaranth> da_bon_bon: Neither did I, this is what I was told though.
+[10:11] <jacquesmerde> my PIII ubuntu machine with 128 RAM takes quite a while to lod up programs, but is other not too slow. is the bottleneck the RAM or the HDD speed?
+[10:11] <cyphase> Amaranth, kiiiind of. a white paper describing it is on the way
+[10:11] <thoreauputic> da_bon_bon, I believe they should be shipping Real Soon Now (tm)
+[10:11] <yahalom> cyphase: an e-mail?
+[10:11] <Amaranth> cyphase: If you know Python I think twisted would be good for that. It seems to make it pretty easy to integrate things like IRC and webpages.
+[10:11] <Choubaka> jacquesmerde: hdd speed usually.
+[10:12] <cyphase> Amaranth, thats not what this is trying to be
+=== MattJ [~matt@oh-clevelandheights-cdnt1-bg2c-224.clvdoh.adelphia.net]  has joined #ubuntu
+[10:12] <da_bon_bon> thoreauputic: but still, it will take time to reach india :(
+[10:12] <cyphase> you'll see when you read the white paper
+[10:12] <da_bon_bon> and, are they SURELY not shipping kubuntu ?
+=== forsaker8k6 [~forsaker@213-156-52-107.fastres.net]  has joined #ubuntu
+[10:12] <jacquesmerde> Choubaka, reckon its worth forking out for a new hdd? would  it make a big diff?
+[10:12] <IIIEars> Yaholom - it's maybe not what you asked but check out the new CD burners "LightScribe" etches labels on disks in any design you choose they aren't very expensive and your customers will love them - not a commercial i promise - lol
+[10:12] <Choubaka> jacquesmerde: depends.
+[10:12] <thoreauputic> da_bon_bon, yes, i guess so - and to reach Australia too :)
+[10:12] <forsaker8k6> hi people! got a problem...
+[10:12] <Razor-X> how much swap should I allocate to Ubuntu distro with 256 MB of RAM?
+[10:12] <da_bon_bon> cyphase: ?? bot type
+[10:13] <Choubaka> Razor-X: half a GB?
+[10:13] <da_bon_bon> thoreauputic: australia has great postal service. india does not :(
+=== gssai [~gssai@222.235.145.65]  has joined #ubuntu
+[10:13] <cyphase> da_bon_bon, what do you mean bot type?
+[10:13] <forsaker8k6> when i run sudo apt-get update... i receive some error about an invalid GPG key O_o
+=== orhs [~orhs-213@cm-62.179.142.231.chello.no]  has joined #ubuntu
+[10:13] <Razor-X> Choukaba: hmmm, ok
+[10:13] <thoreauputic> da_bon_bon, true, but the stuff still ahs to get here: my warty CDs shipped from Switzerland, of all places
+[10:13] <thoreauputic> *has
+[10:14] <da_bon_bon> cyphase: to make sure that u r SURELY not a bot ;)
+[10:14] <Razor-X> do not insult India! *puffs chest*
+[10:14] <Razor-X> just kidding ;-P
+[10:14] <da_bon_bon> thoreauputic: how do u know from where were they shipped
+[10:14] <orhs> hey all
+[10:14] <thoreauputic> forsaker8k6, a few people are reporting this: wait a few hours
+[10:14] <da_bon_bon> Razor-X: u an indian ?
+[10:14] <Razor-X> da_bon_bon: yeah
+[10:14] <IIIEars> Oops - :/
+[10:14] <forsaker8k6> ok tnx thoreauputic i'll wait :D
+[10:14] <da_bon_bon> Razor-X: kaushik
+[10:14] <thoreauputic> da_bon_bon, the "ch" postmark
+[10:14] <da_bon_bon> hmm
+[10:14] <Razor-X> not In India, but, yeah....
+[10:14] <da_bon_bon> ThomasWinwood: ohok
+[10:15] <Razor-X> da_bon_bon: Koushik ;-P
+[10:15] <da_bon_bon> Razor-X: then, where r u from ?!
+[10:15] <da_bon_bon> thoreauputic: ohok
+[10:15] <Amaranth> da_bon_bon: There are no Kubuntu CDs. Would cost way too much.
+[10:15] <Razor-X> USA
+[10:15] <da_bon_bon> noooooooooooooooooooooooooooooooooooooooo
+[10:15] <da_bon_bon> i want kubuntu
+[10:15] <Razor-X> eh?
+[10:15] <bob2> there are kubuntu cds
+[10:15] <da_bon_bon> *shouts 10 time*
+[10:15] <bob2> but Canonical isn't shipping them out for free
+[10:15] <Amaranth> bob2: Not from shipit...
+[10:15] <da_bon_bon> bob2: really ? we are getting kubuntu ?
+[10:16] <Razor-X> I have a Kubuntu iso sitting here
+[10:16] <bob2> da_bon_bon: not from shipit
+=== da_bon_bon jumps up and down
+[10:16] <fdr> Seveas : lol, it took me a WHILE, but at last I found the kernel. ;-)   Once I've downloaded it should I install with dpkg ?
+[10:16] <forsaker8k6> why you want kubuntu da_bon_bon
+[10:16] <forsaker8k6> ?
+[10:16] <bob2> da_bon_bon: also, it's a bit rich complaining that a company on the other side of the world won't ship you things for free
+[10:16] <da_bon_bon> forsaker8k6: coz i like kde ?
+[10:16] <thoreauputic> Amaranth, I see kubuntu-desktop is about 100MB - I'll try it, even though I'm on dialup :)
+[10:16] <da_bon_bon> bob2: i am not complaining. i am requesting
+=== oneleaf_ [~oneleaf@59.36.5.45]  has joined #ubuntu
+[10:16] <da_bon_bon> Razor-X: if u r not in india, then belive what indians say about india.
+[10:17] <forsaker8k6> well, maybe i had to ask the question this way: why do you like kde?
+=== pce-matty [~matty@202.9.60.14]  has joined #ubuntu
+[10:17] <da_bon_bon> forsaker8k6: hmm.. why do u like gnome ?
+[10:17] <thoreauputic> da_bon_bon, do you get decent bandwidth? Even on dialup 100MB isn't impossible once you have Ubuntu installed
+[10:17] <da_bon_bon> bob2: where do i get the kubuntu cds from ?
+[10:17] <forsaker8k6> because.. it's more.... free software compliant... and it's cooler :P
+[10:17] <Razor-X> da_bon_bon: I know the postal system is shit there
+[10:18] <da_bon_bon> thoreauputic: i am on a 2kbps cable line :(
+[10:18] <Razor-X> there are a multitude of reasons my parents came, my dad was an IIT grad ;-P
+[10:18] <da_bon_bon> forsaker8k6: u mean kde isnt free ?
+[10:18] <bob2> da_bon_bon: you can download them from cdimge.ubuntu.com
+=== Sn0p [~aggrw@cm-84.118.197.101.chello.no]  has joined #ubuntu
+[10:18] <da_bon_bon> Razor-X: i wish i was in usa. india -- i dont like it
+[10:18] <thoreauputic> da_bon_bon, ah, that's a bit slow for anything at all - I sympathise
+=== AlohaWolf [alohawolf@cpe-67-49-96-168.socal.res.rr.com]  has joined #ubuntu
+[10:18] <Razor-X> can't help but boast about IIT!
+[10:18] <forsaker8k6> yes it is.. but it had many *legal* problems... because qt has a very strange license
+[10:18] <da_bon_bon> bob2: i have, as i said, 2kbps
+[10:18] <da_bon_bon> forsaker8k6: still i find it better
+[10:18] <Razor-X> da_bon_bon: I visit, and, I'm ahppy living here
+[10:18] <gorilla_> da_bon_bon, yes kde is free but making a master cd for production is expensive.
+[10:18] <Razor-X> *happy
+[10:19] <da_bon_bon> bob2: from where do i buy a kubuntu cd ?
+[10:19] <forsaker8k6> da_bon_bon, well, matter of choices :D
+[10:19] <da_bon_bon> forsaker8k6: now u get my point
+[10:19] <thoreauputic> da_bon_bon, there are many on-line Linux shops
+[10:20] <forsaker8k6> da_bon_bon, yes... but i get payed to predicate for gnome :D
+[10:20] <Razor-X> *happy
+[10:20] <da_bon_bon> thoreauputic: i know. theres one for india too.. but i want it from the makers - canonical -- as a gesture to encourage and thank them for making such nice prods
+[10:21] <IIIEars> ;)
+[10:21] <thoreauputic> da_bon_bon, send a donation then :)
+[10:21] <da_bon_bon> thoreauputic: why not get a cd in lieu of a donation :)
+[10:21] <kalis> i have some problems with the cpp preprocessor. When i try to compile XFCE4 with the installer it tells me that it fails "sanity check"
+[10:22] <Razor-X> thoreauputic: hmmm, I have seen you on a linux chatroom somewhere.... can't remember where
+[10:22] <kalis> i have installed the g++ package for gcc, so its not that...
+[10:22] <kalis> what else can it be?
+[10:22] <thoreauputic> Razor-X, how surprising ;-)
+[10:22] <da_bon_bon> Razor-X: why not do a whois on him to find?!
+[10:23] <thoreauputic> kalis, sudo apt-get install build-essential
+[10:23] <Razor-X> da_bon_bon: as expected, it didn't help that much
+=== ogra [~ogra@p5089BC5E.dip.t-dialin.net]  has joined #ubuntu
+[10:23] <kalis> thoreauputic, allready done that. doesnt help me :(
+[10:24] <jacquesmerde> when setting up a static IP address, is the gateway address just the router's IP address on the LAN?
+=== DJ_Mirage [~djmirage@biggetje.xs4all.nl]  has joined #ubuntu
+[10:24] <thoreauputic> kalis, why compile xfce4 when it's available with synaptic/apt ?
+[10:24] <thoreauputic> kalis, I'm using it right now as a matter of fact
+=== spiral [~spiral@lafilaire-4-82-224-249-43.fbx.proxad.net]  has joined #ubuntu
+[10:24] <kalis> because i want the latest and the greatest ;) the one from the repo doesnt have the quick-lounge thingy
+[10:24] <yahalom> thoreauputic: i previously had issues with the xfce4 from synaptic
+[10:25] <Razor-X> mmm, XFCe
+[10:25] <kalis> thoreauputic, i am also using Xfce installed from the repo.
+=== TFP [~Patrick@dsl-084-056-176-168.arcor-ip.net]  has joined #ubuntu
+[10:25] <thoreauputic> yahalom, it works fine here, - what issues?
+[10:25] <Razor-X> it's a real nice Window Manager
+[10:25] <yahalom> thoreauputic: this time it worked great though, except my sound options cos my panel to crash
+[10:25] <TFP> hi
+[10:25] <da_bon_bon> bob2: where do i buy the kubuntu cd from canonical ?
+[10:25] <TFP> is it possibel to run debian packages on my ubuntu installation?
+[10:25] <thoreauputic> yahalom, I recommend installing xine and xfmedia
+[10:26] <thoreauputic> TFP, possible but not recommanded
+[10:26] <TFP> k
+[10:26] <TFP> thx
+[10:26] <yahalom> thoreauputic: like my color theme is brushes chrome, so if i click on sound options in the control center type place, it crashes and reverts to the original colors until i click on another option and then i get my chrome  back
+=== leww1 [~lewwy@CPE-60-231-145-227.qld.bigpond.net.au]  has joined #ubuntu
+=== leww1 [~lewwy@CPE-60-231-145-227.qld.bigpond.net.au]  has left #ubuntu []
+=== leww1 [~lewwy@CPE-60-231-145-227.qld.bigpond.net.au]  has joined #ubuntu
+[10:26] <forsaker8k6> farewell people
+[10:26] <leww1> hello
+[10:27] <Fator_Dee> Razor-X: and very good for the not-so-high-end-machines :-) (like mine)
+[10:27] <merriam> TFP: just use universe and multiverse.
+[10:27] <yahalom> thoreauputic: i have them, my sound works, it when i click on the sound settings its weird, and i never get to see my sound settings, never opens.
+=== seb128 [~seb128@ANancy-151-1-4-99.w83-194.abo.wanadoo.fr]  has joined #ubuntu
+[10:27] <TFP> thx I will
+[10:27] <da_bon_bon> anyway, bye all
+[10:27] <leww1> I have hoary hedgehog kubuntu, and I am trying to get my Audigy 2 ZS working.  Does anyone know how to get it working?
+[10:27] <da_bon_bon> cya later
+=== shadeofgrey [~shadeofgr@user-1120di5.dsl.mindspring.com]  has joined #ubuntu
+[10:27] <thoreauputic> yahalom, hmm... OK I don't really like the brushed chrome look so I don't use it: sounds like a theme issue, not an xfce issue
+[10:27] <Razor-X> I am never gonna enjoy Romeo and Juliet ever again after my stupid English Honors class -_-
+[10:27] <da_bon_bon> ubuntulog:
+[10:28] <shadeofgrey> i need to know how to totally remove apps AND all the stored packages that go with them
+[10:28] <shadeofgrey> hi THOR
+=== spiral [~spiral@lafilaire-4-82-224-249-43.fbx.proxad.net]  has joined #ubuntu
+[10:28] <shadeofgrey> long time no talk my friend
+[10:28] <kalis> Hmmm! anyone in here got everything with ROX-lib, pygtk, ruby-rox and so on working? mos of all the panel apps for ROX does not work for me.
+[10:28] <thoreauputic> Razor-X, heheh - studying english can really kill it for you ;) (English major here)
+[10:28] <shadeofgrey> ....sorry ive been away - i had to sell my computer
+[10:28] <Razor-X> thoreauputic: o_O" wow.....
+[10:29] <thoreauputic> shadeofgrey, hi there
+[10:29] <Razor-X> look, Shakespeare's play was a medium that was to be delivered in a matter of hours
+[10:29] <thoreauputic> Razor-X, long time ago...
+[10:29] <shadeofgrey> thor:  please refresh my memory -- how do you use apt-get to remove applications AND purge the system  of all their settings and downloaded package files?
+[10:29] <leww1> Can anyone help me get my audigy 2 ZS working?
+[10:29] <Razor-X> and, not every playgoer had the script handy, so they could overanalyze to death
+[10:29] <thoreauputic> shadeofgrey,  sudoa pt-get remove --purge
+[10:29] <thoreauputic> oops
+[10:30] <thoreauputic> apt-get remove --purge
+[10:30] <shadeofgrey> okay
+[10:30] <shadeofgrey> and then at the end the app name right?
+=== panaf [~panaf@rny93-4-82-231-52-165.fbx.proxad.net]  has joined #ubuntu
+[10:30] <thoreauputic> shadeofgrey, package name, yes
+[10:31] <leww1> guys what was the wiki page to add more repositries to apt?
+=== Fahim [~Fahim@c220210.adsl.hansenet.de]  has joined #ubuntu
+[10:31] <thoreauputic> shadeofgrey, that won't work for metapackages or dummy packages, of course
+[10:31] <da_bon_bon> bye all
+[10:31] <thoreauputic> da_bon_bon, bye :)
+[10:31] <Razor-X> does the w32codecs package need any dependancies?
+[10:31] <Razor-X> see ya da_bon_bon
+[10:31] <thoreauputic> Razor-X, no it's just a set of codecs
+[10:32] <da_bon_bon> thoreauputic: bye.
+[10:32] <da_bon_bon> Razor-X: cya
+=== MattJ [~matt@oh-clevelandheights-cdnt1-bg2c-224.clvdoh.adelphia.net]  has joined #ubuntu
+[10:32] <Razor-X> thoreauputic: needed to be sure, Ubuntu won't really be able to access the internet
+[10:32] <Razor-X> so, I can't just apt-get everything :(
+[10:32] <thoreauputic> Razor-X, make sure it installs in the right place if you do it manually
+=== kanaberra [~kanaberra@ANantes-151-1-27-186.w83-195.abo.wanadoo.fr]  has joined #ubuntu
+[10:33] <thoreauputic> Razor-X, best to use a .deb.package if possible
+[10:33] <Razor-X> yeah, I know
+[10:33] <Razor-X> it's a .deb
+[10:33] <Razor-X> dpkg -i xxx.deb
+[10:33] <thoreauputic> Razor-X, well, it should work with  dpkg -i w32codecs
+[10:33] <Razor-X> yeahp
+=== yahalom [~yahalom@bzq-84-108-2-221.cablep.bezeqint.net]  has joined #ubuntu
+=== dwa_ [~dwa@garrut.xs4all.nl]  has joined #ubuntu
+[10:34] <Razor-X> tomorrow, in three hours, I have to repartition a 40 GB NTFS, install Ubuntu, put GRUB on a bootable floppy, fdisk /mbr, and hope everything goes smoothly
+[10:34] <leww1> what was the download manager included in KDE?
+[10:35] <Razor-X> and so, should I partition before the install, because it seems the installer prefers you partition at the time of install
+[10:35] <Razor-X> (as i've read in the guide)
+[10:35] <stuNNed> Razor-X: defrag the NTFS partition and shrink it with the install?
+[10:35] <stuNNed> *during the install, rather
+[10:35] <thoreauputic> leww1,  http://www.ubuntulinux.org/wiki/AddingRepositoriesHowto
+[10:36] <mathew> I
+=== hor [~hor@pD9FD3C8D.dip.t-dialin.net]  has joined #ubuntu
+[10:36] <thoreauputic> leww1, thae other question: kynaptic I think
+[10:36] <Razor-X> stuNNed: gonna defrag, then repartition using knoppix
+[10:37] <Razor-X> and, the newer versions of NTFSResize don't need to defragment, as I can see
+[10:37] <Razor-X> but, it's a safety measure, most definitely
+[10:37] <thoreauputic> Razor-X, make some free space for Ubuntu and you should be good to go
+[10:37] <yahalom> how do i unzip a .zip file?
+[10:37] <Razor-X> thoreauputic: I have
+[10:37] <stuNNed> yahalom: unzip file.zip
+[10:37] <thoreauputic> yahalom, unzip <filename>
+[10:37] <Razor-X> 10 GB free, 6 of that will be partitioned off
+[10:38] <jacquesmerde> my printer server problems are solved, now i just have to solve my little latex problem
+[10:38] <Razor-X> i'm hoping that, in the available keyboard layouts, Dvorak is included
+[10:38] <Choubaka> should be.
+[10:38] <thoreauputic> Razor-X, I seem to recall it is
+[10:38] <yahalom> thoreauputic, do u use rox or xffm?
+[10:38] <thoreauputic> yahalom, rox
+[10:38] <yahalom> thoreauputic, cos my rox is weird
+[10:39] <thoreauputic> yahalom, I use rox in gnome, too
+[10:39] <yahalom> thoreauputic, it displays the icon text off the right
+[10:39] <jacquesmerde> xffm is the shit. i have no idea what the fuss is about
+=== thoreauputic likes rox
+[10:39] <yahalom> thoreauputic, DOCUMENTS ICON
+=== mepisman [~mepisman@CPE-139-168-63-119.vic.bigpond.net.au]  has joined #ubuntu
+[10:39] <yahalom> thoreauputic,               documents
+=== sjohnson [~sjohnson@S0106000d88f1e4fd.vc.shawcable.net]  has joined #ubuntu
+[10:39] <yahalom> thoreauputic, so its like the the text for one icon is under the next one
+[10:39] <thoreauputic> yahalom, rox is very configurable - read the help: it is actually helpful, for a change
+[10:39] <sjohnson> is there an installation manual for this OS?  i installed it, but now it feels like i just got thrown in the water without a lifesaver
+=== apax0r [apax0r@85.195.9.53]  has joined #ubuntu
+[10:40] <yahalom> thoreauputic, thanx
+[10:40] <Razor-X> sjohnson: as a matter of fact, there is
+[10:40] <sjohnson> Razor-X: thanks
+[10:40] <thoreauputic> sjohnson, there's a manual on the install CD - it's a bit outdated though
+[10:40] <Razor-X> sjohnson: http://www.mrbass.org/linux/ubuntu/install/
+[10:40] <Razor-X> there's a hoary install guide
+[10:41] <Razor-X> I did all my homework si I can finish the install without a hitch in 3 hours
+[10:41] <sjohnson> wow
+[10:41] <Razor-X> because, if my parents catch me......
+[10:41] <sjohnson> this is what i was looking for, thanks man
+[10:41] <Razor-X> *so
+=== aragorn [~aragorn@81-86-184-197.dsl.pipex.com]  has joined #ubuntu
+[10:42] <Razor-X> after that, there is a guide to using Ubuntu too
+[10:42] <sjohnson> now... don't you think a Link like this should be on the main website?
+=== nosv [~nosv@197.Red-213-98-147.pooles.rima-tde.net]  has joined #ubuntu
+[10:42] <sjohnson> someone should not have to come and ask for basic install info.. i didn't even know it was on the CD until you told me and didn't see any hints on the website
+=== braam_ [~braam@ipvpn068205.netvigator.com]  has joined #ubuntu
+[10:42] <Razor-X> sjohnson: true ;-P, but a little Google never hurt nobody... (purposeful use of double negatives)
+[10:42] <calamari> do I have any chance of playing a DRM'ed WMA file in Linux?
+=== Funraiser [~Funraiser@81.56.196.103]  has joined #ubuntu
+=== shadeofgrey [~shadeofgr@user-1120di5.dsl.mindspring.com]  has joined #ubuntu
+[10:43] <Choubaka> perhaps
+[10:43] <Razor-X> with Linux it's a _very_ useful fact to get as much documentation as you can
+[10:43] <thoreauputic> sjohnson, agreed, it should be on the website prominently
+[10:43] <apax0r> can ubuntu boot on a DVD-r record?
+[10:43] <Choubaka> doesn't depend on ubuntu, but your bios :P
+[10:43] <Funraiser> hello Ubuntians, I'm looking for a specific file in my system it is "j2re" how can i find it, i type whereis j2re?
+=== ekCo [~leafb0x@220-245-177-34-sa-pppoe.tpgi.com.au]  has joined #ubuntu
+[10:44] <thoreauputic> Funraiser, have you installed java ?
+[10:44] <Funraiser> yes
+[10:44] <webmind> Funraiser, or locate
+[10:44] <ekCo> hello hello, im using ubuntu, 64bit generic kernel, i've updated it all and got my nforce drivers installed, but my video card drivers wont..
+[10:44] <ekCo> is there a different driver for PCI-E nvidia cards?
+=== veritas_ [~veritas@ip68-231-196-244.oc.oc.cox.net]  has joined #ubuntu
+[10:45] <veritas_> AR!
+=== AzMoo [~azmoo@CPE-138-217-223-48.sa.bigpond.net.au]  has joined #ubuntu
+[10:45] <apax0r> Choubaka uhm, you got a point. but there isnt any release of ubuntu that i can burn on a DVD-r?
+[10:45] <Seveas> Funraiser, there is no file called j2re
+=== veritas_ is now known as metalsand2
+[10:45] <Choubaka> apax0r: there's no DVD iso afaik.
+[10:45] <Funraiser> Seveas, it's j2re1.3 actually
+[10:45] <thoreauputic> Funraiser, what are you trying to do?
+[10:45] <apax0r> ok..
+[10:45] <ekCo> apax0r, its possible, just download hoary hedgehog openup a dvd and install it as an image..
+[10:45] <ekCo> worked for me :/
+=== seb128_ [~seb128@ANancy-151-1-20-215.w83-194.abo.wanadoo.fr]  has joined #ubuntu
+[10:46] <Seveas> Funraiser, the only j2re$VERSION files are in the installer
+[10:46] <ekCo> so can anyone help my prob?
+[10:46] <apax0r> ok..
+[10:46] <thoreauputic> Funraiser, the only way that could exist is if you installed an old version of java
+[10:46] <Razor-X> yes, finished!
+[10:46] <Razor-X> Every single Romeo and Juliet Act has been an all-nighter
+=== metalsand2 is now known as metalsand
+[10:46] <Razor-X> some later than others
+[10:46] <Funraiser> thoreauputic, i'm trying to find where the file j2re1.3 is on my system to do a chmod a+w (to fill my taxes online)
+[10:47] <apax0r> does ubuntu install X so it works from start or do i have to configure X?
+[10:47] <Seveas> apax0r, usually it works from start
+[10:47] <Seveas> only if you have a really weird card it won't :)
+[10:47] <thoreauputic> Funraiser, umm - but is java installed at all?
+[10:47] <Funraiser> it is
+[10:47] <apax0r> k, i guess that depends on my gfx. :)
+[10:47] <ekCo> ok
+[10:47] <Seveas> which card do you have?
+[10:47] <Funraiser> i installed azureus so java is installed and working
+[10:47] <thoreauputic> Funraiser, OK - and it's the 1.3 version?
+[10:47] <Seveas> Funraiser, you are missing out on some clue...
+=== koka-kola [t3@195.245.229.17]  has joined #Ubuntu
+[10:48] <apax0r> Seveas hehe i have GeForce 4 MX 440-SE (suckie card)
+[10:48] <Seveas> the java runtime environment doesn't have to be writeable
+[10:48] <Seveas> apax0r, that one works
+[10:48] <apax0r> ok nice :)
+[10:48] <ekCo> I have an ASUS SLI DELUXE MOBO, i've currently installed the nforce drivers, but my video card, 6600GT BFG PCI-E wont install the drivers.. it comes up with an LIBC in a different directory.. which drivers are the correct to be installing? or what can i do to get my video card installed?
+[10:48] <Seveas> apax0r, you might give the nvidia drivers a try too for some performance
+[10:48] <apax0r> yea
+[10:48] <Seveas> see the BinaryDriverHowto page on the wiki
+[10:49] <apax0r> ok, thanks for the help
+[10:49] <daniels> ekCo: http://www.ubuntu.com/wiki/BinaryDriverHowot
+[10:49] <Funraiser> thoreauputic, that's the part i'm not sure that'x why i was asking the method to find the file like locate or whereis j2re* or whereis j2re? ?
+[10:49] <daniels> er, Howto
+=== LaMadredelCorder [~chatzilla@249.red-62-57-26.user.auna.net]  has joined #ubuntu
+[10:50] <thoreauputic> Funraiser, the locate command should find it: run sudo updatedb if it hasn't already run through cron daily
+=== yeti [user66@lns-vlq-17f-81-56-172-108.adsl.proxad.net]  has joined #ubuntu
+[10:50] <Funraiser> k
+[10:50] <thoreauputic> Funraiser, updatedb updates the file database
+[10:50] <Funraiser> k
+[10:50] <thoreauputic> it takes a while to run
+=== yeti is now known as yda
+=== vpalle [~vpalle@park222.koll.au.dk]  has joined #ubuntu
+=== A_Alam [~a_alam@202.41.228.162]  has joined #ubuntu
+[10:51] <ekCo> thanks
+[10:51] <ekCo> brb
+=== yda is now known as yetida
+=== whiteknight [~james@81-178-230-92.dsl.pipex.com]  has joined #ubuntu
+[10:52] <thoreauputic> Funraiser, if you installed java using the instructions on the wiki or ubuntuguide.org, you will have version 1.5.*
+=== gorilla_ [~george@219-90-235-197.ip.adam.com.au]  has joined #ubuntu
+=== Bazzi- [~Bastian@p5484CCC0.dip.t-dialin.net]  has joined #ubuntu
+=== keffo [~keffo@user161.c82-197-233.citynet.nu]  has joined #ubuntu
+[10:53] <Funraiser> thoreauputic, yes it's the one
+[10:53] <Funraiser> i have
+=== luke_ [~luke@218-101-70-108.dialup.clear.net.nz]  has joined #ubuntu
+[10:53] <Funraiser> i remember now
+[10:53] <Funraiser> 1.5 something
+[10:53] <Razor-X> finished, I am!
+[10:54] <Razor-X> good night everyone
+[10:54] <Funraiser> good morning
+[10:54] <IIIEars>  G'nite Razor-X
+=== jsg [~jsg@202.57.71.235]  has joined #ubuntu
+[10:54] <luke_> whats a good media player that you would recommend?
+[10:54] <Funraiser> xine
+[10:54] <Seveas> totem/beep-media-player/mplayer
+[10:54] <Seveas> my preferences :)
+[10:54] <luke_> ok cool thanks! :)
+[10:55] <Funraiser> thoreauputic, locate j2re* doens't work, even though i have the 1.5 version for azureus
+=== jsgotangco [~jsg@202.57.71.235]  has joined #ubuntu
+[10:56] <thoreauputic> Funraiser, try locate java | less
+=== airox [~airox@airox.user]  has joined #ubuntu
+[10:56] <airox> Hi.
+[10:56] <thoreauputic> Funraiser, that should pop up a lot of stuff :)
+[10:56] <airox> I have installed Zend Studio. But I can't seem to type in '
+[10:56] <shadeofgrey> hey thor
+[10:57] <thoreauputic> shadeofgrey, yes?
+[10:57] <airox> It is a death key, and after pressing enter it doesn't get printed.
+=== ptlo [~senko@darguner.rdlab.carnet.hr]  has joined #ubuntu
+[10:57] <Funraiser> thoreauputic, i does
+[10:57] <Funraiser> it*
+[10:57] <shadeofgrey> are you familiar with the install script by evolution colt that automatically downloads java AND downloads and installs openoffice 1.9.97?
+[10:57] <airox> Is there something I need to tweak in the Java package ?
+[10:57] <thoreauputic> Funraiser, space key to look through it, if you didn't know already
+[10:58] <thoreauputic> shadeofgrey, no - heard of it is all
+[10:58] <Funraiser> thoreauputic, i was using enter
+[10:58] <Funraiser> ?
+[10:58] <AzMoo> How do I install a .deb file?
+[10:58] <shadeofgrey> anybody here use it?
+[10:59] <thoreauputic> AzMoo,  sudp dpkg -i <packagename>
+[10:59] <AzMoo> cheers
+[10:59] <shadeofgrey> hey for what its worth..  im really glad to see you thor
+[10:59] <thoreauputic> AzMoo, sorry sudo
+[10:59] <thoreauputic> typo
+=== ektor [~arsuro@d81-211-132-148.cust.tele2.it]  has joined #ubuntu
+=== ektor [~arsuro@d81-211-132-148.cust.tele2.it]  has left #ubuntu ["Sto]
+[11:00] <shadeofgrey> i had to disappear for a long while.... a dear friend of mine passed away and i had to sell my computer to get the money to travel to his funeral
+=== chmj [~charles@dumbledore.hbd.com]  has joined #ubuntu
+[11:00] <thoreauputic> Funraiser, in the less pager, enter only scrolls a line at a time
+[11:00] <shadeofgrey> life was very hard without my P.C.
+[11:00] <thoreauputic> shadeofgrey, sorry to hear about your friend
+[11:01] <shadeofgrey> thor:  its alright.  he had cancer for a long time and....  im just really glad hes not hurting anymore
+[11:02] <Funraiser> shadeofgrey, u mean sad he's not suffering anymore?
+=== lkerscher_ [~lkerscher@p549FD4D2.dip.t-dialin.net]  has joined #ubuntu
+=== topyli [~juha@ktlpc219.edu.helsinki.fi]  has joined #ubuntu
+[11:02] <airox> Weird stuff ...
+[11:02] <shadeofgrey> no
+[11:02] <shadeofgrey> im glad hes not suffering anymore
+=== Rattboi [~rattboi@c-24-17-185-187.hsd1.wa.comcast.net]  has joined #ubuntu
+[11:03] <Funraiser> well yes sorry
+[11:03] <shadeofgrey> wow
+[11:04] <shadeofgrey> this install script kicks serious ass
+[11:04] <shadeofgrey> i sure hope it works
+[11:04] <Funraiser> shadeofgrey, where do u live and where was your friend living?
+[11:04] <Rattboi> shadeofgrey: what install script?
+=== AlohaWolf [alohawolf@cpe-67-49-96-168.socal.res.rr.com]  has left #ubuntu ["wuffie]
+[11:04] <shadeofgrey> im in florida and had to fly to holland
+=== ciocanel [Alex@zamolxis.cs.unibuc.ro]  has joined #ubuntu
+[11:05] <shadeofgrey> ratt: it downloads java and openoffice 1.9.95 and installs them both
+[11:05] <shadeofgrey> on ubuntu hoary
+=== cert [~tobing@129.94.139.234]  has joined #ubuntu
+[11:06] <shadeofgrey> i really love this operating system
+[11:06] <Funraiser> i used to live in florida for 2 years...where u at?
+[11:06] <Rattboi> shadeofgrey: can't you do that with synaptic?
+[11:06] <cert> hei people out of curiosity do anyone here using hp pavillion zt3000 and get their sd card reader working?
+[11:06] <shadeofgrey> i wish i could get my boss to let me replace all the windows xp machines with ubuntu workstations
+[11:06] <cert> shadeofgrey : welcome to the club
+[11:06] <shadeofgrey> Fun:  boca raton
+[11:07] <Funraiser> k
+[11:07] <Rattboi> I'm gonna do a dirty thing and install Hoary on my new mac mini :)
+[11:07] <Funraiser> nice place
+[11:07] <Rattboi> well, dual boot
+=== bezibaer1hen is now known as bezibaerchen
+[11:07] <shadeofgrey> you can dual boot macs?
+[11:07] <Choubaka> sure. :P
+[11:07] <whiteknight> shadeofgrey, yup, am doing it now :d
+[11:07] <Rattboi> whiteknight, sweet
+[11:07] <Rattboi> what are you running on?
+=== Fitti [~chatzilla@2.Red-81-36-152.pooles.rima-tde.net]  has joined #ubuntu
+[11:07] <Fitti> hello
+[11:07] <whiteknight> Rattboi, G4 iBook
+[11:07] <thoreauputic> shadeofgrey, I have an iBook laptop that dual boots Ubuntu :)
+[11:07] <cert> hei people out of curiosity do anyone here using hp pavillion zt3000 and get their sd card reader working?
+[11:08] <whiteknight> i still need os x to watch dvds and also itunes
+=== Rattboi [~rattboi@c-24-17-185-187.hsd1.wa.comcast.net]  has joined #ubuntu
+[11:09] <whiteknight> thoreauputic, can you run dvds at a proper speed?
+[11:09] <thoreauputic> whiteknight, have a look at Mac-on-Linux for those multimedia things
+[11:09] <shadeofgrey> id just like to say...  tiger kicks ass too
+[11:09] <jsgotangco> thoreauputic, hey nice to see you again
+[11:09] <whiteknight> thoreauputic, good point
+[11:09] <thoreauputic> whiteknight, you might need to turn dma on for your dvd drive
+[11:09] <Funraiser> i've been reading somewhere that many Ubuntu hackers have an ibook
+[11:09] <shadeofgrey> and i dont care what anybody says - NOBODY can touch the apple 30" cinema display
+[11:10] <shadeofgrey> that shit is just obscenely cool
+[11:10] <thoreauputic> whiteknight, use hdparm and /etc/hdparm.conf
+[11:10] <whiteknight> thoreauputic, done that, its just a bit to slow - i reckon its the lack of an accelerated driver
+[11:10] <Rattboi> shadeofgrey: but you CAN get a comparable 20" apple display for half the price
+=== dyno [~dyno@i01m-92-187.d4.club-internet.fr]  has joined #ubuntu
+[11:10] <dyno> hi
+[11:10] <Choubaka> 30" is quite much overkill
+[11:10] <thoreauputic> jsgotangco, hi there :)
+[11:10] <whiteknight> thoreauputic, its only a 800mhz G4
+[11:10] <Choubaka> unless you're a graphics pro. :O
+[11:10] <Rattboi> thoreauputic: are there packages for MoL?
+[11:10] <shadeofgrey> i hope they debut a 62" at the mac conf in june like i was reading about
+[11:10] <dyno> does anyone know anything about alsaconf in ubuntu?
+[11:10] <Rattboi> or did you need to recompile kernel?
+[11:11] <thoreauputic> Rattboi, yes, but you need to follow the howto
+[11:11] <shadeofgrey> okay i need help with something
+=== cavediver [~jonas@62.101.48.80]  has left #ubuntu []
+[11:11] <thoreauputic> Rattboi, I'l get the link - hang on
+[11:11] <Funraiser> well thanks all see u later
+[11:12] <shadeofgrey> hey
+=== Funraiser [~Funraiser@81.56.196.103]  has left #ubuntu ["Leaving"]
+=== schasi [~schasi@62.75.160.152]  has joined #ubuntu
+[11:12] <shadeofgrey> is  there a winamp for linux?
+=== Sardukar [Atreides@host176-160.pool8249.interbusiness.it]  has joined #ubuntu
+[11:12] <jsgotangco> xmms
+[11:12] <whiteknight> bmp
+[11:12] <whiteknight> beep media player
+=== chesty [chesty@unconcerned.org]  has joined #ubuntu
+[11:12] <Rattboi> bmp is my fav
+[11:12] <shadeofgrey> which is better?
+[11:12] <thoreauputic> Rattboi, http://www.ubuntulinux.org/wiki/MacOnLinuxHowto
+[11:12] <whiteknight> bmp is just a updated version of xmms
+[11:12] <shadeofgrey> i tried xmms...  it looked like shit
+[11:12] <Rattboi> shadeofgrey: yeah
+[11:12] <dyno> i did not find anything for using my RME soundcard with ubuntu :/
+[11:13] <Rattboi> bmp is xmms w/ GTK2
+[11:13] <Rattboi> so it looks a lot better
+[11:13] <shadeofgrey> is it part of apt get?
+[11:13] <IIIEars>  ubuntu and synaptic make both easy to try - remove the one you don't like.
+[11:13] <thoreauputic> jsgotangco, nice chatting with you at UDU - how are you?
+[11:13] <dyno> aptitude works well :)
+[11:13] <jsgotangco> thoreauputic, been doing well, quite busy, i saw you chatting for quite some time with bob2 during UDU hope it went well on your side
+[11:14] <thoreauputic> Rattboi, got that MOL link?
+[11:14] <Rattboi> yeah
+[11:14] <Rattboi> can't do much with it yet
+[11:14] <thoreauputic> jsgotangco, yes, we got on well :)
+[11:14] <Rattboi> since I don't have the mini for probably another week
+[11:14] <jsgotangco> excellent
+[11:14] <dyno> no one can help me?
+=== schasi [~schasi@62.75.160.152]  has joined #ubuntu
+=== pepsi [~pepsi@72-254-46-54.client.stsn.net]  has joined #ubuntu
+[11:14] <IIIEars> I keep hearing that - just a little timid to change install programs - what if i get soe type of error - it isn't easy being new to linux.
+[11:15] <sjohnson> is there anyone who has any power over Ubuntu?  The documentation is the worst I have ever seen!  And plus, when you first start out, it just tells you to download the images, select "install" on a drive, and then leaves you to it...
+[11:15] <thoreauputic> jsgotangco, he is much more approachable than his IRC persona suggests ;-)
+[11:15] <jsgotangco> haha
+=== schasi [~schasi@p54A264D5.dip.t-dialin.net]  has joined #ubuntu
+=== p0rnflake [~p0rnflake@83.72.67.172.ip.tele2adsl.dk]  has joined #ubuntu
+[11:15] <sjohnson> just like if you were thrown off a boat into the water with no life jacket, why is it like this?
+[11:15] <p0rnflake> Someone got a minutte to help me out with a little dns resolution problem
+=== ubuntu [~ubuntu@adsl-ull-131-89.44-151.net24.it]  has joined #ubuntu
+=== yeti [user66@lns-vlq-17f-81-56-172-108.adsl.proxad.net]  has joined #ubuntu
+[11:15] <thoreauputic> sjohnson, there is a lot of good documentation on the wiki
+=== yeti_des_alpes [~yeti@lns-vlq-17f-81-56-172-108.adsl.proxad.net]  has joined #ubuntu
+[11:16] <bob2> hah
+=== yeti [user66@lns-vlq-17f-81-56-172-108.adsl.proxad.net]  has left #ubuntu ["Leaving"]
+[11:16] <jsgotangco> sjohnson, we're working on the documentation thing
+[11:16] <bob2> surely my irc persona is not that bd
+[11:16] <dyno> yes but nothing about alsaconf...
+=== yeti_des_alpes [~yeti@lns-vlq-17f-81-56-172-108.adsl.proxad.net]  has left #ubuntu ["Leaving"]
+[11:16] <jsgotangco> hah
+[11:16] <thoreauputic> bob2, it isn't at all - I was kidding :)
+[11:16] <sjohnson> jsgotangco: : ok.. cause i'm thinking at least an official handbook would be of IMMENSE help, and this Wiki stuff is pretty ramshackle.. for example, a user should know RIGHT AWAY what to do about setting a root password
+[11:17] <p0rnflake> Can someone explain to me why I'm unable to resolve dns names when my /etc/resolv.conf is correct ?
+[11:17] <thoreauputic> bob2, you know I don't have any problems with you...
+[11:17] <dyno> thanks to ignore my request...
+[11:17] <thoreauputic> bob2, BTW I enjoyed our meeting
+[11:17] <jsgotangco> not all users want the root account but anyway, ill pass this on the docteam
+=== thisfred [~thisfred@c529d80b4.cable.wanadoo.nl]  has joined #ubuntu
+[11:18] <Rattboi> thoreauputic: for MoL, what kind of RAM did you set up?
+=== cert [~tobing@129.94.139.234]  has left #ubuntu ["Leaving"]
+[11:19] <thoreauputic> Rattboi, I specified 512MB (I have 768 total)
+[11:19] <thoreauputic> Rattboi, seems to work well
+=== allio is now known as allio`afk
+[11:19] <sjohnson> is there an OFFICIAL guide that tells you how to use apt-get properly for this OS?  I can't get w32codecs to install or get recognized using apt-get
+[11:19] <sjohnson> the unofficial guide tells me to change around all my files without any explanation whatsoever
+[11:19] <bob2> that's the wrong question
+[11:20] <Rattboi> thoreauputic: does it have to run in a host window, or can it work within a window manager?
+[11:20] <IIIEars> jsgottangco - Will Ubuntu "Breezy" include the no execute "NX" memory flag?
+[11:20] <thoreauputic> sjohnson, for w32codecs you'll need the MArillat repos
+[11:20] <jsgotangco> not the marillat thing again
+[11:20] <jsgotangco> :(
+[11:20] <whiteknight> sjohnson, how about this: http://ubuntuguide.org/
+[11:20] <whiteknight> sjohnson, its the unoffical one but pretty good
+=== Corvus [Corvus@85.86.233.133]  has joined #ubuntu
+[11:21] <sjohnson> yeah i read that, but my file (i just installed the OS) is not consistent at all with the repos change advice
+[11:21] <thoreauputic> Rattboi, it can run nested or on its own display - it runs better on its own tty ( usually defaults to tty8)
+[11:21] <sjohnson> sorry dudes if i'm sounding really pissed off, but tiny thigns like these are really frustrating.. it doesn't inspire a lot of confidence
+[11:22] <thoreauputic> sjohnson, is this your first linux install?
+[11:22] <sjohnson> in other words, what UbuntuGuide says to look for, is not searchable.. it's different
+[11:22] <sjohnson> no, i used to use slackware, openbsd, and freebsd
+=== pce-matty [~matty@202.9.60.14]  has joined #ubuntu
+[11:22] <thoreauputic> http://www.ubuntulinux.org/wiki/   << sjohnson  - a good place to search
+=== housetier [~housetier@dsl-084-056-157-078.arcor-ip.net]  has joined #ubuntu
+[11:23] <bob2> sjohnson: ftp://ftp.nerim.net/debian-marillat/dists/stable/main/binary-i386/w32codecs_20050412-0.0_i386.deb
+[11:23] <jsgotangco> why not just get the tarball from mplayer
+[11:23] <bob2> sjohnson: download that file, and run 'sudo dpkg -i w32codecs_20050412-0.0_i386.deb'.
+[11:23] <IIIEars> sjohnosn - relax, I have less than two weeks using linux and if i can do it you can too. :)
+[11:23] <sjohnson> IIIEars: thanks bro
+[11:24] <thoreauputic> bob2, actually I found the "unstable" marillat version works fine: but disabling marillat in sources.list afterwrds seems to solve other issues
+[11:25] <bob2> it can make mplayer uninstallable
+[11:26] <thoreauputic> bob2, hmm - I installed the multiverse mplayer afterwards: but as I say, I commented marillat out before installing it and after installing the codecs
+[11:26] <bob2> yes
+[11:26] <bob2> that will work
+[11:26] <sjohnson> i think it might be because I'm from Canada, the config files are very different than listed in the UbuntuGuide
+[11:26] <bob2> they will be almost identical
+[11:26] <thoreauputic> sjohnson, which config files?
+[11:27] <Seveas> maybe /etc/apt/sources.list
+[11:27] <Seveas> it could use ca.archive.ubuntu.com
+[11:28] <sjohnson> /etc/apt/sources.list
+=== pce_matty [~matty@202.9.60.14]  has joined #ubuntu
+[11:28] <thoreauputic> bob2, BTW I'm not really impressed with mplayer versus xine (which works beautifully) - is it only for the plugins that mplayer is so popular?
+=== palinuro [~arsuro@d81-211-145-67.cust.tele2.it]  has joined #ubuntu
+=== palinuro [~arsuro@d81-211-145-67.cust.tele2.it]  has left #ubuntu ["Sto]
+=== wixer [~jeroen@adsl219197.adsl.utwente.nl]  has joined #ubuntu
+[11:29] <bob2> sjohnson: the only difference will be adding 3 charcters to the urls
+[11:29] <bob2> that doesn't seem fatally confusing ;)
+[11:29] <sjohnson> bob2: yeah.. but basically different stuff was commented out than the UbuntuGuide.. I'll e-mail him, tell him I'm from Canada
+[11:29] <bob2> thoreauputic: I just like it for it's simplicity.  run it, it shows me a video.  no wasted space on guis or config things or whatever.
+[11:29] <bob2> sjohnson: er, that won't have changed
+[11:29] <thoreauputic> sjohnson, FWIW, I just added multiverse to the end of each universe line
+=== thisfred [~thisfred@c529d80b4.cable.wanadoo.nl]  has joined #ubuntu
+=== owlmanatt [~owlmanatt@69.37.179.70]  has joined #ubuntu
+=== gavriels [~gavriels@gateway.ottawa.transgaming.com]  has joined #ubuntu
+[11:30] <sjohnson> bob2: i don't know why it is different then
+[11:30] <bob2> sjohnson: paste the file to #flood
+[11:30] <sjohnson> i tried finishing the intructions... and i got a GPG error trying to complete the repos stuff
+=== allio`afk is now known as allio
+[11:31] <thoreauputic> sjohnson, in the default file, just uncomment all the sources and package lines
+=== wazquis [~akv@lnxbx.dk]  has joined #ubuntu
+[11:31] <bob2> sjohnson: that seems to be a problem with the archive
+=== phxguy [~phxguy@ip24-251-194-72.ph.ph.cox.net]  has joined #ubuntu
+[11:31] <thoreauputic> sjohnson, did you change the default mirror?
+[11:31] <phxguy> can someone please tell me what i need to open a .docbook file
+[11:31] <merriam> thoreauputic: the deb of mplayer isn't as good as the ebuild
+=== neofeed [~moritz@p548DEDA2.dip.t-dialin.net]  has joined #ubuntu
+[11:31] <bob2> phxguy: where did you get it from?
+[11:32] <bob2> merriam: in what way?
+[11:32] <bob2> phxguy: it's not something you can usefully display, it's the source code for a document
+[11:32] <thoreauputic> merriam, OK - well I'm quite happy with Xine - also xfmedia plays videos , mp3, and ogg etc - I like it too
+[11:32] <merriam> bob2: the deb doesn't seem to include full screen or so many codecs.
+[11:32] <phxguy> from the internet... im trying open the docs for kipiplugins for digikam
+[11:33] <bob2> merriam: which codecs is it missing?
+=== lok [~lala@pouet.dnsalias.org]  has joined #ubuntu
+[11:33] <thoreauputic> merriam, the extra codecs are available in the win32codecs package
+[11:33] <merriam> I forget.  I don't have a recent deb working here.
+[11:33] <merriam> I meant with the codecs package.
+[11:33] <merriam> still no full screen, right?
+=== phxguy [~phxguy@ip24-251-194-72.ph.ph.cox.net]  has left #ubuntu ["check]
+[11:34] <jiyuu0> sjohnson, or you can get the snapshots of all the ubuntuguide apps in http://ubuntuguide.org/add-on-cd
+=== Madeye [~Jad@213.186.186.207]  has joined #Ubuntu
+=== martinhj [~martinhj@host-81-191-103-214.bluecom.no]  has joined #ubuntu
+[11:35] <thoreauputic> merriam, it doesn't resize by default, whereas Xine does, and runs full screen as well
+[11:35] <DJ_Mirage> moin
+=== A_Alam [~a_alam@202.41.228.162]  has joined #ubuntu
+=== demantik [~demantik@203.122.102.128]  has joined #ubuntu
+[11:36] <sjohnson> thoreauputic: i don't know anything about the default mirror, i just did what UbuntuGuide told me to do, and GPG is whining
+=== martinhj_ [~martinhj@host-81-191-103-214.bluecom.no]  has joined #ubuntu
+[11:36] <sjohnson> W: GPG error: http://security.ubuntu.com hoary-security Release: The following signatures were invalid: BADSIG 40976EAF437D05B5 Ubuntu Archive Automatic Signing Key <ftpmaster@ubuntu.com>
+[11:36] <sjohnson> W: You may want to run apt-get update to correct these problems
+[11:36] <bob2> sjohnson: yes, as I said, known problem, which is being fixed
+[11:36] <thoreauputic> sjohnson, as bob2 says, currently there seem to be some issues with the archive gpg
+[11:37] <bob2> merriam: did you use -vo xv?
+[11:37] <merriam> no
+=== tanek [~tanek@h-83-140-246-184.ip.cust.port80.se]  has joined #ubuntu
+[11:37] <bob2> there you go
+[11:37] <thoreauputic> bob2, the .au mirror seems to be OK
+[11:38] <merriam> bob2: ah :)
+[11:38] <gorilla_> go aussie!!! :-)
+=== Adross [~drew@168.9.233.220.exetel.com.au]  has joined #ubuntu
+[11:38] <bob2> hah, au.archive.ubuntu.com is in the uk
+=== rudi-rudi [~rudi@193.87.78.130]  has joined #ubuntu
+[11:38] <Adross> anyone know where the image of the rhythmbox system icon is located?
+[11:38] <thoreauputic> bob2, really? How odd!
+[11:38] <rudi-rudi> Adross, /usr/share/pixmaps/rhythmbox.png
+[11:39] <gorilla_> bob2: don't say that :-P
+=== keffo_ [~keffo@user161.c82-197-233.citynet.nu]  has joined #ubuntu
+[11:39] <sjohnson> thanks bob
+[11:39] <bob2> well, it points at the same machine as archive.ubuntu.com
+[11:39] <thoreauputic> bob2, anyway, changing to it seems to have fixed the gpg issue here
+[11:39] <Adross> rudi-rudi: thats not the system icon
+=== Romadon [~Romadon@213.9.244.32]  has joined #ubuntu
+=== ganymed [~ganymed@p54A7BF20.dip.t-dialin.net]  has joined #ubuntu
+=== derJunior [~derJunior@p549FB67F.dip.t-dialin.net]  has joined #ubuntu
+=== magnon [~magnon@magnon.photogeeks]  has joined #ubuntu
+[11:40] <rudi-rudi> Adross, and what is "system" icon?
+=== wixer [~jeroen@adsl219197.adsl.utwente.nl]  has left #ubuntu ["Leaving"]
+[11:41] <Adross> the one that sites in the notification applet, like gaim
+=== yeti [user66@lns-vlq-17f-81-56-172-108.adsl.proxad.net]  has joined #ubuntu
+[11:42] <thoreauputic> Adross,  try " locate rhythmbox | grep icon " maybe
+[11:42] <thoreauputic> Adross, /usr/share/gnome/help/rhythmbox/C/figures/rhythmbox-tray-icon.png  ?
+=== yeti_des_alpes [user66@lns-vlq-17f-81-56-172-108.adsl.proxad.net]  has joined #ubuntu
+[11:43] <rudi-rudi> Adross: then /usr/share/rhythmbox/art
+=== yeti_des_alpes [user66@lns-vlq-17f-81-56-172-108.adsl.proxad.net]  has left #ubuntu ["Leaving"]
+[11:43] <thoreauputic> ah, that's a help thing sorry
+[11:44] <Adross> thanks rudi-rudi
+[11:44] <rudi-rudi> Adross, ok
+[11:44] <Adross> well, see you all later, you rock man
+=== mmichelli [~mario@pc-80-235-139-153-na.blueyonder.co.uk]  has joined #ubuntu
+[11:44] <sjohnson> what does apt-get update try to do? it quit after doing some stuff at the GPG error, and now i have no idea where i stand
+=== melodie_ [~melodie@dyn-213-36-25-246.ppp.tiscali.fr]  has joined #ubuntu
+=== arbscht [~arbscht@60-234-141-107.bitstream.orcon.net.nz]  has joined #ubuntu
+[11:45] <thoreauputic> sjohnson, it updates the list of installable packages
+[11:45] <mmichelli> good morning all
+[11:46] <sjohnson> i installed w32codecs, but still can't play mp3s
+[11:46] <rudi-rudi> sjohnson: try install gstreamer-plugins
+[11:46] <sjohnson> thanks
+=== _tester_ [~yz@216.238.203.158]  has joined #ubuntu
+[11:47] <thoreauputic> sjohnson, and maybe mpg321
+[11:47] <dyno> don't you think that I could try a manual config of alsa? or it won't work? plz
+[11:47] <sjohnson> ahh... no installation certificate it complains when i try gstreamer
+[11:47] <wezzer-> sjohnson: sudo apt-get install gstreamer0.8-mad
+[11:47] <wezzer-> that will help
+[11:47] <mmichelli> I'm trying to install netbeans 4.1 and get asked the question in the installation wizard, where is the J2SE JDK home directory? Where is it?
+[11:47] <dyno> I'm musician and I really would like to work with ubuntu...
+[11:47] <sjohnson> im doing it, it's working.. but what is "mad"?
+[11:47] <Fitti> i'm traying to uninstall vpopmail but it give me an error
+[11:48] <wezzer-> sjohnson: don't know, but it will play mp3's :)
+[11:48] <sjohnson> thanks, if it weren't for you guys, there's no way i would have gotten Ubuntu working
+[11:49] <rudi-rudi> sjohnson: mad = mpeg audio decoder ;-)))
+[11:49] <thoreauputic> sjohnson, if you want to rip mp3 from CD, install grip and lame ( in the multiverse repo)
+[11:50] <rudi-rudi> sjohnson: or cdparanoia and lame for console ripping.
+[11:50] <thoreauputic> sjohnson, to use sound-juicer for mp3 you'd need gsreamer-lame from marillat
+[11:50] <thoreauputic> actually gstreamer0.8-lame I think
+[11:50] <sjohnson> oh man
+=== nopea [~chris@CEPci-01p3-65.ppp18.odn.ad.jp]  has joined #ubuntu
+[11:51] <thoreauputic> sjohnson, the lame + grip solution is easiest for mp3 ripping
+=== svamp [~johannes@twentyfourseven.se]  has joined #ubuntu
+[11:52] <nopea> if I install a package with Synaptic and later wanted to remove it would I just remove it in Synaptic?
+[11:52] <thoreauputic> nopea, sure
+[11:52] <sjohnson> fuuuuuuuuuuck... im gonna hit the sack guys
+[11:52] <sjohnson> thanks for all the help
+=== space_oddity [~space_odd@151.80.13.18]  has joined #ubuntu
+=== no0tic [~no0tic@host149-193.pool8255.interbusiness.it]  has joined #ubuntu
+=== space_oddity [~space_odd@151.80.13.18]  has left #ubuntu ["Leaving"]
+[11:53] <nopea> thoreauputic, cool would it remove any libraries no longer needed?
+[11:54] <wdh> nopea, nope..
+=== martinhj_ is now known as martinhj
+=== mONGa [~mONGa@64.200.224.158]  has joined #ubuntu
+[11:54] <wdh> nopea, only if you specify what libraries you want to remove
+[11:54] <thoreauputic> nopea, I don't think so, no ( I may be wrong) I think you'd need deborphan for that
+[11:55] <thoreauputic> nopea,  apt-cache show deborphan
+[11:55] <nopea> thoreauputic, cool thanks
+[11:55] <thoreauputic> no worries :)
+=== chmj [~charles@dumbledore.hbd.com]  has joined #ubuntu
+[11:56] <wdh> W: GPG error: http://security.ubuntu.com hoary-security Release: The following signatures were invalid: BADSIG 40976EAF437D05B5 Ubuntu Archive Automatic Signing Key <ftpmaster@ubuntu.com>
+=== sunzi [~sunzi@ACB08395.ipt.aol.com]  has joined #ubuntu
+[11:56] <wdh> what should i do with that error?
+[11:56] <thoreauputic> wdh, known issue, being worked on
+[11:57] <wdh> ah.. ok.
+[11:57] <IIIEars> thoreauputic - getting set up and everything in ubuntu to your liking takes a little time - could there be an application to easily back everything up?
+[11:57] <wdh> meanwhile it is safe to do upgrades?
+[11:57] <thoreauputic> wdh, the archive servers are doing something odd
+[11:57] <shmoolik> can i make windows the defulte system on grub?
+[11:57] <wdh> shmoolik, yes
+[11:57] <wdh> :P
+[11:58] <thoreauputic> IIIEars, there are quite a few - e.g.rsync, tar, dd
+[11:58] <resiak> shmoolik: Sure. vim /boot/grub/menu.lst and edit as appropriate.
+=== Jimbob_ is now known as JimPassedOut
+[11:58] <wdh> resiak, how cruel of you, to send him into vim :)
+[11:58] <shmoolik> resiak,  is there any howto on that ?
+[11:59] <shmoolik> and i m useing Gedit
+[11:59] <wdh> shmoolik, just use gedit yes..
+[11:59] <wdh> there is an entry called 'default'
+[11:59] <thoreauputic> IIIEars, if you mean back up all your configs, it isn't necessary if you use dist-upgrade to upgrade your system
+[11:59] <wdh> just change the number after that as appropriate
+[11:59] <resiak> shmoolik: Set the "default" line to the appropriate number.
+=== sysrq_ [~sysrq@68-190-222-2.mpk-mres.charterpipeline.net]  has joined #ubuntu
+[11:59] <wdh> zero (0) being the first entry
+[11:59] <nopea> with deborphan is there a command to auto remove orphaned libs?
+=== sysrq_ is now known as sysrq
+[12:00] <wdh> nopea, not that i know of.. combine the commands :)
+[12:00] <thoreauputic> nopea, I haven't used deborphan, but I'm sure the man page tells you ;)
+=== rover_dan [~daniel@222.212.32.239]  has joined #ubuntu
+[12:00] <IIIEars> rsync and tar are for files wich is good though they all have to be done from the command line manually.
+=== keffo [~keffo@user161.c82-197-233.citynet.nu]  has joined #ubuntu
+=== MacPlusG3 [~stewart@vpnsrvb2.mysql.com]  has joined #ubuntu
+=== nopea tells himself to RTFM :-)
+[12:01] <wdh> IIIEars, any chance you could use some interpunction?? so we actually understand what you are saying?
+=== xukun [~xukun@gt1989.uvt.nl]  has joined #ubuntu
+[12:01] <wdh> there's more to language then just words
+[12:01] <thoreauputic> IIIEars, you can also use the gnome file-roller to tar files for backup if you wish
+[12:02] <IIIEars> dd is better it saves the partition structure but still it doesn't save the mbr there are no scripts to do it.
+[12:02] <xukun> anybody know why I get this if I run apt-get update: "GPG error: http://security.ubuntu.com hoary-security Release: The following s ignatures were invalid: BADSIG 40976EAF437D05B5 Ubuntu Archive Automatic Signing"
+[12:02] <IIIEars> lol
+[12:02] <wdh> xukun, its being worked on
+[12:02] <IIIEars> File-Roller hm. - didn't know that.
+[12:02] <wdh> IIIEars, dd is better. It saves the partition sructure, but still it doesn't save the mbr. There are no scripts to do it.
+[12:03] <thoreauputic> IIIEars, you can use dd to save the mbr ( it's just the first 512 bytes on the hard drive), but be careful!
+[12:03] <wdh> IIIEars, lots easier to read :)
+[12:03] <xukun> wdh: so I just ignore it for now?
+=== doko [~doko___@dsl-084-059-032-092.arcor-ip.net]  has joined #ubuntu
+[12:03] <wdh> xukun, yes
+[12:03] <IIIEars> lol  (I should take the hint and get a few hours of sleep.)
+=== Chipzz [chipzz@193.190.253.209]  has joined #ubuntu
+[12:04] <wdh> xukun, thats what they told me :) i just came here with the same question
+[12:04] <Fator_Dee> sleep is overrated, coffee \o/
+[12:04] <shmoolik> wdh :) hum... were do i just add the 'default' ?
+[12:04] <petemc> plenty of time to sleep when you're dead
+[12:04] <wdh> shmoolik, there should be a line in there already
+[12:04] <IIIEars> Windows XP used to crash often enough to act as a reminder to get some rest.
+[12:05] <shmoolik> hum... i don't have any ....
+[12:05] <shmoolik> with defaukt i mean
+[12:05] <shmoolik> default*
+=== CoreDump|afk is now known as CoreDump|home
+[12:06] <wdh> in my menu.lst, the first option is "default num"
+[12:06] <shmoolik> oh ! i c thanks
+[12:06] <wdh> :P
+[12:06] <shmoolik> then i just put the number of menu item  right :)
+[12:07] <wdh> yes.. zero being the first item
+=== rast [~rast@81.172.81.93]  has joined #ubuntu
+[12:07] <shmoolik> thanks man 1
+[12:07] <shmoolik> !*
+[12:07] <wdh> shmoolik, but reconsider the windows default :P
+[12:07] <rast> hi
+[12:08] <shmoolik> hum ... i don't have lisence to matlab in linux
+=== nosv [~nosv@197.Red-213-98-147.pooles.rima-tde.net]  has joined #ubuntu
+[12:08] <nosv> pos no ase na
+[12:08] <shmoolik> and i really need a good exal ... which i don't have on ubuntu =\
+[12:08] <wdh> shmoolik, there are a few matlab derivatives on linux..
+=== thomo [~thomo@203-59-89-201.dyn.iinet.net.au]  has joined #ubuntu
+[12:09] <shmoolik> yeah i tryed them
+=== graabein [~graabein@80.203.123.131]  has joined #ubuntu
+=== orhs [~orhs-213@cm-62.179.142.231.chello.no]  has joined #ubuntu
+[12:09] <shmoolik> octave
+[12:09] <orhs> hey all
+[12:09] <wdh> shmoolik, didnt like them?
+[12:09] <graabein> hoy
+[12:09] <shmoolik> i don't know they don't work
+[12:09] <wdh> shmoolik, and doesnt matlab run in wine?
+=== siimo [~siimo@siimo.user]  has joined #ubuntu
+[12:10] <shmoolik> matlab on wine! gods no! i have P3 !
+[12:10] <siimo> hi how do i check the version of ubuntu im running? is it, cat /etc/<whats the file name>
+[12:10] <shmoolik> i and ilike to metal will i script math
+[12:10] <orhs> anyone know some god themes to gnome?
+[12:10] <wdh> siimo, yes it is :P
+[12:10] <orhs> goog*
+[12:11] <orhs> good :P
+[12:11] <siimo> wdh, nvm
+[12:11] <gorilla_> lol :-)
+[12:11] <transgress> i'm beginning to wonder if it's worth getting a 30 gig mp3 player when i have 10 gigs of music
+[12:11] <chmj> siimo: cat /etc/lsb-release
+[12:11] <siimo> its cat /etc/issueissue
+[12:11] <siimo> issue
+[12:11] <shmoolik> okay ppl thank u very much
+[12:11] <Corvus> transgress, you have the answer :)
+[12:12] <wdh> siimo, i already thought your 'ls' was just as good as mine :)
+[12:12] <wdh> transgress, think 'future
+[12:12] <transgress> i do however get more mp3's as time goes by... and i want to stop using my CD's... so hmm... decisions...
+=== norbert_ [~norbert@bdq72.neoplus.adsl.tpnet.pl]  has joined #ubuntu
+[12:12] <airox> Yay, got the ubuntu cd sets :)
+[12:12] <siimo> wdh, unfortunately there are 167 possibilities in /etc/ so thought someone here would know quicker
+[12:12] <airox> Time to bring ubuntu to all my friends :)
+[12:12] <wdh> transgress, and if it plays flac :)
+[12:13] <orhs> airox, did it cost?
+[12:13] <Fator_Dee> transgress: you can use it as a storage also
+=== dizzy [~dizzy@adsl189-59-tn.aknet.it]  has joined #ubuntu
+[12:13] <dyno> good you could make freesbee with that shit
+[12:13] <airox> orhs: no.
+[12:13] <mirak> hi
+[12:13] <orhs> airox, totaly free?
+[12:13] <airox> Yes.
+[12:13] <tanek> transgress: ive got 30gb mp3 and a 60gb mp3player
+[12:13] <transgress> i'm looking at the nomad...
+=== bizkit__ [~bizkit@220-135-247-241.HINET-IP.hinet.net]  has joined #ubuntu
+[12:14] <tanek> thats what i have
+[12:14] <transgress> orhs: shipit.ubuntu.com  <--awesome
+[12:14] <transgress> tanek: how do you like it?
+[12:14] <mirak> usb is broken in breezy, the modprobe sd_mod fix the problem for mass storage, however I can't make work my usb printer. Also I have a new usb device called subgar, it's capture video usb card, and I don't know how I can know which module to load
+[12:14] <wdh> orhs, check ubuntulinux.com for shipit
+[12:14] <airox> Really amazing! :D
+[12:14] <tanek> transgress: i like it a lot, it's pretty large compared to the ipod, but the price makes up for that
+[12:14] <transgress> mirak: stuff broken in breezy?  you're shitting me.
+[12:15] <MattJ> hrmm i just installed muine, and when i play mp3s it says playing, but there is no sound
+[12:15] <mirak> transgress: sarcasm forbidden
+[12:15] <transgress> no way in hell am i spending that much on ipod when there are cheaper choices...
+[12:15] <transgress> mirak: ha!
+=== dyno [~dyno@i01m-92-187.d4.club-internet.fr]  has left #ubuntu ["Leaving"]
+[12:15] <transgress> ipods are just too much for what they offer
+[12:15] <mirak> transgress: most of the time break are really minor
+[12:15] <tanek> transgress: just what i thought when i got mine. and i haven't regretted it
+[12:15] <mirak> breaks
+[12:16] <mirak> I don't know how the update packages, but that's a big bug to not have been spotted by the packager himself ^^
+=== Fitti [~chatzilla@156.Red-81-34-149.pooles.rima-tde.net]  has joined #ubuntu
+=== keffo_ [~keffo@user161.c82-197-233.citynet.nu]  has joined #ubuntu
+[12:17] <transgress> i'd like to get an iRiver, but those are worse than macs... but they are like the only ones that play oggs
+[12:17] <seb128> mirak: printer issue is known
+[12:17] <tanek> transgress: there are customized firmware to nomads that lets them play ogg
+[12:18] <transgress> tanek: nice... so gonna have to get a nomad
+[12:18] <seb128> mirak: and don't use breezy to blame the packagers...
+[12:18] <tanek> yeah :P
+[12:18] <transgress> now to decide if i should get my cell first or my mp3 player
+=== p0m [wodann@203-173-20-85.dyn.iinet.net.au]  has joined #ubuntu
+[12:18] <tanek> at least i've heard atbout such firmware, dont have any oggs hardly
+=== veritas_ [~veritas@ip68-231-196-244.oc.oc.cox.net]  has joined #ubuntu
+[12:18] <veritas_> https://www.ubuntulinux.org/wiki/HowToInstallTheWlanNgDriverInHoary
+[12:18] <veritas_> At the end of that guide
+=== p0m installs Ubuntu Warty again
+[12:19] <transgress> yeah well i plan on ripping most of my cd's
+[12:19] <veritas_> Step 10
+[12:19] <veritas_> Load the module
+[12:19] <veritas_> How exactly do I do that?

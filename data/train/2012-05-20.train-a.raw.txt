@@ -1,0 +1,1365 @@
+[12:40] <Dr_Willis> check your fstab entry for tmp  and see what options its using
+[12:40] <Dr_Willis> most people dont use a seperate /tmp
+[12:40] <g0th> ok I did mount -o remount exec /tmp
+[12:40] <g0th> was that ok?
+[12:40] <Colonel-Rosa> 40KiB/s
+[12:40] <Dr_Willis> check mount command and see how its mounted then
+[12:40] <CaptObvious> Dr_Willis - I use tempfs for /tmp
+[12:40] <futurist> #arduino
+[12:41] <g0th> I use tmpfs
+[12:41] <g0th> well not me but the installer
+[12:41] <g0th> I never touched any of those settings
+[12:41] <Dr_Willis> disable the use of tmpfs then perhaps.
+[12:41] <SilverStar_> Is possible to attach the VHD file in Ubuntu as normal HDD (like windows 7) ??
+[12:41] <g0th> I just removed the noexec from fstab
+[12:41] <g0th> and to get it running now (without reboot) I did mount -o remount exec /tmp
+[12:41] <Dr_Willis> SilverStar_:  i think theres vhd to raw converteres.
+[12:41] <CaptObvious> SilverStar_ - for the millionth time, it's the first hit on google if you google "mount vhd ubuntu"
+[12:43] <Dr_Willis> !info vdfuse
+[12:43] <ubottu> Package vdfuse does not exist in precise
+[12:43] <SilverStar_> CaptObvious -> I search it, but  I only found info about Virtualbox etc.
+[12:43] <Dr_Willis> !find vdfuse
+[12:43] <ubottu> File vdfuse found in virtualbox-dbg, virtualbox-fuse
+[12:44] <Dr_Willis> vhd can work with vdfuse or so i just read.
+[12:44] <Dr_Willis> from man vdfuse -->  -t     specify type (VDI, VMDK, VHD, or raw; default: auto)
+[12:44] <SilverStar_> O,, thanks :)
+[12:45] <Dr_Willis> http://manpages.ubuntu.com/manpages/natty/man1/vdfuse.1.html
+[12:45] <Dr_Willis> You can use vmware-mount provided by VMWare Server.
+[12:52] <csioktel> Hi, i'm new to ufw, i want to know where is the ufw save rules path?
+[12:53] <csioktel> is it ufw will automatic save the rules for next boot?
+[12:54] <pavel_> #Ubuntu-cz
+[13:00] <sa7elak> Hello, how to to know how long the system have been running ???
+[13:00] <iceroot> sa7elak: uptime
+[13:01] <sa7elak> <iceroot> thanks
+[13:11] <_16aR_> Hello
+[13:11] <_16aR_> Is it possible to change the hash algorithm of an already existing pgp / gpg key ?
+[13:11] <_16aR_> Mine is actually SHA1, and I want to use SHA2 instead without regenerating a new key
+[13:12] <CJKay> Has anyone had any luck getting Sun Java 6 (not 7) installed on Precise 12.04?
+[13:12] <Dr_Willis> CJKay:  ive heard it works.. but never really tried.
+[13:13] <CJKay> Heard it works? Where have these people even got it from? D:
+[13:13] <Dr_Willis> I thoght the !java factoid said
+[13:13] <Dr_Willis> lets see..
+[13:13] <Dr_Willis> !java
+[13:13] <ubottu> To just use java you need a "Java Runtime Environment" (JRE) and/or a browser plugin. If that is not sufficient you will need a "Java Development Kit" (JDK) aka "Software  Development Kit" (SDK).  Please see https://help.ubuntu.com/community/Java about how to install one of three current implementations.
+[13:13] <Dr_Willis> Install the openjdk-6-jre package using any installation method.
+[13:14] <Dr_Willis> https://github.com/flexiondotorg/oab-java6
+[13:14] <CJKay> I need specifically Sun's Java 6 implementation
+[13:14] <Dr_Willis> No idea then.  wget http://download.oracle.com/otn-pub/java/jdk/6u31-b04/jre-6u31-linux-i586.bin
+[13:14] <CJKay> Oracle Java 7 doesn't allow me to use anything other than software rendering and OpenJDK 6 just crashes
+[13:14] <Dr_Willis> is all i know on the topic.
+[13:14] <dontknow> anyone using chromium here?
+[13:14] <Dr_Willis> thats java 6
+[13:15] <Dr_Willis> oracle java 6 jre 32-bit
+[13:15] <dontknow> no one use chromium?
+[13:15] <dontknow> lol
+[13:15] <CJKay> Dr_Willis: Link is broken
+[13:15] <Dr_Willis> i tend to use chromoim or google chrome
+[13:16] <CJKay> Which is kinda my problem. Everything has been taken down
+[13:16] <Dr_Willis> CJKay:  all i know is on that wiki page. ;) so cant help much more
+[13:16] <CJKay> Alright, thanks
+[13:16] <Dr_Willis> check askubuntu.com perhaps someone has an old version somewhere
+[13:16] <dontknow> Dr_Willis, are you using or not?
+[13:17] <Dr_Willis> browser window says chromium on this box.
+[13:17] <iceroot> !anyone | dontknow
+[13:17] <ubottu> dontknow: A high percentage of the first questions asked in this channel start with "Does anyone/anybody..." Why not ask your next question (the real one) and find out? See also !details, !gq, and !poll.
+[13:17] <Dr_Willis> other boxs are using googles chrome. ;)
+[13:17] <ActionParsnip> dontknow: chromium is all I use
+[13:17] <Dr_Willis> cant say ive ever noticed any differance in the 2
+[13:17] <tomodo> https://help.ubuntu.com/community/Calculator
+[13:17] <tomodo> where can I get the source code for this program?
+[13:17] <dontknow> ActionParsnip, is it still 18, because 19 released and still no update?
+[13:18] <iceroot> !info calculator
+[13:18] <ubottu> Package calculator does not exist in precise
+[13:18] <Dr_Willis> !find calculator
+[13:18] <ubottu> Found: libwww-google-calculator-perl
+[13:18] <ActionParsnip> tomodo: apt-get source gcalc
+[13:18] <ActionParsnip> dontknow: could report a bug, is there no deb file around
+[13:18] <tomodo> i want the source coed
+[13:18] <iceroot> tomodo: if you know the packagename use "apt-get source packagename" to get the source-package
+[13:18] <Dr_Willis> !find gnome-calculator
+[13:18] <ubottu> File gnome-calculator found in breathe-icon-theme, elementary-icon-theme, gcalctool, gnome-icon-theme-full, gnome-icon-theme-gartoon, gnome-icon-theme-gartoon-redux, gnome-icon-theme-gperfection2, gnome-icon-theme-nuovo, humanity-icon-theme, moblin-icon-theme (and 2 others) http://packages.ubuntu.com/search?searchon=contents&keywords=gnome-calculator&mode=&suite=precise&arch=any
+[13:18] <dontknow> ActionParsnip, you have 18 either?
+[13:19] <dontknow> ActionParsnip, or is it just me
+[13:19] <tomodo> thanks very much
+[13:20] <dontknow> gtmanfred, what are you doing here :D
+[13:21] <Adriannom> hi.  just installed xubuntu 12.04 and after i suspend, the screen is very dark, even at the prompt to log back in.  changing brightness has some effect, but even full brightness is very dark.  the mouse pointer is the only thing that is at full brightness.  any ideas what could be going on?
+[13:21] <evilgeenius> After a fresh install of Ubuntu 12 I have tried to install "apt-get install linux-headers-3.2.0-23-generic" , but it gives me the error "Error! Bad return status for module build on kernel: 3.2.0-23-generic (x86_64)".   Does anyone know what the issue is?  I need to install this so I can run VirtualBox.
+[13:22] <dontknow> ActionParsnip, could you check your chromium's version number
+[13:22] <iceroot> evilgeenius: use the metapackage instead
+[13:22] <tomodo> I installed the source with apt, but where is it?
+[13:22] <iceroot> evilgeenius: linux-headers-generic if i am correct
+[13:22] <tomodo> oh I found it
+[13:22] <iceroot> tomodo: in the dir where you called the command
+[13:22] <tomodo> great
+[13:22] <notze> i always get problems running apt-get
+[13:22] <notze> whats wrong
+[13:23] <notze> its a plain ubuntu server
+[13:23] <notze> Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+[13:23] <notze> either that
+[13:23] <notze> or a lot other problem
+[13:23] <yeats> notze: details?
+[13:23] <notze> Failed to fetch http://us.archive.ubuntu.com/ubuntu/pool/main/v/vlan/vlan_1.9-3ubuntu6_amd64.deb  Unable to connect to us.archive.ubuntu.com:http:
+[13:23] <notze> E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+[13:23] <digitalj> Try another mirror
+[13:23] <iceroot> notze: Unable to connect to us.archive.ubuntu.com
+[13:23] <Dr_Willis> us.archive.* has been slow the last few days.  not tried it today
+[13:23] <yeats> notze: "Unable to connect to us.archive.ubuntu.com" is your key line
+[13:24] <iceroot> notze: what is the question? the error is very clear
+[13:24] <digitalj> I was having problems with us.archive.ubuntu.com yesterday
+[13:24] <digitalj> Some other people were seeing rediculous latency as well, like only 20KB/s
+[13:26] <Dr_Willis> yep. been that way for like 3 days
+[13:26] <D[4]ni> does anyone know how to fix this error in rhythmbox trying to load the 10-band equalizer plugin? http://pastebin.com/y4BqVQFB
+[13:28] <evilgeenius> iceroot: Ok I installed the linux-headers-generic, but now virtualbox gives me the error : "Error! Your kernel headers for kernel 3.2.0-23-generic cannot be found.".  If I install those specified headers then i get an error.
+[13:28] <ngomes> D[4]ni, do you have python-gconf installed ?
+[13:28] <evilgeenius> iceroot: Also, the kernel-devel package is not available to install.  Is that correct?
+[13:29] <iceroot> evilgeenius: what is the output of "dpkg -l linux-headers-3.2.0-23-generic"
+[13:29] <D[4]ni> ngomes, yes i do
+[13:29] <iceroot> !info linux-headers-generic
+[13:29] <ubottu> linux-headers-generic (source: linux-meta): Generic Linux kernel headers. In component main, is optional. Version 3.2.0.24.26 (precise), package size 2 kB, installed size 31 kB
+[13:29] <dontknow> could someone check what version chromium installed on your ubuntu if you haven't added another repo
+[13:29] <notze> iceroot
+[13:30] <notze> yes ists clear but what is this
+[13:30] <iceroot> evilgeenius: as you see its 3.2.0.24 and not .23
+[13:30] <notze> sometimes is there and 5mins later not?
+[13:30] <notze> this HAS to work
+[13:30] <notze> i also have this problem with german servers of ubuntu
+[13:30] <notze> and adn
+[13:30] <iceroot> evilgeenius: you are on 12.04
+[13:30] <evilgeenius> iceroot: This is the output : un  linux-headers-3.2.0-23-g
+[13:30] <ngomes> D[4]ni, i suggest you go ask in #python room then , maybe then can explain better
+[13:30] <compdoc> dontknow, my version is 18.0.1025.168
+[13:30] <Dr_Willis> !info chromium
+[13:30] <ubottu> Package chromium does not exist in precise
+[13:30] <iceroot> notze: can you ping google.de from the cli? ping -c 4 google.com
+[13:30] <Dr_Willis> !info chromium-browser
+[13:30] <ubottu> chromium-browser (source: chromium-browser): Chromium browser. In component universe, is optional. Version 18.0.1025.151~r130497-0ubuntu1 (precise), package size 21157 kB, installed size 78055 kB
+[13:31] <xtu> hi, how to use rss in ubuntu?
+[13:31] <iceroot> evilgeenius: 12.04 is using 3.2.0-24-generic and not 23
+[13:31] <iceroot> !info linux-headers-generic | evilgeenius
+[13:31] <ubottu> evilgeenius: linux-headers-generic (source: linux-meta): Generic Linux kernel headers. In component main, is optional. Version 3.2.0.24.26 (precise), package size 2 kB, installed size 31 kB
+[13:31] <xtu> i mean i want to listen the voa english .
+[13:31] <Dr_Willis> xtu:  whith rss reader apps is one way.  I just use google-reader's web site.
+[13:31] <Dr_Willis> rmss?
+[13:31] <dontknow> compdoc, i still have 18.0.1025.151 and didn't get update ???
+[13:31] <xtu> no, i don't know what is rmss?
+[13:32] <duobix> Hi, will there by official support for nvidia optimus?
+[13:32] <xtu> Dr_Willis, you mean you can get the english podcast in google-reader?
+[13:32] <Dr_Willis> rss = a news feed. rmms is a audio/video stream - i think. i may be backwards
+[13:32] <evilgeenius> iceroot: ok.  So you you have any idea why virtualbox is looking for 3.2.0.23?  "Error! Your kernel headers for kernel 3.2.0-23-generic cannot be found."
+[13:32] <compdoc> dontknow, I installed from the google website
+[13:32] <iceroot> evilgeenius: vbox from the repos?
+[13:32] <dontknow> compdoc, so you should have had 19
+[13:32] <xtu> ok, I will try the google-reader
+[13:32] <notze> iceroot yes
+[13:32] <notze> it works all perfect
+[13:32] <dontknow> compdoc, 19 released
+[13:33] <notze> only the apt stuff is problemtic
+[13:33] <Dr_Willis> http://www.voanews.com/wm/live/newsnow.asx
+[13:33] <Dr_Willis> works in totem
+[13:33] <evilgeenius> iceroot: no from their website.  I need to be using a  slightly older version or virtualbox, 4.1.4, and not the most recent, 4.1.14.
+[13:34] <xtu> oh,  so I can add that link to totem.
+[13:34] <Dr_Willis> xtu:  i imagine most any of the media players can handle it.
+[13:34] <compdoc> dontknow, I installed it a short while back, so thats why
+[13:34] <Dr_Willis> xtu:  i just went to the voanews.com site and clicked on the link and it opened in totem. i saw the url and pasted it here.
+[13:34] <ActionParsnip> dontknow: all I've found is 'add the chrome ppa and install chrome-unstable' which isn't the same thing
+=== nicolas_dh is now known as paposs
+[13:34] <duobix> Hi, is there any way I can simply install rpm packages, without opening terminal?
+[13:35] <iceroot> evilgeenius: then i guess that is out of support here
+[13:35] <crazypete> does anyone know of a texteditor that I can run in a terminal that has shift-arrows to select and ctrl-c/v/x?
+[13:35] <dontknow> Dr_Willis, i didn't add any extra repo, i installed chromium using software center. so this means i will get no update anymore?
+=== paposs is now known as NicolasDH
+[13:35] <Dr_Willis> dontknow:  ubuntu only does security updates to their official repos
+[13:35] <Dr_Willis> rarely version # updates
+[13:35] <iceroot> evilgeenius: if i am correct there is something like /etc/init.d/vbox-setup
+[13:35] <iceroot> evilgeenius: maybe that can help
+[13:36] <evilgeenius> iceroot: yes, that is where I see the error message
+[13:36] <iceroot> evilgeenius: ah ok
+[13:36] <dontknow> Dr_Willis, it is not including chromium?
+[13:36] <xtu> oh, and Dr_Willis , I am not a America, and I want to improve my english, so I want to listen the VOA podcast or rss thing. but I don't know what to do?
+[13:36] <e_t_> duobix: RPM packages are for Red Hat and similar systems, not for Debian-derivatives like Ubuntu. You might have some luck using 'alien' but it's not guaranteed.
+[13:36] <evilgeenius> iceroot:  Virtualbox must be getting 3.2.0.23 from somewhere.
+[13:36] <iceroot> evilgeenius: are you bootet in the .23 kernel maybe? but have the headers installed for .24?
+[13:36] <iceroot> evilgeenius: maybe that script is parsing the output of uname
+[13:37] <duobix> e_t_ thank you.
+[13:37] <compdoc> dontknow, I cannot see an option to update chrome
+[13:37] <evilgeenius> iceroot: yes, uname shows 3.2.0-23-generic
+[13:37] <iceroot> evilgeenius: install the .24 kernel, reboot the system
+[13:37] <duobix> Anyway, I'd love to see a non-terminal installer for tar.gz files
+[13:37] <iceroot> evilgeenius: then the metapackage .24 is matching again to uname
+[13:37] <iceroot> !info linux-image-generic
+[13:37] <ubottu> linux-image-generic (source: linux-meta): Generic Linux kernel image. In component main, is optional. Version 3.2.0.24.26 (precise), package size 2 kB, installed size 31 kB
+[13:38] <crazypete> what do I google for to find editors that run in terminal? what is the common name for non-graphical text editors?
+[13:38] <iceroot> evilgeenius: you see, there is a newer kernel for 12.04 and because the script is parsing uname you get that error
+[13:38] <Dr_Willis> dontknow:  security updates only. are the normal way of ubuntu doing updates to ANYTHING in their repos. ubuntu is not a 'rolling' release
+[13:38] <duobix> That's killing the whole experiance in any linux system
+[13:38] <evilgeenius> iceroot: thanks! I'll I;ll try it.
+[13:38] <dontknow> Dr_Willis, if i install google chrome through their website, it will take updates ?
+[13:38] <iceroot> crazypete: vim, emacs, nano, joe
+[13:38] <Dr_Willis> dontknow:  if google updates it.. yes.
+[13:38] <Dr_Willis> dontknow:  if goodle dosent.. then no.
+[13:38] <Muelli> crazypete: I'd do: apt-cache search editor
+[13:38] <dontknow> Dr_Willis, ok thanks
+[13:39] <iceroot> crazypete: command line editor for example
+[13:39] <chu> crazypete: You're basically limited to the ones iceroot mentioned.
+[13:39] <Dr_Willis> crazypete:  go learn vi. :) its worth learning
+[13:39] <iceroot> crazypete: yes, use vim (not vi) its a real good editor
+[13:39] <crazypete> iceroot, those are line-editors. I want proper text-editor for cli. Somebody must have written something like gedit for cli, if only as a proof of concept.
+[13:39] <iceroot> crazypete: i told you 4
+[13:40] <Dr_Willis> crazypete:  thers dozens of text editors for the cli.
+[13:40] <angel282> Hello, Can someone recommend me on good server management panel such cpanel etc.. ?(which easy to install)?
+[13:40] <iceroot> crazypete: vim is like gedit but much much much much more powerfull
+[13:40] <Dr_Willis> crazypete:  on a 'rescue' system  - often you will be stuck with vi and nano. so those 2 are wrorth learning.
+[13:40] <iceroot> crazypete: sudo apt-get install vim, then use the command "vimtutor"
+[13:41] <Dr_Willis> fte is a very impressive text editor for the console also. but its not commonly used.
+[13:41] <Dr_Willis> !info fte
+[13:41] <ubottu> fte (source: fte): Text editor for programmers - base package. In component universe, is optional. Version 0.50.2b6-1 (precise), package size 87 kB, installed size 323 kB
+[13:41] <crazypete> Dr_Willis, how do a search for these dozens of such editors. what is the common name for them?
+[13:41] <iceroot> crazypete: i told you that too
+[13:41] <Dr_Willis> crazypete:  apt-get basics... 'apt-cache search PATTERNNAME'
+[13:41] <iceroot> crazypete: command line editor
+[13:42] <iceroot> crazypete: but trust me if you want a real editor on the shell with some advanced features there are only vim and emacs
+[13:42] <Volkan-K> hi
+[13:43] <ActionParsnip> crazypete: nano for me :)
+[13:43] <crazypete> I search for command line editors and I find those mentioned here. I don't want to offend anyone, but they're crap. I am looking for something simple and usefull.
+[13:43] <Dr_Willis> i find nano just annoying
+[13:43] <iceroot> crazypete: nano and joe if you want something simple
+[13:43] <crazypete> nano is better, but copy select...
+[13:43] <Volkan-K> they gave me this url for downloading ubuntu : http://tinyurl.com/cccrkq9  but I can't download. can you help?
+[13:43] <Dr_Willis> crazypete:  they are not crap. if you want simple. go with nano.
+[13:43] <iceroot> crazypete: and of course vim is not crap its just not what you are looking for
+[13:43] <ActionParsnip> crazypete: tried nano, simple yet effective. None of the flashy stuff, just a straight editor
+[13:44] <Dr_Willis> try fte - you may like it,
+[13:44] <angel282> Can someone recommend me on a free good server/system administration panel? someone told me webmin is good? any recommendations?
+[13:44] <iceroot> angel282: ssh
+[13:44] <Dr_Willis> angel282:  for get you ever heard about webmin
+[13:44] <Dr_Willis> !ebox
+[13:44] <ubottu> zentyal is a web-based GUI interface for administering a server. It is designed to work with Ubuntu/Debian style configuration management. See https://help.ubuntu.com/community/Zentyal (Project formally known as eBox - including in Lucid/10.04).
+[13:44] <iceroot> !webmin | angel282
+[13:44] <ubottu> angel282: webmin is no longer supported in Debian and Ubuntu. It is not compatible with the way that Ubuntu packages handle configuration files, and is likely to cause unexpected issues with your system.
+[13:44] <ActionParsnip> don't use webmin
+[13:45] <angel282> ActionParsnip: ok, so which admin panel you are recommend to use?
+[13:45] <Volkan-K> thats becaus Debian sux
+[13:45] <Volkan-K> use CentOS
+[13:45] <iceroot> Volkan-K: stop it
+[13:46] <Volkan-K> why would i stop. thats the truth
+[13:46] <iceroot> Volkan-K: its offtopic here
+[13:46] <iceroot> Volkan-K: this is not #debian and not #centos
+[13:47] <compdoc> has anyone heard news about why the ubuntu mirrors are so slow?
+[13:47] <iceroot> Volkan-K: and if the user is not able to admin a system with the normal tools and need a webgui for it i am not sure if the os is the reason for sucking
+[13:47] <compdoc> cant upgrade my server
+[13:47] <Dr_Willis> compdoc:  not seen any news on it..
+[13:47] <gccster> guys i have ubuntu 12.04 on intel i5 laptop hibernate/suspend not working what can i do?
+[13:47] <Dr_Willis> compdoc:  been show for 4 days here
+[13:47] <Dr_Willis> slow
+[13:47] <compdoc> sounds the same for me
+[13:48] <angel282> ActionParsnip: so which admin panel can be used instead of webmin?
+[13:48] <Dr_Willis> !ebox | angel282  said this earlier
+[13:48] <ubottu> angel282  said this earlier: zentyal is a web-based GUI interface for administering a server. It is designed to work with Ubuntu/Debian style configuration management. See https://help.ubuntu.com/community/Zentyal (Project formally known as eBox - including in Lucid/10.04).
+[13:49] <Dr_Willis> 'best' is to learn to use ssh. ;P
+[13:50] <Volkan-K> ubuntu is debian based
+[13:50] <Volkan-K> and is not stable
+[13:50] <Volkan-K> here is the proof: http://digitaloffense.net/tools/debian-openssl/
+[13:50] <iceroot> Volkan-K: you have a support question?
+[13:50] <Volkan-K> iceroot: fuck you!
+[13:50] <iceroot> Volkan-K: cu :)
+[13:51] <Dr_Willis> pointless comments are pointless.
+[13:53] <sirriffsalot> Hey! Is there any database for ubuntu users on getting the right nvidia drivers installed?
+[13:53] <chabicobi> my USB 3G CDMA not working in edubuntu 12.04 who  can help me?
+[13:53] <ikonia> sirriffsalot: the hardware drivers tool should offer the most compatible version for you
+[13:53] <Dr_Willis> sirriffsalot:  i thought nvidia-current sort of scanned and installed what it thought was needed.
+[13:53] <sirriffsalot> I've had some uncomfortable experience in 11.10 doing that though...
+[13:53] <enbez> Does anyone know of a free server that allows you to run programs on it?
+[13:54] <ikonia> sirriffsalot: your card may not actually have good support
+[13:54] <sirriffsalot> I couldn't login after installing an nvidia driver...
+[13:54] <ikonia> enbez: please don't ask in here - this is ubuntu support
+[13:54] <Dr_Willis> sirriffsalot:  detailas as to what happens exactly is more helpfull
+[13:54] <enbez> ok, sorry. Do you know a channel where i can ask?
+[13:54] <ActionParsnip> angel282: I suggest you learn to manage the system with CLI, your skills will be transferrable to other distros and the system will be more secure.
+[13:54] <votproductions> Wait what?
+[13:54] <sirriffsalot> Well, it was a dream studio distribution, so could have been that. Now I'm on a straight Ubuntu 12.04
+[13:54] <sirriffsalot> How do I check what nvidia cards I have?
+[13:55] <ActionParsnip> sirriffsalot: sudo lshw -C display
+[13:55] <amaurea> Hi! My repositories contain the package libportaudio2, but not a corresponding -dev package. Isn't there usually a -dev version for every package?
+[13:55] <sirriffsalot> ActionParsnip: what should I be looking for??
+[13:55] <ActionParsnip> sirriffsalot: the product line(s)
+[13:55] <Dr_Willis> says 'vga'  on a line sirriffsalot
+[13:56] <chabicobi> La nouvelle version de ubuntu ma clé  internet n'est pas détecté aidez moi
+[13:56] <sirriffsalot> Oddly enough I have two *display lines... haha
+[13:56] <sirriffsalot> product: G98 [GeForce G 100] and product: G98 [GeForce G 100]
+[13:56] <sirriffsalot> How do I check which one is being used? Haha
+[13:56] <Thiagovfar> On Ubuntu, ~/bin is automatically added to the PATH variable. Question is: Where is that? I've looked into .bashrc, /etc/bash.bashrc, /etc/profile. Couldn't find it.
+[13:56] <ActionParsnip> sirriffsalot: nvidia-settings has a button to identify displays
+[13:56] <Muelli> !fr | chabicobi
+[13:56] <ubottu> chabicobi: Ce canal est en anglais uniquement. Si vous avez besoin d'aide ou voulez discuter en français, veuillez taper /join #ubuntu-fr ou /join #ubuntu-qc. Merci.
+[13:57] <ActionParsnip> Thiagovfar: /etc/environment  maybe..
+[13:57] <sirriffsalot> ActionParsnip: alright, installing that
+[13:57] <sirriffsalot> By the way, is there some software/command that removes repositories that I no longer use?
+[13:57] <sirriffsalot> That has no software installed requiring them
+[13:58] <Thiagovfar> ActionParsnip: Nope.
+[13:58] <magic_al> i have a picture on the top of my website. this picture is supposed to change depending on the content. more in detail the content is organized within a hierarchical menu. the top level of this menu consists of 6 links. for every of those 6 links i have a certain picture. how can i get the highest link parent of a content-typ in order to fit the picture according to that?
+[13:58] <sirriffsalot> Hmm "You do not appear to be using the NVIDIA X driver."
+[13:58] <Thiagovfar> ActionParsnip: What bugs me is that it seems to be default behaviour for ubuntu, yet I can't find it.
+[13:58] <mneptok> Thiagovfar: ~/.profile ?
+[13:58] <chabicobi> Mon USB 3G 1x CDMA ne marche pas avec Ubuntu 12.04
+[13:59] <mneptok> chabicobi: Angaloseulement en cette canale, SVP
+[13:59] <mneptok> chabicobi: "Anglais seulement"
+[13:59] <sirriffsalot> "Please edit your X configuration file (just run `nvidia-xconfig` as root), and restart the X server."
+[13:59] <sirriffsalot> How do I restart the X server?
+[13:59] <Dr_Willis> $ grep PATH .*
+[14:00] <Dr_Willis> shows it in .profile   ;)
+[14:00] <mneptok> sirriffsalot: ALT+PrntScrn+K
+[14:00] <sirriffsalot> mneptok: Thanks:) Hang on
+[14:00] <monohedron> hi I install 12.04 lts 64bit plus gnome. in gnome classic every window I open ends up partially hidden by the upper panel. can someone let me now how to prevent that?
+[14:00] <Thiagovfar> mneptok: yep, found it on ~/.profile
+[14:00]  * Dr_Willis cant imagine why that default behaivor would be annoying.
+[14:01] <angel282> ActionParsnip: Zentyal is seems hard to install any alternative admin panel which more easy to install?
+[14:01] <chabicobi> my internet key  USB 3G 1x CDMA not working in  Ubuntu 12.04
+[14:01] <sirriffsalot> sudo: nvidia-xconfig: command not found
+[14:01] <Muelli> chabicobi: how do you know it's not working?
+[14:01] <Thiagovfar> Dr_Willis: It's not annoying. I just want to copy it over on Gentoo =)
+[14:01] <mneptok> Thiagovfar: .profile is not shell specific. so if you switch to zsh or tcsh, /bin will stll be in the $PATH
+[14:02] <chabicobi> I think it is not detect
+[14:02] <Thiagovfar> mneptok: good to know
+[14:02] <Dr_Willis> sirriffsalot:  the x gui to nvidia is 'nvidia-settings'
+[14:02] <ActionParsnip> angel282: what do you need the admin panel to achieve?
+[14:03] <sirriffsalot> Dr_Willis: Yes, I get it open, but tells me  "You do not appear to be using the NVIDIA X driver. "
+[14:03] <mneptok> chabicobi: pastebin the outout of "sudo lsusb -vv"
+[14:03] <angel282> ActionParsnip: to manage the domains (adding new domains to the server), ftp accounts and bandwidth control
+[14:03] <Dr_Willis> sirriffsalot:  so... you are not using the nvidia drivers.
+[14:03] <sirriffsalot> Dr_Willis:  "Please edit your X configuration file (just run `nvidia-xconfig` as root), and restart the X server."
+[14:03] <ActionParsnip> sirriffsalot: try:  sudo nvidia-xconfig      then
+[14:03] <sirriffsalot> ActionParsnip: I did
+[14:03] <Dr_Willis> nvidia-xconfig is a cli tool to tweak the xorg.conf
+[14:03] <sirriffsalot> Then it tells me there is no such command
+[14:04] <Dr_Willis> ive rarely needed to run nvidia-xconfig
+[14:04] <Dr_Willis> $ which nvidia-xconfig
+[14:04] <Dr_Willis> /usr/bin/nvidia-xconfig
+[14:04] <Dr_Willis> !find nvidia-xconfig
+[14:04] <ubottu> File nvidia-xconfig found in nvidia-173, nvidia-173-updates, nvidia-96, nvidia-96-updates, nvidia-current, nvidia-current-updates
+[14:04] <ActionParsnip> !info cpanel
+[14:04] <ubottu> Package cpanel does not exist in precise
+[14:04] <sirriffsalot> No such file or directory... lol
+[14:05] <Dr_Willis> its part of the nvidia drivers.. how did you install your nvidia drivers  sirriffsalot ?
+[14:05] <sirriffsalot> In my system settings details it says I have this driver: Gallium 0.4 on NV98
+[14:05] <sirriffsalot> Dr_Willis: Well, I haven't... as I asked in the beginning, I wondered if there is a sound database webpage for getting the right driver installed
+[14:05] <sirriffsalot> But I suppose this is an even more effective database!
+[14:06] <Dr_Willis> Driver: GeForce GT 530/PCIe/SSE2
+[14:06] <sirriffsalot> Dr_Willis: ?
+[14:06] <D[4]ni> also, is there a way to change the order of the window buttons in the maximized state?
+[14:06] <Dr_Willis> all i did on this box was 'sudo apt-get install nvidia-current' and then rebooted
+[14:06] <ActionParsnip> angel282: http://en.wikipedia.org/wiki/Comparison_of_web_hosting_control_panels
+[14:06] <sirriffsalot> Dr_Willis: Hmm, well I guess I'll try that:) Brb
+[14:07] <D[4]ni> i don't like close-minimize-maximize, i'd rather have close-maximize-minimize
+[14:07] <Dr_Willis> sirriffsalot:  thats all ive ever needed to do for like all 10 of my nvidia machines.. ;)
+[14:07] <Dr_Willis> D[4]ni:  at one time Ubuntu-tweak let you reorder them
+[14:07] <ActionParsnip> D[4]ni: what is the output of:  lsb_release -sc
+[14:07] <D[4]ni> i'm on precise
+[14:08] <chabicobi> and me i am in edubuntu precise
+[14:08] <ActionParsnip> D[4]ni: do you still want them on the left?
+[14:08] <chabicobi> sorry help me
+[14:09] <Dr_Willis> chabicobi:  and the problem is
+[14:09] <D[4]ni> i know it's possible for the normal state with gconf-editor, but there doesn't seem to be a setting for the maximized state
+[14:09] <D[4]ni> for maximized windows, they should be on the left, yes
+[14:10] <Dr_Willis> the title/controls get hidden when maxamized. so it would be settings in the panel thing i belive. cant say ive ever noticed them getting reordered. let me see if ubuntu-tweak does it
+[14:10] <Muelli> !details | chabicobi
+[14:10] <ubottu> chabicobi: Please give us full details. For example: "I have a problem with ..., I'm running Ubuntu version .... When I try to do ..., I get the following output: ..., but I expected it to do ..."
+[14:11] <ActionParsnip> D[4]ni: i guess its a global menu thing, the maximized apps controls go into that
+[14:11] <Dr_Willis> Hmm. Ubuntu-tweak no longer has to settings to reorder the buttons. just left or right.
+[14:12] <Dr_Willis> i used to do Min Max <big space> Close    all the time
+[14:12] <chabicobi> Thank you i want to install my key USB 3G CDMA in ubuntu 120.4 , the not dectecting that
+[14:12] <D[4]ni> and where do i find the settings for that?
+[14:12] <monohedron> on 12.04 lts 64bit plus gnome. in gnome classic sessions every window I open ends up partially hidden by the upper panel. can someone let me now how to prevent that?
+[14:14] <Dr_Willis> D[4]ni:  from whative googled. you cant reorder them in the top panel. but you can in the window title
+[14:14] <notze> no i changed the server
+[14:14] <notze> all the time
+[14:14] <notze> the same shit
+[14:14] <notze> hon-qpid_0.12-2_all.deb  Unable to connect to archive.ubuntu.com:http:
+[14:14] <FloodBot1> notze: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[14:14] <notze> Failed to fetch http://archive.ubuntu.com/ubuntu/pool/main/p/python-webob/python-webob_1.1.1-1_all.deb  Unable to connect to archive.ubuntu.com:http:
+[14:14] <notze> Failed to fetch http://archive.ubuntu.com/ubuntu/pool/universe/s/socat/socat_1.7.1.3-1.2_amd64.deb  Unable to connect to archive.ubuntu.com:http:
+[14:14] <ikonia> notze: can you please a.) tone down the language b.) not flood the channel
+[14:14] <D[4]ni> Dr_Willis, i already changed it in the titlebar
+[14:15] <notze> thanx for info the bot told me already
+[14:15] <iceroot> notze: öh
+[14:15] <Dr_Willis> D[4]ni:  I did see some indicator-applet mentioned that  did the same feature. it may have been more changeable. check the webupd8 postings - it was either this week or last week i saw it mentioned
+[14:15] <notze> i i never had this problem with debian
+[14:15] <iceroot> notze: why is the error archive.ubuntu.com:http
+[14:15] <iceroot> notze: and not http://archive.ubuntu.com
+[14:16] <Dr_Willis> http://www.webupd8.org/2012/05/window-buttons-extension-available-for.html
+[14:16] <iceroot> notze: please paste the output of "cat /etc/apt/sources.list"
+[14:16] <iceroot> !paste | notze
+[14:16] <ubottu> notze: For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://imagebin.org/?page=add | !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+[14:16] <notze> ok ;D
+[14:16] <ActionParsnip> notze: try: http://paste.ubuntu.com/997438/
+[14:16] <sa7elak> Hello, how to move an application window to another workspace ??? and how to switch between work spaces using keyboard ??
+[14:17] <iceroot> sa7elak: ctrl + alt + left/right cursor-key to switch (if i am correct)
+[14:17] <ActionParsnip> sa7elak: ctrl+alt+left / right cursor to switch workspace
+[14:17] <Dr_Willis> sa7elak:  in unity on 12.04 press and hold the SUPER(windows) key and it shows a shortcut guide
+[14:17] <ActionParsnip> sa7elak: you can right click the window decorator and send it to a workspace that way
+[14:18] <Dr_Willis> it says shift-alt-ctrl-arrows to move to otehr work spaces
+[14:18] <chabicobi> #ubuntu-fr
+[14:18] <Dr_Willis> The Super Key is SUper!
+[14:18] <iceroot> notze: i bet you just messed up your /etc/apt/sources.list :) so its your fault and not the fault of ubuntu and the complete flame from you was not needed :)
+[14:19] <ActionParsnip> Dr_Willis: thanks for asking :)
+[14:20] <stars69> hi, what is the cmd to format drive under ssh screen?
+[14:20] <sa7elak> Thanks for you all
+[14:20] <Ashkot> Hello everybody  ^_^
+[14:20] <ActionParsnip> stars69: mk2fs   you will format the partition too, not the drive
+[14:20] <michaelvd> Yello, is it possible to find a bluetooth server for multiple communication(voice/soud)?
+[14:20] <ActionParsnip> stars69: the partition will need to be unmounted to be formatted
+[14:21] <stars69> ActionParsnip, thanks
+[14:21] <paopao> I installed nvidia on opensuse, then I realized that ubuntu is really easy to use, and it's so convenient
+[14:22] <compdoc> ubuntu is nice
+[14:22] <gccster> guys why every time i boot my laptop and login ubuntu the wireless adapter is disabled and i have to press the keyboard enable button?
+[14:22] <airbender> so nice
+[14:22] <ActionParsnip> paopao: some distros come with the driver pre-added :)
+[14:23] <ActionParsnip> gccster: if you login and run:  sudo rfkill unblock all     does it unlock it?
+[14:23] <maddinw> Hello everyone.
+[14:23] <sirriffsalot> Dr_Willis: Still no change with the nvidia-settings installed..
+[14:24] <maddinw> I was redirected from another channel to here  and I hope that you could help me with a question I have.
+[14:24] <gccster> ActionParsnip, should i restart and check out?
+[14:24] <paopao> ActionParsnip, you are right
+[14:24] <sirriffsalot> Dr_Willis: When I run it now it still tells me "You do not appear to be using the NVIDIA X driver."
+[14:25] <gccster> ActionParsnip, i dont know if i am clear the wireless adapter is disabled and it needs a keyboard button to get enabled every time i reboot
+[14:25] <ActionParsnip> gccster: if the command works, we can make it happen automagically
+[14:25] <Ashkot> what is the main differences between the ubuntu and kubuntu?
+[14:25] <gccster> ActionParsnip, ok let me try then
+[14:26] <maddinw> But if you are busy right now thats ok I guess.
+[14:26] <ActionParsnip> Ashkot: default desktop, window manager and default apps. The rest is the same
+[14:27] <Hotwired> wtf is meeboo and why is my ubuntu live disk showing me meeboo ads in the corner of my screen :S
+[14:27] <L3top> sirriffsalot: lspci -nn | grep VGA
+[14:27] <rufensis> maddinw what is your question?
+[14:27] <Dr_Willis> sounds like somthign the browser is doing Hotwired
+[14:27] <luser> hi all. what's the difference in "lspci -k" output between "Kernel driver in use" and "Kernel modules"? i have different output between two different installations...
+[14:27] <sirriffsalot> L3top: 03:00.0 VGA compatible controller [0300]: NVIDIA Corporation G98 [GeForce G 100] [10de:06e6] (rev a1)  and 02:00.0 VGA compatible controller [0300]: NVIDIA Corporation C77 [GeForce 8200] [10de:084b] (rev a2)
+[14:27] <luser> these are both output: http://pastebin.com/LhrXyvgC
+[14:28] <luser> in the second case "Kernel modules" is missing although i can see the module with lsmod
+[14:28] <sirriffsalot> L3top: I get those two lines as output..
+[14:28] <dontknow> chrome stable 64 bit doesn't have internal flash player?
+[14:28] <Hotwired> Dr_Willis: evil!
+[14:28] <maddinw> rufensis: I have a few questions about ssh-tunneling and ssh agents.
+[14:28] <L3top> sirriffsalot: are you trying to use both your onboard and the card?
+[14:28] <sirriffsalot> L3top: No idea... not intentionally at least:S
+[14:28] <dontknow> i can't see internal flash player in plugins tab
+[14:28] <gccster> ActionParsnip, well it is not working
+[14:28] <maddinw> I have access to the tunneling service at ssh.silenceisdefeat.com and I can build a tunnel.
+[14:28] <L3top> sirriffsalot: disable the onboard in bios
+[14:29] <sirriffsalot> Onboard...
+[14:29] <Ashkot> i think i am in love with kde
+[14:29] <sirriffsalot> Will that be the G 100 one?
+[14:29] <maddinw> I use the command ssh -D 8000 -Nf sd
+[14:29] <L3top> no
+[14:29] <maddinw> With sd being the host defined in ~/.ssh/confid
+[14:29] <maddinw> *config
+[14:29] <L3top> wait
+[14:29] <ActionParsnip> gccster: so the command is no good :(
+[14:29] <L3top> perhaps
+[14:30] <sirriffsalot> L3top: so the (rev 2) GeForce 8200?
+[14:30] <maddinw> I can open it, but I would like to have it at startup so I dont need to open it up myself all the time.+
+[14:30] <Ashkot> ActionParsnip : thank you :)
+[14:30] <maddinw> So I edited my /etc/rc.local file and inserted the command in there.
+[14:31] <L3top> sirriffsalot: I would expect that that is your onboard.  however in the bios it will likely identify as "onboard"
+[14:31] <ActionParsnip> Ashkot: np man :)
+[14:31] <sirriffsalot> L3top: I'll have a look, thanks for suggesting! Brb
+[14:31] <maddinw> But the tunnel is not available after startup. I have activated public key authentification, but that does not make a difference I guess.
+[14:31] <L3top> sirriffsalot: is this an asus m3n78 bpard by chance?
+[14:31] <ActionParsnip> gccster: does the system have a make and model?
+[14:32] <L3top> s/bpard/board/
+[14:32] <luser> excuse me, anyone knows what's the difference in "lspci -k" output between "Kernel driver in use" and "Kernel modules"?
+[14:32] <gccster> ActionParsnip, you mean my laptops firm?
+[14:32] <Dr_Willis> in use mean loaded.. vs ones that could be loaded.
+[14:32] <ActionParsnip> gccster: the full model please
+[14:32]  * Dr_Willis guesses
+[14:33] <gccster> ActionParsnip, its a local company its an i5 intel 4gb ram nothing special
+[14:33] <maddinw> Any idea?
+[14:33] <ActionParsnip> luser: possibly the ones in use are being used now, but some may be loaded but doing nothing
+[14:33] <ActionParsnip> gccster: so its not a dell or acer etc?
+[14:34] <Dr_Willis> some devices could use differnt modules. I know of several network cards that have differnt drivers that COULD be used for them
+[14:34]  * L3top guesses Dr_Willis's guess is right
+[14:34] <ActionParsnip> gccster: run:  sudo dmidecode -t 1    can you pastebin the output please
+[14:34] <gccster> ActionParsnip, nop i think it must be a interface command that im measing like auto wan0 etc
+[14:34] <luser> ActionParsnip: these era two lspci output of two different installations (dual boot): http://pastebin.com/LhrXyvgC
+[14:34] <rufensis> maddinw: i've never tried loading an ssh login at bootup.
+[14:35] <luser> ActionParsnip: the strange thing is that in both installation lsmod shows the pata_marvell module
+[14:35] <Erealz> hey guys i have a question im running ubuntu 12.04 64bit lts. i haveing a problem when trying to visit a website that was working fine a some time ago.  also i cant reach my shellaccount? but if i connect to my vpn then and retry the page loadsup? and the shell account login come up? what could be causeing this?
+[14:35] <gccster> ActionParsnip, http://pastebin.com/5N1LtwWC
+[14:36] <maddinw> I think it is possible - Im okay with entering the password to allow access to my private keys - but I heard that Linux is flexible so I though this might not pose much of a problem.
+=== lim is now known as Guest61228
+[14:37] <mosno> i found something that fixes my gnome-panel notification area problem until i logout again: if i open appearance properties and pick another GTK+ theme, it fixes my notification area. it remains fixed even if i switch back to the orginal theme (Ambiance)
+[14:37] <Dr_Willis> you can set up ssh keys where you just do a 'ssh host' and it auto starts up with no passwords needed. thats easy enough
+[14:37] <Onixs> i just installed 12.04 on my powerbook!
+[14:37] <Dwezzel> Does someone knows why updates are so slow today ?  From Canada... ???   Or maybe it's only me....
+[14:37] <maddinw> Dr_Willis: Could you explain that a but further please?
+[14:37] <Dr_Willis> Dwezzel:  been slow for 4+ days
+[14:37] <Dr_Willis> !ssh | maddinw
+[14:37] <ubottu> maddinw: SSH is the Secure SHell protocol, see: https://help.ubuntu.com/community/SSH for client usage. PuTTY is an SSH client for Windows; see: http://www.chiark.greenend.org.uk/~sgtatham/putty/ for it's homepage. See also !scp (Secure CoPy) and !sshd (Secure SHell Daemon)
+[14:38] <Dwezzel> Thx Dr_Willis
+[14:38] <sirriffsalot> L3top: Hi... I went into the bios (I'm on a acer aspire machine) and I can't find any options to disable the graphics cards....... this is getting annoying lol
+[14:38] <ActionParsnip> gccster: ok, if you run:  sudo lshw -C network    what driver is the wifi using?
+[14:38] <Prsm> Hello, How do you portforward on Ubuntu without router access?
+[14:38] <Dr_Willis> maddinw:  you generate the keys copy the pub to the server. and    ssh foo, i get a prompt no need to enter  a pass
+[14:38]  * Erealz i need help trobleshooting a problem ,im running ubuntu 12.04 64bit lts. i haveing a problem when trying to visit a website that was working fine a some time ago.  also i cant reach my shellaccount? but if i connect to my vpn then and retry the page loadsup? and the shell account login come up? what could be causeing this?
+[14:38] <Dwezzel> Dr_Willis: Nobody knows when it will be fixed ??
+[14:38] <Dr_Willis> Dwezzel:  no idea
+[14:38] <ActionParsnip> Prsm: if you are using a router you need to set it up there
+[14:38] <Dwezzel> Thx anyway Dr_Willis
+[14:39] <maddinw> Dr_Willis: why should I use PuTTy on a system that has SSH  build into it? I have the public key on the host, but this does still require me to open the tunnel after startup.
+[14:39] <gccster> ActionParsnip, http://pastebin.com/ZJfFH2tQ
+[14:39] <mneptok> sirriffsalot: disable what graphics? in favor of what?
+[14:39] <L3top> sirriffsalot: let me look at something
+[14:39] <Dr_Willis> maddinw:  you dont need to use putty client on linux, unless you like its features.
+[14:39] <maddinw> And I use dynamic forwarding...local forwarding does not really work.
+[14:40] <ActionParsnip> gccster: ok, reboot then run:   sudo modprobe -r ath9k ; sleep 2; sudo modprobe ath9k
+[14:40] <Dr_Willis> maddinw:  you can use  the command line to set up tunnels and so forth
+[14:40] <ActionParsnip> gccster: does it then work?
+[14:40] <sirriffsalot> mneptok: L3top suggested I do that, since I have two graphic cards showing up when I want to know of their usage
+[14:40] <gccster> ActionParsnip, ok give me a moment
+[14:40] <maddinw> Dr_Willis: I know. I do that, but I can't open them at startup.
+[14:40] <mneptok> sirriffsalot: the 2 you pasted were the exact same model.
+[14:40] <sirriffsalot> mneptok: uhm... no? Different numbers and on different lines, how can they be the same?!-.-
+[14:40] <mneptok> sirriffsalot: i know of no OEM that will embed 2 discrete nVidia GPUs into a system.
+[14:40] <Dr_Willis> maddinw:  you can make shell scripts start at login.
+[14:41] <Erealz> ok
+[14:41] <sirriffsalot> mneptok: OEM?
+[14:41] <L3top> I dont think so.
+[14:41] <L3top>  03:00.0 VGA compatible controller [0300]: NVIDIA Corporation G98 [GeForce G 100] [10de:06e6] (rev a1)  and 02:00.0 VGA compatible controller [0300]: NVIDIA Corporation C77 [GeForce 8200] [10de:084b] (rev a2)
+[14:41] <Dr_Willis>  stuff in .config/autostart starts at login. if set up right
+[14:41] <L3top> they have different pci-ids
+[14:41] <maddinw> Dr_Willis: I already edited my /etc/init.d/rc.local and inserted "ssh -D 8000 user@host"
+[14:41] <mneptok> sirriffsalot: 07:56 < sirriffsalot> product: G98 [GeForce G 100] and product: G98 [GeForce G 100]
+[14:41] <sirriffsalot> mneptok: ah yea, copied wrong on that one:P
+[14:42] <sirriffsalot> mneptok: what L3top just linked is correct..
+[14:42] <mneptok> sirriffsalot: this is a laptop?
+[14:42] <sirriffsalot> mneptok: nope, just a shitty PC
+[14:42] <Erealz> umm how about this command would i issue to find out why a certain  page is load and or haveing trouble connecting to it services like a shellaccount?
+[14:42] <L3top> looks like a nettop
+[14:42] <Dr_Willis> maddinw:  stuff in rc.local get ran by root.. so you need to set up the keys in  the root users dir i imagine.
+[14:42] <sirriffsalot> L3top: It's an acer aspire x3200...
+[14:42] <mneptok> sirriffsalot: do you have a PCI(-E) graphics card in it?
+[14:42] <L3top> I am not sure what benefit the addin card is.
+[14:42] <sirriffsalot> mneptok: how do I check?
+[14:42] <L3top> I was loking them up.
+[14:42] <Dr_Willis> maddinw:  useing su -c  in rc.local lets the command get ran by a user and use the users stuff.
+[14:43] <Erealz> umm how about this?what  command would i issue to find out why a certain  page isn't loading and or having trouble connecting to it services like a shellaccount?
+[14:43] <luser> ActionParsnip: excuse me, don't you think these output are "strange"? http://pastebin.com/VVTazGHN vs http://pastebin.com/7CD3YzBV
+[14:43] <sivam> hi i want to install sun-jdk6 or sun-jdk7
+[14:43] <mneptok> sirriffsalot: does the monitor cable plug into the motherboard, as well as an expansion slot? a choice?
+[14:43] <sivam> hi i want to install sun-jdk6 or sun-jdk7
+=== Prsm_ is now known as Prsm
+[14:43] <maddinw> Dr_Willis: This sounds plausible...I will try it out
+[14:44] <sirriffsalot> mneptok: uhm, the monitor cable is plugged into the "top"
+[14:44] <mneptok> sirriffsalot: there is only one place to plug in a monitor?
+[14:44] <sirriffsalot> mneptok: no, two
+[14:44] <sirriffsalot> mneptok: trying to find a picture for you to see the rear
+[14:44] <Erealz> umm how about this?what  command would i issue to find out why a certain  page isn't loading and or having trouble connecting to it services like a shellaccount?
+[14:44] <maddinw> Thank you very much so far...see you after my reboot.
+[14:44] <knutremi> Hi. I'm having trouble with gedit and FTP. Some of the files I save go empty at random. I asked yesterday but no one had an answer.
+[14:44] <mneptok> sirriffsalot: look at the rearward port. is it an expansion slot?
+[14:45] <sirriffsalot> mneptok: http://www.google.no/imgres?q=acer+aspir+x3200&um=1&hl=no&safe=off&client=opera&sa=N&rls=en&channel=suggest&tbm=isch&tbnid=vo1hpHAKoo4MrM:&imgrefurl=http://www.saverstore.com/product/20029938/Acer-Aspire-X3200-Athlon-64-X2-5000-26GHz-3GB-RAM-320GB-DVDRW-LAN-Vista-Home-GeForce&docid=kZYs605ci8V55M&imgurl=http://images2.icecat.biz/img/gallery/2059992_6279.jpg&w=1024&h=1206&ei=PAO5T5miB4PYtA
+[14:45] <sirriffsalot> Lol
+[14:45] <sirriffsalot> mneptok: expansion slot? How do I tell?:$
+[14:45] <sirriffsalot> mneptok: in that picture I'm connected to the top one
+[14:45] <ActionParsnip> luser: is the module 'ahci' loaded in the system with the smaller output? I imagine the one with more text is the 'ok'one....
+[14:45]  * Erealz what  command would i issue to find out why a certain  page isn't loading and or having trouble connecting to it services like a shellaccount?
+[14:45] <mneptok> sirriffsalot: that "top one" is an expansion card.
+[14:46] <sirriffsalot> mneptok:  yea, I figured... What about that?
+[14:46] <knutremi> Please, at least tell me where to ask my question, if you haven't got any answers.
+[14:46] <mneptok> sirriffsalot: that's probably the GeForce 8200.
+[14:46] <sirriffsalot> mneptok: Ok?
+[14:46] <sirriffsalot> mneptok: what's the point?:D
+[14:46] <sirriffsalot> mneptok: want me to take it out?
+[14:46] <mneptok> sirriffsalot: the mobo probably has the G100 embedded
+[14:46] <sirriffsalot> mneptok: I've done it before
+[14:46] <sirriffsalot> mneptok: I suppose the GeForce 8200 is better...
+[14:46] <luser> ActionParsnip: yes, the more output is the ok one and yes, it is ahci module is shown by lsmod also in the "broken" one
+[14:46] <mneptok> sirriffsalot: what is it you are trying to do exactly?
+[14:47]  * Erealz what  command would i issue to find out why a certain  page isn't loading and or having trouble connecting to it services like a shellaccount?
+[14:47] <sirriffsalot> mneptok: anyway where are we going with all of this?
+[14:47] <mneptok> sirriffsalot: you're the one asking for help. you tell me.
+[14:47] <knutremi> T_T
+[14:47] <Sidewinder> knutremi, What do you mean by "go empty at random?"
+[14:47] <sirriffsalot> mneptok: I just want the right nvidia driver installed..:) Haha
+[14:47] <luser> ActionParsnip: i don't understand why lspci doesn't show the "Kernel modules" line...
+[14:47] <ActionParsnip> Erealz: www.downforeveryoneorjustme.com/   tried that
+[14:48] <Erealz> it just me
+[14:48] <sirriffsalot> mneptok: right now nvidia-settings tells me I have none installed..
+[14:48] <mneptok> sirriffsalot: there is no "right" nVidia driver. nVidia issues a single, monolithic binary blob driver for Linux that supports the devices they choose.
+[14:48] <knutremi> Sidewinder: I save the files directly to FTP. Then for inexplicable reasons, some of them go empty in the meantime.
+[14:48] <luser> ActionParsnip: any idea?
+[14:48] <sirriffsalot> mneptok: well I at least want some nvidia driver installed so my graphics won't be complete crap:)
+[14:49] <Erealz> god damn
+[14:49] <ActionParsnip> luser: maybe it needs the 2.6.35 (or later) to work
+[14:49] <mneptok> sirriffsalot: why do you need the proprietary driver from nVidia? what does the "nouveau" driver in the kernel lack that you need?
+[14:49] <ActionParsnip> Erealz: possibly a bad DNS
+[14:49] <sirriffsalot> mneptok: trying to run a game in wine, and I've spent 12 hours trying to configure the graphics right in wine and the game itself so it'll be viewable at least...
+[14:49] <sa7elak> how to copy a directory with its content to another place from terminal ?
+[14:49] <luser> ActionParsnip: well, i hope it's not the reason... the 2.6.32 has the ability to load that module in menuconfig...
+[14:50] <sirriffsalot> mneptok: it runs at 12-18 fps.... has to be driver missing
+[14:50] <sirriffsalot> mneptok: and as it turns out there isn't one installed:P Explains a lot
+[14:50] <luser> ActionParsnip: is there anything else i can test?
+[14:50] <knutremi> Sidewinder: I have no idea if it happens as they're being saved, or something happens in the background without my intervention.
+[14:50] <mneptok> sirriffsalot: if you want my honest opinion, if you want to run games, just install Windows. WINE is not a solution.
+[14:50] <Sidewinder> knutremi, I'm very sorry but I just don't understand your question.
+[14:51] <ActionParsnip> luser: what distro/versions are the boots
+[14:51] <iceroot> sa7elak: cp -r /path/to/dir /path/to/target
+[14:51] <sirriffsalot> mneptok: that isn't an option right now, and many people run it absolutely fine. Would you mind telling me how to get a nvidia driver installed and just see how it goes? If you're right after that then there we go
+[14:51] <GeneralEater> Hi.
+[14:51] <mneptok> sirriffsalot: there is no driver missing. you are using the 2D-only "nouveau" open source nVidia driver that is built-in to the Linux kernel.
+[14:51] <L3top> sirriffsalot: can you please tell me the output of apt-cache policy nvidia-current | grep Installed
+[14:51] <maddinw> Hello again.
+[14:51] <sirriffsalot> L3top: hmm Installed: (none)
+[14:52] <maddinw> Unfortunately my attempt did not work quite well...
+[14:52] <knutremi> I need to figure out if gedit has problems saving to FTP or if it will remove file contents without my knowledge.
+[14:52] <sirriffsalot> mneptok: Well, 2D explains a lot then! it's a 3D game:P
+[14:52] <mneptok> sirriffsalot: be aware, there are TONS of people here every week that complain about how the proprietary nVidia driver has broken their system.
+[14:52] <L3top> sirriffsalot: if I were you, I would sudo apt-get install nvidia-current-updates
+[14:52] <sirriffsalot> mneptok: I'm one of them..:)
+[14:52] <GeneralEater> Is it possible to do a sort of "Factory Reset", where all my personal files are wiped from the hard drive, but the OS stays?
+[14:52] <mneptok> sirriffsalot: and you want to install it anyway>
+[14:52] <mneptok> !?
+[14:52] <sirriffsalot> L3top: trying that then, finger crossed:)
+[14:52] <sirriffsalot> sirriffsalot: I can just remove it again if it fails?:P
+[14:52] <L3top> mneptok: there is a problem with 295.40 imo. The nvidia-current-updates package seems much happier.
+[14:53] <knutremi> Because my hard work is being irreversably deleted when I'm editing files stored on FTP through gedit.
+[14:53] <maddinw> Dr_Willis: I have added the line: udo su maddinw -c ssh -D 8000 -fN maddinw@ssh.silenceisdefeat.com
+[14:53] <mneptok> L3top: i;m not talking about just recent events. i'm talking about what i have seen on this channel in the past 6 years.
+[14:53] <maddinw> sudo su maddinw -c ssh -D 8000 -fN maddinw@ssh.silenceisdefeat.com
+[14:53] <gccster> ActionParsnip, i tried it nothing happened every time i boot i have to click Enable Wireless on gnome to start the wireless adapter
+[14:54] <sirriffsalot> L3top: nvidia-current-updates nvidia-settings-updates these two packages were going to be installed as a result... sound right?
+[14:54] <luser> ActionParsnip: the wotking one is ubuntu 10.10 and the "broken" one is debian squeeze
+[14:54] <luser> i'm also asking in the debian community...
+[14:54] <ardian> Hi I have the classic gnome menu how can I add the minimize max and close button to the upper panel ?
+[14:54] <ardian> like in os x ?
+[14:54] <L3top> nvidia has had the best proprietary support historically imo. If you just don't like closed source, I can respect that... but, we use nvidia extensively and I only dislike this set of drivers
+[14:54] <L3top> yes sirriffsalot
+[14:55] <flowerpot> GeneralEater, it's usually not that easy.  Something might have come with your version of ubuntu (I don't know though), but one method would be to just run a tool from a livecd to clean the drive, then re-install Ubuntu.
+[14:55] <mneptok> L3top: you have opinion. i have 6 years of logs. :)
+[14:55] <maddinw> Does anyone know what I am doing wrong?
+[14:55] <sirriffsalot> L3top: praying for some luck...:D
+[14:56] <sirriffsalot> L3top: alright, shall I just reboot now when it's finished installing?
+[14:56] <GeneralEater> flowerpot, Okay, I'll do that then.
+[14:56] <Erealz> ActionParsnip i thought of that and changed the dns to google dns on my router to no avail? it weird becouse if i connect to my vpn the page loads up and i can get to my shell account login why else might it be
+[14:56] <flowerpot> maddinw, what are you trying to do?
+[14:56] <maddinw> flowerpot: I am trying to get my SSH-Tunnel working at startup
+[14:57] <L3top> mneptok: Again... I am sure you have ati problems, and intel problems... we use compositing and accelleration for h264 in our project, and nvidia has always worked just dandy... we auto detect and install... and it all works great, except this latest slew... your "opinion" is noted
+[14:57] <L3top> yes sirriffsalot
+[14:57] <sirriffsalot> L3top: haha:) cheers. rebooting then. *prays incessantly*
+[14:58] <maddinw> flowerpot: so I edited /etc/init.d/rc.local
+[14:58] <flowerpot> maddinw, what's up with the first "udo su" in your line?
+[14:58] <flowerpot> maddinw, could you upload your rc.local and share it if it doesn't contain any sensitive information?
+[14:58] <maddinw> flowerpot: bash didnt catch that anymore...it does not. I can upload it to pastebin.
+[14:59] <wolfcore> maddinw: you don't need _both_ sudo and su, only sudo
+[14:59] <sirriffsalot> L3top: Now my system details says I have "GeForce G100/PCIe/SSE2 " as a driver:D
+[14:59] <c0deMaster> anybody running openvpn ?  i'm the internet speed is extremely slow
+[14:59] <maddinw> Alright...I will upload it anyway now.
+[14:59] <ardian> Get Unity-Like Window Buttons On The Top any help about this
+[14:59] <L3top> Check performance sirriffsalot.
+[15:00] <sirriffsalot> L3top: in what way?
+[15:00] <L3top> however you did before :P
+[15:00] <sirriffsalot> L3top: logging in to the game:P
+[15:01] <L3top> sirriffsalot: as a side benefit... you can likely use multiple monitors, and enable twinview in the nvidia config gui.
+[15:01] <Orpheon> I'm having big problems with wine and opengl
+[15:01] <maddinw> flowerpot: http://pastebin.com/7r0TbwHM
+[15:01] <Orpheon> it's complaining that it can't find opengl
+[15:01] <sirriffsalot> L3top: don't have enough space for that
+[15:01] <sirriffsalot> Hmmmm
+[15:01] <sirriffsalot> L3top: Hang on
+[15:01] <Orpheon> I tried completely reinstalling the nvidia drivers, wine, mesa, and everything opengl-related I could find
+[15:02] <sirriffsalot> L3top: FPS went from 12-18 to -25-30!!
+[15:02] <sirriffsalot> L3top: you're my hero
+[15:02] <Orpheon> I even tried copying 32 bit opengl libraries and stuck them in /usr/lib, /usr/lib32, /usr/local/lib
+[15:02] <sirriffsalot> L3top: now my ego kicks in... how do I check which nvidia driver is installed? GeForce G100/PCIe/SSE2  I suppose is the name?:p
+[15:03] <L3top> apt-cache policy nvidia-current-updates  will tell you specifics.
+[15:03] <sirriffsalot> L3top: just out of wanting to learn, where do you learn all this stuff from? I'd like to be able to handle this myself in the future, haha:)
+[15:04] <maddinw> sirriffsalot: experience and commitment.
+[15:04] <maddinw> flowerpot: and idea what I should try out?
+[15:04] <sirriffsalot> maddinw: I have the latter and starting to get former
+[15:04] <Orpheon> any wine experience?
+[15:04] <sirriffsalot> L3top: But is there some webpage where they cover this very specifically? Ubuntupage of some kind?
+[15:04] <Orpheon> or driver installation?
+[15:04] <sirriffsalot> Orpheon: a little:)
+[15:05] <sirriffsalot> Orpheon: a lot!
+[15:05] <MestreLion> Guys, I'm having a weird bug in Software Center: "Turn On Recommendations" is not working: I sign in, it shows "submitting inventory", but nothing happens. No recommendations, and if I exit and open again, it shows the same Turn On"  button again. Any clues?
+[15:05] <Orpheon> great!
+[15:05] <Orpheon> can you please help me with this?
+[15:05] <L3top> I do all of the graphics autodetection and configuration for a project that has a media player... I made the mistake of poking around in the source code trying to make more available, and now it's just sort of what I do. We went from only using nvidia, to just about everything out there. To summerize... just dig into some code somewhere.
+[15:05] <sirriffsalot> L3top: Uhm, that command says among other things "295.49-0ubuntu0.1 "
+[15:06] <L3top> correct... that is the driver you are using... 295.49.
+[15:06] <sirriffsalot> L3top: I have no experience in "digging" in codes nor desire to try, I'd smash my computer by the end of a week
+[15:06] <sirriffsalot> L3top: but... what does that mean? Is it "the latest"? The most stable??
+[15:06] <flowerpot> maddinw, I don't know if the sudo command will work, but I suggest you put this in your ~/.bashrc or ~.bash_profile files instead
+[15:06] <MestreLion> (i've tried to delete all settings and configs (and keys) of Software Center, but no matter which account I sign in, Recommendations does not work. Any troubleshooting clues?
+[15:07] <Orpheon> I execute a windows exe that has always worked for me these past 2 years
+[15:07] <Orpheon> http://pastebin.com/RHEqt9xD
+[15:07] <Orpheon> especially these lines
+[15:07] <Orpheon> err:winediag:X11DRV_WineGL_InitOpenglInfo Direct rendering is disabled, most likely your OpenGL drivers haven't been installed correctly (using GL renderer "GeForce GTX 460 SE/PCIe/SSE2", version "1.4 (2.1.2 NVIDIA 295.49)").
+[15:07] <maddinw> flowerpot: alright...I will reboot, try it out and give you feedback. Thank you so far.
+[15:07] <Orpheon> err:d3d_caps:WineD3D_CreateFakeGLContext Can't find a suitable iPixelFormat.
+[15:07] <Orpheon> err:d3d:InitAdapters Failed to get a gl context for default adapter
+[15:07] <Orpheon> Direct3D8 is not available without OpenGL.
+[15:07] <FloodBot1> Orpheon: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[15:07] <flowerpot> you can remove the sudo su maddinw -c part
+[15:07] <Dr_Willis> Hmm. when reencoding a video. Ive noticed the thumbnail  frame changes. Anyone noticed a tool that would let me select what frame is used for the initial/thumbnail  frame? Be nice to have the grandkids face on the videos that star them. ;)
+[15:07] <basso> exit
+[15:08] <basso> so hardcore
+[15:08] <maddinw> Dr_Willis pointed out that rc.local runs with root permissions and thus will not know the public key I have put on the host.
+[15:08] <Dr_Willis> MestreLion:  i find the software recommendations to be rahter... pointless..
+[15:08] <L3top> what version is there is up to the cononical folks. I believe right now the most current is in the 302 range, but I don't test each one for stability... using 295.40 as buntu's stable version was a mistake imo... but what do I know... If you want to experiment you can check out xorg edgers PPA, they have bleeding edge debian packages.
+[15:08] <Etale> I have a question: I'm getting a new laptop tomorrow, and I want to install Linux on it. At first I was thinking of Gentoo, because it's the most customizable. But I understand that to install anything on it (even firefox) takes forever. What would you recommend? Ultimately, I want something that is like Ubuntu but isn't as heavy. Should I go with a low-fat version of Ubuntu, or perhaps with
+[15:08] <Etale> Debian?
+[15:08] <L3top> sirriffsalot: ^
+[15:08] <mneptok> L3top: like i said, it is opinion based on a very deep experience with Ubuntu users.
+[15:08] <Etale> I'm a noob at this point, but I have no problem learning as much as is needed. It will be fun for me.
+[15:08] <Dr_Willis> maddinw:  personally id set up a script that does it all then run that script from rc.local - BUT ifyou are using encrypted homes that may be another issue i just thought of.
+[15:08] <iceroot> Etale: lubuntu
+[15:09] <iceroot> Etale: if you want a light system based on ubuntu
+[15:09] <maddinw> Dr_Willis: I do have /home encrypted.
+[15:09] <sirriffsalot> L3top: I think I'll leave well enough alone for now, lol:D
+[15:09] <sirriffsalot> L3top: thanks a million for your help!
+[15:09] <L3top> mneptok: and mine is based on making all of these work without any user interaction at all... on any hardware with any display.
+[15:09] <L3top> np sirriffsalot.
+[15:09] <Dr_Willis> maddinw:  then even at boot up the key files wont be getting read i belive...
+[15:09] <sirriffsalot> mneptok: you too, thanks for your time!
+[15:09] <sirriffsalot> And everyone else:)
+[15:09] <Orpheon> @L3top: I tried xorg edgers. I couldn't even configure the nvidia server settings, my entire screen was distorted, so I went back to nvidia-current
+[15:09] <MestreLion> Dr_Willis: true, but a buggy Software CEnter that does not stick settings makes me a little worried about using it to buy software, for example
+[15:09] <Dr_Willis> maddinw:  i never encrypt home. ;()
+[15:09] <ActionParsnip> Etale: lubuntu is light, or install minimal then install fluxbox
+[15:10] <mneptok> Orpheon: boot to a previous kernel and see if your nVidia drivers work there.
+[15:10] <Orpheon> uhh
+[15:10] <flowerpot> maddinw, if you put the script in your ~/.bashrc or ~/.bash_profile it won't start the tunnel until you log in...  if you're cool with root or whatever process init runs as owning the tunnel, then just remove the sudo su stuff and try again.  Also, FYI, sudo su isn't necessary; sudo can run commands as another user.
+[15:10] <Orpheon> how do I boot to a previous kernel
+[15:10] <Orpheon> ?
+[15:10] <Dr_Willis> MestreLion:  i dont plan on ever buying anything via software center.. actually i rarelyuse software center
+[15:10] <Orpheon> I have a few backups
+[15:10] <Orpheon> of these last months /usr and /home
+[15:10] <Orpheon> if that helps
+[15:10] <zykotick9> Orpheon: hold SHIFT after BIOS to get grub menu
+[15:10] <mneptok> Orpheon: <esc> early in the boot to get a boot menu
+[15:10] <ActionParsnip> Orpheon: hold shift at boot then select the old kernel
+[15:10] <Etale> iceroot, ActionParsnip, I see that on the wiki page of lubuntu it says: "low-RAM environment for netbooks, mobile devices and older PCs". My laptop is going to be a 8GB monster. Is it still a good option?
+[15:10] <cristian_c> Hi
+[15:10] <Orpheon> ok
+[15:11] <L3top> again Orpheon that is bleeding edge stuff... whether or not that days release is stable on whatever specific card you have is a bit of a coin toss... I was not trying to recommend it for anything other than experiment.
+[15:11] <MestreLion> good for you Dr_Willis.... But I still would like mine to work bug-free. Does anyone have any experience in Software CEnter settings and troubleshooting?
+[15:11] <cristian_c> How can I enable pinch gesture on my touchpad with ubuntu?
+[15:11] <iceroot> Etale: yes
+[15:11] <Etale> I just don't want all the junk in Ubuntu that I will never use.
+[15:11] <Etale> What would you say about Debian?
+[15:11] <Dr_Willis> MestreLion: its also possible the slowdown/issues with the ubuntu servers are causing the problem.
+[15:11] <maddinw> flowerpot: I will try it now without the sudo su stuff.
+[15:11] <Etale> How close is the Debian experience from Ubuntu?
+[15:11] <flowerpot> Etale, such as?  You may find that slightly more junk is preferable to slightly less junk on a desktop.
+[15:11] <cristian_c> How can I use this page: http://askubuntu.com/questions/11300/how-do-i-test-multi-gesture-capabilities-of-a-touchpad for enabling pinch?
+[15:11] <Dr_Willis> Etale:  depends on what desktopps you install. ;)
+[15:12] <Etale> OXFCE
+[15:12] <Etale> Sorry...
+[15:12] <Etale> I meant I want XFCE with compiz.
+[15:12] <zykotick9> Etale: while ubuntu and debian are technically very similar, the two projects have very different goals - and are thus "very different", though technically similar ;)
+[15:12] <flowerpot> IMO Ubuntu tends to "just work" and Debian requires a little more effort.
+[15:12] <Dr_Willis> why would you want xfce with compiz? xfce has its own window manager. ;0
+[15:12] <Sidewinder> MestreLion, You might prefer Synaptic instead of Software Center; it's (Synaptic) in the repos.
+[15:13] <Etale> zykotick9, I want an environment that is customizable, but also has the option of being easy to work with if I have to get something done fast.
+[15:13] <MestreLion> Dr_Willis: maybe, but I think it's unlikely... I've tried yesterday and today, in very differnt hours
+[15:13] <Dr_Willis> MestreLion:  the servers have been problematic for 3+ days now
+[15:13] <Etale> Dr_Willis, because I really like compiz, and XFCE is the lightest window manager I could find. For example compiz doesn't work on fluxbox.
+[15:13] <MestreLion> ... and it worked in a live session I've used yesterday
+[15:13] <Dr_Willis> Etale:  xfce is a desktop that uses the xfwm window manager.
+[15:14] <Dr_Willis> Etale:  fluxbox and compiz are both window managers...
+[15:14] <Dr_Willis> Etale:  you can set up a compiz session to run whatever other extra programs you want and build your own desktop.
+[15:14] <Etale> BTW, I hear that Gentoo has the best package repository. Is it possible to use those packages in Debian/Ubuntu?
+[15:14] <Dr_Willis> Etale:  'best' is vague and debateable.
+[15:15] <Dr_Willis> Etale:  they use a sourced based system. so its more up to date. but can still have problems. and no they are not  compatable with ubuntu
+[15:15] <flowerpot> Etale, it's best not to mix packages between distros.  There are small differences that can muck up the results (e.g. different paths).
+[15:15] <zykotick9> Etale: and gentoo doesn't typically use "packages", it's a source based distro
+[15:15] <ActionParsnip> Etale: ubuntu minimal + fluxbox + slim comes in at about 1.2Gb  then you'll need a network manager app like wicd if you want to use wifi easily
+[15:15] <Etale> Dr_Willis, I don't really understand. If I want compiz to work, and I want it to be as lightweight as possible, then what would you suggest?
+[15:15] <Etale> flowerpot, thanks.
+[15:15] <Dr_Willis> Etale:  compiz and lightweight are two very opposite things. :)
+[15:15] <MestreLion> Sidewinder:  i'm an ubuntu user since Karmic... synaptic is great if I want an in-depth tech details on a given package.... but I still would like Software Center to work properly, specially regarding SSO
+[15:15] <Dr_Willis> Etale:  if you want light  and a decently featured desktop = Lubuntu, then lxde/lubuntu,
+[15:16] <Etale> ActionParsnip, what's the difference between Ubuntu minimal and lubuntu?
+[15:16] <Dr_Willis> Etale:  lightest = just a widnow manager with no extra apps. ie openbox
+[15:16] <Etale> Dr_Willis, but would compiz work on openbox?
+[15:16] <zykotick9> Etale: mini is the debian net-installer (text only) - with LOTS of options, including installing a base non-gui system, then adding what you actually want.
+[15:17] <ActionParsnip> Etale: minimal is just kernel + boot loader + drivers
+[15:17] <MarcoFe> hi guys
+[15:17] <Dr_Willis> Etale:  compiz and openbox are BOTH window managers..  they replace each other.
+[15:17] <ActionParsnip> Etale: plus a few basic apps, all text based
+[15:17] <theadmin> Etale: That doesn't even make sense. One window manager does not work "on" another window manager. You can't run two at the same time.
+[15:17] <Dr_Willis> Etale:  linux is all about layers. ;)
+[15:17] <Dr_Willis> desktop = a window manager + extra apps.
+[15:17] <theadmin> Dr_Willis: Ha, that's a good one :)
+[15:17] <MestreLion> besides, the new revamped Software Center is one of the major, key Ubuntu selling points... so it is a bit weird that instead of trying to help with it, you are suggesting a 10+ years software.
+[15:17] <ActionParsnip> Etale: lubunu adds an x server, LXDE, openbox and some applications like web browser, office productivity etc
+[15:18] <Dr_Willis> MestreLion:  most people seemt o hate the software center.
+[15:18] <Dr_Willis> im getting where i like the android market even less and less. ;)
+[15:18] <Orpheon> back
+[15:18] <Orpheon> didn't help
+[15:18] <MestreLion> and most people hate Unity. Still, this is #ubuntu. If you hate it, use something else
+[15:18] <knutremi> I wrote a more in-depth explaination of my FTP + gedit problem in the Ubuntu pastebin.
+[15:18] <Dr_Willis> its very likely the reccomendation servers are slow/down. i can barely get apt-get to even work for the last 4+ days
+[15:18] <Etale> Let's say I install Debian. How different is that from installing lubuntu?
+[15:19] <knutremi> !paste 997512
+[15:19] <Sidewinder> MestreLion, I totally understand; my use of SC is not that extensive so I don't have a definitive answer for you, sorry. Synaptic has always met my needs so I am much more familiar with it. Please keep in mind that both Synaptic and Software Center are merely gui front ends for apt-get
+[15:19] <knutremi> Uh that's not how I paste?
+[15:19] <knutremi> http://paste.ubuntu.com/997512/
+[15:19] <Dr_Willis> and apt-get update - has been going on here for like 40 min now.. normally takes 40 sec. ;(
+[15:19] <MestreLion> Dr_Willis: that is not the problem. If I re-open SC, it suggests me trying to Turn On recommendations again, so that setting is not being saved
+[15:20] <MarcoFe> i've a problem with my audio...for example when use it with skype or google+ plugin to conference chat, after a bit time, audio is mute...anyone have this problem?
+[15:20] <vexaxv> hey guys im using ubuntu 12.04 and got this error when trying to install "ia32-libs" through synaptic "Failed to fetch http://us.archive.ubuntu.com/ubuntu/pool/main/e/eglibc/libc6_2.15-0ubuntu10_i386.deb" what do i do?
+[15:20] <Dr_Willis> MestreLion:  ive seen cases where people runs tuff as root and it writes config files to the users home.
+[15:20] <Dr_Willis> vexaxv:  servers have been real slow last few days. try it again.
+[15:21] <g0th> hi
+[15:21] <Etale> How close is Sabayon to the Ubuntu experience?
+[15:21] <Dr_Willis> vexaxv:  or switch to a non us server.
+[15:21] <ActionParsnip> Dr_Willis: my quantal install does that, sloooow over wifi
+[15:21] <L3top> !poll | Etale
+[15:21] <ubottu> Etale: Usually, there is no single "best" application to perform a given task. It's up to you to choose, depending on your preferences, features you require, and other factors. Do NOT take polls in the channel. If you insist on getting people's opinions, ask BestBot in #ubuntu-bots.
+[15:21] <vexaxv> Dr_Willis, thanks, and how do i switch?
+[15:21] <g0th> in unity, how do I make it that if I fullscreen a window it is put on the "right side" of the left panel?
+[15:21] <Dr_Willis> vexaxv:  not sure of the proper way these days
+[15:21] <g0th> at the moment the panel will appear on top of the window
+[15:21] <vexaxv> Dr_Willis, k well ill keep trying thanks man just got off my 14 hour shift so sweet and simple answer :P
+[15:21] <ActionParsnip> vexaxv: https://help.ubuntu.com/community/PackageManagerTroubleshootingProcedure  see step 5
+[15:22] <maddinw> Its me again. It worked now. Thank you very much Dr_Willis and flowerpot.
+[15:22] <tieinv> Dr_Willis: sudo apt-get update   Fetched 6,687 kB in 1min 1s (108 kB/s) :)
+[15:22] <Dr_Willis> there used to be a mirrorselect tool
+[15:22] <L3top> Dr_Willis: I think something funny is going on with the repos. People have been complaining the last few days about speed.
+[15:22] <g0th> is there a configuration tool about how the panel behaves with respect to a (fullscreened or not) window
+[15:22] <Dr_Willis> tieinv:  i was getting stuff in B/sec the other day
+[15:23] <Dr_Willis> bbl
+[15:23] <MestreLion> Sidewinder: I'm aware of that. And I think that nowadays Synaptics is a little lost... newbies prefer SC, and it's great because of the reviews (if you don't know *what* you want, you search for it). Skilled users go Aptitude or apt-get. So Synaptics use-case now is a bit weak
+[15:23] <L3top> You can add deb mirror://mirrors.ubuntu.com/mirrors.txt  $DISTRO main restricted universe multiverse    et al to the top of your /etc/apt/sources.list and it will find the closest best it can
+[15:23] <MestreLion> even aptitude has an experimental gtk frontend
+[15:24] <L3top> replacing $DISTRO with your distribution.
+[15:24] <morsnowski> is there a specific make or model for hybrid TV cards that runs on ubuntu with the least amount of wrestling?
+[15:24] <Sidewinder> MestreLion, As you so accurately stated earlier, it's all about choices. :)
+[15:24] <Etale> Okay... Look, I'm a novice. I want to install something that is bare-bones but has the potential to be customized to the point of being easy to use. (Which also means that I want the possibility of using binary packages as opposed to bare-bones Gentoo.) Since this is an Ubuntu chatroom, I figured it would be a good place to get advice about Ubuntu-related distros. Ultimately, after some
+[15:24] <Etale> customization, I want an Ubuntu-like environment. But I would also like to be bare-bones and customizable and for it to have a very good repository of packages.
+[15:24] <knutremi> I'm better off posting about my gedit + FTP problem in the Ubuntu forums right?
+[15:24] <theadmin> Etale: Use the minimal Ubuntu setup, simple as that -- install only things you want from that point on
+[15:24] <deejay31> Yay I finally managed to transfer all my stuff to ubuntu
+[15:24] <ActionParsnip> Etale: install ubuntu minimal then install fluxbox, its as barebomes a desktop as it goes
+[15:25] <Etale> theadmin, thanks.
+[15:25] <MestreLion> so for me synaptics is a weak software... it is less friendly than SC, it has no reviews, and it has less features than aptitude or apt-get
+[15:25] <ActionParsnip> Etale: did say that earlier...
+[15:25] <L3top> This channel is for tech support of ubuntu. Asking whether or not you should install other distributions is not its purpose Etale. Your queries are going to receieve arbitrary answers and they are clogging up the channel. Try ubuntu-offtopic or bots.
+[15:25] <Etale> In what sense is bare-bones Ubuntu different from bare-bones Debian? Does Debian also have same repository for apt-get, but also has more customizability?
+[15:26] <Sidewinder> knutremi, That would be my suggestion; if your question is not answered to your satisfaction here, try ubuntuforms.org.
+[15:26] <Etale> Okay, L3top.
+[15:26] <ActionParsnip> Etale: ubuntu and debian repos are seperate
+[15:26] <Karmaon> is ppa.launchpad.net down?
+[15:26] <Etale> ActionParsnip, which is bigger?
+[15:26] <ActionParsnip> Etale: no idea, why do you care?
+[15:26] <Sidewinder> oops, ubuntuforums.org.   Sorry. :(
+[15:26] <MestreLion> Etale: both have live CDs... try them out
+[15:26] <Etale> The more the better.
+[15:26] <theadmin> Etale: Debian and Ubuntu are *unrelated*. They use different repositories, Debian is much less up-to-date most of the time (especially the "stable" branch), the two are incompatible.
+[15:27] <Etale> Okay.
+[15:27] <ActionParsnip> Etale: not strictly
+[15:27] <MestreLion> "debian is less up-to-date" is very innacurate info. unstable and testing are usually much more up-to-date than Ubuntu, since they are rolling repos
+[15:27] <L3top> http://www.downforeveryoneorjustme.com/ Karmaon
+[15:27] <L3top> looks like it is
+[15:28] <flowerpot> maddinw, pleasure to be of help
+[15:28] <ActionParsnip> Etale: Ubuntu could compile every app with minimal functionality, then Debian could compile the same with every feature enabled with zero optomisation. Which is better?
+[15:28] <theadmin> MestreLion: I *did* mention the stable branch specifically.
+[15:28] <MestreLion> Etale: mos of your questions are easily answered by either google OR by trying out their live CD.
+[15:28] <y0wy-> Karmaon: http://www.downforeveryoneorjustme.com/ppa.launchpad.net
+[15:28] <amirzaim_> Even though that Ubuntu is based from Debian, but both Ubuntu and Debian are not same. They have some different function and features.
+[15:29] <ActionParsnip> Karmaon: do you mean this https://launchpad.net/ubuntu/+ppas works here
+[15:29] <theadmin> However, please note that this channel is for Ubuntu support *only*, Debian (and especially stuff like Gentoo) are highly offtopic here
+[15:29] <Karmaon> ActionParsnip: no the repositories are down, so i can't update some of my packages
+[15:29] <Krenair> Is there any easy way to have two versions of a package (e.g. google-chrome-stable and google-chrome-unstable) installed at the same time?
+[15:29] <ActionParsnip> Karmaon: then hang while they come up, could ask in #launchpad
+[15:29] <MestreLion> theadmin: you said "specially", not "specifically. Debian's Testing and Unstable repos are always more bleeding edge than Ubuntu's, by definition. They are rolling distros, Ubuntu is not
+[15:30] <theadmin> MestreLion: Bah, pardon my wording. Well yes, you're right. However, please look at my previous message. Debian is offtopic here.
+[15:31] <MestreLion> youre right. I also suggested Etale to either google or to try live cds... much better than asking here
+[15:31] <flowerpot> Krenair, http://serverfault.com/questions/279329/can-i-have-two-versions-of-the-same-package-in-an-apt-repository
+[15:32] <xtu> hi, how to read new in command line in ubuntu?
+[15:32] <flowerpot> Krenair, see the "Caveat" in the reply
+[15:32] <MestreLion> So, back to Ubuntu... anyone experienced in troubleshooting one of its flagship products, the Software Center? I would like where it stores its settings, how can I reset it, and find out why some settings are not "sticking"
+[15:32] <flowerpot> xtu, what do you mean by "read new in command"?
+[15:33] <Orpheon> also to ubuntu, where could I get some 32-bit opengl libraries?
+[15:33] <Orpheon> Wine needs them apparently
+[15:33] <xtu> flowerpot,  well, i want to read news in command line, or in console, not gui.
+[15:34] <MestreLion> Orpheon: doesn't apt-get wine download them automatically?
+[15:34] <Orpheon> well
+[15:34] <Orpheon> I tried reinstalling wine
+[15:34] <Orpheon> but it still complains that it can't initialize opengl
+[15:34] <Orpheon> people in #winehq have been saying that's because I'm lacking opengl 32 bit libs
+[15:34] <L3top> Orpheon: have you gone into wine configuration? I don't really use it, but you may have to tick something there
+[15:34] <Orpheon> well, yeah
+[15:35] <compdoc> is opengl something you have to install seperatly?
+[15:35] <Orpheon> there isn't anything besides enabling/disabling hardware acceleration that has anything to do with this
+[15:35] <Orpheon> also
+[15:35] <naxil> hello
+[15:35] <Orpheon> I tried editing the wine registry, DirectDrawRenderer to gdi
+[15:35] <Orpheon> didn't work either
+[15:35] <naxil> i need a little help
+[15:36] <naxil> for enter on monitor setup from Terminal? i have cancel the "monitor Setup" from panel (gnome)
+[15:36] <Deihmos> isn't it strange that ubuntu works much better virtually that installed on my laptop? WHen I install it my fans go crazy, sound barely works and a host of other problems
+[15:36] <flowerpot> xtu, you would use  a newsreader, i imagine.  tons of newsreaders are available on ubuntu; since i don't use them myself i cannot recommend any, but google probably can.
+[15:36] <sirriffsalot> L3top: I wonder... i've got cpufreq installed, but I can't get it to run at 2.40Ghz, it always goes back to 1.20ghz or so... Is there a graphical user interface for configuring this?
+[15:36] <ActionParsnip> Deihmos: probably some weird acpi
+[15:37] <xtu> flowerpot, ok, i got it, thanks.
+[15:37] <ActionParsnip> Deihmos: is it an acer or an alienware?
+[15:37] <Deihmos> I have an HP envy that has two video cards
+[15:37] <ActionParsnip> Deihmos: that'll do it too
+[15:37] <vexaxv> anyone know why in ubuntu 12.04 the shutdown process hangs? im forced to hold down my power button..kinda annoying..
+[15:37] <L3top> sirriffsalot: cat /proc/cpuinfo | grep -i cores
+[15:37] <flowerpot> vexaxv, does it hang when you run shutdown -h now from a terminal?
+[15:38] <ActionParsnip> vexaxv: if you run: sudo shutdown -h now     does it die?
+[15:38] <vexaxv> errr..lemme try
+[15:38] <vexaxv> ill get back to u guys in a sec
+[15:38] <xtu> hi, is usernet is not free to use?
+[15:38] <angel282> Hello, I recently got a dedicated server with ubuntu 10.04 LTS (lucid) and I was wondering if it possible to upgrade the server to higher version using the ssh and idea? or good tutorial?
+[15:38] <vexaxv> no
+[15:39] <sirriffsalot> L3top: cpu cores    : 2 cpu cores    : 2
+[15:39] <vexaxv> Try `shutdown --help' for more information. thats what i get
+[15:39] <zykotick9> vexaxv: try "sudo shutdown -P now", if -h doesn't work
+[15:39] <deejay31> Hey
+[15:39] <ActionParsnip> !upgrade | angel282
+[15:39] <ubottu> angel282: For upgrading, see the instructions at https://help.ubuntu.com/community/UpgradeNotes - see also http://www.ubuntu.com/desktop/get-ubuntu/upgrade
+[15:39] <vexaxv> nope
+[15:39] <vexaxv> wont shutdown
+[15:40] <ActionParsnip> angel282: you can upgrade straight to precise from lucid
+[15:40] <deejay31> Who here uses a ZNC
+[15:40] <theadmin> vexaxv: Try appending "reboot=bios" to the kernel line.
+[15:40] <vexaxv> if i click shutdown it hangs at the ubuntu loading splash screen
+[15:40] <IdleOne> deejay31: people in #znc do
+[15:40] <vexaxv> k i did
+[15:40] <deejay31> Oh ok
+[15:40] <deejay31> Grrrr
+[15:41] <Kaduptm> vexaxv try this: sudo gedit /etc/default/grub
+[15:41] <zykotick9> !gksudo | Kaduptm vexaxv
+[15:41] <ubottu> Kaduptm vexaxv: If you need to run graphical applications as root, use « gksudo », as it will set up the environment more appropriately. Never just use "sudo"! (See http://psychocats.net/ubuntu/graphicalsudo to know why)
+[15:42] <maikls> hi. were ubuntu saves wifi config? Like I made adhoc AP, but I want to see the config file. Were should I look for it?
+[15:42] <sirriffsalot> L3top: what was that for?:D
+[15:42] <theadmin> Kaduptm: Please refrain from using "sudo" and "su" for graphical applications. Use their GUI counterparts, "gksudo" and "gksu".
+[15:42] <Kaduptm> and change: GRUB_CMDLINE_LINUX_DEFAULT="quiet splash" to GRUB_CMDLINE_LINUX_DEFAULT="quiet acpi=force"
+[15:42] <zykotick9> maikls: Network Manager doesn't save the wireless to a file... it's stored in a protected database (by default)
+[15:43] <Kaduptm> ok... my bad
+[15:43] <flowerpot> maikls, not sure what you mean by "wifi config," but the DHCP config stuff is located in files like /var/lib/dhcp/dhclient-2203de08-09c1-4415-a03c-882ba4217f8c-eth0.lease
+[15:43] <vexaxv> k now what
+[15:43] <flowerpot> there should be an entry for your wlan
+[15:43] <L3top> sirriffsalot: I am not sure... I am having a senior moment, I don't know if that 2.4 is supposed to be cumulative of the multiple cores, or if what you are reading should be the combined speed. I am still waking up... I am grabbing cpufreq now, have never used it.
+[15:43] <maikls> flowerpot: thx, zykotick9  - i dont need password, I just want to see how that ad-hoc configuration looks in .conf file
+[15:43] <vexaxv> Kaduptm, now what
+[15:43] <sirriffsalot> L3top: cool! Thanks for your time!
+[15:44] <angel282> ActionParsnip: Great... action.. I tried to upgrade using the "sudo do-release-upgrade" command but I get "no new release found. I think it because the hosting company changed the sources.list any idea? should I changed it back to the ubuntu main source.list?
+[15:44] <flowerpot> maikls, maybe the ip command?
+[15:44] <zykotick9> angel282: LTS->LTS Upgrades aren't offerend (by default) until the point release (sometime next couple of months)
+[15:45] <zykotick9> !schedule | angel282
+[15:45] <ubottu> angel282: The Ubuntu Precise Pangolin release schedule can be found at https://wiki.ubuntu.com/PrecisePangolin/ReleaseSchedule
+[15:46] <maikls> flowerpot: that gives me not what I want. The whole idea is - I'm runing gentoo but on 2nd laptop ubuntu. And I just not cannot make working adhoc on gentoo system, but on ubuntu its working like a charm. I just want to se what i'm doing wrong in gentoo - to compare  both .conf files.
+[15:46] <L3top> wow repos are braindamage slow...
+[15:46] <sirriffsalot> :D
+[15:46] <L3top> sirriffsalot: not to be silly... but is your scaling multiplier right in bios?
+[15:47] <sirriffsalot> L3top: qué?
+[15:47] <maikls> flowerpot: in gentoo it saves it in /etc/conf.d/net
+[15:47] <maikls> but in ubuntu it is empty
+[15:47] <y0wy-> maikls, did u try: ps aux, just to see the command?
+[15:47] <sirriffsalot> L3top: the bios I have in this computer is dated 2009 ... might be outdated, but how do I check if that is so?
+[15:48] <maikls> y0wy-: what does ps aux do? ;/
+[15:48] <flowerpot> try ps - ef
+[15:48] <zykotick9> maikls: i realize you don't believe me (or don't want to) - but N-M doesn't save stuff to config files...
+[15:48] <maikls> zykotick9:  ok, will try in different way
+[15:48] <L3top> the multiplier in bios which sets the clock speed... bioses can be very diffrerent. I would look at a manual for your board/computer
+[15:49] <theadmin> zykotick9: Uh, in Linux everything is a file. Even if NetworkManager uses some awkward gnome pseudo-registry thing such as dconf or gconf, those still store their data in files. If not those, what else?
+[15:49] <sirriffsalot> L3top: not sure there is a function of that kind in my bios at all...
+[15:49] <zykotick9> theadmin: yes yes - thanks for that totally unhelpful comment ;)
+[15:49] <jm> in unix, even Jesus is a file
+[15:49] <theadmin> zykotick9: No, I'm just trying to understand your point -- *where* does NetworkManager store configuration?
+[15:50] <Kaduptm> anyone have this problem?! ubuntu tweak 0.7.1 doesnt save cong after reboot...
+=== deejay31 is now known as deejay31|Offline
+[15:51] <zykotick9> theadmin: N-M reliese on some DM protected files (somewhere).  N-M can't do wireless without GDM/LightDM/KDM/etc. because of the permissions on saving the wireless info/credentials
+[15:51] <L3top> there pretty much has to be... if it can take different chips... I mean... maybe ions dont have them or integrated cpus... I dont know... I don't use those guys as anything but plug n play slim clients... I open the bios and set it to pxe boot and thats it.
+[15:51] <theadmin> zykotick9: Now *that* is one weird way to store configurations, indeed >.<
+[15:51] <zykotick9> theadmin: i have a word for it - but it's not #ubuntu permitted ;)
+[15:52] <sirriffsalot> L3top: checking again then... rebooting:D
+[15:53] <ActionParsnip> Kaduptm: I suggest you contact the ubuntu tweak maintainers
+[15:53] <ActionParsnip> theadmin: ${HOME}/.gconf/system/networking/connections/   according to http://ubuntuforums.org/showthread.php?t=1043039
+[15:54] <theadmin> ActionParsnip: Hm, but that's just gnome's gconf thing
+[15:54] <ActionParsnip> theadmin: sure
+=== kung is now known as Guest61381
+[15:55] <vitald> Hello, can someone help me with setup a microphone?
+[15:56] <ActionParsnip> !details | vitald
+[15:56] <ubottu> vitald: Please give us full details. For example: "I have a problem with ..., I'm running Ubuntu version .... When I try to do ..., I get the following output: ..., but I expected it to do ..."
+[15:58] <AminosAmigos> Hello
+[15:58] <naxil> hello
+[15:58] <vitald> I'm running Xubuntu 12.04 (updated). When I try to record a sound through my microphone I got a noise. I tried it in Audacity
+[15:58] <ActionParsnip> vitald: is it anything like the original sound?
+[15:58] <naxil> please i have a strange problem. I see the name of my monitor (i have two monitor). What i can do for not see the name on screen? i use gnome 10.04
+[15:58] <bedreamer> Anybody mind if I use this channel to learn about IRC
+[15:58] <ActionParsnip> vitald: is the microphone part of a laptop?
+[15:58] <AminosAmigos> is it possible to reposition the icons in th unity launcher ?
+[15:59] <ActionParsnip> AminosAmigos: sure, long click then move it up or down
+[15:59] <maddinw> Hello again...
+[15:59] <sirriffsalot> L3top: I really can't find any such function in the BIOS...
+[15:59] <vitald> mic isn't on laptop, sound is but with noise
+[16:00] <L3top> sirriffsalot: where are you getting the 1.2 from?
+[16:00] <sirriffsalot> Running an acer aspire x3200machine ..
+[16:00] <AminosAmigos> LoL at first it only moved the hole launcher but now it worked strange :D thnx ActionParsnip
+[16:00] <sirriffsalot> L3top: The 1.2?
+[16:00] <maddinw> I have been here a bit before and I would like to ask another question.
+[16:00] <L3top> ghz.
+[16:00] <sirriffsalot> L3top: Ah, from cpufreq-info -m
+[16:00] <deejay31> How can I remove the ubuntu documentation message on logon?
+[16:00] <maddinw> flowerpot: maybe you remember me ;)
+[16:01] <maddinw> I have taken flowerpots advice and put the command to open the tunnel into ~/.bashrc
+[16:01] <sirriffsalot> L3top: it shows two "analyzing CPU:" sections and both say "current CPU frequency is 1.20 GHz."
+[16:01] <maddinw> But not when I open up a console it throws an error message that it can't listen to the port the tunnel runs on.
+[16:02] <maddinw> .peak
+[16:02] <bedreamer> I'm using irsii. Is it easy to suppress all the 'has joined' messages?
+[16:03] <zykotick9> !quietirssii | bedreamer
+[16:03] <maddinw> Is there any way I can make it check for an existing tunnel and not try to open it if it finds one?
+[16:03] <zykotick9> !quietirssi | bedreamer
+[16:03] <ubottu> bedreamer: To ignore joins, parts, quits in irssi:  /ignore #ubuntu +JOINS +PARTS +QUITS
+[16:03] <small> it's very hard to find new soft which i just installed at ubuntu 12.04
+[16:03] <small> hard to use
+=== chinkung is now known as kung
+[16:03] <sirriffsalot> L3top: you given up too?:D
+[16:04] <theadmin> bedreamer: /ignore * JOINS PARTS QUITS NICKS
+[16:04] <Orpheon> does anyone have any more ideas for my wine/opengl problems?
+[16:04] <bedreamer> Thanks ubottu. Much better :-)
+[16:04] <sirriffsalot> Orpheon: what's the problem?
+[16:04] <naxil> bedreamer not run
+[16:04] <L3top> sirriffsalot: no... I am trying to figure out how to use this tool... and I am in a few other chats atm.. just be patient with me.
+[16:04] <Orpheon> I run some exe with wine through console: this error log
+[16:05] <zykotick9> theadmin: i didn't know you could wildcard the channel!  thanks!
+[16:05] <sirriffsalot> L3top: I do apologize, haha:)
+[16:05] <Orpheon> http://pastebin.com/RHEqt9xD
+[16:05] <Orpheon> in particular, three lines
+[16:05] <theadmin> zykotick9: lol um, no problem?
+[16:05] <sirriffsalot> Orpheon: what exe?
+[16:05] <Orpheon> 345
+[16:05] <Orpheon> a game
+[16:05] <L3top> sirriffsalot: all I have available is cpufreqd... and that command is not recognized... and... I am very tired.
+[16:05] <Orpheon> made in Game Maker
+[16:05] <naxil> hello
+[16:05] <Orpheon> it worked before an update I made a few days ago
+[16:05] <sirriffsalot> Orpheon: oh, hmm
+[16:06] <Orpheon> ubuntu 12.04 64-bit here
+[16:06] <sirriffsalot> L3top: alright, sleep well:)
+[16:06] <sirriffsalot> Orpheon: You're trying to run your own made game?
+[16:06] <Orpheon> good night
+[16:06] <Orpheon> well, almost
+[16:06] <Orpheon> yes
+[16:06] <Orpheon> I use it as a test now
+[16:06] <Orpheon> because it's always worked before
+[16:06] <L3top> sirriffsalot: I am still working... just not waking up... I can't sleep atm...
+[16:07] <Orpheon> and because it takes little time to execute
+[16:07] <mafiaboy> ubuntu 12.04 too unstable for now as compared to 10.04
+[16:07] <DoctorMonocular> hey L3Top, a little update -- I tried putting that new config info into .bash_profile, and .profile, and I thought I'd cracked the case when I found at the end of my .bashrc file a line refining the PATH, but removing that didn't help. So I'm still at the point where I can run ruby if I manually source bash_profile when I open a terminal, and I still can't run rails because it's looking for a wonky path to ruby1.8. What do you
+[16:07] <DoctorMonocular> think could cause bash_profile to not load?
+[16:07] <sirriffsalot> L3top: oh, well don't beat yourself up, I'm happy!
+[16:07] <Orpheon> Game Maker itself, or programs that do not use directX, run well
+[16:07] <ActionParsnip> mafiaboy: look at how mature Lucid is compared to Precise
+[16:07] <Darael> Having a problem on several machines since they were upgraded to Precise.  The settings for keyboard layouts are ignored, and the layout is permamently set to whatever the default for that account was before the upgrade, but behaves as though all the check-boxes under "options" were unset.  The other layouts I have configured are selectable from the indicator, but doing so has sod all effect.  That means I can't access QWERTY layouts
+[16:07] <L3top> wolfcore might be able to help you... I was unaware of bash_profiles existence/use
+[16:07] <sirriffsalot> Orpheon: Hmm, wine is very explicit in detailing events, most of those lines are insignificant to the actual problem as far as I  know... But I really have no idea how what you're trying to do works
+[16:08] <DoctorMonocular> L3top, is he around?
+[16:08] <mafiaboy> ActionParsnip : yea but i switched to it thinking that it would be stable
+[16:08] <sirriffsalot> Orpheon: only thing I can suggest is to undo what you did to when it was working
+[16:08] <mafiaboy> crashes a lot
+[16:08] <Orpheon> sirriffsalot: I tried un- and reinstalling pretty much everything I could possibly think of
+[16:08] <Orpheon> asking around
+[16:08] <ActionParsnip> mafiaboy: upgrade or clean install?
+[16:08] <Orpheon> and googling around
+[16:08] <sirriffsalot> Orpheon: backup files, reinstall entire ubuntu?:)
+[16:08] <Orpheon> most of the people told me I need a 32-bit opengl lib
+[16:08] <L3top> he does not make me aware of his whereabouts since he got loose from his chain.
+[16:09] <Orpheon> I have backups of /home and /usr
+[16:09] <Orpheon> of a month ago
+[16:09] <Darael> DoctorMonocular: As I recall, .profile and family only load in a login shell, which your standard terminal emulator is not.  Stick the lines (whatever they are; I just came in) in .bashrc instead?
+[16:09] <ActionParsnip> Orpheon: backup /etc too
+[16:09] <Orpheon> I'll do so from now on, ok
+[16:09] <Orpheon> also
+[16:10] <Orpheon> I tried copy-pasting some libs from the backup into my current /usr
+[16:10] <flowerpot> maddinw, yes
+[16:10] <Orpheon> is this bad?
+[16:10] <DoctorMonocular> L3top, you need to keep track of these things man, you're falling down on the job here
+[16:10] <mafiaboy> ActionParsnip : i did a fresh install
+[16:10] <Prsm> Where should I go for general computer talk?
+[16:11] <L3top> sirriffsalot: cat /proc/cpu | grep -i mhz
+[16:11] <flowerpot> One way to check, if you're using IPv4, would be: lsof -i 4TCP@remotehost:22
+[16:11] <sirriffsalot> L3top: cat: /proc/cpu: No such file or directory
+[16:11] <L3top> sirriffsalot: cat /proc/cpuinfo | grep -i mhz
+[16:11] <L3top> sorry
+[16:11] <sirriffsalot> L3top: mate, you're helping a lot of people, great, but sleep is important!!
+[16:11] <Orpheon> 8 hours per sleep
+[16:12] <Orpheon> is what you usually need
+[16:12] <L3top> I am in charge of a baby... cant sleep.
+[16:12] <DoctorMonocular> Darael, yeah I did that, and it works, but I was afraid I was doing something wrong, I'm really new to all this and I don't know exactly where stuff should sit
+[16:12] <sirriffsalot> L3top: cpu MHz        : 1200.000 power management: ts ttp tm stc 100mhzsteps hwpstate cpu MHz        : 1200.000 power management: ts ttp tm stc 100mhzsteps hwpstate
+[16:12] <flowerpot> 4 - specifies IPv4 (6 would specify IPv6).  TCP - specifies TCP (as opposed to UDP).  @remotehost - the hostname of the remote host.  :22 - specifies the port, in this case 22 for ssh
+[16:12] <ugur> hede
+[16:12] <sirriffsalot> L3top: should have slept before that then=(
+=== lu` is now known as lubmil
+[16:13] <Prsm> can someone please telnet 80.229.207.254 50007 and see if it works?
+[16:14] <L3top> speaking of which he is waking up, so I will be less avail... look for a manual on your PC and check bios settings explained there sirriffsalot... afk
+[16:14] <jellybellie> Im using Ubuntu classic, 12.04, And IM stuck in chinese. PLEASE HELP.
+[16:14] <sirriffsalot> L3top: cheers:)
+[16:14] <Diddy403> Im having a problem where I don't have an option for Appearance --> Visual Effects on Ubuntu. I have installed the AMD Proprietary Driver and all is working, but I cant add visual effects
+[16:14] <jellybellie> some in english, most in chinese
+=== Prsm is now known as Merceng
+[16:15] <ActionParsnip> Merceng: connects ok
+[16:15] <jellybellie> gnome-shell actually
+[16:15] <theadmin> Merceng: I connected, but it doesn't ask for anything, just a hanging connection
+[16:15] <jellybellie> no idea why it switched
+[16:15] <Merceng> ok
+[16:15] <Merceng> disconnect please
+[16:15] <ActionParsnip> Merceng: done
+[16:15] <Merceng> it's spamming me for some reason
+[16:15] <theadmin> Merceng: Done.
+[16:16] <jellybellie> I dont speak chinese :(
+[16:16] <Merceng> 82.9.34.77
+[16:16] <Merceng> please d/c
+[16:16] <terafl0ps> jellybellie, can you click on your username in the upper right hand corner and open "system settings"
+[16:17] <terafl0ps> There should be a "language support" option in there.
+[16:17] <armence>  /join #python-dev
+[16:17] <jellybellie> terafl0ps: I can get terminal
+[16:17] <jellybellie> I think its gnome-shell
+[16:17] <shukty> hi i need a fast hint ... i lost some files  and i need them back. .... os windows7 ( not this computer .... )
+[16:17] <sw0rdfish> hey my wifi network is the one that has internet... and so if I connect to it and connect to a LAN with an ethernet cable will my 12.04 automatically figure out which one has internet?
+[16:18] <Darael> Having a problem on several machines since they were upgraded to Precise.  The settings for keyboard layouts are ignored, and the layout is permamently set to whatever the default for that account was before the upgrade, but behaves as though all the check-boxes under "options" were unset.  The other layouts I have configured are selectable from the indicator, but doing so has sod all effect.  That means I can't access QWERTY layouts
+[16:18] <jellybellie> terafl0ps: got it
+[16:18] <sw0rdfish> and use that for internet?
+[16:18] <Diddy403> Im having a problem where I don't have an option for Appearance --> Visual Effects on Ubuntu. I have installed the AMD Proprietary Driver and all is working, but I cant add visual effects. Using Precise
+[16:18] <terafl0ps> jellybellie: Great, did everything switch back to English?
+[16:18] <theadmin> shukty: Windows is not supported here, try ##windows (other than that, Testdisk (Photorec, rather), Recuva and some other file recovery software can help)
+[16:18] <jellybellie> no
+[16:19] <ActionParsnip> shukty: use your backups, windows support is in ##windows
+[16:20] <sw0rdfish> hey my wifi network is the one that has internet... and so if I connect to it and connect to a LAN with an ethernet cable will my 12.04 automatically figure out which one has internet? .... and use that for internet?
+[16:20] <terafl0ps> jellybellie: if you go into "install/remove languages" what languages are checked ?
+[16:20] <kjm> ##windows
+[16:20] <Darael> jellybellie: I'm not entirely sure about gnome-shell, but the Unity search will often match the English name even when you're in another language, so searching for "language" will usually turn the language-settings tool up.
+[16:21] <jellybellie> terafl0ps: not sure
+[16:21] <jellybellie> in chinese, most, except top three
+[16:21] <sw0rdfish> and I'm hoping I could share the wifi internet with my desktop (either through a LAN router or connect them directly to each other)
+[16:21] <theadmin> !ics | sw0rdfish
+[16:21] <ubottu> sw0rdfish: If you want to share the internet connection of your Ubuntu machine with other machines in the network see https://help.ubuntu.com/community/Internet/ConnectionSharing
+[16:22] <Diddy403> !compiz
+[16:22] <ubottu> Compiz (compositing window manager), for a howto see http://help.ubuntu.com/community/CompositeManager and more help #compiz
+[16:22] <delac> Mobile broadband (3G usb stick) is always disabled on boot or after inserting the stick. This prevents the connection from starting automatically. Any way to set Mobile broadband to enabled by default?
+[16:22] <abhijitrucks> hi
+[16:22] <jellybellie> terafl0ps: how many down is english?
+[16:22] <abhijitrucks> how do i change launcher hot edge to bottom cornor?
+[16:22] <flowerpot> maddinw, you can also use netstat to check what processes are using what tcp ports (over ipv4) with: netstat -4tap
+[16:23] <jellybellie> I see Chhattisgarhi, chinese, Min Nan, Mari, Eastern, Shuswap, and Walser, the rest of the list is in chinese
+[16:23] <maddinw> flowerpot: thank you...this will be helpful.
+[16:23] <jellybellie> swear to god, it just changed, no idea why
+[16:23] <flowerpot> -4 = limit to ipv4.  -t = limit to tcp.  -a = show all connections, listening and otherwise.  -p = show process name
+[16:23] <abhijitrucks> :-|
+[16:23] <terafl0ps> jellybellie, I count English as th 36th language in the list.
+[16:24] <flowerpot> doesn't look like netstat can filter on its own by port # like lsof, so you'd have to grep, sed, awk, or perl yourself some extra detail for the script logic
+[16:24] <ActionParsnip> flowerpot: ooh like that, making an alias now :)
+[16:24] <terafl0ps> in the "installed languages" list
+[16:24] <kjm> quit
+[16:25] <maddinw> I did netstat -4tap | grep 8000
+[16:25] <ActionParsnip> flowerpot: was going to make a UDP joke too but couldn't be sure you got it :D
+[16:25] <abhijitrucks> huh?
+[16:25] <Darael> ActionParsnip: That's /terrible/.
+[16:25] <ActionParsnip> Darael: lots
+[16:26] <jellybellie> argh, the repos are lagging
+[16:26] <ActionParsnip> jellybellie: tried apt-fast ?
+[16:26] <jellybellie> ActionParsnip: what is that?
+[16:26] <ActionParsnip> jellybellie: a script to replace apt-get, uses axel
+[16:27] <jellybellie> I thought you were kidding...
+[16:27] <ActionParsnip> jellybellie: downloads from multiple sources
+[16:27] <ActionParsnip> jellybellie: its a thingf
+[16:27] <jellybellie> apt is usually fast, the ubuntu repos are lagging hard for me.
+[16:27] <stiltzkin> Hello all, this is not a critical issue or anything (this is basically throwaway hardware) but I'm wondering why 12.04 is randomly freezing on my old desktop computer. I did tail -f /var/log/syslog to see what's happening when it freezes, here's what it looks like: http://i.imgur.com/Wstm3.jpg
+[16:28] <jellybellie> terafl0ps: what language pack is english?
+[16:28] <jellybellie> language-pack-???-base
+[16:28] <Darael> jellybellie: en, probably.  Possibly en-$COUNTRYCODE.
+[16:28] <stiltzkin> As you can see, it just keeps trying to enumerate USB devices with MTP for some reason. I don't have any devices that use MTP attached, so this is confusing. Basically I just want to understand whether this is most likely hardware or software related.
+[16:28] <sebastian> hello, i need some help with gsynaptics
+[16:29] <cristi22> hei i instal windows over ubuntu 12.04 and i want to reinstal grub haw i can do?
+[16:29] <Darael> !grub | cristi22
+[16:29] <ubottu> cristi22: GRUB2 is the default Ubuntu boot manager since 9.10 (Karmic). Lost GRUB after installing Windows? See https://help.ubuntu.com/community/RestoreGrub - For more information and troubleshooting for GRUB2 please refer to https://help.ubuntu.com/community/Grub2 - See !grub1 for releases before Karmic (9.10)
+[16:29] <bost> hey man do you see me?
+[16:29] <n1ckn4me09876543> I downloaded Soundblaster X-Fi linux driver, now I have to install it, the readme file tells me: << In terminal,
+[16:29] <n1ckn4me09876543> 1) Goto source directory
+[16:29] <n1ckn4me09876543>  2) Execute make command as root
+[16:29] <n1ckn4me09876543>   make
+[16:29] <n1ckn4me09876543>     make install >> what's the command to install programs/driver
+[16:29] <FloodBot1> n1ckn4me09876543: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[16:29] <jellybellie> Darael: no
+[16:29] <ActionParsnip> jellybellie: sudo apt-get install axel
+[16:29] <BostX> yea I do
+[16:29] <ActionParsnip> jellybellie: then visit here: http://www.mattparnell.com/linux/apt-fast/
+[16:30] <ActionParsnip> jellybellie: grab apt-fast.sh and mark it as executable, I suggest you rename it to apt-fast and copy it to /usr/bin
+[16:30] <jellybellie> sh@, I installed Kashubian
+[16:30] <Darael> jellybellie: en is definitely the language code used in packages for US English.  I think UK English is en-gb.
+[16:30] <sebastian> hey guys i need some help, i can't initialize gsynaptics, and i cant find the xorg.conf archive
+[16:30] <ActionParsnip> jellybellie: you can then use:  sudo apt-fast upgrade
+[16:30] <flowerpot> maddinw, if you're running netstat to check for a tcp connection from localhost:someport to remotehost:8000, then you don't need to include -a in netstat
+[16:30] <jellybellie> Darael: what package do you have installed?
+[16:30] <terafl0ps> jelliebellie, What happened when you tried to reset English in the "language support" tool ?
+[16:30] <DoctorMonocular> so, when I run "rails c" I get this error: bash: /usr/local/bin/rails: /usr/bin/ruby1.8: bad interpreter: No such file or directory -- which seems like it's looking for ruby on the path "/usr/local/bin/rails: /usr/bin/ruby1.8" which is obviously wrong. It looks like there's an extra space in a config file somewhere -- where might that file be?
+[16:30] <jellybellie> ActionParsnip: I will definitely try it.
+[16:31] <jellybellie> language-pack-??
+[16:31] <Darael> jellybellie: language-pack-en and language-pack-en-base.
+[16:31] <jellybellie> k
+[16:31] <ActionParsnip> jellybellie: newer version here https://github.com/ilikenwf/apt-fast
+[16:31] <flowerpot> DoctorMonocular, someone else had the same problem yesterday. I don't know how his case turned out, but it's probably not a problem specific to your case.
+[16:31] <jellybellie> Darael: ubuntu 12.04?
+[16:32] <Darael> ActionParsnip: Axel works these days, then?  Last time I looked at it (about four years ago, I confess) it liked to segfault.
+[16:32] <Darael> jellybellie: That's right.  Been the same since forever, though.
+[16:32] <stiltzkin> Anyone know what this "udevd failed to execute mtp-probe" means? http://i.imgur.com/Wstm3.jpg
+[16:33] <ActionParsnip> jellybellie: ok stick to the first one :)
+[16:33] <jellybellie> this makes no sense, I didnt install anything...
+[16:33] <jellybellie> ActionParsnip: I will try it
+[16:33] <ActionParsnip> Darael: works great here
+[16:33] <jellybellie> but now, Im trying to get english back [:
+[16:33] <abhijitrucks> unity is getting ridiculus on ubuntu 12.04... :( i am gonna try gnome 3
+[16:33] <Darael> ActionParsnip: Good to know.  Four years is, after all, a long time.
+[16:33] <jellybellie> I cannot read the git hub in chinese
+[16:33] <abkarch> hey guys. I just installed ubuntu 12.04 on my laptop and everything went fine. I then used easyBCD from windows to add it to the boot list. Anyway, upon choosing to boot ubuntu, i get a black screen. I dont get a purple ubuntu loading screen before it or anything, it just goes straight to a black screen. If this helps at all, pressing the power button instantly turns off the laptop, which in my experience usually means no OS is boot
+[16:34] <stiltzkin> abkarch, have you tried recovery mode?
+[16:34] <jellybellie> this is crazy
+[16:34] <smerz> abkarch, also check disk activity to verify your theory
+[16:35] <smerz> (to be sure. never hurts)
+[16:35] <abhijitrucks> whoa!!! how do i install gnome in ubuntu 12.04??? help! terminal says gnome-shell is not available
+[16:35] <jellybellie> k, its not change to english
+[16:35] <Darael> abkarch: Is there any reason you didn't just use GRUB for the main bootloader?  I don't think the Windows bootloader understands Linux, and chainloading GRUB from it requires dumping a grub image to a file, or did last time I tried, about six months ago.
+[16:35] <abkarch> im not really an experienced linux user, how would i use GRUB?
+=== euphoria is now known as Guest53376
+[16:36] <abhijitrucks> someone help... how do i install gnome???
+[16:36] <jellybellie> its select to english
+[16:36] <jellybellie> but not english
+[16:36] <Darael> abkarch: It should have been installed with Ubuntu.  If it wasn't, something strange has been going on.  Did you use WUBI?  (the "install inside windows" option).
+[16:36] <abkarch> I burnt to a CD
+[16:36] <zykotick9> !notunity | abhijitrucks
+[16:36] <ubottu> abhijitrucks: Ubuntu 11.10 uses GNOME 3 with the !unity shell by default.  To use GNOME Shell instead, install the "gnome-shell" package and investigate "gnome-tweak-tool".  For GNOME Fallback mode, which is similar to GNOME 2, install "gnome-panel". Both packages will place entries in the Sessions dropdown. Using Natty? See !classic
+[16:37] <abkarch> its probably there, i dont know how to use it Darsel
+[16:37] <Darael> !grub | abkarch: See also
+[16:37] <ubottu> abkarch: See also: GRUB2 is the default Ubuntu boot manager since 9.10 (Karmic). Lost GRUB after installing Windows? See https://help.ubuntu.com/community/RestoreGrub - For more information and troubleshooting for GRUB2 please refer to https://help.ubuntu.com/community/Grub2 - See !grub1 for releases before Karmic (9.10)
+[16:37] <jellybellie> and I cannot select the window text to to translate
+[16:37] <terafl0ps> jellybellie, this may help: http://i45.tinypic.com/2r3y2xk.png
+[16:37] <stiltzkin> abhijitrucks, sudo apt-get install gnome-shell last time I checked
+[16:38] <Darael> abkarch: Incidentally, the tab key will autocomplete a nick, which is great for time-saving and making sure of spelling.  Unfortunately, I have to go (unexpected, my apologies) but I hope someone can sort you out.
+[16:38] <jellybellie> lookin
+[16:38] <abkarch> k
+[16:38] <terafl0ps> English is the 36th language down in the "installed languages" window.
+[16:38] <abhijitrucks> i did sudo apt-get install gnome-shell but it says "package gnome-shell has no insallation candidate"
+[16:38] <ActionParsnip> !info gnome-shell
+[16:38] <ubottu> gnome-shell (source: gnome-shell): graphical shell for the GNOME desktop. In component universe, is optional. Version 3.4.1-0ubuntu2 (precise), package size 329 kB, installed size 901 kB
+[16:38] <enotz> I am trying to use LWP::Simple with perl under 12.04 and if and when I try and get an https address it fails, without error.  I have installed LWP::Simple and http://pkgs.org/ubuntu-12.04/ubuntu-universe-i386/libcrypt-ssleay-perl_0.57-2ubuntu1_i386.deb - what am I missing here
+[16:39] <ActionParsnip> abhijitrucks: do you have universe repo enabled?
+[16:39] <stiltzkin> Still looking for some advice on this system freeze if anyone can tell me anything about it. Screenshot here: http://i.imgur.com/Wstm3.jpg
+[16:39] <abhijitrucks> how do i check?
+[16:39] <ActionParsnip> abhijitrucks: use software centre
+[16:39] <robertkeizer> Greetings.. Anyone else notice that the canoncial DNS servers just set ca.archive.ubuntu.com to go to the UK?
+[16:40] <euphoria_> hello
+[16:40] <jellybellie> terafl0ps: http://tinypic.com/r/2morp1f/6
+[16:40] <ActionParsnip> hi euphoria_
+[16:40] <euphoria_> hi
+[16:40] <abhijitrucks> ya
+[16:40] <abhijitrucks> universe respiratory is enabled
+[16:41] <c0deMaster> what are speedy alternatives to OpenVPN ?
+[16:41] <jellybellie> english is definitely installed, I translated it with google
+[16:42] <terafl0ps> jellybellie, What happens if you choose "English" and press that top button?
+[16:42] <terafl0ps> which should be "apply system wide"
+[16:42] <jellybellie> nothing
+[16:42] <stiltzkin> experience with udevd, anyone, anyone? bueller?
+[16:42] <abhijitrucks> ???
+[16:43] <jellybellie> terafl0ps: I got a pop up when I logged in sayin I chose a different language.  I make sure that the login language was english on the login screen
+=== system is now known as Guest73879
+[16:44] <jellybellie> this is insane
+[16:44] <jellybellie> Im gonna have to reinstall over this...
+[16:44] <abhijitrucks> ok. i added a gnome ppa
+[16:44] <jellybellie> my gawd ubuntu
+[16:45] <abhijitrucks> someone plz help
+[16:45] <abhijitrucks> how to install gnome 3
+[16:45] <abhijitrucks> in ubuntu 12.04
+[16:45] <tensorpudding> abhijitrucks, first, remove whatever ppa you added
+[16:46] <abhijitrucks> ok
+[16:46] <tensorpudding> abhijitrucks, then you're done, because 12.04 comes with gnome 3
+[16:46] <terafl0ps> jellybellie, I'm not sure what's going on then.  Have you tried logging out of gnome and logging back in after you applied the change?
+[16:46] <jellybellie> ubuntu just switched me to chinese, that is what happened
+[16:46] <jellybellie> no idea why
+[16:46] <abhijitrucks> ok i removed it
+[16:46] <tensorpudding> abhijitrucks, if you don't believe me, open System Monitor and look at the System tab, and see where it'll say GNOME 3.4.1
+[16:47] <jellybellie> terafl0ps: gonna try logging out.
+[16:47] <compdoc> I think ppl would be happier if 12.03 did run gnome 3, but it doesnt. But thats OK, I getting used to Unity
+[16:48] <abhijitrucks> but i cant login to a gnome session
+[16:48] <TheShruv> jellybellie: goto system>administration>language (or something like that)
+[16:48] <hypn0> i would be happier if something like openbox was installed too
+[16:48] <robin0800> compdoc: 12.04 does run gnome 3
+[16:48] <tensorpudding> abhijitrucks, unity is built on top of gnome 3, if you want gnome-shell, just install it by name from the software center, you'll get a GNOME session available
+[16:48] <LjL> !gnome3 | abhijitrucks
+[16:48] <ubottu> abhijitrucks: GNOME 3 is the desktop environment on which Unity is based.  To use GNOME Shell instead of Unity, install the "gnome-shell" package and investigate "gnome-tweak-tool". GNOME 3 is not supported under Natty/11.04, and may break your system if installed from alternate sources.
+[16:49] <compdoc> robin0800, not the gnome 3 that abhijitrucks means
+[16:49] <abhijitrucks> i have ubuntu 12.04
+[16:49] <tensorpudding> yes, do what it says, install gnome-shell and gnome-tweak-tool
+[16:49] <LjL> compdoc: yes, what you and abhijitrucks mean is "GNOME-Shell", not "GNOME 3"
+[16:49] <abhijitrucks> and i want to use gnome instead of unity
+[16:49] <LjL> abhijitrucks: follow the instructions in the factoid i just gave.
+[16:50] <n1ckn4me09876543> Can someone help me install driver for Soundblaster X-Fi Fatal1ty ?  I've google'd everywhere and cannot find a solution
+[16:50] <terafl0ps> Overall, I personally think Unity is awful on desktops and laptops.  I think something with a Unity-like interface makes much more sense on tablets and smartphones.
+[16:50] <ActionParsnip> compdoc: 12.04 uses Gnome3...
+[16:50] <robin0800> abhijitrucks: you may need gnome-panel then
+[16:50] <MrGizmo757> Unity is awsome  just takes getting used to
+[16:50] <ActionParsnip> n1ckn4me09876543: those can be a pita, not worth the hastle
+[16:51] <abhijitrucks> unity is kinda messed up in ubuntu 12.04
+[16:51] <ActionParsnip> n1ckn4me09876543: can you give the output of: wget -O alsa-info.sh http://www.alsa-project.org/alsa-info.sh && chmod +x ./alsa-info.sh && ./alsa-info.sh
+[16:51] <MrGizmo757> its rough around the edges but you can tweak it and make it good
+[16:51] <MrGizmo757> such as making the launcher dodge windows like it did in 11.10 amound many other things
+[16:51] <MrGizmo757> with a little TLC you can make unity quite good
+[16:52] <abhijitrucks> how do i change launcher to reveal when i move my mouse to bottom left corner?
+[16:52] <n1ckn4me09876543> ActionParsnip: http://www.alsa-project.org/db/?f=19897beae9289bea9247c92a6b29e6e89a4fbd57
+[16:52] <MrGizmo757> not sure about hot corners. i know My unity and even ubuntu tweak have some funtions like that.
+[16:52] <MrGizmo757> there is a way i just don tknow it.
+[16:52] <abhijitrucks> +they dont work in 12.04
+[16:53] <abhijitrucks> :(
+[16:53] <MrGizmo757> launcher dodgin open windows i have figured out. changin the default lens i have figured out.
+[16:53] <abhijitrucks> i mean i can only change hotsopts to left edge and top left corner
+[16:54] <terafl0ps> I admit I haven't tried Unity since 11.04, but I had lots of problems with it on dual displays, and I really couldn't stand the enormous icons.  Those big icons would make perfect sense on a small screen where they would scale down to the size of your fingertip though.
+[16:54] <MrGizmo757> i agree. out of the box as is Unity is kind of a mess.  but if you spend some time with it you can make it very good.
+[16:54] <MrGizmo757> hmm not sure about lower hot corners.   its not somthing i ever had a need for. i always just use keyboard shortcuts
+[16:54] <n1ckn4me09876543> win8 copied ubuntu's unity :>
+[16:54] <abhijitrucks> NO
+[16:55] <n1ckn4me09876543> yep, the left side bar thingie,  the square looking thing to see programs,  that's the "new" start in win8
+[16:55] <newhoa> Quick question: Nautilus is using media-eject-symbolic as the unmount icon in the sidebar now. Is there a way to define the color of this icon? Mine will only show black.
+=== Prsm is now known as Programmer099
+[16:55] <abhijitrucks> i got used to using bottom left corner for launcher in 11.10 so its kinda frarusting in 12.04
+[16:55] <MrGizmo757> no they didnt. steve balmmer ate some bad shrimp. puked it all out all over a pile of turds and then he copied that. thats windows 8    LOL!!!!
+[16:55] <solderMob> terafl0ps: failed.
+[16:55] <solderMob> terafl0ps: how do i get to the fonts?
+[16:55] <solderMob> maybe the fonts are off
+[16:56] <ActionParsnip> n1ckn4me09876543: is the right output device selected in sound options and are all levels cranked in alsamixer
+[16:56] <solderMob> its says english, but fonts are not english
+[16:56] <MrGizmo757> i like windows 7 am am not baching windows here but  windows 8  i can only ask what are hey smoking
+[16:56] <shadow_wraith> Hi, does anyone here know much about configuring a wacom pad in ubuntu?
+=== solderMob is now known as jellymob
+[16:56] <kelvinella> what happen to windows 8?
+[16:56] <abhijitrucks> and i cant even set expo hot corners in CCSM. the settings dissappear after a restart
+[16:56] <terafl0ps> solderMob, Was your nick jellybellie before?
+[16:56] <ActionParsnip> kelvinella: its offtopic here
+=== jellymob is now known as jellybellie
+[16:57] <petsounds> windows 8 is off-topic
+[16:57] <kelvinella> last month i try to install windows 8 in virtualbox it fails
+[16:57] <jellybellie> terafl0ps: sorry
+[16:57] <jellybellie> forgot
+[16:57] <abhijitrucks> forget about windows 8
+[16:57] <MrGizmo757> anyways i need help with WiFi in ubuntu. i cant get the LED ont eh front of my laptop to work.  anybody know how to fix that?
+[16:58] <n1ckn4me09876543> MrGizmo757: when you open programs in win8, it snaps it to the left screen,  sounds familiar? :> and a bunch of other stuff like   windows store to d/l apps like with ubuntu software centre, lol!
+[16:58] <ActionParsnip> MrGizmo757: does it connect despite the LED?
+[16:58] <MrGizmo757> yes wifi works fine. its just the LED that wont work.
+=== esm is now known as Guest50409
+[16:58] <abhijitrucks> windows 8 is metro and ubuntu is not metro
+[16:58] <abhijitrucks> lol
+[16:58] <ActionParsnip> MrGizmo757: why is the LED needed?
+[16:58] <MrGizmo757> its not its just annoying me
+[16:58] <abhijitrucks> haha
+[16:59] <ActionParsnip> MrGizmo757: could report a bug, its massively trivial. Personally I'd be glad it didn't light
+[16:59] <Kiril> someone can you tell me how to remove from apache to require htcaccess and stop give me a forbidden
+[16:59] <ActionParsnip> Kiril: try asking in the apache channel too
+[16:59] <terafl0ps> Ah.  I don't think it's a font issue.  I really think something is wrong with your language settings somewhere, but the language support program is failing to set them correctly now.
+[16:59] <MrGizmo757> yeah but its sopose to and it dosent.  to me thats annoying.  :-)
+[16:59] <totesmuhgoats> ooooh we are in #ubuntu
+[16:59] <abhijitrucks> kiril: use sudo
+[16:59] <totesmuhgoats> lol i am reading the buffer thinking i'm in ##windows

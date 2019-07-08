@@ -1,0 +1,169 @@
+[18:04] <whlai> hey all. I have a situation with 16.04 where it doesn't detect the second display (though greeter does) any ideas? Using Intel integrated graphics)
+[18:05] <elavee> akik don't be sensitive
+[18:05] <elavee> i'm not trolling
+[18:05] <elavee> /usr/bin is a dump
+=== pkennedy_ is now known as pkennedy
+[18:05] <elavee> there should be some semblance of organization
+[18:05] <elavee> but there's just not
+=== b is now known as Guest51285
+[18:06] <elavee> i guess if you're using something like the ubuntu store to remove an isntalled packaged
+[18:06] <elavee> is it going to just clean itself?
+[18:06] <yeats> elavee: what's your concern about that?
+[18:06] <elavee> i can see that eventually i bet cleaning up the trash left behind from various apps is probably a huge pita
+[18:07] <elavee> unless you guys have some sort of method you use
+[18:07] <elavee> yeats it's not maintainable
+[18:07] <elavee> it's really frustrating
+[18:07] <elavee> and it clutters up userspace
+[18:07] <yeats> elavee: do you have a support question, or are you just complaining?
+[18:07] <akik> elavee: it's called package management which takes care of them
+[18:08] <akik> elavee: can you pastebin of freebsd's /usr/bin so we can compare?
+[18:10] <elavee> yeats my question was where does ubuntu install apps, but now im wondering how the heck do you guys manage this going forward?
+[18:10] <MonkeyDust> !apt | elavee
+[18:10] <ubottu> elavee: APT is the Advanced Package Tool, which together with dpkg forms the basic Ubuntu package management toolkit. Short apt-get manual: https://help.ubuntu.com/community/AptGetHowto - Also see !Synaptic (Gnome), !Muon (KDE) or !Apper (KDE)
+[18:10] <elavee> in my epxerience package managers always leave pieces behind, it just happens
+[18:10] <BluesKaj> what's the ubuntu app for connecting via wfi to android phones?
+[18:10] <MonkeyDust> elavee  yes, you can clean that with apt clean, apt autoremove and others
+[18:11] <cscf> elavee, APT leaves config files behind by default, unless you say "purge" so as to prevent destroying user data.  Other than that, removing a package removes it.
+[18:11] <cscf> BluesKaj, you mean connecting to a phone's hotspot?
+[18:12] <BluesKaj> cscf, no just to trasnsfer files back and forth liker kdeconnect does
+[18:12] <BluesKaj> cscf, I'm just curious is all
+[18:13] <cscf> BluesKaj, I'm not aware of an Ubuntu-specific alternative to kde-connect
+[18:13] <dax> just use kdeconnect?
+[18:13] <elavee> okay thanks guys
+[18:15] <BluesKaj> dax, I do, but some ubuntu purists might not want some kde libs on their systems :-)
+[18:15] <dax> some ubuntu purists should feel free to write their own NIH implementation, then
+[18:16] <BluesKaj> dax, i run Kubuntu so i really don't care , like I said , I'm just curious
+=== precise is now known as layer-420
+=== soul is now known as Guest39515
+=== layer-420 is now known as layer-419
+=== layer-419 is now known as precise
+=== m0tznet is now known as m0tz
+[18:38] <whlai> 16.04 xrandr: Can't open display
+[18:38] <whlai> anyone?
+[18:38] <nissin> HELLO
+[18:38] <nissin> NISSIN my name
+[18:39] <pvsharov> nissin: japan?
+[18:39] <nissin> NO
+[18:39] <nissin> NIHON
+[18:39] <MonkeyDust> nissin  caps
+[18:39] <pvsharov> Nipon?
+[18:39] <akik> whlai: open a new terminal. i think you've changed from your normal user account to some other account
+[18:39] <nissin> monkeydust anal
+[18:40] <MonkeyDust> nissin  this is the ubuntu support channel, sure you want to be here?
+[18:40] <whlai> akik: same
+[18:40] <whlai> as root or as user
+[18:40] <whlai> Can't open display
+[18:40] <akik> whlai: you've changed the display configuration somehow, undo it and then try again
+[18:40] <whlai> This is a fresh install
+[18:41] <whlai> How can I "undo" the configuration?
+[18:41] <nissin_> I have an issue where Bluetooth always turns on when restarting computer
+[18:41] <whlai> 16.04 doesn't have a xorg.conf in ?etc/X11
+[18:41] <nissin_> How can I save myself from this inconvenient burden?
+[18:41] <akik> whlai: what do you get from "echo $DISPLAY" ?
+[18:41] <whlai> nothing
+[18:41] <whlai> blank
+[18:42] <nissin_> bluetooth keeps turning on how can i disable this
+[18:42] <nissin_> !
+[18:42] <akik> whlai: try "DISPLAY=:0 xrandr -q"
+[18:42] <Jordan_U> whlai: Can you open any GUI apps from the terminal?
+[18:42] <whlai> No protocol specified
+[18:42] <whlai> Can't open display :0
+[18:43] <akik> whlai: in the default installation xrandr would work without those errors
+[18:43] <whlai> Jordan_U:  Error: GDK_BACKEND does not match available displays
+[18:43] <whlai> akik, how do I go to default config?
+[18:44] <akik> whlai: that's what i would ask you :) did you change the configuration?
+[18:44] <whlai> not that I know of
+[18:44] <whlai> Made an image, cloned the image, shipped it off
+[18:44] <Ntemis> hi
+[18:44] <Jordan_U> whlai: Do you have this problem when logging in with the guest account?
+[18:44] <whlai> user can't detect second monitor
+[18:44] <Ntemis> i need some help with compliling on xenial
+[18:44] <whlai> Jordan, I don't know didn't try
+[18:45] <Jordan_U> whlai: How did you "clone the image"?
+[18:45] <whlai> with a cloning dock
+[18:45] <nissin_> can anyone help me with this burden
+[18:45] <whlai> basically, dd
+[18:45] <nissin_> i cannot manage to keep bluetooth CLOSED
+[18:45] <Ntemis> any help with this? http://paste.ubuntu.com/17069641/
+[18:45] <Jordan_U> whlai: How did you create the image?
+[18:45] <akik> whlai: shipped what, where? i don't get it
+[18:46] <whlai> akik, i don't have the machine. it's a user. I'm sshing into his machine
+[18:46] <akik> ohh... the details emerge
+[18:46] <whlai> :)
+[18:46] <Jordan_U> whlai: Then of course you cant do anything GUI related.
+[18:46] <whlai> lol
+[18:46] <whlai> but I know what's happeneing on the other end
+[18:47] <akik> whlai: you can you ssh -X remote_host to activate the x11 tunneling
+[18:47] <whlai> right
+[18:47] <whlai> ok
+[18:47] <whlai> one sec
+[18:47] <ephemeral> qqqq
+[18:47] <Jordan_U> whlai: That will not help you usefully run xrandr.
+[18:47] <akik> whlai: but it will just enable you to start apps on the remote_host and display them on your own display
+[18:47] <whlai> lol
+[18:47] <whlai> ok
+[18:47] <whlai> I needed the X flag
+[18:47] <whlai> xrandr returns two monitors
+[18:48] <whlai> HDMI1 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 531mm x 299mm
+[18:48] <whlai> VGA1 connected 1920x1080+1920+0 (normal left inverted right x axis y axis) 531mm x 299mm
+[18:48] <whlai> VIRTUAL1 disconnected (normal left inverted right x axis y axis)
+[18:48] <nissin_> can anyone read this
+[18:48] <nissin_> am i typting to myself
+[18:48] <nissin_> or am i not
+[18:48] <Jordan_U> nissin_: Yes we can see you fine.
+[18:49] <whlai> akik, zrandr returns info now where it did not before without -X
+[18:49] <whlai> xrandr*
+[18:49] <nissin_> Jordan_U how do i switch off BLUETOOTH
+[18:49] <xentity1x> Hi I'm having trouble set the owner of a folder to postgres. Can anyone help?
+[18:49] <akik> whlai: xrandr is talking to your own display setup
+[18:49] <whlai> ohhhh
+[18:49] <whlai> i see
+[18:49] <xentity1x> i've tried chown -R postgres:postgres /database/postgresqldata but it still says permission denied
+[18:49] <Jordan_U> nissin_: I don't know. If I did I would have answered your query the first time.
+[18:50] <whlai> ok
+[18:50] <whlai> sooo... what do I do now?
+[18:50] <nissin_> must be a bug then
+[18:51] <jake__> Hi - I am trying to install a Netgear A6200 wi-fi card Windows 10 driver on Ubuntu 14.04 desktop.  The .inf seems to have installed with ndiswrapper and ndisgtk shows the hardware as "present" but ifconfig only shows wlan0, the other built-in wifi card.  Can someone help me attach the A6200 driver to Ubuntu?
+[18:51] <whlai> why does xrandr return "can't open display?"
+[18:51] <whlai> akik, do you know how I can fix?
+[18:51] <akik> whlai: what do you want to accomplish?
+[18:51] <Jordan_U> whlai: Install screen on their system then have *them* open a gnome-terminal window and run "screen". Then you run "screen -x" or possibly "screen -xd" (the latter of which will diaconnect their terminal from screen).
+[18:51] <MonkeyDust> nissin_  sudo sysv-rc-conf
+[18:51] <Gallomimia> you can't use windows drivers for linux
+[18:51] <whlai> I want two monitors akik
+[18:52] <whlai> Jordan_U, install "screen"?
+[18:52] <jake__> Gallomania: Check out ndiswrapper
+[18:52] <Jordan_U> jake__: Forget the ndiswrapper ever existed.
+[18:52] <nissin_> MonkeyDust service not Found
+[18:52] <nissin_> command **
+[18:52] <MonkeyDust> nissin_  install it, first
+[18:53] <Jordan_U> jake__: Trust me. You don't want it.
+[18:53] <nissin_> monkey dust
+[18:53] <nissin_> I have a menu here in front of me
+[18:53] <jake__> Jordan_U: Okay, how else can I install the wi-fi adapter with only windows drivers?
+[18:53] <nissin_> what do i do now...
+[18:53] <whlai> Jordan_U: Cannot open your terminal '/dev/pts/2' - please check.
+[18:53] <MonkeyDust> nissin_  disbale the service you don't want
+[18:53] <whlai> that's what "screen" returns
+[18:54] <nissin_> MonkeyDust , this is all well but what if i want to use bluetooth one day?
+[18:54] <MonkeyDust> nissin_  turn it back on
+[18:54] <nissin_> using sudo sysv-rc-conf ?
+[18:54] <nissin_> or can i do in through the GUI
+[18:54] <MonkeyDust> nissin_  yes
+[18:54] <nissin_> cant i use the GUI ?
+[18:55] <Jordan_U> jake__: I usually have to repeat this many times to users who have found ndiswrapper, this is the last time I will for you today. If there are no native drivers then you have to buy a new card. Do not use ndiswrapper; it will only end in fruatration and a further broken system.
+[18:55] <pascal> hi, here is my screenshot of gnome http://imgur.com/tghulr6
+[18:56] <nissin_> MonkeyDust thank you but i hope this wont come back to bite me
+[18:56] <Jordan_U> jake__: That said, there may in fact be native drivers available for your card.
+[18:56] <akik> whlai: so you made a dd image of your installation and copied it to anohter disk, then sent the new disk somewhere to be installed into another machine?
+[18:57] <whlai> akik, yes
+[18:57] <jake__> Jordan_U: Okay, I am considering getting a new card -- it wouldn't be super expensive -- but I just wanted to see if there's a way to use the card that I have.  Native drivers would be nice, so I wouldn't have to use ndiswrapper.
+[18:57] <akik> whlai: is the another machine same model than yours?
+[18:57] <whlai> Jordan_U: screen, as user, returned "Screen version 4.03.01 (GNU) 28-Jun-15"
+[18:57] <whlai> akik, no
+[18:58] <Jordan_U> !screen | whlai
+[18:58] <ubottu> whlai: screen is a window manager for terminal sessions, also useful over SSH. The 'byobu' package provides very useful additional utilities. See https://help.ubuntu.com/community/Screen
+[18:58] <whlai> Hordan_U: ?
+[18:58] <Jordan_U> whlai: Great, then it worked. Do exactly as I specified or read more about what screen is.
+[18:59] <whlai> Jordan, which user should I be?
+[18:59] <whlai> any ssh user?

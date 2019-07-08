@@ -1,0 +1,1100 @@
+[09:31] <Lothario> yes
+[09:31] <Lothario> i did a chmod 777 /home.bad
+[09:31] <Lothario> chown -R root.root
+[09:31] <Lothario> as root, it will not remove
+[09:32] <Unhammer> es_,  you can of course change uid/gid with usermod but it'd be _really_ odd if that had an effect
+[09:32] <TJ-> Lothario: I misread the path, so let me re-ask: Is "/"  writeable by the user?
+[09:32] <Lothario> yes
+[09:32] <Lothario> db1:/home.bad/admin/conf# cd /
+[09:32] <Lothario> db1:/# touch hi
+[09:32] <Lothario> db1:/#
+[09:33] <Unhammer>  ~ciao  is readable to ssh, right? (not sure how that works with encrypted homes etc)
+[09:33] <Unhammer> *to sshd
+[09:33] <Lothario> rmdb1:/# rm -rf home.bad
+[09:33] <Lothario> rm: cannot remove ‘home.bad/admin/conf/mail’: Permission denied
+[09:33] <ImJune> my mousepad was working again last night... sigh
+[09:33] <ImJune> I may give up
+[09:33] <Lothario> mail is a directory with perms 777 owner root
+[09:33] <KettleWork> TJ-, I managed to touch it into the future! Like so: touch -d "$(date -r messages.txt) + 1000 years" messages.txt
+[09:34] <TJ-> Lothario: but what about "/home.bad/admin/conf" ?
+[09:34] <ImJune> this is not mystery hardware its an intel controller I dunno why they can't get this stable
+[09:34] <Lothario> same
+[09:34] <Lothario> all owned by root
+[09:34] <Lothario> perms 777
+[09:34] <ImJune> most popular end user linux distro out there yet this does not work
+[09:34] <ImJune> pft
+[09:34] <TJ-> KettleWork: but the datestamp will wrap around at 2038 and so reading it won't give the value you expect it to
+[09:35] <KettleWork> TJ-, statting the file gives me the year 3220 at the moment. The important thing is that the file is messed up datewise and that I later find it with find . -newermt "100 years"
+[09:35] <Lothario> cant rename any of the dirs, TJ-
+[09:35] <Lothario> but i can rename or move /home.bad
+[09:35] <alias_neo> Hi everyone
+[09:35] <TJ-> Lothario: can you show us :pastebinit <(find /home.bad -ls)"
+[09:36] <Lothario> TJ http://termbin.com/qn4c
+[09:37] <EriC^^> Lothario: does touch /home.bad/something work?
+[09:38] <alias_neo> I@m having an issue with my PCIe NIC not coming up early enough to be detected by libvirt when its starting my VMs, is there someplace or somehow I can modify the load order to get it to come up earlier? My two onboard nics come up just fine and early enough
+[09:38] <Lothario> not in the directories that i can't remove
+[09:38] <TJ-> Lothario: what release of Ubuntu is it on?
+[09:38] <EriC^^> try to lsattr those dirs
+[09:38] <Lothario> wait, yes i can create files in those dirs
+[09:39] <Lothario> lsattr returns nothing
+[09:40] <mikubuntu> TJ-: good morning. (don't worry -- no technical problems) .. lol
+[09:40] <Lothario> what should i chattr them to?
+[09:40] <TJ-> Lothario: try: "strace -e trace=file rm /home.bad/admin/conf/mail" and check the messages immediately before the access denied result
+[09:41] <Lothario> it says EACCESS Permission denied
+[09:42] <Lothario> : Permission denied
+[09:42] <Lothario> newfstatat(4, "web", {st_mode=S_IFDIR|0777, st_size=4096, ...}, AT_SYMLINK_NOFOLLOW) = 0
+[09:42] <TJ-> Lothario: You have confirmed that no process has a file handle open for "/home.bad/admin/conf/mail/" ?
+[09:42] <Lothario> openat(4, "web", O_RDONLY|O_NOCTTY|O_NONBLOCK|O_DIRECTORY|O_NOFOLLOW) = 3
+[09:42] <Lothario> nope
+[09:42] <Lothario> i renamed the directory
+[09:42] <Lothario> and rebooted
+[09:44] <Lothario> can i use e2fs
+[09:44] <Lothario> to remove it?
+[09:44] <es_> Unhammer: mmm I think it depends on some settings on my sshd config... I'm investigating . I'm now able to get it typing the password and using the AllowUsers directive but it shoulnd't be necessary. I don't understand looks more like a bug then a feature
+[09:44] <TJ-> Lothario: Try "ls -l /proc/{1..9}*/fd/ | grep 'home\.bad'
+[09:45] <maniraj> i
+[09:45] <Lothario> it wouldnt match 1..9
+[09:45] <maniraj> Hello
+[09:46] <Lothario> ok it did with bash
+[09:46] <Lothario> root@db1:/home.bad/admin# ls -l /proc/{1..9}*/fd/ | grep 'home\.bad'
+[09:46] <Lothario> root@db1:/home.bad/admin#
+[09:46] <BluesKaj> Hey folks
+[09:46] <Lothario> nothin
+[09:46] <maniraj> hw r u
+[09:46] <Lothario> doesnt match home either
+[09:46] <TJ-> Lothario: what release is that? what shell are you using?
+[09:46] <Lothario> ubuntu 14.10, i switched to bash
+[09:47] <TJ-> Lothario: OK, so no process has a handle to anything in /home.bad/ ... that's good to know
+[09:47] <Lothario> er, 14.04
+[09:47] <Lothario> correct, nothing has it open
+[09:47] <TJ-> Lothario: right, so the only things it can be are extended ACLs
+[09:47] <Lothario> so its an ACL
+[09:48] <TJ-> Lothario: You've done "facl /home.bad/admin/conf/mail"  ?
+[09:48] <Lothario> db1:/# lsattr home.bad
+[09:48] <Lothario> -------------e-- home.bad/admin
+[09:49] <EriC^^> Lothario: try getfacl home.bad/admin/conf/mail
+[09:49] <Lothario> i dont have facl instaelled
+[09:49] <Lothario> user::rwx
+[09:49] <Lothario> group::rwx
+[09:49] <Lothario> other::rwx
+[09:50] <TJ-> Lothario: The problem is more like to be in the directory parent that contains "mail" since that is where the "mail" entry has to be deleted from
+[09:50] <philluminati> I can't get this bash statement to work: echo -e "this!\nis!\nawesome!"
+[09:50] <philluminati> I either get "event not found" errors from the exclamation points, or I get \! in the output
+=== julian is now known as Guest34161
+[09:50] <TJ-> philluminati: escape the !
+[09:51] <TJ-> philluminati: otherwise the shell will evaluate the ! itself
+[09:51] <Lothario> TJ: can i use e2fsprogs to remove it?
+[09:51] <philluminati> TJ: If I escape it.. the escaped character appears in the output
+[09:51] <TJ-> philluminati: you're probably using the shell's built-in echo, not /bin/echo
+[09:52] <philluminati> ahhh...
+[09:52] <philluminati> TJ-: still doesn't work: http://pastebin.com/Ut7zDU8f
+[09:53] <TJ-> Lothario: that's a package... I'm not aware of a tool in that package other than the *attr tools that will help
+[09:53] <llutz> philluminati: echo -e "this"'!'"\nsucks"'!'"\n"
+[09:54] <Lothario> hmm
+[09:54] <philluminati> X='!' /bin/echo -e "this${X}\nis${X}\nawesome${X}"   #also works
+[09:54] <Lothario> it all happened when i untarred a weird package
+[09:54] <EriC^^> philluminati: why don't you use printf ?
+[09:55] <philluminati> thanks llutz
+[09:55] <Lothario> ui give p
+[09:55] <llutz> philluminati: have fun counting the quotes :)
+[09:55] <Lothario> i dont know what else to do to remove a directory
+[09:55] <EriC^^> printf "this!\nis\nawesome\n"
+[09:55] <TJ-> philluminati: or echo -e "this! \nis! \nawesome!"
+[09:55] <EriC^^> nevermind
+[09:56] <philluminati> Don't worry guys.. I will make do with llutz "'"'"' solution
+=== lala_ is now known as lala
+[09:58] <TJ-> philluminati: the cause is that ! is interpreted by the shell as a history expansion command
+[09:58] <philluminati> I get that
+[09:58] <philluminati> I was just unsure of why escaping it like \! leaked into the output
+[09:59] <philluminati> potentially evaluated first
+[09:59] <TJ-> philluminati: I don't know, but the man page says it will pass through the literal \ prefix :s
+[09:59] <EriC^^> philluminati: hey this works echo -e 'this!\nis'
+[10:00] <philluminati> interesting, I thought cause the \n not to be interpreted, but it does
+[10:01] <Aklj> hello,world
+[10:01] <EriC^^> philluminati: i guess cause -e tells echo to interpret them, but the ' tells bash to lay off
+[10:01] <TJ-> philluminati: any reason you have to surround with double-quotes?
+[10:01] <philluminati> TJ-: no
+[10:02] <philluminati> I've rewritten it now and happy with it. thanks
+[10:15] <amitprakash> Hi, i have a partition /dev/xvdf1 mounted at /var/log/uwsgi and at /home/ubuntu/logs .. tar is running on  /home/ubuntu/logs/logfile. When I try to unmount /var/log/uwsgi however, I get a device busy error
+[10:15] <amitprakash> How can I unmount the partition only from one location?
+=== julian is now known as Guest22123
+[10:23] <amitprakash> okay, fixed that using umount -l
+[10:23] <amitprakash> How do I debug a failed init.d service
+[10:23] <amitprakash> uwsgi in this case, There are no logfiles in /var/log/uwsgi/
+=== gms is now known as Guest76370
+[10:27] <amitprakash> fixed that too, thanks
+[10:31] <rtur> What could be the problem if os-prober detects Win7 but update-grub doesn't ? Is there a "enable-os-prober" variable somewhere ?
+[10:32] <kokut> Hello, anyone knows if clamv is really necessary? is there a way to check if it has ever found anything in the past year i've had it installed in my system?
+[10:32] <EriC^^> rtur: type ls -l /etc/grub.d/*os-prober
+[10:34] <rtur> EriC^^: It's there, but I noticed that I currently have legacy grub, am now replacing it with 2. Maybe legacy grub can't use the os-prober script ?
+[10:34] <EriC^^> is the script +x ?
+[10:35] <EriC^^> rtur: maybe
+[10:35] <rtur> EriC^^: Yes. With grub2 it works. Thank you.
+[10:35] <EriC^^> no problem
+[10:36] <Hannofcart> I have a 64 bit Ubuntu 14.04 LTS 64 bit running on Lenovo Y510P. My computer was not hibernating on battery critical (even though my battery applet does indeed give me a notification about battery critical at 3%). I then tried using laptop-mode-utils as shown here:  http://askubuntu.com/questions/195671/wont-hibernate-when-battery-critical to get it to hibernate at 4% battery. That doesn't work either. Anyone know what could be wrong?
+[10:40] <astroboy> do you have swap partition?
+[10:41] <chotaz`w> Why does everytime I opena  .deb file from within Chrome or any other web browser, a new isntance of google chrome pops up and re-downloads the file, whereas if I open the .deb from the file manager, it opens the software manager like it should?
+[10:43] <Hannofcart> astroboy: were you asking me that? If so, the answer is no. So that's why! Thanks!
+[10:43] <astroboy> yes i asked you :)
+[10:43] <Hannofcart> :) Thanks
+[10:43] <k1l> Hannofcart: you need swap for hibernation (suspend to disk) since the ram needs to be copied somewhere
+[10:43] <Hannofcart> That makes sense.
+[10:44] <Hannofcart> k11: yes I understand
+[10:44] <Hannofcart> thanks
+[10:44] <k1l> and with battery critical state it wants to hibernate, since it cant keep the ram alive since there might be no power left.
+[10:44] <astroboy> Hannofcart, because we have same problem :'D
+[10:45] <k1l> Hannofcart: swap-file might work too if you dont want/have a swap partition
+[10:45] <Hannofcart> k1l: Thanks a ton. I was just about to ask you about that.
+=== roland is now known as Guest63731
+=== Ad1_RN is now known as Ad1
+=== Ad1 is now known as Ad1_RnR
+[10:54] <xyzzy__> hi all
+[10:58] <MacroMan> So after several hours playing with xrandr I finally have my quad monitor setup as intended. Phew.
+[11:00] <ablest1980> hello is ubuntu 15 out?
+[11:01] <bagbiter> 15.04 or 15.10?
+[11:01] <ablest1980> any
+[11:01] <k1l> !releases | ablest1980
+[11:01] <ubottu> ablest1980: Ubuntu releases a new version every 6 months. Each version is supported for 9 months to 5 years. More info at https://wiki.ubuntu.com/Releases & http://wiki.ubuntu.com/TimeBasedReleases
+[11:02] <bagbiter> 15.04 has been out for a while now.  15.10 is available on daily builds but wont be released until later october/november
+[11:02] <k1l> ablest1980: you are often enough in here to know the release numbering and the release schedule
+[11:02] <ablest1980> ok
+[11:02] <ablest1980> ty and sorry
+[11:03] <ImJune> So I have read so much about this problem now with my mousepad on my laptop this is a kernel issue it seems. I guess it is time to delete ubuntu :(
+[11:08] <OerHeks> systemd-analyze blame
+=== oleg is now known as Guest67210
+[11:18] <juniorsa> hi - I've just finished installing my 14.04 LTS server raid1 2 3TB disks the install went without errors but it won't boot here is output of bootinfoscript - can anyone help? http://paste.ubuntu.com/11701433/
+[11:26] <popey> juniorsa: this may help. it explains why your array is showing up as /dev/md127 http://askubuntu.com/questions/209702/why-is-my-raid-dev-md1-showing-up-as-dev-md126-is-mdadm-conf-being-ignored
+[11:29] <juniorsa> popey:  thanks
+[11:29] <juniorsa> I'll read :)
+[11:42] <cotalinux> hello, I have ubuntu 14.04 LTS with Unity. I've recently tried mate-desktop running alongside Unity and now I would like to remove Unity and use Mate instead. Is it safe to remove all unity packages from my system?
+[11:44] <yorwos> u might remove/break some unity dependent programs but i believe the chances are minimal , even so u will easily find a replacement
+[11:44] <yorwos> but if u dont have a hdd space problem u could just have both
+[11:45] <cotalinux> yeah I have 120G ssd and space is the main issue
+[11:45] <cotalinux> altough I don't think unity takes more than 1GB space
+[11:46] <newUbun_usr_nv> is it possible to increase size of my current swap file?!
+[11:47] <priyanshu> hi
+[11:48] <cotalinux> meh I think I'll do a backup and just install ubuntu mate
+[11:50] <newUbun_usr_nv> ?
+[11:51] <cotalinux> newUbun_usr_nv: maybe this helps http://askubuntu.com/questions/367331/how-to-increase-the-size-of-linux-swap-partition
+[11:52] <esc_type> newUbun_usr_nv: yeah it's possible, you can just make new swap file and swapon it
+[11:52] <newUbun_usr_nv> thank u
+[11:53] <newUbun_usr_nv> @esc_type u mean create a new bigger swap file n ignore the first?
+[11:53] <newUbun_usr_nv> y didn't i think of that?
+[11:55] <esc_type> https://wiki.archlinux.org/index.php/Swap#Swap_file
+[11:58] <newUbun_usr_nv> thanx alot
+[12:14] <Mahalo> hola... i got slow booting. just installed ubuntu server 15 on my i5 pc. whats goin on ?
+[12:14] <wsdjeg> hello everybody
+[12:14] <Mahalo> some text said " journal failed "
+[12:15] <wsdjeg> is there anyone use ubuntu 15/04
+=== wsdjeg is now known as wangshidong
+[12:15] <Mahalo> me... just installed it.
+[12:16] <wangshidong> it's very cool
+[12:16] <wangshidong> how about the UEFI
+[12:19] <OerHeks> !uefi
+[12:19] <ubottu> UEFI is a specification that defines a software interface between an operating system and platform firmware. It is meant as a replacement for the BIOS. For information on how to set up and install Ubuntu and its derivatives on UEFI machines please read https://help.ubuntu.com/community/UEFI
+[12:19] <juniorsa> did I do something wrong during the install - is there a proper way to install my system? http://paste.ubuntu.com/11701433/    -- maybe I can fix it but I would prefer finding a proper procedure and knowing what I did wrong - if anyone knows it would be great 14.04 LTS 2 3TB drives - raid 1 - I did gpt partitions, bios boot parition and then created a swap and then my / - no errors??
+[12:24] <BluesKaj> juniorsa, how large is / ?
+[12:25] <juniorsa> popey: this is very helpful but when I try and stop md126 it says that "mdadm: cannot get exclusive access to /dev/md126" nokidding as I have it mounted lol - do I need a livecd to do this?
+[12:25] <juniorsa> BluesKaj: 3TB
+[12:27] <BluesKaj> editing partitions on HDDs is best done from live media , the only way unless you're ssh'd from another pc or some such , juniorsa
+[12:29] <juniorsa> BluesKaj: right -I'll do that - There must be a simple way that can be done using the ubuntu installer
+[12:29] <BluesKaj> 3TB for / is pretty big and a /home partition would be a good to have
+[12:30] <juniorsa> BluesKaj: ok I could do that but I don't think it would change the problem - it seems like the installer is doing something bad and I end up with the md127
+=== ika is now known as Guest28365
+[12:32] <BluesKaj> juniorsa, yeah I don't recognize the error , i usually prepartition with gparted first then just use manual partitioning in the installer/ubiquity and set the mount points for / and /home, it's a simpler method
+[12:33] <juniorsa> BluesKaj: seems like a waste of an installer :) I think it should work just using the installer don't you?
+[12:33] <egor> ощшт
+[12:33] <BluesKaj> juniorsa, but that's my personal reference
+[12:33] <n5721> exit
+[12:34] <BluesKaj> no i don't like an installer doing my partitioning . i prefer to do it with gparted which is simple and straight forward IMO
+[12:36] <juniorsa> ok I've booted with knoppix and I am at a # I don't know how to make changes to mdadm :(
+[12:37] <gagalicious> how can i tell
+[12:38] <gagalicious> if nfs is working? i can telnet 2049 and 111 but i cant mount it
+[12:38] <gagalicious> i'm using ubuntu server as the nfs server and a centos client as the nfs client
+[12:40] <BluesKaj> juniorsa, dunno much about raid , I just use on HDD for the OS , the others are media and data drives
+[12:40] <BluesKaj> one HDD
+[12:40] <gagalicious> what's the log file for ubuntu's nfs?
+[12:43] <IP92> when installing ubuntu from USB, is there anything specific I should know when installing other than just booting from the USB and proceeding with the normal installation?
+[12:44] <Laban> Not really, it will behave same as if it was from Cd.
+[12:45] <BluesKaj> !mdadm | juniorsa
+[12:45] <BluesKaj> !info mdadm | juniorsa
+[12:45] <ubottu> juniorsa: mdadm (source: mdadm): tool to administer Linux MD arrays (software RAID). In component main, is optional. Version 3.3-2ubuntu1 (vivid), package size 386 kB, installed size 1293 kB
+[12:45] <juniorsa> BluesKaj: I know I'm reading but I can't figure it out
+[12:46] <juniorsa> I can mount my md but it won't boot
+[12:46] <BluesKaj> juniorsa, sorry, that's not my strong suit for sure
+[12:48] <juniorsa> I wonder if anyone else here can help with a 14.04 LTS system that was just installed and won't boot - mdadm issue I think
+[12:49] <ioria> juniorsa, you installed the Grub onto the software RAID Partition ?
+[12:50] <juniorsa> ioria: I did the install and grub was installed on /dev/sda and /dev/sdb from what I remember that the command showed
+[12:51] <ioria> juniorsa, maybe this could help, don't know : http://askubuntu.com/questions/518532/problems-booting-from-software-raid
+[12:51] <ioria> juniorsa, go straight to the answer
+=== andrex|off is now known as andrex
+[12:52] <juniorsa> ioria: guess it's impossible
+[12:53] <ioria> juniorsa, i can't argue because i don't use raid, sorry
+[12:54] <juniorsa> ioria: thanks anyways - I'll be patient maybe someone else knows
+[12:54] <ioria> juniorsa, sure
+[12:55] <msa1> hi eveybody
+[12:55] <BluesKaj> juniorsa, why do you need such a large space for your OS ?
+[12:55] <msa1> how to change Terminal Title , for everytime ??
+[12:55] <msa1> not one time
+[12:56] <juniorsa> BluesKaj: do you think the problem is related to the size of the hard disk? - this sytem will be used to store backups and I can only put 2 drives in this server it's a 1u
+[12:57] <juniorsa> ioria: actually from the script bootinfoscript - it shows sda1 and sdb1 have the grub2's core.img installed so they are not raid partitions
+[12:57] <ioria> juniorsa, let me retrieve it
+[12:58] <pbx> i broke notify-osd and don't know how to fix it.
+[12:58] <pbx> ah, looks like this is my problem. http://askubuntu.com/questions/371020/notify-osd-notifications-appear-unthemed-in-top-left-corner
+[12:59] <juniorsa> it looks like in the blkid output section something is mixing up /dev/md/rob:0 -- should be /dev/md0 instead it is /dev/md126 not sure how to fix that - anyone?
+[13:02] <esc_type> msa1: change .desktop file that runs terminal
+[13:02] <nintendoman64> Hey, does anyone own a K95 RGB?
+[13:03] <nintendoman64> was wondering if the LED problem that plagued the non-RGB series was present in the RGB ones.
+[13:05] <Hannofcart> k1l: Hi, I pinged before asking about the problem regarding hibernate not working on critical battery. You had pointed out before that it was because there was not swap allocated. I have now allocated swap (and I know its working fine because after reboot on doing swapon -s I get details of swap as expected. Also, system monitor also tells me swap is now available: http://ibin.co/24yzZk075RmQ) ... and yet, no hibernate to disk kicks in. Any further id
+[13:05] <Hannofcart> eas?
+[13:19] <huma70> #ubuntuusers
+[13:19] <huma70> #ubuntu
+[13:19] <huma70> hallo
+[13:20] <huma70> ich habe mal eine frage zu meiner Grafikkarte...
+[13:20] <MarcGuay> Hi folks.  I'm looking for a command line tool to search a website for malware, any suggestions?  ClamAV didn't find it.
+[13:21] <bstarek> MarcGuay, search website for malware? please explain
+[13:21] <bstarek> huma70, ask you question
+[13:22] <bstarek> huma70, ask your question
+[13:22] <esc_type> Hannofcart: there are some tweaks if you are hybernating into file
+[13:22] <huma70> ich habe auf einer zweiten Partition ubuntu neu installiert. komme eigentlich von Windows. allerdings wird mir in ubuntu nicht meine Grafikkarte (nvidia 960) finden oder so. Alles ist sehr langsam.
+[13:22] <MarcGuay> bstarek: I have a website directory which contains some htm files with injected malware.
+[13:22] <esc_type> try to read about them
+[13:22] <pbx> MarcGuay, this isn't an ubuntu question
+[13:22] <Hannofcart> esc_type: ok. googling now. thanks.
+[13:22] <MarcGuay> pbx: I'm looking for a command line tool for Ubuntu.  Can you suggest another channel?
+[13:22] <pbx> !de|huma70
+[13:22] <ubottu> huma70: In den meisten Ubuntu-Kanälen wird nur Englisch gesprochen. Für deutschsprachige Hilfe besuche bitte #ubuntu-de, #kubuntu-de, #edubuntu-de oder #ubuntu-at. Einfach "/join #ubuntu-de" eingeben. Danke für Dein Verständnis!
+[13:22] <Isai> Hi, I was installing ubuntu-desktop when I got this: http://paste.ubuntu.com/11701927/
+[13:22] <bstarek> MarcGuay, how do you know they are infected?
+[13:23] <huma70> danke
+[13:23] <bstarek> MarcGuay, you cannot infect html files
+[13:23] <huma70> #ubuntu-de
+[13:23] <MarcGuay> bstarek: The host reported it and provided an example and googling the code reveals that it's a common malware.
+[13:23] <MarcGuay> bstarek: It's javascript.
+[13:23] <pbx> MarcGuay, try #web for advice on this
+[13:23] <MarcGuay> pbx: Thanks
+[13:24] <bstarek> MarcGuay, could post a link to the malware explainantion?
+[13:24] <bstarek> MarcGuay, name of the malware, date of creation....
+[13:27] <Isai> Anyone?
+[13:28] <Deadwing> Can anyone point the way to running a daemon as root on startup under systemd/15.04?
+[13:28] <MarcGuay> bstarek: It's very similar to the code in the first textarea here http://ninjafirewall.com/malware/index.php?threat=2013-06-18.01
+[13:29] <BluesKaj> Deadwing, you could try sudo systemctl enable nameofdaemon
+[13:29] <Sarge123> Does a Ubuntu user believe that telepathy is possible and having experiences with telepathy?
+[13:29] <pbx> Isai, i see some discussion of the problem here but no clear fix yet. https://bugs.launchpad.net/ubuntu/+source/policykit-1/+bug/1447654
+[13:29] <ubottu> Ubuntu bug 1447654 in policykit-1 (Ubuntu) "installing policykit-1 hangs under systemd" [Medium,Confirmed]
+[13:30] <Isai> :/
+[13:30] <bstarek> MarcGuay, it is XSS (cross site scripting) vulnerability
+[13:30] <Deadwing> BluesKaj: Thanks.  I'll look into it now.
+[13:30] <esc_type> Deadwing: write .service file and make systemctl enable myservice.service or just systemctl enable if service is alredy written
+[13:30] <bstarek> MarcGuay, you need to fix your infected "php" file
+[13:31] <bstarek> MarcGuay, you have an unsanitized variable in your code allowing the malware to inject code
+=== rc0mbs is now known as rcombs
+[13:32] <bstarek> MarcGuay, if you are wordpress, please update all your plugins.
+[13:32] <crypto_guy> hi, the kernel update in U14.04 can cause network problem?
+[13:33] <crypto_guy>  kernel update >> apt-get upgrade
+[13:36] <Deadwing> BlueKaj:  sudo systemctl enable vlmcsd gives 'invalid argument'.  Trying to get vlmcsd to start from /etc
+[13:38] <iepupp> jhow to setup "use this connection only for resources on its network command line" using command line
+[13:38] <iepupp> I mean which config file to use to set the above option?
+[13:40] <Deadwing> esc_type:  Missed your reply, thanks as well
+[13:41] <aaps> j #tkkrlab
+[13:42] <MagePsycho> #ini_set('display_errors', 1); —> ini_set('display_errors', 1);
+[13:42] <MagePsycho> how to remove # from the above string
+[13:42] <MagePsycho> using sed command
+[13:43] <cedian_linux> I blocked myself on freenode accidentally by using tor, but I found out it was only on the tor ip's
+=== mrmist is now known as mist
+[13:44] <cedian_linux> But I'm now redownloading my ~/phablet/* files
+[13:47] <cedian_linux> what name has mariogrip now?
+[13:47] <kopele> hi i got a strange problem with xsane and a network printer
+=== andrex is now known as andrex|off
+[13:48] <kopele> when i scan a file and attempt to save it every thing freeze
+[13:56] <Pici> /36/70
+[13:58] <iepupp> does Ubuntu NetworkManager ignores /etc/network/interfaces?
+[13:58] <kopele> no i don`t  think so
+[13:58] <kopele> just yesturday i have a issue with that :)
+[13:59] <iepupp> ok, then what does iface eth0 inet manual in /etc/network/interfaces means?
+=== Sax is now known as Zhyr
+[14:00] <kopele> it`s a some kind of manual setup
+[14:01] <kopele> but there isn`t a static ip subnet and etc.
+[14:01] <BluesKaj> iepupp, no it overwrites  the interfaces file, unless you disable NM
+=== florin is now known as Guest43162
+=== Guest43162 is now known as Guest007
+=== Guest007 is now known as Attila
+=== Attila is now known as Guest007
+=== ika is now known as Guest60721
+[14:05] <BluesKaj> iepupp, this will explain the settings, http://www.cyberciti.biz/faq/setting-up-an-network-interfaces-file/
+[14:06] <iepupp> Ok , I am trying to configure an interface as auto eth3 iface eth3 inet manual
+[14:06] <iepupp> up ip link set dev $IFACE up
+[14:06] <iepupp> down ip link set dev $IFACE down , do i need to disable the NM
+[14:07] <skinux> If I install PhpMyAdmin via PPA, will that over-write the one installed via repo or would it be an additional installation?
+[14:08] <phunyguy> skinux: that depends on what the ppa does, and there is no way of knowing that without the ppa
+[14:08] <BluesKaj> iepupp, only if you can't set them up in NM
+[14:08] <skinux> Well, the PPA looks old anyway: https://launchpad.net/~nijel/+archive/phpmyadmin
+[14:13] <erdea> How do i configure linux for dual displays?
+[14:13] <lotuspsychje> !xrandr | erdea
+[14:13] <ubottu> erdea: XRandR 1.2 is the new method of running dual screens in !X.  Information/HowTo here: http://wiki.debian.org/XStrikeForce/HowToRandR12
+[14:14] <erdea> I have hdmi an hdmi and dvi screen
+[14:14] <erdea> Does it matter?
+[14:15] <erdea> I have one hdmi screen working (new) and my other screen is dvi (old)
+[14:15] <iepupp> BluesKaj, one connection in Ubuntu NM uses an option 'Use this connection for resources on its network'. If I disable NM, How can i configure one interface in interfaces to use this routing option.
+[14:15] <lotuspsychje> erdea: normaly the output of the cables dont matter, just needs xrandr config to find second screen
+[14:16] <erdea> when i am on the dvi screen the hdmi is disconnected and now i am using the new screen its has great resulution but the old screen with the dvi has shit resulution
+[14:17] <lotuspsychje> erdea: read the xrandr link i triggered you mate
+[14:17] <erdea> okay
+[14:24] <newman> hi team I am trying to install Meteor javascript framework using curl command. if i lose internet connect, can I give the same command and half download software will it continue from their or from the start?
+[14:26] <newman> I gave this command right now "curl https://install.meteor.com/ | sh
+[14:26] <newman> " and it's downloading the packages now , if i lose the internet connection giving the same command will the download starts from beginning or from where the download broken/
+[14:26] <newman> kindly help
+[14:26] <MCSH> Hi, I am getting a kernel panic on Ubuntu 15.04 can anyone help me?
+[14:27] <lotuspsychje> MCSH: what does the error say exactly?
+[14:27] <pbx> newman, try the -C option http://curl.haxx.se/docs/faq.html#How_do_I_tell_curl_to_resume_a_t
+=== MobGod_ is now known as MobGod
+=== MobGod is now known as Guest90199
+[14:28] <MCSH> Fatal exception in interupt
+[14:28] <newman> what you mean pbx
+[14:28] <newman> curl -C https://install.meteor.com/ | sh
+[14:28] <newman>  like this pbx
+[14:28] <MCSH> Although the whole system freezes, I've seen this only when I was on tty1 when it freezes
+[14:29] <pbx> newman, http://curl.haxx.se/mail/archive-2010-10/0001.html
+[14:29] <iepupp_> How do i configure auto eth3 iface eth3 inet manual
+[14:29] <iepupp_> up ip link set dev $IFACE up
+[14:29] <iepupp_> down ip link set dev $IFACE down using NetworkManager?
+[14:30] <pbx> newman, that script is only like 6K
+[14:30] <newman> but it wasn't download completley
+[14:30] <newman> each time
+[14:30] <pbx> newman, well then you have some other problem
+[14:31] <pbx> curl isn't going to fix a bad network connection newman . keep trying until you get the whole thing, then pipe it to sh or whatever
+[14:31] <newman> ok
+=== nate_ is now known as nbehary
+[14:31] <MCSH> lotuspsychje Fatal Exception In Interrupt
+=== sid__ is now known as catarvas13
+[14:33] <artms> hidei
+[14:42] <herrkin> hwllo
+[14:42] <herrkin> hello
+[14:42] <herrkin> has anybody had trouble with usb-modswitch?
+[14:43] <herrkin> I have 2 modems that I see it opens 3 ports on dmesg but when I try to connect to them bash says they dont exist
+[14:44] <herrkin> I had one of the modem working before, when I plugged the second one I dont know what happened, now none of them  work
+[14:47] <MCSH> I'm getting Kernel Panic (Fatal Exception In Interrupt) about 30 seconds after I boot 15.04, can anyone help me?
+=== khisanth_ is now known as Khisanth
+[14:49] <ioria> MCSH, can you select another kernel from grub ?
+[14:49] <MCSH> ioria I don't have anyother kernel. after facing the problem I re installed everything and now I'm on a fresh install that doesn't work
+[14:50] <buzain> part
+[14:51] <ioria> MCSH, do you have exotic hardware ,  wifi network adapter in particular ?
+[14:51] <MCSH> ioria , I have Nvidia and Boradcam, both of which have previously caused problems for me
+[14:52] <newman> Hi team I tried to install Lighttable following a link, but I'm getting this error http://paste.ubuntu.com/11702477/
+[14:52] <moses> so
+[14:52] <newman> kindly help
+[14:52] <moses> anyone have nvidia drivers
+[14:52] <moses> on ubuntu?
+[14:53] <ioria> MCSH, do you remember what broadcom ?
+[14:54] <newman> anyone here
+[14:54] <MCSH> ioria, not exactly but I can look it up in wondows if I figure out how
+[14:54] <ioria> MCSH, are you dual boot ?
+[14:55] <MCSH> ioria, Broadcom BCM4352HMB 802.11ac 2x2 Wi-Fi Adapter
+[14:55] <MCSH> ioria, yes. Though that's not a problem I've had 15.04 for a while now, and before that 14.10
+[14:57] <MCSH> newman, have you tried this? http://askubuntu.com/questions/604331/libudev-so-1-not-found-when-trying-to-run-spotify
+[14:58] <moses> which nvidia driver should I be using
+[14:58] <newman> not yet
+[14:58] <newman> will try
+[14:58] <catcher> Anyone having a decent experience with a linux native email client connected to an exchange server?
+[14:58] <moses> open source?
+[14:59] <MCSH> moses, in a terminal run ubunut-drivers devices, it marks one of them as suggested, use that one
+[14:59] <newman> I'm getting this error MCSH http://paste.ubuntu.com/11702516/
+[14:59] <newman> kindly help
+[15:01] <Pici> newman: your error message is cutoff
+[15:01] <moses> i picked the reccomended one tyvm you sexy man
+[15:01] <newman> which one Pici
+[15:01] <Pici> newman: "ln: failed t"
+[15:01] <ay92> having problems with telnet
+[15:02] <MCSH> moses, yw
+[15:02] <ay92> keep having connection refused error when connecting to massinternational.org
+[15:03] <Pici> ay92: What are you trying to accomplish?
+[15:03] <moses> now that I have it installed how do i change the settings?
+[15:03] <newman> kindly check Pici MCSH  http://paste.ubuntu.com/11702531/
+=== ika is now known as Guest7895
+[15:04] <ay92> cend step of configuring postfix
+[15:04] <Pici> ay92: Are you specifying port 25?
+[15:05] <ay92> Picyes
+[15:05] <jParkton> ugh postfix
+[15:05] <MCSH> newman it failed to installed the package, I'm sorry I have no clue
+[15:05] <newman> Pici, any help
+[15:06] <Pici> ay92: telnet massinternational.org 25   works for me
+[15:06] <newman> I got ubuntu 14.04
+[15:06] <MCSH> ioria, any progress? would it help if I install another version of kernel?
+[15:07] <ioria> MCSH, sure, als another version of Ubuntu :-P
+[15:07] <ay92> ubuntu server 15.04 lts
+[15:07] <ioria> MCSH, the erros suggest an hardware issue
+[15:07] <ioria> *s
+[15:08] <MCSH> ioria I was wondering if moving back to Ubuntu 14.10 would cause any problem if I want to update later since it switched to systemd
+[15:08] <ay92> wats de output
+[15:08] <Pici> newman: Are you having trouble running lightable from the path it installs to?
+[15:08] <newman> yes
+[15:08] <Pici> newman: What system architecture are you on? 32 or 64 bit?
+[15:08] <newman> not just their it's not even running from place I downloaded it
+[15:08] <MCSH> ioria hardware as in I have to change the hardware or just kernel failling to commiunicate with it?
+[15:08] <newman> 32 bit
+[15:09] <Pici> newman: What do you mean by "its not there"?
+[15:09] <newman> I mean Download folder I extracted ..
+=== karlthane_ is now known as karlthane
+[15:09] <ioria> MCSH, try with 14.10, then you can do-release-upgrade to 15
+[15:09] <MCSH> ioria , will do thanks
+[15:09] <newman> I actually got 64 system, but OS I installed was 32 bit ubuntu 14.04 Mate
+[15:10] <Pici> newman: Okay, did you extract the contents of the tar.gz file?
+[15:10] <newman> yes
+[15:10] <Pici> newman: To where?
+[15:11] <darthanubis> newman, if its not too late, I'd reinstall with the 64bit version of the OS. The days of 64bit caution have long been over.
+[15:11] <ltk> why use 'LIST_POSITON1' or 'LIST_POSITION2', not 'NULL'？
+=== ltk is now known as leetking
+[15:12] <darthanubis> just a Protip
+[15:12] <Pici> leetking: methinks you've mistaken this channel for another (this is #ubuntu)
+[15:13] <leetking> I don't know other channel.
+[15:14] <Pici> leetking: What are you looking for help with?
+[15:14] <leetking> about two macro
+[15:15] <Pici> leetking: in what software?
+=== Guest7085 is now known as starkers
+[15:16] <leetking> linux kernel file 'list.h', i feel wondring
+[15:18] <Pici> leetking: You'd have better luck asking in ##kernel
+[15:19] <leetking> Pici: yesterday, i join in channel #kernelnewbies , but nobody repond me
+[15:19] <leetking> is the server irc.freenode.net?
+[15:19] <Pici> leetking: Yes.
+[15:20] <leetking> tks, i try again
+[15:23] <Mangled_Packages> I'm stuck in a loop where it won't let me remove a package that depends on another package - it says it removes the package but the broken stuff just keeps lingering around. can anyone help?
+[15:24] <Mangled_Packages> things look like this http://i.imgur.com/PMTg71u.png
+=== stack is now known as Guest68891
+[15:26] <michaelanhvu> hi
+[15:26] <jParkton> wtf are you doin???
+[15:26] <darthanubis> Mangled_Packages, did you try apt-get -f install?
+[15:26] <jParkton> it says right there "sudo -f install"
+[15:27] <jParkton> not sudo apt-get -f uninstall somestuff
+[15:27] <Mangled_Packages> that doesn't work either
+[15:27] <darthanubis> Mangled_Packages, you didn't give the cmd properly
+[15:27] <teward> Mangled_Packages: remove the other packages?
+[15:28] <eydaimon> how is Mir coming? Is it part of unbuntu yet?
+[15:28] <darthanubis> it's "sudo apt-get -f install"
+[15:28] <darthanubis> eydaimon, no
+[15:28] <eydaimon> darthanubis: is there an eta or something?
+[15:28] <Mangled_Packages> dpkg: error processing archive /var/cache/apt/archives/weechat-core_0.4.2-3_i386.deb (--unpack):  trying to overwrite '/usr/share/locale/ru/LC_MESSAGES/weechat.mo', which is also in package weechat-devel-core 1.3-1~dev20150612 dpkg-deb: error: subprocess paste was killed by signal (Broken pipe)
+[15:28] <darthanubis> eydaimon, maybe 16.04
+[15:29] <eydaimon> thanks
+[15:29] <darthanubis> np
+[15:29] <jParkton> sudo apt-get purge weechat*
+[15:31] <Mangled_Packages> ooh, PURGE. that souds lovely. . . . . and I thik it worked!
+[15:31] <Mangled_Packages> thank you so much
+[15:31] <Mangled_Packages> everything - remove, install, and the "repair" that ubuntu's GUI package manager offered to use, were all butting their heads against the same weird dependency crap
+[15:33] <jParkton> Mangled_Packages: that is because you were trying to uninstall weechat but the weechat developer module and I assume others you installed would not let you
+[15:33] <jParkton> it takes time, you will get it
+[15:34] <Mangled_Packages> I am saving that "purge" command in a very honored place in my brain :)
+[15:34] <Mangled_Packages> sometimes total destruction is the only way!
+[15:38] <jParkton> you should follow it up with apt-get autoremove
+[15:38] <jParkton> that will clean up most junk
+[15:39] <M_angled> roger that
+=== roland is now known as Guest20892
+[15:53] <orion> http://www.ubuntu.com/usn/usn-2635-1/ <-- this is wrong!
+[15:53] <orion> "USN-2635-1: Linux kernel (Utopic HWE) vulnerabilities" ... "A security issue affects these releases of Ubuntu and its derivatives: Ubuntu 14.04 LTS"
+[15:53] <orion> 14.04 == Trusty, not Utopic
+=== ubuntu is now known as Guest18545
+[15:55] <timtimtim> hey guys, was wondering if anyone had advice on a good out-of-the-box web server i could use for hosting and testing web projects in development
+[15:55] <mawels> Hi everyone
+[15:57] <mawels> Is that flood?
+[16:01] <tgm4883> timtimtim: apache?
+[16:02] <Fr3d3r1c> salut
+[16:02] <mawels> Has anyone sucseed setting up vga passthroug in kvm?
+[16:02] <Fr3d3r1c> j'aimerai pouvoir travailler sur un lien symbolique
+[16:02] <Fr3d3r1c> mais je ne pense pas que ce soit possible
+[16:02] <tgm4883> orion: that isn't wrong
+[16:02] <jaydemir> hey I could use some help. I'm running xfce-desktop trusty and I tried to install UNetBootin. When I open it, I just get a blank interface. any idea why?
+[16:03] <compdoc> mawels, never needed it. You have two video cards in the host?
+[16:03] <tgm4883> orion: it's a bug in the hardware enablement stack that was backported to 14.04
+[16:03] <tgm4883> jaydemir: try opening it from a terminal and seeing if you get error messages
+[16:04] <mawels> Compdoc i do, i have a integrated intel hd 2000  and a dedicated hd7850
+[16:04] <jaydemir> how would I do that?
+[16:04] <tgm4883> jaydemir: open up a teminal and typr 'unetbootin' (which I'm assuming is the binary name
+[16:04] <compdoc> mawels, the video card you want to pass cannot be used by the host in any way. at least thats my understanding
+=== ika is now known as Guest48987
+[16:05] <mawels> Ok but when i pass the dedicated vga, wich is not in use, my system hangs
+[16:07] <shome> Is anyone here familiar with shadowprotect ?
+[16:07] <jaydemir> getting a command not found
+[16:07] <mawels> I will try again may be i missed something
+[16:07] <meta-system> hi here
+[16:07] <meta-system> need some help about installing vivid with debootstrap
+[16:08] <jaydemir> wait I got it to work in the terminal. same thing. It asks for a password when it opens and doesnt load
+[16:08] <cybrNaut> ":": Keep a package at its current version. Unlike hold, this will not prevent future upgrades. <== what good is that?
+[16:09] <johnsmith> test
+[16:09] <meta-system> cybrNaut: prevent upgrade you don't want
+[16:10] <meta-system> like when gimp change interface when 2.8 comming
+[16:10] <meta-system> prevent gtk/qt version changement
+[16:10] <meta-system> or gcc, etc...
+[16:10] <cybrNaut> meta-system: are you saying it blocks the *next* upgrade only?
+[16:10] <meta-system> cybrNaut: "Keep a package at its current version"
+[16:10] <johnsmith> #ubuntu-discuss
+[16:10] <meta-system> for all next upgrade
+[16:11] <cybrNaut> meta-system: the interesting bit is: "this will not prevent future upgrades."
+[16:11] <cybrNaut> it's a contradiction
+[16:11] <meta-system> cybrNaut: but you can have dependencies problems with other packages
+[16:12] <meta-system> sorry, effectively
+[16:12] <meta-system> cybrNaut: prevent upgrade package if you think next version is not enough stable for you
+[16:13] <meta-system> or if a dependencie is not enough stable
+[16:13] <cybrNaut> meta-system: isn't it pointless to block the next version, but not the version after the next?
+[16:14] <cybrNaut> the version after the next is likely to have the same changes as the next
+[16:14] <meta-system> cybrNaut: it seems
+[16:15] <meta-system> cybrNaut: for example, if you don't want rev version
+[16:15] <meta-system> but jump directly to next version
+[16:16] <xangua> rev version?
+[16:16] <meta-system> revised
+[16:17] <meta-system> for example, actual linux git kernel 4.1-rc7 <<< rc7 is revision 7
+[16:19] <meta-system> example : gcc-4.9-20140406-0ubuntu1 of trusty repos
+[16:19] <meta-system> is 4.9 04/04/2014 revised version
+[16:19] <meta-system> *06
+[16:19] <xangua> !latest
+[16:19] <ubottu> Packages in Ubuntu may not be the latest. Ubuntu aims for stability, so "latest" may not be a good idea. Post-release updates are only considered if they are fixes for security vulnerabilities, high impact bug fixes, or unintrusive bug fixes with substantial benefit. See also !backports, !sru, and !ppa.
+[16:20] <meta-system> exactly what I said...
+[16:21] <xangua> if you want to have the latest for all/any software all the time, maybe Ubuntu is not the distro for you
+[16:24] <kuba7447> fedora
+[16:29] <cybrNaut> if i manually install a package that later becomes market "obsolete" in aptitude, what's the best way to keep it?
+[16:29] <cybrNaut> should I put a hold on it?
+[16:29] <funkt> Hello! I need some help with my dual monitor. Upon booting up my laptop this morning with connected monitor. Ubuntu has decided to remove any known configuration of my previous moitor in nvidia display settings and lock itself to a crappy low res which I cannot change. I have tried restoring, bios, terminal commands, xrandr, articles etc etc and I cannot seem to get anywhere has anyone here got any ideas on how I could fix this again?
+[16:29] <cybrNaut> technically, i do not intend to hold back the version
+[16:33] <Ints> Hey, I just installed ubuntu on another computer, did a complete new install, with deleting the old documents. now after booting I get invalid partition table
+[16:38] <afradin> hello guys
+[16:38] <afradin> how are you ?
+[16:38] <afradin> BOU
+[16:45] <cybrNaut> Ints: not sure how that happened, if you tool the simple path of letting the installer partition your drive using a canned layout
+[16:45] <cybrNaut> Ints: try reinstalling.. perhaps another distro, like Mint
+[16:50] <Ints> cybrNaut: I just had mint, thought I'd try ubuntu. But I found a fix. had to go to bios settings and set the boot sequence to UEFI instead of legacy boot
+=== Samul` is now known as Samul|AWAY
+[16:54] <annoyingquestion> hey guys i have a question
+[16:54] <annoyingquestion> in the "apt-get update -qq" what does the -qq mean?
+[16:54] <meta-system> xangua: effectively, I principaly use funtoo
+[16:55] <acz32> annoyingquestion: man apt-get
+[16:55] <angular_mike_> annoyingquestion: `-qq` supresses logging output
+[16:56] <angular_mike_> annoyingquestion: `-q` would also do that but to lesser extent
+[16:56] <angular_mike_> annoyingquestion: you can learn more by reading `man apt-get`
+[16:56] <annoyingquestion> thank you!
+[16:57] <lotuspsychje> angular_mike_: did you fix your issue from yeserday?
+[16:57] <angular_mike_> lotuspsychje: which one?
+[16:57] <lotuspsychje> angular_mike_: not sure again :p
+[16:57] <angular_mike_> lotuspsychje: the one where my desktop environment was being messed up and gnome-terminal uninstalled?
+[16:58] <lotuspsychje> angular_mike_: cant recall that1
+[16:58] <angular_mike_> lotuspsychje: reinstalling the gnome-terminal as well as ubuntu-desktop seems to fix it every time
+=== mnathani__ is now known as mnathani_
+[16:58] <lotuspsychje> angular_mike_: ok great
+[16:59] <angular_mike_> by the way, #vbox people kinda scoffed at the notion of using ubuntu-specific version of virtualbox
+[16:59] <angular_mike_> lotuspsychje: still not completely sure what causes it
+=== ika is now known as Guest10971
+[17:08] <linuxson> anyone help me with some info on how to run a script file automatically every time my pc starts up?
+[17:09] <lotuspsychje> !cron | linuxson
+[17:09] <ubottu> linuxson: cron is a way to schedule execution of software/scripts. See https://help.ubuntu.com/community/CronHowto
+[17:10] <linuxson> thanx lotus....will have a look
+[17:10] <narkman> hey guys. what if i preload a 1gb ram? is good or take damage?
+[17:11] <lotuspsychje> narkman: wanna install a new ram bank?
+[17:11] <narkman> yes!
+[17:11] <lotuspsychje> narkman: and your question is?
+[17:12] <narkman> is not that
+[17:12] <narkman> just if i preload the low gb ram. is good or bat?
+[17:12] <narkman> bad*
+[17:12] <lotuspsychje> narkman: not sure if i understand you mate
+=== andrex|off is now known as andrex
+[17:12] <narkman> wait i have bad engl
+[17:13] <narkman> i feel you
+[17:13] <narkman> do you know preload?
+[17:13] <narkman> \
+[17:13] <lotuspsychje> narkman: the package preload?
+[17:13] <M_angled>  weechat-plugins : Depends: libperl5.14 (>= 5.14.2) but it is not installable                    Depends: libv8-3.8.9.20 but it is not installable
+[17:14] <lotuspsychje> !info preload | narkman
+[17:14] <M_angled> just to doublecheck, I attempted to apt install those, but they are indeed not installable, heh
+[17:14] <ubottu> narkman: preload (source: preload): adaptive readahead daemon. In component universe, is optional. Version 0.6.4-2 (vivid), package size 34 kB, installed size 135 kB
+[17:14] <narkman> fro more speed?
+[17:14] <narkman> for*
+[17:14] <M_angled> suggestions welcome if anyone knows about libperl or libv8?
+[17:14] <lotuspsychje> narkman: you can install that safely
+[17:15] <narkman> ok ty man
+[17:15] <lotuspsychje> narkman: doesnt matter if you have low or large ram
+[17:15] <narkman> ok
+[17:15] <narkman> is just for a neetbook
+[17:15] <lotuspsychje> narkman: after reboot it will pre-load your packages to boost up a little
+[17:15] <narkman> i have biger with 16gb ram
+[17:16] <lotuspsychje> M_angled: try apt-cache search packagename to check out whats avalaible for you
+[17:16] <ctjctj> I'm having a problem with update-grub duplicating the contents of menu.lst.  Method: rm /boot/grub/menu.lst; update-grub -y; edit groot=(hd0);update-grub;  At the end I have the contents duplicated.  14.04lts
+[17:16] <trism> M_angled: which ubuntu version is this?
+[17:17] <M_angled> 14.04 lte
+[17:17] <trism> M_angled: what is: apt-cache policy weechat-plugins; because that is the wrong perl dep for 14.04 (I get libperl5.18
+[17:18] <M_angled> weechat is an irc client I'm trying to set up. I did things wrong so I had to remove it, and I think an apt cleanup operation I did removed the "no longer necessary" perl, and maybe ruby too
+[17:19] <MCSH> ctjctj run sudo gedit /boot/grub/grub.cfg and manually remove it
+[17:19] <ctjctj> Looking MCSH, thanks.
+[17:19] <trism> M_angled: I know what weechat is, I want to see the output of that command above in a pastebin, but I'm saying that is the wrong perl lib as a dep which is why I am curious, it should be libperl5.18 not libperl5.14
+[17:20] <M_angled> ohhh I see
+[17:20] <M_angled> ok
+[17:20] <MCSH> Ctjctj no problem, ask if you needed help with modifying config
+[17:21] <lotuspsychje> MCSH: you been able to solve your issue mate?
+[17:21] <ctjctj> There is no such file.  I hope you don't mind if I use "emacs -nw" instead of gedit.
+=== lubuntu is now known as Guest17819
+[17:22] <MCSH> lotuspsychje I installed 14.04 and I'm updating it to see if it works :-) no problem so far on 14.04
+[17:22] <lotuspsychje> !yay | MCSH
+[17:22] <ubottu> MCSH: Glad you made it! :-)
+[17:22] <Azjo> Hi, im doing a dd image from ubuntu live to my windows smb share. however it is only going at 2.0mb? can i speed this up?
+[17:22] <Azjo> nvm.. it decided to speed up now
+[17:23] <MCSH> Thanks :-)
+[17:23] <ctjctj> MCSH, that doesn't seem to be helpful.  man update-grub says run it once, edit the options in menu.lst, the run update-grub again.
+[17:23] <M_angled> trism: http://pastebin.com/CmX3zPap
+[17:23] <M_angled> I'm on x86 fwiw
+[17:24] <MCSH> ctjctj sorry in that case, editing /boot/grub/grub.cfg would be the same though
+=== badon_ is now known as badon
+[17:24] <MCSH> ctjctj are you using legacy grub or grub2?
+[17:25] <ctjctj> Let me check with apt-cache
+[17:25] <MCSH> ctjctj menu.lst is for legacy I believe
+[17:25] <trism> M_angled: that's fine, I see you added an external weechat repo, but it seems you added the wrong one, if you don't want to use the repo version it seems like the right repo line is: deb https://weechat.org/ubuntu trusty main
+[17:25] <yank> Greetings
+[17:25] <lotuspsychje> ctjctj: what are you trying to edit exactly?
+[17:26] <lotuspsychje> yank: hello, how can we help you
+[17:26] <ctjctj> MCSH, Version: 0.97-29ubuntu66.  Required for linode py-grub which is required for iscsi and quotas
+[17:26] <trism> M_angled: you added the wheezy one, probably just have to fix it in your /etc/apt/sources.list and rerun: sudo apt-get update;
+[17:26] <yank> I am having some login problems with ubuntu 14.04.
+[17:26] <pbx> my volume buttons stopped working. they appear to be set just as they always have in keyboard settings.  what might i have done? only significant system change today i know of was removing durst (notification daemon from i3)
+[17:26] <lotuspsychje> yank: can you describe
+[17:26] <MCSH> ctjctj yes that's legacy edit /boot/menu.lst
+[17:26] <lotuspsychje> !sound | pbx
+[17:26] <ubottu> pbx: If you're having problems with sound, click the Volume applet, then Sound Preferences, and check your Volume, Hardware, Input, and Output settings.  If that fails, see https://help.ubuntu.com/community/Sound - https://help.ubuntu.com/community/SoundTroubleshooting - http://alsa.opensrc.org/DmixPlugin - For playing audio files,  see !players and !mp3.
+=== kun is now known as Guest47326
+[17:27] <ctjctj> Found the error.
+[17:28] <Azjo> err. my dd copy to share folder is apparently going at 7.0mb now but it looks like it is going slowly? 1mb a second??
+[17:28] <yank> Suddenly, since yesterday, I am unable to login. After I try to, it just launches the desktop (no icons) for 3 seconds, flashes and sends me back to the login screen. I am able to login through guest account.
+[17:28] <ctjctj> if you run update-grub -y; modify menu.lst; update-grub you get two copies.  If instead you run update-grub -y;update-grub; modify; update-grub; it works.
+[17:28] <Guest47326> hello
+=== alpha is now known as Guest71653
+[17:28] <darthanubis> hello
+[17:28] <lotuspsychje> yank: did you try make a new user?
+=== badon_ is now known as badon
+[17:29] <linuxson> anybody here worked with cygwin before?
+[17:29] <Guest47326> krun
+[17:29] <lotuspsychje> linuxson: try the #cigwin channel
+[17:29] <Azjo> anyone with great knowledge of dd copy thru smb share??
+[17:29] <linuxson> cool
+[17:29] <lotuspsychje> linuxson: #cygwin sorry
+[17:30] <yank> lotuspsychje: No but I have deleted .Xauthority (with a backup), reinstalled xorg and made unity default settings.
+[17:30] <M_angled> hm, I did actually want 'wheezy" because I'm superstitious about using the same program version as the majoirity ;) but if trusty will work and wheezy will be a hassle, I'll give it a shot
+[17:30] <M_angled> attempting to install from new repo now
+[17:30] <yank> (through unity-tweak-tools)
+[17:30] <lotuspsychje> yank: maybe try grub recoverymode with a shell, and make a new user?
+[17:30] <yank> I can login on tty
+[17:30] <trism> M_angled: well the versions are all the same, the difference is they build against different libs
+[17:31] <M_angled> ah, ok. I thought I was using a slightly older program version by using wheezy
+[17:31] <lotuspsychje> yank: checkout lightdm.log maybe to see whats going on?
+[17:31] <M_angled> looks like it's working, thanks :)
+[17:31] <lotuspsychje> !cookie | trism
+[17:31] <yank> lotuspsychje: Okay, one second...
+[17:31] <ubottu> trism: Wow! You're such a great helper, you deserve a cookie!
+[17:31] <ctjctj> yank, I have the exact same issue on some older hardware after I yanked the dead nvidia board.  Xorg works for the login screen but fails to allow you to log in.  Including a brand new user.
+[17:32] <pbx> lotuspsychje, thanks, but all those settings are normal-looking, as before (and the troubleshooting stuff is all "i have no sound" which is not my problem; my system simply isn't reacting to the HW keys)
+[17:32] <lotuspsychje> pbx: anything relevant in syslog or dmesg about it?
+[17:33] <ghosty_> bonsoir quelqu'un conai le # tag d'ubuntu quebec
+[17:33] <lotuspsychje> !fr | ghosty_
+[17:33] <ubottu> ghosty_: Nous sommes desoles mais ce canal est en anglais uniquement. Si vous avez besoin d'aide ou voulez discuter en français, veuillez taper /join #ubuntu-fr ou /join #ubuntu-qc. Merci.
+[17:33] <ghosty_> merci
+[17:35] <yank> lotuspsychje: I don't understand it at all.. Should I pastebin ?
+[17:35] <He4dShOt_noteboo> hello
+=== He4dShOt_noteboo is now known as He4dShOt_laptop
+[17:35] <lotuspsychje> yank: sure ill take a look at your lightdm.log
+=== Tristan_ is now known as Guest80666
+[17:36] <He4dShOt_laptop> is it normal that while my laptop is locked the fn+f[1-12] are still accessible?
+=== kpease_ is now known as kpease
+[17:36] <EriC^^> yeah
+[17:37] <He4dShOt_laptop> is there a way I cant disable them while is locked?
+[17:37] <yank> lotuspsychje: http://paste.ubuntu.com/11703233/
+[17:37] <Guest80666> After installing Ubuntu, I get the error "no boot disk has been detected or the disk has failed" Here is my boot repair paste: http://paste.ubuntu.com/11703197
+[17:37] <lotuspsychje> lemme look
+[17:37] <He4dShOt_laptop> *can
+[17:39] <lotuspsychje> yank: sounds like this bug: https://bugs.launchpad.net/ubuntu/+source/lightdm/+bug/1288903
+[17:39] <ubottu> Ubuntu bug 1288903 in lightdm (Ubuntu) "Cannot login to lightdm after upgrade to trusty" [High,Invalid]
+[17:40] <pbx> lotuspsychje, not sure what i'm looking for but nothing obvious seen in syslog or dmesg, nor action in syslog when i hit the keys.
+[17:40] <lotuspsychje> yank: a lot of time shows in lightdm log: User /org/freedesktop/Accounts/User1000 changed
+[17:41] <ctjctj> Yank, lotuspsychje THANK YOU!  Brings that system back to life.  MY lady will be happy about that.
+[17:41] <lotuspsychje> pbx: can you try a realtime tail -f /var/log/syslog and tail -f /var/log/dmesg
+[17:41] <yank> lotuspsychje: Unfortunately I can't access that link since I'm on tty
+=== tvoss is now known as tvoss|test
+=== tvoss|test is now known as tvoss
+[17:41] <ctjctj> yank: short answer: apt-get install ubuntu-session
+[17:41] <lotuspsychje> yank: did you clean install or upgrade?
+[17:42] <yank> clean install
+[17:42] <yank> Oh, I have seen that too
+=== supergauntlet is now known as xXxSuPeRgAuNtLeT
+[17:42] <yank> May I try to reinstall ubuntu session ?
+=== xXxSuPeRgAuNtLeT is now known as supergauntlet
+[17:42] <ctjctj> yank, that's what the bug he referenced suggests.
+[17:42] <yank> oh, ok
+=== stack is now known as Guest16741
+[17:43] <yank> because I already tried to install it and it said it was already installed
+[17:43] <yank> will reinstall it this time
+[17:43] <ctjctj> One other thing in there: I fixed this by installing unity-greeter and manually editing /etc/lightdm/lighdm.conf (greeter-session was empty for some reason, I had to set it to "unity-greeter").
+[17:43] <pbx> lotuspsychje, yeah, nothing in either when i hit the keys
+[17:44] <Scraak> After installing Ubuntu, I get the error "no boot disk has been detected or the disk has failed" Here is my boot repair paste: http://paste.ubuntu.com/11703197
+[17:44] <ctjctj> Scraak, sounds like grub was not installed.
+[17:45] <yank> ctjctj: I do not even have a lightdm.conf file O.O
+[17:45] <yank> will reinstall it
+[17:45] <ctjctj> Try with just the ubuntu-session install first.
+[17:46] <ctjctj> I'm just reading the web page for you.  I know what it is like to be stuck in the cli with no gui.  (about the time I start web browsing with my phone)
+[17:46] <Scraak> ctj, how do install grub? I'm pretty new to linux
+[17:46] <yank> should I restart ?
+[17:46] <ctjctj> if everything is absolutely wonderful "sudo update-grub"
+[17:47] <ctjctj> Yank, you might be able to do "sudo service lightdm restart"
+[17:47] <ctjctj> If not you can use the M$ fix.
+[17:47] <MCSH> ctjctj I doubt that would work; Scraak do you have an ubuntu disk/flash drive?
+[17:47] <Scraak> yeah i have it on disk
+[17:48] <MCSH> Can you boot it live?
+[17:48] <Scraak> yeah, it's what i'm doing rn
+[17:48] <yank> ctjctj: Reinstalled ubuntu-session, restart lightdm service, didn't work
+[17:48] <TJ-> Scraak: "no boot disk has been detected or the disk has failed" comes from the PC's BIOS/Firmware. It is possible the problem is simply the boot device order setting
+[17:48] <yank> ctjctj: Should I try to reinstall lightdm aswell ?
+[17:49] <ctjctj> yank, I don't think that is required.
+[17:49] <yank> Then what should I do ? I still not being able to login
+[17:49] <Scraak> TJ-: Which device should be booted first, then?
+[17:50] <ctjctj> yank, I'm looking at my configurations for an answer for you.
+[17:50] <yank> ctjctj: Oh, thank you very much
+[17:50] <TJ-> Scraak: The device that Ubuntu is installed to - sometimes this happens after the install media is removed if the boot order was changed to do that. Some PCs can remove devices from the boot order list rather than just shuffling the list order
+[17:51] <TJ-> Scraak: That's the very first thing I'd investigate in this situation since the error comes from the firmware, not the boot loader or OS
+[17:51] <Scraak> TJ-:Yeah, the problem starts after ubuntu is done installing and it tells me to remove any installation device
+[17:52] <ctjctj> yank, got to bounce to a different/older box.
+[17:52] <TJ-> Scraak: And to complicate matters, modern systems are often UEFI and have a BIOS boot compatibility mode called 'legacy' or CSM (Compatibility Support Module). Which is required depends very much on whether the installer booted in UEFI or BIOS mode since it'll install for that boot mode, too
+[17:53] <Scraak> TJ_: I'm certain it booted and installed in UEFI
+[17:53] <TJ-> Scraak: Your boot info seems to indicate a UEFI installation on sda
+[17:53] <yank> lotuspsychje: So, any thoughs ?
+[17:54] <Scraak> TJ-: Okay, does that mean I have to change something?
+[17:54] <yank> ctjctj: What I didn't understand sorry ?
+[17:55] <ctjctj> I'm at the office right now. My office box is running 15.04.  I can't find anything about a greeter in my config files.  So I went to my home box running 14.10 and checked there.  No greeter there either.
+[17:55] <yank> oh
+[17:55] <TJ-> Scraak: Now, with UEFI there's one other important issue. The PC firmware keeps, in non-volatile memory, the boot entries and the boot order. Looking at your boot info output, the listing produced by efibootmgr shows the boot order "BootOrder: 0001,0002,000A,000B,0006,0007,000C,0000" and that 0000 (last) is the Ubuntu entry... so all those other devices will be tried first. That also makes me think you need to alter the boot order in the Firmware setup so Ubuntu (
+[17:55] <TJ-> 0000) appears first
+[17:56] <TJ-> Scraak: (line 472 of your pastebin)
+[17:56] <yank> Well just in case, I have no xorg.conf on etc/X11 neither lightdm.conf on etc/lightdm
+=== knightstalker is now known as knightstalker_
+[17:56] <Scraak> TJ-: Alright, but I've tried to manually boot it from ubuntu and it's had the same error
+[17:56] <TJ-> Scraak: OK ... let me read some more of your boot-info, in detail this time
+[17:57] <ctjctj> yank: about 4 years ago xorg.conf became optional.  The detection routines got good enough that the defaults were good.
+[17:57] <yank> Oh
+[17:57] <ctjctj> What type of video card do you have?
+[17:57] <yank> me ?
+[17:57] <yank> intel gma 3150
+[17:57] <yank> I want to use this computer as workstation
+[17:58] <TJ-> Scraak: line 707 indicates the boot order has been fixed
+[17:58] <TJ-> Scraak: Aha!!
+[17:59] <Scraak> I haven't changed anything yet so I don't know why that is
+[18:00] <Aurax0r> hi there
+[18:00] <TJ-> Scraak: Both the outputs from efibootmgr for the Boot000 (Ubuntu) entry have faulty paths - unless there's something wrong with how boot-info captures the output of efibootmgr. On the first (line 473) there is no path to the EFI executable... and on the 2nd (line 708) the path is missing the path separator slashes
+[18:00] <Scraak> TJ-: Okay, how do I fix it?
+[18:01] <TJ-> Scraak: That looks to me like Firmware bug... those used to be quite common... can you tell us the exact make/model of the PC motherboard and the firmware version ?
+[18:02] <Scraak> TJ-: Okay, I'm looking it up
+[18:03] <TJ-> Scraak: This might give it you: "grep DMI /var/log/dmesg"
+[18:03] <ctjctj> yank, strings /usr/sbin/lightdm | grep lightdm takes us to /usr/share/lightdm/lightdm.conf.d where you can find examples for /etc/lightdm/lightdm.conf
+[18:04] <ctjctj> 50-ubuntu.conf says use user-session=ubuntu which would require ubuntu-session
+[18:04] <Scraak> TJ-: Okay it's Hewlett-Packard 500-c60/2B05, BIOS 80.10 01/10/2014
+[18:04] <TJ-> yank: Have you investigated the logs in "/var/log/lightdm/" for clues?
+[18:06] <yank> TJ-: Yes but I know knothing about these things...
+=== ika is now known as Guest33804
+[18:07] <Scraak> TJ-: Would giving FAT32 a 'boot' flag in gparted fix the problem?
+[18:07] <ctjctj> TJ-, He put out a pastbin.  looks like X server got signal 10
+[18:08] <ctjctj> [+175.65s] DEBUG: Got signal 10 from process 3035
+[18:08] <ctjctj> TJ-, http://paste.ubuntu.com/11703233/
+[18:08] <TJ-> Scraak: No; this is totally an firmware bug issue - path is incorrect in the boot menu
+[18:09] <TJ-> Scraak: I am trying to navigate the HP support site to discover any BIOS updates but the site goes round in circles!
+[18:10] <TJ-> yank: ctjctj Have you checked/removed "/home/$USER/.Xauthority" in case it is corrupt?
+[18:10] <yank> TJ-: Yes, will do that again...
+[18:11] <IP92> anyone using spotify's web player? Can you login using the facebook ID?
+[18:12] <TJ-> yank: Shouldn't need to do it again - there's a rare bug where that file gets created owned by 'root' user so when a user logs in it doesn't have permission to delete and replace that file, so the user session aborts back to the login greeter
+[18:12] <nils_> can I get systemd to put out some visual feedback when I stop/start/restart/reload services?
+[18:12] <yank> so I should chown the file to me ?
+[18:13] <Scraak> TJ-:I found the page where you download updates for my exact PC, but there is nothing listed. http://support.hp.com/us-en/drivers/selfservice/hp-pavilion-500-c00-desktop-pc-series/6528309/model/6529878#Z7_3054ICK0K8UDA0AQC11TA930O2
+[18:13] <TJ-> yank: It should already be owned by your user, if not, that is a problem
+=== Samul|AWAY is now known as Samul`
+[18:14] <yank> yeah it stills not working
+[18:14] <TJ-> Scraak: OK but if you select Windows OS and Win 7 there's a BIOS update listed 80.20 Rev A) issued June 9th 2015
+[18:15] <ctjctj> Yank, I'm sorry but nothing more I can do for you from here.  I can't even get my remote hands (lady) to do things on the broken box.
+[18:15] <footer> Hi. I have my hard drive encrypted with the option ubuntu gives on installation. Now laptops motherboard is dead. Willl i be able to retrive the data back given i have only password of sudo
+[18:16] <TJ-> Scraak: I'd try that first if you know how to apply it, then redo the boot info repair in case the path holds correctly. From what I've told you, you know now what to look for in that boot-info output to determine if the path issue is fixed or not
+[18:16] <nils_> footer: are you using ecryptfs then?
+[18:16] <nils_> footer: the option should be named something like "encrypt user home directories"
+[18:16] <yank> ctjctj: Thanks anyway :)
+[18:16] <TJ-> footer: Do you mean user home encrypted, or full disk encryption? Either way, changing the motherboard won't affect being able to unlock encrypted volumes
+[18:16] <footer> Yess i guess so, it puts keys in .private in hone i guess
+[18:16] <nils_> footer: in any case, if the mainboard dies your data is probably still safe as long as you have all the credentials
+[18:16] <yank> I may end up reinstalling
+[18:17] <yank> replacing it with arch
+[18:17] <nils_> footer: should work with your normal user password
+[18:17] <footer> Nils_ yes that home directory encryption
+[18:17] <yank> Im just lazy
+[18:17] <nils_> yank: I prefer the term efficient ;)
+[18:17] <footer> Nils, thanks you very much
+[18:18] <yank> Well, bye guys, thanks for the help! I really appreciate it.
+[18:18] <jackarg> hi there quick question, I'm trying to open minecraft.jar with openjdk java 7 except the option doesn't show up when right clicking, only the "archive manager" does. The file is set as executable. help?
+[18:19] <Scraak> TJ-: How do I apply the update in Ubuntu? I've been using the "Try before installing" mode
+[18:19] <footer> Tj, thanks you too
+[18:19] <TJ-> Scraak: I think you have to use the HP recovery tools, or Windows, but you'll have to read the HP documents on that.
+[18:20] <TJ-> Scraak: The details for that update hint that it may fix this, too: "- Improved security of UEFI code and variables."
+[18:20] <MCSH> jackarg create a file next to it like this: java -jar FILENAME
+[18:21] <MCSH> jackarg make this file executable and run it
+[18:21] <Scraak> TJ-:Okay, I'm going to be gone for a while, doing this
+=== NeuhNeuh is now known as Aristide
+[18:22] <jackarg> MCSH: where filename is .. ?
+[18:22] <MCSH> Jackarg minecraft file, I think it should be minecraft.jar
+[18:24] <jackarg> MCSH: not sure if I'm doing this right, I typed "java -jar minecraft.jar" in my home folder where the actual jar is and got this: "Error: Unable to access jarfile minecraft.jar"
+[18:24] <es_> Unhammer: if you are still reading this it turned out to be a pemission problem on the home directory being group writable makes ssh not accepting public keys authentication
+[18:25] <MCSH> Where is minecraft.jar? same folder?
+[18:25] <Scraak> TJ-: AHAA!!! I just fixed it in the strangest way possible! I launched system recovery, and Ubuntu just, launched!
+[18:25] <MCSH> Scraak congratz!
+[18:26] <MCSH> Jackarg that's basically correct,  the only problem is that it can't locate the minecraft.jar file, make sure you spelled it correctly,  it's on the same folder, etc
+[18:27] <TJ-> Scraak: Fab. Can you show us what "pastebinit <(sudo efibootmgr -v)" now reports?
+[18:28] <jackarg> MCSH: ah, forgot about it being case sensitive. all is good, thanks a bunch. i have to do this every time i'd like to run the game now?
+[18:28] <ctjctj> jackarg, you might be able to right click on the jar file and select "java" to open it.
+[18:28] <MCSH> Jackarg no just execute this file
+[18:29] <Scraak> TJ-: Yeah I'm trying to install it and it's not letting my type in my password, like it's not accepting input in the terminal
+[18:30] <jackarg> ctjctj: that's the problem, i don't have the option
+[18:30] <jackarg> MCSH: don't see any new file created
+[18:30] <TJ-> jackarg: Is there an "Open with..." option?
+[18:31] <MCSH> Jackarg simply put that command in a new document
+[18:31] <MCSH> And mark that as executable
+[18:31] <jackarg> MCSH: right.
+[18:31] <jackarg> TJ-: yes and java is not an available alternative
+[18:36] <cotalinux> Hello, I've set up LXC with LAMP and everything is working nicely. Now I would like to link a folder (www) from the host to the LXC. I've tried with ln -s but it doesn't seem to be working. Does anyone have any ideas how I can do this?
+[18:38] <trism> cotalinux: http://askubuntu.com/questions/610513/share-a-folder-between-host-and-ubuntu-lxc-container
+[18:38] <khalsa> hi
+[18:40] <uporot> khalsa: hi
+=== kpease_ is now known as kpease
+=== d__ is now known as Guest49303
+[18:46] <pbx> my volume keys stopped having any effect, any ideas? all relevant settings (sound, keyboard) seem correct and the same as they have been. sound works normally otherwise, this is clearly an input issue
+=== kpease is now known as kpease_
+[18:52] <Tekkkz> Hello. I have a problem launching minecraft, everytime at startup its following error: https://bpaste.net/show/bc8a17065991 how to fix that?
+[18:53] <r-a-x> i am able to connect to wifi but unable to access internet, I am able to ping website by ip but not by name, and i experience 80% packet loss
+[18:53] <kuba7447> Tekkkz, are you using openJDK ???
+[18:54] <Tekkkz> kuba7447, yeah i think so – how to figure that out?
+[18:54] <kuba7447> tekkkz , i had the same problem a day ago, i fix it
+[18:55] <Tekkkz> kuba7447, how?
+[18:55] <kuba7447> you have to download oracle's JDK, give me a sec and i will give you the link
+[18:58] <Tekkkz> kuba7447, sure, thanks
+[18:59] <brainwash_> Tekkkz: this user was able to resolve the problem http://www.minecraftforum.net/forums/support/unmodified-minecraft-client/2440292-minecraft-boot-trap-error
+[19:00] <kuba7447> http://www.google.ie/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&ved=0CCEQFjAAahUKEwiiyeyK64rGAhWHXRQKHXMPAF4&url=http%3A%2F%2Fwww.howtogeek.com%2F198476%2Fhow-to-install-minecraft-on-ubuntu-or-any-other-linux-distribution%2F&ei=0St7VeKcFYe7UfOegPAF&usg=AFQjCNHdSnr3X3cyU_1XEUhJd0p5Gcmp8g&bvm=bv.95515949,d.d24
+[19:00] <brainwash_> uhm.. that's a long link
+[19:00] <kuba7447> tekkkz, http://www.howtogeek.com/198476/how-to-install-minecraft-on-ubuntu-or-any-other-linux-distribution/
+[19:00] <kuba7447> it didnt load properly
+[19:01] <Tekkkz> ahh ok thanks, brainwash_ 's worked, but thx for your help too, kuba7447
+[19:01] <kuba7447> here, tekkkz, http://www.howtogeek.com/198476/how-to-install-minecraft-on-ubuntu-or-any-other-linux-distribution/
+[19:01] <brainwash_> great :)
+[19:02] <kuba7447> tekkkz, install oracle's jdk anyway, performance increase...
+[19:02] <brainwash_> he left already
+[19:02] <brainwash_> he/she
+[19:02] <kuba7447> ok
+[19:06] <xentity1x> Hi can someone help me figure out why I get a blank screen when I boot into discretre graphics mode with my thinkpad w530. I'm running ubuntu 14.10 with an nvidia quadro k2000m.
+[19:07] <kuba7447> xentity1x, what driver are you using ?
+=== ika is now known as Guest31495
+[19:08] <Blackport> hi, I have problem with ati acceleration in my version of ubuntu, I have hybrid graphic Intel/Amd
+[19:09] <xentity1x> kuba7447, I've tried a few. Most recently I tried the nouveau driver. I also tried nvidia-304 (proprietary) and nvidia-331 (proprietary)
+[19:09] <lotuspsychje> xentity1x: does that card use optimus?
+=== kpease_ is now known as kpease
+[19:11] <xentity1x> lotuspsychje>, yes I've gotten it to work with bumblebee, but I want to also be able to use discrete mode because using dual monitors with bumblebee is difficult
+[19:11] <lotuspsychje> xentity1x: bumblebee is outdated, use nvidia-optimus instead
+[19:11] <xentity1x> kuba7447, I'm not sure the best driver to use.
+[19:12] <lotuspsychje> !info nvidia-prime | xentity1x can you check this package?
+[19:12] <ubottu> xentity1x can you check this package?: nvidia-prime (source: nvidia-prime): Tools to enable NVIDIA's Prime. In component main, is optional. Version 0.8.1 (vivid), package size 10 kB, installed size 114 kB (Only available for i386; amd64)
+=== Evanion is now known as Evanion[AFK]
+[19:14] <xentity1x> <lotuspsychje>, thanks i tried googling that but I can't find any info. Can you direct me to a guide?
+[19:14] <Blackport> Hi Again, I have problem with ati acceleration on my laptop I have hybrid graphic Intel/Amd. My laptop was freezing for while ;/
+[19:15] <xentity1x> <lotuspsychje>, i installed the package but I dont know how to use it
+[19:15] <lotuspsychje> xentity1x: if you sure your card uses optimus technology, then sudo apt-get install nvidia-prime
+[19:15] <lotuspsychje> xentity1x: reboot after, and start nvidia-settings, to enable performance mode to use your nvidia card
+[19:15] <xentity1x> <lotuspsychje>, ok brb
+=== jParkton is now known as emacs
+=== emacs is now known as jParkton
+[19:17] <lotuspsychje> Blackport: anything usefull to see in your syslog or dmesg?
+[19:19] <lotuspsychje> xentity1x: found nvidia-settings from dash?
+[19:19] <Blackport> When I'm writing vainfo in terminal I don't see amd card, only information about Intel integrate card . I didn't check syslog
+[19:19] <lost> hello all
+[19:20] <xentity1x> <lotuspsychje>, ok so i did that. This is what nvidia-settings looks like for me http://i.imgur.com/3esUt0u.png
+=== user1234 is now known as user12345
+[19:20] <lotuspsychje> Blackport: can you switch the card to amd from bios?
+=== user12345 is now known as user12346
+[19:20] <lost> anyone have exp with uefi and ubuntu?
+[19:20] <lotuspsychje> xentity1x: what about application profiles
+[19:21] <xentity1x> <lotuspsychje>, it doesnt show any programs on that screen
+[19:21] <Blackport> lotuspsychje: nope ;/  I have asus k53sk laptop  so  they blocked this option in bios
+[19:21] <xentity1x> it's just a blank list
+[19:21] <lotuspsychje> xentity1x: no profile to edit?
+=== andrex is now known as andrex|off
+[19:22] <lost> i have some boot issues becuase i installed in legacy mode but i need it in uefi and need the efi file i think but im actually pretty new to linux
+[19:22] <lotuspsychje> xentity1x: should look like this: http://www.phoronix.net/image.php?id=nvidia_prime_ubuntu1404&image=nvidia_optimus_prime1_med
+[19:22] <xentity1x> http://imgur.com/CNHPsIb
+[19:22] <xentity1x> <lotuspsychje>,http://imgur.com/CNHPsIb
+=== yuciyuar is now known as Guest60850
+[19:23] <lotuspsychje> xentity1x: wich drive do you have loaded right now? maybe try a switch from additional drivers?
+[19:24] <lotuspsychje> !uefi | lost
+[19:24] <ubottu> lost: UEFI is a specification that defines a software interface between an operating system and platform firmware. It is meant as a replacement for the BIOS. For information on how to set up and install Ubuntu and its derivatives on UEFI machines please read https://help.ubuntu.com/community/UEFI
+[19:24] <xentity1x> <lotuspsychje im using nouevaeu right now
+[19:24] <lotuspsychje> xentity1x: try another maybe, to see if that influence nvidia-settings
+[19:25] <xentity1x> <lotuspsychje any idea how to figure out the best driver for your grpahics card?
+[19:25] <dacorr_> trial an error until one of the nvidia drivers work
+[19:25] <xentity1x> <lotuspsychje> i see a few listed under additional drivers
+[19:26] <lotuspsychje> xentity1x: ubuntu should normaly choose best driver by default, if you enabled internet + updates
+[19:26] <dacorr_>  think 340 worked but my onboard intel is still complaining
+[19:29] <xentity1x> <lotuspsychje> i tried reinstalling nvidia-current
+[19:29] <pbx> i solved my volume-keys-no-work problem.  it was some detritus from installing i3.  removed all i3 packages and rebooted and we're in business again
+[19:29] <xentity1x> <lotuspsychje>now im using nvidia-304 proprietary. The gpu still isnt showing up on nvidia settings
+[19:30] <lotuspsychje> !yay | xen
+[19:30] <ubottu> xen: Glad you made it! :-)
+[19:30] <lotuspsychje> xentity1x: might need a reboot
+[19:30] <xentity1x> <lotuspsychje> ok brb
+[19:31] <lotuspsychje> pbx: so i3 messed up unity?
+[19:31] <pbx> lotuspsychje, yeah, subtly
+[19:31] <lotuspsychje> pbx: ok tnx for feedback, good to know
+[19:32] <Stoner19> hello all
+[19:32] <Stoner19> is server the same as desktop, just without the GUI?
+[19:32] <lotuspsychje> !server | Stoner19
+[19:32] <ubottu> Stoner19: Ubuntu Server Edition is a release of Ubuntu designed especially for server environments, including a server specific !kernel and no !GUI. The install CD contains many server applications. Current !LTS version is !Trusty (Trusty Tahr 14.04) - More info: http://www.ubuntu.com/products/whatisubuntu/serveredition - Guide: https://help.ubuntu.com/14.04/serverguide - Support in #ubuntu-server
+[19:33] <Stoner19> thank you. I wasn't sure if there were additional packages included in server or if it was just designed to be command prompt only but with same packages as desktop
+[19:34] <lotuspsychje> Stoner19: server is non-gui indeed, with other needs then desktop
+[19:34] <Stoner19> thank you very much
+[19:34] <lotuspsychje> Stoner19: do you want to install ubuntu server?
+[19:35] <Stoner19> yes, that is likely what I'll be using. Going to wipe an old macbook to install it on
+[19:38] <mach20x> Should I update to 15.04 from 14.10 I have been having troubles with the graphics, it would seem
+[19:39] <SchrodingersScat> mach20x: eventually you'll want to make a move anyway
+[19:41] <mach20x> "The move" you mean
+[19:41] <SchrodingersScat> if you wait too long you'll be headed off to 16.04 before you know it :)
+[19:42] <lotuspsychje> mach20x: 14.10 is almost end of life, the move means you will have to update soon anyway
+[19:44] <mach20x> I'm doing the upgrade as we speak
+[19:44] <lotuspsychje> mach20x: good choice
+[19:45] <lost> im using 15.04 now
+[19:45] <lost> but i have dual boot for 14.04 also
+[19:46] <lost> but i have some boot issues because of uefi with a layer of bios
+[19:46] <mach20x> I just got a new modem installed, the Ethernet port fried during a lightning storm on the old one, I think that port was starting to go anyways
+[19:48] <xentity1x> <lotuspsychje>, okay got it!
+[19:48] <lotuspsychje> xentity1x: how did you fix mate?
+[19:48] <xentity1x> <lotuspsychje>, I had to install the nvidia-331 drivers.
+[19:48] <fellayaboy> is it possible to run a gui program without a desktop environment?
+[19:48] <mach20x> I might have got some bad packages as a result of the failing Ethernet port on the old modem
+[19:48] <xentity1x> <lotuspsychje>, now any idea how to get it to detect my second monitor connected to the vga port
+[19:48] <xentity1x> ?
+[19:49] <lotuspsychje> !xrandr | xentity1x
+[19:49] <ubottu> xentity1x: XRandR 1.2 is the new method of running dual screens in !X.  Information/HowTo here: http://wiki.debian.org/XStrikeForce/HowToRandR12
+[19:49] <xentity1x> <lotuspsychje>, this is the output of xrandr http://pastebin.com/zqahRfQS
+[19:50] <mach20x> That maybe why it was crashing. EriC^^  has the lowdown on the output of my machine with regards to that problem
+[19:50] <xentity1x> <lotuspsychje>, Its not detecting the vga connection
+[19:50] <lotuspsychje> xentity1x: you need to config xrandr, read the link mate
+[19:51] <lotuspsychje> fellayaboy: if the package is also for terminal, you can run it
+[19:52] <mach20x> Has there been any updates to the open source drivers in Ubuntu for my 4650 ati graphics cards (am doing variety)
+[19:52] <fellayaboy> lotuspsychje: well yeah but what about x applications like firefox or calculator libreoffice…is it possible to run the command and load the gui app without the desktop environment?
+[19:52] <mach20x> AMD not am
+[19:53] <lotuspsychje> fellayaboy: not sure what you wanna achieve with this?
+[19:53] <fellayaboy> or to somehow load a very very light weight desktop environment the moment it runs
+[19:53] <lotuspsychje> !windowmanagers | fellayaboy
+[19:53] <ubottu> fellayaboy: A desktop environment is what "puts the pieces of a !GUI together". The available desktop environments in Ubuntu are !GNOME (ubuntu-desktop), !KDE (kubuntu-desktop), !Xfce (xubuntu-desktop), !LXDE (lubuntu-desktop), IceWM, !Fluxbox, WindowMaker (wmaker), FVWM and others - See also !Flavors
+[19:54] <lotuspsychje> !info blackbox | fellayaboy
+[19:54] <ubottu> fellayaboy: blackbox (source: blackbox): Window manager for X. In component universe, is optional. Version 0.70.1-23 (vivid), package size 208 kB, installed size 670 kB
+[19:54] <fellayaboy> hmm blackbo
+[19:54] <fellayaboy> let me check that out
+[19:55] <fellayaboy> i also wanted to run gui apps off of an ssh server… i tried it to do it but some gui apps dont work while others do..but at least i wnted to try doing it locally…
+[19:55] <lotuspsychje> fellayaboy: e17 (enlightment) is also cool
+[19:55] <mach20x> fellayaboy:  are you running a chroot environment on a single core on a phone or something?
+[19:55] <fellayaboy> raspberry pi
+[19:56] <fellayaboy> ubuntu-mate…i had another ubuntu before where it was just the command line no deskto environment before i plan to do the same with this one
+[19:56] <lotuspsychje> fellayaboy: you can also ssh X
+[19:56] <mach20x> Ah OK, I figured it was something with very limited resources
+[19:57] <fellayaboy> i use to run gui apps using ssh -X …some apps run the gui fine on the client but not most
+[19:57] <fellayaboy> simple apps like gedit would work
+[19:58] <fellayaboy> guys thanks for all your help
+[19:59] <fellayaboy> lotuspsychje:  enlightment looks awesome tahnks for sharing that
+[19:59] <Peret> The 'avahi daemon' is installed in Ubuntu by default. Are there security risks if I am using public networks (Free WiFi, ...)?
+[19:59] <lotuspsychje> fellayaboy: no sweat mate
+[20:00] <lotuspsychje> Peret: public wifi's are always a risk mate
+[20:00] <lotuspsychje> Peret: they can sniff out passwords
+[20:00] <xentity1x> <lotuspsychje>, okay so I tried turning on vga1 with xrandr --output VGA1 --right-of LVDS1
+[20:01] <Peret> lotuspsychje: Yes, I know. But what could others do if I have the avahi daemon installed? Could you tell me some examples for possible attacks?
+[20:01] <xentity1x> <lotuspsychje>, that doesnt seem to work
+[20:01] <lotuspsychje> xentity1x: not sure about that man, sorry dont got 2 screens here
+[20:01] <xentity1x> <lotuspsychje>, okay thanks
+[20:03] <lotuspsychje> Peret: not sure for avahi, but public wifi's are always a risk
+=== lil_dangerz is now known as lil_danger
+[20:04] <lotuspsychje> Peret: if you keep your system up to date, security risks will lower
+=== georg is now known as Guest42680
+=== Lantizia is now known as Guest59309
+[20:10] <Z3> Hi ! If I buy BQ Aquaris E5 Ubuntu edition, when "docking mode" or convergence is finished will be available too in this phone?
+[20:10] <Ev0luti0n_> Hi folks.
+[20:10] <xentity1x> can anyone help me figure out how to add a second monitor with xrandr?
+[20:10] <brainwash_> !hi
+[20:10] <Z3> I want to use it as a desktop pc when convergence is ready
+[20:10] <lotuspsychje> !touch | Z3
+[20:10] <ubottu> Z3: Information about the Ubuntu Touch platform for Phone and Tablet is available here https://wiki.ubuntu.com/Touch . Support and discussion in #ubuntu-touch
+[20:11] <Z3> lotuspsychje ok, thank you
+[20:13] <Ev0luti0n_> Is there any hidden panel, where the power management features can be controled on Ubuntu?
+[20:14] <Ev0luti0n_> thoroughly searched the system settings, in hopes of finding how to enable bluetooth over battery, but found nothing. Unity tweaker has nothing as well...
+[20:14] <lotuspsychje> Ev0luti0n_: dconf-editor has power management options
+[20:14] <lotuspsychje> !info dconf-editor | Ev0luti0n_
+[20:14] <ubottu> Ev0luti0n_: dconf-editor (source: d-conf): simple configuration storage system - utilities. In component universe, is optional. Version 0.22.0-1 (vivid), package size 102 kB, installed size 488 kB
+[20:14] <Ev0luti0n_> thanks!
+[20:15] <Ev0luti0n_> Not being a complete newb, i do have a question. How am i able to find these not so obvious things? I mean, in windows you have "config .ini files, registry editing"... in linux, i just feel lost in certain situations.
+=== ianp_ is now known as ianp
+[20:16] <mach20x> I'm running my system on a TV with 1080p but the drivers I have won't recognize the hdmi converter. Should I load the propriety drivers for my graphics cards? Will that solve this issue?
+[20:17] <lotuspsychje> Ev0luti0n_: well dconf editor is a bit like a registry
+[20:18] <lotuspsychje> Ev0luti0n_: of course, there are plenty of nice packages also to make your life easier
+[20:18] <Ev0luti0n_> installing it already from the sources.
+[20:19] <Ev0luti0n_> What i am trying to say is that, "one sort of is capable of finding the solution through the windows guy for a problem that arises", while on linux, if i don't search the web, i am not capable of arranging a solution; ever. loll
+[20:20] <lotuspsychje> Ev0luti0n_: whats your issue exactly?
+[20:20] <Ev0luti0n_> there is always a myriad of commands, string combinations, packages, dpkg, extracting from archives
+[20:20] <Ev0luti0n_> you name it.
+[20:20] <lotuspsychje> !info arandr | xentity1x can this help?
+[20:20] <ubottu> xentity1x can this help?: arandr (source: arandr): Simple visual front end for XRandR. In component universe, is optional. Version 0.1.7.1-1 (vivid), package size 66 kB, installed size 507 kB
+[20:20] <Ev0luti0n_> As for now, nothing more. Just a newb ranting. Thanks lotuspsychje
+=== shadok_ is now known as shadok
+[20:26] <mach20x> I guess I'll just have to try it and find out
+[20:27] <tgm4883> mach20x: I'd say just try it. You could also just hand configure xorg.conf
+[20:28] <mach20x> What would I do with xorg.conf now?
+[20:29] <tgm4883> well you could hand configure it so the settings match what your TV can do, you'll need to set the ignore EDID flag
+[20:29] <sting3r> anyone know any replacement for remastersys or reconstructor
+[20:30] <tgm4883> mach20x: if the settings aren't getting picked up automatically, then that would be the way to do it manually
+[20:30] <sting3r> running ubuntu 15.04
+[20:30] <ptrz> how do I get to a terminal from the login prompt?
+[20:30] <mach20x> Great, I'll keep that in mind!
+[20:30] <ptrz> (the Unity login prompt)
+[20:30] <ptrz> it's giving me the "failed to start session" error
+[20:31] <tgm4883> ptrz: ctrl+alt+F1
+[20:31] <ptrz> and I'm pretty proficient as a sysadmin, but I'm not getting a grub option and I can't get any information at all about what's actually going on
+[20:31] <ptrz> tgm4883: ah, thanks. I really think there should be a menu option for that
+[20:32] <ptrz> cause from what I could tell, I was logged out and was going to have to boot to a recovery USB
+[20:32] <sting3r> need a good app too replace remastersys or reconstructor
+[20:32] <tgm4883> ptrz: I... you don't need to do that often, and that's the case for any linux distro out there.
+[20:32] <mach20x> I'm not getting any signal to the hdmi as it is set now with a converter for the dvi
+[20:34] <dmrq> ahoy
+=== CompuDesktop is now known as Compu
+[20:35] <hugegreenbug> sting3r: try my script: github.com/distroshare/distroshare-ubuntu-imager
+[20:35] <ptrz> tgm4883: what's the case?
+[20:36] <sting3r> thx
+[20:36] <tgm4883> ptrz: any linux distro you try would do the same for ctrl+alt+F1
+[20:36] <ptrz> tgm4883: anyway, I'm seeing two errors in syslog. one about dnsmasq that I think I recognize, and one about systemd not being able to open the usb descriptor file or something like that
+[20:37] <ptrz> I upgraded and dist-upgraded and rebooted. checking back now to see whether it worked
+[20:40] <roothy>  /msg NickServ VERIFY REGISTER roothy owgruqshujny
+[20:42] <jParkton> nope
+[20:42] <dionysus69> hey guys
+[20:43] <dionysus69> I am following this tutorial
+[20:43] <dionysus69> I am told to install tigervnc on centos, is tigervnc "default" for ubuntu for the same reasons it is for centos?
+=== Guest60850 is now known as yuciyuar
+[20:46] <tgm4883> I'm not sure I understand the question
+[20:47] <Peret> Can sombody explain me why ntpd opens port 123 by default although I only want to sync the time?
+[20:48] <compdoc> beacuse thats the NTP port?
+[20:49] <jParkton> :O
+[20:49] <swair>  i'm compiling kernel 3.16 gcc versions are 5 and 4.8, i've set CC=/usr/bin/gcc-4.8 still i get this error: fatal error: linux/compiler-gcc5.h: No such file or directory. anu ideas?
+[20:49] <jParkton> looks like the script you are trying to compile is looking for => v5
+[20:50] <swair> its the Makefile for kernel. i set CC=/usr/bin/gcc-4.8
+[20:50] <swair> so it should not look for the gcc5 header right?
+[20:51] <hugegreenbug> Peret: ntpd is also a server, not just a client to sync the time. AFAIK
+[20:51] <Peret> compdoc: But why not only send a ntp request to the server and get the answer? Why have the port be open all the time?
+[20:51] <dionysus69> so if I want to install vnc server or client on ubuntu, what would I install? I guess there are several forks
+[20:51] <mach20x> Should I replace /etc/nginx/nginx.conf  ?
+[20:52] <hugegreenbug> Peret: If configured correctly, other clients could sync the time from your ntpd daemon
+[20:52] <mach20x> From 14.10 to 15.04
+[20:52] <Peret> hugegreenbug: Isn't there a possibility so that I use the program only as client?
+[20:54] <hugegreenbug> Peret: I think by default it is setup to only be a client, but it still opens that port. You can check the ntp config file
+[20:55] <hugegreenbug> Peret: I think it is in /etc/ntp or something
+=== Samul_ is now known as Samul|AWAY
+[20:58] <ELITEZ-CRYPTO> http://worldhacker.org
+=== sins-_x is now known as sins-
+[21:02] <jParkton> man his site is so crappy
+[21:02] <jParkton> pitiful engrish
+[21:02] <OliPicard> Hi everyone, I'm trying to create a init.d script that can run the following command on boot su kippo -c /home/kippo/kippo/start.sh any ideas on how to do this?
+[21:02] <OliPicard> I just need the script to run on boot fire up and that's it.
+[21:02] <teward> OliPicard: perhaps put it at the end of /etc/rc.local
+[21:03] <mcphail> or add it to kippo's crontab
+[21:03] <teward> which is called during boot
+[21:03] <teward> mcphail: he'll need pidfile checking or such but that's another option

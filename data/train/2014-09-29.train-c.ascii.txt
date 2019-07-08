@@ -1,0 +1,1500 @@
+[09:14] <Wulframn> logical_: there will still be a filesystem on it. Just because you deleted the files doesn't mean you deleted the filesystem.
+[09:14] <cynicallemon> rwsq1: we i feel we are all a victim of the "linux is secure" syndrome
+[09:15] <logical_> Wulframn seems like you dont understand me,  forget what is on the usb, i just want to change the label of the usb, the name of the usb,  like if it was called USB1 i want to rename it to logicals usb...
+[09:15] <Wulframn> cynicallemon: it's because that's what the fanboys tout as one of its primary advantages.
+[09:15] <cynicallemon> wait until systemd becomes the #1 attack vector
+[09:15] <rwsq1> cynicallemon, I think the point is that everything is out in the open
+[09:16] <Wulframn> logical_: Your ability to change the USB's label depends on the filesystem type on the USB.
+[09:16] <logical_> wulframn it is fat32
+[09:16] <cynicallemon> i like the fact that openbsd chroots their own httpd server by default
+[09:16] <Wulframn> logical_: thank you, just a moment
+[09:16] <rwsq1> this is by far the worst bug I've encountered in 14 years, and it's been sorted out reasonably efficiently, and it's actually probably not as severe as first thought. But the point is we can all see what's happening. If it was a bug in OSX or Windows we woudln't know what was going on until there was an update.
+[09:17] <rwsq1> zundrli, I am using such a setup
+[09:17] <Wulframn> logical_: do you know the USB's location? If not please use fdisk -l
+[09:17] <zundrli> do you have the same problem rwsql
+[09:17] <rwsq1> not as far as I can see
+[09:17] <rwsq1> are your monitors of identical resolution?
+[09:17] <p0a> Hello I have a netbook here with ubuntu installed but the person who is using it does not know the password
+[09:17] <p0a> the username is 'user'
+[09:18] <p0a> can someone guess what the password is? The person is computer illiterate and he bought the computer
+[09:18] <zundrli> no one is 1920x1080 (monitor1) and 1280x1024 (monitor2)
+[09:18] <rwsq1> p0a have you tried booting into single user mode?
+[09:18] <rwsq1> I guess that's your problem zundrli
+[09:18] <p0a> rwsq1: What do you mean by that?
+[09:18] <Wulframn> p0a: No we can't, but we can help you setup a new password.
+[09:18] <Ben64> !lostpassword | p0a
+[09:18] <ubottu> p0a: Forgot your password? See https://help.ubuntu.com/community/LostPassword What's the root password? See !sudo. Don't see *** in password prompts? That's normal. Sudo doesn't ask for your password? It remembers you for several minutes. Please use strong passwords, see https://help.ubuntu.com/community/StrongPasswords
+[09:18] <LainProtocol7> p0a: god, or sex
+[09:18] <logical_> Wulframn fdisk -l gives me nothing in terminal, but i know that the usb drive is in /mount/logical placed
+[09:18] <p0a> LainProtocol7: love?
+[09:19] <zundrli> rwsql many people have that problem and noone knows why
+[09:19] <NaStYdoG> 7
+[09:19] <zundrli> rwsql its fine for twitch.tv but not for youtube
+[09:19] <cynicallemon> rwsq1: as u state being in the open, linux has been "secure" by obscurity, not so obscure anymore
+[09:19] <Wulframn> logical_: you need /dev/sdb1 (or something like that)
+[09:19] <p0a> Ben64: thank you
+[09:20] <EriC^^> logical_: go to the dash > type disks, select your disk, click on the partition, click the gear icon, select edit filesystem > edit the label
+[09:21] <logical_> wulframn it is /dev/sdb1
+[09:21] <rwsq1> p0a if you reboot, at the grub prompt you should get a recovery mode option
+[09:21] <Wulframn> logical_: sudo mlabel -i /dev/sdb1 -s ::"<new label> "
+[09:22] <Wulframn> Or do what EriC^^ said
+[09:22] <rwsq1> p0a to get into grub prompt hold shift key while booting
+=== n is now known as Guest33363
+[09:23] <logical_> Worked, thank you guys
+[09:23] <logical_> thank you for your patience
+[09:23] <buharin> hello
+[09:23] <Wulframn> No worries
+[09:24] <buharin> I got problem on my hp probook I havent network interface eth0
+[09:24] <rwsq1> cynicallemon, quite the opposite - it's closed source which is secure by being obscure
+[09:24] <Wulframn> buharin: which network interfaces do you have?
+[09:24] <buharin> Wulframn, only lo and wlan0
+[09:24] <Thumpxr> i cant use digital and analog audio output at the same time >> http://ubuntuforums.org/showthread.php?t=2246186
+[09:25] <cynicallemon> rwsq1: then explain a 15 year old bug that wasnt fixed or even audited?
+[09:25] <buharin> w8
+[09:25] <buharin> brb
+[09:26] <cynicallemon> rwsq1: ah no-auditing of code, sounds like SSL all over again
+[09:26] <tdn> I have just installed 12.04 amd 64. I cannot start any virtualbox machines. I have tried reinstalling virtualbox packages, but it does not help. This is the error I see: http://paste.yt/p3183.html    What to do?
+[09:26] <p0a> I was not prompted to grub\
+[09:26] <p0a> to log in into a root shell
+[09:26] <bloopletech> I have a UEFI-enabled machine with Windows 8.1 installed; I've repartitioned, installed 14.04 etc, but Ubuntu only boots if the BIOS is set to Legacy mode, and then the Grub screen doesn't show windows. I hae installed refind in an attempt to fix this, but it hasn't helped
+[09:26] <tdn> Note, I already installed build-essential and headers
+[09:26] <p0a> !changepassword | p0a
+[09:27] <bloopletech> and now there are refind files in my /boot/efi/EFI/Microsoft/Boot directory, which I don't think is right
+[09:27] <p0a> Can someone help with changing the password? I have physical access to the notebook
+[09:27] <tnli> I've a question, I have 14.04 and use the Swe-kb layout, but on each boot, it starts with english, and then after a while it switches to Swe/Fi. What's up with this?
+[09:27] <cynicallemon> tdn: yeah you need linux-headers
+[09:27] <p0a> Ben64: I think you linked me before. Can you plese likn me again
+[09:27] <tdn> cynicallemon, I already installed linux-headeres-generic
+[09:28] <Wulframn> !lostpassword | p0a
+[09:28] <cynicallemon> tdn: sorry just saw that :)
+[09:28] <ubottu> p0a: Forgot your password? See https://help.ubuntu.com/community/LostPassword What's the root password? See !sudo. Don't see *** in password prompts? That's normal. Sudo doesn't ask for your password? It remembers you for several minutes. Please use strong passwords, see https://help.ubuntu.com/community/StrongPasswords
+[09:28] <rwsq1> p0a does the grub prompt come up at boot if you hold down shift or ctrl (I forget which)
+[09:28] <EriC^^> bloopletech: what happens if you boot using uefi?
+[09:28] <p0a> rwsq1: the grub prompt does not come up at all
+[09:28] <bloopletech> also I'm confused, as windows itself seems to present windows and ubuntu as boot options; in that case, do I need something like refind at all?
+[09:28] <p0a> Wulframn: thanks. but all these methods requrie the grub prompt, which I do not ge
+[09:28] <p0a> get
+[09:28] <Bolt_Thrower138> word
+[09:28] <bloopletech> EriC^^, a windows boot menu comes up
+=== zenx is now known as Guest72014
+[09:29] <EriC^^> windows boot menu?
+[09:29] <bloopletech> if I then select windows, it boots fine; if I select ubuntu, it just reboots
+[09:29] <EriC^^> bloopletech: did you install using wubi?
+[09:29] <Wulframn> p0a: slap a live cd in there, mount and chmod into your existing environment and change the password that way.
+[09:29] <rwsq1> p0a try repeatedly pressing ctrl from boot
+[09:29] <p0a> Wulframn: don't have one...
+[09:29] <cynicallemon> tdn: "Consult /var/lib/dkms/virtualbox/4.1.12/build/make.log for more information." - have you done that?
+[09:29] <p0a> rwsq1: I will try once more
+[09:29] <bloopletech> EriC^^, I asked the guy who installed ubuntu, he says a livecd
+[09:30] <tdn> cynicallemon, yes. Will paste it. I have no clue as to what it means.
+[09:30] <EriC^^> ok
+[09:30] <bloopletech> He turned UEFI off to install
+[09:30] <rwsq1> you could also try ctrl-x - I think that used to be the hotkey - which version of ubuntu is this?
+[09:30] <bloopletech> which explains why ubuntu only works in legacy mode
+[09:30] <EriC^^> bloopletech: ah, well that's your problem
+[09:30] <p0a> rwsq1: some people recommend changing /etc/default/grub on some forums, but I can't do that without the root password
+[09:30] <EriC^^> bloopletech: reinstall with uefi turned on
+[09:30] <quiet1> hi, can some point me to instructions for installing on an existing lvm partition on an encrypted disk?
+[09:30] <bloopletech> I am vaguely aware of all this uefi stuff but avoided it till now
+[09:30] <bloopletech> I have to reinstall?
+[09:30] <tdn> cynicallemon, http://paste.yt/p3184.html
+[09:30] <Wulframn> p0a: you have access to another system apparently. Better yet, it seems to have internet access. Download and burn one if it comes to that.
+[09:30] <EriC^^> bloopletech: i think so, yes
+[09:30] <p0a> Wulframn: I hve to do this in 10 minutes or less
+[09:30] <bloopletech> sigh ok
+[09:30] <EriC^^> bloopletech: do you have a livecd?
+[09:30] <rwsq1> p0a indeed - you need to boot into recovery mode - it really shold be possible
+[09:31] <p0a> rwsq1: I will try
+[09:31] <bloopletech> I've got an iso, can probably burn it to a usb
+[09:31] <quiet1> s/some/someone
+[09:31] <p0a> rwsq1: hopefully I wont be back :P if it works
+[09:31] <rwsq1> unless someone installed this machine with lilo or anoter bootloader
+[09:31] <bloopletech> the other thing is, those refind files in the windows boot menu, is it safe to leave them around?
+[09:31] <EriC^^> bloopletech: i have no idea what refind is
+[09:32] <bloopletech> EriC^^, this thing: http://www.rodsbooks.com/refind/
+[09:32] <Wulframn> rwsq1: I'm more worried about them needing to do it in ten minutes or less. Sounds shady
+[09:32] <dbugger> Hey guys. How can I execute from an script, another script that is stored in an URL
+[09:32] <dbugger> ?
+[09:32] <bloopletech> basically an efi boot manager... but apparently windows has one? at least a windows 8-style OS chooser gui showed
+[09:32] <cynicallemon> tdn: i assume you updated packages first before installing virtualbox
+[09:33] <tdn> cynicallemon, yes. Everything is up to date.
+[09:33] <EriC^^> bloopletech: ok
+[09:33] <rwsq1> Wulframn, yeah but that's not a software issue :)
+[09:33] <bloopletech> man I dunno, I'm going to do a boot repair or whatever within windows and then reinstall ubuntu
+[09:34] <EriC^^> bloopletech: yeah that's probably best
+[09:34] <cynicallemon> tdn: it looks like some mismatch between virtualbox driver and kernel header file at a guess
+[09:35] <cynicallemon> tdn: i would ask in ubuntu forums and virtualbox forums
+[09:36] <varunendra> dbugger, wget then execute?
+[09:37] <rwsq1> tdn - is your current running kernel 3.13.0-36-generic  ?
+[09:37] <EriC^^> dbugger: bash <(curl -s http://script)
+[09:38] <rwsq1> tdn can you paste somewhere the make log?
+[09:38] <Wulframn> Welcome back buh
+[09:38] <Wulframn> buharin: any luck?
+[09:38] <dbugger> varunendra: how to script it, without leaving residual files?
+[09:38] <buharin> Wulframn, I uinstalled network manager and all go sux
+[09:38] <buharin> ;d
+[09:39] <buharin> maybe I will install new ubuntu
+[09:39] <buharin> instead elementary os
+[09:39] <johncarper> what would be the ports that xrdp uses? i didn't had my ufw firewall enabled on startup on my ubuntu server and now i enabled it i can't connect with rdp anymore
+[09:39] <johncarper> i wonder what the ports are so i can allow
+[09:40] <Wulframn> buharin: run ifconfig -a, what do you see?
+[09:40] <bumbar_> does anyone know if there's a solution/fix for https://bugs.launchpad.net/ubuntu/+source/gedit/+bug/1057165 ?
+[09:40] <buharin> only wlan0 and lo
+[09:40] <ubottu> Launchpad bug 1057165 in gedit (Ubuntu) "slash and greater then /> in javascript break syntax highlight for php" [Undecided,Confirmed]
+[09:40] <varunendra> dbugger, just put the 'wget <options> <online script>', then "./<downloaded script>" lines in your existing script.
+[09:40] <EriC^^> dbugger: that won't save anything, and it won't output any errors
+[09:40] <Wulframn> buharin: run "sudo ifup eth0"
+[09:41] <dbugger> EriC^^: I kinda want the error output
+[09:41] <buharin> cannot find device
+[09:41] <Wulframn> buharin: yeah, was prepared for that. One moment
+[09:41] <Ben64> buharin: are you on elementaryos?
+[09:41] <buharin> ye
+[09:41] <Ben64> then you should head to the support channel for that distro
+[09:41] <rwsq1> tdn sorry I see the make log - I think you might need to get a newer virtualbox
+[09:41] <buharin> but it is ubuntu :P also
+[09:42] <Ben64> it isn't ubuntu
+[09:42] <EriC^^> dbugger: bash <(curl -Ss http://script)
+[09:42] <rwsq1> tdn, download the latest 4.3.x from virtualbox site
+[09:42] <buharin> Ben64, but ok I preapring new ubuntu pendrive
+[09:42] <varunendra> dbugger, if you don't want the downloaded script, simply add another line (rm <script>) to remove it afterwards. Reading, downloading equal things I think.
+[09:42] <EriC^^> dbugger: that will show errors, but won't show any progress meters, etc.
+[09:42] <Ben64> !elementary | buharin
+[09:42] <ubottu> buharin: Elementary OS is an Ubuntu derivative which is supported in their IRC channel #elementary on irc.freenode.net - http://elementaryos.org/ for more information on this distribution.
+[09:43] <Wulframn> buharin: oh my bad, it isn't ubuntu? You're planning to install a new ubuntu?
+[09:43] <buharin> Wulframn, yeah because I think it wont work but anyway it is customized ubuntu 12.04
+[09:43] <buharin> I got hp probook there
+[09:44] <Wulframn> buharin: Once you install ubuntu give it a try and let us know. If eth0 still isn't configured it should be an easy fix.
+[09:44] <Wulframn> *should*
+[09:44] <buharin> Wulframn, but you know how to fix it?
+[09:44] <buharin> Wulframn, it is ubuntu 12.04 now
+[09:45] <Ben64> buharin: stop saying it is ubuntu, it is not
+[09:45] <buharin> -.-
+[09:45] <Wulframn> buharin: I thought you just said you were running elementaryos
+[09:45] <buharin> yep
+[09:45] <Wulframn> Ubuntu derivatives are not Ubuntu
+[09:45] <buharin> oh ok
+[09:45] <buharin> so
+[09:45] <buharin> go on ubuntu right now and will see :)
+[09:45] <Ben64> /join #elementary and ask them
+[09:46] <tdn> rwsq1, Linux grenache 3.13.0-36-generic #63~precise1-Ubuntu SMP Thu Sep 4 22:28:20 UTC 2014 x86_64 x86_64
+[09:46] <Wulframn> Derivatives are downstream, meaning they have more stuff in them meaning they have bugs are not familiar with and are not prepared for
+[09:46] <tdn> rwsq1, the one that is available from apt-get should work with the kernel that is available from packages, right?
+[09:47] <rwsq1> tdn you would think so, but I think there was an issue with some of the 4.2 virtualbox releases
+[09:48] <rwsq1> I would head straight for the virtualbox site for the latest version
+[09:49] <Ben64> i'd recommend using a PPA over downloading software from the site
+[09:50] <jargon> if i enable the root account and delete the user account, and reboot, will the login prompt be for the root account?
+[09:51] <Ben64> jargon: don't
+[09:52] <jargon> Ben64: that doesn't exactly answer my question :-/
+[09:52] <Ben64> its a terrible idea, won't work and its also a bad idea
+[09:52] <_blk> jargon, not in the graphical selection. Not sure about lightdm (ubuntu default), but normally there's an option to log in with any user and you could type "root" there to log in as root (strongly not recommended!). You wouldn't need to delete other accounts for that
+[09:53] <jargon> Ben64: this isn't a production machine. it's for testing purposes
+[09:53] <Ben64> why test something terrible like that
+[09:53] <tdn> rwsq1, but this is vbox 4.1.12
+[09:53] <tdn> rwsq1, so it should not be affected by 4.2 bugs?
+[09:53] <Ben64> jargon: shouldn't you be learning to do things the proper way
+[09:53] <jargon> _blk: this is the server edition. sorry, i forgot to mention that. no gui
+[09:53] <tdn> rwsq1, also, I have used virtualbox on 12.04 before. I just recently had to reinstall. And now it does not work.
+[09:53] <_blk> jargon, on the console you can log in with any user anyway, no need to delete users for that first
+[09:53] <layke> Hi. I'm finding it impossible to use chrome on my fresh 14.04 install. I notice xorg and chrome seem to run at 100% CPU and I end up having 4-8 seconds inbetween any user input and mouse clicks
+[09:54] <jargon> _blk: good point
+[09:54] <jargon> thanks!
+[09:54] <_blk> jargon, you may want to set root's password first!
+[09:54] <rwsq1> tdn, it could be that the 12.04 kernel has changed in recent releases and this has caused incompatibility with virtualbox - you would need to check the changelog
+[09:54] <jargon> _blk: i already did :-)
+[09:54] <Ben64> jargon: alternatively, learn how to use sudo properly
+[09:55] <_blk> jargon, I would go with Ben64's suggestion to use sudo
+[09:55] <_blk> use sudo -s to spawn a root shell
+[09:55] <Ben64> or just leave the channel : /
+[09:56] <rwsq1> tdn, is this your problem: https://lists.debian.org/debian-backports/2014/03/msg00066.html
+[09:56] <rwsq1> (obv that's a debian list but it seems a more general situation)
+[09:57] <MickeyDroid> Hello
+[09:57] <MickeyDroid> I need help!!!
+[09:57] <MickeyDroid> My Latitude e6420 with ubuntu 14 32bits turns  to lag when i press the key combination for dimming the screen.Any fix for that?? <unconvertable>
+[09:58] <tdn> rwsq1, I have no idea.
+[09:58] <bisu> MickeyDroid: and does it work? dim?
+[09:59] <k1l> MickeyDroid: see in "dmesg" what errors pop up after you pressed that key
+[09:59] <Kartagis> how to take ownership of some samba shared directory? I've tried uid and gid, file_mode and dir_mode, none seem to have worked
+[09:59] <rwsq1> tdn, here you are: https://bugs.launchpad.net/ubuntu/+source/virtualbox/+bug/1292118
+[10:00] <rwsq1> that does seem to be your bug
+[10:00] <charlesay> hi
+[10:00] <rwsq1> "The virtualbox module does not build with the newer HWE kernels found in Ubuntu Precise/12.04"
+[10:00] <ubottu> Launchpad bug 1292118 in virtualbox (Ubuntu) "virtualbox-dkms 4.1.12-dfsg-2ubuntu0.6: virtualbox kernel module failed to build [error: incompatible types when returning type kuid_t but RTUID was expected]" [High,In progress]
+[10:01] <charlesay> the man page lookup on my ubuntu system does not work - is it possible to uninstall man-db without breaking something (and then reinstall)?
+[10:02] <layke> What is Xorg? Why would it constantly be high CPU usage? Can I do anything to stop it? Even dragging windows around the screen has insane lag.
+[10:02] <layke> Entering text in inputs has lag. Everything is slooow.
+[10:02] <blueingress> ping www.cfwin.com
+[10:03] <bazhang> !xorg | layke
+[10:03] <ubottu> layke: X.Org is an implementation of the X Windows System, and is the part of your system that's responsible for graphical output. To restart it on an Ubuntu system, type 'sudo service lightdm restart'. To fix screen resolution or other X.Org problems: https://wiki.ubuntu.com/X/Config/Resolution . See also !xorgconf
+[10:04] <Wulframn> I think layke just tried killing xorg. :-\
+[10:05] <tdn> rwsq1, I am nt sure what to make of this.... It proposes a lot of workarounds, but they do not seem to work for people. I have tried most of this also. And without luck. Is this something that is being fixed?
+[10:05] <MickeyDroid> My Latitude e6420 with ubuntu 14 32bits turns  to lag when i press the key combination for dimming the screen.Any fix for that?? <unconvertable>
+[10:06] <bazhang> MickeyDroid, did you try the suggestion already given
+[10:08] <MickeyDroid> which suggestion??
+[10:08] <bazhang> MickeyDroid, a helper also asked a clarification question, please respond to that as well
+=== tcpman is now known as Guest95483
+[10:10] <MickeyDroid> Okay
+=== Guest95483 is now known as ipxman
+[10:12] <jishjish> hi guys --> anyone know how to get gimp to read .psd made with prophoto color profile in GIMP?
+[10:12] <MickeyDroid> Bazhang, i am sorry but i cant find the clarification
+[10:12] <Kartagis> how to take ownership of some samba shared directory? I've tried uid and gid, file_mode and dir_mode, none seem to have worked
+[10:12] <bazhang> <bisu> MickeyDroid: and does it work? dim? <k1l> MickeyDroid: see in "dmesg" what errors pop up after you pressed that key
+[10:15] <jishjish> anyone know how to use prophoto color profile from gimp?
+[10:16] <bazhang> jishjish, why not ask in #gimp
+[10:16] <jishjish> I did, but I use ubuntu so I thought I would ask there (the community is big)
+[10:16] <bazzzb> made my /tmp nosuid with: tmpfs  /tmp  tmpfs  defaults,noatime,nosuid,nodev,noexec,mode=1777,size=100M   0    0. But if I do touch /tmp/test && chmod +s /tmp/test. ls -l shows me: -rwSrwSr--. Is this expected? I'd think no S flag would be set...
+[10:18] <Akiraa> Is it possible to use two AMD cards of different model and different generation in the same system with ubuntu (14.04 LTS)? I want to power three monitors of different resolutions and aspect ratios.
+[10:18] <Akiraa> a 5xxx card and a 6xxx card
+[10:19] <MickeyDroid> bazhang: No error pops up in dmesg
+[10:19] <mharris> Akiraa: It can work in theory, modulo X server and video driver bugs, BIOS glitches and other factors that can be very specific to the motherboard/video card combination, so no universal answer, but in theory X is designed to handle it.
+[10:19] <MickeyDroid> i personally entered this command " tail -f /var/log/kern.log"
+[10:19] <MickeyDroid> and tried dimming the screen
+[10:20] <MickeyDroid> but no errors popped up
+[10:20] <MickeyDroid> i did the same command with dmesg
+[10:23] <EriC^^> MickeyDroid: try /var/log/syslog
+[10:23] <MickeyDroid> Okay
+[10:23] <MickeyDroid> Let me give that a try
+[10:24] <MickeyDroid> am not getting any readings with that either
+[10:30] <tdn> rwsq1, I am downloading http://download.virtualbox.org/virtualbox/4.3.16/virtualbox-4.3_4.3.16-95972~Ubuntu~precise_amd64.deb   do I need to remove/purge virtualbox first? What about dkms and such?
+[10:31] <syeekick> tdn explain yourself a little more budddy
+[10:37] <last_staff> trying to launch synaptic gives me "cannot open display :0.0"
+[10:37] <last_staff> anybody know what I can have done?
+[10:38] <Fuchs> last_staff: 1) are you running a graphical environment?   2) how exactly are you trying to run it? As a different user? (including root / sudo)
+[10:43] <Kopfgeldjaeger> Hi. I get a segfault when upgrading bash to 4.3-7ubuntu1.4 on ubuntu 14.04: Sub-process /usr/bin/dpkg received a segmentation fault. does anybody know a solution?
+[10:44] <MickeyDroid> what method did u use to update Bash??
+[10:44] <Kopfgeldjaeger> apt-get dist-upgrade/upgrade
+[10:45] <root> d
+[10:45] <root> hello
+[10:45] <MickeyDroid> that command upgrades the whole ubuntu right??
+=== root is now known as Guest24426
+[10:45] <Guest24426> hmm
+[10:45] <Kopfgeldjaeger> All packages, yes
+[10:45] <Ben64> Kopfgeldjaeger: pastebin the output of both "sudo apt-get update" and "sudo apt-get dist-upgrade"
+[10:50] <Kopfgeldjaeger> (apt-get clean-ed beforehand) Ben64: http://pastebin.com/ehpJJwyU | my lunch is ready, so I'll be afk for 15 minutes
+[10:51] <last_staff> Fuchs: xubuntu desktop, trying to run 'sudo synaptic' with the user vagrant in the sudoers file and a member of the sudo group
+[10:54] <BluesKaj> HIya folks
+[10:56] <Fuchs> last_staff: do not run graphical applications with sudo
+[10:56] <Fuchs> last_staff: this should not be needed, policykit will take care of permissions
+[10:56] <last_staff> Fuchs: by the way, I tried running it from the terminal
+[10:57] <Fuchs> that should not be an issue, unless by terminal you mean a VT, then you'd have to specify the DISPLAY variable  (and it would be a bit pointless)
+[10:57] <last_staff> can't launch it from the menu, since nothing happens
+[10:57] <last_staff> well
+[10:57] <last_staff> except the password thing
+[10:58] <last_staff> authentication dialog pops up -> enter the password -> click Authenticate -> then, nothing
+[10:58] <Fuchs> right, then running it from a terminal is a good idea, just do it without sudo, b
+[10:58] <Fuchs> *because as said, policykit should do the auth thing
+[10:59] <last_staff> Starting "Synaptic Package Manager" without administrative privileges
+[11:00] <last_staff> so I get the synaptic window up, but that's about it. I can't install any packages or anything
+[11:00] <Fuchs> what version of ubuntu is that?
+[11:00] <last_staff> which is what it's for
+[11:01] <last_staff> 14.04
+[11:02] <Fuchs> last_staff: can you try with pkexec?
+[11:02] <Fuchs> (instead of sudo)
+[11:06] <test> are there any ubuntu tools to grab the posts to a google group and save them as a text file, any suggestions
+[11:10] <last_staff> Fuchs: "(synaptic:3787): Gtk-WARNING **: cannot open display: :0.0"
+[11:10] <last_staff> i.e., same as with sudo
+[11:10] <last_staff> there's also
+[11:10] <last_staff> "No protocol specified", and
+[11:10] <last_staff> "error: XDG_RUNTIME_DIR not set in the environment."
+[11:11] <last_staff> x d, not smileyface
+[11:11] <LainProtocol7> test: Depends on the Google Group. Some can be downloaded with Usenet clients, but other Google Groups are newer and purely viewable with the web interface
+[11:12] <wadie> http://ubuntuforums.org/showthread.php?t=2246220&p=13131648#post13131648
+[11:14] <last_staff> ...hmmm
+[11:14] <last_staff> xdg_runtime_dir gives me /run/user/1000
+[11:18] <Fuchs> last_staff: is your user the one with id 1000,
+[11:19] <Fuchs> last_staff: plus does env  (the command) list the DISPLAY variable,
+[11:19] <Fuchs> last_staff: plus if you already launched several commands with sudo: make sure that files in your home, especially hidden ones such as .XAuthority, belong to the correct user, not root. Fix if needed.
+[11:20] <last_staff> Fuchs: according to the advanced user settings, the user has User ID 1000
+[11:20] <last_staff> Fuchs: env and sudo env both list DISPLAY=:0.0
+[11:21] <last_staff> eh...how do I chown, again?
+[11:21] <last_staff> I've rarely had the need for it
+[11:22] <blackyboy> Hi everyone i want to redierct http to https and if some one access in mysite.com it want to forward to www.mysite.com this both want to be done for my domain but i have done the mysite.com to www.mysite.com but i cant redirect my http to https if i enable the virtual host redirect rule for http to https page not getting loaded.  im using apache2 in ubuntu server 14.04LTS here is my virtualhost entry in pastebin http://paste.ubuntu.com/8454609/
+=== samfty_ is now known as samfty
+=== mhhh is now known as mhh
+[11:23] <LainProtocol7> blackyboy: You're rewriting to http://, not https://
+[11:24] <last_staff> oh, /u means file/directory
+[11:24] <LainProtocol7> blackyboy: Should be:     RewriteRule ^(.*)$ https://www.%{HTTP_HOST} [R=301,L]
+[11:24] <k1l> last_staff: "sudo chown user:user file"
+[11:25] <LainProtocol7> blackyboy: That's presuming the other bits are correct. I just used: https://wiki.apache.org/httpd/RewriteHTTPToHTTPS for my webserver
+[11:26] <blackyboy> ok let me try the above link
+[11:26] <last_staff> k1l: thanks, I did a "sudo chown vagrant:vagrant /home/vagrant"
+[11:27] <k1l> last_staff: that is not enough. you need to specify the files like .Xauthority
+=== PsiOmega is now known as AlphaBeta
+[11:28] <Fuchs> last_staff: or use the -R flag, but as that will affect all files and is not undoable: I don't recommend it. If it's only some (1-3) files: just specify them manually
+[11:28] <Fuchs> ls -al  should list them
+[11:28] <last_staff> k1l: I meant "sudo chown vagrant:vagrant -hR..."
+[11:28] <last_staff> oh, I shouldn't do that?
+[11:29] <Fuchs> well, I personally wouldn't recommend it
+[11:29] <last_staff> ....vagrant destroy && vagrant up
+[11:29] <test> thanks
+[11:29] <Fuchs> as there might be files under your home folder that should belong to someone else
+[11:29] <BobBall> Hi - can I install Ubuntu trusty including -updates somehow?  I'm doing a netboot install so ideally if there was a d-i setting I can twizzle to make sure it uses the -updates repo to download the very latest kernel etc it'd be great...
+[11:29] <k1l> last_staff: well, be very careful with -R
+[11:29] <Fuchs> but if you already did it: meh.  Try if pkexec thingie works now
+[11:29] <Fuchs> and if yes: do not use sudo with graphical applications again :)
+[11:29] <abaday> Hi, Im having trouble escaping the '. echo 'for RAN in $(su - rancid -c 'echo HEJ'); do RANCID=$RAN; done'
+[11:30] <abaday> I want the output to be exactly: for RAN in $(su - rancid -c 'echo HEJ'); do RANCID=$RAN; done
+[11:30] <blackyboy> LainProtocol7: i have used the above link but still i cant forward to https page not loading , but URL shows as https://mysite.com
+[11:30] <last_staff> well what about when I'm forced to?
+[11:30] <abaday> instead im getting for RAN in $(su - rancid -c echo HEJ); do RANCID=$RAN; done
+[11:30] <last_staff> I mean "forced to"
+[11:30] <abaday> note there is no '' around my echo HEJ in the output. which i need to have
+[11:31] <Fuchs> last_staff: you shouldn't be
+[11:31] <Fuchs> last_staff: if, you can install and use something such as gksudo. Or check if policykit  (pkexec) does the job
+[11:32] <k1l> last_staff: you are not forced to run gui with sudo.
+[11:32] <LainProtocol7> blackyboy: So it forwards to https, but then there's an issue?
+[11:33] <last_staff> k1l: yeah I know, that's why I put it in quotation marks right afterwards
+[11:33] <blackyboy> LainProtocol7: yes page not loading may be my ssl configuration was not good means how can i troubleshoot it
+[11:33] <last_staff> basically I want to run synaptic instead of sudo apt-get whatever
+[11:34] <LainProtocol7> blackyboy: SSL certificates tend to be valid for domain.com, OR www.domain.com, unless you have a wildcard certificate. If so, you shouldn't set an alias for the *.443 domain, and instead you should catch requests and forward them on to the domain you're primarily using
+[11:35] <brontosaurusrex> abaday: try #bash
+[11:35] <blackyboy> yes its wildcard certificate
+[11:35] <k1l> last_staff: again, dont use sudo. we have gksu or gksudo for that. but synaptic should provide an request for entering the pw when started as regular program
+[11:36] <LainProtocol7> blackyboy: Not sure then, you'd need to look in your log files to see what error Apache is reporting
+[11:36] <last_staff> k1l: and it does. Only, after the password has been entered, the main window is never displayed
+[11:37] <rwsq1> tdn - I would imagine that it will upgrade to that version and rebuild the dkms but you could remove the old one first if you want
+[11:37] <last_staff> k1l: and apparently it's crashed, because I can't see the program in the task manager (including all users)
+=== AlphaBeta is now known as PsiOmega
+[11:37] <LainProtocol7> blackyboy: My Virtualhost has a line for "SSLCertificateChainFile" where I specify the Certificate chain bundle, which yours is missing
+[11:37] <LainProtocol7> blackyboy: Don't know if this is mandatory though
+[11:39] <blackyboy> LainProtocol7: just now i have tried the chain file in .pem format still its showing error wait let me look into logs
+[11:39] <last_staff> huh.....
+[11:39] <last_staff> log out -> log in
+[11:39] <LainProtocol7> blackyboy: You also haven't specified the SSL protocols you'll accept, or the ciphers you accept. But again, not sure if these two lines are mandatory.
+[11:40] <last_staff> k1l, Fuchs: logging out and logging back in....and synaptic is up again
+[11:40] <last_staff> from the menu, with the authentication window and everything
+[11:41] <Fuchs> Lovely :)
+[11:41] <last_staff> sometimes.... >: (
+[11:41] <Fuchs> so yes, in the future try to avoid sudo for graphical applications. Alternatives: see above
+[11:42] <last_staff> so what you're saying is basically that when I start synaptic from the menu it's not sudoing, right?
+[11:45] <EriC^^> last_staff: what menu
+[11:47] <last_staff> EriC^^: application menu
+[11:47] <Fuchs> last_staff: exactly, hence me asking what version you are using,
+[11:47] <EriC^^> in unity?
+[11:47] <EriC^^> last_staff: type grep -i exec /usr/share/applications/synaptic.desktop
+[11:47] <Fuchs> last_staff: because ubuntu (fortunately) switched from gksu (and similar) to using policykit wherever possible
+[11:49] <last_staff> EriC^^: Exec=synaptic-pkexec
+[11:49] <EriC^^> same here
+[11:49] <last_staff> I know it's telling me something...though I don't know what
+[11:49] <EriC^^> you don't get a popup when you run it?
+[11:50]  * last_staff goes back to the faulty setup and see what happens
+[11:50] <sleipnir> hi, I continue to have a problem with Ubuntu 14.04: it eventually (after many boots) corrupts my laptop in such a manner that Windows won't boot anymore. The only fix to this problem is removal of the CMOS battery. What could cause this?
+[11:50] <last_staff> turns out vagrant is very useful for this kind of bug-isolation
+[11:50] <last_staff> not bug....
+[11:50] <last_staff> inconsistency
+[11:51] <last_staff> "turns out vagrant is very useful for this kind of inconsistency-isolation"
+[11:51] <mehdi_> hey guys im having so much ram consumption  around 95% how can i manage it?
+[11:51] <bazhang> check in top what they are mehdi_
+[11:52] <Fuchs> mehdi_: see with something like htop or a process manager what takes it,
+[11:52] <last_staff> mehdi_: install windows
+[11:52] <cfhowlett> sleipnir, never heard of ubuntu  touching cmos ...
+[11:52] <bazhang> last_staff, what?
+[11:52] <Fuchs> mehdi_: do note that Linux uses available RAM for caching, this is on purpose and good.
+[11:52] <last_staff> then you'll be up to 100% in no-time
+[11:52] <bazhang> last_staff, thats not helpful
+[11:52] <Fuchs> which is  http://www.linuxatemyram.com/  in detail
+[11:53] <last_staff> bazhang: I know, I'm overtired. Stuff like that pops out of me from time to time, then
+[11:53] <quietone> hi, just completed installing but bootloader failed and I don't know how to fix grub or boot to Ubuntu
+[11:53] <sleipnir> cfhowlett, I am not saying that it does touch the CMOS necessraly, just that the only remedy is CMOS battery removale
+[11:53] <cfhowlett> !grub | quietone
+[11:53] <ubottu> quietone: GRUB2 is the default Ubuntu boot manager. Lost GRUB after installing Windows? See https://help.ubuntu.com/community/RestoreGrub - For more information and troubleshooting for GRUB2 please refer to https://help.ubuntu.com/community/Grub2
+[11:53] <bazhang> quietone, dual boot with win8?
+[11:54] <mehdi_> i ran vbox and sqldeveloper  but i close them all only run firefox,rhythmbox, terminal,skype and geany
+[11:54] <bazhang> mehdi_, did you check top as to what is consuming the most
+[11:55] <quietone> cfhowlett, bazhang, no. Debian Jessie. I installed Ubuntu in a separate LVM partition on an encrypted drive.
+[11:55] <quietone> I've mucked around with the Boot Repair disk but that kept failing
+=== Joshua^Dunamis is now known as Joshua^Dunamis_i
+[11:55] <bazhang> quietone, that extra info helps a lot
+[11:55] <quietone> wanted me to stop package managers that were not running
+[11:55] <Fuchs> mehdi_: I'd recommend using htop, because the colours will also show whether the RAM is really used or just for caching, which is explained above.
+[11:56] <mehdi_> the application lock in the launchbar are using ram also?
+[11:56] <quietone> bazhang, np. it's just that messing with Grub etc isn't my area of interest but I can't find suitable help either
+[11:56] <bazhang> mehdi_, could be, what does top/htop show
+[11:57] <last_staff> EriC^^: the grep command shows me the same thing as when before i logged out then back in, as expected
+[11:57] <EriC^^> last_staff: what's going on?
+[11:57] <EriC^^> i'm late to the party :)
+[11:57] <bazhang> quietone, I'm not really up to speed on grub/lvm issues, there is the grub wiki above, and also #grub
+[11:57] <Fuchs> last_staff: I assume that one of the files in your home belonged to the wrong user, which was an issue when you properly want to run a graphical application in context of another
+=== neptune is now known as Guest1400
+[12:00] <EriC^^> Fuchs: if he uses sudo synaptic to launch it, that could get root to own some files there
+[12:00] <mehdi_> nautilus 1.3GB
+[12:00] <Fuchs> EriC^^: he did, I told him it's a bad idea, we fixed permissions, it works again  (well, with policykit, which should be used)
+[12:00] <last_staff> Fuchs: could it have something to do with user@hostname pointers?
+[12:00] <mehdi_> compiz 1.9GB
+[12:01] <Fuchs> last_staff: hard to say with it being as (non)verbose as it is. What you could have tried is debugging policykit when the error occurred, but that's usually not a fun thing to do. So unless you are bored ...
+[12:01] <quietone> bazhang, thx. I've already skimmed those pages. I'll try #grub
+[12:01] <last_staff> Fuchs: ...or pretty much dead-set on figuring out the root cause
+=== john__ is now known as dull_john
+=== xy is now known as Guest9033
+=== dull_john is now known as roamer
+[12:03] <Fuchs> last_staff: well yes, the root cause is running graphical (X11) applications with sudo, which should not be done, because with regular sudo  (not -i) the user environment is kept, hence files are written / modified in your home, some of them being core X stuff like .XAuthority
+[12:03] <bazhang> mehdi_, so the system is very slow using unity then. perhaps try xubuntu/lubuntu on there
+[12:03] <last_staff> EriC^^: The issue was solved, but I've yet to figure out what caused it. I know now what the effect of it is and how to solve it, just not the why and when it happens
+=== Guest9033 is now known as _Guest933
+[12:04] <roamer> Hi, I
+[12:04] <Fuchs> last_staff: http://askubuntu.com/questions/270006/why-user-should-never-use-normal-sudo-to-start-graphical-application  explains what I just wrote in a bit more detail  (the first answer)
+[12:05] <roamer> Hi, I have got the following bug (https://bugs.launchpad.net/ubuntu/+source/grub2/+bug/1289977) and am now stuck at grub rescue... Can anyone help me out?
+[12:05] <ubottu> Launchpad bug 1289977 in grub2 (Ubuntu) "Ubuntu 14.04 Update breaks grub, resulting in "error: symbol 'grub_term_highlight_color' not found"" [High,Triaged]
+[12:05] <roamer> Anyone?
+[12:05] <last_staff> Fuchs: oooh~, bookmarked
+[12:06] <Fuchs> last_staff: it also mentions gksu(do) I mentioned earlier. Note that this is no longer used (and installed) in recent ubuntu versions, but you can still install it
+[12:06] <Fuchs> and if you happen to need a graphical application as root (which you usually don't. Exceptions, such as system settings or package managers, should use policykit these days), you can use that
+[12:06] <Z3> Hi, when will appear first Ubuntu tablet?
+[12:06] <spydon> How can I lower the base volume through pulseaudio?
+[12:06] <Fuchs> I'd not recommend it though, it usually means that something went wrong in the first place if you need root rights
+[12:06] <bazhang> !tablet | z3
+[12:06] <ubottu> z3: Information about the Ubuntu Touch platform for Phone and Tablet is available here https://wiki.ubuntu.com/Touch . Support and discussion in #ubuntu-touch
+[12:06] <popey> Z3: next year probably
+[12:07] <roamer> Hi, I have got the following bug (https://bugs.launchpad.net/ubuntu/+source/grub2/+bug/1289977) and am now stuck at grub rescue... Can anyone help me out?
+[12:07] <ubottu> Launchpad bug 1289977 in grub2 (Ubuntu) "Ubuntu 14.04 Update breaks grub, resulting in "error: symbol 'grub_term_highlight_color' not found"" [High,Triaged]
+[12:07] <last_staff> Fuchs: I blame that I started out with windows, then ubuntu
+[12:07] <Z3> thank you bazhang ubottu popey :-)
+[12:07] <bazhang> one of us is a bot
+[12:07] <roamer> Can anyone help me try to get out of grub rescue?
+[12:07] <Fuchs> last_staff: happened to most of us I guess. But one can learn :)
+[12:08] <EriC^^> last_staff: if you want to know why you can type diff <(gksu env) <(sudo env)
+[12:08] <bazhang> patience roamer
+[12:08] <roamer> ok bzhang
+[12:08] <Z3> bazhang lol ok :)
+[12:08] <roamer> ok bazhang
+=== gnu is now known as Guest98606
+[12:10] <EriC^^> last_staff: it will list the difference between the environment when you run synaptic with those 2 commands, the first is gksu the second is sudo
+[12:11] <last_staff> heh, now I get gksu: no such file or directory
+[12:12] <quants> for some odd reason my laptop battery has stopped working. is there and not hardware reason why this might happen?
+[12:12] <bazhang> !info gksu
+[12:13] <ubottu> gksu (source: gksu): graphical frontend to su. In component universe, is optional. Version 2.0.2-6ubuntu2 (trusty), package size 26 kB, installed size 172 kB
+[12:13] <last_staff> I'm thinking though, that if I'd started out with building the kernel from scratch, like most of the linux geeks in my school (many years back), I'd know a bit more about the OS itself
+[12:13] <EriC^^> last_staff: are you using a bash shell?
+[12:14] <last_staff> um, I don't know anymore. could be dash
+[12:14] <last_staff> lemme check
+[12:14] <k1l> last_staff: i suggest you should start with reading about what you do instead of blindly entering some commands you found anywhere
+[12:14] <k1l> !sudo | last_staff
+[12:14] <ubottu> last_staff: sudo is a command to run command-line programs with superuser privileges ("root") (also see !cli). Look at https://help.ubuntu.com/community/RootSudo for more information. For graphical applications see !gksu (GNOME, Xfce), or !kdesudo (KDE). If you're unable to execute commands with sudo see: http://www.psychocats.net/ubuntu/fixsudo
+[12:14] <k1l> read that! it will explain you a lot.
+[12:14] <last_staff> wow I'm getting it with a teaspoon today. thanks :) (no joke)
+=== Kevin is now known as Guest6977
+[12:16] <Guest6977> yesterday i set up xrdp to connect always trough port 5910 to get tesame session everytime connect, it works with my ufw firewall disabled but not when enabled on my ubuntu client
+[12:16] <Guest6977> even tho i did sudo ufw allow 5910
+[12:16] <Guest6977> any ideas what might be the problem
+[12:16] <last_staff> EriC^^: ps -p $$ gives me 'bash', but I'm actually looking for what sh is linked to
+[12:17] <geirha> last_staff: readlink -f /bin/sh
+[12:18] <last_staff> geirha: that one, yeah. Thanks.
+[12:18] <last_staff> EriC^^: readlink -f /bin/sh points to dash
+[12:18] <last_staff> hence why I'm not sure what I'm running
+[12:18] <Guest6977> how can i allow port 5910 with the ufw to be open all the time?
+[12:19] <quants> hi guys my laptop is not picking up my battery, any ideas?
+[12:19] <roamer> Hi, can anyone take me out of this grub rescue problem?
+[12:19] <roamer> please?
+[12:20] <EriC^^> roamer: what's the problem?
+[12:20] <last_staff> roamer: did you try changing the boot order?
+[12:20] <last_staff> EriC^^: I think quants is struggling with https://bugs.launchpad.net/ubuntu/+source/grub2/+bug/1289977
+[12:20] <ubottu> Launchpad bug 1289977 in grub2 (Ubuntu) "Ubuntu 14.04 Update breaks grub, resulting in "error: symbol 'grub_term_highlight_color' not found"" [High,Triaged]
+[12:20] <last_staff> thanks, ubuntu bot
+[12:20] <roamer> Dear Eric^^ and last_staff I simply upgraded... and tried boot-repair... however I am still stuck at grub rescue
+[12:21] <EriC^^> roamer: it was running fine before?
+[12:21] <roamer> last_staff and Eric^^ yes that is the problem
+[12:21] <roamer> yeah
+[12:21] <EriC^^> roamer: did the upgrade mention anything about boot being full or errors?
+[12:21] <roamer> Eric^^ : no
+[12:22] <kane77> hi.. I removed files from /var/lib/dpkg/info, how can I get them back?
+[12:22] <EriC^^> roamer: type df and check if there's a /boot and if it's full
+[12:22] <roamer> EriC^^ : it says unknown command... I am still stuck at grub rescue>
+[12:23] <EriC^^> oh
+[12:23] <EriC^^> you don't have a livecd?
+[12:24] <roamer> EriC^^ i do... boot up from livecd?
+[12:24] <quants> what's that last-staff ??
+[12:24] <quants> last_staff even
+[12:24] <EriC^^> roamer: yes please
+[12:24] <YamakasY> is it possible to rerun a trusty upgrade ?
+[12:25] <ginette> Hi to everyone ! This is like a Jesus message to inform you all that you should invest into BITCOIN NOW !! Why ? Because i spam like a fucktard for 1 hour now and its seems to help greatly the economy .. So you invest now because it dont stop to increase and for the moment its really unexpensive .. .So go on and ALL INVEST YEAHHHHHH
+[12:25] <wwwwww> hey guys i've been having this recurring bug ever since i installed 14.04, basically it makes windows turn completely black and i have to switch around between windows 100 times just to get it to work again
+[12:26] <wwwwww> windows as in firefox for example. not the os
+[12:27] <hateball> wwwwww: What GPU chipset and driver are you using?
+[12:27] <wwwwww> i have a gtx 760 and i'm running nvidia-current
+[12:27] <last_staff> quants: huh? what's what?
+[12:28] <EriC^^> last_staff: you highlighted him by mistake earlier
+[12:28] <EriC^^> ( while addressing roamer 's issue )
+[12:28] <last_staff> you mean the boot order thing?
+[12:29] <roamer> (trying to boot up from live cd as EriC^^ suggested)
+[12:29] <ts_user> any idea of a command that would automatically mount any USB storage device after it's unmounted ?
+[12:29] <ts_user> (I mean for an entry not present in fstab)
+[12:30] <EriC^^> last_staff: when ubottu gave the bug report
+[12:30] <last_staff> brb
+[12:31] <roamer> EriC^^ : I have booted from livecd
+[12:31] <EriC^^> roamer: ok, is this a efi machine btw?
+[12:31] <ts_user> mount -a doesn't refresh USB :/
+[12:31] <roamer> EriC^^ : yes
+[12:32] <EriC^^> roamer: ok, type sudo parted -l
+[12:32] <EriC^^> and get the disk and partition number of the efi partition, and your main ubuntu installation
+[12:32] <roamer> EriC^^ : do you want the full table? should we private chat?
+[12:33] <roamer> EriC^^ :  it is number 1 and 3
+[12:33] <roamer> EriC^^ :  1 and 3 writes EFI system partition
+[12:33] <ts_user> (it seems gvfs-mount doesn't refresh USB either....)
+[12:33] <EriC^^> 1 *and* 3 ?
+[12:33] <Raydiation> hi guys, my build server gets stuck on sudo apt-get upgrade -y https://travis-ci.org/owncloud/news/jobs/36556587#L883
+[12:33] <roamer> EriC^^ :  yes
+[12:34] <EriC^^> roamer: type sudo apt-get install pastebinit
+[12:34] <Raydiation> is there a way to tell apt-get to keep the current version?
+[12:34] <quants> last_staff do you think this bug could stop my battery working?
+[12:34] <roamer> EriC^^ :  ok done
+[12:35] <EriC^^> roamer: sudo parted -l | pastebinit
+[12:35] <roamer> EriC^^ :  http://paste.ubuntu.com/8456918
+[12:37] <roamer> EriC^^ :  have you been able to open the link?
+[12:37] <EriC^^> roamer: yes
+[12:37] <EriC^^> roamer: it's weird that you have 2 efi partitions
+[12:37] <EriC^^> usually 1 only is recommended
+[12:38] <EriC^^> did you install ubuntu?
+[12:38] <roamer> EriC^^ :  i used boot-repair... i think it did some of its magic there... : http://paste.ubuntu.com/8453292/
+[12:38] <roamer> EriC^^ : yes I did the installation
+[12:38] <quants> whats the best way to fix the grub problem?
+[12:40] <somsip> !fixgrub | quants
+[12:40] <ubottu> quants: GRUB2 is the default Ubuntu boot manager. Lost GRUB after installing Windows? See https://help.ubuntu.com/community/RestoreGrub - For more information and troubleshooting for GRUB2 please refer to https://help.ubuntu.com/community/Grub2
+[12:41] <ginette> Hi to everyone ! This is like a Jesus message to inform you all that you should invest into BITCOIN NOW !! Why ? Because i spam like a fucktard for 1 hour now and its seems to help greatly the economy .. So you invest now because it dont stop to increase and for the moment its really unexpensive .. .So go on and ALL INVEST YEAHHHHHH
+[12:42] <cfhowlett> ginette, get your crappy spammy out of this channy.
+[12:44] <roamer> EriC^^ : can we fix it? or have a just done something very very wrong?
+[12:44] <roamer> EriC^^ : can we fix it? or have I just done something very very wrong?
+[12:45] <EriC^^> roamer: it's fine
+[12:45] <EriC^^> roamer: it looks like ubuntu is using sda3 as efi, according to your fstab
+[12:46] <roamer> EriC^^ :  so how do I fix it? any suggestions?
+[12:46] <EriC^^> roamer: type sudo mount /dev/sda7 /mnt
+[12:46] <roamer> EriC^^ : ok
+[12:47] <roamer> EriC^^ : done that
+[12:47] <EriC^^> roamer: sudo mount /dev/sda3 /mnt/boot/efi
+[12:48] <roamer> EriC^^ : ok...
+[12:48] <roamer> EriC^^ : next?
+[12:48] <EriC^^> roamer: for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
+[12:48] <dotrb> Hi everyone
+[12:49] <roamer> EriC^^ : what does that do?
+[12:49] <EriC^^> it mounts file systems
+[12:49] <dotrb> Is there a cool grey/silver icon theme, preferably flat??
+[12:49] <roamer> EriC^^ : ok done... next?
+[12:50] <EriC^^> roamer: sudo chroot /mnt
+[12:50] <last_staff> back. What'd I miss?
+[12:50] <roamer> ok
+[12:50] <roamer> EriC^^ : ok done...
+[12:50] <EriC^^> roamer: grub-install --recheck /dev/sda
+[12:51] <roamer> EriC^^ : installation finished no error reported...
+[12:51] <EriC^^> roamer: update-grub
+[12:52] <roamer> EriC^^ : done...
+[12:53] <EriC^^> roamer: exit
+[12:53] <roamer> EriC^^ : just one note though... it found the linux image : vmlinuz-3.11.0-36-generic
+[12:53] <roamer> EriC^^ : is that ok?
+[12:53] <EriC^^> well, are you on trusty?
+[12:53] <roamer> EriC^^ : exited...
+[12:53] <EriC^^> are you sure it's 3.11 or 3.13?
+[12:53] <EriC^^> latest is 3.13.0-36
+[12:54] <roamer> EriC^^ : it found both 11 and 13
+[12:54] <EriC^^> ok
+[12:54] <roamer> EriC^^ : exited... what now?
+[12:54] <roamer> EriC^^ : restart?
+[12:54] <EriC^^> type umount -a
+[12:55] <EriC^^> sudo umount -a , then sudo reboot
+[12:55] <roamer> EriC^^ : when I typd umount -a it said : for all devices device is busy...
+[12:57] <roamer> EriC^^ : is it still ok to reboot?
+[12:57] <EriC^^> it's ok, it probably meant different ones
+[12:57] <roamer> EriC^^ : rebooting?
+[12:57] <EriC^^> yeah unless you want to make sure they unmounted
+[12:58] <roamer> EriC^^ : grub rescue screen again
+[12:58] <roamer> EriC^^ : :(
+[13:00] <b0x> hola
+[13:01] <EriC^^> roamer: maybe the bios is using the first efi partition?
+[13:02] <roamer> EriC^^ : how is that possible?
+[13:02] <EriC^^> it would make sense it would
+[13:02] <roamer> EriC^^ : it didn't use to
+[13:02] <roamer> EriC^^ : i mean i used to dual boot...
+[13:02] <roamer> EriC^^ : now I get that weird https://bugs.launchpad.net/ubuntu/+source/grub2/+bug/1289977 error
+[13:02] <ubottu> Launchpad bug 1289977 in grub2 (Ubuntu) "Ubuntu 14.04 Update breaks grub, resulting in "error: symbol 'grub_term_highlight_color' not found"" [High,Triaged]
+[13:02] <EriC^^> did ever run an upgrade on the machine?
+[13:03] <roamer> thank you ubottu
+[13:03] <roamer> EriC^^ : yes from 13 to 14....
+[13:03] <b0x> hello
+[13:03] <zy3pDbot> hi
+[13:04] <sleipnir> hi everyone, another ubuntu question: I am running 12.04 server and ssh is taking very long to respond (about 30 seconds)
+[13:05] <sleipnir> what causes something like that and how can I fix it?
+[13:05] <k1l> sleipnir: system load?
+[13:05] <sleipnir> k1l, zero system load
+[13:06] <sleipnir> k1l, 12 cores 32 GB of ram
+[13:06] <sleipnir> q:Q
+[13:06] <k1l> what does "top" tell you about the systemload?
+[13:06] <EriC^^> roamer: try to boot the liveusb again
+[13:06] <k1l> or about the i/o wiat
+[13:06] <k1l> *wait
+[13:06] <sleipnir> k1l, says 0% CPU
+[13:07] <sleipnir> mhh, where can I see IO?
+[13:07] <roamer> EriC^^ : ok... you need to wait a little while Live CD boot takes time
+[13:07] <k1l> sleipnir: not cpu load, system load: http://askubuntu.com/questions/9487/whats-the-difference-between-load-average-and-cpu-load
+[13:07] <felon> sudo apt-get install skype .... unable to locate package skype :/
+[13:07] <k1l> !skype | felon
+[13:07] <ubottu> felon: To install Skype on Ubuntu, see https://help.ubuntu.com/community/Skype - To record on Skype, check: https://wiki.ubuntu.com/SkypeRecordingHowto - Please use open protocols instead if you can, see !Ekiga
+[13:07] <sleipnir> k1l, load average: 0.00, 0.01, 0.05
+=== i4saken_ is now known as i4saken
+[13:08] <sleipnir> k1l, %CPU(s): 0.0 us, 0.1 sy, 0.0 ni, 99.9 id, 0.0 wa, 0.0 hi, 0.0 si, 0.0 st
+[13:09] <k1l> ok
+=== tree is now known as quietone
+[13:09] <nurul> hei
+[13:09] <nurul> its first time i use irc
+[13:10] <drmagoo> sleipnir: what client are you using to ssh to the machine ?
+[13:11] <zy3pDbot> hi
+[13:11] <sleipnir> drmagoo, just ubuntu ssh
+[13:12] <Dovid> How do I go abotu fixing this? It is an old server and I can't update bash
+[13:12] <Dovid> http://pastebin.com/r60hrXNR
+[13:12] <drmagoo> can you try "ssh -vvv user@host and provide a pastebin of the output ?
+[13:13] <Dovid> drmagoo: Talking to me?
+[13:13] <drmagoo> sorry, that was for sleipnir
+[13:14] <drmagoo> sleipnir: can you try "ssh -vvv user@host" and provide a pastebin of the output ?
+[13:14] <sleipnir> drmagoo, http://pastebin.com/q9iVwu4P
+[13:14] <zy3pD> hi
+[13:15] <sleipnir> drmagoo, the long wait happens after line 62 is displayed
+[13:18] <sleipnir> drmagoo, the machine I am trying to reach is multihomed (if that matters)
+[13:18] <roamer> EriC^^ : are you there? I have booted ubuntu from livecd
+[13:18] <sleipnir> drmagoo, actually that might matter because the route command takes about the same amount of time to complete as the ssh connection
+[13:19] <EriC^^> roamer: ok, sudo mount /dev/sda7 /mnt
+[13:20] <roamer> EriC^^ : done
+[13:21] <zy3pD> hi
+[13:21] <roamer> EriC^^ : next?
+[13:21] <EriC^^> roamer: sudo mount /dev/sda3 /mnt/boot/efi
+[13:21] <drmagoo> sleipnir: there is nothing really odd in that pastebin, that would point to a problem with the ssh-deamon on that machine.. There must be something else that causes that problem. is this a new issue or ?
+[13:22] <zy3pDbot> hi @and 3 servers
+[13:22] <roamer> EriC^^ : done... next?
+[13:24] <sleipnir> drmagoo, yes this is a new issue. there was a power failure and now I have this
+[13:24] <Laurenceb> hi
+[13:24] <sleipnir> drmagoo, it responds the same on all interfaces
+[13:25] <Laurenceb> i have a problem with samba printing
+[13:25] <Laurenceb> the printer is shows 0 pages when i print a large document
+[13:25] <Laurenceb> it seems to be related to the file size
+[13:25] <Laurenceb> can anyone advise?
+[13:25] <roamer> EriC^^ : by the way thank you for helping me. I really hope we can fix this issue. I really need this to work.
+[13:26] <roamer> EriC^^ : can you tell me what the next step is please?
+[13:26] <EriC^^> roamer: hold on
+[13:29] <erobinson> !
+[13:30] <EriC^^> roamer: trying to see how we can mount both efi's in the same place and install , mount --bind not working here
+[13:30] <drmagoo> sleipnir: if you run "dmesg", do you any output about disc read/write errors ?
+[13:31] <EriC^^> roamer: come to think of it, that sounds like a bad idea
+[13:31] <sleipnir> drmagoo, the route problem dissapears if I do route -n (it reseolves quickly) my google foo implies that it means my network is having some problems with reverse DNS lookup.
+[13:32] <sleipnir> drmagoo, I do not see any errors regarding IO error
+[13:32] <EriC^^> roamer: i think we should try to reinstall the grub package
+[13:32] <bitkamaki> hello anyone had any luck with ubuntu xdmx? i'm trying to extend my monitor to my laptop but it just goes blank
+[13:32] <HeadlessTracer> hi, can anyone tell me how to get unity web apps working in 12.04? thanks
+[13:32] <EriC^^> roamer: or, mount the first efi instead and install there
+[13:32] <EriC^^> roamer: up to you
+[13:32] <dualbootubuntu> hi, is it possible to install ubuntu to a connected secondary disk while I'm already running ubuntu? I got gparted to basically copy the partitions/types/flags etc of the first disk, just wondering how I would go about setting it up so that all I have to do is turn it off, change a cable and have the other disk boot up and not miss a beat
+[13:32] <EriC^^> roamer: hold on
+[13:33] <BobBall> dualbootubuntu: Have a look at debootstrap
+[13:33] <roamer> EriC^^ : ok... holding on
+[13:33] <EriC^^> roamer: for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
+[13:33] <EriC^^> run that
+[13:33] <Dovid> how do I tell apt-get what the password for MySQL is ? http://pastebin.com/JibGzE0i
+[13:33] <EriC^^> roamer: then sudo chroot /mnt
+[13:33] <dualbootubuntu> BobBall: thanks
+[13:34] <roamer> EriC^^ : ok done... next?
+=== root is now known as rootpt
+[13:35] <drmagoo> sleipnir: how long does a simple "host www.cnn.com" take ?
+[13:35] <EriC^^> roamer: sudo apt-get install --reinstall grub-efi-amd64-signed
+[13:35] <sleipnir> drmagoo, host could not be reached
+[13:36] <sleipnir> drmagoo, same with google, but 8.8.8.8 goes through
+[13:36] <roamer> EriC^^ : but this is a beta package?
+[13:36] <drmagoo> sleipnir: and what do you have in /etc/resolv.conf
+[13:36] <EriC^^> roamer: it's fine you are already using it i guess
+[13:36] <roamer> EriC^^ : anyway... did what you told me... what should I do next?
+[13:36] <EriC^^> roamer: mine's using it by default
+[13:37] <EriC^^> roamer: did you install it?
+[13:37] <roamer> EriC^^ : ok... what's next?
+[13:37] <sleipnir> drmagoo, nameserver 127.0.0.1
+[13:37] <EriC^^> what did it output?
+[13:37] <drmagoo> sleipnir: do you have a local dns-server on that machine ? otherwise try to add "nameserver 8.8.8.8" as the first line in that file
+[13:38] <roamer> EriC^^ : yes I have... awaiting further instructions...
+[13:38] <EriC^^> roamer: in the end what did it say?
+[13:38] <sleipnir> drmagoo, I do not have a local nameserver
+[13:38] <roamer> EriC^^ : instalation finished. No error reported
+[13:39] <EriC^^> roamer: type update-grub
+[13:39] <drmagoo> sleipnir: do you have an internal dns-server on you network, use that.. else you google's (8.8.8.8)
+[13:40] <roamer> EriC^^ : Done!
+[13:41] <EriC^^> ok
+[13:41] <EriC^^> type exit
+[13:41] <roamer> EriC^^ : typed exit
+[13:42] <EriC^^> ok btw when you type ls /boot/efi , you get some files right?
+[13:42] <EriC^^> i mean
+[13:42] <EriC^^> ls /mnt/boot/efi
+[13:42] <roamer> EriC^^ : let me check
+[13:43] <roamer> EriC^^ : yes I get Boot and EFI folders as well as bootmgr, BOOTNXT and BOOTSECT.BAK files
+[13:43] <EriC^^> ok
+[13:44] <EriC^^> sudo reboot
+[13:45] <roamer> EriC^^ : same problem :(
+=== csheldon_ is now known as Corey84
+[13:45] <EriC^^> we can try mounting the 1st efi if you want
+[13:45] <EriC^^> it might work
+[13:45] <roamer> EriC^^ : ok... let us do that can we do that from grub rescue?
+[13:45] <EriC^^> nope
+[13:46] <EriC^^> livecd again
+[13:47] <roamer> EriC^^ : can you please explain to me what is wrong and what we are trying to do?
+[13:47] <EriC^^> roamer: i think the bios boots the first efi partition
+[13:47] <EriC^^> and it finds grub there, but it is corrupt or something
+[13:48] <roamer> EriC^^ : I see... I also read the following : https://bugs.launchpad.net/ubuntu/+source/grub2/+bug/1289977/comments/35
+[13:48] <EriC^^> so it takes you to the prompt
+[13:48] <ubottu> Launchpad bug 1289977 in grub2 (Ubuntu) "Ubuntu 14.04 Update breaks grub, resulting in "error: symbol 'grub_term_highlight_color' not found"" [High,Triaged]
+[13:48] <roamer> EriC^^ : It seems we haven't done any dpkg-reconfigure...
+[13:49] <roamer> EriC^^ : can that be the problem?
+[13:49] <EriC^^> roamer: i dont think so
+[13:51] <EriC^^> roamer: what error does grub give?
+[13:51] <roamer> EriC^^: error: symbol 'grub_term_highlight_color' not found
+[13:51] <drmagoo> sleipnir: did that solve the problem ?
+[13:52] <sleipnir> drmagoo, yes, lol
+[13:52] <sleipnir> drmagoo, well no
+[13:52] <EriC^^> roamer: ok, boot the livecd
+[13:52] <sleipnir> drmagoo, it did on one machine and not the other
+[13:52] <wadie> how to add a custom resolution to my Ubuntu 14.04 ?
+[13:52] <sleipnir> drmagoo, my server had all osrts of funky stuff in resolv.conf, I commeted that out and put in 127.0.0.1
+[13:53] <EriC^^> wadie: xrandr
+[13:53] <slap_stick> hi, i am trying to setup a LUKS partition for /root however, after doing a luksopen on the filesystem and doing a chroot on that filesystem as well as mounting the boot partition /dev/sda1 under the chroot'ed area, when i do an update-initramfs and put it in verbose mode + check the actual cpio file, it doesn't contain the evms_activate file under /sbin i'm not sure why though?
+[13:53] <roamer> EriC^^ : done
+[13:53] <sleipnir> now I can ssh into the server and get an immidiate response, and route takes 1 ms to populate
+[13:53] <slap_stick> sorry not for /root but for /
+[13:53] <EriC^^> sudo mount /dev/sda7 /mnt
+[13:53] <sleipnir> however on my desktop (this one is not multihomed) I still have the problem that route takes 30 seconds
+[13:53] <wadie> EriC can you link me somewhere ?
+[13:53] <drmagoo> sleipnir: and what do you have in the resolv.conf for that machine ?
+[13:54] <EriC^^> wadie: what resolution do you want?
+[13:54] <wadie> 1600x1200
+[13:54] <EriC^^> type gtf 1600 1200 60
+[13:54] <EriC^^> ( if you want it at 60Hz )
+[13:55] <roamer> EriC^^ : ok... next?
+[13:55] <EriC^^> roamer: sudo mount /dev/sda1 /mnt/boot/efi
+[13:55] <wadie> ok..
+[13:56] <EriC^^> wadie: that will give you the modeline
+[13:56] <wadie> yep
+[13:56] <EriC^^> it's from 60.00" to vsync or something
+[13:56] <roamer> EriC^^ : ok... done that...
+[13:56] <wadie> "1600x1200_60.00"  160.96  1600 1704 1880 2160  1200 1201 1204 1242  -HSync +Vsync
+[13:56] <EriC^^> type xrandr --newmode <modeline>
+[13:56] <EriC^^> wait
+[13:57] <wadie> ok
+[13:57] <EriC^^> type xrandr --newmode "1600x1200" 160.96 .......+Vsync
+[13:57] <EriC^^> roamer: for i in /dev /dev/pts /proc /sys /run; do sudo mount -B $i /mnt$i; done
+[13:57] <wadie> done
+[13:58] <EriC^^> wadie: type xrandr --addmode default 1600x1200
+[13:58] <EriC^^> you can add it to whatever output you want
+[13:58] <wadie> xrandr: cannot find output "default"
+[13:58] <EriC^^> ok type xrandr
+[13:58] <EriC^^> it should say like HDMI1
+[13:58] <EriC^^> or whatever
+[13:59] <EriC^^> get the output you want to add it to
+[13:59] <android42863> Hi all
+[14:00] <android42863> Is this working? I'm trying out android app
+[14:01] <OerHeks> yes
+[14:01] <EriC^^> wadie: it's like <output> Connected .......
+[14:03] <poobutt> what is a good jabber client that runs in the terminal on ubuntu that supports gpg, recommendations anyone?
+[14:04] <OerHeks> !info mcabber
+[14:04] <roamer> EriC^^ : ok... what is next step?
+[14:04] <ubottu> mcabber (source: mcabber): small Jabber (XMPP) console client. In component universe, is optional. Version 0.10.2-1 (trusty), package size 288 kB, installed size 808 kB
+[14:04] <Zerock|LittleRed> Having issues running OpenGL applications in 12.04. No, I can't upgrade. Is there a package for Intel that doesn't ship by default for some reason?
+[14:04] <EriC^^> roamer: sudo chroot /mnt
+[14:05] <poobutt> OerHeks: thanks
+[14:06] <suraj2596> hi all
+[14:07] <suraj2596> anyone there?
+[14:07] <Pici> Yes. There are many someones here.
+[14:08] <LainProtocol7> Zerock|LittleRed: What is your hardware?
+[14:08] <suraj2596> hey pici, u new here?
+[14:08] <sebastianlutter> is there a useful alternative software to teamviewer available? The client I want to connect to is behind router/firewall, so VNC does not work well. I have a root server I can use as proxy. How can I achieve to access the Desktop remotely from outside?
+[14:08] <Zerock|LittleRed> LainProtocol7: 00:02.0 VGA compatible controller: Intel Corporation Atom Processor D4xx/D5xx/N4xx/N5xx Integrated Graphics Controller
+[14:08] <suraj2596> go for mumble, u can chat but not all features
+[14:08] <Zerock|LittleRed> LainProtocol7: Very bad hardware, but this application is super light. Just needs proper driver.
+[14:09] <OerHeks> sebastianlutter, find a service that runs over port 80, like teamviewer, i am not aware of a free client.
+[14:09] <Zerock|LittleRed> sebastianlutter: I have been searching for the same for over a year now. Best of luck to you.
+[14:12] <stangeland> I have 13.10 server ed. installed, I want to upgrade to 14.04. I can do sudo do-release-upgrade to upgrade......But how safe is that actually? Is there a probability that the system will crash and I will loose everything?
+[14:12] <ikonia> stangeland: take backups first
+[14:13] <ikonia> stangeland: how safe it is depends on what software you have configured on it and what repos you are using
+[14:13] <stangeland> ikonia, is it possible to easily just backuop the entire machine?
+[14:13] <ikonia> I presonally don't like the  in place upgrades, but they can work ok
+[14:13] <ikonia> stangeland: you can backup the whole machine or the file systems you want to use
+[14:13] <stangeland> i would like to backup the whole machine basically
+[14:13] <interweb> Hi , How can I install Gnome 3.14 on ubuntu 14.04 ? (with official PPA)
+[14:14] <ikonia> interweb: configure ppa - install gnome3
+[14:14] <somsip> sebastianlutter: isn't that something you can do via X over SSH? I have no experience of this but understand it does what you want
+[14:14] <ikonia> stangeland: look up clonezilla, simple solution
+[14:15] <AlexeyPetrenko> Hi all! How to force Mesa software rendering? Should I use environment variables from http://www.mesa3d.org/envvars.html
+[14:15] <ikonia> AlexeyPetrenko: force it ?
+[14:15] <ikonia> AlexeyPetrenko: let Xorg manage it
+[14:15] <EriC^^> roamer: ?
+[14:16] <interweb> ikonia, Any official PPA ?
+[14:16] <AlexeyPetrenko> ikonia: Yes, I have VBox VM and it's emulated graphics support only Opengl 2.1. I need Opengl 3 and I know Mesa softpipe driver supports it
+[14:16] <roamer> EriC^^ : sorry phone
+[14:16] <ikonia> interweb: not that I'm aware of,
+[14:17] <AlexeyPetrenko> ikonia: How do I configure my system so it uses software driver instead of VM's GPU
+[14:17] <EriC^^> roamer: no problem
+[14:17] <ikonia> AlexeyPetrenko: not sure actuually in that situation,
+[14:17] <roamer> EriC^^ : so I did the chroot
+[14:17] <__unik> can someone tell me what the hotkey for adding Shell tab in Yakuake
+[14:17] <felon> question: how do i know if im using unity 2D or 3D special affects?
+[14:17] <sebastianlutter> somsip, X can remote connect, also gdm/gnome has a vnc like mechanism. But the routing through subnet / router / firewall seems to be the bottleneck
+[14:18] <sebastianlutter> Zerock|LittleRed, Thanks, you still using teamviewer?
+[14:18] <EriC^^> roamer: try sudo apt-get install --reinstall grub-efi-amd64-signed
+=== ljl_ is now known as LjL-GNOME
+[14:18] <ikonia> AlexeyPetrenko: I think (I'll need to check this) there is an xorg module for it, so if you load that it should work, but I'll need to check this
+[14:18] <wadie> Thank you Eric, it's much better now :D
+[14:18] <wadie> :D
+[14:18] <wadie> :D
+[14:18] <AlexeyPetrenko> ikonia: It worked with other VM's where I just could disable 3D acceleration and use software emulation. But now it's boot2docker VM and I dont have control over it, so I want to make it inside ubuntu
+[14:18] <EriC^^> wadie: great :)
+[14:18] <sebastianlutter> OerHeks, you mean something like VNC over web (do not know if something like this exists, just to get your point)
+[14:18] <Zerock|LittleRed> sebastianlutter: I'm not using any remote desktop software, since there isn't any that respects my freedom.
+[14:19] <AlexeyPetrenko> ikonia: Yep, I'm sure it should be. Would be nice to know how to configure X this way.
+[14:19] <Zerock|LittleRed> aren't any that respect*
+[14:19] <EriC^^> wadie: it's not persistent though, if you want it you can make a script and add it to ~/.profile
+[14:19] <sebastianlutter> Zerock|LittleRed, I feel the same way
+[14:19] <ikonia> AlexeyPetrenko: you basically just do a "loadmod" in theh xorg.conf, but I'll need to check the info as I'm working from memory and not %100 sure I'm right
+[14:19] <Zerock|LittleRed> sebastianlutter: I actually run Trisquel Mini on this machine.
+[14:20] <Zerock|LittleRed> Ubuntu at work, and Parabola at home.
+[14:20] <wadie> what do you mean not persistent ? :O how can I create that script ?
+[14:20] <EriC^^> wadie: the last command btw for xrandr to switch the resolution is xrandr -s 1600x1200
+[14:20] <wadie> I used xrandr VGA1 1600x1200 and it worked
+[14:20] <EriC^^> wadie: yes also xrandr --output VGA1 1600x1200 works
+[14:21] <wadie> so about that script
+[14:21] <wadie> what does it include
+[14:21] <sebastianlutter> Zerock|LittleRed, if all that ipv4 subnet / firewall / masquerating stuff would be replaced by ipv6 (a global accessible ip for any device) I guess VNC would do what I want.
+[14:21] <EriC^^> take the commands and put them in a file, call it something, then chmod +x <script>
+[14:22] <Zerock|LittleRed> sebastianlutter: Out of curiosity, what do you need the software for?
+[14:22] <EriC^^> and in ~/.profile add "bash <script>"
+[14:22] <wadie> you mean the xrandr things ?
+[14:22] <EriC^^> wadie: yeah
+[14:22] <Zerock|LittleRed> I did things the hard (read: easy) way, and switched my friends and family to GNU+Linux so I could use ssh.
+[14:22] <wadie> so I'll create a bash script with the xrandr commands, move it to ~/.profile then chmod +x
+[14:23] <EriC^^> wadie: put it anywhere you want, add the path to ~/.profile , bash /path/to/script
+[14:23] <sebastianlutter> Zerock|LittleRed, my setup involves a gentoo with i3 wm and a ubuntu 14.04. I have a crawler for an research project running on my office ubuntu box. But I need about an hour from home to the office, and want to check If everything is well (and maybe restart things) without beeing forced to go there.
+[14:23] <EriC^^> wadie: if you want you can call it ~/.resolution.sh so it'll be hidden
+[14:24] <sebastianlutter> Zerock|LittleRed, it has some GUI elements, so ssh alone does not solve my problem, so VNC or something like this is needed
+[14:27] <HoNgOuRu> hi, my system freezes sometimes after hitting the /home/user folder icon, sometimes it comes back to normality, some others don't.... my home folder /home is in an independent partition from the system.... should I check the partition for disk errors ? or what? I am running ubuntu 14.04... any help will be appreciated...btw, the system / was reformatted yesterday cause I had some laggy situations before...
+[14:31] <wadie> Eric can you link me to a documentation online because I'm not really sure I'm doing it right
+[14:31] <roamer> EriC^^ : sorry for late reply my internet connection was gone. can you please tell me the next step after apt-get install?
+[14:32] <drmagoo> HoNgOuRu: sounds like disc issues, so a check would be a good idea
+[14:33] <Abhijit> pppoe-setup says pppoe.conf not found. i did apt-get install pppoe but package is already installed. can not connect to dnl
+[14:36] <HoNgOuRu> drmagoo, ok... do I have to be root? have the /home unmounted?
+[14:36] <Abhijit> pppoeconf gives SIOCSIFFLAGS: Operation not possible due to RF-kill
+[14:36] <adriennbox> hi everyone, i have no more mouse and internet on ubuntu 14.04
+[14:36] <adriennbox> somebody know why?
+[14:38] <varunendra> Abhijit, does this system have Network Manager installed? You can use that to set up a DSL connection.
+[14:38] <Abhijit> varunendra, networkmanager also does not connect. hence I am here in irc.
+[14:38] <LainProtocol7> adriennbox: 14.04 doesn't support mice or internet
+[14:38] <drmagoo> HoNgOuRu: how proficient are you with linux ? For the best result you should boot from a livecd and run the scan from that.. Unless you are running some sort of encryption on that directory/disc
+[14:38] <varunendra> adriennbox, since when do you have these absent?
+[14:39] <adriennbox> since 3 days
+[14:39] <HoNgOuRu> drmagoo, ok, I got it... I'll do that... shall I use fsck ?
+[14:39] <adriennbox> i can reinstall but i dont want to lose file
+[14:39] <varunendra> Abhijit, is the interface up? And are you trying this over wireless?
+[14:39] <Abhijit> varunendra, for pppoe i got only ethernet cable. modem do not support mifi.
+[14:40] <adriennbox> lainprotocol17 really? so i have to use another version?
+=== carlos is now known as Guest30935
+[14:40] <adriennbox> wich version?
+[14:40] <Abhijit> varunendra, this is for railwire btw
+[14:40] <EriC^^> roamer: sorry, im back
+[14:40] <EriC^^> roamer: grub-install --recheck /dev/sda
+[14:40] <HoNgOuRu> drmagoo, can I just logout from this session log as root unmount /home and do the same ?
+[14:40] <varunendra> adriennbox, just ignore the "doesn't support" comment.
+[14:40] <adriennbox> ok
+[14:40] <EriC^^> wadie: sorry
+[14:40] <EriC^^> wadie: can you pastebin your script?
+[14:41] <varunendra> adriennbox, did it happen after an update or any particular development?
+[14:41] <HoNgOuRu> roamer, I did that just yesterday
+[14:41] <roamer> EriC^^ : welcome back, I have done as you asked no errors reported
+[14:41] <HoNgOuRu> roamer, if you need a hand...
+[14:41] <adriennbox> varunendra i dont remember sorry... but i use live ubuntu
+[14:41] <adriennbox> my sister used live ubuntu instead
+[14:41] <EriC^^> wadie: ~/.profile is a file, not a directory, add "bash ~/.resolution.sh" to the end of the file, if you named your script .resolution.sh in your home directory
+[14:42] <varunendra> Abhijit, the "rfkill" thing only interferes with wireless devices. So that error is a bit confusing for me.
+[14:42] <roamer> EriC^^ : what is the next step?
+[14:42] <drmagoo> HoNgOuRu: I usually run it from a livecd, so that I am sure that there is nothing blocking/using that drive..
+[14:42] <EriC^^> roamer: update-grub
+[14:42] <HoNgOuRu> drmagoo, ok
+[14:42] <varunendra> adriennbox, Live Ubuntu with persistence? (can preserve changes?)
+[14:42] <HoNgOuRu> drmagoo, ok, thank you
+[14:42] <roamer> EriC^^ : so finished that too
+[14:43] <roamer> EriC^^ : next?
+[14:43] <EriC^^> roamer: grep -i highlight /etc/default/grub
+[14:43] <EriC^^> roamer: does it return anything?
+[14:44] <adriennbox> varunendra i guess no
+[14:44] <varunendra> Abhijit, please give us a little detail of your setup. Generally, it is a telephone cable from the ISP that plugs into a DLS modem, then an Ethernet cable from the modem to the computer/network-switch
+[14:44] <adriennbox> live ubuntu without save
+[14:44] <roamer> EriC^^ : no it doesn't
+[14:44] <EriC^^> roamer: ok, try sudo reboot
+[14:44] <EriC^^> exit first
+[14:45] <varunendra> adriennbox, if it can't save changes, then it boots with the default configuration everytime. Which means if it was working earlier, it should work on next boot too, unless there is a hardware change.
+[14:45] <adriennbox> hmm
+[14:45] <adriennbox> so i have to try normal boot after live boot?
+[14:45] <Abhijit> varunendra, this is nothing to do with telephone. direct fibre optic cable. then modem. then rj45
+[14:45] <Abhijit> varunendra, nothing else in the setup.
+[14:45] <adriennbox> varunendra so i have to try normal boot after live boot?
+[14:45] <roamer> EriC^^ : Same problem back in to grub rescue>
+[14:46] <roamer> EriC^^ : :(
+[14:46] <varunendra> adriennbox, please be specific on where you are having the problem - on a Live session or an installed instance (Ubuntu installed and running from Hard Disk)?
+[14:46] <adriennbox> varuendnra it run from harddisk
+[14:47] <adriennbox> varunendra after saw the problems (no mouse and no internet) i put the DVD and did live boot
+[14:47] <varunendra> Abhijit, I'm not familiar with optic fibre connections, but is it different from a regular DSL connection where you need to dial the connection using a username and password?
+[14:48] <varunendra> adriennbox, and the problem is same in both the Live session and the installed one?
+[14:48] <Abhijit> varunendra, no different. its just dsl only.
+[14:48] <adriennbox> varunendra nope, live session work very well (mouse and internet) but run from hard ware no mouse and no internet...
+[14:49] <EriC^^> roamer: if you press esc when the pc boots
+[14:50] <EriC^^> do you get a boot options menu
+[14:50] <felon> ubuntu 14.04 LTS runs so smooth ... glad i formatted and did a fresh upgrade install.
+[14:52] <varunendra> adriennbox, okay, then please boot into the installed version (hard disk) and try this first - "sudo modprobe -rv psmouse".... then.. "sudo modprobe -v psmouse". If this doesn't activate the mouse, run these commands in terminal - "xinput"... and .... "lsmod". Then upload their outputs to pastebin and give us the pastebin link.
+[14:52] <adriennbox> oh nice
+[14:52] <adriennbox> varunendra thx i try now
+[14:53] <varunendra> Abhijit, thought so, since you were trying pppoe. Can you log into the modem interface and check if it (pppoe) can be configured there?
+[14:54] <Abhijit> varunendra, i cant login. ethernet interface is not connected.
+[14:55] <Battlecruiser> hi there
+[14:55] <Battlecruiser> has anyone worked around the problem that wine and cuda 6.5 can't be installed together?
+[14:55] <Battlecruiser> 'cause I need both things installed
+[14:55] <varunendra> Abhijit, then getting the link up is the first problem, pppoe will come later. Please give us the pastebin links of the outputs of - "sudo lshw -C network" and "sudo ethtool eth0".
+[14:56] <adriennbox> varunendra thx very much mouse is back, but no wifi...
+[14:56] <adriennbox> varunendra what is command for the wifi? thx very much
+[14:58] <Peter_> does anyone know of a mirror for old-releases.ubuntu.com? I keep getting intermittent connection timeouts
+[14:58] <roamer> EriC^^ : no...
+[14:58] <OerHeks> Peter_, that is the only mirror
+[14:59] <Peter_> OerHeks ok thanks, it's been having issues since late last week
+[15:00] <Abhijit> varunendra, https://gist.github.com/abhi-navale/49d1590852ecb30b642e
+[15:04] <roamer> EriC^^ : what shall i do?
+[15:04] <hsnopi> Good morning all. There are a lot of access.log entries showing attempts to break in using the shellshock bug. It attempts to wget ec.z. I'm unable to locate anything regarding that. Does anyone know anything about it?
+[15:04] <hsnopi> I had already updated my bash shells friday.
+[15:06] <varunendra> adriennbox, Abhijit sorry went afk, an urgent call..
+[15:06] <Abhijit> o
+[15:06] <Abhijit> ok
+[15:06] <varunendra> adriennbox, for wifi, please follow the instructions at this link and give us the report it asks for : http://ubuntuforums.org/showpost.php?p=13024222
+[15:06] <somsip> hsnopi: the attack approach I've read about is is to try to wget a dodgy file, then execute it which installs something more dodgy
+[15:07] <hsnopi> yeah, that's what I'm seeing. Rkhunter shows no diffs but I'm not sure how to tell if the attack was successful
+[15:07] <hsnopi> 74.201.85.69/ec.z is the main one I'm seeing on a few different machines
+[15:08] <varunendra> Abhijit, please try this - "sudo ethtool -s eth0 speed 100 duplex full autoneg off". Does it get you connected to the modem? (can you ping it?)
+[15:08] <hsnopi> I suppose since it was attempted muletiple times frto the same origination it's a sign it failed.
+[15:08] <adriennbox> varunendra i try now
+[15:09] <daftykins> hsnopi: perhaps the bash channel can shed some light, or channels of web servers
+[15:09] <Abhijit> varunendra, bad command line argument
+[15:09] <somsip> hsnopi: I see no payload in that file
+[15:09] <hsnopi> somsip, agreed. I just wanted tomake sure. thanks.
+[15:09] <somsip> hsnopi: np
+[15:09] <varunendra> Abhijit, please copy-paste the command you tried.
+[15:10] <Abhijit> varunendra, # ethtool -s eth0 speed 100 duplex full autoeng off
+[15:12] <Abhijit> varunendra, corrected
+[15:12] <varunendra> Abhijit, what was the error?
+[15:13] <varunendra> oh, ....eng XD
+=== captain-fixerpc1 is now known as captainfixerpc14
+[15:15] <varunendra> Abhijit, try disabling > re-enabling the interface (sudo ifconfig eth0 down... then ... sudo ifconfig eth0 up) if it doesn't automatically get an IP (assuming you have DHCP enabled on the network).
+=== Adamx2 is now known as Ronald
+=== volent1 is now known as volent
+[15:20] <roamer> Hi, can anyone help me? I currently stuck at the grub rescue screen... I really need to get this pc running. I updated from 13 to 14 on a efi dual boot system. Couldn't repair it with repair-boot please
+[15:22] <loa> what freeware tool is for managing wine environments?
+[15:23] <loa> playonlinux?
+[15:23] <loa> i forgot it.
+[15:23] <loa> =/
+[15:23] <varunendra> loa or winetricks
+[15:24] <roamer> Hi, can anyone help me? I currently stuck at the grub rescue screen... I really need to get this pc running. I updated from 13 to 14 on a efi dual boot system. Couldn't repair it with repair-boot please
+[15:26] <varunendra> roamer, I'm not an EFI booting guy, but have you already checked out this thread at UF? - http://ubuntuforums.org/showthread.php?t=2147295
+[15:26] <jiohdi> using ubuntu-gnome-desktop, under setting online accts, I set up gmail... everything goes fine, then a pop up window asks for the gmail password and rejects the correct password, what am I doing wrong?
+[15:26] <erayaydin> Hi, I installed GCC and I used nullptr in C++. But compiler said "you haven'T c++11". I think in Ubuntu we haven' C++11 ?
+[15:26] <erayaydin> is this true ?
+[15:27] <erayaydin> if we have C++11 , how can I install ?
+[15:27] <roamer> varunendra, yes I have... The system was working perfectly before but after update it broke... I really need help.
+[15:28] <varunendra> jiohdi, happens to me with Thunderbird and Empathy when the connection is too slow! A disconnect --> reconnect fixes is, when the connection speed is at least usable again.
+[15:29] <erayaydin> Anyone could please help me for C++11
+[15:31] <jiohdi> varunendra, my connection speed is 20Mbps
+[15:31] <varunendra> roamer, upgraded via update manager or from an installation DVD/USB of 14.04? Upgrading via update manager frequently causes broken setups :(
+[15:31] <roamer> varunendra, yes upgraded from update manager
+[15:33] <varunendra> roamer, the author of that UEFI guide is online right now. Maybe post a thread at UF asking for help there. It's mostly a foreign territory for me.
+[15:34] <varunendra> I mean the UEFI, not UF :p
+[15:34] <OerHeks> erayaydin, ubuntu 14.04 comes with gcc 4.8.2 that is fully C++11
+[15:35] <OerHeks> http://gcc.gnu.org/projects/cxx0x.html
+[15:35] <roamer> varunendra, is he here? who is he?
+[15:36] <varunendra> roamer, not here, at Ubuntu Forums. Oldfred
+[15:38] <sheap> http://paste.ubuntu.com/8459434/ anyone know why this package is being selected? 1.1 is in trusty-updates but I don't have that in my sources list.....idk where it's coming from :(
+[15:39] <erayaydin> OerHeks: I using Code::Block and compiler GCC. I used `nullptr` but editor saying: "warning: identifier 'nullptr' is a keyword in c++11, error: 'nullptr' was not declared in this scope"
+[15:40] <jiohdi> varunendra, anything else maybe causing the problem with bad password?
+[15:41] <erayaydin> OerHeks: my GCC version: 4..8.2 - null pointer constant min version: 4.6
+[15:42] <ticket> hi people
+[15:42] <reisio> hi tick
+[15:42] <ticket> since i upgraded to ubuntu 14 (from ubunto 12), i cant run the x seerver anymore :/
+[15:42] <varunendra> jiohdi, the only thing that causes troubles for me is "two-step-verification" feature of google, where we need to generate an "application password" for specific applications like chat clients. If you haven't enabled 2-step-verification, I can't guess what else could be causing the error (apart from a typo of course).
+[15:42] <ticket> i now only have the tty to use my ubuntu
+[15:43] <jiohdi> varunendra, I am not sure about the 2 step thing, if I have that enabled what am I supposed to put in when it asked for my j@gmail.com password other than my password?
+[15:44] <holden87> Hey guys, one question: If i was looking something nice, stable, with a prolongued support for a laptop (4gb ram), dual core intel 2.1, what would you suggest?
+[15:44] <netlar> jiohdi: You may need to know if you have 2-step verification
+[15:44] <reisio> holden87: a table
+[15:44] <varunendra> jiohdi, if you're not sure, then you don't have it enabled. Google enables it only if opted-in.
+[15:45] <adriennbox> varunendra thx i did it
+[15:45] <reisio> holden87: 'prolonged support' is code for "I will be lazy to the point of not updating for longer than five whole years", right?
+[15:45] <jiohdi> varunendra, lets assume I have it because I really dont remember one way or the other, then what
+[15:45] <ticket> holden87: i would suggest debian wheezy
+[15:45] <erayaydin> OerHeks: OK, I found. I checked checkbox in Code::Block. IDE fail :D . Thank you
+[15:45] <drmagoo> ticket: what graphics card do you have ?
+[15:45] <erayaydin> I fixed no more problem :)
+[15:45] <netlar> jiohdi: If you do have 2-step, then you need to get an application login
+[15:45] <ticket> drmagoo:  nvidia gtx 660 ti
+[15:46] <OerHeks> erayaydin, great, i was looking for something simular too
+[15:46] <adriennbox> varunendra http://pastebin.ubuntu.com/8459471/
+[15:46] <jiohdi> netlar, 2 step means I have to do two things everytime I log in? if thats the case then I dont have that
+[15:46] <adriennbox> but who will see the txt now?
+[15:46] <varunendra> jiohdi, in this kind of verification, you can authenticate specific systems so that you can log into google account ONLY from THOSE systems. If you try to log on from another system, google sends you a verification code on your mobile.
+[15:46] <adriennbox> varunendra how i got answer?
+=== dirkson is now known as Guest69531
+[15:46] <Guest69531> Hi sorry I'm a noob - but can I install Ubuntu on Windows 8?
+[15:46] <netlar> jiohdi: No, but you do need to authorize google to use each app
+[15:46] <jiohdi> varunendra, ok, I have that for MS but not for gmail
+[15:46] <wadie> can someone please send me a link on how can I make the xrandr customization permanent ?
+=== dankh is now known as Guest74127
+[15:47] <varunendra> adriennbox, taking a look at the report now....
+[15:47] <adriennbox> varunendra u are the one who did it? ok
+[15:47] <netlar> jiohdi: Do you know how to get to your security settings?
+=== alessandro is now known as Guest88979
+[15:47] <jiohdi> netlar, in gmail? yes
+[15:47] <holden87> ticket: i could probably get to it once a year, but would need something that's definitely not half-baked. debian, opensuse, ubuntu, i'm looking into the options. But i know holding on for too long with upgrading is unrealistic. as i'll either get a newer phone which i'll need to load, or a newer e-reader which calibre won't be able to do :D
+[15:47] <netlar> jiohdi: Ok, when you get to that page, go to the security tab
+[15:48] <Marcelunilsson> Hello, i just went from dualboot to a clean ubuntuinstall. The problem im having is that grub is finding some loaders other than the current install on other harddrives. this means i have to wait for grub each boot, i dont want that! how do i make it just boot this installation?
+[15:48] <Wulframn> Guest69531: I think there is a windows installer...wubi or something.
+[15:48] <ticket> hhm
+[15:48] <Wulframn> !wubi | Guest69531
+[15:48] <ubottu> Guest69531: Wubi allows you to install or uninstall Ubuntu 12.04 LTS from within Windows ( version 7 or earlier ) in a simple and safe way. Wubi is INCOMPATIBLE with UEFI, Windows 8 Certified computers, and Windows RAID arrays. https://wiki.ubuntu.com/WubiGuide for more information. File wubi bugs at http://launchpad.net/wubi/+filebug
+[15:49] <Guest69531> wubi wont work for Windows 8 then?
+[15:49] <drmagoo> ticket: do you have the nvidia-current package installed ?
+[15:49] <Wulframn> Guest69531: apparently not! What are you trying to do? Dual-boot?
+[15:49] <Battlecruiser> has anyone worked around the problem that wine and cuda 6.5 can't be installed together?
+[15:50] <Battlecruiser> 'cause I need both things installed
+[15:50] <ticket> ah it seem to have disappear
+[15:50] <netlar> jiohdi: When you are on that page, you see the password section, you should see 2-Step verification enable or not
+[15:50] <Wulframn> Battlecruiser: also try #wine
+[15:51] <wadie> can someone please tell me how can I make the xrandr customization permanent ?
+[15:51] <jiohdi> netlar, the issue is this... on one computer evolution has a pop up saying password for gmail and I put it in and it works fine, on the 2nd comp same password says incorrect password... I am doing this via ubuntu-gnome settings/online accts
+[15:51] <varunendra> adriennbox, please try - "sudo modprobe -v ath5k". If you get any errors while executing that, post back the error you get.
+[15:51] <drmagoo> ticket: yeah, had the same issue when I upgraded...
+[15:52] <netlar> jiohdi: Did you get to the security tab on your account settings?
+[15:52] <Wulframn> wadie: thanks for your patience! If anyone knows how to help they'll respond asap. Sorry for the wait...
+[15:52] <drmagoo> ticket: you might need the build-essentials package too, if I remeber correctly
+[15:52] <jiohdi> netlar, that is obviously not at issue since its a difference between these computers
+[15:53] <Marcelunilsson> Hello, i just went from dualboot to a clean ubuntuinstall. The problem im having is that grub is finding some loaders other than the current install on other harddrives. this means i have to wait for grub each boot, i dont want that! how do i make it just boot this installation?
+[15:53] <netlar> jiohdi: Just checking to see if you have 2-step enabled or not first
+[15:53] <adriennbox> varunendra thx  a lot, wireless work now
+[15:53] <jiohdi> netlar, no I do not
+[15:53] <wadie> Thank you Wulframn :)
+[15:53] <adriennbox> varunendra got to go now, bye thx a lot
+[15:53] <varunendra> adriennbox, congrats! Although it is a bit confusing why it didn't load automatically.
+[15:54] <netlar> jiohdi: So for the online accounts, it will not accept the password at all?
+[15:55] <ticket> i installed the nvidia-current
+[15:55] <netlar> jiohdi: when I put in my google account, it will accept my pass, but then I need to grant access after that
+[15:55] <ticket> drmagoo:  and it returned an error during the pre-removal
+[15:55] <jiohdi> netlar, first a window pop up occurs saying all the google stuff it wants access to, I put in the password there and click accept and everything seems to work, then a 2nd system pop up happens asking for my j@g password, put that in in 1 comp, no issues, 2nd comp, rejects it as wrong password
+[15:56] <ticket> there must be errors in my source list
+[15:56] <ticket> can i restore it to a default source list?
+[15:57] <netlar> jiohdi: not sure then, I have never tested that before
+[15:57] <netlar> jiohdi: Sorry
+[15:57] <ticket> drmagoo: i didnt find the build-essentials in apt-get
+[15:58] <geirha> ticket: build-essential without an s on the end
+[15:59] <sheap> so im doing a tasksel of "ubuntu-desktop" and "xubuntu-desktop" but theres a package in xubuntu-desktop that's at a higher version than what's needed in ubuntu-desktop and the install is failing
+[15:59] <sheap> any way to fix this?
+[15:59] <ticket> drmagoo:  ok, it seems to be already there
+[16:00] <ticket> drmagoo:  the error is on nvidia-331-updates
+[16:01] <drmagoo> ticket: what error do you get ?
+[16:02] <ticket> when i run startx...
+[16:02] <ticket> there are some timeouts
+[16:02] <ticket> and the xorg sever refuses the connec
+[16:02] <k1l> ticket: dont run startx
+[16:02] <k1l> ticket: start the lightdm
+[16:02] <ticket>  it says /usr/bin/X not found
+[16:03] <reisio> maybe you don't have X
+[16:03] <bubaya> Hi. Does anyone know where to download the EDS data integration addon for thunderbird that comes with some Ubuntu versions?
+[16:03] <ticket> lightdm failed to start
+[16:03] <tgm4883> On 14.04, I installed Kubuntu, but then installed Ubuntu-desktop. Everything works fine, but my menu's are a bit difficult to read (see http://ibin.co/1c1MMeOAneJZ ) and I can't find a way to resolve this
+[16:03] <ticket> reisio: yes, it has disappeard during the upgrade
+[16:03] <reisio> bubaya: for evolution?
+[16:04] <k1l> ticket: on ubuntu you dont use startx, you start the *dm and that will manage all the X stuff for you
+[16:04] <ticket> yes k1l , and the job cant be started despite lightdm being installed
+[16:04] <bubaya> reisio: yes. There is a plugin that enables thunderbird to access evolution's contacts.
+[16:05] <k1l> ticket: what ubuntu is that exactly?
+[16:05] <ticket> 14.04
+[16:05] <bubaya> reisio: but their website https://launchpad.net/thunderbird-eds-extension has no downloads, although I already saw a Ubuntu installation having this addon installed.
+[16:05] <k1l> ticket: which desktop?
+[16:05] <ticket> previously i had unity, xfce, and kde
+[16:05] <ticket> and now, nothing :D
+[16:06] <ticket> lets setup ubuntu-desktop
+[16:06] <k1l> is lightdm your actual dm? is it running?
+[16:06] <drmagoo> ticket: try "apt-get install ubuntu-desktop"
+[16:06] <k1l> see dmesg what happens
+[16:06] <ticket> k
+[16:06] <demahum12> Is it true that ubuntu developer summit occurs after every new release?
+[16:07] <Marcelunilsson> Hello, i just went from dualboot to a clean ubuntuinstall. The problem im having is that grub is finding some loaders other than the current install on other harddrives. this means i have to wait for grub each boot, i dont want that! how do i make it just boot this installation?
+[16:08] <wadie> Has anyone tried ARandR? http://www.ubuntugeek.com/arandr-a-simple-visual-front-end-for-xrandr.html
+[16:08] <ticket> drmagoo: ok and then how do i start the desktop ?
+[16:08] <drmagoo> ticket: did that install any new packages ?
+[16:08] <ticket> yes, it installed 27Mb of new package
+[16:09] <drmagoo> ticket: try "service lightdm restart"
+[16:09] <tgm4883> demahum12: IIRC it happens vUDS happens every 3 months. At least that was what it was doing when they started it
+[16:10] <demahum12> tgm4883, and is there something named "ubuntu summit" without "developer" or it is the same thing?
+[16:11] <samthewildone> when running "top" I noticed that chromium is eating up a lot cpu power.
+[16:11] <tgm4883> demahum12: I believe there are different summits (or maybe I'm thinking of sprints)
+[16:11] <loa> samthewildone, you have many bookmarks?
+[16:11] <drmagoo> ticket: did that work ? or do you still get any errors ?
+[16:11] <samthewildone> I only have 3 tabs open with one using either HTML5 or flash for music streaming via soundcloud.
+[16:11] <ticket> yup, i wait for the stuff the download, it is soooo long
+[16:11] <samthewildone> loa, less than 50
+[16:12] <drmagoo> ticket: ok, let me know when its done ;)
+[16:12] <tgm4883> demahum12: this is slightly off topic here, can we take this discussion to #ubuntu-offtopic and you can describe what you are thinking of?
+[16:12] <loa> Samopotamus, on in folder "bookmarks folder"?
+[16:12] <demahum12> tgm4883, sure. :)
+[16:12] <loa> samthewildone, ^^
+=== Vampire0_ is now known as Vampire0
+[16:12] <loa> if so move them to folder called "other"
+[16:13] <loa> there is something with bookmarks in 37 version.
+[16:13] <squinty> Marcelunilsson:  https://help.ubuntu.com/community/Grub2/Setup#Configuring_GRUB_2
+[16:13] <samthewildone> Oh on my bookmark bar ? I have 8
+[16:14] <samthewildone> in my other bookmarks I have the others
+[16:15] <loa> Samopotamus, try to move them
+[16:15] <samthewildone> I still get an error on this > button->setText(tr("&Quit"));
+[16:15] <loa> Samopotamus, sorry man for this.
+[16:15] <loa> samthewildone, it started recently?
+[16:15] <samthewildone> opps
+[16:16] <samthewildone> wrong post on last
+[16:16] <ticket> drmagoo: ok, ubuntu-desktop installed, lightdm still doesnt want to start
+[16:16] <ticket> errors were encountered during the nvidia-331-updates execution
+[16:16] <drmagoo> ticket: try "dpkg-reconfigure lightdm"
+[16:16] <ticket> do i purge this nvidia stuff ?
+[16:16] <samthewildone> loa, almost all of my bookmarks go into a other folder.
+[16:16] <loa> try to move them all.
+[16:16] <ticket> ok
+[16:17] <ticket> still doesnt want to start the lightdm
+[16:17] <k1l> samthewildone: your flash stuff eats a lot of cpu.
+[16:17] <drmagoo> ticket: if that doesnt help, try to remove all nvidia-packages installed and just install nvidia-current
+[16:17] <VapidWorx> I entered the wrong syntax for .profile and now it's in a login boot. The problem is I can't change boot override so I can get to a command line now as root but it won't let me unmount the file system to edit .profile. Any ideas how to get around this? It's an Asus Zenbook that I removed Windows and added Ubuntu too
+[16:17] <drmagoo> ticket: and then try a "dpkg-reconfigure lightdm" again
+[16:17] <ticket> k lets go
+[16:17] <k1l> ticket: again: see "dmesg" what is going on there. i bet its a drivers issue
+[16:18] <ticket> mkay, removed the nvidia* things
+[16:19] <ticket> dmesg returns a lot of things
+[16:19] <jiohdi> and remember to run nvidia-xconf
+[16:19] <ticket> now installing nvidia-current
+[16:20] <drmagoo> ticket: also check if you have the "linux-headers-generic" package installed
+[16:20] <musicalvegan0> hi guys. is there a supported way of installing setroubleshoot server on 14.04? it's not in the repos. I assume it was removed because of apparmor.
+[16:20] <ticket> k
+[16:20] <samthewildone> https://drive.google.com/file/d/0B_rZKP9LDqUFeDdrU2Jjbnd2RDQ/edit?usp=sharing
+[16:20] <daniel_> hey guyz
+[16:21] <Marcelunilsson> squinty: thx! think i made it work 'reboot'
+[16:21] <ticket> k i didnt had the headers generic
+[16:21] <ticket> adding it
+[16:22] <drmagoo> ticket: you might need to do a "dpkg-reconfigure nvidia-current" after installing it...
+[16:22] <ticket> k
+[16:22] <ticket> ok done
+[16:23] <drmagoo> ticket: then try "service lightdm restart"
+[16:23] <Marcelunilsson> squinty: it worked ! thxx
+[16:23] <ticket> stop: unknown instalce: start: Job failed to start
+[16:23] <squinty> Marcelunilsson:  good to hear! :)
+[16:23] <ticket> unknown instance
+[16:24] <samthewildone> Have a look at this > https://drive.google.com/file/d/0B_rZKP9LDqUFSm1Ea05Yc3Bkakk/edit?usp=sharing
+[16:24] <drmagoo> ticket: "dpkg-reconfigure lightdm"
+[16:24] <samthewildone> Shows how many instances of chromium are running.
+[16:24] <samthewildone> I do have hangouts running in the background.
+[16:24] <daftykins> samthewildone: is there a question that goes with this?
+[16:25] <ticket> drmagoo: after reconfiguring, still failing to start
+=== PsiOmega is now known as AlphaBeta
+[16:25] <loa> please help me, looks like something goes wring very bad http://pastebin.com/wS0N6La2
+[16:25] <ticket> maybe i need to reboot
+[16:25] <loa> why this happened? why all my packages which i are deleted?
+[16:25] <drmagoo> ticket: what nvidia-packages do you have installed ?
+[16:25] <loa> what was that? O_O
+[16:25] <loa> bug?
+[16:25] <daftykins> loa: might be easier to ask in #ubuntu-ru
+[16:26] <ticket> after purgin all nvidia, just the nvidia current,
+[16:26] <Mayur> guys how can i revert everything that got installed in apt-get upgrade?
+[16:26] <VapidWorx> anyone have a suggestion how to get it to boot to liveUSB around boot override?
+[16:27] <ticket> drmagoo: just nvidia-current now
+[16:27] <samthewildone> daftykins, wanted to know why is chromium taking up so much cpu resources when I hardly have webpages open.
+=== eeeeee is now known as eeee
+=== eeee is now known as e
+[16:27] <samthewildone> this affects the performance of chromium because it hangs sometimes.
+[16:27] <drmagoo> ticket: give me a sec... trying to remeber all the hops I had to go thru to get it to work ;)
+=== e is now known as eeee
+[16:27] <daniel_> hey guys
+[16:27] <ticket> :)
+[16:28] <daftykins> samthewildone: try a clean profile.
+[16:28] <samthewildone> daftykins, sometime pages don't fully scroll and have a delay.
+[16:28] <ticket> the fun thing is, i upgraded on my laptop, also having an nvidia card and nothing went wrong
+[16:28] <daniel_> i want to learn core programming an someone is suggesting red hat ahead of ubuntu, whats ur say
+[16:28] <samthewildone> where is my chromium user profile ?
+[16:28] <daftykins> samthewildone: don't know.
+[16:28] <SchrodingersScat> somewhere in ~ probably
+[16:29] <samthewildone> SchrodingersScat, searched nothing there.
+[16:29] <samthewildone> though I found some stuff @ whereis chromium-browser
+[16:30] <drmagoo> ticket: which geforce card did you have ?
+[16:31] <loa> is there way to get last deleted packages?
+[16:31] <ticket> drmagoo: it is a geforce gtx 660 ti
+[16:31] <loa> log or something
+[16:31] <trism> samthewildone: ~/.config/chromium/
+[16:31] <creichen> Hi!  I'm trying to re-install grub, but I can't seem to get the on-screen keyboard (onboard or anything like it) to start, which makes that rather difficult.  Is there any clever trick to start OnBoard?  (This is on a utopic-unicorn snapshot from last week.)
+[16:31] <loa> need this option badly
+[16:32] <daftykins> !utopic
+[16:32] <ubottu> Ubuntu 14.10 (Utopic Unicorn) is the next development release of Ubuntu due for release in October 2014. Support in #ubuntu+1. For more info, see the announcement at http://www.markshuttleworth.com/archives/1363
+[16:32] <daftykins> creichen: that release is not final yet, discussion in #ubuntu+1
+[16:32] <creichen> daftykins: My apologies for spamming the wrong channel, and thanks!
+=== owner_ is now known as Guest15125
+[16:33] <daftykins> not a problem :)
+[16:33] <ticket> drmagoo: i should be able to start the x server even without the nvidia drivers isnt it ?
+[16:33] <Battlecruiser> http://pastebin.com/qzgXehnz
+[16:33] <Battlecruiser> anyone will help?
+[16:33] <samthewildone> trism, thanks man
+[16:33] <samthewildone> trism, lot of junk in there
+[16:33] <nullbyte_> what is diference of ubuntu gnome adn ubuntu desktop?
+[16:34] <samthewildone> ah there's the almighty "crash_reports" folder
+[16:34] <samthewildone> nullbyte_, ubuntu desktop is Unity
+[16:34] <samthewildone> nullbyte_, a custom desktop environment.
+[16:35] <daniel_> guyz pls does vb net work on ubuntu?
+[16:35] <samthewildone> nullbyte_, gnome is another desktop environment.
+[16:35] <reisio> daniel_: yes
+[16:35] <samthewildone> nullbyte_, pretty much it comes down to personal preference.
+[16:36] <samthewildone> nullbyte_, though Unity is more cross device (unity phone, tablets)
+[16:36] <samthewildone> !unity | nullbyte_
+[16:36] <ubottu> nullbyte_: Unity is the default UI since Ubuntu 11.04.  Unity is a shell for GNOME. see http://unity.ubuntu.com. For a GNOME 2-like experience, see !notunity
+[16:37] <reisio> that's right, unity, which is a shell for gnome... is more cross device :p
+[16:38] <drmagoo> ticket: that depends of you X-server is set to use the nvidia drivers
+[16:39] <drmagoo> ticket: try to do a "sudo nvidia-xconfig"
+[16:39] <ticket> mmhh
+[16:40] <drmagoo> ticket: then you should be able to start X again (service lightdm restart"
+[16:40] <ticket> unable to parse X.Org version string , backed up file xorg.conf, new X config file written
+[16:41] <ticket> still not willing to start lightdm
+[16:41] <ticket> i wait for the apt-get upgrade to finish
+[16:42] <drmagoo> ticket: that's not finished yet ?
+[16:42] <ticket> i ran it some minutes ago, there is 200 Mo to upgrade
+[16:43] <drmagoo> ticket: that might be why then, some package still not installed.. wait until all packages are installed and then try again
+[16:43]  * samthewildone is away: Currenly I'm away from the keyboard, please wait...
+[16:44] <loa> is there something similiar to mock under ubuntu?
+[16:45] <loa> need to build wine from sources, but is is too complicated under working system.
+[16:45] <ticket> lets wait :D
+[16:45] <loa> want make something like chroot.
+=== luckybunny is now known as lbaway
+[16:47] <nullbyte_> samthewildone: i understand, thank you
+[16:48] <nullbyte_> samthewildone: but Ubuntu Desktop is builded by Ubuntu ?
+[16:48] <ticket> drmagoo:  ok I rebooted, the prompt says that my current hardware enablement stack HWE is no longer supported since 2014-08-07.
+[16:48] <sheap> how do I correct package dependency problems when doing a tasksel of ubuntu-desktop/xubuntu-desktop and one creates a problem for the other?
+[16:48] <nullbyte_> Ubntu GNome i mean however
+[16:52] <ticket> drmagoo: and llightdm doesn't starts
+[16:52] <ticket> I try installing xfce
+[16:54] <drmagoo> ticket: can you paste the exact error message for the "Stack hwe is no longer supported"
+[16:54] <nilstab> i don't get any panel after login already reinstalled lightdm, unity, ubuntu-desktop... no avail, already deleted ~/.config, doesn't change anything. i can start ccsm but it has no window-decorations. over tty1 unity is activated
+[16:54] <nilstab> how to fix that?
+[16:55] <ticket> hm I will not find the message back, this terminal is very raw
+[16:55] <maris2> ciao
+[16:56] <drmagoo> ticket: kinda lost on ideas here
+[16:56] <ticket> :/
+[16:56] <ticket> it is xubuntu 14.04
+[16:56] <Erto> I am running ubuntu 14.04 . can i run a self test in 'Disks' while i'm logged into ubuntu??
+[16:57] <daftykins> Erto: disk tests are best from live sesion
+[16:57] <daftykins> +s
+[16:57] <EOBeav> Erto: AFAIK, no. Good reason to have a boot up USB to run those tests.  I'd recommend Parted Magic, but that's a pay for app now.
+[16:58] <ticket> drmagoo: the message is like this one http://askubuntu.com/questions/493541/hardware-enablement-stack-hwe-out-of-support
+[16:58] <Erto> daftykins: how long will those tests take for a 1TB HDD?
+=== bumlike is now known as Sleepnbum
+=== ekotowski is now known as edmondk
+[17:00] <daftykins> Erto: how long is a piece of string?
+[17:01] <Erto> pieceof string?
+[17:01] <drmagoo> ticket: can you try answer #4
+[17:04] <romance> just installing xfce desktop on my ubuntu unity, and ripped off the unity desktop, and now my ubuntu turns xubuntu, but i have a lil problem with uGet, it aint working anymore, any solution
+[17:05] <xangua> What did you exactly remove? romance
+[17:06] <romance> xangua: https://sites.google.com/site/easylinuxtipsproject/alternative , read the C. Cleanup
+[17:07] <ticket> drmagoo: I installed some things
+[17:07] <ticket> now I can see the login screen in graphic mode
+[17:07] <ticket> but I still can't login for real
+[17:08] <drmagoo> ticket: you cant login ?
+=== qwerty is now known as Guest2281
+[17:08] <ticket> when I login and type password, the screen goes black, and goes back to login choice
+[17:09] <ticket> some of the packages listed on the askubuntu page do not seem to exist
+[17:09] <ticket> and I can not copy and paste them with the computer who needs that :D
+[17:09] <drmagoo> ticket: but X now works ? did you reboot it ?
+[17:09] <ticket> x works, just for login screen
+[17:10] <troned> deluge doesnt start anymore for me, how do uninstall and reinstall a program?
+[17:10] <Erto> How long will it take to run a Self Test from 'Disks' for a 1TB HDD??
+[17:10] <xangua> xangua: maybe autoremove removed something else, you also didn't need to remove unity, let it alone or better do a fresh install
+[17:10] <Erto> I know I have one bad sector...
+[17:10] <xangua> romance: ^ ups
+[17:11] <ticket> rebooting
+[17:11] <drmagoo> ticket: ok good
+[17:11] <romance> xangua: still, i did a reinstalling of uget but it wont work too
+[17:11] <ticket> nope, still the same error after login with x
+[17:11] <daftykins> Erto: 'how long is a piece of string' means 'i have no idea and nobody else does either'. share your smartctl output?
+[17:12] <drmagoo> ticket: http://askubuntu.com/questions/223501/ubuntu-gets-stuck-in-a-login-loop
+=== ekotowski is now known as edmondk
+[17:13] <drmagoo> ticket: I think answer #9 will be most helpful for you
+[17:16] <ticket> mmmmkay, now I have logged in, but I have no icons, working bar or programs launched
+[17:16] <ticket> just the background and the cursor working
+[17:16] <s4my> hi
+[17:17] <drmagoo> ticket: and you moved the .Xauthority file?
+[17:17] <ticket> I moved it to .Xauthority.backup
+[17:17] <s4my> anyone here can help plz
+[17:17] <drmagoo> ticket: at least one step closer...
+[17:18] <s4my> drmagoo, dude can help plz
+[17:18] <squinty> !ask | s4my
+[17:18] <ubottu> s4my: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+=== ekotowski is now known as edmondk
+[17:20] <o2q> ticket: sudo chmod -x /usr/bin/gsettings
+[17:23] <ticket> I am doing a dist upgrade as in answer #9
+[17:24] <AlexPortable> so, i get busybox failed to mount something
+[17:24] <ticket> dammit 100kb/s
+[17:24] <rantic> Hi everyone, I'm interested in a minimal Ubuntu install and noticed the ubuntu minimal image doesn't contain EFI support. Would using Ubuntu Server as a base be OK?
+[17:24] <AlexPortable> how to fix?
+[17:24] <Erto> daftykins: Here's the output for smartctl  http://paste.ubuntu.com/8460095/
+[17:24] <drmagoo> ticket: check .xsession-errors for any clues
+[17:25] <daftykins> Erto: and what's the story behind what's leading you to want to perform a disk check?
+[17:26] <drmagoo> s4my: what problem do you have ?
+[17:26] <ticket> drmagoo: I don't have an .xsession file
+[17:26] <xangua> rantic: that depends, do you want a server?
+[17:26] <AlexPortable> I get something like this, is my data damaged?
+[17:26] <AlexPortable> http://askubuntu.com/questions/159554/ubuntu-12-04-wont-load-hangs-at-busybox-v1-18-5-initramfs
+[17:26] <rantic> xangua, No it's for a minimalist desktop
+[17:27] <drmagoo> ticket: in your home directory, you dont have a file called .xsession-errors ?
+[17:27] <ticket> nop
+[17:27] <daftykins> AlexPortable: boot a live session to investigate
+[17:28] <ticket> damn, yes I do have one
+[17:28] <drmagoo> ticket: =)
+[17:28] <ticket> why the auto complete doesn't show it
+[17:28] <rantic> ticket, did you autocomplete for a hidden file?
+[17:28] <Erto> I was getting input/output error while accessing a folder ... ran disks.... there's one bad sector..
+[17:29] <Erto> daftykins: ^
+[17:29] <ticket> aaaanyway :D
+[17:29] <daftykins> Erto: yeah it's still pending and hasn't been reallocated yet. i would backup the data, then use a manufacturer utility to zero fill the entire disk
+[17:29] <ticket> the xsession-errors has few lines
+[17:29] <daftykins> Erto: if the disk is in warranty, you could RMA it
+[17:29] <AlexPortable> daftykins: well if my disk is about to die, live session will kill it
+[17:29] <daftykins> AlexPortable: no, no it won't
+[17:30] <ticket> openConnection : connect: no file or folder like this, cannot connect to brltty at :0
+[17:30] <AlexPortable> daftykins: whyn ot?
+[17:30] <daftykins> AlexPortable: what part of booting a live session from a DVD or USB flash drive do you consider to affect a hard disk?
+[17:31] <AlexPortable> it turns on
+[17:32] <daftykins> AlexPortable: that's not how it works. boot a live session, install smartmontools and pastebinit, then run "sudo smartctl -a /dev/sda | pastebinit"
+[17:33] <drmagoo> ticket: check "dpkg --get-selections | grep ubuntu-session" if that is installed do a dpkg-reconfigure on it.. if its is not installed, install it =)
+[17:33] <AlexPortable> ok
+=== tcpman is now known as Guest74766
+[17:48] <demahum12> Is there anyone who knows how these things with Munich City and Limux (forked from Ubuntu) finished. I know that they decided to call IT staff to reconsider using Linux since many of the users complained. I can't find what happened. Is there anyone who knows more recent details about this?
+[17:50] <Samopotamus> loa, hah, no problem.
+[17:51] <daftykins> demahum12: this channel is for ubuntu support, nothing to do with anything beyond that.
+[17:52] <demahum12> daftykins, thanks.
+=== Navo_ is now known as N4V0
+=== N4V0 is now known as Navoo
+=== Navoo is now known as NavoDev
+[17:56] <AlexPortable> daftykins: http://pastebin.com/RT2cRfGf
+=== Navo_ is now known as Navooo
+=== Navooo is now known as Naavo
+[17:57] <daftykins> AlexPortable: you have 1 pending sector and 2 reallocated, as per lines 58 and 59. no way of telling if that happened now, but i would backup the data, zero the entire drive with a manufacturer tool (or use 'dd') then restore your backup
+=== alessandro is now known as Guest89
+[18:00] <AlexPortable> disk or not broken?
+[18:00] <AlexPortable> disk is not *
+[18:01] <compdoc> it could have problems in the future
+[18:01] <compdoc> backup
+[18:01] <rlinx> Ubuntu 14.04 software center hung applying changes I tried xkill and I can't shut it down to remove and reinstall
+[18:02] <daftykins> AlexPortable: not hugely, but it could carry on and get worse. no way of knowing
+[18:02] <daftykins> AlexPortable: ah actually i don't like the raw read error rate, line #44
+[18:02] <daftykins> AlexPortable: backup and consider replacing, that thing is tiny and old
+[18:03] <rlinx> Ubuntu 14.04 software center hung applying changes I tried xkill and I can't shut it down to remove and reinstall
+[18:03] <rlinx> how do I shut it off?
+[18:04] <catern> are there ubuntu images that fit on CDs anymore? I can't find them
+[18:04] <dalekusa> I need help installing Ubuntu from a DVD.
+[18:04] <bubbasaures> catern, The mini or lubuntu
+[18:04] <catern> bubbasaures: those are my only options?
+[18:04] <xangua> catern: no, but lubuntu still fits on a CD
+[18:05] <catern> lxde is so ugly, so I'll go with mini
+[18:05] <dalekusa> After I pull up the purple menu and select the try ubuntu option, it just goes to a blank screen
+[18:05] <bubbasaures> catern, With ubuntu and a cd load yes.
+[18:05] <drmagoo> rlinx: how long have it been hung ? have you checked top to see if there is any process that hogs the cpu ?
+[18:05] <catern> bubbasaures: xangua: thanks.
+[18:05]  * dalekusa tried with both 64 and 32-bit images, and it doesn't work either way
+[18:06] <dalekusa> I have Linux Mint
+[18:06] <bubbasaures> catern, If you have grub now you can boot the iso from it.
+[18:06] <dalekusa> in case you need it
+[18:06] <dalekusa> the info
+[18:06] <daftykins> !mint | dalekusa
+[18:06] <ubottu> dalekusa: Linux Mint is not a supported derivative of Ubuntu. Please seek support in #linuxmint-help on irc.spotchat.org
+=== root is now known as Guest78518
+[18:06] <rlinx> Ubuntu 14.04 software center hung applying changes I tried xkill and I can't shut it down to remove and reinstall
+[18:06] <rlinx> Ubuntu 14.04 software center hung applying changes I tried xkill and I can't shut it down to remove and reinstall
+[18:06] <dalekusa> well I am trying to replace it with ubuntu
+[18:06] <rlinx> how do I shut it off?
+[18:06] <daftykins> ah sorry, didn't see that part
+[18:07] <daftykins> !nomodeset | dalekusa
+[18:07] <ubottu> dalekusa: A common kernel (boot)parameter is nomodeset, which is needed for some graphic cards that otherwise boot into a black screen or show corrupted splash screen. See http://ubuntuforums.org/showthread.php?t=1613132 on how to use this parameter
+[18:07] <thurstylark> Anyone know why I'm getting "no talloc stackframe" errors on my 14.04.1 server
+=== also is now known as rootpt
+[18:09] <thurstylark> From what I remember, it had something to do with the samba server implementation in this version
+[18:09] <trism> thurstylark: bug 1257186
+[18:09] <ubottu> bug 1257186 in samba (Ubuntu Trusty) "memory leakage messages (no talloc stackframe)" [High,Triaged] https://launchpad.net/bugs/1257186
+[18:10] <dalekusa> success!!!!
+[18:10] <dalekusa> That just saved my dad about $50
+[18:11] <dalekusa> wait
+[18:11] <dalekusa> after the splash it turned blank again
+[18:11] <dalekusa> drive is still spinning
+[18:11] <daftykins> if you're booting from DVD, which is horrible in 2014 btw, it's probably going to take a while.
+[18:12] <dalekusa> lol
+[18:12] <dalekusa> I'll try this again with the 64-bit image
+[18:12] <dalekusa> shortly
+[18:12] <tgm4883> On 14.04, I installed Kubuntu, but then installed Ubuntu-desktop. Everything works fine, but my menu's are a bit difficult to read (see http://ibin.co/1c1MMeOAneJZ ) and I can't find a way to resolve this
+[18:12] <Noiro> uhhh, where can I get a cross compiler compatible for sfml 2.1?
+[18:12] <daftykins> dalekusa: and USB flash drive, please! :)
+[18:13] <dalekusa> I don't think that my PC can USB boot
+[18:13] <thurstylark> trism: Ahh! Yes! So, what reprecussions should I expect from removing libpam-smbpass?
+[18:13] <dalekusa> and it has booted!
+[18:13] <Jordan_U> dalekusa: How old is this machine?
+[18:13] <thurstylark> or should I look at removing smb server alltogether? I'm definetly not using it...
+[18:13] <dalekusa> 2009
+=== sins-_x is now known as sins-
+[18:14] <daftykins> dalekusa: ok that's not the end of it, ideally you need to identify what graphics hardware it uses and install proper drivers (if needed) after installing
+[18:14] <drmagoo> tgm4883: what do you mean by hard to read. In that picture some options like "Full screen" are "greyed out" and that is why it looks like that. You cannot select that option
+[18:14] <trism> thurstylark: yeah if you are not using it, there aren't any problems really, the bug has a few comments detailing the issues it can cause if you are using it
+[18:14] <trism> thurstylark: I removed it months ago just to stop the message
+[18:15] <dalekusa> I can tell you the model of computer
+[18:15] <dalekusa> HP Pavilion a6803w
+[18:15] <tgm4883> drmagoo: the thing is, they aren't "greyed out", I can totally select that option
+=== Ronald is now known as FilthyFrank
+[18:15] <dalekusa> switching to 64 bit image
+[18:16] <thurstylark> trism: Awesome. Uninstalling now. Thanks for the help!
+[18:16] <daftykins> dalekusa: i don't have time to assist further now unfortunately, get it installed then come back
+[18:16] <dalekusa> ok
+[18:16] <drmagoo> tgm4883: hmm... have you made any other changes? like installed any new themes ?
+[18:17] <tgm4883> no, just installed ubuntu-desktop from kubuntu
+[18:17] <Wulframn> tgm4883: you're using kubuntu and installed ubuntu-desktop?
+[18:18] <tgm4883> Wulframn: yes, I switched to Ubuntu-desktop from kubuntu
+[18:19] <tgm4883> drmagoo: Wulframn here is another image showing how it's difficult to see  http://ibin.co/1c21XyB4WqrB
+[18:19] <Wulframn> tgm4883: understand that this is the ubuntu support room and kubuntu support is #kubuntu. Since you're using ubuntu-desktop in kubuntu your mileage may vary
+[18:19] <tgm4883> Wulframn: but I'm not using kubuntu, I'm using ubuntu-desktop now
+[18:20] <Wulframn> tgm4883: what was the base system you installed?
+[18:20] <tgm4883> kubuntu
+[18:20] <Wulframn> Right
+[18:20] <Pici> Wulframn: Kubuntu is just Ubuntu with KDE installed by default instead of Unity.  tgm4883 is in the right place for support.
+[18:21] <tgm4883> Wulframn: you do realize that Kubuntu is just a base ubuntu install with KDE and such packages. While Ubuntu is a base ubuntu install with Unity and such packages
+[18:21] <Wulframn> Pici: I've previously been yelled at for suggesting that so I apologise, I must just be behind the policy here
+[18:21] <Wulframn> tgm4883: I understand the differences.
+[18:22] <minimec> tgm4883: Check if you have gnome-icon-theme gnome-icon-theme-extras installed...
+[18:22] <tgm4883> minimec: looks like I don't have -extras. Some further investigation indicates it's just an issue with the Unity Ambiance theme
+[18:23] <minimec> tgm4883: ok.
+[18:23] <Erto> i missed stuff from here thanks to a blackout and net disconnect
+[18:24] <Boscop> HELP, why do i get this error? bash: cannot create temp file for here-document: No space left on device. I have lots of free space
+[18:25] <Hardtail75> Hello there ladies and gents. I am currently in the installation process of Ubuntu on my Windows 8.1 PC. I have created a bootable USB drive. I am at the stage where it is asking me to partition my drive. How do I keep my Windows partition and create a new area for Ubuntu?
+[18:26] <Sc0tty-> why can I not connect to sourceforge using wget through a beaglebone black? can anyone help?
+[18:26] <freshone0> hi
+=== michael is now known as Guest97968
+[18:28] <Hardtail75> Can anyone help me with dual booting and partitioning, please?
+[18:29] <jParkton> Literally first hit on google http://itsfoss.com/install-ubuntu-1404-dual-boot-mode-windows-8-81-uefi/
+[18:30] <jade-mbp> hey, i wonder if anyone can help me, i have just done an install of 12.04 LTS 5, and are trying to install gobi-loader amongst other packages. initially thought maybe that package was renamed, but it seems even irssi cant be installed. why is every package i try to use coming up as "E: Package '[packagename]' has no installation candidate"?
+[18:30] <bubbasaures> Hardtail75, You should resize widows with it's disk manager leaving a unallocated for ubuntu, follow the UEFIwiki if needed.
+[18:31] <Hardtail75> jParkton thank you, I was following a different guide on Ubuntu
+[18:31] <__zug__> Best website to guide you on securing Ubuntu and your browser?
+=== Guest97968 is now known as Supermathie
+[18:32] <Pici> jade-mbp: does sudo apt-get update work?
+[18:32] <k1l> __zug__: there is no best. but there are thousands of howtos out there
+[18:32] <Sc0tty-> why can I not connect to sourceforge using wget through a beaglebone black? can anyone help?
+[18:32] <jade-mbp> Pici: sort of, it comes at the end with some signature error, i shall re-run it to get exact message
+=== Stu|[A] is now known as Stu|
+[18:33] <Pici> Sc0tty-: What OS are you running?
+[18:34] <Sc0tty-> Pici: ubuntu
+[18:34] <jade-mbp> lots of hash mismatches!
+[18:35] <jade-mbp> all urls listed seem to be all my entries in sources.lst too
+[18:35] <Pici> Sc0tty-: can you wget any other site?
+[18:35] <__zug__> k1l: Lots of horrible ones too. lol Maybe this a good places to start? https://wiki.ubuntu.com/BasicSecurity then maybe here? http://www.itsecurity.com/features/ubuntu-secure-install-resource/
+[18:35] <jade-mbp> i wonder...
+[18:36] <jade-mbp> perhaps it is isp censoring it
+[18:36] <Sc0tty-> Pici: nope, I am using SSH to connect to the beaglebone if that helps
+[18:36] <k1l> __zug__: i would start with the question: what do you want to secure? and why do you want it
+[18:37] <Pici> Sc0tty-: does dig sourceforge.net    provide any records?
+[18:37] <AlexPortable> Error reading block 14197363 (Attemt to read block from filesystem resulted in short read). Ignore error<y>?
+[18:37] <AlexPortable> i did yes. Now I get: Force rewrite<y> ?
+[18:38] <compdoc> AlexPortable, thats just a bad idea
+[18:38] <Sc0tty-> Pici: it says dig command not found
+[18:38] <AlexPortable> compdoc: what?
+[18:38] <thurstylark> is there a way to let ubuntu pass alt modifier to chrome?
+[18:38] <compdoc> running fs checks on a failing drive
+[18:39] <compdoc> youre begging for more sectors to fail

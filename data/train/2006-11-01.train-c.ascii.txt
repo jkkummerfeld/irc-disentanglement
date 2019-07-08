@@ -1,0 +1,1500 @@
+[01:53] <kevb> jamesstansell: that can't be good?
+[01:53] <bigusdickus> kevb, no problem
+[01:53] <bigusdickus> kevb, you can uninstall ubuntu-desktop
+[01:53] <jamesstansell> kevb: something like apt-get -d source vino should download the missing dependencies. Once you know what they are you can install them
+[01:53] <kevb> ah ok thnx
+[01:54] <dcypherd> sorry i forgot about the purists
+[01:54] <jason_> dcypherd: I would rather anyone learn how to modify a plain-text file and take the risk of making errors, and learn the importance of making backups, than having them cluelessly use software that messes up their machine.
+=== hype [n=hype@gar31-3-82-234-50-53.fbx.proxad.net]  has joined #ubuntu
+[01:54] <dcypherd> yeah yeah i see your point
+=== crackers [n=kvirc@97.232.203.62.cust.bluewin.ch]  has joined #ubuntu
+[01:54] <hype> hi there
+=== tortho [n=tortho@99.84-49-88.nextgentel.com]  has joined #ubuntu
+[01:54] <jamesstansell> kevb: it won't hurt to remove ubuntu-desktop, but you'll want to reinstall it when everything is working again, so it will be there when you upgrade to feisty
+=== babwe2 [n=poul@0x3e42bcbd.adsl.cybercity.dk]  has joined #ubuntu
+[01:55] <rc-1>  is there an irc command to query channels (based on popularity etc?)
+[01:55] <bigusdickus> rc-1, in x-chat: Window->Channel List
+=== cynical_ [n=cynical@adsl-068-209-095-168.sip.gsp.bellsouth.net]  has joined #ubuntu
+[01:56] <bigusdickus> rc-1, no popularity contest among irc channels though
+[01:56] <tortho> anyone who knows an easy way to apply a patch to the kernel (i have some diff and i'm a newbie to this)
+=== Gekitsuu [n=aglenn@pool-71-163-120-41.washdc.fios.verizon.net]  has joined #ubuntu
+=== slinky_ [n=twh@hst-dhcp-142-166-156-179.cable.crrstv.net]  has joined #ubuntu
+=== Gekitsuu [n=aglenn@pool-71-163-120-41.washdc.fios.verizon.net]  has left #ubuntu []
+=== windtw [n=wind@59-112-226-171.dynamic.hinet.net]  has joined #ubuntu
+[01:56] <bigusdickus> tortho, gzip -cd ../patch-2.6.18.1.gz | patch -p1
+=== richee [n=ashish@203.101.52.132]  has left #ubuntu ["Leaving"]
+=== phatmonkey [i=nobody@81.2.121.150]  has joined #ubuntu
+=== user-land2 is now known as user-land
+=== Gekitsuu [n=aglenn@pool-71-163-120-41.washdc.fios.verizon.net]  has joined #ubuntu
+=== johnema [n=john@85-18-14-22.fastres.net]  has joined #ubuntu
+[01:57] <kevb> jamesstansell: apt-get -d source vino just got vino again, no dependencies :S
+[01:57] <tortho> bigusdickus: is this how i can apply the diff text to my kernel?
+[01:58] <jamesstansell> kevb: I must have been wrong about it
+[01:58] <jason_> So does anyone know where in the apache2 config files I can enable the DELETE method? In the ubuntu apache package it is disabled by default and I cant find where to enable it.
+[01:58] <kevb> jamesstansell: Ah, i think it's -b switch
+=== fraiddo [n=fredo@AAmiens-151-1-61-21.w83-192.abo.wanadoo.fr]  has joined #ubuntu
+[01:58] <kevb> jamesstansell: for "build-dependencies"
+[01:58] <bigusdickus> tortho, yes if your diff is compressed and you have it stored in one directory above the directory with your sources
+=== ruxpin [n=mikael@Catalyst-53.pspt.fi]  has joined #ubuntu
+[01:58] <hype> how can i be sure of the graphic chipset of a pc? ( a friend of mineis installing Beryl but hedoenst know what graphic card he has)
+[01:59] <kevb> jamesstansell: although it failed to get them : )
+=== [adw]  [n=adw@ti531210a080-8033.bb.online.no]  has joined #ubuntu
+[01:59] <jason_> hype: use lspci
+[01:59] <bigusdickus> tortho, if you have a non-compressed patch you don't need the gzip part and the pipe
+[01:59] <tortho> bigusdickus: and then i have to make some config and compile a new kernel?
+[01:59] <jamesstansell> kevb: did it at least list them?
+[01:59] <hype> jason_ ,here is the output
+=== byon is now known as deeem
+[01:59] <hype> VGA compatible controller: Intel Corporation 82852/855GM Integrated Graphics Device (rev 02)
+[01:59] <jason_> dont paste it here
+[01:59] <hype> how cani know if its i910 or anything else?
+[01:59] <hype> sorry
+=== jk_work [n=jk@persaunet.uninett.no]  has left #ubuntu ["Leaving"]
+[01:59] <bigusdickus> tortho, you must be sure first the patch applies cleanly without rejects, you can do a make oldconfig and compile the new kernel
+=== DerD [n=derd2@p54B3F736.dip.t-dialin.net]  has joined #ubuntu
+=== jdawson [n=dawson@user-5440e115.wfd80a.dsl.pol.co.uk]  has joined #ubuntu
+[02:00] <jason_> where do we paste output, i forget the channel name
+[02:00] <johnema> i'm searching a sources.list with a lot of repository for Ubuntu Edgy (like a Trevino's sources.list)---- the google search has no important results
+[02:00] <kevb> jamesstansell: Yeah, it listed them. Do I need to get them all as source?
+=== babwe2 [n=poul@0x3e42bcbd.adsl.cybercity.dk]  has joined #ubuntu
+[02:00] <tortho> bigusdickus: what i want to do is to add the patches for the p990i from this bug.. https://launchpad.net/distros/ubuntu/+source/linux-source-2.6.17/+bug/62469
+=== Qew [n=qew@82-69-126-225.dsl.in-addr.zen.co.uk]  has joined #ubuntu
+[02:00] <hype> jason_ http://www.rafb.net/paste/
+=== Milchmann [n=david@DSL01.83.171.148.147.ip-pool.NEFkom.net]  has joined #ubuntu
+=== paracetamolo [n=paraceta@81-174-12-172.f5.ngi.it]  has joined #ubuntu
+[02:01] <jason_> ah ok
+[02:01] <jamesstansell> kevb: you probably don't need their source - just a regular install of them should do
+[02:01] <hype> any one can help me determine if my buddy is using i915 or i810?
+=== flint [n=flint@71-80-45-220.dhcp.davl.vt.charter.com]  has joined #ubuntu
+=== kevu [i=aafs@ppp2-170.lar.forthnet.gr]  has joined #ubuntu
+=== MatthewV [n=MatthewV@202.183.115.122]  has joined #ubuntu
+=== mikl [n=mikl@pdpc/supporter/active/mikl]  has joined #ubuntu
+=== Psychobudgie [i=klaatu@82-71-44-108.dsl.in-addr.zen.co.uk]  has joined #Ubuntu
+[02:01] <jason_> hype: I just see an empty form though
+[02:02] <jason_> oh recent pastes
+[02:02] <bigusdickus> tortho, be advised those patches are for the vanilla kernel, so it could be it doesn't applies cleanly with patch but i see the patch is small enough you can merge it if needed
+=== dkakon [n=dkakon@ASte-Genev-Bois-153-1-75-46.w86-203.abo.wanadoo.fr]  has joined #ubuntu
+[02:02] <hype> jason_ , lol, i just pasted the revelent part of lspci from my mate
+[02:02] <tortho> bigusdickus: thanks, will try to break something :-)
+[02:02] <johnema> do you have a sources.list with a lot of repository for Ubuntu Edgy (like a Trevino's sources.list) ??
+=== flint [n=flint@71-80-45-220.dhcp.davl.vt.charter.com]  has left #ubuntu ["Leaving"]
+=== das-q [n=das-q@p54BFF1B2.dip.t-dialin.net]  has joined #ubuntu
+[02:03] <MetaMorfoziS> how can i idnetify my ram's speed?
+[02:03] <hype> jason_ http://www.rafb.net/paste/results/ZotmYt39.html , ifyou want (one line tho)
+[02:03] <alek> how to copy my files to svnrepository svn add or svn import?:(
+=== miranda82 [n=markitox@234.Red-83-35-161.dynamicIP.rima-tde.net]  has joined #ubuntu
+[02:03] <hype> alek , you've setup your onw repo? :)
+=== _jordi [n=jordi@100.Red-83-55-63.dynamicIP.rima-tde.net]  has joined #ubuntu
+[02:03] <miranda82> hi people
+[02:03] <jason_> hype: well looks like you found it then
+[02:03] <_jordi> hi
+[02:03] <alek> hype: jest
+=== leonel [n=leonel@189.155.93.192]  has joined #ubuntu
+[02:04] <alek> wr
+=== ajopaul [n=ajopaul@59.92.186.255]  has joined #ubuntu
+[02:04] <kevu> is rc.local executed after gnome is loaded?
+[02:04] <miranda82> is there any command to check what speed is actually working my cpu?
+[02:04] <alek> hype: yes
+[02:04] <alek> Ive got repo in /var/www/framework and I want to copy files from /home/alek/framework to my repository
+[02:04] <hype> jason_ , the thing is: i need to enagle 3D on his pc: but most "how to" or done for i815 or i910, but i cant find which one hes using ;s
+=== mikeconcepts [n=mike@100.142.33.65.cfl.res.rr.com]  has joined #ubuntu
+=== reZo [n=reZo@124.197.12.55]  has joined #ubuntu
+[02:05] <ajopaul> miranda82: cat /proc/cpuinfo
+[02:05] <miranda82> ajopaul, let me see! thx :)
+[02:05] <jamesstansell> hype: the Xorg logfile should have it
+=== R2D3 [n=linuxtes@host81-129-122-225.range81-129.btcentralplus.com]  has left #ubuntu []
+=== binary_goofy [n=goofyz@dialpool-210-214-104-162.maa.sify.net]  has joined #ubuntu
+[02:05] <miranda82> ajopaul, but, it's not changing..
+[02:06] <jason_> hype: Looks like thats the i810, but dont come hunt me down if im wrong
+[02:06] <miranda82> ajopaul, i mean, i want to see what speed is he using now, not what he's capable
+[02:06] <binary_goofy> hi room! i need to give cdrom mount rights to user. can somebody pls help me going about this??
+=== dob1 [n=dob@62.211.182.54]  has joined #ubuntu
+[02:06] <miranda82> capable? do u say that in english?
+[02:06] <hype> jason_ , i'd like to be sure :)
+[02:06] <dob1> hi
+=== guillote_GNU [n=BrainDoo@host190.200-45-182.telecom.net.ar]  has joined #ubuntu
+=== gnufied [n=inxs-2@59.144.3.126]  has joined #ubuntu
+[02:07] <ajopaul> hmm! dono if dude changes speed everytime
+=== tortho [n=tortho@99.84-49-88.nextgentel.com]  has left #ubuntu []
+=== mygod [n=ch@222.183.69.72]  has joined #ubuntu
+[02:07] <dob1> are there any option to pass at boot for install ubuntu on sata disk?  i have problem to boot the installation cd
+[02:07] <hype> binary_goofy , here is my line in fstab: /dev/hdc        /media/cdrom0   udf,iso9660 user,noauto     0       0
+[02:07] <jamesstansell> hype: from my Xorg.0.log file: (II) I810: Driver for Intel Integrated Graphics Chipsets: i810, i810-dc100,
+[02:07] <jamesstansell>         i810e, i815, i830M, 845G, 852GM/855GM, 865G, 915G, E7221 (i915),
+[02:07] <jamesstansell>         915GM, 945G, 945GM
+[02:07] <jamesstansell> (
+[02:07] <hype> ho cheers jamesstansell , will try that
+=== b-o-w [n=miro@heineken.suomenlinna.fi]  has joined #ubuntu
+[02:08] <jamesstansell> I have the 82865G
+=== jastarafi [n=sil@triwo070.gotadsl.co.uk]  has joined #ubuntu
+[02:08] <cyzie> how do i share my printer over the network using samba?
+[02:08] <hype> jamesstansell , did you determine that from Worg log?
+[02:08] <fnf> Hi, is there anyone here owning an Acer notebook ?. I can't seem to get my battery info.
+[02:09] <hype> (i do nt see any line about  82865G in your Xorg.log output o0)
+[02:09] <gnufied> i am unable to install msttcorefotns package..i remember i used to isnert a line to refer in /etc/apt/source.lst to refer that repo
+[02:09] <jamesstansell> hype: although when I enable 3D (on dapper) some programs will crash the whole system
+=== jdawson [n=dawson@user-5440e115.wfd80a.dsl.pol.co.uk]  has joined #ubuntu
+[02:09] <hype> ok :/
+[02:09] <jamesstansell> hype: I think the 865G in the output refers to my card
+[02:09] <miranda82> is there any command to check what speed is actually working my cpu?
+[02:09] <binary_goofy> hype: mine reads - /dev/hdc        /media/cdrom0   auto ro,auto,user,exec     0       0
+[02:09] <gnufied> mstffcorefonts fails to install because its there in some ohter repo
+=== m4steR [n=m4steR@host197-21-dynamic.11-87-r.retail.telecomitalia.it]  has joined #ubuntu
+[02:09] <binary_goofy> wat do i need to change here?
+[02:10] <hype> only difference i see is exec
+[02:10] <bigusdickus> miranda82, cat /proc/cpuinfo
+[02:10] <binary_goofy> hype: my drive is a dvd-burner
+[02:10] <hype> me too :(
+[02:10] <miranda82> bigusdickus, that does not say the actual speed, but the top speed he's able..
+=== Emess [n=matt@CPE-124-178-79-96.wa.bigpond.net.au]  has joined #ubuntu
+=== m4steR [n=m4steR@host197-21-dynamic.11-87-r.retail.telecomitalia.it]  has joined #ubuntu
+[02:11] <binary_goofy> hype: so wit udf, iso9660 under type, does it allow u to load all types of cds, dvds?
+[02:11] <bigusdickus> miranda82, install the CPU Frequency Monitory GNOME Applet then.
+[02:12] <miranda82> bigusdickus, i already have it, but it is not real..
+[02:12] <miranda82> bigusdickus, or 1,6 or 2.8
+=== yah_ [n=yah@APoitiers-157-1-47-224.w83-193.abo.wanadoo.fr]  has joined #ubuntu
+=== bombero_ [n=bombero@e177170166.adsl.alicedsl.de]  has joined #ubuntu
+[02:13] <fnf> miranda82: The CPU always run at full speed, unless you did some sort of scaling, how did you know it wasn't real ?
+[02:13] <scheuri> bigusdickus: what a nickname...
+=== TooTallJones [n=sdg@ppp-65-71-172-221.dialup.tpkaks.swbell.net]  has joined #ubuntu
+[02:13] <hype> binary_goofy , nope, i've had issues with udf birnt dvds recnetly
+=== jeang [n=jeang@dsl-242-164-236.telkomadsl.co.za]  has joined #ubuntu
+[02:13] <hype> i didnt look to much to fix it tho
+[02:13] <kevb> jamesstansell: I found the command dpkg-buildpackage but something odd happened... it tried to apply the patch in question (the one from the launchpad bug thread)... it couldn't do it cos i'd already changed the code :S
+=== jeang [n=jeang@dsl-242-164-236.telkomadsl.co.za]  has left #ubuntu []
+[02:13] <miranda82> fnf, cuz i can't be working at 1,6 while i'm not doing anything
+[02:13] <bigusdickus> what do you mean with "not real" do you ant more accurate numbers?
+[02:14] <jamesstansell> hype: yikes :)
+[02:14] <miranda82> bigusdickus, yeah, more acurate
+[02:14] <fnf> miranda82: You mean the average load ?
+=== Alakazamz0r [n=Alakazam@cpe-72-177-237-129.houston.res.rr.com]  has joined #ubuntu
+[02:14] <miranda82> fnf, yeah probably
+[02:14] <hype> ^^
+[02:14] <jamesstansell> kevb: I guess undo your changes?
+[02:14] <binary_goofy> hype: thanks pal. but wat i specifically need is how to give rights to user to mount from command line using mount.
+[02:14] <fnf> miranda82: 1.6 MHz/GHz ?
+[02:14] <kevb> jamesstansell: Doing that now, just wondering where the path came from!! : )
+[02:15] <kevb> jamesstansell: patch*
+[02:15] <TooTallJones> So I just bought this AGP 512MB geforce 7600 GS.  But 3D acceleration isn't working properly in windows or my linux OS.  Also my BIOS doesn't have the selection for 512MB ram on a graphics card.  Is this probably because my BIOS is out of date? Why 3D won't work that is
+[02:15] <hype> binary_goofy , the "user" line should have done it :(
+[02:15] <hype> or mayben try "users"
+[02:15] <bigusdickus> miranda82, do this, try with xfce4-cpu-freq-plugin and with the  CPU Frequency Monitor GNOME Applet, if their output is similar, probably you are wrong.
+[02:15] <hype> with a "s"
+[02:15] <hype> :p
+=== Cimi [n=Cimi@host83-112.pool8250.interbusiness.it]  has joined #ubuntu
+=== coz_ [n=coz_@pool-70-17-176-216.pitt.east.verizon.net]  has joined #ubuntu
+[02:15] <Cimi> hi
+[02:15] <binary_goofy> hype: nah. wen i try to run mount as user, gives me an error saying only root can mount
+[02:16] <hype> you want any other user to mount it? or just your user?
+[02:16] <miranda82> bigusdickus, i already have that applet
+[02:16] <Cimi> i need a french!!!
+=== infidel [n=ecc@210.188.150.155]  has joined #ubuntu
+[02:16] <bigusdickus> miranda82, so?
+[02:16] <hype> ho
+=== Zta [n=stephan@port572.ds1-arc.adsl.cybercity.dk]  has left #ubuntu []
+[02:16] <Cimi> anyone is french here?
+[02:16] <miranda82> bigusdickus, nah, u're right
+[02:16] <hype> binary_goofy .. you have to be root to mount a device
+[02:16] <hype> Cimi , non
+[02:16] <hype> :)
+=== robert_ [n=hellspaw@objectx/robert]  has joined #ubuntu
+[02:16] <infidel> Cimi, french yuck
+[02:16] <Cimi> i need translation of "murrine configurator"
+[02:16] <Cimi> and
+=== Emess [n=matt@CPE-124-178-79-96.wa.bigpond.net.au]  has joined #ubuntu
+[02:16] <Cimi> Configure themes based on the murrine engine
+=== livingdaylight [n=conrad@82-35-48-222.cable.ubr03.camd.blueyonder.co.uk]  has joined #ubuntu
+[02:17] <jamesstansell> kevb: sometimes there will be different patches with the same name.  Did you find the 2.1 source package?
+[02:17] <binary_goofy> hype: but can't i change dat. i just need to give user rights to mount cdrom only
+[02:17] <hype> murrine...is a themme , no?
+[02:17] <TooTallJones> Also after xserver-xorg reconfig my computer is still only calling the geforce card an Nvidia default card
+[02:17] <livingdaylight> tar xvf tar.gz?
+[02:17] <coz_> Cimi, no way to google the translations??
+=== slinky_ [n=twh@hst-dhcp-142-166-156-179.cable.crrstv.net]  has left #ubuntu []
+[02:17] <Cimi> hype, yes i'm the creator
+[02:17] <infidel> how do i make my terminal fonts color?
+[02:17] <hype> Cimi, au fait , #ubuntu-fr
+[02:17] <kevb> jamesstansell: The source is just from the main source repository
+[02:17] <Cimi> coz_, i will take a look
+[02:17] <hype> ho, :)
+[02:17] <livingdaylight> is it tar xvf photalbum.tar.gz ?
+[02:17] <infidel> !terminal
+[02:17] <ubotu> The linux terminal or command-line interface is very powerful. Open a terminal via applications -> accessories -> terminal (gnome) or kmenu -> system -> konsole (kde). Manuals: https://help.ubuntu.com/community/BasicCommands
+=== Winball [i=Winball@ikke.alt.er.mor.ro]  has left #ubuntu []
+[02:17] <Rookie> !beryl
+[02:17] <ubotu> beryl is a window manager that takes advantage of an OpenGL accelerated X environment. See http://forum.beryl-project.org/  -  Please see #ubuntu-xgl for help with beryl.
+[02:17] <bigusdickus> tar xvzf
+=== MtJB [n=warthawg@cpe-66-68-176-215.austin.res.rr.com]  has joined #ubuntu
+[02:18] <kevb> jamesstansell: The patch looks correct, i'll give it a go
+=== ozant [n=ozan@reverse-89-106-0-21.grid.com.tr]  has joined #ubuntu
+=== MtJB [n=warthawg@cpe-66-68-176-215.austin.res.rr.com]  has left #ubuntu ["Leaving,]
+[02:18] <hype> Cimi Configure themes based on the murrine engine --> Configurez les thmes bas sur le moteur Murrine
+[02:18] <kevb> jamesstansell: I wouldn't have thought that they would have a different package in source & binary
+[02:18] <hype> bass*
+[02:18] <jdawson> Where did "run as different user" go to on edgy?
+[02:18] <jamesstansell> kevb: the repository can contain multiple versions, but yeah, I normally wouldn
+[02:19] <constrictor> jdawson: applications -> system tools
+[02:19] <binary_goofy> hype: can't i give user mount rights den?
+=== TobiF [n=Kanales@e180062247.adsl.alicedsl.de]  has joined #ubuntu
+[02:19] <jamesstansell> kevb: wouldn't expect a source version in the enduser repository without a binary version there too
+[02:19] <jdawson> constrictor: I don't have an applications - > system tools
+[02:19] <constrictor> jdawson: kubuntu or ubuntu
+[02:19] <constrictor> ?
+[02:20] <jdawson> ubuntu
+[02:20] <jdawson> Ubuntu 6.10
+=== KillerDemon [n=hetisnui@i154094.upc-i.chello.nl]  has joined #ubuntu
+[02:20] <constrictor> jdawson: do you have alacarte installed
+=== exalted [n=exalted@137.204.183.96]  has joined #ubuntu
+[02:20] <livingdaylight> can someone help me with a command?
+[02:20] <MetaMorfoziS> how can i identify my ram's speed?
+=== BelialMkII [n=Dave@62.6.163.130]  has joined #ubuntu
+[02:20] <coz_> constrictor, alacarte is default install on edgy
+[02:21] <jdawson> constrictor: no idea, never heard of it before
+[02:21] <livingdaylight> i want to send something from cdrom1 to my homefolder
+[02:21] <exalted> Any "powerpc" specific Ubuntu channel, or can i ask here?
+=== ivoks [n=ivoks@ubuntu/member/ivoks]  has joined #ubuntu
+[02:21] <coz_> jdawson system/preferneces/ menu layout
+=== evilstoy [i=HydraIRC@83-131-0-96.adsl.net.t-com.hr]  has left #ubuntu []
+[02:21] <jdawson> coz_:  thanks
+[02:21] <constrictor> jdawson -> applications -> accessories -> alacarte menu editor
+=== funkyHat_ [n=matt@cpc7-nthc3-0-0-cust812.nrth.cable.ntl.com]  has joined #ubuntu
+[02:21] <kevb> jamesstansell: I've installed the new package so I can test it now. Heres a harder question : ) How do I start vino from command line : )
+[02:21] <coz_> constrictor, on edgy it is is system/preferences/menulayout
+[02:21] <livingdaylight> is it cp /media/cdrom1/photoalbum.tar.gz /home/conrad ?
+[02:22] <rausb0> livingdaylight: should work, yes
+[02:22] <binary_goofy> livingdaylight: yes it is
+=== Malin [n=Malin@dtz70.neoplus.adsl.tpnet.pl]  has joined #ubuntu
+[02:22] <livingdaylight> thx, guys
+[02:22] <constrictor> i see, a bit old fashioned aren't i :-~)
+[02:22] <jamesstansell> kevb: /usr/bin/vino ?
+[02:22] <rausb0> livingdaylight: (if your home dir is /home/conrad)
+=== atk_ [n=tommi@tuomi.oulu.fi]  has joined #ubuntu
+=== peters_ [n=peters@wbs-41-208-195-174.wbs.co.za]  has joined #ubuntu
+=== rambo3 [n=stone123@c-e0f871d5.027-6-6b73641.cust.bredbandsbolaget.se]  has joined #ubuntu
+[02:22] <coz_> constrictor, not at all you are on dapper not edgy
+[02:22] <livingdaylight> rausb0: you cheeky monkey :D
+=== Dimensions [n=filter@bb-87-80-0-37.ukonline.co.uk]  has joined #ubuntu
+[02:22] <constrictor> just upgraded actually
+[02:22] <constrictor> :-)
+=== Dybber [n=dybber@0x503fddad.virnxx13.adsl-dhcp.tele.dk]  has joined #ubuntu
+[02:23] <rausb0> livingdaylight: remember you can use the TAB key in the shell to complete path names
+[02:23] <coz_> constrictor, maybe the upgrade soes not change menu order
+[02:23] <atk_> Hi. Can you suggest a light weight http server for my laptop? It would be nice if it supported php
+[02:23] <constrictor> true
+=== freacky22527 [n=arthur@gov91-1-82-234-91-6.fbx.proxad.net]  has joined #ubuntu
+[02:23] <kevb> jamesstansell: Nope, I'm not sure how vino works, have a horrible feeling I can only do it by restarting gnome/X
+[02:23] <livingdaylight> rauble: ok, i'll try that
+[02:23] <kevb> jamesstansell: which I really don't want to do
+[02:23] <jamesstansell> kevb: " whereis vino" says /usr/lib/vino which is a bit weird
+=== Echtor2oo3 is now known as Echtor`off
+[02:23] <binary_goofy> hey guys can somebody please tel me how to give rights to the mount command to users?
+[02:23] <kevb> jamesstansell: Yep, it's part of gnome in some way
+[02:23] <rausb0> livingdaylight: so you can write "cp /me<TAB>" to get "cp /media/"
+[02:24] <jamesstansell> kevb: how do you start it normally?
+[02:24] <jdawson> binary_goofy:  http://lunapark6.com/?p=1710
+=== Cre[a] tiveEmb[a]  is now known as CreativeEmbassy
+=== funkyHat_ is now known as funkyHat
+[02:24] <jdawson> binary_goofy: I had this problem this morning. Above URI sorts it.
+[02:24] <constrictor> atk_ i'm not sure if lighttpd supports PHP but you can look it up
+=== Gekitsuu [n=aglenn@pool-71-163-120-41.washdc.fios.verizon.net]  has joined #ubuntu
+=== Echtor`off is now known as Echtor2oo3
+[02:24] <livingdaylight> rauble: yea!
+=== nutrino [n=nutrino5@node67adsl389485.xs4all.nl]  has joined #ubuntu
+=== Gekitsuu [n=aglenn@pool-71-163-120-41.washdc.fios.verizon.net]  has left #ubuntu []
+[02:24] <exalted> Any "powerpc" specific Ubuntu channel, or can i just ask here?
+[02:24] <kevb> jamesstansell: You start it in gnome, on one of the menus it says "Remote Desktop"
+[02:24] <binary_goofy> jdawson: thanks. checking it now.
+=== darkmatter [n=darkmatt@206-163-248-49.yktn.hsdb.sasknet.sk.ca]  has joined #ubuntu
+[02:24] <coz_> exalted let me check for you
+[02:24] <El_Che> 2
+[02:25] <exalted> coz_, Thank you!
+[02:25] <livingdaylight> rauble: could i have untarred it at the same time?
+=== Caplain_ [n=matt@91.detroit-11-13rs.mi.dial-access.att.net]  has joined #ubuntu
+[02:25] <bigusdickus> livingdaylight, yes with tar xvzf as I told you
+=== JaZyWRK [n=nonya@129.113.185.183]  has joined #ubuntu
+[02:25] <kevb> jamesstansell: actually it seems to be running... but it's got the same problem : )
+[02:26] <jamesstansell> kevb: on the quit menu there's an option to log on as another user, which starts a 2nd gnome session.  would that help?
+[02:26] <kevb> ARRRGGHHH
+[02:26] <livingdaylight> bigusdickus: i didn't see your reply,sorry
+[02:26] <atk_> constrictor: thanks
+=== LabThug [n=nida@128-23-6-108.musc.edu]  has joined #ubuntu
+[02:26] <kevb> jamesstansell: maybe, but I'm not at the machine, this is my problem : )
+[02:26] <Dimensions> hi ... i have used a few days ago mysql with php pages but now when i do mysqltest it says mysqltest: Could not open connection 'default': 2002 Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2) not ok
+[02:26] <livingdaylight> bigusdickus: and my question was about copying and untarring at the same time. That would be quite a command wouldn't it?
+[02:26] <kevb> jamesstansell: SSH only
+=== han3 [i=hantu@60-241-200-159.static.tpgi.com.au]  has joined #ubuntu
+[02:27] <jamesstansell> kevb: maybe it didn't really have the newest version of the patch?
+=== skypa [n=skypa@e178229123.adsl.alicedsl.de]  has joined #ubuntu
+=== AfterBurner [i=UPP@c9342289.virtua.com.br]  has joined #ubuntu
+=== Morrowyn [n=Morrowyn@s5590a6cd.adsl.wanadoo.nl]  has joined #ubuntu
+[02:27] <kevb> jamesstansell: It seems not, I wonder if the patch changed the source so I can check
+[02:27] <TooTallJones> How wouuld I go about a BIOS update in linux?
+=== dodo [n=dodo@einstein.itbox.sk]  has joined #ubuntu
+[02:27] <MattJ> Dimensions, anything in your setup changed to cause that?
+[02:28] <MattJ> I'm using MySQL fine here
+=== mezen [n=saied@100.165.100-84.rev.gaoland.net]  has joined #ubuntu
+[02:28] <jason_> Dimensions: one thing you could try just for the hek of it is, /etc/init.d/mysql restart
+=== CodeX__ [n=bla@p5494184D.dip0.t-ipconnect.de]  has joined #ubuntu
+[02:28] <PlanarPlatypus> TooTallJones, depends on the motherboard but the usual procedure I have seen involves a bootable floppy disk
+=== shedi [n=siggi@dsl-149-109-85.hive.is]  has joined #ubuntu
+[02:28] <coz_> exalted, I can t find a specific channel for that so Ask away here some one must use poc with ubuntu
+[02:28] <CodeX__> hi
+[02:28] <atk_> constrictor: lighttpd seems good and has lot of features :)
+[02:28] <exalted> coz_, alright.
+[02:28] <TooTallJones> Yeah I just found the update downloads, but I don't know which motherboard I have lol
+[02:28] <CodeX__> has anyone got jackd running with edgy eft?
+=== debsyl35 [n=debsy35@ARennes-257-1-122-3.w86-210.abo.wanadoo.fr]  has joined #ubuntu
+[02:28] <livingdaylight> bigusdickus: what is the difference between tar xvf and tar xvzf like you said ?
+[02:29] <constrictor> atk_ yeah it's really helpful but i like apache because i'm used to it
+=== scoo [n=scoo@adsl-dyn-88-208-156-189.heliweb.de]  has joined #ubuntu
+[02:29] <kevb> jamesstansell: I need a way to do dpkg-buildpackage without applying any patches now
+[02:29] <pukeko> how do i detect nics ( a clean start ) - as i have deleted /etc/network/interfaces  ?
+[02:29] <TooTallJones> So next question, how can I see what type of motherboard I have
+[02:29] <bigusdickus> livingdaylight, with z you filter the archive through gzip effectively gunzipping it before extracting the archive, (for tar.gz or tgz files)
+[02:30] <atk_> constrictor: I've used apache too but I prefer smaller servers in this case. My laptop already has few heavy stuff running besides normal firefox etc.
+=== Cimi [n=Cimi@host83-112.pool8250.interbusiness.it]  has left #ubuntu ["Leaving"]
+[02:30] <livingdaylight> bigusdickus: zo simply tar xvf is not sufficient?
+=== minotaurking [n=liukai@222.64.221.231]  has joined #ubuntu
+[02:31] <constrictor> atk_ yeah i can appreciate that
+[02:31] <pukeko> if i type discover they are both listed - what do i do next
+[02:31] <jamesstansell> kevb: dpkg-buildpackage looks like it tries to be too smart
+[02:31] <jason_> TooTallJones: you could type sudo halt and then take your side panel off and have a  look at the MB, Or you could restart the computer and try to catch the ID that is usually printed at the lower right or top of the screen
+[02:31] <bigusdickus> livingdaylight, I was wrong I just tested and I see that it works without the z option too. tar is crap
+[02:31] <LabThug> This morning in my software updates (for Edgy), I had a "Distribution update" for gkrellm.  However, It's greyed out.  How do I resolve this update?
+[02:31] <exalted> I'd be really come handy right now that someone could point me an ubuntu guide on powerpc installation, since i'm having trouble to figure out how to get / where to put yaboot. Ubuntu installation claims that he can not find any newworld partition and yaboot needs a Apple_Bootstrap partition, so installation won't proceed. I've been a PC guy, and now trying to install on a friend's mac, but having lil difficulties. Any help is appreciated, thank you.
+=== skunkworks [n=skunkwor@68-115-41-210.static.eucl.wi.charter.com]  has joined #ubuntu
+[02:31] <bigusdickus> livingdaylight, old versions of tar don't though
+[02:32] <coz_> exaulted let me google for a how to
+[02:32] <rausb0> TooTallJones: you can try "sudo dmidecode | less" but it doesnt work with all boards
+[02:32] <kevb> jamesstansell: I think patches might be files in the source tree, i probably need to delete them
+[02:32] <exalted> coz_, sure...
+[02:32] <scoo> hi @ll
+[02:32] <coz_> exalted, what ppc are you using new world or old world?
+[02:32] <jamesstansell> kevb: maybe you can remove the patch file that you don't want applied?
+=== Skalle [n=daniel@h250n2fls35o981.telia.com]  has joined #ubuntu
+[02:32] <pukeko> does kudzu exist for ubuntu ?
+=== Skalle [n=daniel@h250n2fls35o981.telia.com]  has left #ubuntu ["Leaving"]
+[02:33] <jamesstansell> kevb: yeah, like you just said
+[02:33] <exalted> coz_, well this is an ibook g3, not sure if its old/new world
+[02:33] <TIger_IT> pukeko: kdesu
+=== emilio [n=emilio@244.Red-88-6-223.staticIP.rima-tde.net]  has joined #ubuntu
+[02:33] <coz_> exalted, G3 is new world hold on
+[02:33] <livingdaylight> bigusdickus: lol, so either.... well, its alot of letters to remember in the right order. So, if xvf works then that is one less letter to remember
+[02:33] <exalted> coz_, :D
+[02:33] <TIger_IT> pukeko: kdesu is called gkdesu
+[02:33] <bigusdickus> livingdaylight, right :)
+=== scoo [n=scoo@adsl-dyn-88-208-156-189.heliweb.de]  has joined #ubuntu
+=== cartucho [n=cartucho@201.15.136.109]  has joined #ubuntu
+=== rob [i=RobertSt@freenode/staff/rob]  has joined #ubuntu
+[02:33] <kevb> jamesstansell: I just don't know where they are. Any idea what a patch looks like?
+[02:34] <pukeko> TIger: cli only
+=== finn [i=Finn@ppp55-182.lns1.cbr1.internode.on.net]  has joined #ubuntu
+=== jomino [n=jomi@p54A397A4.dip0.t-ipconnect.de]  has joined #ubuntu
+[02:34] <TIger_IT> pukeko: just sudo
+=== lch_ [n=karsten@p57A18C20.dip0.t-ipconnect.de]  has joined #ubuntu
+[02:34] <pukeko> jsut sudo ... ok ..??
+=== scoo [n=scoo@adsl-dyn-88-208-156-189.heliweb.de]  has joined #ubuntu
+=== wasabi [n=wasabi@ubuntu/member/wasabi]  has joined #ubuntu
+[02:35] <cartucho> has anyone managed to install dbdesigner4 in ubuntu ?
+[02:35] <coz_> exalted, is this anintel based cpu
+[02:35] <cartucho> egy
+[02:35] <coz_> exalted, intel
+[02:35] <exalted> coz_, no it's a powerpc
+[02:35] <coz_> exalted, ok hold on
+[02:35] <rausb0> pukeko: hardware detection is not done by kudzu in ubuntu, it uses udev for that.
+=== arrai [n=arrai@dslb-084-060-214-149.pools.arcor-ip.net]  has joined #ubuntu
+=== Mez [n=Mez@ubuntu/member/mez]  has joined #ubuntu
+[02:35] <rausb0> TIger_IT: he meant kudzu, not kdesu
+[02:35] <pukeko> TIger: i just want to detect and configure my nics
+[02:35] <ripper__> i have an ati all in wonder 7500 , and i was looking at swapping video cards out, right now there is an ati rage II pro in this box, if i put the AIW in this pc, will my xserver break?
+[02:35] <jamesstansell> kevb: patches are generally unified diff files - sometimes they'll have a .diff extension
+=== tatiane [n=tatiane@201009035107.user.veloxzone.com.br]  has joined #ubuntu
+[02:36] <coz_> exalted, are you able to boot from the cd holding down the "c" key
+[02:36] <TIger_IT> rausb0:  ahh OK...
+=== Ziemas [n=flurf_fl@90-227-219-67-no62.tbcn.telia.com]  has joined #Ubuntu
+[02:36] <exalted> coz_, yeah; i've already arrived to the level of formatting the drive...
+[02:37] <TIger_IT> xD
+[02:37] <rausb0> pukeko: detection is done by udev, configuration can be done with some GUI tool (i dont use that) or by editing /etc/network/interfaces
+[02:37] <coz_> exalted,  ok just wanted to be sure it was new world old world g3 acnnot boot from cd that way
+=== scoo [n=scoo@adsl-dyn-88-208-156-189.heliweb.de]  has joined #ubuntu
+[02:37] <exalted> coz_, oh, i see...
+[02:37] <kevb> jamesstansell: under ./debian/ there is a file called stamp-patch-debian=patches=01_fix_password_free.patch which is the patch i saw when i built the package. Problem is it's not a patch, its empty
+[02:37] <rausb0> TIger_IT: kudzu is rehat's hardware detection tool
+[02:37] <rausb0> *redhat's
+=== minotaurking [n=liukai@222.64.221.231]  has left #ubuntu []
+[02:38] <pukeko> rausb0: no gui here..
+[02:38] <kevb> jamesstansell: ahh, found ./debian/patches with patches in it
+[02:38] <TIger_IT> rausb0:  thanks! I didnt know
+[02:38] <coz_> exalted, can you be more specific as to the model of the laptop
+=== valliere [n=valliere@AAnnecy-251-1-84-155.w86-194.abo.wanadoo.fr]  has joined #ubuntu
+=== rexbinary [n=rexbinar@unaffiliated/rexbinary]  has joined #ubuntu
+[02:38] <rausb0> pukeko: so read "man 5 interfaces" and edit /etc/network/interfaces accordingly
+[02:38] <exalted> coz_, "iBook G3" =)
+=== Zdra [n=zdra@di-net.ulb.ac.be]  has joined #ubuntu
+[02:39] <coz_> exalted, ok
+[02:39] <CodeX__> is nobody doing audio-recording with ubuntu?
+[02:40] <pukeko> rausb0: i deleted it to see what would happen - hoping i could get it to rewrite itself by using a tool like netconfig which i don't seem to have : )
+=== coolpaul900 [n=coolpaul@fl-76-1-184-83.dhcp.embarqhsd.net]  has joined #ubuntu
+[02:40] <coz_> exalted, here is a starting point, not exactly what you want but look at this while I google more   http://research.naumachiarius.com/ibook-debian.html
+[02:40] <coolpaul900> I need help!!!
+=== sbc [n=sbc@83.72.201.52.ip.tele2adsl.dk]  has joined #ubuntu
+[02:41] <exalted> coz_, i'll give it a shot; ty
+[02:41] <livingdaylight> how does one force unmount /media/cdrom1 ?
+[02:41] <coolpaul900> I am having BIG problem
+[02:41] <coz_> exalted, well I am still looking so don't go anywhere
+[02:41] <rausb0> pukeko: deleting system files just to see what happens is a bad idea :)  (at least without backup)
+[02:41] <exalted> coz_, ok :)
+=== marcanto [i=A@ANancy-157-1-142-234.w90-6.abo.wanadoo.fr]  has joined #ubuntu
+[02:42] <coolpaul900> I accidentily installed xubuntu when I was in aptitude
+=== hriostat [i=hriostat@200.138.147.54]  has joined #ubuntu
+=== salavas [i=salavas@81-234-108-240-o279.telia.com]  has joined #ubuntu
+=== WooD [n=rdltech@Toronto-HSE-ppp3752309.sympatico.ca]  has joined #ubuntu
+[02:42] <coolpaul900> and it removed all ubuntu programs
+[02:42] <coolpaul900> what do I do?
+=== mega` [n=mega@client-82-9-27-123.manc.adsl.virgin.net]  has joined #ubuntu
+[02:42] <coolpaul900> ??
+[02:42] <exalted> coz_, i suspect that i have to keep an MacOS installation on disk to get Ubuntu
+[02:42] <LabThug> Anyone know how to install the  "Distribution update" for gkrellm?  It's greyed outfor me.
+[02:43] <coolpaul900> Can someone help me?
+[02:43] <livingdaylight> can anyone help me with opening cdrom1?
+[02:43] <kevb> jamesstansell: Do you know how to change a diff? Do I put a - sign before the line?
+[02:43] <marcanto> Hello, i have a problem with an old compaq presario 2292 (onboard sound card). has anyone a solution ? thanks
+[02:43] <livingdaylight> it won't 'Eject' nor tray open from the front
+[02:43] <kevb> jamesstansell: To remove it
+[02:43] <pukeko> rausb0: all part of the fun .. is there a netconfig in ubuntu ?
+[02:43] <coolpaul900> I need help
+=== ziro [n=ziro__@doc-24-206-254-136.nixa.mo.cebridge.net]  has joined #ubuntu
+[02:43] <LabThug> coolpaul900: is your system still running?
+[02:43] <livingdaylight> keeps saying device is busy
+[02:43] <coolpaul900> Yes
+=== Rico [n=rjh@chaffinch.netcraft.com]  has joined #ubuntu
+=== han3 [i=hantu@60-241-200-159.static.tpgi.com.au]  has joined #ubuntu
+[02:44] <LabThug> try `sudo apt-get install ubuntu-desktop`
+=== knowledgEngi [n=user@host-84-221-151-15.cust-adsl.tiscali.it]  has joined #ubuntu
+[02:44] <knowledgEngi> hello
+=== han3 is now known as hantu
+[02:44] <jamesstansell> kevb: you can pretend you're the diff command, but I don't recommend it.  I used to try but it didn't usually work well.
+[02:44] <knowledgEngi> way do not exyst ubuntu optimised for i686 ???
+[02:45] <knowledgEngi> exist for i386 but not for i686
+=== CreativeEmbassy is now known as Cre[a] tiveEmb[a]
+[02:45] <knowledgEngi> i know that i386 can work under i686 cpu
+[02:45] <jamesstansell> kevb: the bug has the patch, right?  can you replace the old one with the new one from the bug?
+=== paracetamolo [n=paraceta@81-174-12-172.f5.ngi.it]  has left #ubuntu []
+[02:45] <knowledgEngi> but if is compiled for i686 i think is much better
+=== archibald [n=archibal@Mb9a6.m.pppool.de]  has joined #ubuntu
+=== laza [n=laza@dslb-088-066-029-225.pools.arcor-ip.net]  has joined #ubuntu
+[02:46] <kevb> jamesstansell: The file in attached to the bug looks very different to the one in debian/patches, considering it's a one line change
+=== archibald [n=archibal@Mb9a6.m.pppool.de]  has left #ubuntu ["Ex-Chat"]
+=== kevb is AFK for 10 minutes
+[02:46] <coz_> exalted, well so far not too much ... I might be working it incorrectly... however that particular link I gave you gives enough info to get started i wish you luck,, i tried ubuntu on an old world g3 with no luck cannot boot from cd
+=== mygod [n=ch@222.183.69.72]  has left #ubuntu [""]
+=== dcordes [n=dcordes@dslb-084-062-045-056.pools.arcor-ip.net]  has joined #ubuntu
+=== dcordes_ [n=dcordes@dslb-084-062-045-056.pools.arcor-ip.net]  has joined #ubuntu
+=== The_Machine [n=awatson@65.91.185.36]  has joined #ubuntu
+=== KerneL [n=seb@84.6.135.161]  has joined #ubuntu
+[02:47] <exalted> coz_, i see; thank you!
+=== toogreen [n=toogreen@222.68.15.224]  has joined #ubuntu
+=== d33p__ is now known as luisbg
+[02:48] <Mez> !fglrx
+[02:48] <ubotu> To install the Ati/NVidia drivers for your video card, see https://help.ubuntu.com/community/BinaryDriverHowto
+[02:48] <rausb0> pukeko: iirc no text based netconfig. but the manpage of the interfaces file has an example.
+=== GaiaX11 [n=vagner@201.57.125.2]  has joined #ubuntu
+[02:49] <Mez> hmm my fglrx isnt working
+=== TomaszD [n=Tomasz@unaffiliated/tomaszd]  has joined #ubuntu
+[02:49] <LabThug> How come ubuntu always comes up as a misspelled word on Edgy?
+=== ozant [n=ozan@reverse-89-106-0-21.grid.com.tr]  has joined #ubuntu
+=== ozant [n=ozan@reverse-89-106-0-21.grid.com.tr]  has left #ubuntu ["Leaving"]
+=== darkanyel [n=darkanye@host186-162-dynamic.0-87-r.retail.telecomitalia.it]  has joined #ubuntu
+=== juanx [n=juanx@141.pool80-102-36.dynamic.uni2.es]  has joined #ubuntu
+[02:50] <darkanyel> hi
+=== Rico [n=rjh@chaffinch.netcraft.com]  has left #ubuntu ["Leaving"]
+[02:50] <darkanyel> how can i change the icon of the gnome bar
+[02:50] <TomaszD> LabThug, because upstream didn't include that word in their spellcheck dictionaries
+=== tuxmaniac [n=aanjhan@unaffiliated/tuxmaniac]  has joined #ubuntu
+[02:50] <marcanto> I have a problem with an old compaq presario 2292 (onboard sound card) under xubuntu. has anyone a solution or an advice?
+=== debsyl35 [n=debsy35@ARennes-257-1-122-3.w86-210.abo.wanadoo.fr]  has left #ubuntu []
+[02:50] <juanx> hi
+[02:51] <darkanyel> how can i change the icon of the gnome bar???
+=== frederick85 [n=frederic@CPE-58-170-180-136.wa.bigpond.net.au]  has joined #ubuntu
+=== jhaquo [n=doe@168.75-201-80.adsl-dyn.isp.belgacom.be]  has joined #ubuntu
+[02:51] <LabThug> TomaszD: while I realize it's a "small nit,"  I don't think it bodes well for ubuntu
+=== Jay_Dogg [n=jukka@a88-112-86-89.elisa-laajakaista.fi]  has joined #ubuntu
+[02:51] <TomaszD> LabThug, agree. Still there are more important issues...
+[02:51] <jhaquo> hi, i have made a folder shared over samba, but i cannot access it from another computer, when i enter \\IP in the other computer, it asks me for a login and password, but i never set one
+[02:51] <darkanyel> how can i change the icon of the gnome bar???
+=== lobosque [n=lobosque@200.103.109.208]  has joined #ubuntu
+=== scoo is now known as Scoo_afk
+=== flo-_- [n=flo@host188-131.pool80116.interbusiness.it]  has joined #ubuntu
+=== cypher [n=cypher@82.114.184.193]  has joined #ubuntu
+=== jayakumar2 [n=jayakuma@203.114.50.16]  has joined #ubuntu
+=== Scoo_afk is now known as Scoo
+[02:52] <TomaszD> darkanyel, look for the distributor-logo.png file
+=== Kyynara [n=pate@hoas-fe33dd00-63.dhcp.inet.fi]  has joined #ubuntu
+[02:53] <jamesstansell> kevb: the debdiff in the bug is a diff of a diff - kinda weird
+[02:53] <lobosque> hey, im trying to install cedega trough a .deb package, but when i open it, it says: "Error: Dependency is not satisfiable: xlibs
+[02:53] <cypher> hi all
+[02:53] <darkanyel> i already change it but it doesnt work TomaszD
+[02:53] <Scoo> hi
+=== aMohammed [n=chatzill@82.201.233.237]  has joined #ubuntu
+=== Turk [n=Emir@85.100.84.29]  has joined #ubuntu
+[02:53] <knowledgEngi> Hey ubuntu developers, next time i want a release compiled for i686 :))
+[02:53] <TomaszD> jhaquo, you need to set security = share in the samba config file
+=== marcanto [i=A@ANancy-157-1-142-234.w90-6.abo.wanadoo.fr]  has left #ubuntu ["Quitte"]
+[02:54] <aMohammed> hi there , I need to adjust my monitor brightness and gamma .. is there an option to do so in Gnome ?
+[02:54] <jhaquo> how do i dot that please?
+=== multichil [i=multichi@nova.brewery.b33r.net]  has joined #ubuntu
+[02:54] <TomaszD> darkanyel, what doesn't work?
+=== AstralJava [n=jaska@cm-083-102-068-117.lohjanpuhelin.fi]  has joined #ubuntu
+[02:54] <coz_> exalted, here is an oldworld mac ubuntu install might come in handy   https://help.ubuntu.com/community/Installation/OldWorldMacs
+=== egon_spengler [n=egon@pool-71-98-65-181.ipslin.dsl-w.verizon.net]  has joined #ubuntu
+[02:54] <exalted> coz_, got it
+[02:54] <darkanyel> wll i change the distributor-icon but it still the same
+=== BenC [n=bcollins@debian/developer/bcollins]  has joined #ubuntu
+[02:54] <lobosque> im trying to install cedega trough a .deb package, but when i open it, it says: "Error: Dependency is not satisfiable: xlibs
+[02:54] <cypher> new edgy
+=== termleech [n=cypher@pool-71-252-101-87.washdc.east.verizon.net]  has joined #ubuntu
+[02:54] <cypher> noob at it
+=== redir [n=robrien@70.88.128.138]  has joined #ubuntu
+[02:55] <TomaszD> jhaquo, gksudo gedit /etc/samba/smb.conf
+=== Mez [n=Mez@ubuntu/member/mez]  has joined #ubuntu
+[02:55] <Scoo> how can i get a password for the channel (to verify my nick) ?
+[02:55] <balayhashi> is there a way to say all reductions done in ghci?
+[02:56] <balayhashi> :%say/see
+[02:56] <Scoo> %say/see
+=== segfault_ [n=nobody@c-68-33-214-39.hsd1.md.comcast.net]  has joined #ubuntu
+[02:56] <Scoo> ?
+=== numberDevil [n=numberDe@pool-72-95-0-17.hrbgpa.east.verizon.net]  has joined #ubuntu
+[02:56] <peija-kas> does anyone here know if the GameBoy Advance ROM flashing device G6 Lite 4gb works under Linux?
+[02:56] <balayhashi> ?
+[02:56] <TomaszD> jhaquo, in there you should find the line with " security = "
+=== gneral [n=iLLaki@unaffiliated/gneral]  has joined #ubuntu
+[02:57] <TomaszD> uncomment it and change to security = share
+[02:57] <Mez> anyone know wher I can find logs for fglrx
+=== jason_ is now known as jason_away
+=== Vigzilla [n=chatzill@ip68-1-99-14.pn.at.cox.net]  has joined #ubuntu
+=== sorush21 [n=sorush20@82-43-184-143.cable.ubr07.newm.blueyonder.co.uk]  has joined #ubuntu
+[02:58] <TomaszD> Mez, /var/log/Xorg.0.log would be a good place to start.
+[02:58] <livingdaylight> hi, Guys, what plugin to i need for Totem to play .mov (little movies i made with my Minolta digital cam)
+[02:58] <Scoo> don't understand what you mean, TomaszD (or aren't you talking to me?)
+[02:58] <Mez> Xlib:  extension "XFree86-DRI" missing on display ":0.0".
+[02:58] <sorush21> guys I keep getting this error what is the best way of fixing it?
+=== math_ [n=math@ip5457c516.direct-adsl.nl]  has joined #ubuntu
+[02:58] <TomaszD> Scoo, not talking to you.
+[02:58] <Scoo> oh, ok :)
+=== picasso [i=mike@chrondo.com]  has joined #ubuntu
+[02:58] <TomaszD> :]
+[02:58] <sorush21> http://pastebin.co.uk/4920
+[02:59] <sorush21> what does this mean? libGL warning: 3D driver claims to not support visual 0x4b
+=== b_52Centos [n=skimo@adsl196-230-28-217-196.adsl196-9.iam.net.ma]  has joined #ubuntu
+=== finalbeta_ [n=finalbet@d5152A68A.access.telenet.be]  has joined #ubuntu
+=== PunjabiFLOYDIAN [n=Floydian@59.144.244.29]  has joined #ubuntu
+[02:59] <LabThug> sorush21: sounds like your sudoers file has a problem.  Can you paste it?
+[02:59] <TomaszD> sorush21, paste the content of /etc/sudoers
+=== MtJB [n=warthawg@cpe-66-68-176-215.austin.res.rr.com]  has joined #ubuntu
+[02:59] <Scoo> -NickServ- This nickname is owned by someone else
+[02:59] <Scoo> -NickServ- If this is your nickname, type /msg NickServ IDENTIFY <password>
+[02:59] <livingdaylight> sorush21: Allah Akbar!
+[02:59] <ivoks> sorush21: wine?
+[02:59] <Scoo> can s.o. tell me, what this means ?
+=== jd_ [n=jd@def92-9-82-243-242-129.fbx.proxad.net]  has joined #ubuntu
+[02:59] <MtJB> is there a separate channel for beryl support?  i feel like i am on acid.
+[03:00] <livingdaylight> Anyone know what plays .mov files?
+[03:00] <LabThug> Scoo, you are using a name that someone else has reservered ...
+[03:00] <jamesstansell> kevb: the comment says to not gfree the password, but that's not what it looks to me like the debdiff is doing
+[03:00] <exalted> coz_, i'll go with a little reverse-engineering-mind. First i'll let Ubuntu format the drive automatically however he wants (seems to work). And then i'll look what he has done, and make a second custom installation like the way i want it... Thank you for your efforts.
+[03:00] <sorush21> livingdaylight: you were in the christian chat right?
+=== administrator__ [i=administ@nat/cisco/x-1fd09b75bc412047]  has joined #ubuntu
+=== yah_ [n=yah@APoitiers-157-1-47-224.w83-193.abo.wanadoo.fr]  has joined #ubuntu
+[03:00] <cypher> ubuntu sucks
+[03:00] <cypher> ubuntu sucks\
+=== slicslak [n=slicslak@S01060014bf23e2d1.ed.shawcable.net]  has joined #ubuntu
+[03:00] <cypher> ubuntu sucksubuntu sucks
+[03:00] <sorush21> ivoks: no I@am just doing the glxgears..
+[03:00] <kraut_> for those who have problems to starting vmware after dist-upgrade to ubuntu/edgy: http://www.vmware.com/community/thread.jspa?messageID=499317
+[03:00] <Scoo> somewhere in this chan or global, LabThug  ?
+[03:00] <livingdaylight> sorush21: Salaam!
+[03:00] <[ANF]MasterNinja> back
+[03:00] <MtJB> cypher, how do you feel about ubuntu?
+[03:00] <sorush21> livingdaylight: islam channel
+[03:00] <cypher> private
+[03:00] <[ANF]MasterNinja> :P
+[03:00] <LabThug> Scoo: the Freenode network does these name reservations globally
+[03:00] <TomaszD> livingdaylight, w32codecs with mplayer
+[03:00] <sorush21> livingdaylight: hello to you too
+[03:01] <livingdaylight> sorush21: what were you saying in the christian and islam channels?
+=== Comrade_S [n=Krush_U@pool-151-203-237-33.bos.east.verizon.net]  has joined #ubuntu
+=== DevDuck [n=greg@71.58.111.207]  has joined #ubuntu
+=== protocol1 [n=merculie@68-35-178-69.gci.net]  has joined #ubuntu
+[03:01] <sorush21> livingdaylight: can't remember now.
+[03:01] <livingdaylight> TomaszD: how can i tell whether i have W32 or not?
+[03:01] <[ANF]MasterNinja> was it something fun?
+[03:01] <Scoo> a couple of years ago, i've reserved this name i thing but forgot password. Can i get the PW back, LabThug  ?
+[03:01] <math_> hello
+=== vap [n=vap@adsl-63-194-216-46.dsl.snfc21.pacbell.net]  has joined #ubuntu
+[03:01] <protocol1> whats the latest linux image I can load on a pentium 3 system running edgy?
+=== jrib [n=jasonr@unaffiliated/jrib]  has joined #ubuntu
+[03:01] <math_> someone knows something about windowmaker?
+[03:01] <Scoo> and i also forgot all the IRC-things ;)
+[03:01] <[ANF]MasterNinja> nope
+=== livingdaylight [n=conrad@82-35-48-222.cable.ubr03.camd.blueyonder.co.uk]  has joined #ubuntu
+[03:02] <math_> all kde users? :P
+[03:02] <picasso> math_, what about it
+=== noela [n=b@cm64004.red.mundo-r.com]  has joined #ubuntu
+[03:02] <TomaszD> livingdaylight, you don't. You need to get it from another repository.
+[03:02] <LabThug> Scoo: I don't know.  You might be able to petition the Freenode admins, but I don't know the process
+[03:02] <bigusdickus> math_, yes is a window manager
+[03:02] <livingdaylight> TomaszD: sorry, my X-chat crashed
+[03:02] <math_> well... I cant make my own menu's
+[03:02] <lobosque> im trying to install a /deb file and its saying "error: dependency is not satisfiable: xlib" what should i do??
+[03:02] <[ANF]MasterNinja> Ubuntu is nice cause its free its like a poor man's emergancy OS
+[03:02] <DevDuck> Scoo: did you try guessing your password?
+[03:02] <Scoo> ok, thanks LabThug
+=== mig06 [n=mig@dslb-088-064-185-027.pools.arcor-ip.net]  has joined #ubuntu
+[03:02] <[ANF]MasterNinja> and Wine lets you do windows stuff
+[03:02] <yah_> bonjour, je ne vois pas mes disques dur dans le poste de travail, je ne comprends pas bien la manip /etc/fstab a faire. que faire ??? svp aidez moi au moins a trouver la doc dessus parce que je suis perdu
+[03:02] <jrib> lobosque: what is it a deb of?
+=== mig06 [n=mig@dslb-088-064-185-027.pools.arcor-ip.net]  has left #ubuntu ["Verlassend"]
+[03:02] <livingdaylight> TomaszD: how do you know i don't have it?
+[03:02] <picasso> math_, did you try with the wmconf tool?
+[03:02] <Scoo> DevDuck, yes. tried my standard-pw ;)
+[03:02] <lobosque> jrib cedega
+[03:02] <protocol1> whats the latest linux image I can load on a pentium 3 system running edgy?
+[03:02] <math_> just wmconf in console?
+[03:02] <Scoo> but does'nt seem to be
+[03:02] <TomaszD> livingdaylight, you don't know what it is. that's why.
+[03:03] <picasso> i dont remember, it's been years
+[03:03] <picasso> WMConf maybe
+=== Natsh8 [n=natsh@124.Red-80-39-246.dynamicIP.rima-tde.net]  has joined #ubuntu
+[03:03] <livingdaylight> TomaszD: lol,
+[03:03] <picasso> something like that
+[03:03] <DevDuck> Scoo: then you can try contacting a server admin, I don't think there's another way
+[03:03] <lobosque> jrib what should i do?
+[03:03] <livingdaylight> TomaszD: its is multimedia codecs right?
+[03:03] <TomaszD> yes.
+[03:03] <math_> picasso where I can find it?
+[03:03] <livingdaylight> TomaszD: do you have the .deb file for w32?
+[03:03] <jrib> lobosque: have you searched teh wiki for a cedega page?
+[03:03] <Scoo> ok, thank you DevDuck
+[03:03] <termleech> i having some trouble getting my dual monitors to work under ubuntu 6.10 with a radeon 9200 using the fglrx drivers
+[03:03] <termleech> i have a working dual monitor xorg.conf if i use the ati driver
+[03:03] <DevDuck> I just upgraded dapper to edgy and now gnome doesn't start, X works, as does GDM but when I login nothing
+[03:04] <picasso> math_ it should come with windowmaker, im not sure
+=== dcordes [n=dcordes@dslb-084-062-045-056.pools.arcor-ip.net]  has joined #ubuntu
+[03:04] <DevDuck> can anyone help?
+[03:04] <math_> ah
+=== BoggsBeer [n=biglou@203-206-110-129.dyn.iinet.net.au]  has joined #ubuntu
+[03:04] <termleech> however once i make the change of ati to fglrx i only get a single monitor
+[03:04] <termleech> and not dual
+[03:04] <TomaszD> livingdaylight, http://www.debian-multimedia.org/pool/main/w/w32codecs/w32codecs_20060611-0.0_i386.deb
+[03:04] <[ANF]MasterNinja> other people have this problem
+[03:04] <termleech> any help would be appreciated
+[03:04] <lobosque> jrib i dont think that i'll find support there, because im downloading it at emule
+[03:04] <dcordes> anybody has vmware running in his xgl session?
+[03:04] <[ANF]MasterNinja> make a back up
+=== icoo [n=icoo@dh71-153.xnet.hr]  has joined #ubuntu
+[03:04] <jrib> lobosque: ...
+[03:04] <peija-kas> dcordes i have
+[03:04] <[ANF]MasterNinja> and make a edgy cd
+[03:04] <peija-kas> vmware works fine
+[03:04] <picasso> math_: http://ubuntuforums.org/archive/index.php/t-118450.html
+[03:04] <math_> ive installed ubuntu 5.10 plane and installed x-window-system etc. etc. with wdm wmaker
+[03:04] <dcordes> peija-kas: hey nice... what os do you run in it?
+[03:04] <peija-kas> Dapper
+[03:04] <math_> ok, I'll take a look, thnx
+[03:04] <peija-kas> oh windows xp :D
+[03:04] <[ANF]MasterNinja> DevDuck
+[03:04] <peija-kas> lol
+[03:05] <sorush21> I can't access the sudoers.. file..
+=== kevin [n=kevin@221.218.79.30]  has joined #ubuntu
+[03:05] <cypher> sudo is easy
+[03:05] <lobosque> jrib ?
+[03:05] <peija-kas> i need couple windows apps, run those in vmware
+[03:05] <LabThug> termleech: I went through the same procress on 6.06  There are keywords you need to add to xorg.conf to make fglxr work.  I never got what I wanted and just switched back to the ati driver
+[03:05] <[ANF]MasterNinja> download edgy and start over its a bad idea to do a upgrade
+[03:05] <picasso> hm i dono
+[03:05] <dcordes> peija-kas: :-) that's what i meant. i'm trying to run xp too but the only thing i get is a black screen.
+[03:05] <sorush21> I get the same error
+[03:05] <jrib> lobosque: buy it from cedega
+=== LabThug [n=nida@128-23-6-108.musc.edu]  has left #ubuntu []
+[03:05] <jrib> or transgaming or whatever
+[03:05] <DevDuck> [ANF] MasterNinja that seems like a harsh answer
+[03:05] <peija-kas> dcordes i followed the vmware howto or somethign, worked right away
+=== zOap [n=zOap@84.53.35.91]  has joined #ubuntu
+[03:05] <[ANF]MasterNinja> its the only solution
+[03:05] <dcordes> peija_kas: me too... did you change anything
+[03:05] <peija-kas> i have it on two dapper boxes, both run under xgl
+[03:06] <[ANF]MasterNinja> other people have had major problems upgrading
+[03:06] <peija-kas> no, i just did the default install
+=== MtJB [n=warthawg@cpe-66-68-176-215.austin.res.rr.com]  has left #ubuntu ["Leaving,]
+[03:06] <dcordes> peija_kas: oh nice. did you modify your vmx?
+[03:06] <dcordes> hm
+[03:06] <cypher> i install edgy desktop in vmware and it  went fine
+[03:06] <dcordes> strange
+[03:06] <kevb> jamesstansell: If i modify the patch by hand it give an error "make: *** [reverse-patches]  Error 1"
+[03:06] <DevDuck> [ANF] MasterNinja I have a feeling I can fix this if Itear gnome far enough apart
+[03:06] <cypher> so whats the big deal
+[03:06] <dcordes> cypher: well i have a black screen when i boot win2k
+=== nortonec [n=nortonec@gc122.internetdsl.tpnet.pl]  has joined #ubuntu
+[03:06] <dcordes> cypher: the loading screen pops up then it turns black
+[03:06] <sorush21> help people how do I change the data please?
+[03:06] <[ANF]MasterNinja> well what ever you want man but id play it safe and do a fresh install
+=== polkadotshorts [n=andre@dsl-243-44-216.telkomadsl.co.za]  has joined #ubuntu
+[03:06] <sorush21> in the sudoers file?
+[03:07] <DevDuck> [ANF] MasterNinja thanks forthe advice
+[03:07] <jrib> sorush21: visudo
+[03:07] <[ANF]MasterNinja> np
+=== hriostat [i=hriostat@200.138.147.54]  has left #ubuntu []
+[03:07] <[ANF]MasterNinja> my mate had the same problem
+[03:07] <cypher> dcorders: in vmware u mean
+=== nortonec [n=nortonec@gc122.internetdsl.tpnet.pl]  has left #ubuntu ["Ex-Chat"]
+[03:07] <cypher> dcordes: in vmware u mean
+[03:07] <DevDuck> [ANF] MasterNinja he reinstalled?
+=== kevin [n=kevin@221.218.79.30]  has joined #ubuntu
+[03:07] <dcordes> cypher: yea
+=== thefish [n=thefish@unaffiliated/thefish]  has joined #ubuntu
+[03:07] <[ANF]MasterNinja> he downloaded a edgy .iso and did a fresh install
+=== Natsh8 [n=natsh@124.Red-80-39-246.dynamicIP.rima-tde.net]  has left #ubuntu []
+[03:08] <[ANF]MasterNinja> backing up his work first :P
+=== sexcopter8000 [n=james@resnet-97071.resnet.bris.ac.uk]  has joined #ubuntu
+[03:08] <DevDuck> of course
+[03:08] <[ANF]MasterNinja> Ubuntu admited it is all thier fault
+=== TooTallJones [i=TooTallJ@ppp-65-71-172-221.dialup.tpkaks.swbell.net]  has joined #ubuntu
+[03:08] <livingdaylight> TomaszD: still says that decoder is missing :(
+[03:08] <sorush21> jrib: I keep getting access denied.. with visudo, and sudo vidsudo gives me the same error
+[03:08] <TomaszD> livingdaylight, mplayer says that?
+[03:08] <DevDuck> not upgrading is so very un-debian
+[03:08] <sorush21> http://pastebin.co.uk/4920
+[03:08] <TooTallJones> To upgrade my BIOS I need to make an IBM formatted floppy.  How in the world can I do that? =/
+[03:09] <[ANF]MasterNinja> yeah well its a once only
+[03:09] <Vigzilla> total noob here: 6.6 or 6.10 for first run?
+[03:09] <livingdaylight> TomaszD: Totem
+[03:09] <mamzers555> my nautilus is switching the language of it's menus? what is this problem about?
+[03:09] <jrib> sorush21: sudo visudo, should work.  Does 'sudo echo hi' work?
+[03:09] <[ANF]MasterNinja> they promise it wont happen again
+[03:09] <mamzers555> can somebody help with this please?
+[03:09] <mamzers555> it's annoying
+[03:09] <TomaszD> livingdaylight, totem won't open this
+[03:09] <sorush21> jrib: no I get the same error
+[03:09] <livingdaylight> TomaszD: do you know whether Totem is just a piece of crap?
+[03:09] <jrib> sorush21: I just saw your pastebin, have you set a root password by any chance?
+[03:09] <livingdaylight> TomaszD: mplayer?
+[03:09] <TomaszD> livingdaylight, yes it is, try getting totem-xine and libxine-extracodecs
+[03:10] <sorush21> jrib: how do I do that?
+[03:10] <livingdaylight> ok
+[03:10] <cypher> dcordes: look the same thing happend to me yester day so i made a new vm and it went fine
+[03:10] <sorush21> !root
+[03:10] <ubotu> sudo is a command to run programs with superuser privileges ("root"). Look at https://help.ubuntu.com/community/RootSudo for all information.
+=== Benni [n=benni@p549EE978.dip.t-dialin.net]  has joined #ubuntu
+[03:10] <Scoo> livingdaylight, VLC maybe ?
+[03:10] <dcordes> cypher: reinstalling did not work
+[03:10] <cypher> dcordes:
+=== elia [n=elia@nurenberg.ing.ula.ve]  has joined #ubuntu
+=== MtJB [n=warthawg@cpe-66-68-176-215.austin.res.rr.com]  has joined #ubuntu
+[03:10] <jamesstansell> !debdiff
+[03:10] <ubotu> Sorry, I don't know anything about debdiff - try searching on http://bots.ubuntulinux.nl/factoids.cgi
+[03:10] <dcordes> cypher: could you  dcc me your vmc?
+[03:10] <sorush21> I get the same error with any thing that I try to use sudo jrib
+[03:10] <dcordes> vmx
+[03:10] <jrib> sorush21: no, you don't need to.  It would just be more convenient if you had.  You'll have to reboot and choose "recovery mode" from the grub menu.  Then edit sudoers and fix your syntax.  In the future, using visudo toe dit will rpevent this from happening
+=== MtJB [n=warthawg@cpe-66-68-176-215.austin.res.rr.com]  has left #ubuntu ["Leaving,]
+[03:10] <jamesstansell> !patch
+[03:10] <ubotu> patch: Apply a diff file to an original. In component main, is optional. Version 2.5.9-4 (edgy), package size 93 kB, installed size 188 kB
+[03:10] <livingdaylight> Scoo: already installing totem-xine now :p
+[03:11] <[ANF]MasterNinja> okay dudes i got a problem i cd /home/masterninja/install but it says that directory does not exist when i know it does
+[03:11] <Scoo> livingdaylight, ok ;)
+[03:11] <cypher> dcordes: dcc what that means
+=== sorush21 [n=sorush20@82-43-184-143.cable.ubr07.newm.blueyonder.co.uk]  has left #ubuntu []
+[03:11] <dcordes> sending files iver irc
+=== phenex [n=lera@bzq-88-152-100-54.red.bezeqint.net]  has joined #ubuntu
+[03:11] <jamesstansell> !proposed
+[03:11] <ubotu> Sorry, I don't know anything about proposed - try searching on http://bots.ubuntulinux.nl/factoids.cgi
+[03:11] <cypher> im in anetcafe
+[03:11] <cypher> no hme
+[03:11] <jrib> [ANF] MasterNinja: is it Install or INSTALL maybe?  linux is case-sensitive
+=== kmaynard [n=kmaynard@user-24-214-249-208.knology.net]  has joined #ubuntu
+[03:12] <livingdaylight> Scoo: don't wanna end up with half-a-dozen players
+[03:12] <[ANF]MasterNinja> na its lowercase
+[03:12] <livingdaylight> Scoo: but if this don't work i'll try VLC next :)
+[03:12] <phenex> hey guys, i need help with edgy. i've just upgraded to it, the firefox 2.0 wizard came up, updated the addons and all, and now it doesn't load...
+[03:12] <jrib> [ANF] MasterNinja: does 'ls /home/masterninja' list "install"?
+[03:12] <[ANF]MasterNinja> kk
+[03:12] <Scoo> livingdaylight, no prob, was just a hind. don't really know if .mov works with vlc :x
+[03:13] <Scoo> have no .mov file to try here ..
+=== icoo [n=icoo@dh71-153.xnet.hr]  has joined #ubuntu
+[03:13] <[ANF]MasterNinja> no it doesnt
+[03:13] <jrib> phenex: ps -ef | grep firefox, turn up anything?
+[03:13] <jrib> [ANF] MasterNinja: where is install?  On your desktop?
+[03:13] <rambo3> that quicktime codec
+=== hannes_ [n=hannes@p5089A1AD.dip0.t-ipconnect.de]  has joined #ubuntu
+[03:13] <cypher> dcordes: what is the vmware version u r using
+[03:13] <[ANF]MasterNinja> my account folder
+=== Unimatrix9 [n=scheelin@a62-251-25-103.adsl.xs4all.nl]  has joined #ubuntu
+[03:13] <jrib> [ANF] MasterNinja: where do you see it?
+=== egal [i=sp@brokensocialscene.de]  has joined #ubuntu
+[03:14] <phenex> jrib, yup... should i kill it?
+[03:14] <[ANF]MasterNinja> file browser
+[03:14] <[ANF]MasterNinja> im looking at the contents now
+[03:14] <dcordes> cypher; i have a VMware Workstation 5.5.2 build-29772
+=== mygod [n=ch@222.183.69.72]  has joined #ubuntu
+=== sticazzi [n=ra@82-44-145-95.cable.ubr01.haye.blueyonder.co.uk]  has joined #ubuntu
+[03:14] <Unimatrix9> vmware yummie!
+[03:14] <jrib> [ANF] MasterNinja: find ~ -name install
+=== Zaggynl [n=Zaggynl@dsl-083-247-110-137.solcon.nl]  has joined #ubuntu
+=== asn [n=asnkia@58.49.147.203]  has left #ubuntu []
+[03:15] <cypher> what is the config of the mechine
+[03:15] <jrib> phenex: hmmm, yes, I would.  killall firefox-bin
+=== mygod [n=ch@222.183.69.72]  has joined #ubuntu
+[03:15] <livingdaylight> TomaszD: thxx :D
+[03:16] <phenex> it doesn't want to die -_-
+[03:16] <Unimatrix9> is there an special channel for ubuntu and labtops?
+[03:16] <phenex> firefox-bin no procces
+[03:16] <TomaszD> livingdaylight, totem-xine works?
+[03:16] <Vigzilla> Is 6.6 Stable or is it 6.10?
+[03:16] <livingdaylight> TomaszD: but no sound :(
+[03:16] <jrib> phenex: what did your ps find before?
+[03:16] <elia> hello
+[03:16] <phenex> and if i try to kill it by pid it just comes right back up
+[03:16] <Unimatrix9> 6.06 LTS is stabel
+[03:16] <[ANF]MasterNinja> um it finds a folder in my recycle bin that wont delete
+[03:16] <TomaszD> livingdaylight, try mplayer
+[03:16] <Vigzilla> Thank you
+[03:16] <livingdaylight> k
+[03:16] <Unimatrix9> hence the lts ( long term support )
+[03:16] <cypher> whaT ABOUT Edgy is it stable
+[03:16] <cypher> its new
+[03:16] <jrib> [ANF] MasterNinja: what do you want to do with install?  delete it?
+[03:16] <cypher> who can tell
+[03:16] <kmaynard> cypher, works for me
+[03:17] <Unimatrix9> edgy is edgy....
+[03:17] <phenex> jrib, lera      6603  6503  0 16:18 pts/0    00:00:00 grep firefox
+[03:17] <elia> is threre a way to look in the web a historia?
+[03:17] <cypher> still new stuff freaks me up
+[03:17] <kmaynard> Unimatrix9, beat me to it :)
+[03:17] <Unimatrix9> :)
+[03:17] <cypher> is till use athlon 2600+
+[03:17] <[ANF]MasterNinja> hang on im going to try something to fix it and come back cause its a long story on what i did wrong
+[03:17] <jrib> phenex: yeah, that's just your grep :) not actually firefox
+[03:17] <kmaynard> cypher, then use dapper...easy choice
+[03:17] <phenex> hmm...
+[03:17] <jrib> phenex: try 'firefox -safe-mode'
+[03:17] <phenex> ok... now i fell even lamer :P
+[03:17] <jamesstansell> kevb: I've got to leave.  Sorry I couldn't be more helpful.
+[03:17] <egal> hi
+=== Dybber [n=dybber@0x503fddad.virnxx13.adsl-dhcp.tele.dk]  has left #ubuntu []
+[03:17] <rambo3> heh i always  run stable ubuntu for max 1 month , till first beta
+[03:17] <kmaynard> heck, you could always install FF2 from mozilla.com, and even gaim 2 if you want, just run it on top of dapper
+[03:18] <Unimatrix9> cypher, as in the matrix?
+[03:18] <kmaynard> there's a few new features in nautilus that i love, but dapper is still rockin
+=== jvolkman [n=jvolkman@208.17.32.27]  has joined #ubuntu
+=== sorush20 [n=sorush20@82-43-184-143.cable.ubr07.newm.blueyonder.co.uk]  has joined #ubuntu
+=== jamesstansell [n=stansell@adsl-38-15-127.tulsaconnect.com]  has left #ubuntu []
+[03:18] <phenex> jrib, works under safe mode
+=== harisund [n=harisund@ip72-207-196-236.br.br.cox.net]  has joined #ubuntu
+[03:18] <jrib> phenex: ok, close it, and just run 'firefox'.  What does it say?
+=== unreal [n=unreal@unaffiliated/unreal]  has joined #ubuntu
+[03:18] <sorush20> jrib: I got into grub what can I do exactly?
+[03:18] <jrib> sorush20: select "recovery mode" from the menu
+[03:19] <jrib> sorush20: then use 'visudo' and fix your syntax
+=== sentinel [n=sentinel@82.152.61.195]  has joined #ubuntu
+[03:19] <cypher> neo man
+=== kuyky [i=Lord@84.90.83.169]  has joined #ubuntu
+[03:19] <Dimensions> jason_away: .... when i do /etc/init.d/mysql restart it says ... ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
+=== jd_ [n=jd@def92-9-82-243-242-129.fbx.proxad.net]  has joined #ubuntu
+[03:19] <Unimatrix9> nock nock
+[03:19] <sorush20> jrib: you mean just select the same kernel image but with the recovery mode that is infront of it/
+[03:19] <phenex> jrib, Segmentation fault (core dumped)
+[03:19] <Unimatrix9> follow the white rabit :P
+[03:20] <cypher> cool
+[03:20] <jrib> sorush20: hmm there should be some option that just says "Recovery mode".  This was the case in dapper, though I haven't looked at it in edgy
+[03:20] <sorush20> at the end it says press ctrl + D to continue to enter root password for administration..
+=== Mez [n=Mez@ubuntu/member/mez]  has joined #ubuntu
+[03:20] <jrib> sorush20: ok maybe it changed, try that
+=== mikm[laptop]  [n=michael@kron2-46-125.resnet.wisc.edu]  has joined #ubuntu
+[03:20] <cypher> hahaha
+=== sorush20 [n=sorush20@82-43-184-143.cable.ubr07.newm.blueyonder.co.uk]  has left #ubuntu []
+=== ayaa [n=fourat@196.203.211.36]  has joined #ubuntu
+[03:21] <webben> Is there any way to install the spidermonkey library?
+[03:21] <cypher> so lets talk serious
+[03:21] <jrib> phenex: firefox -ProfileManager    try making a new profile
+[03:21] <Unimatrix9> whats spidermonkey? ( alway's ready to learn new things )
+[03:21] <[ANF]MasterNinja> EMERGANCY I need the chmod command to enable to view contents of a particular folder.
+[03:21] <jrib> [ANF] MasterNinja: what folder
+=== meuserj [n=meuserj@indianalifesciences.com]  has joined #ubuntu
+=== YoManWazap [n=rodolfo@209-148-130-166.dynamic.rogerstelecom.net]  has joined #ubuntu
+[03:21] <[ANF]MasterNinja> install folder somethings gone deadly wrong
+[03:21] <phenex> jrib, but but my profile :( all my bookmarks and everything
+=== livingdaylight [n=conrad@82-35-48-222.cable.ubr03.camd.blueyonder.co.uk]  has joined #ubuntu
+[03:22] <jrib> phenex: it will still be there, you can copy the bookmarks over
+=== sexcopter8000 [n=james@resnet-97071.resnet.bris.ac.uk]  has joined #ubuntu
+=== CypherBIOS [n=rafa@ns5.screenlab.com.br]  has joined #ubuntu
+[03:22] <cypher> sweeeet
+[03:22] <kmaynard> chmod u+r folder/
+=== acuster [n=acuster@62-90-111-158.barak.net.il]  has joined #ubuntu
+[03:22] <[ANF]MasterNinja> thx
+=== ntc [n=brx@p57A7C8D5.dip0.t-ipconnect.de]  has joined #ubuntu
+=== tuopppi [n=tuomas@bb-81-175-158-87.dsl.phnet.fi]  has joined #ubuntu
+[03:23] <babo> what's the story with mozphone ? has anyone here used it ?
+=== elia [n=elia@nurenberg.ing.ula.ve]  has left #ubuntu []
+[03:23] <kmaynard> for the contents chmod -R u+r folder/
+=== Thirsteh [n=thirsteh@linuxfordummies/Thirsteh]  has joined #ubuntu
+[03:23] <jrib> webben: apt-cache search spider monkey   turns up 6 packages
+[03:23] <kmaynard> that just gives the owner read permission...
+=== CypherBIOS [n=rafa@ns5.screenlab.com.br]  has left #ubuntu ["Saindo"]
+[03:23] <webben> jrib: yes, but i can't seem to actually install them
+[03:23] <jrib> webben: what happens
+[03:23] <Unimatrix9> ok i am off to ubuntu-laptop....
+[03:23] <mirak> phanter:
+=== draconius [n=j00@incognito.student.iastate.edu]  has joined #ubuntu
+[03:23] <Unimatrix9> bye bye
+[03:23] <egal> i'd like to try out ubuntu, so i put the kernel and ramdisk from dists/edgy/main/installer-i386/current/images/hd-media/ on an empty partition and booted from it. now the installer doesn't seem to support a network installation and only offers to look for an install-iso-image.
+[03:23] <Unimatrix9> take care...all you geeks
+[03:24] <cypher> geeeeks rule
+=== CypherBIOS [n=rafa@ns5.screenlab.com.br]  has joined #ubuntu
+[03:24] <webben> jrib: ah I may have just gotten it working :)
+=== tRSS [n=tRSS@193.220.221.2]  has joined #ubuntu
+[03:24] <tat> egal: try the net-install image
+[03:24] <Unimatrix9> yeah! they do, especially cypher!
+[03:24] <Unimatrix9> :P
+[03:24] <phenex> jrib, works with new profile.
+[03:24] <cypher> true man
+[03:25] <livingdaylight> TomaszD: no, sound working too :) Sound was somehow tied up by something else. Rebooted and it works completely now
+[03:25] <phenex> how can i move over my bookmarks and addons and all
+[03:25] <[ANF]MasterNinja> oh noes
+=== Unimatrix9 [n=scheelin@a62-251-25-103.adsl.xs4all.nl]  has left #ubuntu ["Ik]
+[03:25] <TomaszD> livingdaylight, cool, glad it works.
+[03:25] <[ANF]MasterNinja> it says it doesnt exist but i know that folder exists
+[03:25] <jrib> phenex: ok then it may be an extension problem.  I'm not sure of this, but set your regular profile to default, start safe mode, and then see if you can disable all the extensions
+=== asraniel [n=asraniel@61-6.0-85.cust.bluewin.ch]  has joined #ubuntu
+[03:25] <livingdaylight> TomaszD: thx again. That makes my day to be able to watch movies of my kid i made some years back :D
+=== CypherBIOS [n=rafa@ubuntu/member/cypherbios]  has left #ubuntu ["Saindo"]
+=== ntc [n=brx@p57A7C8D5.dip0.t-ipconnect.de]  has joined #ubuntu
+=== tenshiKur0 [n=tenshiKu@S0106000d93cb5211.vc.shawcable.net]  has joined #ubuntu
+[03:26] <livingdaylight> TomaszD: in future i must remember on a fresh ubuntu install to install Totem-xine then and something-extracodecs?
+[03:26] <TomaszD> libxine-extracodecs
+=== mkeadle [n=mkeadle@uslec-66-255-105-22.cust.uslec.net]  has joined #ubuntu
+[03:26] <TomaszD> yes
+[03:26] <sexcopter8000> does anyone know how you can set up the gnome xchat client to auth with Q automatically when xchat connects?
+=== markmtc [n=markmtc@69.Red-88-17-3.dynamicIP.rima-tde.net]  has joined #ubuntu
+[03:26] <phenex> jrib, it doesn't let me manage addons from safe mode
+[03:26] <[ANF]MasterNinja> i screwed my folders up so much im gonna chicken out and reinstall ubuntu
+[03:26] <asraniel> hi, i have a problem with dapper. im want to look a film, but the sound is.. strange. its like i was listening to a vinil disk, but that there was one bug scratch on it
+[03:27] <kevb> Anyone know anything about the current vino issue in edgy?
+[03:27] <jrib> phenex: k, then your options are to a) figure out how to disable extensions b) use the new profile and copy over the settings you want (see ~/.mozilla/firefox/ )
+[03:27] <egal> tat: the thing is, i actually have a full ubuntu iso, but the installer doesn't let me mount the related partition and supply the path - the only option is to make an automated search that doesn't work. this is kind of irritating.
+[03:27] <dcordes> vino???!
+=== Elischa [n=rassihu@M3631P011.adsl.highway.telekom.at]  has joined #ubuntu
+[03:28] <sexcopter8000> (i'm referring to when xchat connects to quakenet of course)
+=== Loceur [n=Loceur@vsas.veedix.com]  has joined #ubuntu
+[03:28] <tat> egal: oh..
+=== jason_away is now known as jason_
+=== techwhore [n=chatzill@dt1corp.globo.com]  has joined #ubuntu
+[03:28] <Loceur> is there a live cd available?
+=== Crazed [n=Crazed@cc242865-b.deven1.ov.home.nl]  has joined #ubuntu
+=== ntc [n=brx@p57A7C8D5.dip0.t-ipconnect.de]  has joined #ubuntu
+[03:28] <jrib> [ANF] MasterNinja: that sounds like overkill, why don't you explain in a bit more detail what happened
+[03:28] <Loceur> ohh and hi!
+[03:28] <[ANF]MasterNinja> i cant i did to many stupid commands
+[03:28] <jrib> Loceur: desktop cd is the live cd and the install cd
+=== soundray [n=soundray@dsl-217-155-44-246.zen.co.uk]  has joined #ubuntu
+[03:28] <XiXaQ> What is the difference between hostname and domain in Networking?
+[03:28] <[ANF]MasterNinja> i cant retrace what i did
+[03:28] <Loceur> jrib, thanks!
+[03:29] <jrib> [ANF] MasterNinja: what were you trying to do?
+=== Loceur [n=Loceur@vsas.veedix.com]  has left #ubuntu ["Leaving"]
+=== mumbles-zzzz is now known as mumbles
+[03:29] <[ANF]MasterNinja> basically
+=== woro2006 [n=woro2006@pool-151-199-24-236.bos.east.verizon.net]  has joined #ubuntu
+[03:29] <brynk> anyone in here yet eith a working epson aculaser c1100?
+[03:29] <tapas> XiXaQ: read the network administrator's guide
+[03:29] <TIger_IT> Soory... how can I execute/run a .sh script ?
+[03:29] <[ANF]MasterNinja> okay what happend was i tried to enable execute functions on a certain folder
+[03:29] <XiXaQ> tapas, url?
+[03:30] <tapas> www.google.com
+[03:30] <[ANF]MasterNinja> and it went badly wrong cause i entered the wrong commands
+[03:30] <jrib> [ANF] MasterNinja: k, was this folder somewhere in your home directory?
+[03:30] <ayaa> do you suggest using easyubuntu to get the fllash and java plugins on my ubuntu ?
+[03:30] <jrib> [ANF] MasterNinja: as long as you didn't touch anything outside your home, the worst-case scenario would be to make a fresh new user
+[03:30] <[ANF]MasterNinja> oh would that sove the problem?
+[03:31] <kevb> anyone know how i can make gdm login automatically on startup, using only ssh?
+=== Alzi2 [n=alzi2@linth.xs4all.nl]  has joined #ubuntu
+[03:31] <tRSS> my system loads, all sorts of services when it boots, e.g. kbluetoothd, bittrack.bittorrent, etc. which dont want it to start. where do I change this bahevoir?
+[03:31] <jrib> [ANF] MasterNinja: I'm not sure what the problem is, but you can try
+[03:31] <[ANF]MasterNinja> thing is i cant delete the folder
+[03:31] <XiXaQ> tapas, is it the same for all networks and all operating systems, or is it different between windows and ubuntu?
+[03:31] <phenex> jrib, thanks. i managed to disable all unneeded addons and now it works
+[03:31] <[ANF]MasterNinja> kk
+=== Mook [i=MookDawg@pool-141-150-245-110.pskn.east.verizon.net]  has joined #ubuntu
+[03:31] <jrib> [ANF] MasterNinja: just use sudo
+=== Flats [i=Flats@c-68-38-79-89.hsd1.nj.comcast.net]  has joined #ubuntu
+[03:31] <[ANF]MasterNinja> i was logged in as rout
+[03:31] <jrib> phenex: can you give me a quick summary of what you had to do to disable them?
+[03:31] <n2k> over 1000 people in here.
+[03:31] <n2k> pretty impressive.
+[03:31] <[ANF]MasterNinja> root*
+[03:32] <Flats> NE1 familair with Samba/SWAT for Ubuntu]
+[03:32] <[ANF]MasterNinja> 1000 people?
+=== markmtc [n=markmtc@69.Red-88-17-3.dynamicIP.rima-tde.net]  has joined #ubuntu
+=== Alberto [n=alberto@host221-129-dynamic.3-87-r.retail.telecomitalia.it]  has joined #ubuntu
+[03:32] <[ANF]MasterNinja> that makes ubuntu teh awesomes
+=== tenshiKur0 [n=tenshiKu@S0106000d93cb5211.vc.shawcable.net]  has left #ubuntu ["--out"]
+[03:32] <TIger_IT> Soorry... how can I execute/run a .sh script ?!!!!!!!!!!
+=== LjL [n=ljl@81-208-60-199.ip.fastwebnet.it]  has joined #ubuntu
+=== holger [n=hg@87.193.38.81]  has left #ubuntu ["Verlassend"]
+=== dade` [n=dade@nectarine/admin/dade]  has left #ubuntu []
+[03:32] <bronze> script.sh then press enter
+[03:33] <jrib> TIger_IT: sh /path/to/script.sh   make sure you understand what it does or trust the source...
+=== Alberto [n=alberto@host221-129-dynamic.3-87-r.retail.telecomitalia.it]  has left #ubuntu []
+=== TooTallJones [i=TooTallJ@ppp-65-71-172-221.dialup.tpkaks.swbell.net]  has joined #ubuntu
+[03:33] <zmo> TIger_IT - sh script.sh or . script.sh or chmod +x script.sh && ./script.sh or chmod +x script.sh && export PATH=$PATH:. && script.sh
+=== mygod [n=ch@222.183.69.72]  has joined #ubuntu
+=== mygod [n=ch@222.183.69.72]  has left #ubuntu [""]
+=== binary_goofy [n=goofyz@dialpool-210-214-104-162.maa.sify.net]  has left #ubuntu []
+[03:33] <TIger_IT> jrib  and zmo ......... thanks :)
+[03:34] <zmo> and avoid the '?!!!!!!!!!!' people get banned for less
+[03:34] <kevb> Anyone know how t oenabled automatic login in gdm, from a console
+=== Ace_NoOne [n=me@p54A56063.dip.t-dialin.net]  has joined #ubuntu
+=== ke [n=kenneth@port272.ds1-aboes.adsl.cybercity.dk]  has joined #ubuntu
+[03:35] <cypher> system->administration->login.....somthing the featur is there
+=== DevDuck [n=greg@71.58.111.207]  has joined #ubuntu
+[03:35] <phenex> jrib, i ran profile manager again to switch back to my profile, it gave core dump again. then i ran firefox in safe mode and chose the option "disable all add-ons" in the menu that pops up. then ran firefox and enabled the addons i need
+[03:35] <jrib> [ANF] MasterNinja: join #ubuntu-classroom and we'll sort out this mysterious 'install' folder if you wish (don't want to clog up #ubuntu with a bunch of commands back and forth)
+=== mygod [n=ch@222.183.69.72]  has joined #ubuntu
+=== DShepherd [n=dwight@port0034-afo-adsl.cwjamaica.com]  has joined #ubuntu
+=== mygod [n=ch@222.183.69.72]  has left #ubuntu [""]
+[03:35] <jrib> phenex: ah good to know, thanks
+[03:35] <KenSentMe> I have a command that i want to run everytime the system is started and it needs to be run by root. Where do i put it?
+[03:35] <DevDuck> [ANF] MasterNinja I did a `apt-get install gnome` and that worked
+[03:35] <TooTallJones> Anyone know how to make an IBM formatted floppy to update my BIOS in linux or windows xp?
+[03:35] <kevb> cypher: Need to do it from the console, no GUI
+[03:35] <cypher> kevb: system->admin...--> login  chk there u will find what u want
+[03:35] <[ANF]MasterNinja> really?
+[03:35] <DevDuck> it installed a few things I didn't want but oh well
+[03:36] <cypher> ahh
+[03:36] <[ANF]MasterNinja> ah as long as its runs smooth keep it as it is
+[03:36] <DevDuck> thats my feeling
+[03:36] <sticazzi> there's a package that I need to remove and the removal in Synaptic fails: E: graphviz-cairo: subprocess post-removal script returned error exit status 127
+[03:36] <cypher> r u good in shell
+[03:36] <soundray> kevb: still here?
+[03:36] <sticazzi> how can I clean this up?
+[03:36] <[ANF]MasterNinja> yeah have you got alot of stuff installed?
+=== polkadotshorts [n=andre@dsl-243-44-216.telkomadsl.co.za]  has left #ubuntu ["Leaving"]
+[03:36] <Ace_NoOne> hi there - quick newbie question: I'm determined to make finally the switch to Ubunto. Now I've read a lot about how Edgy screwed up many people's systems - does this only affect upgrades from Dapper or should I start with Dapper rather than Edgy?
+[03:36] <n2k> sticazzi: i've got that on powerpc too.
+[03:37] <DevDuck> it's a very customized system
+[03:37] <Ace_NoOne> *finally make *sigh*
+=== Bokeh [n=blaat@berchem.lorentz.leidenuniv.nl]  has joined #ubuntu
+[03:37] <kevb> soundray: yeah man
+[03:37] <sticazzi> Ace_NoOne, from scratch it's fine
+[03:37] <[ANF]MasterNinja> ah you'd best keep it as it is
+[03:37] <sticazzi> just make enough space for it.. what's your HDD setup?
+[03:37] <[ANF]MasterNinja> yeah Edgy is like electronic love
+[03:37] <jrib> [ANF] MasterNinja: I've only seen problems with the upgrade route for some people, but try both live cd's and see what you prefer
+[03:37] <sticazzi> n2k, mine is a standard x86
+[03:37] <DevDuck> it's running, so having gnomeoffice and the ilk isn't a big deal
+[03:37] <jrib> Ace_NoOne: I've only seen problems with the upgrade route for some people, but try both live cd's and see what you prefer
+[03:37] <DShepherd> Ace_NoOne: it only applies to Dapper Edgy upgrades...
+[03:38] <kevb> soundray: You got any ideas?
+[03:38] <[ANF]MasterNinja> ya
+[03:38] <Ace_NoOne> ok thx
+=== c0d3h4ck [n=Hyunsik@124.60.164.138]  has joined #ubuntu
+[03:38] <gnufied> my apt tree is in mess, because a package called python-subversion failed to install, because of "bus error ldconfig" now every damn package I install/remove complains about that..and won't let me install/remove anything eventually
+=== tanghus_ [n=tol@0x50c79cd2.boanxx14.adsl-dhcp.tele.dk]  has joined #ubuntu
+[03:38] <Ace_NoOne> sticazzi: 2x320GB - that should be enough :D
+=== georgy [n=georgy@217-117-42-7.teledisnet.be]  has joined #ubuntu
+[03:38] <soundray> kevb: open your /etc/gdm/gdm.conf-custom (or create a new one if not existing). Find a section called [daemon]  and add two lines: "AutomaticLoginEnable=true" and "AutomaticLogin=user", replacing user with your username.
+=== palski [n=ville@a81-197-22-200.elisa-laajakaista.fi]  has joined #ubuntu
+[03:38] <sticazzi> yeah, are they SATA, EIDE or mixture?
+[03:38] <DShepherd> Ace_NoOne: Dapper seems to be rock solid and you can start with that if you like... Edgy... well its a bit edgy,,, you can jump to that too if you like
+[03:38] <ayaa> do you suggest using easyubuntu to get the fllash and java plugins on my ubuntu ?
+[03:38] <variant> http://www.platinax.co.uk/news/01-11-2006/linux-distros-ubuntu-trustix-and-suse-accused-of-email-spam/ <--- lol
+[03:38] <Ace_NoOne> sticazzi: 2xSATA2
+[03:38] <[ANF]MasterNinja> hmm i wander what the admin group gives me
+[03:38] <Dimensions> Loceur u can get it from http://www.ubuntu.com/products/GetUbuntu/download?action=show&redirect=download
+=== mamzers555 [n=user@88.134.196.178]  has joined #ubuntu
+[03:38] <rambo3> ayaa, use apt
+[03:38] <sticazzi> Ace_NoOne, you're fine
+[03:38] <[ANF]MasterNinja> i bet it gives me execution rights
+=== bigbootay [n=bigboota@209.250.156.214]  has joined #ubuntu
+[03:38] <jrib> !flash > ayaa
+=== egal [i=sp@brokensocialscene.de]  has left #ubuntu []
+[03:39] <jrib> !java > ayaa
+=== Testarossa_ [n=anguste@218.83.56.34]  has joined #ubuntu
+[03:39] <Ace_NoOne> cool - thanks for the info guys
+[03:39] <kevb> soundray: Thanks, I'll give that a try right now
+[03:39] <[ANF]MasterNinja> anyone had problems running scripts?
+=== tatiane [n=tatiane@201009035107.user.veloxzone.com.br]  has joined #ubuntu
+[03:39] <jrib> [ANF] MasterNinja: admin gives you ability to use sudo
+[03:39] <rambo3> [ANF] MasterNinja, more specific
+=== MTecknology [n=MTecknol@138.247.246.245]  has joined #ubuntu
+=== ench0 [n=encho_@86.42.137.146]  has joined #ubuntu
+[03:40] <[ANF]MasterNinja> perfect cause my driver wont install cause user doesnt have execution rights
+=== PeaM [n=Peace@i577AFF7D.versanet.de]  has joined #ubuntu
+[03:40] <Flats> What is the Ubuntu control file? Inetd.conf found in /etc?
+[03:40] <Bokeh> <variant> http://www.platinax.co.uk/news/01-11-2006/linux-distros-ubuntu-trustix-and-suse-accused-of-email-spam/ <-- that is about the dumbest article i've read in quite a while
+=== user_ [n=user@88.134.196.178]  has joined #ubuntu
+[03:40] <Bokeh> very typical PHB material
+=== SleepingCreep [n=sleeping@host39-93-dynamic.61-82-r.retail.telecomitalia.it]  has joined #ubuntu
+[03:40] <tRSS> what is bonobo-activation-server?
+[03:40] <tRSS> ~bonobo
+[03:40] <tRSS> !bonobo
+[03:40] <ubotu> bonobo: The GNOME Bonobo System.. In component universe, is optional. Version 1.0.22-9 (edgy), package size 230 kB, installed size 1308 kB
+[03:40] <[ANF]MasterNinja> lol a windows bloke ran that
+[03:40] <[ANF]MasterNinja> dumbass story
+[03:41] <Bokeh> yeah
+[03:41] <[ANF]MasterNinja> you can smell it
+=== GNu_Joe [i=joe@nat/ibm/x-d5dd7afe7d5f3a93]  has joined #ubuntu
+=== Caplain [n=matt@6.detroit-04-05rs.mi.dial-access.att.net]  has joined #ubuntu
+=== hangfire [n=hangfire@201.139.155.132.cableonline.com.mx]  has joined #ubuntu
+[03:41] <Bokeh> must be some muppet who can't be arsed reading the footer in a mailing list message about how to send an unsubscribe mail to a list
+=== richee [n=ashish@203.101.52.132]  has joined #ubuntu
+=== Tampler [n=falafel@83.142.21.168]  has joined #ubuntu
+=== GNu_Joe [i=joe@nat/ibm/x-d5dd7afe7d5f3a93]  has left #ubuntu ["Leaving"]
+[03:41] <[ANF]MasterNinja> i read something about linux sucking at running games
+=== p3n [n=p3n@dxb-as58150.alshamil.net.ae]  has joined #ubuntu
+=== superdeejay [n=superdee@212.red-62-57-181.user.auna.net]  has joined #ubuntu
+[03:42] <[ANF]MasterNinja> :P
+[03:42] <sticazzi> anyone know how to de-install a package manually, it's stopping me from upgrading the system and all sorts of other stuff
+[03:42] <Bokeh> hehe
+=== aloysio [i=foobar@201.29.136.253]  has joined #ubuntu
+[03:42] <[ANF]MasterNinja> yeah but thats direct x though
+[03:42] <kevb> soundray: You don't know anything about vino do you?
+=== aloysio is now known as AFigueiredo
+=== superdeejay [n=superdee@212.red-62-57-181.user.auna.net]  has left #ubuntu ["Abandonando"]
+[03:42] <[ANF]MasterNinja> wine will emulate direct 3d at some point
+[03:42] <Bokeh> the usual "gaming on linux sucks so we won't make any games for linux" farce
+[03:42] <TomaszD> sticazzi, try sudo apt-get -f install
+[03:42] <[ANF]MasterNinja> then windows will be screwed
+[03:42] <TomaszD> just that
+[03:42] <Bokeh> doubtful :)
+[03:42] <kmaynard> gaming is for consoles
+=== kmaynard ducks
+[03:42] <soundray> sticazzi: post the output of 'sudo apt-get -f install' on the pastebin pls (see /topic)
+[03:42] <cyzie> what is the command to add/remove locale after the system is installed?
+[03:42] <Bokeh> people will still stay with windows if only because of the vendor-lockin
+[03:43] <soundray> kevb: try me
+[03:43] <[ANF]MasterNinja> doesnt that transgaming will run most games anyways
+[03:43] <sticazzi>  executing..
+[03:43] <dutchy> dual boot works fine. but screw nwn2 for not having native linux support!!
+=== xamox [n=x@liger.trans.mtu.edu]  has joined #ubuntu
+[03:43] <[ANF]MasterNinja> its run bf2142
+[03:43] <hoelk> hmm
+[03:43] <xamox> what IDS does everyone suggest?
+=== coolpaul900 [n=coolpaul@fl-76-1-184-83.dhcp.embarqhsd.net]  has joined #ubuntu
+[03:43] <kmaynard> people stay with windows because they can get a $4-500 pc that does tall they want it to, works with crap off-the-shelf hardware, etc
+=== atk_ [n=tommi@tuomi.oulu.fi]  has left #ubuntu []
+[03:43] <hoelk> i want to play a game windowed with wine that starts foolscreen by default
+[03:43] <[ANF]MasterNinja> no shadowing effets though but plays fine
+=== Andy [n=Andy@1-1-3-22a.rny.sth.bostream.se]  has joined #ubuntu
+[03:43] <hoelk> any idea how to achieve that?
+[03:43] <Bokeh> that's hardly an argument anymore kmaynard
+[03:43] <kmaynard> there's a lot of people i dont want using linux
+[03:44] <Bokeh> a local computer store sells computers with dapper preinstalled (OEM installation), and it does anything a normal desktop user wants to do 90% of the time
+[03:44] <rambo3> in this channel ?
+[03:44] <sticazzi> http://paste.ubuntu-nl.org/29731/
+[03:44] <Dimensions> Hiya guys ... i dont know some thing is wrong but when i try to access mysql with php page or try to start mysql or restart it i get this message every time .... and when i check mysqld in the location it states ... its not there either ... ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
+[03:44] <[ANF]MasterNinja> look if u dont buy vista you'll have $200 more to spend on hardware
+[03:44] <sticazzi> that's the output
+=== Turk [n=Emir@85.100.84.29]  has left #ubuntu []
+[03:44] <ayaa> where can i find sun-java5-jre package
+[03:44] <kevb> soundray: Theres a current bug (https://launchpad.net/distros/ubuntu/+source/vino/+bug/65795). A fix is there, I'm not sure what to do with it. So far I have altered the source like I think it describes and have built it and installed it. I'm just rebooting to see if it works but I don't think it has. I'm wondering if there is a sane way to fix it : )
+[03:44] <kmaynard> Bokeh, they'll just bring it back and ask for windows when it doesnt run {app here]  or work with [device here]
+=== SportChick is now known as SportlessChick
+=== Scribe [n=rich@adsl-1-193-164.bna.bellsouth.net]  has joined #ubuntu
+[03:45] <rambo3> Dimensions, can you access it in terminal
+[03:45] <hangfire> ayaa- type java5 into a synaptec search
+[03:45] <Bokeh> the problem is shit like directx, asp, which causes software developers to stick with windows because it'd actually cost them to make software platform-independent
+[03:45] <dutchy> kmaynard: perhaps those ppl would be better off with mac os x than windows :> (although i've never tried mac os x myself, it sounds reasonably fool-proof :>)
+[03:45] <soundray> sticazzi: you have some package manager running. Quit it, redo the apt-get -f install and paste the output again pls
+[03:45] <rambo3> Dimensions,  mysql -p root
+[03:45] <sticazzi> pardon me
+=== Testarossa_ [n=anguste@218.83.56.34]  has joined #ubuntu
+[03:45] <kmaynard> dutchy, more than agreed
+[03:45] <Bokeh> hehe
+[03:45] <Bokeh> true :)
+[03:45] <[ANF]MasterNinja> cmon im a real noob GUI obsessed windows user but after a few days i can fumble my way round the router to do standard stuff soon ill have a linux clone of what i had on xp including games, drivers and software.
+[03:46] <[ANF]MasterNinja> i mean terminal
+[03:46] <hangfire> ayaa-whoops, you said jre and not jdk
+[03:46] <LjL> !offtopic
+[03:46] <ubotu> #ubuntu is the Ubuntu support channel, #ubuntu+1 supports the development version of Ubuntu and #ubuntu-offtopic is for random chatter. Welcome!
+[03:46] <[ANF]MasterNinja> were talking about ubuntu
+[03:46] <kmaynard> LjL, sorry...got carried away
+[03:46] <StephenL> Anyone know of good open source Project Management software?
+[03:46] <mike_> Hello, how do i do so i can start a program by just typing for example "firefox" insteed of "/usr/bin/firefox"
+[03:46] <sticazzi> http://paste.ubuntu-nl.org/29732/
+=== uxalla [n=user@88.134.196.178]  has joined #ubuntu
+=== [cb]  [n=cb@HSI-KBW-091-089-045-050.hsi2.kabelbw.de]  has joined #ubuntu
+=== ke [n=kenneth@port272.ds1-aboes.adsl.cybercity.dk]  has joined #ubuntu
+[03:47] <Andy> StephenL: what are u looking for? eclipse?
+[03:47] <LjL> StephenL: what about planner?
+[03:47] <[ANF]MasterNinja> does win amp run on wine?
+=== jonshea [n=jonshea@129.170.38.237]  has joined #ubuntu
+[03:47] <Bokeh> it does
+=== lonran [n=hugo@151.Red-88-20-52.staticIP.rima-tde.net]  has joined #ubuntu
+[03:47] <Bokeh> but why would you want winamp?
+[03:48] <sticazzi> doesn't here
+[03:48] <aoupi> mike_: make sure it is in your path (echo $PATH) or make a new directory with your apps that you add to your path(add a line in your .bashrc that says PATH=$PATH:/my/apps)
+[03:48] <[ANF]MasterNinja> cant be bothered to install codecs for freeware :P
+[03:48] <rambo3> mikl, alias export ldconf
+[03:48] <soundray> kevb: what's your current version of vino?
+=== jmitchj [n=mitch@hlfxns0149w-142068030161.pppoe-dynamic.ns.aliant.net]  has joined #ubuntu
+[03:48] <StephenL> I was looking at http://www.openworkbench.org/ but it looks like a stale project.  I'll check out planner.  Thanks.
+[03:48] <[ANF]MasterNinja> unless installing codecs is easy
+[03:48] <variant> [ANF] MasterNinja: freeware?
+[03:48] <PlanarPlatypus> [ANF] MasterNinja, you can get it to run under wine but have you looked at xmms as an alternative?
+[03:48] <TooTallJones> anyone who can help me with upgrading my BIOS?
+[03:48] <mikl> rambo3: interesting :)
+[03:48] <[ANF]MasterNinja> does xmms have the codecs installed?
+=== quertun [n=quertun@d51A587B8.access.telenet.be]  has joined #ubuntu
+=== PawciooS [n=pawel@nat-38.mikolow.net]  has joined #ubuntu
+[03:49] <PlanarPlatypus> [ANF] MasterNinja, for what file format?
+[03:49] <kevb> soundray: It's 2.16.0-0ubuntu2 not 2.16.0-0ubuntu2.1
+[03:49] <mike_> aoupi: Thanks, I'm going to try it now. I'll report back.
+[03:49] <jmitchj> could someone help me with this message?..."W: GPG error: http://ubuntu.moshen.de dapper Release: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY FC0A1CC62F306651"
+=== PawciooS [n=pawel@nat-38.mikolow.net]  has left #ubuntu []
+[03:49] <[ANF]MasterNinja> mp3,mp4 among others
+[03:49] <soundray> TooTallJones: this isn't the best channel to ask. Have you looked at the motherboard manufacturer's web site?
+=== josh__ [n=josh@66-191-145-50.dhcp.roch.mn.charter.com]  has joined #ubuntu
+[03:49] <josh__> who uses vi in here?
+=== hangfire [n=hangfire@201.139.155.132.cableonline.com.mx]  has joined #ubuntu
+[03:49] <aoupi> mike_: just one thing, don't put your own app in /usr/bin, it's best to let ubuntu handle that path by itself
+[03:49] <josh__> or vim
+[03:49] <rambo3> mikl, yeah i thought so , this nickname complatation  in xchat is science
+[03:49] <sticazzi> If I actually hit "yes" then I get the following error: /var/lib/dpkg/info/graphviz-cairo.postrm: 11: dot: not found   subprocess post-removal script returned error exit status 127
+[03:50] <rausb0> [ANF] MasterNinja: xmms comes with mp3 by default. ogg and others can be installed too. mp4 i dont know.
+=== acuster [n=acuster@62-90-111-158.barak.net.il]  has joined #ubuntu
+[03:50] <rausb0> josh__: whats the question?
+=== hangfire [n=hangfire@201.139.155.132.cableonline.com.mx]  has joined #ubuntu
+[03:50] <[ANF]MasterNinja> i dont have any mp4's anyway but i want windows media and quick time to work as well
+[03:50] <mikl> rambo3: yeah, it's not easy to figure out
+=== MeTa [n=sajt@53d8293e.adsl.enternet.hu]  has joined #ubuntu
+=== SportlessChick is now known as SportChick
+[03:50] <KenSentMe> I have a command that i want to run everytime the system is started and it needs to be run by root. Where do i put it?
+[03:51] <soundray> kevb: I think you'll have to apt-get the source to vino as well as the build dependencies, then apply the patch and recompile.
+[03:51] <josh__> when i do a "/search string" in a file... it will find one... is there a command that will make it search for that string again?
+=== poopotootti [n=poopotoo@c193-229-35-241.elisa-laajakaista.fi]  has joined #ubuntu
+[03:51] <rausb0> josh__: n
+=== Mez [n=Mez@ubuntu/member/mez]  has joined #ubuntu
+[03:51] <PlanarPlatypus> [ANF] MasterNinja, try installing gstreamer0.10-plugins-bad and gstreamer0.10-plugins-ugly, this should give you mp3 and windows media playback
+[03:51] <josh__> or do i have to continually type "/search string" for each instance
+[03:51] <josh__> "n"?
+=== xamox [n=x@liger.trans.mtu.edu]  has left #ubuntu ["http://www.xamox.net"]
+[03:52] <cyzie> what is the command to add/remove locale after the system is installed?
+[03:52] <josh__> woot woot
+[03:52] <PlanarPlatypus> [ANF] MasterNinja, not tried quicktime personally but I am told it works
+[03:52] <rausb0> josh__: "n" for next
+[03:52] <josh__> thats rausb0
+=== felix_ [n=felix@host120-192-dynamic.59-82-r.retail.telecomitalia.it]  has joined #ubuntu
+[03:52] <josh__> tanks
+[03:52] <[ANF]MasterNinja> ill make a note
+[03:52] <kevb> KenSentMe: You probably want to put a script in /etc/rc0.d/ but I'm not sure
+[03:52] <josh__> *thanks
+[03:52] <The_Machine> what's another good linux image editor that isn't as complex as gimp
+[03:52] <The_Machine> just looking for something like paint.net for Windows
+[03:52] <kevb> KenSentMe: Maybe someone else could confirm
+[03:52] <ayaa> wich branch to use to get the sun-java-jre (universe/multi .... ?)
+[03:52] <abze> i get this when i do apt-get update "W: GPG error: http://archive.ubuntu.com edgy Release: Could not execute '/usr/bin/gpgv' to verify signature (is gnupg installed?)
+[03:52] <abze> " how can i fix it?
+[03:52] <josh__> who in here has setup their apache server?
+=== Carnage\ [n=CarNagE@dslb-084-056-243-242.pools.arcor-ip.net]  has joined #ubuntu
+[03:52] <The_Machine> maybe for gnome?
+[03:52] <felix_> server\ caltanet.azzurra.org
+=== mygod [n=ch@222.183.69.72]  has joined #ubuntu
+=== b_52Centos [n=skimo@adsl196-110-31-217-196.adsl196-9.iam.net.ma]  has joined #ubuntu
+[03:52] <jrib> ayaa: multiverse
+[03:52] <[ANF]MasterNinja> lol use photoshop CS 2 on wine
+[03:52] <abze> and gnupg is not isntalled
+[03:52] <[ANF]MasterNinja> :P
+[03:53] <StephenL> KenSentMe:  Put it in /etc/rc.local
+[03:53] <aoupi> josh__: I have
+[03:53] <[ANF]MasterNinja> i dunno
+[03:53] <josh__> its complaining about fully qualified domain name... i dont have a "ServerName=" line in my httpd.conf file... where do i add it at?
+[03:53] <soundray> KenSentMe: add the command to /etc/rc.local
+[03:53] <[ANF]MasterNinja> photoshop is preety easy
+=== tanghus_ [n=tol@0x50a14d23.boanxx14.adsl-dhcp.tele.dk]  has joined #ubuntu
+=== alef-null [n=alef0@M869P020.adsl.highway.telekom.at]  has joined #ubuntu
+=== MeTa [n=sajt@53d8293e.adsl.enternet.hu]  has joined #ubuntu
+[03:53] <kevb> KenSentMe: There ya go, what they said
+=== LjL [n=ljl@81-208-60-199.ip.fastwebnet.it]  has joined #ubuntu
+=== frying_fish [n=frying_f@insouciant.plus.com]  has joined #ubuntu
+[03:53] <Dimensions> rambo3: ... i am only using terminal ...
+[03:53] <mikeconcepts> Seveas, I'm getting an error trying to install several things, it is saying falcon isn't available.
+=== Riot777 [n=riot777@unaffiliated/riot777]  has joined #ubuntu
+=== Joe_SWAU [n=ubuntu@l-lib-lap5.lab.swau.edu]  has joined #ubuntu
+[03:54] <sticazzi> The_Machine, http://osdir.com/Article7278.phtml - It's a GIMP clone with the menus moved around for the people who are comfortable with PhotoShop
+=== JNeverMind [n=no@d206-75-58-235.abhsia.telus.net]  has joined #ubuntu
+[03:54] <JNeverMind> good morning
+[03:54] <josh__> just add that line anywhere near the top?
+[03:54] <aoupi> josh__: just add it anywhere in the httpd.conf
+[03:54] <rambo3> Dimensions, ask ubotu about lamp and google mysql + error number
+[03:54] <josh__> rgr
+=== Joe_SWAU [n=ubuntu@l-lib-lap5.lab.swau.edu]  has left #ubuntu []
+[03:54] <JNeverMind> ive successfully setup software raid1 with ubuntu dapper before
+[03:54] <jmitchj> could someone help me with this message?..."W: GPG error: http://ubuntu.moshen.de dapper Release: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY FC0A1CC62F306651"
+[03:54] <kevb> soundray: I did apt-get source and built all deps, I applied current patches then modified vino_conf.c by hand and built it. It still has the problem : )
+[03:54] <JNeverMind> after a reinstall im a little screwed :/
+=== Joe_SWAU [n=ubuntu@l-lib-lap5.lab.swau.edu]  has joined #ubuntu
+[03:55] <The_Machine> no
+[03:55] <The_Machine> not looking for something as powerful as photoshop
+=== Testarossa__ [n=anguste@218.83.56.34]  has joined #ubuntu
+[03:55] <The_Machine> i mean very simple..  i don't even need filters
+=== Joe_SWAU [n=ubuntu@l-lib-lap5.lab.swau.edu]  has left #ubuntu []
+[03:55] <The_Machine> a "quick image editor"
+=== LjL [n=ljl@81-208-60-199.ip.fastwebnet.it]  has joined #ubuntu
+=== mamzers555 [n=user@88.134.196.178]  has joined #ubuntu
+[03:55] <The_Machine> like, fire it up, edit, save & clsoe
+[03:55] <aoupi> The_Machine: tuxpaint :)
+[03:55] <Dimensions> rambo3:  i dont have LAMP i installed mysql php and apache manually ...
+[03:55] <The_Machine> k
+[03:55] <The_Machine> thanks!
+[03:55] <aoupi> The_Machine: my little sister loves it
+[03:55] <alek> i want to add files from /home/alek/files/ to my repository places in /home/alek/respos. how to do it?
+[03:56] <The_Machine> lol
+[03:56] <soundray> kevb: how annoying. Sorry, I've no ideas. Perhaps you want to add your experience to the bug report.
+[03:56] <rambo3> Dimensions, so you dont have Linux Apache Mysql Php ?
+=== Joe_SWAU [n=ubuntu@l-lib-lap5.lab.swau.edu]  has joined #ubuntu
+[03:56] <KenSentMe> StephenL, and others: thank you
+[03:56] <soundray> sticazzi: what happens if you hit Y at this point?
+[03:56] <aoupi> The_Machine: you can try xpaint, but that might be too simple
+[03:56] <sticazzi> If I actually hit "yes" then I get the following error: /var/lib/dpkg/info/graphviz-cairo.postrm: 11: dot: not found   subprocess post-removal script returned error exit status 127
+=== ubuntero22 [i=opera@104.Red-81-41-128.staticIP.rima-tde.net]  has joined #ubuntu
+[03:57] <The_Machine> i'm checking tuxpaint right now
+[03:57] <mamzers555> how to delete attachments in launchpad?
+[03:57] <kevb> soundray: Yeah, I might, I'm just trying to confirm that I have done eveything correctly first. Thanks for help anyway, auto login worked nicely :D
+[03:57] <The_Machine> HAHA
+[03:57] <The_Machine> this doesnt' look how i expected it to!
+[03:57] <sticazzi> I get the same result if I run the "apt autoremove" command
+[03:57] <aoupi> The_Machine: :)
+[03:57] <sticazzi> apt-get*
+[03:57] <mamzers555> does somebody knows that if this is possible?
+[03:57] <The_Machine> LOL
+=== nomis_ [n=nomis__@chello062178225065.14.15.vie.surfer.at]  has joined #ubuntu
+[03:58] <Joe_SWAU> Hi. :-) I was updating edubuntu, and my laptop lost power. Now it won't boot. I tried the boot rescue command on the live cd, but it just gave me some error.
+[03:58] <rausb0> The_Machine: tuxpaint is for kids, try xpaint
+=== The_Machine removes tuxpaint
+[03:58] <The_Machine> hehe
+[03:58] <soundray> sticazzi: can you pastebin /var/lib/dpkg/info/graphviz-cairo.postrm please
+[03:58] <The_Machine> yeah
+[03:58] <The_Machine> i realize that now :P
+[03:58] <[ANF]MasterNinja> how do i change directory?
+[03:58] <ubuntero22> hello, i have a problem installing dapper, when loading i get error such "buffer i/o error" anybody knows how can i solve this? thanks a lot for your help
+[03:58] <aoupi> The_Machine: but you wont have any sound effects with xpaint, that is a major draw bacx
+=== sioux [n=sioux@adsl-64-156.37-151.net24.it]  has joined #ubuntu
+[03:58] <The_Machine> sound effects?
+[03:58] <rausb0> [ANF] MasterNinja: in the shell?
+=== hoelk [n=hoelk@h081217035104.dyn.cm.kabsi.at]  has joined #ubuntu
+[03:58] <georgy> cd directory
+[03:58] <[ANF]MasterNinja> the terminal
+[03:58] <soundray> Joe_SWAU: "some error" isn't a very helpful problem description
+[03:58] <The_Machine> like lightsabers clashing?
+[03:58] <The_Machine> :P
+=== dearboy [n=ch@222.183.69.72]  has joined #ubuntu
+[03:59] <rausb0> [ANF] MasterNinja: cd directoryname
+[03:59] <aoupi> The_Machine: yea, tuxpaint has all theese weird sounds for when you paint, yes, sounds like lightspabers sometimes
+=== Dr_willis [n=willis@74.140.6.108]  has joined #ubuntu
+[03:59] <The_Machine> yeah
+=== thefish [n=thefish@dsl-fixed-62-69-44-72.surfdsl.murphx.net]  has joined #ubuntu
+[03:59] <The_Machine> this is too simple.
+[03:59] <[ANF]MasterNinja> na it wont do it says the folder doesnt exist
+[03:59] <The_Machine> sigh
+=== cntb [n=user@CBL217-132-240-213.bb.netvision.net.il]  has joined #ubuntu
+[03:59] <kevb> can anyone running edgy do me a massive favour? : )
+[03:59] <The_Machine> i'll use gimp.
+[03:59] <rausb0> [ANF] MasterNinja: where the exact specification of directoryname depends on the shell's current directory
+=== Mez [n=Mez@ubuntu/member/mez]  has joined #ubuntu
+=== The_Machine froms
+=== tec [n=tec@58.69.19.77]  has joined #ubuntu
+[03:59] <The_Machine> frowns
+[03:59] <The_Machine> heh
+[04:00] <[ANF]MasterNinja> its /home/masterninja/install
+[04:00] <ubuntero22> hello, i have a problem installing dapper, when loading i get error such "buffer i/o error" anybody knows how can i solve this? thanks a lot for your help
+[04:00] <[ANF]MasterNinja> but it says the directory does not exist
+[04:00] <rausb0> [ANF] MasterNinja: so look where you are now: pwd
+[04:00] <Joe_SWAU> soundray: Is there a rescure cd I should download, or should it be on the live cd?
+[04:00] <abze> when i do apt-get update i gett an error from a program i uninstalled, asks me if u still have it, and no i dont. any way to fix it
+[04:00] <sticazzi> http://paste.ubuntu-nl.org/29734/ from line 32 onwards
+=== ch__ [n=ch@222.183.69.72]  has joined #ubuntu
+=== Dark_Anakin [n=Anakin@host122-81.pool8253.interbusiness.it]  has joined #ubuntu
+=== rich_ [n=rich@pool-71-101-108-49.tampfl.dsl-w.verizon.net]  has joined #ubuntu
+=== coolpaul900 [n=coolpaul@fl-76-1-184-83.dhcp.embarqhsd.net]  has joined #ubuntu
+[04:00] <kevb> Anyone on edgy, I need a massive favour. +1000 karma :)
+[04:00] <soundray> Joe_SWAU: what's the error you get from the live CD?
+=== Dark_Anakin [n=Anakin@host122-81.pool8253.interbusiness.it]  has left #ubuntu ["Leaving"]
+[04:00] <josh__> who was the apache guy in here again?
+=== neub [n=neub@85-218-28-157.dclient.lsne.ch]  has joined #ubuntu
+=== ch__ [n=ch@222.183.69.72]  has left #ubuntu [""]
+[04:01] <aoupi> josh__: hi
+=== j_ack [n=rudi@p508D8229.dip0.t-ipconnect.de]  has joined #ubuntu
+[04:01] <neub> hy guy
+=== TooTallJones [n=sdg@ppp-65-71-172-221.dialup.tpkaks.swbell.net]  has joined #ubuntu
+[04:01] <coolpaul900> Why does the splash look kinda weird?
+[04:01] <josh__> aoupi: what is the file that specifies what port apache will listen on?
+[04:01] <sticazzi> I guess I need to edit it and remove that "dot" thing which I have no clue about what it is
+[04:01] <neub> i'm looking for a soft to transform mpeg video in avi without compression
+[04:01] <rausb0> [ANF] MasterNinja: file- and directorynames are case sensitive, so "install" is not the same as "Install"
+[04:01] <mike_> aoupi: Hmm i can't find a line with $PATH in my /home/mike/.bashrc   what about "ln" command? What is the best way of going about this?
+=== poopotootti [n=poopotoo@c193-229-35-241.elisa-laajakaista.fi]  has joined #ubuntu
+=== dearboy [n=ch@222.183.69.72]  has left #ubuntu [""]
+[04:01] <coolpaul900> almost darker?
+=== Manny_ [n=chris@p54968E74.dip0.t-ipconnect.de]  has joined #ubuntu
+[04:01] <josh__> mike_: you want it to be globally?
+[04:02] <josh__> from any user?
+[04:02] <mike_> josh__: Yes
+[04:02] <josh__> for*
+[04:02] <aoupi> josh__: Listen 80 will listen on port 80
+[04:02] <Joe_SWAU> soundray: I can get the live cd to boot just fine. It gives me an error when it type: rescue acpi=off. It was a missing file error I believe.
+[04:02] <josh__> vim /etc/environment
+[04:02] <aoupi> mike_: you can add a line
+=== engie [n=stephen@dhcp-152-78-61-244.ecs.soton.ac.uk]  has joined #ubuntu
+[04:02] <soundray> sticazzi: just edit that file, insert 'exit 0' as the second line, and try removing again
+[04:02] <coolpaul900> Why does my splash look kinda weird? It looks a little darker then normal?
+[04:02] <josh__> yeah aoupi, but what file to i make that change in?
+=== mirak [n=mirak@ip-41.net-81-220-108.rev.numericable.fr]  has joined #ubuntu
+[04:02] <aoupi> josh__: httpd.conf
+[04:02] <Dimensions> rambo3: ... i do have apache2 mysql and php5 which i installed manually in my ubuntu machine ... while the ubuntu it self was installed like few months ago ... and i did use php apache and mysql a few days ago ... but now i am having this problem ...
+=== dearboy [n=ch@222.183.69.72]  has joined #ubuntu
+[04:02] <josh__> i dont have that line in my http.conf
+[04:02] <ubuntero22> i have a problem installing dapper, when loading i get error such "buffer i/o error" anybody knows how can i solve this? thanks a lot for your help
+=== Jo_ [n=chatzill@vil35-2-82-227-204-151.fbx.proxad.net]  has joined #ubuntu
+[04:02] <kevb> Anyone on edgy with gnome, I need a massive favour... +5000 karma now :)
+[04:03] <coolpaul900> Why does my splash look kinda weird? It looks a little darker then normal?
+[04:03] <soundray> Joe_SWAU: how far do you get when you try booting from the HD?
+=== fm [n=fm@82.229.180.51]  has joined #ubuntu
+=== Ampli^ [n=ampli@c83-248-55-254.bredband.comhem.se]  has joined #ubuntu
+=== Blacken [n=ed@edward-ropple.um.maine.edu]  has joined #ubuntu
+[04:03] <coolpaul900> Why does my splash look kinda weird? It looks a little darker then normal?
+[04:03] <sticazzi> soundray, nice! works now
+[04:03] <Joe_SWAU> soundrary: Not very far. It gives me a kernel error. I can reboot to my HD, then boot back into the Live CD, and tell you what the error is exactly.
+[04:04] <aoupi> josh__: well you could cd to the directory with httpd.conf and do: grep Listen *
+=== gouki [n=gouki@bl4-187-123.dsl.telepac.pt]  has joined #ubuntu
+[04:04] <sticazzi> where can I file bug reports? this the third I found related to installation
+[04:04] <aoupi> josh__: or just add the Listen line
+[04:04] <jrib> !bugs | sticazzi
+[04:04] <gouki> bugs.ubuntu.com
+[04:04] <ubotu> sticazzi: If you find a bug in Ubuntu or any of its derivatives, please file a bug report at: http://bugs.ubuntu.com/  -  Bugs in/wishes for the bots can be filed at http://launchpad.net/products/ubuntu-bots
+=== neub [n=neub@85-218-28-157.dclient.lsne.ch]  has left #ubuntu ["Ex-Chat"]
+[04:04] <coolpaul900> sticazzi: launchpad.net
+[04:04] <kevb> Anyone on edgy with gnome, I need a massive favour... OK +10000 karma half now half on completion :)
+=== MeTa [n=sajt@53d8293e.adsl.enternet.hu]  has joined #ubuntu
+[04:04] <soundray> Joe_SWAU: good idea. I'll be back in 10 min. Someone else may be available to help
+[04:04] <josh__> yeah i just ended up adding the listen line.... works now
+=== o[-_-] o [n=rule@modemcable101.136-82-70.mc.videotron.ca]  has joined #ubuntu
+[04:04] <jrib> kevb: just ask
+[04:05] <ubuntero22> i have a problem installing dapper, when loading i get error such "buffer i/o error" anybody knows how can i solve this? thanks a lot for your help
+[04:05] <kevb> jrib: Its complicated : )
+=== alnokta [n=alnokta@196.218.22.33]  has joined #ubuntu
+[04:05] <mirak> my kernel doesn't boot
+[04:05] <mirak> is there some support somewhere ?
+[04:05] <jrib> kevb: pastebin maybe, I mean do you think someone will just say yes without knowing what the massive favor is? :)
+[04:05] <Andy> mirak:try here;-)
+[04:05] <sticazzi> I'd be happy if someone quickly reviews the other two just to make sure that I'm not spamming the bug tracking tool. The problems I had encountered were: http://cimarosti.blogspot.com/2006/10/ubuntu-installation.html
+[04:05] <coolpaul900> Why does my splash look kinda weird? It looks a little darker then normal?
+=== Caplain_ [n=matt@86.detroit-04-05rs.mi.dial-access.att.net]  has joined #ubuntu
+[04:06] <jrib> !repeat | coolpaul900
+[04:06] <ubotu> coolpaul900: Don't feel ignored and repeat your question quickly, if nobody knows your answer, nobody will answer you. You can search https://help.ubuntu.com or http://wiki.ubuntu.com while you wait. Also see !patience
+=== web [n=web@dslb-084-058-175-059.pools.arcor-ip.net]  has joined #ubuntu
+=== hoelk [n=hoelk@h081217035104.dyn.cm.kabsi.at]  has joined #ubuntu
+[04:06] <kevb> I need someone to enable remote desktop, set password to "password" (or something else, known) and then copy me the file ~/gconf/desktop/gnome/remote_access/%gconf.xml . (Theres no security problem btw, just tell me the password after you copy the file and change the pw)
+[04:06] <coolpaul900> Why does my splash look kinda weird? It looks a little darker then normal?
+[04:06] <ubuntero22> i have a problem installing dapper, when loading i get error such "buffer i/o error" anybody knows how can i solve this? thanks a lot for your help
+[04:06] <alnokta> Hello ... I need some help ... I was adjusting "Services" from "System" ... I unticked "D bus service" . when I did that ... the "services-admin" disappeared ..also I cannot access "Right click on desktop menu" ... anyone knows how to undo the stupid thing I made?
+[04:06] <josh__> lol next question... who uses dyndns services?

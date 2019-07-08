@@ -1,0 +1,1350 @@
+[06:52] <Yossi> how do i change what timezone ubuntu thinks im in?
+[06:52] <bullgard4> n2diy: s/sqllite/SQLite
+[06:52] <dj_ryan> speaking of reinstall, my ubuntu gusty doesnt like being upgraded to intrepid, cant configure libc is what i get when doing apt-get dist-upgrade
+[06:52] <joljam> i am not able to write files to the DVD in ubuntu intrepid
+[06:53] <n2diy> ! SQLite
+[06:53] <ubottu> Sorry, I don't know anything about SQLite
+[06:53] <the99zChris> hey would anyone know what i messed up in gnome(hardy) if my compiz shortcuts don't work anymore, my volume popup display looks def not as good, and it looks like i now have only 256 colors..??
+[06:53] <bsdunix> Yossi: google's feeling awful lonely without you right about now
+[06:53] <gte351s> Titan8990: how can I change the password via the live cd for the new language? Probably the best thing is to set up a new user and password, but how to make it stick after the live cd reboot?
+[06:53] <gte351s> n2diy: yeah, that's what I thought :D
+[06:53] <Titan8990> gte351s, you have to chroot into your ubuntu drive for something like that
+[06:54] <n2diy> bullgard4: thanks, Maybe I don't need a DB? Abiword might beable to use Gnumeric for mail merge?
+[06:54] <Yossi> bsdunix: point taken :P
+[06:54] <gte351s> Titan8990: should I mount the device or something?
+[06:54] <ramontayag> hey all. i tried asking in the ubuntu forums but it seems people are asleep there :) i've got a compaq presario 1200 with a fresh install of xubuntu. i booted it up but the login screen is blank! i tried connecting an external monitor, and then restarted gnome, and then that's when the laptop shows the login screen. what should i do so I won't need to plugin a cable to make the laptop...
+[06:54] <ramontayag> ...display something?
+[06:54] <joljam> someone please help me.. I am not able to write to my dvd
+[06:54] <Titan8990> gte351s, yes, it needs to be mounted
+[06:54] <quietas> alrighty folks, its off to bed for me. Night all
+=== thelordmortis|aw is now known as thelordmortis
+[06:55] <bullgard4> n2diy: Sorry but I am not very much familiar with Abiword.
+[06:55] <roccity_> what up guys
+[06:55] <n2diy> bullgard4: np, I'm not either, obviously, but I'm learning.
+[06:55] <the99zChris>  hey would anyone know what i messed up in gnome(hardy) if my compiz shortcuts don't work anymore, my volume popup display looks def not as good, and it looks like i now have only 256 colors..??
+[06:56] <abstortedminds> How do i make it so that my drives dont display on desktop
+[06:56] <roccity_> the99zChris:you haven't changed your xorg file have you
+[06:56] <eMaX> don't look at them
+[06:57] <Titan8990> gte351s, now, assuming you mounted it to /media/ubuntu:    mount -t proc none /media/ubuntu/proc && mount -o bind /dev /media/ubuntu/dev && chroot /media/ubuntu /bin/bash && envupdate
+[06:57] <Titan8990> gte351s, from a root shell: sudo -i
+[06:57] <the99zChris> no, but i did run a couple lines of commands i didn't entirely understand in the terminal, would xorg be a good place to start lookin?
+[06:58] <gte351s> Titan8990: I think I'm mounted from /media/disk - how do I find out?
+[06:58] <roccity_> the99zChris: yeah check the depth that it is running at and the video driver I think you want at least 24 for the depth
+[06:58] <the99zChris> but i'm pretty sure the problems were delayed a bit
+=== matthew__ is now known as darkone778
+[06:58] <Titan8990> gte351s, you have to specify a mount location when you mount....
+[06:58] <bsdunix> call mount
+[06:59] <Titan8990> gte351s, eg- sudo mount /dev/sdxx /media/ubuntu   <----mount location
+[06:59] <the99zChris> sounds good thanks, u know how to get compiz hotkeys workin again? its running but not working if that makes sense
+[06:59] <Titan8990> gte351s, but yes, mount alone will display where all devices are mounted
+[06:59] <roccity_> the99zChris: what about in the screen resolution
+[06:59] <n2diy> abstortedminds: right click on the desktop, and explore your options.
+[06:59] <roccity_> the99zChris: what were the commands that you entered in a term
+[07:00] <gte351s> Titan8990: I got /dev/sdb1 on /media/disk type vfat
+[07:00] <Titan8990> gte351s, that doesn't sound right
+[07:00] <the99zChris> to be honest i don't know, i copy/pasted which i'm now seriously regretting.. no screen resolution option from right click desktop though
+[07:01] <Titan8990> gte351s, it should be a linux formatted drive, I would be very surprised if a linux install would even work on fat
+[07:01] <the99zChris> and no option to change colors when i go to system>preferences>screen resolution
+[07:01] <gte351s> Titan8990: here's what I get for running mount alone: http://pastie.org/426290
+[07:02] <eMaX> the99zChris, graca?
+[07:02] <the99zChris> graca?
+[07:02] <roccity_> the99zChris: I would look in your xorg to start
+[07:03] <the99zChris> cool, a starting place does wonders thanks! i'll leave u guys alone now :)
+[07:03] <sachin_> i want to make my ubuntu desktop as a multi-seat...the doubt is that if i edit /etc/X11/xorg.conf ..will my configuration reflect...i am using intrepid
+[07:03] <Titan8990> gte351s, there is no linux drive mounted
+[07:04] <oztrout> hello
+[07:04] <gte351s> Titan8990: I tried mounting one of the /dev/sda (1-8), but got "mount: can't find /dev/sda5 in /etc/fstab or /etc/mtab"
+[07:04] <Titan8990> gte351s, thats because you didn't specify a mount point
+[07:05] <sachin_> i want to make my ubuntu desktop as a multi-seat...the doubt is that if i edit /etc/X11/xorg.conf ..will my configuration reflect...i am using intrepid...its written in the configuration file that any changes made in that will not reflect
+[07:05] <sachin_> i want to make my ubuntu desktop as a multi-seat...the doubt is that if i edit /etc/X11/xorg.conf ..will my configuration reflect...i am using intrepid...its written in the configuration file that any changes made in that will not reflect...plz help guys
+[07:05] <gte351s> Titan8990: I see. should it be then?
+[07:06] <Titan8990> gte351s, sudo -i
+[07:06] <oztrout> my browser (firefox) keeps freezing on my when i go to youtube or play youtube movies .... any help ... :)
+[07:06] <Titan8990> gte351s, mkdir /media/ubuntu && mount /dev/sdxx /media/ubuntu
+[07:06] <Titan8990> gte351s, where /dev/sdxx is your ubuntu main fs drive
+[07:07] <lyckegard`> oztrout: just youtube or any flashpage? which flashplayer do you have got? a hint is to use medibuntu to get a good flash-player (the nonfree version)
+[07:07] <oztrout> flash pagers
+[07:07] <the99zChris> flash is a memory hog too, i had problems with memory..
+[07:07] <sachin_> i want to make my ubuntu desktop as a multi-seat...the doubt is that if i edit /etc/X11/xorg.conf ..will my configuration reflect...i am using intrepid...its written in the configuration file that any changes made in that will not reflect...plz help guys
+[07:07] <oztrout> ok ty i will try that .... brb ...
+[07:08] <gte351s> Titan8990: cool, I mounted sda6 (which I think was my main fs, judging by gparted).. next?
+[07:08] <sachin_> i want to make my ubuntu desktop as a multi-seat...the doubt is that if i edit /etc/X11/xorg.conf ..will my configuration reflect...i am using intrepid...its written in the configuration file that any changes made in that will not reflect...plz help guys
+[07:09] <sachin_> i think no ones interested here...
+[07:09] <Titan8990> gte351s, you should check the files on it to make sure
+[07:10] <gte351s> Titan8990: yeah, it has my home dir.
+[07:10] <Titan8990> gte351s, mount -t proc none /media/ubuntu/proc && mount -o bind /dev /media/ubuntu/dev && chroot /media/ubuntu /bin/bash && envupdate
+[07:11] <gte351s> Titan8990: what does all that do?
+[07:11] <Titan8990> gte351s, mounts dynamic kernel files and device files to your ubuntu filesystem
+[07:11] <n2diy> what is the terminal command to make your system beep?
+[07:11] <Titan8990> gte351s, then in chroots into the filesystem
+[07:11] <taz_> somethign wrong with my webcam???
+[07:12] <taz_> my webcam logitech
+[07:12] <Titan8990> gte351s, so your new terminal envirnment will be your ubuntu filesystem
+[07:12] <gte351s> Titan8990: I get an error mount point /media/ubuntu/proc does not exist
+[07:12] <Titan8990> gte351s, pastebin ls -al /media/ubuntu
+[07:13] <o0Chris0o> !webcam | taz_
+[07:13] <ubottu> taz_: Instructions for using webcams with Ubuntu can be found at https://help.ubuntu.com/community/Webcam - Supported cams: https://wiki.ubuntu.com/HardwareSupportComponentsMultimediaWebCameras
+[07:13] <taz_> ok im try
+[07:14] <gte351s> Titan8990: http://pastie.org/426290
+[07:14] <Titan8990> gte351s, that is not your rootfs
+=== Kwitschibo_ is now known as Kwitschibo
+[07:15] <gte351s> Titan8990: I think my root is in another partition now that I see where you're going. gimme a sec to mount it
+[07:15] <Titan8990> gte351s, that is your /home partition
+[07:15] <n2diy> what is the terminal command to make your system beep? I think it is "bell" but how do I tell bash it is a system command, and not a file?
+[07:15] <Titan8990> gte351s, but wait
+[07:15] <Titan8990> gte351s, if you have /home on its own partition, you should just reinstall
+[07:15] <gte351s> Titan8990: thanks for sticking around, by the way
+[07:16] <gte351s> Titan8990: really?.. wont it mess everything up?
+[07:16] <Titan8990> gte351s, that is the benefit of having a /home partition, you can install any OS on the root partition but all your files and application settings stay because they are all stored in /home
+[07:16] <Titan8990> gte351s, no, shouldn't
+[07:16] <Titan8990> gte351s, just don't accidently reformat the /home partition
+[07:16] <Titan8990> gte351s, and be sure to select it to be mounted at /home for the new install and your good to go
+[07:16] <Ian00> how can i make apt-get to stop asking me about how much disk space will be used
+[07:17] <gte351s> Titan8990: alright, I'll do that.
+[07:17] <n2diy> Titan8990: but not your apps, you have to re-install those, unless I'm missing something?
+[07:17] <gte351s> Titan8990: thanks a lot, if we ever meet - drinks are on me :D
+[07:17] <Titan8990> n2diy, yes, applications need to be reinstalled but his settings for those application will remain
+[07:18] <Titan8990> n2diy, with the exceptions of server apps that need to be configured by root
+[07:18] <Titan8990> gte351s, no problem and good luck :)
+[07:18] <bary_> Hi, can anyone tell me, why I can't Un-Mute capture sound?
+[07:19] <oztrout> bbl ... :)
+[07:19] <taz_> not work with logitech
+[07:19] <Titan8990> Ian00, use -q=2
+[07:19] <jway> how can I make my screen to the left my primary?
+[07:19] <n2diy> Titan8990: roger that, not familiar with servers, bottom line is having a /home important.
+[07:19] <Ian00> Titan8990 thank you
+[07:19] <jway> the left screen will *always* be the one with menubar, taskbar and desktop icons
+[07:21] <n2diy> is there a rule of thumb to determine the size of a /home partition per user?
+[07:21] <Titan8990> n2diy, right, its best to keep the rootfs as isolated as possible
+[07:21] <sprockets2000> anyone use the cpufreq scaling applet
+[07:21] <sprockets2000> I messed up the permissions to it
+[07:21] <sprockets2000> need to figure out how to get them back to normal
+[07:22]  * N4 away; sleep
+=== N4 is now known as n4
+[07:23] <n2diy> ! dvd
+[07:23] <ubottu> For multimedia issues, this page has useful information: https://help.ubuntu.com/community/RestrictedFormats - See also https://help.ubuntu.com/8.10/musicvideophotos/C/video.html - But please use free formats if you can: https://help.ubuntu.com/community/FreeFormats
+[07:28] <whou> does anybody know how to boot an iso from a hard drive?
+[07:28] <A-KO> Does anyone here know off the top of their head if the eee pc variants of ubuntu support full disk encryption? Or is it something I'd have to add? And if not, could I add it after installation?
+=== Daemon_ is now known as Xavierg2003
+[07:29] <Xavierg2003> Hello i need mental help. insert bullet here.
+[07:31] <Xavierg2003> yes
+[07:31] <pogztimz> how do i convert avi files for my PSP?
+[07:33] <dinesh__> i want to contribute to ubuntu how can i do it
+=== bonzo is now known as Guest40275
+[07:35] <threethirty> hi i am having trouble connecting to a bridgemaxx wimax modem in interpid anyone have any tips for me?
+[07:37] <Zygot> threethirty: what kind of problem? do you know the DHCP pool addees?
+[07:37] <RaNdY> Anybody can help me with /etc/hosts ?
+[07:38] <Guest75773> hi list
+[07:38] <Zygot> threethirty: do you know the gateway addee?
+[07:38] <threethirty> Zygot:i have a an adress its in the 10. range
+[07:39] <Zygot> threethirty: 10.0.0.1 is the gateway?
+[07:39] <nutty> 2
+[07:39] <Guest75773> I have some questions on setup of webserver using virtualmin - anyone here to help?
+[07:39] <Kartagis> !anybody | RaNdY
+[07:39] <ubottu> RaNdY: A large amount of the first questions asked in this channel start with "Does anyone/anybody..."  Why not ask your next question (the real one) and find out?
+[07:40] <threethirty> Zygot: the ip i have is 10.47.48.222 the broadcast is 10.47.63.255 are those useful?
+[07:41] <Zygot> threethirty: looks like you are connected?
+[07:41] <cyphase> is there some way i can tell nautilus to copy/move a file from an external script/program?
+[07:41] <bary_> How do I unmute the capture line-in sound?
+[07:41] <threethirty> Zygot: yeah but it wont resolve any pages
+[07:41] <cyphase> perhaps from the console, or via DBus
+[07:42] <Zygot> threethirty: can you ping 10.47.48.1 or 10.47.48.254?
+[07:43] <threethirty> Zygot: i can oing 10.47.48.1 with no packet loss
+[07:43] <threethirty> ping rather
+[07:43] <Zygot> threethirty: ok, what is the nameserver listed in /etc/resolv.conf?
+[07:44] <threethirty> Zygot: 205.171.3.65 and 205.171.2.65
+[07:45] <Zygot> threethirty: can you ping those?
+[07:46] <threethirty> Zygot: no "connect: Network is unreachable"
+[07:46] <Wille_eee> bary_» Try using your mixer settings
+[07:46] <jones-> Hi!
+[07:46] <bary_> Wille_eee> already did, thanks
+[07:46] <fortunachris> hi there
+[07:47] <Guest75773> in setting up my webserver (ubuntu Hardy) I need to isntall a SSL certificate - how do I do this. this is a dedicated server with 1 IP, and hosting multiple domains
+[07:47] <jones-> After unlocking my desktop this morning, I noticed that the keyboard layout had mysteriously changed. I go and fix it, and realize that the right CTRL key and the arrow keys don't work!
+[07:47] <bary_> Wille_eee> alsamixer too it keeps muting again?
+[07:47] <jones-> All was fine yesterday night when I locked it, and I didn't upgrade anything.
+[07:47] <jones-> I literally didn't do anything :) Any suggestions?
+[07:48] <jones-> Also the AltGr key seems to behave oddly.
+[07:48] <jones-> AltGr = Left arrow!
+[07:48] <Zygot> threethirty: if you want to edit the file and put in 208.67.222.222 and 208.67.220.220 but that will change on next lease
+[07:49] <aneptun> Hello everybody! Can someone help me with something in Ubuntu?Private Me.Thank you very much!
+[07:49] <threethirty> Zygot: how are you comming up with those ips so i can guess next lease?
+[07:49] <quibbler> i have a few hundred mp3ś with names like  001 - the group - title.mp3, (the numbers and the first -)  I want to get rid of in each name and keep the rest can i do this from the terminal?
+[07:50] <ruben23> hi i installed ubuntu intrepid desktop on my acer 4730Z my only problem is i cannot installed my web cam....
+[07:50] <Zygot> threethirty: those are for open dns service, thew will be overwritten next time you acquire a dhcp lease
+[07:50] <bouma> wow i just had several crashes
+[07:50] <bouma> could i describe them to anyone ?
+[07:50] <Zygot> th
+[07:51] <threethirty> Zygot: ahh i should have known that, i use them on my other connection :P is there a way to force my computer to use openDNS or will it reset every lease
+[07:52] <hateball> quibbler❥ you could do that with a script, but easytag can do it for you with a gui
+[07:52] <threethirty> Zygot: and do i need to restart anything to have those settings take effect?
+[07:52] <rehman> hi every body.
+[07:52] <rehman> can any one help me on konqueror?
+=== florin is now known as Guest91221
+[07:53] <Zygot> threethirty: you can go in on a static connection, that is easiest, but dhcp should configure your dns for you, did you rerun - sudo dhclient wlan0 - or some such?
+[07:53] <hateball> !anyone | rehman
+[07:53] <ubottu> rehman: A large amount of the first questions asked in this channel start with "Does anyone/anybody..."  Why not ask your next question (the real one) and find out?
+[07:53] <threethirty> Zygot: no i havent
+[07:54] <Zygot> threethirty: whatever the interface is? dhclient should find your dns.
+[07:54] <threethirty> Zygot: kool
+[07:54] <quibbler> hateball, i have never made a script ... and I thank you for the easytag suggestion , I will look into that.
+[07:54] <rehman> I am just trying to deliver the question.
+[07:54] <Zygot> threethirty: anyway, you see the problem now.
+[07:54] <hateball> quibbler❥ I figured as much, hence suggesting easytag :)
+[07:54] <rehman> if some one understands
+[07:54] <Titan8990> !ask | rehman
+[07:54] <ubottu> rehman: Please don't ask to ask a question, simply ask the question (all on ONE line, so others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[07:54] <threethirty> Zygot: yeah
+[07:55] <rehman> ubottu, ok
+[07:55] <ubottu> You're welcome! But keep in mind I'm just a bot ;-)
+[07:56] <rehman> Titan, Konqueror is not opening any page, instead it changes the icon in address bar.
+[07:56] <Zygot> threethirty: just reconnect and it should fix.
+[07:56] <Titan8990> rehman, I know nothing about konqueror, I was just trying to help you get help from someone else, by stating your question clearly
+[07:56] <quibbler> hateball, an astute man
+[07:57] <rehman> ok
+=== Pooky_ is now known as Pooky
+[07:58] <threethirty> Zygot: its still not connecting, i dont know why this is so bloody hard, its an ehternet interface, what magic could they be doing?
+[07:58] <rehman> Does any body know how to configure konqueror? not browsing.
+[07:58] <psypher246> hiall, is there anyone here who can help me with adhoc wireless setups. thanks
+[08:00] <iulianpojar> psypher246: http://www.ubuntugeek.com/tag/adhoc-wireless-network-setup-ubuntu
+[08:00] <rehman> Does any body know how to configure konqueror? not browsing.
+[08:00] <ruben23> hi i installed ubuntu intrepid desktop on my acer 4730Z my only problem is i cannot installed my web cam....
+[08:00] <Zygot> threethirty: you reacquired a lease and the /etc/resolv.conf is the same? their dns down?
+[08:01] <threethirty> Zygot: i hope not, this is my first day with it, i just bought the damn thing
+=== RV is now known as rv06
+[08:02] <rehman> Does any body know how to configure konqueror? not browsing.
+[08:02] <Zygot> threethirty: edit the /etc/resolv.conf file and change the numbers to open dns just long enough to see if it works
+[08:03] <ill> Anyone know if Ubuntu 8.10 has any compatibility issues with Radeon 4850x2?
+[08:03] <iulianpojar> psypher246: https://help.ubuntu.com/community/WifiDocs/Adhoc
+=== Vincent is now known as Guest34677
+[08:03] <threethirty> Zygot: i did that and its acting just as it did, and i doubt opendns, live.com, google, and yahoo are all down
+[08:04] <threethirty> Zygot: i think im gonna give up for the night, thanks for your help
+[08:04] <rehman> Does any body know how to configure konqueror? not browsing.
+[08:04] <Zygot> threethirty: you put 208.67.222.222 in resolv.conf?
+[08:04] <threethirty> Zygot: yeah i did
+[08:05] <Zygot> I'm thinking the modem is not connected to your provider
+[08:05] <threethirty> Zygot: it just over wrote, i must have released in the time we were pounding on it
+[08:06] <ruben23> anybody have ideas
+[08:07] <cMad_> does anyone use the fullsize apple wired keyboard?
+[08:07] <Zygot> threethirty: although those look like bridge numbers? It will overwrite.
+[08:08] <psypher246> iulianpojar: i have laready set it up, my problem is a little more complex. after about a 30 mins or an hour of connection suddenly the connection is terrible. the 2 laptops are right next to each other and get a 3ms ping there is no traffic. create ANY kind of load, small or large and pings shoot up to 20SECONDS! crazy!
+[08:08] <threethirty> Zygot: yeah, im totally confused now ( its 4am localtime) i think ill sleep on this and try again tomorrow, thanks
+[08:08] <Zygot> threethirty: OK, bye
+[08:08] <iceroot>  anyone getting an open port with "nmap -p 389 alpha-unix.de"?
+[08:08] <psypher246> iulianpojar: btw one laptop is the dell mini with preinstalled 8.04 and the other 8.10 x64
+[08:08] <psypher246> also dell, m6300
+[08:09] <iulianpojar> psypher246: problems with drivers
+[08:13] <psypher246> iulianpojar: and those sites, which i have already read before, are useless cos they don't mention that to get this working properly you HAVE to install dnsmasq-base AND that ubuntu page is actually completely irrelevant as /etc/dbus-1/event.d/25NetworkManager stop  does not work as there are NO files in /etc/dbus-1/event.d/
+[08:13] <ruben23> hi if i have existing program on my centos server installed through yum then plan to upgrade it to a newer version...what step would i take...
+[08:13] <psypher246> iulianpojar: k so how do i fix them?
+[08:14] <psypher246> iulianpojar: know any work arounds?
+[08:14] <tomcyl> hi, all
+[08:14] <ruben23> i tried to update...samething no newer version is installed....
+[08:15] <tomcyl> anybody know , ubuntu can make web site?
+[08:15] <dave84> Hello, Could anybody please give any assistance with ATI Radeon drivers on Hardy... I've been through forums and sites, just had a quick question or two where I can get a realtime response :)
+[08:16] <MenZa> !ati | dave84
+[08:16] <ubottu> dave84: For Ati/NVidia/Matrox video cards, see https://help.ubuntu.com/community/BinaryDriverHowto
+[08:16] <aneptun> it is a difference between virtualbox and virtual box -ose?
+[08:16] <Baconizer> yes
+[08:16] <aneptun> what difference?
+[08:16] <Baconizer> OSE = Open Source Edition
+[08:16] <dave84> thanks, checking it now.
+[08:16] <MenZa> aneptun: The non-OSE version has  few more features, but alas, isn't open source.
+[08:16] <iulianpojar> psypher246: look in the  logs and see who of the notebooks is giving you problems
+[08:16] <Baconizer> meaning the OSE is better :P
+[08:17] <psypher246> iulianpojar: any logs i shiould specifically look at, messages, kernelm, debug...
+[08:19] <iulianpojar> psypher246: tail /var/log/messages , and wait untill it hapens
+[08:19] <huwenfeng> how to delete the Evolution from my Ubuntu 8.04 LTS?
+[08:19] <huwenfeng> i hate it ,  i never use it!
+[08:20] <cast> huwenfeng: open up your package manager and remove it, i presume
+[08:20] <MenZa> r/w 30
+[08:21] <psypher246> iulianpojar: thanks
+[08:21] <stefodnb> Hi
+[08:21] <MenZa> Hello, stefodnb
+[08:21] <stefodnb> How do I downgrade subversion from 1.5.1 to 1.3.2?
+[08:21] <stefodnb> (compatibility problems)
+[08:22] <cast> stefodnb: hmm, i'd suggest installing 1.3.2 in /usr/local,
+[08:23] <stefodnb> and have 2 coexisting versions? sounds messy, no?
+[08:23] <ill> Anyone know if Ubuntu 8.10 has any compatibility issues with Radeon 4850x2?
+[08:23] <cast> not as messy as having 1.3 installed but all the rest of the packages for your release expecting 1.4 or 1.5
+[08:23] <tomcyl> anyone know why my NVIDIA ACCELERATED driver can not activate? do i need to change the card?
+[08:24] <cast> stefodnb: hmm, in what way are you using svn?
+[08:24] <stefodnb> cast: ok, I was thinking my system had a requirement for something like svn >= 1.1, svn <= 1.5.1
+[08:24] <c7m> it didn't work for me O_o
+[08:25] <stefodnb> cast: Well we are developing software, I have a working copy which I edit and commit
+[08:25] <stefodnb> cast: so other people on my team can get the changes. Normal stuff..
+[08:25] <c7m> download driver from nvidia and install via console
+[08:25] <c7m> nothing with your card i guess
+[08:25] <cast> stefodnb: hmm, OT: ever used a distributed rcs? :)
+[08:26] <stefodnb> cast: Nope. Coworkers are still struggling to switch from emailing diffs around, I'm keeping it as simple as possible. dvcs requires that one knows what hes doing.
+[08:27] <cast> stefodnb: what compatibility issue are you running into? might be another way around it, if you let 1.5 touch your repo it may automagically upgrade it so 1.3 can't read it
+=== zone is now known as Guest2856
+[08:29] <stefodnb> cast: yeah, that seems to be what happened. Coworker using 1.3 fails to "svn up" a repo i touched with 1.5
+[08:29] <stefodnb> it seems he's going to upgrade and i won't be downgrading, anyway.
+[08:29] <cast> that's probably the better way to go about it :)
+[08:30] <stefodnb> yeah if it's possible. i wasn't sure if his ubuntu 6.06 can support a recent svn version.
+[08:30] <cast> i don't keep track of their changes between releases anymore, but i presume they would have fixed at least a few bugs between 1.3 and 1.5
+[08:30] <cast> stefodnb: i'd very much expect one to be able to install subversion on it
+[08:31] <stefodnb> i said a _recent_ svn, i.e. 1.5.1
+[08:31] <cast> ahh, sorry, i meant recent svn :)
+[08:32] <stefodnb> ah, cool.
+[08:32] <prasot> k
+[08:32] <cast> i don't have svn installed as i'm short on space, but i do pull from svn:// with hg often :) hmm, wonder how much ci support there is for hg/git to svn
+[08:34] <stefodnb> do you mean using a bridge like git-svn, or natively from git?
+[08:35] <Kimi> HI
+[08:35] <Kimi> If i use guided use entire disk option for a 40gb hard disk... will it erase all the 40 gb and install .............. or it will completely delte the C drive alone ?????
+[08:36] <Kimi> iMatter are you there ?
+[08:37] <cast> stefodnb: either or
+[08:38] <user_> Kimi: it will delete everything on the harddisk, C-Drive (of Windows) and any other drives (D,E..) as well
+[08:38] <Kimi> ok user_
+[08:38] <stefodnb> cast: looks like the svn1.5 .deb requires a newer libc than available in ubuntu6.06
+[08:40] <Ranakah> 5.1 sound don't work in ubuntu intrepid?
+[08:40] <cast> stefodnb: very likely, you can either [as you may have] look for a backport, see if you can build the .deb src package on 6.06, or make your own .deb for 6.06, or do the ol ./configure make make install
+=== ubuntu__ is now known as vito590
+[08:40] <cast> stefodnb: is work standardised on 6.06?
+[08:40] <DasEi> Ranakah: it does, what a comp ? also see :
+[08:40] <DasEi> !alsa
+[08:40] <ubottu> If you're having problems with sound, first ensure ALSA is selected, by double clicking on the volume control, then File -> Change Device (ALSA Mixer). If that fails, see https://help.ubuntu.com/community/Sound - https://help.ubuntu.com/community/SoundTroubleshooting - http://alsa.opensrc.org/DmixPlugin - For playing audio files, see !Players and !MP3
+[08:40] <Ranakah> my soundcard is nvidia soundstorm on abit nf7-2 rev 2.0 (nforce 2 chiposet)
+[08:40] <Lint01> where can I find ext3 data structures specifications?
+[08:41] <tomcyl> <tomcyl> anyone know why my NVIDIA ACCELERATED driver can not activate? do i need to change the card?
+[08:41] <bouma_> quit
+[08:41] <hotbeefhero> hey new to linux, using xubuntu, trying to transfer files onto a external hdd, allowed me to transfer onto the pc but wont let mew copy them back off
+[08:41] <Ranakah> it's alsa selected.. and i hear sound only from front
+[08:41] <mm2000> Hi there, is there a way to adduser and pass username and password as arguments?
+[08:41] <DasEi> Lint01:wikipedia
+[08:42] <cast> mm2000: i'm going to look at the man page, i think there is.
+[08:42] <ShackTiDe> Hi all. I need some help about the USB automounter. I need to pass an option to the automounted USB devices like "shortname=winnt". Where do I put this???????????
+[08:42] <rehman> Ubottu: can you help me on konqueror?
+[08:42] <ubottu> Error: I am only a bot, please don't think I'm intelligent :)
+[08:42] <DasEi> Ranakah: configured alsa ? how many sliders ? pcm risen, too ?
+[08:42] <kraut> moin
+[08:42] <Titan8990> mm2000, use useradd instead of adduser
+[08:42] <cast> mm2000: man useradd has such an option
+[08:43] <mm2000> ok, ty
+[08:43] <Titan8990> mm2000, adduser is interactive whereas useradd can be more automated, but careful because I misconfigured user account can be pretty worthless
+[08:43] <xangua1> ubottu: update to jaunty ?
+[08:43] <ubottu> Error: I am only a bot, please don't think I'm intelligent :)
+[08:43] <Ranakah> i try all with this sliders... turn on some and turn of.. i think i need drivers for this soundcard... but i don't know where i can get it
+[08:43] <DasEi>  !brain
+[08:43] <ubottu> Hi! I'm #ubuntu's favorite infobot, you can search my brain yourself at http://ubottu.com/factoids.cgi - Usage info: http://wiki.ubuntu.com/UbuntuBots
+[08:43] <cast> mm2000: if it's for remote uses, could forgo the passwords all together and just send them a ssh secret key :)
+[08:43] <zaggynl> hiya, can I disable sound using boot options on ubuntu 8.10 livecd?
+[08:43] <Kimi> !brains
+[08:43] <ubottu> Sorry, I don't know anything about brains
+[08:44] <DasEi> Ranakah: also, are the icons above the slidrs green (unmuted?)
+[08:44] <ShackTiDe> Anybody familiar with Ubuntu's automount option??
+[08:44] <zaggynl> !bootoptions
+[08:44] <ubottu> For a list and explanation on some of the boot options, see https://help.ubuntu.com/community/BootOptions
+[08:44] <Ranakah> DasEi yes
+[08:45] <Lint01> DasEi: nope
+[08:45] <hotbeefhero> Titan8990: can you help me with setting permissions on an external hdd? i desperately need to copy files to it
+=== hotbeefhero is now known as thelinuxman
+=== thelinuxman is now known as thelinuxN00b
+[08:46] <Titan8990> hotbeefhero, just use sudo
+[08:46] <Lint01> where can I find ext3 data structures specifications?
+[08:47] <thelinuxN00b> what is sudo?
+[08:47] <Titan8990> !sudo | thelinuxN00b
+[08:47] <ubottu> thelinuxN00b: sudo is a command to run programs with superuser privileges ("root"). Look at https://help.ubuntu.com/community/RootSudo for more information. For graphical applications see !gksu (Gnome, XFCE), or !kdesudo (KDE)
+[08:47] <eqisow2> Lint01: This isn't really the right channel for that
+[08:47] <voice5sur5> thelinuxN00b, sudo is to get you root permitions
+[08:47] <thelinuxN00b> thanx heaps
+[08:47] <user_> Lint01: browse the source or google. you seem to have the right keywords already
+[08:48] <voice5sur5> i have a problem, i can't shutdown my linux
+[08:48] <cast> if you can't find anything for ext3, look for ext2, since there's not mcuh difference
+[08:48] <coulix> Hi, if anyone has some xp setting up bind9 i got some weird errors: http://dpaste.com/18861/
+[08:48] <voice5sur5> it stack at unmounting temporary filesystem
+[08:48] <cast> voice5sur5: what have you tried?
+[08:48] <voice5sur5> i cant reboot but i can't shutdown
+[08:48] <voice5sur5> i can*
+[08:49] <voice5sur5> when i shutdown it finish process then when it says Unmounting temporary filesystem it stay like that
+[08:49] <DasEi> Lint01:http://en.wikipedia.org/wiki/Ext_3
+[08:49] <voice5sur5> in tty
+[08:49] <Peter[i]> Hi, does anyone know if its possible to send html mail from claws?
+[08:50] <voice5sur5> any idea?
+[08:50] <n2diy> voice5sur5: will you answer cast's question?
+[08:50] <voice5sur5> n2diy, i don't understand
+[08:50] <voice5sur5> ?
+[08:50] <n2diy> voice5sur5: what command are you using?
+[08:51] <voice5sur5> normal shutdown from application but its does the same thing with halt or shutdown
+[08:51] <DasEi> Ranakah: what does that mean, only front, the physical front of the box or  just 2channel instead of f.e. surround ?
+[08:51] <Lint01> DasEi: there's no data structures described there
+[08:51] <voice5sur5> the only way is forced shutdown that risk data corruption
+[08:52] <n2diy> voice5sur5: what command are you using?
+[08:52] <voice5sur5> halt or shutdown
+[08:52] <DasEi> Lint01: what to wanto to know ? better a #linux question
+[08:52] <DasEi> do*
+[08:52] <voice5sur5> or normal shutdown from gui
+[08:52] <Ranakah> DasEi only front channels in sorround system.. only if i turn on "Duplicate front" then i hear some sound from rear and center.. but is only stereo then not sorround
+[08:53] <voice5sur5> n2diy, ??
+[08:53] <n2diy> voice5sur5: have you tried "shutdown -h now" in a terminal?
+[08:54] <voice5sur5> -h stand for what?
+[08:54] <n2diy> voice5sur5:  you'll need to sudo that
+[08:54] <stefodnb> halt
+[08:54] <cedric30> Salut
+[08:54] <voice5sur5> the halt command doesn't work too
+[08:54] <voice5sur5> the only one is poweroff -f
+[08:54] <voice5sur5> which risk data corruption
+[08:54] <iulianpojar> salutare
+[08:54] <n2diy> voice5sur5: have you tried "sudo shutdown -h now" in a terminal?
+[08:55] <voice5sur5> n2diy, yes
+[08:55] <voice5sur5> the problem is not the command
+[08:55] <voice5sur5> but the cause
+[08:55] <voice5sur5> the unmounting thing
+[08:55] <n2diy> voice5sur5:  and that didn't work!?!?
+[08:55] <voice5sur5> why does it block then
+[08:55] <voice5sur5> i does
+[08:55] <cast> the fs in question is /tmp?
+[08:55] <voice5sur5> i said the only working command is poweroff -f
+[08:56] <voice5sur5> cast, ?
+[08:56] <voice5sur5> what do you mean
+[08:56] <gaojinjun> i
+[08:56] <n2diy> ! init
+[08:56] <ubottu> Boot options: https://help.ubuntu.com/community/BootOptions - To add/remove startup services, you can use the package 'bum', or update-rc.d - To add your own startup scripts, use /etc/rc.local - See also !grub and !dualboot - Making a boot floppy: https://help.ubuntu.com/community/GrubHowto/BootFloppy - Also see https://help.ubuntu.com/community/SmartBootManagerHowto
+=== florin is now known as IceyBlack
+[08:57] <cast> well, it's stuck unmounting you said
+[08:57] <IceyBlack> Hi all
+[08:57] <voice5sur5> yes c
+[08:57] <cast> hello IceyBlack
+[08:57] <voice5sur5> cast,
+[08:57] <IceyBlack> i cannot open a .pps document
+[08:57] <sei> Hello
+[08:57] <IceyBlack> i dont know why
+[08:57] <cast> IceyBlack: hmm, openoffice won't?
+[08:57] <IceyBlack> yep
+[08:57] <cast> IceyBlack: do you know what version of office created it?
+[08:58] <cast> IceyBlack: i found issues optioning the latest travesty of a spreadsheet format from office a few months ago
+[08:58] <IceyBlack> i try now to see version
+[08:58] <voice5sur5> no solution to my problem?
+[08:58] <Mr-BibsoN> † :-))) †
+[08:58] <IceyBlack> my .pps doc is open and after 1 sec close
+[08:58] <adda> neatza all:*
+[08:59] <IceyBlack> neatza adda
+[08:59] <n2diy> cast, what was the spread sheet issue?
+[08:59] <cedric30> Why when I try to compile my source "gcc -I/usr/include/ file.c", it returns this error "error:  stdio.h : No file.." It is not the "-I" option to include the header directory?
+[08:59] <DasEi> Ranakah: sorry for my pause, I just had to boot another box I have it running; kmix let's you set it, I don't use 5.1 on ubuntu, but kmix should install there, too
+[08:59] <cast> IceyBlack: hmm, open up a terminal and type "openoffice asdf.pps" and see what the error is, if there is one
+[08:59] <IceyBlack> cast ok
+[08:59] <cast> n2diy: nothing knew how to open it. i think it was a office open xml thingy, .xls
+[08:59] <IceyBlack> wait
+[08:59] <cast> n2diy: sorry, .xxls, or something
+[09:00] <DasEi> Ranakah: is your soundcard shown correctly in alsamixergui ?
+[09:00] <adda>  .  /:)
+[09:00] <ScrowMABTW> Hello all
+[09:00] <IceyBlack> xx.pps not recovered yet
+[09:00] <cast> ahh, .xlsx!
+[09:00] <n2diy> cast, what created it?
+[09:01] <adda> IceyBlack prv me
+[09:01] <IceyBlack> and after i press recover open pps again and after one second is crushing again
+[09:01] <adda> plz
+[09:01] <ScrowMABTW> I loaded file sharing on my Ubuntu box, and I can connect from my windows laptop, but when I play video files on the windows box, I only get audio! What's wrong?
+[09:01] <cast> n2diy: office 2k7 i believe
+[09:01] <cast> ScrowMABTW: whereas, when you copy the videos over they play fine?
+[09:01] <ScrowMABTW> Oh I hadn't tried that... what i did
+[09:02] <IceyBlack> cast
+[09:02] <ScrowMABTW> The files are all stored on the Ubuntu box
+[09:02] <ScrowMABTW> I can connect to the drive from the windows box
+[09:02] <n2diy> cast, the new release of Win?
+[09:02] <ScrowMABTW> But I cannot get video to work, just the audio portion
+[09:02] <cast> voice5sur5: i've got no idea bro, how exactly the shutdown process works is beyond me. it's always 'just worked' for me,
+[09:03] <cast> ScrowMABTW: well we need to isolate it down, is it related to ubuntu at all, the best way to do that would be to have ubuntu not involved in the process at all
+[09:03] <ScrowMABTW> They all play fine on the Ubuntu box. They are just AVI files
+[09:03] <IceyBlack> maybe i must install a new extension or something?
+[09:03] <IceyBlack> or it is that possible?
+[09:03] <cast> ScrowMABTW: most of the time it's a codec issue
+[09:03] <tomcyl> my ubuntu got too many problem , any way i can reset it back to normal?
+[09:03] <ScrowMABTW> But they are just AVI files and I am using Windows Media Player...
+[09:03] <cast> ScrowMABTW: grab mplayer, or vlc, for windows :) WMP shit
+[09:04] <ScrowMABTW> But why would WMP not work?
+[09:04] <cast> ScrowMABTW: avi is just a container format, it could have a video stream encoded with one of several video codecs
+[09:04] <tomcyl> hello all.
+[09:04] <tomcyl> help
+[09:04] <ScrowMABTW> I see...
+[09:04] <cast> n2diy: no, MS Office 2007
+[09:05] <ScrowMABTW> How do I get other codecs?
+[09:05] <IceyBlack> any clue with my .pps extension?
+[09:05] <ScrowMABTW> I hate this damn version of Windows
+[09:05] <cast> i do not use windows, or wmp ;)
+[09:05] <DasEi> ScrowMABTW: use vlc player
+[09:05] <cast> IceyBlack: if open office is failing you, you could look for another program that opens .pps
+[09:05] <tomcyl> windows? not ubuntu?
+[09:05] <n2diy> cast, ok, I thought you meant Win 7, sorry no clue here.
+=== Gui is now known as Guest63478
+[09:05] <DasEi> ScrowMABTW: how did you connect ? samba ?
+[09:05] <simplexio> ScrowMABTW: or mplayer. it has all needed codecs
+[09:05] <IceyBlack> cast like what?
+[09:06] <ScrowMABTW> Samba
+[09:06] <cast> IceyBlack: and if you get really desperate, you could run office
+[09:06] <IceyBlack> cast i tryied soffice -show file.pps  too
+[09:06] <IceyBlack> but same error
+[09:06] <cast> IceyBlack: kde might have something, not sure
+=== methril|away is now known as methril|work
+[09:06] <IceyBlack> ok tnx aneway mate
+[09:06] <DasEi> ScrowMABTW: check with a usb stick the direct copy as mentioned above, then use a including player ^
+[09:07] <IceyBlack> it was an e-mail attachament,i hope is note a naked hot girl slide show ;)
+[09:07] <bman> ivirii
+[09:08] <DasEi> Ranakah: is your soundcard shown correctly in alsamixergui ?
+[09:08] <Ranakah> yes DasE1
+[09:09] <ScrowMABTW> Downloading the CCCP
+[09:09] <cast> IceyBlack: i have noticed people embedding videos in .pps, :\
+[09:09] <Ranakah> i need drivers for nvidia soundstorm integrated soundcard
+[09:09] <IceyBlack> true..
+[09:09] <DasE1> Ranakah: sudo apt-get install kmix
+[09:09] <Aperculum> To which packet does /usr/dict/words belong to, I'd like to install it
+[09:10] <ScrowMABTW> Damn it!
+[09:10] <cast> Aperculum: you can search for file names in packages
+[09:10] <ScrowMABTW> I can't install without admin on this comp
+[09:11] <cast> Aperculum: the ubuntu package website probably has such a feature, apt-file does
+[09:11] <cast> ScrowMABTW: you can get just a .zip of mplayer, that needs no install
+[09:11] <DasE1>  !sudo > ScrowMABTW
+[09:11] <ubottu> ScrowMABTW, please see my private message
+[09:11] <Aperculum> cast, I know but I don't know the command, I'm searching for it but I'd hope someone knew right away
+[09:12] <cast> Aperculum: i could know right away, but it's more useful in the long term to teach you ;P\
+[09:12] <Ranakah> DasE1 kmix.. i have gnome not kde
+[09:12] <Ranakah> ?
+[09:12] <Riya> sir how can i use cin and cout key word in ubuntu which lib i download ?
+[09:12] <Aperculum> cast, yes, I know, thank you anyway :)
+[09:13] <cast> Riya: install g++
+[09:13] <cast> Riya: i'm presuming you are refering to C++
+[09:15] <warnet> grgr
+[09:15] <Riya> ya i installed g++ but i cant use cin and cout in c++ i am using Geany editor .
+[09:15] <warnet> haloooo
+[09:16] <cast> Riya: so when it comes time to compile what happens?
+[09:16] <ScrowMABTW> No luck with the mplayer zip
+[09:16] <L3dPlatedLinux>  yeah I guess with linux mint I should have just installed ubuntu so I think I might try sabayon
+[09:16] <ScrowMABTW> I run it and it opens a little box, a bunch of text scrolls, and it closes
+[09:16] <cast> Riya: libstdc++6-4.3-dev: /usr/include/c++/4.3/iostream
+[09:16] <simplexio> ScrowMABTW: start it from console and see what is error
+[09:17] <thelinuxN00b> <your user name here> ALL=NOPASSWD: ALL this  command not working in sudo, do i have the command wrong, trying to get root as user
+[09:17] <ScrowMABTW> I don't understand
+[09:17] <cast> Riya: they might be defined in that file, dunno, i don't do C++
+[09:17] <cast> simplexio: the windows console, even
+[09:17] <Riya> how can i install libstdc++6-4.3
+[09:18] <ScrowMABTW> Oh ok
+[09:18] <cast> thelinuxN00b: did you use visudo?
+[09:18] <ScrowMABTW> Error is
+[09:18] <thelinuxN00b> yes
+[09:18] <ScrowMABTW> No codecs
+[09:19] <thelinuxN00b> hold that thought i think i may have got root
+[09:19] <DasE1> Ranakah:do you have sliders for the other channels but the main stereo ones ?
+[09:19] <DasE1> do ?
+[09:20] <Ranakah> default not
+[09:20] <Ranakah> DasE1 not default..only if i turn it on
+[09:20] <Riya> how can i install libstdc++6-4.3
+[09:21] <thelinuxN00b> still wont let me copy. in terminal it has at start root@myusername-laptop:-#
+[09:21] <cast> is it an NTFS drive thelinuxN00b?
+[09:21] <thelinuxN00b> the external is yes
+[09:22] <cast> i've noticed, with that particular crapware of a fs, that if it's in an unclean state some linux ntfs rw projects will refuse to mount it rw
+[09:22] <Kimi> my frnd tells that Star office is owned by sun microsys.... then what about open office ?? are both the same or what ??????
+[09:22] <thelinuxN00b> the laptop hdd is fat 32
+[09:22] <cast> what does the output of 'mount' say for that drive?
+=== Pula is now known as Tyroll
+[09:22] <ScrowMABTW> GRR
+[09:22] <ScrowMABTW> Says there is no "codec.conf" file
+[09:22] <DasE1> Ranakah: if you s-card is shown correctly,it's not a driver,but a settings problem, gnome-alsamixer is installedyou say, and I dont't find and equivalent for kmix else; did you try system > preferences > sound > something like iec blahblah  output ?
+[09:23] <cast> ScrowMABTW: might be time to give up on windows, ;)
+[09:23] <thelinuxN00b> how do i check that please cast
+[09:23] <cast> thelinuxN00b: i just told you.
+[09:23] <abhishekiitd007> hey anyone here?
+[09:23] <abhishekiitd007> i need help!
+[09:23] <thelinuxN00b> whoops
+[09:23] <abhishekiitd007> hello
+[09:23] <abhishekiitd007> anyone ?
+[09:23] <DasE1>  !ask
+[09:23] <ubottu> Please don't ask to ask a question, simply ask the question (all on ONE line, so others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[09:23] <abhishekiitd007> @ubottu
+[09:23] <abhishekiitd007> ok
+[09:24] <ScrowMABTW> I want to, but my gf wont let me remove it from her computer
+[09:24] <abhishekiitd007> I want to install nvidia on my ubuntu hardy
+[09:24] <abhishekiitd007> and i some how installed it
+[09:24] <cast> ScrowMABTW: dual boot is handy
+[09:24] <abhishekiitd007> but my graphics havent improved at all
+[09:25] <ScrowMABTW> I just need something that works and doesnt require an install
+[09:25] <abhishekiitd007> what can i do?
+[09:25] <thelinuxN00b> i have typed mount into terminal, it doesnt seem to have any info on the external it has been detected and i can copy from it but not to
+[09:25] <mid_> hello everybody.. after a reboot (no updates involved) my sound card suddenly doesnt work anymore.. I have a samsung nc10, kernel 2.6.27-11, sound card Intel Corporation 82801G (ICH7 Family) High Definition Audio Controller (rev 02)... any hint??
+[09:25] <cast> ScrowMABTW: well, i can only offer ubuntu related solutions to your windows problem :D
+[09:25] <abhishekiitd007> I want to install nvidia on my ubuntu hardy    and i some how installed it      but my graphics havent improved at all
+[09:25] <cast> abhishekiitd007: and how did you measure.
+[09:26] <abhishekiitd007> cast:measure what?
+[09:27] <DasE1> Ranakah:http://ubuntuforums.org/showpost.php?p=1478381&postcount=1
+[09:27] <Kimi> my frnd tells that Star office is owned by sun microsys.... then what about open office ?? are both the same or what ??????
+[09:27] <abhishekiitd007> cast:well, my screen supports resolutions better than 800
+[09:27] <Ranakah> DasE1 tnx :D
+[09:27] <abhishekiitd007> cast:*600
+[09:27] <cast> Kimi: surely, surely this is described on wikipedia
+[09:28] <Kimi> cast ok
+[09:28] <abhishekiitd007> cast:i cant use beryl
+[09:28] <Kimi> can you just give me link.... or will you ask me to google out ?
+[09:28] <Kimi> ok
+[09:28] <cast> Kimi: guess. :)
+[09:28] <ivanatwork> i need to scan to a pdf
+[09:28] <Kimi> cast
+[09:28] <Kimi> cast googled///// got the site
+[09:28] <abhishekiitd007> cast:how do i exit x server?pressing crt;, alt, f1?
+[09:28] <Kimi> cast :P thanks anyway
+[09:28] <AnRkey> how can i get permission to use my serial port in 8.04.2?
+[09:29] <M_23_LTU> looking for a girl to chat. pls private
+[09:29] <cast> i umm, i'm going to go quiet now. good luck all!
+[09:29] <ivanatwork> M_23_LTU: good luck ;)
+[09:29] <abhishekiitd007> cast:why?
+[09:29] <Kimi> cast quick question : is star office still released by sun or they totally stopped it for open off ?
+=== bookkeeper is now known as pogz
+[09:29] <AnRkey> M_23_LTU, wrong place for chatting about that
+[09:30] <pogz> how do i convert avi files for my psp?
+[09:30] <M_23_LTU> If you are pretty nasty gril, lets chat
+[09:30] <ivanatwork> M_23_LTU: lol
+[09:30] <prince_jammys> M_23_LTU: stop.
+[09:30] <mid_> hello everybody.. after a reboot (no updates involved) my sound card suddenly doesnt work anymore.. I have a samsung nc10, kernel 2.6.27-11, sound card Intel Corporation 82801G (ICH7 Family) High Definition Audio Controller (rev 02)... any hint??
+[09:31] <ScrowMABTW> HAHA YES!
+[09:31] <Kimi> cast ?? any idea...is star office still released by sun or they totally stooopped it ?
+[09:31] <Kimi> for ooo
+[09:31] <AnRkey> how can i get permission to use my serial port (/dev/ttyS0) in 8.04.2?
+[09:33] <Kimi> cast ?? plz. tell me
+[09:33] <hummahumma> hey
+[09:33] <ivanatwork> scan to pdf: suggestion?
+[09:33] <jude> hey
+[09:33] <jude> sudo apt-get install xchat-gnome
+[09:33] <jude> sorry
+[09:34] <remoteCTRL1> how can i accomplish to see all of the open applications in the taskbar, also those on other workspaces?
+[09:34] <hummahumma> how can i exit x server?
+[09:34] <AnRkey> ivanatwork, scan it and print directly to virtual pdf printer
+[09:34] <remoteCTRL1> hummahumma: ctrl +alt + backspace
+[09:34] <AnRkey> hummahumma, ctrl + alt +f2
+[09:34] <ivanatwork> AnRkey: I have several pages to scan...
+[09:34] <DasE1> Kimi: firsthit on google,this is #ubuntu http://www.openoffice.org/licenses/gpl_license.html 8-)
+[09:34] <bman> all yur ubuntu is mine
+[09:34] <ortsvorsteher> hummahumma: you want to exit it to get command line? or only restart?
+[09:34] <remoteCTRL1> haha
+[09:34] <mid_> can anybody PLEASE help me?
+[09:34] <AnRkey> hummahumma, sudo /etc/init.d/gdm stop or start
+[09:35] <remoteCTRL1> mid_: with what?
+[09:35] <hummahumma> remoteCTRL1:but after that i get a terminal screen asking for login
+[09:35] <mid_> hello everybody.. after a reboot (no updates involved) my sound card suddenly doesnt work anymore.. I have a samsung nc10, kernel 2.6.27-11, sound card Intel Corporation 82801G (ICH7 Family) High Definition Audio Controller (rev 02)... any hint??
+[09:35] <Kimi> DasE1 i just wanted to know whether Star office is still there and released by sun or they stopped
+[09:35] <ortsvorsteher> hummahumma: so try " sudo /etc/init.d/?dm stop"
+[09:35] <remoteCTRL1> hummahumma: you completely want to turn it off? sudo  /etc/init.d/gdm stop
+=== Seven-7 is now known as Mediadragondesig
+[09:35] <Kimi> DasE1 and its simple to answer "yes" or "no" if you know
+[09:35] <Kimi> then why to gooooogle ?
+=== Mediadragondesig is now known as Mediadragon_
+[09:35] <ivanatwork> I need to scan "directly" to PDF. I have several pages
+[09:35] <AnRkey> ivanatwork, script it :)
+[09:35] <hummahumma> remoteCTRL1:and what should be the reaction to this?not a terminal screen, right?
+[09:36] <jude>  who can help me  install this drivers
+[09:36] <jude> Installation Guide
+[09:36] <jude> 1. install Redhat 9.0
+[09:36] <jude> 2. cp sisdrv_430_20040604.o to /usr/X11R6/lib/modules/drivers/sis_drv.o
+[09:36] <jude> 3. make sure the /etc/X11/XF86Config file have the correct "driver" section.
+[09:36] <jude>    Drivers "sis"
+[09:36] <jude> 4. startx
+[09:36] <remoteCTRL1> mid_: what do dmesg and /var/log/system say?
+[09:36] <FloodBot1> jude: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[09:36] <ivanatwork> AnRkey: lol yes, of course
+[09:36] <AnRkey> ivanatwork, i know how, soz on the auto part
+[09:36] <remoteCTRL1> hummahumma: exactly
+[09:36] <AnRkey> :P
+[09:36] <DasE1>  !sound|mid_
+[09:36] <ubottu> mid_: If you're having problems with sound, first ensure ALSA is selected, by double clicking on the volume control, then File -> Change Device (ALSA Mixer). If that fails, see https://help.ubuntu.com/community/Sound - https://help.ubuntu.com/community/SoundTroubleshooting - http://alsa.opensrc.org/DmixPlugin - For playing audio files, see !Players and !MP3
+[09:36] <thelinuxN00b> Hi all having a ongoing problem, have gained root access but still wont let me  copy to a external hdd ntfs format. all the permissions seem to be right but it still wont go any ideas
+[09:36] <hummahumma> remoteCTRL1:well, but i keep getting that terminal screen everytime i try to exit x server
+[09:37] <AnRkey> ivanatwork, if your scanner supports scan to folder and windows shares then set up a smb share and scan to that
+[09:37] <DasE1> thelinuxN00b: single file ?
+[09:37] <remoteCTRL1> hummahumma: what terminal screen?
+=== admin__ is now known as lamerion
+[09:37] <AnRkey> ivanatwork, canon scanners do that for example works well for my clients
+[09:37] <thelinuxN00b> whole folder about 30 gig
+=== lamerion is now known as lamerion2
+[09:37] <remoteCTRL1> hummahumma: what are you actually trying to accomplish?
+[09:37] <hummahumma> remoteCTRL1:a blank screen asking for my login, after i key taht in, then a password....after which its just a terminal window full screen
+[09:37] <thelinuxN00b> DasE1: tried  a single file still didnt work
+[09:38] <hummahumma> remoteCTRL1:i am trying to install NVIDIA graphics, which requires x server shutdown
+[09:38] <remoteCTRL1> hummahumma: well that is linux running without x-server, isn't that what you wanted?
+[09:38] <ivanatwork> AnRkey: i have an Epson Photo, not a network scanner. Too bad I found only gscan2pdf with german (!!) OCR...
+[09:38] <DasE1> thelinuxN00b: sudo cp -r  /path/of/folder    /path/to/folder          ,   checkout sudo fdisk -l before to get correct devicenames
+[09:38] <mid_> dmesg nothing, and /var/log/system file doesnt exist
+[09:38] <AnRkey> hummahumma, try envyng
+[09:38] <AnRkey> hummahumma, it does it all from the gui for u in one go
+[09:38] <WeazelON> hey guys, i have a few users on the same computer, thing is i want to use screen on a different user and it tells me Cannot open your terminal '/dev/pts/3' - please check.
+[09:38] <remoteCTRL1> hummahumma: depends on whether you do that from within the restricted drivers dialog or if you manually install them
+[09:38] <AnRkey> hummahumma, it also downloads the drivers for u
+[09:38] <DasE1> thelinuxN00b: external drive is mounted ?
+[09:39] <bman> mount that
+[09:39] <thelinuxN00b> DasE1: Thanx will give that a go!!!
+[09:39] <bman> oh yeah
+[09:39] <WeazelON> can anyone shed some light on that matter ?
+[09:39] <AnRkey> hummahumma, sudo apt-get install envyng i think
+[09:39] <thelinuxN00b> DasE1: not sure it has been detected, fairly new to this
+[09:39] <hummahumma> remoteCTRL1:ok, so that terminal screen is linux without x server...?
+[09:39] <remoteCTRL1> hummahumma: if you manually install them sudo /etc/init.d/gdm stop is the command that you are looking for, execute this from a console which you can access with ctrl+alt+F1 to F6
+[09:40] <DasE1> thelinuxN00b: type:                  mount                                                     ,to see all mounted devices
+[09:40] <ivanatwork> i'm searching something like gscan2pdf
+[09:40] <bman> hummahumma, that is linux
+[09:40] <remoteCTRL1> hummahumma: exactly
+[09:40] <bman> x isnt required
+[09:40] <AnRkey> hummahumma, envy is far easier to use for nvidia and ati drivers
+[09:40] <WeazelON> hey guys, i have a few users on the same computer, thing is i want to use     `screen`     on a different user and it tells me " Cannot open your terminal '/dev/pts/3' - please check. "
+[09:40] <hummahumma> AnRkey:can u tell me what exactly is envy?how do i use it?
+[09:40] <AnRkey> bman, isn't that dash instead of linux :)
+[09:40] <remoteCTRL1> hummahumma: envy imho is bogus like hell, dont recommend that..
+[09:40] <AnRkey> hummahumma, it's a gui for installing nvidia and ati drivers
+[09:41] <jude> my computer is  old   drivers is sis
+[09:41] <thelinuxN00b> DasE1: it appears to be mounted, states at bottom /dev/sdb1 on /media/New Volume type fuseblk (ro,nosuid,nodev,allow_other,blksize=4096)
+[09:41] <jude> i can not install the drivers
+[09:42] <hummahumma> AnRkey:i was anyway able to install nvidia yesterday, somehow...but i still cant use beryl, nor can i get 1280*760 resolution, only 800*600
+[09:42] <bman> ive used linux since 94 and didnt use X until 2002
+[09:42] <remoteCTRL1> hummahumma: then you dont really have it running
+[09:42] <jude> so  i want know how can i install this drivers
+[09:42] <AnRkey> hummahumma, u can use compiz-fusion if the drivers are installed. It's all done for u
+[09:42] <ortsvorsteher> !details | jude
+[09:42] <ubottu> jude: Please give us full details. For example: "I have a problem with ..., I'm running Ubuntu version .... When I try to do ..., I get the following output: ..., but I expected it to do ..."
+[09:42] <bman> its still linux without X
+[09:42] <hummahumma> AnRkey:at startup ity gives an error message, "graphics not found, ..configure/cancel, continue"
+[09:43] <jude> Installation Guide
+[09:43] <jude> 1. install Redhat 9.0
+[09:43] <jude> 2. cp sisdrv_430_20040604.o to /usr/X11R6/lib/modules/drivers/sis_drv.o
+[09:43] <jude> 3. make sure the /etc/X11/XF86Config file have the correct "driver" section.
+[09:43] <jude>    Drivers "sis"
+[09:43] <jude> 4. startx
+[09:43] <FloodBot1> jude: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[09:43] <remoteCTRL1> hummahumma: you are aware that there is a dialog in system/administration called hardware drivers where ubuntu does that for you?
+[09:43] <remoteCTRL1> jude: this is an ubuntu channel not a redhat channel
+[09:43] <ortsvorsteher> jude: what do you want to install? which ubuntu you have running?
+[09:43] <jude> this is Installation Guide
+[09:43] <AnRkey> hummahumma, if you read the man entry for envy, there is a text version too that can fix that
+[09:43] <hummahumma> howremoteCTRL1:ubuntu does that?does what?configure graphics card?
+[09:44] <jude> i use ubuntu 8.10
+[09:44] <ortsvorsteher> jude: and what do you want to install?
+[09:44] <jude> i only have this drivers cd
+[09:44] <remoteCTRL1> hummahumma: install graphics drivers AND configure graphics card
+[09:44] <hummahumma> AnkRey:do i need to download envy?
+[09:44] <ortsvorsteher> !pm | jude
+[09:44] <ubottu> jude: Please ask your questions in the channel so that other people can help you, benefit from your questions and answers and ensure that you're not getting bad advice. Please note that some people find it rude to be sent a PM without being asked for permission to do so first.
+[09:44] <remoteCTRL1> hummahumma: you might also sudo apt-get install nvidia-settings which is a graphical interface with which you can customize the driver
+[09:45] <mid_> no hints?
+[09:45] <hummahumma> remoteCTRL:but how can i customise it, if it says it hasnt been installed properly?
+[09:45] <remoteCTRL1> how can i accomplish to see all of the open applications in the taskbar, also those on other workspaces?
+[09:45] <DasE1> thelinuxN00b: sudo cp -r /dev/path/OrignialFolder  /media/New""Volume/>FlderName<   ,without the <>
+[09:45] <hummahumma> remoteCTRL:thought, after installation, it said installing successful
+[09:45] <remoteCTRL1> hummahumma: have you already had a look into system/administration/hardware drivers?
+[09:46] <hummahumma> remoteCTRL:ok let me boot in ubuntu first
+[09:46] <AnRkey> hummahumma, read buddy, i told you earlier, sudo apt-get install envyng-gtk
+[09:46] <jude> but my english so bad
+[09:46] <thelinuxN00b> DasE1: Thanx heaps will give that a go
+[09:46] <remoteCTRL1> hummahumma: well problem might be that if you install the drivers manually you might have to add the drivers name to /etc/X11/xorg.conf
+[09:46] <ortsvorsteher> jude: which is your mother language?
+[09:46] <DasE1> thelinuxN00b: spaces in directorynames are alittle prob sometimes,you could mount the external to a dir with a contingous name
+[09:47] <jude> chinese
+[09:47] <ortsvorsteher> !cn | jude
+[09:47] <ubottu> jude: For Ubuntu help in Chinese 您可以访问中文频道： #ubuntu-cn 或者 #ubuntu-tw  或者 #ubuntu-hk
+[09:47] <remoteCTRL1> AnRkey: i believe the dude has a little messup there...
+[09:47] <nightclaw> hi there, my problem is that pidgin does not update. still showing version 2.5.2-0ubuntu1.1 (intrepid main paket sources selected main,update, proposed, main mirror for germany)
+[09:47] <jude> ubotuu
+[09:47] <jude> thank you
+[09:47] <billawal> evening everybody
+[09:48] <remoteCTRL1> nightclaw: you need to enable the backports repository in system/administration/sources
+[09:48] <ortsvorsteher> !cookie | ubottu
+[09:48] <ubottu> ortsvorsteher: Wow! You're such a great helper, you deserve a cookie!
+[09:48] <WeazelON> hey guys, i have a few users on the same computer, thing is i want to use     `screen`     on a different user and it tells me " Cannot open your terminal '/dev/pts/3' - please check. "
+[09:48] <ortsvorsteher> :)
+[09:48] <nightclaw> remoteCTRL why backports, kinda makes no sense to me
+[09:48] <nightclaw> ill try
+[09:48] <WeazelON> if i use SSH to myself i can use screen
+[09:49] <fliegenderfrosch> !thanks > jude
+[09:49] <ubottu> jude, please see my private message
+[09:49] <remoteCTRL1> nightclaw: you get major updates only on next operrating system upgrade, if you want to have this earlier you need to enable backports
+[09:49] <DasE1> nightclaw: update/-grade ; see :
+[09:49] <DasE1>  !latest
+[09:49] <ubottu> Packages in Ubuntu may not be the latest. Ubuntu aims for stability, "latest" may not be a good idea. Post-release updates are only considered if they are: fixes for security vulnerabilities, high impact bug fixes, or unintrusive bug fixes with substantial benefit. See also !backports.
+[09:49] <remoteCTRL1> nightclaw: backport does not mean back to previous versions but back from future versions to this one;)
+[09:50] <DasE1> nightclaw: just do  sudo apt-get update && sudo apt-get upgrade
+[09:50] <remoteCTRL1> DasE1: hat wont fix anything..
+[09:51] <Husaini> DasE1 sudo apt-get update is enough for him
+[09:52] <DasE1> ﻿ remoteCTRL1: I just stepped in with the call for latest pidgin, what's the background ?
+[09:52] <b3rz3rk3r> hey all, if i install the 9.04 alpha can i just upgrade to full release via patches when it comes out?
+[09:52] <remoteCTRL1> DasE1: well i geuss as usual icq not working with it anymore?
+=== ubuntu__ is now known as vito5900
+[09:52] <ortsvorsteher> b3rz3rk3r: try in #ubuntu+1
+[09:53] <DasE1>  ! jaunty
+[09:53] <ubottu> Jaunty Jackalope is the codename for Ubuntu 9.04, due April 23rd, 2009 -  Schedule in https://wiki.ubuntu.com/JauntyReleaseSchedule - Lots of breakage between now and April - Please join #ubuntu+1 for discussion and support.
+[09:53] <b3rz3rk3r> ortsvorsteher, thx will do
+[09:53] <ortsvorsteher> :)
+[09:53] <billawal> hello
+[09:54] <nightclaw> ok i'm upgrading, but there was neither pidgin nor libpurple in the do you want to upgrade list
+[09:54] <hybr1der> does anyone know a great backup program from which i can backup windows pcs?
+[09:55] <goodmen> Hi, who use IEGD driver ?
+[09:55] <goodmen> Anyone could help me to config the IEGD driver in xorg.conf ?
+[09:56] <goodmen> It seems weird to use
+[09:56] <thelinuxN00b> DasE1: thepath that i entered was root@hotbeefhero-laptop:~#  sudo cp -r /Desktop/MP3's  /dev/sdb1media/New""Volume/mp3. After I pressed enter all i got was a empty prompt, prob something simple i missed i hope
+[09:57] <DasE1> thelinuxN00b: press ctrl and c
+[09:57] <erUSUL> thelinuxN00b: probably the ' and "" confused the shell... scape those characters
+[09:58] <hummahumma> remoteCTRL1:i just looked into administration>hardware drivers.it shows nvidia is enabled, but  not in use
+[09:58] <DasE1> thelinuxN00b: ﻿﻿sudo cp -r ~/Desktop/MP3's  /dev/sdb1media/New""Volume/
+[09:59] <DasE1> thelinuxN00b: ﻿﻿sudo cp -r ~/Desktop/MP3's  /dev/sdb1media/New""Volume
+[09:59] <simplexio> thelinuxN00b: it's bad idea to use space, ' " \ - in filenames, if you ever use console..
+[10:00] <thelinuxN00b> The space is prob what is stuffing me, however it will not let me change the name on the external hdd.
+[10:00] <bullgard4> AlsaMixer outputs in the upper left: "Card: Intel 82801DB-ICH4". Somewhere I read: Card - 'Name of the AC-Link Controller'. What is meant by 'AC-Link'?
+[10:00] <hummahumma> I installed NVIDIA drivers , but still can't use them
+[10:00] <hummahumma> how to install NVIDI driver s properly?
+[10:00] <simplexio> thelinuxN00b: ~/Desktop/MP3\'s and New\"\"Volume is right i think.
+=== DJones_ is now known as DJones
+[10:01] <DasE1> thelinuxN00b: ﻿﻿sudo unmount /dev/sdb1
+[10:01] <ortsvorsteher> !details | hummahumma
+[10:01] <ubottu> hummahumma: Please give us full details. For example: "I have a problem with ..., I'm running Ubuntu version .... When I try to do ..., I get the following output: ..., but I expected it to do ..."
+[10:01] <hummahumma> everyone:How to install and configure NVIDIA graphics properly?
+[10:01] <simplexio> thelinuxN00b: i assume that newvolume is automounted ? you oculd try change label of  that partition
+[10:02] <remoteCTRL1> hummahumma: pleas past your /etc/x11/xorg.conf to www.nopaste.org
+[10:02] <DasE1> thelinuxN00b: ﻿﻿sudo mkdir /media/extern
+[10:02] <podman99a> hey all ... what are the limits for unix users ?? can for example i have a username bob-loves-cheese ?? or does it have to be without the '-'
+[10:02] <badboy_> hello chaps, I am newbie. I have running ubuntu, 64 bits. I have a problem, some of my firefox plugins do not wort with 64bits. Can somebody tell the command to remove firexfox 64 bits, and the command to reinstall firefox 32 bits
+[10:02] <DasE1> simplexio : don't confuse ;-), on the way
+[10:03] <bullgard4> podman99a: Just try it. You will see. It is easy to test.
+[10:03] <podman99a> bullgard4... yes but i need to know the restrictions
+[10:03] <DasE1> thelinuxN00b: ﻿﻿mind if I pm you ?
+[10:04] <eth01> please no pvt's thanks
+[10:04] <thelinuxN00b> DasE1: tried sudo unmount /dev/sdb1 says command not found\
+[10:04] <hummahumma> remoteCTRL1:pasted
+[10:04] <DasE1> thelinuxN00b: ﻿﻿mind if I pm you ?
+[10:04] <ortsvorsteher> thelinuxN00b: try umount, not unmount
+[10:04] <thelinuxN00b> please do
+[10:04] <Lucid_Dreamer> Hi gaiz
+[10:04] <hummahumma> remoteCTRL1:should i give the link here?
+[10:05] <Lucid_Dreamer> it's 6am, and it took me all night
+[10:05] <remoteCTRL1> hummahumma: yes please
+[10:05] <Lucid_Dreamer> but I got xunbuntu running on my box
+[10:05] <nightclaw> ok i did update upgrade and even dist-upgrade but pidgin ist still old version
+[10:05] <hummahumma> remoteCTRL1:http://www.nopaste.org/p/aHXIJwCBj
+[10:05] <remoteCTRL1> hummahumma: ok, gimme a sec
+[10:05] <hummahumma> remoteCTRL1:sure, thanks!
+[10:06] <simplexio> podman99a: i think you can have anything in username.. - may cause problems. and it will cause problems if files names start with -
+[10:06] <podman99a> whats max length of unix user
+[10:07] <simplexio> podman99a: i dont see anyreason why it would have some limit.
+[10:07] <fooey> my 8.10 livecd freezes at "starting bluetooth" during bootup, google returns a few results that cite conflicting tv tuners but I have neither those nor bluetooth devices. any ideas?
+[10:07] <remoteCTRL1> hummahumma: hummkay as i thought you got a little messup there, i suggest the folowing: the driver that you installed has a remove option, do remove the driver on the commandline then again enable it in the hardware drivers menu, if you are lucky it works after that
+[10:07] <hummahumma> remoteCTRL1:how do i remove the driver?
+[10:08] <simplexio> podman99a: my best quess for max lenght is what is max lenght of argument for adduser, which few thousand charachters.. but i have newer tried
+[10:08] <hummahumma> remoteCTRL1:how do i remove the driver? what is the command?
+[10:08] <DasE1>  !paste > thelinuxN00b
+[10:08] <ubottu> thelinuxN00b, please see my private message
+[10:09] <fooey> any ideas?
+[10:09] <remoteCTRL1> hummahumma: as i said the script that installs the driver has a remove option, i havent memorized exacly which one it is but try --remove
+[10:10] <hummahumma> remoteCTRL1:ok, suppose i installed the driver frm a file 123.run...should i now try sh 123.run --remove?
+[10:10] <remoteCTRL1> hummahumma: exactly
+[10:10] <nightclaw> http://nopaste.at/e8e604c5d2 anyone any idea left why it does not update?
+[10:11] <remoteCTRL1> nightclaw: that command only updates the software sources, not the operating system, that would be sudo apt-get dist-upgrade
+[10:12] <nightclaw> same result as normal upgrade
+[10:12] <hummahumma> remoteCTRL1:ok, now i have uninstalled the nvidia drivers
+[10:12] <dawdle> I just installed the proprietary ATI drivers for my radeon card. Previously (on generic drivers) two LCD screens worked perfectly using the Screen Resolution tool. On installing the drivers, the best I can get is Dual-Head, where each monitor seems to run a seperate session of X. They are actually different GUIs. How can I get it back to two monitors supporting one extended desktop? Running 8.1
+=== fooey is now known as pfui
+[10:12] <hummahumma> remoteCTRL1:but administration>hardware drivers still shows nvidia!
+[10:13] <remoteCTRL1> hummahumma: then go to system/administration/hardware drivers once more and enable it there
+[10:13] <remoteCTRL1> hummahumma: disable and enable it
+[10:13] <Sparky_> DCC SEND "0101010101010101" 0 0 0
+[10:14] <hummahumma> remoteCTRL1:after enabling, it is downloading some file
+[10:14] <hummahumma> remoteCTRL1:i hope thats supposed to happen
+[10:14] <remoteCTRL1> hummahumma: if that does not work do sudo dpkg -reconfigure xserver-xorg
+[10:14] <remoteCTRL1> hummahumma: yes it is!
+[10:14] <remoteCTRL1> hummahumma: that is a good sign cos that is the driver that it wants to install
+[10:15] <pfui> my 8.10 livecd freezes at "starting bluetooth" during bootup, google returns a few results that cite conflicting tv tuners but I have neither those nor bluetooth devices. any ideas?
+[10:15] <hummahumma> remoteCTRL1:installed sucesfully..now should i try that command u said
+[10:15] <hummahumma> ??
+[10:15] <remoteCTRL1> hummahumma: NO that command cleans your xorg.conf you dont want that to happen now!
+[10:16] <hummahumma> remoteCTRL1:but i still dpont get good graphics
+[10:16] <remoteCTRL1> hummahumma: but you need to restart the computer now in order to have the driver running
+[10:16] <hummahumma> remoteCTRL1:ok
+[10:18] <bullgard4> AlsaMixer outputs in the upper left: "Card: Intel 82801DB-ICH4". Somewhere I read: Card - 'Name of the AC-Link Controller'. What is meant by 'AC-Link'?
+[10:18] <remoteCTRL1> pfui: try starting the cd by removing the --quiet and --splash options from the kernel options, when it gets stuck during startup press ctrl+c
+[10:18] <pfui> I've hit ctrl+c repeatedly but to no avail
+[10:19] <pfui> would the absence of --quiet and --splash make a difference?
+[10:19] <remoteCTRL1> pfui: makes the difference that you see exactly where it gets stuck
+[10:19] <pfui> the installer halts at a devd event 4172 "modprobe quit unexpectedly" or some such
+[10:19] <remoteCTRL1> pfui: i dunno if there is a no bluetooth option for the kernel, see through the options with err... F6 i believe it is
+[10:20] <pfui> nope, there isn't :\
+[10:20] <remoteCTRL1> hummahumma: working now?
+[10:20] <zeroGravity> hey anybody knows a good game channel here?
+[10:20] <pfui> only acpi, floppy and vga options
+[10:20] <hummahumma> remoteCTRL1:i got the same error again
+[10:20] <heber> hello, I would like to know how i make a fresh install of the NIC drivers on my ubuntu 8.10 ???? anyone have a good answer for this one.. both wlan and eth01 msg me
+[10:20] <remoteCTRL1> hummahumma: which one?
+[10:20] <erUSUL> !games
+[10:20] <ubottu> Information about games on Ubuntu can be found at https://help.ubuntu.com/community/Games and http://www.icculus.org/lgfaq/gamelist.php
+[10:20] <zeroGravity> there's a channel called !games?
+[10:20] <tess> hi, my kids have messed with ubuntu now my top panel doesnt have places, and no matter where i look i cant find it to add it back
+[10:23] <pfui> any ideas?
+[10:23] <hummahumma> remoteCTRL1:"ubuntu is running  in low resolution mode, ..didnt graphics, please configure tyourself"
+[10:23] <qazual> hi
+[10:23] <remoteCTRL1> tess that would be in system/preferences/ menu
+[10:23] <qazual> list
+[10:23] <hummahumma> remoteCTRL1:when i clicked configure, there was no mention of my nvidia card, but some other card of nvidia
+[10:23] <remoteCTRL1> hummahumma: errr. that is not an error message:D what is the precise statement?
+[10:23] <zeroGravity> ok i don't need games i just have some problem with one installing
+[10:23] <remoteCTRL1> hummahumma: huh??
+[10:23] <hummahumma> remoteCTRL1:i mean it should have mentioned NVIDIA GEFORCE 9200 GS exactly, right?
+[10:23] <tess> remoteCTRL; if this works then you are a legend :)
+[10:24] <tess> remoteCTRL: nope places isnt in there
+[10:24] <remoteCTRL1> hummahumma: i have no idea, if that is your card it probably should have...
+[10:24] <hummahumma> remoteCTRL1:what do i do?should i note down that message?
+[10:24] <remoteCTRL1> tess you need to click on add menu on the right side
+[10:24] <hummahumma> remoteCTRL1:and paste here?
+[10:24] <remoteCTRL1> hummahumma: could help, yes
+[10:25] <heber> hello, I would like to know how i make a fresh install of the NIC drivers on my ubuntu 8.10 ???? anyone have a good answer for this one.. both wlan and eth01 msg me
+[10:26] <tess> remoteCTRL: ok, so i pretty much have to rebuild the menu hahah dam kids
+[10:26] <wal3> whats better for backup: rdiff-backup or tar with incrementals?
+[10:26] <remoteCTRL1> tess haha well i am afraid so...
+[10:27] <remoteCTRL1> wal3: depends on your backup strategy?
+[10:27] <wal3> explain please
+[10:27] <tess> remoteCTRL: thanks for that
+[10:28] <remoteCTRL1> tess np:)
+=== StyleSheep is now known as sdfa
+[10:28] <remoteCTRL1> wal3: what do you want to backup, do you want to do it on a regular basis? would you like to keep several versions?
+=== sdfa is now known as fjkdsla
+[10:28] <bullgard4> AlsaMixer outputs in the upper left: "Card: Intel 82801DB-ICH4". Somewhere I read: Card - 'Name of the AC-Link Controller'. What is meant by 'AC-Link'?
+[10:28] <wal3> remoteCTRL1: all data on my desktop pc. regular yes, like every day.
+[10:29] <wal3> remoteCTRL1: several versions.. hm.. dunno
+=== fjkdsla is now known as StyleSheep
+[10:29] <nightclaw> im going mad, i removed --purge, autocleaned and apt-get installed pidgin again
+[10:29] <nightclaw> but still old version
+[10:29] <remoteCTRL1> wal3: just the latest version oder different versions, like a monthly a weekly and a daily backup?
+[10:29] <dawdle> GDM shows my dual monitors correctly - I can mouse between them. But when I log in and Gnome starts, it goes into cloned desktops. Any ideas?
+[10:29] <remoteCTRL1> nightclaw: have you enabled the backports yet as i told you to?
+[10:29] <nightclaw> yes
+[10:30] <pfui> people? any ideas?
+[10:30] <remoteCTRL1> nightclaw: what version have you got?
+[10:30] <wal3> remoteCTRL1: different versions aren't really needed, imho.
+[10:30] <remoteCTRL1> wal3: and where are you backing it up to?
+[10:30] <wal3> remoteCTRL1: extern hdd
+[10:30] <brucelee> i have this pci wireless G device that I just installed into the system, how do I perform an Add/Remove hadrware equivalent in Ubuntu?
+[10:31] <remoteCTRL1> wal3: in that case i suggest you use rsync
+=== k is now known as Guest23117
+[10:31] <remoteCTRL1> wal3: rsync -av
+[10:31] <ttl> hi
+[10:31] <ttl> anybody is using enlightenment?
+[10:32]  * remoteCTRL1 @ lunchbreak
+[10:32] <rosario_> ciao a tutti
+[10:32] <rosario_> !list
+[10:32] <ubottu> This is not a file sharing channel (or network). If you're looking for information about me, type « /msg ubottu !bot »
+[10:32] <nightclaw> remoteCTRL: about pidgin: 2.4.3; package: 1:2.5.2-0ubuntu1.1 (intrepid updates)
+[10:32] <hummahumma> remoteCTRL1:Ubuntu is running in low resoltion mode: Your screen and graphics card could not be detected properly. To use higher resolutions, you have to configure the display urself. configure/shutdown/cancel  I clicked configure>graphics card>driver....driver shows vera generic vesa compliant video cards
+[10:32] <pfui> ok, at least tell me where to search...
+[10:33] <remoteCTRL1> nightclaw: that is awkward... what ubuntu version are you on?
+[10:33] <DarKnesS_WolF> where i can find a howto install an ubuntu lab via network ? all with same configurations harddiskpartitioning and so on ?
+[10:33] <azlon> how can I type in Korean? I want the English OS, but I would like a  key combination to switch to typing in Korean
+[10:34] <remoteCTRL1> hummahumma: not good... basically this happens sometimes if you try and install nvidia drivers manually, i had that once and i had it until i reinstalled ubuntu, cos i gave up after tinkering arround with it for like three days...
+[10:34] <nightclaw> remoteCTRL what is the command for exact kernel and os version?
+[10:34] <shay26> Hello , I would like to know what the correct way to write this sentence : 1. i installed ICQ in my computer . 2. i installed ICQ on my computer ?
+[10:34] <hummahumma> remoteCTRL1:does this have to do something with the history of installation of nvidia?i mean, i think i used a bad method of shutting down server(which neednt require that terminal scree)
+[10:34] <fliegenderfrosch> azlon: are you looking for something like "scim"?
+[10:34] <azlon> fliegenderfrosch: I don't know... let me google SCIM real quick...
+[10:34] <remoteCTRL1> hummahumma: nope that is imho not the point
+[10:35] <fliegenderfrosch> azlon: i don’t know more about it unfortunately, is I have no use for it myself
+[10:35] <remoteCTRL1> nightclaw: lsb_release
+[10:35] <remoteCTRL1> shay26: to my computer
+[10:35] <hummahumma> remoteCTRL1:i used some rm   to shut down x server from terminal, then installed lib6 libraries, and then nvidia file
+[10:35] <azlon> fliegenderfrosch: you got me pointed in the right direction, that helps big time... thanks!
+[10:35] <remoteCTRL1> hummahumma: rm???
+[10:35] <DasE1>  !sudo > thelinuxN00b
+[10:35] <ubottu> thelinuxN00b, please see my private message
+[10:36] <hummahumma> remoteCRTL1:yah rm command and then some argument(to remove something)
+[10:36] <shay26> remoteCTRL1: but from thos 2 lines which one is better :  1. i installed ICQ in my computer . 2. i installed ICQ on my computer ?
+[10:36] <wal3> remoteCTRL1: thx
+[10:36] <hummahumma> remoteCRTL1:found it on google
+[10:36] <nightclaw> remoteCTRL nightclaw@nightclaw-m:~$ uname -a
+[10:36] <nightclaw> Linux nightclaw-m 2.6.27-14-generic #1 SMP Fri Mar 13 18:00:20 UTC 2009 i686 GNU/Linux
+[10:36] <fliegenderfrosch> azlon: no problem
+[10:36] <hummahumma> remoteCRTL1:found it on google,...but the author also said it is a bad method
+[10:36] <remoteCTRL1> wal3: np:)
+[10:37] <remoteCTRL1> shay26: it is TO not in or on but if you have to use one of the two it would be on
+[10:37] <remoteCTRL1> nightclaw: ya that dont tell me the ubuntu version, as said the command you are looking for is lsb_release
+[10:37] <nightclaw> remoteCTRL nightclaw@nightclaw-m:~$ lsb_release -a
+[10:37] <nightclaw> No LSB modules are available.
+[10:37] <nightclaw> Distributor ID:	Ubuntu
+[10:37] <nightclaw> Description:	Ubuntu 8.10
+[10:37] <nightclaw> Release:	8.10
+[10:37] <FloodBot2> nightclaw: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[10:37] <nightclaw> Codename:	intrepid
+[10:38] <remoteCTRL1> nightclaw: and you are sure that you have the backports enabled???
+[10:38] <gte351s> Titan8990: if you're still here, re-installing worked great and I didn't lose anything - thanks
+[10:38] <nightclaw> yes at least synaptic paket sources tells me so
+[10:38] <nightclaw> i'll take a look in the sources list
+[10:39] <hummahumma> remoteCRTL1:so is there any way i can still use nvidia on hardy?
+[10:39] <remoteCTRL1> nightclaw: in that case also try and enable intrepid-proposed
+[10:39] <hummahumma> remoteCRTL1:or is it that NVIDIa gefoce 9200 gs is not compatible with ubuntu?
+[10:40] <remoteCTRL1> hummahumma: none that i currently know of, except if you reinstall DON'T install them manually again....
+[10:40] <remoteCTRL1> hummahumma: sure as hell is;)
+[10:40] <gte351s> I'm trying to install gnome-do and can't get a response from the ubuntu keyserver - any idea why?
+[10:40] <remoteCTRL1> ok i gotta go for lunch, hummahumma and nightclaw seeya in 30 if still rewuired
+=== pagan is now known as kiddies
+[10:41] <nightclaw> remoteCTRL http://nopaste.at/83b35038e8 quick look plz
+[10:41] <nightclaw> there lines are in the sources.lst
+[10:41] <hummahumma> remoteCTRL1:ok i will reinstall ubuntu in meantimer
+[10:42] <stevem_> Under an official Canonical support package... which Ubuntu editions are supportable?
+[10:43] <heber> Is it possible to reinstall NIC drivers so that the default drivers load ????
+[10:44] <Husaini> heber , i think no need .
+[10:44] <heber> Husaini, what do you mean?
+[10:45] <Husaini> my nic automatic detect after loading ubuntu .
+[10:45] <Husaini> but for what you want to reinstall your nic cards ?
+[10:46] <Husaini> did you already check your xorg ?
+[10:47] <heber> Husaini, because I have made a mess somehow :) installed the ndiswrapper and also made some changes to some files reguarding my nic .. And now it is like surfing with a modem.. dont ask me what I have done, pretty new to the whole linux experience :D
+[10:49] <DarKnesS_WolF> where i can find a howto install an ubuntu lab via network ? all with same configurations harddiskpartitioning and so on ?
+[10:51] <heber> Husaini, I started to fipple with this because I had a problem with my Intel 4965AGN card and my Dlink DIR655 router, the experience of surfing the web was terrible on my ubuntu 8.10 with this card and the router.. so i thougt I would try some other alternatives and made it much worse :D
+[10:51] <brucelee> i installed my pci nic, and hoped ubuntu would detect it after booting up, but it didnt, so now what?
+[10:53] <ramontayag> hey all. i tried asking in the xubuntu forums but it seems people are asleep there :) i've got a compaq presario 1200 with a fresh install of xubuntu. i booted it up but the login screen is blank! i tried connecting an external monitor, and then restarted gnome, and then that's when the laptop shows the login screen. what should i do so I won't need to plugin a cable to make the laptop...
+[10:53] <ramontayag> ...display something?
+[10:54] <TheSpark> DCC SEND "0101010101010101" 0 0 0
+[10:55] <nado> hi
+[10:55] <nado> can someone tell me why sometimes, wihtout any obvious reason, rhythmbox will give me just random noise instead of the music i'd like to hear? sometimes it doesn
+[10:56] <nado> sometimes it doesn't even start playback
+[10:56] <nado> it just says 'nothing to play'
+=== ubuntu__ is now known as vito590
+[10:57] <bullgard4> AlsaMixer outputs in the upper left: "Card: Intel 82801DB-ICH4". Somewhere I read: Card - 'Name of the AC-Link Controller'. What is meant by 'AC-Link'?
+=== ubuntu__ is now known as vito5900
+[11:01] <brucelee> i installed my pci nic, and hoped ubuntu would detect it after booting up, but it didnt, so now what?
+[11:01] <lord_> hi
+[11:01] <lord_> ПРИВЕТ НАРОД
+[11:01] <lord_> КТО ТУТ ЕСТЬ  ..;...????
+[11:01] <Nasra> oh lord_
+[11:01] <lord_> ПРИВЕТ НАСРА
+[11:01] <fosco_> is that russian?
+[11:01] <fosco_> !ru
+[11:01] <ubottu> Пожалуйста посетите #ubuntu-ru для получения помощи на русском языке  / Pozhalujsta posetite #ubuntu-ru dlya polucheniya pomoshi na russkom yazyke
+[11:01] <Nasra> lord_   english
+[11:01] <lord_> У МЕНЯ ОПЕРАЦИОНКА  gOS
+[11:02] <lord_> English
+[11:02] <lord_> no
+[11:02] <Lint02> lord_: че орёшь? ^)
+[11:02] <Nasra> yes
+[11:02] <lord_> Я НЕ ОРУ
+=== sejo is now known as masterhumper
+=== masterhumper is now known as sejo
+[11:03] <lord_> У МЕНЯ ЕСТЬ ВАПРОС ДЛЯ ТЕХ КТО ЗНАЕТ ЭТОТ ДИСТР
+[11:03] <marcusdavidus> hello how to change bitrate of mp3 with an GUI tool ?
+[11:03] <Lint02> omg
+[11:04] <marcusdavidus>  i need resamle few mp3 becouse my k510i have no memory card and is imposible to  install such
+[11:04] <lord_> Linux gOS
+[11:04] <marcusdavidus> woot?
+[11:04] <fosco_> marcusdavidus, I use lame command with no gui
+[11:04] <brucelee> i installed my pci nic, and hoped ubuntu would detect it after booting up, but it didnt, so now what?
+[11:05] <lord_> У меня тут в асе краказябры приходят как их решить ???
+[11:05] <DJones> !english > lord_
+[11:05] <ubottu> lord_, please see my private message
+[11:05] <marcusdavidus> fosco_:  i know aboute lame but  ubu dont have an gui tool ? i use to use lame on gent but damn ubuntu = i got gui for everything
+[11:06] <lord_> Да незнаю я англиского ЁПТ
+[11:06] <Gnea> !ru | lord_
+[11:06] <ubottu> lord_: Пожалуйста посетите #ubuntu-ru для получения помощи на русском языке  / Pozhalujsta posetite #ubuntu-ru dlya polucheniya pomoshi na russkom yazyke
+[11:06] <marcusdavidus> lord_:  get out of here u comunist  imo
+[11:06] <Gnea> marcusdavidus: no.
+[11:06] <fosco_> hay marcusdavidus please be polite
+[11:06] <marcusdavidus> damn ok so lame
+[11:06] <marcusdavidus> fosco_:  i am lol
+[11:06] <fosco_> ok
+[11:06] <lord_> Я не буду писать на транслите и так бошка болит
+[11:07] <Gnea> lord_: /join #ubuntu-ru
+[11:07] <sachin_> hey guys i want to enable a multi seat in my intrepid machine any ideas how to do that
+[11:07] <marcusdavidus> but are u russian ppl can write in englosh sience this is english channel not opmfg i love putin ?
+[11:07] <bazhang> lord_, english here; Gos is not supported either.
+[11:07] <lord_> Убунта тупит и тормозит
+[11:07] <bazhang> lord_, please stop
+[11:07] <Gnea> lord_: whatever you're saying, it doesn't matter, and it doesn't count, and it won't be tolerated.
+[11:07] <marcusdavidus> and then u ask why u should nuke russia
+[11:07] <bazhang> marcusdavidus, stop that
+[11:08] <marcusdavidus> bazhang:  oh noze u never sleep ?
+[11:08] <sachin_> hey guys i want to enable a multi seat in my intrepid machine any ideas how to do that
+[11:08] <lord_> ???? Gnea
+[11:08] <sachin_> guys help me
+[11:08] <marcusdavidus> pff ok i belive u dont sleep and have bad mood today
+[11:08] <Lint02> marcusdavidus: your nazi rant belongs to #ubuntu-offtopic
+[11:08] <Gnea> lord_: please type this:  /join #ubuntu-ru
+[11:08] <bazhang> !ot > marcusdavidus
+[11:08] <ubottu> marcusdavidus, please see my private message
+=== Samon is now known as samon
+[11:09] <Gnea> marcusdavidus: don't be an idiot.
+[11:09] <Lint02> lord doesn't need ubuntu-ru, for his is using gOS :)
+[11:09] <sachin_> hey guys i want to enable a multi seat in my intrepid machine any ideas how to do that...guys help me
+=== samon is now known as samon127
+[11:09] <sachin_> hey guys i want to enable a multi seat in my intrepid machine any ideas how to do that...guys help me
+[11:09] <sachin_> hey guys i want to enable a multi seat in my intrepid machine any ideas how to do that...guys help me
+[11:09] <sachin_> hey guys i want to enable a multi seat in my intrepid machine any ideas how to do that...guys help me
+[11:09] <sachin_> hey guys i want to enable a multi seat in my intrepid machine any ideas how to do that...guys help me
+[11:09] <FloodBot2> sachin_: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[11:09] <Lumiere> sachin_: we're not blind
+[11:09] <lord_> Gnea  отвали со своей убунтой гнелой
+[11:09] <marcusdavidus> damn ppl i belive u never live in poland who was under russia ocupation by 60 years is why u call me nazi anyway this is offtop
+[11:10] <Lumiere> and spamming us just makes us ignore you
+[11:10] <sachin_> sorry guys..but help me
+[11:10] <Gnea> !helpme | sachin_
+[11:10] <ubottu> sachin_: Avoid your questions being followed by a trail of "Please, help me", "Can nobody help me?", "I really need this!", and so on. This just contributes to making the channel unreadable. If you are not answered, ask again later; but see also !repeat and !patience
+[11:10] <marcusdavidus> next question any guake user ?
+[11:10] <sachin_> guys stop all these non-sense...its a technical chat room...
+[11:11] <sachin_> dont fight here
+[11:11] <marcusdavidus> becouse i want to ask is any way to make guake pop up from bottom of screen sience i got bar on the top
+[11:11] <tehfalcon28> hi
+[11:11] <tehfalcon28> can someone help me with a hardware problem?
+[11:11] <tehfalcon28> i wonder why there's a nyodimium magnet inside a HD
+[11:11] <marcusdavidus> tehfalcon28:  sure  what is your prob?
+[11:11] <fosco_> !ask | tehfalcon28
+[11:11] <ubottu> tehfalcon28: Please don't ask to ask a question, simply ask the question (all on ONE line, so others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[11:11] <tehfalcon28> i have always thought that you shuldn't put a magnet
+[11:11] <tehfalcon28> close to your hdd
+[11:12] <azlon> anybody here use SCIM? im trying to activate it but its not working for some reason
+[11:12] <sachin_> i think no one have a answer to my question of multi seat in intrepid
+[11:12] <binarymutant> tehfalcon28, what would spin the disc?
+[11:12] <marcusdavidus> tehfalcon28:  YES u should not 4 sure
+[11:12]  * Gnea decides that his time will be better spent elsewhere right now
+[11:12] <tehfalcon28> well...an motor?
+[11:12] <DJones> tehfalcon28: That question is probably better asked in #hardware
+[11:12] <tehfalcon28> ok
+[11:12] <tehfalcon28> thanks
+[11:12] <brucelee> i installed my pci nic, and hoped ubuntu would detect it after booting up, but it didnt, so now what?
+[11:12] <fosco_> your right Gnea :-(
+[11:13] <marcusdavidus> brucelee:   pls post lspci -vvv
+[11:13] <brucelee> cool
+[11:13] <brucelee> thanks
+[11:13] <brucelee> let me try that
+[11:13] <sachin_> does any  body here have a idea of multi seat in intrepid
+[11:14] <brucelee> codepad?
+[11:14] <brucelee> <koi> anyway, enough nonsense
+[11:14] <brucelee> err
+[11:14] <bullgard4> AlsaMixer outputs in the upper left: "Card: Intel 82801DB-ICH4". Somewhere I read: Card - 'Name of the AC-Link Controller'. What is meant by 'AC-Link'?
+[11:14] <brucelee> sorry
+[11:14] <FloodBot2> brucelee: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[11:15] <brucelee> i have it pasted onn http://codepad.org/obxvgFSg
+[11:16] <ziroday> brucelee: its PCI right?
+[11:17] <brucelee> yeah
+[11:17] <brucelee> its PCI
+[11:17] <brucelee> and its Dlink
+[11:17] <brucelee> looking through my paste, i see something that says D-Link
+=== onats_ is now known as onats
+[11:17] <ziroday> brucelee: are you certain its plugged in correctly? Cause its not appearing in lscpi
+[11:17] <brucelee> line 57, could that be it?
+[11:18] <brucelee> its plugged in correctly because when i boot into windows with the same system, the network card works
+[11:18] <brucelee> pci wireless g
+[11:18] <ziroday> brucelee: sorry, thought it was a wireless card, yes that is it
+[11:18] <brucelee> it is a wireless card :p
+[11:18] <ziroday> brucelee: err thats interesting
+[11:19] <brucelee> theres a nic built into the motherboard, and i installed the pci one into there
+[11:19] <ziroday> brucelee: I have a feeling that its not going to work, whats the model number of the dlink?
+[11:19] <brucelee> its dlink airplus 510
+[11:19] <brucelee> i have revision A
+[11:19] <fliegenderfrosch> I have to replace a harddisk in a raid1 (total 2 hds). Can I use a different model with a slightly larger capacity?
+[11:19] <marcusdavidus> oh guy and gui for lame is >> soundconverter
+[11:19] <marcusdavidus> guys*
+[11:20] <achadwick> http://hardware4linux.info/component/30107/ - looks like an ndiswrapper thing.
+[11:20] <marcusdavidus> fliegenderfrosch:  i belive so
+[11:20] <remoteCTRL1> nightclaw: seems correct, yet still it doesnt update it?
+[11:20] <marcusdavidus> fliegenderfrosch:  but u cannot use hdd + sdd it will nto work sience  sdd is diferent
+[11:21] <jatt> I want to obtain the .config file that was used to build the kernel binary shipped by Ubuntu. Is it available in any package?
+[11:21] <ziroday> brucelee: you will have to use ndiswrapper, see http://ubuntuforums.org/showthread.php?t=760603
+[11:21] <fliegenderfrosch> marcusdavidus: both are scsi drives
+[11:21] <remoteCTRL1> nightclaw: dont forget, if you update the sources.list manually you neet to sudo apt-get update then sudo apt-get dist-upgrade
+[11:21] <nightclaw> remoteCTRL yes unfortunately
+[11:21] <marcusdavidus> fliegenderfrosch:  if both are standart HDD and get same  spin and sata type it will work
+[11:22] <nightclaw> remoteCTRL http://nopaste.at/d9953a77cb
+[11:22] <brucelee> ziroday thanks
+[11:22] <remoteCTRL1> nightclaw: na sonderkomisch:D
+[11:22] <fliegenderfrosch> marcusdavidus: ok, thanks. both are ibm scsi drives, the new one is just slightly larger
+[11:23] <remoteCTRL1> nightclaw: sudo apt-get upgrade pidgin?
+[11:24] <brucelee> ziroday, it says "couldn't find package ndiswrappr-utils-1.9
+[11:24] <nightclaw> remoteCTRL1 second please, apt is working right now
+[11:24] <remoteCTRL1> nightclaw: is it? what is it doing?
+[11:25] <ziroday> brucelee: do sudo apt-get install ndiswrapper-utils ndisgtk
+[11:25] <nightclaw> nothing related to pidgin ;)
+[11:25] <remoteCTRL1> nightclaw: verstehe...
+[11:25] <brucelee> ziroday, it says "package ndiswrapper-utils has no installation candidate
+[11:26] <ziroday> brucelee: okay, just install ndisgtk then
+[11:26] <nightclaw> remoteCTRL1 upgrade pidgin -> no effect
+[11:26] <brucelee> sudo apt-get install ndisgtk?
+[11:26] <marcusdavidus> WTF sound preview in nautilus ?? thi is fu** awesome srry im just drunk but this is omfg i love this gnome shiet
+[11:26] <ziroday> brucelee: ya
+[11:26] <mint3> whats the uk ubuntu channel again
+[11:26] <ziroday> marcusdavidus: watch the language please
+[11:26] <ziroday> mint3: #ubuntu-uk
+[11:26] <marcusdavidus> SSYY i apollogyse
+[11:26] <brucelee> ok now i did
+[11:26] <brucelee> now hwat?
+[11:26] <mint3> ta
+[11:27] <ziroday> brucelee: type in gksudo ndisgtk
+[11:27] <remoteCTRL1> nightclaw: i am a little outta ideas frankly spoken, i can see no reason, why it doesnt do updates... only thing i can recommend is that you look for the package on packages.ubuntu.com, download and install it manually...
+[11:27] <hummahumma> remoteCTRL1:i reinstalled ubuntu, but i cant access internet over t\here..that has been an old problem
+[11:27] <brucelee> ziroday, its asking me for location of driver, do i download the windows drivers and put it somewhere, then point to that location?
+[11:27] <remoteCTRL1> hummahumma: what is t\ ?
+[11:28] <ziroday> brucelee: yes, its looking for the .inf file
+[11:28] <hummahumma> remoteCTRL1:there
+[11:28] <BitTorment> what is the current state of dual monitor support in ubuntu?
+[11:28] <brucelee> ok
+[11:28] <brucelee> let me get the windows drivers then
+[11:28] <remoteCTRL1> hummahumma: why is that?
+[11:29] <hummahumma> remoteCTRL1:i actuallt use need to put in proxy authentication with proxy server 10.10.3.14, port 3128, and a username and password...i also configured network setting properly
+[11:29] <brucelee> ziroday: so now i did, and it says "Hardware present: yes"
+[11:29] <brucelee> now how do i connect wirelessly?
+[11:29] <hummahumma> remoteCTRL1: administration>network
+[11:29] <marcusdavidus> ziroday:  but i lvoe this nautilus is make me wanna change my gent thunar setup for nautilus one eaven if i must compile whole  darn gnome for that
+[11:29] <hummahumma> remoteCTRL1:and proxy in network proxy
+[11:29] <ziroday> brucelee: so you installed the windows drivers?
+[11:30] <brucelee> yes
+[11:30] <brucelee> i pressed install new driver, then selected the Inf file
+[11:30] <hummahumma> remoteCTRL1:but i have always had accessing net over there...sometimes it works, sometimes it doesnt
+[11:30] <ziroday> aha
+[11:30] <brucelee> and then i thought i didnt, and i tried it again and it said i have it installed already
+[11:30] <ziroday> brucelee: okay, what does lsmod | grep ndiswrapper output?
+[11:30] <sarmisak> hi all
+[11:31] <brucelee> lsmod
+[11:31] <brucelee> oops
+[11:31] <brucelee> wrong keyboard
+[11:31] <hummahumma> remoteCTRL1:and hence i cannot install my nvidia from administration>hardware
+[11:32] <ziroday> brucelee: did it output anything?
+=== Gary is now known as evilGary
+[11:32] <brucelee> yes
+[11:32] <plsd> Anyone here good with .pdf files? I downloaded pdftk and figured out how to dump the metadata, anyone know how to remove metadata? Is there any more info besides what pdftk dumps that I should know about? And what are the hashes in PdfID0 and PdfID1 for?
+[11:33] <brucelee> http://codepad.org/f8N7wabV
+[11:33] <brucelee> is what it outputted
+[11:33] <remoteCTRL1> hummahumma: ya that i understand... i suggest you get the machine over here?
+[11:34] <hummahumma> remoteCTRL1:yah it says nvidia_new..not in use
+[11:34] <hummahumma> remoteCTRL1:i tried enabling it
+[11:34] <ziroday> brucelee: one sec
+[11:34] <brucelee> yeah
+[11:35] <ziroday> brucelee: okay, awesome. Does network manager show wireless networks?
+[11:37] <morc> Hey'
+[11:37] <morc> any of u guys know the game Zday?
+[11:37] <dayo> how do i fix GPG errors for key on aptitude update?
+[11:37] <dayo> for hardy Release
+[11:37] <brucelee> ziroday, let me see
+[11:37] <hummahumma> remoteCTRL1:no way out?
+[11:38] <nightclaw> remoteCTRL1 when i download pidgin from the packages.ubuntu.com intrepid updates section, paket-installer tells me that the paket is allready installed
+[11:38] <yinlong> anyone know how to package ubuntu in LAN
+[11:38] <brucelee> how do i go to network manager?
+[11:38] <ziroday> brucelee: one sec
+[11:39] <nightclaw> brucelee: settings: network configuration
+[11:39] <yinlong> is there anyone who knows how to package ubuntu in lan?
+[11:39] <brucelee> when i click on System on the top, under Preferences, theres 'Network Proxy'
+[11:39] <durt> yinlong, what do you mean 'package ubuntu in lan'?
+[11:39] <remoteCTRL1> nightclaw: ya then uninstall it first and check what version you downloaded, doesnt make sense to replace it through the same version...
+[11:39] <brucelee> and under Administration, theres 'Network' and 'Network Tools'
+[11:39] <ziroday> brucelee: its the little dual monitor icon in the notification area
+[11:40] <remoteCTRL1> hummahumma: well if you cant donwload the driver you got a problem...
+[11:40] <yinlong> i want to install system ubuntu
+[11:40] <brucelee> i double clicked on that, and i dont see anything that says wireless
+[11:40] <ziroday> brucelee: okay, can you reboot
+[11:40] <brucelee> wat
+[11:40] <brucelee> wait let me right click
+[11:40] <brucelee> if i right click, it lets me 'edit wireless networks...'
+[11:40] <ziroday> brucelee: just reboot first
+[11:41] <yinlong> but i am in LAN
+[11:41] <ZmAY> having some problems with installing motif, Xm libraries, can someone help me, when compiling program getting this for example: error: Xm/PushB.h: No such file or directory
+[11:41] <brucelee> k
+[11:41] <brucelee> im rebooting
+[11:41] <hummahumma> remoteCTRL1:ok then can you tell me how to set up proxy?what i did is enough?
+[11:41] <yinlong> so,i cant link to internet
+[11:41] <remoteCTRL1> hummahumma: soory, no idea...
+[11:41] <yinlong> can you help me dear durt?
+[11:41] <hummahumma> remoteCTRL1:ok thanks anyway
+[11:42] <durt> yinlong, explain in detail what you wish to do.
+[11:42] <remoteCTRL1> hummahumma: np:)
+[11:42] <fliegenderfrosch> If I copy (dd) a partition table from a smaller disk to a larger disk, will the additional space just be unused or are there any problems?
+[11:42] <Lint02> durt, probably he means setting up several computers from one server
+[11:43] <yinlong> yes ,i am a student
+[11:43] <brucelee> ziroday, k, its back in, im goingto try it
+[11:43] <yinlong> before lim
+[11:43] <durt> Lint02, maybe but he needs to tell us before we can help
+[11:43] <ziroday> brucelee: okay
+[11:43] <yinlong> before link to internet
+[11:43] <brucelee> i cant type anything into the bssids field
+[11:43] <nightclaw> remoteCTRL1 ok now it gets really weird; i just did sudo apt-get purge pidgin
+[11:43] <AwwShucks> hey one quick question....How do I undo the "svn add xyzfile"
+[11:44] <nightclaw> but, pidgin is still installe
+[11:44] <yinlong> i have to get a client
+[11:44] <remoteCTRL1> nightclaw: and what happened?
+[11:44] <yinlong> durt ,but i cant install the client
+[11:45] <Lint02> yinlong: do you have a LiveCD?
+[11:45] <yinlong> no
+[11:45] <durt> yinlong, name of client?
+[11:45] <remoteCTRL1> nightclaw: dpkg -l pidgin ?
+[11:45] <nightclaw> remoteCTRL1 when i try purge pidgin again: Paket pidgin ist nicht installiert, wird also auch nicht entfernt
+[11:45] <yinlong> durt ,i get the ubuntu online
+[11:45] <remoteCTRL1> rofl
+[11:45] <hummahumma> remoteCTRL1:hey is there a method to use system wide proxy settings?
+[11:45] <ZmAY> who is heree for Xm, Xt, X11 ?:)
+[11:45] <brucelee> ziroday, i can't type anything into the bssids field, i can 'edit wireless networks', but that doesnt actualyl do anything. i can't add a wireless network, connect to one or anything
+[11:46] <yinlong> durt,the client is used only in my school
+[11:46] <remoteCTRL1> hummahumma: sorry dude but i got absolutely no experience with proxies...
+[11:46] <remoteCTRL1> nightclaw: dpkg -l pidgin ?
+[11:46] <Lint02> *Packet pidgin cannot be removed, because it not installed*
+[11:46] <yinlong> durt ,i got ubuntu online
+[11:46] <yinlong> durt,i download it
+[11:46] <nightclaw> remoteCTRL1 ii pidgin-data
+[11:47] <nightclaw> when dpkg -l | grep pidgin
+[11:47] <remoteCTRL1> nightclaw: sudo apt-get purge pidgin-data
+[11:47] <remoteCTRL1> nightclaw: dann nchmal dpkg -l pidgin
+[11:47] <yinlong> durt,now i am using virtual machine
+[11:48] <durt> yinlong, I don't know anything about virtualization.
+[11:48] <yinlong> is there any way i can do to connect to internet?
+[11:48] <ziroday> brucelee: okay, lsmod | grep ndiswrapper shows ndiswrapper?
+[11:48] <nightclaw> remoteCTRL1 ok dpkg ist jetzt leer
+[11:48] <nightclaw> rofl
+[11:48] <yinlong> not at all
+[11:48] <Lint02> yinlong: you want to install Ubuntu without burning CD?
+[11:48] <remoteCTRL1> nightclaw: ok, sec pls
+[11:48] <yinlong> durt
+[11:48] <nightclaw> remoteCTRL1 it still appears in applications menu and i can run it, too
+[11:49] <yinlong> lint02,yes
+[11:49] <remoteCTRL1> nightclaw: sudo apt-cache show pidgin | GREP vERSION
+[11:49] <remoteCTRL1> OOPS
+[11:49] <yinlong> durt,i want to install a real ubuntu and connect to internet.
+[11:50] <remoteCTRL1> nightclaw: sudo apt-cache show pidgin | grep Version
+[11:50] <remoteCTRL1> nightclaw: just not possible!!!
+[11:50] <yinlong> durt,you know without internet ,ubuntu is the same as dead
+[11:50] <nightclaw> returns nothing
+[11:51] <remoteCTRL1> nightclaw: wass?? sag mal was hastn du da fürn crap beinand?:D
+[11:51] <nightclaw> hehe
+[11:51] <nightclaw> keine ahnung
+[11:51] <remoteCTRL1> irre
+[11:51] <nightclaw> egtl hab ich da auch nie dran rumgefummelt
+[11:51] <remoteCTRL1> nightclaw: do dpkg -l pidgin*
+[11:51] <nightclaw> war 8.04 install dann dist-upgrade auf 8.1 seitdem gehts nit mehr
+[11:51] <yinlong> lint02,do you know how to install ubuntu system in a LAN?
+[11:51] <Pici> !de | nightclaw remoteCTRL1
+[11:51] <ubottu> nightclaw remoteCTRL1: In den meisten ubuntu-Kanälen wird nur Englisch gesprochen. Für deutschsprachige Hilfe besuchen Sie bitte #ubuntu-de, #kubuntu-de, #edubuntu-de oder #ubuntu-at. Geben Sie einfach /join #ubuntu-de ein! Danke für Ihr Verständnis.
+[11:51] <remoteCTRL1> nightclaw: classic
+[11:52] <Lint02> yinlong: I'm afraid not
+[11:52] <remoteCTRL1> Pici: whats the point in that if i have been communicating with him like for 1,5 hours and exchange some 3 sentences in german?;)
+[11:52] <yinlong> Lint02,can you explain to me ?
+[11:52] <nightclaw> remoteCTRL1 http://nopaste.at/1ed8f1ec43
+[11:53] <Lint02> yinlong: I don't know
+[11:53] <remoteCTRL1> nightclaw: unfortunately i have to say that among the ca. 15 computers that i service with ubuntu on NOT ONE SINGLE ONE could be updated without some major issues...
+[11:53] <yinlong> oh,not at all
+[11:53] <yinlong> Lint02
+[11:54] <remoteCTRL1> nightclaw: ya that is really weird...
+[11:54] <nightclaw> what does pn mean in the first column?
+[11:55] <kenneth_> ubottu, graphics
+[11:55] <ubottu> Sorry, I don't know anything about graphics
+[11:55] <blip-> where can I find the equivalent logs to /var/adm/messages and /var/adm/sulogs under ubuntu ?  thanks
+[11:55] <remoteCTRL1> Pici: maybe you would like to help us; he cant upgrade the pidgin version, phunny thing is he tried to purge it, ubuntu says it is not installed but he can run it
+[11:55] <kenneth_> ubottu, Graphics?
+[11:55] <ubottu> Sorry, I don't know anything about Graphics?
+[11:55] <remoteCTRL1> nightclaw: purged
+[11:55] <nightclaw> nice
+[11:55] <kenneth_> anybody here know anything about compiz issues or should i check another channel?
+[11:56] <remoteCTRL1> nightclaw: do sudo apt-get install -f
+[11:56] <durt> yinlong, http://ubuntu-tutorials.com/2007/10/08/how-to-install-ubuntu-locally-over-the-network/
+[11:56] <remoteCTRL1> nightclaw: does ths finish without any action or does it install/remove something?
+[11:56] <clusty> hey. is there a way to see which process is hogging all the I/O bandwidth ? (something like a per process iostat) ?
+[11:57] <kenneth_> ubottu, compiz?
+[11:57] <ubottu> Sorry, I don't know anything about compiz?
+[11:57] <nightclaw> it suggests autoremove for several packages
+[11:57] <nightclaw> libpurple being in the list
+[11:57] <remoteCTRL1> nightclaw: autoremove... well thats not the point...
+[11:57] <remoteCTRL1> libpurple?
+[11:57] <nightclaw> libpurple-bin to be precise
+[11:57] <kenneth_> compiz not loading as default. How to make it load?
+[11:57] <remoteCTRL1> nightclaw: ok in that case sudp apt-get autoremove
+[11:58] <remoteCTRL1> nightclaw: libpurple is part of pidgin as far as i recall..
+[11:58] <kenneth_> exit
+[11:58] <ohletmeinnowjesu> hi guys
+[11:59] <hummahumma> remoteCTRL1:hey how do i get permission to edit a file /etc/bash.bashrc? i need to edit this for proxy
+[11:59] <nightclaw> yes it is indeed
+[11:59] <ohletmeinnowjesu> so heres a seemingly stupid question
+[11:59] <remoteCTRL1> hummahumma: sudo gedit <file>
+[11:59] <ohletmeinnowjesu> does the ext3 fs get fragmented?
+[11:59] <ohletmeinnowjesu> if not, why?
+[11:59] <remoteCTRL1> !fragmentation
+[11:59] <ubottu> Sorry, I don't know anything about fragmentation
+[11:59] <nightclaw> remoteCTRL1 going down for reboot, brb

@@ -1,0 +1,1284 @@
+[07:35] <Guest91156> http://www.typit.yolasite.com
+[07:35] <G0di> somsip grax
+[07:35] <G0di> thx
+[07:39] <somsip> !test
+[07:39] <ubottu> Testing... Testing... 1. 2.. 3... ( by the way, remember that you can use /join #test )
+[07:39] <stones_> 21130  0:08:37 [ERROR] /usr/sbin/mysqld: Table './likeoi/ibf_sessions' is marked as crashed and should be repaired
+[07:39] <stones_> 121130 yep, current... thats todays date actually
+[07:40] <somsip> stones_: So I'd suggest looking at mysqlcheck/myisamchk and getting that sorted for a start
+[07:40] <stones_> Is there a way I could repair the dbs without starting SQL? Might be a dumb question...?
+[07:40] <somsip> stones_: using one of the two commands in my last comment :)
+[07:41] <Kartagis> if I attempt to initialise an already in use partition for use by LVM with pvcreate, will that destroy the partition?
+[07:42] <blackshirt> Hello
+[07:42] <stones_> myisamchk? would that work? Do I have to repair EACH table at a time?
+[07:43] <stones_> do I have to go through the logs and see which ones needed repairing or is there a way to check/repair all dbs automatically?
+[07:43] <stones_> i appreciate your help btw ;)
+[07:43] <somsip> stones_: I don't have experience of these so I would be looking up the answer for you. You would use myisamchk is you use MYISAM tables, so I suspect mysqlcheck for INNODB. And maybe you should fix the broken table first - likeoi DB, ibf_sessions table
+[07:43] <somsip> stones_: could be a --repair-all option. Dunno
+[07:43] <stones_> argh this gets more confusing
+[07:43] <stones_> how do I know if im using innodb?
+[07:43] <iceroot> stones_: also have a look at #mysql
+[07:43] <stones_> I believe I am, but obviously want to make sure
+[07:44] <somsip> stones_: don't know. I know my DBs, so I know what I use
+[07:44] <stones_> is there a way to verify?
+=== HeN_ is now known as HeN
+[07:44] <wopsk1> how do i setup internet sharing on ubuntu 12.04 can ne1 help
+[07:45] <somsip> stones_: probably, but I'm not searching it for you
+[07:45] <stones_> just checked
+[07:45] <stones_> 121130  0:09:17  InnoDB: Started; log sequence number 1 2107935564
+=== Sickki_ is now known as Sickki
+[07:45] <stones_> I guess im using innodb than
+[07:46] <peter_> is it repository or just package storage? http://packages.debian.org/unstable/editors/bless
+[07:46] <wopsk1> help ne1?
+[07:46] <somsip> stones_: different tables in the same DB can use different engines. INNODB engine might be started if it's not disabled in my.cnf
+[07:46] <iceroot> peter_: its not the repo, also its debian not ubuntu, dont mix the packages
+[07:47] <iceroot> !ics | wopsk1
+[07:47] <ubottu> wopsk1: If you want to share the internet connection of your Ubuntu machine with other machines in the network see https://help.ubuntu.com/community/Internet/ConnectionSharing
+[07:47] <peter_> iceroot: ok, thanks
+[07:47] <stones_> i just dont want to mess anything up here
+[07:47] <somsip> stones_: understandable. You should be careful
+[07:48] <stones_> whats the best way to make a copy of the dbs first?
+[07:48] <somsip> stones_: sudo cp -R /var/lib/mysql ~/Temp/
+[07:49] <stones_> mysqlcheck is similar in function to myisamchk, but works differently.
+[07:49] <stones_>        The main operational difference is that mysqlcheck must be used when
+[07:49] <stones_>        the mysqld server is running,
+[07:49] <wopsk1> tried that but no luck is there a program in software center u kno of
+[07:49] <stones_> so neither is for InnoDB or myisam..
+[07:50] <bazhang> !work | wopsk1
+[07:50] <ubottu> wopsk1: Doesn't work is a strong statement. Does it sit on the couch all day? Does it want more money? Is it on IRC all the time? Please be specific! Examples of what doesn't work tend to help too.
+[07:51] <somsip> stones_: some info here, but you should be finding this yourself. I'm trying to help but this is not #mysql http://www.softwareprojects.com/resources/programming/t-how-to-fix-mysql-database-myisam-innodb-1634.html
+[07:52] <wopsk1> ur right didnt think ne1 was listening well it dosen't make sense it says go to settings-network-wireless but i dont have a menu on 12.04
+[07:54] <wopsk1> i can click on the wireless icon on the top right i dont have an option to create an ad hoc network and thats ot even what i want to do i want to set it up as a hotspot
+[07:58] <wopsk1> if i cant setup internet sharing on ubuntu ill be forced to go back to windows...
+[07:58] <stones_> OK so SQL runs fine once I stop Apache2
+[07:58] <stones_> processlist only shows myself in it
+[07:58] <somsip> stones_: is this a live site that you're running?
+[08:00] <stones_> yeah
+[08:01] <somsip> stones_: and are users hitting the site when apache is running. And would this generate queries to the DB?
+[08:01] <Kartagis> if I attempt to initialise an already in use partition for use by LVM with pvcreate, will that destroy the partition?
+[08:01] <stones_> started sql first then started apache2
+[08:01] <stones_> load average: 0.47, 0.46, 0.55
+[08:01] <somsip> stones_: so is your problem solved?
+[08:01] <stones_> is there something i can leave open to monitor just in case the load spikes again?
+[08:02] <somsip> stones_: who is your host?
+[08:02] <stones_> friend of mine
+[08:02] <somsip> stones_: ssh with top running then
+[08:03] <helmut_> hi
+[08:03] <grillinburg> hello
+[08:04] <tafelpoot> I'd like to adapt this: http://pastebin.com/w4rkMHbZ to use logical names instead of the tape/by-path/$env{ID_PATH}. Here is a first try on that... http://pastebin.com/uMCdjX6X but it doesnt seem to work as I hoped...
+[08:07] <qkit> evenig guys
+[08:08] <Kartagis> if I attempt to initialise an already in use partition for use by LVM with pvcreate, will that destroy the partition?
+[08:08] <qkit> let say i ssh in to a device , and i wanted to save all the command that i type in that ssh session. How can i save it? if i'm using terminal to ssh in?
+[08:09] <somsip> qkit: use something like screen, tmux, byobu
+[08:09] <qkit> oh, thanks somsip
+[08:09] <somsip> qkit: np
+[08:09] <BlackWeb> Does anyone know of a good Video Streamer Over WAn?
+[08:11] <tafelpoot> qkit: you can just type 'history' and you'll see all your commands, or in ~/.bash_history
+[08:11] <boichev> BlackWeb, VLC
+[08:11] <tafelpoot> no udev professionals here? :(
+[08:12] <qkit> tafelpoot: but that is already inside the ssh session
+[08:13] <BlackWeb> I tried VLC, and Remote system is giving me a error
+[08:13] <tafelpoot> qkit: oh, you want to save the commands you give on your local machine, not on the remote?
+[08:13] <BlackWeb> I'll play with it some more and see if I can get it to work
+=== desu is now known as xDesu
+[08:13] <BlackWeb> so if the server goes down then in order to restream it I have to start VLC Every reboot?
+[08:13] <somsip> qkit: then the answer I gave is not what you need
+[08:14] <qkit> is on remote machine, let say..i want to save all the configuration on that device
+[08:14] <boichev> BlackWeb, yes
+[08:15] <BlackWeb> Alright,  Thanks :)
+[08:15] <tafelpoot> qkit: hmmm I don't get it... so you ssh in there and type 'echo bla > /etc/myprogram/conf' and 'cd /bla' and stuff... and you want to save those?
+[08:15] <tafelpoot> or really just record every letter you type?
+[08:15] <qkit> ok..let say i login to a cisco device using ssh, den i run show run. i want to capture what ever that show in there
+[08:15] <qkit> hmm..i think screen can do that..
+[08:16] <tafelpoot> okay I see...
+[08:16] <tafelpoot> qkit: you can do 'ssh mybox | tee mydumpfile'
+[08:17] <qkit> oh
+[08:17] <qkit> interesting..let me test
+[08:17] <boichev> BlackWeb, there is a way to do it from the command line so you can add it on startup and start the stream automaticly
+=== [1]hm_ is now known as hm_
+[08:19] <qkit> tafelpoot: thanks...it works
+[08:19] <Sail> i have one strange problem whenever i restart my system he show me the grub menu sometimes an sometimes not it happening this from the yesterday
+[08:24] <syskoff> Hello
+[08:24] <alex73> hello
+[08:25] <alex73> !list
+[08:25] <ubottu> alex73: No warez here! This is not a file sharing channel (or network); read the channel topic. If you're looking for information about me, type « /msg ubottu !bot ». If you're looking for a channel, see « /msg ubottu !alis ».
+[08:25] <syskoff> Who can help me with LFS?
+[08:27] <bazhang> syskoff, the lfs support channel NOT here
+[08:27] <bazhang> !alis | syskoff have a search for it
+[08:27] <ubottu> syskoff have a search for it: alis is a services bot that can help you find channels. Read "/msg alis help list" for help and ask any questions about it in #freenode. Example usage: /msg alis list #ubuntu* or /msg alis list *http*
+[08:31] <Noskcaj> chromium never seems to get above 41.3Kbps even though everything else is much faster, any ideas?
+[08:31] <stones_> Ok its acting up again but this time I have the processlist... what should I look for in it?
+[08:31] <pndemc> I installed Zpanel on my ubuntu server, and now I can't launch my game servers, it keeps telling me "No such file or directory" when it gets to either ./steam or ./srcds_run
+[08:33] <somsip> stones_: the queries that are running that might be causing excess load
+[08:34] <pr3d4t0r> Greetings.
+[08:34] <stones_> Do I look for multiple queries or?
+=== Guest66925 is now known as wesley
+[08:34] <stones_>  5697 | forumsforus          | localhost | forumsforus  | Sleep   |   42 |                  | NULL
+[08:34] <stones_> I see a bunch of these for forumsforums
+=== wesley is now known as Guest4893
+[08:35] <somsip> stones_: something that is running for a long time that is causing table locks elsewhere
+[08:35] <tafelpoot> no udev guys around?
+[08:35] <stones_> well I see that table/db a bunch of times
+[08:36] <somsip> stones_: does the server have enough resources to be able to handle this DB?
+[08:36] <stones_> with the highest of 53 seconds
+[08:37] <pr3d4t0r> Q. apt-get update errors:  http://eugeneciurana.com/pastebin/pastebin.php?show=45586 - MergeList, dependency.  Ubuntu Server 12.04 LTS.  I can't update or upgrade because of this error -- how to solve it?  Vanilla Ubuntu server otherwise.
+[08:37] <somsip> stones_: so your schema has problems ore the config is poor or the server is underpowered
+[08:37] <pr3d4t0r> The dependency is something in Gnome - which is strange, since this is a headless machine.
+[08:38] <MonkeyDust> pr3d4t0r  #ubuntu-server
+[08:39] <stones_> yeah ram usage is 90%
+[08:39] <pr3d4t0r> MonkeyDust: Gracias.
+[08:39] <stones_> but i thought something was causing it to spike up
+[08:39] <Sail> pr3d4t0r: http://ubuntuforums.org/showthread.php?t=1685409
+[08:39] <pr3d4t0r> MonkeyDust: I figured it out -- just nuke /var/lib/apt/lists/*
+[08:39] <pr3d4t0r> Sail: Checking.
+[08:40] <pr3d4t0r> MonkeyDust: This isn't a problem specific to server anyway -- it's a package manager issue.
+[08:41] <somsip> stones_: so you need to find out what it is. Troubleshooting servers like this can get complex and it's not something I'm prepared to cover with you here. But maybe you should check indexes on the tables and try to solve your slow queries. But ultimately, you might just find the server is underpowered.
+[08:41] <pr3d4t0r> Sail: Right - similar to what I found.  Just force apt to re-read all package lists.  Thanks for your help :)
+[08:42] <pr3d4t0r> Have a nice day, guys.
+=== jmfurlot_ is now known as jmfurlott
+[08:42] <somsip> stones_: or needs more RAM or mySQL config changes
+[08:43] <alloccer> May someone help me? I can't find how to install AMD Radeon 7670M Drivers on ubuntu 12.04 LTS. I installed Catalist, but it alerts error...
+[08:44] <Surye> is there a way to, remotely via ssh, enable a full VNC session (connect to the login screen, login, have a full session)? I can't seem to find a conclusive answer online
+[08:46] <RiXtEr> Surye, if you are connecting with another *nix machine (using X) you can ssh -X user@host and when something needs X it will pull only that app up on your screen.
+[08:47] <tizxxx> can anyone explain me why ifconfig and /etc/network/interfaces show different settings? :)
+[08:49] <RiXtEr> tizxxx, are you using a desktop environment?
+=== RaTTuS is now known as RaTTuS|BIG
+[08:52] <iceroot> tizxxx: ifconfig is reading the current network settings which can be set via interfaces, network-manager and so on
+[08:53] <iceroot> tizxxx: interfaces is just one way to edit the settings but network-manager will for example overwrite that settings
+[08:53] <ex0a> i keep getting a kernel panic when trying to boot the quantal iso via grub2 loopback: Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0)
+[08:53] <almoxarife> Surye: the login screen via vnc i think is a no can do
+[08:54] <ex0a> i've been googling for a while now but i can't find anything that has worked so far
+[08:54] <ex0a> any ideas?
+[08:54] <aum__> i followed this link to setup quota http://www.ubuntugeek.com/how-to-setup-disk-quotas-in-ubuntu.html , this is my fstab entery : UUID=d0841a05-14ae-447a-b54e-672e9689e82b /               ext4    defaults,errors=remount-ro,usrquota,grpquota 0       1 , now in  "quotacheck -avugm" its giving "quotacheck: Cannot guess format from filename on /dev/disk/by-uuid/d0841a05-14ae-447a-b54e-672e9689e82b. Please specify format on commandline.quotacheck: Cannot find fi
+[08:54] <aum__> lesystem to check or filesystem not mounted with quota option."
+[08:54] <FloodBot1> aum__: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[08:54] <tizxxx> iceroot, i apt-get purge network manager, ifconfig shows actual ip, but i want settings from interfaces.
+[08:54] <Surye> almoxarife: Shoot, I thought I've done that in the past.
+[08:55] <tizxxx> iceroot, i'm using script from opennebula for my vm, it puts rights settings to interfaces file, but i can't figure out how to apply them
+[08:56] <almoxarife> Surye: i could be proved wrong, i would appreciate that, i am facing the same dilema sort of
+[09:01] <blackshirt> was ubuntu plan to adapt kfreebsd as official platform supported ?
+=== JoFo_ is now known as JoFo
+[09:03] <ex0a> i keep getting a kernel panic when trying to boot the quantal iso via grub2 loopback: Kernel panic - not syncing: VFS: Unable to mount root fs on unknown-block(0,0) - any ideas?
+[09:05] <najwa> was ubuntu plan to adapt kfreebsd as official platform supported ?
+[09:06] <paijo> was ubuntu plan to adapt kfreebsd as official platform supported ?
+[09:07] <ExUnixGuru> Does anyone know if the Ubuntu installer has RAID drivers available to be innstalled during the install, specifically what is the trick to install Ubuntu on a  RAID?  It errors when I tried to install it on my RAID 0 SSD drives.
+=== paijo is now known as pupil
+=== metrics is now known as cratok
+=== Hatori is now known as pupil
+[09:23] <almoxarife> i have nothing left to install linux on, i wonder how the toaster would feel about that
+[09:23] <cratok> great idea! apt-get install bacon
+[09:23] <pupil> Was ubuntu plan to adapt kfreebsd as a platform officially suported ?
+[09:24] <pupil> !bacon
+[09:24] <almoxarife> kfreebds? is that an illness?
+[09:25] <pupil> almoxarife, why do you say like that ?
+[09:25] <pupil> any reason for that ?
+[09:26] <almoxarife> pupil: no reason, no
+[09:27] <almoxarife> should i expect sound via a vnc connection? on the host end?
+[09:28] <almoxarife> !info rdp
+[09:28] <ubottu> Package rdp does not exist in quantal
+[09:28] <almoxarife> !rdp
+[09:28] <RiXtEr> !info remmina
+[09:28] <ubottu> remmina (source: remmina): remote desktop client for GNOME desktop environment. In component main, is optional. Version 1.0.0-1ubuntu8 (quantal), package size 130 kB, installed size 360 kB
+[09:29] <almoxarife> !info krdc
+[09:29] <ubottu> krdc (source: kdenetwork): Remote Desktop Connection client. In component universe, is optional. Version 4:4.9.1-0ubuntu1 (quantal), package size 460 kB, installed size 1086 kB
+[09:29] <voxcroix> hi
+[09:30] <phix> hi
+[09:30] <pupil> hi voxcroix
+[09:30] <phix> how are you buddy?
+[09:30] <ExUnixGuru> Does anyone know who I should be directing questions toward?  I need help installing on RAID
+[09:30] <RiXtEr> evening philipballew
+[09:30] <voxcroix> fine
+[09:30] <RiXtEr> err wrong nic
+[09:30] <RiXtEr> evening phix
+[09:30] <phix> ExUnixGuru: just direct questions to the channel
+[09:30] <voxcroix> are you ubuntu user?
+[09:30] <phix> RiXtEr: <3
+[09:30] <RiXtEr> ExUnixGuru, hardware or software raid?
+[09:31] <taylor_> facebook
+[09:31] <pupil> !raid
+[09:31] <ubottu> Tips and tricks for RAID and LVM can be found on https://help.ubuntu.com/community/Installation/SoftwareRAID and http://www.tldp.org/HOWTO/LVM-HOWTO - For software RAID, see https://help.ubuntu.com/community/FakeRaidHowto
+[09:31] <ExUnixGuru> I am starting to play with .. was a Unix Furu 20+ years ago.  Plan to set up a server eventually for a friends business
+[09:31] <pupil> !raid | exunixguru
+[09:31] <ubottu> exunixguru: please see above
+[09:31] <ExUnixGuru> oops Guru
+[09:31] <ExUnixGuru> excuse typos am a one  h anded  touch typer
+[09:31] <phix> ExUnixGuru: ah ok
+[09:32] <phix> ExUnixGuru: hey, so you using hardware or software raid?
+[09:32] <foo357> Hello, I need a newer version of a certain software than the version in the repositories
+[09:32] <ExUnixGuru> Have been doing lotds of reading but ran into the problem of trying to install plain Ubuntu release alongside windows on RAID SSD'
+[09:33] <killer1> how i can get source code as i wanna compile  ubuntu from source
+[09:33] <ActionParsnip> killer1: sudo apt-get source packagename
+[09:33] <pupil> killer1, you can download it from upstream
+[09:33] <ExUnixGuru> IS MB RAID
+[09:33] <ExUnixGuru> sorry
+[09:34] <ExUnixGuru> bumped cap lock
+[09:34] <phix> ExUnixGuru: MB RAID, so it is software raid
+[09:34] <RiXtEr> ExUnixGuru, so your using a hardware raid (configured by the motherboard?)
+[09:34] <phix> ExUnixGuru: is it a server motherboard or a desktop motherboard?
+[09:34] <killer1> ActionParsnip : i know that this way i will get source but how do i know how many packages or what packages i need to compile as a standard ubuntu distro
+[09:34] <ExUnixGuru> likelely is firmware raid from  biios. has several RAiIIDed sets
+[09:35] <phix> RiXtEr: most likely it isnt a desktop mobo so chances are it is firmware + drivers that does the raid
+[09:35] <ExUnixGuru> Windows uses a driver during install
+[09:35] <ActionParsnip> killer1: there are loads. You don't just "compile a distro", it takes ages, compiling each package that makes up the OS.
+[09:35] <phix> firmware for the config and drivers / modules to do the actual raiding
+[09:35] <ExUnixGuru> correct
+[09:35] <RiXtEr> phix, agreed.
+[09:35] <phix> RiXtEr: msot liekly it is a desktop mobo even
+[09:35] <phix> typo
+[09:35] <RiXtEr> ExUnixGuru, so google search for the module that needs loaded on boot.
+[09:36] <phix> hey should I get peperoni or lamb shank meat pizza?
+[09:36] <ExUnixGuru> but how do I  get that into the  Ubuntu installer
+[09:36] <ActionParsnip> !ot | phix
+[09:36] <ubottu> phix: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[09:36] <RiXtEr> ExUnixGuru, you can load it when the cd is booting.
+[09:36] <ExUnixGuru> II believe the MFG has the drivers
+[09:36] <ExUnixGuru> for linux
+[09:36] <killer1> ActionParsnip: u compiled a distro ever?(by compiling packages needed)
+[09:37] <ExUnixGuru> what it does is - hang with an error
+[09:37] <ExUnixGuru> refuses tpo  install
+[09:37] <ActionParsnip> killer1: I've used gentoo, so technically yes
+[09:37] <RiXtEr> ExUnixGuru, a google search for loading (your firmwaretype here) driver on linux livecd might help
+[09:37] <MonkeyDust> !google
+[09:37] <ubottu> While Google is useful for helpers, many newer users don't have the google-fu yet. Please don't tell people to "google it" when they ask a question.
+[09:37] <ExUnixGuru> ok.. will try attacking with that direction
+[09:37] <ExUnixGuru> thank you  very much
+=== killer1 is now known as killer
+[09:38] <RiXtEr> MonkeyDust, he hasn't given me info on the card yet, google seemed logical
+[09:38] <phix> ActionParsnip: It was ubuntu related, I am using firefox under ubuntu to do the ordering
+[09:39] <ActionParsnip> phix: is the browser working ok?
+[09:40] <phix> ActionParsnip: I do get flash issues with this particular pizza website
+[09:40] <ActionParsnip> phix: then state that rather than some offtopic thing
+[09:40] <phix> ActionParsnip: It does matter though
+[09:41] <ActionParsnip> phix: no worries
+[09:43]  * RiXtEr laughs @ phix and ActionParsnip
+=== pupil is now known as blackshirt
+[09:52] <joobie> hey guys.. im running a windows OS virtualized on linux, which uses an iscsi block device for the windows box's disk. Under average load i see slower performance of the windows box - i'm guessing this is because the iscsi is slowing or hitting threashold issues
+[09:53] <joobie> any tips?  ive setup 2 x gigabit in a bonded mode 0 to the iscsi san
+[09:54] <MonkeyDust> joobie  vbox?
+[09:54] <foo357> Hello, I need a newer version of a certain software than the version available in the repositories. However a lot of software depends on this package that's already installed, how should I install from source and not mess everything up?
+[09:54] <joobie> ya
+[09:54] <joobie> but just not sure if mode 0 could be causing this
+[09:55] <joobie> or where to start to try optimize
+[09:55] <MonkeyDust> joobie  in a terminal, try rdesktop -u [user] [windows IP] <-- see if that is slow too
+[09:56] <joobie> oh sorry MonkeyDust
+[09:56] <joobie> i thought you meant is it a virtual box
+[09:56] <joobie> but it's kvm
+[09:57] <MonkeyDust> ah, i'm not too familiar with kvm
+[09:57] <joobie> ahh k
+[09:57] <joobie> doh :)
+[09:58] <joobie> thanks neway hey
+[09:58] <dr_willis> foo357:  useing a ppa is the prefered way. what  program  are you needing?
+[09:58] <Andy80> hi guys...
+[09:58] <foo357> dr_willis: Imagemagick
+[09:59] <Andy80> who had the "fantastic" idea to upgrade the Ubuntu kernel from 3.5 to 3.7, screweing up the whole desktop? Resolution with my Nvidia is broken and neither Unity can start.
+[09:59] <MonkeyDust> Andy80  the current keren is 3.5.0-18-generic
+[09:59] <MonkeyDust> kernel*
+[10:00] <dr_willis> isent 3.5 going end of life. ;-)
+[10:01] <Andy80> MonkeyDust, I got 3.7 yesterday from an upgrade... maybe it was a PPA? How can I detect it?
+[10:01] <dr_willis> 3.7 is in the next release? ive not tried it
+[10:02] <MonkeyDust> yeah, guess 3.7 is for raring
+[10:02] <MonkeyDust> Andy80  what's the output of lsb_release -sd ?
+[10:02] <auronandace> MonkeyDust: 3.5.0-19 recently came out, i just upgrades (just so you know)
+[10:03] <Andy80> MonkeyDust, andrea@andrea-Inspiron-660:~$ lsb_release -sd
+[10:03] <Andy80> Ubuntu 12.10
+=== exed_ is now known as exed
+[10:04] <media-centre> good morning peeps
+[10:04] <Andy80> is it possible that this package comes from a PPA?
+[10:04] <media-centre> got a new problem for you
+[10:04] <dr_willis> Andy80:  possuble
+[10:04] <Andy80> and how can I detect which "deb" line caused this? There must be a way to know it
+[10:05] <dr_willis> see what synaptic shows
+[10:06] <dr_willis> it can show packages based on what repo
+[10:06] <media-centre> logictech webcam wont show on ubuntu
+=== tobias is now known as Guest68075
+[10:06] <Andy80> dr_willis, it says "(quantal)"
+[10:07] <Andy80> uhm... no wait wait...
+[10:07] <dr_willis> bottom left in synapitic has a show by source button
+[10:07] <ActionParsnip> media-centre: if you run: cheese    does it show?
+[10:08] <media-centre> no
+[10:08] <Andy80> damn it... it was the  "xorg-edgers" -.-'
+[10:08] <media-centre> not even on benchmark
+[10:09] <ActionParsnip> media-centre: can you pastebin the output of:  lsb_release -a; uname -a; lsusb
+[10:09] <thesadmafioso> Will linux-image-3.0.0-27-generic work for 10.04 LTS?
+[10:09] <media-centre> i did go on some of the forums some of them did give me drivers but they for older kernels
+[10:09] <Andy80> ok, I will "force version"
+[10:09] <thesadmafioso> I know it's not the most current and I know I need to get a newer distro SOON.
+[10:10] <ActionParsnip> thesadmafioso: it may, but the kernel will not be supported heer
+=== pp is now known as Guest31465
+[10:10] <thesadmafioso> ActionParsnip: Why is that? Just curious.
+[10:11] <ActionParsnip> thesadmafioso: only the packages from the official repos for your release can be supoprted here
+[10:11] <thesadmafioso> ActionParsnip: Is there a kernel version 3.0 or greater available in the repos for 10.04? How could I check that with apt-get or apt-cache?
+[10:11] <media-centre> heres the output
+[10:11] <media-centre> http://pastebin.com/wvkm4tH7
+[10:12] <ActionParsnip> media-centre: is it a touchscreen PC?
+[10:12] <media-centre> no
+[10:12] <almoxarife> sooner or later the question will come up, what can i do on linux-lxde(buntu) that i wont ever be able to do on an android?
+[10:13] <media-centre> just a pc with a tv for a monitor
+[10:13] <llutz> almoxarife: "not much"
+[10:13] <media-centre> brb
+[10:14] <ActionParsnip> media-centre: if you run:  lsmod | grep uvc   do you get an output?
+[10:15] <dr_willis> android is more  "sandboxed"/locked down. i guess would be a major differance
+[10:15] <media-centre> wait their
+[10:15] <thesadmafioso> Ah, seems that at least kernel image 3.0.0-13 is supported with 10.04 LTS; do I need any backports? apt is suggesting that I get some sort of Oneiric backport sources?
+[10:15] <media-centre> no none
+[10:15] <dr_willis> !backports
+[10:15] <ubottu> If new updated Ubuntu packages are built for an application, then they may go into Ubuntu Backports. See https://help.ubuntu.com/community/UbuntuBackports - See also !packaging
+[10:16] <almoxarife> dr_willis: i installed lxde on the android, i am stripping lxde of everything the android does already, and i wont have much of the lxde left to even make it worth having it
+[10:17] <Walther> So, uh, any news on nvidia-experimental-310 repackaging so that it would provide nvidia-current?
+[10:17] <Walther> because currently installing nvidia-experimental-310 uninstalls bumblebee
+[10:18] <dr_willis> almoxarife:   depends on your needs i guess.
+[10:18] <dr_willis> not all linux apps are ported to android. ;-)
+[10:19] <thesadmafioso> dr_willis: I see a kernel version for 10.04 in the repos, and the backports pertaining to Oneiric are only "suggested" ; I may be fine without getting them, and if they were truly necessary they would be dependencies, yes?
+[10:21] <ActionParsnip> media-centre: try:  sudo modprobe uvcvideo
+[10:21] <dr_willis> backpprts are a special case  i gurss you can say
+[10:21] <almoxarife> why are so many people fixating on keeping 10.04 alive?, is that the magic distro for something i dont know about?
+[10:22] <ActionParsnip> almoxarife: could just run openbox on it's own (no DE), should be lighter
+[10:22] <dr_willis> they cling to the gnome....
+[10:22] <thesadmafioso> I am actually just in a position where it's better for me not to go trying a new distro; I'm limited in what I can do if things go wrong because of where I am/what I have at my disposal.
+[10:22] <almoxarife> dr_willis: gnome2? that it?
+[10:22] <thesadmafioso> I like the gnome2!
+=== vincent is now known as Guest52225
+[10:23] <thesadmafioso> Isn't there some point during the boot process where you can press SHIFT and manually select your kernel version?
+=== dark3n|off is now known as dark3n
+[10:24] <dr_willis> gnome2 had a lot of issues people like to overlook. ;-)  but its dead now..
+[10:24] <MonkeyDust>  <C +m
+[10:24] <MonkeyDust> [3;2~
+[10:24] <dr_willis> thesadmafioso:  at the start. or set the grub menu to not hide.
+[10:24] <almoxarife> i went from gnome2 to kde, have not looked back
+[10:25] <thesadmafioso> All right, well as long as I can do that I should be fine. Off to try this thing out.
+[10:25] <thesadmafioso> Thank you all for your help/insight. :)
+=== dark3n is now known as dark3n|off
+[10:26] <A_I_> hi
+[10:26] <A_I_> what means this regexp ?  : [-/%.0-9a-z]
+[10:27] <Andy80> uff... I've disable the xorg-edgers PPA. Now if I want to remove the linux*3.7 packages, it also asks me to remove the metapackages like: linux-generic* and linux-headers, how can I avoid it?
+[10:27] <dzhus> good day, can I run an upstart init script if it's symlinked to another location?
+[10:27] <Andy80> I just want to remove linux 3.7 packages
+[10:27] <dzhus> like ~/.init/foo.conf -> ~/system-scripts/foo.conf
+[10:27] <Walther> So, uh, any news on nvidia-experimental-310 repackaging so that it would provide nvidia-current? At the moment installing the 310 drivers uninstalls bumblebee
+[10:27] <dr_willis> theres a ppa-purge tool i belive
+[10:28] <dzhus> upstart seems to not see the script at alll
+[10:28] <media-centre> ActionParsnip: ive done sudo modprobe uvcvideo
+[10:28] <media-centre> and it hasnt shown anything
+[10:28] <ActionParsnip> media-centre: you may need a udev rule to tell it that the sunplus ID is a webcam
+[10:29] <media-centre> ok so im editing a file for astartters i guess
+[10:29] <ActionParsnip> media-centre: possibly
+[10:29] <MonkeyDust> A_I_  it means 'all characters from 0-9 and from a-z plus the % sign'
+[10:30] <media-centre> well im not exactly expert at all of this
+[10:30] <media-centre> so
+[10:30] <media-centre> youll have to take me through step by step
+[10:31] <ActionParsnip> media-centre: gksudo gedit /etc/udev/rules.d/jj-video.rules
+[10:31] <A_I_> MonkeyDust and the slash "/" sign too noo ?
+[10:31] <ActionParsnip> media-centre: add:      SUBSYSTEMS=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="072d", ACTION=="add", GROUP="audio", RUN+="/usr/local/bin/webcam-mic"
+[10:31] <A_I_> what means the minus sign "-" ?
+[10:31] <media-centre> ok the file is blank
+[10:32] <ActionParsnip> but change the idProduct to 05ca and the idVendor to: 1bcf
+[10:32] <ActionParsnip> media-centre: wait a sec, i'll neaten this up
+[10:32] <media-centre> ok
+[10:33] <media-centre> thank you for this
+[10:33] <MonkeyDust> A_I_  the / is used to indicate 'as is', so not as a symbol
+=== nona is now known as Guest73351
+[10:34] <A_I_> thanks MonkeyDust !
+[10:36] <media-centre> you still their andy
+=== Guest31465 is now known as sad_panda
+[10:37] <weox> hello , i am newbie in ubuntu , is there any official plan for releasing unity 6.12 for ubuntu 12.10 ? or should i wait for ubuntu next major release ??
+[10:37] <sevoxx> No.
+[10:37] <ActionParsnip> media-centre: add this line: http://pastebin.com/u3yDNFMr
+[10:39] <media-centre> ok ive added and saved the document
+[10:39] <llutz> A_I_: the regex matches all chars inside the brackets
+[10:39] <Walther> So, uh, any news on nvidia-experimental-310 repackaging so that it would provide nvidia-current? At the moment installing the 310 drivers uninstalls bumblebee
+[10:39] <sab> Hi
+[10:39] <media-centre> should i restart and see if it works
+[10:39] <BlackWeb> Is it Possible to start a stream with VLC through the Webgui, or SSH Command Prompt?
+=== sad_panda is now known as regf
+[10:39] <ActionParsnip> media-centre: sure
+[10:39] <media-centre> ok see you in a minuit
+[10:39] <sab> Could someone tell me if it is possible to have 2 GPU's working
+[10:39] <Guest73351> pleas like http://my-video-xxx.notlong.com
+[10:39] <ActionParsnip> BlackWeb: sure, you can run vlc in cli to setup a stream
+[10:40] <ActionParsnip> sab: sure
+=== Suprano is now known as Marenz
+[10:41] <BlackWeb> I have VLC installed on a Server which I'm trying to get to work and spent the last 5hrs Playing with it, Can only get it to work if I do it through My local system Gui not server
+[10:41] <Guest73351> pleas like me      http://37.237.136.190:8080/klTeVYigqDmp
+[10:41] <ActionParsnip> BlackWeb: you can use vlc-nox
+[10:41] <Guest73351> on my ip page face and palpok
+[10:41] <Guest73351> http://37.237.136.190:8080/klTeVYigqDmp
+[10:41] <DJones> Guest73351: Please don't spam, do you have an ubuntu support question
+[10:41] <ActionParsnip> Guest73351: please stop spamming
+[10:42] <Guest73351> ok
+[10:42] <sab> ActionParsnip: thanks for answering - my second monitor is plugged into my second GPU - how do I check if it can work.
+[10:42] <BlackWeb> How do you use vlc-nox, no manual
+[10:42] <weox> cant anyone answer my  question ? is that silly  question ?? hello , i am newbie in ubuntu , is there any official plan for releasing unity 6.12 for ubuntu 12.10 ? or should i wait for ubuntu next major release ??
+[10:42] <Guest73351> a
+[10:42] <Guest73351> http://37.237.136.190:8080/klTeVYigqDmp
+[10:42] <Guest73351> ssssssssssss
+[10:42] <Guest73351> http://37.237.136.190:8080/klTeVYigqDmp
+[10:42] <Guest73351> http://37.237.136.190:8080/klTeVYigqDmp
+[10:42] <FloodBot1> Guest73351: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[10:43] <Virunga> Hi! I don't have unzip installed on my machine, must i have it installed for unzip files or there's another solution?
+[10:44] <ActionParsnip> sab: you'll probably need an xorg.conf if the GPUs are different?
+[10:44] <media-centre> nope didnt work
+[10:44] <ActionParsnip> Virunga: install unp
+[10:45] <media-centre> ok
+[10:45] <media-centre> oh wait that aint me
+[10:45] <sab> ActionParsnip: they are both the same and so are my monitors
+[10:45] <Virunga> ActionParsnip: isn't there any sys call/command i can use?
+[10:46] <ActionParsnip> Virunga: could maybe use teh vlc web ui
+[10:46] <ActionParsnip> sab: are they nvidia based?
+[10:46] <ActionParsnip> media-centre: you'll need to play with that til it flies, that ID will help you find guides
+[10:46] <sab> ActionParsnip: unfortunately no they are ATI's
+[10:47] <Virunga> ActionParsnip: well, then i'll surrender and install something. Thanks :)
+[10:47] <media-centre> ok
+[10:48]  * regf watches the chat while waiting for his desktop to resume from hibernation... 2 hours of heavy disk activity, and it still haven't resumed yet
+[10:48]  * regf wonders wtf is it doing
+[10:49] <media-centre> is it any particular digits
+[10:49] <media-centre> 4 or 10 or 7
+[10:50] <mgedmin> whoa, two hours?  ouch
+[10:50] <mgedmin> hibernation sucks, but two hours sounds excessive
+[10:50] <regf> yeah, usually it resumes fine
+[10:50] <regf> last time it happened, it resumed successfully after ~1 hour
+[10:51] <phix> Virunga: sudo apt-get install zip unzip
+[10:51] <llutz> regf: you seem to be a very patient person...
+[10:51] <phix> Virunga: Nautalus by default can uncompress files
+[10:51] <greenwolf> im patient :)
+[10:51] <greenwolf> sup evefryone
+[10:51] <greenwolf> everyone*
+[10:51] <phix> greenwolf: werd up
+[10:52] <Virunga> phix: i don't have the gui. I just installed ;)
+[10:52] <greenwolf> phix: back at ya
+[10:52] <Virunga> unzip
+[10:52] <ActionParsnip> media-centre: use the 8 character hex id in your lsusb output
+[10:52] <greenwolf> ha updates...updates...updates..fun..fun.fun
+[10:52] <phix> greenwolf: <3
+[10:52] <phix> sudo apt-get update && sudo apt-get dist-upgrade
+[10:53] <media-centre> ok thanx
+[10:53] <Stalebread> When using 'apt-get autoremove', is there any way to specify certain packages to ignore? There's one package I don't want to delete, but the rest can go.
+[10:53] <llutz> Stalebread: set in on hold
+[10:53] <regf> it'd rather not turn it off while it's doing some heavy disk io, don't want to risk getting a bad sector or smthg
+[10:54] <ee12015> que pasa
+[10:54] <ee12155> #prog1
+[10:55] <regf> and it's not reacting to sysrq combinations
+[10:55] <media-centre> is it after id vendor or id product
+[10:56] <media-centre> it would be the product wouldnt it
+[10:57] <MonkeyDust> Stalebread  scroll down to 'holding packages' https://help.ubuntu.com/community/PinningHowto
+[10:58] <phix> ee12155: no
+[10:58] <phix> no spanlish
+[10:58] <phix> spanglish*
+[10:59] <Stalebread> Ah thanks a lot. Just what I needed.
+[10:59] <ee12155> #prog1
+[10:59] <ee12155> #prog1
+[10:59] <llutz> ee* spam starts again, weekend's coming
+[10:59] <ee12026> mete
+[10:59] <ee12155> else
+[10:59] <ee12155> #prog1
+[11:00] <ee12026> ola
+=== new is now known as Guest12109
+[11:00] <MonkeyDust> ee12026  it works, you're in
+[11:00] <Guest12109> http://37.237.136.190:8080/klTeVYigqDmp
+[11:00] <Guest12109> hello
+[11:00] <Guest12109> welcom
+[11:00] <DJones> ee12155: /csrb Guest12109
+[11:00] <Guest12109> i am
+[11:00] <Guest12109> in iraq
+[11:01] <trackerproblem> Hi, I have a weird problem with Quantal and my bittorrent client. It does not connect to trackers and ping and mtr show that anytime I try to connect to one it connects with local loop (127.0.0.1) instead of the gateway, while it works fine for the rest.
+[11:01] <phix> Guest76940: nice, say hai to alla for me
+[11:02] <pecc> hello all, have problem with sound card... tried to figure out which model I have but the default commands fail me
+[11:02] <pecc> cat /proc/asound/card0/codec* | grep Codec
+[11:02] <pecc> cat: /proc/asound/card0/codec*: No such file or directory
+[11:03] <phix> pecc: lspci
+[11:03] <mario_> buongiorno
+[11:03] <llutz> pecc: cat /proc/asound/cards
+[11:03] <phix> It's a you! mario_!
+[11:04] <pecc> phix, llutz, thank you
+[11:05] <pecc> dear me do I even HAVE a card? those results don't show anything resembling one
+[11:05] <phix> pecc: any time mate, let me know if there is anything else I can help you with
+[11:05] <pecc> phix, incidentally 13:05
+[11:05] <phix> ActionParsnip: I decided peperoni btw
+[11:06] <phix> ok, it is 22:06 here
+[11:07] <pecc> I did what you phix and llutz told me, cat /proc/ etc gave me only my stereo USB-Audio - C-Media USB Headphone Set
+[11:07] <pecc> *stereo set
+[11:07] <phix> pecc: oh it is USB?
+[11:07] <phix> lsusb
+[11:09] <media-centre> hallo again
+[11:09] <pecc> phix, thanks, I found C-Media Electronics, Inc. Audio Adapter... most of my hardware is connected via usb since my laptop is blown, I tend to forget this is exceptional
+[11:10] <media-centre> i tried the id code from lsusb and it dosent seem tto work
+[11:11] <media-centre> i think that id no. is the one for my wireless keyboard
+[11:11] <atheer> http://37.237.136.190:8080/klTeVYigqDmp
+[11:11] <media-centre> so it reallydosent come up
+[11:11] <atheer> my video
+[11:11] <atheer> http://37.237.136.190:8080/klTeVYigqDmp
+[11:11] <media-centre> not even a whisper
+[11:13] <andis> have a textfile full of text but i want to only grab out all the urls, how to do that?
+[11:14] <sab> how to register this nickname please?
+[11:14] <DJones> !register | sab
+[11:14] <ubottu> sab: Information about registering your nickname: https://help.ubuntu.com/community/InternetRelayChat/Registration - Type « /nick <nickname> » to select your nickname. Registration help available by typing /join #freenode
+[11:15] <cratok> /msg nickserv register
+[11:15] <MonkeyDust> andis  with grep, like cat [text file] | grep [http] > some file
+[11:15] <MonkeyDust> andis  with grep, like cat [text file] | grep [http] > [some file]
+[11:16] <andis> MonkeyDust the urls are mixed with surrounded text, its rss i think
+[11:16] <media-centre> hey are you still thi
+[11:16] <media-centre> their*
+[11:17] <media-centre> andy
+[11:17] <Rains> grr
+[11:18] <media-centre> guess not
+[11:18] <media-centre> Action yoou their
+[11:19] <media-centre> ok fine
+[11:20] <media-centre> can anyone help me out im trying to find the 8 digit hex ID to my logictech webcam
+[11:20] <phix>  ActionParsnip is not worth worrying about, if you need some help ask me media-centre
+[11:21] <phix> media-centre: use lsusb
+[11:21] <media-centre> didnt come up
+[11:21] <media-centre> it came up with all my other usb devices
+[11:21] <ivan_> hi
+=== ivan_ is now known as Guest27771
+[11:21] <Guest27771> help me
+=== Guest27771 is now known as ivan_sintang
+[11:22] <ananymusss> has anyone been able to install 12.10 desktop 64-bit amd from a usb driv successfully?
+[11:22] <phix> ananymusss: never tried
+[11:23] <media-centre> so any chance of some help phix
+[11:23] <phix> media-centre: you bet!
+[11:23] <yblangkubu> hi
+[11:23] <phix> media-centre: plug your camera and type in lsusb
+[11:23] <ananymusss> i'd also like some help if possible...
+[11:23] <phix> if it doesnt sho up then try sudo lsudb
+[11:23] <media-centre> didnnt come up
+[11:23] <phix> lsusb even
+[11:23] <phix> if it still doesnt come up then plug in your USB device
+[11:24] <yblangkubu> this is my  first time using weechat .. nice to meet you all guys..
+[11:24] <phix> if it still doesn't then plug it in
+[11:24] <media-centre> same thing
+[11:24] <ActionParsnip> media-centre: if the file is no good, delete it
+[11:24] <ActionParsnip> ananymusss: many times
+[11:24] <phix> you should plug it in
+[11:24] <phix> trace the cable back
+[11:24] <yblangkubu> phix: hi
+[11:24] <shutpeas> hey, how do i remove all java installs without installing a load of alternatives?
+[11:24] <phix> then plug it in
+[11:24] <phix> yblangkubu: sup
+[11:24] <regf> andis: if you know a bit of perl you can try Regexp::Common module to extract urls
+[11:24] <media-centre> and how do i do that
+[11:25] <phix> ananymusss: use python's re
+[11:25] <media-centre> cal me thick in the head
+[11:25] <media-centre> i need simple instructions
+[11:25] <media-centre> even how
+[11:25] <ActionParsnip> media-centre: whom are yuo addressing?
+[11:25] <media-centre> phix
+[11:25] <ActionParsnip> media-centre: see how my text highlights you, that's not an accident
+[11:25] <ananymusss> ActionParsnip: i've been trying to install 12.10 64-bit amd ubuntu for the past 3 hours from a usb stick and it hasn't worked. the hash of the iso i downloaded matches with the expected has and i'm using the usb set-up .exe that is on the download page...
+[11:25] <media-centre> yeaa the id hex is not coming up
+[11:26] <andis> how do i get that regf
+[11:26] <media-centre> i think its for my wireless keyboard
+[11:26] <ActionParsnip> media-centre: if you type a few letters of the nick and hit tab it will complete and you will highlight themm, just as I am highlighting you
+[11:26] <phix> media-centre: look at the camera, then touch it, feel around the back, there you will notice a long cylinder that trails at the back of it, grab it and move your hands down it until you get to the end
+[11:26] <phix> it should be attached to your computer
+[11:26] <ActionParsnip> ananymusss:  do you get a black screen at boot?
+[11:27] <media-centre> it is
+[11:27] <ananymusss> right now i'm looking at a screen that says:
+[11:27] <ananymusss> No DEFAULT or UI configuration directive found!
+[11:27] <ananymusss> boot : _
+[11:27] <media-centre> still dosent come up
+[11:27] <ananymusss> i can type things in....
+[11:27] <ActionParsnip> ananymusss: how did you put the ISO on the USB?
+[11:27] <_boot> ananymusss: excuse me?
+[11:28] <media-centre> the only time i got it working was by a script for skype
+[11:28] <media-centre> all it was was the same line twice
+[11:28] <ananymusss> ActionParsnip: I used http://www.ubuntu.com/download/help/create-a-usb-stick-on-windows
+=== Kitar|st_ is now known as Kitar|st
+[11:28] <regf> andis: it's in libregexp-common-perl package if that's what you're asking about
+[11:29] <ananymusss> i formatted a 2.0gb partition of my usb stick into FAT and then used that installer (without having the installer's format option selected)
+[11:29] <media-centre> im gonna see what was in that script
+[11:29] <ActionParsnip> ananymusss: have you tried a different USB stick?
+[11:29] <ananymusss> no i haven't- i don't have one
+[11:29] <niktto> hi all, how do you manage packaging for different architectures and versions of ubuntu? I'm looking for most optimal way to automate daily builds on only one machine
+[11:29] <ananymusss> i used it just a few hours ago to install windows 7 64 bit and it went fine...
+[11:29] <ActionParsnip> ananymusss: have you tried the device in a different PC?
+[11:30] <ananymusss> yes, my laptop
+[11:30] <ananymusss> should i try to use FAT32 instead of FAT?
+[11:31] <ActionParsnip> ananymusss: yes, use FAT32
+[11:31] <Touhou11> ananymusss: Have you tried ReiserFS?
+[11:32] <ananymusss> no sir
+[11:32] <Touhou11> Wouldn't recommend it
+[11:32] <MonkeyDust> Touhou11  FAT is readable by most systems, my manual here says reiserFS is not really fit for ubuntu
+[11:32] <ee12026> manda o nome do chat
+[11:32] <ee12026> manda o nome do chat
+[11:32] <ee12026> manda o nome do chat
+[11:32] <FloodBot1> ee12026: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[11:33] <loostro> hello, i need help with http://serverfault.com/questions/453811/how-to-configure-php-cli-on-linux-debian-to-run-as-www-data
+[11:33] <ananymusss> anyone here have experience with Arch?
+[11:33] <pecc> trouble with alsamixer... No command 'alsa-mixer' found, did you mean:
+[11:33] <pecc>  Command 'alsamixer' from package 'alsa-utils' (main)
+[11:33] <pecc> alsa-mixer: command not found
+[11:33] <pecc> peccan@Theo:~$ alsamixer
+[11:33] <pecc> cannot open mixer: No such file or directory
+[11:33] <rymate1234> #archlinux
+[11:33] <FloodBot1> pecc: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[11:33] <MonkeyDust> loostro  ubuntu is not the same as debian, better ask in #debian
+[11:33] <ActionParsnip> ananymusss: ask in #arch
+[11:33] <rymate1234> ActionParsnip, its #archlinux
+[11:33] <rymate1234> unless he means the actual app arch
+[11:34] <loostro> MonkeyDust: i actually use ubuntu
+[11:34] <ActionParsnip> rymate1234: my bad, though it would be aliased.
+[11:39] <shutpeas> hey, how do i remove all java installs without installing a load of alternatives?
+[11:40] <phix> shutpeas: sudo apt-get --purge remove '*java*'
+[11:40] <ActionParsnip> phix: dpkg -l | grep java     make a choice there
+[11:41] <shutpeas> phix: done that, doesn't work
+[11:41] <shutpeas> ActionParsnip, ill try that now
+[11:42] <phix> shutpeas: ok
+=== hypnotistrabbit is now known as dzup
+[11:48] <media-centre> ok im back
+[11:48] <media-centre> heres the line that made it work
+[11:48] <media-centre> LD_PRELOAD=/usr/lib/libv4l/v4l1compat.so /usr/bin/skype
+[11:48] <media-centre> ill see if this has got it
+=== branant__ is now known as branant
+[11:51] <empty> #irc.cryto.net
+[11:51] <media-centre> ok it has ot it
+[11:52] <media-centre> so im guessing its just script files
+[11:53] <media-centre> i just went on synaptic and instaled developement files for libv4l
+[11:53] <media-centre> so maybe it will work now
+[11:54] <fishcooker> im using desktop lucid
+[11:54] <fishcooker> i wanna ask the built in chat messenger on right panel
+[11:58] <media-centre> so phix any idea on how to fix this
+[11:58] <media-centre> or Action how bout yoou
+[12:01] <media-centre> ok theyve both bailed on me
+[12:01] <media-centre> great
+[12:01] <media-centre> ok
+=== Strife is now known as Guest33867
+[12:04] <ActionParsnip> media-centre: i have no idea
+[12:05] <Bustacap> If I don't have a blank dvd, can I just extract the iso to a new partition, flag it as boot, and remove the boot flag from the current boot partition?
+[12:05] <media-centre> cant think of anything
+[12:06] <ActionParsnip> Bustacap: grub2 can boot ISO files
+[12:07] <Bustacap> ActionParsnip: I love how you are always here and know everything.
+[12:07] <Bustacap> Lol.
+[12:07] <Bustacap> How do I go about doing that?
+[12:07] <media-centre> not everything
+[12:07] <ActionParsnip> Bustacap: I know some
+[12:08] <ActionParsnip> Bustacap: http://michael-prokop.at/blog/2009/05/25/boot-an-iso-via-grub2/
+[12:08] <Bustacap> That looks confusing o.O
+[12:10] <empty> how to change network?
+[12:10] <trackerproblem> can please someone tell me the ip address of tracker.ccc.de? just tell me the ip addres you get when you do 'nslookup tracker.ccc.de'
+[12:10] <ActionParsnip> empty: irc network you mean?
+[12:10] <empty> yes
+[12:10] <empty> i tries /server irc.cryto.net:6667
+[12:11] <empty> but its not ocnnecting
+[12:12] <ActionParsnip> trackerproblem: goes to 127.0.0.1
+[12:12] <empty> i wanted to join the irc.cryto.net:6667 network
+=== tobias is now known as Guest34763
+[12:15] <regf> Bustacap: even if it boots, it still may not work
+[12:15] <trackerproblem> ActionParsnip I get the same problem, are dns servers blocking torrent trackers?
+[12:15] <regf> Bustacap: it depends what are you trying to boot
+[12:15] <ActionParsnip> trackerproblem: no idea, sorry
+[12:15] <Bustacap> regf: Trying to boot windows 8.
+[12:15] <ActionParsnip> trackerproblem: are you UK based?
+[12:15] <Bustacap> Ran out of blank dvd's and don't feel like waiting until 10 for walmart to open :P
+[12:16] <media-centre> hey how comes skype dont come up on ubuntu software or synaptic
+[12:16] <trackerproblem> ActionParsnip nope
+[12:16] <media-centre> have they cancelled it or somthing
+[12:16] <ActionParsnip> media-centre: you need to enable the partner repo
+[12:16] <regf> Bustacap: probably won't work
+[12:16] <media-centre> ok
+[12:16] <ActionParsnip> media-centre: not cancelled at all
+=== jrgifford is now known as Guest2393
+[12:16] <ActionParsnip> media-centre: or you can get it from the skype website
+[12:17] <Bustacap> regf: Why not?
+[12:17] <empty> need help!!! I wanted to join the irc.cryto.net:6667 network but is unable to connect .I tried to connect by "/server irc.cryto.net:6667" but i gave error "host name misspelled"!
+[12:17] <bazhang> empty, ask in #freenode
+[12:17] <ActionParsnip> empty: can you ping the server name?
+[12:17] <empty> didn't try it
+[12:17] <regf> Bustacap: because as soon as Windows kernel starts, it doesn't use BIOS and the CD emulation anymore
+[12:18] <empty> *trying now *
+[12:18] <ActionParsnip> empty: surely thats the first thing to try....?
+[12:18] <regf> Bustacap: it will be looking for the real CD/DVD drive
+[12:18] <Bustacap> regf: That's why I was thinking of just extracting the iso to the partition I plan on installing it on and marking it as the only thing with boot flags.
+[12:19] <regf> Bustacap: marking it bootable is not enough
+[12:20] <regf> Bustacap: you also need a partition bootloader and its configuration
+[12:21] <empty> ActionParsnip i ping the server its responding.but still unable to connect to the network
+[12:21] <Bustacap> regf: Doesn't the iso have a boot config?
+[12:22] <regf> Bustacap: booting CD/DVD is a different process than booting a HD partition
+[12:22] <Bustacap> True.
+[12:23] <Bustacap> Brb. Gonna try something.
+[12:23] <Kartagis> would using pvcreate on an already existing partition wreck it?
+[12:24] <Ny0> hi everyone, you know if there is a way to backup windows partitions (with bootloader, ecc) on dvd using ubuntu live ?
+[12:25] <ikonia> Ny0: look at clonezilla live cd
+[12:25] <ActionParsnip> Ny0: you can make an image of the MBR using dd, then backup the data
+[12:27] <regf> Ny0: many ways - copying whole block device with dd-like tool, copying only used parts with ntfsclone, or even copying just files if you're careful about preserving all file attributes
+[12:29] <regf> I don't think preserving MBR is important if it's a standard Windows MBR, it can easily be restored with testdisk for example
+[12:30] <Ny0> regf: it's a damn win8 notebook without dvd restore -.-'
+[12:30] <Ny0> i'm trying to avoid this problem by doing backup in other ways
+[12:30] <Ny0> with xp i remember it was easy to restore mbr
+[12:30] <pecc> my sound disappears randomly, disconnect/reconnect dock helps but only for some time
+[12:31] <pecc> afaik i have upgraded drivers etc
+[12:31] <Ny0> regf: but in this case is more complex because there is lenovo oneclick recovery
+[12:31] <tizz> i'm having some trouble making a desktop file to run an sh, how do i run the desktopfile validatation tool
+[12:32] <Bustacap> It worked hmmm
+[12:32] <Bustacap> Installing as we speak
+[12:32] <Ny0> regf: so is not a standard windows mbr -.-'
+[12:33] <Bustacap> Just extracted and marked the partition as boot
+[12:33] <Bustacap> Can't wait till its installed so I can get back to ubuntu lol
+[12:33] <regf> Ny0: hmm, Win8 may be tricky due to secureboot, GUID partition table and all that stuff
+[12:34] <regf> Bustacap: nice, good to know it's smart enough to work that way :)
+[12:34] <Bustacap> So far lol
+[12:35] <xyzone> secureboot machines are boned
+[12:35] <psychopathic> i work over time at 1 unit.
+[12:36] <Ny0> regf: its a big deal but i'd really like to modify part table preserving the possibility to restore the notebook one day
+[12:36] <media-centre> does anyone know why i cant change the permissions on an a .sh file
+[12:36] <media-centre> for some reason its not letting me
+[12:36] <Ny0> regf: in this moment it is a useless pc
+[12:36] <media-centre> i miss linux mint
+[12:37] <ActionParsnip> media-centre: how, its still actively developed.
+[12:37] <regf> Ny0: I would probably image the whole disk just in case there are some important bits hidden somewhere
+[12:37] <media-centre> but it wont load as a program
+[12:37] <media-centre> brb
+[12:39] <Ny0> regf: 500 gb O.o
+[12:39] <regf> Ny0: compress it with gzip (or maybe lzop because it's faaaast)
+[12:39] <regf> Ny0: most of it is probably filled with zeroes if it's new
+[12:40] <regf> Ny0: or copy it to a sparse file
+[12:41] <ActionParsnip> media-centre: how do you mean 'as a program'?
+[12:41] <ActionParsnip> media-centre: do you mean wubi?
+[12:41] <Ny0> regf: i will try
+[12:41] <media-centre> NO
+[12:41] <Ny0> regf: tnx
+=== mrenouf|away is now known as mrenouf
+[12:41] <regf> Ny0: or a compressed file if the file system supports it (btrfs, NTFS, ZFS)
+[12:41] <media-centre> when you click properties
+[12:41] <media-centre> and then permissions
+[12:42] <ActionParsnip> media-centre: on what?
+[12:42] <media-centre> theirs a option to run it as a program
+[12:42] <Bustacap> Installed successfully
+[12:42] <Bustacap> Woot
+[12:42] <media-centre> the file browser
+[12:42] <ActionParsnip> media-centre: then use:  chmod +x filename     works in any distro.
+[12:42] <media-centre> huh my god and your in a help channel
+=== YuKa is now known as Ho
+[12:43] <media-centre> ok thanx
+[12:43] <ActionParsnip> media-centre: then when you double click the file, it will run. Did you seriously switch disto for that...
+[12:43] <media-centre> no
+[12:43] <Bustacap> Woah nirvana
+[12:43] <Bustacap> I just started playing lithium on guitar
+[12:43] <Bustacap> Lolol
+[12:45] <Spiders>  /server irc.blackirc.org 6667
+[12:46] <Ny0> regf what if i copy only win8 partition and i try to fix mbr with win8 cd
+[12:46] <Ny0> ?
+[12:48] <satya> hello we are running ubuntu 10.10 server .. we are facing issue related to connection getting reset when we access port 80 .. all other ports are accessed properly. we have disabled iptables and all other firewall ufw but still no luck
+[12:48] <media-centre> no still aint woking
+[12:49] <media-centre> ill create a duplicate and try it again
+[12:49] <MonkeyDust> satya10.10 is no longer suppedort
+[12:49] <fishcooker> why you disable all firewall satya
+[12:49] <MonkeyDust> satya 10.10 is no longer supported*
+[12:49] <satya> it is a local server for testing
+[12:49] <satya> ok
+[12:49] <fishcooker> you should take 10.04 for sure
+[12:49] <fishcooker> LTS
+[12:50] <MonkeyDust> or 12.04
+[12:50] <fishcooker> thankyou MonkeyDust
+[12:50] <MonkeyDust> satya there's also #ubuntu-server
+[12:50] <fishcooker> are you on 12.04 or still on 10.04
+[12:50] <regf> Ny0: I don't have any experience yet with Win8, that's why I would image the whole disk
+[12:51] <MonkeyDust> Ny0 this is not the right place for win8 questions
+[12:51] <Ny0> MonkeyDust: ^^ sorry.
+[12:52] <regf> Ny0: "cp --copy-contents --sparse=always /dev/sdx sdx.img" will create a sparse image (skipping zeros), which shouldn't take much space
+[12:53] <satya> sorry my mistake it is 10.04
+[12:54] <Ny0> regf: thank you very much
+[12:54] <satya> can anybody help
+[12:54] <satya> DISTRIB_ID=Ubuntu
+[12:54] <satya> DISTRIB_RELEASE=10.04
+[12:54] <satya> DISTRIB_CODENAME=lucid
+[12:54] <satya> DISTRIB_DESCRIPTION="Ubuntu 10.04.4 LTS"
+[12:54] <FloodBot1> satya: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[12:55] <satya> http://paste.ubuntu.com/1399023/
+[12:59] <tizz> i cannot seem to get my desktop file to work
+[12:59] <tizz> http://paste.ubuntu.com/1399032/
+[12:59] <userzerox> I get this error when i compile Ansi C complaint programs. fatal error: conio.h: No such file or directory compilation terminated. Please help me fix it!
+[13:00] <tizz> i double click it, it looks like its trying to launch, but never does
+[13:01] <tizz> can anyone see why that desktop file is not launching the script its pointing at
+[13:03] <xyzone> tizz, try running the script in terminal
+[13:03] <tizz> the script works by itself fine
+[13:03] <tizz> but my desktop file cant seem to open it
+[13:04] <tizz> could it be because the script itself is set to execute?
+[13:04] <tizz> be executable
+[13:04] <xyzone> should just place it in ~/bin and put it in your path
+[13:05] <media-centre_> that chmod command didnt work
+[13:05] <media-centre_> its not executing it
+[13:06] <media-centre_> i miss linux mint
+[13:06] <llutz_> tizz: does the script need a terminal to run in? then you'll have to open it inseide a terminal when calling from desktop-file
+[13:06] <Bustacap> It's nice to be back in linux :)
+[13:06] <media-centre_> all this root acess shit would of disapeared
+=== thunder_ is now known as freethunder
+[13:07] <tizz> it does not need the terminal to run in, i can just set the .sh as executable and run it and it opens the game
+=== cryptfu_ is now known as Guest93484
+[13:07] <media-centre_> dont you think ive tried that already
+[13:08] <tizz> but i'll try the terminal launch anyway
+[13:08] <media-centre_> it wont let me
+[13:08] <media-centre_> i tcikcthe box it dosent happen
+[13:08] <media-centre_> tick the *
+[13:08] <oddie> howdie all, is there a fix for the left menu bar to appear when in auto hide? I can press super and it appears, If I take off autohide it is fine?.. as soon as I click on hide through compiz-settings-manager it hides and mouse wont release it back. Any help?
+[13:09] <media-centre_> i cant even run a dektop launcher without it saying root
+[13:09] <media-centre_> its crap
+[13:09] <media-centre_> absolute crap
+[13:10] <Pici> media-centre_: drop the attitude please, people here are trying to help you.
+[13:10] <media-centre_> yea and al their efferts seem to not work
+[13:11] <danie44> Can anyone help me with something?
+[13:11] <media-centre_> i bet if they suggested all of this on mint
+=== danie44 is now known as danielbauwens
+[13:11] <media-centre_> it would of worked
+[13:11] <danielbauwens> My brother made that when i go to this certain site, it goes to localhost
+[13:12] <danielbauwens> I know i can use proxy, but i prefer just to "remove" whatever he did
+[13:12] <Pici> media-centre_: How are you trying to execute the script?
+[13:12] <media-centre_> terminal
+[13:12] <media-centre_> double clicking it
+[13:13] <media-centre_> trying to run it from a launcher
+[13:13] <media-centre_> take your pick
+[13:13] <media-centre_> theyve all screwed up
+[13:13] <loin> what is the default gcc version in the latest ubuntu?
+[13:13] <media-centre_> either cos of root
+[13:13] <Pici> media-centre_: When you use the terminal to execute it, what error message are you getting?
+[13:13] <phix> media-centre_: hai pal
+[13:13] <Pici> !info gcc
+[13:13] <ubottu> gcc (source: gcc-defaults (1.117ubuntu1)): GNU C compiler. In component main, is optional. Version 4:4.7.0-5ubuntu1 (quantal), package size 5 kB, installed size 41 kB
+[13:14] <danielbauwens> Can someone help me?
+[13:14] <danielbauwens> It would be nice
+[13:14] <phix> danielbauwens: ok what up?
+[13:14] <media-centre_> heres the ine
+[13:14] <Pici> danielbauwens: I'd start by taking a look at /etc/hosts
+[13:14] <media-centre_> sudo: /home/media-centre/skype.sh: command not found
+[13:14] <MonkeyDust> danielbauwens if we know what your brother did, we can try to undo it
+[13:14] <danielbauwens> My brother made the url of a website redirect to localhost
+[13:15] <MonkeyDust> danielbauwens any reasons why he did it? maybe he doesnt want you to visit it
+[13:15] <Pici> media-centre_: Do you need to access it with sudo privleges?
+[13:15] <danielbauwens> It's a pony forum lol :D
+[13:15] <danielbauwens> Bronies
+[13:15] <media-centre_> yea
+[13:16] <phix> danielbauwens: You like ponies?
+[13:16] <danielbauwens> He thinks i'm spying on him
+[13:16] <danielbauwens> I don't mind them, but he likes them
+[13:16] <danielbauwens> I mean mylittlepony
+[13:16] <media-centre_> otherwise its permission denied
+[13:16] <MonkeyDust> media-centre then try chown [your user] [your user]
+[13:16] <phix> danielbauwens: cool
+[13:16] <phix> danielbauwens: those guys rock
+[13:16] <danielbauwens> :D
+[13:16] <danielbauwens> brohoof
+[13:16] <phix> <3
+=== zz_liono is now known as liono
+[13:17] <media-centre_> why twice
+[13:18] <oddie> is there a fix for the left menu bar to appear when in auto hide? I can press super and it appears, If I take off autohide it is fine?.. as soon as I click on hide through compiz-settings-manager it hides and mouse wont release it back. Any help?
+[13:19] <MonkeyDust> media-centre what's the output of ls -l [your file]  ?
+[13:20] <hello_world_> hello
+[13:20] <media-centre_> heres the output
+[13:20] <media-centre_> -rw------- 1 media-centre media-centre 152 Nov 30 13:02 /home/media-centre/skype.sh
+[13:21] <media-centre_> ok thats done the trick
+[13:21] <llutz_> media-centre_: chmod 755  /home/media-centre/skype.sh
+[13:21] <media-centre_> thanx
+[13:22] <llutz_> media-centre_: why do you need a script to run skype and why do you need to use sudo for it?
+[13:22] <phix> llutz_: why not
+[13:22] <phix> sudo is great
+[13:22] <danielbauwens> Okay thanks guys
+[13:22] <media-centre_> dosent matter now
+[13:22] <danielbauwens> It was indeed in /hosts
+[13:22] <llutz_> phix: stop your random nonsense please
+[13:22] <phix> llutz_: ?
+[13:22] <phix> It wasnt random
+[13:22] <phix> it was very specific
+[13:23] <psychopathic> they smoke weed on velocity radian.
+[13:23] <phix> nothing wrong with sudo, that is a true, if skype is lously programmed that it requires root access to run then why not run it via sudo
+[13:23] <llutz_> phix: still nonsense
+[13:23] <phix> llutz_: no sense
+[13:23] <xyzone> don't use skype
+[13:24] <phix> you get that, software providers being used to writting windows apps being lazy and not implementing usermode correctly
+[13:24] <phix> so it requires root / admin access to run
+[13:24] <phix> fair enough
+[13:24] <llutz_> skype mightto be avoided but it neither needs root-right nor should it be run as root
+[13:24] <phix> llutz_: it does if it was programmed so
+[13:25] <Slart> skype doesn't require root for me.. runs just fine here as a regular user
+[13:25] <llutz_> phix: it wasn't
+[13:25] <sidd_mak> plz suggest some package which can recover deleted files from FAT file system.
+[13:25] <phix> I dont know, I dont use it, but I wouldnt be suprised if it does
+[13:25] <Myrtti> phix Ive never needed sudo to run skype nor have I heard anyone else needing it
+[13:25] <phix> Myrtti: great
+[13:25] <llutz_> phix: so whats the point of all your comments then? just blahhblah
+[13:26] <Myrtti> sidd_mak: photorec might help
+[13:26] <phix> llutz_: being helpful
+[13:26] <llutz_> you aren't phix
+[13:26] <phix> llutz_: you arnt helpful either, shut up
+[13:26] <xyzone> sidd_mak, testdisk
+[13:26] <sidd_mak> Myrtti : no only image but all kind of files
+[13:27] <llutz_> sidd_mak: photorec recovers more than photos, just a confusing name
+[13:27] <fishcooker> fahim are you alrite
+[13:27] <Myrtti> sidd_mak: yes, it might help. I cant remember if it can recover any files
+[13:28] <BluesKaj> Howdy all
+[13:29] <fahim> fishcooker nice to meet you. I'm very new here.
+[13:29] <sidd_mak> Myrtti xyzone llutz_ : thanks guys....
+[13:29] <phix> who else lkes robert kirkman's work on ubuntu?
+[13:29] <fahim> but not a very new ubuntu user.
+[13:30] <fishcooker> i dont think so fahim
+[13:31] <regf> sidd_mak: photorec is for recovering files from any filesystem, I don't know if it uses any FS information besides free space ; if you just want FAT undelete, testdisk may be a better option
+[13:31] <fahim> what do you think? fishcooker
+[13:31] <regf> sidd_mak: there is undelete option in advanced menu
+[13:34] <fahim> fishcooker are you there?
+[13:34] <fishcooker> yes
+[13:35] <knoppix> i have 3g  usb modem,  how unmount 3g modem cd driver
+[13:35] <deffrag> Hi! I'm using IDE/SATA to USB adapter which uses external power supply like - http://www.ebay.com/itm/USB-TO-IDE-SATA-S-SATA-Converter-CABLE-Adaptor-w-POWER-/220764567409? - I've connected 750GB HDD to the adapter but I'm not able to get it working on Ubuntu 12.04. dmesg, lsusb, fdisk -l logs: http://paste.ubuntu.com/1399099/ . How can I fix it please?
+[13:35] <Slart> knoppix: if it's a kernel driver you might be able to unload it using modprobe
+[13:36] <media-centre_> well i got it to execute
+[13:36] <media-centre_> but it still aint making the webcam load up
+[13:36] <llutz_> deffrag: according to your logs, it is detected. sudo mount /dev/sdb1 /mnt
+[13:37] <knoppix> Slart, ok . thank you.
+[13:37] <deffrag> llutz, Hi, I can see its detected and I tried that command but it asked for proper filesystem. I ran blkid and then gparted to get proper filesystem but it didn't help
+[13:38] <llutz_> deffrag: sudo fsck /dev/sdb1
+[13:38] <xyzone> deffrag, http://ubuntuforums.org/showthread.php?t=966321&page=2
+[13:39] <regf> deffrag: don't do any fsck!
+[13:39] <regf> deffrag: the disk isn't detected properly!
+[13:39] <deffrag> llutz, Forgot to give blkid log - http://paste.ubuntu.com/1399106/ . Why is there a need to check and repair fs using fsck?
+[13:40] <deffrag> regf, I haven't yet
+[13:40] <regf> deffrag: your USB interface is lying
+[13:40] <regf> deffrag: it says the disk has 4K logical sector size, while it should be 512 bytes
+[13:41] <deffrag> xyzone, Thanks, I'll go through that. regf : How so?
+[13:41] <fishcooker> i wanto mounting spesific partition
+[13:41] <fishcooker> as home
+[13:41] <fishcooker> rather than using single partition
+[13:41] <regf> deffrag: I don't know if there is any way to override it
+[13:41] <fishcooker> should i rsync /home folder manually to the new partition
+[13:44] <regf> deffrag: I guess you could modify partition table to fit if your partitions were 4k aligned, but they are not
+[13:44] <deffrag> regf, Possible. I tried another 2.5" HDD and it worked easily opening the file manager
+[13:44] <MonkeyDust> media-centre_ did the chmod trick help?
+[13:45] <deffrag> regf, I'm not sure what could have caused that issue to 750GB drive
+[13:45] <deffrag> It was working fine and is used as booting device on the desktop machine
+[13:46] <deffrag> booted fine on desktop in past, I mean
+[13:46] <oddie> is there a fix for the left menu bar to appear when in auto hide? I can press super and it appears, If I take off autohide it is fine?.. as soon as I click on hide through compiz-settings-manager it hides and mouse wont release it back. Any help?
+[13:47] <regf> deffrag: older hard drives may be detected properly by your USB adapter, never drives - 512k logical / 4k physical may be mangled to 4k logical / 4k phys.
+[13:47] <deffrag> llutz, regf : Sorry I forgot to mention that the /home on it is encrypted... is that causing the issue/
+[13:48] <regf> deffrag: your USB adapter is probably lying intentionally, they do it to make bigger drives than 2TB work on Windows
+[13:48] <deffrag> regf, Both the drive 2.5" are newer
+[13:48] <regf> deffrag: it's a trick to make 2TB+ drives accessible with msdos partition table
+[13:48] <deffrag> And the adapter is working fine for another new 2.5" drive
+[13:48] <deffrag> well
+[13:49] <Walther> Is the nvidia-experimental-310 going to be repackaged any time soon? It does not provide nvidia-current, causing bumblebee to uninstall
+[13:49] <regf> deffrag: it's probably working fine for drives with 512k log. / 512 k phys. sector size
+[13:49] <regf> deffrag: and it's probably lying for 512k log / 4 k phys
+[13:50] <regf> deffrag: either connect the drive directly without the USB adapter, or buy an adapter which doesn't mangle sector sizes
+[13:50] <deffrag> regf, sector size detected for first is 4096bytes and second working one is 512bytes
+[13:51] <Walther> !package nvidia-experimental-310
+[13:51] <deffrag> Okay
+[13:51] <phix> The plot thickens
+[13:51] <ActionParsnip> !info nvidia-experimental-310 | Walther
+[13:51] <ubottu> Walther: Package nvidia-experimental-310 does not exist in quantal
+[13:51] <regf> deffrag: yep, that's what I thought
+[13:51] <deffrag> regf, I'll try connecting it directly to laptop
+[13:51] <Walther> Ehh?
+[13:51] <subdesign> hey, can i combine Krusader splitted large file with windows Total Commander ?
+[13:51] <Walther> Anyway, who is maintaining that package?
+[13:51] <reels> Hi, sscanf() seems buggy in ubuntu LTS (10.04, 12.04). Test program works well on other systems apparently : http://ideone.com/bKiiwY  . Any idea why ? Thanks.
+[13:52] <Walther> It needs a rebuild; it doesn't provide 'nvidia-current', causing a big issue with bumblebee
+[13:52] <ActionParsnip> Walther: try http://packages.ubuntu.com
+[13:52] <deffrag> regf, Can encryption report wrong sector size to protect or something?
+[13:53] <llutz_> Walther: apt-cache show nvidia-current|grep -i maint
+[13:53] <media-centre_> what i cant understand is why of all the webcams does that one decide to not work
+[13:53] <media-centre_> i mean is it loyal to microshit
+[13:54] <xyzone> media-centre, because no drivers
+[13:54] <media-centre_> oh their are drivers
+[13:54] <ikonia> media-centre_: drop the language/attitude
+[13:54] <media-centre_> their just just for older kernals
+[13:54] <media-centre_> mind you thats an idea
+[13:55] <regf> deffrag: don't confuse encryption block with hard drive sector size
+[13:55] <media-centre_> cos im sure their are .so files in the drivers that ican just pick one of them to get it working
+[13:55] <phix> ikonia: drop the authoriterianess
+[13:55] <Ho> Join Server For Free CC /server IRC.Blackirc.org IRC.BLACKIRC.ORG
+[13:55] <Ho> Join Server For Free CC /server IRC.Blackirc.org IRC.BLACKIRC.ORG
+[13:55] <Ho> Join Server For Free CC /server IRC.Blackirc.org IRC.BLACKIRC.ORG
+[13:55] <regf> deffrag: two independent things
+[13:55] <FloodBot1> Ho: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[13:55] <phix> ho no
+[13:56] <deffrag> regf, do you mind if I pm you on the same?
+[13:57] <deffrag> Thanks
+[13:57] <ikonia> phix: the language is unacceptable,
+[13:58] <phix> ikonia: If you get offended by language you may as well not speak to anyone
+[13:58] <ikonia> phix: the channel has rules on offensive language, then include no cursing, that's why he was pulled up on it
+[13:59] <phix> ikonia: I wasn't offended
+[13:59] <ikonia> phix: it's not "my" rules, it's the channels, you're welcome to request discussion on it through the operators team
+[13:59] <phix> ok, lets discuss
+[13:59] <ikonia> phix: it doesn't matter if you are offended or not in that respect, the channels rules are no cursing, if you are not happy with those rules a.) raise it as a concern to the operators team b.) don't use the channel
+[13:59] <phix> ikonia: I prefer a over b
+[13:59] <phix> I like using this channel
+[13:59] <ikonia> phix: I'll pm you the email address of the ubuntu IRC council and you can send you concerns to them
+[13:59] <ikonia> phix: great, b is a bad option
+[14:00] <OerHeks> phix, stop it please.
+[14:00] <ikonia> phix: I'll pm you the email address to send your complaint
+[14:00] <phix> I Just dont like the idiotic rules that people apply to this channel
+[14:00] <phix> ikonia: thank you
+[14:00] <phix> OerHeks: ikonia and I are just discussing that
+[14:00] <phix> Quix0te: your input isnt required
+[14:00] <ikonia> and now it's done
+[14:01] <phix> OerHeks: even, sorry Quix0te, tab complete fail
+[14:01] <phix> awesome, much appreciated
+[14:01] <phix> in the mean time, any one need some ubuntu help?  I have 10 yrs of IT experience up my belt
+[14:02] <ActionParsnip> phix: 10 years of Ubuntu as well?
+[14:02]  * BluesKaj can't wait to see this :)
+=== notprawn is now known as prawnsalad
+[14:02] <phix> ActionParsnip: nope, 10 years of linux, redhat, mandrake, slackware, debian then ubuntu about 5 years ago
+[14:02] <Pici> !offtopic
+[14:02] <ubottu> #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[14:03] <rymate1234> lol
+=== regf_ is now known as regf
+[14:03] <ActionParsnip> phix: hehe mandrake, I started on mandrake :)
+[14:03] <worm> Does anyone know how to install skype on my x86_64 12.10 Ubuntu? apt-get shows that skype is not available.
+[14:03] <phix> ActionParsnip: I Only liked enlightenment in Mandrake
+[14:03] <OerHeks> worm, enable partner repo
+[14:03] <ActionParsnip> worm: grab the 64bit deb from skype's website
+[14:03] <ikonia> !skype | worm
+[14:03] <ubottu> worm: To install Skype on Ubuntu, see https://help.ubuntu.com/community/Skype - To record on Skype, check: https://wiki.ubuntu.com/SkypeRecordingHowto - Please use open protocols instead if you can, see !Ekiga
+[14:04] <xyzone> I started on ubuntu 5.10
+[14:04] <worm> Thanks a lot.
+[14:04] <phix> I started with a woody
+[14:04] <ActionParsnip> worm: wget -O skype_Ubuntu-current_amd64.deb http://www.skype.com/go/getskype-linux-beta-ubuntu-64
+[14:04] <phix> debian that is
+[14:05] <ActionParsnip> worm: sudo dpkg -i ./skype_Ubuntu-current_amd64.deb; sudo apt-get -f install
+[14:05] <phix> why use skype for?
+[14:05] <worm> ActionParsnip: I see. I'll try that.
+[14:05] <ActionParsnip> phix: chat to other skype users
+[14:05] <phix> skype is a service, asterisk is a full package
+[14:05] <phix> use asteriak
+[14:05] <phix> it is ubuntu too
+[14:05] <phix> skype is out of topic
+[14:05] <ActionParsnip> phix: to chat to skype users using voice?
+[14:06] <xyzone> I wonder why the 32-bit is still recommended
+[14:06] <phix> ActionParsnip: out of topic
+[14:06] <Pici> phix: stop it
+[14:06] <ActionParsnip> phix: its in the official ubuntu partner repo, so is supported
+[14:06] <phix> Pici: ? who are you?
+[14:06] <phix> ActionParsnip: nah asterisk is supported more though
+[14:06] <phix> by ubuntu and debian
+[14:06] <ikonia> phix: drop it please.
+[14:06] <ikonia> you're causing a problem
+[14:07] <Pici> phix: You're misleading users, and annoying the helpers.
+[14:07] <phix> ikonia: I am not causing a problem
+[14:07] <phix> I am a helper
+[14:07] <phix> Pici: I am helping
+[14:07] <ikonia> you're not helping, please slow down and think about what you are saying
+[14:07] <phix> ikonia: I am, asterisk is the full package, skype is just a service
+[14:07] <xDesu> I just hope whoever doesn't get the multiarch issue with x64 I experienced on 12.10.
+[14:07] <phix> you have no source control with skype
+[14:07] <ikonia> phix: yes, he ants to use skype
+[14:07] <phix> you do with asterisk
+[14:07] <ikonia> it's supported
+[14:08] <ikonia> you can offer suggestions for other packages, but please, don't make things up
+[14:08] <ActionParsnip> xDesu: in what package?
+[14:08] <phix> ikonia: hmmmm
+=== Zorro is now known as Guest17861
+[14:08] <phix> ikonia: I am making things up?
+[14:08] <xDesu> ActionParsnip, it was an issue with multiarch not being enabled on my system by default so I couldn't install skype.
+[14:08] <phix> ikonia: it is true though
+[14:08] <ActionParsnip> phix: this channel supports packages from teh official ubuntu repos. The partner repor IS an official repo, its just disabled by default
+[14:08] <ikonia> phix: when you said skype is "off topic"
+[14:09] <ActionParsnip> phix: as skype is in that repo, it is supported here. Clear enough?
+[14:09] <Guest17861> Hello
+[14:09] <xDesu> Guest17861, hi there.
+[14:09] <phix> ActionParsnip: ok it is supported, I am not arguing that, I am arguing that asterisk is the better choice, it is also supported and in the repo
+[14:10] <ActionParsnip> xDesu: if use 64bit in newer releases, it is enabled by default, your OS should puul in 32bit deps to satisfy thet deps
+[14:10] <Guest17861> how are you xdesu
+[14:10] <xDesu> Guest17861, you may want to change your name(if you don't know how "/nick <name>
+[14:10] <phix> ikonia: ah ok
+[14:10] <phix> ikonia: well ActionParsnip argued / debated another point
+[14:10] <ActionParsnip> phix: that's fine, but saying 'skype is out of topic' is incorrect, isn't it?
+[14:10] <Guest17861> Ace
+[14:10] <phix> ikonia: I agree now it is supported, I just looked it up :)
+[14:10] <xDesu> ActionParsnip, it wasn't enabled on my copy of 12.10, but don't worry I have long since resolved the issue.
+[14:10] <phix> ActionParsnip: yes, but it isn't the best choice
+[14:11] <ikonia> that's debatable
+[14:11] <ikonia> it's personal opnion
+[14:11] <ikonia> opinion
+[14:11] <ActionParsnip> xDesu: if you use apt-get it should work ok. aptitude doesn't play taht way
+[14:11] <phix> asterisk is far superior
+[14:11] <xDesu> ActionParsnip, I had to run
+[14:11] <ActionParsnip> phix: that's not the issue at hand. You said it's "out of topic", which is wrong. Isn't it
+[14:11] <phix> ikonia: really? is it a personal opionion that you can use asterisk as a full blown PBX? and have access to the source?
+[14:11] <ActionParsnip> phix: if it's ontopic, why say it's not?
+[14:12] <ikonia> phix: please stop now, I'm getting board
+[14:12] <Guest17861> can you speak german xdesu
+[14:12] <phix> ActionParsnip: I thought it wasnt as skype is very commerial
+[14:12] <ikonia> phix: the user wanted to connect to skype - he wanted the skype clients
+[14:12] <xDesu> ActionParsnip, I had to run "dpkg --add-architecture i386 && apt-get install ia32-libs" the issue has already been resolved though so don't worry about it.
+[14:12] <Pici> phix: asterisk is not a replacement for skype for someone who wants to chat to skype users.
+[14:12] <phix> ActionParsnip: I forget that ubuntu doesnt have the same values as debian
+[14:13] <Guest17861> Bye bye
+[14:13] <xDesu> Guest17861 #ubuntu-de
+[14:13] <Walther> ActionParsnip: created a bug about it https://bugs.launchpad.net/ubuntu/+source/nvidia-graphics-drivers-experimental-310/+bug/1085044
+[14:13] <ubottu> Launchpad bug 1085044 in nvidia-graphics-drivers-experimental-310 (Ubuntu) "nvidia-experimental-310 does not provide nvidia-current" [Undecided,New]
+[14:14] <ActionParsnip> Walther: good start :)
+[14:15] <xDesu> ActionParsnip, you seem to be in here quite a lot.
+[14:15] <ActionParsnip> xDesu: kinda :)
+=== zomGreg_ is now known as zomGreg
+[14:16] <xDesu> I hope to learn much from you master.
+[14:16] <ActionParsnip> xDesu: as you use the OS, you'll learn :)
+[14:17] <Tex_Nick>
+[14:17] <xDesu> I've already learned tons in my single year of actually using ubuntu(though I'm not on Debian for my laptop), but yea. Learn loads from other people's issues here.
+[14:17] <xDesu> I meant to say I am on Debian...
+[14:17] <ActionParsnip> xDesu: straight up
+[14:18] <xDesu> Straight up?
+[14:18] <ActionParsnip> xDesu: yes / I agree
+[14:18] <xDesu> Ahh, sorry the unexpected usage of "straight up" caught me a bit offguard.
+[14:22] <MadEchidna> Hey any X11 wizards here? I was using Ubuntu 11.10 32 bit and then a friend of mine talked me in to install 64 bit instead and it's been nothing but headaches
+[14:22] <MadEchidna> On a clean install, installing the AMD video driver from the software sources applet, without any special ppas or anything, didn't work
+[14:23] <MadEchidna> I was able to get it working after fudging around with x11 edgers for a few days, but yesterday I got a kernel update and no matter what I try I can't get the damn thing to work
+[14:23] <MadEchidna> I keep getting this error over and over
+[14:23] <MadEchidna> ERROR (dkms apport): kernel package linux-headers-3.7.0-4-generic is not supported
+[14:23] <MadEchidna> Error! Bad return status for module build on kernel: 3.7.0-4-generic (x86_64)
+[14:23] <khufu> are you sure it is a 64bit package?
+[14:24] <MadEchidna> khufu, what do you mean?
+[14:24] <khufu> well the linux-headers
+[14:24] <MadEchidna> I'm just install it like normal with apt, I didn't download a deb somewhere
+[14:24] <MadEchidna> how do I check?
+[14:24] <ActionParsnip> MadEchidna: ask in #ubuntu+1 for raring support
+[14:24] <MadEchidna> ?
+[14:24] <ActionParsnip> MadEchidna: 3.7 is the raring kernel
+[14:25] <Ace> guest17861
+[14:27] <MadEchidna> I meant 12.10 ActionParsnip
+[14:27] <MadEchidna> I don't know if that's the right channel
+[14:27] <jrib> MadEchidna: you need to explain where that kernel is coming from then
+[14:27] <Pici> MadEchidna: what does apt-cache policy linux-headers-3.7.0-4-generic say?
+[14:27] <Siebjee> Hi guys, i am having some issues with changing the default ulimit settings. Normally you add * - nofile 65535 to /ect/security/limits.conf and when you ssh to the server your openfiles (ulimit -n) will be at 65535. But for some reason i have to manually change it with ulimit -n 65535 in order to get the limit settings i want on my server. Is there a other way to achive this ?
+[14:28] <jrib> Siebjee: I think something needs to be added to pam, one sec
+[14:28] <MadEchidna> Pici, http://pastebin.ca/2258650
+[14:28] <MadEchidna> jrib, the default repos? I purged the PPAs I had
+[14:29] <Siebjee> jrib, i already added 'session require pam_limits.so' to the /etc/pam.d/common-session
+[14:30] <jrib> Siebjee: that should work afaik assuming you've defined the limits correctly
+[14:30] <RickZilla> I'm using a persistent Live USB of ubuntu 12.10. If I go ahead and install it to my HD, will it keep those settings that I've already made, or will it just be a fresh install?
+[14:30] <Pici> MadEchidna: That output says that you installed it from somewhere other than the default repos.  It looks like you disabled whatever source you installed it from.
+[14:31] <MadEchidna> Pici, okay so how do I go back to the default kernel?
+[14:31] <Siebjee> jrib, that didn't work for me. I used Ƽ* - nofile 65535' and '<username> - nofile 65535' both are not working
+[14:31] <MadEchidna> when I look at the 3.7 package in synaptic it even says "Ubuntu Kernel Team", I don't get where this would have just "come from"
+[14:31] <ikonia> MadEchidna: didn't you say you had the edgers repo
+[14:32] <ikonia> xorg-edger ?
+[14:32] <MadEchidna> I did, and then I ran a ppa-purge
+[14:32] <ikonia> right, so that's why the kernel is still there
+[14:32] <MadEchidna> I thought that ppa-purge took care of that
+[14:32] <MadEchidna> so do I just uninstall the package?
+[14:32] <jrib> Siebjee: let me try here
+[14:32] <ikonia> how can it, the kernel is runing and inuse
+[14:32] <Pici> MadEchidna: The safest way is to reboot to an older kernel and then remove that package.
+[14:32] <MadEchidna> oh
+[14:32] <MadEchidna> okay brb
+[14:34] <Kartagis> what package does it take to install KDE? kdebase-bin?
+[14:34] <jrib> Siebjee: actually my /etc/pam.d/sshd seems to already contain pam_limits by default
+[14:35] <ikonia> Kartagis: isn't that the package ?
+[14:35] <Siebjee> jrib: so does mine, but why isn't it working ?
+[14:35] <xDesu> Kartagis, if you just install kde that should automatically try to satisfy depndencies.
+[14:36] <RickZilla> I'm using a persistent Live USB of ubuntu 12.10. If I go ahead and install it to my HD, will it keep those settings that I've already made, or will it just be a fresh install?
+[14:36] <takitez> Kartagis: you want the full set? install kubuntu-desktop   or kde-plasma-desktop for basic kde
+[14:37] <Netfeed> is it possible to "upgrade sideways" from linux mint to ubuntu?
+[14:37] <ActionParsnip> RickZilla: fresh
+[14:37] <ActionParsnip> Netfeed: you'll need a reinstall
+[14:37] <Netfeed> bummer
+[14:37] <RickZilla> ActionParsnip: Thanks, is there a way to install otherwise?
+[14:37] <jrib> Siebjee: works fine for me, all I did was add "*               -    nofile            65535" to my /etc/security/limits.conf and then "ssh localhost".  Maybe pastebin your /etc/security/limits.conf?  I didn't even touch anything in /etc/pam.d/
+[14:37] <ActionParsnip> RickZilla: you could copy the contents of $HOME to an external storage and copy the data over once you get logged in
+[14:38] <DJones> Netfeed: Only by a fresh install, I'd backup /home and do a fresh install and then transfer the backup to the new install
+[14:38] <RickZilla> ActionParsnip: I'll look into that. Thanks for the support
+[14:38] <Netfeed> alright, i hoped it was possible as they use the same base, ah well, i've got something to do this weekend then
+[14:38] <dsa> hello
+[14:39] <Siebjee> jrib: http://pastebin.com/NBPskses there is my limits.conf
+[14:39] <RickZilla> Netfeed: I'm going back to ubuntu from LM also
+[14:39] <jrib> Siebjee: seems fine.  Are both changes being ignored?
+[14:39] <Siebjee> Yes
+[14:40] <Netfeed> RickZilla: same "problem"? :)
+[14:40] <jrib> Siebjee: you're sure there's nothing in your user's startup scripts changing the ulimit?
+[14:41] <RickZilla> Netfeed: LM just acts too much like Windows, and I already have that...when I need Linux, I like the ubuntu experience a little more
+[14:41] <Siebjee> jrib: only for the root user the ulimit is beeing changed as a temporary fix. But not for any other user. Only to check if they are correct or not and printing a message when they are not correct
+[14:41] <jrib> Siebjee: what ubuntu version?
+=== Upasna is now known as sweet_kid
+[14:42] <Netfeed> RickZilla: ah, i don't use cinnamon
+[14:42] <Siebjee> jrib: well its debian squeeze, but its similar to 12.04 and 11.10
+[14:42] <Siebjee> jrib: and the debian community aint responding to my request
+[14:42] <RickZilla> Netfeed: What problems were you having with LM?
+[14:43] <ActionParsnip> Siebjee: debian isn't supported here
+[14:43] <jrib> Siebjee: here's my paste since I already put it up: http://paste.ubuntu.com/1399660/ but you should ask #debian (use the oftc channel) since there may be some differences
+[14:43] <Netfeed> RickZilla: i guess i will have the same problem in ubuntu, but team fortress 2 crashes :)
+[14:43] <MadEchidna> Okay, I uninstalled the new kernel, and reinstalled fglrx and x11-core or whatever
+[14:43] <Siebjee> ActionParsnip: i know, but please work with me. I can work with ubuntu fixes and convert them to debian
+[14:43] <MadEchidna> and I think everything is working okay now, I have direct rendering and Unity runs
+[14:44] <MadEchidna> it feels little slower than before but I could just be imagining things
+[14:44] <Touhou11> Siebjee: Agreed, Ubuntu basically is a specific configuration of Debian after all
+[14:44] <MadEchidna> thanks for your help ikonia and Pici
+[14:44] <RickZilla> Does Amazon have some kind of deal with ubuntu? I noticed there was a sidebar button just for Amazon on the fresh ubuntu install
+[14:44] <Nvveen> Hey all. I reinstalled Ubuntu Quantal today, but I'm having an issue with executing scripts and executables locally. I have a bash script build.sh that I can only execute with "bash build.sh" instead of "./build.sh". I have all permissions set correctly and its executable bit has been also set
+[14:44] <Nvveen> In Precise, I didn't have anything like this issue
+[14:44] <ActionParsnip> RickZilla: you can disable that if you want
+[14:45] <xDesu> RickZilla I believe they do, but you can disable it.
+[14:45] <Touhou11> RickZilla: Canonical (who make Ubuntu) get money if you click and then buy through Amazon. Amazon don't "have a deal" as such, anyone can do Amazon referral links
+[14:45] <ActionParsnip> Nvveen: is the file executable?
+[14:45] <RickZilla> Got it
+[14:46] <MadEchidna> RickZilla, if you don't like the Amazon search results in Unity, you can disable it in the Privacy settings pane
+[14:46] <ActionParsnip> Nvveen: what is the ls -la ./build.sh     output (the .sh extension isn't needed in linux)
+[14:46] <Touhou11> RickZilla: There's bug reports to get similar Amazon enhancing features when searching in the terminal
+[14:46] <Nvveen> ActionParsnip, yes, all permissions have been set
+[14:46] <MadEchidna> just hit the ubuntu logo and type Privacy
+[14:46] <RickZilla> I was thinking that if I wanted Amazon advertising I'd just get a Kindle Fire
+[14:46] <MadEchidna> anyway thanks for the help guys I've got work to do now
+[14:46] <spm-Draget> The 32bit Version of Ubuntu 12.04 is recommended. Any rough guess how much more instability I should expect with ubuntu 12.04 64bit? Like, is this just 'a bit less well tested' or should I relly expect occasional problems?
+[14:46] <Nvveen> ActionParsnip, about the extension: It's so I myself know it's a bash script
+[14:46] <southern> hey guys
+[14:46] <ActionParsnip> spm-Draget: its not about stability
+[14:46] <Siebjee> jrib: your settings are the same as mine, it is kind of strange why it doesn't work.
+[14:47] <RickZilla> But, I don't mind supporting Canonical, so that wouldn't be a bad idea when I need to get something from Amazon anyway
+[14:47] <jrib> Siebjee: we're using different OS
+[14:47] <xDesu> Nvveen you can also state in the script what you wish yo run it with (e.x. #!/usr/bin/env bash)
+[14:47] <southern> I have an ubuntu server 10.04 and host lookup ignores the /etc/hosts file content
+[14:47] <ActionParsnip> Nvveen: is the top line in the file:   #!/bin/bash     ?
+[14:47] <Nvveen> -rwxr-xr-x 1 neal neal 179 Nov 29 01:19 build.sh
+[14:48] <southern> the nsswitch.conf file seems to OK
+[14:48] <KI4RO> My wife's system is still at 12.04.  Do I have to wake up something in the update manager to get her to 12.10 or will it eventually figure it out and take care of it itself?
+[14:48] <southern> hosts:          files dns
+[14:48] <Nvveen> ActionParsnip, yes. It's also not limited to just the bash script. The executable that is made in that build script (c++ compilation) isn't executable either
+[14:49] <spm-Draget> ActionParsnip: I am aware of some propetarian drivers and 64bit issues etc. But as for stability, I should expect about the same experience as in 32bit? Okay, thanks.
+[14:49] <zykotick9> KI4RO: by default LTS releases only update to other LTS releases, there is some way to change that... but i don't know it.
+[14:49] <KI4RO> zykes-: Thanks for the info
+[14:49] <Touhou11> RickZilla: Just need to be aware that anything you search for on your local computer gets sent to Amazon... hence the privacy concerns
+[14:49] <ActionParsnip> spm-Draget: yes both are equally stable. proprietary drivers are also 64bit
+[14:49] <KI4RO> zykotick9: Thanks
+[14:49] <Siebjee> jrib: gonna try if i can reproduce it on 12.04.1
+[14:49] <ActionParsnip> Nvveen: what is the output of:  lsb_release -sc
+[14:50] <media-centre>  a different problem
+[14:50] <xDesu> KI4RO http://www.omgubuntu.co.uk/2012/10/how-to-upgrade-ubuntu-12-04-to-ubuntu-12-10
+[14:50] <KI4RO> xDesu: Thanks
+[14:50] <Nvveen> ActionParsnip, quantal
+[14:50] <RickZilla> Touhoull: Is nothing sacred anymore? I thought that was the point of FOSS
+[14:50] <media-centre> 1394 firewire card
+[14:50] <media-centre> same problem dosent come up
+[14:50] <southern> PLS help
+[14:50] <Touhou11> RickZilla: A lot of us agree, it's reduced Ubuntu to basically adware software. Can always use Linux Mint
+[14:51] <Siebjee> jrib: same problem on 12.04.1
+[14:51] <jrib> Siebjee: i'm on 12.10, but I can test on 12.04.  One sec
+[14:51] <zykotick9> Touhou11: RickZilla and anything you type into Unity gets sent to canonical - who then shares it with facebooka and twitter :|
+[14:51] <xDesu> KI4R
+[14:51] <RickZilla> zykotick9: Even if I don't have an account there?
+[14:52] <Siebjee> jrib: the pam settings are okay, and i added the '*       -       nofile  65335' line to the limits.conf
+[14:52] <zykotick9> RickZilla: you have an account with canonical... if you use unity ;)
+[14:52] <RickZilla> true
+[14:52] <media-centre> so can any of you help with that instead
+[14:52] <RickZilla> I do like the ubuntu layout, so I can't argue with that
+[14:53] <jrib> Siebjee: did not seem to work on 12.04 :)
+[14:53] <media-centre> so can any of you help with that
+[14:53] <jrib> Siebjee: erm, one sec I made a typo
+[14:54] <jrib> Siebjee: works now :/
+[14:54] <opieng> Does Ubuntu work ok the Raspberry Pi?
+[14:54] <b0ot> Anyone know of an easy to setup cluster based instant messenging server on a private network (no internet access). I want essentially there to be one global set of users for N number of servers. I want the system to be able to work no matter what servers are online or even if the servers were seperated into two LANS each LAN would still work (obviously couldn't talk across the LANS if they werent connected but they could still provide services within thei
+[14:54] <b0ot> r own LAN)
+[14:54] <southern> Why my /etc/hosts file is not working on my Ubuntu 10.04?
+[14:54] <jrib> southern: be more specific
+[14:54] <Touhou11> southern: One second, just putting on my magic hat
+[14:54] <media-centre> none of you can help with my firewire problem
+[14:55] <media-centre> instead of thhat webcam problem
+[14:55] <Touhou11> media-centre: Never used firewire, isn't that only used on macs?
+[14:55] <media-centre> no
+[14:55] <media-centre> just more popular
+[14:55] <Siebjee> jrib: strange... it couldn't be the sudo access for multiple users right ?
+[14:55] <jrib> Siebjee: on your 12.04, does everything look the same: http://paste.ubuntu.com/1399800/
+[14:56] <southern> issuing 'host dummydomain' command returns with Host dummydomain not found: 3 (NXDOMAIN)
+[14:56] <edgy> Hi, I installed ubuntu and can't make my webcam work, I don't even have a /dev/video0 device
+[14:57] <southern> in /etc/hosts file there is 127.0.0.1 dummydomain record
+[14:57] <southern> in nsswitch.conf file there is hosts:          files dns line
+[14:58] <southern> I can't figure out the situation...
+[14:58] <jrib> Siebjee: I don't see how sudo would be related
+[14:58] <southern> the system is ubuntu server 10.04
+[14:58] <Nvveen> Oh for god's sake, now Nautilus keeps crashing when I open my Home-folder
+[14:59] <RickZilla> besides, I can only imagine what info that M$ is keeping
+[14:59] <Siebjee> jrib: you're output is kind of odd, and so it your grep statement
+[14:59] <jrib> southern: maybe host is behaving correctly?  Can you check what its documentation says it does?
+[14:59] <jrib> Siebjee: in what way?
+[14:59] <edgy> southern: what's your problem?

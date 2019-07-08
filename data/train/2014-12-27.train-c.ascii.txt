@@ -1,0 +1,1500 @@
+[10:14] <xoxo> reboot and select proper boot device
+[10:14] <ikonia> xoxo: same thing - it's not installing grub to the device you are booting from
+[10:15] <notfadssss> which device would that be? I have changed the boot order
+[10:15] <xoxo> can I install grub another way?
+[10:15] <notfadssss> I have even selected the partition ubuntu is installed on >.>
+[10:16] <ikonia> xoxo: the installer is fine, just during the install make sure you select the correct device
+[10:16] <xoxo> it's the whole harddrive
+[10:17] <ikonia> yes, but there are 2 disks in your system, the hard disk and the usb disk
+[10:17] <xoxo> what else is there to select?
+[10:17] <ikonia> xoxo: it sounds like it's installing grub to the usb disk, rather than the hard disk
+[10:18] <notfadssss> I cannot imagine how after installing ubuntu on the hdd that it would then go install grub on a usb... but you believe thatis the issue?
+[10:18] <ikonia> notfadssss: I'm not talking to you
+[10:18] <ikonia> notfadssss: hence why I'm saying the username xoxo in front of my statements
+[10:19] <notfadssss> oh :\
+[10:24] <notfadssss> well, if anyone has a moment to help I would greatly appreciate it.
+[10:36] <clausen> I can't get linux/grub/livecd/anything-except-windows to boot on my UEFI laptop
+[10:40] <brent> ive got several irc cli programs running which are hogging memory
+[10:40] <c-moi> clausen, try to boot on windows and execute the ubuntu / setup.exe
+[10:40] <brent> is there anyway to limit their ram usage or to clear it from cache?
+[10:40] <ikonia> clausen: do not do that
+[10:40] <clausen> c-moi, you mean wubi.exe?  I tried that, it also didn't work
+[10:41] <theadmin> c-moi: I suggest you don't do that. WUBI is not supported on EFI systems.
+[10:41] <ikonia> brent: why do you think they are using/hogging ram
+[10:41] <c-moi> oh ?
+[10:41] <c-moi> that's what I did with a debian installer
+[10:41] <brent> i have no idea, theyre connected to irc 24/7, theres about 30 clients
+[10:41] <clausen> c-moi, (first, it didn't give me any options at all.  Then it said it installed, and it added something to the windows boot manager, but that was never able to boot...)
+[10:41] <c-moi> and then I installed Ubuntu 14.04
+[10:41] <ikonia> brent: why do you think they are using your ram ?
+[10:42] <c-moi> it was on a Acer netboot with UEFI
+[10:42] <clausen> how is it supposed to work?  I don't see how the ISO can possibly meet the UEFI specification (which I'm reading now...)
+[10:42] <brent> my system says i have 140meg ram left out of 8 gug
+[10:42] <ikonia> brent: where does it say this
+[10:42] <c-moi> well at least, I could have access to the Bios and boot options, and could turn off the UEFI boot
+[10:42] <theadmin> clausen: The Ubuntu image is properly signed and all that, but I have to point out that it may not work from USB
+[10:42] <theadmin> clausen: At least, from my understanding
+[10:43] <brent> free -m
+[10:43] <theadmin> brent: http://linuxatemyram.com
+[10:43] <clausen> theadmin, I don't think it's a signature problem -- I have disabled SecureBoot.  I think it's just that the UEFI firmware only recognises FAT32, not iso9660
+[10:43] <ikonia> brent: who is running all the IRC clients ?
+[10:43] <c-moi> brent, the "free" memory is not the only one which is free. See the buffered and cached
+[10:43] <clausen> (that's just conjecture... honestly, I have no idea what the problem is)
+[10:44] <clausen> I tried copying the contents of the ISO onto a USB flash drive formatted with fat32, but that doesn't work either
+[10:44] <theadmin> clausen: I don't think so, after all, the Ubuntu image is designed to be EFI bootable. Just copying the contents like that won't work though, that is to be expected.
+[10:44] <theadmin> Honestly, I just use legacy mode, EFI is too much of a pain.
+[10:45] <clausen> theadmin, just to be clear: I have an official Ubuntu DVD, that does *not* work
+[10:45] <clausen> theadmin, my laptop doesn't have a legacy mode
+[10:45] <theadmin> clausen: Oh blimey.
+[10:45] <clausen> theadmin, the official DVD doesn't work
+[10:45] <theadmin> That's quite a problem.
+[10:45] <theadmin> clausen: By the way, did you make sure to disable Fast Startup in Windows?
+[10:45] <clausen> theadmin, let me double check...
+[10:46] <brent> ikonia, so.. -/+ buffers/cache:       2388       5470
+[10:46] <ikonia> brent: thats fine
+[10:46] <brent> ;) i notice the system slows down quite a bit
+[10:46] <ikonia> brent: who is running all the IRC clients
+[10:47] <brent> i am
+[10:47] <theadmin> brent: Then... close them?
+[10:47] <brent> theyre different bots, which need to be up
+[10:48] <ikonia> brent: if your IRC clients are using 7GB - you are using them for something they shouldn't be doing
+[10:48] <ikonia> brent: they are only using the ram they need
+[10:48] <ikonia> brent: flush your cache and see how much is free
+[10:48] <ikonia> brent: I'd suspect your bots may have memory leaks
+[10:48] <brent> which could be possible
+[10:49] <clausen> theadmin, I don't think Fast Startup is relevant -- I can access the UEFI firmware without any trouble
+[10:49] <VimFleed> anyone here who uses crouton to enjoy linux beside chromeos?
+[10:49] <ikonia> crouton ?
+[10:49] <theadmin> ikonia: Script to install Xubuntu on a Chromebook
+[10:50] <ikonia> so not really ubuntu then
+[10:50] <VimFleed> ikonia, yes  it's a script used on chromeos to install linux
+[10:50] <theadmin> Yeah
+[10:50] <VimFleed> yea manily ubuntu
+[10:50] <ikonia> VimFleed: it's not ubuntu
+[10:50] <ikonia> VimFleed: it still runs within chromeos
+[10:51] <VimFleed> ikonia, is it a technical difference only?
+[10:51] <ikonia> no
+[10:51] <ikonia> it's a significant difference
+=== alberto is now known as Guest29203
+[10:51] <theadmin> Stuff may break and nobody here will have any idea why since you're operating in such an uncommon environment, basically, VimFleed
+[10:51] <VimFleed> ikonia, how does it make my everyday use of linux different?
+[10:51] <ikonia> it uses chromeos
+[10:52] <VimFleed> theadmin, make sense
+[10:52] <ikonia> VimFleed: I suggest you talk to the script support team to explain the risks/issues
+[10:52] <brent> ikonia, how does one flush their cache
+[10:52] <VimFleed> ikonia, but on the other side, it offers linux on a cheap laptops
+[10:52] <ikonia> brent: interface with a proc parameter,
+[10:52] <ikonia> VimFleed: no it doesn't
+[10:52] <VimFleed> ikonia, how come?
+[10:53] <ikonia> because it's not linux as I've just said
+[10:53] <ikonia> it's chromeos
+[10:53] <theadmin> ...Well ChromeOS is Gentoo so it is Linux, technically speaking.
+[10:53] <ikonia> VimFleed: I suggest you talk to the support teams who make/support the script
+[10:53] <clausen> theadmin, disabling fast boot didn't help
+[10:53] <theadmin> But not Ubuntu, yup
+[10:53] <VimFleed> ikonia, I'm using a cheap HP 14 which is only $200 to use linux
+[10:53] <theadmin> clausen: Uh... I really have no idea why it isn't working >.<
+[10:53] <ikonia> VimFleed: so ?
+[10:54] <ikonia> not sure what that has to do wiht anything
+[10:54] <theadmin> VimFleed: Point is, it ain't really supported here.
+[10:54] <VimFleed> ikonia, so it does offer linux experience on cheap laptops
+[10:54] <ikonia> VimFleed: this is nothing to do with ubuntu
+[10:56] <Seveas> we should have a !crouton or !chromeos factoid that points people to the right place to find support
+[10:56] <ikonia> Seveas: agreed, note added
+[10:57] <Seveas> Because it sure as hell is unsupported by Ubuntu and Google :-)
+[10:57] <santhosh> how to install app runer in ubuntu
+[10:57] <Seveas> well, crouton is. obviosuly google supports chromeos :)
+[10:57] <Seveas> santhosh: what is 'app runer'?
+[10:57] <santhosh> i want install whats up in ubuntu it is porssible
+[10:57] <theadmin> santhosh: You mean WhatsApp?
+[10:58] <theadmin> santhosh: Your best bet would be using Genymotion or another Android emulator.
+[10:58] <Seveas> santhosh: if you mean 'WhatsApp', then no, they only support android and iphone phones I believe. Maybe win8, but definitely not Ubuntu.
+[10:59] <cob> what's that program that's like top, but newer?
+[10:59] <marshal0505> cob: htop ?
+[10:59] <theadmin> cob: "newer"? You mean htop?
+[10:59] <ikonia> what's wrong with "top" why do you need newer ?
+[10:59] <cob> hehe, yeah
+[10:59] <cob> ikonia: just... looking at new things
+[10:59] <White_Cat> I am having quite a headache
+[11:00] <White_Cat> I am looking for a mailserver that will only get connections from localhost
+[11:00] <White_Cat> I ideally do not want to use unix usernames for this
+[11:00] <White_Cat> what client would be most usable for this
+[11:00] <oddeyed> Hiya everyone! I have a strange problem: in order to print a ` character, I have to push the key twice. And after pressing ` once, none of my other keypresses work. Does this sound familiar to anyone?
+[11:00] <Seveas> White_Cat: ssmtp?
+[11:01] <theadmin> oddeyed: You have an international layout.
+[11:01] <White_Cat> the mailserver will recieve external mail and send them too
+[11:01] <theadmin> oddeyed: Switch to an "English (US)" or a similar layout, it will stop.
+[11:01] <White_Cat> Seveas ssmtp would only send not receive
+[11:01] <theadmin> oddeyed: Generally speaking, in international layouts, `e = e and such
+[11:01] <oddeyed> theadmin: Okay, lemme give it a try ^_^
+[11:01] <ikonia> White_Cat: the client has nothing to do with it
+[11:01] <White_Cat> I meant what server
+[11:02] <ikonia> White_Cat: you can use any mail server that you know best
+[11:02] <ikonia> the one that you know the best is the obvious choice
+[11:02] <White_Cat> I know none
+[11:02] <notfadssss> can anyone help me out for a second? I just installed ubuntu lamp after fresh install initial restart is only bringing me to a blank screen - I have bootlog report if someones got a moment to take a look at this I would greatly appreciate it
+[11:02] <ikonia> then pick one to learn, use the default from ubuntu if any any doubt
+[11:02] <White_Cat> which one is the default
+[11:02] <ikonia> look on your system
+[11:02] <White_Cat> bah
+[11:02] <ikonia> White_Cat: you said you'd done research on this ?
+[11:02] <ikonia> it's postfix
+[11:03] <Seveas> White_Cat: proxsmtpmd without a filter configured?
+[11:03] <wh-hw> anybody see same things like this : https://bugs.launchpad.net/ubuntu/+source/alsa-driver/+bug/1405691???
+[11:03] <ubottu> Launchpad bug 1405691 in alsa-driver (Ubuntu) "No sound from subwoofer on Asus N551JM" [Undecided,New]
+[11:04] <oddeyed> theadmin: Thanks! It worked perfectly! (^_^)`
+[11:04] <wh-hw> i need help with that !!!
+[11:04] <wh-hw> pls
+[11:04] <White_Cat> I tried postfix and configuring it is harder than programming a space shuttle
+[11:04] <ikonia> it's quite straight forward
+[11:04] <White_Cat> it really isnt
+[11:04] <ikonia> if you explain the problem specifcially
+[11:04] <ikonia> people can help
+[11:04] <White_Cat> I have done that
+[11:04] <bekks> You havent.
+[11:04] <White_Cat> I will do so again
+[11:05] <Seveas> White_Cat: if you find configuring postfix hard, the internet doesn't want you running a mailserver :-)
+[11:05] <ikonia> Seveas: this is the truth
+[11:05] <White_Cat> I have a system which will only recieve user connections from localhost
+[11:05] <wh-hw> i installed ubuntu 14.10 on my asus n551jm , but it no sound
+[11:05] <White_Cat> all those connections will come from odoo which can use pop and imap
+[11:05] <Seveas> seriously, dpkg-reconfigure can set it up appropriately for most common things with no manual config.
+[11:05] <ikonia> White_Cat: we don't need the whole thing again
+[11:05] <White_Cat> as well as something called "local server"
+[11:05] <ikonia> White_Cat: just the problem
+[11:06] <White_Cat> you wanted me to explain
+[11:06] <ikonia> White_Cat: just the problem
+[11:06] <ikonia> White_Cat: we can ask for specifics depending on the problem
+[11:06] <notfadssss> Can anyone take a look at this boot report and tell me why ubuntu wont boot :( http://paste.ubuntu.com/9629215/
+[11:06] <White_Cat> the problem is that odoo marks mail as read the moment it connects to it
+[11:06] <bekks> White_Cat: Why is that a problem?? And how is that related to an SMTP server?
+[11:07] <White_Cat> I can explain
+[11:07] <ikonia> that doesn't sound like a problem with a mail server
+[11:07] <White_Cat> so I intend to make a copy of each email to foo@bar.org to foo@erp.bar.org
+[11:07] <White_Cat> I need a mail server to run all email with @erp.bar.org
+[11:07] <bekks> White_Cat: Data duplication will not solve any issue.
+[11:07] <White_Cat> it will totally solve the issue
+[11:07] <bekks> It will not.
+[11:08] <White_Cat> since people will not have their email marked as read
+[11:08] <ikonia> that is not a solution
+[11:08] <ikonia> that is a crazy approach to a CRM not configured / working properly
+[11:08] <White_Cat> well, that is the problem I have
+[11:08] <Seveas> White_Cat: do you also buy a new car when the ash tray is full?
+[11:08] <bekks> White_Cat: If you process the mails automatically, why do you need them to be processed manually by the users again?
+[11:09] <bekks> That concept is lacking sense. :)
+[11:09] <White_Cat> because users want to read their mail at their own pace
+[11:09] <bekks> Then do not process them automatically.
+[11:09] <White_Cat> and they also want a copy to appear in the erp system
+[11:09] <White_Cat> I have to achieve both
+[11:09] <bekks> Being a user, I'd harass you if you duplicate my mails. :)
+[11:09] <ikonia> White_Cat: so telling odoo to not mark mail as read seems a logical approach ?
+[11:09] <White_Cat> odoo always marks them as read
+[11:09] <ikonia> White_Cat: or working with odoo to resolve the issue
+[11:09] <White_Cat> I lack a way to do that
+[11:09] <ikonia> rather than some crazy mail setup
+[11:10] <ikonia> this problem is an odoo problem, not a mail server problem
+[11:10] <White_Cat> hence why I didnt want to explain you the problem
+[11:10] <White_Cat> it would be a waste of my time
+[11:10] <ikonia> White_Cat: right, so now you know where to look
+[11:10] <White_Cat> and yours
+[11:10] <White_Cat> no I do not
+[11:10] <ikonia> White_Cat: talk to Odoo team
+[11:10] <White_Cat> I still need that mail server
+[11:10] <bekks> You dont.
+[11:10] <bekks> You need to fix odoo.
+[11:10] <White_Cat> yes I do
+[11:10] <ikonia> White_Cat: raise bug/work with them to resolve "auto read mails"
+[11:11] <ikonia> may be as simple as a configuration parameter
+[11:11] <White_Cat> its not
+[11:11] <ikonia> how do you know ?
+[11:11] <White_Cat> I have spent a good month on this
+[11:11] <ikonia> yeah, but you didn't even know the mail server
+[11:11] <White_Cat> odoo is horrible with emmail
+[11:11] <ikonia> so your research trouble shooting seems lacking
+[11:11] <White_Cat> ikonia why would I care about the mail server?
+[11:11] <White_Cat> honestly
+[11:11] <bekks> White_Cat: And you didnt eve create a bug on this towards the odoo team.
+[11:11] <ikonia> White_Cat: because you're using it to send mail
+[11:12] <ikonia> White_Cat: which seems pretty key to the system interacting with the mail server
+[11:12] <ikonia> White_Cat: is your name Lawrence by any chance
+[11:12] <White_Cat> no my name isnt that
+[11:12] <White_Cat> what an odd question
+[11:12] <ikonia> White_Cat: ok, on the mailing list there is a guy on the odoo mailing list called lawrence with your same problem
+[11:12] <Dat> How long would gpart take to rescue a lost partition on a 4tb drive?
+[11:12] <ikonia> there are multiple options suggested to him
+[11:13] <ikonia> some are from the development teams, some from other users
+[11:13] <ikonia> most will get you what you want
+[11:13] <White_Cat> ikonia I need email accounts for admin tasks too
+[11:13] <White_Cat> really pointless
+[11:13] <ikonia> White_Cat: not sure what that has to do with anything
+[11:13] <clausen_> theadmin, I think I figured it out!  I finally got into the windows "rescue command line", and I can access the EFI system partition
+[11:13] <White_Cat> here is the problem
+[11:13] <ikonia> White_Cat: you've explained the problems
+[11:13] <clausen_> theadmin, it has a file, /efi/boot/bootia32.efi
+[11:13] <ikonia> the CRM marks emails as read
+[11:13] <ikonia> you don't want it to to
+[11:13] <ikonia> there are solutions on the odoo mailing list
+[11:13] <clausen_> so it looks like it's a 32-bit boot
+[11:14] <clausen_> 32-bit UEFI configuration -- quite exotic
+[11:14] <White_Cat> users in this company pay microsoft money to have their email run
+[11:14] <Seveas> good thing they do, as they clearly shouldn't be paying you for it :)
+[11:14] <White_Cat> I want to have a parallel system to copy their mail so that what they do with their email does not affect the erp system
+[11:14] <bekks> White_Cat: How about taking a closer look at the solutions proposed instead of repeating pointless approaches on and on?
+[11:15] <ikonia> White_Cat: a mirror mail service is not a solution, it's a bad idea
+[11:15] <White_Cat> why is it a bad idea?
+[11:15] <ikonia> because it does not fix your problem
+[11:15] <ikonia> it makes a mess of your mail setup
+[11:15] <White_Cat> why does it not?
+[11:15] <ikonia> it does
+[11:15] <ikonia> I didn't say it didn't
+[11:15] <White_Cat> microsoft mail would simply forward each incoming mail
+[11:15] <ikonia> White_Cat: actually do what you want,
+[11:15] <bekks> White_Cat: Why dont you want to fix your ERP system instead?
+[11:15] <ikonia> White_Cat: you seem to have no idea how to manage the systems and don't want to actually use logical solutions
+[11:16] <ikonia> bekks: there are fixes on the mailing lists........
+[11:16] <White_Cat> bekks because I need additional email accounts anyways
+[11:16] <ikonia> after a month of research.....
+[11:16] <notfadssss> anyone available for a moment to help me debugg some issues I am having with initial reboot of ubuntu install?
+[11:16] <bekks> ikonia: I know. I found them within minutes, didnt need a month.
+[11:16] <nbusrone> hi , I am using smplayer but when playing a video recording using an android phone it get fastforward but the sound was fine.Using VLC works well. Anyone know the reason behind ?
+[11:16] <bekks> White_Cat: Additional emails accounts have entirely nothing to do with mirroring mails.
+[11:16] <ikonia> they would just be more to mirror
+[11:16] <White_Cat> indeed
+[11:16] <White_Cat> its two seperate issues
+[11:17] <ikonia> which as mirroring is a pointless task, you're making more work for yourself
+[11:17] <White_Cat> ikonia you know nothing of my implementation
+[11:17] <clausen_> theadmin, there are some webpages saying Ubuntu doesn't support ia32 EFI...
+[11:17] <Seveas> notfadssss: what are the issues?
+=== pvoigt_ is now known as pvoigt
+[11:17] <ikonia> White_Cat: only what you explain
+[11:17] <clausen_> theadmin, I guess I will have to submit a patch...
+[11:17] <White_Cat> I cant explain you all the details
+[11:17] <ikonia> White_Cat: and you lack of understanding yourself, so I'm making a few assumptions
+[11:17] <schub> :-)
+[11:17] <notfadssss> Seveas: http://paste.ubuntu.com/9629215/ <---- I install ubunutu Lamps, initial restart brings back a black screen
+[11:17] <White_Cat> you have been making assumptions the second I started explanning myself
+[11:18] <White_Cat> it was quite a hastle to deal with that
+[11:18] <ikonia> White_Cat: not at all, I've been using the info you provided over the last few days
+[11:18] <Seveas> notfadssss: what is ubuntu lamps?
+[11:18] <White_Cat> ikonia, if it is all the same to you I really do not want your help. I end up frustrating you and you end up frustrating me.
+[11:18] <Seveas> ikonia: he's been here for days? :/
+[11:18] <White_Cat> yes i have
+[11:18] <ikonia> White_Cat: you're not frustrating me
+[11:18] <notfadssss> Seveas: Ubuntu server
+[11:19] <ikonia> Seveas: yeah, trying to do virutal users etc etc
+[11:19] <Seveas> ugh
+[11:19] <Dat> is there anyway to check the progress of a gpart scan?
+[11:19] <ikonia> White_Cat: you admitted earlier you don't know any mail server technology (which is fine - no issue with that) so would it not be wise to actually try to take advice from people who do know mail server technology ?
+[11:19] <Seveas> White_Cat: hire an actual sysadmin please. You're doing your users/employer a major disservice by relying on internet volunteers whom you don't seem to get along with.
+[11:19] <White_Cat> All I need is a mail server that supports POP and/or IMAP with non-unix (virtual) users.
+[11:20] <ikonia> White_Cat: yeah, you where told how to do that yesterday
+[11:20] <Seveas> White_Cat: postfix + cyrus. Now go read documentation.
+[11:20] <Dat> White_Cat: postfix
+[11:20] <ikonia> White_Cat: now you have a problem with your CRM - which you've been told how to fix, and ignored
+[11:20] <White_Cat> I tried configuring postfix and it cant even connect
+[11:20] <ikonia> White_Cat: now you want to mirror emails - which unless you need complience (which a postfix mirror is not a good solution for) is not a good way
+[11:20] <bekks> I guess I can safely rest this case and deal with more interesting topics.
+[11:20] <nbusrone> hi , I am using smplayer but when playing a video recording using an android phone it get fastforward but the sound was fine.Using VLC works well. Anyone know the reason behind ?
+[11:20] <Seveas> bekks: yeah :/
+[11:21] <White_Cat> complience?
+[11:21] <ikonia> White_Cat: seriously, try to actually understand, people are not saying "don't do this" for fun, they are trying to stop you make a bad choice/mess
+[11:21] <White_Cat> I setup mail forwarding before
+[11:21] <Seveas> nbusrone: I have that from time to time as well. Not sure why, but I'm guessing there are some odd values in the avi container. If lc works, just use vlc :)
+[11:21] <bekks> Which you dont need for your ERP.
+[11:21] <White_Cat> I am told to do it
+[11:21] <Dat> i had two postfix servers mirroring each other
+[11:21] <bekks> BY whom?
+[11:21] <Dat> it was pita to setup
+[11:21] <White_Cat> why do you care
+[11:21] <Dat> and hard to maintain
+[11:22] <ikonia> White_Cat: understanding your requirements, thats why
+[11:22] <bekks> White_Cat: I dont care about that issue anymore, dont worry.
+[11:22] <White_Cat> please entertain yourself with someone else
+[11:22] <Seveas> Dat: why were you doing mirroring at the postfic layer?
+[11:22] <ikonia> White_Cat: the question is do you have a technical reason for this, or a managment pressure for this ?
+[11:22] <Seveas> I do that at the mailstore layer, delivering to two mailstores
+[11:22] <nbusrone> Seveas : i tried reinstalling but it still having fast forward
+[11:22] <White_Cat> ikonia a bit of both
+[11:22] <Seveas> nbusrone: reinstalling won't help :)
+[11:22] <ikonia> White_Cat: whats the technical reason as that part you don't seem to explain
+[11:22] <ikonia> other than "I want it"
+[11:22] <ikonia> or "I need it"
+[11:23] <White_Cat> Look
+[11:23] <Dat> Seveas: i was using dovecot sync
+[11:23] <Seveas> Dat: eww. That failed miserably for me at the time
+[11:23] <White_Cat> say I have 10 users with emails. I need 5 more "group" email accounts that will primarily send email
+[11:23] <Dat> Seveas: i got it to work but it was just a pain
+[11:23] <Seveas> notfadssss: I looked at your pastebin thing and am afrain I can't help, sorry :(
+[11:23] <White_Cat> I do not want to use microsoft for those 5 "group" emails
+[11:23] <Dat> I even had to write a script to fix duplicate emails
+[11:24] <Dat> :(
+[11:24] <White_Cat> its half the reason why I need a mail server
+[11:24] <ikonia> hang on White_Cat are you also the user darknet
+[11:24] <totesmuhgoats> hey guys
+[11:24] <ikonia> he had exactly the same requirement a few weeks ago
+[11:24] <Seveas> hi totesmuhgoats
+[11:24] <notfadssss> seveas: thank you for trying, I think it has something to do with raid1 configure ;\
+[11:24] <ikonia> is this the same situation ?
+[11:24] <White_Cat> ikonia I am not on the odoo forums
+[11:25] <ikonia> White_Cat: I meant IRC user Darknet
+[11:25] <White_Cat> this isnt an odoo problem
+[11:25] <ikonia> he had the same issue, are you the same guy ?
+[11:25] <Dat> hrmm i have no idea if my gpart is hung or not I should have done this via command line
+[11:25] <White_Cat> ikonia, I dont think so
+[11:25] <ikonia> ah, never mind,
+[11:25] <Seveas> White_Cat: no, it's a problem of you refusing to learn to do your job. If you find postfix hard, you shouldn't be a linux admin.
+[11:25] <White_Cat> I am not a linux admin
+[11:25] <Dat> lol
+[11:25] <Seveas> then tell your linux admin to set this up
+[11:25] <White_Cat> I am not pretending to be one
+[11:25] <White_Cat> I lack that
+[11:25] <ikonia> White_Cat: who looks after you linux systems ?
+[11:26] <Seveas> then hire one, clearly you don't know what you're doing.
+[11:26] <totesmuhgoats> i am doing some troubleshooting and i booted into an older kernel than the most recent installed one, the problem is that the nvidia (proprietary) driver does not load for this kernel does not seem to exist in the system for this older kernel, how can I make the driver re-build itself for all the installed kernel versions?
+[11:26] <White_Cat> that unfortunate job is mine unfortunately
+[11:26] <White_Cat> I dont have the resources I need
+[11:26] <ikonia> White_Cat: it would seem not, sorry you're in that situation
+[11:26] <ikonia> White_Cat: but based on that situation, would it not be wise to listen to the people who can help you ?
+[11:26] <nbusrone> Seveas: Anyway found a fix http://tuxdiary.com/2014/03/06/mplayer-plays-mp4-video-too-fast/ thank you for the reply :D
+[11:26] <White_Cat> I understand odoo aspect of things
+[11:27] <ikonia> you don't
+[11:27] <ikonia> as you just said "you can't fix it"
+[11:27] <Seveas> nbusrone: rock on, thanks for sharing!
+[11:27] <ikonia> when there are multiple fixes for it
+[11:27] <White_Cat> ikonia fixing it causes different problems
+[11:27] <ikonia> White_Cat: so ? you still say "I know it" - but also "I can't fix it"
+[11:27] <nbusrone> Seveas: you are welcome :)
+[11:27] <White_Cat> ikonia can you stop it please
+[11:28] <ikonia> White_Cat: then follow the advice
+[11:28] <ikonia> deal with one issue at a time
+[11:28] <ikonia> clouding it into a big jumble doesn't help you move it forward
+[11:28] <Seveas> ikonia: /nick sisyphus :)
+[11:29] <Dat> damnit gparted just died in the rescue
+[11:29] <Dat> ;/
+[11:29] <Dat> another 20hours :(
+[11:29] <Seveas> Dat: time to restore from backups?
+[11:29] <White_Cat> ikonia your advice is fix a system that isnt the problem
+[11:29] <Dat> not for this drive
+[11:30] <Dat> no backups where taken
+[11:30] <ikonia> White_Cat: it is the problem based on the issues you've reported
+[11:30] <White_Cat> I must have a mail server to gain the extra emails I need
+[11:30] <White_Cat> I have spent 3 days reading documentaiton on postfix and the end result is I cannot connect to it
+[11:30] <ikonia> White_Cat: splitting the mail service into one handled by microsoft / you locally is not a good solution
+[11:30] <ikonia> it's quite bad
+[11:30] <notfadssss> if anyone has any experience with raid 1 ubuntu server install some help would be appriciated ><' initial reboot leads to a black screen
+[11:30] <bekks> White_Cat: "odoo mark mails and should not do it" "thats the issue, fix it" "no, it is not the issue".
+[11:30] <ikonia> White_Cat: if you cannot run a mail server - I strongly advise you not to
+[11:30] <ikonia> White_Cat: hire someone
+[11:30] <White_Cat> ikonia I am not doing what you suggested
+[11:31] <White_Cat> erp.foo.bar and foo.bar will be seperate domains
+[11:31] <White_Cat> *seperate ips
+[11:31] <ikonia> White_Cat: right, but the DNS for foo.bar and MX record will be controlled by the same ISP
+[11:31] <White_Cat> yes
+[11:31] <White_Cat> no problem with that
+[11:31] <ikonia> you will end up with serious mail routing problems unless you are not very careful and know what you are doing
+[11:31] <White_Cat> erp.foo.bar would have a different ip
+[11:31] <ikonia> the logical step would be to add the 5 extra mail accounts to the microsoft hosted soution
+[11:32] <ikonia> solution
+[11:32] <White_Cat> it isnt a solution
+[11:32] <White_Cat> thats too slow
+[11:32] <ikonia> it is not too slow
+[11:32] <ikonia> it takes seconds
+[11:32] <White_Cat> large attachments would take forever to download
+[11:32] <ikonia> and if you've been doing this for 3 months.....
+[11:32] <White_Cat> multiple times
+[11:32] <ikonia> this is getting into a fantasy problem area rather than a real life issue
+[11:33] <ikonia> forwarding mail to a subdomain to stop download times for 5 people....
+[11:35] <hojo> hello. i am having problems after trying to install ati proprietary drivers to ubuntu 14.04.1. I uninstalled all ati drivers and removed xorg.conf files but i still cant access the GUI. Just a black screen after loading ubuntu. I can access tty1 though. any ideas anyone?
+[11:37] <hojo> trying to open any programs that operate in the graphical environment, i get "cannot open display" message
+[11:37] <g0th> hi
+[11:37] <g0th> hi
+[11:37] <g0th> hi
+[11:38] <g0th> hw do I mount a cifs share from a NAS such that the permissions are correctly set?
+[11:38] <g0th> at the moment everything basically has all permissions
+[11:39] <bekks> g0th: Whats the issue then?
+[11:41] <g0th> well I would like them to ave specific permissions
+[11:41] <g0th> previously I used sec=ntlm,nounix
+[11:41] <g0th> for my ready nas
+[11:41] <g0th> now I have a synology and if I mount like that
+[11:41] <g0th> everything is totally f* up
+[11:42] <bekks> Can you be more specific and use a clean language please?
+[11:42] <g0th> for instance if I do "ls" in the mounted directory with "sec=ntlm,nounix" it lists all files recursively
+[11:42] <bekks> What exactly is the problem when doing what exactly, in detail?
+[11:42] <g0th> I used clean language :)
+[11:42] <raj_> yes
+[11:43] <g0th> when I mount the cifs share with sec=ntlm,nounix the whole filesystem behave strangely
+[11:43] <bekks> g0th: Why are you using sec=ntlm and nounix?
+[11:43] <raj_> hey can anybody help me update kernel to 3.19
+[11:43] <g0th> because that seems to be the only way to mount the files with proper permissions
+[11:43] <g0th> how do you guys mount cifs volumes?
+=== Yukitteru is now known as Dhs92
+[11:44] <g0th> the settings worked perfectly with my readynas
+[11:44] <g0th> but with the synology one it doesnt work
+[11:44] <raj_> how to turn off write protection
+[11:44] <clausen_> theadmin, I create a new ubuntuforums thread, http://ubuntuforums.org/showthread.php?t=2258379&p=13195099#post13195099
+[11:45] <clausen_> theadmin, does this look helpful?
+[11:45] <bekks> g0th: like this: https://wiki.ubuntu.com/MountWindowsSharesPermanently
+[11:46] <clausen_> it's my first ubuntuforums.org post -- does it look useful?
+[11:47] <g0th> bekks: yes, that's not working properly
+[11:47] <g0th> the files have the wrong permissions
+[11:48] <bekks> g0th: Define "properly" and "wrong permissions" in detail please.
+[11:48] <g0th> the permissions should be 0664 for files and 0775 for directories
+[11:48] <g0th> with proper uid and gid
+[11:48] <bekks> g0th: CIFS doesnt support linux permissions.
+[11:49] <g0th> I think it does
+[11:49] <g0th> there is an extension
+[11:49] <bekks> g0th: Then you are using a different CIFS implementation than the entire linux world.
+[11:49] <g0th> I just want to mount it with those permissions on my system
+[11:49] <g0th> no I am nt
+[11:49] <g0th> it is well known
+[11:49] <g0th> it's supposed to work with "nounix"
+[11:50] <g0th> how do you mount cifs shares?
+[11:50] <bekks> I just told you.
+[11:50] <g0th> so all your cifs shares just have all permissions?
+[11:50] <bekks> Yes, because CIFS does not support linux permissions.
+[11:51] <g0th> anyone else who has more experience wth the cifs unix extension?
+[11:51] <bekks> All you can do is map a user as described in here: https://wiki.ubuntu.com/MountWindowsSharesPermanently#Special_permissions
+[11:52] <EREVAN> hi there, who can tell me, what is ~# symbols mean in terminal
+[11:52] <g0th> bekks: so how do you prevent normal users from just overwriting everything?
+[11:52] <bekks> g0th: BY setting proper filesystem permissions on the filesystem, not on the share.
+[11:52] <g0th> ok, how to do that?
+[11:53] <k1l_> EREVAN: its the prompt. ~ stands for  "/home/user/" where user is your username
+[11:53] <g0th> btw
+[11:53] <g0th> I was always asking about the filesystem permissions not the share
+[11:53] <bekks> g0th: That depends on the system providing the sahre.
+[11:53] <bekks> *share
+[11:53] <EREVAN> k1l_ thanks
+[11:53] <g0th> it's a synology nas
+[11:53] <g0th> the client is an ubuntu system
+[11:53] <bekks> g0th: You were always asking about CIFS, whihc is a filesharing mechanism. You cannot format a partition as "CIFS".
+=== Dhs92 is now known as Yukitteru
+[11:53] <k1l_> EREVAN: but # seems to be a root shell.
+=== Yukitteru is now known as Yukinotteru
+[11:54] <g0th> bekks: of course not
+[11:54] <g0th> bekks: but you can mount it with the appropriate permissions
+[11:54] <g0th> or you should be able to
+[11:54] <EREVAN> k1l_ OK
+[11:54] <bekks> g0th: You cant, and the link given even states the same.
+[11:56] <g0th> bekks: you are incorrect
+[11:56] <g0th> bekks: it should work but it doesn't
+[11:56] <g0th> there is some bug
+[11:56] <g0th> you're supposed to be able to set the permissions wth file_mode and dir_mode
+[11:56] <g0th> either with nounix or without
+[11:57] <g0th> but neither of them works properly
+[11:57] <g0th> unfortunately
+[11:57] <bekks> g0th: But you cant set different users/groups, and different permissions on different files.
+[11:57] <bekks> Thats what I am telling you all the time.
+[11:57] <g0th> that's fine
+[11:57] <bekks> You didnt even read the link given, as it seems.
+[11:57] <g0th> but at least not 777 permissions
+[11:57] <g0th> I did
+[11:58] <g0th> look it seems you can't help me, you don't even seem to know the interactions with unix extensions and cifs
+[11:58] <g0th> anyway
+[11:58] <g0th> anyone else maybe?
+[11:58] <bazhang> g0th, read the links provided
+[11:58] <g0th> I'll read it again for the third time, fine
+[11:59] <notfadssss> if anyone has any experience with raid 1 ubuntu server install some help would be appriciated ><' initial reboot leads to a black screen
+[11:59] <bekks> g0th: Good luck, if you are not accepting technical facts.
+[11:59] <notfadssss> I have a boot log report if wanted ;\ cannot seem to get grub up
+[12:02] <g0th> bekks: you are not
+[12:02] <g0th> read your own article
+[12:02] <g0th> it specifically mentions my solution with file_mode and dir_mode
+[12:02] <g0th> which is not working properly (which is what this whole discussion was about to begin with)
+[12:03] <g0th> it seems to be a bug on the synology nas
+[12:03] <g0th> (when using nounix)
+[12:06] <bazhang> try #synology g0th
+[12:06] <g0th> ok thanks
+[12:07] <bazhang> np
+=== brrr is now known as Guest68579
+=== alberto is now known as Guest16377
+[12:10] <notfadssss> if someone can help with my ubunutu install issues  I will paypal them '_'
+[12:11] <k1l_> notfadssss: give more informations about ubuntu version, hardware controller etc.
+[12:11] <bazhang> try #ubuntu-server
+[12:12] <brunoescola> Hi. Good Morning.
+[12:12] <notfadssss> http://paste.ubuntu.com/9629215/ <---- I install ubunutu Lamps, initial restart brings back a black scree
+[12:13] <Lexie> Hi
+[12:13] <alex_> hi
+[12:14] <alfelisi22> hi
+[12:15] <cfhowlett> !nomodeset | notfadssss
+[12:15] <ubottu> notfadssss: A common kernel (boot)parameter is nomodeset, which is needed for some graphic cards that otherwise boot into a black screen or show corrupted splash screen. See http://ubuntuforums.org/showthread.php?t=1613132 on how to use this parameter
+[12:20] <g0th> bazhang: #synology seems to be "dead/silent"
+=== tcpman is now known as Guest68239
+[12:46] <notfadssss> if anyone can help me solve my initial reboot issues with my server I will paypal them or bitcoin them - http://paste.ubuntu.com/9629215/
+[12:46] <g0th> I don't get nfs, all the security is through the ip address?
+[12:46] <g0th> does that make any sense?
+[12:46] <g0th> can't someone just take over the ip?
+[12:47] <the_tricky> hello guys
+=== mfisch is now known as Guest60657
+[12:47] <the_tricky> i know, this is kind of specific question
+[12:48] <the_tricky> but does anyone know if it is possible to disable the floating skype window in ubuntu?
+[12:48] <the_tricky> haven't found a better channel for the question
+[12:48] <the_tricky> sorry in advance
+[12:50] <g0th> well nfs is not acceptable that way
+[12:50] <g0th> and I'm back to my original problem
+[12:51] <khurram1> i am unable to shut down my laptop it freezes in between i have all the boot info in the following link http://paste.ubuntu.com/9629567/
+[12:51] <bekks> g0th: Using NFS3, there is no access control, using NFS4, there is kerberos.
+[12:52] <daytan> ciao
+[12:52] <daytan> !list
+[12:52] <ubottu> daytan: No warez here! This is not a file sharing channel (or network); read the channel topic. If you're looking for information about me, type <unconvertable> /msg ubottu !bot <unconvertable> . If you're looking for a channel, see <unconvertable> /msg ubottu !alis <unconvertable> .
+[12:52] <g0th> oh, ok I'll try again with nfsv4
+[12:52] <Seveas> g0th: nfs is meant to be used in networks where all devices are trusted. It was developed in a time that that made sense, and in many environments it still does.
+[12:52] <Seveas> (e.g. in our datacenter, NFS is just fine. In offices much less so)
+[12:52] <bekks> porkys is spamming in pm.
+[12:53] <Seveas> bekks: tell #ubuntu-ops :)
+[12:54] <Seveas> khurram1: try triggering a shut down from a vt (switch to it with alt+f1, then log in, then do sudo shutdown -h now), it may give you more details.
+=== corey84-- is now known as Corey84-
+[12:55] <g0th> I would really really prefer cifs shares
+=== ARMEN_ is now known as EREVAN
+[12:55] <g0th> but they don't work :(
+[12:55] <g0th> somehow the permissions are messed up :(
+[12:55] <Seveas> g0th: you'll need to tell samba how to map users, that can be a b*tch.
+[12:56] <g0th> when I use "nounix" it lists all files and directories recursively
+[12:56] <g0th> e.g. "\test\mytestfile.cpp" "\test" ec
+[12:56] <g0th> etc*
+[12:56] <g0th> basically it creates a windows style - named file at the root level of the filesystem for every file in all directories
+[12:57] <g0th> and without nounix I never ever got permissions to work / show something besides 777 permissions
+[13:01] <g0th> how do I prevent normal users from acessing my mounted cifs share?
+[13:01] <g0th> there must be some way
+[13:01] <g0th> hmm, I could maybe create a folder on top with appropriate permissions, that way users shouldn't be able to access subfolders?
+[13:01] <g0th> ideally I would like to map the permissions
+[13:01] <g0th> it's really really annoying
+[13:13] <BluesKaj_> Hiyas all
+[13:13] <cfhowlett> BlueShark, yowza
+=== Yukinotteru is now known as Dhs92
+=== Dhs92 is now known as Yukinotteru
+[13:17] <Seveas> cfhowlett: the perils of <tab> trap you again :-)
+[13:18] <cfhowlett> Seveas, yep
+[13:18] <netcrash> Hello, how can I make the resize shortcut from xubuntu(ALT+right click+drag window) work in ubuntu?
+[13:18] <cfhowlett> !ops | spam via PM from porkys:  <porkys> show gratis (solo hooy) --> http://s422803032.mialojamiento.es/
+[13:19] <maxwell_> hi
+[13:20] <maxwell_> I get this error when compiling InspIRCd: fatal error: tds.h: No such file or directory
+[13:22] <alfagt1989> ciao!
+[13:22] <alfagt1989> !ciao
+[13:24] <Seveas> maxwell_: why are you compiling it instead of installing it from the repos?
+[13:25] <notfadssss> if anyone can help me solve my initial reboot issues with my server I will paypal them or bitcoin them - http://paste.ubuntu.com/9629215/
+[13:26] <alfagt1989> !list
+[13:26] <ubottu> alfagt1989: No warez here! This is not a file sharing channel (or network); read the channel topic. If you're looking for information about me, type <unconvertable> /msg ubottu !bot <unconvertable> . If you're looking for a channel, see <unconvertable> /msg ubottu !alis <unconvertable> .
+[13:26] <alfagt1989> list!
+[13:26] <anonymous__> salut
+[13:26] <alfagt1989> ciao
+[13:26] <alfagt1989> list!
+[13:26] <Seveas> alfagt1989: do you have any Ubuntu support questions?
+[13:27] <anonymous__> e cineva roman de aici?
+[13:27] <cfhowlett> !it | anonymous__
+[13:27] <ubottu> anonymous__: Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi <unconvertable> /join #ubuntu-it <unconvertable> senza virgolette)
+[13:27] <alfagt1989> ciaooooooooooooooooo
+[13:27] <alfagt1989> !it
+[13:27] <cfhowlett> alfagt1989, no.  no warez.
+[13:27] <alfagt1989> !list
+[13:27] <ubottu> alfagt1989: No warez here! This is not a file sharing channel (or network); read the channel topic. If you're looking for information about me, type <unconvertable> /msg ubottu !bot <unconvertable> . If you're looking for a channel, see <unconvertable> /msg ubottu !alis <unconvertable> .
+[13:27]  * cfhowlett begins writing a python *smite* script ...
+[13:28] <anonymous__> am mare nevoie de ajutor
+[13:28] <cfhowlett> anonymous__, english.  ENGLISH please.
+[13:28] <anonymous__> welcome
+[13:29] <popey> !ro | anonymous__
+[13:29] <ubottu> anonymous__: Daca doriti ajutor sau doriti sa discutati despre Ubuntu/Kubuntu/Xubuntu, intrati pe #ubuntu-ro
+[13:31] <giuseppe_> list
+[13:34] <maxwell_> Seveas,  I am compiling it cause I need extra mods
+[13:35] <Seveas> maxwell_: ok. To install everything that's needed to compile it, you can use 'apt-get build-depends'
+[13:35] <maxwell_> I also wans to change the code later on
+[13:35] <Seveas> sudo apt-get build-depends inspircd
+[13:35] <anonymous__> salut
+[13:36] <pupil> good evening
+[13:36] <maxwell_> its build-dep not build-depends
+[13:36] <anonymous__> e cinva roman
+[13:36] <anonymous__> cineva*
+[13:36] <giuseppe_> channel
+[13:37] <jinta> hello
+[13:37] <giuseppe_> hello
+[13:37] <cfhowlett> !it | giuseppe_,
+[13:37] <ubottu> giuseppe_,: Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi <unconvertable> /join #ubuntu-it <unconvertable> senza virgolette)
+[13:37] <jinta> can you speak chinese?
+[13:37] <cfhowlett> !cn | jinta,
+[13:37] <ubottu> jinta,: , /join #ubuntu-cn <unconvertable> /join #ubuntu-tw
+[13:38] <jinta> <unconvertable>
+[13:38] <jinta> ,
+[13:38] <anonymous__> salut
+[13:38] <gaetano> susy-1
+[13:38] <cfhowlett> jinta go to !ubuntu-cn
+[13:38] <cfhowlett> anonymous__, english.
+[13:39] <jinta> salut
+=== erry is now known as plush
+[13:39] <anonymous__> salut
+[13:39] <jinta> susy -l
+[13:39] <anonymous__> jinta hai pe privat
+[13:39] <jinta> ?
+[13:45] <aeoril> Using filezilla, I can connect to my sftp server using my ssh username/secret key that secures the ssh file.  How is that any more secure than simple username/password authentication?  I have not entered my private keys into filezilla, however, I have managed my keys with PuTTY.  Is filezilla accessing my keys somehow from PuTTY?
+=== plush is now known as erry
+[13:47] <khurram1> i am unable to shut down my laptop it freezes in between i have all the boot info in the following link http://paste.ubuntu.com/9629567/
+[13:47] <michaelk> Hello... If anybody was here last night with me. It seems the answer to my problem i
+[13:48] <michaelk> is to create a windows 8.1 usb recovery media and fix windows bootloader
+[13:48] <khurram1> anyone havin any answer to my problem?
+[13:48] <cfhowlett> khurram1, event logs will tell more than basic boot info
+[13:49] <michaelk> khurram1 This is your GRUB file?
+[13:49] <michaelk> that you pastebined
+[13:50] <khurram1> its what i got from boot repair
+[13:51] <khurram1> how can i get my event log to you guys so that you can help me ?
+[13:53] <khurram1> i am unable to shut down my laptop it freezes in between i have all the boot info in the following link http://paste.ubuntu.com/9629567/
+[13:53] <Ben64> !patience | khurram1
+[13:53] <ubottu> khurram1: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[13:53] <michaelk> It might be in a log folder somewhere but I'm not to sure about that try like /dev etc
+[13:54] <michaelk> also cntrl+h for hidden folders :)
+=== martinklepsch is now known as Guest49210
+[13:56] <notfadssss> if anyone can help me solve my initial reboot issues with my server I will paypal them or bitcoin them - http://paste.ubuntu.com/9629215/
+[13:58] <khurram1> i am unable to shut down my laptop it freezes in between i have all the boot info in the following link http://paste.ubuntu.com/9629567/
+[13:58] <Seveas> !repeat | notfadssss, khurram1
+[13:58] <ubottu> notfadssss, khurram1: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[13:59] <Seveas> khurram1: did rebooting from a vt like I suggested show anything useful?
+[13:59] <EriC^_> khurram1: that's the boot-repair info, it's quite irrelevant for the most part, please pastebin tail -n100 /var/log/syslog
+[13:59] <khurram1> nops
+[13:59] <EriC^_> khurram1: also next time you shutdown press esc to see where it is hanging at
+[14:01] <khurram1> Dec 27 01:34:51 teasers rtkit-daemon[1900]: Successfully made thread 6234 of process 6234 (n/a) owned by '1000' RT at priority 3. Dec 27 01:34:51 teasers rtkit-daemon[1900]: Supervising 4 threads of 2 processes of 1 users. Dec 27 01:35:07 teasers avahi-daemon[869]: Withdrawing address record for fe80::c218:85ff:fe33:9065 on wlan1. Dec 27 01:35:07 teasers avahi-daemon[869]: Withdrawing workstation service for wlan1. Dec 27 01:35:07 t
+[14:01] <EriC^_> !paste | kur
+[14:01] <ubottu> kur: For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://imgur.com/ !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+[14:04] <khurram1> here is my system log info http://paste.ubuntu.com/9629838/
+[14:06] <khurram1> eric was it helpful in diagnosing the problem?
+=== SonikkuAmerica_ is now known as SonikkuAmerica
+[14:08] <Seveas> khurram1: no :(
+[14:08] <Seveas> when's the last time you tried a reboot?
+[14:09] <khurram1> i guess its a hardware issue then :!
+[14:09] <EriC^_> khurram1: try to reboot and press esc
+[14:09] <khurram1> crap
+[14:09] <khurram1> okay
+[14:09] <Seveas> khurram1: try shutdown from a vt again. When it 'hangs', switch to a second vt with alt+f2. If you can log in there still, execute this command: ps auxf > ps.txt
+[14:09] <EriC^_> it will list what it's doing, take a screenshot of what it's hanging at
+[14:09] <EriC^_> or any errors
+[14:09] <Seveas> and when you've started up again, pastebin ps.txt
+[14:29] <Quitta> Hi Im having a question, my ubuntu partition of the HD died, im able to access the contents with a live cd however. Now Im trying to get into my postgresql database in order to copy a table to my new laptop
+[14:29] <Quitta> Does someone know how I could do this?
+[14:32] <oldster> just started using ubuntu mate
+[14:33] <oldster> any tips for brightening up the desktop?
+[14:34] <oldster> oh well bye!
+[14:39] <compengi> Hello, I booted to the ubuntu 14.01 live cd and I'm trying to mount a usb drive ext3 and ext4 partitions, but the auto mount mounts the disks as root, why is that? I want to read/write to them.
+[14:39] <BluesKaj_> Quitta, you could try the terminal on a live media device, dd if=/dev/sdx of=/dev/sdy , where if=inputfile and of=outpufile and x and y are the source and target partitions
+[14:40] <EriC^_> compengi: the perms stay the same when you mount them
+[14:40] <Quitta> BluesKaj_: I was thinking about simply copying the database files, I wasnt sure if thats actually possible
+[14:40] <compengi> EriC^_: It's a fresh formated drive with gparted
+[14:42] <compengi> EriC^_: Do you mean it's fine to use root permissions to move files?
+[14:42] <EriC^_> compengi: ok, it should mount it under /media/<your username>/<UUID>
+[14:42] <compengi> EriC^_: I see
+[14:42] <EriC^_> compengi: i meant if it's ext fs then it will be mounted with the perms of the files, you can't change that
+[14:42] <BluesKaj_> Quitta, yes as long as you use the /dev/sdx/pathtodatbasefile  and same for dev/sdy/pathtotargetfile
+[14:43] <EriC^_> compengi: you can change the parent dir's permissions, depends where you are mounting it
+[14:43] <EriC^_> then you can read/write/exec with another user
+[14:44] <eli77> !<factoid>
+[14:45] <Quitta> BluesKaj_: I will give that a try first then
+[14:46] <BluesKaj_> Quitta, it has worked for me as long as the if=inputfile is accessible
+[14:46] <compengi> EriC^_: It's a live cd so it is actually mounting it to /media/ubuntu/<UUID> directory, but I still can't write to the disc
+[14:47] <eli77> what is ubottu?
+[14:48] <BluesKaj_> !ubottu
+[14:48] <ubottu> Hi! I'm #ubuntu's favorite infobot, you can search my brain yourself at http://ubottu.com/factoids.cgi | Usage info: http://ubottu.com/devel/wiki/Plugins | Bot channels and general info: https://wiki.ubuntu.com/IRC/Bots | Make a clone of me: /msg ubottu botclone
+[14:49] <compengi> EriC^_: I could change the dir's permission to ubuntu:ubuntu
+[14:49] <EriC^_> compengi: ok
+=== nusr is now known as qubic
+[14:54] <uschxc> ubuntu 14.04, recently uninstalled "deluge" however I get system crashe GUI warning at startup about "deluge" not running.  I've checked upstart and .config/autostart, doesn't seem to be launching from there.  Any suggestions on where this is hiding?
+[14:54] <Zebbi_> Hi
+[14:54] <Zebbi_> Can u help me guys?
+[14:55] <uschxc> Depends, obviously
+[14:55] <Zebbi_>  ftp://192.168.1.128/
+[14:55] <Zebbi_> It works
+[14:55] <uschxc> cool glad to have helped.
+[14:55] <Zebbi_> im creating a ftp server but only works in my LAN
+[14:55] <Zebbi_> not external
+[14:55] <uschxc> create a firewall rule
+[14:56] <Zebbi_> Im working with Windows
+[14:56] <Zebbi_> the people from #windows dont help me
+[14:56] <uschxc> ok, you still need a firewall rule
+[14:56] <uschxc> this is not an Operating System issue, so it really has no business in Windows or Ubuntu.
+[14:57] <uschxc> Its an application/firewall port issue
+[14:57] <uschxc> http://www.ncftp.com/ncftpd/doc/misc/ftp_and_firewalls.html
+[14:58] <Zebbi_> ok ty
+[14:58] <Zebbi_> im gonna craate the rule
+[14:58] <Zebbi_> lets see
+[15:00] <uschxc> for what its worth, you should stop using FTP right now.  This isn't 1981.  Use SFTP
+[15:00] <Zebbi_> men
+[15:00] <Zebbi_> can u give me a nice tutorial for install a server sftp
+[15:00] <Zebbi_> in windows
+[15:00] <Zebbi_> please
+[15:02] <uschxc> no.  You obviously need to practice your google-fu
+[15:03] <llutz> !ot | Zebbi_
+[15:03] <ubottu> Zebbi_: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[15:03] <Zebbi_> filezilla is a good software to create a ftp server?
+[15:03] <uschxc> http://bit.ly/1xondME
+[15:05] <superstraw> I have bridged two nics together, but I do not want the second interface to have an address of 10.42.0.1.  where/what config do I edit to change this?
+[15:05] <aryo> helo, I tried installing a package with qapt, but getting error "This operation cannot continue since proper authorization was not provided"
+[15:06] <aryo> according to http://askubuntu.com/questions/103350/how-can-i-provide-proper-authorization-to-the-kde-software-updates-program I have to install polkit-kde-1, but I have had it
+[15:06] <uschxc> use "sudo" aryo
+[15:06] <uschxc> "sudo apt-get" or whatever
+[15:07] <uschxc> superstraw, you want to bridge two NICs but you do not want them to have the same IP?  thats kind of what bridging NICs does
+[15:07] <superstraw> I mean, one nic is 192.168.1.*, the other defaults to 10.42.0.1.  I would like the second one to be 192.168.200.1 instead.
+[15:08] <BluesKaj_> superstraw, the 192 IP is most likely your router
+[15:08] <aryo> uschxc: I want to test debconf-kde gui
+[15:08] <uschxc> ok.  install your app with root priviledges via sudo
+[15:09] <aryo> uschxc: it's just the same. the error persists
+[15:09] <aryo> I've disabled KDE feature but I forgot which one
+[15:09] <superstraw> 192.168.1.100 is my computer's #1 nic, 192.168.1.1 is router, 10.42.0.1 is computers #2 nic.
+[15:10] <superstraw> I would like #2 to be 192.168.100.1
+[15:10] <uschxc> http://askubuntu.com/questions/103350/how-can-i-provide-proper-authorization-to-the-kde-software-updates-program
+[15:10] <uschxc> check that out aryo
+[15:10] <superstraw> Thinking I have to fudge with the network manager...
+[15:10] <superstraw> and I think my google searching if finally bringing something up on it... I'll report back if successful.
+[15:16] <aryo> uschxc: I've attach that link before
+=== vicamo_ is now known as vicamo
+[15:19] <eli77> how can I find channel about clash of clans?
+[15:20] <Nathan__> hello
+[15:20] <uschxc> google it eli77
+[15:20] <uschxc> don't be surprised if google tells you to get a life :)
+[15:21] <eli77> how?
+[15:21] <eli77> what should I type?
+[15:23] <llutz> !alis | eli77
+[15:23] <ubottu> eli77: alis is a services bot that can help you find channels. Read "/msg alis help list" . For more help or questions relating to alis, please join #freenode. Example usage: /msg alis list #ubuntu* or /msg alis list *http*
+[15:24] <superstraw> eli77: http://lmgtfy.com/?q=clash+of+clans
+[15:24] <uschxc> eli77 seriously???  http://bit.ly/1xopFCT
+[15:25] <eli77> ok I got it
+=== Lexie is now known as Thorin
+=== Thorin is now known as Fromage
+=== Fromage is now known as Lexie
+[15:34] <pirat3d> hi
+[15:47] <ubuntu668> Hello there. I am currently working on fixing the wifi adapter for my ubuntu computer. I have gotten it working, however every time i restart the computer, i have to go through the "Make" "Make install" and "Modprobe". I have attempted to add the mod to modules, however it does not appear to be working. Any ideas?
+[15:49] <tnkhanh> anyone use guake terminal?
+[15:50] <tnkhanh> happy new year guys!
+[16:07] <JackelopeKing> hello... I'm working on trying to get my ethernet connection working again and am having trouble
+[16:08] <Seveas> JackelopeKing: how did you break it?
+=== mohammad is now known as Guest36327
+[16:18] <JackelopeKing> Hello. I am trying to fix my Ethernet connection on Ubuntu 14.10.
+[16:20] <shuman> JackelopeKing: if you don't describe what the problem is, the how can anyone help?
+[16:20] <cfhowlett> !details | JackelopeKing
+[16:20] <ubottu> JackelopeKing: Please elaborate; your question or issue may not seem clear or detailed enough for people to help you. Please give more detailed information, errors, steps, and possibly configuration files (use the !pastebin to avoid flooding the channel)
+[16:21] <JackelopeKing> Shuman: thank you. Ethernet tries to connect but hangs on "connecting" endlessly
+[16:21] <JackelopeKing> I swapped out my 12 year old Ethernet card thinking that was the issue with no luck.
+[16:22] <JackelopeKing> I also attempted to set up a static ip without success.
+[16:23] <JackelopeKing> I can still connect via wifi without issue but my Ethernet cable establish a network connection.
+[16:24] <JackelopeKing> What other information can i provide?
+[16:29] <groovedrum> hello
+=== Guest59755 is now known as mg
+=== mg is now known as mg__
+[16:34] <Seveas> JackelopeKing: pastebin the output of 'ifconfig -a' please.
+[16:34] <JackelopeKing> Seveas: thank you. One moment.
+[16:36] <JackelopeKing> http://pastebin.com/shXk1HtT
+[16:37] <m1dnight_> guys, is it possible to navigate through a tarball and extract a single subdirectory of that tarball to a location from the cli?
+[16:39] <Seveas> JackelopeKing: according to that, you have two ethernet connections. It looks like eth0 has never been used, but eth1 is the one you're trying to use. Is this correct?
+[16:40] <locutus1> hey guys.  back.  so I am trying to reinstall 14.04 and it is failing at the grub installation every time
+[16:40] <JackelopeKing> Seveas: that is correct. eth0 is a non functional Ethernet port on my mobo
+[16:40] <Seveas> JackelopeKing: ok, pastebin the output of 'sudo ethtool eth0' please
+[16:40] <Seveas> err, eth1
+[16:40]  * Seveas slaps self
+[16:41] <locutus1> the specific error is "unable to install grub in /dev/sda: executing 'grub-install /dev/sda failed' this is a fatal error"
+[16:41] <locutus1> that's all I get
+[16:41] <locutus1> and I think I just found out why
+[16:41] <locutus1> is there any way I can point the grub install at a different disk?
+[16:42] <locutus1> it should be installing to /dev/sdb, not /dev/sda
+[16:42] <JackelopeKing> Seveas: http://pastebin.com/EG0sW0GL
+[16:42] <Seveas> JackelopeKing: ok, that says at least the cable is plugged in correctly. Is DHCP supposed to work on your network?
+[16:43] <cfhowlett> locutus1, yes.  just select the alternate target and install
+[16:43] <Novice201y_> Hi. Easy way to 14.10->15.04?
+[16:43] <locutus1> cfhowlett, I don't have an alternate target for the grub install, though.
+[16:43] <Novice201y_> (And yes- it's not a production machine)
+[16:43] <Seveas> !ubuntu+1 | Novice201y_
+[16:43] <ubottu> Novice201y_: Vivid Vervet is the codename for Ubuntu 15.04 - Support only in #ubuntu+1
+[16:43] <locutus1> cfhowlett, doing a minimal install.
+[16:43] <teward> Novice201y_: #ubuntu+1 - 15.04 is offtopic here
+[16:43] <cfhowlett> Novice201y_, 14.04 isn't even released yet
+[16:43] <teward> (because it's not released yet)
+[16:43] <teward> cfhowlett: 15.04 is what you meant to type right?
+[16:43] <cfhowlett> locutus1, should still be possible
+[16:44] <Seveas> Novice201y_: but sudo do-release-upgrade -c -d should get you there. Further support only in the +1 channel :)
+[16:44] <cfhowlett> teward, doh!  yep
+[16:44] <locutus1> cfhowlett, how can one do it? :)  it doesn't provide me with an option as for where to install it :D
+[16:44] <cfhowlett> locutus1, the grub target selection tool is on the partitioning page
+[16:45] <JackelopeKing> Seveas: i believe so but can't be 100% sure. Using a linksys ea3500.
+[16:45] <Seveas> JackelopeKing: well, let's find out :) sudo dhclient eth0
+[16:45] <Novice201y_> Seveas, Why "-c" and "-d"?
+[16:45] <Seveas> JackelopeKing: err, eth1 again.
+[16:46] <Seveas> Novice201y_: read the manpage :)
+[16:46] <locutus1> cfhowlett, I tell it to use the entire disk, then I select the disk for it to partition (sdb), but it still tries to install grub to sda?
+[16:46] <cfhowlett> locutus1, shouldn't do that ... obviously.  sorry, but I don't know why and can't advise.
+[16:47] <JackelopeKing> Not getting any output, but also still hanging on "connecting" in the network GUI
+[16:47] <Novice201y_> Seveas, There's no man for it.
+[16:47] <locutus1> cfhowlett, no worries.  thanks for trying.  I have an idea of how to solve, let me know if this would work.  could I boot to a live cd and then do a grub-install from that?
+[16:48] <cfhowlett> !grub | locutus1, yes indeed.
+[16:48] <ubottu> locutus1, yes indeed.: GRUB2 is the default Ubuntu boot manager. Lost GRUB after installing Windows? See https://help.ubuntu.com/community/RestoreGrub - For more information and troubleshooting for GRUB2 please refer to https://help.ubuntu.com/community/Grub2
+[16:48] <Seveas> JackelopeKing: oh, then there's probably already one running. Make the one from NetworkManager go away by clicking disconnect. Then retry
+[16:49] <locutus1> cfhowlett, second question.  is grub necessary on a system that is not dual boot?
+[16:49] <NoOova> Hello!
+[16:49] <kabar> First time it's solved my problem but My ubuntu 14.04 x64 server again showing below message but this time it's not solve this problem it's still showing:  7 packages can be updated.  7 updates are security updates.  Commands i used:  Step:1 sudo apt-get update  Step:2 sudo apt-get -y upgrade  Step:3 sudo reboot   Please help me to solve this.....
+[16:49] <cfhowlett> locutus1, strictly speaking, no.  but you'd have to manually configure which kernel and options to boot each and every time ...
+[16:49] <teward> kabar: what did `sudo apt-get -y upgrade` return?
+[16:50] <locutus1> cfhowlett, well that doesn't sound like fun :D
+[16:50] <teward> kabar: did it return something saying "Some packages have been held" or such?
+[16:50] <JackelopeKing> Seveas: disconnected ethernet and still getting no output
+[16:50] <cfhowlett> locutus1, it would get tiresome quickly
+[16:51] <degenorate> would anybody possibly have time to help me out a little, im learning ubuntu. and i need to give a person a ftp user login that is limited to only one directory. i tried on my own and now i cant even login to the user at all
+[16:51] <ragazzi> hei
+[16:52] <kabar> teward:  The following packages have been kept back: linux-generic linux-headers-generic linux-image-generic 0 upgraded, 0 newly installed, 0 to remove and 3 not upgraded
+[16:52] <kabar> it showing above message when i try
+[16:52] <teward> kabar: those don't get installed by `upgrade` - you have to explicitly give the instruction to install them.  or use dist-upgrade
+[16:53] <locutus1> cfhowlett, alright.  going to try to see if this install succeeds, if it fails I will install without grub then boot to the live cd and try running boot-repair
+[16:53] <teward> (sudo apt-get -y dist-upgrade    OR   sudo apt-get install linux-generic linux-headers-generic linux-image-generic )
+[16:53] <cfhowlett> kabar, agreed with teward.  sudo apt-get dist-upgrade     tends to solve those things
+[16:53] <locutus1> cfhowlett, thanks again
+[16:53] <teward> kabar: HOWEVER, that would require a reboot and such.
+[16:53] <cfhowlett> locutus1, happy2help
+[16:54] <Seveas> JackelopeKing: ps aux | grep dhcl
+[16:54] <Seveas> and pastebin the output
+[16:56] <xeniphon> Seveas/JackelopeKing:  That dhclient command should probably point to eth1 - it didn't look like eth0 was plugged in.
+[16:56] <JackelopeKing> Seveas: http://pastebin.com/MR3X85pb
+[16:56] <Seveas> xeniphon: yeah :)
+[16:56] <Seveas> JackelopeKing: sudo kill 8995 && sudo dhclient eth1
+[16:57] <xeniphon> Seveas/JackelopeKing:   sudo dhclient eth1
+[16:58] <JackelopeKing> Seveas: followed commands above, still no output.
+=== Tsunami is now known as Guest57369
+[16:59] <Seveas> JackelopeKing: oh bugger. It doesn't output, but sends its messages straight to /var/log/syslog. grep dhclient /var/log/syslog
+[17:01] <JackelopeKing> Seveas: http://pastebin.com/r2X9ic7K
+[17:03] <locutus1> cfhowlett, looks like boot-repair did it
+[17:03] <locutus1> well that was an adventure lol
+[17:04] <cfhowlett> locutus1, good work getting it sorted.
+[17:04] <Seveas> JackelopeKing: dhcp isn't working on your network. Do you know ip address/netmask/gateway you need to set?
+[17:05] <JackelopeKing> Seveas: can i get that from my router's setup page?
+[17:05] <Seveas> JackelopeKing: probably. Is the wifi on the same router?
+[17:06] <JackelopeKing> Seveas: yes it is.
+[17:07] <JackelopeKing> Seveas: i have them up.
+[17:07] <Seveas> JackelopeKing: what are they?
+[17:08] <JackelopeKing> Ip: 192.168.1.1 / netmask: 255.255.255.0
+[17:08] <Seveas> ok, can you ping that ip?
+[17:09] <JackelopeKing> Seveas: yes. Working over wifi
+[17:10] <peeps[lappy]> how do i set static ip in ubuntu
+=== JR is now known as Guest16535
+[17:10] <Seveas> JackelopeKing: ok. Let's set a manual IP and try to ping via the wired: sudo ifconfig eth0 192.168.1.201/24 up
+[17:10] <JackelopeKing> Seveas: for eth1 yes?
+[17:10] <peeps[lappy]> 14.10
+[17:10] <Seveas> JackelopeKing: and then ping -I eth1 192.168.1.1
+[17:10] <Seveas> JackelopeKing: yes. Whenever I say eth0, assume I mean eth1 :-)
+[17:11] <Seveas> eth0 is just hardwired into my finger memory I guess :-)
+[17:11] <xeniphon> Seveas: what happens when Ubuntu has two network interfaces in the same subnet?
+[17:12] <JackelopeKing> Seveas: destination host unreachable
+[17:12] <Seveas> xeniphon: depends on the routing table
+[17:12] <Seveas> JackelopeKing: ok, so it looks like eth1 is physically connected to something that is not your router
+[17:13] <Seveas> JackelopeKing: maybe your router has some special interfaces you shouldn't use? or there's a misconfigured switch in the middle?
+[17:13] <JackelopeKing> Seveas: i use a power link adapter to connect to the router. One moment.
+[17:13] <Seveas> peeps[lappy]: click the network manager icon, select edit connections, edit the wired connection
+[17:14] <Seveas> JackelopeKing: try plugging it directly into the router. If that works, the power link adapters are the problem.
+[17:14] <frainHereNotHere> I will be seting up mashine in few days, it will be used as web server , game server, mercurial server etc. , fun stuff. So I was wondering which ubuntu version should i put on? ubuntu server?
+[17:15] <JackelopeKing> Seveas: the adapter works fine on another device. Let me try swapping them out. One moment please.
+[17:15] <Seveas> frainHereNotHere: ubuntu server 14.04
+[17:15] <frainHereNotHere> cool, thanks
+[17:18] <polpottery> Guys my GUI has just died, how can i fix it? (14.04, Pantheon)
+[17:18] <bekks> polpottery: What happened exactly?
+[17:19] <Seveas> polpottery: try rebooting.
+[17:19] <OerHeks> pantheon is elementary, right?
+[17:19] <favourites> i need help
+[17:19] <favourites> anyboddy there?
+[17:19] <JackelopeKing> Seveas: the router is on the other side of the house so a direct connection is out for the moment I'm afraid. Swapped the physical powerline adapters for the one which has been working with no change
+[17:20] <SchrodingersScat> !ask | favourites
+[17:20] <ubottu> favourites: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[17:21] <favourites> this is my problem: http://askubuntu.com/questions/565748/using-firefox-developer-edition-as-default-browser-problem haven't been able to understand the answers (absolute newcomer here)
+[17:21] <polpottery> bekks: basically all my windows just froze. I can still get updates in terminal, but i can't interact with spotify for example or move the terminal window
+[17:21] <JackelopeKing> Seveas: which i think leaves the connection problem somewhere in the physical wiring of the house
+[17:21] <polpottery> bekks: probably due to some pantheon bug, i dunno
+[17:21] <Seveas> JackelopeKing: I'm afraid that what little information we can get in this situation does point to these adapters being the problem :(
+[17:21] <JackelopeKing> Seveas: thank you for your help!
+[17:22] <bekks> polpottery: Wjy do you think pantheon is the reason? And what is it?
+[17:22] <SchrodingersScat> favourites: idk anything about firefox dev edition, but I know you shouldn't sudo nautilus ever, it would be gksudo nautilus, but even then you should be stopping and asking yourself why you need to do this before proceeding.  Is it a permissions problem?
+[17:23] <toptyg> hello all, is it there exist spec of mc ?
+[17:23] <polpottery> bekks: it's the GUI for ElementaryOS, and i assume it's to blame because i never have these sorts of issues with Unity for instance
+[17:24] <toptyg> How's MC is coping files? which is algorithm use?
+[17:24] <toptyg> I have folder 200gb and wonna to copy it on anoter location
+[17:25] <Seveas> toptyg: on the same computer? On the same partition/volume perhaps?
+[17:25] <toptyg> but some files wile i am copping this folder may be modified
+[17:25] <toptyg> ya on the same pc
+[17:26] <toptyg> while*
+[17:26] <Seveas> toptyg: it will copy the files one by one. If they are modified during the copy, who knows which version is copied...
+[17:27] <favourites> http://askubuntu.com/questions/565748/using-firefox-developer-edition-as-default-browser-problem help
+[17:27] <toptyg> Seveas: ok .. but coppying proc more then 2h doing..
+[17:28] <Seveas> toptyg: yes, that's no surprise.
+[17:28] <toptyg> Seveas: no recursion may be in this case ? )
+[17:28] <toptyg> loop
+[17:29] <polpottery> what's the command to restart a process?
+[17:29] <Seveas> not unless you do something really weird creating new files
+[17:29] <Seveas> in fact, I can't think of a way to make it to endless loops :)
+[17:29] <Seveas> polpottery: there's no such command.
+[17:29] <Seveas> polpottery: can you be more specific?
+[17:30] <SchrodingersScat> closest I can think of is if it's a service, sudo service foo restart  ???
+[17:30] <bekks> polpottery: There is no such command.
+[17:30] <polpottery> Seveas: so i installed the elementaryos GUI (as far as i understand it), which replaces unity with Pantheon. Pantheon seems quite buggy, and just now all my windows have basdically become unclickable (although i can type in terminals)
+[17:31] <bekks> !elementaryos | polpottery
+[17:31] <bekks> !elementary | polpottery
+[17:31] <ubottu> polpottery: Elementary OS is an Ubuntu derivative which is supported in their IRC channel #elementary on irc.freenode.net - http://elementaryos.org/ for more information on this distribution.
+[17:31] <polpottery> it's inactive, as usual
+[17:31] <bekks> Which doesnt make it supported in here.
+[17:31] <Seveas> that doesn't make it ok to ask us questions about it.
+[17:31] <polpottery> Seveas: this is a general ubuntu question
+[17:32] <EriC^_> polpottery: type whereis elementary
+[17:32] <Seveas> it's not. It's elementary os, and even something they specifically replaced.
+[17:32] <bekks> polpottery: Well, you are not using Ubuntu, but ElementaryOS.
+[17:32] <Seveas> so, off you go. Ask someone who knows about it, which is not us :)
+[17:32] <polpottery> bekks: no, i'm using ubuntu, just the elementaryOS GUI
+[17:33] <EriC^_> polpottery: you used an ubuntu iso to install?
+[17:33] <polpottery> yeah
+[17:33] <Seveas> polpottery: that's still not supported in here
+[17:33] <EriC^_> polpottery: type whereis elementary
+[17:34] <EriC^_> polpottery: type apropos elementary
+[17:34] <toptyg> Seveas: i am looking on bar and see copping /33/  then /99/ then /06/
+[17:34] <EriC^_> apropos elementary | nc termbin.com 9999 and give us the link
+[17:34] <Seveas> toptyg: yeah, it doesn't do them in alphabetical or numeric order :)
+[17:35] <toptyg> Seveas: ya but its annoying me :)
+[17:36] <Seveas> well, tough :)
+[17:41] <Encrypt> Hello o/
+[17:42] <Seveas> hi
+[17:42] <Encrypt> I'm looking for somebody who knows how the "mail icon" in Unity behaves
+[17:42] <Encrypt> How to make it change of color exactly
+[17:43] <IdleOne> look for the .desktop file
+=== zz_XeBlackWater is now known as XeBlackWater
+[17:43] <Encrypt> IdleOne, I have tox installed actually
+[17:43] <EriC^^> Encrypt: type restart indicator-messages
+[17:43] <toptyg> And one's question ..
+[17:43] <Encrypt> And once I get a message, the app icon blinks in the dock
+[17:43] <toptyg> Hows to create cron job without crontab command ?
+[17:43] <Encrypt> But I'd like a better integration and have it change the color of the mail icon
+[17:44] <Encrypt> Just exactly as thunderbird / XChat when get a new mail / HL
+[17:44] <toptyg> I may create script.. and when i use crontab -l   I may see it
+[17:44] <toptyg> but it doesnot work
+[17:45] <toptyg> and when i try to run it i se msg that 120 sec inactive task...
+[17:45] <Encrypt> IdleOne, EriC^^, Do you know how I could do that?
+[17:45] <Encrypt> I saw a StartupNotification option in the .desktop file
+[17:45] <IdleOne> I( don't
+[17:45] <Encrypt> But I imagine it's not as simple as turning it to "true", right? :p
+[17:46] <Encrypt> IdleOne, Ok, thanks anyway :)
+[17:46] <kabar> teward: problem is solved now :)
+[17:46] <kabar> thank you
+[17:47] <kokut> what IRC channel should i go to as a cellphone related question?
+[17:47] <toptyg> Seveas: can u help me with cron ?
+[17:47] <SchrodingersScat> !touch | kokut
+[17:47] <ubottu> kokut: Information about the Ubuntu Touch platform for Phone and Tablet is available here https://wiki.ubuntu.com/Touch . Support and discussion in #ubuntu-touch
+[17:49] <polpottery> What part of ubuntu is responsible for what happens when you alt+tab?
+[17:49] <Encrypt> IdleOne, EriC^^, Do you know anybody who would be able to help me?
+[17:49] <trism> Encrypt: this is a simple python app that shows how to highlight the envelope and remove it, you need a .desktop file too: http://paste.ubuntu.com/9630800/ (this uses test-app.desktop but any desktop file would work if you change the name)
+[17:50] <Encrypt> trism, Thanks, I'll have a look
+[17:50] <toptyg> Seveas: thanks for advice
+[17:50] <kokut> SchrodingersScat: man i didnt mean the ubuntu phone i mean just any cellphone
+[17:51] <EriC^^> toptyg: you can do crontab -l > tempcron && echo "* * * * * newcron" >> tempcron && crontab tempcron && rm tempcron
+[17:51] <SchrodingersScat> !alis | kokut
+[17:51] <ubottu> kokut: alis is a services bot that can help you find channels. Read "/msg alis help list" . For more help or questions relating to alis, please join #freenode. Example usage: /msg alis list #ubuntu* or /msg alis list *http*
+[18:00] <kokut> SchrodingersScat: man i found no channels
+=== juned is now known as wow
+[18:03] <wow> any youtube downloader for ubuntu
+[18:03] <wow> ?
+[18:03] <wow> any youtube downloader for ubuntu
+[18:03] <gr33n7007h> wow, youtube-dl
+[18:03] <SchrodingersScat> !info youtube-dl | wow, but you normally need to update it via pip or similar anyway...
+[18:04] <ubottu> wow, but you normally need to update it via pip or similar anyway...: youtube-dl (source: youtube-dl): downloader of videos from YouTube and other sites. In component universe, is extra. Version 2014.08.05-1 (utopic), package size 306 kB, installed size 1469 kB
+[18:04] <Encrypt> Also, that's not that legal
+[18:05] <wow> thx
+[18:05] <wow> sweet dreams
+[18:10] <Guest78725> who  81.177.180.164
+=== santacat is now known as cats
+[18:21] <aaa801> whats the package that lists what package something you are missing is in when you attempt to use it..
+[18:22] <jhutchins> I have a youtube downloader for Firefox.  It updates from the Firefox site directly.
+=== polpottery is now known as basichash
+[18:24] <oldster> can't install unetbootin-linux-608
+[18:24] <oldster> can anyone help please
+[18:24] <trism> aaa801: apt-file ?
+[18:25] <aaa801> trism: im after the one that does the automated messages
+[18:25] <trism> aaa801: oh command-not-found ?
+[18:25] <aaa801> like if you try and run php and its not found it says php can be found in yadayada
+[18:25] <aaa801> thats it!
+[18:25] <cik> hi
+[18:25] <cik> hi
+[18:25] <aaa801> thanks
+[18:25] <oldster> its a .bin file
+[18:27] <oldster> unetbootin-linux-608.bin
+[18:28] <oldster> made it executable via permissions
+[18:28] <oldster> and then ./unetbootin-linux-608
+[18:28] <oldster> and nothing?
+[18:30] <oldster> cheers!
+[18:30] <OerHeks> oldster, why that hard way? sudo apt-get install unetbootin
+=== XeBlackWater is now known as zz_XeBlackWater
+[18:31] <oldster> just wanted latest version of unetbootin
+[18:31] <oldster> shall try synaptic version
+[18:31] <gr33n7007h> oldster, try sudo ./untenbootin-linux-608
+[18:32] <oldster> thanks OerHeks
+[18:34] <def_> Hi, Can I use gtk2 themes on 14.4.1?
+=== mohammad is now known as Guest82510
+=== Paradisee_ is now known as Paradisee
+[18:46] <tnkhanh> I just lost the whole unity stuffs after messing with compizconfig
+[18:46] <tnkhanh> lucky i got them back :D
+[18:52] <Darknet> <ikonia> hang on White_Cat are you also the user darknet
+[18:52] <Darknet> lol?
+[18:53] <light94> Hello everyone, i am new to linux . I wanted to know if there is a difference between installing a program with ubuntu's apt-get and building directly from source (git)
+[18:54] <light94> specially if I want to contribute to the app
+[18:54] <Prezident> Not really.
+[18:55] <tnkhanh> hi
+[18:55] <light94> Prezident: so, for example i installed an app from the software center and it says that canonical does not provide updates to the app
+[18:56] <light94> so, in that case, how do we update the app?
+=== Guest15013 is now known as cydrobolt
+[18:57] <llutz> light94: get the source, build your own package, install it. avoid to install stuff without using the packagemanagement, makes updates/deinstallations etc much easier
+[18:57] <xeniphon> light94:  The primary difference between apt-get and git is that apt will track dependencies and versions.  With git you need to know you have all the required libraries, headers and the like - apt&dpkg won't help you as much.
+=== cydrobolt is now known as Cydrobolt
+[19:00] <light94> xeniphon: so an app installed via apt-get isn't always up to date with the source even if apt-get update command doesn't tell about upgradations?
+[19:05] <def_> Hi, I am trying to install some themes, but I am not sure how i can make the menu bar go at the bottom like a mac as the designer has done on this theme http://pauloarapiraca.deviantart.com/art/Elementary-Dark-2-0-462699494?ga_submit_new=10%253A1403459880
+[19:05] <def_> How would I go about doing this?
+[19:09] <Justus_> hi
+[19:10] <Justus_> is there a project that deals with sound problems?
+[19:11] <thorij> Hello Im having trouble with my headphones... there is this static noise all the time like they are set to volume 100% or more but they are not, sound is working just fine but this noise in background is really annying
+[19:11] <thorij> all input devices all disabled also tried a lot with options snd-hda-intel model=... but it make no difference
+[19:13] <Justus_> ah, the joys of pulse, sorry there, I can't help you, I'm currently in the middle of another annoying sound problem myself :|
+[19:20] <tech2_> Hi all, I've recently add-apt-repository'd a ppa, launchpad shows a particular set of versions of packages for my installed release (utopic) but when I apt-cache search it's showing an earlier version. How do I discover where the issue is?
+[19:20] <bekks> tech2_: Can you show us those outputs in a pastebin please?
+[19:20] <SchrodingersScat> did you apt-get update?
+[19:21] <tech2_> SchrodingersScat: I did.
+[19:24] <tech2_> bekks: http://paste.ubuntu.com/9631258/
+[19:25] <tech2_> bekks: https://launchpad.net/~hansjorg/+archive/ubuntu/rust - the ppa in question shows 0.12 as an available option, it's in the pool and there appears to be a dsc for utopic. I worry I may be reading things wrongly though.
+[19:27] <pyromine> Has anyone ever had the issue of pip giving a Permission Denied error on pip list?
+[19:30] <Seveas> pyromine: no, but I can see how it could happen. Could you run it under strace -eopen?
+[19:30] <Seveas> (and pastebin the output)
+[19:31] <norinder> Hi, after disabling ipv6 in 14.04, I have to do a "sudo sysctl -p" every time I connect to a new network.  Is this expected?
+[19:32] <Seveas> norinder: welcome to the 21st century. Stop disabling ipv6, it serves no purpose to do so.
+[19:33] <norinder> Seveas, sorry, but my ISP has ipv6 all screwed up
+[19:33] <norinder> OfflineIMAP doesn't play well with ipv6 and my ISP
+[19:33] <norinder> Have to disable ipv6
+[19:33] <pyromine> Seveas, Well this is just the output from running it in general. http://pastebin.com/cHQRBZvt
+[19:33] <Seveas> norinder: time to swtich isp :)
+[19:33] <maxwell_> gello
+[19:33] <norinder> Seveas, I'm at a university
+[19:33] <maxwell_> hello
+[19:34] <fx11> guys, how to make fonts rendering like osx?
+[19:34] <norinder> fx11, disable hinting
+[19:34] <Seveas> pyromine: probably result of a 'sudo pip'. sudo rm -r /home/tom/.cache/pip
+[19:35] <norinder> fx11, or see the infinality package: http://www.webupd8.org/2013/06/better-font-rendering-in-linux-with.html
+[19:35] <maxwell_> hello
+[19:35] <pyromine> Seveas, Thanks that fixed it, never would have guessed it was the cache
+[19:36] <maxwell_> what does this message mean? m_ssl_gnutls.so: undefined symbol: gnutls_x509_privkey_import
+[19:36] <maxwell_> is this a problem with the module itself?
+[19:38] <locutus1> hello all.  having an issue with a fresh install of transmission-daemon.  I am getting errors that say "no data found! ensure your drives are connected or use set location".  The settings.json was pulled from a working setup and placed here.  The path names to complete and incomplete downloads are the same on this system and the drives are mounted.  any help?
+[19:40] <tech2_> bekks, SchrodingersScat: any further ideas? :(
+[19:44] <Justus_> jesus christ, it's the same as always, the more I learn about pulse and how it handles stuff the more terrible and idiotic it appears :|
+[19:44] <Justus_> https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=724735
+[19:44] <ubottu> Debian bug 724735 in bluez "A2DP device stopped working after latest update" [Normal,Fixed]
+[19:44] <proc3sarte> HI!
+[19:45] <Justus_> proc3sarte: hey
+[19:46] <Vegg> Hello there. I'm attempting to start up a game on Steam(Rust, linux compatible). However, keep getting a error "Could not find required openGL entry point, glcolormaskindexedEXT". Im suspecting this  has something to do with the GFX drivers. Any ideas?
+[19:46] <Justus_> How about a new project "Sound for Linux - Taking care of that shit for you."
+[19:46] <EriC^^> Justus_: how about you make it?
+[19:46] <tech2_> Justus_: _another_ standard... of course, that will fix _all_ the problems.
+[19:47] <Justus_> EriC^^: that is the idea...
+[19:47] <daniel__> hello i did a minimal install of unity with --no-install-recommends now im trying to use the tweak tool and im getting "The following schema is missing com.canonical.indicator.session"
+[19:47] <Justus_> tech2_: Don't think standard, think middleware handling the communication between parts seemingly not built to work together
+[19:50] <Justus_> I mean look at what I got here, right now bluez may be the culprit, since it claims the device connected is not media capable, leaving out the 3 hours of research I had to do to arrive at this point all that matters to the user is "my audio doesn't work". Same problem on another OS: "Look at that, I plugged it in and it works!"
+[19:50] <tech2_> Justus_: an API is a standard like any other. Are you proposing this replacement middleware supports the exact same API as pulse?
+[19:51] <Justus_> tech2_: I am not even suggesting replacing pulse, the problem isn't inside pulse, it's in the way it's deployed
+[19:51] <Justus_> tech2_: the whole problem is in not having critical parts under your control
+=== mike is now known as Guest77215
+=== owner is now known as Guest49840
+[19:52] <daniel__> wich package contains it?
+[19:52] <tech2_> Justus_: the likelihood is bluez imho, it's an absolute pita and iirc the version in ubuntu is at least a major version out of date with bluez latest release.
+[19:52] <Justus_> tech2_: just one word for that (you can probably imagine the tone of it) - WHAT?!
+[19:53] <locutus1> nm
+[19:53] <locutus1> it's working now
+[19:53] <Justus_> tech2_: one full version? O_o
+[19:53] <Justus_> tech2_: meaning I can now probably go ahead and compile it on my own
+[19:54] <tech2_> Justus_: from bluez homepage "Release of BlueZ 5.27", from dpkg on utopic - 4.101-0ubuntu20
+[19:54] <Justus_> tech2_: or throw either ubuntu or the idea of using my computer to play smartphone audio away
+[19:54] <tech2_> Justus_: it's not that easy to just recompile though, iirc bluez did a bit of a rewrite between 4 and 5 and it's incompatible, but I could be wrong there.
+[20:02] <Giwrgaras> j/ #c#
+=== Caleb--- is now known as Caleb--
+[20:04] <sergiu> Hello :)
+[20:12] <Josephine23>  High Quality photos and videos http://bitly.com/1nx3K4c
+[20:15] <s1lk> servus zusammen
+[20:16] <s1lk> nachdem ich nun einiges probiert habe dachte ich mir es konnte kein fehler sein mal hier zu fragen ...  :)
+[20:16] <llutz> !de | s1lk
+[20:16] <ubottu> s1lk: In den meisten Ubuntu-Kanalen wird nur Englisch gesprochen. Fur deutschsprachige Hilfe besuche bitte #ubuntu-de, #kubuntu-de, #edubuntu-de oder #ubuntu-at. Einfach "/join #ubuntu-de" eingeben. Danke fur Dein Verstandnis!
+[20:24] <Laurenceb__> hi, I have a problem, metacity has crashed, and I need to restore my desktop using putty from a windows machine
+[20:24] <Laurenceb__> can anyone assist me
+[20:25] <Laurenceb__> and first machine is stil dead
+[20:25] <Laurenceb__> (metacity --replace&) $ Window manager error: Unable to open X display
+[20:26] <orrieux> motogp
+[20:28] <SchrodingersScat> Laurenceb__: might have to export the display?
+[20:29] <Laurenceb__> ok, how do i do that?
+[20:29] <SchrodingersScat> Laurenceb__: something like export DISPLAY=":0.0"
+[20:30] <Laurenceb__> ah perfect, it works
+[20:31] <Laurenceb__> thanks
+[20:33] <sasha-> Yop anyone know how I can disable the middle button?
+[20:33] <sasha-> it randomly pastes stuff  all the time
+[20:33] <Annoyed> Good afternoon
+[20:33] <sasha-> drove me through the roof until I discovered what messed with me
+[20:33] <blackangelpr> sasha-,  any imput device that do that its must be broken XD
+[20:34] <sasha-> very
+[20:34] <SchrodingersScat> !pm | badape
+[20:34] <ubottu> badape: Please ask your questions in the channel so that other people can help you, benefit from your questions and answers, and ensure that you're not getting bad advice.
+[20:34] <sasha-> the laptop was in a lake blackangelpr
+=== badape is now known as scullu
+[20:35] <blackangelpr> XD
+[20:36] <Annoyed> Having a problem getting XDMCP to work on 14.04, either server or desktop versions. I know Unity won't work, so I installed the server version (no GUI by default) and during install, I installed Gnome, intending on using gdm ... But Xming can't get a desktop
+[20:38] <Annoyed> and it would appear that the service is not running or the port is blocked.. nmap says the port is closed : 177/tcp closed xdmcp
+[20:42] <Annoyed> Anyone manage to get XDMCP going in 14.04 ?
+[20:46] <anonemoose> Hello
+[20:47] <anonemoose> How do I customise the ubuntu iso to minimize its size?
+[20:47] <anonemoose> I want to remove all the browsers, text editors, wall papers it comes with
+[20:48] <anonemoose> and strip it to just plain desktop environment and a console
+=== adapter_ is now known as adapter
+[20:48] <Seveas> anonemoose: https://help.ubuntu.com/community/LiveCDCustomization
+[20:49] <anonemoose> Thanks a lot Seveas
+=== tiffany_ is now known as eightball
+[20:50] <OerHeks> many features are dependencies of unity desktop, i bet you end up not that much smaller
+[20:51] <eightball> try to install this sudo apt-get install myagenda   GET THIS ERRORW: Duplicate sources.list entry http://archive.canonical.com/ubuntu/ trusty/partner i386 Packages (/var/lib/apt/lists/archive.canonical.com_ubuntu_dists_trusty_partner_binary-i386_Packages)
+[20:51] <eightball> W: You may want to run apt-get update to correct these problems
+[20:51] <eightball> help please
+[20:52] <OerHeks> eightball, and did you run apt-get update ?
+[20:53] <eightball> yes then i get this error W: Failed to fetch http://ppa.launchpad.net/piotr-zagawa/ma2/ubuntu/dists/trusty/main/binary-i386/Packages  404  Not Found
+[20:53] <eightball> E: Some index files failed to download. They have been ignored, or old ones used instead
+[20:53] <\o> o/
+[20:54] <llutz> eightball: its a warning, not an error
+[20:54] <OerHeks> eightball, oh, but that ppa https://launchpad.net/~piotr-zagawa/+archive/ubuntu/ma2 has only got a Precise 12.04 candidate.
+[20:54] <OerHeks> eightball, remove that ppa in softwarecenter
+[20:54] <eightball> yes i did see that later after i read it
+[20:56] <eightball> how do i do that ?
+[20:57] <OerHeks> eightball, open softwarecenter > edit > sources, and find that ppa in the list 'other software'
+[20:59] <eightball> then un check?
+[20:59] <OerHeks> eightball, yes
+[20:59] <eightball> then update then try to install sudo apt-get install myagenda
+[20:59] <OerHeks> as you didn't install any part, you wont need ppa-purge to reverse anything
+[21:00] <eightball> ok
+[21:00] <OerHeks> no, myagenda is not available
+[21:00] <eightball> is there another program like it you can point me to?
+=== Neo31 is now known as Neo31mbl
+=== Neo31mbl is now known as Neo31
+[21:02] <SupaYoshi> Hey I have a problem, I am trying to resize a LVM2PV partition?
+[21:02] <SupaYoshi> But I cannot resize it I want it to be smaller. Im using gparted.
+[21:03] <SupaYoshi> And Im reading this stuff on this website, but it wont work for me
+[21:03] <SupaYoshi> http://askubuntu.com/questions/196125/how-can-i-resize-an-lvm-partition-i-e-physical-volume
+[21:03] <SupaYoshi> Because it is already umounted, im booting from a live cd.
+[21:03] <OerHeks> eightball, there is simpelagenda, else some other option that requires a PPA http://www.omgubuntu.co.uk/2014/05/california-calendar-app-hits-yorba-daily-ppa
+[21:04] <SupaYoshi> It also tells me that the unallocated space is 0
+[21:04] <SupaYoshi> But the unallocated space is much bigger than that
+[21:05] <SupaYoshi> http://paste.ubuntu.com/9631720/
+[21:07] <eightball> looking at ti
+[21:08] <SupaYoshi> Thanks. xD
+[21:09] <OerHeks> SupaYoshi, you might want to use parted or gdisk for those gpt partitions
+[21:09] <SupaYoshi> I am :D
+[21:09] <SupaYoshi> I am in gparted.
+[21:09] <SupaYoshi> But in gparted (live cd/usb)
+[21:09] <OerHeks> not gparted, that one cannot handle gpt too, is it?
+[21:09] <SupaYoshi> It wont let me resize either the LVM or the other extended partition.
+[21:09] <SupaYoshi> It cannot?
+[21:10] <SupaYoshi> http://gparted.org/livecd.php im using this.
+[21:10] <SupaYoshi> But?
+[21:11] <OerHeks> oh it can.
+[21:12] <SupaYoshi> Yeah..
+[21:12] <SupaYoshi> But so why cant i resize the partition sizes? O.o
+[21:12] <SupaYoshi> I cannot of the LVM or the Extended partition.
+[21:15] <SupaYoshi> Picture :D https://s3.amazonaws.com/pushbullet-uploads/ujxmyuGuoXk-GfH0k5FQ6yzCtWZebByjJOQQn36LHFb0/IMG_20141227_215158.jpg
+[21:16] <Flannel> SupaYoshi: What are you trying to do?
+[21:16] <SupaYoshi> Flannel, trying to reduce the size of /dev/sdb5 to 110 GB or so.
+[21:17] <SupaYoshi> So I can put it on my 120 GB ssd.
+[21:17] <SupaYoshi> (clonezilla)
+[21:17] <Flannel> SupaYoshi: You first need to shrink the size of the LVM stuff "inside" the partition (to make it so you really do have 30GiB Unused)
+[21:17] <SupaYoshi> But it says Used: 148.81
+[21:17] <SupaYoshi> Yeahh!
+[21:17] <Flannel> right, you need to make that 120ish
+[21:17] <MDTech-us_MAN> hello
+[21:18] <SupaYoshi> :D But I cannot move that bar
+[21:18] <MDTech-us_MAN> I have a window that was on a second screen
+[21:18] <SupaYoshi> Like I usually can. with gparted.
+[21:18] <SupaYoshi> So like.. How would I resize it / make it smaller?
+[21:18] <Flannel> SupaYoshi: That's because it's all used.  Your 150GB partition is completely full of LVM stuff.
+[21:18] <MDTech-us_MAN> I disconnected the screen and now I cant fint the window!
+[21:18] <SupaYoshi> Okay understood thanks mate
+[21:18] <Flannel> SupaYoshi: You need to use LVM tools, not gparted.
+[21:18] <SupaYoshi> So I need to boot into Linux?
+[21:18] <SupaYoshi> Okay. Never done that before man :D
+[21:19] <Flannel> You can probably use your liveCD
+[21:19] <Flannel> SupaYoshi: http://blog.shadypixel.com/how-to-shrink-an-lvm-volume-safely/
+[21:19] <MDTech-us_MAN> how do i bring the window over to the current screen
+[21:19] <SupaYoshi> http://paste.ubuntu.com/9631766/ there
+[21:20] <Flannel> SupaYoshi: First you resize the partition(s) that are inside the LVM (like /, this will be ext3, ext4, etc, regular filesystems), then you'll use lvreduce to shrink the size of your logical volume, then you can shrink the size of the PV that the LV is inside of, etc.
+[21:20] <SupaYoshi> Okay cool
+[21:21] <SupaYoshi> I only have 1 partition inside of the LVm right?
+[21:21] <Flannel> SupaYoshi: http://askubuntu.com/questions/196125/how-can-i-resize-an-lvm-partition-i-e-physical-volume is another one, that covers exactly what you're trying to do as well.
+[21:21] <Flannel> (It even shows your picture)
+[21:21] <SupaYoshi> Yeah I found that myself
+[21:22] <SupaYoshi> But my partition was already umounted.
+[21:22] <Flannel> And actually, the askubuntu link I gave also covers the volume group reduction, so that's closer to what you'll want.
+[21:22] <SupaYoshi> Do I do this from the gparted live cd?
+[21:22] <Flannel> SupaYoshi: Assuming the gparted liveCD has those commands (e2fsck, resize2fs, lvreduce, vgreduce, only the latter two are questionable) then yes.
+[21:23] <SupaYoshi> Flannel, okay cool. So If I follow the guide what has 17 likes, and 3 answers above it...
+[21:23] <SupaYoshi> I'm going to be fine
+[21:23] <SupaYoshi> correct?
+[21:23] <Flannel> SupaYoshi: The one with the half-dozen commands, yes.  That mirrors the link I gave you earlier, just with slightly more detail
+[21:25] <SupaYoshi> To be exact, this right? http://prntscr.com/5llo7w
+[21:25] <SupaYoshi> Sorry I am very insecure about tis.
+[21:25] <SupaYoshi> I made a backup of the drive but still
+[21:25] <SupaYoshi> Scarey
+[21:25] <thewrinkle> Can anyone tell me how I can find what is modifying my path?
+[21:26] <MDTech-us_MAN> hello
+[21:26] <MDTech-us_MAN> I have a window that was on a second screen
+[21:26] <MDTech-us_MAN> I disconnected the screen and now I cant fint the window!
+[21:26] <MDTech-us_MAN> *find
+[21:26] <thewrinkle> I know the path is globally set in /etc/environment and then user profiles should set the path in ~/.profile and ~/.bashrc
+[21:26] <MDTech-us_MAN> how do i bring the window over to the current screen
+[21:27] <SupaYoshi> # lvreduce -L -1G /dev/vg_blah/lv_blah Does this mean minus 1 GB?
+[21:28] <rypervenche> SupaYoshi: Approximately 1 gigabyte, yes. It will not be exact, as it depends on the number of extents. Make sure you resize your file system before doing that though.
+=== corey84-- is now known as Corey84-
+[21:35] <SupaYoshi> Okay so
+[21:35] <SupaYoshi> Will this be correct?
+[21:35] <SupaYoshi> http://prntscr.com/5llt4r
+[21:35] <bonhoeffer> since iptables is not a service, but part of the kernel, there is no way to disable it, right?
+[21:35] <bonhoeffer> one can just give it zero rules
+[21:38] <SupaYoshi> Correction, http://prntscr.com/5llui9
+[21:38] <SupaYoshi> Flannel, do you think this lookks right? http://prntscr.com/5llui9
+[21:39] <SupaYoshi> I really don't understand what he means with lv_blah
+=== Unibob is now known as DJ_Unibob
+[21:40] <SupaYoshi> nad vg_blah
+=== ubuntu is now known as Guest42043
+[21:41] <SupaYoshi> :(
+[21:43] <OldMan> Hi all!
+[21:45] <Flannel> SupaYoshi: That's the name you gave your logical volume (LV) and volume group (VG) (traditionally it's LV* and VG* respectively)
+[21:46] <Flannel> SupaYoshi: so, your volume group is named "HOMESRV-vg"
+[21:46] <SupaYoshi> Yeah!
+[21:46] <SupaYoshi> Because the mount-point is named that way right?
+=== MoeD_ is now known as MoeD
+[21:48] <SupaYoshi> so I am wondering if I should do, umount /dev/HOMESRV-vg
+[21:48] <SupaYoshi> but that says, there is no such directory.
+[21:49] <SupaYoshi> So Im like, that must be wrong?
+[21:49] <Flannel> SupaYoshi: You're on your liveCD, so it's probably not mounted to begin with.
+[21:49] <SupaYoshi> Okay, understood.
+[21:51] <SupaYoshi> But, how would I interate these commands?
+[21:51] <rypervenche> bonhoeffer: It is both part of the kernel and a program.
+[21:51] <SupaYoshi> If I don't know what to exaclty type ?
+[21:51] <SupaYoshi> For the VG and LVM thing blah blah.
+[21:51] <SupaYoshi> I don't know where to find the correct naming for them.
+[21:51] <SupaYoshi> So idk what Im doing basically.?
+[21:51] <bonhoeffer> rypervenche: ive heard i can replace it with palantir <unconvertable> would that be a kernel modification?
+[21:51] <SupaYoshi> That's probally All I need to know since I know this.
+[21:51] <rypervenche> bonhoeffer: Depending on how your kernel is set up you could disable/blacklist the modules if they were built as modules. Otherwise, simply don't make any rules.
+[21:51] <Flannel> SupaYoshi: Look in the /dev/ directory, see if theyre there.
+[21:51] <bonhoeffer> got it
+[21:52] <mybox1776> Anyone here ever set up a surveillance system on Ubuntu?  If so, any good, failry easy ones to setup?
+[21:52] <Flannel> SupaYoshi: It may be that the liveCD doesn't have LVM stuff installed, so you'll need to install them, or find a different liveCD, or whatever.
+[21:52] <rypervenche> bonhoeffer: I've never heard of palantir.
+[21:52] <SupaYoshi>  http://prntscr.com/5lm1lk
+[21:52] <SupaYoshi> Okay!
+[21:53] <SupaYoshi> :D Thanks.
+[21:53] <skinux> I just copied a gEdit plugin directory to /.gnome2/gedit/plugins, but the plugin isn't showing up in Preferences->Plugins
+=== Hobby_boy_l is now known as Hobby_boy
+[21:54] <SchrodingersScat> !info zoneminder | mybox1776, Although, I've never used it personally, this is one
+[21:54] <ubottu> mybox1776, Although, I've never used it personally, this is one: zoneminder (source: zoneminder): Linux video camera security and surveillance solution. In component universe, is optional. Version 1.26.5-1ubuntu6 (utopic), package size 1132 kB, installed size 9741 kB
+[21:54] <mybox1776> Sweet!  Thanks!   Googling it now.
+[21:55] <SchrodingersScat> mybox1776: the website: http://www.zoneminder.com/
+[21:55] <mybox1776> My flipn landlord wont believe his maintenence man is coming in my place
+[21:55] <mybox1776> I want to nail him -
+[21:55] <mybox1776> Awesome, thanks!
+=== curiousx is now known as Chuck_Norris
+[21:56] <Chuck_Norris> mybox1776: http://terminal28.com/how-to-install-and-configure-zoneminder-linux-cctv-debian/
+[21:57] <mybox1776> Looks pretty slick!
+[21:57] <osakiyama> hi
+[21:57] <mybox1776> I am in the process of building a new box - just got parts from new egg
+[21:59] <Chuck_Norris> mybox1776: /j #hardware
+[21:59] <MDTech-us_MAN> hello
+[21:59] <MDTech-us_MAN> I have a window that was on a second screen
+[21:59] <MDTech-us_MAN> I disconnected the screen and now I cant find the window!
+[21:59] <MDTech-us_MAN> how do i bring the window over to the current screen
+[22:00] <feurd> Hello! I have a script for rsync my /home/ directory on an external hard drive : http://paste.ubuntu.com/9631907/ In it, there's a test to check if my disk is present. And despite the fact that it is, the script keeps saying that it's not. Does someone have an idea why?
+[22:01] <teward> feurd: first question: is your system automatically mounting the drive at boot or no?
+[22:01] <cpika> MDTech-us_MAN: hm. try to catch the window by cycling through your open windows by alt+tab. if it's activated but still not shown, perhaps ctrl+alt+shift+left/right helps to bring it to another virtual desktop.
+[22:02] <teward> feurd: because the disk being present and the disk being mounted are different
+[22:02] <cpika> MDTech-us_MAN: if you don't find the window by cycling with alt+tab, perhaps it's closed. you could check that by inspecting the processes list.
+[22:02] <mybox1776> Whats /J #harware
+[22:02] <skinux> I can't seem to get gEdit to see this plugin no matter what directory I put it in.
+[22:03] <Chuck_Norris> mybox1776: a channel to chat about hardware
+[22:03] <mybox1776> woops duh
+[22:03] <mybox1776> thx
+[22:03] <Chuck_Norris> np
+[22:04] <feurd> teward, Well, it is indeed automatically mounting my discs (or I presume it does, because I don't do it myself). But I checked and the disc in question in correctly under /media/feurd/DEXTER, as it is specified on the script.
+[22:05] <teward> feurd: that... wasn't my question - the only time you'll see that directory if you've clicked the thing in the GUI and the system mounts it.
+[22:05] <SupaYoshi> http://mindbuffer.wordpress.com/2011/06/06/resize-root-filesystem-in-logical-volume/ Should I do this to resize my logical volume size?
+[22:05] <teward> feurd: if you DON'T click the icon or the name of the drive in the GUI file explorer, it won't mount it automatically.
+=== Guest7 is now known as SveN1010
+=== bwk_ is now known as bwk
+[22:06] <teward> feurd: so, after booting, have you gone in the file system to the root location and tried to access the path yourself?
+[22:06] <teward> feurd: or in the command line, gone to /media/ and made sure that entire path exists, WITHOUT clicking the icon for the external disk
+[22:07] <MDTech-us_MAN> cpika
+[22:07] <MDTech-us_MAN> I juat tried that and now I cant even see Alt+Tab
+[22:08] <brent> feurd, im a bit of a noob here so excuse me if im in the wrong direction
+[22:08] <teward> feurd: because I too have an external disk, but it isn't automounted on a reboot, the GUI doesn't do that.
+[22:08] <brent> could you add it to the fstab file?
+[22:08] <MDTech-us_MAN> guess it now shows Alt+Tab on another screen
+[22:08] <feurd> teward, Sorry, I'm not sure I follow you completely. If I can access the disc through GUI, write on it, etc, doesn't it mean it's mounted?
+[22:09] <teward> feurd: you missed my point - did you reboot and then go via ***the command line*** to make sure the path actually exists
+[22:09] <feurd> teward, no I didnt.
+[22:09] <teward> feurd: because if you mean 'accessing via the gui' as in clicking the disk name under "Devices" that will automatically mount the disk
+[22:09] <feurd> teward, Ok, that's why I did.
+[22:09] <teward> feurd: the only way to ***guarantee*** the disk is always mounted is to put it into /etc/fstab and that will guarantee it is always mounted at boot
+[22:10] <teward> feurd: okay, then that's a form of manually mounting the disk
+[22:10] <brent> like i said :)
+[22:10] <feurd> teward, Ok I didn't know.
+[22:10] <feurd> brent, Indeed :)
+[22:10] <teward> feurd: that's why you get a 'doesn't exist' error - because /media/$USER/DEXTER will never exist until it's automatically created by the Files system
+[22:10] <teward> feurd: is it an NTFS partition?
+[22:10] <teward> (on that external disk)
+[22:10] <teward> or is it ext?
+[22:10] <brent> feurd, do you know how to add it?
+[22:10] <brent> theres a great gui program built in that makes it easy
+[22:10] <teward> brent: i was gonna help him with that oo ;)
+[22:10] <teward> brent: but GUIs?  not the best way
+[22:11] <teward> (badthings if the GUI is wrong)
+[22:11] <brent> with 2 clicks its done
+[22:11] <brent> hehe ok ill leave it for you ;)
+[22:11] <rypervenche> udev always messing things up :)
+[22:11] <teward> ^ that
+[22:11] <cpika> MDTech-us_MAN: okay, so Unity thinks you've still two screens enabled... that's the main problem, I think.
+[22:11] <brent> im talking about using "Disks"
+[22:11] <teward> ahhhh
+[22:12] <rypervenche> udisks rather
+[22:12] <MDTech-us_MAN> cpika, so what do I do?
+[22:12] <MDTech-us_MAN> in Displays I only have one screen showing
+[22:12] <teward> brent: true, that could be done and work
+[22:12] <teward> brent: i thought you meant a separate utility :)
+[22:12] <teward> brent: tricky on NTFS mounts if you want some advanced options though
+[22:13] <feurd> teward, Ok. It's a bit weird, I'm not sure I understand quantum state where it's at the same time mounted and not mounted :) But anyway. I don't remember what format I use, but I'm sure it's not ext.
+[22:13] <teward> feurd: if you went via the files window, it's not mounted unless there's an eject button next to it
+[22:14] <feurd> I should probably format it in ext4 if I want to use it for backups.
+[22:14] <teward> feurd: the "Files" window (and Nautilus) is 'smart' but not automount smart
+[22:14] <feurd> teward, But there's a eject button
+[22:14] <MDTech-us_MAN> will "kill"ing unity log me out?
+[22:14] <teward> feurd: sure, after you open it, or on a removable drive that's standing by to be mounted.  but on boot it's not mounted by default
+[22:14] <Eliona23>  There is no such thing as Free Porn http://bitly.com/1nx3K4c
+[22:14] <teward> and if you log out you're screwed there too
+[22:15] <feurd> teward, Ok, that's probably right.
+[22:15] <teward> feurd: i would use the Disks utility to make the mount point, and if you want your data accessible outside of Ubuntu, use whatever format is there now
+[22:15] <feurd> teward, But we agree that now, it's mounted. Right?
+[22:15] <cpika> MDTech-us_MAN: sure, that will log you out. can you reach the overview over the virtual desktops? it's on the dock, usually. if you're in the overview, you can grab the window and move it to another screen.
+[22:15] <teward> feurd: yes, right now, it's mounted - it's erroring when it gets unmounted somehow.
+[22:15] <Zemeio> Hi. So, I want to burn an ubuntu live CD, but I only have a CD, not a DVD. Anyone have a link to a CD image?
+=== renato_ is now known as Guest16313
+[22:16] <teward> feurd: so, the solution is to set up the mount at boot, for your user to access it and such.
+[22:16] <feurd> teward, ok so the idea now is to make it automatically mounted?
+[22:16] <MDTech-us_MAN> cpika, where is the overview?
+[22:16] <feurd> teward, all right, I follow your orders :)
+[22:16] <teward> feurd: i'd use the "Disks" utility (search it in the dash), and maybe brent can walk you through it
+[22:17] <teward> i have to take the girlfriend out on the date today :)
+[22:17] <MDTech-us_MAN> I dont see it
+[22:17] <cpika> MDTech-us_MAN: it's usually the lowest button on the dock
+[22:17] <Bashing-om> Zemeio: The only image I am aware of that will fit on a CD in the 'buntu sisterhood is the 'minimal" install . Not to be entered into light heartedly.
+[22:17] <cpika> MDTech-us_MAN: if you're on a laptop, you might also want to try the key on your keyboard that tells the system to switch between screens
+[22:18] <feurd> teward, I don't have anything called Disks...
+[22:18] <Zemeio> Bashing-om Thanks
+[22:18] <Bashing-om> Zemeio: I take it a USB is not an option ?
+[22:19] <MDTech-us_MAN> I don'e have that button though I remember having it on another one of my systems
+[22:19] <MDTech-us_MAN> this is a laptop, but it has no such button
+[22:19] <Zemeio> Bashing-om: It would be my first option, but apparently there are none I can use here =/
+[22:20] <squinty> feurd:  Disks > gnome-disk-utility (package name) > gnome-disks (name for terminal)  if running a current ubuntu version you should have it
+[22:21] <cpika> okay, MDTech-us_MAN. open a terminal and try 'xrandr --auto'
+[22:21] <Maryland_IT_Guy> Hello. Does anybody know of a good resource with labs/book/training for advanced network analysis for tcpdump? More along the lines of security analysis, malware traffic/intrusion detection. I'd appreciate it.
+[22:22] <cpika> MDTech-us_MAN: that might update the system
+[22:23] <feurd> squinty, Oh ok, I'm in it.
+[22:23] <jhutchins> Maryland_IT_Guy: wireshark might have some good resources.
+[22:23] <xamxam> Hi, How can i restore ubuntu to its original state?
+[22:24] <jhutchins> xamxam: From what?
+[22:24] <Maryland_IT_Guy> jhutchins: the thing is, I really need it to be tcpdump cli specific. I've done a fair amount of searching on the web and cannot come up with anything substantial. Tons of stuff on wireshark though.
+[22:24] <xamxam> i want to reinstall it, but i am thinking if i can just restore it to earliest possible time.
+[22:24] <jhutchins> Maryland_IT_Guy: That's because wireshark is the tool for the job.
+[22:25] <jhutchins> Maryland_IT_Guy: It's good enough that people don't put any effort into alternatives.
+[22:25] <jhutchins> Maryland_IT_Guy: You can take the output of tcpdump and process it with wireshark.
+[22:25] <rypervenche> Maryland_IT_Guy: You can use tcpdump and tshark I think it's called, the CLI version of wireshark, and they will work well, but you need to know what you're looking for and create package captures to do exactly what you want.
+[22:25] <Maryland_IT_Guy> jhutchins: Wireshark is not supported/allowed where I work. Lol. I know how to use wireshark rather well.
+[22:26] <xamxam> like freshly install ubuntu. i have changed quite a lot of things, and messed up many of its settings and programs, restoring to raw OS is what i am looking for.
+[22:26] <rypervenche> s/package/packet/
+[22:26] <jhutchins> Maryland_IT_Guy: tcpdump is ok if you know what you're looking for, like the traffic for a DHCP session.
+[22:27] <jhutchins> Maryland_IT_Guy: If they don't want you seeing what wireshark can show you, trying to see it with tcpdump is probably not a good alternative.
+[22:27] <feurd> teward, Well, my external drive was set to automatic mounting. So the original explanation doesn't stand anymore.....
+[22:28] <rypervenche> feurd: When you boot up your system, run "df -hT" and provide us with its output s'il te plait.
+[22:28] <Maryland_IT_Guy> jhutchins: I oversee a contract for the government. They only allow CLI on the analysis machine.
+[22:28] <Maryland_IT_Guy> jhutchins: not my decision.. lol
+[22:29] <Maryland_IT_Guy> jhutchins: if it was up to me, I'd be using wireshark only.
+[22:29] <feurd> rypervenche, I do that now.
+[22:29] <jhutchins> Maryland_IT_Guy: Just left a contract for the GSA myself.  You can record the info with tcpdump and analyse it on another machine, or use the CLI variants of wireshark.
+[22:29] <Maryland_IT_Guy> jhutchins: that is not an option, I'm not an admin and they don't allow wireshark as authorized software.
+[22:30] <Maryland_IT_Guy> jhutchins: or tshark for that matter.
+[22:31] <Maryland_IT_Guy> jhutchins: tcpdump is literally the only thing I can use. I know the basics. I can filter for certain hosts, ports, strings, snaplength, etc, etc
+[22:31] <EriC^^> xamxam: you can backup your stuff and installed programs and reinstall
+[22:31] <EriC^^> xamxam: for future reference you can dd the installation if you want to later restore it
+[22:31] <EriC^^> or use lvm for snapshots or something
+=== soee__ is now known as soee
+[22:31] <bekks> xamxam: Or create a simple backup-
+[22:31] <bekks> !backup | xamxam
+[22:32] <ubottu> xamxam: There are many ways to back your system up. Here's a few: https://help.ubuntu.com/community/BackupYourSystem , https://help.ubuntu.com/community/DuplicityBackupHowto , https://wiki.ubuntu.com/HomeUserBackup , https://help.ubuntu.com/community/MondoMindi - See also !sbackup and !cloning
+[22:32] <Maryland_IT_Guy> jhutchins: anyway, I'm going to continue to search the web for answers. Thanks for your input jhutchins.
+[22:32] <jhutchins> xamxam: Linux does not take snapshots when changes are made, that's up to you to do manually.
+=== tcpman is now known as Guest61179
+[22:32] <rypervenche> Maryland_IT_Guy: Then you will need to use that for your needs, but it sounds to me like you need to know more about what you should be searching for. If they don't allow you to use the tools you need though, then you should either be an admin, the admin there should be doing this, or you should have a talk with them to allow you to use the tools you need.
+[22:33] <feurd> rypervenche, Here it is : http://paste.ubuntu.com/9632053/
+[22:33] <brent> wb feurd
+[22:33] <rypervenche> feurd: Ok, well first thing is first. You do not want to backup your data to a vfat file system :)
+[22:34] <feurd> rypervenche, Mhmm maybe I would if I knew what it was ;)
+[22:35] <Maryland_IT_Guy> rypvervenche: I do know what I'm searching for, and I am capable of doing the job with the tools I have. I'm just trying to get a more comprehensive understanding about tcpdump. It's a sophisticated tool with a ton of different switches and capabilities that I don't fully understand yet.
+[22:35] <rypervenche> feurd: Secondly, we'll want to make sure that you have the correct path set up, you may have it set up incorrectly: namei -om /media/feurd/DEXTER/save/rsync/home
+[22:36] <rypervenche> feurd: But the second part is not really necessary right now since you'll be reformatting :)
+[22:36] <adrian15> So I have a wrong sudoers file. I cannot run: sudo -i . Why Ubuntu software center lets me install "Extreme Tux Racer"? Is it a bug ?
+[22:36] <feurd> rypervenche, shouldn't I format it in ext4?
+[22:37] <EriC^^> adrian15: it doesn't use sudo
+[22:37] <rypervenche> feurd: Yep. I was just giving you a solution to see why it wasn't working, but it won't matter anyways since we'll be reformatting. Yes, ext4 would be good.
+[22:37] <bekks> adrian15: Why did you change your sudoers file in a wrong way?
+[22:38] <adrian15> bekks: It's a for Rescatux demo video so that I can regenerate them. I was hoping not being able to install programs because of sudo problems.
+[22:38] <adrian15> EriC^^:  What does it use then? Being inside admin group or something ?
+[22:38] <feurd> rypervenche, Ok so first, I format it. Let's see after that.
+[22:38] <rypervenche> feurd: D'accord, sounds good.
+[22:38] <EriC^^> adrian15: it asks for your password before installing software
+[22:39] <adrian15> EriC^^: Yes, that's right. And how does it validate that I'm the right person for installing software ?
+[22:39] <bekks> EriC^^: And then? How does it get root privileges without sudo? :)
+[22:39] <Maryland_IT_Guy> rypervenche: Thanks for the help!
+[22:40] <rypervenche> Maryland_IT_Guy: https://danielmiessler.com/study/tcpdump/ is a good beginning guide. For more in-depth things, you'll need to first know what you need/want to do then ask those questions.
+[22:42] <EriC^^> bekks: it doesn't use sudo
+[22:42] <EriC^^> bekks: it uses some sort of apt daemon thingy
+[22:42] <bekks> EriC^^: Then what does it use? How does it get root privileges otherwise?
+[22:42] <EriC^^> you can install packages and remove them from the software center with the package sudo uninstalled
+[22:42] <bekks> There is no such thing as "apt daemon".
+[22:42] <Maryland_IT_Guy> rypervenche: Thanks a lot. Great article. I read that a few weeks ago, but I should read it again. :)
+[22:42] <MDTech-us_MAN> cpika
+[22:42] <MDTech-us_MAN> I ran the command and nothing
+[22:43] <MDTech-us_MAN> should I have run it as root?
+[22:43] <EriC^^> bekks: i dont know, when you get the box to enter your password press on details it mentions a service
+[22:43] <EriC^^> bekks: it's not sudo though and will run and install without sudo installed
+[22:44] <Tom_> Hello there. Was just wondering if anyone has a way of creating a windows bootable USB, while inside of Ubuntu? Tried netbootin & winusb, however, can't seem to get any of those 2 working.
+=== Tom_ is now known as Guest15378
+[22:46] <EriC^^> adrian15: what are you trying to achieve?
+[22:46] <EriC^^> adrian15: not being able to install programs?
+[22:46] <MDTech-us_MAN> cpika?
+[22:47] <adrian15> EriC^^: bekks: Action: org.debian.apt.install-or-remove-packages ; Provider: Apt Daemon
+[22:47] <cpika> MDTech-us_MAN: I really don't know. but I don't have experience with dual monitors either. repeat your initial question so that someone else can give you more tips :(
+[22:47] <adrian15> EriC^^: Something visual about the user no longer being in sudoers (because of sudoers being wrong). I could do some terminal but I wish there was something visual.
+[22:47] <MDTech-us_MAN> hello
+[22:47] <MDTech-us_MAN> I have a window that was on a second screen
+[22:48] <MDTech-us_MAN> I disconnected the screen and now I cant find the window!
+[22:48] <MDTech-us_MAN> how do i bring the window over to the current screen
+[22:48] <k1l> use the show desktop thing in the launcher and drag and drop the window to the first screen then
+[22:49] <MDTech-us_MAN> k1l, I don't have that "thing"
+[22:49] <adrian15> EriC^^: bekks: It seems that there is an aptdaemon: https://launchpad.net/aptdaemon/ .
+[22:49] <sloppeng> Anyone else having problems resizing webapp windows with 14.10?
+[22:49] <MDTech-us_MAN> for whatever reason
+[22:49] <k1l> MDTech-us_MAN: what desktop?
+[22:49] <k1l> MDTech-us_MAN: what ubuntu version?
+[22:49] <MDTech-us_MAN> 14.04.1
+=== badape is now known as Babbage
+[22:50] <MDTech-us_MAN> desktop you mean as in window system?
+=== Babbage is now known as passages
+[22:50] <MDTech-us_MAN> if so, I have the default
+[22:50] <MDTech-us_MAN> i think its called unity or gnome or something like that
+[22:51] <k1l> MDTech-us_MAN: press super+w
+[22:52] <MDTech-us_MAN> ok
+[22:52] <MDTech-us_MAN> I did
+[22:52] <MDTech-us_MAN> I see the windows that are on this screem
+[22:52] <MDTech-us_MAN> but not any others
+[22:52] <MDTech-us_MAN> I am sure I did no close them
+[22:53] <k1l> use alt+tab. if its not on there its closed
+[22:53] <MDTech-us_MAN> one of the windows is XChat. as you can see, its still open and connected: maxwell_
+[22:53] <squinty> MDTech-us_MAN:  left hand side of the unity screen, right click on the relevant app in the panel and see if it listed there
+[22:54] <karolkens> wow dat irssi clnt
+[22:54] <MDTech-us_MAN> squinty, its there. I even see someone PMed me on IRC lol
+[22:54] <MDTech-us_MAN> its showing a notification
+[22:55] <adrian15> EriC^^:  bekks : I'm also able to add users to my system. Anyways it does not matter. I'll use the command line instead for an example.
+[22:55] <MDTech-us_MAN> which means it is running
+[22:56] <EriC^^> adrian15: you can boot into recovery mode and fix the sudoers file if you want

@@ -1,0 +1,1279 @@
+[07:41] <red2kic> Wiesshund: I don't want charts. I want to see the numbers with my eyes. :o
+=== GarbageMobileDev is now known as mtm
+[07:41] <mtm> Whats the best linux OS
+[07:41] <mtm> besides Fedora
+[07:41] <hermanlf> Anyone know how I can install the beam up animation plugin for compiz?
+[07:41] <mtm> :)
+[07:41] <PythonPup> mtm, the one that serves your needs.
+[07:41] <red2kic> mtm: You're in #ubuntu -- We'll say Ubuntu. ;O
+[07:41] <kvio04> Ubuntu is not letting me create new partitions in gparted. The error is "/dev/sdc1 is apparently in use by the system; will not make a filesystem here!" however, dev/sdc1 does not exist
+[07:42] <mtm> LOL
+[07:42] <kvio04> Any way around it?
+[07:42] <Gnea> kvio04: use a livecd
+[07:42] <kvio04> Gnea: this /is/ a livecd :/
+[07:42] <mtm> Okay, my needs are iphone and web design
+[07:42] <xangua> hermanlf: just activate 'animations add-on' in compizconfig seting maanger
+[07:42] <Gnea> kvio04: so what is /dev/sdc1 being used by?
+[07:42] <PythonPup> kvio04, what do you get from    sudo fdisk /sdc
+[07:43] <hermanlf> xangua: I have, but that animation doesn't seem to be there.  Let me double check.
+[07:43] <PythonPup> kvio04, oops, make that    what do you get from    sudo fdisk /dev/sdc
+[07:43] <xangua> animation¿
+[07:43] <Gnea> sudo fdisk -l /dev/sdc perhaps?
+[07:43] <kvio04> No devices are listed
+[07:43] <PythonPup> Gnea, even better.  I usually run it and then do a p.
+[07:44] <kvio04> No partitions, rather
+[07:44] <kvio04> I see the columns but they're empty
+[07:44] <hermanlf> xangua, well hell, there it is lol.  Now even more animations have shown up.  I could have sworn I only had a few just a minute ago.
+[07:44] <PythonPup> Then gparted can't make a partition, because the system does not see the drive, kvio04
+[07:44] <Gnea> kvio04: well something isn't right
+[07:44] <RAX_bg> PythonPup: i looked for dropbox but wont it make a folder on botth machines which folder will sync automatically and always have the same contents
+[07:44] <kvio04> The system does see it. The drive is listed, just no partitions
+[07:44] <kvio04> I'll pastebin it
+[07:44] <greezmunkey> *Q* is there an _accurate_ system monitor out there that doesn't scew results by virtue of its own overhead?
+[07:45] <Gnea> probably an illusionary process
+[07:45] <Wiesshund> red2kic apt://netmon-applet
+[07:45] <`blackmk4`linux> is there a command to write the current mounting setup to fstab
+[07:45] <PythonPup> RAX_bg, That is in fact the only thing it does.
+[07:45] <red2kic> !info netspeed | Wiesshund Actio
+[07:45] <ubottu> Wiesshund: netspeed (source: netspeed): Traffic monitor applet for GNOME. In component universe, is optional. Version 0.15.2-1 (lucid), package size 348 kB, installed size 1344 kB
+[07:45] <Gnea> `blackmk4`linux: not in one fell swoop, no. it has to be done by hand.
+[07:45] <RAX_bg> PythonPup: yes but this will cost me alot of disk space which the so called client machine doesnt have
+[07:45] <`blackmk4`linux> christ.
+[07:46] <`blackmk4`linux> i have 60 drives mounted
+[07:46] <Gnea> `blackmk4`linux: the way it should be done, to avoid problems.
+[07:46] <`blackmk4`linux> this will take forever
+[07:46] <red2kic> Wiesshund: This was it. :O
+[07:46] <kvio04> PythonPup, Gnea: http://pastebin.com/xS6jgSB8
+[07:46] <Wiesshund> red2kic that one works too, other one is just s simple text in out
+[07:46] <Gnea> `blackmk4`linux: you could possibly script it
+[07:46] <RealEyes> I feel bored with ubuntu, any suggetions?
+[07:46] <el_seano>  Go with arch!
+[07:46] <PythonPup> RAX_bg, That part is right.  I did not know you had the disk limit problem.  I might look at sshd then.  I have not set one up yet, but it should do what you want.
+[07:46] <`blackmk4`linux> if you are bored with ubuntu
+[07:46] <el_seano> that's what I'm planning, anyway.
+[07:47] <`blackmk4`linux> i hope you are making money doing it
+[07:47] <el_seano> :(
+[07:47] <`blackmk4`linux> because you know more than anyone else
+[07:47] <kvio04> PythonPup, Gnea: Both drives are listed there -- just no partitions under sdc
+[07:47] <Gnea> `blackmk4`linux: what's that supposed to mean?
+[07:47] <kvio04> PythonPup, Gnea: I tried rewriting the MFT again from scratch, which also seems to make no difference
+[07:47] <PythonPup> kvio04, OK, you just don't have a partition table.
+[07:47] <`blackmk4`linux> what that means
+[07:47] <`blackmk4`linux> is that if he is bored he isn't learning anything
+[07:48] <Gnea> kvio04: that shows that /dev/sdc is a 320G disk that hasn't been used yet
+[07:48] <greezmunkey> RealEyes: pick a project, then see it through - like learning bash scripting. That'll keep you thinking.
+[07:48] <`blackmk4`linux> if he's not learning anything then either he isn't trying new things or he knows everything
+[07:48] <PythonPup> kvio04, try   sudo fdisk /dev/sdc
+[07:48] <kvio04> PythonPup: I've recreated the MFT five or six times trying to recover this thing
+[07:48] <Gnea> RealEyes: tried any other distros?
+[07:48] <kvio04> Gnea: The drive was being used, it had four partitions until today
+[07:48] <RealEyes> I'm trying to learn bash but I don't know where to tart.
+[07:48] <RealEyes> start* lol
+[07:48] <kvio04> Gnea: rewrote the MFT for other purposes
+[07:48] <PythonPup> kvio04, Are you trying to recover data on a drive that had some problem?
+[07:48] <kvio04> PythonPup: This is a different drive from that one
+[07:48] <RealEyes> It looks like art to me, the bash shell.
+[07:48] <Gnea> kvio04: what's the MFT?
+[07:48] <`blackmk4`linux> bash as in scripting?
+[07:48] <kvio04> PythonPup: Same computer, different drive
+[07:49] <RealEyes> I haven't tried other distros.
+[07:49] <Gnea> RealEyes: try 'hello world'
+[07:49] <RealEyes> I'd like to get conky working and -- whats hello world?
+[07:49] <`blackmk4`linux> i suggest you write a motd that gathers some info from the system every time you ssh in
+[07:49] <kvio04> Gnea: there were 4 partitions on here and a Ubuntu install failed, so we rebooted the machine from livecd and tried to create a new master file partition from gparted
+[07:49] <Gnea> RealEyes: that's your problem. I suggest debian and slackware.
+[07:49] <xangua> !ot
+[07:49] <ubottu> #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics. Thanks!
+[07:49] <kvio04> Gnea: now it's like this on two different computers
+[07:49] <RealEyes> Gnea, just curious why you're suggesting that?
+[07:50] <Gnea> RealEyes: "hello world" is the most basic program in any programming language in the world.
+[07:50] <`blackmk4`linux> they require more messing around to get up and running
+[07:50] <Gnea> RealEyes: it's designed to print "hello world" to the screen and exit
+[07:50] <Gnea> RealEyes: because you asked.
+[07:50] <kvio04> PythonPup: http://pastebin.com/SSntbqs7
+[07:50] <PythonPup> kvio04,   Run  sudo fdisk/dev/sdc    and choose option o to write a new partition table.  Depending on what it says, you may have to reboot as the next step.
+[07:50] <Gnea> RealEyes: there's nothing wrong with suggesting it.
+[07:50] <RealEyes> I mean, whats good about debian and slackware?
+[07:50] <xangua> !ot
+[07:50] <xangua> .......................
+[07:50] <Gnea> xangua: shut up
+[07:50] <xangua> better leaving
+[07:50] <Gnea> RealEyes: what's wrong with them?
+[07:50] <PythonPup> kvio04, I did not say to do a -l
+[07:51] <xangua> Gnea: please stop
+[07:51] <kvio04> PythonPup: ok, one moment
+[07:51] <`blackmk4`linux> what is good about slackware, in particular, is that you aren't all given a happy fun time into linux
+[07:51] <Gnea> xangua: welcome to /ignore
+[07:51] <`blackmk4`linux> you get to learn how to configure the system from command line / figure out little niggles with hardware you have
+[07:51] <RealEyes> I'm just asking, what're they all about? How are they different from ubuntu?
+[07:51] <Wiesshund> I used to love slackware back in the day, had it living with dos (zipslack)
+[07:51] <xangua> RealEyes: there is a channel called OFFTOPIC
+[07:51] <Prohibited2> o,.o
+[07:51] <xangua> !ot > RealEyes
+[07:51] <ubottu> RealEyes, please see my private message
+[07:51] <kvio04> PythonPup: http://pastebin.com/JmqUvuva
+[07:52] <Gnea> xangua: stop abusing the bot, and this is entirely on-topic, so stop trying to play channel god.
+[07:52] <`blackmk4`linux> i'm glad we have a non op playing op
+[07:52] <PythonPup> kvio04, now do a     w
+[07:52] <kvio04> a and w, or a "w"?
+[07:52] <KB1JWQ> Let us be civil, please.
+[07:52] <kvio04> suppose just w
+=== spyrosebastos is now known as spiros
+[07:52] <KB1JWQ> !ot
+[07:52] <ubottu> #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics. Thanks!
+[07:52] <PythonPup> kvio04, just the       w
+[07:53] <rww> Gnea: xangua is right. This channel is for Ubuntu support. Discussion of other distros is offtopic for it. Drop the attitude.
+[07:53] <Gnea> RealEyes: may I PM you?
+[07:53] <RealEyes> Yes :S
+[07:53] <RealEyes> xD
+[07:54] <Wiesshund> `blackmk4`linux that brings back memories. trying to figure out how exactly to make X work and make kde useful, doing most stuff at a console and thinking bitchX high color :)
+[07:54] <kvio04> PythonPup: http://pastebin.com/cxx1QxBT -- still failing in gparted, though
+[07:54] <guntbert> RealEyes: for your original question see https://help.ubuntu.com/community/UsingTheTerminal
+[07:55] <`blackmk4`linux> seriously, weiss
+[07:55] <`blackmk4`linux> i loved those days
+[07:55] <PythonPup> kvio04, reboot the computer now.  If that does not do it, your drive or controller is bad.
+[07:55] <`blackmk4`linux> rofl
+[07:55] <`blackmk4`linux> i learned a lot more back then, nothing worked right
+[07:55] <RealEyes> guntbert, thx
+[07:56] <kvio04> PythonPup: what about the DOS-compatible mode and the invalid flag warnings?
+[07:56] <guntbert> RealEyes: have fun :)
+[07:56] <PythonPup> kvio04, don't worry about them.
+[07:56] <kvio04> PythonPup: any other suggestions in the event this doesn't work? drive is only a few weeks old, and it was working last night
+[07:56] <Gnea> rww: my apologies, didn't see how it was OT since Ubuntu is based on Debian, but oh well.
+[07:56] <kvio04> PythonPup: problems seem to have been spurred solely by gparted
+[07:57] <RealEyes> i just typed in 'man intro'
+[07:57] <RealEyes> lol
+[07:57] <root__> hi
+[07:57] <Wiesshund> `blackmk4`linux heh youd spend hours just trying to poke at your .bitchx and .ircrc to try to get it actualy usuable on more than one channel. if not days
+[07:57] <PythonPup> How old is the computer, kvio04?  Could it have a bios that does not support LBA48?
+[07:57] <`blackmk4`linux> ahaha
+[07:57] <xangua> root__: not a goo idea entering as (sic) root
+[07:57] <xangua> good*
+[07:57] <guntbert> !ot | Wiesshund `blackmk4`linux
+[07:57] <ubottu> Wiesshund `blackmk4`linux: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics. Thanks!
+[07:58] <kvio04> PythonPup: the drive was working fine last night --- and now it's doing this on two machines of varied age and model
+[07:58] <Wiesshund> yes ubottu :(
+[07:58] <kvio04> PythonPup: can't be bios or else it wouldn't have worked in the first place, i presume
+=== ara_ is now known as ara
+[07:58] <`blackmk4`linux> i really must wonder why people that aren't helping others do nothing but police the channel
+[07:58] <PythonPup> kvio04, varied does not tell me much.
+[07:58] <`blackmk4`linux> either way, fun times.
+[07:58] <`blackmk4`linux> later, weiss
+[07:58] <PythonPup> kvio04, I would probably run spinrite on the drive.  But, reboot first.
+[07:59] <PythonPup> kvio04, spinrite is a commercial, proprietary app.  But, I build enough PCs that I bought a copy.
+[08:00] <PythonPup> I wish there were something open that worked half as well as spinrite.  Beter would even be better, but it would be nice to have something basic.
+[08:00] <ArghArgh200> Hey, I seem to have removed some categories from the Main Menu on the Desktop. How would I go about getting these back?
+[08:01] <PythonPup> System/Preferences/Main Menu is what I'd use, ArghArgh200
+[08:01] <ArghArgh200> ...I removed that...
+[08:01]  * ArghArgh200 smacks his head on his desk
+[08:01] <Wiesshund> ArghArgh200 right click, pick edit menu, click revert ?
+[08:01] <xangua> ArghArgh200: right clic in the menu> edit
+[08:01] <ArghArgh200> okay, I'll try that.
+[08:02] <ArghArgh200> be right back
+[08:02] <ArghArgh200> ...
+[08:02] <ArghArgh200> It won't open a rightclick menu
+[08:03] <rww> ArghArgh200: press Alt-F2, type   alacarte   in the box that comes up, run it
+[08:03] <kvio05> PythonPup: sorry, I disconnected. two things did come to mind though
+[08:03] <MACscr> anyone running colorzilla for firefox with their 64bit ubuntu system? Its driving me nuts that i cant get that plugin to work and i normally use it on a daily basis
+[08:03] <kvio05> PythonPup: the specific partition it says is in use (/dev/sdc1) was a 500mb /boot partition before failure. also, the drive is USB. would either of those factors play a role?
+[08:04] <PythonPup> kvio05, I don't see how.
+[08:04] <kvio05> PythonPup: not possible that the livecd automatically is doing something with /boot on startup?
+[08:05] <meral_k> hi all!
+[08:05] <PythonPup> The live CD does not alter your hard drives automatically.  That would be a real big nono.
+[08:05] <kvio05> PythonPup: if it were something simply just wrong with the drive itself..it seems odd to me that gparted would specifically identify /dev/sdc1 as the problem (even when there is no 1)
+[08:05] <Wiesshund> kvio05 can you plug the drive in after boot?
+[08:05] <LUCHO_2385> hellooooooooo :D
+[08:05] <kvio05> Wiesshund: very good idea, i'll try that right now (or actually someone else will, i'm doing this all via teamviewer)
+[08:06] <PythonPup> kvio05, did you reboot?
+[08:06] <meral_k> i see new updates now "linux 2.6.32-24". but i already use this version of linux. so what should i do now ? can we check which version of linux i use from terminal ?
+[08:06] <kvio05> PythonPup: was waiting on a response from the person physically there
+[08:06] <Wiesshund> kvio05 i mean if you think the livecd is trying to do something with /boot on it. im thinking not but no harm in checking
+[08:06] <kvio05> PythonPup: will respond with result shortly
+[08:06] <razz11> i installed freenx and I see x11vnc  server under applications > internet, is that normal? and I already have a custom ssh keys setup between the server and the client. which I use regularly to connect to the server. I guess I will not need one more. can someone point me in the right direction as to how to set up freenx
+[08:07] <PythonPup> meral_k,   uname -a   will show your current kernel.  It must be a minor update.
+[08:07] <rww> meral_k: PythonPup's right, it is. It's a security update that came out today.
+[08:07] <meral_k>  rww:  PythonPup: ok thanks!
+[08:08] <Wiesshund> razz11 its normal to see x11vnc server there, cant answer the other
+[08:08] <RAX_bg> PythonPup: sry smth happened with my internet
+[08:09] <PythonPup> razz11, I have not used it recently, so I better let someone else help.  I use VNC all the time.  Freenx is preferred for remote control of remote systems, but I don't do that.
+[08:09] <RAX_bg> PythonPup: anything found on my problem? I looked for sshd but it doesn't seem to be the kind of software i need
+[08:09] <razz11> Wiesshund: thnx,
+[08:09] <razz11> PythonPup: I use vnc, it's inefficient, and sluggish. even with compression
+[08:10] <Wiesshund> razz11 x11vnc is the only one i found that would work with compiz and desktop effect
+[08:10] <razz11> PythonPup: what server do you run, vino?
+[08:10] <PythonPup> RAX_bg, There are several options.  Are these computer both at home or the same location?
+[08:10] <razz11> Wiesshund: so freenx uses x11vnc. am I right?
+[08:10] <Wiesshund> razz11 i believe so
+[08:11] <razz11> k
+[08:11] <PythonPup> razz1, I used the default one under System/Preferences/Remote Desktop.  On xubuntu, I setup vino.
+[08:12] <Wiesshund> PythonPup only downside of that one is if the server is running compiz and desktop effects enabled, the screen doesnt update. If you can get the user to disable that stuff it works but..
+[08:13] <PythonPup> razz11, freenx may fall back to vnc, but it's default protocol is much better.  That is why it is preferred for remote systems.  VNC control of a machine in a remote location can be painful.
+[08:13] <LUCHO_2385> how can I edit a .pub file in ubuntu?
+[08:13] <RAX_bg> PythonPup: no they both are part of one network but every computer of this network has real IP so i cant make something like LAN sharing, but what i want is to be able to see a folder like i see it when its shared in LAN because i want to use its contents without having the files on the client machine. is this possible?
+[08:13] <KB1JWQ> LUCHO_2385: file $file.pub
+[08:13] <KB1JWQ> What's it say?
+[08:13] <LUCHO_2385> .pub is a publisher file
+[08:13] <razz11> PythonPup: it's vino, I find it very sluggish even without any desktop effects? vinagre was shockingly buggy, so moved to remmina, its very good
+[08:13] <PythonPup> Wiesshund, Yes, I disable compiz on machines I want to control.  Who needs it on a server, anyway?
+[08:13] <KB1JWQ> OpenOffice perhaps.
+[08:14] <ArghArgh200> I still can't restore the main menu items to my desktop...
+[08:14] <LUCHO_2385> I cannot
+[08:14] <xangua> LUCHO_2385: scribus maybe¿
+[08:14] <PythonPup> RAX_bg, what is the ping time to the other machine?
+[08:14] <LUCHO_2385> there's no option to open a .pub
+[08:14] <xangua> ArghArgh200: right clic to the panel> add> menubar
+[08:15] <LUCHO_2385> scribus dosn't have that option neither
+[08:15] <PythonPup> razz11, I guess I'll have to try remmina.  Thanks.
+[08:15] <RAX_bg> PythonPup: standat ping packet or a big one
+[08:15] <aruntomar> is it possible to aggregate 2 ppp connections?
+[08:15] <ArghArgh200> xangua, it doesn't work
+[08:16] <PythonPup> RAX_bg, standard ping.  Let it do a few packets to get the average.
+[08:16] <xangua> ArghArgh200: it doesn't work what¿ are you running netbook remix¿
+[08:16] <RAX_bg> PING 85.217.188.5 (85.217.188.5) 1400(1428) bytes of data.
+[08:16] <RAX_bg> 1408 bytes from 85.217.188.5: icmp_seq=1 ttl=61 time=11.2 ms
+[08:16] <RAX_bg> 1408 bytes from 85.217.188.5: icmp_seq=2 ttl=61 time=11.0 ms
+[08:16] <RAX_bg> 1408 bytes from 85.217.188.5: icmp_seq=3 ttl=61 time=9.98 ms
+[08:16] <RAX_bg> this is with big
+[08:16] <FloodBot2> RAX_bg: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[08:16] <ArghArgh200> xangua, yes
+[08:16] <xangua> !panels | ArghArgh200
+[08:16] <xangua> try to restore panel settings then ArghArgh200
+[08:16] <ubottu> ArghArgh200: To reset the gnome panel to defaults, type this in a !terminal: « gconftool --recursive-unset /apps/panel && killall gnome-panel »
+[08:16] <greezmunkey> aruntomar: you can, mlppp is for that, but to be effective it needs to be done at both ends.
+[08:16] <Wiesshund> PythonPup server no, but if your doing something like remotely helping an end user or helping the kid with a collage paper etc, sometimes your stuck with thier desktop effects
+[08:16] <PythonPup> razz11, I did setup freenx for one person a couple of years ago.  It gave great performance, even though the computers were in different cities.
+=== slidinghorn is now known as [-slidinghorn-]
+[08:17] <RAX_bg> PythonPup: well on packet size of 1400 bytes its around 10ms
+[08:17] <LUCHO_2385> nobody???
+[08:18] <aruntomar> greezmunkey, i tried doing that, the problem that i'm facing is that although i get the same gateway for both the ppp connections, what should be my default route and via which device
+[08:18] <razz11> PythonPup: trying to setup nx, let you know when  I get it right, thnx
+[08:18] <PythonPup> RAX_bg, That is a little slow.  You miight try setting up a samba server on the linux machine and sharing a directory to the other machine.  Depending on how much data you transfer, it might be OK.
+[08:18] <LUCHO_2385> is opening .pub impossible in ubuntu?
+[08:19] <RAX_bg> how to make the samba shared folder visible for the other machine
+[08:19] <songer> hello
+[08:19] <LUCHO_2385> hello songer
+[08:19] <Wiesshund> ok im out, tired.
+[08:19] <rgevaert> u
+[08:19] <PythonPup> RAX_bg, I was afraid you might ask that.
+[08:20] <LUCHO_2385> I need to open a .pub file... Any option???
+[08:20] <RAX_bg> well im lets say noob
+[08:20] <dr0id> btw, I hope I can run more than 1cron jobs anytime, right ?
+[08:20] <greezmunkey> LUCHO_2385: check this thread: http://forums.techguy.org/linux-unix/870637-urgent-open-pub-documents.html
+[08:20] <songer> how can i set dame album of a song?
+[08:21] <PythonPup> RAX_bg, The remote machine is Windows.  Right, RAX_bg
+[08:21] <songer> to see on my player?
+[08:21] <LUCHO_2385> I'll check. thanks
+[08:21] <RAX_bg> PythonPup: yes that's correct
+[08:21] <greezmunkey> aruntomar: the mlppp process sets up a virtual interface. When the mlppp connection is up, check in ifconfig to see what the system calls it.
+[08:22] <dr0id> btw, I hope I can run more than 1cron jobs anytime, right ?
+[08:22] <balr0g> hello guys, can anyone help me? im having issues on updating my kernel to 2.6.35 ... this is my grub.cfg : http://pastebin.com/rSNfn4Tv and this is the error booting the new kernel: http://pastebin.com/HEUR71mG can anybody help me please ? any clues?
+[08:22] <rww> dr0id: yes, you can have as many as you want
+[08:22] <dr0id> rww: thanks , that's awesome :)
+[08:22] <aruntomar> greezmunkey, there is no virtual interface, i guess, my isp doesn't support mlppp
+[08:23] <greezmunkey> aruntomar: there is the proviso! Both ends, remember?!
+[08:23] <aruntomar> greezmunkey, can i use linux bridging concept to achieve this ?
+[08:23] <PythonPup> RAX_bg, So, on their side, they will just browse for a windows share.   Let's say your machine is 123.234.56.78 and you call the shared area gamespace.   There are several ways they can do it.  I usually go to a command prompt and type    net use k: //123.234.56.78/gamespace
+[08:24] <rounder> alow
+[08:24] <PythonPup> RAX_bg, or maybe they put the slashess the other way.
+[08:24] <greezmunkey> aruntomar: if you are trying to increase bandwidth by cobbing two desperate internet connections together - don't waste your time. You will have no end of problems with it.
+[08:24] <PythonPup> RAX_bg, On your side, you just install samba nad setup a share.
+[08:25] <RAX_bg> PythonPup: its the other way in win. my way to connect from win host is go to run and type \\IP\foldername
+[08:25] <RAX_bg> PythonPup: i shared it with right click->sharing options
+[08:25] <aruntomar> greezmunkey, oh :(
+[08:25] <greezmunkey> aruntomar: It's just the way it rolls.
+[08:25] <RAX_bg> because when i tried to install samba it said its already the newest version
+[08:26] <aruntomar> greezmunkey, i thought may be with some other networking concept i could achieve this
+[08:26] <PythonPup> RAX_bg, OK, then do it that way.
+[08:26] <RAX_bg> another question
+[08:26] <RAX_bg> PythonPup: do i need to configure the router
+[08:26] <balr0g> hey guys, can anyone help on solving update kernel issue?
+[08:26] <RAX_bg> PythonPup: i mean what port is samba using
+[08:26] <PythonPup> RAX_bg, Then, just edit /etc/samba/smb.conf and add your new share and you are set.
+[08:27] <aruntomar> greezmunkey, basically the client saw this kind of setup somewhere, those guys are using different 3G usb devices, and combining the network bandwidth
+[08:27] <PythonPup> RAX_bg, Router?  Do both machines have public IP addresses.  You said that earlier.
+[08:27] <aruntomar> greezmunkey, now he wants us to combine 2 or more 3G usb devices for uploading purposes
+[08:28] <RAX_bg> well the router im behind does and the client machine has its own public IP
+[08:29] <greezmunkey> aruntomar: There are two concepts, aggrigation and load balancing - you want load balancing.
+[08:29] <PythonPup> Samba is not the most secure thing.  I don't suggest people expose it over the internet.  I thought y'all were in the same building.
+[08:29] <KB1JWQ> PythonPup: Could always VPN it, but that's still ugly.
+[08:30] <PythonPup> KB1JWQ, That is better than exposing your samba server to the world.
+[08:30] <aruntomar> greezmunkey, ok. let me reconfirm the steps with u for mlppp, let me know if i'm doing something wrong
+[08:30] <KB1JWQ> Yeah, but it's still something of an ugly hack.
+[08:30] <KB1JWQ> I'd rather use something else for sharing files across a WAN.
+[08:31] <PythonPup> RAX_bg, If your router is good enough, you can set it to only allow the samba ports from his IP address.  That would be pretty safe.
+=== [-slidinghorn-] is now known as slidinghorn
+[08:31] <LUCHO_2385> bye bye
+[08:32] <RAX_bg> PythonPup: yes i can do that but what ports the samba uses
+[08:32] <TiK> or iptables
+[08:32] <aruntomar> greezmunkey, i created 2 different files via pppconfig and tested them individually and they are working, i then added multilink in the 2 files created earlier
+[08:32] <giantpune> can somebody help a sister out with some ubuntu mimetype stuff?  i want to associate files with the extension ".dol" with a program i wrote.  but by default in ubuntu they show up as "vnd.microsoft.icon" files.  where does ubuntu get this from and where can i change it?
+[08:32] <disse> can anybody help me? I'm on a live CD
+[08:32] <disse> http://codepad.org/h6CBpz9W
+[08:32] <aruntomar> greezmunkey, then i start the ppp connection on both the files via pon command
+[08:32] <disse> why he doesn't knows lvm? lvm2 is installed
+[08:32] <RAX_bg> PythonPup: also as i want to run online game do i need to forward its ports too
+[08:32] <greezmunkey> aruntomar: you won't be using mlppp to do load balancing - it will be an iptables, or squid excercise
+=== akos is now known as Guest72599
+[08:33] <PythonPup> RAX_bg, samba uses Port 135/TCP, Port 137/UDP, Port 138/UDP, Port 139/TCP, Port 445/TCP
+[08:34] <aruntomar> greezmunkey, i can do load balancing with iproute2 as mentioned in lartc, haven't tried it with iptables or squid
+[08:34] <RAX_bg> PythonPup:  ty and last what about the smb.conf file what do i need to add there is it something like that [foo]
+[08:34] <RAX_bg> path = /home/bar
+[08:34] <RAX_bg> read only = no
+[08:34] <RAX_bg> guest ok = yes
+[08:34] <FloodBot2> RAX_bg: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[08:34] <aruntomar> greezmunkey, m i following the steps for mlppp correctly? or m i doing something wrong there
+[08:34] <PythonPup> RAX_bg, I see something about letting high ports outgoing through the firewall.  Most firewalls do that anyway.  I have not setup samba exposed to the internet.  Someone else may comment on that.
+[08:35] <th0r> giantpune: I think that is defined in the mimetypes, so you might try starting there. But I have never edited them so I am not sure
+[08:35] <RAX_bg> PythonPup: ok ill play around with it ty very much
+[08:35] <aruntomar> greezmunkey, the point is that if mlppp works then it's great, but it doesn't , then what are my options, like iptables or squid
+[08:35] <PythonPup> RAX_bg,  a bunch of stuff.  I don't have my samba template here.
+[08:36] <giantpune> thats where im looking th0r.  buth theres liek 2000 different files and folders for mimetypes
+[08:37] <giantpune> and the ones that are names vns.microsoft.blabla say "do not edit, this is automatically generated..."
+[08:37] <balr0g> hey guys, anyone knows to solve kernel update issues?
+[08:38] <xangua> balr0g: what issues¿
+[08:38] <balr0g> xangua, im having issues on updating my kernel to 2.6.35 ... this is my grub.cfg : http://pastebin.com/rSNfn4Tv and this is the error booting the new kernel: http://pastebin.com/HEUR71mG can anybody help me please ? any clues?
+[08:38] <xangua> balr0g: 2.6.35 ¿¿ are you compiling¿¿
+[08:39] <balr0g> xangua, yes
+[08:39] <xangua> i got 2.6.35 from a ppa
+[08:39] <xangua> compiling for me is like........damn i am so lazy
+[08:39] <balr0g> xangua, i need to compile to select special options from menuconfig
+[08:39] <Aemaeth> Hey everyone, my phone used to work with the wireless manager in gnome, but now when i plug it in it doesn't do anything.  File transfer from phone to computer and vice versa works, so data should but there's no way for me to access the settings, what's going on here?
+[08:40] <SwedeMike> balr0g: it couldn't find the root file system, there are a lot of different reasons why it wouldn't be able to do that so it's not nearly enough information.
+[08:40] <disse> can anybody help me? I'm on a live CD
+[08:40] <disse>   http://codepad.org/h6CBpz9W
+[08:40] <disse>  why he doesn't knows lvm? lvm2 is installed
+[08:41] <balr0g> SwedeMike, i just follow README instructions... i extract then i do... make menuconfig ... make ... make modules_install install ... reinstall grub ... its all
+[08:41] <TiK> question: I have an asus laptop.. when I close it and reopen it the monitor is dark and I have to reboot.. why?
+[08:41] <greezmunkey> aruntomar: when you asked if it was possible to "combine" two ppp links, I responded with "mlppp" - once you described your desired result I told you that mlppp is not the tool you need. You want to set up a load-balancing application with iptables. This is not a task for the faint of heart, but it does work.
+[08:41] <SwedeMike> balr0g: try makig a kernel package instead, then you might get all initrd etc as well.
+[08:41] <mikubuntu> my friend (who is 94) called me today to come over .. all of a sudden, his internet wasn't working.  he has some kind of 'support' contract (and i use the term loosely) and had already been on the phone with them, and they only wanted $130 to diagnose it for him.  i popped in the keychain usb i just made the other day, and set the bios to boot from the usb.  a minute later, we were running live, and online.
+=== geo is now known as geo05
+[08:42] <th0r> SwedeMike: did you update grub after installing the new kernel?
+[08:42] <aruntomar> greezmunkey, thanx for ur help and giving me direction, i'll now focus my efforts on iptable load balancing
+[08:42] <SwedeMike> th0r: wrong person.
+[08:42] <balr0g> SwedeMike, can you point me on what or how do kernel package?
+[08:42] <th0r> oops
+[08:42] <balr0g> th0r, im the issue one lol
+[08:42] <balr0g> th0r, yes i update it...
+[08:43] <mikubuntu> i let him play around with firefox (he wanted to know where the internet's explorer was) and determined that he could prolly learn to live with 'filefox'.
+[08:43] <Aemaeth> mikubuntu, chrome is probably the closest to IE
+[08:43] <ugliefrog_> !ubotu
+[08:43] <greezmunkey> aruntomar: I was doing some googlin' and found some "shortcuts" using iproute, don't waste your time there. That method is not reliable.
+[08:43] <ubottu> Hi! I'm #ubuntu's favorite infobot, you can search my brain yourself at http://ubottu.com/factoids.cgi - Usage info: http://wiki.ubuntu.com/IRC/Bots
+[08:43] <balr0g> th0r, here: http://pastebin.com/rSNfn4Tv you can see 2.6.35 recognized... but booting this is the error: http://pastebin.com/HEUR71mG
+[08:44] <TiK> question: I have an asus laptop.. when I close it and reopen it the monitor is dark and I have to reboot.. why?
+[08:44] <aruntomar> greezmunkey, oh :(
+[08:44] <tensorpudding> Probably it interprets closing the lid a hibernating
+[08:44] <Aemaeth> i have an asus too, when i close mine and it suspends the webcam light comes on
+[08:44] <KB1JWQ> Disable that. :-)
+[08:45] <xangua> TiK: system>preferences>screensaver , disable: block screen
+[08:45] <ghoulsblade> hi, i've got a weird "find" process in top&ps ax with a long param list und user nobody, what can i do to find out where it comes from ?
+[08:45] <xangua> no, that wasn't....
+[08:45] <ghoulsblade> (it uses a lot of resources it seems)
+[08:45] <Jordan_U> balr0g: Why are you trying to compile your own kernel?
+[08:45] <llutz> ghoulsblade: updatedb running?
+[08:46] <xangua> system>preferences>energy TiK
+[08:46] <balr0g> Jordan_U, i need to activate some especial options to use BSD Process Accounting feature (ELSA)
+[08:46] <Jordan_U> ghoulsblade: pstree may help
+[08:46] <th0r> balr0g: according to the grub file you have the kernel installed on the second partition of the second drive (1,1) but the error says grub is looking on the first partition of the first drive (0,0)
+[08:46] <cgtobi> gotta go, cya
+[08:46] <balr0g> th0r, thata makes sense, how to solve it?
+[08:46] <MaRk-I> balr0g: did you,   sudo update-initramfs -c -k 'yourkernelversion.3bla" before doing the grub update?
+[08:46] <ghoulsblade> thanks, will give it a try.  updatedb : yes, two of them even, but i see it everytime i look, shouldn't be running all the time right ?
+[08:47] <th0r> balr0g: that is the new grub file, so I don't know how it is defined. In the old days I would just edit menu.lst
+[08:47] <balr0g> MaRk-I, no man, will try it...
+[08:47] <mikubuntu> so, he decided he was ready to try the new system.  alas, when i started the installer, it would not get past the first partitioning, and i got a message that it could not set up the ext4 file.  i wish i had save the whole message, because it mentioned also something about raid apparently.  i spent about an hour in one of these channels, but couldn't make any headway on what the problem might be.  i've never had a hangup like this b
+[08:47] <mikubuntu> http://pastebin.ubuntu.com/473324/
+[08:48] <aruntomar> greezmunkey, so if iptables is unreliable should i look for proxy load balancing via squid
+=== ugliefrog_ is now known as xfrog
+[08:48] <mikubuntu> this is some output from a command they had me run today, but i don't know if its useful or not
+[08:49] <TiK> xangua: ok thanks
+[08:49] <greezmunkey> aruntomar: no, I said the iproute script shortcuts are unreliable. I finally found a good article for you, check this for iptables: http://serverfault.com/questions/93678/load-balancing-nat-ing-multiple-isp-connections-on-linux
+[08:50] <PythonPup> mikubuntu, It looks like you have no free space to put linux.  You will need to add a new drive or wipe one of those or uses a live CD or use partition magic.
+[08:50] <RealOpty> hi
+[08:50] <TiK> xangua: i have no system / pref / energy
+[08:50] <TiK> energy
+[08:50] <RealOpty> what kind code is this lol? 0x102
+[08:50] <RealOpty> is that hex or what?
+[08:50] <KB1JWQ> RealOpty: That's a hex code.  Not a lol.
+[08:51] <th0r> RealOpty: yes, that is hex
+[08:51] <RealOpty> k
+[08:51] <xangua> TiK: 'gestor de energía' here in spanish, i don't know how is it called in english
+[08:51] <RealOpty> any one have a hex to asci link?
+[08:51] <mikubuntu> PythonPup: i specified to wipe xp, and to use the whole disk for ubuntu, there shouldn't be any lack of space ??
+[08:51] <PythonPup> Tik - use a little imagination.  Sustem /Preferences /Power Management.
+[08:52] <PythonPup> mikubuntu, can you get in front of his system and still use IRC?
+[08:53] <PythonPup> mikubuntu, Knowing the exact error would help.
+[08:53] <mikubuntu> i'm home now, have to go back tomorrow nite.  i can get on irc using the livecd as i ws today
+[08:53] <PythonPup> mikubuntu, the 4 gb drive is probably a pen drive.  Is that right?
+[08:54] <greezmunkey> RealOpty: use the calculator, set it to "programming" then use the buttons at the top right to convert back and forth.
+[08:54] <mikubuntu> guess the best bet will be to take my laptop over there tomorrow so i can check into the channel
+[08:54] <TiK> PythonPup: thats the first place  looke settings seem to be correct
+[08:54] <mikubuntu> PythonPup: yes, its a lexar 4gb usb
+[08:54] <TiK> looked*
+[08:55] <mikubuntu> PythonPup: its the first boot usb i ever made, and it runs live just fine
+[08:55] <PythonPup> mikubuntu, I have not made a USB boot.  So, you are ahead of me there.
+[08:55] <Aemaeth> is there a command like iwconfig for cell phones?
+[08:55] <fishcooker> how access hidden share by pyneighboorhod
+[08:55] <fishcooker> ?
+[08:55] <mikubuntu> PythonPup: but can't get the install past the ext4 creation
+[08:56] <PythonPup> mikubuntu, You probably picked the wrong option, but I am guessing.  You want remove all partitions and create default layout.
+[08:56] <mikubuntu> PythonPup:   k, i check back in tomorrow when i'm in front of the machine again .. thanx!
+[08:56] <PythonPup> mikubuntu, Now, I would do something else first.
+[08:57] <mikubuntu> PythonPup: ok, whats that
+[08:57] <PythonPup> mikubuntu, Is there data on either drive he wants to preserve?
+[08:57] <mikubuntu> PythonPup: no data to preserve
+[08:57] <balr0g> MaRk-I, it seems to be solved man... tks sudo update-initramfs -c -k 2.6.35 and sudo update-grub was the solution ...
+[08:57] <MaRk-I> balr0g: nice
+[08:58] <PythonPup> OK, then you are OK.  This is probably one of those dynamic raid setups that Windows supports.  mikubuntu, you need to erase the partitions on both drives.  That may be related to your problem.
+[08:58] <yondie> hye , i found out in LTS 10.04 my X won`t start if there is no monitor attached to it
+[08:58] <yondie> hwo can i solve it?
+[08:59] <PythonPup> yondie, connect a monitor?
+[08:59] <PythonPup> yondie, that was a trick question, right?
+[08:59] <mikubuntu> PythonPup: what TWO drives?  does his machine have two drives?
+[08:59] <Aemaeth> PythonPup, sometimes easier said than done, I had old soviet system, she was like landwhale, killed three men
+[08:59] <yondie> nope
+[08:59] <yondie> PythonPup:  i want to start it headlessly
+[08:59] <yondie> but i need the X
+[08:59] <yondie> to run
+[09:00] <mikubuntu> PythonPup: is that RAID thing something that's on his drive that's impeding the setup?
+[09:00] <PythonPup> mikubuntu, yes.  The fdisk -l shows two 80 gb drives.  If you open it and don't see two hard drives let us know.
+[09:00] <PythonPup> mikubuntu, maybe.
+[09:01] <mikubuntu> PythonPup: so, should i run 'darik's boot and nuke' on it before i try the install again?
+[09:01] <Walex> yondie: configure it with an explicit X file. It does not start because by default it autodetects the monitor and autoconfigs it.
+[09:02] <PythonPup> mikubuntu, you could.  The ubuntu installer should handle it, but wiping the drive could be a fallback position.
+[09:02] <Antonio_> aloha folks..
+[09:02] <PythonPup> yondie, Yes, that is what I was going to suggest.  create a xorg.conf file
+[09:02] <mikubuntu> PythonPup: ok, i see you tomorrow .. thanks, i has to get to sleep
+[09:02] <Antonio_> Is anyone familiar with a program that I can use to convert a dvd to an avi/mp4/etc...and allow me to select the individual chapters/scenes that I want?
+[09:03] <PythonPup> mikubuntu, I won't be here Thursday, but others will be.
+[09:03] <TiK> PythonPup: http://tinypics.com/r/2zxyrt/4
+[09:03] <llutz> Antonio_: handbrake
+[09:03] <mikubuntu> PythonPup: k, thx again
+[09:03] <TiK> PythonPup: http://tinypic.com/r/2zxyrt/4 sorry
+[09:03] <PythonPup> TiK, page not found
+[09:04] <TiK> my browser keeps crashing
+[09:04] <PythonPup> TiK, that page is asking me to upload a picture.
+[09:04] <TiK> nevermind
+[09:04] <TiK> :(
+[09:04] <Benkinooby> the ubuntu netbook remix is just having a different unser interface... or are there also differences "under the hood"?
+[09:05] <TiK> PythonPup: it was just a pic of power management.. dim display is unchecked
+[09:05] <TiK> on AC
+[09:05] <PythonPup> Benkinooby, a few changes, but mostly the same.
+[09:05] <Jigal> Hello can someone tell me how to get rid of the annoying screen lock on 10.04 every 5 minutes or so int atuomatically locks the screen. Dont want that
+=== lag is now known as Guest71543
+[09:05] <PythonPup> Jigal, configure your screensaver.
+[09:05] <Slart> Jigal: turn off the screensaver?
+[09:05] <TiK> Jigal: power management
+[09:06] <PythonPup> Jigal, System / Preferences / Screensaver
+[09:06] <Benkinooby> PythonPup: i use a lenovo ideapad s12. don't think that there will be remarkable performance changes
+[09:06] <PythonPup> 5 minutes is the default for screensaver, so it is probably that.
+[09:06] <Jigal> PythonPup, Slart TiK thanks
+=== gaveen_ is now known as gaveen
+[09:07] <PythonPup> Benkinooby, no remarkable changes.  Now, on the arm version they are working on, there are more changes.  That is because the arm has problems with some apps, like firefox.
+=== Krana is now known as Rapture1781
+[09:08] <PythonPup> TiK, I don't know where you are now.  Are you trying to get a picture up?  I don't really know your root problem.
+[09:10] <PythonPup> Benkinooby, The main thing about the netbook remix is that it is designed to run one screen app at a time.  You can get around it, but normally, apps come up full screen.  That is nice for a netbook, usually.
+[09:10] <kenwiliest> how do i see the root account in 10.04
+[09:10] <Black_Prince> !sudo
+[09:10] <ubottu> sudo is a command to run command-line programs with  superuser privileges ("root") (also see !cli ) . Look at https://help.ubuntu.com/community/RootSudo for more information. For  graphical applications see !gksu (Gnome, XFCE), or !kdesudo (KDE). If you're unable to execute commands with  sudo see: http://www.psychocats.net/ubuntu/fixsudo
+[09:10] <Benkinooby> PythonPup: ok, thank you. i prefer to have serveral apps on my screen...
+[09:11] <TiK> PythonPup: still goes dim// no big deal
+[09:11] <PythonPup> Benkinooby, that is why I setup some netbook users with the standard Ubuntu.   Good luck.
+[09:11] <massimo_> concert by the sea
+[09:12] <PythonPup> TiK, I don't understand.  Are you saying the screen dims?  That is probably a screensaver setting.
+[09:12] <gio1983> hello everyone :)
+[09:12] <e-DIO-t> does anybody know why ErrorDocument 503 /some/html/page isn't working...even if when i try to load the "urlmappedinvhost.com" it gives me error 503?
+[09:12] <PythonPup> TiK, under Power Management in the screensaver settings.
+[09:13] <e-DIO-t> [ps: modify /error/HTTP_SERVICE....is not working anyway]
+[09:13] <gio1983> I'm working on a minimalistic ubuntu environment, where most of the tools available in a standard ubuntu installation are not available
+[09:13] <gio1983> I have the following problem
+[09:13] <PythonPup> kenwiliest, As the bot said.  By default, there is no root user on an Ubuntu system.  It is safer that way.
+[09:13] <TiK> PythonPup: what am I looking for again? :(
+[09:14] <Walex> gio1983: have you had a look at ubuntu for netbooks?
+[09:14] <gio1983> the system automounts usb storage devices, and I would like to be able to read the idVendor and idProduct
+[09:14] <MaRk-I> yondie: read post #605 and below plus next page might give you an idea http://ubuntuforums.org/showthread.php?p=9244160#post9244160
+[09:14] <gio1983> @Walex it's an ad-hoc thing not developed by us :\
+[09:14] <kenwiliest> pythonpup, wow, i was too lazy to read that... thanks... reading hanbook right now...
+[09:14] <gio1983> my problem is this
+[09:14] <PythonPup> TiK, Go to screensaver preferences and look under power management.  I don't see the same options as you, because I am using a desktop machine.
+[09:14] <gio1983> I have /proc and /sys
+[09:15] <kenwiliest> i could fo swore in 8.04 or 9 series you could set a pass for root??
+[09:15] <Slart> kenwiliest: setting a root password isn't supported in here
+[09:15] <TiK> PythonPup: that was the first place I looked.. I give up
+[09:15] <gio1983> I can list the mounted devices using /proc/mounts
+[09:15] <Slart> !root | kenwiliest
+[09:15] <ubottu> kenwiliest: Do not try to guess the root password, that is impossible. Instead, realise the truth... there is no root password. Then you will see that it is 'sudo' that grants you access and not the root password. Look at https://help.ubuntu.com/community/RootSudo
+[09:15] <gio1983> and, for example I can find out that /dev/sdb1 is a vfat partition
+[09:15] <gio1983> coming from an usbkey
+[09:16] <TiK> I think i's a bug
+[09:16] <PythonPup> kenwiliest, The way root is used on Ubuntu has been the same since the first Ubuntu release.  You can setup a root account.  On servers, this is fairly commonly done.
+[09:16] <gio1983> now, how can I find out idVendor and idProduct?
+[09:16] <TiK> bc its switching from AC to battery power.........
+[09:16] <gio1983> knowing this?
+[09:16] <llutz> gio1983: lsusb
+[09:17] <gio1983> but how can I make the binding /dev/sdb ---> Bus 002 Device 015: ID 0930:1400 Toshiba Corp.
+[09:17] <PythonPup> TiK, is that your problem?  That it is switching from AC to battery.
+[09:17] <star3am> hallo guys, anyone can hep with php5-mcrypt module ?
+[09:17] <Benkinooby> PythonPup: i was wondering about the difference between ubuntu minimal install and ubuntu alternate install. i read about both of them, but i don't get the difference. looks like the minimal cd has only the most crucial packages, so everything has to be download from web for installation. the alternate cd is like the normal installation cd, but it runs with text interface and gives more chices during installation. is that coorect?
+[09:17] <gio1983> lsusb does not tell which device file is associated to a certain device :\
+[09:17] <Tohuw> is there a way to make an fstab include just for a certain user? e.g. user joe logs on and mounts everything in /etc/fstab, user john logs on and mounts everything in /etc/fstab AND another fstab-like file.
+[09:17] <gio1983> does it?
+[09:17] <llutz> gio1983: read "dmesg" output
+[09:18] <Tohuw> Benkinooby: you are correct. The "extra choices" are related to setting up software RAIDs
+[09:19] <PythonPup> Benkinooby, I think you have it.  The alternate gives you a full system.  It has more install options and is what I normally use.  The minimal install is used for servers and virtual machines, mostly.
+[09:19] <gio1983> @llutz dmesg does not tell this info, unfortunately
+[09:19] <TiK> PythonPup: Ive looked in the options under power managemet.. and when I am on AC I want it to be bright and when I lose my lid I want it to remain bright. when I a nnot on AC I want to display tobe dimmed so I checked "Reduce Backlight Brightness" under on battery per. Now whneer I close my lid and wakeup my computer "on AC power" its dim
+[09:19] <Benkinooby> Tohuw: ok thank you.
+[09:19] <TiK> lose/close
+[09:19] <PythonPup> Benkinooby, the important option for me on the alternate installer is the ability to setup encrypted disks.
+[09:19] <Slart> Tohuw: I think fstab is parsed when the machine boots.. not when a user logs in.. so no.. I doubt you'll be able to work with the fstab that way
+[09:20] <TiK> seems lik a big to me pythonpup
+[09:20] <TiK> bug
+[09:20] <llutz> gio1983: here it does
+[09:20] <Benkinooby> PythonPup: so if a want ubuntu with flxbox (and no gnome; fluxbuntu seems to be dead) best is to use alternate cd
+[09:20] <Slart> Tohuw: you could write a script that runs at login which mounts drives and such
+[09:21] <llutz> gio1983: after plugin the stick in,  dmesg logs lines like :[ 6494.035797] sd 4:0:0:0: [sdb] 15753215 512-byte logical blocks: (8.06 GB/7.51 GiB)
+[09:21] <Tohuw> Slart: that's what I assumed... is there a way to make an fstab entry only mount for a certain user? I need to shake off the brain-dust in this area, but I seem to remember you can specify for each mount instruction who can actually access it. The issue is that I have a cifs share I want to mount, but only one user should be able to get to it (the share mounts in their home anyway)
+[09:21] <TiK> PythonPup: anyway tanks for trying I am posting this as a bug
+[09:21] <gio1983> I get this for example
+[09:21] <gio1983> http://ubuntu.pastebin.com/AWMMNKES
+[09:21] <MACscr> is there anything i can do to automatically keep my gnome ftp bookmark connections alive? Im constantly having to refresh the folder when i want ot open a file. Most of hte time i have to do it a couple times
+[09:22] <TiK> Tohuw: make a script and allow them to mount with sudo
+[09:22] <rgnr> bgj
+[09:22] <TiK> idk...
+[09:22] <llutz> gio1983: it only gives raw-device (sdc) in your case
+[09:22] <Slart> Tohuw: I think your best option is to set permissions on the mounted drive so that only the specified user can access it.. ie it will still be mounted but only some user(s) will be able to read the files
+[09:22] <TiK> thats what I'd do
+[09:22] <sylon> hi my phone shows up as 2 mass storage drives on windows (phone internal memory and microSD card) but on linux it only shows one (the internal memory), any ideas whats up?
+[09:22] <TiK> Slart: yeah good idea
+[09:23] <ElBano> help!
+[09:23] <PythonPup> Benkinooby, The alternate CD will install gnome.  The kubuntu alternate CD will install KDE.  You would want the server CD, probably.  Then there is a package called fluxbox.  I have not tried it lately.  The lubuntu setup is what I use for a light desktop.
+[09:23] <ElBano> http://ubuntuforums.org/showthread.php?t=1294251
+[09:23] <randhol>  Hi. I have setup to autoimport photos from camera, that works great. However, I get asked if I want to import from SD card every time I turn on the printer-scanner as it has a SD card inside. Is there a way to remove this question? I only want to import fram cameras automatically
+[09:23] <gio1983> @llutz uhm that tells me the device [sdc] but it does not tell the usb bus thing where I can find idVendor etc..
+[09:24] <Jordan_U> gio1983: "lsusb" or "ls -l /dev/disk/by-id/"
+[09:24] <Tohuw> Slart: over the course of our conversation, I've realized I'm worrying about a non-issue: it doesn't matter who logs in, this share is only accessible by this user (hence the stored credentials file) and the share point is only accessible by them. It doesn't matter that it mounts for everyone; they still can't get to it. File this in /mountains-out-of-molehills
+[09:24] <PythonPup> TiK, sorry I could not do more.  I need a laptop handy, I guess.  I have one, but it has no battery, so it really acts like a desktop.
+=== WhiteKIBA is now known as [WhiteKIBA]
+[09:25] <llutz> gio1983: there is no "one command" to show you all that info. you have to look at several places if you need it
+[09:25] <Benkinooby> PythonPup: lubuntu... i'll have a look at it, thx for the hint. instead of using server, maybe the minimal install would be better, due to the fact that only the packages i explicitly choose are installed
+[09:25] <gio1983> @Jordan_U I can't use lsusb but the other suggestion might be interesting
+[09:25] <gio1983> @llutz I know unforttunately
+[09:25] <gio1983> in a previous project I was using gudev
+[09:26] <gio1983> but here I can't use it :\
+[09:26] <gio1983> it's Android :P
+[09:26] <Tohuw> Benkinooby: if you're aiming for a very lean system, and understand just what you want, the minimal install is perfect, I've found
+[09:26] <ph8> hey all, anyone know how i can fix a corrupted MBR on an NTFS Drive from ubuntu?
+[09:26] <llutz> gio1983: write an udev-rule to assign a fixed device to your usb-id
+[09:26] <PythonPup> Benkinooby, the minimal install would be fine.  Just expect that you will be adding a lot of basic stuff.  That is a decent way to start.\
+[09:26] <frogzoo> I get a protracted beep on shutdown at the message "unmounting temporary file systems" - didn't use to do this - any clues to fix it?
+[09:27] <Tohuw> ph8, the best way to fix it is with the FIXMBR command on any WINNT or higher install CD. Other ways are not as "safe".
+[09:28] <ph8> can i make fixmbr available in a normal install rather than only in the 'recovery console'?
+[09:28] <Benkinooby> Tohuw, PythonPup : thank you. thought the alternate cd would also give me choice about the packages to be "initally" installed.
+[09:28] <PythonPup> frogzoo, Did you add some samba mounts recently.  I know it takes longer to shutdown, if I don't unmount my samba share.  I don't remember a beep. though.
+[09:29] <PythonPup> Benkinooby, nope.  No package install options.
+[09:29] <frogzoo> PythonPup: no it's a different issue to yours - the beep is really loud & intrusive - I figure it as an alarm of some sort
+[09:29] <Tohuw> Benkinooby: PythonPup: It's a shame though, because ubuntu-server does give you those options; the alt cd really should too
+[09:30] <Benkinooby> Tohuw, +1 ;)
+[09:30] <MaRk-I> gio1983: lshw ??
+[09:30] <Tohuw> frogzoo: it may be completely unrelated to unmounting the shares. have you tried fsck'ing, checking temperatures of CPU/hardware, checking fan states, etc.?
+[09:31] <Tohuw> s/shares/drives
+[09:31] <PythonPup> Tohuw, The alternate installer just uses the standard debian installer.  I like it the way it is, but if you want a change, you would need to convince debian, not ubuntu.
+[09:31] <Tohuw> frogzoo: a memtest may also be in order. PythonPup: thank you for that information; I didn't know that.
+[09:32] <PythonPup> The alternate installer disk has memtest.  Or, it did the last time I looked.
+[09:32]  * Tohuw acknowledges that "ubuntu" is an African word for "I can't configure Debian"
+[09:32] <frogzoo> Tohuw: I guess a fsck may well be in order, tks
+[09:32] <Jordan_U> gio1983: This is really the wrong channel :)
+[09:32] <Tohuw> PythonPup: It's on the Live CD as well
+[09:33] <PythonPup> memtest is small.  I am glad they include it.
+[09:33] <gio1983> @Jordan_U I know, but since android is basically linux with some minor change
+[09:33] <jihad> Has anyone been able to use itunes and mount an itouch or iphone?
+[09:33] <frogzoo> debian has no one to blame but themselves for ubuntu stealing their thunder
+[09:33] <gio1983> I was trying to understand if some one had a similar issue
+[09:33] <gio1983> in linux
+[09:33] <gio1983> since in android it is more difficult to find answers
+[09:33] <Jordan_U> gio1983: No, android is an operating system that happens to use the linux kernel :)
+[09:34] <Tohuw> gio1983: this is not an Android support channel. Android has many major differences from Ubuntu. You would be best off pursuing an Android-specific support channel.
+[09:34] <frenzied_coder> Is there a driver for broadcom 4357 wireless (64bit)? Didn't find it here http://is.gd/e3OLJ or on broadcom's website.
+[09:34] <gio1983> sure
+[09:35] <gio1983> however thanks for the good insights :)
+[09:35] <gio1983> you were all very kind
+=== [WhiteKIBA] is now known as WhiteKIBA
+[09:36] <Kozzy_> hi what is the faster version of ubuntu or ubuntu based distro still active today?
+[09:36] <thebandoffice> THERE'S A PENIS IN MY BUTT HELP ME
+[09:36] <thebandoffice> WHAT'S THE COMMAND TO REMOVE IT
+[09:36] <Jordan_U> gio1983: I wasn't joking by the way, other than the kernel android shares almost nothing in common with a normal GNU/Linux system.
+[09:36] <FloodBot2> thebandoffice: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[09:36] <ikonia> thebandoffice: calm down
+[09:36] <ikonia> thebandoffice: drop the language and that attitude
+[09:36] <Kozzy_> im trying to get a quick one for my toshiba nb305
+[09:36] <ikonia> thebandoffice: this channel is for ubuntu support ONLY
+[09:36] <ikonia> !coc > thebandoffice
+[09:36] <ubottu> thebandoffice, please see my private message
+[09:36] <MaRk-I> !broadcom | frenzied_coder
+[09:36] <ubottu> frenzied_coder: Help with Broadcom bcm43xx can be found at  https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx
+[09:37] <ikonia> !guidelines > thebandoffice
+[09:37] <gio1983> @Jordan_U well it's not totally true, many of thepieces are there, we ported many applications too
+[09:37] <Kozzy_> any help?
+[09:37] <gio1983> @Jordan_U but you're right in saying that there are also many differences
+[09:38] <uncle_sin> hello
+[09:38] <Kozzy_> guess not :(
+[09:39] <bullgard4> '~$ locate gdm-simple-greeter.schemas; /usr/share/gconf/schemas/gdm-simple-greeter.schemas; /usr/src/gdm-2.30.0/gui/simple-greeter/gdm-simple-greeter.schemas.in; /usr/src/gdm-2.30.2.is.2.30.0/gui/simple-greeter/gdm-simple-greeter.schemas.in'. The »file« command in all 3 cases says: "ASCII English text." What does the file name extension '.in' stand for?
+[09:39] <ikonia> bullgard4: that's nothing to do with ubuntu
+[09:39] <ikonia> bullgard4: extensions cacn mean anything you want
+[09:40] <psycho789> if youre running wubi is it just running an application inside of windows
+=== 36DAADETC is now known as Symphonist
+[09:41] <bullgard4> ikonia: hm
+[09:41] <dhecode> huy
+=== e-DIO-t is now known as Bacchettabacco
+[09:42] <PythonPup> Jordan_U, The guy in charge of Android is big on Java.  He wanted everything to run under their own version.  I have seen one netbook that offered a choice of Android or Ubuntu.
+[09:44] <psycho789> if you install ubuntu from wubi are you really just running an application inside of windows
+[09:44] <psycho789> or is it really ubuntu
+[09:44] <dhecode> hello
+[09:45] <mtm> the real deal
+[09:45] <psycho789> so its no different?
+[09:45] <mtm> not really
+[09:45] <dhecode> hello
+[09:46] <mtm> you choose what to boot in
+[09:46] <mtm> ubuntu is in c:/ubuntu
+[09:47] <psycho789> is it slower
+[09:47] <mtm> depends what you have
+[09:47] <psycho789> ok
+[09:47] <psycho789> thanks
+[09:48] <spencer> Hello, I'm just wondering if anyone knows of a good Antivirus for Ubuntu
+[09:49] <decomp> hello all!
+[09:49] <spencer> and how susceptible[?] the OS is to viruses
+[09:49] <jussi> !virus | spencer
+[09:49] <ubottu> spencer: Antivirus is something you don't need on !Linux, except where files are then passed to windows computers (perhaps using samba), See https://help.ubuntu.com/community/Antivirus
+[09:49] <jetienne> q. is there a way to automatically  install all the dependancies of a .deb (not in a repository)
+[09:49] <mtm> hi jussi
+[09:50] <jussi> hi mtm
+[09:50] <mtm> guess what. i know what i did wrong
+[09:50] <jussi> :)
+[09:50] <decomp> Hi all, I changed me display manager to wdm and then back to gdm and now no display manager starts at all. I tried dpkg reconfigure-gdm, and opening synaptic and reinstalling gdm. no change. Can anyone please help?
+[09:50] <mtm> its 1.0.2 now
+[09:50] <spencer> okay, and is there any risk of a virus caught on Linux, to spread to Windows?
+[09:51] <mtm> i installed 1.0.1 and i insralled in seperate files
+[09:51] <Tohuw> spencer: the whole point is you won't "catch" a virus on Linux, unless you do something silly, like run an unknown executable as root
+[09:51] <mtm> and the all that time for something stupid
+[09:52] <spencer> I can't get viruses from the internet?
+[09:52] <PythonPup> spencer, look at clamav.  If you use it, be sure to install freshclams to get updated signatures.
+[09:52] <mtm> ..
+=== WhiteKIBA is now known as [WhiteKIBA]
+[09:52] <PythonPup> spencer, Linux can get viruses.  But, it is much less likely than a Windows system.  Windows practically encourages them.
+[09:53] <spencer> Pythonpup, so true.
+[09:53] <decomp> Hi all, I changed me display manager to wdm and then back to gdm and now no display manager starts at all. I tried dpkg reconfigure-gdm, and opening synaptic and reinstalling gdm. no change. Can anyone please help?
+=== [WhiteKIBA] is now known as WhiteKIBA
+[09:54] <spencer> Alright thanks all, I'm out. Night
+[09:54] <NightKhaos> PythonPup: *sigh* Same old agruement. The security model in Vista and above does not "encourage" users, in fact it's the best it's ever been. The majority of virues on Windows are now PEBKAC type errors, i.e. phishing and trojans.
+[09:54] <NightKhaos> Anyways:
+[09:54] <kenwiliest> decomp, you probably have to edit/add a line to a file like rc.conf or some shit
+[09:55] <NightKhaos> Is it possible to do a multiple alais... i.e. I want to alais all binaries start with arm-none-eabi to arm-elf.
+[09:55] <kenwiliest> decomp, i suggest you direct your attention to something like... the ubuntu documentation emphasizing  that topic
+[09:55] <PythonPup> spencer, I just removed rootkits that had been installed on 30 Linux systems.   So, Linux can get them.  I don't know how they got in.  Someone else is doing the backtracking on that.
+[09:56] <jetienne> q. i got a source package .dsc, _source.build, _source.change, and .targz, how can i recompile it ?
+[09:56] <decomp> kenwiliest: The rc.conf file (/etc/rc.conf) is the core system configuration file used in Arch Linux.
+[09:56] <mtm> So theres nothing suspicious about not having any trojans for over a year?
+[09:56] <decomp> is that also used in ubuntu?
+[09:56] <kenwiliest> decomp,  yes....
+[09:56] <PythonPup> NightKhaos, I was being a little metaphorical.  Saying Vista is the most secure Windows is not a very high standard.  They still include IE, so they are not serious about security.
+[09:56] <kenwiliest> also in freebsd too
+[09:56] <kenwiliest> i think it's a universally vital file.
+[09:57] <frenzied_coder> MaRk-I, thanks. works now.
+[09:57] <NightKhaos> PythonPup: I'll grant you that, however IEs security model is improving.
+[09:57] <kenwiliest> i've never even used arch linux
+[09:57] <MaRk-I> frenzied_coder: yw
+[09:57] <kenwiliest> what's arch linux's emphasis?
+[09:57] <jasonwryan> kenwiliest: rc.conf in ubuntu? really?
+[09:58] <decomp> anyone else having trouble logging into ubuntu forums?
+[09:58] <PythonPup> kenwiliest, arch is for Linux users that want package management like BSD.  That seems to be the dominant, but not only characteristic.
+[09:58] <mtm> lol
+=== denny_ is now known as denny
+[09:58] <NightKhaos> PythonPup: still got more holes in it than swish cheese, but IE8 can throw punches in terms of security with Firefox. However, there are other reasons (rendering) that mean I discourage the use of IE anyways. It could be the most perfectly secured, sandbooked browser out there, however if they don't fix their rendering engine... meh.
+[09:58] <NightKhaos> PythonPup: however, Offtopic... aliases, any ideas?
+[09:58] <kenwiliest> pythonpup, as in ports?
+[09:58] <mtm> Opera #1
+[09:59] <jasonwryan> kenwiliest: as in pacman...
+[09:59] <PythonPup> NightKhaos, I am sorry.  I missed the first part about aliases.  I am in favor of them, but that is not your problem, I bet.
+[10:00] <KrisWood> Hello everyone
+[10:01] <PythonPup> NightKhaos, So, could you repeat the original question?
+[10:02] <NightKhaos> PythonPup: multiple alasies... I have two precompiled twochains on different machines, one of which I don't have admin access too so I can't update the toolchain. On one they are called arm-none-eabi-, however on the other they are called arm-elf-. I don't want to have to create a whole lot of symlinks in /usr/local/bin if I can avoid it, but I want to make sure that when I execute arm-elf-gcc it points to arm-none-eabi-
+[10:02] <NightKhaos> gcc for example, that or do you know a way to make my makefiles contextual (i.e. it terms which gcc is valid and then uses that one)
+[10:02] <PythonPup> kenwiliest, yes, as in ports.
+[10:02] <kenwiliest> pythonpup, what are they called in arch?
+[10:02] <NightKhaos> PythonPup: sed s/twochains/toolchains/ ... some typo.
+[10:02] <jetienne> dpkg-source -x blabla.dsc was my answer :)
+[10:02] <kenwiliest> pythonpup, the ports that is
+[10:03] <KrisWood> I've got a silly question... I'm trying to download themes off the gnome-look and they're all in archives without any file extension to indicate what format they're in... Any ideas?
+[10:03] <ogunay> hi, i use ubuntu lucid, i've some torrent files, and i could't change their ownership from root to user via #chown -hR <username:groupname> <torrentfile>
+[10:03] <PythonPup> kenwiliest, That detail is too small for me to remember.  It has been 6 months since I tries arch.  I try a lot of Linux distros.
+[10:03] <NightKhaos> ogunay: where you root (or at least sudoing) when you executed that chown?
+[10:03] <erUSUL> ogunay: where are those torrent files stored ?
+[10:03] <kenwiliest> pythonpup, which is your favorite?
+[10:04] <jasonwryan> kenwiliest: ABS (Arch Build System) and they are called pkgbuilds
+[10:04] <alsem> Does anyone have experience with Ubuntu file sharing on a wireless network?
+[10:04] <kenwiliest> jasonwryan, thanks a lot.
+[10:04] <ogunay> erUSUL: these are on /Torrents , i've changed the location to anohter partition /media/disk
+[10:04] <jasonwryan> kenwiliest: np
+[10:04] <jasonwryan> alsem what's up?
+[10:04] <erUSUL> ogunay: what filesystem ?
+[10:05] <ogunay> erUSUL: ext4
+[10:05] <PythonPup> kenwiliest, For most uses, I pick Ubuntu.  It is what I use as my main desktop and once I make a few tweaks, it does quite well.
+[10:05] <kenwiliest> PythonPup, IC. nice
+[10:05] <erUSUL> ogunay: what error do you get from chown ?
+[10:05] <ogunay> erUSUL: no error, i've checked the file, the same ownership (root)
+[10:06] <KrisWood> ah ha, it's a gzip archive, just had to right click for properties :)
+[10:06] <PythonPup> NightKhaos, The only thing I would suggest is to write a script to create the symlinks for you.  Then, it is not much effort to keep it up to date.  Have the script inspect the  arm-none-eabi list to be sure it creates all the needed symlinks.
+=== Bacchettabacco is now known as e-DIO-t
+[10:06] <alsem> I have two computers both running U10.04.  I have followed the instructions on "SimpleHelp".  I have the infoamous little hand under the file.  But when I go to Places --> Network I don't see any files at all.
+[10:07] <erUSUL> ogunay: very odd; but without an error message or some other clue i can not know what is going on ...
+[10:07] <jasonwryan> alsem: are you using nfs?
+[10:08] <ogunay> erUSUL: if i try it via gksudo nautilus, i change to user, then the menu becomes again to the root :\
+[10:08] <alsem> Jasonwryan:  I am using the regular U10.04 files.  I think nfs would be on a Windows system?
+[10:08] <NightKhaos> PythonPup: for bin in /usr/local/arm/bin/arm-none-eabi*i; do ln -s $bin /usr/local/bin/${bin:-none-eabi-=-elf-}; done ?
+[10:08] <jasonwryan> alsem: no, nfs is for 2 linux boxes: http://mybeni.rootzilla.de/mybeNi/2007/how_to_set_up_nfs_and_how_to_share_files_in_a_local_network_with_ubuntu_linux/
+[10:08] <azlon1> how can i enable vnc?
+[10:08] <azlon1> !vnc
+[10:08] <ubottu> VNC is a protocol for remote desktop. https://help.ubuntu.com/community/VNCOverSSH describes how to use it securely.  It works best over fast connections, otherwise look at !FreeNX
+[10:08] <ralf_e> what is the easiest way to create a .deb package from a checked out source project (with patches), f.e. http://git.gnome.org/browse/gedit/ , for installation in my own ubuntu system?
+[10:09] <Gnea> alsem: NFS is actually a unix component, SMB/CIFS is windows networking
+[10:10] <PythonPup> NightKhaos, Something like that.  I don't know your need or how the list changes to know if you need to remove the existing symlinks first.  Are items likely to disappear from the list?
+[10:10] <erUSUL> !checkinstall
+[10:10] <ubottu> checkinstall is a wrapper to "make install", useful for installing programs you compiled. It will create a .deb package, which will be listed in the APT database and can be uninstalled like other packages. See https://help.ubuntu.com/community/CheckInstall - Read the warnings at the top and bottom of that web page, and DO NOT interrupt CheckInstall while it's running!
+[10:10] <alsem> Jasonwryan:  Let me go play with that page and see if I can get anywhere.  Thanks I'll let you know later how it worked out.
+[10:10] <NightKhaos> PythonPup: fairly unlikely to change. I'll know if/when I upgrade the toolkit, so I can redo the links and delete the broken symlinks.
+[10:10] <jasonwryan> alsem: np: it works for me
+=== JimmyJ is now known as JimmyJ|zz
+[10:11] <__goo__> Hey, which ubuntu distro is best suited for a 256 mb RAM system?
+[10:12] <iceroot> __goo__: lubuntu
+[10:12] <Gnea> __goo__: xubuntu
+[10:12] <PythonPup> azlon1, System/Preferences/Remote Desktop to enable the server.   Install xvnc4viewer on the client side.
+[10:12] <iceroot> __goo__: not xubuntu, its taking the same as ubuntu
+[10:12] <__goo__> Gnea, i dont like XFCE
+[10:12] <__goo__> iceroot, ah ok
+[10:12] <Gnea> __goo__: neither do i
+[10:12] <Gnea> ah, didn't know about lubuntu
+[10:13] <iceroot> __goo__: have a look at lubuntu (lxde)
+[10:13] <PythonPup> __goo__, I use regular ubuntu on systems with 256 meg of ram and they seem fine to me.
+[10:13] <justin22885> i have a question... id like to install ubuntu command line with a light weight desktop to a USB flash drive of 16gb, what would be the recommended filesystem setup for this?
+[10:13] <__goo__> PythonPup, even 10.04?
+[10:13] <jasonwryan> __goo__: Crunchbang
+[10:14] <PythonPup> __goo__, If I was going to make heavy desktop use of one, I would look at ubuntu or crunchbang.
+[10:14] <TiK> hey
+[10:14] <Gnea> PythonPup: with gnome? surely you jest
+[10:14] <PythonPup> __goo__, yes, even 10.04
+[10:14] <__goo__> its not heavy desktop use
+[10:14] <__goo__> I just wanna get my mom to use Linux
+[10:14] <__goo__> and the PC is just a 800 mhz 256 mb RAM system
+[10:14] <justin22885> anyone know the best way to install ubuntu to a flash drive?
+[10:15] <iceroot> !usb | justin22885
+[10:15] <ubottu> justin22885: For information about installing Ubuntu from USB flash drives, see https://help.ubuntu.com/community/Installation/FromUSBStick - For a persistent live USB install, see: https://wiki.ubuntu.com/LiveUsbPendrivePersistent
+[10:15] <justin22885> no iceroot.. install it TO a usb drive, not FROM, i was wondering what the optimal filesystem would be
+[10:15] <the_fool> Hello all i'm working on a quick bash script to change my wallpaper on startup. Anyone know why: http://pastie.org/1076979  would return: arithmetic expression: expecting primary: "  % (24 + 1) "  ?
+[10:15] <iceroot> justin22885: reread the text from ubottu
+[10:15] <el_seano> man, ubottu is awesome.
+[10:15] <PythonPup> Gnea, full blown gnome.  Startup is a little slow, but once it gets going, it is fine.  The system is an 800 MHz via and can't take more than 256 meg of ram.  I have a similar system with a P3/933 and 256 meg of ram and it is also ok.
+[10:16] <__goo__> But i want it the distro to be easy to use, for a person shifting from Windoze
+[10:16] <__goo__> PythonPup, which one u talking about
+=== lag is now known as Guest27899
+[10:16] <alsem> Jasonwryan:  I read through the article.  How will this affect smb and smbfs?  I was "using" Samba so can this run along side?  Do I need to undo Samba?
+[10:16] <KrisWood> Ok new theme, I'm able to get the appearance preferences to correctly see the theme in the install menu if I rename the file with a .tar.gz extension, but it still doesn't show up in my available themes, what could cause this?
+[10:16] <iceroot> justin22885: i am using ext2 on a ssd, because of the missing journal
+[10:16] <PythonPup> __goo__, try ubuntu out and see what you think.  The biggest problem I have is first starting apps.  Firefox is a little slow to load, but does fine after that.
+[10:17] <geese> salut tous le monde
+[10:17] <__goo__> PythonPup, okie
+[10:17] <jasonwryan> alsem: you only need samba if you want a windoze box o your network
+[10:17] <el_seano> Firefox is always sort of slow to start.
+[10:17] <el_seano> mostly why i made the jump to chrome.
+[10:17] <geese> j'espere qu'il y a quelqu'un qui parle français
+[10:17] <__goo__> el_seano, FF 4 is much faster
+[10:17] <dlandau> Firefox 4 starts up faster.
+[10:18] <bacon> chrome's search bar is more powerfull.
+[10:18] <tkahn6> LOAD -e "/home/tkahn/Desktop/google.pl"
+[10:18] <tkahn6> thank you xchat
+[10:18] <__goo__> bacon, but FF automatically loads the best result
+[10:18] <PythonPup> el_seano, true, but the security on Firefox is so much better, I would not use anything else as my main web browser.
+[10:18] <el_seano> i will admit i like that FF's search bar instantly grabs your bookmarks though, rather than the quick search
+[10:18] <__goo__> bacon, i dont find that in chrome, it just does a google search
+[10:19] <el_seano> PythonPup: Security in what regard, if I may ask?
+[10:19] <alsem> jasonwryan:  I have a windows box on the network BUT when I go to Places --> Network --> Windows  I get an error message that it can't mount the server  or get some file from it.  So I thought I'd try something simple like a Ubuntu to Ubuntu machine.
+[10:19] <justin22885> apparently id need to disable journaling on ext4, add the noatime option to fstab, and use /tmp in RAM
+[10:19] <bacon> __goo__: i don't know if it exist in FF, but with chrome you can search directly on the website you need with a tabulation after the site's url
+[10:20] <PythonPup> el_seano, Chrome has nothing like noscript.  Chrome does not have the hooks it needs.  Browsing the web without something like noscript is just crazy.
+[10:20] <bacon> __goo__: I like how browsing and search are fast with it
+[10:20] <KrisWood> Hmmm is gtk2 installed by default in the latest ubuntu? no idea why these themes aren't working :-/
+[10:20] <jasonwryan> alsem: sorry, I can't help with samba - I only run Linux...
+[10:21] <__goo__> bacon, i c, but check out FF 4's new features - Tab Candy is pretty useful esp as i have 50 - 100 tabs open usually
+[10:21] <alsem> jasonwryan:  thanks anyway!
+[10:21] <PythonPup> alsem, can you post your smb.conf file for me to look at?
+[10:21] <bacon> __goo__: I have maxi 15 tabs opened, but I'll try it for sure ! I don't like using all the google services (:
+[10:21] <justin22885> iceroot, i am reading an article about how ext4 without the journaling is more efficient than ext2
+[10:21] <bacon> __goo__: mail, reader, browser...
+[10:21] <jasonwryan> alsem: s'ok: someone here will have samba chops...
+[10:22] <__goo__> bacon, ok
+[10:22] <justin22885> found another article giving me a list of things to edit in fstab to tweak ext4 to work properly with it
+[10:22] <el_seano> PythonPup: I just heard about noscript today, actually.  What do you mean by the hooks?  That Chrome couldn't support something like noscript?
+[10:22] <bacon> justin22885: may you give me a link please?
+[10:22] <sussler> hey dudes
+[10:23] <sussler> are there any intermittent lockup problems with intel gfx on ubuntu lucid lynx
+[10:23] <azlon1> where is the .vnc folder?
+[10:23] <fredfall> Is alpha 3 released?
+[10:23] <sussler> i am kind of getting pissed at suse
+[10:23] <alsem> PythonPup:  Where is the smb.conf file located?  Myabe I can cut and paste it?  (In case you haven't figured yet I'm kind of new to this Ubuntu)
+[10:23] <PythonPup> el_seano, Yes, the developer of noscript looked at Chrome and talked to people at Google.  Chrome cannot support noscript, but may do so in the future.
+[10:23] <PythonPup> alsem,   /etc/samba/smb.conf
+[10:23] <Gnea> alsem: most configuration files are kept in /etc
+[10:24] <justin22885> http://forums.fedoraforum.org/showthread.php?t=215109
+[10:24] <nebula_> help !
+[10:24] <justin22885> that gives a list of tweaks, that a forum, im going to try those and disable journaling and see how it works, im using a 16gb kingston datatraveler right now with ubuntu 10.04
+[10:24] <sussler> dudes, any gfx problems on lucid lynx
+[10:24] <sussler> intel , 2.6.34 kernel
+[10:24] <nebula_> the besy  musc player for ubuntu ?
+[10:24] <el_seano> neat!
+[10:25] <erUSUL> !best
+[10:25] <ubottu> Usually, there is no single "best" application to perform a given task. It's up to you to choose, depending on your preferences, features you require, and other factors. Do NOT take polls in the channel. If you insist on getting people's opinions, ask BestBot in #ubuntu-bots.
+[10:25] <justin22885> exaile
+[10:25] <nebula_> the best ....  musc player for ubuntu ?
+[10:25] <erUSUL> !player | nebula_
+[10:25] <ubottu> nebula_: Audio (Ogg, MP3...) players: Audacious, Banshee, Beep Media Player, Listen, Quod Libet, Rhythmbox, Exaile, XMMS2 (GTK/Gnome based) and Amarok, JuK (Qt/KDE based).  Video players: Totem, Xine, MPlayer, VLC, Kaffeine - See also !codecs
+[10:25] <nebula_> 100x
+[10:25] <alsem> PythonPup:  This is a big file but here goes=
+[10:25] <PythonPup> justin22885, that may be right.  Due to my own testing, I won't use ext4 on anything other than a test system.
+[10:25] <alsem> #
+[10:25] <alsem> # Sample configuration file for the Samba suite for Debian GNU/Linux.
+[10:25] <alsem> #
+[10:25] <alsem> #
+[10:25] <alsem> # This is the main Samba configuration file. You should read the
+[10:25] <FloodBot2> alsem: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[10:25] <PythonPup> alsem, stop
+[10:25] <nebula_> !net
+[10:25] <justin22885> my vote goes to exaile if youre using gnome, or gtk based desktops like lxde.. or amarok if youre using KDE
+[10:25] <Gnea> justin22885: looking forward to your results
+[10:25] <nebula_> !firewall
+[10:25] <ubottu> Ubuntu, like any other Linux distribution, has firewall capabilities built-in. The firewall is managed using the 'ufw' command - see https://help.ubuntu.com/community/UFW | An alternative to ufw is the 'iptables' command - See https://help.ubuntu.com/community/IptablesHowTo | GUI frontends such as Firestarter/Gufw (Gnome) or Guarddog (KDE) also exist.
+[10:26] <Gothack> ...
+[10:26] <PythonPup> alsem, use a pastebin.  Go to pastebin.com and post your contents.  Then put a link here in irc..
+[10:27] <azlon1> does anybody know where the .vnc folder is located?
+[10:27] <Gothack> so many ones
+[10:27] <PythonPup> nebula_, yatm
+[10:27] <shai> Hi :) I just installed Ubuntu and noticed that /etc/network/interfaces just has 'lo' defined and not eth0 ... so where is eth0 defined by default?
+[10:27] <erUSUL> shai: Network Manager manages all connections
+[10:28] <PythonPup> alzon1, in your home directory.
+[10:28] <shai> erUSUL, I have a headless server.... where is that in a file...?
+[10:29] <Gnea> shai: ubuntu-server?
+[10:29] <erUSUL> shai: if you are on a server use interfaces. just add the definitions you need
+[10:29] <alsem> PythonPup:  I think I pasted to large a file in here and got disconnected for a while.  Did you get the file?
+[10:29] <PythonPup> nebula_, but I use vlc and a player I am writing the most.
+[10:29] <GDG> hi,
+[10:29] <PythonPup> alsem, use a pastebin.  Go to pastebin.com and post your contents.  Then put a link here in irc..
+[10:29] <PythonPup> alsem, no I did not get it.
+[10:30] <shai> Gnea, not a server per say ... just a station that I use via SSH. erUSUL I understand that I can edit /etc/network/interfaces... but currently, where is eth0 defined for the pc to be available via eth0 using DHCP? It must be written somewhere in a file, no?
+[10:31] <alsem> PythonPup:  where is pastebin.com?  Is it obvious how to put a link in the irc?
+[10:31] <GDG> how can I install an older version of gcc on my Ubuntu?
+[10:31] <PythonPup> Use you web browser and look.  It is really obvious, alsem.
+[10:31] <erUSUL> shai: no; Network manager uses gconf so maybe it is in afile somewhere but you have to use gconftool-2 or gconf-editor
+[10:32] <KrisWood> This is getting incredibly frustrating....
+[10:32] <the_fool> Can anyone help me with this bash script: http://pastie.org/1076979 ? I'm Learning as I go and can't figure out why I'm getting this error: /home/max/Pictures/wallpapers/.wallpaperchanger.sh: 5: arithmetic expression: expecting primary: "  % (24 + 1) "
+[10:32] <mamooth> Hi there
+[10:33] <justin_> anyone know how to disable journaling?
+=== justin_ is now known as justin22885
+[10:33] <justin22885> annoying.. anyway, anyone know how to disable journaling?
+[10:34] <mamooth> I'm running ubuntu 10.04 - With thunderbird, could someone point how to create an IMAP account. I really don't see where in the account configuration process I can select IMAP instead of POP3
+[10:34] <llutz> justin22885: isn't it "noload" boot-option?
+[10:34] <GDG> how can I install an older version of gcc on my Ubuntu 10.4?
+[10:34] <el_seano> Can anyone recommend me some good documentation or a tutorial regarding devices and how to mount them and get information and so on?
+[10:34] <llutz> mount-option*
+[10:34] <justin22885> i dont know
+[10:35] <justin22885> ive never disabled journaling before
+[10:35] <erUSUL> the_fool: this « length=34 ; a=$(( $RANDOM % ($length + 1) )) ; echo $a » works here
+[10:35] <PythonPup> justin22885, did you go to http://lmgtfy.com/ and put in disable journaling ext4
+[10:35] <alsem> PythonPup:  I pasted in the message box.  the URL is  http://pastebin.com/56d8D8Xd
+[10:36] <Gothack> does anybody know how to install openoffice?
+[10:36] <the_fool> erUSUL, I'll try that. MInd if i keep pestering you though? Because I'll need the script to get the number for length on the fly
+[10:37] <erUSUL> the_fool: #bash may be a better place to ask
+[10:37] <justin22885> i have to use tune2fs to do it i believe
+[10:37] <the_fool> erUSUL, ... ^_^" that's a good idea
+[10:37] <PythonPup> alsem, are you going to be online a while?
+[10:37] <Gothack> what does it mean...........
+[10:38] <el_seano> Gothack: From the terminal, type sudo apt-get install openoffice
+[10:38] <llutz> !info openoffice.org > Gothack
+[10:39] <PythonPup> el_seano, The package is openoffice.org
+[10:39] <el_seano> whoops, my bad.
+[10:39] <KrisWood> ah ha! I need the "emerald theme manager" whatever that is... *googles it*
+[10:39] <alsem> PythonPup:  Not sure how long "a while is"  It is 2:20am here so probably not very long.  If you wish you can send it to my eMail  at  alsemus@yahoo.com
+[10:39] <Gothack> yeah,openoffice.org
+[10:40] <Gothack> i'm learning to use xchat.....this'is my first time use ubuntu
+[10:40] <PythonPup> alsem, It is 4:40am here.  You need to add a whole section at the bottom of the file.  I have that at home, and not here.  If you are still here, I'll post it to you when I get home.  It will take about 45 minutes.
+[10:41] <Gothack> it is 5:40pm here..................
+[10:41] <NightKhaos> PythonPup: lrwxrwxrwx 1 root root     36 2010-08-05 19:36 arm-elf-gcc -> /usr/local/arm/bin/arm-none-eabi-gcc ... got it work via for file in /usr/local/arm/bin/*; do sudo ln -s $file /usr/local/bin/arm-elf-${file#/usr/local/arm/bin/arm-none-eabi-}; done
+[10:41] <azlon1> when i remote (vnc) into my ubuntu machine, the vnc window on the other machine doesnt update
+[10:42] <abhijit> Namaste!
+[10:42] <abhijit> :)
+[10:42] <NightKhaos> PythonPup: took me a while to find # operator. :(
+[10:42] <PythonPup> NightKhaos, If I understood that right, then good.
+[10:42] <MaRk-I> azlon1: disable compiz
+[10:42] <alsem> PythonPup:  Thanks.  If I'm not here, might have gone back to bed, then just e-mail me please.   Thanks.........   Al
+[10:42] <MaRk-I> azlon1: on the remote machine I mean
+[10:42] <PythonPup> NightKhaos, I usually write Python scripts, not bash scripts, so I did not notice the error.
+[10:43] <azlon1> MaRk-I: on the client? the client is running windows 7...
+[10:43] <NightKhaos> PythonPup: figures, with the name and all.
+[10:43] <PythonPup> alsem, How would I do that, alsem?
+[10:43] <MaRk-I> azlon1: ah nvm then
+[10:43] <rocket16> Hello all
+[10:43] <PythonPup> NightKhaos, That is a pretty good clue.  I was putting together a spin of Puppy Linux with Python added.  Thence, this nickname.
+[10:44] <shin_> why if I try to connect via SSL with XCHAT receive the error * Connessione fallita. Errore: self signed certificate.? (18)
+[10:44] <zhang> hello,i'm new here
+[10:44] <alsem> PythonPup:  Use the email   alsemus@yahoo.com
+[10:44] <Gothack> zhang? are you chinese?
+[10:44] <zhang> yes
+[10:44] <ShapeShifter499> how do I enable my controller in ubuntu?
+[10:44] <Gothack> oh my dear
+[10:45] <zhang> how
+[10:45] <azlon1> MaRk-I: you were right, but the problem was compiz on the host machine... thanks!
+[10:45] <PythonPup> ShapeShifter499, just tell your wife she can use it.
+[10:45] <Gothack> so am i
+[10:45] <PythonPup> alsem, noted.
+[10:45] <ShapeShifter499> PythonPup: HAHAHAHAHHAAAA    btw I'm 16
+[10:45] <MaRk-I> azlon1: ahh good to know and yw
+[10:45] <ShapeShifter499> xD
+[10:45] <azlon1> MaRk-I: is there a way to disable compiz only when a machine connect via vnc, then restore compiz when the user disconnects?
+[10:45] <alsem> PythonPup:  Thanks a lot.
+[10:46] <shin_> I try to connect to irc.explosionirc.net in SSL whit port 6697 and I receive the error "self signed certificate.? (18)"
+[10:46] <rocket16> !hi | zhang
+[10:46] <ubottu> zhang: Hi! Welcome to #ubuntu! Feel free to ask questions and help people out. The channel guidelines are at https://wiki.ubuntu.com/IRC/Guidelines . Enjoy your stay!
+[10:46] <MaRk-I> azlon1: there was a way but I dont remember ATM you can search it... has to do with some -xnodamage thing
+[10:46] <Gothack> 都有多少中国的。。。。
+[10:46] <zhang> thank you
+[10:47] <zhang> 我是中国的
+[10:47] <MaRk-I> !cn
+[10:47] <ubottu> For Ubuntu help in Chinese 您可以访问中文频道： #ubuntu-cn 或者 #ubuntu-tw  或者 #ubuntu-hk
+[10:47] <PythonPup> azlon1, probably.  Look at gconf and see if there is a key to control it.  You can script changing those.
+[10:47] <ShapeShifter499> MaRk-I beat me to it
+[10:47] <ShapeShifter499> xD
+[10:47] <NightKhaos> PythonPup: hehe, I'm getting quite good at doing inline for loops. It freaks a couple of people out cause they tend to be like "wtf did you just do?"... to quote a friend of mine "my shell foo is strong"
+[10:47] <PythonPup> NightKhaos, That is a handy skill.
+[10:48] <zhang> my English is very poor
+[10:48] <rocket16> zhang: No problem, we all can understand you well, :)
+[10:48] <PythonPup> azlon1, the program gconftool-2 is what you would call in such a script.
+[10:48] <zhang> thank you
+[10:48] <ShapeShifter499> zhang: your fine
+[10:48] <zhang> thanks
+[10:49] <zhang> Who can teach me English
+[10:49] <abhijit> zhang, join ##english
+[10:49] <Gothack> mine is poor... too
+[10:49] <NightKhaos> PythonPup: my freakest one to date was: for file in *.s; do mv $file ${file}.old; sed s/';'/@/ ${file.old} > $file; done
+[10:49] <Gothack> ##english
+[10:49] <abhijit> Gothack, type /j ##english
+[10:50] <MaRk-I> azlon1: read post #11 https://bugs.launchpad.net/ubuntu/+source/xorg-server/+bug/353126
+[10:50] <Gothack> i get ie
+[10:51] <sangi> Can anyone suggest a document to install ubuntu from windows
+[10:51] <ShapeShifter499> how do I use my game controller in ubuntu and wine?
+[10:51] <NightKhaos> sangi: in a VM or outside?
+[10:51] <abhijit> !wubi | sangi
+[10:51] <ubottu> sangi: Wubi is an Ubuntu installer for Windows users that allows you to install and uninstall Ubuntu like a Windows application, in a simple and safe way. http://wubi-installer.org/support.php and https://wiki.ubuntu.com/WubiGuide for troubleshooting. Please  file bugs at http://launchpad.net/wubi/+filebug.
+[10:51] <rocket16> sangi: https://wiki.ubuntu.com/WubiGuide
+[10:51] <sangi> i want to install through iso image
+[10:52] <rocket16> sangi: Just use an emulator, like Nero, which supports Virtual Drive. Load the ISO, and install using Wubi.
+[10:52] <zhang> I've always wanted to learn English,but always learn bad
+[10:52] <NightKhaos> rocket16: or Oracle VirtualBox... :P
+[10:53] <abhijit> !ot | zhang  type /j ##english
+[10:53] <ubottu> zhang  type /j ##english: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics. Thanks!
+[10:53] <rocket16> NightKhaos: Certainly, :) but Virtual OSes share same RAM, hence a performance-decrease is sure, :)
+[10:53] <encoder> hi all, i would like to copy my files to a FTP server (shared hosting) using a cron job. How do i pass the authentication to a script guys?
+[10:53] <NightKhaos> rocket16: meh... not a problem on either of my machines.
+[10:53] <NightKhaos> rocket16: but yes, that is a valid concern.
+[10:54] <NightKhaos> rocket16: 4GiB and 6GiB.
+[10:54] <rocket16> NightKhaos: I see.\
+[10:55] <JamesWStubbs> Hello, I'm doing an Ubuntu port to the iPhone, I'm having a problem with screen rotation using Fbdev and evtouch. Both will work fine in portrait, but for screen estate reasons I need it to be landscape before I can release my images. I've added Option "Rotate" "CW" to xorg.conf, which will rotate the screen when X starts but as soon as the screen is touched the X server closes. I've also tried adding Mode "480x320" to the Display section of xorg.conf bu
+[10:56] <abhijit> i installed kubuntu to external usb hdd. it shows os missing errror i need to edit grub. so where is grub in my usb?
+[10:56] <abhijit> help
+[10:57] <MaRk-I> abhijit: when you were installing you were supposed to add the grub to the usb to have it in the usb
+[10:57] <tim__b> Anyone knowing a plugin for audacious to remove songs shorter than a given time from the playlist (like removing all songs with a playtime less then 2 minutes to get rid of intros/outros/interludes)?
+[10:57] <gws> Hi, I installed latest 10.04 ubuntu release. I have Logitech wireless mouse and it does not work properly...it stucks, sometimes I can not click anywhere. Also some apps show me this error: "Could not grab the mouse". Can you help me with this problem please?
+[10:57] <abhijit> MaRk-I, installing means i write kubuntu iso using unetbootin. sorry my mistake.
+[10:58] <abhijit> i write kubuntu iso to external usb hdd using unetbootin. it shows os missing errror i need to edit grub. so where is grub in my usb?
+[10:58] <abhijit> help
+[10:58] <JamesWStubbs> Hello, I'm doing an Ubuntu port to the iPhone, I'm having a problem with screen rotation using Fbdev and evtouch. Both will work fine in portrait, but for screen estate reasons I need it to be landscape before I can release my images. I've added Option "Rotate" "CW" to xorg.conf, which will rotate the screen when X starts but as soon as the screen is touched the X server closes. I've also tried adding Mode "480x320" to the Display section of xorg.conf bu
+[10:58] <MaRk-I> abhijit: ahh well it should be there if done correctly
+[10:58] <abhijit> MaRk-I, it shows error operating system missing
+[10:59] <kancerman> *has unetbootin -- needs to figure out how to use it ;)*
+[11:00] <MaRk-I> abhijit: hhmm you should re-install it if its new, just make sure you format the usb as FAT32 and unebootin will do the rest
+[11:00] <abhijit> MaRk-I, okk
+[11:00] <ronank> I'm trying to boot a Eee from Ubuntu Netbook Edition on a USB stick, so that I can fix the messed-up installation on the SSD in the device, but it halts at "GRUB loading" with Error 15. Can anyone help sort this out?
+[11:02] <user9> join us
+[11:04] <red> hey, whats a decent mp3 encoding app? gui preferred
+[11:04] <Amber_> my sudo is all messed up
+[11:04] <JamesWStubbs> I've left the room
+[11:04] <Amber_> can anyone help me /
+[11:04] <KrisWood> hmmm I seem unable to use any emerald themes even with the theme manager....
+[11:04] <demoneye> how to increase the screen resolution on ubuntu 10.04? System > Preferences > Monitor > etc. It only has 800x600, I would like it to be more then 1000x.. Can anyone be kind to assist me with it?
+[11:04] <JamesWStubbs> Hello, I'm doing an Ubuntu port to the iPhone, I'm having a problem with screen rotation using Fbdev and evtouch. Both will work fine in portrait, but for screen estate reasons I need it to be landscape before I can release my images. I've added Option "Rotate" "CW" to xorg.conf, which will rotate the screen when X starts but as soon as the screen is touched the X server closes. I've also tried adding Mode "480x320" to the Display section of xorg.conf bu
+[11:04] <AshyIsMe> hi
+[11:04] <Laggie> Hi, I have a question about the nano editor, I have a strange problem, the text is visibly placed wrong, when I edit a line it is actually the line above I am writing on, so there is some kind of error
+[11:05] <AshyIsMe> how do i enable the 64bit kernel in ubuntu 10?
+[11:05] <user9> hi
+[11:05] <JoshuaL> demoneye, install the hardware drivers: System -> Administration -> Hardware drivers
+[11:05] <erUSUL> AshyIsMe: installing the 64 bit version of ubuntu
+[11:05] <KrisWood> ah there we go, lovely :D
+[11:05] <AshyIsMe> erUSUL, haha bugga
+[11:06] <gws> Hi, I installed latest 10.04 ubuntu release. I have Logitech wireless mouse and it does not work properly...it stucks, sometimes I can not click anywhere. Also some apps show me this error: "Could not grab the mouse". Can you help me with this problem please?
+[11:06] <demoneye> JoshuaL: I'll give a go
+[11:06] <demoneye> give it*
+[11:06] <red> hey, whats a decent mp3 encoding app? gui preferred.
+[11:06] <erUSUL> red: ripping too ? or only encoding ?
+[11:06] <user9> heloo
+[11:07] <demoneye> JoshuaL: It says "No proprietary drives are in use on this system"
+[11:07] <JoshuaL> demoneye, then I have no idea, sorry
+=== Guest62226 is now known as LjL
+[11:10] <demoneye> JoshuaL: Ok.
+[11:10] <demoneye> Anyone eles could help me with it?
+[11:11] <JamesWStubbs> Hello, I'm doing an Ubuntu port to the iPhone, I'm having a problem with screen rotation using Fbdev and evtouch. Both will work fine in portrait, but for screen estate reasons I need it to be landscape before I can release my images. I've added Option "Rotate" "CW" to xorg.conf, which will rotate the screen when X starts but as soon as the screen is touched the X server closes. I've also tried adding Mode "480x320" to the Display section of xorg.conf bu
+[11:11] <Amber_> My Sudo is all messed up can anyone help me with it ? sudo: must be setuid root
+[11:12] <ShapeShifter499> JamesWStubbs: omg to iphone
+[11:12] <JamesWStubbs> ShapeShifter499: Yes
+[11:12] <JamesWStubbs> ShapeShifter499: Currently only the 2G and 3G
+[11:12] <ShapeShifter499> JamesWStubbs: ubuntu on an idevice would be soo win
+[11:12] <JamesWStubbs> It's works nicely in landscape if I use evdev for input
+[11:12] <JamesWStubbs> Works fast using icewm for the window manager
+[11:13] <hiddenpearls> hey guys, this Ubuntu has mad me
+[11:13] <hiddenpearls> damn, it is not installing on my laptop
+[11:13] <hiddenpearls> anyone here can help me ?
+[11:14] <MaRk-I> Amber_: http://ubuntuforums.org/showpost.php?p=1467656&postcount=4
+[11:15] <ShapeShifter499> JamesWStubbs: too bad ipt aren't supported atm, if they were I would switch in a hartbeat
+[11:15] <JamesWStubbs> ShapeShifter499: I have the iPod Touch 1g Working fine.
+[11:15] <JamesWStubbs> ShapeShifter499: I need to finish sound support
+[11:16] <demoneye> how to increase the screen resolution on ubuntu 10.04? System > Preferences > Monitor > etc. It only has 800x600, I would like it to be more then 1000x.. Can anyone be kind to assist me with it?
+[11:16] <demoneye> hiddenpearls: why not?
+[11:16]  * ShapeShifter499 has teh crappy 3gen, no iboot jailbreak, and no linux alternative os  :D
+[11:16] <ShapeShifter499> *D:
+[11:16] <ShapeShifter499>  D:
+[11:17]  * ShapeShifter499 wants a iphone 3gen or 4 OR an android
+[11:17] <Minas1> I am using Ubuntu, and 3G USB modem, how to find the modem to install?
+[11:18] <neil_ubuntu> demoneye, you should install video drivers first, lspci first to verify video card
+[11:18] <bibo> does anyone know why the Ubuntu forums aren't updating?
+[11:19] <jpds> bibo: Howso?
+[11:19] <bibo> Well I only see posts from nine hours ago
+[11:19] <demoneye> neil_ubuntu: thank you, i'll give it a try
+[11:19] <hiddenpearls> I have downloaded ubuntu and put it on USB and also on virtual CD
+[11:20] <bibo> I've cleared my cache and gone to it on multiple computers and it still hasn't updated
+[11:20] <hiddenpearls> but whenever I try to run demo
+[11:20] <Somelauw> I created an alias like:  alias netbeans=~/netbeans-6.9/bin/netbeans
+[11:20] <hiddenpearls> it asks me to reboot system
+[11:20] <hiddenpearls> and when I reboot
+[11:20] <hiddenpearls> and ubuntu starts loading
+[11:20] <hiddenpearls> and it takes forever
+[11:20] <Somelauw> But when I do ls netbeans it says ls: cannot access netbeans: No such file or directory
+[11:20] <demoneye> running the first time, it might "take forever"
+[11:21] <Somelauw> Yes, I did source .bashrc
+[11:21] <Minas1> I am using Ubuntu, and 3G USB modem, how to find the modem to install?
+[11:21] <ashiswin> hello
+[11:21] <ashiswin> i need some help
+[11:21] <hiddenpearls> demoneye: why ?
+[11:21] <shamil> anyone want lubuntu 64 bit?
+[11:21] <shamil> i sort of made an iso
+[11:21] <ashiswin> my ubuntu, for the password fields, it should show big black circles. but now those are small. how do i make them big again
+[11:21] <hiddenpearls> I tried it many times .. everytime it sucks like that
+[11:22] <demoneye> I'm not sure myself
+[11:22] <hiddenpearls> demoneye: how I can install it then ?
+[11:22] <ashiswin> my ubuntu, for the password fields, it should show big black circles. but now those are small. how do i make them big again. Anyone has any idea?
+=== Krana is now known as Rapture1781
+[11:23] <neil_ubuntu> Minas1, you can try lsusb to verify modem model
+[11:23] <bibo> ashiwin: are you talking about how it hides your password with the circles?
+[11:23] <ashiswin> ya
+[11:23] <ashiswin> the circles are now tiny instead of big
+[11:23] <bibo> is that an issue?
+[11:23] <Minas1> neil_ubuntu,  how can I do it?
+[11:23] <ashiswin> yes bibo. sometimes i cant see if im typing
+=== Rapture1781 is now known as krana
+=== krana is now known as Krana
+[11:24] <neil_ubuntu> Minas1, open terminal type lsusb :)
+[11:24] <ashiswin> any idea how to fix it bibo?
+=== Krana is now known as Rapture1781
+[11:25] <bibo> certain themes do that. You could also go into your gdm as root and probably change the font size
+[11:25] <aga^_^> anyone can help me to configure freeradius on ubuntu 10
+[11:25] <ashiswin> bibo, im using the default theme
+[11:27] <demoneye> neil_ubuntu: i typed 'lscpi' in terminal, it replyed some stuff.. USB, VGA etc etc. What am I look for?
+[11:27] <Minas1> mine is netbook. I have problem with charge, how to fix it?
+[11:28] <tama> hello
+[11:28] <MaRk-I> Minas1: go to terminal and type: sudo apt-get install usb-modeswitch , unplug the usb plug it back and unmount the folder that appears on the desktop then go to network manager it shoud appear
+[11:29] <bibo> ashwin: sudo cp /usr/share/applications/gnome-appearance-properties.desktop /usr/share/gdm/autostart/LoginWindow
+[11:29] <bibo> then logout
+[11:29] <ashiswin> what will that do?
+[11:29] <MaRk-I> demoneye: lspci | grep -i vga
+[11:30] <bibo> it opens up the appearance settings for the login screen. You could change the font size
+[11:30] <Minas1> MaRk-I,  where is the terminal? it is my first day on ubuntu
+[11:30] <liuwang> what is there
+[11:30] <Somelauw> I created an alias like:  alias netbeans=~/netbeans-6.9/bin/netbeans
+[11:30] <Somelauw> But when I do ls netbeans it says ls: cannot access netbeans: No such file or directory
+[11:30] <bibo> then when you log back in put this in a terminal
+[11:30] <bibo> sudo unlink /usr/share/gdm/autostart/LoginWindow/gnome-appearance-properties.desktop
+[11:31] <MaRk-I> Minas1: the console/terminal
+[11:31] <ashiswin> k thx bibo
+[11:31] <ashiswin> i'll try that
+[11:31] <Minas1> MaRk-I,  do I have to turn of the copm?
+[11:31] <MaRk-I> no
+[11:32] <Minas1> (
+[11:32] <Minas1> I do not know the console place
+[11:32] <demoneye> MaRk-I: 01:00.0 VGA compatible controller: VIA Technologies, Inc. CN700/P4M800 Pro/P4M800 CE/VN800 [S3 UniChrome Pro] (rev 01)
+[11:32] <MaRk-I> Minas1: go to menu, first entry then look for "terminal" o "gnome terminal"
+=== scsix is now known as hispalis
+[11:32] <Minas1> MaRk-I,  ok :)
+[11:32] <MaRk-I> via ufff
+=== Krana is now known as Rapture1781
+[11:33] <bibo> you could also hit Ctrl+Alt+T to bring up the terminal
+[11:34] <Gyro54> I have just removed the top panel? Don't ask why! Anyone help me put it back please.....
+[11:35] <pyost> I've got a problem with UbuntuForums, could anyone confirm that it's not just me?
+[11:35] <Minas1> I see
+[11:35] <bibo> pyost: forums haven't updated? I'm having that problem
+[11:35] <TiK> !panel
+[11:36] <bibo> Gyro: If you have a panel left, right click on it, and there should be an option for new panel
+[11:36] <TiK> !help
+[11:36] <ubottu> Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[11:36] <Gyro54> I have added a new panel but I cant find how to add the original toolbars
+[11:36] <pyost> Well, that too, it seems... When I logged in, it just threw me into an infinite refresh loop :\
+[11:36] <TiK> !gnome-panel
+[11:36] <TiK> i forgetthe command
+[11:36] <bibo> you'll have to add them in add to panel
+[11:36] <hiddenpearls> anyone can help me in installing Ubuntu ?
+[11:36] <TiK> Gyro54: there is a way t do it with 1 command
+[11:36] <MaRk-I> demoneye: pastebin the contents of your /etc/X11/xorg.conf
+[11:37] <bibo> pyrost: servers are probably down
+[11:37] <demoneye> MaRk-I: that file is empty
+[11:37] <TiK> Gyro54: http://www.celsius1414.com/2006/08/31/how-to-reset-gnome-panel-to-default-in-ubuntugnome2
+[11:37] <bibo> hiddenpearls: what do you need help with?
+[11:37] <pyost> great, just when I needed help... thanks, bibo, at least I know I'm not the only one :)
+[11:38] <Gyro54> TiK: You are a life saver!  Thanks for your help
+[11:38] <bibo> pyost: hehe I actually came on here for that very reason
+[11:38] <demoneye> MaRk-I: On /etc/X11, I dont seen a 'xorg.conf' file :(
+[11:38] <Minas1> MaRk-I,  may I PM ?
+[11:38] <bavbat> Q: i do this to compress a directory with ALL its files (incl. hidden): tar cvfz test.tar.gz /home/me/NetBeansProjects/test ... but in the created archive it contains the "me" and "NetBeansProjects" directories - how can i avoid that?
+[11:38] <hiddenpearls> bibo: I boot with USB
+[11:38] <k0sh> why o why when i pxeboot my ubuntu it tells me that it didnt found /lib/modules/2.6.32-21generic/modules.dep even tho that file exists in nfs exported dir, plus other distros netboot just fine, only ubuntu gives e such error and goes into kernel panic
+[11:38] <MaRk-I> Minas1: PMs are blocked sorry
+[11:39] <Minas1> MaRk-I,  ok
+[11:39] <pyost> bibo: unfortunately, my problem is of such nature that it probably can't be solved through irc :D
+[11:39] <TiK> cd into the dir first
+[11:39] <hiddenpearls> bibo: it takes forever to load from USB ot CD
+[11:39] <TiK> k0sh: cd into tedir first
+[11:39] <Minas1> MaRk-I,  I typed apt-get install usb-modeswitch
+[11:39] <TiK> the*
+[11:39] <Minas1> it asked are you root?
+[11:39] <hiddenpearls> bibo: I tried both methods
+[11:39] <Minas1> I typed yes
+[11:39] <vak> hi all
+[11:40] <MaRk-I> Minas1: it's:    sudo apt-get install usb-modeswitch      <<<<
+[11:40] <k0sh> TiK: what?
+[11:40] <Minas1> ok
+[11:40] <bibo> hiddenpearls: It takes a long time depending on your computer. Just wait a while and then you should be able to install it (~15 minutes max I've had for an old computer)
+[11:40] <TiK> k0sh: cd into the dir you want to compress or the one before it
+[11:40] <justin22885> well everyone... i made the neccessary FSTAB changes, and tweaked ext4 for running on a USB drive
+[11:40] <reverse821> hello
+[11:40] <hiddenpearls> bibo: I have 1.86 dual core + 4GB ram
+[11:40] <bibo> pyost: it'd be easier to solve on irc though
+[11:40] <k0sh> TiK: ????
+[11:41] <hiddenpearls> and it took 2 hours
+[11:41] <reverse821> anyone wanting to help me fix my BT headset? 8)
+[11:41] <k0sh> TiK: why o why when i pxeboot my ubuntu it tells me that it didnt found /lib/modules/2.6.32-21generic/modules.dep even tho that file exists in nfs exported dir, plus other distros netboot just fine, only ubuntu gives e such error and goes into kernel panic
+[11:41] <hiddenpearls> and nothing but loading with background
+[11:41] <MaRk-I> demoneye: S3 VIA cards are how can I say it barely supported and tricky you can reconfigure your X but might leave you without it if you dont do it right
+[11:41] <TiK> k0sh: cd /home/me/NetBeansProjects/ && tar cvfz test.tar.gz test
+[11:41] <bibo> hiddenpearls: How long did you wait? It takes a while, but once it's installled it's very fast
+[11:41] <hiddenpearls> bibo: not asking any option just loading with background
+[11:41] <justin22885> theres actually an immediate change in performance, EASILY noticed
+[11:41] <vak> Kino captures DV-video OK, but exports(encodes) it into ugly interlaced video. Did anyone successfully cope with it?.. Does de-interlacing really work in Kino?...
+[11:41] <k0sh> TiK: how does it relate to pxebooting???
+[11:42] <TiK> eeer
+[11:42] <TiK> i ment bavbat
+[11:42] <hiddenpearls> bibo: it took 2 hours
+[11:42] <k0sh> lol
+[11:42] <TiK> sorry k0sh
+[11:42] <k0sh> :D
+[11:42] <k0sh> k, np
+[11:42] <pyost> bibo: well, it doesn't seem to be that common, since I couldn't google a solution - to cut a long story short, I had to cancel a burning task in Brasero because it got stuck, and now the drive is dead in both ubuntu and windows
+[11:42] <TiK> :D
+[11:42] <fredfall> When does alpha 3 come?
+[11:42] <demoneye> MaRk-I: oh ok
+[11:42] <hiddenpearls> bibo: I was giving it a try from USB and CD
+[11:42] <bibo> hiddenpearls: You may have a bad burn. Try burning the .iso on the slowest speed possible. I've had that issue before.
+[11:42] <aswin> in our computer networking lab in college we connect to a server(running redhat) using telnet nd thn use vi editor for writing client and server..is ther a similar way for me to do the same in my ubuntu syste,
+[11:42] <bullgard4> [GNOME, Ubuntu 10.04.1] Why are there on one computer 2 processes gconf-helper, gdm-session-worker and gdm-simple-slave each? Ubuntu created them automatically. On another computer only 1 each.
+[11:43] <MaRk-I> demoneye: check this   http://wwww.ubuntuforums.org/showthread.php?p=9450721
+[11:43] <hiddenpearls> bibo: i see
+[11:43] <aswin> i want to try out the programs before i go to the lab..but i dnt have ny server here to telnet to..so can i use my laptop nd telnet to itself and try out the program
+[11:44] <bavbat> TiK: thanks (:
+[11:44] <k0sh> why o why when i PXEBOOT my ubuntu it tells me that it didnt found /lib/modules/2.6.32-21generic/modules.dep even tho that file exists in nfs exported dir, plus other distros netboot just fine, only ubuntu gives me such error and goes into kernel panic, dir is exported via nfs v3
+[11:44] <bibo> hiddenpearls: what's your hardware? It may be incompatible. Also you may just have had a bad bootup. I had that with Lubuntu, but then I tried again and it worked
+[11:44] <bibo> *may not be compatible
+[11:44] <experiMENTAL> hi. how to install vusb?
+[11:44] <hiddenpearls> bibo: I am at windows7 + dual core 1.86 + 4gb RAM + dell laptop
+[11:45] <bibo> aswin: what programs?
+[11:45] <MaRk-I> demoneye: also check this one might help  http://ubuntuforums.org/showthread.php?t=1488040&highlight=openchrome
+[11:45] <k0sh> why o why when i PXEBOOT my ubuntu it tells me that it didnt found /lib/modules/2.6.32-21generic/modules.dep even tho that file exists in nfs exported dir, plus other distros netboot just fine, only ubuntu gives me such error and goes into kernel panic, dir is exported via nfs v3
+[11:45] <hiddenpearls> bibo: you know what , when I install it from USB/CD it starts copying in C: drive
+[11:45] <bibo> hiddenpearls: ???
+[11:45] <demoneye> MaRk-I: sure looks confusing, I will, thank you :)
+[11:46] <hiddenpearls> bibo: and after copying, it starts downloading from torrent
+[11:46] <aswin> we write c programs like a chat system,retreving date nd time etc etc
+[11:46] <justin22885> hey everyone
+[11:46] <bibo> hiddenpearls: Are you doing a Wubi install?
+[11:46] <hiddenpearls> bibo: Yes
+[11:46] <hiddenpearls> wubi.exe is there
+[11:47] <vak> is any one here experienced with miniDV video encoding?
+[11:47] <bibo> hiddenpearls: Are you trying to run it by clicking on Wubi?
+[11:47] <justin22885> im noticing an immediate change in performance when i tweaked fstab to run ext4 on my USB flash drive...
+[11:47] <hiddenpearls> bibo: Yes
+[11:48] <MaRk-I> demoneye: on the 2nd link read post #3   that looks like it might help
+[11:48] <justin22885> its running faster, smoother, and optimized to write as little as neccessary to the actual drive
+[11:48] <hiddenpearls> bibo: and then I tried both options demo and install inside windows
+[11:50] <bibo> hiddenpearls: you could try setting it up as a dual boot
+[11:50] <hiddenpearls> bibo: how to set it dual boot ?
+[11:51] <bibo> hiddenpearls: First I have to ask, do you have a backup of Win7?
+[11:51] <hiddenpearls> bibo: no
+[11:51] <justin22885> first step is to load a liveCD, "tune2fs -o journal_data_writeback /dev/sdx1", then under fstab i used "/dev/sdx1 / ext4 noatime,nodiratime,data=writeback,nobh 0 0"
+[11:52] <justin22885> then also under fstab added /var/log, /tmp, and /var/tmp to operate under tmpfs
+[11:52] <hiddenpearls> bibo: I can try this on my other PC
+[11:52] <hiddenpearls> bibo: which have winxp
+[11:52] <leon> dd
+=== leon is now known as Guest90501
+[11:52] <hiddenpearls> bibo: though I have tried this there too but damn the same situation
+[11:53] <hiddenpearls> bibo: it starts loading with background and continues forever
+[11:53] <bibo> hiddenpearls: wubi is known to have problems, you could try reinstalling it, or to set up as a dual boot just put the live cd in the tray, shut down the system, and turn it back on, and it'll boot into the disk. Then there will be an option to easily create a partition for Ubuntu.
+[11:53] <Guest90501> anybody hear
+[11:54] <hiddenpearls> bibo: wubi extracts when I make ISO readable via magicISO
+[11:54] <hiddenpearls> or form USB
+[11:54] <arzhar> whats the name for png library ? libpng12-dev ?
+[11:55] <waltercool> libpng?
+[11:55] <hiddenpearls> bibo: partition is necassary to create ?
+[11:55] <ramontayag> hey guys. would anyone know why a windows share asks for a password when viewing via ubuntu, and it doesn't ask for a password when i'm viewing via another windows machine? i tried entering no password, my the guest's password, but it doesn't let me though.
+[11:55] <bibo> arzhar: libpng, it should be installed by default
+[11:55] <matrix> Hello guys
+[11:55] <matrix> i cant use some icons theme on my ubuntu
+[11:55] <matrix> why
+[11:55] <lunavorax> Hi everybody !
+[11:55] <matrix> Linux matrix-laptop 2.6.32-24-generic #39-Ubuntu SMP Wed Jul 28 05:14:15 UTC 2010 x86_64 GNU/Linux
+[11:55] <hiddenpearls> bibo: for ubuntu
+[11:55] <waltercool> arzhar, are you developing something with libpng or you need it for an app?
+[11:55] <lunavorax> Why is the line "force_color_prompt=yes" is commented in the .bashrc file ?
+[11:55] <matrix> my ubuntu cant use some art icons theme
+[11:56] <arzhar> bibo: it is, but trying to compile E gives me this Check if Evas was compiled with png module enabled and all required dependencies exist.
+[11:56] <bibo> matrix: I've had that same issue. Go to gnome-look.org and there's several icon sets that actually do work
+[11:56] <Laggie> I have some strange problems with the nano editor, the text is moved visibly one line too high, so when I start editing I edit the wrong line. To see the correct text on the line I need to use the right arrow key and punch through all text that I want to see correct first.
+[11:56] <arzhar> im gonna try again with the dev package
+[11:56] <Tecna> "Failed to retrieve share list from server" Somebody please help me figure out what's wrong with my samba server?   CLI output: http://pastebin.com/j3n4niis
+[11:57] <bibo> arzhar: Oh yeah you're right, I had to get that package for something, I just can't recall what
+[11:57] <arzhar> bibo: so if i want to compile something i need the dev package ?
+[11:58] <MaRk-I> hiddenpearls: here's a step by step http://www.hackourlives.com/dual-boot-windows-7-and-ubuntu-10-04-lucid-lynx/
+[11:58] <bullgard4> [GNOME, Ubuntu 10.04.1] Why are there on one computer 2 processes gconf-helper, gdm-session-worker and gdm-simple-slave each? Ubuntu created them automatically. On another computer only 1 each.
+[11:58] <demoneye> MaRk-I: I paste'ed this on xorg.conf, what should be the next thing? http://ubuntu.pastebin.com/aKz6mPwZ
+[11:58] <k0sh> why o why when i PXEBOOT my ubuntu it tells me that it didnt found /lib/modules/2.6.32-21generic/modules.dep even tho that file exists in nfs exported dir, plus other distros netboot just fine, only ubuntu gives me such error and goes into kernel panic, dir is exported via nfs v3
+[11:58] <aronaliaga> hola
+[11:58] <aronaliaga> no me funciona
+[11:58]  * demoneye is *blur*
+[11:58] <aronaliaga> el chat en español
+[11:58] <bibo> hiddenpearls: Well if you're dual booting, Ubuntu needs part of a harddrive specifically for itself. I don't know much about Wubi, I couldn't get it to work so I just dual booted.
+[11:58] <aronaliaga> alguien me ayuda?
+[11:59] <aronaliaga> q ocurre?
+[11:59] <io> !es | aronaliaga
+[11:59] <ubottu> aronaliaga: En la mayoría de canales de Ubuntu se habla sólo en inglés. Si busca ayuda en español o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[11:59] <MaRk-I> demoneye: next step is to restart X,   just log out and back in

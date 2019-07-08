@@ -1,0 +1,1500 @@
+[07:42] <Haohmaru> alkisg i was trying to set it up so that two people can collaborate on a 3rd machine's desktop, however, the client app (at least on windows) captures the mouse movement at all times
+[07:42] <alkisg> Haohmaru: I'm using x2go to gain access alone, and then reverse vnc to share it with others
+[07:43] <Start> i got a "upstart" internal error and the computer doesn't connect anymore either wifi or wired and i find no information on the internet :\
+[07:43] <alkisg> Haohmaru: for example, to share your screen with me, you only need to run `x11vnc -connect my-ip`
+[07:43] <alkisg> You can share x2go screens or whatever other, that way
+=== Start is now known as Starski
+[07:43] <Haohmaru> alkisg opengl is involved in the whole thing btw
+[07:43] <alkisg> Ah, that's a good reason not to use x2go
+[07:44] <alkisg> (or anything remote :D)
+[07:44] <Haohmaru> well, i managed to get the opengl running thru turbovnc (after completely destroying the lubuntu before that with the nvidia driver troubles)
+[07:45] <Haohmaru> so now i don't want to do any extra (wrong) steps ;]
+[07:46] <akik> is there a way to disable the boot-time framebuffer? (14.04)
+[07:46] <wafflejock> OlofL, you shouldn't have a problem if you are just switching only issue seems to be it turns the top bar black to match gnome theming and doesn't switch it back if you remove the package for it, would still recommend taking a backup before installing though
+[07:46] <wafflejock> OlofL, http://askubuntu.com/questions/766071/install-gnome-shell-on-ubuntu-16-04
+[07:52] <jushur> OlofL: make a new user, test it out as login shell on that user, and not your own user?
+[07:52] <hateball> Haohmaru: is the service chmod+x ?
+[07:52] <jushur> OlofL: that way you dont mess up your current config.
+[07:53] <Haohmaru> hateball the tvnc.service file?
+=== jackNemrod_ is now known as jackNemrod
+[07:55] <hateball> Haohmaru: yea
+[07:55] <Haohmaru> oops.. it is now
+[07:59] <marech> heyy! about that latest glibc bug, where you couldn't resolve dns. which is latest stable release for ubuntu 16.04?
+=== alexandre9099_ is now known as alexandre9099
+[08:03] <ducasse> !info libc6 xenial
+[08:03] <ubottu> libc6 (source: glibc): GNU C Library: Shared libraries. In component main, is required. Version 2.23-0ubuntu7 (xenial), package size 2221 kB, installed size 9581 kB
+[08:03] <marech> oh, thanks! :)
+[08:04] <ducasse> marech: you can also check this on packages.ubuntu.com
+[08:05] <marech> nice, every day learning something new
+=== Lee_ is now known as Guest29051
+[08:07] <nanodrone> i tried setting grub timeout to zero but it didn't work. i'm on 16.10.
+[08:08] <Haohmaru> o_O ban has reason now? wow
+[08:09] <alkisg> nanodrone, do you want to hide grub?
+[08:09] <nanodrone> yup completely
+[08:10] <alkisg> nanodrone: grub is hidden by default via GRUB_HIDDEN_TIMEOUT=0 unless if you have multiple operating systems, in which case it's overriden later
+[08:11] <nanodrone> i'm editing the /etc/default/grub file.
+[08:11] <nanodrone> then running update-grub
+[08:11] <ducasse> did you run update-grub?
+[08:11] <ducasse> ok
+[08:11] <nanodrone> it used to work just fine.
+[08:11] <alkisg> nanodrone: put your /boot/grub/grub.cfg to pastebin
+[08:11] <kstrozyk> frameborder="1"
+[08:12] <kstrozyk> #mainHeader nav{
+[08:12] <kstrozyk> width:100%;
+[08:12] <kstrozyk> height:30px;
+[08:12] <kstrozyk> position:relative;
+[08:12] <kstrozyk> top:200px;
+[08:12] <Haohmaru> hm.. now "reboot" takes very long time (longer than my patience) .. could this have happened due to my tvnc.service?
+[08:12] <alkisg> Haohmaru: yes, services can block shutdown/reboot
+[08:13] <nanodrone> on paste.ubuntu?
+[08:13] <alkisg> Yup
+[08:14] <alkisg> Include your /etc/default/grub too
+[08:16] <slawek> siema linuksowe swiry
+[08:16] <Haohmaru> crap, i need to start the turbovnc service only after the user logs into his desktop
+=== plamen is now known as xryz
+[08:17] <slawek> i think you are glupi
+[08:18] <akik> !pl
+[08:18] <ubottu> Na tym kanale uzywamy tylko jezyka angielskiego. Mozesz uzyskac pomoc w jezyku polskim na #ubuntu-pl.
+[08:18] <nanodrone> alkisg, did that work
+[08:18] <alkisg> nanodrone: you don't have windows, so by default grub is hidden
+[08:19] <alkisg> I.e. you only need to restore a default /etc/default/grub
+[08:19] <nanodrone> I do have windows.
+[08:19] <Artur_> witam
+[08:19] <nanodrone> I can select windows from grub.
+[08:19] <Artur_> kto pl?
+[08:19] <alkisg> nanodrone: ah sorry I missed it
+[08:20] <Artur_> kto pl?
+=== Krzysiekhuj is now known as pacala
+[08:20] <akik> !pl
+[08:20] <Artur_> !pl
+[08:20] <ubottu> Na tym kanale uzywamy tylko jezyka angielskiego. Mozesz uzyskac pomoc w jezyku polskim na #ubuntu-pl.
+=== pacala is now known as krzysiekk
+[08:20] <nanodrone> win10 + ubuntu 16.10.
+[08:20] <krzysiekk> Siemka kto pl
+[08:20] <tprygiel> twoja stara
+[08:20] <Artur_> zamknij ryj :)
+=== krzysiekk is now known as Krzysiekk
+[08:21] <akik> artur: it means that you should write in english :)
+[08:21] <wsibilski> czesc szukam dziewczyny ktora chce sie ruchac
+[08:21] <wsibilski> hi
+[08:21] <wsibilski> gringos
+[08:21] <alkisg> nanodrone: check this line in your grub.cfg: if [ "${timeout}" = 0 ]; then   set timeout=10 fi
+[08:21] <Artur_> i dont  speak english fucking troll
+[08:22] <Artur_> siata fakap
+[08:22] <alkisg> nanodrone: that's what overrides your 0 timeout
+[08:22] <nanodrone> alkisg, okay just a sec.
+[08:22] <wsibilski> artur get the fuck out
+[08:22] <wsibilski> mothafucca
+[08:22] <ducasse> !language
+[08:22] <ubottu> Please avoid any language that may be considered offensive, including acronyms and obfuscation of such - also see https://wiki.ubuntu.com/IRC/Guidelines || The main channels are English only, for other languages, see https://wiki.ubuntu.com/IRC/ChannelList
+[08:22] <Krzysiekk> wsibilski can you shut the fuck up?
+[08:23] <Krzysiekk> GOWNO XDDD
+[08:23] <slawek> hello
+=== slawek is now known as Glanden
+[08:23] <Glanden> hejka linuksowe swiry
+[08:23] <Artur_> I welcome drupal freaks
+[08:23] <alkisg> nanodrone: I don't know of a way around it, but check if this helps: GRUB_TIMEOUT=00
+[08:23] <nanodrone> i'm gonna try setting it to 1 and reboot, i'll be back.
+[08:23] <alkisg> nanodrone: and update-grub
+[08:23] <Glanden> gra ktos w szachy
+[08:23] <Glanden> ?
+[08:24] <nanodrone> it's weird tho, it was workign fine earlier.
+[08:24] <akik> !pl | Glanden
+[08:24] <ubottu> Glanden: Na tym kanale uzywamy tylko jezyka angielskiego. Mozesz uzyskac pomoc w jezyku polskim na #ubuntu-pl.
+[08:24] <Krzysiekk> akik
+[08:24] <Krzysiekk> STFU
+[08:24] <ducasse> Krzysiekk: watch the language
+[08:25] <Glanden> ducasse pajacu nie pouczaj ja tu jestem nauczycielem
+[08:25] <Artur_> I like extreme sports mainly chess
+[08:26] <Krzysiekk> ducasse watch the shut the fuck up
+[08:27] <Haohmaru> hm.. so if i want to start turbovnc server only after the specific user logs into the desktop (because i need display :0 to be running for the opengl magic) .. i should do it from .xprofile instead of systemd?
+[08:27] <Lukker> hello
+[08:27] <Krzysiekk> jest tu jakis kozak?
+[08:28] <Glanden> hi
+[08:29] <alkisg> Haohmaru: if you want to start vnc for the existing user and not as a service for new sessions, then yes
+[08:29] <Glanden> o
+[08:29] <Haohmaru> alkisg i'm not sure
+[08:29] <Krzysiekk> Hello, i have big problem. My poop is hard and it hurts. PLS HELP ME
+[08:29] <Artur_> What drupal on computer science? Please help quickly
+[08:30] <Glanden> Drupal 8 my friend
+[08:30] <Haohmaru> but virtualgl doesn't work if display :0 is not "open" or so
+[08:30] <Artur_> why not drupal 7?
+[08:30] <Krzysiekk> bcs drupal 7 sucks
+[08:30] <Glanden> because Drupal 8 > Iframe
+[08:30] <nanodrone> alkisg, i tried what you suggested '00', and it worked lol
+[08:30] <Artur_> iframe is very very gowno
+[08:30] <alkisg> nanodrone: hacks ftw! :)
+[08:31] <nanodrone> what i don't understand is where that line just popped up from.
+[08:31] <nanodrone> the if $timeout = 0 line
+[08:31] <Krzysiekk> HELLO GAYS
+[08:31] <Glanden> ohh hello wanna kopala w drupala?
+[08:31] <ducasse> !ops | Krzysiekk Artur_ Glanden
+[08:31] <ubottu> Krzysiekk Artur_ Glanden: Help! Channel emergency! (ONLY use this trigger in emergencies) - Pici, Myrtti, jrib, Amaranth, tonyyarusso, Nalioth, lamont, CarlK, elky, mneptok, PriceChild, Tm_T, jpds, ikonia, Flannel, genii, wgrant, stdin, h00k, IdleOne, nhandler, Jordan_U, popey, Corey, ocean, cprofitt, djones, Madpilot, gnomefreak, lhavelund, k1l, rww, phunyguy, bazhang, chu
+[08:32] <Glanden> !ops
+[08:32] <Haohmaru> Glanden u goin to jail, son
+[08:32] <alkisg> nanodrone: from /etc/grub.d/30_os-prober
+[08:32] <nanodrone> can't believe this is happening in the official ubuntu channel.
+[08:32] <Artur_> Have you seen anyone of you fast and furious at the terminal?
+[08:32] <ducasse> nanodrone: happens all the time
+[08:33] <Krzysiekk> ZGNIJESZ W SZTUMIE GLANDEN HAHA
+[08:33] <Krzysiekk> SMIESZNE
+=== Krzysiekk is now known as NinjaKOXpl
+[08:34] <nanodrone> alkisg, should i investigate further or just leave it at this? won't update to 17.10 ruin it again
+[08:34] <NinjaKOXpl> cho na solo kutasiarzu
+[08:34] <alkisg> nanodrone: I think leave it as it is
+[08:34] <alkisg> nanodrone: noone can guarantee what future code will bring though
+[08:34] <NinjaKOXpl> @Glanden dawaj na solo
+[08:35] <nanodrone> yup... i moved from linux mint 17.1 to 16.04 to 16.10
+[08:35] <Artur_> I invite room 400
+[08:35] <nanodrone> each had it's own unique problems.
+[08:35] <nanodrone> i had to install the mainline kernel to make the kernel panics stop.
+[08:36] <Artur_> Alkisg can you help me I do not know how to make an iframe and in 5 min my site has to rely on it
+[08:36] <ducasse> Artur_: try #web, it's offtopic here
+[08:36] <Artur_> i dont have internet :X
+[08:37] <Collapse>  bitchhhhhhhhhhhhh xdddddddddddddddddddddddddddddddddddddddddddddddddddddd
+[08:37] <Collapse>  bitchhhhhhhhhhhhh xdddddddddddddddddddddddddddddddddddddddddddddddddddddd
+[08:37] <Collapse>  bitchhhhhhhhhhhhh xdddddddddddddddddddddddddddddddddddddddddddddddddddddd
+[08:37] <Collapse>  bitchhhhhhhhhhhhh xdddddddddddddddddddddddddddddddddddddddddddddddddddddd
+[08:37] <Collapse>  bitchhhhhhhhhhhhh xdddddddddddddddddddddddddddddddddddddddddddddddddddddd
+[08:37] <Kycoo>  bitchhhhhhhhhhhhh xdddddddddddddddddddddddddddddddddddddddddddddddddddddd
+[08:37] <nanodrone> can't someone just kick or ban them?
+[08:38] <ducasse> nanodrone: seems the ops are not available atm
+[08:38] <M_aD> !op
+[08:38] <ubottu> Help! Channel emergency! (ONLY use this trigger in emergencies) - Pici, Myrtti, jrib, Amaranth, tonyyarusso, Nalioth, lamont, CarlK, elky, mneptok, PriceChild, Tm_T, jpds, ikonia, Flannel, genii, wgrant, stdin, h00k, IdleOne, nhandler, Jordan_U, popey, Corey, ocean, cprofitt, djones, Madpilot, gnomefreak, lhavelund, k1l, rww, phunyguy, bazhang, chu
+[08:39] <nanodrone> is that a huge list of ops?
+[08:39] <ducasse> yes, for highlighting them
+[08:40] <M_aD> yup, but i was too late, experiencing some lag over here
+[08:41] <nanodrone> alkisg, what ubuntu+kernel combination are you on?
+[08:41] <alkisg> nanodrone: ubuntu-mate 16.04.2 , stock kernel 4.8
+[08:42] <nanodrone> with no kernel panics?
+[08:42] <ducasse> most people don't have them :)
+[08:42] <nanodrone> most people are lucky.
+[08:42] <nanodrone> i had them for three days (i didnt know what to do)
+[08:42] <alkisg> No kernel panics, yes
+[08:43] <ducasse> nanodrone: are you on very new hardware?
+[08:43] <nanodrone> a convertible
+[08:43] <nanodrone> ultrabook/tablet/laptop...
+[08:43] <ducasse> nanodrone: but is it _new_?
+[08:43] <nanodrone> it kinda is.
+[08:43] <nanodrone> it's like the surface pro 3
+[08:44] <minimec> irssi jump time
+[08:44] <ducasse> nanodrone: quite new hw can take some time for drivers etc to become stable, that can give you kernel panics.
+[08:44] <nanodrone> but the sp3 is horrible when it comes to linux support
+[08:44] <hemangpatel> Hi. Morning
+[08:44] <LibertyWeNeed> what is the best contacts application on Ubuntu. I need one that will work with GMX.NET which uses the CardDAV protocol.
+[08:45] <hemangpatel> Can i ask question about vsftpd ?
+[08:45] <nanodrone> linux still freezes completely when i suspend my computer, my way around it is active-suspend script that i wrote myself, plus i've disabled suspend completely.
+[08:45] <LibertyWeNeed> I am trying to convert my mum to Ubuntu so she doesn't need to spend thousands on a New Macbook Pro.
+[08:46] <nanodrone> i read on an ubuntu kernel thread that support for active sleep is coming (wonder if it's true)
+[08:48] <ducasse> nanodrone: suspend/resume is often a bit finicky, try looking at the acpi wiki page
+[08:48] <ducasse> !acpi
+[08:49] <unkek> hello, new xubuntu user here. I have nvidia 218 gpu + 2 displays. The main display is using some ridiculously low resolution and the other display is not used at all, what do I do? 'Display settings' shows that only a single resolution is available for my display.
+[08:49] <nanodrone> ducasse, i've done quite a lot of research around it, it just isn't supported, my computer has no S3 mode.
+[08:49] <ducasse> ah, right.
+[08:50] <unkek> nvidia-settings has almost no settings at all
+[08:50] <nanodrone> it's not linux's fault lol, it's microsoft+intel, they haven't documented it at all.
+[08:51] <nanodrone> plus the secure-boot thing was just beautiful...
+[08:52] <nanodrone> it didn't even let me re-partition my ssd with gparted.
+[08:56] <unkek> :c
+[08:56] <unkek> haaalp
+[09:13] <Flyman> wooo hooo hello
+[09:32] <terlands> hi
+[09:33] <terlands> im having problems whit the graphics when watshing video
+[09:33] <terlands> i took a schreen shot
+[09:33] <terlands> how do i upload it here?
+[09:33] <FuzzyHandcuffs> terlands: this is text only
+[09:33] <Haohmaru> you don't upload it to irc
+[09:33] <FuzzyHandcuffs> upload it to a service such as imgur.con
+[09:34] <FuzzyHandcuffs> typo
+[09:34] <FuzzyHandcuffs> imgur.com i meant
+[09:34] <Haohmaru> you upload it to some image sharing site and paste the URL here
+[09:34] <terlands> ok
+[09:34] <FuzzyHandcuffs> and then paste the link here
+[09:34] <FuzzyHandcuffs> furthermore you don't upload a schreen shot
+[09:34] <LibertyWeNeed> share.riseup.net
+[09:34] <FuzzyHandcuffs> you upload a screen shot
+[09:34] <FuzzyHandcuffs> unless you're high, then you can do either ;)
+[09:34] <LibertyWeNeed> https://lut.im/
+[09:35] <FuzzyHandcuffs> http://www.gnaa.eu
+[09:35] <FuzzyHandcuffs> http://twitter.com
+[09:35] <FuzzyHandcuffs> and many more
+[09:35] <FuzzyHandcuffs> we get the point
+[09:35] <terlands> http://imgur.com/a/aIJ5m
+[09:36] <FuzzyHandcuffs> !ops terlands imgur porn link
+[09:36] <ubottu> FuzzyHandcuffs: I am only a bot, please don't think I'm intelligent :)
+=== Mo0O_ is now known as Mo0O
+[09:36] <FuzzyHandcuffs> that guy is clearly trying to swallow semen
+[09:38] <terlands> anyone?
+=== JediMaster is now known as Guest55738
+[09:38] <Haohmaru> terlands what happens when you pause it?
+[09:39] <terlands> yes. but i get those glitches when playing as well
+[09:39] <terlands> but not that mush
+[09:40] <Haohmaru> nasty
+[09:45] <terlands> the picture looks then normal
+[09:46] <jushur> terlands: you done any tweaks to the browsers settings for video accel?
+[09:46] <terlands> i dont know what video accel means
+[09:47] <terlands> i took one setting away after googeing the problem
+[09:47] <terlands> but i dident work
+[09:47] <terlands> its the same when watching video on vlc
+[09:48] <Haohmaru> terlands video accelleration, it's when your video card is used to help decode/encode the video
+[09:48] <k1l_> terlands: what ubuntu is that? what video card is it?
+[09:48] <Haohmaru> otherwise that's done by your processor
+[09:49] <terlands> i have ubuntu mate 16.04.2
+[09:49] <jushur> terlands: what gpu/grafic card do you have?
+[09:49] <terlands> i dont know what video card
+[09:50] <Haohmaru> time for opening up a terminal
+[09:50] <k1l_> terlands: lspci -nnk | grep -i vga -A3 |  nc termbin.com 9999
+[09:50] <k1l_> and show the url in here
+[09:51] <morningbird> I have issues with ubuntu 16.10 on my server.
+=== uhhf1 is now known as uhhf
+[09:52] <terlands> http://termbin.com/i7rv
+[09:52] <morningbird> systemctl status apt-daily.timer and apt-daily.service are dead
+[09:52] <morningbird> I tried to dpkg reconfigure unattended-upgrades
+[09:53] <morningbird> there are no timers set for apt-daily.timer
+[09:53] <Haohmaru> terlands that looks like a lousy integrated intel video card, ouch
+[09:53] <morningbird> how can I make sure anattended-upgrades are working corectly
+[09:54] <terlands> yeah. but still, it should work
+[09:54] <Haohmaru> depends
+[09:55] <terlands> i just use the pc for music and video on the tv
+[09:55] <Haohmaru> if it happens to use video accelleration, and if the video card or driver is messed up in some way - you might experience all kinds of weirdnesses
+[09:55] <Haohmaru> you could try playing around with the settings in vlc
+[09:55] <Haohmaru> or try another video player which has enough settings to play with
+[09:56] <terlands> maybe
+[09:57] <Haohmaru> i suspect you'll get proper picture if you bypass the video card.. but then it might result in low FPS and high cpu usage
+=== dreamon__ is now known as dreamon
+[10:00] <alkisg> terlands: are you using marco or compiz? ps aux|grep marco|nc termbin.com 9999
+[10:05] <terlands> what is marco or compiz?
+[10:06] <terlands> http://termbin.com/fp5o
+[10:10] <alkisg> terlands: now run this, and then try to play video again: marco --no-composite --replace &
+[10:10] <jushur> terlands: compositing manager, basicly a tool to enable showing fancy things. like transparent windows.
+[10:11] <garofalo> buon giorno
+[10:11] <garofalo> qualcuno parla italiano
+[10:11] <BluesKaj> Hey all
+[10:12]  * wreck_boo says hi
+[10:12] <wreck_boo> how do i  setup wlan0 as my default interface
+[10:12] <OerHeks> !it | garofalo
+[10:12] <ubottu> garofalo: Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi <unconvertable> /join #ubuntu-it <unconvertable> senza virgolette)
+[10:13] <garofalo> grazie
+[10:14] <rhnticz>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <mejlxzr>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <sfuvcmq>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <rhnticz>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <jtfedzr>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <asvmsxc>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <vpvlcix>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <kzqhout>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <vpvlcix>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <vpvlcix>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <mejlxzr>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <mejlxzr>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <mejlxzr>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <Dokuroyaiba>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <Dokuroyaiba>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:14] <Dokuroyaiba>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:15] <Dreadlord>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:15] <Dreadlord>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:15] <Dreadlord>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:15] <Dreadlord>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:15] <Fisherman>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:15] <Fisherman>   bitchhhhhhxdDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
+[10:21] <linocisco> hi all
+[10:21] <negev> hi, 16.04.2 with all the latest updates, vm.swappiness = 0 and ~370MB RAM free, no swap space used by kswapd is going nuts, using 30% cpu
+[10:21] <negev> is this a kernel issue?
+[10:21] <negev> s/by/but
+[10:23] <ducasse> negev: aiui the kernel will swap if it has to no matter what vm.swappiness is set to.
+[10:23] <negev> ducasse: but i have ram free and no swap is used
+[10:23] <linocisco> during my shutdown, I found after two services such as [stopping ]ccpd.service and [stopped] target user and group name Lookups . next of these are faster until shutdown
+[10:25] <ducasse> negev: i just meant that vm.swappiness being 0 most likely doesn't matter here
+[10:25] <alkisg> negev: what happens if you restore swappinness to the default "60" value/
+[10:25] <alkisg> ?
+[10:25] <ducasse> negev: i could be wrong, though :)
+[10:26] <alkisg> negev: also, are you using zram?
+[10:26] <negev> what is zram?
+[10:26] <alkisg> swapping inside ram, using compression
+[10:26] <negev> no idea
+[10:26] <negev> no change with vm.swappiness=60
+[10:26] <negev> 2.8MB swap used now, but that's it
+[10:27] <negev> kswapd still at 30% cpu
+[10:27] <negev> 342MB free RAM
+[10:27] <alkisg> lsmoz | grep zram
+[10:27] <alkisg> *lsmod
+[10:28] <negev> alkisg: nothing
+[10:29] <alkisg> negev: ok, no other ideas from me :) Maybe try sudo strace its pid or something. Check also in #ubuntu-kernel
+[10:29] <negev> it's a linode kernel so i guess i'll ask them first
+[10:30] <alkisg> Eh, you say 16.04.2 but you don't mention custom kernel. Lame. :)
+[10:31] <minimec> negev: I would try this... 'sudo -i', then 'echo madvise > /sys/kernel/mm/transparent_hugepage/enabled' https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1476211
+[10:31] <ubottu> Launchpad bug 1518457 in linux (Ubuntu Yakkety) "duplicate for #1476211 kswapd0 100% CPU usage" [High,Fix released]
+[10:31] <OerHeks> oh, linode ...
+[10:32] <minimec> negev: I had your exact problem with a 2GBRAM Chromebook with Fedora installed. If I remember well the command above solved my problem.
+[10:32] <negev> made no difference but thanks anyway
+[10:32] <OerHeks> minimec, but he has no 100%, just 30% ..
+[10:34] <minimec> OerHeks: Yeah, but I think the command will prevent 'kswapd' from 'working' all the time.
+[10:38] <linocisco> during my shutdown, I found after two services such as [stopping ]ccpd.service and [stopped] target user and group name Lookups . next of these are faster until shutdown
+[10:39] <FMan> I would like to ask a question
+[10:41] <k1l_> FMan: just ask
+[10:43] <FMan> if I set up a virtual machine that runs Ubuntu, is it possible to hibernate it?
+[10:46] <FMan> I just noticed I can buy Ubuntu Advantage
+[10:47] <FMan> I am trying to find out the release date for 17.04
+[10:47] <alkisg> Are those random questions from a bot? :)
+[10:47] <bazhang> FMan, #ubuntu+1 for that
+[10:48] <OerHeks> if you can find advantage ... https://wiki.ubuntu.com/ZestyZapus/ReleaseSchedule
+[10:49] <martyix> Hi, when I open a folder in Files (the gui thing in Ubuntu for browsing computer files), I can see Modified column and I can see that a file was modified "Yesterday". I would like to see the date+time right away. Can I adjust this behavior?
+[10:49] <FMan> thanks
+[10:50] <martyix> I haven't found it yet. It seems there are not many settings for Files though
+[10:52] <linocisco> during my shutdown, I found after two services such as [stopping ]ccpd.service and [stopped] target user and group name Lookups . next of these are faster until shutdown
+[10:53] <alkisg> linocisco: is there a question in that comment?
+[10:53] <linocisco> alkisg, what should I do to make shutdown faster?
+[10:53] <alkisg> linocisco: how much time does it take to shutdown?
+[10:54] <debianbeing> linocisco: I just joined the channel, can you provide some extra info?
+[10:54] <linocisco> alkisg, stopping ccpd.service about 6 mins. and next one about 8 mins
+[10:55] <alkisg> linocisco: can you try stopping those services before you shutdown, and then check again how much time it takes to shutdown?
+[10:55] <debianbeing> linocisco: can you pastebin journal output from shutdown
+[10:55] <OerHeks> martyix, change date_modified to date_modified_full >> dconf org.gnome.nautilus.list-view-defaultvisible-colomns
+[10:55] <linocisco> alkisg, I dont know how to stop 2nd service
+[10:56] <alkisg> linocisco: sudo service nss-user-lookup stop
+[10:56] <martyix> OerHeks: thanks, I'll have a look
+[10:57] <alkisg> Eh sorry
+[10:57] <OerHeks> martyix, i see it does not work
+[10:57] <alkisg> linocisco: sorry that's a target not a service
+[10:57] <alkisg> You don't need to stop that
+[10:58] <linocisco> alkisg, so what do I do?
+[10:59] <debianbeing> linocisco: journal output plz
+[10:59] <alkisg> linocisco: first send the journal output that debianbeing asks for. You can do my test later, if you don't see anything in the journal. My test would be, sudo service ccpd.service stop; wait until it's stopped; sudo poweroff => time it
+[11:01] <linocisco> debianbeing, alkisg how to generate journal output? command pls?
+[11:01] <debianbeing> linocisco: journalctl
+[11:02] <debianbeing> linocisco: journalctl -b so it only shows starting from latest boot
+=== jackNemrod_ is now known as jackNemrod
+[11:02] <unkek> hello
+[11:02] <unkek> I have displays problem
+[11:02] <debianbeing> wait no
+[11:02] <HowAboutIt> hello world
+[11:03] <debianbeing> unkek: what kind of problem? missing displays or too many?
+[11:03] <unkek> freshly installed xubuntu, it worked fine until I swapped the monitor and added another one
+[11:03] <debianbeing> unkek: oh yes been there
+[11:03] <unkek> now it uses only one and in a shitty resolution
+[11:03] <HowAboutIt> reseat the connections and restart it all.
+[11:03] <unkek> what?
+[11:03] <linocisco> debianbeing, okk
+[11:04] <unkek> debianbeing: how did you solve that?
+[11:04] <debianbeing> linocisco: actually something like journalctl --since "20 min ago" would be more useful: you want to have the logs from the latest shutdown
+=== cigumo_ is now known as cigumo
+[11:05] <debianbeing> unkek: unplug all but one display, open the display settings and reset everything, then tick the "configure new displayes when connected" and check back with results
+[11:05] <HowAboutIt> what I typed before.
+[11:06] <HowAboutIt> lawd.
+[11:06] <HowAboutIt> <3
+[11:06] <debianbeing> unkek: if your installation is new, easiest way to reset is to delete all configs from home dir (.config et al)
+[11:06] <debianbeing> HowAboutIt: yeah lol missed it
+[11:06] <unkek> debianbeing: it is new
+[11:06] <HowAboutIt> we think in a similar way
+[11:07] <debianbeing> unkek: delete all configs, log out and log back in
+[11:07] <debianbeing> lol
+[11:07] <unkek> debianbeing: do I need to restart DM?
+[11:07] <debianbeing> HowAboutIt: you wanna hang out later ;)
+[11:07] <HowAboutIt> sarcasm BOT just splooged.
+[11:07] <unkek> also, should I disconnect the 2nd monitor then?
+[11:07] <debianbeing> unkek: better safe than sorry
+[11:07] <HowAboutIt> no I do not thank you
+[11:07] <HowAboutIt> I like my space between me and you and all of us ( ;
+[11:08] <debianbeing> why do you not thank me
+[11:08] <debianbeing> ;P
+[11:08] <HowAboutIt>  ; <unconvertable>
+[11:08] <unkek> debianbeing: do I need to drop the whole home or just ~/.config?
+[11:09] <debianbeing> unkek: rm .*
+[11:09] <debianbeing> and rm -r .config
+[11:09] <unkek> so the whole ~?
+[11:09] <unkek> oh
+[11:09] <unkek> alright, thank you, unlogging
+[11:09] <debianbeing> sure, but no need to delete the Desktop etc dirs
+[11:10] <HowAboutIt> if it was working before; don't change software; just power down; reseat all the gear and then restart; if it doesn't work then; then begin the removal of drivers and replacing them.
+[11:10] <debianbeing> I hope my advice works and I didn't just waste his time lol
+[11:11] <debianbeing> HowAboutIt: never reboot, just kill all processes lol
+[11:13] <HowAboutIt> well debianbeing; typically I'd agree if his system was running for some time.  He replaced hardware.
+[11:13] <thyriaen> where do i put my icon file when i want to access it in my *.desktop file so it know where to look for it ?
+[11:13] <HowAboutIt> or She.
+[11:13] <ChaiTRex> thyriaen: Where is the .desktop file located?
+[11:13] <linocisco> http://paste.ubuntu.com/24234352/
+[11:14] <thyriaen> .local/share/applications/
+[11:14] <thyriaen> ~/....
+[11:16] <linocisco> alkisg, http://paste.ubuntu.com/24234352/
+[11:16] <ChaiTRex> thyriaen: Looks like under ~/.local/share/icons
+[11:16] <alkisg> linocisco: it was debianbeing that asked for it, not me :)
+[11:16] <alkisg> (12:59:58 <unconvertable> ) alkisg: linocisco: first send the journal output that debianbeing asks for. You can do my test later, if you don't see anything in the journal. My test would be, sudo service ccpd.service stop; wait until it's stopped; sudo poweroff => time it
+[11:17] <linocisco> alkisg, debianbing quit
+[11:17] <alkisg> linocisco: so basically verify that ccpd is to blame
+[11:17] <thyriaen> ChaiTRex, it has to be png format right ? ( *.ico wont work ? )
+[11:17] <alkisg> linocisco: yes, but I don't know what to do with the output he asked for
+[11:18] <linocisco> alkisg, ok. i will do stopping two as you said
+[11:18] <unkek> did not work :c
+[11:18] <unkek> I also installed arandr, nothing helps
+[11:19] <unkek> it lists only single monitor with a single available resolution
+[11:19] <smellsLikeGoatSp> Hi, I recently installed xboxdrv on both my laptop but I cant get the repository grumbel to update. as a result I think I miss xpad or some joystick calibration mapping gtk. this is my error: http://pastebin.com/JwDuzNt9
+[11:20] <alkisg> unkek: you have two monitors and only one of them is working? When you are at the login screen, do both of them work?
+[11:20] <unkek> no, only single one works
+[11:20] <unkek> even at login screen
+[11:20] <alkisg> unkek: if you unplug that one, then does the other one work?
+[11:20] <alkisg> (with sudo service lightdm restart)
+[11:21] <OerHeks> smellsLikeGoatSp, that is correct
+[11:21] <OerHeks> https://launchpad.net/~grumbel/+archive/ubuntu/ppa?field.series_filter=
+[11:21] <OerHeks> no xenial stuff there
+[11:21] <unkek> alkisg: unplug the working one to see if the other will work?
+[11:21] <alkisg> unkek: yes, and reboot if necessary
+[11:22] <unkek> ok
+[11:23] <smellsLikeGoatSp> OerHeks: excuse me?
+[11:23] <OerHeks> smellsLikeGoatSp, your error is correct.
+[11:24] <OerHeks> see the ppa page
+[11:25] <smellsLikeGoatSp> OerHeks: but then again, when I installed it on a desktop, also runnning 16.04, I had two extra joystick gtks (one I think name joystick and the other one I cant quite remember, they were the same anyway)
+[11:26] <OerHeks> smellsLikeGoatSp, hard to believe, that ppa has no xenial 16.04 package, or they removed it.
+[11:27] <smellsLikeGoatSp> OerHeks: probably nothing to do with it at this rate. just wondering what could have been. xpad maybe. I would not mind but the default setting for triggers is buttons..which is less than ideal. those gtks allowed to calibrate and map the keys
+[11:28] <smellsLikeGoatSp> OarHeks: I ll have another look from the desktop tmr.
+[11:29] <OerHeks> smellsLikeGoatSp,  i found the github , not sure it contains newer code https://github.com/xboxdrv/xboxdrv
+[11:29] <smellsLikeGoatSp> on a different note I am also struggling with the newest VBox on 16.04. used to be quite straight forward when I used it a couple years ago. now I cant get oracle extension to do what is supposed to do
+[11:29] <smellsLikeGoatSp> OerHeks: thanks mate
+[11:30] <OerHeks> smellsLikeGoatSp,  yakkety got the newer 0.88 https://launchpad.net/ubuntu/+source/xboxdrv/   .. maybe worth upgrading and use xboxdrv without ppa
+[11:31] <unkek> alkisg: well, now it works on another monitor
+[11:31] <unkek> still shitty resolution
+[11:31] <alkisg> unkek: now you only have one monitor, or two?
+[11:31] <unkek> one
+[11:32] <unkek> I tried to plug the 2nd one after that - nothing changes
+[11:32] <unkek> monitors app in xfce still shows only 1 available resolution
+[11:32] <alkisg> unkek: can you pastebin your /var/log/Xorg.0.log, and the output of `xrandr` ?
+[11:32] <unkek> and only 'default' monitor
+[11:32] <unkek> pastebinit /var/log/Xorg.0.log    http://paste.ubuntu.com/24234468/
+[11:33] <unkek> pastebinit /var/log/Xorg.2.log  http://paste.ubuntu.com/24234470/
+[11:33] <unkek> what if I just remove my /etc/X11/xorg.conf?
+[11:33] <ChaiTRex> thyriaen: .ico is likely to work.
+[11:33] <unkek> it contains data only about 1 monitor
+[11:34] <smellsLikeGoatSp> OerHeks: well it is working fine on both machines at the moment. with a few difference although I think I followed the same tutorial. on laptop I run sudo xboxdrv -s to start it. whereas on the desktop it seems unnecessary. I should have said that it is a wifi controller on the desktop and a usb on the laptop...It is late and I m making little sense at the minute. I ll sleep over it :P
+[11:34] <alkisg> unkek: what's the output of `dpkg -l "*nvidia*' | grep ^ii` ?
+[11:35] <linocisco> alkisg, hi i did as u said. this time,[stopped] LSB: ebtables ruleset management: is taking too long
+[11:35] <alkisg> linocisco: so, the command `sudo service ccpd stop` finished quickly/
+[11:35] <alkisg> ?
+[11:35] <unkek> alkisg: dpkg -l "*nvidia*" | grep ^ii | pastebinit
+[11:35] <unkek> http://paste.ubuntu.com/24234478/
+[11:36] <alkisg> unkek: yes, try to rename /etc/X11/xorg.conf to .bak so that it gets out of the way, and reboot
+[11:36] <linocisco> alkisg, yes
+[11:37] <alkisg> linocisco: and you're not seeing "waiting for this service to shutdown..." while shutting down?
+[11:38] <unkek> alkisg: didn't work :c
+[11:38] <alkisg> unkek: meh :(
+[11:38] <alkisg> Anyway, time to go, /me waves...
+[11:39] <unkek> :c
+[11:40] <TuxMaster> Salut, mes amis!
+[11:40] <anddam> I'm experiencing hangs while shutting down my laptop, the "alternate" view displays the NFS umount as last comment
+[11:40] <anddam> at that point I can switch virtual terminal but I cannot type text into the tty prompt
+[11:40] <anddam> it seems to stay like that forever
+[11:42] <TuxMaster> Hi, I have an HP Laserjet CP1025 color (USB only), and cannot use it because it is recognized as a CDROM drive.
+=== _salem is now known as salem_
+[11:44] <linocisco> alkisg
+[11:45] <linocisco> http://imgur.com/a/Jx6wg
+[11:46] <anddam> any hint about what to check or how to read a failed shutdown log is welcome
+[11:47] <hateball> TuxMaster: do you have hplip installed?
+[11:47] <brunch875> guy how do I delete a partition table on a disk? I know there's a command for it but askubuntu only shows how to overwrite the starting blocks with zeros with dd
+[11:50] <dag_> how can i clear log files that starts ends with .log001
+[11:50] <dag_> or .log some number
+[11:51] <hateball> brunch875: gparted lets you wipe the FAT iirc
+[11:51] <unkek> someone, please, haaaalp
+[11:52] <unkek> 2 monitors, only 1 works and in shitty resolution
+[11:52] <hateball> brunch875: are you looking at just removing the FAT and not the partitions? or do you just want to wipe the entire drive?
+[11:52] <brunch875> hateball: trying to find the console command built just for that though
+[11:52] <unkek> 2 gpus available, using only discrete nvidia
+[11:52] <brunch875> I want to wipe all, even the partition table
+[11:52] <unkek> nvidia drivers are installed
+[11:52] <BluesKaj> brunch875, use gparted and choose new partition table
+[11:53] <hateball> brunch875: right. Personally I like to use shred for that, to overwrite data as well
+[11:53] <hateball> brunch875: so assuming the drive you want to overwrite is /dev/sdc, "shred -n 1 -v /dev/sdc" apply sudo as needed
+[11:53] <brunch875> hateball: you mean shred on /dev/sdx? That's kind of like overwriting with dd
+[11:53] <brunch875> I don't mind about data leftovers
+[11:53] <unkek> weird 'nvidia driver is not loaded'
+[11:53] <unkek> how do I load nvidia driver?
+[11:54] <brunch875> I want to get rid of partition table being messed up
+[11:54] <brunch875> gparted should work, but I'm curious about the command I once found for it
+[11:54] <hateball> brunch875: fdisk lets you create new partitions
+[11:54] <OerHeks> parted /dev/sdX mklabel msdos
+[11:55] <hateball> I guess you want parted if it's a larger drive, if you need GPT
+[11:56] <OerHeks> even on smaller drives than 2 Tb i want gpt.
+[11:59] <smellsLikeGoatSp> virtualbox guest addition wont work with XP virtual machines?
+[12:00] <FinalX> why would it? WinXP isn't supported by Microsoft anymore for 3 years now.
+[12:00] <FinalX> it was already end of life way before it was end of support.
+[12:00] <LennyKitty> my wifi isnt working network mnanager says unavailable 802.1x supplement failed
+[12:01] <brunch875> Is parted installed by default on most systems? I just realized I can use fdisk to fix the partition table
+[12:01] <mozammel> does linux-phc still work with ubuntu 17.04 ?
+[12:02] <guest0212US> Hi All, If my laptop supports (U)EFI, should I install my Linux in (U)EFI mode? Linux will be a single OS in the laptop. Is this effect the performance?
+[12:03] <mozammel> guest0212US: go for it. UEFI does not effect performance. I do use it myself.
+[12:05] <OerHeks> mozammel, no, there is no phc package, and the ppa is dead
+[12:05] <guest0212US> mozammel: are any special reasons to use (U)EFI instead of BIOS (old school) for a Linux installation?
+[12:05] <PCatinean> I I run this curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - multiple times it does not create duplicates does it?
+[12:07] <OerHeks> PCatinean,  sudo apt-key list # will tell
+=== zombofod is now known as foddo
+[12:08] <brunch875> OerHeks: shouldn't parted /dev/sdX mklablel msdos delete old contents?
+=== foddo is now known as Guest82097
+[12:09] <OerHeks> brunch875, no, it writes a fresh mbr
+[12:09] <OerHeks> man parted
+[12:10] <Skyrider> Does rsync have the ability to fully make an oS backup? (openvz container)
+[12:10] <brunch875> oh so old partitions are still there
+[12:10] <Skyrider> including all installed packages, etc.
+[12:10] <Skyrider> Asked yesterday, but going to continue today.
+=== foddo_ is now known as fod
+[12:10] <OerHeks> brunch875, recoverytools can find the partitions yes
+=== fod is now known as foddo
+[12:11] <brunch875> recoverytools? I'm seeing the old folders unchanged :p
+[12:11] <brunch875> I guess I might be replacing the partition table by an identical one
+[12:13] <MadPsy> Skyrider, depends what you call 'OS backup' - rsync deals with individual files
+[12:13] <Skyrider> See it like an OS image backup.
+[12:13] <Skyrider> Instant backup / restore of the entire OS.
+[12:13] <MadPsy> Skyrider, then the answer is no
+[12:13] <mozammel> guest0212US: its more secure. thats all.
+[12:14] <guest0212US> mozammel: thank u
+=== CuCus is now known as Stummer
+[12:14] <Skyrider> Crap
+[12:14] <OerHeks> Skyrider, you would do that from the host, duplicate the image. and openvz is funny.
+=== Stummer is now known as CuCus
+[12:15] <MadPsy> Skyrider, with something like openvz you would simply take an image on the host though, not faff about with files using rsync
+=== VoidWhisperer_ is now known as VoidWhisperer
+[12:17] <Skyrider> MadPsy: host doesn't allow creating images.
+[12:18] <MadPsy> Skyrider, then without sounding cheeky - find a decent host :)
+[12:18] <Skyrider> It is on their to-do list though.. as they mentioned.
+[12:20] <MadPsy> Skyrider, I have no idea what your container but sounds like you need something like ansible to look after the configuration of it (store in Git or something) and then rsync any moving data. That way you can restore the entire thing easily.
+=== KindTwo is now known as KindOne
+=== jackNemrod_ is now known as jackNemrod
+[12:25] <unkek> yay, I made it wurk!
+[12:26] <ppf> how do i downgrade a specific package to a specific version again?
+[12:27] <Haohmaru> can files shared on the network be used sort of as normal files like you can in windows by typing their path like //computer_name/folder/file.txt ?
+[12:27] <MadPsy> ppf, add '=' after the package name
+[12:27] <ppf> MadPsy: thanks
+[12:28] <brunch875> Haohmaru: out of my lack of experience, i'm pretty sure you could mount those as a folder and just access that folder
+[12:28] <MadPsy> Haohmaru, why not just mount the share ?
+[12:28] <Haohmaru> "why not" <- i have no idea what i can or cannot do to start with
+[12:28] <ppf> MadPsy: and how do i Pin that package to this specific version so another upgrade won't override me again?
+[12:29] <Haohmaru> i have some project which references files over the network, and when i tried opening that project under ubuntu - it complained about those files
+[12:29] <MadPsy> ppf, apt pin priorities - not sure exactly how off the top of my head
+[12:29] <MadPsy> Haohmaru, what type of 'network share' are they?
+[12:29] <brunch875> Haohmaru: basically when you plug in a thumb drive, you can "mount it" by making it appear as a folder inside your system. Normally it appears in /media/haohmaru
+[12:30] <brunch875> it should be about the same with network shares
+[12:30] <Haohmaru> MadPsy it's a samba server thing
+[12:30] <ppf> MadPsy: apt-mark hold does the trick!
+[12:30] <ppf> ty
+[12:31] <brunch875> Haohmaru: this any help? http://imgur.com/a/2vghb
+[12:31] <MadPsy> Haohmaru, ok then look into how to mount a samba share - you'll need to 'apt install samba-common' and then mount with something like 'mount.cifs -v //blah /blah/'
+[12:31] <brunch875> I'd use the GUI and hit ctrl-l to see the path
+[12:32] <linocisco> [stopped] LSB: ebtables ruleset management: is taking too long
+[12:33] <Haohmaru> but the problem might be elsewhere
+[12:33] <Haohmaru> how will the path look like then?
+[12:33] <HowAboutIt> write the path down
+[12:33] <brunch875> I'd help you out but this isn't a home network so I can't connect to it
+[12:33] <Haohmaru> //computer/folder/file.txt ?
+[12:34] <Haohmaru> i am able to browse the network shares from PCManFM
+[12:34] <brunch875> no, it's definitely something like /media/haohmaru/longstringofgarbage/
+[12:34] <Haohmaru> but only on the actual monitor of the machine, not thru VNC
+[12:34] <MadPsy> Haohmaru, no - it'll be /blah/blah - a local file path, possibly in /mnt or /media etc
+[12:34] <brunch875> or at least I remember it like that
+[12:34] <PlainDave> hello all. I just installed some updates and rebooted. Is there now a way I can find what changes the updates have/do?
+[12:35] <MadPsy> PlainDave, /var/log/dpkg.log
+[12:35] <brunch875> Haohmaru: there's nothing above /. Any drivers will get put beneat hit
+[12:35] <PlainDave> hey thanksl
+[12:35] <PlainDave> thanks*
+[12:35] <brunch875> drives beneath it*
+[12:36] <Haohmaru> damn
+[12:36] <Haohmaru> so i have to modify the projects to change the paths of those files then
+[12:36] <Haohmaru> :~(
+[12:37] <brunch875> Haohmaru: see if your project admits a more OS-agnostic notation
+[12:37] <PCatinean> OerHeks, it seems not, thank you :D
+[12:38] <brunch875> something like $PROJECT_ROOT/whatever
+[12:41] <Haohmaru> brunch875 i'll see
+[12:44] <ned> Howdy folk :)
+[12:46] <Haohmaru> MadPsy so, i should create a folder somewhere like /home/myuser/HERE/ and mount.cifs into that?
+[12:46] <MadPsy> Haohmaru, sure
+[12:47] <MadPsy> Haohmaru, you may wish to add some options such as '-o uid=1000,gid=1000,credentials=/home/myuser/.smbcredentials' - the uid/gid part are important if you want to write to it :)
+[12:48] <Haohmaru> i certainly do want to write to it
+[12:52] <brunch875> Haohmaru: you can even mount a folder into another folder
+[12:59] <Southern_Gentlem> bruce752,  well you mount a device and tell the OS that it uses This folder
+[13:00] <Haohmaru> hm
+[13:00] <Haohmaru> seems i need to edit /etc/fstab
+=== Ard1t is now known as Guest74808
+[13:08] <exp-innit> is anyone aware of how the official ubuntu netinstall images are built? i want to customise the process, but I can't find any documentation on how they're prepared
+[13:09] <lotuspsychje> !netinstall | exp-innit perhaps here?
+[13:09] <ubottu> exp-innit perhaps here?: Ubuntu can be installed in lots of ways. Please see https://help.ubuntu.com/community/Installation for documentation. Problems during install? See https://wiki.ubuntu.com/CommonProblemsInstall - Don't want to use a CD? See http://tinyurl.com/3exghs - See also !automate
+[13:10] <MadPsy> exp-innit, are you after preceeding info ?
+[13:12] <exp-innit> MadPsy: no we have working preseeds
+[13:12] <exp-innit> i need to customise the kernel
+[13:12] <exp-innit> lotuspsychje: i couldn't find anything anywhere on those pages, is there anything specific?
+[13:13] <MadPsy> exp-innit, I presume you mean a modified kernel to perform the install itself? If so, I'm not sure.
+[13:14] <OerHeks> exp-innit,  only the sourcecode of the full iso is available, http://cdimage.ubuntu.com/source/xenial/source/current/source/  cannof find netinstall version
+[13:14] <exp-innit> MadPsy: indeed, the default kernel is missing a number of modules and possibly firmwares, and there seems to be little to no documentation on why this is, or how it's built
+[13:14] <exp-innit> OerHeks: those are just the source packages afaik, what i'm looking for is the procedure used by debian release engineers to prepare the netinstall iso
+[13:14] <exp-innit> uh, by ubuntu release engineers* :)
+[13:14] <OerHeks> exp-innit, some firmwares are not missing, maybe the license does not allow distribution.
+[13:15] <lotuspsychje> exp-innit: talk to the #ubuntu-devel guys perhaps?
+[13:15] <exp-innit> i'll repeat the question in there too thanks lotuspsychje
+=== Guest66600 is now known as someone
+[13:18] <ioria> exp-innit, it misses modules and firmware 'cause is a netinstall , but you can edit the initrd.gz and put them in it
+[13:19] <exp-innit> ioria: yeah i can patch them in manually, but that means i'll have to script that for each new release and there's no guarantee of compatability
+[13:19] <exp-innit> it'd be a lot easier if i could adopt the official process but customise it
+[13:21] <ioria> exp-innit, you take the modules from the full-desktop  isos.... they are compatible and updatable
+[13:21] <OerHeks> exp-innit,  you would need to patch that anykernel update.
+[13:22] <OerHeks> so figure
+[13:22] <exp-innit> OerHeks: patching the build script should not require that, i'd hope not at least, and ioria yeah but that's harder to ensure it's reliable
+[13:22] <exp-innit> for context, i've been linked to https://code.launchpad.net/~ubuntu-cdimage from ubuntu-devel
+[13:23] <exp-innit> but it's not quite clear if this is the canonical source
+[13:23] <ioria> exp-innit, oh, good
+[13:23] <OerHeks>  exp-innit  err, yes it does.
+[13:23] <OerHeks> if you build a custom kernel module ..
+[13:23] <exp-innit> OerHeks: there's a significant difference between modifying a build config and patching a built package, i'm hoping the former is available
+[13:30] <Arca> io
+[13:31] <Arca> io
+[13:32] <alkisg> oi
+[13:32] <lotuspsychje> hey alkisg :p
+[13:32] <alkisg> Hey lotuspsychje, hi all :)
+[13:32] <HowAboutIt> building a system that doesn't require documentation to use it?
+[13:32] <HowAboutIt> that'd be nice.
+[13:34] <najmul> hello ubuntu
+[13:34] <lotuspsychje> najmul: welcome, how can we help you?
+[13:34] <najmul> lotusphychje: just looking around. thanks.
+[13:37] <alexey_> Tesing
+[13:37] <alexey_> Testing
+=== najmul is now known as cuttlefish
+[13:40] <aadi> Hi
+[13:40] <alexey_> aadi, hillou
+[13:41] <aadi> I want to change the orange color of ubuntu to blue, I searched the net too but couldn't get anything beneficial, can anyone help sort me out?
+[13:41] <unkek> what is irc.ubuntu.com? it looks like a mirror of irc.freenode.net, is that so?
+[13:42] <alexey_> aadi, you can install themes, google it. Use Unity Tweak Tool to switch themes.
+[13:42] <MadPsy> unkek, yes - it's a CNAME to chat.freenode.net.
+[13:42] <aadi> alexey_, I did, but can't change the folder color
+[13:42] <OerHeks> unkek,  no such site.
+[13:42] <lotuspsychje> !themes | aadi
+[13:42] <ubottu> aadi: Find your themes at: http://www.gnome-look.org - http://art.gnome.org - http://www.kde-look.org - http://kubuntu-art.org - http://freecode.com/tags/theme - http://www.guistyles.com - https://wiki.ubuntu.com/Artwork/ - Also see !changethemes and https://help.ubuntu.com/community/UbuntuEyeCandy
+[13:44] <unkek> MadPsy: thx
+[13:44] <diverdude> Hi there. I am trying to install ubuntu 14.04 on my machine but i am getting the following error after grub loader : Kernel panic - not syncing: No working init found. Try passing init= option to kernel.    What has gone wrong here?
+[13:47] <ioria> diverdude, how did you do the usb stick ?
+[13:47] <diverdude> ioria: i made one on a mac using unetbootin
+[13:48] <ioria> diverdude, mmm, if you ask me, do it again with rufus (on win) or dd (on linux)
+[13:48] <diverdude> ioria: first i downloaded an image from here: http://releases.ubuntu.com/14.04/
+[13:48] <diverdude> ioria: i only have a mac available :/
+[13:48] <ioria> !mac
+[13:48] <ubottu> For help on installing and using Ubuntu on a Mac, see: https://wiki.ubuntu.com/MactelSupportTeam/CommunityHelpPages
+[13:50] <diverdude> ioria: nono i do not want to install ubuntu on my mac
+[13:50] <diverdude> ioria: i am just creating my usbkey on a mac
+[13:51] <nodnod> u only have a mac available :)
+[13:52] <ioria> diverdude, idk about mac, try this http://apple.stackexchange.com/questions/179781/how-to-create-a-bootable-ubuntu-usb-stick-using-os-x-10-10-2
+[13:52] <aadi> alexey_, I installed arc-theme but that too doesn;t change the folder color to blue. It is still orange :(
+[13:53] <ioria> diverdude,  don't you have the 'dd' command ?
+[13:54] <diverdude> ioria: on my mac?
+[13:54] <MadPsy> diverdude, you should be able to 'dd' the ISO straight to USB (they made the ISO a bit-for-bit binary recently) Not 100% about 14.04 but 16.04 works that way for sure.
+[13:54] <ioria> diverdude,  yup
+[13:55] <diverdude> ioria: ah ok...yeah i do have dd on my mac...only thing is it needs to be 14.04 :(
+[13:55] <ioria> diverdude,  let's try, it'll takes few minutes
+[13:55] <diverdude> ioria: because i think the machine i have does not support 16.04
+[13:56] <ioria> diverdude,  dd if=/path/to/file.iso of=/path/of/mounted/usb
+[13:57] <diverdude> this is the hardware i am trying to install on http://paste.ubuntu.com/24234970/
+[13:57] <MadPsy> diverdude, it may well work with 14.04, I can't remember when they switched to bit-for-bit ISOs
+[13:58] <OerHeks> what makes you think it does not support 16.04
+[13:58] <ioria> diverdude,  nvidia quadro ? hug
+[13:59] <diverdude> ioria: hug?
+[13:59] <diverdude> ioria: Do i need to somehow format the usbkey first?
+[13:59] <ioria> diverdude,  nope
+[13:59] <HowAboutIt> what's a usb key?  A thumb drive?
+[14:00] <OerHeks> nvidia q 5000 is supported by the 370 driver and up
+[14:00] <HowAboutIt> if yes; you all just make simple shit complex .. stop doing that.
+[14:00] <OerHeks> HowAboutIt, verry helpfull
+[14:01] <linocisco> lotuspsychje, how can I find shutdown.log file?
+[14:01] <ioria> diverdude,  nvm, just shocked by the model : <unconvertable>
+[14:02] <nodnod> 16.04 should be possible
+[14:02] <HowAboutIt> there's a difference between a usb encrypted drive and a thumb drive.
+[14:03] <diverdude> ioria:  dd if=ubuntu-14.04.5-desktop-amd64.iso of=/Volumes/KINGSTON         gives error : dd: /Volumes/KINGSTON/: Is a directory
+[14:03] <HowAboutIt> making up random terms doesn't enable people to better understand.
+[14:03] <HowAboutIt> don't give me heat because I question obscure terms.
+[14:03] <ioria> diverdude,  no man, you use the /dev/sdX
+[14:03] <diverdude> ioria: yes its a good computer....i cannot use it though because i cannot make ubuntu running on it :(
+[14:03] <diverdude> ioria: ah sorry
+[14:04] <ioria> diverdude,  dd if=file.iso of=/dev/sdX
+[14:04] <ikevin> diverdude, umount /Volumes/KINGSTON before doing the dd
+[14:05] <linocisco> diverdude, if you dont know about mounting point and exact path. type mount in CLI and see which path.
+[14:05] <MadPsy> diverdude, also, I would add 'bs=4m' on the end or it may take some time (4M or 4m depending on BSD vs GNU version of dd, can never remember which)
+[14:06] <ioria> diverdude,   first you need to identify your usb stick (if your disk is /dev/sda   , your only usb attached would be /dev/sdb), but you need to check first
+[14:06] <diverdude> ok...i unmounted /Volumes/KINGSTON   Before it was on /dev/disk4s1   Is it safe to assume that its still on /dev/disk4s1  ?
+[14:07] <ioria> diverdude,  don't take chances, dd will erase the device
+[14:07] <diverdude> ioria: ok, so how can i know if /dev/disk4s1    is the right one?
+[14:08] <ioria> diverdude,  how do you check your devices on macos  ? ( i don't use it)
+[14:08] <alkisg> diverdude: you'll want to dd to the whole disk, not to a partition. It might be /dev/disk4 instead of /dev/disk4s1, I don't know macs
+[14:10] <ioria> diverdude,   and  you don't pick up partitions, but the whole device
+[14:10] <diverdude> hmmm ok i see
+[14:10] <diverdude> dang...this is not easy
+[14:10] <Random832> MadPsy, 4096k will work on any version of DD, but also do you really benefit from your block size being *that* large?
+[14:11] <MadPsy> Random832, probably not 4M, but at least >=1M
+[14:11] <leonardo_> dio
+[14:17] <Random832> the POSIXly correct way to spell "megabyte" for dd is "kx1k", but for the record it's "M" for GNU and 'm' on BSD (though some BSDs are case-insensitive).
+=== xrandr_ is now known as xrandr
+[14:18] <thanhkiet> hi
+[14:19] <thanhkiet> quit()
+[14:22] <forgiven-jeans> hello
+[14:22] <forgiven-jeans> after i install unity-tool have problem this is schemas missing
+=== masos is now known as Guest49524
+[14:25] <OerHeks> forgiven-jeans, what do you miss ? make a screenshot please?
+=== gnu is now known as Guest63965
+[14:27] <forgiven-jeans> where i up my screenshot?
+[14:28] <OerHeks> imgur.com is fine
+[14:29] <OerHeks> this is what i see http://imgur.com/a/fF9DT
+[14:30] <forgiven-jeans> http://imgur.com/oGPO77s
+[14:31] <OerHeks> notify-osd seems to be missing: sudo apt-get install notify-osd
+[14:33] <forgiven-jeans> OerHeks: thanks
+[14:33] <forgiven-jeans> it is run now
+[14:33] <OerHeks> :-)
+[14:34] <jerry__> hi
+[14:35] <jerry__> hello?\
+[14:35] <jerry__> anybody?
+[14:36] <OerHeks> :-)
+[14:40] <iandeb> pidgin
+[14:42] <dixson> Hello friends; I need you to help me with a problem. Connect 2 computers in network (windows 7, linuxmint 18.1 mate). From windows to linux no problem, but from linux to windows if, ask me for username and password.
+=== JanC_ is now known as JanC
+[14:44] <BlueProtoman> Wouldn't it be cool if a GitHub repo could be used as a PPA?
+[14:44] <BlueProtoman> (Because you can upload deb packages to the Releases section?)
+=== Ricardus_ is now known as Ricardus
+[14:45] <alkisg> You can clone a github repo to launchpad and publish to a ppa automatically
+[14:49] <dungeon_> Anyone have experience using the crash utility?
+[14:50] <Simonious> nilfs2 partition is empty, previously had data, still reporting 46% full on df -H     /sbin/nilfs_cleanerd is running, is there a way to get this to report correctly?
+[14:51] <brunch875> I installed ubuntu on a laptop and it says "The access point /org/freedesktop/NetworkManager/AccessPoint/9 was not in the scan list" when picking a wifi connection
+[14:51] <brunch875> but the same wifi connection works on the same laptop on the liveUSB
+[14:51] <brunch875> what could it be?
+[14:52] <BlueProtoman> alkisg: I can?  How?
+=== Zren_ is now known as Zren
+[14:55] <hajhatten> Is it possible to generate a preseed config based on the interactive server installer?
+[14:57] <forgiven-jeans> how to do if i want to use docky
+[14:58] <nacc> hajhatten: `debconf-get-selections` but not all are preseedable iiuc
+[14:58] <nacc> hajhatten: with --installer option
+=== jackNemrod_ is now known as jackNemrod
+=== twager is now known as G3TPI
+=== pp_cz is now known as |pp|
+=== |pp| is now known as pp_cz
+[15:01] <hajhatten> nacc: thx
+[15:01] <forgiven-jeans> how to do use docky
+[15:02] <PCatinean> Hello guys
+[15:02] <ntzor> hello, I would like to ask purely just to know if from an older version of ubuntu, no longer supported, one can still install critical security updates
+[15:03] <k1l_> ntzor: no support means there are no updates means there are no security updates.
+[15:03] <PCatinean> My installer is stuck at preparing to install ubuntu
+[15:03] <ntzor> why did they abandon the lenses ? so many interesting lenses were created
+[15:04] <PCatinean> Can I get some help?
+[15:04] <Southern_Gentlem> ntzor,  if one creates their ow n updates yes
+[15:04] <k1l_> ntzor: you still can compile own packages and put the security updates into it, but that is your own business then.
+[15:04] <Southern_Gentlem> PCatinean, no
+[15:04] <ntzor> ok got it
+[15:04] <PCatinean> :))
+[15:04] <forgiven-jeans> help me please
+[15:05] <k1l_> ntzor: they changed from lenses to scopes
+[15:05] <Southern_Gentlem> PCatinean,  sorry i didnt see you issue till after i posted
+[15:06] <Southern_Gentlem> forkup, and google says
+[15:07] <PCatinean_> I joined irc in the ubuntu install with xchat-gnome
+[15:07] <PCatinean_> Is there anything I can do, maybe paste stuff from syslog so I can find out why it freezes?
+[15:12] <naruto__> i am not able to access my window partion when today i opened the laptop. And today when i opened i also saw all my setting were back to default. I never use windows though it's dual booted.
+[15:12] <naruto__>  And whatever setting i am changing in mine Ubuntu now, it get reversed when i logged out or restart
+[15:12] <naruto__> I am using Ubuntu 16.04 lts
+[15:12] <naruto__> Today i also seeing a icon of FileSystemroot which never existed before
+[15:12] <naruto__> _> And it's not getting unmount too...Unable to unmount <unconvertable> Filesystem root <unconvertable> operation not permitted!
+[15:13] <naruto__> please help! i was building grilo plugin yesterday by jhbuild.
+[15:19] <Wirehunter> naruto__, What doesn't work? I don't think it has anything to do with jhbuild.
+[15:20] <Wirehunter> naruto__, Are you running in an uefi setup?
+[15:22] <alkisg> BlueProtoman: google for "launchpad import git", "launchpad recipes", and "launchpad ppa"
+[15:24] <PCatinean_> Hey guys
+[15:25] <PCatinean_> I've been trying to install ubuntu for some time now alongside windows
+[15:25] <PCatinean_> But it keeps getting stuck at preparing to install
+[15:25] <PCatinean_> and apparenlty gparted can't even read the partitions
+[15:25] <PCatinean_> Does anyone know what I can do?
+[15:27] <nanodrone> PCatinean_, my secure-boot didn't let gparted do anything to my ssd.
+[15:27] <nanodrone> I had to disable secure-boot and windows' all kinds of fancy services
+[15:28] <PCatinean> Nanodrone
+[15:28] <PCatinean> Where is secure boot? In bios?
+[15:28] <naruto__> Wirehunter: I can't see partions and seeing FileSystemroot icon in it's place which is already mounted and not getting unmount
+[15:28] <nanodrone> yeah.
+[15:28] <PCatinean> Leemme see
+[15:28] <PCatinean> I had ubuntu on this before and no issuew
+[15:29] <nanodrone> secure-boot is only a problem on a newish pcs (the convertibles and the tablets etc)
+[15:29] <nanodrone> it locks down devices to MS's windows.
+[15:29] <Wirehunter> naruto__, How can't you see partitions? Using what exactly? Have you tried unmounting using root?
+[15:30] <dixson> Hello friends; I need you to help me with a problem. Connect 2 computers in network (windows 7, linuxmint 18.1 mate). From windows to linux no problem, but from linux to windows if, ask me for username and password.
+[15:30] <alkisg> !mint
+[15:30] <ubottu> Linux Mint is not a supported derivative of Ubuntu. Please seek support in #linuxmint-help on irc.spotchat.org
+[15:30] <alkisg> dixson: see this ^
+[15:31] <nanodrone> linuxmint != ubuntu
+[15:31] <naruto__> Wirehunter: i tried sudo mount-l and this is result http://pastebin.com/tZA5bR3e
+[15:31] <PCatinean> I don't even have secure boot in bios
+[15:31] <PCatinean> What the hell
+[15:31] <alkisg> PCatinean: what's the output of `sudo parted -l` ?
+[15:32] <PCatinean> :( should I reinstall windows?
+[15:32] <emmabuntus> can anyone tell me how to find the latest version of ubuntu christian edition distro?
+[15:33] <Wirehunter> naruto__, what about sudo parted -l ?
+[15:34] <Wirehunter> naruto__, I've got to pack. My train is arriving already.
+[15:34] <naruto__> Wirehunter: Ok bro, thanks fr u'r help!
+[15:34] <PCatinean> Alkisg one sec
+[15:35] <nacc> emmabuntus: i don't believe that is an official flavor, so you should ask whoever creates it
+[15:36] <PCatinean> Alkisg
+[15:36] <PCatinean> How do i paste?
+[15:36] <emmabuntus> i don't even see it on ubuntu's website
+[15:36] <nacc> emmabuntus: because it's not 'official'. I've never heard of it
+[15:37] <alkisg> PCatinean: sudo parted -l | nc termbin.com 9999
+[15:37] <emmabuntus> http://ubuntuce.com/
+[15:37] <alkisg> PCatinean: although I'll go afk for a while, maybe someone else can see it and help
+[15:37] <PCatinean> Oh :(
+[15:37] <PCatinean> Ok i will just reinstall windows
+[15:38] <nacc> emmabuntus: seems like you answered your own question?
+[15:38] <nacc> emmabuntus: there's a download link
+[15:42] <david7> hello
+=== georgi_ is now known as gssatcc
+[15:47] <naruto__> can anybody help me how to
+[15:48] <naruto__> partions... i am unable to see
+[15:48] <naruto__>  http://pastebin.com/tZA5bR3e
+[15:50] <emmabuntus> i saw a hexchat for christian last night but lost the update version of distro
+[15:51] <emmabuntus> naruto you need to review youtube or google search about those ?s
+=== fritz is now known as Guest48766
+[15:54] <james1138> Two techy questions for the group about Ubuntu <32 bit version>. 1st - has anyone got Chromium and/or Firefox to view Netflix movies?? 2nd - has anyone who is using Ubuntu version 14.04.5 been able to get "Calendar-Indicator" to autostart at boot up?? Mine appears to crash... I meant do nothing. I can install the app and start it manually but not auto-start on each boot. Feel free on reply on-list or in private message.
+[15:56] <OneM_Industries> So, I'm using an external USB soundcard. Every time a firefox pulseaudio stream starts, the volume is cranked way up. I've tried several times to turn it down, but can't figure out how to turn it down and set the lower volume as a default for the new streams.
+[15:58] <DelphiWorld> hi ubuntu people
+[15:59] <DelphiWorld> i have ubuntu 16.04 xenial
+[15:59] <DelphiWorld> i have a package that require libapache2-mod-php5
+[15:59] <DelphiWorld> what to do?
+[15:59] <k1l_> DelphiWorld: then its not a 16.04 package :)
+[15:59] <DelphiWorld> HamRadio: 70
+[15:59] <PCatinean> Hello, I'm trying to install ubuntu alongside windows 10 and my installer freezes at preparing to isntall ubunt
+[15:59] <DelphiWorld> HamRadio: CQ CQ CQ 7X2SW calling
+[16:00] <PCatinean> Can someone please offer assistance so I can finish the install?
+[16:00] <david7> can help me?
+[16:00] <david7> from scapy.all import * # importa scapy ImportError: No module named 'scapy'
+[16:00] <david7> my script not working
+[16:01] <PCatinean> Anyone?
+[16:01] <k1l_> david7: install the python scapy package from the ubuntu repos
+[16:01] <nicomachus> !patience | PCatinean
+[16:01] <ubottu> PCatinean: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[16:02] <PCatinean> okay
+[16:02] <k1l_> !pm
+[16:02] <ubottu> Please ask your questions in the channel so that other people can help you, benefit from your questions and answers, and ensure that you're not getting bad advice.
+[16:02] <k1l_> david7: you can search for ubuntu packages with "apt search keyword" or on packages.ubuntu.com
+[16:07] <CrazySane> Good afternoon. I'm looking to install [any version of] Ubuntu on to an HP Elitepad 1000. The internets have struggled with this and some have solved the problem (I think?) It has something to do with non-32bit efi? But I'm missing something. Any ideas?
+[16:10] <lotuspsychje> CrazySane: have you actually tried installing ubuntu on your machine?
+[16:11] <CrazySane> lotuspsychje: I run Ubuntu on most of my machines. Just this one - the Elitepad fails to find the bootable flash media. From what I can find online, the Elitepads only recognize 32bit efi? But I'm a little confused as to how I verify/make sure that's available.
+[16:12] <lotuspsychje> CrazySane: did you disable secureboot and fastboot?
+[16:12] <ducasse> CrazySane: afaik that is a quite manual process, unless things have changed recently
+[16:12] <CrazySane> lotuspsychje: yes.
+[16:13] <CrazySane> lotuspsychje: well, there is no option in BIOS for Fastboot. But Secureboot is disabled.
+[16:13] <lotuspsychje> CrazySane: ask EriC^^ on uefi issues he's our uefi lifesaver here :p
+[16:16] <alkisg> CrazySane: try this: http://askubuntu.com/questions/775498/ubuntu-on-32-bit-uefi-only-based-tablet-pc
+[16:17] <muhammet> sa
+[16:17] <CrazySane> alkisg: thanks. looking now.
+[16:17] <muhammet> burada Turk veya Turkcebilen var m <unconvertable>
+[16:17] <nacc> !tr | muhammet
+[16:17] <ubottu> muhammet: Turk ubuntu kullanclar, Turkce yardm ya da geyik icin /join #ubuntu-tr hizmetinizde.
+[16:18] <pavlos> lotuspsychje, which model of the elitepad?
+[16:18] <fudge111> hi, how is it going ?
+[16:18] <lotuspsychje> pavlos: CrazySane started the question
+[16:18] <pavlos> sorry
+[16:19] <OerHeks> some vendors give a 64 bit uefi update
+[16:19] <muhammet> Turkce bilen var m <unconvertable>
+[16:19] <CrazySane> alkisg: http://imgur.com/a/RdrVk   I don't have a EFI folder?
+[16:20] <k1l_> muhammet: see the bots message
+[16:20] <uL4m0g> anyone has ever use an opensource bios firmware/software? my acer aspire laptop bios sux and I'm thinking of using a different one that came with it like Libreboot, coreboot or OpenBIOS; anybody have experiences with using a different bios than the ones that came with your pc/laptop?
+[16:20] <nacc> uL4m0g: doesn't seem ontopic for the ubuntu support channel
+[16:20] <pavlos> CrazySane, should be under /boot
+[16:20] <CrazySane> pavlos: HP Elitepad 1000 G2
+[16:21] <pavlos> CrazySane, thx
+[16:21] <CrazySane> pavlos: only grub under boot
+[16:22] <muhammet> linux mint is the error
+[16:22] <k1l_> muhammet: then ask the linux mint support
+[16:22] <k1l_> !mint | muhammet
+[16:22] <ubottu> muhammet: Linux Mint is not a supported derivative of Ubuntu. Please seek support in #linuxmint-help on irc.spotchat.org
+[16:22] <OerHeks> uL4m0g, there is #seabios and #libreboot-support here on #freenode
+[16:22] <muhammet> can youhelp me
+[16:22] <uL4m0g> nacc, well im trying to install ubuntu 16.04/16.10 under uefi and its telling me i have to use a passphrase to disable secureboot on reboot but when i boot up the laptop says No Bootable Drive. I have to install ubuntu in Legacy mode because my laptop wont recognize in UEFI mode
+[16:23] <k1l_> muhammet: no, not in here
+[16:23] <david7> k1l pm please
+[16:23] <k1l_> !pm | david7
+[16:23] <Dreaman> k1l_  ubuntu is not debian
+[16:23] <ubottu> david7: Please ask your questions in the channel so that other people can help you, benefit from your questions and answers, and ensure that you're not getting bad advice.
+[16:23] <Dreaman> or
+[16:23] <k1l_> Dreaman: stop that unrelated talk
+[16:23] <Dreaman> !debian
+[16:23] <ubottu> Ubuntu and Debian are closely related. Ubuntu builds on the foundations of Debian architecture and infrastructure, with a different community and release process. See https://www.ubuntu.com/about/about-ubuntu/ubuntu-and-debian - !Repositories meant for Debian should NOT be used on Ubuntu!
+[16:24] <nacc> Dreaman: you have been told to actually be helpful (by me) multiple times. I am assuming now you are trolling the channel.
+[16:24] <Dreaman> ok
+[16:24] <david7> k1l explain me pls what is exact command
+[16:24] <muhammet> k1l <unconvertable> could not find the solution
+[16:24] <nacc> uL4m0g: sounds like a buggy bios, but i don't know
+[16:24] <k1l_> david7: install the python scapy package. i told you how you find it
+[16:25] <david7> i installed
+[16:25] <david7> but get same answe
+[16:25] <david7>  line 16, in <module>     from scapy.all import * # importa scapy ImportError: No module named 'scapy'
+[16:25] <uL4m0g> nacc, yeah i been reading up a little bit on uefi and it suppose to be "better" but sometimes it locks the hardware specifically to certain O.S. like windows etc
+[16:26] <CrazySane> uL4m0g: tell me about it. XD
+[16:26] <uL4m0g> DerHeks, ill go check out those channels, thanks
+[16:26] <k1l_> david7: then you didnt install the scapy packge
+[16:26] <david7> i instal it
+[16:27] <david7>  Welcome to Scapy (2.2.0)
+=== xd is now known as Guest31236
+[16:27] <CrazySane> pavlos: Any ideas why I don't seem to have /EFI/BOOT/bootia32.efi on the boot flash? I created the disk using unetbootin and Ubuntu ISO
+[16:28] <Guest31236> hello! Where can I find resize.f2fs in Ubuntu? f2fs-tools doesn't contain it.
+[16:28] <poorUser> hi people! i've freshly installed 16.10, but now tapping 2 times alt doesn't complete the command, am i missing something?
+[16:29] <Guest31236> dpkg -L f2fs-tools|grep resize|wc -l      output: 0
+[16:29] <david7> k1l i can give you conect via ssh
+[16:29] <david7> and see your self:)
+[16:29] <EriC^^> CrazySane: it isn't there by default, you need to add it to the usb manually
+[16:29] <CrazySane> EriC^^: Ah. Folders and all?
+[16:30] <poorUser> oh it's just just disabled by default into /etc/bash.bashrc
+[16:31] <dax> Guest31236: assuming I'm interpreting right, the version of f2fs-tools in released versions of Ubuntu is from before resize.f2fs was added.
+[16:31] <Dreaman> CrazySane  dual boot and 2 hdd or
+[16:31] <Guest31236> dax: correct. It is present in Suse but don't want to install another OS just to have it
+[16:32] <Guest31236> (latest LTS)
+[16:32] <k1l_> david7: are you using python3? then 16.04 doesnt have any python3 pacakge for scapy
+[16:32] <ntzor> Hi, what's up with unity lenses in latest version of ubuntu ?
+[16:32] <CrazySane> Dreaman: huh?
+[16:33] <lotuspsychje> ntzor: 17.04 or 16.10?
+[16:33] <ntzor> both
+[16:33] <Dreaman> huh i use 2 hdd dual boot win 10 and ubuntu 17.04 alpha
+[16:33] <Dreaman> usb boot instal
+[16:33] <Dreaman> huh
+[16:33] <CrazySane> Congratulations?
+[16:34] <Dreaman> ok
+[16:34] <ntzor> lotsupsychje: both
+[16:34] <ntzor> lotuspsychje: both *
+[16:34] <lotuspsychje> ntzor: ok you installed both, and you have a problem with?
+[16:34] <Guest31236> dax: aaagh... got <1.7 without resize.. solved thank you!
+[16:34] <ntzor> no I just have the impression that older lenses don't work
+[16:34] <EriC^^> CrazySane: no you should already have an efi/boot dir with bootx64.efi
+[16:34] <Zeljko> How can i check what IP addresses was connected to my shell account today ?
+[16:34] <DelphiWorld> hi people
+[16:35] <k1l_> Zeljko: "who"
+[16:35] <DelphiWorld> i have a package that require libapache2-mod-php5
+[16:35] <Zeljko> k1l_ what ?
+[16:35] <DelphiWorld> but i'm in xenial and its not found
+[16:35] <ntzor> lotsupsychje: am I right ?
+[16:35] <alkisg> CrazySane: the ubuntu live cd has some hacks to show an efi folder when it boots in uefi mode. That's why you don't see it now. Create the stick with rufus or something in order to get an efi folder.
+[16:35] <ntzor> lotuspsychje: am I right ? *
+[16:35] <k1l_> Zeljko: sorry, "last" is the command
+[16:35] <DelphiWorld> how can i map or create a virtual package that will map libapache2-mod-php5 to libapache2-mod-php7
+[16:36] <Zeljko> k1l_ thanks can u pvt you
+[16:36] <PCatinean> I'm trying to install ubuntu in dual boot with windows 10 on a laptop that worked before in this configuration
+[16:36] <k1l_> DelphiWorld: so you have a non xenial package there
+[16:36] <PCatinean> But it hangs at preparing to install ubuntu
+[16:36] <DelphiWorld> k1l_: yes, a external package that rely on php5
+[16:36] <CrazySane> alkisg: I'm running Ubuntu on my desktop, not Windows.
+[16:36] <PCatinean> I also noticed goarted does not load up and the syslog shiws some errors with partitions reading
+[16:37] <david7> k1l ok then what exactly version of ubuntu i mus use?
+[16:37] <PCatinean> Bare in mind i deleted all the partition on the ssd
+[16:37] <david7> must
+[16:37] <PCatinean> And tried installing just ubuntu and it did not work
+[16:37] <alkisg> CrazySane: i believe rufus is available for ubuntu too, isn't it? if not, there's also unetbootin etc
+[16:37] <PCatinean> Any idea what could be wrong?
+[16:37] <CrazySane> EriC^^: I formatted my flash again, make the boot disk from a mini.iso using unetbootin, and I see no efi/boot folder.
+[16:37] <Zeljko> k1l_: how can i scan for vulnerabilities on my shell acc
+[16:37] <david7> because i have vps ovh and can owerwrite any time
+[16:37] <Zeljko> exploits, and etc
+[16:37] <DelphiWorld> me i have xenial
+[16:37] <PCatinean> Alkisg i used rufus too, usually it's fine but i'm afraid it could be the culprit here
+[16:37] <DelphiWorld> can't downgrade to 14.04
+[16:37] <k1l_> david7: since ubuntu 16.10 ubuntu ships python and python3 packages for scapy
+[16:38] <ntzor> lotuspsychje: hello
+[16:38] <DelphiWorld> if someone could help please
+[16:38] <PCatinean> Kinda lost here
+[16:38] <lotuspsychje> DelphiWorld: you cant downgrade, clean install instead
+[16:39] <DelphiWorld> lotuspsychje: bro, this is a openvz vps that have data. my idea is to create a virtual package
+[16:39] <ntzor> lotuspsychje: hello ?
+[16:40] <DelphiWorld> is it easy to create a virtual package?
+[16:40] <lotuspsychje> !patience | ntzor
+[16:40] <ubottu> ntzor: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[16:41] <lotuspsychje> ntzor: best way to get your issue solved, is to re-ask once in a while, all in one line with your detailed problem, steps taken,etc
+[16:41] <ntzor> I do not have an issue I Am asking if the old lenses are compatible with latest versions
+[16:41] <david7> k1l 16.10version i not find just 16.04 and 14.04 ubuntu server
+[16:41] <ntzor> of ubuntu
+[16:42] <PCatinean> alkisg can you help out? :(
+[16:42] <david7> maybe i can use debian
+[16:42] <david7> ?
+[16:42] <lotuspsychje> !uefi | PCatinean
+[16:42] <ubottu> PCatinean: UEFI is a specification that defines a software interface between an operating system and platform firmware. It is meant as a replacement for the BIOS. For information on how to set up and install Ubuntu and its derivatives on UEFI machines please read https://help.ubuntu.com/community/UEFI
+[16:42] <PCatinean> What about it?
+[16:43] <alkisg> PCatinean: sorry I wasn't watching the channel...
+[16:43] <lotuspsychje> PCatinean: shows you howto setup for dualboot and uefi setup with w10
+[16:43] <OerHeks> DelphiWorld, more a question for #openvz perhaps? they provide the vm. https://openvz.org/Download/template/precreated
+[16:43] <k1l_> david7: as i said, look if you are using python3 with your "script". if so, you need a python3 scapy module. ubuntu doesnt ship that with 16.04
+[16:43] <blackrabbit> hello
+[16:43] <PCatinean> lotuspsychje i already did that before on the same laptop and it worked fine
+[16:44] <lotuspsychje> PCatinean: and the problem now is?
+[16:44] <PCatinean> Empty ssd, deleted all partitions, used 40 oercent to install windows, left the rest unpartitioned
+[16:44] <PCatinean> Started usb bootable stick for ubuntu in uefi mode too
+[16:44] <PCatinean> And statted install...it habgs
+[16:44] <lotuspsychje> PCatinean: hangs at wich step?
+[16:44] <PCatinean> I also tried just ubuntu no windows
+[16:44] <PCatinean> lotuspsychje on preparing install
+[16:45] <PCatinean> Looking at the syslog it showed something about oartitions
+[16:45] <PCatinean> Partitions
+[16:45] <lotuspsychje> PCatinean: did you try F1 to see at wich point exactly text boot?
+[16:45] <PCatinean> 1 sec
+[16:45] <PCatinean> F1?
+[16:45] <Dreaman> laptop
+[16:46] <Dreaman> acer my f2
+[16:46] <PCatinean> Could it be because of the usb stick or how ubuntu was added to it?
+[16:46] <lotuspsychje> Dreaman: do you have an ubuntu question?
+[16:46] <david7> k1l i understand you then what version of ubuntu or debian i must use couse run this script?
+[16:46] <Dreaman> lotuspsychje  https://paste.ubuntu.com/24235759/  no
+[16:46] <Dreaman> you
+[16:46] <lotuspsychje> PCatinean: we have to less details to solve your issue mate
+[16:47] <PCatinean> One sec
+[16:47] <r33d> hello
+[16:47] <k1l_> david7: ubuntu 16.10 or newer. or you get that python3 pacakge for the other ubuntu releases. like using pip or such
+[16:47] <CrazySane> Am I using the wrong image to create the boot flash? Since I don't have an /EFI/BOOT folder?
+[16:47] <camouflage> I have a question about Ubunto 16.04
+[16:48] <compdoc> cool
+[16:49] <lotuspsychje> camouflage: and your question is?
+[16:50] <camouflage> thx :  I not able to use "wired" connection  just wireless
+[16:50] <CrazySane> !ask | camouflage
+[16:50] <ubottu> camouflage: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[16:50] <lotuspsychje> camouflage: did you update to 16.04.2?
+[16:50] <camouflage> yes
+[16:50] <lotuspsychje> camouflage: tried a reboot or network-manager reboot?
+[16:51] <camouflage> serveral time, the device was supported under windows, so I assume its functional
+[16:51] <lotuspsychje> camouflage: sudo lshw -C network to see if your eth card driver= is recognized?
+[16:52] <camouflage> ok  one sec
+[16:52] <PCatinean-Ubuntu> lotuspsychje, thisis what always shows up: https://hastebin.com/viyuzumehu.sql
+[16:54] <david7> k1l maybe you can conect quick via ssh to me server?
+[16:54] <SirUser> !ask
+[16:54] <ubottu> Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[16:54] <Ulurux> Hello, I switched to Ubuntu and would like to replace Unity with Gnome 3 please. I'm not sure whether to use the gnome-shell command or gnome desktop
+[16:54] <SirUser> !patience
+[16:54] <ubottu> Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[16:54] <PCatinean> Sorry i exited by mistake
+[16:55] <lotuspsychje> PCatinean: did you manual partition or auto partition with ubuntu setup?
+[16:55] <compdoc> Ulurux, pretty sure if you install it, you get the desktop and everything else
+[16:55] <Ulurux> compdoc: So using sudo apt install gnome gnome-shell will also give me the desktop?
+[16:55] <k1l_> Ulurux: install the gnome-shell package. then logout and choose gnome shell on the login screen
+[16:55] <blackrabbit> can you help me with step 6 on ubuntu server? I don't know what I should do http://doc.otrs.com/doc/manual/admin/5.0/en/html/manual-installation-of-otrs.html
+[16:56] <david7> kill i get wich pi i think
+[16:56] <CrazySane> Shux, I guess I lost Eric^^
+[16:56] <lotuspsychje> blackrabbit: the #ubuntu-server channel might know that
+[16:56] <minimec> Ulurux: I guess this is the right one.
+[16:56] <bitfawkes> hello
+[16:56] <minimec> Ulurux: http://packages.ubuntu.com/xenial/ubuntu-gnome-desktop
+[16:56] <PCatinean> lotuspsychje does that bring anything new to the table?
+[16:56] <bitfawkes> can I ask for a question
+[16:56] <bitfawkes> ?
+[16:56] <CrazySane> !ask | bitfawkes
+[16:56] <ubottu> bitfawkes: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[16:56] <lotuspsychje> PCatinean: scroll to my last question
+[16:57] <k1l_> david7: we dont do that remote connection in here.
+[16:57] <compdoc> Ulurux, not sure you need to install gnome-shell, and be sure 'gnome' will get you the version you want. should be lots of tutorials online
+[16:57] <bitfawkes> ok
+[16:57] <camouflage> what syntax do I need to the network name?
+[16:57] <Ulurux> mimimec: thank you :)
+[16:57] <lotuspsychje> camouflage: did last command show you driver active?
+[16:57] <bitfawkes> I need to redirect port 8080 in https://mywebsite/folder
+[16:57] <Ulurux> compdoc: Yeah the tutorials give different commands. One is gnome-shell and another is gnome-desktop
+[16:58] <camouflage> no but it complaind about syntax
+[16:58] <lotuspsychje> camouflage: sudo lshw -C network
+[16:58] <camouflage> ok try again
+[16:59] <david7> k1l but via ssh you can try run this script self:)
+[17:00] <Ulurux> sudo apt install ubuntu-gnome-desktop --- sudo apt install gnome gnome-shell -- which command is right please. Currently on Ubuntu with Unity.
+[17:01] <k1l_> david7: i dont want to run any scripts.
+[17:01] <minimec> Ulurux: the first one is a metapackage. It will install the others automatically.
+[17:01] <lotuspsychje> camouflage: it should show you both chipsets of your wifi & ethernet card + drivers=
+[17:01] <Ulurux> minimec: Ah right, I'll use that then, thanks very much :-)
+[17:02] <camouflage> nope its not being recgnized, just the wireless device = wlan0  @ 192.168.0.1
+[17:02] <david7> then ok i try run this script 2 weeks and nothink same fucking error:D
+[17:02] <lotuspsychje> camouflage: wich chipset please? does it say 'unclaimed'?
+[17:02] <k1l_> david7: then look at what you need as dependecies and make sure you can fullfill those
+[17:03] <minimec> Ulurux: You might be ask to recinfigure the login-manager. Choose 'gdm' instead of 'lightdm'. You get better results with gnome3
+[17:04] <camouflage> sorry its not showing any chipset for the ethernet card... like it doesn't exist
+[17:04] <david7> without ubuntu 16.10 i can use other os?
+[17:04] <Ulurux> minimec: Alright, thank you. Erm I tried the sudo apt install ubuntu-gnome-dekstop and it says -The following packages have unmet dependencies.  ubuntu-gnome-desktop : Depends: xorg but it is not going to be installed E: Unable to correct problems, you have held broken packages.-
+[17:04] <david7> or only ubuntu 16.10
+[17:04] <k1l_> david7: this is #ubuntu we dont talk about other OS
+[17:04] <lotuspsychje> camouflage: is your card disabled in bios or so?
+[17:04] <david7> ok understand
+[17:05] <lotuspsychje> camouflage: check lspci -nn if you find ethernet controller?
+[17:05] <camouflage> it shouldn't be, but I would have to reboot to find out.. the various network software i have d/l  really don't see it ether
+[17:05] <k1l_> david7: i answered your question now several times. if you want to run your haxx0r script and not even know how to look for dependencies then stop trying to run that scripts
+[17:06] <lotuspsychje> camouflage: did your card work before on ubuntu?
+[17:06] <camouflage> yes most definately
+[17:07] <minimec> Ulurux: That xorg error is strange, because it should already be installed...
+[17:07] <CrazySane> So where I stand now is that no matter the iso I use, I don't seem to be generating an EFI/boot folder on the flash drive at all? What am I doing wrong there?
+[17:07] <lotuspsychje> camouflage: what did you do, or when did it broke?
+[17:08] <Ulurux> minimec: Got it working now. So you said I should choose gdm3, after restart if my screen goes black how would I fix that please
+[17:08] <camouflage> right after loading ubuntu 14.02 for the first time
+[17:08] <lotuspsychje> CrazySane: best way to get your issue solved, is to re-ask your issue all from the start with all details, ubuntu version, steps taken etc
+[17:08] <techguyman> Hello I got a question. Whats the best ubuntu distro for an old pentium 3 machine?
+[17:09] <lotuspsychje> techguyman: lubuntu or xubuntu will do fine i think, depends wich brand/specs?
+[17:09] <k1l_> techguyman: lubuntu, if that still supports pentium3
+[17:09] <camouflage> I admit I was have abit of time selecting a version of Ubuntu since it was on this Toshiba LT, and the versions seemed to be for DT.
+[17:09] <minimec> Ulurux: you can do that in recovery mode with 'sudo dpkg-reconfigure lightdm' or 'sudo dpkg-reconfigure gdm3' With both commands you should be able again to switch the login-manager.
+[17:09] <lotuspsychje> techguyman: ram, cpu, model would be nice to know
+[17:09] <k1l_> techguyman: might want to ask in #lubuntu if that is working on your machine still
+[17:09] <techguyman> my specs are 900 mhz, 512 mb ram, 30 gb hard disk
+[17:10] <lotuspsychje> techguyman: wich brand/model of laptop?
+[17:10] <k1l_> lotuspsychje: pentium 3 will not be any good with xubuntu since those old machines dont have any ram in todays usage size
+[17:10] <Ulurux> minimec: Ah right. Thank you very much. gnome is installing now :-)
+[17:10] <techguyman> it is a desktop
+[17:10] <CrazySane> Working with an HP Elitepad 1000 G2. Trying to get Ubuntu installed, but the BIOS doesn't recognize any boot media I present. From what I've found online, it seems to be cause by a missing bootia32.efi? I don't have an EFI/boot folder on the flash media that I've created. Using unetbootin and various Ubuntu ISOs, including mini.iso
+[17:10] <camouflage> also under "syslog" it didn't appear to be checking for any eth0 card
+[17:11] <techguyman> it is a custom built pc
+[17:11] <minimec> techguyman: Lubuntu.
+[17:11] <techguyman> which version of lubuntu?
+[17:11] <Ulurux> Going to restart and install some apps, will be back on Uluru :-) thanks for the help
+[17:11] <lotuspsychje> k1l_: i had some cases where xubuntu work better then lubuntu on old acer aspire p3, but indeed, wasnt very usefull for heavy work
+[17:12] <minimec> techguyman: http://lubuntu.me/xenial-released/
+[17:12] <k1l_> CrazySane: that is a crappy windows 32bit uefi tablet, right? then you need to do manual work to get the 32bit uefi running. i think someone linked the manual work already for you
+[17:13] <CrazySane> k1l_: the link provided tells me to add bootia32.efi to the EFI/boot folder, but one does not exist. creating the referenced path and placing the file yeilds no results.
+[17:16] <lotuspsychje> techguyman: ive tested lubuntu 16.04 recently and was pretty great
+[17:17] <techguyman> lotuspsychje: what was the specs of the hardware?
+[17:17] <lotuspsychje> camouflage: if it worked on older ubuntu version, should be working now also
+[17:17] <camouflage> no, it didn't work on either vers.
+=== planck is now known as Guest62681
+[17:17] <lotuspsychje> techguyman: cant recall, but also old machine, perhaps test out a liveusb first?
+[17:18] <techguyman> ok thanks
+[17:18] <techguyman> I may need to use plopbootlinux to do it
+[17:18] <lotuspsychje> camouflage: you sure lspci doesnt show the ethernet card right?
+[17:18] <lotuspsychje> techguyman: yeah i also use plop boot manager on old machines that dont bootup usb
+[17:19] <camouflage> correct... didn't show it... is there a OS network mgr I might try?
+[17:19] <techguyman> I guess I will go now thanks for the info :)
+[17:19] <Ulurux> Hello, I installed gnome shell and after reboot, it hangs on a purple screen.
+[17:19] <lotuspsychje> camouflage: did your card work on any Os before?
+[17:20] <camouflage> yes  windows 7
+[17:20] <lotuspsychje> camouflage: your machine is toshiba?
+[17:20] <camouflage> correrct
+[17:20] <k1l_> CrazySane: you got a ubuntu usb?
+[17:21] <lotuspsychje> camouflage: perhaps try the most recent bios update, also doublecheck your bios settings for network
+[17:21] <lotuspsychje> camouflage: if lshw and lspci show nothing, somethings wrong
+[17:21] <CrazySane> k1l_: Yes. I have a flash disk with Ubuntu Mini ready. Created with netbootin.
+[17:21] <k1l_> CrazySane: ubuntu mini? why ubuntu mini?
+[17:21] <camouflage> Ok thx for the help....
+[17:22] <CrazySane> k1l_: partly because I've made this boot disk so many times. But mostly because the disk on this tablet is rather small so I'm starting small. I have other ISOs ready if you want to recommend I use a different one. I've tried a few.
+[17:22] <lotuspsychje> camouflage: can you recall the chipset of that network card on w7?
+[17:22] <k1l_> CrazySane: 1st: use the full desktop image. 2nd dont use unetbootin since that makes issues. use the ubuntu usb creator on ubuntu or rufus on windows. then mount the usb and put the bootia32.efi into the /EFI/BOOT folder
+[17:23] <CrazySane> k1l_: standby. wilco
+[17:23] <camouflage> no I doubt I ever wrote it down, although I usually write specs and such
+[17:23] <lotuspsychje> camouflage: perhaps find the right chipset on the website url of your machine?
+[17:23] <lotuspsychje> camouflage: on ubuntu can be real relevant help to know its chipset
+[17:24] <camouflage> I looked for that originaly, but it didn't appear to be directly supported
+[17:24] <MK> Is there a flavor of Ubuntu specifically tailored for use as a media center, connected to a television?
+[17:24] <camouflage> BRB
+[17:25] <k1l_> MK: there was some kodibuntu but that was not official ubuntu flavor.
+[17:26] <lotuspsychje> !mythbuntu | MK
+[17:26] <ubottu> MK: Mythbuntu is an Ubuntu derivative centered upon setting up a standalone MythTV system. See: http://www.mythbuntu.org for more information and #ubuntu-mythtv
+[17:26] <acheron-a> https://ubuntustudio.org/
+[17:26] <dina> hi
+[17:27] <init7> hi
+[17:27] <dina> is anybody there
+[17:27] <lotuspsychje> !ask | dina
+[17:27] <ubottu> dina: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[17:27] <dina> how are you
+[17:28] <dina> i want some help in qtcreator
+[17:28] <PCatinean> Still nothing is working, i'm.done
+[17:28] <ntzor> is singlet working with ubuntu 16 ?
+[17:29] <dina> i created one application form now i want to add one which is "please fillout this field" option in that form........how to add that
+[17:30] <dina>  i created one application form now i want to add one which is "please fillout this field" option in that form........how to add that in qtdesigner........please give me answer
+[17:30] <k1l_> dina: maybe a qt related channel can help you on that?
+[17:30] <dina> which channnel
+[17:31] <dina> name please
+[17:31] <lotuspsychje> PCatinean: did you manually partition or use the partition of ubuntu setup?
+[17:31] <k1l_> !alis | dina i dont know the name please use the searchbot
+[17:31] <ubottu> dina i dont know the name please use the searchbot: Alis is an IRC service to help you find channels. For help on using it, see "/msg Alis help list" or ask in #freenode. Example usage: "/msg Alis list http"
+[17:31] <dina> okk fine
+[17:31] <PCatinean> lotuspsychje i do not get to that part
+[17:31] <PCatinean> It's stuck in the preparing install, before it asks what yiu want to do
+[17:32] <k1l_> PCatinean: what is on the disk?
+[17:32] <PCatinean> One sec
+[17:32] <lotuspsychje> PCatinean: you never see that window you want to install or try ubuntu?
+[17:33] <PCatinean-Ubuntu> THanks for helping first of all
+[17:33] <PCatinean-Ubuntu> I try ubuntu or install ubuntu
+[17:33] <PCatinean-Ubuntu> I click next, install third-party apps and such, next and it gets stuck in preparing install
+[17:33] <PCatinean-Ubuntu> I can show you the data in var sys log if it helps
+[17:34] <PCatinean-Ubuntu> Also gparted does not seem to open and hangs as well
+[17:34] <lotuspsychje> PCatinean-Ubuntu: how long wait?
+[17:34] <PCatinean-Ubuntu> lotuspsychje, I tried first time 15-20 minutes
+[17:34] <camouflage> "lot" apparently, the RJ45 isn't functional, odd though :P
+[17:34] <PCatinean-Ubuntu> and in syslog it freezes
+[17:34] <PCatinean-Ubuntu> I keep it open with tail -f /var/log/syslog
+[17:35] <k1l_> PCatinean-Ubuntu: pastebin a "sudo parted -l" please
+[17:35] <lotuspsychje> camouflage: how did you test?
+[17:35] <PCatinean-Ubuntu> yes sir one sec
+[17:35] <PCatinean-Ubuntu> k1l_, https://hastebin.com/sebususibu.sql
+[17:35] <PCatinean-Ubuntu> what should I do there?
+[17:36] <PCatinean-Ubuntu> ignore?
+[17:36] <camouflage> I remember it blinking on eitehr side, in the past, but now it only lights solid on one side, not traffic shown on the other
+[17:37] <k1l_> PCatinean-Ubuntu: so what did you choose to partition?
+[17:37] <k1l_> PCatinean-Ubuntu: and did you try to not hit "install 3rd party" and  continue?
+[17:37] <CrazySane> k1l_: Using a full desktop installation I have the EFI/BOOT folders now, but the stick is a ro filesystem now?
+[17:37] <PCatinean-Ubuntu> k1l_, nothing: I click install ubuntu English and then continue
+[17:38] <MK> thanks, I'll try Mythbuntu. Looks like they discontinued the distro, but this media center won't be connected to the internet, so it's fine
+[17:38] <minimec> Ulurux: Did not see your message. Still a broken boot process?
+[17:38] <k1l_> PCatinean-Ubuntu: there should be the question what you want to do like using full disk or install besides windows
+[17:38] <PCatinean-Ubuntu> k1l_, yes I did it always freezes here: https://hastebin.com/sotizaciqo.sql
+[17:38] <lotuspsychje> MK: yes project will end, but they released a 16.04 still so, offline would work well i think
+[17:39] <k1l_> PCatinean-Ubuntu: so its resizing the ntfs. that needs a lot of time
+[17:39] <CrazySane> k1l_: hold that thought tho - seems like we're making headway.
+[17:39] <PCatinean-Ubuntu> k1l_, I have a 750gb regular hdd and a 120gb ssd. In the windows installer I deleted all the partitions on the SSD installed windows on 50 gb and left the rest unalloated space
+[17:40] <PCatinean-Ubuntu> and sudo parted -l showed the ssd as well? Why doesn't gparted start?
+[17:40] <k1l_> PCatinean-Ubuntu: i asked you 3 times now, what you selected on the ubuntu istaller waht and where you want to install.
+[17:40] <PCatinean-Ubuntu> https://hastebin.com/fonavacesa.sql
+[17:40] <PCatinean-Ubuntu> On the ubuntu installer I selected enlighs, and clicked continue, that's it
+[17:40] <PCatinean-Ubuntu> it hangs there
+[17:40] <PCatinean-Ubuntu> English*
+[17:40] <lotuspsychje> PCatinean-Ubuntu: he means on wich partition exactly
+[17:41] <PCatinean-Ubuntu> lotuspsychje, I don't get the question, I never had an option to pick a partition or anything like that
+[17:41] <k1l_> PCatinean-Ubuntu: so you tell me, the ubuntu installer is resizing the ntfs because its bored?
+[17:41] <PCatinean-Ubuntu> It's literally two clicks after the usb boot started
+[17:42] <PCatinean-Ubuntu> I always installed like this and it worked, erase the complete SSD, make a 50gb partition in windows installer for windows. Install there and leave the rest as unpartitioned space
+[17:42] <PCatinean-Ubuntu> Then boot in the ubuntu usb stick, and proceed with the install normally where I get to the option of "Install ubuntu alongside windows, remove windows and install ubuntu, something else"
+[17:42] <PCatinean-Ubuntu> I never get there, where am I in the wrong now?
+[17:43] <k1l_> what ubuntu are you booting there?
+[17:43] <lotuspsychje> PCatinean-Ubuntu: wich ubuntu iso are you
+[17:43] <PCatinean-Ubuntu> latest, 16.04.02
+[17:43] <PCatinean-Ubuntu> downloaded from the official website, 3 times now
+[17:43] <PCatinean-Ubuntu> One made with rufus in windows, one with startup disk from live session, both fail in the same step
+[17:43] <lotuspsychje> PCatinean-Ubuntu: you sure you setup uefi correctly like last time?
+[17:44] <lotuspsychje> PCatinean-Ubuntu: because wrong uefi setup can block this step in ubuntu
+[17:44] <PCatinean-Ubuntu> lotuspsychje, I run both usb sticks (windows and ubuntu) in uefi mode from the boot startup
+[17:44] <PCatinean-Ubuntu> Maybe something changed since then? where should I check, how?
+[17:44] <aotaointbin> if i run apt-get update while a virtualenv is activated and i end up updating python, did i break anything? :P
+[17:45] <lotuspsychje> PCatinean-Ubuntu: in your bios, check secureboot and fastboot settings
+[17:45] <PCatinean-Ubuntu> This shows up in the syslog: https://hastebin.com/onezunaqit.sql
+[17:45] <lotuspsychje> !uefi | PCatinean-Ubuntu
+[17:45] <ubottu> PCatinean-Ubuntu: UEFI is a specification that defines a software interface between an operating system and platform firmware. It is meant as a replacement for the BIOS. For information on how to set up and install Ubuntu and its derivatives on UEFI machines please read https://help.ubuntu.com/community/UEFI
+[17:46] <PCatinean-Ubuntu> lotuspsychje, i tried finding them and there were no such options
+[17:46] <k1l_> PCatinean-Ubuntu: "ERROR: NTFS is inconsistent. Run chkdsk /f on Windows then reboot it TWICE!"
+[17:46] <PCatinean-Ubuntu> LIke last time I checked
+[17:46] <k1l_> repair that ntfs first
+[17:46] <PCatinean-Ubuntu> k1l_, tried that too, tried deleting the entire SSD and installig ubuntu on it
+[17:46] <PCatinean-Ubuntu> without windows, still nothing
+[17:47] <PCatinean-Ubuntu> and why would this happen and in 14.04 there were no issues with the steps I just described? dam....
+[17:47] <lotuspsychje> PCatinean-Ubuntu: thats impossible, if you singleboot ubuntu you need to disable secureboot and fastboot
+[17:48] <lotuspsychje> PCatinean-Ubuntu: you must have overlooked settings somewhere
+[17:48] <Dreaman> omg
+[17:49] <lotuspsychje> PCatinean-Ubuntu: find legacy/uefi settings
+=== crayon is now known as crayon|office
+=== button is now known as crayon
+[17:52] <Uluro> Yellow, I installed gnome-shell and selected gdm3, after reboot I got a purple screen. Any advice please. I selected proprietary Nvidia you after installing Ubuntu.
+[17:52] <CrazySane> k1l_: That process created a ISO9660 partition that contains the folder I'm trying to modify. That appears to be a r/o filesystem?
+[17:53] <PCatinean-Ubuntu> lotuspsychje, so you're sure secure boot is enabled?
+[17:53] <PCatinean-Ubuntu> even though I just lookedfor such an option and it's not, and have not changed bio since last time?
+[17:53] <k1l_> CrazySane: how did you create the usb?
+[17:53] <CrazySane> Usuntu Startup Disk Creator
+[17:53] <CrazySane> Ubuntu*
+[17:54] <lotuspsychje> PCatinean-Ubuntu: i didnt say that, i just say if you install ubuntu single, you need to disable secureboot & fastboot to be able to install
+[17:54] <k1l_> CrazySane: the usb should be able to be mounted.
+[17:54] <lotuspsychje> PCatinean-Ubuntu: but from your story, not be able to install ubuntu at partition screen, we could also test uefi settings if its not blocking
+[17:55] <CrazySane> k1l_: I can mount it, but no matter how I do so, it comes back as a r/o filesystem.
+[17:55] <lotuspsychje> PCatinean-Ubuntu: what Os was installed originally on your machine?
+[17:55] <CrazySane> k1l_: Give me a sec and I'll screenshot
+[17:59] <PCatinean-Ubuntu> lotuspsychje, it seems to have worked after a long time of waiting, not sure what to make of this...
+[18:00] <lotuspsychje> PCatinean-Ubuntu: you mean it shows partition screen now?
+[18:00] <PCatinean-Ubuntu> lotuspsychje, yes, I just went for dinner and forgot it open
+[18:00] <CrazySane> k1l_: http://imgur.com/a/snsp7
+[18:00] <minimec> Uluro: Ulurux: At what stage of the boot process do you get the purple screen? Do you think that it is a gdm3 problem?
+[18:00] <PCatinean-Ubuntu> Should it have took so long to resize? and resize what?
+[18:00] <PCatinean-Ubuntu> :)
+[18:00] <lotuspsychje> PCatinean-Ubuntu: thats what k1l_ said then, resize can take long
+[18:01] <PCatinean-Ubuntu> that's all? it just takes 10 times more than the last ubuntu installation?
+[18:01] <k1l_> PCatinean-Ubuntu: as i said in the beginning, it takes a lot of time
+[18:01] <antigen> Hey guys, quick question for you...having some troubles with Ubuntu. I just installed 10.4 on my desktop and the internet won't work, wired or unwired. This is obviously...frustrating.
+[18:01] <Uluro> minimec: Yeah I managed to switch to lightdm and it works but can't login. Im going to reinstall
+[18:01] <PCatinean-Ubuntu> k1l_, I was used to 1 minute, maybe 3-4-5 at most ins ome other cases, never more than 15 minutes
+[18:02] <lotuspsychje> antigen: 10.04 is end of life
+[18:02] <antigen> er, how do I tell which version I am on
+[18:02] <lotuspsychje> antigen: lsb_release -a
+[18:02] <PCatinean-Ubuntu> And if it has to just install in the unpartitioned space and update the bootloader, what is it resizing more specifically?
+[18:03] <antigen> sorry
+[18:03] <antigen> I am on 16.10
+[18:03] <minimec> Uluro: I don't think you need to reinstall. The problem is probably the nvidia GPU. Do you have a so called 'graphical boot process' or a text based? In my case with a nvidia gtx1060, I need a text based boot to get the gdm login screen.
+[18:03] <lotuspsychje> antigen: chipset and driver of your cards?
+[18:03] <antigen> lotuspsychje:  how can I tell?
+[18:03] <PCatinean-Ubuntu> Now I'm curious as to why this happens
+[18:04] <lotuspsychje> antigen: sudo lshw -C network
+[18:04] <lotuspsychje> PCatinean-Ubuntu: 750 gig hd, takes some time to read
+[18:04] <ubottu> Ubuntu bug 750 in Launchpad itself "Oops at /projects/+syncreview" [Medium,Fix released] https://launchpad.net/bugs/750
+[18:04] <antigen> so weird
+[18:04] <antigen> it's not taking my password when i run that request
+[18:04] <Mittles> so how long till beta 2 gets pushed? :D
+[18:05] <antigen> but it's definitely the password. I used it to log into the OS..wtf
+[18:05] <k1l_> Mittles: #ubuntu+1
+[18:05] <PCatinean-Ubuntu> lotuspsychje, ah it's reading that? damn it, how do I unmount it so it does not read it? it's just an extra hdd I keep for storage
+[18:05] <PCatinean-Ubuntu> as a caddy
+[18:05] <antigen> nm got it
+[18:05] <PCatinean-Ubuntu> I take it previous installers did not look at it?
+[18:05] <Uluro> minimec: Yeah I have Nvidia GPU too. It is graphical boot I believe. Not sure how to get a text based boot.
+[18:05] <antigen> lotuspsychje: Intel product...ummm
+[18:05] <antigen> logical name: enp0s25
+[18:06] <Karthick> I am trying to change my email address on my launchpad account.. Added the new email address which sends token to the email id and click on the token gives this message "Application error.  Unauthenticated user POSTing to page that requires authentication." Any one has some idea why this occurs?
+[18:06] <lotuspsychje> antigen: driver= module?
+[18:06] <Mittles> k1l_: i know it's today :p
+[18:06] <antigen> Product: ethernet connection (2) I218-V
+=== miki is now known as Guest78952
+[18:06] <Dreaman> nvidia driver work 16.10 and 17.04 alpha
+[18:06] <antigen> driver=e1000e
+[18:07] <lotuspsychje> antigen: driver shows, should work..have you tried a reboot? system up to date to latest?
+[18:07] <PCatinean-Ubuntu> lotuspsychje, and why does it try to resize it?
+[18:07] <Uluro> minimec: all setup again. Do you recommend using the proprietary Nvidia in additional drivers?
+[18:07] <antigen> lotuspsychje: i have tried rebooting; I am running whatever was downloaded off of ubuntu's website a few days ago
+[18:08] <lotuspsychje> PCatinean-Ubuntu: in ubuntu setup at partitioning, the more hd's one have the larger the time will be i think
+[18:08] <minimec> Uluro: Well.. if you have a newer nvidia GPU I recommend the nvidia driver.
+[18:08] <PCatinean-Ubuntu> lotuspsychje, i've come to learn that the hard way :))
+[18:08] <lotuspsychje> antigen: make sure plz? sudo apt update && sudo apt full-upgrade
+[18:08] <PCatinean-Ubuntu> Any way I can disconnect it before starting the installer?
+[18:08] <Uluro> minimec: I'm using a GTX 980. I'll do that then, thank you.
+[18:09] <lotuspsychje> PCatinean-Ubuntu: sure, your the boss of your machine
+[18:09] <antigen> lotuspsychje: hard to do with no internet...
+[18:09] <lotuspsychje> antigen: right lol
+[18:09] <Mittles> Uluro: ppa for proprietary updated Nvidia: https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa
+[18:09] <PCatinean-Ubuntu> lotuspsychje, not phisically as I don't have a scredriver with me haha XD
+=== iczero is now known as wlp1s1
+[18:10] <lotuspsychje> antigen: did your internet work on other ubuntu versions?
+[18:10] <Uluro> Mittles: thank you very much.
+[18:10] <antigen> Ive been putting off trying linux for years because of this shit god I'm such a n00b; but now here I am...the reason I didnt try it because of some stupid fundamental incompatibility that I was assured was long behind the project at this point.
+[18:10] <antigen> lotuspsychje it works in windows and linux mint
+[18:10] <antigen> but i wiped the linux mint partition
+[18:11] <CrazySane> k1l_: mount: /dev/sdd1 is write-protected, mounting read-only
+[18:11] <lotuspsychje> antigen: i might advise to also test an LTS version as 16.04.2
+[18:11] <antigen> how
+[18:11] <lotuspsychje> antigen: download and install?
+[18:11] <antigen> sigh
+[18:11] <antigen> what a mess
+[18:12] <lotuspsychje> antigen: or check your 16.10 logs to see whats happening to the driver
+[18:12] <antigen> now i gotta redo the entire bootdisk
+[18:12] <antigen> setup
+[18:12] <Mittles> u w0t m8
+[18:12] <nacc> antigen: what is failing? the e1000e driver? that seems odd
+[18:12] <lotuspsychje> nacc: also his wifi
+[18:12] <antigen> nacc, I don't have any idea
+[18:13] <antigen> it just can't connect to the internet
+[18:13] <hmv> Hi, Ubuntu people.
+[18:13] <antigen> I instsalled Ubuntu and out of the box it was broken with no internet running
+[18:13] <lotuspsychje> hmv: hi user
+[18:13] <nacc> antigen: how did you install ubuntu?
+[18:13] <antigen> USB Flashdrive
+[18:13] <nacc> antigen: and did it have internet in the installer?
+[18:13] <antigen> nacc...i assume so?
+[18:13] <antigen> no
+[18:13] <antigen> the installer didn't
+[18:13] <antigen> it couldnt download any updates, etc
+[18:13] <CrazySane> I can now get my Elitepad 1000G2 to boot from the usb stick, but live or install it hangs on the purple splash, always with the righthand two dots lit.
+[18:14] <nacc> antigen: well ... that should have told you something
+[18:14] <hmv> USB flashdrive.  I tried running KDE Neon FROM a flashdrive, as a HD.
+[18:14] <Mittles> antigen: make sure your install media isn't corrupt
+[18:14] <antigen> the media i installed is not corrupt
+[18:14] <antigen> this is clearly a driver support issue
+[18:14] <hmv> I had a horrible error with Mint, it wouldn't update
+[18:14] <Mittles> I doubt it'd work on mint and not ubuntu, they don't patch the kernel afaik
+[18:14] <nacc> antigen: but also if you're new to linux, then i would absolutely hav said 16.04
+[18:14] <nacc> Mittles: no they ahve their own pacakges (incl. kernel) i believe
+[18:14] <lotuspsychje> antigen: driver shows active in your lshw
+[18:14] <antigen> nacc:  it's not like there's any guide on the website that explains this
+[18:15] <hmv> where can you get KDE 14?
+[18:15] <minimec> Uluro: To avoid 'nvidia problems' during boot, you might want to change a line in '/etc/default/grub... 'GRUB_CMDLINE_LINUX_DEFAULT="nomodeset"', then 'sudo update-grub'. Like that you have a text based boot process that should work with the nvidia card. You can just put a '#' in front of the old line and add the one I give here. Like that you can always come back to the old one.
+[18:15] <Uluro> Mittles: after I add the ppa, how do I install it please. Sorry, new to Ubuntu.
+[18:15] <lotuspsychje> antigen: does network/wifi icon showup at your right upper corner?
+[18:15] <adymitruk> is there a way to find out what Dell has installed and configured on their XPS laptops? I've found the source of their packages and what is installed from them. Where do I find all the other custom settings etc. I want to do a fresh install and add these Dell-specific things myself.
+[18:15] <antigen> I am just a linux hobbyist -- wanting to learn more about open source, etc
+[18:15] <hmv> uluro: can't you google it?
+[18:15] <hmv> Antigen: happy to help you!  I do hangouts as well
+[18:15] <antigen> lotuspsychje: it appears,  yes..
+[18:16] <lotuspsychje> adymitruk: i think dell has a website for that
+[18:16] <Mittles> Uluro: Make sure you run 'sudo apt update' like the page asked, once that's done it's easy enough to add it from the 'Software & Updates'
+[18:16] <hmv> Does anyone want to do a Google hangout about Linux?
+[18:16] <antigen> hmv i appreciate that and would take you up on it, except the internet is broken out of the box on the install :/
+[18:16] <lotuspsychje> !discuss | hmv
+[18:16] <ubottu> hmv: Want to talk about Ubuntu, but don't have a support question? /join #ubuntu-discuss for non-support Ubuntu discussion, or try #ubuntu-offtopic for general chat. Thanks!
+[18:16] <adymitruk> lotuspsychje: I've tried looking there.. any ideas on better google search terms?
+[18:16] <Uluro> minimec: Gotcha, thanks very much.
+[18:17] <antigen> I suppose I could do a hangout from my laptop & point the webcam at my desktop
+[18:17] <antigen> lol
+[18:17] <lotuspsychje> adymitruk: holdon
+[18:17] <Uluro> Mittles: Ah it lives in software and updates, gotcha. Appreciate the help.
+[18:17] <lotuspsychje> OerHeks: you remember dell's ubuntu packages website url?
+[18:17] <hmv> My support question is, why didn't Linux mint's update work?  It told me to change servers and such, but that didn't work.  Just putting this question out there, as most people say that Mint is the most stable, well I didn't experience any stability.
+[18:17] <lotuspsychje> !mint | hmv
+[18:17] <ubottu> hmv: Linux Mint is not a supported derivative of Ubuntu. Please seek support in #linuxmint-help on irc.spotchat.org
+[18:17] <CrazySane> !mint | hmv
+[18:18] <antigen> lotuspsychje: the icon appears, but nothing's connected and it can't connect
+[18:18] <lotuspsychje> antigen: eth cable plugged right?
+[18:18] <antigen> under network connections, ethernet, I do see "Wired Connection 1" last used 23 minutes ago
+[18:18] <antigen> but i have no idea what this means...
+[18:18] <k1l_> CrazySane: i have the same issue with my ubuntu usb. that looks like some cheap flash pendrives do have that isues
+=== anon is now known as Guest86694
+[18:18] <lotuspsychje> antigen: try to restart network-manager plz
+[18:19] <antigen> (I plugged the RJ into my desktop directly once I noticed wireless wasn't working)
+[18:19] <antigen> lotuspsychje:  how
+[18:19] <antigen> just close and exist?
+[18:19] <lotuspsychje> antigen: sudo service network-manager restart
+[18:19] <antigen> don
+[18:19] <CrazySane> k1l_: I edited the grub command (removed spash) so I can see whats up - looks like the startup hands on "Repeat this process for the rest of the CDs in your set"
+[18:20] <antigen> now it says it was just last used right now
+[18:20] <Mittles> I do wonder if antigen's hardware is working fine and it's just not resolving DNS, has anyone looked into that?
+[18:20] <lotuspsychje> antigen: is it working?
+[18:20] <Mittles> On wired connection that is
+[18:20] <antigen> no...it's not working
+[18:20] <antigen> Mittles: no one has troubleshot that
+[18:20] <CrazySane> k1l_: before that "deb cdrom:[Ubuntu 16.04.2 LTS _Xenial Zerus_ - Release amd64 (20170215.2)]/ xenial man restricted
+[18:20] <hmv> I'm not able to join the off-topic chat.  How do I Register myself?
+[18:21] <Menzador> !register
+[18:21] <ubottu> For information on registering your IRC nick, see https://help.ubuntu.com/community/InternetRelayChat/Registration - For any further help, ask in #freenode.
+[18:21] <lotuspsychje> antigen: tail -f /var/log/syslog and plug out/in your eth cable plz
+[18:21] <antigen> Mittles: i think that because it's not showing a list of wifi networks it's not working properly, but I'm not sure
+[18:21] <antigen> ok 1 sec
+[18:21] <lotuspsychje> antigen: lets see whats happening as errors there
+[18:21] <antigen> Should I PM these
+[18:22] <lotuspsychje> !paste | antigen
+[18:22] <ubottu> antigen: For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://imgur.com/ !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+=== hmv is now known as Shai-Hu1ud
+[18:22] <antigen> hard for me to paste, because these are happening on a system with no internet
+[18:22] <antigen> ill take a picture and upload here
+[18:22] <lotuspsychje> antigen: try to tell us what kind of weird things you see?
+[18:23] <lotuspsychje> antigen: fish out the specific error, like driver module not loading or whatever
+[18:24] <antigen> hmm
+[18:25] <antigen> uploading
+[18:25] <antigen> heh
+[18:25] <antigen> sorry
+[18:25] <antigen> http://imgur.com/a/kSXMf
+[18:25] <antigen> here is what i see
+[18:27] <Mittles> antigen: you need to be using tail -f while the service itself restarts (easiest to do in separate terminal windows)
+[18:27] <Mittles> also, does "ping -c 3 8.8.8.8" return anything when you have it just running from a wired connection?
+[18:28] <antigen> when i do the ping it says "connect: Network is unreachable"
+[18:28] <Mittles> As for wifi working on mint but not Ubuntu it is often the "ubuntu-restricted-addons" package missing from install on a wifi chip that requires off firmware
+[18:28] <Mittles> ok
+[18:29] <antigen> I am not sure how to tail in a separate terminal window, unfortunately
+[18:29] <antigen> Do I just restart in one window and before i restart, run the tail command in another window?
+[18:29] <Mittles> yep, tail in one first, restart in the other
+[18:30] <rts-sander> Hi I run add-apt-repository <some repository> -y, then update, then it gives me an error on apt-get install
+[18:30] <Mittles> rts-sander: which error, ppa, and package?
+[18:30] <rts-sander> the error doesn't happen if I do the same commands manually, but when executed in a script it goes wrong
+[18:30] <Mittles> well
+[18:30] <Mittles> i guess the script matters too
+[18:30] <rts-sander> GPG error: http://ppa.launchpad.net trusty InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 4F4EA0AAE5267A6C
+[18:31] <k1l_> rts-sander: vagrant?
+[18:31] <rts-sander> no I'm adding ppa:ondrej/php
+[18:31] <lotuspsychje> antigen: perhaps a relevant bug here: https://bugs.launchpad.net/ubuntu/+source/network-manager/+bug/1528639
+[18:31] <ubottu> Launchpad bug 1528639 in network-manager (Ubuntu) "Network Manager Crashes Shortly after Starting" [Undecided,Confirmed]
+[18:32] <k1l_> rts-sander: is this a pure ubuntu on a real machine?
+[18:32] <rts-sander> it's a ubuntu VM
+[18:32] <k1l_> rts-sander: a vagrant vm?
+[18:32] <rts-sander> lxc
+[18:32] <k1l_> rts-sander: because there was someone in here yesterday having the same issue. and it was vagrants fault
+[18:32] <antigen> I don't know what's going on...now both terminals are outputting what seems to be jibberish
+[18:33] <davy_> hello
+[18:33] <rts-sander> I'm executing these commands via golang, it's really weird
+[18:33] <k1l_> rts-sander: try sudo apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 4F4EA0AAE5267A6C
+[18:33] <lotuspsychje> antigen: on 16.10 i would go for a bug, but surely you could test a 16.04.2 liveusb?
+[18:34] <Skyrider> Ey everyone
+[18:34] <pavlos> 16.04 I have a file /etc/network/if-up.d/ubuntu-fan but none of my other 16.04 machines have it. That script calls /usr/sbin/fanctl which none of my other systems have it. Any ideas?
+[18:34] <Mittles> antigen: I'm inclined to also recommend 16.04.2
+[18:34] <antigen> sigh
+[18:34] <rts-sander> k1l_, thanks this solved the problem
+[18:35] <rts-sander> is it safe to add this to the script?
+[18:35] <Skyrider> I already asked this in Maria channel, but also going to ask it here.. as I'm curious if there are any known issues installing mariaDB on a fresh new 14.04 ubuntu installation (minimal).. See: http://pastebin.com/C9UNHq0J (dependency problems)
+[18:35] <Mittles> I've not had a networking hardware headache in forever
+[18:35] <rts-sander> won't the key "4F4EA0AAE5267A6C" change?
+[18:35] <antigen> 2017, people still spending 10+ hours troubleshooting arbitrary driver issues on an IRC channel
+[18:35]  * antigen grumbles about open source
+[18:35] <Mittles> Don't buy shitty hardware?
+[18:35] <lotuspsychje> antigen: you have chosen non-lts, things can get bumpy at some times
+[18:36] <k1l_> rts-sander: looks like your script doesnt pull the gpg key
+[18:36] <lotuspsychje> Mittles: keep the support familly friendly plz
+[18:36] <rts-sander> I think the command "add-apt-repository" does it
+[18:36] <rts-sander> but not when executed through the script :/
+[18:36] <Mittles> lotuspsychje: ok.
+[18:36] <Mittles> Don't buy broadcomm hardware.
+[18:36] <antigen> alright well i better get to compiling a 10.4 usb boot stick
+[18:37] <lotuspsychje> antigen: your wifi is a broadcom?
+[18:37] <antigen> Mittles:  it came with the computer i bought
+[18:37] <antigen> lotuspsychje: i have...no idea
+[18:37] <antigen> how can I tell?
+[18:37] <minimec> raspberry pi broadcom
+[18:37] <Mittles> antigen: lspci

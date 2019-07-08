@@ -1,0 +1,1500 @@
+[03:44] <MiMiC> I have a XP tablet edition partition, called XP, NTFS
+[03:44] <MiMiC> I have a data partition, NTFS
+[03:44] <{DB}HobbitJa> apparently so
+[03:44] <MiMiC> I have created a partition for ubuntu, EXT3
+[03:45] <Felarin> kore2 : in fact, i'm on wireless now on Ubuntu
+[03:45] <{DB}HobbitJa> gimme 2 secs
+=== bucket [n=bucket@41-147.1-85.cust.bluewin.ch]  has joined #ubuntu
+[03:45] <MiMiC> and I have a SWAP partiiton
+=== MrEgg964 [n=fred@217-148-248-114.happymany.net]  has left #ubuntu []
+[03:45] <kore2> Felarin: ok but the weird thing is that I have 3 connections there
+[03:45] <Felarin> kore2 : and i use gigabit wired in the office
+[03:45] <Daverocks> MiMiC: some of that must be on extended, you can't have 5 primary partitions
+=== mode/#ubuntu [+o Hobbsee]  by ChanServ
+[03:45] <Felarin> 3 connections is right
+[03:45] <kore2> Felarin: wireless, wired and modem
+=== j_ack [n=jack@p508DBE55.dip0.t-ipconnect.de]  has joined #ubuntu
+=== mode/#ubuntu [-b arpegius!*@*!#ubuntu-read-topic]  by Hobbsee
+[03:45] <kore2> Felarin: oh, ok
+[03:45] <Felarin> 1 loopback, 1 LAN and 1 wireless
+[03:45] <MiMiC> SHARED is on extended, so is swap
+=== hepcat57 [n=joseph@static-71-166-163-113.washdc.east.verizon.net]  has joined #ubuntu
+=== Mikelevel [n=MoVeWoRk@60.Red-80-25-210.staticIP.rima-tde.net]  has joined #ubuntu
+=== iwcbrian [n=iwcbrian@207.235.54.1]  has joined #ubuntu
+[03:45] <Daverocks> MiMiC: SHARED being the NTFS data partition?
+[03:45] <MiMiC> i am 99% sure that RECOVERY (HIDDEN), XP, and UBUNTU are primary partitions
+=== arpegius [n=arpegius@c-66-31-202-118.hsd1.ma.comcast.net]  has joined #ubuntu
+=== belracu [n=test@218-168-140-172.dynamic.hinet.net]  has joined #ubuntu
+[03:45] <kore2> Felarin: let me try to modify the wired connection
+=== W_o_r[l] d [n=Psico@151.73.97.194]  has joined #ubuntu
+[03:46] <MiMiC> Daverocks: yes
+=== brian-j [n=brianjan@lab.teamhpc.com]  has left #ubuntu ["Ex-Chat"]
+[03:46] <Daverocks> MiMiC: so it's not that complicated o_O
+[03:46] <Felarin> kore2 : okay, you should also check if the router assigning your DHCP address is functioning properly
+[03:46] <Felarin> kore2 : also make sure that your LAN cable is fine
+[03:46] <Felarin> kore2 : these things also prevent proper IP address obtaining
+[03:46] <Daverocks> MiMiC: the partitioning layout, that is
+[03:46] <Daverocks> i wonder why things don't like it
+[03:47] <MiMiC> Daverocks: it is, since during ubuntu installation, its partitioner does not recognize ANY partition on my HDD
+=== thiago__ [n=thiago@201.73.145.196]  has joined #ubuntu
+[03:47] <{DB}HobbitJa> remove the root password from /etc/shadow does that sound like i need to edit shadow?
+[03:47] <Felarin> try to ping the DHCP server, if you cant, try changing the LAN cable, restart the DHCP service and try again.
+=== forester [n=forester@Fb457.f.ppp-pool.de]  has joined #ubuntu
+[03:47] <kore2> Felarin: I have one laptop and another pc. on my pc is working fine but on my laptop it doesn't work
+=== l3mr [n=l3mr@77-56-104-181.dclient.hispeed.ch]  has joined #ubuntu
+[03:47] <Daverocks> {DB}HobbitJa: you shouldn't need to edit /etc/shadow manually
+[03:47] <kore2> Felarin: anyway I dont have a router
+[03:47] <Felarin> try changing the cable
+=== MrEgg965 [n=fred@217-148-248-114.happymany.net]  has joined #ubuntu
+[03:47] <{DB}HobbitJa> its for my western digital mybook world NAS
+[03:47] <Daverocks> MiMiC: maybe one of the partitioning progs messed it up
+[03:47] <Felarin> and is this your first time having this problem?
+[03:47] <forester> hi! what is a plaindump?
+=== melter [n=Melter@dyn007.morrill-116.ndsu.NoDak.edu]  has left #ubuntu ["Client]
+[03:48] <kore2> Felarin: i'm changing it when i want to try if it works and yes this is my first time
+[03:48] <{DB}HobbitJa> ive connected it to my pc and need to unlock some stuff to enable services like ssh telnet ftp etc
+[03:48] <sipior> {DB}HobbitJa: and there's no, uh, login?
+[03:48] <kore2> Felarin: i just bought this laptop
+[03:48] <MiMiC> Daverocks: do u recommend I re-partition it using ubuntu's partiitoner or another 3rd party?
+=== mtha [n=mtha@cpc1-derb3-0-0-cust274.lei3.cable.ntl.com]  has joined #ubuntu
+[03:48] <{DB}HobbitJa> yeah its web based but you cant do anything
+[03:48] <Felarin> kore2 : network should not be a problem, it works out of the box with Ubuntu by right. What LAN card does the laptop have?
+[03:48] <sipior> {DB}HobbitJa: no default password?
+[03:48] <MrEgg965> Thanks for your advices. I installed totem-gstreamer, and now I can play mpeg :) Divx (avi) still not working, though. What am I missing ? tx
+[03:48] <Felarin> do you know the make and model?
+[03:48] <{DB}HobbitJa> o default password yeah possibly
+[03:48] <mtha> is there a way to limit the choices of a cpu frequency scaling daemon?
+=== Virtuall [n=virtuall@87.110.198.224]  has joined #ubuntu
+[03:49] <Daverocks> MiMiC: uh, you said ubuntu's partitioner couldn't read it?
+[03:49] <sipior> {DB}HobbitJa: manual should say something about that :)
+[03:49] <Felarin> MiMiC : gparted is good.
+[03:49] <kore2> Felarin: i forgot, how can I check?
+=== forester [n=forester@Fb457.f.ppp-pool.de]  has left #ubuntu []
+=== l3mr [n=l3mr@77-56-104-181.dclient.hispeed.ch]  has left #ubuntu []
+[03:49] <thirdy> Nice, is that right? Heroes III in linux?
+=== hepcat57 [n=joseph@static-71-166-163-113.washdc.east.verizon.net]  has left #ubuntu []
+=== Frogzoo_ [n=Frogzoo@202.155.165.25]  has joined #ubuntu
+[03:49] <{DB}HobbitJa> http://websupport.wdc.com/forum/topic.asp?TOPIC_ID=5535&whichpage=1
+[03:49] <Felarin> hmm.. the easiest way would be to check your catalogue? the brochure which they gave you when you bought the laptop?
+[03:49] <Daverocks> gparted seems to always work for me, but it can't be perfect
+[03:49] <MiMiC> Daverocks: that's correct. the ubuntu partitioner cannot see any partitions. Although I was able to mount all my drives using the live CD
+[03:49] <{DB}HobbitJa> thats where i was told about it
+=== Fido [n=fido@82-45-91-123.cable.ubr03.gill.blueyonder.co.uk]  has joined #ubuntu
+[03:49] <sipior> thirdy: yup, bit old, but i get a kick out of it at times
+[03:49] <mh_le> is there a package for GNU MP 2?
+[03:49] <MiMiC> which means that it can detect them all...
+[03:49] <kore2> Felarin: hold on a second
+[03:50] <Daverocks> MiMiC: hm, try using gparted on the live CD
+=== din [n=din@c-67-162-206-27.hsd1.mi.comcast.net]  has joined #ubuntu
+=== MrEgg965 [n=fred@217-148-248-114.happymany.net]  has left #ubuntu []
+=== cypher1 [n=cypher1@c-68-83-184-230.hsd1.nj.comcast.net]  has joined #ubuntu
+[03:50] <Daverocks> MiMiC: unmounting all the partitions before you do so of course :P
+[03:50] <Felarin> MiMiC : are you on a restricted account?
+=== brian-j [n=brianjan@lab.teamhpc.com]  has joined #ubuntu
+[03:50] <Felarin> MiMiC : try sudo fdisk -l in the command line
+[03:50] <thirdy> What's the most popular game for linux?
+[03:50] <Felarin> thirdy : WoW on Cedega
+[03:50] <MiMiC> Felarin: what do u mean restricted / fdisk -l showed nothing
+=== BlindSIde [n=halfdemo@125-238-247-213.broadband-telecom.global-gateway.net.nz]  has joined #ubuntu
+=== aabrahao [n=aabrahao@200.212.85.42]  has joined #ubuntu
+=== iwcbrian [n=iwcbrian@207.235.54.1]  has joined #ubuntu
+[03:50] <MiMiC> Daverocks: gparted showed an unallocated HDD
+[03:51] <Felarin> thirdy : Quake4\Enemy Territory if native
+[03:51] <aabrahao> how can I configure vhosts in apache?
+=== AMAG [i=jsw@69.31.82.162]  has joined #ubuntu
+=== klav [n=jamie@ccanyexch01.ccapr.com]  has joined #ubuntu
+[03:51] <Felarin> MiMiC : Did you try sudo in front
+[03:51] <MiMiC> of courese
+[03:51] <Felarin> sudo fdisk -l
+[03:51] <Felarin> it shows nothing?
+[03:51] <Felarin> that's weird
+[03:51] <MiMiC> i see an error
+[03:51] <MiMiC> in terminal
+[03:51] <Felarin> what error?
+[03:51] <Daverocks> best graphics does not equal most fun
+[03:51] <Felarin> can you post it here?
+=== tru_`z24 [n=truz_`24@74-129-166-232.dhcp.insightbb.com]  has joined #ubuntu
+[03:51] <MiMiC> Can't have overlapping partitions.
+[03:51] <kore2> Felarin: LAN (802.11B/G) but i'm not sure this is what you are looking for
+[03:51] <thirdy> I have 1.1duron, 256ram, 64mbVram
+=== kupesoft [n=dave@red-gw.cs.toronto.edu]  has joined #ubuntu
+[03:51] <Felarin> when you type sudo fdisk -l, you get this error?
+[03:51] <sparr> provided a multitouch input device, are there any desktop or pda linux softwares that could utilize the extra input information?
+=== RabidWeezle [n=rabidwee@CPE-76-177-190-127.natsoe.res.rr.com]  has joined #ubuntu
+[03:51] <MiMiC> Felarin: no it's when I opened gparted
+[03:52] <Daverocks> thirdy: ok, don't try all the 3D games then, lol
+[03:52] <klav> Hi - Looking to extract a file to /usr/share but says i don't have permission. I'm usingthe GUI to extract. how can I put it through as root?
+[03:52] <Felarin> kore2 : that's the wireless
+[03:52] <mangojambo> Felarin: I cant unmounting ... I mean ... I did right click in the SDcard icon on my desktop and it was unmounted.. but the sdcard light in the reader still on!!
+=== atoponce [n=aaron@oalug/member/atoponce]  has left #ubuntu ["http://www.dvzine.org]
+[03:52] <Felarin> MiMic : no error or anything when you use fdisk -l?
+[03:52] <MiMiC> Felarin: i tried sudo fdisk -l again, and this time it showed me all my partitions
+[03:52] <RabidWeezle> there we go, remember kids, xchat gnome isn't half as good as just good ole xchat
+[03:52] <AMAG> Hey, folks, I've got a FAT32-formatted firewire disk hooked up to my ubuntu machine, and even though there is ~300G of data on it, `df` shows 32KB used.  The used space value is increasing as I copy data onto it, though.  Is this normal or might it be overwriting my existing data? :)
+[03:52] <Felarin> mango : you can remove it.
+[03:52] <Felarin> MiMiC : cool, we're somewhere now. What exactly do you need?
+=== Omnius [n=rado@203-206-222-25.dyn.iinet.net.au]  has joined #ubuntu
+[03:52] <Felarin> damn i need to smoke
+[03:52] <thirdy> yeah
+[03:53] <RabidWeezle> then smoke
+=== RabidWeezle grins
+=== tux76 [n=thomas@p50906e98.dip.t-dialin.net]  has joined #ubuntu
+[03:53] <Felarin> yeah
+[03:53] <kore2> Felarin: I dont have nothing on my box, is there another way to check?
+[03:53] <Felarin> but i wanna help these guys before i o
+[03:53] <Felarin> go
+[03:53] <thirdy> how bout online multiplayer games?
+[03:53] <MiMiC> Felarin: I would prefer to keep my partitions and install everything onto them. but I need to fix that error "can't have overlapping partitions."
+=== RabidWeezle smokes in his house...
+=== pwuertz [n=pwuertz@ott1.Physik.Uni-Mainz.DE]  has joined #ubuntu
+[03:53] <Felarin> kore2 : is your 802.11 B/G Intel?
+[03:53] <mangojambo> Felarin: there is no problem to "broke" ( "burn") my card ?
+[03:53] <kore2> Felarin: yes
+=== verahsa lights up, and keeps typing.
+[03:53] <Felarin> MiMiC : try purging gparted and reinstalling it.
+[03:53] <sparr> provided a multitouch input device, are there any desktop or pda linux softwares that could utilize the extra input information?
+[03:53] <sparr> sorry for the repeat
+[03:53] <Felarin> MiMiC : then try relaunching it.
+=== pierre1987 [n=pierre@ALyon-253-1-116-50.w83-205.abo.wanadoo.fr]  has joined #ubuntu
+[03:54] <Felarin> if fdisk -l is fine, something is wrong with gparted
+[03:54] <Felarin> try sudo df -ah
+[03:54] <verahsa> is there a way to get the splash screen to center at a resolution other than 640x480?
+[03:54] <Felarin> can you see decent output?
+[03:54] <sipior> AMAG: weird, but i doubt it's overwriting. still good idea to test first. any unusual mount options?
+[03:54] <Daverocks> thirdy: i like soldat (with wine) and ut2004 on linux for online multiplayer, but that might be too stressful on your hardware... armagetron advanced is a great online mutiplayer game as well
+=== inflex [n=PLD@171.156.240.220.dynamic.dsl.comindico.com.au]  has left #ubuntu ["wrong]
+[03:54] <Felarin> soldat is good stuff
+[03:54] <Felarin> lol
+[03:54] <Daverocks> Felarin: love it :D
+[03:54] <Felarin> yeah but i'm really bad @ it
+=== CrummyGummy [n=CrummyGu@dsl-242-23-15.telkomadsl.co.za]  has joined #ubuntu
+[03:54] <Felarin> i only just play WoW these days
+[03:54] <Felarin> lol
+[03:54] <kore2> Felarin: well, do you have any ideas?
+[03:54] <MiMiC> Felarin: i tried that command, and it gave some output. What should i look for
+=== RabidWeezle searches synaptic for xmms
+[03:55] <kore2> Felarin: i really need this internet connection...
+[03:55] <Daverocks> that's the problem with WoW, people _only_ play WoW :P
+[03:55] <Omnius> how to you delete a directory?
+=== gana-home [n=ganadist@58.140.133.11]  has joined #ubuntu
+[03:55] <Felarin> MiMic : i'm just trying to ascertain if you really have a problem. It seems that Linux can read all your partitions and only gparted has an issue. You can purge gparted and reinstall it to try.
+[03:55] <Daverocks> kore2: ipw2200? ipw2915?
+[03:55] <sipior> Omnius: rmdir, if it's empty
+[03:55] <verahsa> Daverocks: That's not entirely true. There's a broad range of WoW gamers that play -more- than just WoW. :p
+=== xackall [n=lubastos@20150021188.user.veloxzone.com.br]  has joined #ubuntu
+[03:55] <Felarin> kore2 : i think you should manually specify your IP\subnet
+=== dajoru [n=dajoru@pegasus.cellbio.RWTH-Aachen.DE]  has joined #ubuntu
+[03:55] <Daverocks> verahsa: ok ok
+[03:55] <Felarin> once you manually specify
+[03:55] <Daverocks> :P
+[03:56] <MiMiC> Felarin: i'm using the live cd, so i do not understand what you mean by purge.
+[03:56] <Felarin> restart your network /etc/init.d/networking restart
+[03:56] <Omnius> ah yep its not empty
+=== dajoru [n=dajoru@pegasus.cellbio.RWTH-Aachen.DE]  has left #ubuntu []
+[03:56] <Felarin> MiMiC : use fdisk /dev/whicheveryoursis - sda or hda and partition it with fdisk via the CLI
+[03:56] <Felarin> and then proceed to install
+[03:56] <Daverocks> kore2: as root, "lsmod | grep ipw"
+[03:56] <verahsa> Daverocks: I play WoW, and it's probably what I play the -most-, but I also hit up Vanguard, EQ2, the godforsaken Planetside, and a few other non-mmorpgs when I get the urge. <grin>
+[03:56] <Felarin> when it asks you to partition again, choose manual and choose next, should work
+[03:56] <sipior> Omnius: then rm -r <directory>. but be careful with that...
+=== misnix [n=jkr@corona.xs4all.nl]  has joined #ubuntu
+[03:56] <MiMiC> Felarin: ah okay thank you, i shall try that
+[03:57] <Omnius> is there a linux version of del *.*?
+=== exippy [n=driss@mek33-4-82-236-45-51.fbx.proxad.net]  has joined #ubuntu
+=== l3mr [n=l3mr@77-56-104-181.dclient.hispeed.ch]  has joined #ubuntu
+[03:57] <Daverocks> Omnius: that'd be rm
+[03:57] <Felarin> Omnius : sudo rm -rf = ULTIMATE
+[03:57] <Omnius> ok
+[03:57] <sipior> Omnius: yes, rm -r *
+[03:57] <Felarin> nothing beats that
+=== Nicke [n=niclasa@p45.kthopen.kth.se]  has joined #ubuntu
+[03:57] <exippy> server irc.recycled-irc.net
+=== thomax_ [n=thomas@217-148-245-50.happymany.net]  has joined #ubuntu
+[03:57] <Felarin> use the -rf switch
+=== p6 [n=p6@196.3.84.214]  has joined #ubuntu
+[03:57] <Felarin> removes forcefully
+[03:57] <kore2> Daverocks: i dont get nothing
+[03:57] <verahsa> Omnius: sipior's suggestion of rm -rf <dir> is appropriate... but it's dangerous if you type the wrong directory or hit enter early.
+=== kairu0 [n=kairu@softbank221108010089.bbtec.net]  has joined #ubuntu
+[03:57] <sipior> with vengeance!
+=== kairu_ [n=kairu@softbank221108010089.bbtec.net]  has joined #ubuntu
+[03:57] <Felarin> and recursive too
+[03:57] <p6> que lo que
+[03:57] <Daverocks> -rf is more good for scripts... i prefer just using -r when at a shell
+[03:58] <Omnius> ok wish me luck
+[03:58] <sipior> verahsa: well, glad you think so!
+=== Panzer_ [n=Porsche9@209.177.211.250]  has joined #ubuntu
+[03:58] <Daverocks> kore2: there's your problem ;)
+[03:58] <Daverocks> kore2: do you know exactly which intel wireless card you have?
+=== Sobek [n=jack@pD9537DDB.dip.t-dialin.net]  has left #ubuntu []
+=== PecisDarbs [n=pecisk@mail.republika.lv]  has joined #ubuntu
+[03:58] <Daverocks> kore2: oh wait, were you trying to get internet through wired?
+=== thomax_ [n=thomas@217-148-245-50.happymany.net]  has joined #ubuntu
+[03:58] <Felarin> i think he's trying to use wired Dave
+[03:58] <verahsa> sipior: was just thinking "You know... be careful doesn't quite cover the destructive nature of that command." hehehe
+[03:58] <Felarin> and he dosen't know what model of wired card he has
+[03:58] <kore2> Daverocks: yes, exactly
+[03:58] <MiMiC> Omnius: try "rm -r *"
+[03:58] <kore2> Daverocks: with wired
+=== naruneo [n=naruneo@ALille-251-1-82-96.w82-127.abo.wanadoo.fr]  has joined #ubuntu
+[03:58] <Felarin> kore2 : set your connection manually
+[03:58] <sipior> verahsa: true enough :)
+[03:58] <Felarin> specify IP and netmask
+[03:58] <Daverocks> kore2: lspci, is it there?
+[03:59] <Felarin> and then restart networking the way i told you to try
+=== joseph [n=marnee@24-119-163-108.cpe.cableone.net]  has joined #ubuntu
+=== lynxz [n=lynxz@c83-249-26-206.bredband.comhem.se]  has joined #ubuntu
+[03:59] <kore2> Daverocks: i get something
+[03:59] <Daverocks> kore2: can you see your ethernet card in there?
+[03:59] <Felarin> kore2 : you should have a lot there
+=== soneil [n=soneil@86-40-104-138.b-ras2.mvw.galway.eircom.net]  has joined #ubuntu
+=== ReX0r [n=rex@88.197.144.42]  has joined #ubuntu
+=== nikin [n=niki@dsl54009920.pool.t-online.hu]  has joined #ubuntu
+=== Oni-Dracula|lapp [n=Oni@adsl-1-235-180.ard.bellsouth.net]  has joined #ubuntu
+[03:59] <Felarin> kore2 : try to find your intel wired card
+[03:59] <Felarin> or some wired card
+=== babo [n=babo@213-202-135-45.bas502.dsl.esat.net]  has joined #ubuntu
+[04:00] <Felarin> could be broadcom or some other brand like realtek
+=== fattony [n=fattony@p54AF6273.dip.t-dialin.net]  has joined #ubuntu
+[04:00] <babo> is there an app out there to put together animated gifs ?
+=== loslalfos [n=loslalfo@p54BF6503.dip.t-dialin.net]  has left #ubuntu ["Leaving"]
+=== bokey [n=bokey@61.95.192.203.static.sa.chariot.net.au]  has joined #ubuntu
+[04:00] <Felarin> Daverocks : i figure, if he can't set manually, his card might be an unsupported one
+=== ahmed [n=ahmed@196.204.154.167]  has joined #ubuntu
+[04:00] <Daverocks> babo: gifsicle?
+=== DarkED [n=darked@h460bdd82.area7.spcsdns.net]  has joined #ubuntu
+[04:00] <Felarin> Daverocks : i've seen it once before, only once though, some funny brand card
+[04:00] <joseph> babo... gimp has basic gif editing
+=== thomax_ [n=thomas@217-148-245-50.happymany.net]  has joined #ubuntu
+[04:00] <ahmed> guys wat is the best torrents downloading program ?
+=== aat [n=aat@home.swapoff.org]  has joined #ubuntu
+[04:00] <kore2> Felarin: i have a lot with ATI Technologies but I've got something with Ethernet controller: Realtek Semiconductor Co., Ltd. RTL...
+=== AdministratorX [n=Administ@12.198.186.85]  has joined #ubuntu
+[04:00] <CheshireViking> !torrent
+[04:00] <ubotu> Torrent clients: Azureus (Java), BitTornado (Shell with python front-end), KTorrent (KDE/Qt), rTorrent (C++) -  Bittorent FAQ: http://www.bittorrent.com/FAQ.html
+[04:00] <Felarin> ahh
+=== bulmer [n=kana_kan@adsl-69-232-210-24.dsl.pltn13.pacbell.net]  has joined #ubuntu
+[04:01] <babo> joseph: yes, but no animation properties ...
+[04:01] <Felarin> kore2 : the only other time i saw the problem, was with a realtek funny make card
+[04:01] <Felarin> kore2 : have you tried manually setting your IP and netmask?
+=== ekv [n=ekv@dsl-vsabrasgw1-fe07dc00-70.dhcp.inet.fi]  has joined #ubuntu
+[04:01] <joseph> install gap
+[04:01] <Felarin> kore2 : once you do, restart your laptop
+[04:01] <Felarin> and tell me if it works
+[04:01] <Daverocks> babo: http://www.lcdf.org/gifsicle/
+[04:01] <Felarin> if not, you might need to try going wireless
+[04:01] <ahmed> guys wat is the best torrents downloading program ?
+[04:01] <babo> Daverocks: k thnaks
+[04:01] <kore2> Felarin: I wrote my ip address and subnet but in gateway address I dont know what to type there
+[04:02] <Daverocks> !torrent | ahmed
+[04:02] <ubotu> ahmed: Torrent clients: Azureus (Java), BitTornado (Shell with python front-end), KTorrent (KDE/Qt), rTorrent (C++) -  Bittorent FAQ: http://www.bittorrent.com/FAQ.html
+[04:02] <Felarin> gateway : same as your ISP's gateway
+=== Frogzoo [n=Frogzoo@202.155.165.25]  has joined #ubuntu
+=== kane77 [n=kane@194.1.130.37]  has joined #ubuntu
+=== DarkED [n=darked@h460bdd82.area7.spcsdns.net]  has joined #ubuntu
+[04:02] <Daverocks> maybe your local LAN gateway would be better?
+[04:02] <joseph> babo: gap might help
+[04:02] <Felarin> oh btw kore2
+[04:02] <joseph> that's all i've used
+[04:02] <joseph> sry
+=== OhMyGods [n=OhMyGods@218.94.48.170]  has joined #ubuntu
+[04:02] <Felarin> how do you check if your connection is not working?
+[04:02] <Felarin> do you go to like www.google.com?
+=== [GuS]  [n=gdnet@190.48.97.135]  has joined #Ubuntu
+[04:03] <kore2> Daverocks: and what is that?
+[04:03] <joseph> try pinging first
+[04:03] <joseph> felarin
+[04:03] <kore2> Felarin: yes
+[04:03] <Felarin> try going to an IP address only
+[04:03] <Felarin> don't go to a hostname
+[04:03] <joseph> ping your dns...
+[04:03] <joseph> then out
+=== ^tolkien [n=supertol@eu99-67-60.clientes.euskaltel.es]  has joined #ubuntu
+[04:03] <Felarin>  ping 66.249.89.99
+[04:03] <Daverocks> kore2: there should be an IP on your LAN which acts as the gateway... like, do you have a router?
+[04:03] <kore2> Felarin: i will try next time but now I need this Gateway address and I really don't know...
+=== xackall [n=lubastos@20150021188.user.veloxzone.com.br]  has joined #ubuntu
+[04:03] <joseph> route
+[04:03] <kore2> Daverocks: i don't have a router
+[04:03] <Felarin> Daverocks : he don't have
+=== htchien [n=chatzill@125-225-175-70.dynamic.hinet.net]  has joined #ubuntu
+[04:03] <joseph> from the terminal
+[04:03] <joseph> will show you on the second line
+[04:04] <Felarin> he might just have a DNS problem joseph
+[04:04] <Daverocks> kore2: ah yeah k, then your ISP's gateway
+[04:04] <Felarin> brb all
+=== htchien [n=chatzill@125-225-175-70.dynamic.hinet.net]  has left #ubuntu []
+[04:04] <rmd_> if i want to install a new theme on ubuntu 7.04, where do i look on gnome-look.org?
+[04:04] <kore2> Daverocks: i don't know what is it...
+[04:04] <Felarin> yeah kore2 : you can actually check with your ISP for their gateway address
+[04:04] <rmd_> metacity?
+=== xackall [n=lubastos@20150021188.user.veloxzone.com.br]  has left #ubuntu ["Ex-Chat"]
+=== haddron [n=haddron@200.204.63.200]  has joined #ubuntu
+[04:04] <Felarin> kore2 : they should know it by heart
+=== MJ_ [n=malam@216.40.38.232]  has joined #ubuntu
+[04:04] <Felarin> rmd : yes metacity, default theme for GNOME
+[04:05] <Felarin> rmd : unless you have beryl, then look for emerald themes if you aren't pushing beryl with Metacity
+[04:05] <kore2> Felarin: should I call my provider to ask him for my gateway address?
+[04:05] <rmd_> Felarin, thanks loads
+[04:05] <Felarin> yeah you can do that kore2
+[04:05] <Felarin> rmd : you're welcome
+=== skathirgamu [n=skathirg@216.40.38.232]  has joined #ubuntu
+[04:05] <kore2> Felarin: ok, i will now, just wait a minute please
+[04:05] <Felarin> kore2 : before you do, can you set your wired connection back to DHCP
+[04:05] <Felarin> and then ping 66.249.89.99
+[04:05] <Felarin> launch the terminal
+[04:05] <Felarin> and type
+[04:05] <Felarin> ping 66.249.89.99
+=== fb [n=fb@a178087.studnetz.uni-leipzig.de]  has joined #ubuntu
+=== `danny [i=danny@89-172-174-228.adsl.net.t-com.hr]  has joined #ubuntu
+[04:06] <Felarin> once you set back to DHCP
+[04:06] <lynxz> I have a problem with my DVD-drive. When I trie to copy from it my whole system slows down even if I'm not copying to my system harddrive. Playing DVD's in it produces slow slideshow.
+[04:06] <Felarin> do this in the terminal
+[04:06] <Felarin> /etc/init.d/networking restart
+[04:06] <Felarin> and then
+[04:06] <Felarin> ping 66.249.89.99
+[04:06] <SlimeyPete> lynxz: check that DMA is enabled (run "sudo hdparm /dev/dvd"
+[04:06] <SlimeyPete> )
+[04:07] <MJ_> hi sutharsan
+[04:07] <kore2> Felarin: ok
+=== KomiaPoika [n=prkl@host-85-27-68-129.brutele.be]  has joined #ubuntu
+=== darkmatter [n=darkmatt@unaffiliated/darkmatter]  has joined #ubuntu
+[04:07] <Felarin> oh
+[04:07] <Felarin> put a sudo in front of all the commands
+[04:07] <Felarin> cept ping
+[04:07] <Felarin> haha
+=== dr_willis [n=willis@74-140-6-108.dhcp.insightbb.com]  has joined #ubuntu
+[04:07] <Felarin> sudo /etc/init.d/networking restart
+[04:07] <Felarin> ping 66.249.89.99
+[04:07] <Felarin> after you set your connection back to DHCP
+[04:08] <kore2> Felarin: ok, i got it
+=== smo [i=smo@sd-9655.dedibox.fr]  has joined #ubuntu
+[04:08] <Felarin> cool
+[04:08] <kore2> Felarin: i need to disconnect now..
+[04:08] <smo> hi
+[04:08] <Felarin> brb kore2 : i will check with you once i get back
+[04:08] <Felarin> it's cool
+=== nico- [n=nico@rke75-5-82-230-124-212.fbx.proxad.net]  has joined #ubuntu
+[04:08] <kore2> ok
+=== MJ_ [n=malam@216.40.38.232]  has left #ubuntu ["Ex-Chat"]
+[04:08] <smo> if i have a special kernel installed but no headers availables can i create it ???
+=== alexxxprog [n=alessand@host136-124.pool8252.interbusiness.it]  has joined #ubuntu
+=== CyberSnooP [n=bvleur@131.155.199.227]  has joined #ubuntu
+[04:09] <sipior> smo: create what?
+[04:09] <alexxxprog> hi is anyone who can help me?
+[04:09] <alexxxprog> I have to do a bash script
+[04:09] <erUSUL> !anyone
+[04:09] <ubotu> A large amount of the first questions asked in this channel start with "Does anyone/anybody..."  Why not ask your next question (the real one) and find out?
+[04:09] <smo> the headers sipior
+[04:09] <alexxxprog> please who want to help me come with me in private
+=== kritzstapf [n=kritzsta@pD955B202.dip0.t-ipconnect.de]  has joined #ubuntu
+=== MJ [n=malam@216.40.38.232]  has joined #ubuntu
+[04:09] <smo> im on my dedicated now and thy build their own kernel but no headers available...;
+[04:10] <erUSUL> !pm | alexxxprog
+[04:10] <ubotu> alexxxprog: Please ask your questions in the channel so that other people can also benefit. Please don't PM a user in the channel without asking first, some find it rude.
+[04:10] <smo> need it to compile
+[04:10] <sipior> smo: generally, you'll want to use the headers that match your C compiler
+[04:10] <lynxz> SlimeyPete:  It wasn't but the playback is still jerky.
+[04:10] <wols> smo: either ask the place you got the kernel form for the headers, or get a new kernel where headers are available. no othe way
+[04:10] <alexxxprog> ok
+[04:10] <SlimeyPete> lynxz: DMA isn't enabled? It should be
+[04:10] <smo> humm ok
+[04:10] <alexxxprog> Create a bash procedure createdata that creates collections (directories) that that will have to contain a random number, comprised between 300 and 600, of binary files of dimension comprised between 10 Kbytes and 30 kbytes.
+[04:10] <SlimeyPete> lynxz: without DMA enabled, your drive will be very slow
+=== RabidWeezle sinks into his couch getting comfy with ubuntu
+[04:10] <wols> alexxxprog: nice homework
+[04:10] <SlimeyPete> lynxz: to enable it, do a "sudo hdparm -d 1 /dev/dvd"
+[04:10] <alexxxprog> yes
+[04:10] <lynxz> SlimeyPete: I just enabled it but it didn't do much.
+[04:11] <erUSUL> smo: if you compiled the kernl yourself the headers are in the linux source dir afaik
+[04:11] <MiMiC> Daverocks/Felarin: thank you guys for your help. I wiped out my extended partitions and linux partitions using PartitionMagic. Now ubuntu recognizes my other partitions
+[04:11] <SlimeyPete> lynxz: oh right
+[04:11] <Felarin> RabidWeezle : try some nice packages from packages.ubuntu.com
+=== cdavis [n=cdavis@affil174.aces.uiuc.edu]  has joined #ubuntu
+=== nikita [n=nik@86.57.255.230]  has joined #ubuntu
+[04:11] <Daverocks> MiMiC: cool
+=== daltocli [n=daltocli@149.254.192.195]  has joined #ubuntu
+[04:11] <RabidWeezle> ?
+[04:11] <smo> no not compiled it myself
+[04:11] <alexxxprog> who can help me?
+[04:11] <SlimeyPete> lynxz: not sure what's wrong, then, sorry :/
+[04:11] <Felarin> MiMiC : oh pqmagic... only thing is, i think linux fdisk is way faster
+=== RabidWeezle checks it out
+[04:11] <cdavis> Nautilus will not start completely, at least I cannot see all of my desktop icons, and I have no idea where to start to look.
+[04:11] <Felarin> MiMiC : but whatever works is good too.
+[04:11] <lynxz> SlimeyPete: Looks like it reset it self though
+=== instagib_wake [n=wakeup@pD9E83A0C.dip0.t-ipconnect.de]  has joined #ubuntu
+[04:12] <MiMiC> Felarin: I simply wiped the partitions out. I'm using ubuntu installer to create my new partitions
+[04:12] <sipior> alexxxprog: help do your homework? i'm guessing no one, to first order.
+[04:12] <smo> noting in /usr/src
+[04:12] <smo> damn
+[04:12] <SlimeyPete> lynxz: oh. That might indicate that the Ubuntu kernel (or just Linux kernels in general) do not support your motherboard properly
+[04:12] <Felarin> MiMiC : good, gparted is one of the best partition UI managers ever
+=== sigp239 [n=brutus@210.124.188.210]  has joined #ubuntu
+=== An4k1n [i=ox@62.225.134.181]  has joined #ubuntu
+=== Prognatus_ [n=bjorn@2.80-203-143.nextgentel.com]  has joined #ubuntu
+[04:12] <sigp239> what's the best p2p music download app?
+[04:12] <MiMiC> Felarin: thx. I will be using that for sure. Btw, I have 2 gigs RAM, should I set 2gigs or 4 gigs for SWAP?
+[04:12] <Felarin> use limewire for linux
+[04:12] <smo> 2.6.20.6dedibox-r7-beta1  in /lib/modules so wtf
+[04:13] <rmd_> how do i install these themes?  if i go to theme/install theme and choose the .gz or .bz2 file it doesn't load colors or anything
+[04:13] <Felarin> 4 gig
+[04:13] <Khrajin|sleep> sigp239: your local music store
+[04:13] <MiMiC> k thx
+[04:13] <Felarin> anything above 1 GB of RAM, double it instead of 1.5 for SWAP
+[04:13] <lynxz> SlimeyPete: It used to work fine while I ran Gentoo
+[04:13] <cdavis> if i hover over the desktop I get the little wait clock
+[04:13] <Felarin> 2 GB = 4 GB swap
+=== kore2 [n=ubuntu@89.35.100.77]  has joined #ubuntu
+[04:13] <MiMiC> okay
+=== ircleuser [n=lotylyhr@24.144.2.10]  has joined #ubuntu
+=== jordy [n=jordy@ip503dd9b4.speed.planet.nl]  has joined #ubuntu
+=== Bombjack [n=cato@237.80-202-64.nextgentel.com]  has left #ubuntu []
+[04:13] <ircleuser> hello
+[04:13] <ircleuser> can anyone help me?
+[04:13] <Khrajin|sleep> !ask
+[04:13] <ubotu> Don't ask to ask a question. Just ask your question :)
+[04:13] <Felarin> rmd_ : very easy to install, no need to unzip or decompress em
+=== TeTeT [n=spindler@217.237.166.98]  has joined #ubuntu
+[04:14] <rmd_> Felarin, but it isn't installing them correctly
+[04:14] <Felarin> rmd : just go to System -- Preferences -- Themes and click on install themes
+[04:14] <kore2> Felarin: i can ping when i set to dhcp and after I restart the networking i get: there is already a pid file /var/run/dhclient.eth0.ping with pid 16683, killed old client process, removed pid file
+[04:14] <RabidWeezle> heh, they got pearpc for linux
+[04:14] <Felarin> kore2 : you can ping?
+=== RabidWeezle uses that on his windows machine
+[04:14] <Felarin> launch your browser
+[04:14] <Felarin> and type 66.249.89.99 in the address bar
+=== vecna_ [n=vecna@vecna.vecnix.net]  has joined #ubuntu
+[04:14] <rmd_> Felarin, it's not working correctly.  it won't change the colors of the windows.  just the decorations.
+[04:15] <kore2> Felarin: i tried but it doesnt work
+[04:15] <Felarin> rmd : depends on the version of the theme, some of the themes are outdated
+=== |Element| [n=Element@221.4.137.132]  has joined #ubuntu
+[04:15] <CapriCorn^80> wats gdm and kdm ?
+[04:15] <Felarin> you can ping
+[04:15] <Felarin> but you can't go to the address?
+[04:15] <Felarin> hmm..
+[04:15] <Felarin> did you try 66.249.89.99 in the address bar of your browser?/
+[04:15] <Felarin> gdm is the process name for gnome
+[04:15] <Khrajin|sleep> CapriCorn^80: Gnome Desktop Manager and KDE Desktop Manager, respectively
+[04:15] <Felarin> and kdm is the process name for kde
+=== nico- [n=nico@rke75-5-82-230-124-212.fbx.proxad.net]  has joined #ubuntu
+[04:15] <kore2> Felarin: yes...
+[04:15] <cdavis> it seems I have a link or something that the nautilus doesn't like to deal with on my desktop because if I move all items from the /Desktop nautilus works as normal again
+[04:15] <wols> CapriCorn^80: display managers
+=== omnius [n=chatzill@203-206-222-25.dyn.iinet.net.au]  has joined #ubuntu
+[04:16] <Felarin> can you ping www.google.com now?
+[04:16] <Khrajin|sleep> CapriCorn^80: The two most common gui's for linux
+=== Gabrie1 [n=usuario@201-75-176-2-nd.cpe.vivax.com.br]  has joined #ubuntu
+=== miip [n=miip@p54A56362.dip.t-dialin.net]  has joined #ubuntu
+=== lasking [n=bulala@222.241.100.136]  has joined #ubuntu
+[04:16] <Gabrie1> hi ^^
+[04:16] <Felarin> if you can ping, nothing is wrong with your hardware
+=== MJ [n=malam@216.40.38.232]  has joined #ubuntu
+[04:16] <kore2> Felarin: now I have my cable into my pc, I have to do the change to ping..
+[04:16] <CapriCorn^80> ok i have get kde using apt-get and after that i configured it with kdm i hope my sytem will not crash
+=== owner_ [n=owner@80-235-45-192-dsl.mus.estpak.ee]  has joined #ubuntu
+[04:16] <MiMiC> Felarin: I am having trouble allocating Partitions. It seems that I cannot create 4 primary partitions and 1 extended.
+=== albert [n=albert@e176026086.adsl.alicedsl.de]  has joined #ubuntu
+[04:16] <kore2> Felarin: then I have to configure myself my eth0, right?
+[04:16] <Felarin> you CANT of course
+=== mwe [n=mwe@unaffiliated/mwe]  has joined #ubuntu
+=== grevier [n=grevier@125.162.205.49]  has joined #ubuntu
+[04:17] <CapriCorn^80> coz after doing that its unpacking the softwares and i can one line Database not available
+[04:17] <MiMiC> Felarin: i thought 4 primary was acceptable...
+[04:17] <kore2> Felarin: and I need that Gateway address... should I call my provider to get it?
+[04:17] <Gabrie1> people... i'm trying to connect using winmodem but gnome cant recognize my modem driver automaticaly... what should i do?
+=== ericx_2 [n=jxtadev@180.30.118.125.broad.hz.zj.dynamic.163data.com.cn]  has joined #ubuntu
+[04:17] <Felarin> mimic : i tried that before, i tried 3 primary and 1 extended and it works
+[04:17] <grevier> jajaja
+[04:17] <lasking> who know what happened at 1989.6.4 beijing china?
+[04:18] <Felarin> kore2 : yeah you should, then set manual with the gateway address and try
+=== pentolino [n=riccardo@host28-35-dynamic.58-82-r.retail.telecomitalia.it]  has joined #ubuntu
+=== motin_ [n=motin@c-7695e255.19-15-64736c14.cust.bredbandsbolaget.se]  has joined #ubuntu
+=== siegfriedwu [n=siegf@60.26.131.233]  has joined #ubuntu
+[04:18] <kore2> Felarin: ok..
+[04:18] <MiMiC> Felarin: okay thx I will do that instead (wipe my RECOVERY partition, no need :P)
+=== yoda [n=yoda@fwbox.uevora.pt]  has joined #ubuntu
+=== vecna_ [n=vecna@vecna.vecnix.net]  has joined #ubuntu
+=== grevier is now known as Ocep
+[04:18] <kore2> Felarin: so there is no other way to get Gateway address, right?
+=== gcst [i=stenzel@nat/ibm/x-5b2668367b484c2c]  has joined #ubuntu
+=== kraut [n=kraut@blackhole.packetloss.biz]  has joined #ubuntu
+[04:18] <pawitp> Mimic: An extended partition is "a kind of" primary partition
+=== MJ [n=malam@216.40.38.232]  has joined #ubuntu
+=== lasking [n=bulala@222.241.100.136]  has left #ubuntu []
+[04:18] <omnius> man took on tank
+[04:18] <CapriCorn^80> is there any site which can scan n detect wireless drivers automatically for ubuntu edgy ?
+[04:19] <Felarin> kore2 : yeah, your ISP should be the one to get it from, a router could possibly also get it automatically. By right, DHCP shouild get it automatically too
+[04:19] <Felarin> Capricorn : Install network-manager-gnome
+=== siegfriedwu [n=siegf@60.26.131.233]  has left #ubuntu []
+[04:19] <dr_willis> CapriCorn^80,  id be impressed at such a site.
+[04:19] <Felarin> if you can use WPA with your WPA card, your drivers are fine
+[04:19] <Felarin> if you can only use WEP
+[04:19] <kore2> Felarin: ok, let me see
+=== scarter__ is now known as scarter
+=== yoda [n=yoda@fwbox.uevora.pt]  has joined #ubuntu
+[04:20] <Felarin>  you might need to check if ndiswrapper can be used with your model
+[04:20] <omnius> CapriCorn: i use Wicd
+=== alexxxprog [n=alessand@host136-124.pool8252.interbusiness.it]  has left #ubuntu []
+[04:20] <Khrajin|sleep> Try using KNetworkManager
+[04:20] <Felarin> kore2 : i can guarantee you that it's not your hardware now, lol, it's all configuration, DHCP is being screwed, did you try restarting as well?
+=== Khrajin|sleep is now known as Khrajin
+=== pentolino [n=riccardo@host28-35-dynamic.58-82-r.retail.telecomitalia.it]  has left #ubuntu []
+=== tru_`z24 [n=truz_`24@74-129-166-232.dhcp.insightbb.com]  has joined #ubuntu
+[04:20] <kore2> Felarin: yeah, I tried
+=== twixi [n=twixi@chb28-2-88-163-36-112.fbx.proxad.net]  has joined #ubuntu
+[04:21] <Felarin> alright, just use manual from now on
+[04:21] <Felarin> get the gateway address
+[04:21] <omnius> is there a way to bridge NIC's?
+=== MrC_ [n=charlles@dsl-hkibras-fe2df900-192.dhcp.inet.fi]  has joined #ubuntu
+[04:21] <MiMiC> Felarin: can SWAP be on a extended partition?
+=== zeroflag [i=root@213-146-165-196.kunde.vdserver.de]  has left #ubuntu []
+[04:21] <sipior> omnius: yep, check out brctl
+[04:21] <omnius> MiMiC: Mine is
+=== Superstar [n=Supersta@89-180-128-129.net.novis.pt]  has joined #ubuntu
+=== yoda [n=yoda@fwbox.uevora.pt]  has joined #ubuntu
+[04:21] <Felarin> MiMiC : never tried, maybe someone else knows.
+=== MJ [n=malam@216.40.38.232]  has joined #ubuntu
+[04:21] <Felarin> i don't think gparted allows you to choose
+[04:21] <MiMiC> omnius: hmm okay thanks i'll try that setup then
+[04:21] <Khrajin> MiMiC: I thougth a SWAP partition was it's own extension al together....
+[04:22] <Felarin> yep khrajin
+[04:22] <Felarin> i believe khrajin is right
+=== jonathan__ [n=jonathan@202.137.6.90]  has joined #ubuntu
+[04:22] <Felarin> a SWAP partition is on it's own
+[04:22] <MiMiC> Felarin: I can use Acronis Disk Director to make it happen
+=== atlas95 [n=atlas@fw-asn2.ornis.com]  has joined #ubuntu
+[04:22] <Felarin> Linux itself can be run on a logical part
+[04:22] <Khrajin> It is its own system because it's like temporary disk space.
+[04:22] <Felarin> using that theory, if you can make it happen
+[04:22] <Felarin> it should work
+[04:22] <Khrajin> extra ram
+[04:22] <MiMiC> oh
+=== jintxo [n=jintxo@119.Red-88-6-166.staticIP.rima-tde.net]  has joined #ubuntu
+[04:22] <Felarin> but i have no idea how to make it happen
+[04:22] <Felarin> yeah
+[04:22] <Gabrie1> anyone can help me with dialup conection?
+[04:22] <jonathan__> hello everbody
+[04:22] <Felarin> it's like your PAGE file in Windows
+[04:23] <Felarin> that's what your SWAP drive is
+=== stevej [n=stevej@mail.joneslinux.com]  has left #ubuntu []
+[04:23] <MiMiC> yes that I know...
+[04:23] <Felarin> cept in Windows, page file = 1.5 x your actual physical RAM
+[04:23] <jonathan__> anyone can help me to find the original directory of software?
+[04:23] <MiMiC> hmm i'll try installing ubuntu on logical partiiton then... hopefully it will boot
+[04:23] <jonathan__> I looking for my wine
+[04:23] <Felarin> jonathan : what software?
+[04:23] <Felarin> try this command
+=== hasta [n=hasta@57.24-241-81.adsl-dyn.isp.belgacom.be]  has joined #ubuntu
+[04:23] <Felarin> whereis wine
+[04:23] <Felarin> in the terminal
+[04:23] <Khrajin> Felarin: But Swap actually works right vs taking up your writable hdd space lolol
+=== tpwru [n=BackOffi@h-68-165-61-112.chcgilgm.dynamic.covad.net]  has joined #ubuntu
+[04:23] <jonathan__> I'm already installed those wine
+[04:23] <Felarin> ooh wine?
+=== hasta [n=hasta@57.24-241-81.adsl-dyn.isp.belgacom.be]  has left #ubuntu ["Quitte"]
+[04:23] <jonathan__> and working well
+[04:23] <Felarin> go to your /home/name directory
+=== secleinteer [n=scl@70.230.171.248]  has joined #ubuntu
+[04:23] <Felarin> it should be in a folder named .wine
+[04:23] <jonathan__> in the first time
+[04:24] <Felarin> cd .wine
+=== vero39 [n=vero@57.24-241-81.adsl-dyn.isp.belgacom.be]  has joined #ubuntu
+[04:24] <Bitmess> sipior,  did I miss something?
+[04:24] <Khrajin> home ./.wine/
+=== haddron [n=haddron@200.204.63.200]  has joined #ubuntu
+[04:24] <Felarin> yep
+[04:24] <jonathan__> and located in my accesoris
+[04:24] <Felarin> /home/youraccountname/.wine
+[04:24] <sipior> Bitmess: sorry, about what?
+=== sppatel [i=sppatel@nat/ibm/x-5cfce06d430998aa]  has joined #ubuntu
+=== vero39 [n=vero@57.24-241-81.adsl-dyn.isp.belgacom.be]  has left #ubuntu ["Quitte"]
+[04:24] <MiMiC> Felarin: you can change the pagefile size under windows
+[04:24] <MiMiC> :P
+[04:24] <Felarin> yes i know
+[04:24] <Felarin> but the proper CALCULATION
+[04:24] <Bitmess> sipior,  about knoppix sources.list. :)
+[04:24] <ircleuser> hello
+[04:24] <Felarin> = 1.5 x Physical RAM
+[04:24] <jonathan__> but I don't know where is those original files on
+[04:24] <Felarin> and i believe you can resize SWAP partitions.
+=== ircleuser is now known as johnschroeder
+[04:24] <Khrajin> MiMiC: your pagefile takes up actual disk space vs swap is a seperate partition
+[04:25] <Felarin> yep
+[04:25] <johnschroeder> how is everyone?
+[04:25] <Felarin> there are differences between swap and pagefile
+[04:25] <sipior> Bitmess: i couldn't tell you, i don't know much about it myself
+[04:25] <pawitp> Felarin: There is never a proper calculation, but rather reasonable calculation
+[04:25] <MiMiC> yup
+[04:25] <johnschroeder> i have a quick question about ubunto server version 7
+[04:25] <Felarin> SWAP = more efficient
+[04:25] <jonathan__> anybody can help me to find winehq application?
+=== whar [n=tellu@209.8.41.54]  has joined #ubuntu
+[04:25] <Felarin> pawitp : yep
+[04:25] <Khrajin> MiMiC: go to your regular c:\ and look for pagefile.sys or something like that, it will bel ike 3 gb (or whatever you set it to)
+[04:25] <johnschroeder> i installed it and there is no GUI
+=== digitalspaghetti [n=digitals@host217-37-122-77.in-addr.btopenworld.com]  has joined #ubuntu
+[04:25] <MiMiC> 512MB :P
+[04:25] <Bitmess> sipior,  thanks
+[04:25] <Khrajin> !wine
+[04:25] <ubotu> wine is a compatibility layer for running Windows programs on GNU/Linux. See https://help.ubuntu.com/community/Wine for more information.
+[04:25] <digitalspaghetti> i'm ordering a new PC - my option is ATi or nVidia?
+[04:25] <jonathan__> yes
+[04:25] <Felarin> john : i believe it's all CLI
+[04:25] <Khrajin> DigitallyStoned: Gaming?
+[04:25] <MiMiC> digital: what do u wanna do? gaming?
+[04:25] <pawitp> You can have a swap file but it'll be lower performance than a swap partition
+[04:25] <whar> is there any site that can detect and install driver of my wireless card ?
+[04:25] <thirdy> What's the forumw.org for Linux?
+[04:25] <Gabrie1> plz.. someone help me with dialup conection
+[04:25] <jonathan__> and I'm already installed wine
+[04:26] <digitalspaghetti> nahh, it's for work
+[04:26] <Felarin> john : you'd have to manually install a UI if  you want one with the server.
+[04:26] <jonathan__> and already installed vlc
+[04:26] <digitalspaghetti> i was stability
+[04:26] <jonathan__> but
+[04:26] <digitalspaghetti> i'll be doing a lot with video
+[04:26] <johnschroeder> i see
+[04:26] <Khrajin> DigitallyStoned: ATI is harder to get drivers for because they are persnickety about the data and nVidia is easy to get them
+[04:26] <jonathan__> now the shortcut
+[04:26] <MiMiC> digital: nvidia has great support on ubuntu. ati has only open-sourced drivers. they might or might not work that well
+[04:26] <scarter> read quite a bit... many options assume you are adding additional packages to create a custom cd and not replacing existing old packages with their security/version update debs...  i was thinking of something like a slipstreaming process to create an updated install cd of the same version. any website suggestions?
+[04:26] <jonathan__> is gone
+[04:26] <Khrajin> DigitallyStoned: Otherwise, person preference
+[04:26] <Pici> !enter | jonathan__
+[04:26] <ubotu> jonathan__: Please try to keep your questions/responses on one line - don't use the "Enter" key as punctuation!
+[04:26] <thirdy> Or any site wer I can download commercial games for linux?
+[04:26] <johnschroeder> how hard is that? lol
+[04:26] <johnschroeder> i am a linux newbie
+[04:26] <jonathan__> ok
+[04:26] <digitalspaghetti> so go for the nVidia if i want stability then
+=== RabidWeezle plays some "craft"
+[04:27] <Khrajin> digitalspaghetti: Not stability, ease of installation
+[04:27] <MiMiC> khrajin: also stability :D
+[04:27] <pawitp> digitalspaghetti:Go for nVidia if you want linux, just that
+[04:27] <Khrajin> DigitallyStoned: And try not to get something thats super brand new.
+[04:27] <sipior> johnschroeder: "sudo aptitude install gnome" should do it
+[04:27] <Khrajin> MiMiC: I'm running an ati card and its
+=== iDN [n=ido@bzq-84-108-61-90.cablep.bezeqint.net]  has joined #ubuntu
+[04:27] <jonathan__> my wine shortcut are gone and I can't find where those file originally installed
+=== El_Burro [n=El@82-69-26-123.dsl.in-addr.zen.co.uk]  has joined #ubuntu
+=== Khrajin ping time
+[04:27] <digitalspaghetti> i'll have a dual boot, so ok, nvidia it is then :)
+[04:27] <Khrajin> out*
+=== Mandalore [n=dagmar@80.78.170.1]  has joined #ubuntu
+=== inflex [n=PLD@171.156.240.220.dynamic.dsl.comindico.com.au]  has joined #ubuntu
+[04:27] <MiMiC> khrajin: were u able to run beryl/compiz?
+[04:28] <inflex> hi, I need to install a commercial rpm package in Ubuntu - how do I install rpm's in Ubuntu?
+[04:28] <whar> is there any site that can detect and install driver of my wireless card ?
+=== foolsout is now known as fools
+[04:28] <Khrajin> MiMiC: Havn't tried,l but I can run WOW
+[04:28] <Pici> jonathan__: If you install a windows app with wine it gets installed to ~/.wine/drive_c/
+[04:28] <sipior> johnschroeder:  better would be "sudo aptitude install ubuntu-desktop" should do it
+[04:28] <dr_willis> !rpm
+[04:28] <ubotu> RPM is the RedHat Package Management system. Ubuntu uses !APT, not RPM. RPM packages are not supported (the package "alien" can allow installing them, but it's quite dangerous)
+[04:28] <inflex> (so long as the files are installed, it's okay - I can make the startup bits
+[04:28] <Felarin> johnschroeder : try CentOS if you need a server with UI, or if you just need linux with UI, grab Ubuntu Desktop, should help you since you dont know how to install X and a dm
+[04:28] <jonathan__> ok
+=== inflex uses alien
+=== digitalspaghetti [n=digitals@host217-37-122-77.in-addr.btopenworld.com]  has left #ubuntu []
+[04:28] <jonathan__> now I want to find files called: 'winefile'
+[04:28] <Felarin> and CentOS uses RPM
+[04:28] <MiMiC> khrajin: nice! and ur using open-sourced drivers?
+=== Mr_Jam [n=jam@190.140.5.142]  has left #ubuntu ["Ex-Chat"]
+[04:28] <johnschroeder> really
+[04:29] <johnschroeder> so that is all i got to type interesting
+[04:29] <pawitp> jonathan__: isn't winefile a file manager for wine
+[04:29] <Khrajin> MiMiC: yeah
+[04:29] <johnschroeder> i will try that
+=== Dexadia [n=MPH@cpe-69-205-239-1.stny.res.rr.com]  has joined #ubuntu
+=== damejiar [i=damejiar@sv-cpe-dynamic-190-53-1-44.amnetsal.com]  has joined #ubuntu
+[04:29] <Felarin> yeah
+[04:29] <Khrajin> MiMiC: FGLRX
+[04:29] <Felarin> you can also apt-get
+[04:29] <thirdy> Do you use anti-virus in linux?
+[04:29] <Felarin> but you need a net connection on your ubuntu box
+[04:29] <jonathan__> I want to make a new shortcut for winefile
+=== inflex [n=PLD@171.156.240.220.dynamic.dsl.comindico.com.au]  has left #ubuntu ["wrong]
+[04:29] <Khrajin> Can anyone see this if this site is up please? http://70.191.82.58/
+[04:29] <Felarin> yeah you can, but it's pointless thirdy
+[04:29] <Pici> jonathan__: winefile should be in your path, you shouldnt have to find what directory its in.  But if you really want to know, type `whereis winefile`
+[04:30] <thirdy> why?
+[04:30] <Felarin> for new users, i suggest AVGfree for linux, they have a deb package on their site
+[04:30] <thirdy> I'm new to linux
+[04:30] <wols> thirdy: pretty much no one does except to scan for windows viruses.e.g. when you run a mailserver
+[04:30] <iDN> Hi, I have another problem. I have downloaded StarDict, converted my Babylon dictionaries to its format using convdict, put them in the dic folder of StarDict.Everything work fine but the encoding of the language does not allow me to see the translation. Any help?
+[04:30] <Felarin> cause Linux dosent need an anti-virus
+=== LjL [n=ljl@ubuntu/member/ljl]  has joined #ubuntu
+[04:30] <jonathan__> oh...
+[04:30] <Toma-> Khrajin: nope
+[04:30] <jonathan__> I'll try
+[04:30] <johnschroeder> it is unfamiliar with the command apitude
+[04:30] <wols> thirdy: you don't need it. neither do you need a firewall
+[04:30] <johnschroeder> ?????
+[04:30] <Khrajin> Any suggestions why apache ha it up last night and its down today?
+[04:30] <Felarin> there has not been one single successful linux virus to date. You might wanna get rkhunter to check for rootkits though
+=== magnuse [n=magnuse@gw.sbg.se]  has joined #ubuntu
+[04:30] <Toma-> Khrajin: i can ping it
+[04:30] <sipior> johnschroeder: try apt-get, instead then
+[04:30] <thirdy> ok
+[04:30] <wols> Felarin: there have been succuessful ones
+[04:30] <Toma-> Khrajin: did you restart?
+[04:30] <thirdy> then site adsivor is enough
+[04:30] <Khrajin> Toma-: No, should I?
+[04:31] <verahsa> thirdy: the reason it's pointless is because the people writing virii generally don't write them for linux, and windows binaries (.exe files, etc) won't run natively on linux. add on top of that that linux is fairly secure on its own out of the box
+[04:31] <Toma-> Khrajin: nope
+[04:31] <jonathan__> ok
+=== visham [n=visham@59.96.43.36]  has joined #ubuntu
+[04:31] <johnschroeder> i tried that still no luck
+[04:31] <pawitp> wols: You should still use iptables
+[04:31] <Felarin> tthere can't p;ossibly be because of most linux versions using restricted accounts
+[04:31] <Felarin> how can they then spread?
+[04:31] <visham> hi folks
+[04:31] <jonathan__> I find it
+[04:31] <mh_le> how does one send an email from the command line?
+[04:31] <Felarin> none have spread successfully
+[04:31] <sipior> johnschroeder: could you show exactly what you typed?
+[04:31] <wols> pawitp: wrong
+[04:31] <visham> i need some help installing a usb modem on breezy
+[04:31] <Felarin> because of the fact that linux users, mostly don'
+=== gly_ [n=gly@hundmat.ros.sgsnet.se]  has joined #ubuntu
+=== ahmed [n=ahmed@196.204.154.167]  has joined #ubuntu
+[04:31] <Felarin> use root accounts
+=== Becc [n=crazybex@C-210-10-137-133.can.connect.net.au]  has joined #ubuntu
+=== vecna_ [n=vecna@vecna.vecnix.net]  has joined #ubuntu
+[04:31] <MrC_> anyone in here using ubuntustudio?
+[04:32] <wols> pawitp: you either don't open a certain port when it's bad (e.g. mysql) or you open it. (e.g. apache http server). no need for a firewall. especially not for people new to linux
+[04:32] <erUSUL> visham: adsl?
+=== Elko [n=elko@cp34987-a.roose1.nb.home.nl]  has joined #ubuntu
+[04:32] <johnschroeder> sudo apitude install ubuntu-desktop
+[04:32] <Felarin> keep in mind that viruses are meant to spread, rootkits are diff altogether.
+[04:32] <iDN> Someone?
+[04:32] <ahmed> how to set the default mp3 player to be amorak ?
+[04:32] <Khrajin> Ontop of all that Windows users are generally all admin accounts so that is how it gets really bad
+[04:32] <johnschroeder> sudo apt get install ubuntu-desktop
+[04:32] <Felarin> try sudo apt-get install ubuntu-desktop
+[04:32] <sipior> johnschroeder: aptitude is spelled wrong
+=== atlas95 [n=atlas@fw-asn2.ornis.com]  has joined #ubuntu
+[04:32] <Pici> mh_le: Take a look at the mail manpage.
+[04:32] <johnschroeder> haha
+[04:32] <jonathan__> thank you all for you help
+[04:32] <clever> if i have a dualboot setup could i say put ubuntu into hibernation and boot into the other os?
+[04:32] <johnschroeder> darn
+[04:32] <Elko> How could I convert a mp4 movie file to avi?
+[04:32] <Khrajin> Elko: VLC
+[04:32] <ahmed> how to set the default mp3 player to be amorak ?
+[04:32] <pawitp> Felarin: if linux users start running mail attachment(i.e. installer) which is a virus, they will spread (probably won't happen)
+=== lmr [n=lmr@32.104.18.240]  has joined #ubuntu
+[04:32] <johnschroeder> ok
+[04:32] <johnschroeder> it is now installing
+[04:32] <Elko> Khrajin: That converts, next to playing it?
+=== Mikelevel [n=MoVeWoRk@60.Red-80-25-210.staticIP.rima-tde.net]  has joined #ubuntu
+=== dv_ [n=dv@pnsgw3-client181.demo.tuwien.ac.at]  has joined #ubuntu
+[04:32] <johnschroeder> but it looks like it is installing the desktop
+[04:32] <Felarin> pwaitp : if it could happen, it would have happened years ago
+[04:33] <Felarin> it's not like malicious users don't target linux boxes, they do
+[04:33] <johnschroeder> what will that do for me? give me the gui? or desktop edition of ubuntu
+[04:33] <Toma-> Khrajin: did your router/firewall get reset or anything like that over night?
+[04:33] <Khrajin> Elko: Aye, Look around in the file tab
+[04:33] <Felarin> but it's not easy to do as much dmg, as say.. on a Windows box.
+[04:33] <visham> erUSUL, yes its a adsl modem
+[04:33] <erUSUL> !adsl | visham
+[04:33] <Felarin> because of the way accounts work in Linux.
+[04:33] <pawitp> Felarin: They're targeting servers not newbies
+[04:33] <Felarin> yep, but a lot of us run servers too
+[04:33] <Pici> !offtopic
+[04:33] <ubotu> visham: Setting up an ADSL/PPPoE connection? Look at https://help.ubuntu.com/community/ADSLPPPoE
+[04:33] <ubotu> #ubuntu is the Ubuntu support channel, #ubuntu+1 supports the development version of Ubuntu and #ubuntu-offtopic is for random chatter. Welcome!
+[04:33] <Felarin> i am more afraid of rootkits to be honest
+=== tpwru [n=BackOffi@h-68-165-61-112.chcgilgm.dynamic.covad.net]  has left #ubuntu []
+[04:33] <Felarin> get rootkit hunter
+[04:33] <Tinned_Tuna> rootkits?! WHERE
+[04:34] <johnschroeder> sipior?
+=== Tinned_Tuna dives for cover
+[04:34] <Felarin> compile and install and type sudo rkhunter -c -sk
+[04:34] <erUSUL> visham: in that page you wil find instruccions for dsl modems
+[04:34] <sipior> johnschroeder: yes?
+[04:34] <Felarin> checks your system for rootkits
+[04:34] <johnschroeder> what will that do for me? give me the gui? or desktop edition of ubuntu
+[04:34] <pawitp> rootkits!?
+[04:34] <sipior> johnschroeder: yes to both
+=== matri [n=matri@58.34.95.63]  has joined #ubuntu
+[04:34] <Felarin> john : give you the GUI
+[04:34] <johnschroeder> k
+[04:34] <Felarin> it changes server to desktop?
+[04:34] <Felarin> i didn't know that
+[04:34] <Pici> Felarin: yes.
+[04:34] <hwilde> why doesn't mozilla firefox come with java plugin?   this manual install does not work!
+=== kritzstapf [n=kritzsta@pD955B202.dip0.t-ipconnect.de]  has joined #ubuntu
+=== rmd_ [n=jason@c-24-98-234-179.hsd1.ga.comcast.net]  has joined #ubuntu
+[04:34] <Felarin> oh damn, that's lame
+[04:35] <Felarin> what if i installed X and GNOME on my own?
+[04:35] <Tinned_Tuna> hwilde: automatix2 :)
+[04:35] <pawitp> Felarin: stop using closed source drivers
+[04:35] <LjL> !automatix
+[04:35] <ubotu> Automatix2 is a script that tries to install some software, and often fails and breaks systems. We don't provide support for it, and we strongly discourage its use. Problems caused by Automatix are often hard to track and solve, and it might sometimes be easier to !install a fresh copy of Ubuntu. See also !WorksForMe
+[04:35] <Pici> !automatic | Tinned_Tuna
+[04:35] <ubotu> Sorry, I don't know anything about automatic - try searching on http://bots.ubuntulinux.nl/factoids.cgi
+[04:35] <MiMiC> hwilde: www.ubuntuguide.org
+=== ana [n=ana@ACBC350E.ipt.aol.com]  has joined #ubuntu
+=== slash [n=slash@i53874052.versanet.de]  has joined #ubuntu
+[04:35] <Tinned_Tuna> !automatix | hwilde
+[04:35] <Felarin> pawitp : =.=
+[04:35] <ubotu> hwilde: please see above
+[04:35] <Pici> LjL: do you have automatix on hilight?
+[04:35] <Felarin> lol
+[04:35] <rmd_> ok, i've installed a theme, but it isn't showing all the theme options or changing the colors on the windows.  any ideas?  ubuntu 7.04 fres install, trying ti install ATER theme
+=== bipolar [n=bflong@216-164-162-138.pa.subnet.cable.rcn.com]  has joined #ubuntu
+[04:36] <LjL> Pici, i don't disclose my highlights :)
+[04:36] <hwilde> All of your ! links are not helpful.  I have downloaded the jre .bin from the java site and it will not install manually.  this should not be so difficult
+[04:36] <visham> erUSUL, i checked that page already its about draper and it tells u how to set up a adsl modem using a network card
+=== FP [n=federico@62-101-126-216.ip.fastwebnet.it]  has joined #ubuntu
+[04:36] <visham> i want to connect a adsl usb modem on breezy
+=== Khrajin [n=Khraji@ip70-191-82-58.sb.sd.cox.net]  has joined #ubuntu
+[04:36] <MiMiC> hwilde: sudo synaptic, search for "jre", and install it there
+[04:36] <Khrajin> Toma-: Highly likely. What would I have to do in that case?
+[04:36] <Felarin> hwilde : grab the mozilla-java-plugin DEB package from packages.ubuntu.com
+[04:36] <Felarin> it's a lot less troublesome
+[04:37] <Toma-> Khrajin: open the ports to connect
+[04:37] <hwilde> Felarin, yes now this is helpful
+[04:37] <Felarin> yeah, that website is easy mode
+[04:37] <Felarin> and it shows you ALL dependencies too
+=== davemicc [n=david@cpe-071-071-001-026.triad.res.rr.com]  has joined #ubuntu
+[04:37] <Felarin> so if you need to grab anything else, just do and put them all in one folder
+[04:37] <Felarin> and go to term
+[04:37] <Felarin> go to the folder
+=== RabidWeezle installs midnight commander
+[04:37] <Felarin> and type sudo dpkg -i *.deb
+[04:37] <LjL> Felarin: uhm, and i missing something?
+[04:37] <Felarin> and bam, you have everything
+[04:37] <dr_willis> hwilde,  the java wiki page - last i looked mentioned the exact package to install with the package manager to get the sun java. it wasent that hard.
+[04:38] <Khrajin> Toma-: The router was power cycled, and the settings are still good to pass 80 thru
+[04:38] <Toma-> Khrajin: id say give a restart of the httpd a start. not the wqhole computer
+=== Sgt [n=kowalski@200.181.176.63]  has joined #ubuntu
+[04:38] <dr_willis> hwilde,  i havent needed to install the .bin in ages.
+[04:38] <LjL> Felarin: the packages at packages.ubuntu.com are the packages available in the repositories, so why do it in such awkward way?
+=== RabidWeezle skips all that and just uses synaptic
+[04:38] <Toma-> Khrajin: ahh ok
+[04:38] <whar> tell me some best tools for configuring wireless on ubuntu edgy ???
+[04:38] <Khrajin> Toma-: How do I do that?
+[04:38] <Felarin> cause sometimes, their apt sources list are so screwed up
+[04:38] <Felarin> it's best to go that way
+[04:38] <visham> hey adsl usb modem help needed
+=== tavl_ [n=tavl@cinnet.cin.ufpe.br]  has joined #ubuntu
+=== matri [n=matri@58.34.95.63]  has left #ubuntu ["Leaving"]
+[04:38] <Felarin> and windows users who are switching just love websites that have everything
+[04:38] <jonathan__> anybody know how to get a mac address
+[04:38] <LjL> Felarin: i doubt that highly. if sources.list is broken, it must be fixed, or the system will break anyway
+[04:38] <Felarin> seeing a blackscreen gives them jitters
+=== DBO [n=DBO@unaffiliated/dbo]  has joined #ubuntu
+[04:38] <MiMiC> whar: networkmanager, or just install/upgrade to feisty
+=== Ketzal [n=Shinomur@145.pool85-50-206.dynamic.orange.es]  has joined #ubuntu
+[04:38] <Toma-> Khrajin: something like 'sudo /etc/init.d/httpd (or apache2) restart'
+[04:38] <hwilde> dr_willis, firefox goes to the find plugin link, locates jre and goes to manual install, that points to this page: http://java.com/en/download/index.jsp  I tried both the rpm.bin and the .bin and it doesn't work
+[04:39] <RabidWeezle> beats blue screens
+[04:39] <LjL> Felarin: there's Synaptic, no need for a black screen. your advice is very misleading, seriously.
+[04:39] <Felarin> it may not be broken, but some sources may be commented out.
+[04:39] <jonathan__> if in command prompt we must use getmac
+[04:39] <Pici> jonathan__: ifconfig shows it under HWaddress
+[04:39] <Felarin> they told him about synaptic
+=== Karri [n=karri@hoasb-ff02dd00-141.dhcp.inet.fi]  has joined #ubuntu
+[04:39] <slash> ...
+[04:39] <jonathan__> but in terminal?
+[04:39] <Felarin> but it isn't what he wants
+[04:39] <jonathan__> oh...
+[04:39] <Tinned_Tuna> jonathan__: it should be there automatically, a MAC address is your NIC's hardware address ?
+=== crockodie [n=tech123@cable-202-8-235-235.d-one.net]  has joined #ubuntu
+[04:39] <LjL> hwilde: what was the problem again? you're trying to get Java working?
+[04:39] <jonathan__> ifcofig
+=== w4ett [n=don@24-159-74-250.dhcp.jcsn.tn.charter.com]  has joined #ubuntu
+[04:39] <Pici> jonathan__: ifconfig
+[04:39] <RabidWeezle> synaptic rocks :)
+[04:39] <whar> tell me some best tools for configuring wireless on ubuntu edgy ???
+[04:39] <jonathan__> ifconfig
+[04:39] <LjL> hwilde: as in, "working for applets in a web browser"?
+[04:39] <rmd_> okay.  i'm trying to install a theme... any theme... none of the theme files i've downloaded will change the color scheme of metacity/gtk, whatever....
+[04:39] <LjL> !wifi > whar    (whar, see the private message from Ubotu)
+[04:39] <Pici> jonathan__: you need to type it in a terminal
+[04:39] <jonathan__> just like ipconfig hah?
+[04:39] <wols> whar: an editor
+[04:39] <MiMiC> hwilde: simplest solution :D "sudo aptitude install sun-java6-jre sun-java6-plugin sun-java6-fonts"
+[04:39] <jonathan__> ini windows
+[04:39] <shiftplusone> does anyone know a support channel for sound issues?
+[04:39] <Khrajin> Toma-: http://70.191.82.58/ ?
+[04:39] <LjL> !enter | jonathan__
+[04:39] <ubotu> jonathan__: Please try to keep your questions/responses on one line - don't use the "Enter" key as punctuation!
+[04:39] <dr_willis> hwilde,  you DONT want to let firefox do it. You just need to install the  sun-java6-jre - Sun Java(TM) Runtime Environment (JRE) 6 (architecture independent files)  Package
+=== kowalski_ [n=kowalski@200.181.176.63]  has joined #ubuntu
+=== slash [n=slash@i53874052.versanet.de]  has joined #ubuntu
+[04:40] <LjL> shiftplusone: no, there's this channel.
+[04:40] <LjL> !sound > shiftplusone    (shiftplusone, see the private message from Ubotu)
+[04:40] <jonathan__> ok
+[04:40] <Toma-> Khrajin: still no go
+[04:40] <jonathan__> I'll try to not press enter key as punctuation
+[04:40] <Toma-> Khrajin: your 80 port is filtered..
+=== fb [n=fb@a178087.studnetz.uni-leipzig.de]  has joined #ubuntu
+[04:40] <shiftplusone> nuh, none of those help me and I have asked the question several times... nobody knows what's the problem
+=== Knoeki [n=Knoeki@ip56521cba.adsl-surfen.hetnet.nl]  has joined #ubuntu
+[04:40] <sipior> jonathan__: lol
+=== slash [n=slash@i53874052.versanet.de]  has joined #ubuntu
+=== RabidWeezle giggles at this: aegis-virus-scanner (0.1.1-1) [universe]
+[04:41] <RabidWeezle>     A virus scanner for Linux/Unix systems
+[04:41] <hwilde> dr_willis, ok but that's what firefox points to...
+[04:41] <Khrajin> Toma-: I have port 80 setup to be forwarded to the server
+=== ekv [n=ekv@dsl-vsabrasgw1-fe07dc00-70.dhcp.inet.fi]  has joined #ubuntu
+[04:41] <jonathan__> sipior: lol
+=== Dapper [n=alexandr@AOrleans-258-1-4-194.w90-8.abo.wanadoo.fr]  has joined #ubuntu
+[04:41] <hwilde> LjL, I just need firefox java plugin that's all...
+[04:41] <Toma-> Khrajin: right.
+=== adriano [n=adriano@201.78.173.106]  has joined #ubuntu
+=== visham [n=visham@59.96.43.36]  has joined #ubuntu
+[04:41] <RabidWeezle> come on, I have run linux for forkin years, and never caught a single virus...
+[04:41] <Tinned_Tuna> RabidWeezle: I use ClamAV :p
+[04:41] <MiMiC> hwilde: type "sudo aptitude install sun-java6-jre sun-java6-plugin sun-java6-fonts" in terminal
+[04:41] <johnschroeder> sipior, it is still installing, :(
+=== h4wk0 [n=h4wk@84.13.242.164]  has joined #ubuntu
+[04:41] <hwilde> MiMiC, it's downloading in synaptic already
+[04:41] <visham> help needed to setup a usb adsl modem on breezy
+[04:41] <jonathan__> there is not such a virus in linux
+[04:41] <MiMiC> kk that too :P
+[04:41] <Khrajin> Toma-: Rebooting it
+[04:41] <hwilde> !adsl | visham
+[04:42] <Tinned_Tuna> yea, I have a VM that writes to SMB shares, I need to scan those as other windows boxen could get 'ill'
+[04:42] <ubotu> visham: Setting up an ADSL/PPPoE connection? Look at https://help.ubuntu.com/community/ADSLPPPoE
+[04:42] <sipior> johnschroeder: slow internet connection? it's a big package, with dependancies
+=== slash [n=slash@i53874052.versanet.de]  has joined #ubuntu
+[04:42] <dr_willis> hwilde,  dosent matter. the 'ubuntu' way is to use the package manager.
+[04:42] <RabidWeezle> oh?
+=== mehdi_ [n=mehdi@41.227.2.213]  has joined #ubuntu
+[04:42] <RabidWeezle> I don't use a vm, I just got many pc's :)
+[04:42] <visham> ubotu,  i checked the site already i need to set up the adsl modem via the usb
+[04:42] <crockodie> how can i make my ubuntu a webserver?
+[04:42] <Felarin> if they so so, hey hwilde : just use synaptic
+[04:42] <Toma-> Khrajin: ok
+[04:42] <wols> crockodie: install apache
+[04:42] <dr_willis> crockodie,  install apache2 (or whatever its called)
+=== Merc_Work [n=Merrick@rrcs-24-172-179-175.central.biz.rr.com]  has joined #ubuntu
+[04:42] <Toma-> !lamp | crockodie
+[04:42] <ubotu> crockodie: LAMP is an acronym for Linux-Apache-MySQL-PHP. However, the term is often used for setups using alternative but different software, such as Perl or Python instead of PHP, and Postgres instead of MySQL. For help with setting up LAMP on Ubuntu, see  https://help.ubuntu.com/community/ApacheMySQLPHP - See also the Server CD installation process (different in Edgy+)
+[04:42] <wols> crockodie: rather, apache2
+[04:42] <RabidWeezle> this is the house of geek
+[04:42] <RabidWeezle> :)
+[04:42] <jonathan__> anybody can help me to install internet explorer 7 in my wine?
+=== jatt [n=user@85.115.3.118]  has joined #ubuntu
+[04:42] <johnschroeder> umm no internet connection should be fast. of course it is only a cable modem no t1 line or anything
+[04:43] <Felarin> internet explorer 7 in wine?
+[04:43] <Felarin> that's new
+[04:43] <wols> jonathan__: no. ask microsoft, not us
+[04:43] <RabidWeezle> only VM I use is for pearpc for osx tiger
+[04:43] <Toma-> crockodie: if youre after something very simple, thttpd is a great little server
+[04:43] <MiMiC> lol
+[04:43] <jonathan__> ha2
+[04:43] <crockodie> hmmm do i have to configure my router to forward to port 80 or other port ?
+[04:43] <Felarin> seriously man, that's new
+[04:43] <jonathan__> ask for microsuck hah?
+[04:43] <LjL> Felarin: it's not. many people who do web design need their site to be tested on IE.
+[04:43] <MiMiC> jonathan: what's wrong with firefox?
+=== retroaction [n=guest@88-137-40-198.adslgp.cegetel.net]  has joined #ubuntu
+[04:43] <wols> Felarin: testing a site in different browsers it makes sense. still: OT in #ubuntu
+[04:43] <jonathan__> that's good
+[04:43] <jonathan__> just only test those wine
+[04:43] <RabidWeezle> didn't bill just take linus to court for copyright infringment?
+[04:43] <Felarin> you might as well create a VM
+=== NeXtDaY [n=illusion@82.178.97.223]  has joined #ubuntu
+[04:44] <Felarin> and test there
+=== slash [n=slash@i53874052.versanet.de]  has joined #ubuntu
+[04:44] <MiMiC> aha
+[04:44] <crockodie> Toma- thttpd ? i never heard about this one can u guide setting this up ?
+[04:44] <Pici> !ies4linux | jonathan__
+[04:44] <ubotu> jonathan__: ies4linux is a script that quickly and effortlessly helps you install 3 versions of IE in Wine. Information can be found at http://www.tatanka.com.br/ies4linux/page/Main_Page including instructions specifically for Ubuntu. ies4linux is aimed at web designers and ie-only sites, so please, dont use any of the IEs to navigate! Use Firefox!
+[04:44] <wols> RabidWeezle: no
+[04:44] <Felarin> test whatever microsoft you want
+[04:44] <LjL> !offtopic | RabidWeezle
+[04:44] <ubotu> RabidWeezle: #ubuntu is the Ubuntu support channel, #ubuntu+1 supports the development version of Ubuntu and #ubuntu-offtopic is for random chatter. Welcome!
+[04:44] <RabidWeezle> :/
+[04:44] <elkbuntu> Pici, does ies4linux do ie7 now?
+=== Omnius [n=rado@203-206-222-25.dyn.iinet.net.au]  has joined #ubuntu
+[04:44] <Toma-> crockodie: the /etc/thttpd/conf file will guide you
+=== CheshireViking [n=CV2@unaffiliated/cheshireviking]  has joined #ubuntu
+[04:44] <hwilde> so I have to dl 27MB just for a java plugin?? it should be tiny mozilla-jre-plugin package
+[04:44] <Pici> elkbuntu: I'm not sure, I saw something about it but it isnt on their main page.
+[04:44] <Khrajin> Toma-: How do you force a machine to have an IP address?
+=== adhie [n=adhie@125.164.252.156]  has joined #ubuntu
+[04:44] <hwilde> Khrajin, man ifconfig
+[04:44] <Toma-> Khrajin: static ips?
+[04:44] <Pici> elkbuntu: I dont use it :/
+[04:44] <jonathan__> might be this is right to change my OS to linux
+[04:45] <Khrajin> Toma-: Static local
+[04:45] <klav> ^^
+[04:45] <jonathan__> this is much more secure and better
+=== valehru [n=valehru@123.113.187.133]  has joined #ubuntu
+[04:45] <crockodie> Toma- but do i have to set my router forward to port 80 or its automatically listen to port 80 ?
+=== pony333 [n=pony333@dslb-084-060-027-150.pools.arcor-ip.net]  has joined #ubuntu
+[04:45] <MiMiC> hwilde: u need to have JRE in order to run the plugin... the plugin simply starts java
+[04:45] <Toma-> Khrajin: its more to do with your router. disable dhcp and enable static ips, then setup your computer to have its assigned IP from the router
+=== gepatino [n=gepatino@200.123.184.5]  has joined #ubuntu
+=== adhie [n=adhie@125.164.252.156]  has left #ubuntu ["Leaving"]
+=== pony333 [n=pony333@dslb-084-060-027-150.pools.arcor-ip.net]  has left #ubuntu ["Verlassend"]
+[04:45] <wols> crockodie: you need the router port forward it
+[04:45] <MiMiC> hwilde: after installing sun's java, type "java -version" and make sure u get sun's version, not the crappy gcj
+[04:45] <Khrajin> Toma-: ah k
+=== pegger [n=bab@155.44.217.155]  has joined #ubuntu
+[04:45] <Toma-> crockodie: youll need to make the conf file bind your servers ip to your router and yes, open the 80 port
+[04:45] <hwilde> MiMiC, it is installing sun-java6-bin package
+[04:46] <wols> Khrajin: edit /etc/network/interfaces and set the IP static. man interfaces
+[04:46] <crockodie> yeah but im running DCHP in my router .. is it better to configure my static IP ?
+[04:46] <Khrajin> wolki: thx
+[04:46] <wols> crockodie: for portforwarding it can be
+[04:46] <Omnius> I tried brctl and it stuffed my network
+=== ogra [n=ogra@ubuntu/member/ogra]  has joined #ubuntu
+=== Matthai [n=Matthai@kovacic-m.fdv.uni-lj.si]  has joined #ubuntu
+=== grevier [n=grevier@125.162.205.49]  has joined #ubuntu
+[04:46] <crockodie> wols but i already havestatic IP
+[04:46] <Toma-> crockodie: not really. just setup your DHCP leases for like a week, then dont turn off your computer for more than a week :)
+[04:47] <elkbuntu> pici http://www.tatanka.com.br/ies4linux/page/Beta
+[04:47] <crockodie> yeah its been 4yrs now never shut down my pc
+=== ROPSS3 [n=IceFox@74-132-209-196.dhcp.insightbb.com]  has joined #ubuntu
+=== visham_ [n=visham@59.96.43.36]  has joined #ubuntu
+=== janek [n=janek@natk2-bk.generacja.pl]  has joined #ubuntu
+[04:47] <wols> crockodie: then it's fine
+[04:47] <sipior> Omnius: well, you might have to read the man page first :)
+[04:47] <crockodie> im running redhat before
+[04:47] <ROPSS3> Hmm, a lot more people here than I thought there would be.
+[04:47] <Pici> jonathan__: See http://www.tatanka.com.br/ies4linux/page/Beta for getting ie7 installed
+[04:47] <crockodie> now im changing to ubuntu
+[04:47] <wols> Omnius: and/or a howto
+[04:47] <Pici> elkbuntu: thanks, I passed it on.
+[04:47] <rmd_> okay.  i've tried several times to install a theme archive now.  the theme does not appear on the list after installation, except under the heading of "custom theme" and it does not change the colors.  this happens for all themes i've tried to install.
+[04:48] <Omnius> lol
+[04:48] <ROPSS3> Well I suppose someone can help me with my Divx problem?
+[04:48] <pegger> for evolution can  you sync your contacts with a imap server???
+[04:48] <Omnius> i did
+[04:48] <hwilde> MiMiC, dr_willis, E: /var/cache/apt/archives/sun-java6-bin_6-00-2ubuntu2_i386.deb: subprocess pre-installation script returned error exit status 1
+=== aLeSD [n=alex@132.Red-83-32-92.dynamicIP.rima-tde.net]  has joined #ubuntu
+[04:48] <Pici> rmd_: Its possible that those themes dont support changing the colors.
+=== otman [n=otman@41.201.209.29]  has joined #ubuntu
+[04:48] <MiMiC> rmd, if u really want themes, easiest way i know is installing beryl and using their theme manager GUI :P
+[04:48] <otman> hy all
+[04:48] <Lilacor> !anyone
+[04:48] <ubotu> A large amount of the first questions asked in this channel start with "Does anyone/anybody..."  Why not ask your next question (the real one) and find out?
+=== retroaction [n=guest@88-137-40-198.adslgp.cegetel.net]  has joined #ubuntu
+[04:48] <Omnius> i bridged my if's ok then removed them from the bridge and now i cant get online
+[04:48] <Pici> MiMiC: You must have a twisted definition of easy.
+[04:48] <visham_> usb adsl modem help
+=== _pinky_ [n=hamza@LPuteaux-151-42-16-208.w217-128.abo.wanadoo.fr]  has joined #ubuntu
+[04:48] <MiMiC> hwilde: what's ur question?
+[04:48] <rmd_> Pichi, every screenshot i've seen of the themes i've been trying to install shows them with drastically different colors
+[04:48] <johnschroeder> sipior, do you get paid to sit here and chat and help people?
+[04:49] <crockodie> i agree to MiMiC install beryl its cool
+[04:49] <sipior> Omnius: do you still have a default route?
+[04:49] <Omnius> not sure
+[04:49] <sipior> johnschroeder: not generally. do you get paid to ask questions?
+=== ian-outside [n=ian@rrcs-70-63-45-10.central.biz.rr.com]  has joined #ubuntu
+[04:49] <MiMiC> pici: if theme is what he's asking for, he'll discover a whole crapload of goodies with beryl. I say worth the pain :D
+[04:49] <wols> Omnius: /etc/init.d/networking restart
+[04:49] <johnschroeder> pretty much, this is for my company not myself haha
+[04:49] <johnschroeder> you sure are being a great help to me
+[04:49] <ROPSS3> Can anyone help me to get divx and stage 6 movies working?
+[04:49] <Omnius> ok i'll try that thanks
+[04:49] <hwilde> MiMiC, I installed the package from synaptic and it gave me that error!  E: /var/cache/apt/archives/sun-java6-bin_6-00-2ubuntu2_i386.deb: subprocess pre-installation script returned error exit status 1
+[04:50] <Omnius> brb
+=== RabidWeezle remembers to get gnome-art
+[04:50] <Pici> johnschroeder: 99.9% of us here are volunteers and not employees of Canonical
+[04:50] <rmd_> MiMiC, I don't relish the thought of installing even more crap to sit in RAM
+[04:50] <Lilacor> ROPSS3: install VLC and all its codecs and you should be able to play the videos fine.
+[04:50] <jonathan__> wow! This is my first time using ubuntu and I'm enjoy it!
+=== Refakki [n=refakki@ppp85-140-1-211.pppoe.mtu-net.ru]  has joined #ubuntu
+[04:50] <johnschroeder> gotcha, this chat room is pretty useful though
+[04:50] <ROPSS3> Could you possibly link me to that
+[04:50] <ROPSS3> I installed vlc once and it wasn't so helpful.
+[04:50] <clever> if i have a dualboot setup could i say put ubuntu into hibernation and boot into the other os?
+[04:50] <_pinky_> hello world
+[04:50] <crockodie> is it possible to run Ubuntu in Windows XP using VMware ?
+=== SudoBash [n=wickedly@c-69-246-156-9.hsd1.tn.comcast.net]  has joined #ubuntu
+[04:50] <Lilacor> ROPSS3: no, use your synaptic package manager
+[04:50] <shoot`> guys, im trying to send email using postfix for smtp, running locally... however, i get delivery failure notification from both gmail and hotmail, stating its for "policy reasons on the gateway". I'm guessing its because its a server running on a local machine... but anyone got any ideas how i can get around it? dont want to use my own ISPs cos its been kinda unreliable.
+[04:50] <Pici> !codecs | ROPSS3 take a look at these links
+[04:50] <ubotu> ROPSS3 take a look at these links: For multimedia issues, this page has useful information: https://help.ubuntu.com/community/RestrictedFormats - See also http://help.ubuntu.com/ubuntu/desktopguide/C/common-tasks-chap.html - But please use free formats if you can: https://help.ubuntu.com/community/FreeFormats
+[04:50] <ROPSS3> Ah okay
+=== tobyb [n=cilleyhi@modemcable075.197-81-70.mc.videotron.ca]  has joined #ubuntu
+=== _ringlej [n=ringlej@c-71-62-243-179.hsd1.va.comcast.net]  has joined #ubuntu
+[04:50] <_pinky_> clever : of corse
+=== cMadman [n=mark@195.188.221.169]  has joined #ubuntu
+=== bismark [n=bismark@200.55.161.39]  has joined #ubuntu
+[04:51] <MiMiC> hwilde: I've never seen that error before. what is ur version of ubuntu?
+[04:51] <clever> _pinky_: good:)
+[04:51] <crockodie> is it possible to run Ubuntu in Windows XP using VMware ?
+[04:51] <Pici> crockodie: Very possible.
+[04:51] <clever> _pinky_: but im guessing i shouldnt have the fat32 mounted under ubuntu though
+[04:51] <hwilde> MiMiC, 2.6.20-15-generic #2 SMP Sun Apr 15 07:36:31 UTC 2007 i686 GNU/Linux
+[04:51] <johnschroeder> how do you people get into all this, especially linux? i have really gotten in to windows and macs but not linux
+[04:51] <clever> at the time of entering hibernation
+[04:51] <MiMiC> ROP: http://ubuntuguide.org/wiki/Ubuntu:Feisty#Multimedia_Players_.26_Browser_Plug-ins
+[04:51] <crockodie> Pici can u guide me
+=== madsusi [n=sakke@a80-186-227-166.elisa-laajakaista.fi]  has joined #ubuntu
+=== Refakki [n=refakki@ppp85-140-1-211.pppoe.mtu-net.ru]  has joined #ubuntu
+=== madsusi [n=sakke@a80-186-227-166.elisa-laajakaista.fi]  has left #ubuntu ["Ex-Chat"]
+=== tinin [n=tinin@165.Red-83-41-163.dynamicIP.rima-tde.net]  has joined #ubuntu
+[04:51] <verahsa> johnschroeder: can't speak for anyone else, but for me i got curious and devoted time to it.
+[04:51] <Lilacor> johnschroeder: boredom
+[04:51] <_pinky_> crockodie : it's possible yes
+[04:52] <MiMiC> hwilde: try this version instead: open up a new terminal, and type "sudo aptitude install sun-java6-jre sun-java6-plugin sun-java6-fonts"
+[04:52] <johnschroeder> i see
+[04:52] <crockodie> what programs do i need to download
+=== p4tux [n=p4tux@189.169.91.80]  has joined #ubuntu
+=== vecna_ [n=vecna@vecna.vecnix.net]  has joined #ubuntu
+[04:52] <rmd_> this is pretty pathetic.  a system that can't even change themes correctly...
+=== shoot` is now known as shoot^
+[04:52] <klav> ?
+[04:52] <johnschroeder> i can not even begin to understand how linux is structured i mean there is all kinds of differ linux os.
+[04:52] <MiMiC> rmd: do u have ATI or Nvidia?
+=== thansen [i=thansen@nat/novell/x-e573c72e82888b8b]  has joined #ubuntu
+[04:53] <hwilde> So the Synaptic sun-java6 package does not work??
+[04:53] <Pici> crockodie: Take a look at this very good tutorial, it explains everything: http://www.tanguay.info/web/tutorial.php?idCode=installUbuntuOnVmware
+[04:53] <_pinky_> <clever> : you can do it in /etc/fstab
+[04:53] <Tinned_Tuna> hwilde: automatix !
+[04:53] <crockodie> Pici which program do i need to download to do that ?
+[04:53] <MiMiC> hwilde: jus follow my instructions. it always works for me
+[04:53] <sipior> johnschroeder: the differences are pretty minimal, and principally on the administration end of things
+[04:53] <wols> !automatix
+[04:53] <ubotu> Automatix2 is a script that tries to install some software, and often fails and breaks systems. We don't provide support for it, and we strongly discourage its use. Problems caused by Automatix are often hard to track and solve, and it might sometimes be easier to !install a fresh copy of Ubuntu. See also !WorksForMe
+[04:53] <rmd_> MiMiC, why would that matter in the least for changing colors according to a theme?
+[04:53] <wols> Tinned_Tuna: we don't support that
+[04:53] <LjL> johnschroeder, some things are specific to the Linux kernel - some things are specific to Unix (or POSIX) systems in general - some things are quite Debian centric.
+[04:53] <_pinky_> clever  : to mount automtcally an fat32 FSs
+[04:53] <Pici> Tinned_Tuna: Can you please stop suggesting automatix and take a look at ubotu's message about it.
+=== klos_ [i=hans@e180239146.adsl.alicedsl.de]  has joined #ubuntu
+[04:53] <MiMiC> rmd: i strongly recommend installing beryl if you want to change colors, get cooler effects, new skins, etc etc
+=== smoenux [n=smoenux@dsl-146-0-139.telkomadsl.co.za]  has joined #ubuntu
+[04:54] <tinin> !WorksForMe
+[04:54] <ubotu> Common Sense: Just because you can, does not mean you should (and especially recommend to others). Think before you do. "Works for me" does not mean it is ok. The latest version of everything is not always useful if you aim for stability.
+[04:54] <crockodie> Pici what program do i need to download to do that
+[04:54] <Tinned_Tuna> wols: personal experience shows different for me, but if you don't like it...
+=== iDN [n=ido@bzq-84-108-61-90.cablep.bezeqint.net]  has joined #ubuntu
+[04:54] <wols> Tinned_Tuna: I don't care about. the channel doesnA't like it
+[04:54] <MiMiC> rmd: go to www.ubuntuguide.org, search for beryl, and follow their detailed instructions. It should be a breeze if you have the latest ubuntu
+[04:54] <johnschroeder> so the best way to learn is to install any of linux os that are gui if you can and learn that way, and work from there or try things, mainly with this ubuntu server i am looking to run it as a web server
+=== iDN [n=ido@bzq-84-108-61-90.cablep.bezeqint.net]  has joined #ubuntu
+=== jaypro [n=jaypro@ip72-197-132-99.sd.sd.cox.net]  has joined #ubuntu
+[04:54] <adriano> please , with i install NVU, i not be repository of the NVU
+[04:54] <rmd_> MiMiC, I don't want Beryl.  I want the supposed functionality of the system to function.  i do not want more crap, on top of this ridiculous amount of GNOME stuff sitting in RAM.
+[04:54] <LjL> Tinned_Tuna: we don't like it indeed. feel free to use it if it works for you, just don't recommend it here, please.
+[04:54] <Pici> crockodie: Huh? The page I linked to you explains what you need. I'm not sure what program you are asking about.
+=== BrixSat [n=chatzill@beavis.dei.isep.ipp.pt]  has joined #ubuntu
+[04:54] <_pinky_> clever  : to mount automtcally an fat32 FSs  by editing etc fstab
+=== kalon33_ [n=nicolas@i02v-62-34-145-118.d4.club-internet.fr]  has joined #ubuntu
+=== gentus [n=sylv1@rsa59-4-82-247-209-197.fbx.proxad.net]  has joined #ubuntu
+[04:54] <clever> _pinky_: yeah i know how to auto mount the fat32 but if the fat32 is in use by ubuntu when it goes into hibernation
+=== john-ke7cw [n=john@adsl-71-144-81-141.dsl.sfldmi.sbcglobal.net]  has joined #ubuntu
+[04:55] <tobyb> Ubuntu newbie: With a Norton Ghost image of my XP system, if I screw-up my Ubuntu dual-boot install setup (with GRUB in the MBR) will restoring my XP image restore my MBR and return me to my pre-install state?
+[04:55] <BrixSat> i need some help?
+[04:55] <rmd_> I want the themes to do what they are supposed to.  it doesn't seem all that complicated.
+=== omnius [n=chatzill@203-206-222-25.dyn.iinet.net.au]  has joined #ubuntu
+=== jose [n=jose@36.pool85-49-193.dynamic.orange.es]  has joined #ubuntu
+[04:55] <jaypro> do you guys know of a program that can import *.pst files that were originally from microsoft outlook?
+[04:55] <clever> _pinky_: then i boot the fat32 and modify it...
+=== jsgotangco [n=jsg123@ubuntu/member/jsgotangco]  has joined #ubuntu
+[04:55] <MiMiC> rmd: in that case, sorry, I do not know why you cannot change themes...
+[04:55] <crockodie> Pici i aint see any link from u ?
+[04:55] <Pici> crockodie: http://www.tanguay.info/web/tutorial.php?idCode=installUbuntuOnVmware
+[04:55] <CheshireViking> adriano, nvu doesn't exist anymore, its been replaced, give me a min & i'll find out what it is
+[04:55] <crockodie> there
+=== Lightning [n=Lightnin@cpc1-hatf4-0-0-cust445.lutn.cable.ntl.com]  has joined #ubuntu
+=== ReK_ [i=ReK_@S0106001310e912a8.vn.shawcable.net]  has joined #ubuntu
+[04:55] <rmd_> MiMiC, I can change themes, but the archive is not being installed correctly (only 1 option out of 4 shows up) and none of the colors change, even though the window decorations do.
+[04:55] <LjL> !info readpst | jaypro
+[04:55] <crockodie> ty Pici
+=== pc_ [n=pc@74.128.160.154]  has joined #ubuntu
+[04:55] <smoenux> Can someone please help me connect to my router, or direct me to a channel that can help. (For some reason I cant connect to my Router in Feisty)
+[04:55] <ubotu> jaypro: readpst: Converts Outlook PST files to mbox and others. In component universe, is optional. Version 0.5.1-1 (feisty), package size 54 kB, installed size 192 kB
+=== djieno [n=djieno@84-107-175-172.dsl.quicknet.nl]  has joined #ubuntu
+[04:55] <clever> _pinky_: ubuntu's cache/state for the fat32 mounting wont match up right when it comes out of hibernation id think
+[04:55] <LjL> jaypro: that was easily found by me by typing "apt-cache search outlook". learning to search repositories is very important.
+[04:55] <BrixSat> how can i install a theme? what is the gnome default theme manager?
+[04:56] <LjL> !packages > jaypro    (jaypro, see the private message from Ubotu)
+[04:56] <RabidWeezle> anyone know if I install 6.10 outa the box after updates and stuff, do I got proper 3d acceleration on a ati radeon mobility?
+[04:56] <MiMiC> rmd: my only suggestion is try updating your system with "sudo apt-get update" and "sudo apt-get upgrade". that might fix some bugs that ur programs might have
+[04:56] <rmd_> BrixSat, you can't.  the function is broken to the point of being essentially useless.
+=== Polis_wrk [n=your@194-237-172-225-no48.business.telia.com]  has joined #ubuntu
+=== LasseP [n=xerox@c-4476e255.010-198-73746f32.cust.bredbandsbolaget.se]  has joined #ubuntu
+[04:56] <adriano> CheshireViking, What i can install in the place it ?
+[04:56] <rmd_> MiMiC, I am completely up to date.
+[04:56] <jrib> rmd_: please don't misinform
+[04:56] <jrib> !themes > BrixSat (see the private message from ubotu)
+[04:56] <_pinky_> clever : ah ok
+=== lusepuster [n=thoeger@0x5735d9db.bynxx19.adsl-dhcp.tele.dk]  has joined #ubuntu
+[04:56] <BrixSat> so i cant use themes unless i use the ones it has got?
+=== tombs [n=tombs@ip565e4a39.direct-adsl.nl]  has joined #ubuntu
+=== riotkittie [n=riotkitt@cpe-72-228-44-212.nycap.res.rr.com]  has joined #ubuntu
+[04:57] <rmd_> jrib, well, until someone can show me otherwise, all I can tell someone is what i have seen, which is that the option is completely useless
+=== jona__ [n=jona@136.34-241-81.adsl-dyn.isp.belgacom.be]  has joined #ubuntu
+[04:57] <Pici> BrixSat: Of course you can.  Take a look at the message from ubotu
+[04:57] <jrib> BrixSat: you can.  Go to one of the websites ubotu gave you, find a nice theme, download it.  Then drag it into the system > preferences > themes dialog
+[04:57] <jaypro> LjL ahhh...never knew about that.  Thanks!
+[04:57] <lusepuster> Hi folks - just installed PCLOS on an extra partition. Might have been stupid, but I let PCLOS setup GRUB, and now I have a hard time booting into Ubuntu
+[04:57] <clever> _pinky_: also i probly shouldnt touch the ext3 from win98 but thats near imposible:P
+[04:57] <jrib> rmd_: then make it clear that it doesn't work for *you*
+[04:57] <_pinky_> clever : i think that it's ceate a temporary  files on fat32 fs
+[04:57] <riotkittie> ew. irssi in an xshell makes me feel so ... dirty
+[04:57] <klav> Yes - installing themes has been easy as pie for me
+[04:57] <ikonia> lusepuster: define hard time
+=== Gasten [n=Gasten@h61n3c1o1095.bredband.skanova.com]  has joined #ubuntu
+[04:57] <clever> the fat32 im using for some data storage and for win98
+[04:58] <klav> Anyone have a good link for adding addition codecs?
+[04:58] <BrixSat> for example in gnome-look i have the metacity themes and the gdm themes? what are the ones i need?
+[04:58] <clever> but since i can write to it from linux its not realy in the way any
+=== Kester [n=kester@adsl-71-132-134-60.dsl.pltn13.pacbell.net]  has joined #ubuntu
+[04:58] <rmd_> jrib, right, well, i apologize, "out of the box, none of the supported themes work in any way correctly"  sorry.
+=== Kester [n=kester@adsl-71-132-134-60.dsl.pltn13.pacbell.net]  has left #ubuntu []
+[04:58] <_pinky_> clever :  good luck :)
+[04:58] <_pinky_> bye
+[04:58] <clever> main problem is ym 128mb ram is making the installer a bit slow
+[04:58] <MiMiC> klav: http://ubuntuguide.org/wiki/Ubuntu:Feisty#How_to_install_Multimedia_Codecs
+[04:58] <LjL> clever: what installed, the Desktop CD installer? 128Mb is *very* borderline for that.
+[04:58] <Pici> rmd_: Can you link me to a theme that you're trying to install and colorize so I can attempt to duplicate the issue here?
+[04:59] <clever> yeah desktop for 7.04
+[04:59] <rmd_> oh, wait, *for me* because i'm certain it has something to do with my system, forgetting of course that the entire thing is completely uncustomized... mostly because it has been impossible to do so.
+=== fraggle_laptop [n=fraggle@bea13-2-82-239-143-199.fbx.proxad.net]  has joined #ubuntu
+[04:59] <lusepuster> ikonia, sorry - the bootup screen is replaced by scrolling text mode, ubuntu boots fine but the sound doesn't work. Once logged into ubuntu, the screen goes white an I only see the mouse cursor
+[04:59] <riotkittie> i am debating an upgrade to 7.04 but ... :\
+[04:59] <tinin> !themes >
+[04:59] <klav> MiMiC: thank you
+[04:59] <tinin> !themes
+[04:59] <ubotu> Find your themes at: http://www.gnome-look.org - http://art.gnome.org - http://www.kde-look.org - http://themes.freshmeat.net/browse/58/ - http://www.guistyles.com - https://wiki.ubuntu.com/Artwork/ - Also see !changethemes and https://help.ubuntu.com/community/UbuntuEyeCandy
+[04:59] <clever> the system was 64mb but i shoved 2 unkown chips in
+[04:59] <MiMiC> Felarin: still there? I need some help with my wired ethernet connection
+[04:59] <rmd_> Pici: ATER, the highest rated metacity theme on gnome-look.org
+[04:59] <ikonia> lusepuster: sounds like its done more than play with grub
+[04:59] <clever> lshw shows it as a 64 and a pair of 32's
+[04:59] <LjL> !pm the bot > tintin
+[04:59] <RabidWeezle> what version of gtk does 6.10 use?
+[04:59] <jrib> BrixSat: metacity themes control what the window decorations look like, gtk themes control the buttons and other controls.  gdm themes are for the login window
+[04:59] <CheshireViking> adriano, its replacement is called kompozer, here's the link & instructions on how to install https://help.ubuntu.com/community/Kompozer
+[04:59] <rmd_> Pici: Also Blended...
+=== morneHeru [n=alex@host86-132-202-219.range86-132.btcentralplus.com]  has joined #ubuntu
+=== Marck- [n=Marck-@147.Red-217-126-134.staticIP.rima-tde.net]  has joined #ubuntu
+[04:59] <RabidWeezle> 2.x?
+[04:59] <Pici> rmd_: okay, let me check. Give me a few minutes.
+[04:59] <BrixSat> what theme manager does ubuntu has?
+[04:59] <rmd_> Pici: and every other theme I've downloaded.
+[04:59] <ikonia> lusepuster: the scrolling text is because you've overwritten the version of grub installed with the grub version from another OS
+[04:59] <ROPSS3> Okay I installed all the VLC plugins and everything
+=== _malajenho_ [n=kvirc@122.Red-88-6-112.staticIP.rima-tde.net]  has joined #ubuntu
+[04:59] <ROPSS3> still not able to watch it
+[05:00] <_malajenho_> hi
+[05:00] <clever> with swap off the livecd wouldnt realy even run on 128mb ram
+[05:00] <riotkittie> ew. with 128mb ram, there are better distro options.
+[05:00] <LjL> !info libgtk2.0-0 | RabidWeezle
+[05:00] <ubotu> rabidweezle: libgtk2.0-0: The GTK+ graphical user interface library. In component main, is optional. Version 2.10.11-0ubuntu3 (feisty), package size 2481 kB, installed size 5372 kB
+[05:00] <lusepuster> ikonia: Okay, yes that is probably true
+[05:00] <LjL> !info libgtk2.0-0 edgy > RabidWeezle
+[05:00] <jrib> !changethemes > BrixSat (see the private message from ubotu)
+=== iDN [n=ido@bzq-84-108-61-90.cablep.bezeqint.net]  has joined #ubuntu
+[05:00] <clever> but i added 'init=/bin/bash' to the kernel line and that let me enable swap very early on
+[05:00] <lusepuster> ikonia: Can I simply do that once again w the Feisty live cd?
+[05:00] <leagris> Hello, still having some problem reading some DVD. Despite having latest libdvdcss2 1.2.9. Some DVD are partially vieuwable and part of the titles cause seeks to non existant blocks. Cane someone help?
+[05:00] <_malajenho_> anyone could to help me to fix my ftp server??
+[05:00] <clever> then i just exec /sbin/init and it acted like a normal boot up
+[05:00] <rmd_> Oh and this is cute now, I downloaded a file that ends in .tar.gz as a GDM theme, and i'm trying to install it, and the installer is telling me that it is not a file that ends in .tar.gz, even though it is obviously named thusly
+=== killvador [n=vador@194.140.247.50]  has joined #ubuntu
+[05:00] <djieno> Can anybody help me out making a cross cable connection between two dapper server machines?
+[05:00] <ikonia> lusepuster: you can re-install fesity yes
+[05:00] <adriano> CheshireViking, thanks ....
+[05:00] <johnschroeder> 6 minutes left to finish installing!!
+[05:00] <rmd_> this is truly amazin
+[05:01] <lusepuster> ikonia - can't I just reinstall grub w/o reinstalling all feisty?
+[05:01] <LjL> rmd_: is there a bug filed?
+[05:01] <leagris> djieno, are you using ethernet?
+[05:01] <djieno> hi
+[05:01] <djieno> yes
+=== Faemir [n=daniel@85-211-222-38.dyn.gotadsl.co.uk]  has joined #ubuntu
+[05:01] <ikonia> lusepuster: you can, but I don't know what else has changed, sounds like other things have been changed due to sound/screen not working too
+=== compengi [n=compengi@85.112.69.192]  has joined #ubuntu
+=== Catoptromancy_ [n=cat@fl-71-1-235-150.dhcp.embarqhsd.net]  has joined #ubuntu
+=== rescon__ [n=jbrown@adsl-75-13-178-141.dsl.fyvlar.sbcglobal.net]  has joined #ubuntu
+[05:02] <leagris> djieno, any modern NIC card wil sens data path and kindl cross connect even on stright ethernet cables.
+[05:02] <rmd_> LjL: i don't know, i've tried googling "themes just flat out do not work on a completely fresh system" isn't bringing much up
+[05:02] <johnschroeder> sipior: so when i typed in aptitude, all it did was download from a server the package?
+[05:02] <BrixSat> yes but what is the default theme manager
+[05:02] <djieno> i have both servers eth1 in same subnet
+[05:02] <sipior> johnschroeder: should have installed it as well
+[05:02] <jrib> BrixSat: I told you, system -> preferences -> themes
+[05:02] <_malajenho_> anyone is using proftpd or similar????
+[05:02] <sipior> johnschroeder: and all the packages it needs as well
+[05:02] <lusepuster> ikonia: Screen works fine, I get the Ubuntu login screen, and it loads the panels and so before going blank
+[05:02] <ikonia> _malajenho_: just ask the question
+[05:02] <djieno> leagris, two 3com network 3c509 cards
+[05:02] <wols> djieno: what is in your /etc/network/interfaces ?
+[05:03] <ikonia> lusepuster: so its going blank - therefore doesn't work
+[05:03] <clever> leagris: i think only my newrouter and my newest laptop can do that and i beleive its called something like auto crossover
+[05:03] <LjL> rmd_: when i say "bug", i mean Ubuntu bug. which hardly involves Google. search http://bugs.ubuntu.com for "themes" or "gnome themes", and if you don't find a bug report, make one.
+[05:03] <leagris> djieno, check the link is physically up and with same parameters with tehtool
+[05:03] <sipior> johnschroeder: you'll probably want to restart to make sure that gnome comes up properly
+[05:03] <BrixSat> jrib but when i do install a theme it should be for metacity or what else?
+[05:03] <johnschroeder> sipior: oh i see, all i did was download the ubuntu server, and what your saying is i should have download everything?
+[05:03] <tobyb> is having an XP disk image a good recovery safeguard in case I botch my Ubuntu dual-boot install attempt? can i restore the image and thus wipe out grub in my MBR?
+[05:03] <lusepuster> ikonia: yes, but it isn't any hardware thing, that's what I mean
+[05:03] <djieno> leagris, what is the tool?
+[05:03] <jrib> BrixSat: metacity themes control what the window decorations look like, gtk themes control the buttons and other controls.  gdm themes are for the login window
+[05:03] <_malajenho_> I've installed proftpd, and configured, but it doesn't work
+[05:03] <sipior> johnschroeder: no. it grabbed all the packages it needed for the GNOME desktop, and installed them
+[05:03] <ikonia> lusepuster: of course its not
+[05:03] <leagris> djieno, spelled it ethtool
+[05:03] <sipior> johnschroeder: you should be good to o
+[05:03] <ikonia> _malajenho_: define doesn't work
+[05:03] <BrixSat> thanks jrib i got it now
+[05:03] <BrixSat> :)
+[05:03] <djieno> allright..sorry :-)
+[05:03] <sipior> johnschroeder: go
+=== Lr5_ [n=lr5@dsl-hkigw4-fe35de00-44.dhcp.inet.fi]  has joined #ubuntu
+[05:03] <jrib> BrixSat: great
+[05:03] <_malajenho_> ok
+=== calavera [n=cal@195.Red-80-26-32.staticIP.rima-tde.net]  has joined #ubuntu
+=== leonel [n=leonel@189.155.106.143]  has joined #ubuntu
+=== tenkabuto [n=tenkabut@74-37-135-77.dsl1.ekgv.ca.frontiernet.net]  has joined #ubuntu
+[05:04] <Pici> rmd_: Okay, I think I know what the issue is.
+[05:04] <djieno> leagris, wols, how can i filter you instead of all ?
+=== iDN [n=ido@bzq-84-108-61-90.cablep.bezeqint.net]  has joined #ubuntu
+[05:04] <djieno> sorry first time irc
+=== rosevie [n=rosevie@201.121-65-87.adsl-dyn.isp.belgacom.be]  has joined #ubuntu
+=== nutterpc_ [n=nutterpc@203-214-137-98.perm.iinet.net.au]  has joined #ubuntu
+=== tommy_ [n=tomek@baza.wlan.pl]  has joined #ubuntu
+[05:04] <sipior> johnschroeder: so try restarting the machine and see if it worked properly
+[05:04] <rmd_> Pici: ??
+[05:04] <leagris> djieno, open a private room
+[05:04] <johnschroeder> i see, so it just grabbed what i need to see the GNOME desktop, but not it is different from the acutal ubuntu desktop edition right? there is a difference but it is the same?
+[05:04] <lusepuster> ikonia, anyway, I'll give a reinstall a try
+[05:04] <wols> djieno: paste your /etc/network/interfaces in a pastebing please
+[05:05] <johnschroeder> sipior: okay it is not quite done just yet
+=== ZeZu [n=NULL@c-69-245-160-89.hsd1.in.comcast.net]  has joined #ubuntu
+=== theine [n=theine@AAnnecy-157-1-155-144.w90-14.abo.wanadoo.fr]  has joined #ubuntu
+=== RabidWeezle grins at his new theme
+[05:05] <Pici> rmd_: I dont think that Gnome can currently install more than one theme if they are compressed. If I uncompress the file then I drag each of the subfolders separately into the theme window and install them.  You can only manually change the colors of GTK themes (controls) not Metacity themes(window borders)
+=== theine [n=theine@AAnnecy-157-1-155-144.w90-14.abo.wanadoo.fr]  has left #ubuntu ["Ex-Chat"]
+[05:05] <djieno> wolf,...can you join the conversation with leagris
+[05:05] <Pici> rmd_: Try that and see if it works
+[05:06] <_malajenho_> I've edited my proftpd.conf like this:     http://cpp.sourceforge.net/?show=36710
+=== tommy__ [n=tomek@baza.wlan.pl]  has joined #ubuntu
+[05:06] <wols> djieno: no I won't
+=== plastic_wrap [n=sjc@ppp149-108.lns1.per1.internode.on.net]  has joined #ubuntu
+[05:06] <ikonia> _malajenho_: just tell us the problem
+=== Tiradin [n=Tiradin@bas8-toronto63-1096782738.dsl.bell.ca]  has joined #ubuntu
+[05:06] <_malajenho_> ok
+=== tommy_ [n=tomek@baza.wlan.pl]  has joined #ubuntu
+=== thirdy [n=chatzill@124.106.206.240]  has joined #ubuntu
+[05:06] <djieno> wolf, allright..hold on ill paste the config of /etc/network interfaces
+[05:06] <leagris> djieno, do you read me on the private room?
+[05:07] <_malajenho_> I can enter in my ftp server with my own pc: ftp://myip
+[05:07] <ROPSS3> Okay, whenever I go to Tv-links.co.uk and try to watch scrubs (I know scrubs is in divx format) it still won't work
+=== mon^rch [n=anonymou@S0106000fea33f1bb.cg.shawcable.net]  has joined #ubuntu
+=== {D3m{0}n3R0x}666 [n=DeMoNe66@82.84.157.57]  has joined #ubuntu
+[05:07] <rmd_> Pici: it still acts the same.  so how do i change the colors?
+[05:07] <ROPSS3> I did install the new VLC and all plugins as well.
+=== tobyb [n=cilleyhi@modemcable075.197-81-70.mc.videotron.ca]  has left #ubuntu []
+[05:07] <_malajenho_> but when I try to enter with another pc, I can't
+=== tommy_ [n=tomek@baza.wlan.pl]  has joined #ubuntu
+[05:07] <Pici> rmd_: You should have multiple entries for each colored version of the theme.
+[05:07] <_malajenho_> I would be: ftp://mypublicip
+[05:07] <_malajenho_> yes?
+[05:07] <ikonia> _malajenho_: if you want help your going to have to give better info than that
+=== retroaction [n=guest@88-137-40-198.adslgp.cegetel.net]  has joined #ubuntu
+[05:07] <Fjodor> Having some trouble with k9copy. Is there another app of similar capacities?
+[05:07] <neverblue> _malajenho_, yes
+=== MuffY [n=chatzill@s55928932.adsl.wanadoo.nl]  has joined #ubuntu
+[05:07] <ikonia> _malajenho_: no - your public Ip is natted
+[05:07] <neverblue> but you have to open ports
+[05:07] <LjL> !enter | _malajenho_
+[05:07] <ubotu> _malajenho_: Please try to keep your questions/responses on one line - don't use the "Enter" key as punctuation!
+=== logan [n=logan@DSL217-132-9-130.bb.netvision.net.il]  has joined #ubuntu
+[05:07] <leagris> _malajenho_, is your FTP server runing? Does it listen to any IP/interface/port
+[05:08] <thirdy> What's the equivalent of Bloodshed's Dev-c++5 in xubuntu
+=== yeniklasor [n=yeniklas@88.235.255.172]  has joined #ubuntu
+[05:08] <thirdy> ?
+[05:08] <rmd_> Pici: when I drag the subfolder into the theme manager, it pops up under "custom theme"
+[05:08] <neverblue> _malajenho_, what FTP server are you using?
+=== bentob0x [n=laurent@ip-213-49-82-96.dsl.scarlet.be]  has joined #ubuntu
+[05:08] <rmd_> Pici, it doesn't install anything
+[05:08] <LjL> !code > thirdy    (thirdy, see the private message from Ubotu)
+[05:08] <rmd_> it "customizes"
+[05:08] <_malajenho_> proftpd
+[05:08] <Pici> rmd_: I see AlTER-Blue, ALTER-Bluemac if I go to customize theme, Window border
+[05:08] <mon^rch> could somebody please tell me how I can prevent a specific program from being able to access the internet?
+[05:08] <neverblue> _malajenho_, takes a bit to learn that FTP server :)
+[05:08] <neverblue> _malajenho_, how many systems on your LAN?
+=== NemesisBLK [n=Menes@71-9-38-182.dhcp.wsco.ca.charter.com]  has joined #ubuntu
+[05:08] <neverblue> that you have access to
+[05:08] <_malajenho_> only 1
+[05:09] <LjL> mon^rch: i think this has been discussed before and the conclusion was that you can't
+[05:09] <neverblue> _malajenho_, ok, so you need to post your proftpd.conf on pastebin
+=== ench0 [n=encho_@86-42-129-236.b-ras1.bbh.dublin.eircom.net]  has joined #ubuntu
+[05:09] <_malajenho_> http://cpp.sourceforge.net/?show=36710
+=== iDN [n=ido@bzq-84-108-61-90.cablep.bezeqint.net]  has joined #ubuntu
+[05:09] <neverblue> _malajenho_, ill take a look at it
+[05:09] <_malajenho_> ok
+[05:09] <_malajenho_> thanks
+[05:09] <Pici> rmd_: Yes...These are metacity themes, They do not include icons or window controls and as such they do not get entered as a 'theme' just an entry in the customize window.
+[05:09] <_malajenho_> :)
+[05:09] <rmd_> Pici: I don't.
+=== razone [n=razone@58.19.56.101]  has joined #ubuntu
+[05:09] <neverblue> _malajenho_, you can port scan your own box, to check that port 21 (default FTP port) is open
+[05:10] <_malajenho_> ok
+[05:10] <thirdy> I have xfce, dat mins I can't run KDE and GNOME apps right?
+[05:10] <_malajenho_> I'll do
+[05:10] <mon^rch> LjL: karp you have a good memory! I was just starting to think that if Windows' firewall can do it... why not Linux's??
+[05:10] <Pici> rmd_: You uncompressed the theme.tar.gz?
+[05:10] <neverblue> unless you changed it... but the port scanner will tell you which service is on each port anyways..
+[05:10] <johnschroeder> sipior:
+[05:10] <rmd_> Pici: um, yes.
+[05:10] <johnschroeder> sipior:i told it to do no configuration
+[05:10] <LjL> mon^rch: i think you could possibly, however, use a program like "proxychains" (there are others as well), which are intended to trick a program into using a proxy instead of connecting to the Internet directly. if you give it no working proxy, i suppose that would mean your program won't be able to connect
+[05:10] <sipior> johnschroeder: of what?
+[05:10] <johnschroeder> i am not sure
+=== jose [n=jose@36.pool85-49-193.dynamic.orange.es]  has joined #ubuntu
+[05:10] <rmd_> Pici: I see the folders, but i dont see any entries under "customize/window borders"
+[05:10] <thirdy> !code>thirdy
+[05:10] <johnschroeder> something asked me if i wanted to do it in of these 5 different ways
+=== jose [n=jose@36.pool85-49-193.dynamic.orange.es]  has joined #ubuntu
+[05:11] <johnschroeder> local only no config, sateilite
+[05:11] <sipior> johnschroeder: ah, the mail server configuration
+[05:11] <johnschroeder> sipior: yep
+[05:11] <sipior> johnschroeder: you probably want to leave that unconfigured unless you plan on sending or receiving mail on that box
+[05:11] <_malajenho_> neverblue:     port 21?
+[05:11] <Elko> Khrajin: thx, seems to work (though I didn't see avi there as a choice to convert the mp4)
+[05:11] <djieno> wolf, # The secondairy network interface
+[05:11] <djieno> auto eth1
+[05:11] <djieno> iface eth1 inet static
+[05:11] <djieno>         address 10.0.0.1
+[05:11] <djieno>         netmask 255.255.255.0
+[05:11] <sipior> johnschroeder: if it's just going to be a web server, you can leave it
+[05:11] <johnschroeder> i did, whew that was a smart choice then
+=== darkha7 [n=mtgarden@158.158.241.223]  has joined #ubuntu
+=== a5benwillis [n=benwilli@72.159.132.4]  has joined #ubuntu
+[05:11] <MuffY> My friend installed ubuntu, and he let the installer choose partitions automatically (which resulted in the death of windows). I asked him to paste his results for fdisk -l to me, and he says only a sda1, sda2 and sda5 are given. Might the windows partition be still alive at sda3 or sda4, because I don't understand why the partition enumeratoin would suddenly skip two numbers.
+[05:11] <Pici> rmd_: Did you drag the folders in one at a time? Or did you select them all and drag them all in?
+[05:12] <johnschroeder> sipior: good deal
+=== OmnificienT [n=pim@ip54506326.adsl-surfen.hetnet.nl]  has joined #ubuntu
+[05:12] <jrib> Fjodor: I like thoggen, there's also dvdrip
+[05:12] <rmd_> PIci, forget it.  this fact is that this should not be so complicated.  at the very least, the documentation should be better, or the system for installing them should be able to inform the user what's going on.  this is pathetic.
+[05:12] <LjL> mon^rch: actually, "man iptables" gives this option: "--cmd-owner name     Matches if the packet was created by a process with the given command name.".    this seems like what you want
+[05:12] <djieno> leagris ?
+=== Catoptromancy [n=cat@fl-71-1-235-150.dhcp.embarqhsd.net]  has joined #ubuntu
+=== rescon__ [n=jbrown@adsl-75-13-178-141.dsl.fyvlar.sbcglobal.net]  has joined #ubuntu
+[05:12] <ikonia> MuffY: extended partitions
+[05:12] <leagris> yes djieno?
+=== tegger [n=romi@88.134.61.45]  has joined #ubuntu
+[05:12] <neverblue> _malajenho_, it will show the service on that port..
+=== calavera [n=cal@195.Red-80-26-32.staticIP.rima-tde.net]  has joined #ubuntu
+[05:12] <dr_willis> MuffY,  check 'sudo fdisk -l' it will show what types of partitions are there
+[05:12] <LjL> mon^rch: though it also says, "Please  note:  This  option  requires  kernel  support  that  might not be available in official Linux kernel sources [...] "
+[05:12] <jrib> clever: I don't see why not, but I have not tried it
+[05:12] <jintxo> I'm having problems booting with only 1 memebert of my mda raid available (it works fine with only 1 device but won't boot with only the OTHER device). I have noticed that ubuntu can't unount md0 when shutting down my system. could that have something to do?
+[05:12] <johnschroeder> sipior: does this matter that linux is on this FAT32 vs. NTFS?
+[05:12] <MuffY> dr_willis: that's exactly what i asked him to do. this was his output
+[05:13] <thirdy> does the items in the panel in xfce significantly slows my comp?
+=== Rafolins [n=nilofar@62.215.119.97]  has joined #ubuntu
+[05:13] <OmnificienT> hey
+[05:13] <sipior> johnschroeder: you've installed on a fat32 partition?
+[05:13] <Fjodor> jrib: Ok, thanks
+[05:13] <dr_willis> thirdy,  they shouldent.
+[05:13] <rmd_> Pici, so how do i get the colors of the windows to change?  that's what i'm looking for.
+[05:13] <dr_willis> thirdy,  unless your Chip on that machine is a Dorito. :)

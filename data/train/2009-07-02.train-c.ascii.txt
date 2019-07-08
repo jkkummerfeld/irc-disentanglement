@@ -1,0 +1,1500 @@
+[06:44] <P_Kable> hi, someone has nfs server installed ? where are LOGS ?
+[06:45] <Hilikus> WIGGMPk: the permisions of the folders in the server are ok to be shared. they have rw access and the client uses that same user to mount it. problem is once the client mounts it, it sees the permissions screwed. not to what they are in the server
+[06:45] <bazhang> jeffs, install ccsm, make sure you have the 3D drivers for your card, and set (in general) of ccsm virtual horizontal desktops to 4
+[06:45] <bazhang> !ccsm | jeffs
+[06:45] <ubottu> jeffs: To enable advanced customization of desktop effects in Ubuntu: install 'compizconfig-settings-manager' or 'simple-ccsm'. If you install the latter, a new option will appear in your appearance properties - See also !compiz - Help in #compiz-fusion
+[06:45] <mase_work> P_Kable: i dunno about LOGS , but the log files are located in /var/log/ i imagine. proabably /var/log/nfs or something like that
+[06:45] <P_Kable> mase_work=> that's my problem
+[06:46] <P_Kable> it is not there
+[06:46] <P_Kable> :D
+[06:46] <mase_work> the nfs config files should tell you where they log to , otherwise syslog will tell you
+[06:46] <angel12> hey guys quick question: i just install ubuntu server 9.04, and now after a reboot i cannot reload apt or install any packages, but i can ping the us.archive.ubuntu.com server
+[06:46] <mase_work> P_Kable: that wasn't the problem you stated.
+[06:46] <WIGGMPk> Hilikus: im not sure then.. if you have the permission set properly then it should work
+[06:47] <P_Kable> anyway I don't find any log for NFS (that's my problem)
+[06:47] <halberd> angel12, what a coincidence I also just installed 9.04 (upgrade from 8.10)
+[06:47] <halberd> like just finished half an hour ago
+[06:47] <P_Kable> anyone with nfs-kernel-server installed ?
+[06:47] <\\`oot> Howdy everyone
+[06:47] <mase_work> P_Kable: what does the nfs config file list for logging  ? does it have its own log file or does it use syslog ?
+[06:47] <\\`oot> Anyone upgrade to FireFix 3.5 yet?
+[06:48] <u_dparte> anyone that's running 9.04 w/ an nvidia card I highly recommend installing the 185 driver from nvidia ... fixed a ton of issues as well as performance
+[06:48] <bazhang> !ff35 | \\`oot
+[06:48] <ubottu> \\`oot: Firefox 3.5 Final is currently being built and tested for Jaunty. If you *need* to install it, the firefox-3.5 *beta* package from the repositories will be updated when testing is complete. See also http://is.gd/1jkNY
+[06:48] <P_Kable> i don't know where the conf file is either mase_work :)
+[06:48] <nellmathew> lopeze, how'd it go?
+[06:48] <\\`oot> bazhang: Perfect... I like getting in on the 'testing'...
+[06:49] <P_Kable> /etc/exports jsute has share definitions
+[06:49] <P_Kable> just*
+[06:50] <angel12> apt just tries to connect to us.archive.ubuntu.com and then doesnt connect
+[06:50] <angel12> any ideas?
+[06:50] <mase_work> angel12:  try a different archive ?
+[06:50] <vise> Hi.. I installed Qemu and SDL on my ubuntu 8.10... But qemu cannot initialize SDL since, as i found on the web, SDL in ubuntu does not get the frame buffer. Can someone suggest a workaround. I really need to run Qemu..
+[06:50] <angel12> mase_work:  im trying to apt-get update
+[06:51] <angel12> it just worked about 15 minutes ago
+[06:51] <u_dparte> angel12, you need to modify your sources to look for another repo
+[06:51] <angel12> i cant install any packages from apt
+[06:51] <mase_work> angel12: i don't see how that prevents you from trying a different server
+[06:51] <u_dparte> but apt-get update is working fine for me and I'm using us.archive
+[06:52] <mase_work> dns issue maybe ?
+[06:52] <linuxguy2009> Hey guys is there any kind of keyboard shortcut or anything that when I want to have an app open and a nautilus window open that I can press a key combination or do something to make it faster to get both windows side by side using the whole desktop rather than manually resizing each and every time? Just wondering it would be very helpful.
+[06:52] <angel12> i can ping it fine
+[06:53] <mase_work> angel12: that doesn't mean that it's pinging the right server :)
+[06:53] <mase_work> what IP address do you get for it?
+[06:53] <sagredo> yo crew
+[06:53] <sagredo> what's up
+[06:53] <angel12> 91.189.88.46
+[06:54] <u_dparte> angel12, i get 91.189.88.31
+[06:54] <lucax1> #remastersys
+[06:54] <vise> Hi.. I installed Qemu and SDL on my ubuntu 8.10... But qemu cannot initialize SDL since, as i found on the web, SDL in ubuntu does not get the frame buffer. Can someone suggest a workaround. I really need to run Qemu..
+[06:54] <lucax1> any ideas about that program?
+[06:55] <bullgard4> After dist-upgrade 8.04.2 > 8.10 > 9.04 I cannot switch on my WiFi adapter 2200BG any more pressing Ctrl+Alt+W. The Linux kernel module ipw2200 is loaded. /lib/modules/2.6.28-13-generic/kernel/ubuntu/misc/acerhk.ko exists. How to fix that?
+[06:55] <bazhang> lucax1, uck is easier imo there are other options as well
+[06:55] <bazhang> !remaster | lucax1
+[06:55] <ubottu> lucax1: Interested in remastering the Ubuntu !live CD? See: https://help.ubuntu.com/community/LiveCDCustomization or use tools such as http://uck.sourceforge.net/ or http://linux.dell.com/wiki/index.php/DRU_Disc_Remastering_Utility
+[06:55] <u_dparte> vise, why qemu?
+[06:55] <u_dparte> why not something like virtualbox or wine?
+[06:56] <koshari> whats shiretoko?
+[06:56] <lucax1> i want to make it out of my current installation
+[06:56] <angel12> ugg
+[06:56] <vise> u_dparte, I do osdev, and I need something that quickly goes through the bios stage, since i code and run pretty often...
+[06:56] <angel12> im a b00n, i turned on the firewall lol
+[06:57] <bazhang> lucax1, a clone?
+[06:57] <bullgard4> What is the command-line command to switch on a WiFi adapter having the driver ipw2200?
+[06:57] <u_dparte> vise, ic ... can't help you then, I don't have any exp. with it
+[06:58] <shahalam> hi all
+[06:58] <lucax1> bazhang: yeah i want to make a dist type cd with my current ubuntu... like one of the options of remastersys, but the thing is that ive installed the 2.6.30 kernel, and for some reason remastersys doesnt work with it... i can do it with 2.6.28 kernel but not .30
+[06:58] <u_dparte> bullgard4, when I need to switch wifi interfaces I do sudo ifconfig <wifi interface> down
+[06:58] <u_dparte> sudo ifconfig <other wifi interface> up
+[06:58] <vise> u_dparte, Have you ever run qemu/virtualbox for windows, in wine? Or that would be too slow.. :(
+[06:58] <sagredo> yo crew
+[06:59] <sagredo> whilst
+[06:59] <sagredo> trying to connect to the internet
+[06:59] <shahalam> i plan to buy a tv tuner card can any one suggest me a good one compatible with ubuntu 9.04 ?
+[06:59] <sagredo> what should I install
+[06:59] <u_dparte> I've run XP/osX in virtualbox without any issues
+[06:59] <sagredo> to get the little wireless icon in my taskbar
+[06:59] <sagredo> so I can click it and see available networks
+[06:59] <koshari> shahalam usb or pci?
+[06:59] <mase_work> u_dparte: OSX works in VB ?
+[06:59] <shahalam> pci
+[06:59] <u_dparte> mase_work,  ... very carefully
+[06:59] <koshari> dvico ones work well
+[07:00] <u_dparte> mase_work, it's not what you would call stable
+[07:00] <Wzcocoon> Hello every body, I just ugraded to 9.4 and under 8.4 I coud use compix with my graphic cart nvidia but now I cannot any longer any idea what can be adjusted to make it work? thank
+[07:00] <u_dparte> Wzcocoon, have you install nvidia drivers?
+[07:00] <dangerdave> Is there an official AMI for 9.04, or are there only AMIs for Intrepid and Hardy?
+[07:00] <Wzcocoon> I have the driver 180.44 installed
+[07:01] <BlackDex> hello there
+[07:01] <BlackDex> i have a problem with my hdd
+[07:01] <BlackDex> when i run e2fsck -f i get a view questions
+[07:01] <u_dparte> have you run sudo nividia-config
+[07:01] <BlackDex> and i don't realy know what they do
+[07:01] <Wzcocoon> nop
+[07:01] <u_dparte> try that first
+[07:01] <Wzcocoon> will do that now
+[07:01] <BlackDex> entry x has an invalide inode. clear (y)
+[07:01] <u_dparte> it will setup your xorg.conf
+[07:01] <BlackDex> What happens when i select yes?
+[07:01] <BlackDex> does it remove the associated file
+[07:01] <mase_work> u_dparte: we have a piece of software that we wanted to test in OSX but the macbook we have is broken. So we have a free licence and all we wanted bought the macbook for was testing an application that we had written
+[07:01] <shahalam> thanks koshari
+[07:02] <Wzcocoon> sudo: nividia-config: command not found
+[07:02] <WIGGMPk> BlackDex: just run "e2fsck -f -y"
+[07:02] <BlackDex> WIGGMPk: i did that
+[07:02] <bazhang> Wzcocoon, nvidia
+[07:02] <BlackDex> but then it complains about having it to run manualy
+[07:02] <u_dparte> Wzcocoon, lemme check real quick .. i just ran it for the 185 driver
+[07:02] <WIGGMPk> BlackDex: what do you mean 'complains'
+=== sleepy_cat is now known as c_nick
+[07:03] <u_dparte> Wzcocoon, nvidia-xconfig
+[07:03] <BlackDex> it gives me an kind of error message.. saying that i have to run e2fsck manually.. without -a or -p
+[07:03] <BlackDex> ah
+[07:03] <BlackDex> wait
+[07:03] <BlackDex> you have -y
+[07:03] <FloodBot3> BlackDex: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[07:03] <BlackDex> tssss
+[07:03] <Wzcocoon> I just got WARNING messqges
+[07:03] <u_dparte> mase_work, I would suggest doing a google search for how to run osX ... it's not really supported esp. in here
+[07:04] <BlackDex> but clearing an inode wont remove the file?
+[07:04] <WIGGMPk> BlackDex: why are you running fsck anyway? if the drive is marked clean then you dont need to run it
+[07:04] <u_dparte> Wzcocoon, did you run as sudo?
+[07:04] <Wzcocoon> yes
+[07:05] <mase_work> u_dparte: just interesting to note, it's not high on our priority list as we only have a few customers that care and they are reasonably technical.
+[07:05] <BlackDex> WIGGMPk: well during boot. it gave an error
+[07:06] <WIGGMPk> BlackDex: then you dont need the -f to run it if there is an error.. -f forces checking even if the filesystem is marked clean
+[07:06] <u_dparte> mase_work, ya - I don't really use osX except for testing ... and walking clients through installs etc...
+[07:06] <mase_work> u_dparte: yeh its not my cup of tea either
+[07:07] <WIGGMPk> mase_work: installed MAC OSX on ANYTHING other than Apple hardware violates the EULA and is not for a good topic of conversation in this chat.
+[07:07] <Thingymebob> Wzcocoon: Had similar with mine had to add the following to the "screen" section in my xorg.conf
+[07:07] <Thingymebob> Option	"AddARGBGLXVisuals"	"True"
+[07:08] <mase_work> WIGGMPk: ah crap
+[07:08] <lucax1> this is giving me a really really hard time...
+[07:08] <u_dparte> WIGGMPk, ... not true ... if you look at their license it is now a 1 machine agreement ... however you are right that is irrelevant
+[07:08] <WIGGMPk> mase_work: im not saying "it cant be done" but it definitely is frowned upon in here and by Apple
+[07:08] <bazhang> it's not legal and offtopic here
+[07:09] <bullgard4> u_dparte: What do you mean by <other wifiinterface>?
+[07:09] <WIGGMPk> u_dparte: I work for a company that ships every Apple product on the East Coast of the US, the license is like that for a reason lol
+[07:09] <u_dparte> bullgard4, I have a wifi1 and wifi0 -- -two diff. wifi cards
+[07:09] <u_dparte> to switch between the two you bring 1 down and 1 up
+[07:09] <u_dparte> visa versa to switch them
+[07:10] <bullgard4> u_dparte: Your messages do not answer the question which have put.
+[07:10] <davidguard> Hey all. I'm wondering if I can some advice for a friend. He tells me that after a recent upgrade ATI drivers in the repositories caused his monitor to become bricked. What could have caused this? Could it be: Ubuntu/Canonical not testing the driver sufficiently before including it in the repository; him using binary drivers; him not being careful enough. The reason I'm asking is because he is saying this is his reason fo
+[07:10] <bazhang> jeffs, you have ccsm installed? (here and not via PM)
+[07:11] <digitaltao> ek
+[07:11] <bazhang> jeffs, please answer here (NOT PM)
+[07:11] <Jordan_U> davidguard: What makes him think that the drivers bricked the monitor? If it wasn't a CRT then I don't see how that would be possible, and even then not likely.
+[07:12] <mase_work> WIGGMPk: i don't want to do anything illegal and i'd rather not support that platform if thats the approach they are taking.
+[07:12] <jeffs> yes its installed
+[07:12] <WIGGMPk> davidguard: well.. I would start by assuring him that a driver can not "brick" a monitor..
+[07:12] <halberd> is it possible to get wicd to connect automatically to known wireless networks?
+[07:12] <bazhang> jeffs, open ccsm and look at general settings (general)
+[07:12] <halberd> known = connected to them before
+[07:12] <vise> Ok.. one more question... Is it possible to cleanly uninstall a program which was installed using 'make install' from the source tarball? Most programs don't have an uninstall script in their Makefile. Or is there a program that would parse and reverse changes by looking at the install script in the Makefile?
+[07:12] <davidguard> Jordan_U: He says that was the case. I have no idea whether it's true or whether he even knows what he's talking about. That's why I'm asking.
+[07:12] <jeffs> ok
+[07:12] <u_dparte> bullgard4, what are you trying to do exactly
+[07:13] <davidguard> WIGGMPk: that's good news. I can tell him that.
+[07:13] <halberd> vise I don't think that's likely... maybe someone has tried
+[07:13] <bazhang> jeffs, under General Options (top row) click on Desktop Size
+[07:13] <jeffs> ok
+[07:13] <halberd> vise often a program will say where it installs things
+[07:13] <davidguard> Does anyone have any other related info I could use to continue advocating Ubuntu to him?
+[07:13] <halberd> vise like in the readme
+[07:13] <bazhang> then horizontal virtual size set to 4 jeffs
+[07:13] <WIGGMPk> davidguard: drivers can not render hardware (the monitor) useless.. he most likely does not have the ATI drivers installed correctly, or does not have the xserver setup properly. Its tough to say without providing information and config files
+[07:13] <halberd> vise so to uninstall it you could simply remove wherever it said it installed to
+[07:14] <vise> halberd, Yes, but there are a lot of locations... It takes time to remove them all.. It puts configurations, binaries and icons etc...
+[07:14] <halberd> using your good judgment
+[07:14] <jeffs> thanks
+[07:14] <davidguard> WIGGMPk: so that main thing is it's not Ubuntu's fault... right?
+[07:14] <digitaltao> Anyone here install Firefox 3.5 yet?
+[07:14] <u_dparte> digitaltao, yes
+[07:14] <jeffs> are you a bot
+[07:14] <u_dparte> works great
+[07:15] <digitaltao> Is it much quicker??
+[07:15] <Jordan_U> davidguard: CRT or LCD? I really doubt that even a CRT could be bricked, but I am willing to say it might be possible ( too high a refresh rate might concievably cause problems with a CRT ), an LCD on the other hand I don't know how it would be possible.
+[07:15] <bazhang> !ff35 | digitaltao try yourself
+[07:15] <ubottu> digitaltao try yourself: Firefox 3.5 Final is currently being built and tested for Jaunty. If you *need* to install it, the firefox-3.5 *beta* package from the repositories will be updated when testing is complete. See also http://is.gd/1jkNY
+[07:15] <u_dparte> digitaltao, fairly - I haven't noticed the big 50% increase like they claim
+[07:15] <WIGGMPk> davidguard: well.. technically no.. if he installed the drivers 'the ubuntu way' then no, its not Ubuntu's fault.. If he started by using binaries from ATI and switched to Ubuntu's repositories for the driver than its definitely a config issue
+[07:15] <bullgard4> u_dparte:  After dist-upgrade 8.04.2 > 8.10 > 9.04 I cannot switch on my WiFi adapter 2200BG any more pressing Ctrl+Alt+W. The Linux kernel module ipw2200 is loaded. /lib/modules/2.6.28-13-generic/kernel/ubuntu/misc/acerhk.ko exists. How to fix that?
+[07:15] <digitaltao> oh
+[07:16] <digitaltao> i think i will just wget the non real deal
+[07:16] <digitaltao> ***er the non beta
+[07:16] <WIGGMPk> davidguard: I have never used ATI drivers on Ubuntu but have heard of them being troublesome.. If its relatively similar to nvidia drivers than Ubuntu should be able to handle them.
+[07:16] <davidguard> Jordan_U: At this stage I'm unware of the monitor type... he's an old friend I haven't seen in about 10 years... I recently only came in contact with him through Facebook. His replies to a status update are causing anyone seeing them to be misled, if what he's saying is untrue of course.
+[07:16] <u_dparte> digitaltao, they have them in one of the repos ... my upgrade last night caught it and upgraded
+[07:16] <u_dparte> i think its the proposed repo
+[07:17] <croddy> hello, is there a way to configure grub to wait forever for me to select a kernel before it boots?
+[07:17] <jeffs> how do I make sure that my video card drivers are properly installed?
+[07:17] <high-rez> So...  I just tried to install and it hung at "scanning the mirror"./
+[07:17] <Jordan_U> croddy: Yes
+[07:17] <u_dparte> bullgard4, I'm not sure ... dist-upgrades are not ideal IMO ... try running system>>administration >> hardware drivers to see if you need to install one
+[07:18] <davidguard> Thanks for the advice guys. I will try explaining that so that no one gets the wrong idea.
+[07:18] <dinar> <unconvertable> <unconvertable>
+[07:18] <bazhang> dinar, #ubuntu-ru
+[07:19] <Jordan_U> croddy: IIRC if you remove the "timeout" line in /boot/grub/menu.lst it won't boot anything automatically but let me check before you try that.
+[07:19] <croddy> that seems to cause it to instantly boot the default entry
+[07:19] <davidguard> Oh one other question: does Ubuntu have dual screen support... I've never tried.
+[07:20] <bazhang> !xrandr | davidguard
+[07:20] <ubottu> davidguard: XRandR 1.2 is the new method of running dual screens in !X.  Information/HowTo here: http://wiki.debian.org/XStrikeForce/HowToRandR12
+=== infidel2sum1 is now known as infidel2s
+[07:20] <Jordan_U> davidguard: Yes, but how easy / stable it is depends on the driver
+[07:20] <davidguard> Thanks bazhang I'll have a look.
+[07:21] <davidguard> Jordan_U: thanks for that.
+[07:22] <high-rez> Man what the heck - I see posts about this from like two years ago and its still not been fixed.  What a terrible user experience.
+[07:22] <boozler> I'm running desktop effects with this video card http://www.newegg.com/Product/Product.aspx?Item=N82E16814121019 and it's performing rather poorly... Can any one confirm that they would expect this card to perform poorly (other hardware aside)
+[07:23] <Jordan_U> croddy: Commenting out / removing the timeout line should do it ( just checked ).
+[07:23] <croddy> ok, thanks
+[07:25] <davidguard> Oh one last point of clarification: this could not have been caused by simply upgrading? Yes/No?
+[07:25] <steph_> i had a soundcard which didnt work now i changed to usb soundcard and dunno whys not working either
+[07:25] <Thingymebob> boozler: Are you using Nvidia or nv drivers
+=== ercastil is now known as Ernesto
+[07:26] <boozler> thingymebob nvidia
+[07:26] <mubu> Anyone know when Firefox 3.5 will be released in the ubuntu jaunty 9.04 repositories? Thanks
+[07:27] <gauravsrf> HELLO EVERY ONE
+[07:27] <aacosta_> hello
+[07:27] <steph_> brb
+[07:27] <leaf-sheep> !ff3.5 | mubu
+[07:27] <ubottu> mubu: Firefox 3.5 Final is currently being built and tested for Jaunty. If you *need* to install it, the firefox-3.5 *beta* package from the repositories will be updated when testing is complete. See also http://is.gd/1jkNY
+[07:27] <Thingymebob> boozler: My old Nvidia works OK so I would expect this to be ok too, What exactly do you mean by poor.
+[07:27] <sattam> clear
+[07:27] <stealth-> anyone know a java decompiler for linux?
+[07:27] <gauravsrf> could any one help me in the situation like i want to syncronize my one of folder from windows partition to the linux partation and same way via versa is it possible if so how ?
+[07:28] <aacosta_> can anyone help me out with vsftpvd
+[07:28] <aacosta_> ftpd
+[07:28] <aacosta_> i dont know for some strange reason im not able to do file transfes
+[07:28] <Spike1506> gauravsrf, i would use rsync to do such thing
+[07:28] <aacosta_> locally from one ubuntu box to another
+[07:28] <leaf-sheep> gauravsrf: Use Unison if you need GUI.
+[07:28] <Spike1506> gauravsrf, altough im not sure howto do it.
+[07:28] <boozler> Thingymebob its somewhat slow and not very smooth. I also trying to run it in 1920x1080...
+[07:29] <gauravsrf> ?
+[07:29] <mubu> leaf-sheep, have a real answer?
+[07:30] <Siegfried> i don't understand something, if i put http://pastebin.com/m2bbded83 in babelfish, spanish to english
+[07:30] <justanothercoder> how do i change the timezone on an ubuntu-server?
+[07:30] <Siegfried> ops
+[07:30] <Siegfried> english to spanish
+[07:30] <Siegfried> quotes are changed to spanish quotes in firefox, but in lynx wget or curl it doesn't show any quote
+[07:30] <kbp> between Norton Ghost & Partimage, which one is faster?
+[07:31] <Siegfried> sudo tzconfig justanothercoder
+[07:31] <Siegfried> or dpkg-reconfigure tz-data
+[07:31] <Siegfried> tzdata*
+[07:32] <Mike94287> Instead of having to type 'php /path/to/file.php' in terminal to run a php script, is there a way to add a custom right click menu option in Nautilus that will open terminal with that line in it?
+[07:32] <gauravsrf> could any one help me in the situation like i want to synchronize my one of folder from windows partition to the Linux partition and same way via versa is it possible if so how ?
+[07:33] <MooKow> lol
+[07:33] <MooKow> taking my name XD
+[07:34] <justanothercoder> Siegfried : it says tzconfig is deprecated
+[07:34] <lopeze> Can anyone help me set up a full Ubuntu install post installation with a minimal iso?
+[07:34] <justanothercoder> and i should use  dpkg-reconfigure tzdata
+[07:34] <Thingymebob> boozler: http://www.nabble.com/Jaunty:-How-do-you-activate-video-acceleration--td227 looks like poster was having same issue
+[07:35] <digitaltao> why lopeze?
+[07:35] <bullgard4> u_dparte: From my investigations I conclude that the proper driver is installed. Something with my configuration seems to be not all right after the dist-upgrade. --  Thank you for commenting.
+[07:35] <Yossarian> hey guys
+[07:35] <boozler> Thingymebob links no good for me
+[07:35] <manpreet> hi
+[07:35] <u_dparte> bullgard4, n/p .. sorry i can't help much
+[07:35] <Yossarian> i'm using latest amarok and i'd like to listen to last.fm radio through it but it doesn't seem to work
+[07:35] <manpreet> hoe r u
+[07:35] <lopeze> digitaltao: With the alternate Hardy Heron disk it always hangs at 6 percent. The only way I can get it to install is through the minimal iso.
+[07:35] <Yossarian> it show it's playing but it doesn't output anything
+=== bahgheera is now known as bahgheera_zzzzzz
+[07:36] <Jordan_U> bullgard4: Did it work in the LiveCD session?
+[07:37] <Jordan_U> bullgard4: Or, can you try it with a jaunty LiveCD?
+[07:37] <gauravsrf> could any one help me in the situation like i want to synchronize my one of folder from windows partition to the Linux partition and same way via versa is it possible if so how?
+[07:37] <bullgard4> Jordan_U: I obtained a 9.04 CD only yesterday. I will test it now.
+[07:38] <legend2440> Mike94287: like this? http://ubuntuforums.org/showthread.php?t=336193
+[07:38] <gauravsrf> any help
+[07:38] <Thingymebob> boozler: what version is your driver?
+[07:38] <Jordan_U> !rsync | gauravsrf
+[07:38] <ubottu> gauravsrf: rsync is a fast remote file copy and synchronization program - For more see: https://help.ubuntu.com/community/rsync
+[07:39] <Jordan_U> gauravsrf: It also works locally
+[07:39] <jahc> help.. my netbook only has 4gb solid state non upgradeable hard drive. after installing every app codec addon plugin and software I want to do what I want to do, I've only got about 600mb left! I need more space for my music and youtube clips!
+[07:39] <boozler> Thingymebob 180
+[07:39] <jahc> what can I delete that isnt essential?
+[07:39] <jahc> need gcc (just in case), need openoffice.org..
+[07:39] <vadviktor> Good morning PPL! Anyone knows a way how to get information on an unmounted hdd before mounting? Like what labels or partitions does it have?
+[07:40] <Thingymebob> boozler: have you tried 173?
+[07:40] <Mike94287> legend2440: Kind of, but instead of just being in the directory and still having to type 'php file.php' I'd rather have it be there right away when I open the file with terminal
+[07:40] <boozler> Thingymebob ill need to try that i suppose
+[07:41] <Yossarian> ok nevermind it works :D
+[07:41] <Jordan_U> vadviktor: sudo fdisk -l /dev/sdxx
+[07:41] <Thingymebob> jahc: install localepurge to get rid of all languages you don't need
+[07:42] <vadviktor> Jordan_U: thank you very much! :)
+[07:42] <Thingymebob> jahc: sudo apt-get clean
+[07:42] <kilrathi_> I'm trying to upgrade from gutsy to hardy, but apt tells me there are no release upgrades at this time.  I've been following the eol pages on the ubuntu site.  Can anyone help?
+=== kilrathi_ is now known as kilrathi
+[07:44] <legend2440> Mike94287: try this  right click Desktop and select Create Launcher   Select Type   Application in Terminal  Name it Whatever you want then in command try this foe example     gnome-terminal --working-directory='/usr/src'  When you click it it opens in  /usr/src
+[07:44] <Thingymebob> !upgrade | kilrathi_
+[07:44] <ubottu> kilrathi_: For upgrading, see the instructions at https://help.ubuntu.com/community/UpgradeNotes - see also http://www.ubuntu.com/getubuntu/upgrading
+[07:45] <Thingymebob> Kilrathi_ : sorry, just read you've been following those!
+[07:46] <kilrathi> The other problem i've been having with that page is it seems to only refer to the gui upgrade.  I'm doing this all through the cli.  X isn't even installed.
+[07:47] <Gunther> hi when i given the #xhost 192.168.1.80
+[07:47] <Gunther> i'm getting the error xhost:  unable to open display ""
+[07:47] <lopeze> Anyone able to help me complete a full install of ubuntu as if it was done with the live cd, however in this case it is done with the minimal iso install?
+[07:47] <Gunther> can any one help
+[07:48] <bullgard4> I have started the Ubuntu 9.04 Desktop Edition CD. It tells me that the radio networks are diabled. How to enable them?
+[07:48] <Jordan_U> lopeze: As I told you before, just "sudo apt-get install ubuntu-desktop"
+[07:49] <lopeze> Even then I cannot get the graphical display to appear even with start x.
+[07:49] <lopeze> After doing that the machine also tells me that the filesystem has errors that even with a manual fsck do not go away.
+[07:49] <bullgard4> I have started the Ubuntu 9.04 Desktop Edition CD. It tells me that the radio networks are disabled. How to enable them?
+[07:49] <Jordan_U> lopeze: Are you sure that the hard drive is good?
+[07:49] <justanothercoder> my cron doesn't seem to be firing, i setup crontab right. is there a way to check some error log or something?
+[07:50] <lopeze> Yes.
+[07:50] <indus> Gunther: what are you trying to do
+[07:50] <micah> sup motherfuckers
+[07:50] <lopeze> Should I be running the command as root or under the username?
+[07:51] <indus> micah: wrong channel
+[07:51] <root_> exit
+[07:51] <indus> !ops > micah
+[07:51] <ubottu> micah, please see my private message
+[07:51] <bullgard4> Ich habe die Ubuntu 9.04 Desktop Edition CD gestartet. Sie meldet: "Funknetzwerke sind deaktiviert." Wie aktiviert man sie?
+[07:52] <micah> dont even know what the hell that means
+[07:52] <Cosmo1> I am having a odd couple of problems one is that my keyboard layout keeps changing from dvorak back to qwerty even though I have removed the qwerty layout and it seems at random times it goes back to qwerty and I have to run setxkbmap dvorak in a launcher
+[07:52] <indus> !ops > indus
+[07:52] <ubottu> indus, please see my private message
+[07:52] <indus> oops
+[07:52] <indus> micah: watch your language
+[07:52] <Gunther> indus: i want to open X in a remote ssh session
+[07:53] <micah> i do what i want bitch dont tell me what to do
+[07:53] <Gunther> indus: and run some gui applications
+[07:53] <chiques> Anyone have any idea why my videos are really choppy (e.g. Youtube, facebook...) when playing in Firefox?
+[07:53] <tanath> need. help. removed secondary HD and now machine won't boot
+[07:53] <PC_Nerd101> Hi - is there a way I can get ubuntu to display what runtime (rc) its in?
+[07:53] <tanath> freezes at 'reading hardware drivers' and caps lock starts blinking
+[07:54] <ikonia> micah: this channel has a clean language policy, please control your language, I hope that makes it clear
+[07:54] <atomic007za> hi
+[07:54] <tanath> what does blinking capslock mean?
+[07:54] <micah> oh thats hella messed up we should have freedom of speech
+[07:54] <ikonia> micah: then you don't have to be in this channel if you can't follow the rules
+[07:54] <ikonia> tanath: sounds like it's probing and not completing
+[07:54] <micah> how to i switch channels?
+[07:55] <ikonia> micah: /join #channel_name
+[07:55] <gauravsrf_> rsync how to use it local folders
+[07:55] <Jordan_U> tanath: Usually a kernel panic
+[07:55] <ikonia> micah: /part will make you exist this channel
+[07:55] <tanath> ikonia: all i did was remove an unnecessary hard drive
+[07:55] <Jordan_U> tanath: Basically the equivalent of a BSOD
+[07:55] <ikonia> tanath: may be more nessasary than you thought, what was on it ?
+[07:56] <tanath> ikonia, Jordan_U, i have a sata drive i removed, and now my ide boot drive won't load ubuntu. freezes during bootup splash
+[07:56] <Jordan_U> gauravsrf_: Just have the source and destination paths both be local
+[07:56] <tanath> ikonia: videos & stuff
+[07:56] <tanath> ikonia: just storage
+[07:56] <ikonia> tanath: as you said, that really shouldn't effect it
+[07:56] <tanath> ikonia: indeed
+[07:56] <tanath> ikonia: but now i can't boot. doesn't seem to make sense
+[07:56] <ikonia> tanath: can you boot into single user mode ?
+[07:57] <tanath> ikonia: i'm in recover console right now
+[07:57] <tanath> +y
+[07:57] <indus> Gunther: what error are you gettinh
+[07:57] <kbp> hello I gonna backup my Windows and Ubuntu partitions (1 is NTFS, 1 is ext3). so which type of partition do I use to store the image backup file? Thank you very much
+[07:57] <Spike1506> ext4
+[07:57] <jahc> thunder: excellent, i've freed up around 150mb
+[07:57] <tanath> ikonia: i booted to recovery mode, but not sure how to fix when i'm unsure of the problem
+[07:57] <jahc> nice :)
+[07:57] <ikonia> tanath: and that works ok ?
+[07:57] <jahc> its not THAT much but every bit helps on 4gb solid state soldered in hard drives!
+[07:57] <jahc> thanks guys
+[07:57] <indus> Gunther: xhosts <ip>
+[07:58] <tanath> tanath: well, i can get the recovery prompt. i ran irssi to get here
+[07:58] <ikonia> tanath: here is my suggestion, go to your grub menu.lst and remove the splash option so there is no splash - watch what happens when you boot up and see where it hangs
+[07:58] <tanath> ikonia: woops, see last msg
+[07:58] <Jordan_U> kbp: Doesn't matter, the image can be stored on anything ( well, not fat because it has a 4 GIG file size limit, but anything else :)
+[07:58] <Cosmo1>  I am having a odd couple of problems one is that my keyboard layout keeps changing from dvorak back to qwerty even though I have removed the qwerty layout and it seems at random times it goes back to qwerty and I have to run setxkbmap dvorak in a launcher. How do I fix this
+[07:58] <tanath> ikonia: what do i add to the line?
+[07:58] <lasifjelais> hai2u
+[07:58] <kbp> Spike1506: ext4 is buggy and every1 avoid it at the moment
+[07:58] <lasifjelais> haiiiiiiiiiiii2uuuuuuuuu
+[07:58] <Spike1506> i use it
+[07:58] <kbp> thank you Jordan_U
+[07:58] <Jordan_U> kbp: Or are you not actually creating an image but just copying the files?
+[07:59] <tanath> ikonia: er, woops. you mean remove the 'splash' param?
+[07:59] <Spike1506> dont have any problems with it.
+[07:59] <ikonia> tanath: that's it
+[07:59] <tanath> ikonia: been i while
+[07:59] <tanath> ikonia: ok
+[07:59] <ikonia> tanath: no problem
+[07:59] <Gunther> indus:hostname: Unknown host
+[07:59] <Gunther> xauth: (argv):1:  bad display name "nortrans01:0" in "list" command
+[07:59] <Gunther> xauth: (stdin):1:  bad display name "nortrans01:0" in "add" command
+[07:59] <Gunther> X: user not authorized to run the X server, aborting.
+[07:59] <Gunther> xauth: (argv):1:  bad display name "nortrans01:0" in "remove" command
+[07:59] <Gunther> Couldnt get a file descriptor referring to the console
+[07:59] <FloodBot3> Gunther: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[07:59] <tanath> ikonia: ok, i'll have a look. back in a bit if i don't figure it. thanks
+[07:59] <kbp> Jordan_U I gonna use Norton Ghost to make partition image (Partimage doesnt work well)
+[08:01] <Alumin> OK, this is kinda a shot in the dark, but anybody else with a Synaptics touchpad on a laptop see it stop working today with package updates?
+[08:01] <Alumin> been a little while since I updated packages on the laptop, so maybe within a week or so
+[08:01] <ActionParsnip> !touchpad
+[08:01] <ubottu> For a comprehensive Synaptics Touchpad guide, see https://help.ubuntu.com/community/SynapticsTouchpad
+[08:01] <joebodo> Alumin what release ?
+[08:01] <adhok> Hi, I'm having difficulties dropping out of the graphic interface and into the shell by using ctrl + alt + F1.  Whenever I do it .. makes my keyboard go wonky.  It won't allow me to type any real characters, so I can't log in to complete this darn driver installation :(  Anyone know what the problem could possibly be?
+[08:02] <Alumin> Xubuntu Jaunty
+=== xxx is now known as Guest4845
+[08:02] <u_dparte> adhok, did you try a restart into a freshly running ubuntu X
+[08:03] <u_dparte> adhok, I just had the same thing while updating to the nvidia 185 drivers
+[08:03] <kbp> adhok: how about Ctrl+Alt+F2 - F3 - F4 ... ? is it the same?
+[08:03] <joebodo> Alumin updating my eeepc now
+[08:03] <adhok> yes I did, although I didn't purge my machines memory, I even tried doing the recovery option and logging in as root with terminal.. and it still was giving me issues
+[08:03] <Jordan_U> adhok: First of all you probably shouldn't be installing the nvidia drivers manually which is what I assume you are doing
+[08:03] <adhok> havent tried ctrl + alt and any other Fkeys
+[08:03] <Alumin> if it helps, I noticed that removing and re-inserting the "psmouse" kernel module had an effect
+[08:03] <u_dparte> adhok, which drivers are you installing?
+[08:03] <Spike1506> when will firefox 3.5 be available in ubuntu?
+[08:03] <Cosmo1> my gnome panel keeps disapearing, how do I get it to stop doing that?
+[08:03] <synta10> !ff35
+[08:03] <ubottu> Firefox 3.5 Final is currently being built and tested for Jaunty. If you *need* to install it, the firefox-3.5 *beta* package from the repositories will be updated when testing is complete. See also http://is.gd/1jkNY
+[08:04] <Alumin> when I "modprobe psmouse", the touchpad works for about a second, then stops responding again
+=== Caleb is now known as Guest16591
+[08:04] <adhok> beta drivers for my gtx280s.. all the available drivers that are recommended just won't work
+[08:04] <u_dparte> adhok, I had to kill some services like postfix, apache, sshd to get it to drop to a shell correctly
+[08:04] <adhok> kk thanks u_dparte, that's a good idea
+[08:05] <V1> Who here is using pidgin?
+[08:05] <synta10> V1: me, why?
+[08:05] <Cosmo1> me
+[08:05] <Severity1> me
+[08:05] <Severity1> why
+[08:05] <supravat> v1:me
+[08:05] <V1> Yeaa
+[08:06] <supravat> why ??
+[08:06] <jschiff> pidgin is terrible :(
+[08:06] <V1> Pidgin is total pwnage
+[08:06] <Severity1> no it is not
+[08:06] <Alumin> I'm going to try the suggestions on the page ActionParsnip suggested, maybe that'll help
+[08:06] <jschiff> an IM client without webcam support *sigh*
+[08:06] <supravat> why u think that ??
+=== V1 is now known as VM_UBUNTU_IS_SKI
+[08:06] <Severity1> well it is an instant messenger
+[08:06] <Alumin> jschiff: you'd really hate my setup then, I use BitlBee most of the time :)
+[08:07] <Severity1> just use skype
+[08:07] <joebodo> Alumin touchpad seems fine after update
+[08:07] <Alumin> joebodo: bah to you, then  :D
+=== VM_UBUNTU_IS_SKI is now known as UbUnTu-Vm-Pwn
+[08:07] <jschiff> I have a lot of friends that just use msn/yahoo and aren't tech savvy enough to use skype
+[08:07] <UbUnTu-Vm-Pwn> :-D
+[08:07] <UbUnTu-Vm-Pwn> Lol yea
+[08:08] <Alumin> mine is an Acer Aspire One ... it went into suspend and didn't come back out properly, that may have something to do with it too perhaps
+[08:08] <jschiff> that's why IM clients need to have webcam support over the msn/yahoo protocol
+[08:08] <Cosmo1> I tried using empathy I was not impressed
+[08:08] <jschiff> same
+[08:08] <jschiff> unfortunately kopete is by far the best IM client for linux
+[08:08] <jschiff> however limiting itself to qt is agrivating
+[08:09] <lijero> hola
+[08:09] <lijero> hola
+[08:09] <Gunther> indus: i want to open gui applications in ssh can you help ?
+[08:09] <jschiff> Gunther: ssh -X
+[08:09] <UbUnTu-Vm-Pwn> Is there like an online software repository, but in a web browser instead of sudo-apt get blah blah blah???
+[08:09] <rayno_b> Hello there - I need some assistance with the "X Server" on Ubuntu Server while using Putty?
+[08:09] <Thingymebob> kilrathi: Its not recommended and is frowned upon here but you can upgrade by changing your sources. PM Me if you want me to guide you through it
+[08:10] <bullgard4> I have started the Ubuntu 9.04 Desktop Edition Live CD. It tells me that the radio networks are disabled. How to enable them?
+=== [1]JeZ-l-Lee is now known as JeZ-l-Lee
+[08:10] <adhok> hrm, apparently I have no services running except for root, and it still has the same issue :(
+[08:10] <Jordan_U> UbUnTu-Vm-Pwn: Try Applications > Add/Remove, it's probably more what you are looking for
+[08:10] <emilie> i can't log in gmail and in any other <form> like the gmail login form, i can solve it by removing the .firefox directory, but I'd like a beeter solution
+[08:10] <emilie> better]
+[08:11] <ikonia> bullgard4: enable your wirless card
+[08:11] <bullgard4> ikonia: hehe. I just asked how to enable it.
+[08:11] <Gunther> jschiff: i'm using putty from windows machine
+[08:11] <ikonia> bullgard4: normally with a kill switch on the machine
+[08:12] <jschiff> Gunther: Install Cygwin-X
+[08:12] <jschiff> will allow you to run an X environment on windows
+[08:12] <jschiff> thus allowing ssh -X tunneling
+[08:12] <tanath> ikonia: blargh
+[08:12] <steph_> my sounds dont works at all
+[08:12] <ikonia> tanath: ?
+[08:12] <tanath> ikonia: error msg wasn't that helpful
+[08:12] <rayno_b> jschiff do you mind if I pvt you please?\
+[08:12] <bullgard4> ikonia: My computer does not have a hardware kill switch.
+[08:12] <ikonia> tanath: anything at all ?
+[08:12] <jschiff> go ahead rayno_b
+[08:12] <tanath> ikonia: there were 3 relevant lines at end
+[08:12] <u_dparte> steph_, did you just install ?
+[08:12] <ikonia> bullgard4: is it a PC or a laptop
+[08:12] <tanath> ikonia: 'Code: (lots of hex)' then..
+[08:12] <bullgard4> ikonia: It is a laptop computer.
+[08:13] <steph_> yesterday, i installed drivers yesterday and in pulse it shows sound, but i cant hear it
+[08:13] <steph_> @ u_dparte
+[08:13] <ikonia> bullgard4: then it will either have a kill switch or a kill key sequence
+[08:13] <tanath> ikonia: 'EIP: avc_has_perm_noaudit+0x186/0x1b0' then...
+[08:13] <ikonia> tanath: that does sound like a panic
+[08:13] <tanath> ikonia: 'Kernel panic - not syncing: fatal exception in interrupt'
+[08:13] <soreau> steph_: Try running 'alsamixer' in your terminal?
+[08:13] <ikonia> tanath: game over
+[08:13] <jeancalvin> hi guys, which "debian version" is closest to ubuntu 9.04? Please see this list before you answer: http://deb.opera.com/ .
+[08:13] <steph_> i did
+[08:13] <ikonia> jeancalvin: none
+[08:14] <tanath> ikonia: it was fine before removing the HD. not sure why it'd do that
+[08:14] <soreau> ! audio | steph_
+[08:14] <ubottu> steph_: If you're having problems with sound, first ensure ALSA is selected, by double clicking on the volume control, then File -> Change Device (ALSA Mixer). If that fails, see https://help.ubuntu.com/community/Sound - https://help.ubuntu.com/community/SoundTroubleshooting - http://alsa.opensrc.org/DmixPlugin - For playing audio files, see !Players and !MP3
+[08:14] <jeancalvin> ikonia, please just look
+[08:14] <jschiff> debian 5.0 jeancalvin
+[08:14] <ikonia> tanath: that really shouldn't effect it....but, have you tried putting the hardware in
+[08:14] <jeancalvin> i just need to install opera
+[08:14] <ikonia> jeancalvin: no - they are not related
+[08:14] <jeancalvin> jschiff: pls look at the list.
+[08:14] <tanath> ikonia: not yet. i didn't before 'cause it was being copied to & from
+[08:14] <steph_> ohh wait now comes something different in terminal
+[08:14] <steph_> i try that
+[08:14] <tanath> ikonia: i could now, but i'd like to know what the prob is
+[08:15] <tanath> ikonia: if it works... there could still be a prob, only hidden
+[08:15] <steph_> i had always problems with audio
+[08:15] <jeancalvin> hi guys
+[08:15] <jeancalvin> potato, woody, sarge, etch, lenny, or sid?
+[08:15] <ikonia> tanath: if it works we can look into it more, but as it stands it's hard to work out due to the panic
+[08:15] <ikonia> tanath: I'll be surprised if it works when the disk goes back in, but it's certainly worth trying
+[08:16] <tanath> ikonia: i'd be surprised if it didn't, 'cause nothing else has changed... though it is odd
+[08:16] <ikonia> tanath: lets find out
+[08:16] <tanath> ikonia: well thanks. it's late. i'm off for now
+[08:16] <TheQ> Moin
+[08:16] <tanath> ikonia: yeah, i'll try it, but i'm off for now
+[08:16] <tanath> ikonia: thanks
+[08:17] <lijero> hola
+[08:17] <lijero> que tal
+[08:17] <ikonia> !es
+[08:17] <ubottu> En la mayoria de canales Ubuntu se comunica en ingles. Para ayuda en Espanol, por favor entre en los canales #ubuntu-es o #kubuntu-es.
+[08:17] <SnakDoc> can you run any gui app with x11 forwarding ?
+[08:18] <steph_> i also lost my sound icon in panel it was there b4
+[08:18] <jschiff> SnakDoc: ssh -X and yes
+[08:18] <SnakDoc> steph: right click panel and hit add to panel
+[08:18] <steph_> ok
+[08:19] <SnakDoc> steph: look for volume control should be what you are wanting
+[08:19] <indus> Gunther: hi sorry was away
+[08:19] <indus> Gunther: you found help already?
+=== tyler is now known as Guest2732
+=== Guest2732 is now known as thankyou
+[08:20] <indus> Gunther: nice tutorial here http://nixcraft.com/getting-started-tutorials/170-run-remote-x-applications-over-network-using-ssh.html
+[08:21] <NOMIND> k
+[08:24] <ladiez_caem> hy
+[08:24] <indus> hi
+[08:24] <ladiez_caem> asl
+[08:24] <Cosmo1>  I am having a odd couple of problems one is that my keyboard layout keeps changing from dvorak back to qwerty even though I have removed the qwerty layout and it seems at random times it goes back to qwerty and I have to run setxkbmap dvorak in a launcher. How do I fix this?
+[08:24] <u_dparte> are you kidding me ... what is this aol now
+[08:25] <steph_> i did that the page wanted but still nothing its says failed in terminal
+[08:25] <Gunther> indus:thanks, indus i will read that tutorial
+=== hello is now known as Guest81205
+[08:28] <indus> Gunther: let me know if it works, i havent tried this yet
+[08:29] <rubydiamond> how to install firefox 3.5 for ubuntu 8.10 using apt
+[08:29] <indus> Gunther: i think xforwarding is the issue you have , make sure you set it up on the server
+[08:29] <Thingymebob> !ff35
+[08:29] <ubottu> Firefox 3.5 Final is currently being built and tested for Jaunty. If you *need* to install it, the firefox-3.5 *beta* package from the repositories will be updated when testing is complete. See also http://is.gd/1jkNY
+[08:31] <AndorinKato> Hi, guys! A little while back my multimedia keys on my laptop (Play/Pause, Stop, etc) stopped working for any music player. I know it's not a hardware issue since Ubuntu detects the usage of the keys themselves; they just don't function. Their keyboard shortcut assignments haven't changed. Any thoughts?
+[08:31] <indus> rubydiamond:i suggest you directly download ff from mozilla
+[08:32] <rubydiamond> indus, then how can I install it?
+[08:32] <indus> rubydiamond: go to site and download
+[08:32] <indus> www.getfirefox.com
+[08:32] <AndorinKato> I think it happened after I installed a small group of updates via the Update Manager. However, on my other Jaunty install on my PC, the keys work fine.
+[08:32] <rubydiamond> indus, but it will break apt ff
+[08:32] <ziroday> indus: please don't recommend that.
+[08:33] <indus> rubydiamond: no it wont its not a deb file
+[08:33] <ziroday> rubydiamond: follow the factoid given to you above. Wait patiently or use the mozilla-security PPA if you have to
+[08:33] <indus> rubydiamond: ziroday:well,iam using the ff beta from synaptic
+[08:33] <tweaker25> someone can tell why some softwares need more hardware on linux than windows and why linux always grow bigger in hardware specifications need when it only does the same things as before ???
+[08:34] <indus> ziroday: whatas wrong with using it from mozilla? works fine
+[08:34] <AndorinKato> tweaker25: It's the other way around... Ubuntu needs 4 GB of HD space when it's installed, and Windows 7 needs 16 GB.
+[08:34] <jschiff> tweaker25: examples?
+[08:34] <ziroday> indus: if you'll join me in #ubuntu-offtopic I'll explain why using the packages to source from mozilla.org is not a good idea
+[08:34] <AndorinKato> Linux runs a lot better on older computers than Windows.
+[08:34] <indus> ziroday: ok
+[08:35] <tweaker25> miro software is a good example ... linux isn't windows so cut the comparaison there ...
+[08:36] <tweaker25> yep it run better but where cutting at it slowly with ubuntu and ubuntu just do the same as other distros
+[08:36] <AndorinKato> Does anyone have any suggestions for the problem I described above?
+[08:37]  * tweaker25 wait and pray for the next xubuntu-killer lubuntu as an official distro !!!
+[08:37] <AndorinKato> tweaker25: Ubuntu is actually a more resource-hungry distro because of its fancy GUI and desktop effects.
+[08:37] <djiezes> AndorinKato: have you tried reconfiguring those shortcuts?
+[08:37] <AndorinKato> So I'm not really sure what you're asking about.
+[08:38] <AndorinKato> djiezes: I have; I've tried assigning the functions to different keys, and those don't work either. Hence, not hardware issue.
+[08:38] <tweaker25> AndorinKato some software need a little more on linux than on windows, the softwares need more tweaking or what ?
+[08:39] <kraut> moin
+[08:40] <djiezes> AndorinKato: just this session, or also after other reboots?
+[08:40] <Slemming> Hi, any word on when firefox will be updated in repo to 3.5?
+[08:40] <AndorinKato> djiezes: I tried it a while back... want me to again just to be sure?
+[08:40] <djiezes> AndorinKato: you're saying rebooting didn't fix the issue?
+[08:41] <sultan> I tried you mama
+[08:41] <AndorinKato> djiezes: Indeed.
+[08:41] <Alumin> well, I tried "modprobe psmouse synaptics_resume_reset=N" but still no dice...works for about a second then dies again
+[08:41] <djiezes> AndorinKato: hm ... i'm running out of ideas ... sorry
+[08:41] <Jimmio> Hello all. How do I use gnome-session-save? It's not working at all... but the --logout parameter works >_>
+=== sultan is now known as FilthyRat
+[08:41] <AndorinKato> That's okay, thanks anyway. :)
+[08:42] <AndorinKato> Can anyone offer advice on nonfunctioning multimedia keys?
+[08:42] <djiezes> AndorinKato: maybe another application is preventing the use of your keyboard shortcuts. ... but that's just a guess
+[08:42] <Slemming> AndorinKato: do they generate an event?
+[08:42] <Alumin> anybody know where I can edit my Xorg configuration now?  This new idea of "we don't need xorg.conf, everything's auto-detected" is fine and dandy until something breaks and you need to tweak one thing :)
+[08:43] <Slemming> run xev, press multimedia keys, see if something changes in console
+[08:43] <Slemming> (run xev from a terminal)
+[08:43] <AndorinKato> Yes.
+[08:43] <niarbeht> AndorinKato: as in, you press it at the console (the real one, not a term inside X) and no random-seeming gibberish spits out?
+=== peppe is now known as pepito987
+[08:43] <AndorinKato> Slemming: They do. I know it's not a hardware issue because of that, and because I've tried changing the keys of the shortcut.
+[08:43] <niarbeht> Alumin: are you talking about messing w/ input device configuration?
+[08:43] <Slemming> AndorinKato: Where are you trying to bind the keys?
+[08:44] <AndorinKato> Er... bind meaning?
+[08:44] <Slemming> assigning shortcuts
+[08:44] <jschiff> Alumin: /etc/X11/xorg.conf
+[08:44] <Alumin> niarbeht: yeah, I think there was an Xorg update recently that borked my (synaptics) touchpad
+[08:44] <Alumin> jschiff: that's where I would expect to find it, yeah
+[08:44] <niarbeht> Alumin: Oh, JOY.  To xorg-server 1.5, I'm guessing?  Lemme look up where the hal stuff is on my gentoo install...
+=== desti_T2 is now known as desti
+[08:45] <AndorinKato> Uh... well, for example, I'm trying to assign Fn+Home (on a laptop) to XF86AudioPlay. Is that the sort of answer you're looking for?
+[08:45] <hossam> hello, i am trying to enable multiple backgrounds for my workspaces and tried to follow this tutorial http://anuragbansal.wordpress.com/2008/05/10/how-to-get-different-wallpapers-on-each-workspace-in-ubuntu/
+[08:45] <Slemming> AndorinKato: Aren't those hardwired?
+[08:45] <jschiff> Alumin: you try a "mv /etc/X11/xorg.conf{,.bak}" then a "Xorg -configure" and using that config?
+[08:45] <niarbeht> Alumin: /etc/hal/fdi/policy/47-some-logical-policy-name.fdi
+[08:45] <hossam> but now compiz cube doesnt have the background option since ubuntu 9.04
+[08:45] <Slemming> as in "does the fn key alone generate an event?"
+[08:46] <hossam> is there anythign i can do to get this background feature back?
+[08:46] <AndorinKato> Slemming: It does not.
+[08:46] <Alumin> jschiff: my point is that there is no xorg.conf there now...but I'll try the -configure, one sec
+[08:46] <Verlex> have a good morning to all people in chatt
+[08:46] <Alumin> niarbeht: lemme see what I have in there
+[08:46] <niarbeht> Alumin: what you'll wanna do is find a HAL policy file for a synaptics touchpad, and add/tweak options as appropriate.
+[08:46] <Slemming> AndorinKato: And you want fn+home to be assigned to XF86AudioPlay?
+[08:46] <AndorinKato> But other Fn functions work, like shutting off the screen. My multimedia keys and mute are the only ones that don't work.
+[08:46] <AndorinKato> Slemming: Indeed, that's where it normally is.
+[08:46] <Slemming> what does fn+home generate now?
+[08:46] <AndorinKato> Nothing.,
+[08:46] <niarbeht> Alumin: Mine is under /etc/hal/fdi/policy/11-x11-synaptics.fdi, I can pastebin the contents for you if you want.
+[08:47] <Slemming> AndorinKato: And that's your hardware issure
+[08:47] <jschiff> Alumin: "Xorg -configure" then "mv /root/xorg.conf.new /etc/X11/xorg.conf"
+[08:47] <Slemming> issue*
+[08:47] <Alumin> niarbeht: by the way I already followed the instructions on this page:  https://help.ubuntu.com/community/SynapticsTouchpad
+[08:47] <jschiff> as root of course
+[08:47] <AndorinKato> Slemming: Are you sure? If I assign XF86AudioPlay to another key (say Insert), it still doesn't work.
+[08:48] <AndorinKato> Slemming: Okay, maybe I misunderstood your question earlier... apologies.
+[08:48] <AndorinKato> I'm still rather new to this. ^^;
+[08:48] <sf_thailand_haii> ubuntu
+[08:49] <Slemming> AndorinKato: I'm not sure about that part (remapping a key to another)
+[08:49] <niarbeht> Alumin: well, those seem rather decent.  If you've updated to xorg-server 1.5 as your X server, then you'll need to edit a HAL policy file rather than the xorg.conf file.
+[08:49] <hossam> anyone know how to have multiple desktops for your workspaces in ubuntu 9.04?
+[08:49] <Slemming> but if the OS doesn't detect that fn+home is being pressed, it sounds hard to use that as bindings
+[08:49] <Slemming> still, it's possible that I'm wrong
+[08:49] <vl> Sorry if this is a FAQ, but since a kernel update this morning (German time) my windows kvm virtual machine does not boot anymore.
+[08:50] <AndorinKato> Slemming: It's what makes me think it's a software thing... plus the fact that they stopped working, like, right after I installed a handful of updates. Also, xev deects Fn+Home, but not Fn alone.
+[08:50] <vl> Is that a known issue?
+[08:50] <vl> Running 9.04
+[08:50] <FilthyRat> fag
+[08:50] <Alumin> niarbeht: I think my package versions are on a different track from yours, mine is 1:7.4~5ubuntu1
+[08:50] <Alumin> ie the Jaunty version
+[08:50] <Slemming> AndorinKato: Ah, so it does detect fn+home?
+[08:50] <superlinux> i have tutorial videos that i made . They are about debian installation.  they are on my server. www.superlinux.net. just click the links. discard the Arabic. videos are in arabic and english at the same time. I hope you download them. they are FREE!
+[08:50] <djiezes> AndorinKato: i don't get it, what's the point of mapping a multimediakey to insert for example. What I do (in amarok for example) is binding 'Next Track' to XF86Forward. That works ...
+[08:50] <Slemming> AndorinKato: Not a hardware issue then, probably
+[08:50] <sf_thailand_haii> #join a2
+[08:51] <Slemming> djiezes: I'm thinking other way around, so that insert would be xf86home
+[08:51] <jschiff> sf_thailand_haii: "/join #a2"
+[08:51] <AndorinKato> djiezes: It was to test whether or not the Fn+Home function was physically broken somehow... which can't be the case since both keys still work.
+[08:51] <roxie> how do i install java runtime environment on ubuntu netbook remix
+[08:51] <Slemming> AndorinKato: It's not broken if it generates a xev event
+[08:51] <jschiff> roxie: apt-get install sun-java6-jre
+[08:51] <djiezes> Slemming , AndorinKato : okay, it was a test, now i got it :)
+[08:51] <roxie> thankyou
+[08:51] <AndorinKato> Either way, Insert was just a temporary test; I changed it back. My media player is Songbird 1.2, with the plugin that allows for multimedia key use. The same software that's on my PC, where multimedia keys /do/ work.
+[08:51] <Alumin> niarbeht: I think copying your HAL config file is probably my best bet at this point; if you don't mind putting yours online I'll gladly snipe it :)
+[08:51] <djiezes> AndorinKato: is it in gnome settings only that it doesnt work, or are you trying a specific application?
+[08:52] <roxie> E: Could not open lock file /var/lib/dpkg/lock - open (13 Permission denied)
+[08:52] <roxie> E: Unable to lock the administration directory (/var/lib/dpkg/), are you root?
+[08:52] <Flannel> roxie: Prefix it with sudo
+[08:52] <AndorinKato> djiezes: I tested it in Songbird and in Amarok.
+[08:52] <u_dparte> roxie, sudo
+[08:52] <niarbeht> Alumin: yeah, that version number you quoted was the xorg-x11 front, not the xorg-server version.  I think post-7.3 uses xorg-server 1.5, so you do need to use HAL policies.
+[08:52] <jschiff> ubuntus sudo paradigm is annoying
+[08:52] <niarbeht> Alumin: just a sec
+[08:52] <djiezes> AndorinKato: and in Amarok, in 'Global Shortcuts' ?
+[08:52] <Slemming> roxie: You can't install stuff when you
+[08:52] <AndorinKato> djiezes: I'll check real quick just to make sure it's assigned.
+[08:53] <roxie> k
+[08:53] <roxie> ty
+[08:53] <Slemming> roxie: are not admin, that's why it needs sudo
+[08:53] <AndorinKato> I can't remember whether I've used Amarok before on this computer.
+[08:53] <Alumin> jschiff: I tried the "Xorg -configure" deal and when I launch with that config I just get a black screen and an error saying "get fences failed: -1"
+[08:53] <jschiff> never heard that error before
+[08:53] <Alumin> I have to go back to the invoking terminal and Ctrl-C, it doesn't respond to ctrl-alt-backspace
+[08:53] <Slemming> AndorinKato: Where do you map "fn+home" to XF86Home?
+[08:53] <jschiff> Well you can thank ubuntu for ctrl-alt-backspace not working
+[08:53] <niarbeht> Alumin: I'd also recommend reading the man page for the synaptics driver once you write out my policy file and restart X
+[08:53] <AndorinKato> djiezes: Nope, it doesn't work in Amarok either.
+[08:54] <Jordan_U> jschiff: Well, actually upstream Xorg :)
+[08:54] <AndorinKato> Slemming: System -> Preferences -> Keyboard shortcuts
+[08:54] <jschiff> you can put Option "dontzap" in your server config in Xorg
+[08:54] <jschiff> to bypass that
+[08:54] <Slemming> AndorinKato: that doesn't remap a key to another?
+[08:54] <Flannel> !dontzap | Alumin, jschiff
+[08:54] <ubottu> Alumin, jschiff: To re-enable the Ctrl+Alt+Backspace combination that restarts your X server, you can install the "dontzap" package and use the command <unconvertable> sudo dontzap --disable <unconvertable> . The combination Alt+SysRq+K can also be used to obtain a similar effect.
+[08:54] <AndorinKato> Slemming: It remaps functions to different keys, doesn't it?
+[08:54] <jschiff> flannel that's a stupid way of doin it
+[08:54] <roxie> mozilla 3.5 is not recognizing the java plugin i guess
+[08:54] <r_a_f> ello -- I need Live CD working on 250 MB RAM and usb support - any suggestions PLS ?
+[08:54] <jschiff> why install stuff to remove functionality that's disabled
+[08:54] <niarbeht> Alumin: That way, you can customize it.  Btw, if your pad supports two- and three-finger actions, this policy file does two-finger scrolling (up-down and left-right), as well as two-finger-tap middle-click and three-finger-tap right-click =D    http://pastebin.ca/1481634
+[08:55] <jschiff> when you can just toggle a Xorg option
+[08:55] <Slemming> AndorinKato: yes, which function are you binding to fn+home?
+[08:55] <Flannel> jschiff: Installing a package is much easier than manually configuring anything.
+[08:55] <Jordan_U> roxie: How did you install firefox 3.5
+[08:55] <jschiff> not really >_<
+[08:55] <Flannel> jschiff: If you'd like to discuss this further, I'd be happy to do so in #ubuntu-offtopic, but it's not appropriate for here.
+[08:55] <Slemming> "action"
+[08:55] <AndorinKato> XF86AudioPlay.
+[08:55] <Alumin> Flannel: not for everone :)
+[08:55] <roxie> go to ubuntumini.com
+[08:55] <jschiff> i'd hardly call editing a file manually configuring.. lol
+[08:55] <Alumin> niarbeht: thanks :)
+[08:55] <jschiff> people make xorg.conf out to be this big scary beast, but it's really not all that bad
+[08:55] <niarbeht> r_a_f: DSL?  Damn Small Linux?  There might be one by them.....
+[08:55] <roxie> http://www.ubuntumini.com/2009/06/install-firefox-35.html
+[08:56] <Slemming> Jordan_U: you could install firefox-3.5 from repo, though it's not up to date
+[08:56] <niarbeht> jschiff: nope, it isn't, it's just messy sometimes.
+[08:56] <jschiff> and it's good to get users familiar with it
+[08:56] <jschiff> so they don't become dependent on ubuntu's automagic configurator
+[08:56] <Flannel> jschiff: again, discussions (and rants, etc) belong in #ubuntu-offtopic, not here.  Thanks
+[08:56] <niarbeht> Alumin: please do tell if it works.  And remember you'll need to completely restart X first...
+[08:56] <Jordan_U> Slemming: I am asking how he did it to help debug his problem
+[08:57] <roxie> Jordan_U: http://www.ubuntumini.com/2009/06/install-firefox-35.html
+[08:57] <AndorinKato> Slemming: XF86AudioPlay... not sure if you saw that message.
+[08:57] <Slemming> Jordan_U: Sorry, missed that
+[08:57] <Slemming> AndorinKato: XF86Home isn't listed as an action to me?
+[08:57] <niarbeht> Alumin: also, the left/right two-finger drag may cause a back or forward action in Opera instead of scrolling.  Stupid Opera L/
+[08:58] <r_a_f> niarbeht:THANKS :)
+[08:58] <AndorinKato> Slemming: XF86Home? Where did you get that?
+[08:58] <Slemming> AndorinKato: Obviously didn't, sorry, mixed that up
+[08:59] <matib> is there someone ?
+[08:59] <Slemming> AndorinKato: Still, XF86AudioPlay is listed as a shortcut, not an action
+[08:59] <niarbeht> r_a_f: did you find what you were looking for?
+[08:59] <AndorinKato> Slemming: It's okay, but I might have mixed something up too... like, it looks like the system detects that FN+home is AudioPlay, it's just not letting it execute.
+[08:59] <Slemming> AndorinKato: Does fn+home generate a XF86AudioPlay event?
+[08:59] <AndorinKato> Slemming: Yeah, sorry, I confused that. Um, I'll check now..
+[08:59] <roxie> how do i change my default web  browser on ubuntu netbook remix?
+[09:00] <r_a_f> niarbeht: yo - i try DSLinux on old hardware ;)
+[09:00] <Slemming> AndorinKato: Try setting XF86AudioPlay (fn+home) to open a Terminal
+[09:00] <Slemming> then see if fn+home opens a terminal
+[09:00] <AndorinKato> Slemming: Yes, I believe so. The resulting output includes XF86AudioPlay. And yes, I will.
+[09:01] <AndorinKato> Slemming: It opened.
+[09:01] <Slemming> AndorinKato: So the key works, and also does binding it
+[09:01] <Slemming> what functionality did you want out of fn+home?
+[09:01] <djiezes> AndorinKato: Slemming : i'm trying it too, the XF86AudioPlay doesn't work either, but other keys like XF86Forward & XF86Back do work ...
+[09:02] <niarbeht> r_a_f: I once ran Gentoo on a Pentium II w/ 384mb of RAM.  Compiles took forever... but it was a router, so it did alright.  Except for the bad hardware.
+[09:02] <AndorinKato> Slemming: To play a track if one isn't playing, or to pause a currently playing track. So play/pause.
+[09:02] <michelleIL> are there any other chanels except this one?
+[09:03] <AndorinKato> djiezes: None of mine work- play/pause, stop, forward, back. Oh, and my mute function is out.
+[09:03] <Slemming> AndorinKato: Are you sure that your music player recognises play/pause?
+[09:03] <niarbeht> michelleIL: #freebsd ?
+[09:03] <AndorinKato> Slemming: It's worked before, like I said, so I'm pretty sure it does.
+[09:03] <niarbeht> michelleIL: sorry, bad joke.
+[09:03] <Slemming> djiezes: Do you know if amarok listens to play or pause?
+[09:04] <AndorinKato> Slemming: It does, because I've used it before.
+[09:04] <Slemming> gnome's play or pause
+[09:04] <Alumin> niarbeht: I'm pretty sure gdm restarts X when you log out, but I'm gonna go ahead and just reboot just to be sure
+[09:04] <AndorinKato> I just don't use Amarok normally. I find it to be not-particularly-user-friendly. Plus not including .mp3 support by default is a little annoying.
+=== Caleb is now known as Guest33544
+[09:04] <Alumin> nope, no dice
+[09:05] <djiezes> Slemming: i'm using Amarok14, and it doesn't react to my XF86AudioPlay. I do know amarok has a play/pauze button in one.
+[09:05] <Slemming> Alumin: ps aux | grep X, sudo kill -9 "that pid"
+[09:05] <Alumin> I'm not entirely sure it's an Xorg issue, though
+[09:05] <Alumin> Slemming: appreciate the thought, but you're answering the wrong question :)
+[09:05] <Slemming> Alumin: Meant for forcing a X restart :)
+[09:05] <Slemming> Alumin: ah sorry
+[09:06] <Slemming> Alumin: sudo invoke-rc.d gdm restart
+[09:06] <r_a_f>  niarbeht: i need to do copy from an old 240 ram computer - so need usb support for pendrive
+[09:06] <Alumin> Slemming: yeah, but I'm lazy and this netbook restarts really fast :P
+[09:06] <Slemming> I'm not sure if that should be done from within the running session
+[09:06] <djiezes> AndorinKato: it's weird, overhere it's the only key not working, the rest works as it should
+[09:06] <Slemming> Alumin: right :)
+[09:06] <kujiu> hello
+[09:06] <AndorinKato> djiezes: Running Jaunty?
+[09:06] <niarbeht> Alumin: to my knowledge, you can set that option somewhere.  GDM in gentoo defaults to not restarting X, but I have no idea about ubuntu.
+[09:06] <djiezes> AndorinKato: yep, 64bit though
+[09:07] <Alumin> niarbeht: the interesting thing is that the touchpad does work for about 1 second if I remove and re-insert the "psmouse" module
+[09:07] <niarbeht> Alumin: O.o
+[09:07] <Slemming> AndorinKato: Check inside Amarok -> Settings -> Configure global Shortcuts
+[09:07] <Alumin> I did mention that before, but I don't think you were watching the channel yet
+[09:08] <boiboite> bon matin !!!
+[09:08] <Alumin> so I checked /var/log/(dmesg|messages|syslog), but I don't see any errors
+[09:08] <boiboite> dites, j'ai besoin au demarrage de la machine d'ajouter un vairable d'environnement ?
+[09:08] <AndorinKato> Slemming: Did, and I had to assign it, but once I did it still didn't work. Will double-check.
+[09:08] <Slemming> AndorinKato: Assigned to XF86AudioPlay?
+[09:08] <Caleb_> With my ubuntu it says it has like 600 updates.When i go to see, everything is ticked.How do i untick everything so i can tick what i want? Manually unticking every update would take AGES
+[09:09] <AndorinKato> Slemming: It calls it "Media Play" in Amarok
+[09:09] <niarbeht> Hey, boiboite wants to know how to add an environment variable methinks.
+[09:09] <Jordan_U> Caleb_: Use synaptic or apt-get instead, but make sure you install all security updates at least :)
+[09:10] <Slemming> Caleb_: Not sure if this is how to do it, don't have an uninstalled update to try, but I'd try synaptic
+[09:10] <Alumin> /etc/profile hehe
+[09:10] <Caleb_> Ok, i got the lts
+[09:10] <FloodBot3> !netsplit
+[09:10] <ubottu> netsplit is when two IRC servers of the same network (like freenode) disconnect from each other, so users on one server stop seeing users on the other. If this is happening now, just relax and enjoy the show. See http://en.wikipedia.org/wiki/Netsplit
+[09:10] <ziroday> Caleb_: select the top package, hold shift go down to the bottom, select the bottom package and then untick. Did that work?
+[09:10] <djiezes> AndorinKato: i got it working !
+[09:10] <Slemming> Caleb_: Actually I'd rather go with apt-get
+[09:10] <Caleb_> Ok
+[09:10] <AndorinKato> djiezes: Oh boy, what's the process?
+[09:11] <djiezes> AndorinKato: in amarok14 that is. I deleted the XF86AudioPlay shortcut. used the primary one (Win+C) then reconfigured the XF86AudioPlay one
+[09:11] <Alumin> niarbeht: thanks for the config file anyway though, once I get this stupid touchpad working again it'll be nice to tweak the options
+[09:11] <djiezes> AndorinKato: and that did the trick overhere
+[09:11] <AndorinKato> djiezes: K, I'll try it.
+[09:11] <Alumin> the ironic part is, I !@#$% hate touchpads
+[09:11] <salil__> is it possible to extend my root partition?
+[09:11] <Caleb_> When i get adsl2+(Oh yeaaa) I can install them all
+[09:11] <Slemming> Caleb_: sudo apt-get install *that package you wanted to upgrade*
+[09:11] <Alumin> if they made a netbook-sized device with a trackpoint I would drop-kick this thing :)
+[09:11] <djiezes> AndorinKato: all in 'Global Shortcuts', Amarok itself ...
+[09:11] <Caleb_> Ah ok
+[09:11] <AndorinKato> Right...
+[09:12] <AndorinKato> djiezes: Nope, didn't fix it.
+[09:12] <Alumin> salil__: if it's on LVM then yeah
+[09:12] <Jordan_U> salil__: What do you mean by expand? If you have free space on the disk you can use a liveCD to expand the partition.
+[09:12] <Caleb_> Netbooks are...Dodgy
+[09:12] <salil__> Jordan_U, Yes.. answered...
+[09:12] <Alumin> Caleb_: I guess...mine's been a trooper until this mouse issue
+[09:12] <djiezes> AndorinKato: I might have reconfigured the key first in gnome settings too ...
+[09:13] <Alumin> well, except for the fact that it has a ***** trackpad :D
+[09:13] <djiezes> AndorinKato: do you use Amarok2, or Amarok14?
+[09:13] <AndorinKato> djiezes: I've already done that, with the Insert thing.
+[09:13] <machinebacon> !ff3.5
+[09:13] <ubottu> Firefox 3.5 Final is currently being built and tested for Jaunty. If you *need* to install it, the firefox-3.5 *beta* package from the repositories will be updated when testing is complete. See also http://is.gd/1jkNY
+[09:13] <Alumin> did I mention I don't like trackpads?
+[09:13] <AndorinKato> djiezes: 2.0.2.
+[09:13] <Slemming> AndorinKato: did it not listen to insert as pause/play?
+[09:13] <AndorinKato> Slemming: Nope, it did not.
+[09:13] <niarbeht> Alumin: I've no idea why it's not working :/
+[09:13] <djiezes> AndorinKato: Oh, i use 1.4, maybe that makes a difference
+[09:13] <Slemming> AndorinKato: Does it listen to any other shortcut?
+[09:13] <Alumin> niarbeht: yeah, I don't think it's an X issue
+[09:14] <Caleb_> Notebooks on the other hands are great.I also dont use the ******* trackpad i use a notebook mouse
+[09:14] <Slemming> djiezes: Possibly, he mentioned it was working before
+[09:14] <niarbeht> Alumin: Lenovo might (they inherited the Thinkpad series...)
+[09:14] <Alumin> niarbeht: the mouse doesn't work in console either
+[09:14] <Slemming> Alumin: Probably isn't
+[09:14] <AndorinKato> Slemming: For any other function, you mean? Or do you mean if I were to reassign it to another different key combination?
+[09:14] <Caleb_> Sorry i type slow on ipod touch
+[09:14] <Slemming> Alumin: driver/driver settings I'd think
+[09:14] <djiezes> AndorinKato: overhere there's a primary & alternative shortcut. primary i Win+C, i used that before I reconfigured XF86audioplay as alternative binding.
+[09:14] <djiezes> (just to see if it worked, and it did)
+[09:14] <Slemming> AndorinKato: Try assigning Enter to "play/pause"
+[09:14] <Slemming> then try assigning it to say Forward
+[09:15] <Cosmo1> I am having a problem one is that my keyboard layout keeps changing from dvorak back to qwerty even though I have removed the qwerty layout and it seems at random times it goes back to qwerty and I have to run setxkbmap dvorak in a launcher. How do I fix this?
+[09:15] <AndorinKato> Slemming: It might not let me but I'll try
+[09:15] <Slemming> Cosmo1: Do you have a bind to change layout that you're not aware of?
+[09:15] <AndorinKato> Yeah, had to use Ctrl+Enter
+[09:15] <Caleb_> Dvorak is really odd
+[09:15] <AndorinKato> Slemming: Annnnd it does not work.
+[09:15] <djiezes> Now i'm puzzled as to how i got it working ... & why the same procedure doesn't do it for AndorinKato
+[09:16] <Boohbah> !ot
+[09:16] <ubottu> #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics. Thanks!
+[09:16] <Slemming> AndorinKato: ctrl+enter shouldn't be picked up by the system, so obviously global keybinds does not work for amarok2
+[09:16] <Alumin> holy cow it is way past my bedtime
+[09:16] <Caleb_> You choose the layout in the installation prcess
+[09:16] <AndorinKato> djiezes: I've been setting the shortcut to the global commands, not the alternate
+[09:16] <Cosmo1> Slemming: not that I know of, and it keeps doing it at random times
+[09:16] <umar> i can open a readonly file like "sudo vim filename" and edit it. how can i make text editors like 'gedit' 'eclipse' etc edit read-only files?
+[09:16] <Slemming> Caleb_: Can change it too
+[09:16]  * Alumin shakes his fist in the air at the trackpad
+[09:16] <AndorinKato> Slemming: I tested Ctrl+Enter with Songbird
+[09:16] <Slemming> Cosmo1: Are you positive it's random?
+[09:16] <Caleb_> Yea
+[09:16] <MooKow> lol, it's way past my bedtime too
+[09:16] <Slemming> AndorinKato: test xf86playaudio with songbird rather
+[09:16] <MooKow> going tos leep soon ^.^
+[09:16] <djiezes> AndorinKato: oh, i've got the multimedia keys as alternate, maybe try the same.
+[09:17] <AndorinKato> djiezes: K
+[09:17] <Alumin> thanks a lot for the help with this, guys (even though it's still not working hehe)
+[09:17] <djiezes> AndorinKato: and check if the primary key (win+c) works
+[09:17] <umar> the above probelm prevents me from using eclipse on a project that is readonly. i wasn to edit it without changing permissions
+[09:17] <Alumin> I have a USB mouse that works fine, so it's not epic fail at the moment
+[09:17] <AndorinKato> djiezes: Nope, still doesn't work.
+[09:17] <djiezes> AndorinKato: what about the primary keybinding?
+[09:17] <Caleb_> Cosmo1:Dvorak is something you cant pronounce.Qwerty is easily pronouncible
+[09:17] <AndorinKato> djiezes: My primary is Space, which DOES work.
+[09:18] <Alumin> my primary uses for the netbook are remote administration with SSH, and lounging on the couch playing nethack...neither of which require a mouse
+[09:18] <Cosmo1> yes Caleb_ but dvorak is better
+[09:18] <djiezes> AndorinKato: and you've got the xf86audioplay binded in gnome settings shortcuts as play/pauze too?
+[09:18] <AndorinKato> djiezes: Yeppers
+[09:18] <Slemming> AndorinKato: Though that's not the same?
+[09:18] <Alumin> so it's not so bad...and I won't have to worry about the **** touchpad messing with my window focus while I'm typing YAY lol
+[09:19] <djiezes> AndorinKato: then you've got the same settings as i do, except you have amarok2, i got 1.4
+=== Caleb is now known as Guest13632
+[09:19] <Slemming> AndorinKato: Your regular key works, it's the global bindings that are the problem?
+[09:19] <AndorinKato> Slemming: Seems that way to me.
+[09:20] <djiezes> AndorinKato: set it both in 'global shortcuts' and 'shortcuts'
+[09:20] <djiezes> (or does amarok2 not have those 2 options?)
+[09:20] <Guest13632> Is there an online software repository but like a webpage, not sudo-aptitude-get-program?
+[09:20] <AndorinKato> djiezes: I can't, it only lets me assign XF8PlayAudio in one area at a time in Amarok
+[09:20] <Flannel> Guest13632: to browse?
+[09:21] <Guest13632> /nick PooIsYum
+[09:21] <Guest13632> Ya
+[09:21] <djiezes> AndorinKato: are you sure? I've got it in both.
+[09:21] <Flannel> Guest13632: packages.ubuntu.com
+[09:21] <susbwoy> Hi, what program can I use to measure write performance on my harddrive?
+[09:21] <djiezes> susbwoy: hddparm
+[09:21] <Guest13632> http:packages.ubuntu.com
+[09:21] <Guest13632> right?
+[09:21] <susbwoy> djiezes: cheers
+[09:21] <AndorinKato> djiezes: I'm sure, I just tried it again.
+[09:22] <djiezes> AndorinKato: I'm starting to think it might be an amarok2 issue?
+[09:22] <AndorinKato> djiezes: Except that it also doesn't work in Songbird.
+[09:23] <djiezes> AndorinKato: maybe they both have issues? have you tried other apps, like rhythmbox or something?
+[09:23] <AndorinKato> djiezes: I will now.
+[09:23] <Glowball> Hi
+[09:23] <AndorinKato> djiezes: Nothing.
+[09:23] <Glowball> I can find my shared Ubuntu files on my Windows machine, so Samba seems to be working fine, but where can I find them the other way round?
+[09:23] <Slemming> AndorinKato: I wouldn't depend on songbird catching that
+[09:23] <AndorinKato> Not from any of the keys.
+[09:24] <thefeds> Can I make a USB installer with an Imation Cool USB flash drive?
+[09:24] <AndorinKato> Slemming: Songbird normally /does/ work with the keys, though, since it's my primary media player on both computers; I just need to install a plugin for it to work
+[09:24] <thefeds> !usb
+[09:24] <ubottu> For information about installing Ubuntu from USB flash drives, see https://help.ubuntu.com/community/Installation/FromUSBStick - For a persistent live USB install, see: https://wiki.ubuntu.com/LiveUsbPendrivePersistent
+[09:24] <ziroday> thefeds: should do
+=== Caleb is now known as Guest42245
+[09:24] <Slemming> AndorinKato: Btw, does this involve an update to the systems with components that haven't been restarted?
+[09:24] <AndorinKato> Slemming: I don't know, how would I check that?
+[09:25] <djiezes> AndorinKato: sry, now I'm really starting to run out of ideas. Only thing I can say is that I got it working after some fiddling. So: fiddle ... (?)
+[09:25] <AndorinKato> Slemming: Also remember that these keys stopped working right after updating my system
+[09:25] <Slemming> AndorinKato: Have you rebooted the computer since the problem came up?
+[09:25] <Slemming> since the update*
+[09:25] <AndorinKato> Slemming: Yes, I've shut it down and powered it back up multiple times; the update was a few weeks ago.
+[09:25] <wisler> hi anyone
+[09:25] <u_dparte> wisler, hi
+[09:26] <Slemming> AndorinKato: Obviously not the problem then
+[09:26] <wisler> i have a problem compiling samba3.3.6 for ubuntu can anyone help me?
+[09:26] <AndorinKato> M'k
+[09:26] <Slemming> AndorinKato: Getting 'desperate
+[09:26] <Slemming> 'desperate'*
+[09:26] <ziroday> wisler: what's wrong with 3.3.2?
+[09:27] <ehsh> is there any program like google earth for Ubuntu?
+[09:27] <indus> is firefox 3.5 a backport
+[09:27] <Slemming> try running amarok2 from a terminal
+[09:27] <thefeds> ziroday: it has an encrypted section of the USB
+[09:27] <indus> hmm probably no since the newer ubuntu hasntbeen released
+[09:27] <thyri> !AAI .g amarok
+[09:27] <ubottu> Sorry, I don't know anything about AAI .g amarok
+[09:27] <Slemming> and see if it says something interesting
+[09:27] <u_dparte> indus, it's not release in the repos yet
+[09:27] <AndorinKato> Slemming: If it comes to it I can always reinstall Ubuntu; I did that the other day with my PC, updated it and the keys work.
+[09:27] <u_dparte> indus, i think you can get it from proposed repos though
+[09:27] <Slemming> AndorinKato: Try sudo apt-get purge amarok
+[09:27] <Slemming> then reinstall amarok
+[09:27] <Slemming> first
+[09:27] <Slemming> rather than reinstalling the OS
+[09:28] <ziroday> thefeds: well as long as there is enough blank unpartitioned space for the usb creator to work
+[09:28] <indus> u_dparte: hmm its in the regular repos in beta, so i hear it will be upgraded to final
+[09:28] <indus> too many repos
+[09:28] <AndorinKato> M'k
+[09:28] <Slemming> indus: 3.5v4 is in repo
+[09:28] <ehsh> is there any program like google earth for Ubuntu?
+[09:28] <thefeds> Doesn't the OS need the first block of the USB to boot it
+[09:28] <thyri> !ehsh .g ubuntu google earth
+[09:28] <ubottu> Error: I am only a bot, please don't think I'm intelligent :)
+[09:28] <wisler> my pdc dont work
+[09:28] <wisler> by login in all is ok
+[09:28] <wisler>  wisler: but by logging out it cant renew the profile
+[09:28] <thefeds> I think the first block is part of the encrypted part
+[09:29] <Jordan_U> ehsh: There's google earth :)
+[09:29] <thyri> .g ubuntu google earth
+[09:29] <AAAI> thyri: https://help.ubuntu.com/community/GoogleEarth
+[09:29] <djiezes> ehsh: there's: google earth :-)
+[09:29] <Thingymebob> ehsh: iGoogle earth is in medibuntu repos
+[09:29] <thefeds> I.E the OS can't read the part where ubuntu starts
+[09:29] <thefeds> Isn't that right?
+[09:29] <u_dparte> indus, yeah i had the beta and just last night one of my repos caught the actual release
+[09:29] <djiezes> ehsh: it's in the medibuntu repository
+[09:29] <Thingymebob> !medibuntu : ehsh
+[09:29] <ubottu> Error: I am only a bot, please don't think I'm intelligent :)
+[09:29] <Slemming> ehsh: Google Earth or Marble is what wikipedia lists
+[09:29] <Thingymebob> !medibuntu | ehsh
+[09:29] <ubottu> ehsh: medibuntu is a repository of packages that cannot be included into the Ubuntu distribution for legal reasons - See http://www.medibuntu.org
+[09:29] <indus> u_dparte: hmm really>? proposed? or normal?
+[09:30] <thyri> .g ubuntu dvd
+[09:30] <AAAI> thyri: http://cdimage.ubuntu.com/dvd/current/
+[09:30] <u_dparte> indus, tbo honest not sure ... I have proposed plus several others from installs ... I believe it came from proposed
+[09:30] <ehsh> i ont understand nothing
+[09:30] <u_dparte> lemme check
+[09:31] <AndorinKato> Slemming: It's not letting me run any sudo commands, it says another process is using the administration directory... I'm going to reboot, brb
+[09:31] <Slemming> u_dparte: Are you having any non-regular repos? Because apt-get update && apt-get install firefox-3.5 doesn't give me the latest
+[09:31] <Slemming> AndorinKato: close synaptic
+[09:31] <u_dparte> Slemming, yes I have some no standard repos
+[09:31] <u_dparte> i'm looking to see which one it came from
+[09:32] <indus> is opera in the repos?
+[09:32] <indus> like third party or something , is that called partner
+[09:32] <Slemming> Btw: Why does firefox-3.5 as a package depend essentially on firefox-3.0?
+[09:32] <lesshaste> I've remove the /var/cache/debconf directory by mistake, how can I restore it? It makes apt-get install unhappy
+[09:32] <thyri> .wik ubuntu opera
+[09:32] <AAAI> "What programming tools does Ubuntu have?--71.185.140.19 (talk) 01:46, 11 June 2008 (UTC)" - http://en.wikipedia.org/wiki/Wikipedia:Reference_desk/Archives/Computing/2008_June_11
+[09:33] <thyri> .g ubuntu opera
+[09:33] <AAAI> thyri: https://help.ubuntu.com/community/OperaBrowser
+[09:33] <Slemming> lesshaste: Try sudo dpkg-reconfigure debconf
+[09:33] <Thingymebob> ehsh: What don't you understand?
+[09:33] <u_dparte> Slemming, indus : #deb http://ppa.launchpad.net/ubuntu-mozilla-daily/ppa/ubuntu jaunty main
+[09:33] <lesshaste> Slemming: that gives ebconf: DbDriver "config": could not open /var/cache/debconf/config.dat
+[09:34] <Slemming> u_dparte: :) obviously
+[09:34] <u_dparte> Slemming, indus : #deb-src http://ppa.launchpad.net/ubuntu-mozilla-daily/ppa/ubuntu jaunty main
+[09:34] <lesshaste> Slemming: well.. debconf...
+[09:34] <Slemming> are you getting ubufox icons or?
+[09:34] <indus> u_dparte: thanks
+[09:34] <u_dparte> works fine for me
+[09:34] <ehsh> so linux is open source,how can i see the source,how can u change the source ?
+[09:34] <u_dparte> i have the latest and haven't had any issues with it
+[09:34] <lesshaste> ehsh: join #linux
+[09:34] <johnibanez> Hello, I'm a Windows user and I'm planning to move to Ubuntu.
+[09:34] <Thingymebob> ehsh: download the source packages
+[09:34] <lesshaste> Slemming: can I just reinstall it somehow?
+[09:35] <indus> ziroday: i installed ff 3.5 from mozilla but it wont run :)
+[09:35] <Slemming> indus: run it from a terminal, does its output say anything?
+[09:36] <indus> Slemming: ya trying now
+[09:36] <Slemming> lesshaste: I'd presume apt-get install --reinstall debconf doesn't work
+[09:36] <AndorinKato> Slemming: No good, I purged and reinstalled it and it still insists on not working, and I ought to point out that the ubuntu-restricted-extras package also isn't letting me play my .mp3s in Amarok
+[09:36] <indus> Slemming: which exe should i run iam thinking
+[09:36] <Thingymebob> ehsh: sudo apt-get source packagename
+[09:36] <AndorinKato> Slemming: Meaning, it should, but it isn't.
+[09:36] <indus> Slemming: run mozilla.sh? or firefox-bin
+[09:37] <Thingymebob> will put the source package in you current directory
+[09:37] <wisler> anyone help me to compile samba-3.3.6 for ubuntu 9.04????????????
+[09:37] <Slemming> indus: I'd say firefox-3.5
+[09:37] <indus> Slemming: error when loading shared libraries libxul
+[09:37] <Jordan_U> Slemming: firefox-3.5 doesn't depend on firefox-3
+[09:37] <indus> Slemming: even though its there in the ff folder
+[09:37] <bright4_chris> Anyone know how to automatically run a custom script on insertion of a CD on an Ubuntu install without GUI ?
+[09:37] <ehsh> E: Unable to find a source package for packagename
+[09:38] <jeniffer> hello friends. I have a question: How can i make the HDD temperature to go down a little bit. In ubuntu, the HDD temperature is a lot higher than in windows.... is it possible to reduce it under linux???????????
+[09:38] <Slemming> indus: sudo apt-get install xulrunner-1.9.1
+[09:38] <u_dparte> ehsh, google around till you find the actual command
+[09:38] <AndorinKato> jeniffer: Is your drive getting adequate ventilation and cooling from the fans?
+[09:38] <Slemming> indus: I think, that's one of the dependancies my firefox 3.5v4 has
+[09:38] <indus> Slemming: oops iam on hardy
+[09:39] <wisler> anyone help me to compile samba-3.3.6 for ubuntu 9.04????????????
+[09:39] <u_dparte> firefox-3.5 firefox-3.5-branding xulrunner-1.9.1
+[09:39] <AndorinKato> AndorinKato: Do I even know what I'm talking about?
+[09:39] <Jordan_U> wisler: Why not use the packaged samba?
+[09:39] <jeniffer> AndorinKato exactly the same when i have booted windows....
+[09:39] <indus> Slemming: but the thing is, mozilla binaries come with their own version of xul i believe and it loads it from same directory
+[09:39] <psycolizard> wow, lotsa people. I got the error of "BIOS does not provide ACPI _PSS objects in a way linux understands" can someone please tell me what that means and how to fix?
+[09:39] <wisler> because it dont work
+[09:39] <Thingymebob> ehsh: Replace packagename with the name of whichever package you want the source for e.g gedit gnome-terminal etc
+[09:40] <wisler> i have done as it is discribted in the wiki but it didnt work
+[09:40] <AndorinKato> Slemming: I think I may just end up wiping and reinstalling, it's not a tall order for me to xfer a few hundred music tracks and some miscellaneous files to the laptop with Giver after a reinstall
+[09:40] <Jordan_U> wisler: In what way, and why do you think that it will work if you compile from source?
+[09:40] <Anirban1987>  How can I set my personal web hosting Control panel on a different port than port 80 like CPanel is in port 2082 ?
+[09:40] <Slemming> Jordan_U: The following extra packages will be installed: firefox firefox-3.0 firefox-3.0-branding firefox-3.5-branding ubufox
+[09:40] <lesshaste> I reinstalled debconf, now I get these errors when doing a kernel upgrade in ubuntu
+[09:40] <lesshaste> http://pastebin.ca/1481676
+[09:40] <u_dparte> Anirban1987, that depends on your server configuration
+[09:41] <Jordan_U> Slemming: firefox-3.5 *recommends* ubufox, which depends on firefox-3.0 ( which is understandable but still a bug )
+[09:41] <Lord-Readman> Hello, I am trying to get a webserver working, I followed the how to forge perfect server 9.04 but didnt install ISPconfig2, I can get one domain working on the server, but I cant seem to create a vertualhost for another domain to point to a different folder, i.e. i set it to /home/mysite/ and it still loads from /var/www/ and says IT WORKS! and I have restarted.
+[09:41] <Anirban1987> u_dparte : Mine is Ubuntu 9.04 server 32 bit. How to set it up like that ?
+[09:41] <johnibanez> Hello, I'm a Windows user and I'm planning to move to Ubuntu. I'm a freelance web developer and I use Dreamweaver, Photoshop, Flash and other Adobe products. I have the CS3 Masterpack. My question is would these programs work well with Ubuntu and wine? And would I be able to run multiple simultaneous programs with Wine?
+[09:41] <Jordan_U> Slemming: sudo apt-get install firefox-3.5 --no-install-recommends
+[09:42] <Slemming> Jordan_U: that was apt-get install firefox-3.5 only
+[09:42] <u_dparte> Anirban1987, you will need to set your http config to listen on those ports I believe on ubuntu their is a file called ports.conf
+[09:42] <h4f> hi all
+[09:42] <Jordan_U> johnibanez: No to the first( only CS2 ), yes to the second
+[09:42] <sagemode> johnibanez: All of the is not 100% working but alternatives are all great
+[09:42] <ziroday> johnibanez: most of those applications don't work well with wine unfortunately. However you can use a windows virtual machine and run all those applications, or use linux alternatives to those applications
+[09:42] <u_dparte> Anirban1987, I'm not positive though b/c I only use redhat for web server and the configs are different
+[09:42] <Jordan_U> Slemming: I know
+[09:43] <moncky> johnibanez: for compatibility and wine have a look at the winehq site, to your final point, yes you can run multiple programmes
+[09:43] <djiezes> johnibanez: no, CS3 does not work with wine under linux/ubuntu.
+[09:43] <sagemode> johnibanez: I giveup adobe for gimp, and inkscape: and I work with neatbeans6.5
+[09:43] <moncky> johnibanez: My question would be, why move a way from windows if your current software requires it?
+[09:43] <wisler> i have compiled samba now the error message is error while loading shared libraries: litdb.so.1
+[09:44] <Anirban1987> u-dparte : Actually I want the EHCP control panel to appear on http://xyz.com:2082/ like that
+[09:44] <u_dparte> Anirban1987, do you have a 64bit processor?
+[09:44] <psycolizard> sigh this is a nightmare, can someone who knows about BIOS issues pull me aside in a private message please?
+[09:44] <Anirban1987> u_dparte : Its in a Virtual Machine
+[09:44] <Jordan_U> johnibanez: Linux might not be a good choice for your needs yet, unless you want to run windows in a VM.
+[09:44] <vcvg> hey, anybody know how to force 'make' to ignore error at a line?
+[09:44] <sagemode> johnibanez: You can also use virtualbox seamless mode if you have kickus desktop... but that's not moving away from a window
+[09:45] <Lord-Readman> Anyone here good with apache on ubuntu I really need some help
+[09:45] <Daemon_> can someone help me with my monitor
+[09:45] <sagemode> johnibanez: r u from phil..?
+[09:45] <discorpia> i have a samsung syncmaster 2493hm, i'm running freshly installed 9.04, how do i get it to detect the monitor (currently set to a generic supporting maximum 1280x900, but can't find any way to change it)
+[09:45] <moncky> Lord-Readman: just ask somone might know
+[09:45] <Jordan_U> !anyone | Lord-Readman
+[09:45] <ubottu> Lord-Readman: A large amount of the first questions asked in this channel start with "Does anyone/anybody..."  Why not ask your next question (the real one) and find out?
+[09:45] <u_dparte> Lord-Readman, what's your problem
+[09:45] <Lord-Readman> i did ask
+[09:45] <Lord-Readman> the chanel is moving very fast
+[09:45] <discorpia> there doesn't seem to be any proper display/screen sections in xorg.conf nowadays either
+[09:45] <Lord-Readman> Hello, I am trying to get a webserver working, I followed the how to forge perfect server 9.04 but didnt install ISPconfig2, I can get one domain working on the server, but I cant seem to create a vertualhost for another domain to point to a different folder, i.e. i set it to /home/mysite/ and it still loads from /var/www/ and says IT WORKS! and I have restarted.
+[09:45] <thechef> How do I change the master password of my keyring?
+[09:45] <FloodBot2> Lord-Readman: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[09:46] <sagemode> johnibanez: r u from phil.. join #ubuntu-ph
+[09:46] <Stdht> Could someone please help me
+[09:46] <Stdht> I have in sound devices HDA intel alc268 (ALSA) , HDA intel analog alc268 (OSS),HDA intel analog alc268 (OSS), Alsa advanced linux sound architecture, OSS open sound system, PulsaeAudioServer
+[09:46] <Stdht> why so many devices/// comparing to windows
+[09:46] <u_dparte> apache people IM me I will try to help you but the chat is moving to fast
+[09:46] <indus> Slemming: ok it runs but loads old firefox .
+[09:46] <dutch> Hi can some one help please i dont seem to have the appearance icon so i can install new themes could any one help
+[09:46] <ziroday> Stdht: ALSA and OSS are different soundsystems. I recommend you pick the first option
+[09:47] <moncky> Lord-Readman: have a look at your httpd.conf there is a setting there that you neet to change so you can use /home dirs
+[09:47] <Daemon_> how can i change my display refresh rate to 60hz?
+[09:47] <johnibanez> @Jordan_U, sagemode, ziroday, djiezes: Thank you mates. @moncky, I got spotted by Team Philippines Anti Piracy team and some of my freelance mates.
+[09:47] <indus> dutch: its in system>preferences>appearance no?
+[09:47] <johnibanez> @sagemode : Yes I'm from the philippines. :D
+[09:47] <ziroday> dutch: open a terminal and type in gnome-appearance-properties, does anything pop up?
+[09:47] <Jordan_U> johnibanez: np
+[09:47] <discorpia> dpkg-reconfigure xserver-xorg gives nothing related to monitor selection, where am i supposed to change this??
+[09:47] <Slemming> indus: doh
+[09:48] <u_dparte> discorpia, nvidia?
+[09:48] <indus> Slemming: yeah had this problem before, have to remove old ff profile probably
+[09:48] <ziroday> Stdht: please don't PM. ALSA and OSS are both soundsystems and are seperate from each other. You should pick ALSA
+[09:48] <Slemming> indus: mine migrated
+[09:48] <dutch> yes it does when run in the ter
+=== sean is now known as Guest6433
+[09:48] <Slemming> AndorinKato: Gotta dostuff, good luck with your problem
+[09:48] <Jordan_U> discorpia: System > Preferences > Display
+[09:48] <Stdht> ziroday ok
+[09:48] <discorpia> Jordan_U: yeah, as i said, i can't change monitor typ there and only have a few resolutions to choose from
+[09:48] <ziroday> dutch: then its installed in your system :), it should be under System > Preferences > Appearance
+[09:49] <AndorinKato> Slemming: Thank you for your help L)
+[09:49] <AndorinKato> :)
+[09:49] <sagemode> johnibanez: Yup Phil Anti Piracy is moving up these days
+[09:49] <Stdht> ziroday so I have both installed,
+[09:49] <Stdht> ?
+[09:49] <Jordan_U> discorpia: What gfx card?
+[09:49] <dutch> no its not there but that is perfect with the command thaanks
+[09:49] <ziroday> Stdht: it would appear so but I'm not certain
+[09:49] <Daemon_> how can i change my display refresh rate to 60hz?
+[09:49] <sagemode> johnibanez: Join ubuntu-ph mate!
+[09:49] <discorpia> should that matter since it's not my graphics card it's the monitor parameters i want to change? does gfx card matter?
+[09:49] <Stdht> if I choose sound devices I see
+[09:49] <indus> dutch: you can right click on main menu and add it then
+[09:49] <racecar56> how do i get 3D working nicely on my ati radeon 9800 pro?
+[09:49] <Stdht> HDA intel alc268 (ALSA) , HDA intel analog alc268 (OSS),HDA intel analog alc268 (OSS), Alsa advanced linux sound architecture, OSS open sound system, PulsaeAudioServer
+[09:49] <discorpia> it's ati, but i haven't installed fglrx yet because when i tried to install it things got really slow and the xorg process kept going on 96%
+[09:50] <ziroday> racecar56: it should work out of the box with the -ati driver
+[09:50] <racecar56> ziroday, it sucks
+[09:50] <racecar56> ziroday, bad
+[09:50] <ziroday> racecar56: pardon?
+[09:50] <racecar56> ziroday, it lags really bad
+[09:50] <psycolizard> Can someone tell me what this means and how to fix it please? "BIOS does not provide ACPT _PSS objects in a way linux understands"
+[09:50] <Slemming> AndorinKato: Glad I could... well... try .)
+[09:50] <humbolt> are firefox 3.5 packages available for jaunty already? the final version and as full replacement for FF3.1 not as parallel install with extra preferences dir and the such?
+[09:50] <Stdht> ziroday I can test all of them but only HDA Intel(alc268) do not work
+[09:50] <ziroday> racecar56: can you pastebin /var/log/Xorg.0.log please
+[09:50] <racecar56> ziroday, k
+[09:50] <ziroday> Stdht: okay, well then use the one that works then
+[09:51] <Jordan_U> discorpia: Yes, unfortunately the proprietary drivers don't support the standard interface for configuring monitors.
+[09:51] <niarbeht> psycolizard: that relates to cpu frequency scaling.  What CPU do you have?
+[09:51] <Stdht> ziroday so I do but why there so many devices comparing to windows
+[09:52] <ziroday> Stdht: because of the different sound systems, windows only has one sound system (AFAIK)
+[09:52] <racecar56> ziroday, http://racecar56.pastebin.com/f7cee64a7
+[09:52] <humbolt> why is my system so slow (tons of IO wait) after resuming from suspend?
+[09:52] <gralco> hi is anyone interested in learning C++ along with me
+[09:52] <discorpia> Jordan_U: oh, ok. but i haven't installed those drivers yet. it is a ati radeon 3450, but performance is miserable when i try running fglrx, so something must be buggy with the proprietary drivers and that card then
+[09:52] <Jordan_U> humbolt: suspend to disk?
+[09:52] <niarbeht> ziroday: technically, there's been more than one sound system, it's just relatively transparent because they all co-exist....
+[09:52] <humbolt> Jordan_U: no RAM
+[09:52] <psycolizard> @niarbeht AMD Athlon 64 x2 Dual Core 6400+ 3.2ghz dont know what you need
+[09:52] <niarbeht> K.
+[09:53] <Stdht> ziroday so How to choose which device will soundplayer use?
+[09:53] <discorpia> i was hoping i could get full resolution, just not fully accelerated without using the fglrx/ati drivers
+[09:53] <racecar56> psycolizard, :( you got nice processor
+=== |Jason8| is now known as |Jason8|RAD|
+[09:53] <racecar56> psycolizard, i only have an amd sempron 3100+
+[09:53] <ziroday> racecar56: well the radeon driver is loaded, what does glxinfo | grep direct return?
+[09:53] <Thingymebob> dutch: create a new text file in /usr/share/applications/gnome-appearance-properties.desktop, copy this into it http://paste.ubuntu.com/207983/ chown to root and chgrp to root then chmod +r
+[09:53] <psycolizard> i built my comp from the ground up, when i still had a job lol
+[09:53] <racecar56> ziroday, direct rendering: Yes
+[09:53] <Jordan_U> discorpia: Can you pastebin the output from /var/log/Xorg.0.log ?
+[09:53] <ziroday> racecar56: and glxinfo | grep render
+[09:53] <indus> racecar56: i have athlon x2 4400+ :)
+[09:54] <discorpia> Jordan_U: with our without the proprietary drivers?
+[09:54] <niarbeht> Well, ever poked around in your BIOS before?  Find and turn on the Cool and Quiet option in there and the complaints from the kernel will cease.  That, and you might be able to convince your computer to do dynamic CPU frequency scaling, causing your computer to run cooler when idle, saving power not just in terms of the CPU's power usage, but also in terms of your AC bill :P
+[09:54] <Stdht> ziroday I cant test ALSA on HDA intel and at the same time when I play wav file with a pleyer I can use HDA intel ALSA in volume contorl and voulme really changes?
+[09:54] <racecar56> ziroday, same thing as before and OpenGL renderer string: Mesa DRI R300 20060815 AGP 8x TCL
+[09:54] <ziroday> Stdht: I have no idea what you are saying sorry.
+[09:54] <Jordan_U> discorpia: without first
+[09:54] <racecar56> indus, mine is 1.8 ghz :|
+[09:54] <racecar56> indus, old comp=yes
+[09:54] <ziroday> racecar56: right, well then the correct driver is loaded and 3D accelerated rendering is working. Not much more I can do sorry.
+[09:55] <racecar56> ziroday, kk
+[09:55] <niarbeht> psycolizard: that big blurb was for you, btw
+[09:55] <Stdht> ziroday, my english needs much to be regarded ... but I'll try once again...:)
+[09:55] <psycolizard> honestly i dont know much about computers, this is my first build... i know how to run it not so much program it. any chance u can explain it a bit to me
+[09:55] <indus> racecar56: ziroday:ATI has dropped support for older r 200 (and r300) cards in newer releases ,so hardy is the only option for the driver, else use the open source driver
+[09:55] <ziroday> Stdht: what's your native language?
+[09:55] <indus> not sure about the r 300 though
+[09:55] <ziroday> indus: correct...
+[09:56] <humbolt> pidstat -d 1 tells me firefox is constantly reading something on the disk
+[09:56] <Stdht> ziroday russian
+[09:56] <racecar56> indus, thats what i am using
+[09:56] <racecar56> indus, open source
+[09:56] <indus> ziroday: he seems to have the r 300 and he is using jaunty i presume
+[09:56] <racecar56> indus, and i on 9.04 :|
+[09:56] <discorpia> Jordan_U: http://pastebin.com/m2b3e7abe
+[09:56] <ziroday> Stdht: then #ubuntu-ru might be helpful too :)
+[09:56] <racecar56> indus, yep
+[09:56] <ziroday> indus: and?
+[09:56] <Stdht> tnks i'll try
+[09:56] <racecar56> indus, r350 i think
+[09:56] <indus> racecar56: ziroday:oh ok sorry but i missed some of the posts
+[09:56] <dAnon> my graphics driver doesn't work, I tried running Enemy Territory, and it just quits the game before even launching
+[09:56] <niarbeht> psycolizard: I'm not talking about programming it.  Got the motherboard manual?  Look for a section about entering the BIOS.  Usually, you just spam the "delete" key like a madman when starting the system up.  Once in there, be careful not to go changing things you don't understand, just find the cool and quiet option and turn it on :P
+[09:56] <thummy> Hi Humanas (ubuntus), I was setting up some netboot. When I boot the client, it gets tha IP address but fails to get the image. It says "tftp: client does not accept options" and/or "tftp:file not found". Any one who can figure the problem?
+[09:56] <rayno_b> hey there - I'm trying to install Ubuntu within VirtualBox, but the VirtualBox display loads the CD, but the screen is completely blank.  I can see the screen for a brief second when I shut down that VirtualBox.  Does anyone have any suggestions for me?
+[09:57] <indus> racecar56: whats the problem? system not using the ati drivers?
+[09:57] <racecar56> indus, laggy 3D
+[09:57] <ziroday> racecar56: the issue is your graphics card is too old. Disable some of the effects you don't need or disable compiz all together.
+[09:57] <vng> where is log file of pidgin? I want to view the log of #ubuntu channel
+[09:57] <indus> racecar56: ziroday:open source ATI drivers wont perform like the proprietary ones
+[09:57] <ziroday> !logs > vng
+[09:57] <ubottu> vng, please see my private message
+[09:57] <racecar56> ziroday, i dont use gnome.......
+[09:57] <indus> for 3d at least
+[09:57] <psycolizard> if its that simple it should be no problem. my mobo lets me in its bios easily, unlike my old stock computer, eww stock
+[09:57] <racecar56> ziroday, i use lxde
+[09:57] <ziroday> racecar56: yes but you use compiz?
+[09:58] <racecar56> ziroday, no
+[09:58] <racecar56> ziroday, i have no desktop fx
+[09:58] <dAnon> my graphics driver doesn't work, I tried running Enemy Territory, and it just quits the game before even launching, installed 173 driver, this is terrible
+[09:58] <ziroday> racecar56: that what is laggy?
+[09:58] <h4f1> Is there a way to set up network usage priority ? EX I use FF and Transmision. Transmision uses all bandwidth so when I go FF I get nothing. I can limit Transmission bandwidth but then when FF is IDLE bandwidth is not used at all. I need some kind of QoS
+[09:58] <racecar56> ziroday, 3d games e.g. vdrift
+[09:58] <racecar56> ziroday, or i could have compiled stupid
+[09:58] <racecar56> ziroday, but i dont think so
+[09:58] <indus> dAnon: run the game from terminal and see the error
+[09:59] <discorpia> Jordan_U: not sure if all of it is relevant, but didn't want to cut anything out
+[09:59] <indus> dAnon: also,which graphics card
+[09:59] <ziroday> racecar56: right, as I said your graphics card is just old. Lower the settings on the game then.
+[09:59] <vng> how about the log on my machine?
+[09:59] <racecar56> ziroday, kk
+[09:59] <gralco> hi is anyone interested in learning C++ along with me
+[09:59] <dAnon> indus 7800GT, it says no opengl subsystem
+[09:59] <psycolizard> so if I turn on cool and quiet in there it should solve the ACPI fail?
+[09:59] <ninina> I don't know if this is the place to ask this, but I feel like I want to get involved in open source dev. Anyone know a good place to start out or something?
+[09:59] <djiezes> h4f1: do you have a router? if so you could try prioritizing network traffic there. set up portforwarding for your torrents should have some effect.
+[09:59] <ziroday> vng: its under ~/.purple/logs
+[10:00] <indus> dAnon:paste output of glxinfo | grep render
+[10:00] <rayno_b> hey there - I'm trying to install Ubuntu within VirtualBox, but the VirtualBox display loads the CD, but the screen is completely blank.  I can see the screen for a brief second when I shut down that VirtualBox.  Does anyone have any suggestions for me?
+[10:00] <nsb> names
+[10:00] <indus> !paste
+[10:00] <ubottu> pastebin is a service to post multiple-lined texts so you don't flood the channel. The Ubuntu pastebin is at http://paste.ubuntu.com | To post !screenshots use http://imagebin.org/index.php?page=add | Make sure you give us the URL for your paste - see also the channel topic
+[10:00] <racecar56> ziroday, it seems my older Radeon 9200SE is faster hmmm
+[10:00] <h4f1> djiezes: yeap I have a modem. but how does it relate to application usage
+[10:00] <racecar56> ziroday, i have 2 gfx cards (not at once) and they are both old
+[10:00] <vng> ziroday: thank you
+[10:00] <racecar56> ziroday, the older 9200SE is faster O_o
+[10:00] <koshari> how do i set firefox 3.5 as default browser so links open in 3.5 instead of 3.1?
+[10:00] <ziroday> racecar56: not much that I can do sorry
+[10:00] <racecar56> ziroday, k
+[10:01] <discorpia> Jordan_U: when i enter display settings it says Samsung 17" as monitor name, where does it get that from? why is xorg.conf basically empty?
+[10:01] <ziroday> koshari: System > Preferences > Preffered Applications
+[10:01] <djiezes> h4f1: torrents use a different port than normal browsing. if you set  up portforwarding for your torrents, it helps ... really, check http://portforward.com/ for how to do so.
+[10:01] <lesshaste> what's the ubuntu equivalent of  apt-get -o DPkg::Options::="--force-confmiss" --reinstall install <packagename>
+[10:01] <discorpia> i don't even recognize linux anymore when i'm fiddling with ubuntu and xorg
+[10:01] <racecar56> discorpia, i have mine saying acer 22"
+[10:01] <racecar56> discorpia, i also wonder how it knows...
+[10:01] <ziroday> racecar56: some of the options in http://wiki.archlinux.org/index.php/ATI#Performance_tuning might be able to help, but be very careful with what you do and only change xorg.org settings
+[10:02] <discorpia> racecar56: mine doesn't know per se, since it's dead wrong, but it assumes, and that annoys me when it doesn't tell me how to affect that assumption :D
+[10:02] <jeniffer> friends why hard disk temperature under linux is higher than in windows???? is is something to reduce it (except power off the laptop)????
+[10:02] <koshari> ziroday cheers
+[10:02] <dAnon> indus it spams Xlib:  extension "GLX" missing on display ":0.0"
+[10:02] <AndorinKato> Hey, guys, I have a question... I'm trying to install a plugin for Pidgin, and I'm very new to compiling... the README tells me to run the configure script, but when I paste in the command it tells me I need to specify where Pidgin is installed to... but a search through my system for pidgin gives a LOT of results. How do I tell where Pidgin is installed? It came installed by default with Jaunty...
+[10:02] <indus> dAnon: the driver is not installed
+[10:02] <koshari> ziroday there was no option so i edited the custom line to add -3.5
+[10:02] <h4f1> djiezes: yeap. sound kind of solution. but I have to do that for all applications now :( not nice. I would prefer to apply something like cpulimit and nice to a process. but in network sense
+[10:03] <dAnon> indus but I installed it, so who's fault is this?
+[10:03] <ziroday> koshari: Web browser > Custom
+[10:03] <indus> dAnon: how did you install the nvidia driver? did you do it from system>administration>hardware drivers?
+[10:03] <dAnon> say indus yes
+[10:03] <djiezes> h4f1: you don't, you only need to configure your torrent application/port. It'll solve other network issues. torrent is quite heavy on network traffice & congests your router.
+[10:03] <psycolizard> @niar well im gonna go try that, if i cant get it ill be back on here, if it works than tyvvm
+[10:03] <indus> dAnon: open hardware drivers and tell me what it says
+[10:03] <koshari> AndorinKato cant you use the gui tools > plugins?
+[10:04] <rayno_b> when I start "startx", my screen does not seem to like the resolution and goes off until I ctrl+C the startx session.  How do I set the resolution a bit lower?
+[10:04] <AndorinKato> koshari: That's only for configuring them, not installing them... the plugin came as a .tar
+[10:04] <koshari> AndorinKato ok, i guess you will need to firuge out where the plugins reside
+[10:05] <dAnon> indus 173.14.16
+[10:05] <halberd> my inspiron 15n laptop came with 8.10 preinstalled, which I just upgraded to 9.04... now suspend no longer works
+[10:05] <halberd> anybody know a fix?
+[10:05] <h4f1> djiezes: the problem is that I said FF and Torrent as example. Some time I am running very bandwidth hungry application
+[10:05] <Jordan_U> h4f1: Try trickle
+[10:05] <mcfarlane> When I do tail /var/log/messeges, what does the -- MARK -- processes mean?
+[10:05] <zugu> hello all
+[10:05] <AndorinKato> koshari: And how do I do that?
+[10:05] <indus> dAnon: does it say the driver is currently in use?
+[10:05] <h4f1>  Jordan_U: thanks
+[10:05] <koshari> AndorinKato can you find or locate the name of an existing plugin?
+[10:05] <u_dparte> halberd, version upgrades are not that consistent ... your better off doing a clean install if you can
+[10:05] <Jordan_U> h4f1: np
+[10:06] <dAnon> indus where do I figure this out?
+[10:06] <AndorinKato> koshari: That would be a good place to start, I guess ;)
+[10:06] <zugu> can someone explain me why all the good stuff on getdeb.net is not present in Ubuntu's repositories?
+[10:06] <Lord-Readman> I need to unjail my user account when I login in stuck in my home folder, and I wish to browse to my /var/www/
+[10:06] <u_dparte> zugu, because much of it is not officially supported
+[10:06] <indus> dAnon: at the bottom , it will say this driver is currently in use along with a button on the right to enable or disable
+[10:07] <zugu> u_dparte: I'm afraid I don't understand; why isn't it officially supported? Are the packages on getdeb not safe?
+[10:07] <u_dparte> zugu, not necessarily ... just means they might cause problems with your system
+[10:07] <dAnon> 173
+[10:07] <dAnon> I click it
+[10:07] <dAnon> indus and it says it's enabled and in use
+[10:08] <indus> dAnon: did you just install nvidia driver?
+[10:08] <zugu> u_dparte: then why does everyone point me to getdeb when I ask where I can find more recent software?
+[10:08] <u_dparte> zugu, before you install anything though you should research it and find out any known issues
+[10:08] <lesshaste> well I tried to restore debconf and not something has gone wrong when trying to install the kernels?  See http://pastebin.ca/1481697
+[10:08] <dAnon> indus and it says it's enabled and in use, I installed it from here
+[10:08] <indus> dAnon: open synaptic,search for nvidia-glx-173 or something and install if from there
+[10:08] <Jordan_U> discorpia: The xorg.conf is mostly empty because Xorg can auto detect pretty much everything that the Xorg.conf generating scripts could. You can still add to the xorg.conf and it will honor the settings
+[10:08] <AndorinKato> koshari: Not getting a lot of luck here; so far out of the several I've searched for, only one gave results and I got 25 hits
+[10:09] <h4f1> Jordan_U: trickle is goo. I need something like that per process . like cpulimit
+[10:09] <lesshaste> help! :)
+[10:10] <zugu> I mean, it's not right; some packages in Ubuntu's repositories are out of date, why are they not updated like the ones on getdeb?
+[10:10] <dAnon> indus why isn't it working in the first place?
+[10:10] <Lord-Readman> anyone know howto unjail a user account when so when i FTP I can browse to my /var/www/
+[10:10] <dAnon> indus I've got them marked as installed
+[10:10] <Flannel> zugu: Packages are mostly frozen a few months before release, after that they just get updates for bugs and security fixes.
+[10:10] <indus> dAnon: i dont know, i had the same problem and i finally installed from synaptic
+[10:10] <u_dparte> zugu, its not uncommon to have additional repos.. i use them all the time, but there is way to much software out there to test each pack to ensure its completely safe to install
+[10:10] <indus> dAnon: just reinstall it
+[10:11] <dAnon> indus reinstalling as we speak
+[10:11] <indus> dAnon:good and dont forget to restart
+[10:11] <moncky> Lord-Readman: you could create a group and add the user to that group and give the group access to /var/www, or add the user to the apache group
+[10:11] <u_dparte> zugu, ubuntu tests common packages that a majority of there users will need and leaves the rest up to you and I
+[10:11] <halberd> how would I diagnose a failure with suspend?  when I ask if pm-is-supported --suspend it tells me yes
+[10:11] <Flannel> zugu: The reason for the freeze is to ensure everything works correctly together.  If you're not satisfied with this approach, you might be more interested in a rolling release like debian testing.
+[10:11] <dAnon> indus reinstalling, rebooting
+[10:11] <halberd> but when I try pm-suspend it does nothing
+[10:11] <halberd> the command exits with no action
+[10:11] <AndorinKato> Ok, grr, this isn't working...
+[10:12] <indus> whats a rolling release
+[10:12] <AndorinKato> Can someone who has experience with compiling PM me? I'm having trouble with what is probably a basic concept...
+[10:12] <zugu> Flannel: curious, I never knew this; so basically people are stuck with older software? On Windows I can install whatever version of some specific software I want, straight from the developer's website; why is this so difficult with Ubuntu? Or am I missing something? Sorry, I'm a noob
+[10:12] <Flannel> indus: New package version are put into the same release more or less when they become stable, as opposed to only updating those things eery six months
+[10:13] <indus> Flannel: which do you prefer and why
+[10:13] <u_dparte> zugu, it's not difficult just not supported ... windows doesn't support other developers software either
+[10:13] <h4f1> cpulimit - limit the cpu usage of a process (expressed in percentage, not in cpu time). I need same think for Network Bandwidth
+[10:13] <Stdht> ziroday: as i thought in russian channel - no help at all
+[10:13] <Flannel> zugu: There's nothing wrong with "old" software.  Its only a few months old generally.  Yes, you can install software straight from the developers website on Ubuntu, its just "as easy" as on Windows, but you then have to keep track of updates/etc yourself.
+[10:13] <zugu> u_dparte: yes, but the developer supports the software directly, on Ubuntu I am fosced to depend on the repositories
+[10:14] <Stdht> ziroday: so may I ask you once again?
+[10:14] <Jordan_U> zugu: Ubuntu has descrete releases and to keep things stable and predictable they only release updates for bugs and security fixes. There are other distros called "rolling" distros that always have the latest of everything and never have releases, you just constantly upgrade bit by bit.
+[10:14] <u_dparte> zugu, no you have several options for installing software
+[10:14] <u_dparte> you can compile from source
+[10:14] <Flannel> zugu: Package management is a really nice feature, because it keeps you up to date, and means that software plays well with each other, etc.
+[10:14] <AndorinKato> Can someone who has experience with compiling PM me? I'm having trouble with what is probably a basic concept...
+[10:14] <u_dparte> you can install rpms, debs etc..
+[10:14] <Flannel> !compile > AndorinKato
+[10:14] <ubottu> AndorinKato, please see my private message
+[10:14] <indus> Flannel: ubuntu talks about stability and hence a 6 month cycle, then why have an LTS i wonder
+[10:15] <dAnon> indus this is hopeless, still same thing
+[10:15] <u_dparte> indus, its for people who install servers that can't be upgraded every 6 months
+[10:15] <Flannel> indus: Because you get even more stability with a two year cycle.  Also (the bigger reason) some people don't like upgrading every six months.  A two year cycle suits their needs much better.
+[10:15] <u_dparte> indus, I have a server still runing 7.10
+=== tyler is now known as Guest74027
+[10:15] <Flannel> u_dparte: That's unsupported.
+[10:15] <psycolizard> sigh, im back. cool and quiet got rid of the ACPI error, but it gave me the same screen, a black dos like screen that talks about ubuntu and its software... what do i do?
+[10:15] <zugu> Flannel: there are a lot of things wrong with old software; look at pidgin: the latest version in Jaunty is 2.5.5 and I really need 2.5.8 because 2.5.5 cannot connect to Yahoo! anymore; Ubuntu won't update the pidgin in its repositories and getdeb is not officially supported; on Windows I can install 2.5.8 right away from www.pidgin.im
+=== Guest74027 is now known as thankyou
+[10:16] <indus> dAnon: can i see your xorg.conf file paste output of cat /etc/X11/xorg.conf
+[10:16] <koshari> AndorinKato look in the .purple dirs, pidgin used to be called gaim remember and i think they changes the dir names to purple
+[10:16] <u_dparte> zugu, then why not ask how to install the latest and greatest here?
+[10:16] <h4f1> cpulimit - limit the cpu usage of a process (expressed in percentage, not in cpu time). I need same think for Network Bandwidth  any one :(
+[10:16] <halberd> how could I try to diagnose a problem with pm-suspend?
+[10:16] <zugu> u_dparte: I need the latest and greatest, but I do not want to install unsupported software
+[10:17] <Flannel> zugu: In the past there have been updates to fix protocols (since those are bugfixes), I'm not sure what the timeframe for that is though.
+[10:17] <indus> what other distro would people here recommend similar to ubuntu
+[10:17] <Flannel> zugu: You can still install pidgin right away, it just wouldn't be via package management
+[10:17] <Jordan_U> u_dparte: You should really upgrade to 8.04, for security updates if nothing else. You can stay with 8.04 for a long time since it's LTS
+[10:17] <Flannel> indus: Try debian testing if you're looking for a rolling release.
+[10:17] <lesshaste> well I tried to restore debconf and not something has gone wrong when trying to install the kernels?  See http://pastebin.ca/1481697
+[10:17] <u_dparte> zugu, that's what we're here for buddy
+[10:17] <lesshaste> any idea what to do about it?
+[10:17] <zugu> Flannel: the person who introduced me to Ubuntu said I should only install software from the official repositories
+[10:17] <indus> Flannel: i somehow dont feel at home with debian :) too geeky
+[10:18] <Flannel> zugu: I agree with them.
+[10:18] <u_dparte> yes, I would but I'll probably end up smashing it with a sledgehammer before I upgrade
+[10:18] <rayno_b> Hi I need some assistance with xorg - If I run startx my screen goes into sleep mode.  Any suggestions?
+[10:18] <Flannel> indus: You... know that Ubuntu is based on debian, right? (and for some values of 'is' basically, is debian?)
+[10:18] <indus> Flannel: anyways ill discuss it off topic with you people later
+[10:18] <zugu> Flannel: then why is it so hard to find an officially supported pidgin 2.5.8 on ubuntu?
+[10:18] <indus> Flannel: yes i know that.but somehow ubuntu seems more down to earth
+[10:19] <AndorinKato> koshari: Still doesn't help... :(
+[10:19] <Flannel> zugu: 2.5.8 won't ever be in Jaunty, the version number won't change from 2.5.5, but it'll have the patch for yahoo introduced into it.  Like I said, I'm not sure about the timeline for this.  Have you checked launchpad for a bug report?  That might have more information on the current status
+[10:19] <thummy> I was setting up netboot. When I boot the client, it gets an IP address from the server but it fails to get the boot image. The sysylog message on server says "tftpd[11658]: tftp: client does not accept options". But the client says "tftp error: file not found". Anyone who can help?
+[10:19] <u_dparte> Jordan_U, new server from prgmr is running centos5.2 ... can't wait to move everything to a stable box
+[10:20] <koshari> AndorinKato urs/lib/purple-2/plugins.so
+[10:20] <zugu> Flannel: there's a bug report on Launchpad, but it concerns the next Ubuntu release
+[10:20] <dAnon> indus http://www.sendspace.com/file/bzqcuo this is what I've got in my xorg.conf
+[10:20] <koshari> AndorinKato sorry /usr/lib.................
+[10:20] <rayno_b> Hi I need some assistance with xorg - If I run startx my screen goes into sleep mode.  Any suggestions?
+[10:21] <zugu> Flannel: https://bugs.launchpad.net/ubuntu/+source/pidgin/+bug/393736
+[10:21] <u_dparte> zugu, many times installing a current release is a good thing
+[10:21] <psycolizard> i still cant get my computer to install ubuntu. it starts, gives me language select, gives me menu of "install" "demo" etc, if i hit either one it takes me to black screen with info about ubuntu and its software and has a doslike prompt... can someone help me?
+[10:21] <thummy> I was setting up netboot. When I boot the client, it gets an IP address from the server but it fails to get the boot image. The sysylog message on server says "tftpd[11658]: tftp: client does not accept options". But the client says "tftp error: file not found". My server is Ubuntu 9.04 Anyone who can help?
+[10:21] <indus> dAnon: please use paste, sendspace is banned here
+[10:21] <raevol> can anyone help me figure out why totem is stretching the movies i watch, so the aspect is wrong
+[10:21] <u_dparte> zugu, ex. I was having issues w/ my source control being corrupted ... come to find out by building the latest from source everything was all better
+[10:22] <u_dparte> zugu, the latest from the repos was out of date by like a bunch of versions
+[10:22] <Flannel> zugu: right, that wouldn't be the same thing.  What you should do is file a bug about yahoo in jaunty not working (and ask for them to patch the yahoo version)
+[10:22] <zugu> u_dparte: I don't like to compile things
+[10:22] <AndorinKato> koshari: Thank you, but still getting the same error when trying to configure... I just don't know jack about compiling.
+[10:22] <indus> zugu: Flannel:well its a known bug and tehy are working on it i believe
+[10:22] <u_dparte> zugu, compiling is fun - it's like a birthday present except you don't know if your getting a bag of crap or a block of gold
+[10:22] <Flannel> indus: Do you have a bug report?
+[10:23] <Flannel> u_dparte: Please don't recommend that in this channel.
+[10:23] <indus> Flannel: wait let me check on pidgin site
+[10:23] <indus> there is i believe. its a famous bug now
+[10:24] <Flannel> indus: pidgin bugs don't count.  We need Ubuntu bugs, since this is an ubuntu issue.
+[10:24] <zugu> Flannel: I give up; it's easy on Windows, it should be just as easy on Ubuntu
+[10:24] <Flannel> zugu: It is easy.  But package management doesn't work that way.  If you go outside of package management, it's just as trivial.
+[10:24] <indus> Flannel: hmm i mean,,,, pidgin cant connect to yahoo and the pidgin devs are aware and workin on it, its also an ubuntu bug ?
+[10:25] <edgarmattern1> Hi, can someone help me, since a kernelupdate (I think it was one) my system does'n start enymore.
+[10:25] <zugu> Flannel: yes, but I won't ever go outside the package management
+[10:25] <Flannel> indus: There needs to be a bug reported in launchpad (against Ubuntus pidgin), because the fix for yahoo (which is in 2.5.8) needs to be put into 2.5.5
+[10:25] <u_dparte> edgarmattern1, how so?
+[10:25] <u_dparte> does it go into grub?
+[10:26] <digitaltao> hah, has any one ever done the alt+f2 free the fish command (if you run gnome)
+[10:26] <indus> Flannel: http://tinyurl.com/pidgin-yahoo
+[10:26] <edgarmattern1> yas, the loadingscreen is there and the caps lock and the scrool lock aer blinking.
+[10:26] <zugu> thank you guys for trying to help, but I find all this to be too unnecessarily complicated
+[10:26] <Flannel> zugu: You're holding your OSes to a double standard.  But sure, if you won't go outside of package management, file a bug about it.  There isn't currently one.
+[10:26] <edgarmattern1> yes...
+[10:26] <Flannel> zugu: Or, switch to debian testing, which is a rolling release where they don't freeze versions, so you're constantly being updated.
+[10:27] <indus> zugu: http://tinyurl.com/pidgin-yahoo
+[10:27] <u_dparte> when you boot up hit alt+f2 and it will show you all the things going on behind the scenes ... see if you can pinpoint where it is going wrong based on the text output
+[10:27] <rayno_b> Hi I need some assistance with xorg - If I run startx my screen goes into sleep mode.  Any suggestions?
+[10:27] <zugu> I'll go back to XP, since lack of Yahoo connectivity is a showstopper for me; it's not a Pidgin problem, they fixed it; it's an Ubuntu issue
+[10:27] <bart416> rayno_b: tried generating a new configuration file already?
+[10:27] <edgarmattern1> kernel panic - not syncing: Fatal exception in interrupt.
+[10:27] <Flannel> zugu: Bye
+[10:28] <zugu> bye all
+[10:28] <edgarmattern1> bye
+[10:28] <bart416> anybody here any good at grub?
+[10:28] <indus> aah wait
+[10:28] <AndorinKato> Okay, guys, I would really like someone to help me install a plugin for Pidgin... my issue is that when configuring I don't know where to point the installation to...
+[10:28] <indus> nooo
+[10:28] <bart416> it somehow seems to dislike the idea of booting an OS on a disk marked as slave instead of master >_>
+[10:28] <moncky> AndorinKato: is it asking for where the binary is?
+[10:28] <Flannel> indus: Again, that's not a launchpad bug report, Ubuntu's pidgin people need to be told about it, and I don't believe they have been.
+[10:29] <AndorinKato> moncky: The binary of Pidgin?
+[10:29] <koshari> bart416: whats ya prob
+[10:29] <moncky> AndorinKato: yeah where is it asking you to point to
+[10:29] <psycolizard> i still cant get my computer to install ubuntu. it starts, gives me language select, gives me menu of "install" "demo" etc, if i hit either one it takes me to black screen with info about ubuntu and its software and has a doslike prompt... can someone help me?
+[10:29] <bart416> well, my HD with my operating systems is in IDE Channel 1 but it's slave, not master
+[10:29] <AndorinKato> moncky: Um.. I don't know... it tells me that it doesn't find the packages 'pidgin' or 'purple'
+[10:29] <thummy> I was setting up netboot. When I boot the client, it gets an IP address from the server but it fails to get the boot image. The sysylog message on server says "tftpd[11658]: tftp: client does not accept options". But the client says "tftp error: file not found". My server is Ubuntu 9.04 Anyone who can help?
+[10:29] <bart416> changing the jumper would take several hours cause of the way the hardware is fitted in the case
+[10:29] <bart416> so that's not really an option
+[10:30] <rayno_b> Bart, do you mind if I pvt you?
+[10:30] <bart416> the HD has both win xp and kubuntu on it (I'm happy I didn't try debian)
+[10:30] <bart416> now if I boot it'll load grub
+[10:30] <indus> Flannel: it was a popular problem or bug, and if you telling me that the devs will only fix a problem if you file a launchpad  report, thats really arrogant, but i dont believe thats how they work.
+[10:30] <bart416> the side issue being that it gives error 22
+[10:30] <u_dparte> psycolizard, at the first menu after the language try hitting f4 and selecting the safe graphics mode
+[10:30] <koshari> bart416: it wont care if its master or slave, its the dev that it cares about, and you may need to install the grub onto the mbr if you have changes drives
+[10:30] <moncky> AndorinKato: purple is a library for pidgin, pidgin is installed to /usr/bin in my system
+[10:31] <u_dparte> psycolizard, if it's not that, you might have a bad disk ... did you check the disk for errors?
+[10:31] <bart416> well, the fact that it loads means it's in the mbr koshari
+[10:31] <indus> Flannel: but anyway ill file one if thats what it will take
+[10:31] <halberd> hey is it possible to revert my kernel to an older version?
+[10:31] <Flannel> indus: You're saying that the people in charge of packaging pidgin need to be omniscient?
+[10:31] <qe2eqe> indus, =(
+[10:31] <bart416> cause if it was booting directly from the slave it'd load xp
+[10:31] <bart416> it wrote the mbr on one of the sata disks
+[10:31] <u_dparte> halberd, when you but up you can select which kernel
+[10:31] <psycolizard> ill go check that, i guess brb, whether it works or not
+[10:31] <indus> qe2eqe: yes?
+[10:32] <koshari> bart416 it looks like the grub mbr is pointing to the wrong drive then
+[10:32] <AndorinKato> moncky: Here are the brief install instructions and the error I get when I attempt to follow them: http://pastebin.com/d7cb15c9 I just suck at compiling and have no idea what to do with the 'configure' step
+[10:32] <dAnon> indus Section "Device"
+[10:32] <dAnon> 	Identifier     "Device0"
+[10:32] <dAnon> 	VendorName     "NVIDIA Corporation"
+[10:32] <bart416> koshari: I wouldn't know
+[10:32] <dAnon> BoardName      "GeForce 7800 GT"
+[10:32] <dAnon> 	Driver	"nvidia"
+[10:33] <indus> dAnon: well it looks fine
+[10:33] <koshari> bart416 so what did you change for it not to work anymore?
+[10:33] <koshari> bart416 or have you not had it working yet?
+[10:33] <bart416> I didn't have it working yet
+[10:33] <bart416> just reinstalled my operating systems
+[10:34] <Myrtti> dAnon: please use pastebin for those!
+[10:34] <koshari> bart416 ok pastebin the output of fdisk -l, menu.1st and devices.list
+[10:34] <dAnon> indus use what?
+[10:34] <venomen> Looo! You are on mybrute and want to get a bear? Be my Pupil and get one GUERANTEED at Level4 experience at the game: http://lecktsmiamorsch.mybrute.com/ get my Pupil!
+[10:34] <geirha> !pastebin | dAnon
+[10:34] <ubottu> dAnon: pastebin is a service to post multiple-lined texts so you don't flood the channel. The Ubuntu pastebin is at http://paste.ubuntu.com | To post !screenshots use http://imagebin.org/index.php?page=add | Make sure you give us the URL for your paste - see also the channel topic
+[10:34] <indus> Flannel: https://bugs.launchpad.net/ubuntu/+source/pidgin/+bug/389322
+[10:35] <indus> Flannel: who told you the devs havent been notified yet
+[10:35] <dAnon> http://paste.ubuntu.com/208003/plain/
+[10:35] <dAnon> like this
+[10:35] <dAnon> ?
+[10:35] <indus> yeah'
+[10:36] <Flannel> indus: Apparently it's been fixed in Jaunty already.  Wonder what zugu's issue was then.
+[10:36] <bart416> koshari: well there's another issue
+[10:36] <bart416> getting fdisk to run
+[10:36] <indus> Flannel: yeah sorry about thta
+[10:36] <Flannel> indus: No worries
+=== dROg is now known as Guest66104
+[10:36] <koshari> bart416: use sudo
+[10:36] <andruk> why is the number pad on Gnome Sudoku upside down from a normal number pad?
+[10:36] <indus> Flannel: yes it seems fixed but you know yesterday i couldnt connect
+[10:36] <bart416> koshari: oh yes I tried that
+[10:37] <indus> Flannel: maybe fix was released today? does it say when they released the fix?
+[10:37] <bart416> gimme a minute, going to try something else to get it working
+[10:37] <koshari> bart416 you tried "sudo fdisk -l" ?
+=== chrissi is now known as didi2002
+[10:37] <indus> Flannel: 2 hours ago it seems :)
+[10:37] <AndorinKato> Can somebody please help? <-- Trying to install a plugin for Pidgin, those are the instructions and error; I have no idea how to resolve the error, please help?
+[10:37] <indus> damn
+[10:37] <bart416> yeah, it's not working cause I chrooted earlier :P
+[10:37] <AndorinKato> Dammit, forgot link! ^^;
+[10:37] <Myrtti> AndorinKato: which plugin?
+[10:38] <koshari> why dont you boot from the live disc, you need to be ther to run grub anyway
+[10:38] <gangil> is there a way to get the temperatures in Ggkrellm on the task bar

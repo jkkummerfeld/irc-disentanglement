@@ -1,0 +1,1191 @@
+[08:36] <mole_> I'm having difficulty getting my Palm Tungsten T to reliably synchronise with gnome-pilot and evolution.  I'm using hoary with the latest updates.   I can get working as a one-off using the instructions at ubuntuguide.org, but being able to do it consistently is a problem.  gpilotd just doesn't seem to be able to see the udev device for the palm unless I have the configuration window open in evolution (gpilotd-control).  The gnome apple
+[08:36] <mole_> t frontend to gpilotd also doesn't appear to work.  Anyone else having trouble with this?
+=== aisipos [~anton@dsl081-081-225.lax1.dsl.speakeasy.net]  has joined #ubuntu
+[08:36] <chris_ubuntu> dabaSlon: Yes, but that doesn't make sense.  Why would I want this to be bootable if it is a slave backup space?
+[08:37] <bluemax> ok, i'm trying to connect to a nsv stream (at a url) but it's almost always full, so i have to have it loop in mplayer but i don't know how
+[08:37] <dabaSlon> cause it wants you to:)
+[08:37] <bluemax> #mplayer is dead so i thought i'd ask here
+[08:37] <chris_ubuntu> dabaSlon: by bootable, I am understanding that this is where the OS sits and boots from.  Is this incorrect?
+[08:37] <dabaSlon> pls try it, chris...
+[08:38] <dabaSlon> im dying to know if it works...
+[08:38] <dabaSlon> to answer your question, yes...
+[08:38] <IIIEars> chris_ubuntu - no need for a bootable flag if you will only use it for storage
+[08:38] <ryman> whats the command to check system up time ?
+[08:38] <crimsun> ,,uptime''
+[08:38] <dabaSlon> IIIEars: did you read the pastebin?
+[08:38] <chris_ubuntu> yes, seems to have written.  So my above understanding is incorrect?
+[08:38] <dabaSlon> it is correct.
+[08:39] <dabaSlon> it would only seem that a hard drive does not like to be formatted without a bootable partition.
+[08:39] <dabaSlon> ok, let us mount that baby, then...
+[08:39] <ryman> crimsun, thank you
+[08:39] <dabaSlon> so, it is hdb1?
+[08:39] <IIIEars> yes - what did i miss? - it is complaining that it can't be booted from but that is no problem for windows to see it.
+[08:39] <chris_ubuntu> hang on.  Let me see
+[08:39] <metalsand2> crimsun: what do I do know?
+[08:40] <dabaSlon> dos mbr, meaning windows, IIIEars?
+=== herzi [~herzi@d015219.adsl.hansenet.de]  has joined #ubuntu
+[08:40] <dabaSlon> or windows meaning linux?
+[08:40] <dabaSlon> or exactly as you said:-p
+[08:40] <chris_ubuntu> dabaSlon: OK, lets mount it.  How?
+[08:40] <dabaSlon> is it hdb1?
+[08:40] <chris_ubuntu> dabaSlon: Well, I don't see it in gparted.
+=== pitti [~martin@box79162.elkhouse.de]  has joined #ubuntu
+[08:41] <dabaSlon> sudo mkdir /media/relmp3 :)
+[08:41] <IIIEars> Chris_ubuntu - you will use this disk for storage? - if you need storage and it is formatted for a correct file type windows will see it.
+[08:41] <ryman> how do I make a dir in computer ?
+[08:41] <chris_ubuntu> dabaSlon: Windows?  This is a ubuntu box.
+[08:41] <crimsun> metalsand2: are you running 0.2.1-pre26? I never saw absolute confirmation from you.
+[08:41] <dabaSlon> sudo mount /dev/hd1 /media/relmp3/
+[08:41] <metalsand2> crimsun: That's what I installed from
+[08:42] <dabaSlon> chris, you worry too much, for one, you will have a haeart attack...
+[08:42] <dabaSlon> second, I was speaking to IIIEars
+[08:42] <metalsand2> I know I unziped that file, went to that directory and made the module from that directory
+[08:42] <dabaSlon> nothing related to youl
+[08:42] <crimsun> metalsand2: if you can confirm from the filename, fine.
+[08:42] <dabaSlon> ryman: what ditr?
+[08:42] <dabaSlon> mkdir?
+[08:42] <dabaSlon> through gnome?
+[08:42] <IIIEars> lol - sorry - the bootable flag is just that a signal to the boot loader to look for an os there.
+=== chavo [~chavo@226.sub-70-212-24.myvzw.com]  has joined #ubuntu
+[08:42] <dabaSlon> no need to be sorry...
+[08:43] <chris_ubuntu> dabaSlon: I just don't understand.
+=== sap [~simon@81.187.239.200]  has joined #ubuntu
+[08:43] <dabaSlon> I work customer service, imagine how happy my customers are...they are all like, sorry:(
+[08:43] <ryman> dabaSlon, I want to make a dir in Computer
+=== jono__ [~jono@80.68.82.48]  has joined #ubuntu
+[08:43] <ryman> but I dont' know wat dir it is
+[08:43] <dabaSlon> chris, which part?
+[08:43] <dabaSlon> ryman: no, come on....
+[08:43] <dabaSlon> serious?
+[08:43] <crimsun> metalsand2: yay? nay?
+[08:43] <dabaSlon> cant be..
+[08:43] <dabaSlon> how do you know that is what you want then?
+[08:44] <dabaSlon> chris, sudo mkdir /media/relmp3
+[08:44] <ryman> dabaSlon, like you go to Places - Computer
+[08:44] <dabaSlon> sudo mount /dev/hdb1 /media/relmp3/
+[08:44] <chris_ubuntu> dabaSlon: Well, should I be able to see this disk space now?  And where?
+[08:44] <ryman> I want to make a folder in that place
+[08:44] <dabaSlon> copy and paste those into your terminal.
+[08:44] <IIIEars> Chris_ubuntu - you won't need a bootable parttion to use that drive as storage. format it in a filetype that the OS you choose will understand and you're done. - :)
+[08:44] <ryman> but I don't know waht dir is the Places - Computer
+[08:44] <dabaSlon> ok, you need tro be root to do that, ryman,..
+[08:44] <dabaSlon> what folders does it have>?
+[08:45] <dabaSlon> etc, home, var, usr, and so on?
+[08:45] <ryman> CD ROM Drive, floppy ...
+[08:45] <ryman> filesystem
+[08:45] <dabaSlon> no, that is where you mount...
+[08:45] <chris_ubuntu> IIIEars: I formated it in a Linux file sys, but can't see it anywhere.  How would I drag a file to it?
+[08:45] <dabaSlon> cant make a folder there, why do you want to?
+[08:45] <dabaSlon> chris...
+[08:45] <ryman> i want to mount my second HD there
+[08:45] <dabaSlon> I told you, mount the hard.
+[08:45] <dabaSlon> Nope, cant do...
+[08:45] <dabaSlon> linux fs is in a shape of a tree...
+[08:45] <sap> hi, I'm having a bit of trouble booting using the live CD. It boots up as far as 'elevator: using anticipatory as default io scheduler' and then stops. Any ideas?
+=== loren [loren@69-12-132-188.dsl.static.sonic.net]  has left #ubuntu []
+[08:45] <dabaSlon> everything starts at root...
+[08:46] <dabaSlon> or, maybe you can...
+[08:46] <dabaSlon> heh
+[08:46] <dabaSlon> sorry
+[08:46] <IIIEars> Chris_ubuntu - are you in linux now?
+[08:46] <ryman> i c thanks
+[08:46] <chris_ubuntu> IIIEars: yes
+[08:46] <Q_Continuum> dabaSlon, maybe walk him through making a softlink on his desktop to it?
+[08:46] <dabaSlon> chris, are you ignoring my possts?
+[08:46] <ryman> dabaSlon, my ubuntu keep freezing and firefox keep crashing. I wonder why
+[08:46] <chris_ubuntu> IIIEars: I am doing this all from a linux box.  I am chatting on the box I am doing this on
+[08:46] <dabaSlon> Q_Continuum: be my guest:)
+[08:46] <Q_Continuum> I can't remember, and I'm not booted to Ubuntu atm lol
+[08:47] <IIIEars> okay - do you know if it has been mounted (erm -- Ubuntu is using it?)
+[08:47] <dabaSlon> hm....could be that inotify thing, huh, crimsun?
+[08:47] <chris_ubuntu> dabaSlon: no, just missing them trying to read and configure.
+[08:47] <Q_Continuum> I'm no guru :-)
+[08:47] <dabaSlon> for rymans post...
+[08:47] <dabaSlon> k, chris...
+[08:47] <ryman> what what ?
+[08:47] <chris_ubuntu> dabaSlon: yes
+[08:47] <ryman> I mnted the 2nd HD into /media/Misc
+[08:47] <ryman> I was just wondering if i can mnt it to the Computer
+=== lunatech [~rshekhar@global-pix1.bangalore.corp.yahoo.com]  has left #ubuntu ["Leaving"]
+[08:48] <crimsun> dabaSlon: if he's using 2.6.11 from Hoary/universe without that boot param
+[08:48] <dabaSlon> when mounting, when it freezes...you can make a soft link, likely as q said..as for freezing, there is some thing with mouinting with inotify and then it does not freeze
+[08:48] <dabaSlon> how would eh know?
+[08:48] <crimsun> cat /proc/cmdline
+[08:49] <dabaSlon> ryman: for the soft link...explore yuor conf editor in apps, system something
+[08:49] <dabaSlon> chris...
+[08:49] <dabaSlon> make a dir,...moutn the hard to dir...
+[08:49] <chris_ubuntu> dabaSlon: yes
+[08:49] <ryman> dabaSlon, thanks
+=== dragoonz [~x0p30d3@dsl-220-253-73-241.NSW.netspace.net.au]  has joined #ubuntu
+[08:49] <crimsun> metalsand2: still waiting for an answer
+[08:49] <dabaSlon> sudo mkdir /media/relmp3
+[08:49] <chris_ubuntu> dabaSlon: that language doesn't mean anything tangable to me
+[08:49] <dabaSlon> sudo mount /dev/hd1 /media/relmp3/
+[08:49] <crimsun> metalsand2: I can only troubleshoot for about 15 more minutes
+=== ggibeau [~ggibeau@S01060002b35db7e2.ed.shawcable.net]  has joined #ubuntu
+[08:50] <IIIEars> good save dabaslon - my eyes had glazed over - (newb remmember) - lol
+[08:50] <dabaSlon> chris, the first part was for ryman, the second, after chris, was for you.
+=== ztonzy [~ztonzy@ztonzy.artist.blender]  has joined #ubuntu
+[08:50] <ggibeau> whats the best program for playing mpeg's?
+[08:50] <dabaSlon> IIIEars: what?
+[08:50] <dabaSlon> id ont get it
+[08:50] <dabaSlon> lmao
+[08:50] <IIIEars> j/k grin
+[08:50] <dabaSlon> I finally lit that baby...
+[08:51] <dabaSlon> hah
+[08:51] <dabaSlon> lol
+[08:51] <dabaSlon> I cant believe I typed that...
+[08:51] <chris_ubuntu> OK, I typed that in
+[08:51] <dabaSlon> chris, mounted?
+[08:51] <chris_ubuntu> what now?
+[08:51] <dabaSlon> ls /media/relmp3
+[08:51] <dabaSlon> ls -alt /media/relmp3
+=== zbowling [~zbowling@adsl-68-95-142-47.dsl.rcsntx.swbell.net]  has joined #ubuntu
+[08:51] <dabaSlon> thats from my linux assuignment, straight off
+[08:51] <vergeofimpetus> i give up for now .....i can't even find apache now dangit
+[08:52] <dabaSlon> or Unix, rather.
+[08:52] <dabaSlon> apache is downloadable
+[08:52] <IIIEars> heh
+[08:52] <vergeofimpetus> i install it and now i can't install it
+[08:52] <dabaSlon> through...
+[08:52] <vergeofimpetus> find it
+[08:52] <dabaSlon> apt-get install apache
+[08:52] <dabaSlon> what is your issue?
+[08:52] <chris_ubuntu> dabaSlon: It just shows a small list and says "total 8"
+[08:52] <dabaSlon> chris, did this 3 times today only...
+[08:52] <dabaSlon> kewl..
+[08:53] <dabaSlon> caus4 nothing is on the hard
+[08:53] <dabaSlon> do a ls
+=== IIIEars is now known as IIIEars_plugged
+[08:53] <chris_ubuntu> dabaSlon: I don't know what that means
+[08:53] <dabaSlon> just ls
+[08:53] <dabaSlon> and tell me a file name
+=== metalsand [~veritas@ip68-231-196-244.oc.oc.cox.net]  has joined #ubuntu
+[08:53] <dabaSlon> small file, nothing on the hard:-p
+[08:53] <metalsand> Sorry, crimsun
+[08:53] <dabaSlon> english.
+=== BuffaloSoldier [~ugachaga@218.111.67.59]  has joined #ubuntu
+[08:53] <metalsand> I was having network issues
+[08:53] <metalsand> I'm on my latop now, not my desktop anymore
+[08:53] <crimsun> metalsand: np. Any word on absolute version confirmation?
+[08:54] <dabaSlon> he types that out?
+[08:54] <chris_ubuntu> dabaSlon: sorry, I must not be doing it right.  I don't see anything
+=== fsapo [~fsapo@201-1-136-108.dsl.telesp.net.br]  has joined #ubuntu
+[08:54] <dabaSlon> verge, dude, what is your issue?
+[08:54] <dabaSlon> he left,..
+=== stub [~stub@203-217-54-48.dyn.iinet.net.au]  has joined #ubuntu
+[08:54] <dabaSlon> awesome...
+[08:54] <metalsand> crimsun: how could I absolute be sure? I'll check synaptic?
+[08:54] <dabaSlon> dude couldnt install apache, and left.
+[08:54] <dabaSlon> anyhow...
+=== malte` [~malte@host21-170.pool80116.interbusiness.it]  has joined #ubuntu
+[08:54] <dabaSlon> chis,...
+[08:54] <crimsun> metalsand: check the tarball filename from which you extracted
+[08:54] <dabaSlon> in english...
+[08:54] <metalsand> Yes, that was the file
+[08:55] <fsapo> dabaSlon, burned my dvd ^^ seems that its working
+[08:55] <dabaSlon> the folder, /media/relmp3(religiousmp3s...) has nothing in it, therefore, the list you seen was empty...
+[08:55] <Q_Continuum> I think dude left because he couldn't find apache in the apps menu. heh.
+[08:55] <fsapo> dabaSlon, found this in google: http://www.brandonhutchinson.com/Burning_Video_DVDs_in_Linux.html
+[08:55] <dabaSlon> heh...
+[08:55] <chris_ubuntu> dabaSlon: So that indicates the new drive?
+[08:55] <dabaSlon> I like the toms hardware one, with the bluesniper.
+[08:55] <dabaSlon> riht, that is where the drive is...
+[08:55] <dabaSlon> anyhow, let us move on...
+[08:56] <dabaSlon> you need to give permissions on that hard drive, and make it mount at boot...dude...
+[08:56] <crimsun> metalsand: ok, sec.
+[08:56] <dabaSlon> I said I did it 3 times, today, onlyt..
+[08:56] <dabaSlon> I work tech support, I do a OE config 5 times at least...
+=== sour-monkey [~sour-monk@210-86-92-87.jetstream.xtra.co.nz]  has joined #ubuntu
+=== IIIEars_plugged is now known as IIIEars
+[08:56] <sour-monkey> Howdy
+=== chillywilly [~danielb@CPE-65-26-216-107.wi.res.rr.com]  has joined #ubuntu
+[08:56] <dabaSlon> so, how do we give permissions?
+=== sour-monkey [~sour-monk@210-86-92-87.jetstream.xtra.co.nz]  has left #ubuntu ["Leaving"]
+=== _mage_work is now known as _mage_afk
+[08:57] <dabaSlon> like a sudo chown -R $user /media/relmp3
+=== FallenHitokiri [~Pharao@p54ACD0D1.dip.t-dialin.net]  has joined #ubuntu
+[08:58] <dabaSlon> sudo chown -R $USER /media/relmp3
+[08:58] <chris_ubuntu> dabaSlon: Too few arguments
+[08:58] <crimsun> metalsand: did you hear any beeps when you inserted the card?
+[08:58] <metalsand> crimsun:
+[08:58] <metalsand> This package is useless without the appropriate linux-wlan-ng-modules-x.yy.zz
+[08:58] <metalsand> package for the kernel you are running. You may have to build that by hand;
+[08:58] <dabaSlon> sorry, chris.
+[08:58] <chris_ubuntu> dabaSlon: OK, but I have to end this in a few minutes.  I have a very full day tomorrow.  I really appreciate your help, but for me to do too much of this type of command line config stuff is really an indulgence for me.  Can you tell me where we are tin the process?
+=== cheitania21 [~cheitania@pc-199-246-104-200.cm.vtr.net]  has joined #ubuntu
+=== mebaran151 [~mebaran15@c-24-126-1-10.hsd1.ca.comcast.net]  has left #ubuntu ["Leaving"]
+[08:58] <dabaSlon> allow her user as well.
+[08:58] <dabaSlon> not yours..
+[08:58] <cheitania21> hola
+[08:58] <dabaSlon> yours is for su.
+[08:58] <metalsand> crimsun: none
+[08:58] <dabaSlon> sudo...
+[08:58] <dabaSlon> not hers.
+[08:58] <dabaSlon> ok?
+[08:59] <dabaSlon> over ssh...and learn bash:)
+[08:59] <dabaSlon> you would have to sign in as her now...
+[08:59] <dabaSlon> are you?
+[08:59] <metalsand> Crimsun: what I pasted was from synaptic, I've made the modules but do I have linux-wlan-ng, or should I have it installed in synaptic? In synaptic I have no listed installed version
+[08:59] <dabaSlon> you can remove her permissions in a file...
+=== karsten_ [~karsten@host-66-81-223-51.rev.o1.com]  has joined #ubuntu
+[09:00] <dabaSlon> chris, made changes?
+[09:00] <crimsun> metalsand: first of all, did you create Debian packages, or did you compile from tarball?
+[09:00] <dabaSlon> then also a file needs to be edited for mounting.
+[09:00] <crimsun> metalsand: the cleanest (and recommended method) is to use Debianised source, not tarball
+[09:00] <metalsand> crimsun: compiled from the tarball
+[09:00] <chris_ubuntu> dabaSlon: The prompt came back and said "too few arguments"
+=== karsten_ is now known as karsten
+[09:00] <metalsand> crimsun: I just followed the guide
+[09:00] <dabaSlon> after the $USER?
+[09:01] <metalsand> crimsun: I originally tried install the linux-wlan-ng from synaptic
+[09:01] <metalsand> crimsun: but that never worked... I never saw the part about it being useless with the linux-wlan-ng-modules, though
+[09:01] <metalsand> crimsun: now I'm not so certain I have everything configured correctly
+[09:01] <crimsun> metalsand: I have no idea what you've done
+=== malte` is away: faccio cose, vedo gente
+[09:02] <chris_ubuntu> dabaSlon: Really, I don't know who you are addressing.  I can't keep watching this ongoing paging and try to figure out which mssgs are for me.  Thanks to everyone, but I am going to have to move on.
+[09:02] <dabaSlon> it is gonna spew out a lotta lines.
+[09:02] <crimsun> metalsand: if you've compiled and installed from tarball, you'll have to use the tarball's instructions
+[09:02] <dabaSlon> dude, I did it here...
+[09:02] <dabaSlon> right now...
+[09:02] <dabaSlon> but, see ya later...
+[09:02] <metalsand> crimsun: The current thing I've done is followed this guide, exactly: https://www.ubuntulinux.org/wiki/HowToInstallTheWlanNgDriverInHoary
+[09:02] <chris_ubuntu> dabaSlon: Is "dude" me
+[09:02] <chris_ubuntu> ?
+[09:03] <dabaSlon> haha
+[09:03] <dabaSlon> nope...
+[09:03] <dabaSlon> sudo chown -R $USER /media/relmp3
+[09:03] <dabaSlon> is you...
+[09:04] <chris_ubuntu> dabaSlon: OK, I did it, but it just gave me another prompt...
+[09:04] <dabaSlon> right, asking for a password?
+[09:04] <dabaSlon> perhaps?
+[09:04] <metalsand> crimsun: I installed the kernel modules, should I now install wlan-ng from synaptic?
+[09:04] <chris_ubuntu> dabaSlon: I don't know what the result of these commands is supposed to be.  No, if the password coment is for me, it did not ask for a password.
+[09:05] <crimsun> oh my.
+[09:05] <crimsun> that wiki page is _horrible_
+[09:05] <IIIEars> Wow! - crimsun is usually very reserved.
+[09:05] <chris_ubuntu> dabaSlon: Fuck it.  This is an exercise in futility.
+[09:05] <crimsun> step 3 is utterly broken
+[09:05] <dabaSlon> IIIEars: awesome.
+[09:05] <metalsand> crimsun: The one I pasted? :x
+[09:05] <dabaSlon> chris, right...
+[09:06] <chris_ubuntu> dabaSlon: right?
+[09:06] <crimsun> metalsand: paste your /etc/wlan/wlan.conf onto pastebin
+[09:06] <dabaSlon> exactly.
+=== sour-monkey [~sour-monk@210-86-92-87.jetstream.xtra.co.nz]  has joined #ubuntu
+[09:07] <IIIEars> Chris_ubuntu - if you have set permissions and have mounted it - correct me if i'm wrong someone - there is no more left to do but use the drive you have created. :)
+=== Sh4d [~Sh4d@167-243-118-80.kaptech.net]  has joined #ubuntu
+[09:07] <dabaSlon> its kinda bedtime-ish...
+[09:07] <dabaSlon> man...
+[09:07] <dabaSlon> ok, night.
+[09:08] <metalsand> http://pastebin.com/282529
+[09:08] <chris_ubuntu> dabaSlon: How do I use it?  I can't see it in the GUI?  There is a serious gap in communication here (probably based on my misunderstanding)...
+=== dabaSlon is now known as dabaSlon_slp
+[09:08] <dabaSlon_slp> haha
+[09:08] <sour-monkey> How much disk space does a typical PPC Ubuntu installation use?
+[09:08] <dabaSlon_slp> thats cool, chris, use your drive, and make it am\utomount in fstab, IIIEarsknows how.
+[09:08] <bob2> sour-monkey: 1.8GB by default
+=== Segovia [~Segovia@modemcable241.21-202-24.mc.videotron.ca]  has joined #ubuntu
+[09:09] <Raskall> good morning. I have managed to "enlist" 3 or 4 ubuntu-newbies now. They wanted a good distro for their laptop. :)
+[09:09] <sour-monkey> 1.8 GB?  Damn
+[09:09] <bob2> sour-monkey: 1.2GB if you don't precopy the .debs
+[09:09] <sour-monkey> I only have 20GB, and I want OS X on here too
+[09:09] <dabaSlon_slp> Raskall: tell that to metalsand
+[09:09] <crimsun> metalsand: and /etc/wlan/wlancfg-pirates ?
+[09:09] <dabaSlon_slp> :))
+[09:09] <bob2> sour-monkey: 1.8GB is < 1/10th of that
+[09:09] <IIIEars> dabaSlon - you are really nice to be so helpful. :)
+=== freewoody [~bill@202.79.52.59]  has joined #ubuntu
+[09:10] <sour-monkey> Yeah, I know.  I have lots of other things I'm gonna need to put on here though
+[09:10] <IIIEars> G'nite! :)
+[09:10] <dabaSlon_slp> like what?
+[09:10] <dabaSlon_slp> lmao
+[09:10] <dabaSlon_slp> man...
+[09:10] <IIIEars> lol
+[09:10] <dabaSlon_slp> :)))
+[09:10] <pablo921> Raskall, more of us newbies to torture those who help us?
+[09:10] <dabaSlon_slp> haha
+[09:10] <dabaSlon_slp> awesome
+[09:10] <dabaSlon_slp> nit
+[09:10] <IIIEars> lol
+[09:10] <crimsun> metalsand: or are you using /etc/wlancfg/wlancfg-DEFAULT ?
+=== lymz [~lymz@ip68-109-136-240.ph.ph.cox.net]  has joined #ubuntu
+[09:11] <metalsand> http://pastebin.com/282531
+=== johnnybe1ak [~johnnybez@203-217-51-78.dyn.iinet.net.au]  has joined #ubuntu
+[09:11] <chris_ubuntu> dabaSlon: I don't get it.  I can't tell which mssgs are for me.  This is not something I am going to be able to complete.  Thanks but this is not working.  I hate to say it makes me long for Microsoft giving me a case number at the beginnging of a paid call
+[09:11] <metalsand> crimsun: I'm using wlancfg-pirates
+[09:11] <metalsand> I deleted default
+[09:11] <Raskall> pablo921: :) I have started an ubuntu support company. They'll call me and I'll bother you if I cant help them.
+[09:11] <freewoody> Can somebody tell me how to make PostFix send mails using my IP Address
+=== fwiffo [~fwiffo@dhcpserver0.oersted.dtu.dk]  has joined #ubuntu
+[09:12] <pablo921> Raskall, i'm just starting to learn.
+[09:13] <crimsun> metalsand: are you using the pcmcia restart or the wlanctl-ng method?
+[09:13] <IIIEars> chris_ubuntu - You learned a little and so did i. we don't have to learn everything all at once. a little rest can make it all a lot easier to do in the morning.
+=== lymz [~lymz@ip68-109-136-240.ph.ph.cox.net]  has joined #ubuntu
+[09:13] <Raskall> pablo921: and it's not torture. We want as many ubuntu users as possible you know. And If we felt tortured we would just leave the channel.
+[09:13] <dabaSlon_slp> IIIEars: well, you see, he cant get which messages I send him...
+[09:14] <metalsand> crimsun: I have no idea
+=== revelater [~andrew@adsl-69-225-141-122.dsl.irvnca.pacbell.net]  has joined #ubuntu
+[09:14] <crimsun> metalsand: ...err?
+=== alexandre [~alexandre@AMarseille-151-1-32-55.w82-122.abo.wanadoo.fr]  has joined #ubuntu
+[09:14] <revelater> how do i check on my hard drive partitions?
+[09:14] <dabaSlon_slp> and, Im talking only to him, and only me and him are on the channel...except for crimsun and metalsand sometimes...
+[09:14] <revelater> get a list of them?
+[09:14] <pablo921> Raskall, it's just that there are normally 500 people in this room and maybe 10 that can and will help us newbies
+[09:14] <jsgotangco> fdisk -l
+[09:14] <metalsand> crimsun: How would i check which method I'm using :x
+[09:14] <revelater> didn
+[09:14] <crimsun> metalsand: ok, you're obviously not using the latter then
+[09:15] <IIIEars> X-chat is highlighting all of my messages - would be a lot easier to avoid the questions i can't answer if it didn't - lol
+[09:15] <dabaSlon_slp> revelater: fdisk -l /dev/hdx
+[09:15] <revelater> didn't list anything
+[09:15] <metalsand> crimsun: right
+[09:15] <jsgotangco> sudo fdisk -l
+[09:15] <crimsun> metalsand: please restart pcmcia and paste dmesg again please
+[09:15] <revelater> jsgotangco: thanks, that did it
+[09:15] <jsgotangco> :-)
+[09:15] <dabaSlon_slp> excellent.
+=== Clint|ology [~Clint@nr30-69-61-180-207.fuse.net]  has joined #ubuntu
+[09:16] <Raskall> hmm.. my pentium 4M is not very happy with vmware. :) the CPU gets really hot.
+[09:16] <dabaSlon_slp> slp
+[09:16] <revelater> jsgotangco: what is id f?
+=== psoulocybe [~psoulocyb@adsl-065-007-128-249.sip.asm.bellsouth.net]  has joined #ubuntu
+=== ttf_ [~tom@p83.129.15.67.tisdip.tiscali.de]  has left #ubuntu []
+[09:17] <metalsand> http://pastebin.com/282533
+[09:17] <revelater> k, this doesn't look right... :
+[09:17] <revelater>    Device Boot      Start         End      Blocks   Id  System
+[09:17] <revelater> /dev/hda1   *           1      231589   116720824+  83  Linux
+[09:17] <revelater> /dev/hda2          231590      232581      499968    f  W95 Ext'd (LBA)
+[09:17] <revelater> /dev/hda5          231590      232581      499936+  82  Linux swap / Solaris
+[09:17] <metalsand> The last couple of lines changed, crimsun
+[09:17] <revelater> anyone drown itn that one? :P
+=== eob84 [~david@137.36.236.125]  has joined #ubuntu
+[09:18] <eob84> HI
+[09:18] <eob84> I have a quick question
+[09:18] <eob84> does anyone know where you can get bootsplash debs for ubuntu?
+[09:18] <revelater> ...
+[09:18] <eob84> ha
+[09:19] <revelater> what is bootsplash?
+[09:19] <eob84> the binary for the kernal
+[09:19] <eob84> oops sorry
+[09:19] <revelater> do you use synaptic?
+[09:19] <IIIEars> eob - google >> images >> splash screen - i got too many to use them all - too many is just enough. - lol
+=== Jamminpotato__ [~Jamminpot@ip68-10-31-239.hr.hr.cox.net]  has joined #ubuntu
+[09:20] <eob84> no splash screen
+=== GNAM [~GNAM@natpool-1-17.pd.astro.it]  has joined #ubuntu
+[09:20] <eob84> I need the actual program
+[09:20] <eob84> bootsplash
+[09:20] <revelater> i am outta here...
+=== drunken [~drunken-w@C-450.AHL.Uni-Linz.AC.AT]  has joined #ubuntu
+[09:20] <drunken> hi everyone...
+[09:20] <eob84> the file on http://www.bootsplash.de/files does not work
+[09:21] <crimsun> metalsand: double-check your wlancfg-pirates
+[09:21] <metalsand> crimsun: for what?
+[09:21] <crimsun> metalsand: any missing parameters
+[09:21] <metalsand> crimsun: all i did was rename the file
+[09:22] <crimsun> metalsand: you didn't tweak it to your own hardware?
+=== Kamping_in_doze [~kaiser@ppp226-238.lns3.adl2.internode.on.net]  has joined #ubuntu
+[09:22] <metalsand> crimsun: when i went through it all seemed correct to my settings
+=== pitti [~martin@box79162.elkhouse.de]  has joined #ubuntu
+[09:22] <drunken> is anyone using dc++ from linux?
+[09:22] <drunken> for linux...
+[09:23] <crimsun> metalsand: please double-check. Sorry, but it's nearly 3:30, and I need to be back here at work in less than five hours.
+[09:23] <Kamping_in_doze> anyone come across this before? i crashed ubuntu, and reinstalled windows (without rebooting into ubuntu). when i tried to reinstall grub, it cant find core.img or somthing. anyone know this one?
+[09:23] <metalsand> crimsun: I just double-checked, everything looks correct
+[09:23] <metalsand> I have no WEP enabled, its set to DHCP
+[09:23] <kakalto> does anyone have the transcode package, and could they put it up on a server for download for me? please?
+[09:24] <kakalto> the debian-marillat repos don't work
+=== goli [~sunil@220.226.57.188]  has joined #ubuntu
+[09:24] <pablo921>  kakalto:i'm waiting for it also.
+[09:24] <crimsun> metalsand: ok. I'll be back in ~18 hrs
+[09:24] <kakalto> I tried downloading the source from transcoding.org but the tar isn't valid
+[09:25] <metalsand> crimsun: K. So we're done for the night?
+[09:26] <pablo921> kakalto:i tied to install dvdrip but can't without transcode.
+[09:26] <kakalto> hmm.
+[09:26] <metalsand> crimsun: Thanks for looking over my code, I appriate it. G'night, get some rest.
+[09:26] <kakalto> I tried to install transcode, but couldn't
+=== ivoks [~ivoks@wall2.grad.hr]  has joined #ubuntu
+[09:26] <metalsand> Morning, ivoks
+[09:26] <ivoks> hello
+[09:26] <metalsand> Guess what I'm back to trying?
+[09:26] <metalsand> wlan-ng
+[09:26] <metalsand> Yay :D
+[09:27] <pablo921> kakalto:i guess marillat has been down for awhile
+[09:27] <kakalto> yeh
+[09:27] <kakalto> :(
+[09:27] <pablo921> kakalto:patience
+=== m [~m@ben.rh.rit.edu]  has joined #ubuntu
+[09:28] <m> anyone know where the start menu is kept in gnome.. the file? ?
+[09:28] <ivoks> metalsand great... that driver gave better results :)
+[09:28] <kakalto> pablo921, patience is hard when sick and wanting to burn a video-dvd for a friend
+[09:28] <pablo921> kakalto:unles you find somebody who has it
+[09:28] <kakalto> that's what I was hoping for
+[09:29] <metalsand> ivoks
+[09:29] <metalsand> I just noticed something
+[09:29] <metalsand> in dmesg
+[09:30] <ivoks> ok
+=== Kamping_in_doze is now known as Kaiser_milo
+[09:30] <metalsand> p80211knetdev_hard_start_xmit: Tx attempt prior to association, frame dropped.
+[09:30] <metalsand> It states that
+[09:30] <Kaiser_milo> bbl. good luck ppl
+[09:30] <ivoks> metalsand google
+=== Kaiser_milo [~kaiser@ppp226-238.lns3.adl2.internode.on.net]  has left #ubuntu []
+[09:30] <ivoks> metalsand copy paste that in google
+[09:30] <metalsand>  Bit Rate:2 Mb/s   Tx-Power:2346 dBm
+=== seb128 [~seb128@ANancy-151-1-9-31.w83-194.abo.wanadoo.fr]  has joined #ubuntu
+[09:30] <metalsand> and when I iwconfig
+[09:30] <metalsand> it shows that
+[09:30] <ivoks> metalsand as i said, your wifi works
+[09:31] <metalsand> and that kind of tx-power is rediculous, thecards max is 23
+=== Segovia [~Segovia@modemcable241.21-202-24.mc.videotron.ca]  has joined #ubuntu
+[09:31] <ivoks> metalsand iwlist wlan0 scan
+[09:31] <ivoks> metalsand what does it says?
+=== Seveas [~seveas@ksl403-uva-132.wireless.uva.nl]  has joined #ubuntu
+[09:31] <metalsand> wlan0     Interface doesn't support scanning : Function not implemented
+[09:31] <ivoks> metalsand then eth2
+=== dholbach [~daniel@td9091b75.pool.terralink.de]  has left #ubuntu ["Verlassend"]
+[09:31] <ivoks> ah...
+[09:31] <metalsand> I have no eth2
+[09:32] <ivoks> ok
+[09:32] <IIIEars> Foolish Ubuntu question #101 - how do i create a wallpaper like the default that looks like two layers?
+[09:32] <metalsand> i have eth0 (what im connected to right now)
+=== ali4728 [~ali4728@adsl-69-226-194-192.dsl.pltn13.pacbell.net]  has joined #ubuntu
+[09:32] <ivoks> i'm sleepy :(
+[09:32] <ali4728> Newbie Needs Help! I have a (LinuxApacheMysqlPhp) web server on my comp/ubuntu, I want to send email [mail()]  by somepage.php but default confs doesnt seem to work! Any help?
+[09:32] <pablo921> Seveas, i thought youw4ent to work.
+[09:32] <ivoks> ali4728 mail()?
+[09:33] <metalsand> lol
+[09:33] <ivoks> ali4728 AFAIK, that doesn't work on lot of servers
+=== carlos [~carlos@69.Red-80-33-181.pooles.rima-tde.net]  has joined #ubuntu
+[09:33] <bob2> ali4728: sudo dpkg-reconfigure postfix, configure it to be able to send mail
+[09:33] <ivoks> ali4728 couse it is possible to send spam over that function
+=== m [~m@ben.rh.rit.edu]  has left #ubuntu []
+[09:34] <ivoks> metalsand i don't know... how do you know others managed to setup that card? any URL?
+=== golanz [~golan@81-174-12-108.f5.ngi.it]  has joined #ubuntu
+[09:34] <Seveas> pablo921, i am at work now :)
+=== paknaald [~Miranda@cp822948-a.tilbu1.nb.home.nl]  has joined #ubuntu
+=== Cybermagellan [~shawn@ip68-231-152-140.tc.ph.cox.net]  has joined #ubuntu
+[09:35] <kakalto> Seveas, are you involved in the marillat repos?
+[09:35] <Seveas> i am a scientific programmer, so it's not that much of a surprise that i have an internet connection at my work :)
+[09:35] <pablo921> Seveas, you have a good day.
+[09:35] <Seveas> kakalto, not at all
+[09:35] <ivoks> i buyed canon 300D
+[09:36] <Cybermagellan> hey what do you guys think of this for a Ubuntu webserver logo http://68.231.152.140:8080/apache2-default/poweredby.png ?
+=== dwa_ [~dwa@garrut.xs4all.nl]  has joined #ubuntu
+[09:36] <kakalto> Seveas, k, my bad
+=== darkaudit [~bpack@pool-141-153-89-111.clrk.east.verizon.net]  has joined #ubuntu
+[09:36] <Seveas> Cybermagellan, not bad, but the font looks fuzzy
+[09:36] <ivoks> lol
+[09:36] <ivoks> my grandma could do that :)
+[09:36] <Seveas> and the logo isn't scaled correctly
+[09:37] <ali4728> <bob2> is it ok if just type the command that u mentioned? What u mean by configure?
+[09:37] <ivoks> Cybermagellan try again :)
+[09:37] <Cybermagellan> Thanks ivoks...maybe your grandma would care to do it...
+[09:37] <bob2> ali4728: yes, run the command I gave you
+[09:37] <ivoks> Cybermagellan she wouldn't, and i wouldn't :)
+=== veritas [~veritas@ip68-231-196-244.oc.oc.cox.net]  has joined #ubuntu
+[09:38] <ivoks> Cybermagellan make powerd by bigger, remove ubuntu and leave cicrcle
+[09:38] <ivoks> circle
+[09:38] <veritas> ivoks
+[09:38] <veritas> It works!
+[09:38] <veritas> lol
+[09:38] <veritas> I CANNOT believe it
+=== jk_ [~jochem@jkossen.nl]  has joined #ubuntu
+[09:38] <poningru> heh I am here too
+[09:38] <ivoks> u dumb prick
+[09:38] <veritas> bob2: did you hear that?
+[09:38] <poningru> I stalk people here
+=== ubuntu [~ubuntu@zux221-024-161.adsl.green.ch]  has joined #ubuntu
+[09:39] <veritas> ivoks: Why am I a dumb prick? lol
+[09:39] <bob2> ivoks: language
+[09:39] <ivoks> veritas can you see anybody else? :)
+[09:39] <Seveas> ivoks, please don;t use that kind of language herre
+[09:39] <ivoks> bob2 I have to...
+[09:39] <ivoks> bob2 he was pooling my nose for days
+[09:39] <ivoks> bob2 and now it works... :)
+[09:39] <veritas> ivoks: No, I wasn't
+[09:39] <veritas> I JUST got it to work
+[09:39] <ali4728> <bob2> It opened up a conf window should I simply clk OK?
+[09:39] <paknaald> where can i find a good xorg.conf manual?
+=== Cr1ck3t [~Cr1ck3t@host-63-238-55-190.apid.com]  has joined #ubuntu
+[09:40] <veritas> bob2: I think we should change the topic
+[09:40] <IIIEars> 485 people in the room at least that many different opinions on your logo. - lol
+[09:40] <bob2> paknaald: why do you want to modify it?
+=== eob84 [~david@137.36.236.125]  has joined #ubuntu
+[09:40] <bob2> ali4728: in a terminal, yes
+[09:40] <paknaald> well i have a radeon x600 and it won't get graphical
+[09:40] <eob84> I am trying to remove a package from apt and I am getting errors
+[09:40] <veritas> | metalsnd got his PCMCIA NIC working, everyone can procede to their daily schedule | Please don't use Breezy yet |
+[09:40] <paknaald> so i install ubuntu in textmode and then try to configure xorg.conf
+[09:40] <veritas> What do you say, bob2?
+=== thisfred [~thisfred@a80-127-80-154.adsl.xs4all.nl]  has joined #ubuntu
+[09:40] <paknaald> so then in vesa it works, on one screen
+[09:40] <bob2> eob84: you need to be more specific, (ie past the error to #flood)
+[09:40] <paknaald> but i want gflrx on dual screen
+[09:41] <paknaald> that's _hard_
+[09:41] <bob2> daniels: radeon x600 should Just Work, right?
+[09:41] <eob84> bo2, subprocess pre-removal script returned error exit status 10
+[09:41] <ivoks> veritas and, what was wrong?
+=== cyphase is listening to Call by fireflight - Get it at http://www.fireflightrock.com/
+[09:41] <veritas> Nothing is wrong
+[09:41] <Cr1ck3t> wow didn't expect to see this many people here hehe
+[09:41] <Seveas> cyphase, please don't spam here...
+[09:41] <ali4728> <bob2> I have options "int site, int with sm host, sat sys, Local only" which is good for me?
+[09:41] <ivoks> veritas i know, but what was wrong with you...
+[09:42] <daniels> bob2: in theory, yes.  in pracrice, it tends to lock up, apparently, but I haven't got any hardware. :\
+[09:42] <bob2> eob84: no, the whole error, to #flood
+[09:42] <Cr1ck3t> hello everyone, don't need help just thought I would check out the room.
+[09:42] <bob2> cyphase: please turn that off
+[09:42] <eob84> what? join another chanel?
+[09:42] <cyphase> Seveas, if thats spam, then i don't know why im the only one your telling to stop spamming
+[09:42] <bob2> eob84: yes
+[09:42] <bob2> ali4728: do you have a smarthost?
+[09:42] <Burgundavia> cyphase, that is spam
+[09:42] <Seveas> cyphase, because no one else does that perhaps
+[09:42] <ali4728> nope
+[09:43] <ali4728> <bob2> no
+[09:43] <veritas> I'm so freaking excited right now
+[09:43] <veritas> My card works.
+[09:43] <cyphase> Burgundavia, Seveas, what qualifies as spam in your opinion
+[09:43] <paknaald> bob2: does 'vesa'-mode even support dual screen?
+[09:43] <bob2> paknaald: I don't know
+[09:43] <Burgundavia> cyphase, the channel is already very busy. Anything that is offtopic is spam
+[09:43] <Cr1ck3t> cyphase that is considered spam in help rooms just turn it off in here its not a big deal...
+[09:43] <bob2> ali4728: then just internet host, I guess
+[09:43] <ivoks> veritas it's good feeling when you get something to work on linux, isn't it?
+[09:43] <ali4728> <bob2> let me try
+[09:44] <ivoks> veritas what's even better, it's great feeling when you realize that you learned something along the way...
+[09:44] <ivoks> veritas doesn't that make you smile?
+[09:44] <cyphase> Burgundavia, Seveas, are you telling me that everything else in here is on topic?
+[09:44] <cyphase> because i highly doubt it
+[09:44] <Burgundavia> cyphase, mostly yes
+[09:44] <veritas> ivoks: I let out a little grin :P
+[09:44] <cyphase> right
+[09:44] <veritas> ivoks: I wouldn't say I learned a little
+[09:44] <Seveas> cyphase, cut it out. We *try* to stay on topic
+[09:44] <cyphase> ;)
+[09:44] <bob2> cyphase: automatic crap is off-topic
+[09:44] <Burgundavia> cyphase, what you are listening to has little to do with linux, let alone ubuntu
+=== yfir [~somebody@S0106000c414971a6.ok.shawcable.net]  has joined #ubuntu
+[09:44] <cyphase> bob2, automatic?
+[09:45] <veritas> I'd say 95% of my linux knowledge was learned because of this freaking card :P
+[09:45] <bob2> cyphase: public away messages will be told to shut it off, too
+[09:45] <cyphase> lol
+[09:45] <veritas> bob2: are you excited for me?
+[09:45] <Seveas> veritas, you better watch out
+[09:45] <Seveas> veritas, or you'll become a linux-geek ;)
+[09:45] <veritas> Seveas: How come?
+=== garrut [~gerrit@garrut.xs4all.nl]  has joined #ubuntu
+[09:46] <veritas> Seveas: I'm not scared :P
+[09:46] <Seveas> well, welcome aboard then :)
+=== cyphase is listening to everyone talk
+[09:46] <cyphase> ;)
+[09:46] <veritas> bleh
+[09:46] <veritas> what's the command to ghost
+=== spacey [~spacey@145.33.144.141]  has joined #ubuntu
+[09:46] <veritas> I can't get metalsand
+[09:46] <Cr1ck3t>  /ns ghost nick password
+[09:47] <Seveas> or /msg nickserv ghost nick passord
+=== telemaco [~telemaco@176.Red-83-33-191.pooles.rima-tde.net]  has joined #ubuntu
+[09:49] <veritas> What happened to the chat :x
+[09:49] <Seveas> it became silent
+[09:49] <Seveas> no problems anymore, woohoo :)
+[09:49] <paknaald> isn't their anybody a xorg.conf expert? ;)
+[09:50] <veritas> It's because I fixed my problem :P
+[09:50] <veritas> bleh
+[09:50] <Seveas> ik niet iig paknaald, sorry :)
+[09:50] <paknaald> you've a x600 too?
+[09:50] <veritas> i can't ghost metalsand because it's not registered
+=== palmi [~da@host130-250.pool8172.interbusiness.it]  has joined #ubuntu
+[09:50] <Cr1ck3t> hehe veritas thats usually the case.
+=== koka-kola [t6@195.245.229.17]  has joined #Ubuntu
+=== Cr1ck3t is now known as {Cricket}
+[09:51] <ivoks> lol
+[09:51] <Seveas> there ya go
+=== veritas is now known as metalsand
+[09:51] <Seveas> metalsand, if it happens again, try /ping metalsand
+[09:51] <Seveas> it will help the server noticing that that nick is dead
+=== jesper [~jesper@Linuxnews.dk]  has left #ubuntu []
+[09:52] <Seveas> i just pinged him and bang, he is gone
+=== sorsis_ [~sorsis@student.merikoski.fi]  has joined #ubuntu
+[09:52] <Cybermagellan> Any better now: http://68.231.152.140:8080/apache2-default/poweredby.png
+[09:52] <metalsand> Ah, good call. :D
+[09:52] <metalsand> Sweet - my next problem
+[09:52] <Seveas> scaling is ok
+[09:52] <Cybermagellan> I locked it this time
+[09:52] <Seveas> "ubuntu" looks crappy so close to the logo
+[09:52] <Seveas> and powered by is too small
+[09:52] <metalsand> FATAL: Unable to open cisco control file '/proc/driver/aironet/eth0/Config' 2:No such file or directory
+[09:52] <Cybermagellan> I can't think of anywhere else to put it
+[09:52] <Seveas> next to the logo is better
+[09:53] <Seveas> as in powered by (LOGO) Ubuntu
+[09:53] <pablo921> Cybermagellan: look ok to me
+[09:53] <ivoks> Seveas eth0?
+[09:53] <ivoks> sorry
+[09:53] <ivoks> metalsand eth0? isn't your wlan on wlan0?
+[09:53] <metalsand> kismet is trying to run off of eth0, not wlan0 it seems
+[09:53] <ivoks> metalsand configure kismet
+[09:53] <ivoks> bye all
+[09:53] <metalsand> Yeah, I've never bothered trying to run it since my card never worked
+[09:54] <Q_Continuum> metalsand, whenever I've had that happen (I'm using ndiswrapper) it's because i need todo another modprobe ndiswrapper
+[09:54] <Q_Continuum> which fixes it
+[09:54] <bob2> metalsand: let me guess, kismet?
+=== laji [~laji@82.78.129.137]  has joined #ubuntu
+[09:54] <laji> hi
+[09:54] <sour-monkey> Gidday
+[09:54] <laji> anyone had experiences with webcams ?
+=== Garathor [~Unknown@213-145-178-167.dd.nextgentel.com]  has joined #Ubuntu
+[09:55] <metalsand> bob2: Yes
+[09:55] <laji> i just installled ubuntu.. and it drives me crazy
+[09:55] <bob2> metalsand: you need to configure it
+[09:55] <bob2> metalsand: ie tell it what sort of card you have
+[09:55] <laji> it recognizes the webcam.. but i can't see it
+=== jackass [~jackass@c-c838e055.144-1-64736c10.cust.bredbandsbolaget.se]  has joined #ubuntu
+[09:56] <kakalto> laji, not meaning to be unfriendly, but have you tried google?
+[09:56] <metalsand> bob2: where are the config files? I'm in the readme right now, but it'd be nice just to go right to them :P
+[09:56] <laji> it is saying that is a v4l2 device, the module is loaded..
+[09:56] <laji> yes...
+[09:56] <ali4728> <bob2> Do I need to configure anything with PHP Postfix configured now!
+[09:56] <laji> i tried.
+[09:56] <jackass> What program would i use instead of Deamon Tools, on linux??! (neeb)
+[09:56] <bob2> metalsand: /etc/kismet/kismet.conf
+[09:56] <Seveas> jackass, mount :)
+[09:56] <metalsand> bob2: thanks :)
+[09:56] <bob2> metalsand: all config files for non-user thingfgs are in /etc
+[09:56] <jackass> :S
+[09:57] <Seveas> jackass, but only for .iso files
+[09:57] <fsapo> bob2, i said that my dvd wasnt going to work, ive found this: http://www.brandonhutchinson.com/Burning_Video_DVDs_in_Linux.html
+[09:57] <bob2> ali4728: you need to make sure postfix is actually working
+[09:57] <Seveas> no idea about other formats
+[09:57] <bob2> ali4728: ssh in and see if "mail -stest some@email.com" and make sure it turn up
+[09:57] <fsapo> bob2, i think that if the player can read dvd-r midia it should work
+[09:57] <bob2> fsapo: ok
+[09:57] <jackass> but what program for .bin files then? and wher can i find "mount"
+[09:59] <ali4728> <bob2> ssh in?
+[09:59] <jackass> but what program for .bin files then? and wher can i find "mount"
+[09:59] <Cybermagellan> Seveas, something like http://68.231.152.140:8080/apache2-default/poweredby1.png
+[09:59] <Cybermagellan> ?
+=== factorx [~factorx@dsl-084-060-019-024.arcor-ip.net]  has joined #ubuntu
+[10:00] <bob2> ali4728: or however you normally connect to it
+[10:00] <bob2> jackass: you can't mount .bin files
+[10:00] <pablo921> Cybermagellan:, i think it looks fine
+[10:00] <bob2> jackass: use bchunk to convert it to a useful format
+[10:00] <jackass> :( okey
+[10:00] <Seveas> Cybermagellan, indeed, but the font is awfully small compared to the logo size imho
+[10:00] <jackass> wheres bchunk? where can i find it.
+[10:00] <Cybermagellan> Well I was going to suggest that this be at the bottom of a webpage...so I don't wanna make it too large....nor too small
+[10:01] <{Cricket}> jackass google for it
+[10:01] <Cybermagellan> Like the powered by apache logo
+[10:01] <bob2> jackass: wiki.ubuntu.com/SynapticHowto, enable universe
+[10:01] <Seveas> Cybermagellan, i suggest you shrink the logo a bit then
+[10:01] <Cybermagellan> Yeah I was thinking that too
+[10:02] <jackass> thanks
+[10:02] <jackass> i got it now
+=== mikko [~mikko@194.211.206.25]  has joined #ubuntu
+[10:03] <metalsand> What should I list as my super user ID? Do I tell kismet it's root?
+[10:03] <metalsand> or veritas, if that's my regular ubuntu login
+[10:03] <{Cricket}> root
+[10:03] <bob2> just leave it
+[10:03] <bob2> all you need to change is the driver
+=== gaurav [~gaurav@202.71.143.90]  has joined #ubuntu
+[10:05] <metalsand> bob2: How do I tell the name of the source?
+=== FrankyFourFinger [~frvnieuw@igwesl6.vub.ac.be]  has joined #ubuntu
+[10:06] <bob2> metalsand: presumably prism2source
+=== Xyrouz [~Xyrouz@0x3e42bd6c.adsl.cybercity.dk]  has joined #ubuntu
+[10:07] <metalsand> Then my cardtype must be wrong :/
+[10:07] <jackass> how do i change a .fin file to .iso file... i got bchunk and that but how?
+[10:07] <jackass> how do i change a .bin file to .iso file... i got bchunk and that but how?
+=== pshend [~paul@host81-138-210-156.in-addr.btopenworld.com]  has joined #ubuntu
+[10:08] <Seveas> jackass, read the documentation....
+[10:08] <bob2> jackass: dude a) don't repeat, it's obnoxious, b) did you read the documentation that came with it?
+=== ali4728 [~ali4728@adsl-69-226-194-192.dsl.pltn13.pacbell.net]  has joined #ubuntu
+[10:09] <pshend> hi all. i've installed the gPerfection icon theme, but none of my gtk controls are using it - like ok buttons are still using the old icons etc, and nautilus back/fwd buttons dont use this theme
+=== BuffaloSoldier [~ugachaga@218.111.67.59]  has left #ubuntu ["Leaving"]
+[10:09] <jackass> i wrote wrong from the start changes fin - bin sry im reading but i don't understand
+[10:09] <pshend> any ideas how i fix it? i've installed the theme for root, and when i run synaptic, root DOES use the gPerfection icons
+[10:10] <bob2> jackass: run "man bchunk" in a terminal, and read it
+[10:10] <Cybermagellan> Seveas, so maybe something like this? http://68.231.152.140:8080/apache2-default/poweredby2.png
+[10:10] <bob2> pshend: er, don't install it for root then
+[10:10] <jackass> no manual post for bchunk:S!
+[10:10] <pshend> bob2, the root install is just in /root/.icons, so it shouldn't interfere with /home/user/.icons, should it?
+=== pablo921 [~paul@az-yuma-cuda1x-159.losaca.adelphia.net]  has left #ubuntu []
+[10:11] <Seveas> Cybermagellan, comes close, but if you want to put it at the bottom of a page, you should use the previous image with the logo as big as in this image, so that the images width is bigger than its height
+[10:11] <bob2> jackass: then you didn't install it
+[10:11] <bob2> jackass: read the page again and try again
+[10:11] <jackass> how to install... Im really a neeb....
+[10:11] <bob2> jackass: dude, read the page I gave you
+[10:12] <bob2> jackass: wiki.ubuntu.com/SynapticHowto
+[10:12] <bob2> pshend: you installed it as root and are complaining that it doesn't work for your regular user, right?
+[10:12] <Cybermagellan> Seveas, ok so kinda like a banner then
+[10:12] <pshend> bob2, no. sorry, i didn't explain that too well.
+=== m [~m@ben.rh.rit.edu]  has joined #ubuntu
+[10:13] <pshend> bob2, i installed it as a user with the theme manager, then i installed it  for root by sudu su'ing, then unpacking the theme into root/.icons - so there shouldn't be a permissions prob
+[10:13] <jackass> thx alot
+[10:13] <Seveas> Cybermagellan, yeah, sort of
+=== lotuz [~lotuz@h183n5c1o1052.bredband.skanova.com]  has joined #ubuntu
+[10:14] <Cybermagellan> Kinda like.. http://68.231.152.140:8080/apache2-default/poweredby3.png
+[10:14] <Seveas> Cybermagellan, that's the best one so far :)
+=== m [~m@ben.rh.rit.edu]  has left #ubuntu []
+[10:15] <Cybermagellan> Ok, well it's 1:30 in the am so I am going to bed now
+[10:15] <Cybermagellan> night all
+[10:15] <ali4728> <bob2> Postfix working ( I reboot the comp.) but could not send mail yet, any idea?
+[10:15] <Seveas> but i would make the the height of the word "ubuntu" about 3/4 as heigh as the logo and center it vertically
+[10:15] <Seveas> g'night!
+[10:16] <fsapo> Seveas, night!
+[10:16] <bob2> ali4728: then postfix isn't working
+[10:16] <bob2> ali4728: and there was no need to reboot it
+[10:16] <Seveas> fsapo, that was to Cybermagellan it's 10:16am here :)
+[10:17] <ali4728> <bob2> shal I try over again?
+[10:17] <bob2> ali4728: what happened when you ran the command I gave you?
+=== Swynndla [~Swynndla@210-54-11-182.ipsm.net.nz]  has joined #ubuntu
+[10:18] <ali4728> <bob2> it opend conf GUI end I went through steps!
+[10:18] <bob2> ali4728: no
+[10:18] <bob2> 17:57:19 @         bob2 | ali4728: ssh in and see if "mail -stest some@email.com" and make sure it turn up
+[10:19] <bob2> ali4728: send that test email
+[10:20] <pshend> anyone know if unpacking a file which gives timestamp errors could cause a problem? (it's a theme)
+[10:20] <ali4728> <bob2>I am trying to send this mail through a web page you aware of that righT?
+[10:20] <bob2> ali4728: dude
+[10:20] <bob2> ali4728: I can't help you if you ignore me
+[10:21] <ali4728> <bob2>you fill a form and click OK to send!
+[10:21] <bob2> ali4728: you need to actually run the command I gave you
+=== Nermal [~pprior@pc2.packadsl.ftech.co.uk]  has joined #ubuntu
+[10:21] <bob2> ali4728: no, ignore the webt
+[10:21] <ali4728> <bob2> ok hold on
+=== mepisman [~mepisman@CPE-143-238-231-66.vic.bigpond.net.au]  has joined #ubuntu
+=== pokute_ is now known as pokute
+=== pokute is now known as pokute_
+=== cbruggeman [~cbruggema@AAmiens-104-2-1-13.w217-128.abo.wanadoo.fr]  has joined #ubuntu
+[10:24] <jackass> where can i find synaptic package manager???
+[10:24] <mole_> can anyone help walk me through synchronising my USB Palm device?  I've tried the udev configuration on ubuntuguide.org, but it only works for the initial sync.
+[10:25] <bob2> jackass: dude, chill
+[10:25] <bob2> jackass: and use some initiative.
+[10:25] <jsgotangco> PDA support :-(
+[10:25] <ali4728> <bob2>I run this command "mail -stest some@email.com" no response from bash!
+[10:25] <jackass> i have been loocking every where
+[10:25] <bob2> jackass: system -> administration -> package manager
+[10:25] <mole_> So it doesn't work too well, then?
+[10:25] <cbruggeman> hi all
+[10:25] <jackass> OMG im such a LOSER
+[10:25] <bob2> ali4728: so.  you did actually substitute in an email address of your own in there, right?
+[10:25] <NicP> lol
+[10:25] <cbruggeman> i have a big prob aswell
+[10:26] <jsgotangco> mole_, its on high priority at the moment
+[10:26] <jsgotangco> but we'll need testers on certain devices
+=== allio is now known as allio`afk
+[10:26] <cbruggeman> anybody now spip ? and have ever try to put it on ubuntu ?
+[10:26] <Seveas> jackass, no, just a newbie, but relax, we all had to go through this :)
+[10:26] <bob2> cbruggeman: you need to ask a more specific question
+[10:26] <mole_> jsgotangco: happy to try and help if I can.  I have a Palm Tungsten T, m515 and Palm Vx.
+[10:27] <cbruggeman> ok bob2
+=== da_bon_bon [~rohandhru@203.212.221.132]  has joined #ubuntu
+[10:27] <cbruggeman> my problem is juste than i didn't arrive to install spip
+[10:27] <ali4728> <bob2> it hangs..
+[10:27] <jsgotangco> mole_, that's great, refer to http://udu.wiki.ubuntu.com/PDASupport
+[10:27] <cbruggeman> i did an apt-get install apache , mysql and php4
+[10:27] <bob2> ali4728: you didn't answer my question
+[10:28] <jsgotangco> the key is supporting certain models for now
+[10:28] <ali4728> <bob2> yes I did
+[10:28] <bob2> ali4728: where?
+[10:28] <bob2> 18:25:50 @         bob2 | ali4728: so.  you did actually substitute in an email address of your own in there, right?
+[10:28] <ali4728> <bob2> here actual thing4728@yahoo.com
+[10:29] <mole_> jsgotangco: I can get the bluetooth sync working using pilot-link and the guide at howto.pilot-link.org/bluesync
+[10:29] <bob2> good
+[10:29] <bob2> ali4728: now run: echo this is a test email | mail -s test thing4728@yahoo.com
+[10:29] <ali4728> <bob2> here actual thing  # mail -stest ali4728@yahoo.com
+[10:29] <mole_> It just seems to be a problem with gnome-pilot
+[10:29] <mole_> But I'm sure you probably know that already
+[10:30] <jsgotangco> mole_, that's great can you email me the details of it at jgotangco@gmail.com so I can test it out and update the wiki at the same time contact you thanks
+=== allio`afk is now known as allio
+[10:30] <bob2> er
+[10:30] <mole_> jsgotango: will do
+[10:30] <bob2> it might be better to file a bug
+[10:30] <bob2> unless jsgotangco is like the gnome-pilot author
+=== pokute_ is now known as pokute
+=== pokute is now known as pokute_
+[10:31] <jsgotangco> yeah file a bug
+[10:31] <ali4728> <bob2> I run it "echo this is a test email | mail -s test ali4728@yahoo.com"
+[10:31] <bob2> ali4728: good
+[10:31] <bob2> ali4728: now go and see if the email arrived
+=== Restless [~binary@adsl-67-112-202-201.dsl.sntc01.pacbell.net]  has joined #ubuntu
+[10:32] <ali4728> <bob2> No mail
+[10:32] <mole_> I'll have to look at the gnome-pilot mailing list first...
+[10:33] <bob2> ali4728: so, open up your postfix log
+[10:33] <ali4728> <bob2>ok
+=== gorilla_ [~george@150.101.97.229]  has left #ubuntu ["Leaving"]
+=== bunoc [~bun@dhcp-243-144.mag.keio.ac.jp]  has joined #ubuntu
+=== St0n3-C0l [~stone@St0n3-c0l.user]  has joined #ubuntu
+[10:34] <ali4728> <bob2> is it in /etc/postfix log file?
+[10:34] <bob2> no
+[10:34] <ali4728> <bob2> where
+[10:34] <bob2> I told you before, /var/log/mail.log
+[10:34] <ali4728> <bob2>ok
+[10:35] <bunoc> hello. i just installed hoary. anybody pls tell me how to change the screen solution?
+[10:35] <bunoc> i am in gnome now
+[10:35] <REdz> ye its the menu man
+[10:35] <REdz> with the preferences
+[10:36] <laji> the kernel delivered with the default ubuntu instalation does support video4linux?
+=== helloyo [~alex@c211-30-78-117.belrs2.nsw.optusnet.com.au]  has joined #ubuntu
+[10:36] <bunoc> hmm.... only 640x408 available. how to choose better solution?
+=== metalsand [~veritas@ip70-181-104-57.oc.oc.cox.net]  has joined #ubuntu
+[10:36] <REdz> that supports wat is setup, i dont know how to change it for x.org
+[10:36] <bunoc> why hoary only detects 640x480 on my screen?
+[10:37] <helloyo> how do i use an external dvd driver with ubuntu? (my bro is being a dick about how windows installed it automatically)
+[10:37] <REdz> its prob a safe default bunoc
+=== eruin [~eruin@eruin.user]  has joined #ubuntu
+[10:37] <bunoc> REdz: yes, but i cannot work with this solution :(
+[10:37] <REdz> hegemony, is it a usb burner
+[10:37] <ali4728> <bob2> here is LOG http://pastebin.com/282554
+[10:37] <REdz> bunoc, ull have to read up on x.org bunoc i have only just started usn it
+=== lewwy [~lewwy@CPE-60-231-144-139.qld.bigpond.net.au]  has joined #ubuntu
+[10:39] <lewwy> hello fellow ubuntu chumps
+[10:39] <helloyo> does anyone know how to setup an external dvd burner?
+[10:39] <lewwy> can somebody reccomend a good programming language for linux/ubuntu?
+[10:39] <hhurtta> c++/c
+[10:39] <jsgotangco> python?
+[10:39] <REdz> helloyo, is it a usb or firewire one
+[10:39] <hhurtta> bash?
+[10:39] <lewwy> thats easy
+[10:39] <REdz> c/ c++
+[10:39] <lewwy> preferably something like visual basic
+[10:39] <lewwy> bash?
+[10:39] <lewwy> you can program for bash?
+[10:39] <REdz> mono
+[10:40] <helloyo> REdz, usb
+[10:40] <hhurtta> lewwy: lightly
+[10:40] <REdz> bash is shell
+[10:40] <lewwy> isnt C/C++ coding like, REALLY hard?
+[10:40] <jsgotangco> nothing is hard if you persevere
+[10:40] <lewwy> lightly
+[10:40] <St0n3-C0l> lol
+[10:40] <lewwy> hehe
+[10:40] <REdz> helloyo, well u have to have usb setup in the kernel and that and basically linux ie ubuntu or debian treats it as a scsi drive
+[10:40] <St0n3-C0l> In you take interested in learning then it's not hard
+=== raghu [~raghu@203.145.183.210]  has joined #ubuntu
+[10:41] <helloyo> REDz, oh ok, so how do i go about burning? want to show my brother it can be done relatively easily
+[10:41] <ali4728> <bob2> May 11 01:35:42 ubuntu postfix/smtp[4306] : connect to mx3.mail.yahoo.com[64.156.215.6] : Connection timed out (port 25)
+[10:41] <lewwy> the idea of programming in something where i can't exactly see what i'm doing scares me
+[10:41] <REdz> helloyo, k3b supports it 2 secs
+[10:41] <lewwy> i like the vb way of doing doings
+[10:41] <lewwy> VISUAL basic
+[10:41] <Q_Continuum> ewwwww
+[10:41] <Q_Continuum> ewwwww
+[10:41] <REdz> helloyo, 3 secs
+[10:41] <jsgotangco> thats not programming, that's designing an interface most of the time
+[10:41] <hhurtta> lewwy: even in vb you cant see the logic behind the gui
+[10:41] <REdz> mono!
+[10:41] <helloyo> REdz, what do you mean? so i just need k3b?
+[10:42] <ali4728> <bob2> I dont have to open port 25 do I?
+[10:42] <REdz> hegemony, ye install k3b, i use it alot, u can get nero also
+[10:42] <lewwy> yeh
+[10:42] <lewwy> the overheads are annyoing too
+[10:43] <hhurtta> just grab a basic c/c++ tutorial and start learning
+[10:43] <REdz> helloyo, http://www.linux-usb.org/USB-guide/book1.html is a good start especialy the mass storage section
+[10:43] <REdz> helloyo, leme find the programs
+[10:43] <lewwy> i shall port halo to ubuntu!
+[10:43] <helloyo> REdz, thanks
+[10:43] <hhurtta> lewwy: sure you are...
+[10:43] <lewwy> hehe
+[10:44] <lewwy> well can anyone suggest a good tutorial for C?
+[10:44] <lewwy> or C++?
+[10:44] <hhurtta> try google
+[10:44] <lewwy> i sorta thought microsoft owns C++ and C seems more standard
+[10:44] <REdz> helloyo, dvd+rw-tools  for one
+[10:44] <hhurtta> it usually knows these things best
+[10:44] <lewwy> one of these days i'd like to program for gba
+=== DarthV4der [~wheel@218-162-222-217.dynamic.hinet.net]  has joined #ubuntu
+[10:44] <helloyo> REdz, yeah, i have that, just tried gnomebaker, but that didn't detect the drive
+[10:44] <metalsand> ping google.com
+[10:44] <lewwy> man, i love ubuntu without the stupid font AA
+[10:44] <lewwy> it kicks ass
+[10:44] <metalsand> oops :x
+[10:44] <lewwy> i can actually see what im doing
+[10:45] <REdz> helloyo, once ur burner is setup and u can mount and unmount it as a cdrom drive
+[10:45] <DarthV4der> hi
+[10:45] <REdz> then just use k3b with ur dvd tools
+[10:45] <helloyo> REdz, what do i set it up in?
+[10:45] <REdz> helloyo, make sure u can access it first
+=== Gatton [~jason@adsl-157-113-40.clt.bellsouth.net]  has joined #ubuntu
+[10:45] <REdz> lol helloyo read those websites i pasted
+[10:45] <lewwy> i also wub cedega
+[10:45] <helloyo> REdz, oh ok, sorry
+[10:46] <REdz> helloyo, it explains about usb , basically kernel support , and if u have warty or hoary u wont have to edit files like /etc/fstab
+=== maddler [~maddler@62-101-119-119.fastres.net]  has joined #ubuntu
+[10:46] <REdz> helloyo, check in /etc/fstab to see if the system made an entry for it also and in dmesg
+=== loren [loren@69-12-132-188.dsl.static.sonic.net]  has joined #ubuntu
+=== loren [loren@69-12-132-188.dsl.static.sonic.net]  has left #ubuntu []
+=== geoffroy_ [~geoffroy@m105.net81-67-147.noos.fr]  has joined #ubuntu
+[10:47] <geoffroy_> hello dudes
+[10:48] <Seveas> hi
+[10:48] <REdz> helloyo, dvdrtools udftools dvdplusrw, just do sudo apt-cache search dvd| more and have a loook
+[10:48] <geoffroy_> I just installed 5.04
+[10:48] <Seveas> geoffroy_, welcome aboard the Ubuntu ship then :)
+[10:49] <Daehlie> 5.04!@!@ You just said our word of the day!@!
+[10:49] <geoffroy_> thank you
+[10:49] <Daehlie> ding ding ding
+[10:49] <geoffroy_> but I was on 4.10 before
+[10:49] <helloyo> REdz, thanks a lot
+[10:49] <Seveas> :)
+[10:49] <Seveas> well, welcome on the hoary ship ;)
+[10:49] <geoffroy_> and i don't understand why the system is asking me a password for changing configuration etc...
+[10:49] <helloyo> REdz, just trying to get my brother to stop being a dick about windows detecting it straight away
+[10:49] <geoffroy_> is it not supposed to be the superuser pass ?
+[10:49] <Seveas> geoffroy_, no
+[10:49] <Seveas> it needs your password since ubuntu uses sudo
+[10:50] <geoffroy_> oh my god, I missed something
+[10:50] <eruin> geoffroy_: you _are_ the superuser, effectively speaking
+[10:50] <Seveas> geoffroy_, http://wiki.ubuntu.com/RootSudo
+[10:50] <Seveas> that'll explain a lot :)
+[10:50] <geoffroy_> ok thanks, I was searching this page
+[10:50] <REdz> helloyo, ye for sure its not very hard
+=== goli [~sunil@203.145.183.210]  has joined #ubuntu
+=== St0n3-C0l [~st0ne@202.69.61.196]  has joined #ubuntu
+[10:51] <lewwy> heh
+[10:51] <lewwy> helloyo: just tell him if he uses windows hes a communist
+[10:51] <Seveas> neh
+[10:51] <webmind> does anyone know if ubuntu/x.org has DRI support for the new or any ATI chipsets on the amd64 platform ?
+[10:51] <Seveas> more like a capitalist
+=== lewwy doesnt know what a capitalist is
+[10:52] <lewwy> hey, did anyone here see microsofts attempts to take down linux?
+[10:52] <lewwy> by saying it costs more etc etc?
+[10:52] <daniels> webmind: define 'new'
+[10:52] <Seveas> lewwy, they are right though in some cases
+[10:53] <REdz> lewwy, wats new
+[10:53] <REdz> they do it all the time
+[10:53] <helloyo> lewwy, he thinks that it takes ages for me to do anything, like add a new printer (easy as hell in ubuntu), but thats cos i'm constantly in a broken state on purpose
+[10:53] <Seveas> lewwy, they just forget to mention the "in some cases" part
+[10:53] <daniels> webmind: it supports up to 9200 out of the box, and we have the proprietary driver packaged, which supports all of them
+=== Cr1ck3t [~Cr1ck3t@host-63-238-55-190.apid.com]  has joined #ubuntu
+[10:53] <lewwy> hehe
+[10:53] <lewwy> thats the way to go helloyo
+=== Cr1ck3t is now known as {Cricket}
+[10:53] <webmind> daniels, 9250, 9550 or the 9600 ?
+[10:53] <lewwy> my bro gets on my nerves sometimes, but if i dont help him, i dont get my adsl fix :(
+=== {Cricket} [~Cr1ck3t@host-63-238-55-190.apid.com]  has left #ubuntu ["Leaving"]
+=== seb128_ [~seb128@ANancy-151-1-30-146.w83-196.abo.wanadoo.fr]  has joined #ubuntu
+[10:54] <St0n3-C0l> lol
+[10:54] <daniels> webmind: supports 9250 out of the box, 9550 and 9600 are supported by the proprietary driver
+=== hyphenated [~caleb@210-86-76-45.jetstream.xtra.co.nz]  has joined #ubuntu
+[10:54] <lewwy> argh this is getting on my nerves.  I installed farcry under windows and then gave the cd's back to my friend
+[10:55] <lewwy> and now i cant play it! :'(
+[10:55] <lewwy> (cedega)
+[10:55] <webmind> daniels, ok
+[10:55] <geoffroy_> okay, I missed something during the installation
+[10:55] <webmind> daniels, also on the amd64 then ?
+[10:55] <helloyo> REdz, i have been reading that site, and i still can't get anything happening
+[10:55] <geoffroy_> because my first user is not in the sudoers
+[10:55] <daniels> webmind: yeah
+[10:55] <webmind> cool :)
+[10:55] <REdz> ledi, ye u prob need no cd crack
+[10:55] <REdz> lewwy, ye u prob need no cd crack
+[10:56] <daniels> it would probably also work better if you actually bought the game
+[10:56] <geoffroy_> Should I have to reinstall ? or is there any solution without running installation again
+[10:56] <REdz> helloyo, did u check /etc/fstab and dmesg
+[10:56] <Seveas> geoffroy_, this has changed in hoary
+[10:56] <lewwy> its already cracked REdz
+[10:56] <geoffroy_> oh ?
+[10:56] <REdz> and is ur usb working helloyo
+[10:56] <REdz> lewwy, ok
+[10:56] <lewwy> i just run it, and it tries to init, and then dies
+[10:56] <helloyo> REdz, dmesg says that it found a removable scsi disk sda at scsi0
+[10:57] <lewwy> could the fact that im running it on RO filesystem affect it?
+[10:57] <REdz> helloyo, thats a good thing, wat about fstab
+[10:57] <helloyo> doesn't say anything about it
+[10:57] <REdz> lewwy, ye i read up on that at some places for diablo2
+[10:57] <REdz> not sure if its related
+[10:58] <lewwy> mmm
+[10:58] <lewwy> is captive-ntfs supposed to support r/w
+[10:58] <helloyo> REdz, no entry for it in fstab
+[10:58] <REdz> helloyo, well ye u prob need that in there first
+[10:59] <REdz> and install some of those tools and start up k3b after that
+[10:59] <geoffroy_> Can't I had my first user to sudoers ?
+[11:00] <Taliesin`> your first user (the one you create on install) is in sudoers
+[11:00] <geoffroy_> that is the problem
+[11:00] <Taliesin`> u dont want it in sudoers?
+[11:00] <geoffroy_> My first user, the one I created during install doesnt appear in sudoers file
+[11:01] <Taliesin`> oh buggery
+[11:01] <geoffroy_> Sorry, user geoffroy may not run sudo on
+[11:01] <lewwy> hey is there anyway i can possibly force an unmount of a cd drive?
+[11:01] <lewwy> heh
+[11:01] <lewwy> good one jeff
+[11:01] <Taliesin`> umount -f /mnt/cdrom0
+[11:01] <Taliesin`> -f forces
+[11:01] <Taliesin`> from the terminal ofcourse
+=== ermanox [~ermanox@adsl-63-204-132-93.dsl.snfc21.pacbell.net]  has joined #ubuntu
+[11:02] <lewwy> argh linux seems to pussy foot around the fact of unmounting cd drives
+[11:02] <lewwy> if its mounted and semi in use
+[11:02] <lewwy> you cant eject it
+[11:02] <Taliesin`> i never seem to have a problem
+[11:02] <lewwy> why can windows do this so easily?
+[11:03] <lewwy> no, im in the middle of a raven shield install
+[11:03] <lewwy> i ran cedega Setup.exe
+[11:03] <geoffroy_> Could you paste your file /etc/sudoers please ?
+[11:03] <Taliesin`> windows doesnt take control of the cdrom
+[11:03] <Taliesin`> linux appears to take control of it at a more hardware level
+[11:03] <lewwy> but...whats the benefit of that?
+[11:03] <Taliesin`> nfi, it just works for me
+[11:03] <lewwy> and why can't i just say "i really need that CD, emergency eject"
+[11:03] <Taliesin`> the only rare case i use umount -f is when i incorrectly burn a CD
+[11:03] <lewwy> yeh
+[11:04] <lewwy> but i got an install running off the CD
+[11:04] <lewwy> and it wont take it
+[11:06] <geoffroy_> Ok I think that it works
+[11:06] <geoffroy_> how can i config the pass for sudo ?
+[11:06] <geoffroy_> cuz he doesn't ask me the password
+=== hno73 [~hno73@henrik.gotadsl.co.uk]  has joined #ubuntu
+[11:06] <geoffroy_> if anyone could paste his file /etc/sudoers, I think it would help me
+[11:07] <Burgundavia> geoffroy_, what do you mean? not asking for password?
+[11:07] <Burgundavia> have you entered it within the last 15 minutes?
+=== pokute_ is now known as pokute
+[11:07] <geoffroy_> my first user wasn't in sudoers file
+=== pokute is now known as pokute_
+[11:07] <geoffroy_> so i wrote (with visudo) geoffroy ALL=(ALL)  ALL
+[11:07] <geoffroy_> so the pass isnt needed
+[11:07] <geoffroy_> as for root account.
+[11:08] <geoffroy_> I just want that when i want to change something in system configuration or anything else, it asks me a password
+=== Zaphod_ [~Agrajag@66-215-172-98.sb-eres.charterpipeline.net]  has joined #ubuntu
+=== runge [~runge@host-206-98.wetternet.net]  has joined #ubuntu
+[11:11] <runge> hi. I am having lots of problems with the screen resulution in ubuntu horay
+=== TiffOn [user@218.Red-217-126-197.pooles.rima-tde.net]  has joined #ubuntu
+[11:13] <runge> it is stuck at 800x600 I think. doesent help to change xorg.config. the xserver says that it will go to default resulution cause something cant handle hsync. xorgconfig dident help. xorgcfg dident show any apps, just started with background and nothing else
+[11:13] <dabaSlon_slp> runge, why horray;)
+[11:13] <runge> :)
+[11:13] <dabaSlon_slp> you changed teh resolution in conf?
+[11:14] <daniels> runge: do you have an intel desktop chipset?
+[11:14] <runge> yes, the change dident help
+[11:14] <geoffroy_> so, nobody wants to paste /etc/sudoers here ? :<
+[11:14] <runge> daniels, i810
+[11:14] <geoffroy_> it would help me, i think
+[11:14] <daniels> runge: it's a known bug in the intel driver, will be fixed this week
+[11:14] <daniels> and probably make it into hoary-updates at some stage
+[11:14] <runge> ah!
+[11:15] <Razor-X> hmmmm, anyone here use a trackball?
+[11:15] <runge> thanks, any way for me to monitor the development fo the bug?
+[11:15] <Razor-X> dabaSlon_slp: wow, you're up this late?
+[11:15] <lewwy> hey can i force cedega to release a cd-drive?
+[11:15] <lewwy> so i can unmount it?
+[11:16] <runge> lewwy, dont know, but you might be able to use the command "sudo eject"
+[11:16] <lewwy> nah
+[11:16] <lewwy> that ejects the bottom drive
+[11:16] <lewwy> i want to eject hdd, not hdc
+[11:17] <dabaSlon_slp> yup.half slp...
+[11:17] <dabaSlon_slp> ;)
+[11:17] <Razor-X> heh
+[11:17] <runge> lewwy, sudo eject /dev/hdd
+[11:17] <lewwy> because, raven shield is using the top cd drive for installing
+=== HetIsLarsje [~ljansen@dyn24-eesi.nbw.tue.nl]  has joined #ubuntu
+[11:17] <Razor-X> i'm doing Romeo and Juliet
+[11:17] <lewwy> umount: /media/cdrom0: device is busy
+[11:17] <Razor-X> when I go to college with math.... I won't have to do these stupid English essays >_<
+[11:18] <Razor-X> lewwy: not sure, but, isn't there a --force command in umount?
+[11:18] <kakalto> why are all the source downloads on transcoding.org broken?!
+[11:18] <Razor-X> check the man out
+=== yahalom [~yahalom@62.219.140.220]  has joined #ubuntu
+[11:18] <kakalto> not sure about the cvs tho
+[11:18] <yahalom> when i click logout, my gnome-sessions doesnt log out, any ideas?
+=== lkerscher_ [~lkerscher@p549FDCFD.dip.t-dialin.net]  has joined #ubuntu
+=== lewwy [~lewwy@CPE-60-231-144-139.qld.bigpond.net.au]  has left #ubuntu []
+=== Chameleon22 [~serg@60-240-132-6.tpgi.com.au]  has joined #ubuntu
+=== bcroq [~bertrand@bruz.freeskop.net]  has joined #ubuntu
+[11:22] <Q_Continuum> methinks netsplit.
+[11:23] <Q_Continuum> or just no talk.
+[11:23] <yahalom> i'm here
+[11:23] <Razor-X> both
+=== snowblink [~snowblink@wind.snowblink.co.uk]  has joined #ubuntu
+[11:23] <yahalom> Q_Continuum, then again its like 2am in the west coas
+=== St0n3-C0l [~st0ne@202.69.61.196]  has joined #ubuntu
+=== coddex{away} [~coddex@as-dialup-82-10-93.sgaice.ru]  has joined #ubuntu
+=== DarthV4der *weird*
+=== darkaudit [~bpack@pool-141-153-89-111.clrk.east.verizon.net]  has joined #ubuntu
+=== coddex{away} is now known as coddex
+=== jinty [~jinty@62-14-221-226.inversas.jazztel.es]  has joined #ubuntu
+[11:24] <Razor-X> DarthV4der: dude, Padme dies because of you!
+=== k40z [~k40zmotic@82.153.107.39]  has joined #ubuntu
+=== geoffroy_ [~geoffroy@m105.net81-67-147.noos.fr]  has joined #ubuntu
+[11:25] <DarthV4der> why do you say that?
+[11:25] <runge> Razor-X, we will always have Closer
+[11:26] <webmind> hmm, does anyone know if the Epson CX3650 is going to work out of the box ?
+=== coddex [~coddex@as-dialup-82-10-93.sgaice.ru]  has left #ubuntu [""]
+[11:26] <DarthV4der> Epson (craps???)
+[11:27] <yahalom> i get the following error on log in: Error activating XKB configuration.
+[11:27] <yahalom> anyone know what that is?
+[11:27] <Seveas> yahalom, is taht the complete error?
+[11:28] <webmind> DarthV4der, uhm.. epson usually has very good support in linux ?
+[11:29] <yahalom> Seveas, can i paste the complete error?
+[11:29] <Seveas> yahalom, use ubuntu.pastebin.com for that
+[11:29] <yahalom> Seveas, ok
+[11:29] <gaurav> runge: is ur monitor resloution prob solved?/
+[11:30] <yahalom> Seveas, http://ubuntu.pastebin.com/282574
+[11:30] <gaurav> ?/
+[11:31] <Seveas> yahalom, no messages before that?
+=== zeedo [~zeedo@www.bsrf.org.uk]  has joined #ubuntu
+[11:31] <yahalom> Seveas, no
+[11:31] <St0n3-C0l> hey
+[11:31] <yahalom> Seveas, maybe its cos i chose to use xorg.conf settings instead of gnome settings?
+[11:32] <St0n3-C0l> gaim 1.3.0 is in backports ??
+[11:33] <yahalom> Seveas, no idea?
+=== mz2 [~mz2@81.1.89.151]  has joined #ubuntu
+[11:34] <DarthV4der> s/good/bad/
+=== matteo [~matteo@tc102.univ-tours.fr]  has joined #ubuntu
+=== geoffroy_ [~geoffroy@m105.net81-67-147.noos.fr]  has joined #ubuntu
+[11:37] <geoffroy_> hey.
+[11:37] <geoffroy_> does anyone have a i560 (canon) installed on ubuntu ?
+[11:37] <geoffroy_> it seems like without turboprint drivers, it won't work
+=== oferw [~chatzilla@CBL217-132-128-185.bb.netvision.net.il]  has joined #ubuntu
+=== zxy [~ralph@host-84-9-32-87.bulldogdsl.com]  has joined #ubuntu
+=== zxy_ [~ralph@host-84-9-32-87.bulldogdsl.com]  has joined #ubuntu
+=== TexJoachim [~TexJoachi@p508BD25A.dip.t-dialin.net]  has joined #ubuntu
+=== coddex{away} [~coddex@as-dialup-82-10-93.sgaice.ru]  has joined #ubuntu
+=== desplesda [~desplesda@17.242.132.203.in-addr.wholesaledsl.net]  has joined #ubuntu
+=== Fator_Dee [~fatordee@adsl-85-217-17-57.kotinet.com]  has joined #ubuntu
+[11:43] <geoffroy_> with hoary, I can't manage anymore network interfaces ?
+=== joente [~joente@ehv01e.pixs.philips.com]  has joined #ubuntu
+[11:44] <geoffroy_> there was a small manager for interface configuration, where we could chose profiles for interfaces, it doesn't exist anymore ?
+=== coddex{away} [~coddex@as-dialup-82-10-93.sgaice.ru]  has left #ubuntu [""]
+[11:44] <Burgundavia> geoffroy_, it is there
+[11:45] <geoffroy_> oh ?
+[11:45] <Burgundavia> system-->admin-->networking
+=== jsgotangco [~jsg@202.57.71.236]  has joined #ubuntu
+[11:45] <geoffroy_> okay, but profiles have disapeared no ?
+[11:45] <Burgundavia> no idea
+=== Crasp [crasp@cartman.blackbyte.nl]  has joined #ubuntu
+[11:47] <Crasp> lo
+[11:47] <DarthV4der> ol
+=== gazeux_snake [~mocquiya@193.52.16.173]  has joined #ubuntu
+[11:47] <Crasp> i'm trying to build suphp using dpkg-buildpackage, but now i want it to use apache2 instead of apache1, how do i do that?
+=== corvix [~corvix@port-195-158-167-227.dynamic.qsc.de]  has joined #ubuntu
+=== _tester_ [~yz@216.238.203.178]  has joined #ubuntu
+=== weezer_ [~weezer@p54B8BC82.dip.t-dialin.net]  has joined #ubuntu
+[11:50] <geoffroy_> does anyone have a atheros wifi device ?
+[11:51] <corvix> anyone know about intel 855gm graphics chip and dri?
+[11:51] <corvix> im getting 4 kBytes additional video memory is required to enable DRI  in the xorg log
+=== rayde [~rayde@vs217.das.psu.edu]  has joined #ubuntu
+[11:52] <cyphase> corvix, add a 4kb memory stick then
+[11:52] <cyphase> ;)
+[11:52] <DarthV4der> ;)
+=== Shorty^ [~shorty@shorty.trancelab.org]  has joined #ubuntu
+[11:52] <geoffroy_> atheros chipset only works with madwifi drivers ?
+[11:53] <corvix> LOL
+[11:53] <corvix> its a shared mem system
+[11:53] <mjr> geoffroy_, yes
+[11:54] <mjr> geoffroy_, and those contain a nonfree component and are included in linux-modules-restricted
+[11:54] <corvix> any way of freeing up some more video memory? deactivating features or so?
+[11:54] <DarthV4der> mine is not
+[11:54] <Seveas> linux-restricted-modules that is
+[11:54] <mjr> corvix, perhaps try to use software mouse cursor instead of hardware cursor?
+=== verden01 [~verden@61.68.225.143]  has joined #ubuntu
+[11:54] <johnnybe1ak> hey guys is there a gtk2 app for editing id3 tags
+[11:54] <corvix> @darth ... you got 855gm runnig with dri in xorg?  but not shared?
+[11:54] <Shorty^> does ubuntu have mplayer ?
+[11:54] <corvix> thmmm ... option?
+[11:55] <DarthV4der> @_@
+[11:55] <DarthV4der> wtf question
+[11:55] <geoffroy_> ok mjr
+[11:55] <geoffroy_> thanks
+[11:55] <johnnybe1ak> Shorty: yeah
+=== verden01 [~verden@61.68.225.143]  has left #ubuntu ["Leaving"]
+[11:57] <geoffroy_> and does anyone know how to make a canon i560 working on unbuntu withou turboprint drivers ?
+[11:58] <Seveas> Shorty^, yes, in multiverse
+[11:59] <Shorty^> ah, ok :P
+[11:59] <Shorty^> anyone got a sources.list line for it?
+[11:59] <wdh> for multiverse?
+[11:59] <wdh> check the wiki\

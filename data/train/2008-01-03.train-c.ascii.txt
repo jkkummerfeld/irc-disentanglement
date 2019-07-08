@@ -1,0 +1,1500 @@
+[14:34] <Invert314>  tar cvf dox.tar.gz dox/
+[14:34] <arang2> Omer: how bad is ur slowdown?
+[14:34] <jaggz-> no
+[14:34] <perfector> v3ctor: CyberMatt i tried it multiple times.. it does not remove any links anymore but still tries to startup during boot-time
+[14:34] <jaggz-> wrong
+[14:34] <zOOd> 'lo tous.
+[14:34] <Invert314> that command worked fine
+[14:34] <doxie> hate you all. :>
+[14:34] <jaggz-> that's not really gzipped
+[14:34] <x-X-x> i want to access a dir but i cant and when i check properties under permissions it says the "owner is 1445" and the group is "300" can someone help me ?
+[14:34] <perfector> v3ctor: CyberMatt any other way i can remove it.. like config files?
+[14:34] <chef_> ty all... think I got it now... just hope I remember all this for next time... gonna try to jot it all down quick b4 I forget everything I just learned
+[14:34] <Omer> arang2: i'll give you an update in a few minutes, i'm connected through wireless
+[14:34] <[SpigiBoy]> hello
+[14:34] <arang2> Omer: alright muchas gracias
+[14:35] <v3ctor> perfector: check all of the /etc/rcX.d directories
+[14:35] <jaggz-> v3ctor: your command was wrong, why don;t you speak up??  :)
+[14:35] <Coope> Does 7.10's encryption at install encrypt swap?
+[14:35] <gsnsr> my wireless card is broadcom, ubuntu recognize it, I see wireless connection in network setting, but I can't turn it on. I pushed the wireless button. It ran normally in windows, can u help me?
+[14:36] <perfector> v3ctor: no does not exist anywhere
+[14:36] <uzerzero> !broadcom | gsnsr
+[14:36] <ubotu> gsnsr: Help with Broadcom bcm43xx can be found at https://wiki.ubuntu.com/WifiDocs/Driver/Broadcom43xx
+[14:36] <Invert314> jaggz-, using  tar -czf doxwz.tar.gz dox/ (your command) resulted in a tar ball half the size compared with the tar ball the other comand created
+[14:36] <Invert314> we hate you too doxie
+[14:36] <v3ctor> perfector: like /etc/rc2.d /etc/rc3.d etc
+[14:36] <tifine> whats the command to display the processor speed and other things ?
+[14:37] <v3ctor> perfector: shouldn't start then
+[14:37] <jaggz-> Invert314: your command looks, to you, like it worked, but it didn't.  You can call the output file anything you want, but with -z it will be gzipped, and without it it will not
+[14:37] <perfector> v3ctor: yeah and rcS too
+[14:37] <perfector> v3ctor: i also used to think the same.. this is baffling me
+[14:37] <jaggz-> tar -cf foo.tar dir/             tar -czf foo.tar.gz dir/
+[14:38] <_mug> hey im trying out nvidia-settings and i wonder how i make it save the settings.. i apllied "cursor-shadow" but nothing happens, after a x-restart the box is unchecked and every change i made is back as it was..
+[14:38] <jaggz-> tar -cf foo.tar.gz dir/     <--- this makes a normal uncompressed tar file, but it mistakenly calls it .gz
+[14:38] <jaggz-> I think we used to have to do compression like this:   tar -cf - dir/  |  gzip -c  > file.tar.gz       :)
+[14:39] <Dr_willis> now is the time to google for a tar tutorial or 4 :)
+[14:39] <jaggz-> we still have to with unsupported compression
+[14:39] <v3ctor> lol @ Dr_willis
+[14:39] <chef_> ok... 1 more question guys... would this be the installation path of my browser (default 7.10) /usr/firefox?
+[14:39] <jaggz-> v3ctor: why are you laughing?  you're the one who needs to read it.. ;)
+[14:39]  * jaggz- nudges v3ctor
+[14:39] <jaggz-> :)
+[14:40] <Dr_willis> _mug,  i normally edit/enable some of that stuff by manually eding the xorg.conf I wonder if compiz overrides/disables some of those settings..
+[14:40] <v3ctor> jaggz-: i accidentally copied and pasted someone eleses mess up...oops
+[14:40] <Dr_willis> _mug,  i THINK cursor shadow only works with the default X cursors.. not the fancier gnome/compiz ones
+[14:40] <_mug> Dr_willis: hmrm
+[14:40] <Dr_willis> I toyed witht he shadow ages ago. Not messed with it lately.
+[14:40] <_mug> Dr_willis: i see
+=== aherrera is now known as andres_h
+[14:41] <jaggz-> v3ctor:  heh
+[14:41] <gsnsr> ubuntu can't turn on my wireless. can u help me?
+[14:41] <CompGuru> quit
+[14:41] <CompGuru> exit
+[14:41] <v3ctor> jaggz-: personally i would have used 'j' to get those couple extra bytes shrunk down ;)
+[14:42] <CompGuru> #quit
+[14:42] <jaggz-> definitely.. if you have the time
+[14:42] <jaggz-> comp, /quit ?
+[14:42] <jaggz-> Why does my package system say:  ii  python2.4      2.4.1-0-1      Python 2.4   but software with dependencies are broken, requiring python2.4 (>= 2.3.90) (UNSATISFIED)  ?
+[14:43] <jaggz-> it was through my own fiddling with the system trying to get some software installed which required some python dev tools, but my distro is old and unsupported (and I needed this development to get some important work done -- so I couldn't update my distro)
+=== chaky_ is now known as chaky
+[14:43] <jaggz-> so I manually/force installed some python packages, and those overwrote my existing python2.4 stuff, and now tons of things are broken :(
+[14:44] <jaggz-> I'd like to tell the system, "convince yourself that my current python2.4 is sufficient"
+[14:44] <v3ctor> do you have more than one python version installed?
+[14:45] <timrit> Does anyone know why my number pad on my keyboard would stop working on its own and the only way to get it back is to restart the machine? Also, if I restart X by <cntl - alt - bksp> I get a login screen but after I log in i never get my desktop.
+[14:45] <chef_> Dr_willis: sorry 2 keep bothering you but you seem quite knowledgable... installer is asking for the installation path of my browser giving this ex. (i.e., /usr/lib/mozilla)... that file doesn't exist but there is a /usr/firefox file... I'm guessing that's the correct one but would like confirmation so I not sticking files any old place & wondering why the app doesn't work
+[14:45] <jaggz-> yes and no.. there's the older python 2.3 also installed.. and it all worked before with 2.3 and 2.4.. it wasn't until I had to install some -dev packages which were of mismatched versions
+[14:46] <jaggz-> that I overwrote my 2.4 python and broke everything
+[14:46] <iblicf> hi , i have installed the pulseaudio using apt-get from the reportery , 7.10 , allmost everything can found there, bu i dont's know how to use  it , and seems sth wrong like i can't stop the bell ring of vi / terminal ?
+[14:46] <v3ctor> jaggz-: i had the original problem you had before, it was because of the symlink to of python to the wrong binary...it pointed to 2.4 instead of 2.5
+[14:47] <mrtimdog> Anyone know of a resource booking app for ubuntu?
+[14:47] <jaggz-> I'd like to tell it, "consider my current python2.4 is sufficient to satisfy python2.4 v2.3.90"
+[14:47] <Dr_willis> chef_,  you do realize theres an updated .deb package that can install the new flash player? :) you wouldent have to mess with this stuff.
+[14:47] <poningru_> Martinp23, resource booking?
+[14:47] <poningru_> err
+[14:47] <poningru_> mrtimdog,
+[14:47] <v3ctor> jaggz-: what does `python --version` tell you
+[14:48] <x-X-x> im trying to access a directory and it says i dont have the permission too and when i check the properties of that dir it says that the owner of the dir is "1445" and that the group is "300" what does this mean? isnt it supposed to say root ? can someone help me ?
+[14:48] <mrtimdog> poningru_: Just general resources, i.e. meeting rooms, projectors, etc..
+[14:48] <jaggz-> Python 2.4.1 (#1, Dec 19 2007, 10:16:44)
+[14:48] <jaggz-> python -v
+[14:48] <Dr_willis> chef_,  i have  /usr/lib/mozilla/ here
+[14:48] <poningru_> mrtimdog, yeah dude tons... there are bunch of cms servers out there
+[14:48] <chef_> Dr-willis: no I had no idea but then again I want to learn this so I don't have to shell out the big $$$ to Uncle Bill for crappy software
+[14:48] <v3ctor> jaggz-: i like the extra keystrokes...its the only exercise i get ;)
+[14:48] <jaggz-> I think I downloaded and installed a bunch of python's from the ubuntu old-releases.ubuntu.com repository
+[14:48] <Dr_willis> !flash
+[14:48] <ubotu> To install Flash see https://help.ubuntu.com/community/RestrictedFormats/Flash - Flash 9 is now available in dapper-backports and edgy-backports - See also !Restricted and !Gnash
+[14:48] <jaggz-> lol
+[14:48] <ubotu> The Flash plugin installation is currently broken. This is due to Adobe changing the tar file that the package downloads. See http://ubuntuforums.org/showthread.php?t=636397 if you need to fix this immediately, but it's recommended to wait for an official fix.
+[14:49] <Dr_willis> chef_,  that 2nd url the bot posted - has info/links to the 'testing' flash installer package. Use at your own risk. :) but i imagine its safer then using the flash installer.
+[14:49] <v3ctor> jaggz-: have you tried removing all python packages and starting over?
+[14:50] <jaggz-> hmm.. perhaps I could force-install the current one, over the existing one, with an option saying it satisfies the other dependencies?
+[14:50] <v3ctor> you could...
+[14:50] <jaggz-> I'm a bit hesitant to remove them since I have it working
+[14:50] <Nicolaidis> hello, does someone use weather desklet?
+[14:51] <jaggz-> oh.. python -v is also extra.. verbose.
+[14:51] <Dr_willis> chef_,  http://launchpadlibrarian.net/10761023/flashplugin-nonfree_9.0.115.0ubuntu2_i386.deb is the pakcage ive been testing onmy machines. Again. use at your own risk. I dont expect anyproblems from it however
+[14:51] <Omer_> arang2: ok i have tested both configs
+[14:51] <v3ctor> eww @ extra verbose
+[14:51] <PWizard> I've got an ATI X1550 running the fglrx driver on 64-bit gutsy.  Google Earth freezes at the splash screen and takes up 100% of one of my CPUs.  Has anyone had this issue, and if so, is there a workaround?
+[14:51] <chef_> Dr-willis: thx again but I gone this far... checked again & I've a /usr/firefox folder & a /usr/mozilla folder but there's no /usr/lib/mozilla folder... running 7.10 server... standard install
+[14:51] <Omer_> arang2: with your settings i can get upto 80 mbits/s
+[14:52] <PWizard> I've tried installing the latest Catalyst driver by hand, but that just makes my system lock up when gdm starts
+=== andres_h is now known as airxdres
+[14:52] <copperhead> i'm new to ubuntu but a long time slackware user.  this system has a wide screen lcd that wants the display at 1440x900@60Hz.  This wasn't an option in the System->Administration->Screens and Graphics interface, so I extracted the .INF file from the windows 'driver' for that monitor and imported it.  Now Screens and Graphics offers the monitor as a choice, but the screen gets set to...
+[14:52] <jaggz-> dpkg --convince-yourself-and-remember-that-all-dependencies-are-satisfied
+[14:52] <copperhead> ...1280x1024 after I restart.  /etc/X11/xorg.conf shows 1440x900.  Does anybody know what script is changing the resoloution after X starts?
+=== airxdres is now known as andres_h
+[14:52] <copperhead> err resolution
+[14:53] <v3ctor> jaggz-: that only works with the --cross-your-fingers option
+[14:53] <jaggz-> dpkg --python2.4-YYYY -is-sufficient-to-satisfy python2.4-XXXX
+[14:53] <jaggz-> rofl
+[14:53] <Mal-NY> good morn, anyone run Darwin streaming server on Ubuntu?
+[14:53] <bobbo> Does anyone in here know anything about eSata?
+[14:53] <jaggz-> here comes eSanta Claus
+[14:53] <osfameron> hiya
+[14:53] <arang2> Omer_: and with urs?
+[14:53] <Dr_willis> bobbo,  its one of those neat things.. that i wish would get really really really common really really fast!
+[14:53] <Dr_willis> :)
+[14:53] <osfameron> how do I create a new keyboard shortcut in gnome?  e.g. to launch an executable
+[14:54] <bobbo> Dr_willis: My mobo doesnt have any Sata connectors, if i get an eSata PCI card will this be enough to connect my eSata HD?
+[14:55] <AdemoS> whoever it was that recommended Deluge over Azu.....appears to be right
+[14:55] <jaggz-> I have to sleep :(
+[14:55] <jaggz-> ttyl
+[14:55] <AdemoS> it's a lot easier to use, faster, and without a million JRE dependcies
+[14:55] <Dr_willis> bobbo,  i guess so - if the card is supoported. Ive not seen any esata pci cards  out yet. (not looked much)
+[14:55] <th0r> AdemoS aren't you getting tired yet?
+[14:55] <Dr_willis> !hardware | bobbo
+[14:55] <ubotu> bobbo: For lists of supported hardware on Ubuntu see https://wiki.ubuntu.com/HardwareSupport - To help debugging and improving hardware detection, see https://wiki.ubuntu.com/DebuggingHardwareDetection
+[14:56] <Omer_> arang2: it's slower, but with your settings i still get slow directory listings
+[14:56] <AdemoS> Once it's stable on Windows I can start recommending it to friend
+[14:56] <bobbo> thanks Dr_willis
+[14:56] <AdemoS> Thor: Haha, a little. What about you?
+[14:56] <arang2> Omer_: so using no settings gives u slower speed?
+[14:56]  * AdemoS on retrospect like the water droplet over the frog
+[14:57] <AdemoS> anyway th0r, thanks again for your help with partioning. hopefully when I set up my second storage driver, it'll be much faster
+[14:57] <Omer_> arang2: yes, but since i'm over wireless i can't get over 40 mbits anyway, that's why i haven't noticed ;)
+[14:57] <AdemoS> goodnight all
+[14:58] <osfameron> aha, apparently binding a key to an exe isn't yet defined in ui ( http://ubuntu.wordpress.com/2006/01/30/defining-keyboard-shortcuts-for-commands/ )
+[14:58]  * osfameron apt-gets xbindkeys-config
+[14:58] <arang2> Omer_: oh damn so at the end i still stay screwed :(
+[14:59] <howlingmadhowie> hallo :) quick problem: the cdrw of a friend of mine stopped being recognised at the end of the year. she's using gutsy. has anybody here had the same problem or is it more likely to be a hardware problem?
+[14:59] <wols> howlingmadhowie: unless she changed kernels then, very much sounds like hardware. does the BIOS still recognize the drive?
+[14:59] <Gpalco> c9s, I MANAGED to set alias!
+[15:00] <Omer_> arang2: you might have a problem with your switch/hub?
+[15:00] <howlingmadhowie> wols: an excellent question. with the stupid bios, i suppose she'll have to start new and check.
+[15:00] <arang2> Omer_: i ruled it out i connect the computers using a cross cable
+[15:01] <simmerz> is there a way to allow videos to play when using compiz so that the screen doesn't flicker? using an nvidia graphics card
+[15:02] <howlingmadhowie> oh for openboot or linux bios on normal pcs!
+[15:03] <Webspot> I am trying to ping a windows vista machine. When I try to ping it, it says the host could not be found. But if I run nmblookup on the host, it does find the host. Can someone explain why?
+[15:03] <pvt_harv> hi guys, why can't i install clamtk (and clamav) using apt-get? it constantly displays that dependencies are not met. apt-get should have installed them too right? using synaptic, i've got the same error
+[15:03] <Mal-NY> good mor, anyone run Darwin streaming server on Ubuntu?
+[15:03] <carina> how do i check what type of memory machine is using currently_
+[15:03] <loa> hello, explain me why there no icons in kde... after kernel upgrade
+[15:04] <loa> i checked all libs, paths
+[15:04] <loa> all is ok
+[15:04] <Xintruder> If was to buy a laptop and install ubuntu, making it "look" nice with beryl or something, and compatible with most multimedia files today, what would I buy?
+[15:05] <Dr_willis> weird. Try makign a new user see if it affects them loa?
+[15:05] <emilio> hola
+[15:05] <Dr_willis> Xintruder,  Dell has Ubuntu preinstalled laptops.
+[15:05] <ikonia> Xintruder: any laptop that has supported hardware
+[15:05] <PWizard> Xintruder, that is, you want an nvidia chipset
+[15:05] <PWizard> :)
+[15:05] <Dr_willis> yea - Nvidia Video card - is a MUST.
+[15:05] <carina> how do i activate compiz on a ati graphics card?
+[15:06] <carina> i have glxgears working
+[15:06] <Xintruder> why is nvidia card importan if I will not run games?
+[15:06] <B-rabbit> Where can i find the documentation for "GnomePGP" cause the given web address that comes with the package seems to be dead?
+[15:06] <loa> <Dr_willis> ok... but why whit old kernel all is ok?
+[15:06] <B-rabbit> :(
+[15:06] <carina> i mean i have 3d acceralion working
+[15:06] <ikonia> Xintruder: compiz-fusion will appriciate a solid video card
+[15:06] <simion314> how can i make the task bar appear like buttons with my running application? how this plugin is maned?
+[15:06] <rexy> you enable desktop graphics something
+[15:06] <Dr_willis> loa,  no idea on that. This is the first ive heard of that kind of problem.
+[15:06] <Xintruder> ikonia, who is compix-fusion :s ????
+[15:06] <loa> hmmm thank you
+[15:06] <carina> i tried and it give me compiz no extension or something
+[15:07] <ikonia> Xintruder: compiz-fusion, its the new name for beryl
+[15:07] <Xintruder> oh ok
+[15:07] <Dr_willis> compiz is what gives ya all the fancy eye candy - It can be a bit of a pain to get going on ati cards.
+[15:07] <carina> i am using gutsy
+[15:07] <rexy> Xintruder: just a name for a desktop wich has more eye candy
+=== andres_h is now known as airxdres
+[15:07] <Dr_willis> Compiz can be a pain in other ways as well.
+[15:07] <PWizard> Xintruder, beryl/compiz/whatever work best on nvidia, in my experience.  Trust me, I'm using an ATI card now and can't get the shit working.  :)
+[15:07] <i00_000i> h
+[15:07] <simmerz> is there a way to allow videos to play when using compiz so that the screen doesn't flicker? using an nvidia graphics card
+[15:07] <B-rabbit> !Gnome pgp
+[15:07] <ubotu> Sorry, I don't know anything about gnome pgp - try searching on http://ubotu.ubuntu-nl.org/factoids.cgi
+[15:07] <ikonia> rexy: it's not a desktop
+[15:07] <simion314> how can i make the task bar appear like buttons with my running application? how this plugin is maned?
+[15:07] <rexy> ikonia: dont nit pick
+[15:07] <Xintruder> ok thank you
+[15:07] <ikonia> rexy: don't give false information
+[15:07] <bobbyd> hi
+[15:08] <carina> is there way to find the speed of the memory?
+[15:08] <robdeman> hey folks, when using IMAP then Dovecoty is unable to create folders such as SENT, TRASH, etc... any idea why?
+[15:08] <rexy> ikonia: does it give your desktop eye candy?
+[15:08] <carina> or what type of memory?
+[15:08] <ikonia> carina: look at the bios prompt
+[15:08] <ikonia> rexy: yes, it certainly does
+[15:08] <ikonia> carina: look at the bios prompt at boot up
+[15:08] <i00_000i> gcc is not working in ubuntu saying stdio cant be found is this error normal in ubuntu or an installation failure
+[15:08] <Xintruder> is GeForce Go 7400 with 64mb dedicated memmory good enough??
+[15:08] <carina> i have no bios prompt
+[15:08] <ikonia> i00_000i: do you have stdio.h on the sysstem
+[15:08] <carina> my computer is a compaq
+[15:09] <ikonia> carina: when you boot up you will get a bios logo or some wording, read the wording
+[15:09] <carina> i only see a big compaq logo
+[15:09] <Gpalco> c9s, I managed to setup alias with a fixed IP. But it only works when DHCP works TOO! like this: "eth0 Link encap:Ethernet  HWaddr 00:13:77:38:49:72  inet addr:192.168.1.4  Bcast:192.168.1.255  Mask:255.255.255.0 inet6 addr: fe80::213:77ff:fe38:4972/64 Scope:Link
+[15:09] <Gpalco> eth0:0    Link encap:Ethernet  HWaddr 00:13:77:38:49:72 inet addr:192.168.0.88  Bcast:192.168.0.255  Mask:255.255.255.0 "
+[15:09] <ikonia> carina: enter the bios and if possible disable the bios logo
+[15:09] <ikonia> carina: or lookup your model on the net for the ram make/speed
+[15:09] <carina> is there any way to find in linux
+[15:09] <i00_000i> ikonia: i installed the ubuntu server version it shld b ther by default i ran locate stdio but no result was listed
+[15:09] <chef_> Dr-willis:Doh! Yes I was in /usr/lib looking for lib file (sorry... guess I'm a little thick) but in /usr/lib I've got /firefox & /mozilla so I'm unsure which I should consider the browser install path... there are many folders in the /firefox folder including a plugin sub-folder but only one within the /mozilla folder... also a plugin subfolder... very confusing
+[15:10] <bobbyd> I have a weird problem: file dialogs and Nautilus windows are taking ages to appear (maybe 40 seconds). there's no CPU, Disk or Network activity though. I *think* this may have started happening since I started using Bluetooth for browsing my phone, but that may just be a coincidence. Has anyone got any ideas? (Runnign Gutsy on a Dell Inspiron 6400)
+[15:10] <wols> caravel: what chipset?
+[15:10] <ikonia> i00_000i why should it be there by default ?
+[15:10] <Mal-NY> anyone run Darwin streaming server on Ubuntu?
+[15:10] <ikonia> i00_000i: header files are not there by default
+[15:10] <carina> any able to get compiz fusion work with ati card?
+[15:10] <Xintruder> ikonia, is GeForce Go 7400 with 64mb dedicated memmory good enough??
+[15:10] <wols> carina: xserver-xgl
+[15:10] <wols> !xgl | carina
+[15:10] <unravel> compiz-fusion works fine with my ancient ati
+[15:10] <ubotu> carina: Compiz (compositing window manager) and XGL (X server architecture layered on top of OpenGL) - Howto at http://help.ubuntu.com/community/CompositeManager - help in #compiz-fusion
+[15:10] <Mal-NY> anyone run Darwin streaming server on Ubuntu?
+[15:10] <flint> wmaluk
+[15:10] <bobbyd> oh, there's nothing in the syslog either
+[15:10] <i00_000i>  ikonia: but itz ther in fedora so shld i download all the headers and copy it to /usr/include
+[15:11] <Dr_willis> chef_,  personally i would  'wget http://launchpadlibrarian.net/10761023/flashplugin-nonfree_9.0.115.0ubuntu2_i386.deb ' then 'sudo dpkg -i flashplugin-nonfree_9.0.115.0ubuntu2_i386.deb ' and dump the manual installer.
+[15:11] <Gpalco> People! How can I tell Ubuntu which IP to use in case it fales to receive on from a DHCP server ???
+[15:11] <ikonia> i00_000i: your not using fedora, so it doesn't matter
+[15:11] <rexy> ikonia: you probably need the glibc-dev package
+[15:11] <flint> wmaulik, you there?
+[15:11] <rexy> err i00_000i
+[15:11] <ikonia> rexy: ?
+[15:11] <ikonia> ahh
+[15:11] <Dr_willis> :)
+[15:11] <rexy> ibc6-dev: /usr/include/stdio.h
+[15:11] <bobbyd> sorry, I just quit by accident :)
+[15:11] <Mal-NY> anyone run Darwin streaming server on Ubuntu?
+[15:11] <wols> !build-essential | i00_000i
+[15:11] <ubotu> i00_000i: Compiling software from source? Read the tips at https://help.ubuntu.com/community/CompilingSoftware (But remember to search for pre-built !packages first)
+[15:12] <simion314> so anyone  can tell me how cann i  change the task bar in compiz to have buttons for the open application? not the classic bar
+[15:12] <Mal-NY> anyone see me? anyone run Darwin streaming server on Ubuntu?
+[15:12] <dgjones> !repeat | Mal-NY
+[15:12] <ubotu> Mal-NY: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. You can search https://help.ubuntu.com or http://wiki.ubuntu.com while you wait. Also see !patience
+[15:12] <flint> ampex, what an excellent handle, are you coming in from Hollywood?
+[15:12] <ikonia> Mal-NY: stop asking every 10 seconds
+[15:12] <Mal-NY> ok
+[15:12] <i00_000i>  ikonia: i had been using fedora for past 4 yrs....jst tried my luck wit ubuntu....hope red hat is more student friendly version
+[15:13] <carina> what a good remote desktop software?
+[15:13] <ikonia> i00_000i: ok
+[15:13] <ampex> Is there a way without using commercial software like rar to compress files/directories to multiple spanning volumes of a certain size?
+=== sakuramboo_ is now known as sakuramboo
+[15:13] <elde1> Mal-NY: give it some time bro, im sure someone will come along who knows your answer.
+[15:13] <ampex> flint: I've used it forever, why the hollywood question? Because of the old ampex corporation?
+[15:14] <flint> ampex, exactly.  btw try dosbox.
+[15:14] <flint> ampex, oops rather try tar with gzip...
+[15:14] <Gpalco> People! How can I tell Ubuntu which IP to use in case it fales to receive one from a DHCP server ??? (I now how to specify one in addition the one given by DHCP, but it doesn't work if DHCP server doesn't respond at all)
+[15:14] <ampex> flint: heh, dosbox, tar with gzip, same thing :)
+[15:15] <flint> ampex, the spanning volume thing worries me... should it?
+[15:15] <ampex> flint: I'm looking to split the compressed output among many DVD-Rs, so I need to split at certain a certain filesize, I don't believe tar+gzip can natively do this?
+[15:16] <simion314> so anyone  can tell me how cann i  change the task bar in compiz to have buttons for the open application? not the classic bar
+[15:16] <Yodude> Hey i have a SERIOUS problem ! i accidentily killed my friend's usb pendrive while trying to make it linux-bootable, it's not not even showing up when i do "lspci", what can i do ?
+[15:16] <Vixen_> I'm trying to install Ubuntu on an external HD, I can't repartition the drive as it says it is "mounted". Can someone explain this, and how to fix it so I can repartition and install ubuntu with out damaging my internal HDs at all?
+[15:16] <flint> ampex, look at partimage or mondo mindi.
+[15:17] <flint> ampex I gotta go.
+[15:17] <ubuntu> I have formatted a reiserfs partition to an ext3 partition. Is there anyway to recover some info? I mean, I would like if possible, to recover some stuff I had in reiserfs
+[15:17] <pike_> Yodude: hide
+[15:17] <bobbyd> Vixen_: right-click the external drive and select "unmount"
+[15:17] <ubuntu> is it possible?
+[15:17] <wols> mounted drives are the ones you can access Vixen_
+[15:17] <elde1> Yodude: buy a new one. lol
+[15:17] <Yodude> elde1: no really is it fixable ?
+[15:17] <wols> ubuntu: no
+[15:17] <elde1> Yodude: well what happend?
+[15:17] <bobbyd> wols: need to unmount the drive to repartition
+[15:17] <ubuntu> wols: thanks
+[15:17] <Vixen_> bobbyd, wols: I'll then be able to repartition?
+[15:17] <wols> Yodude: you shouldn't be able to kill it that way. and it will never show up in lspci
+[15:18] <Omer_> ampex: try 7-zip, you can just apt-get or dl it from 7-zip.org
+[15:18] <wols> Yodude: plug the device in and run "dmesg"
+=== Omer_ is now known as Omer
+[15:18] <kbrooks> Yodude, it shows up in "lsusb"
+[15:18] <wols> Vixen_: when it's unmounted: yes
+[15:18] <Yodude> elde1: kbrooks: no it doesn't show up in lsusb anymore
+[15:19] <Vixen_> wols: cheers, will I then be able to partition it into separate drives for linux and windows?
+[15:19] <wols> Yodude: unplug the stick. reboot the machaine (cold boot). plug it back in. check dmesg
+[15:19] <Gpalco> UbuntuGeeks! Q to you: How can I tell Ubuntu which IP to use in case it fales to receive one from a DHCP server ??? (Special thank you to Jowi_n1 and c9s who helped me learn how to specify one in addition the one given by DHCP! That's an amazing feature, but it only works if DHCP server DOES respond)
+[15:19] <pike_> Yodude: lsusb will show it also dmesg | tail if you unplug replug
+[15:19] <elde1> Yodude: its not one of those pen drives with the on off switches is it?
+[15:19] <Yodude> elde1: no, it doesn't have any buttons
+[15:20] <elde1> Yodude: then i would use pike's and wols advice
+[15:20] <Yodude> elde1: when i plug it in the Os first detectsit and mounts irt and then after like 10 seconds it automatically unmounts it
+[15:21] <B-rabbit> !pgp
+[15:21] <ubotu> Sorry, I don't know anything about pgp - try searching on http://ubotu.ubuntu-nl.org/factoids.cgi
+[15:21] <Yodude> pike_: what does dmesg do ?
+[15:21] <wols> Yodude: then it's not broken. repartition and reformat it
+[15:21] <v3ctor> !gpg
+[15:21] <ubotu> gpg is the GNU Privacy Guard.  See https://help.ubuntu.com/community/GnuPrivacyGuardHowto and class #8 on https://wiki.ubuntu.com/ClassroomTranscripts
+[15:21] <B-rabbit> thnx
+[15:21] <v3ctor> np
+[15:22] <Yodude> wols: that's the problem, it's like shutting down after 10 seconds ! it's not a partition problem, cuz after 10 seconds of plugging it in the OS doesn't even recognize the device, and GParted doesn't even show iut
+[15:22] <pvt_harv> hi guys, why can't i install clamtk (and clamav) using apt-get? it constantly displays that dependencies are not met. apt-get should have installed them too right? using synaptic, i've got the same error
+[15:23] <whochismo> Hello! Can anyone tell me a way to make ubuntu use the ATI free driver? i updated the rectricted one and now i cannot start my session (unless in failsave mode)
+[15:23] <simion314> where can i find the output from the boot time?
+[15:23] <poningru_> whochismo, which one do you have?
+[15:23] <Yodude> any ideas ?
+[15:23] <poningru_> simion314, /var/log/messages or dmesg
+[15:23] <pvt_harv> hi guys, why can't i install clamtk (and clamav) using apt-get? it constantly displays that dependencies are not met. apt-get should have installed them too right? using synaptic, i've got the same error
+[15:23] <whochismo> what card? an ATI mobility radeon X600
+[15:23] <wols> if the OS first assigns it a device and later disassaigns the device names there will be errors. please paste the dmesg outout
+[15:23] <whochismo> and ubuntu 7.10
+[15:23] <wols> *output
+[15:24] <simion314> where can i find the output from the boot time?
+[15:24] <wols> pvt_harv: pastebin the apt-get output
+[15:24] <wols> !bootlog
+[15:24] <ubotu> Sorry, I don't know anything about bootlog - try searching on http://ubotu.ubuntu-nl.org/factoids.cgi
+[15:24] <whochismo> i tried to reinstall the restricted drivers that existed in ubuntu, but they don't work anymore
+[15:24] <poningru_> whochismo, hmm is that an r300?
+[15:24] <poningru_> whochismo, hold on
+[15:24] <pike_> Yodude: i have trouble with usb and my main box. if you have a lappy or something you might try in in another machine also
+[15:24] <Yodude> wols: the problem is that i don't have the usb with me anymore
+[15:24] <bakarat> hi, for some reason when i try to write something to an usb stick, it will first cache whatever i want to do, and only once i unmount it, will it start writing, this is _very_ annoying
+[15:24] <bakarat> what is the reasoning behind this and how can i stop it?
+[15:25] <YouKnowMe> I'm trying to ssh into my chumby, which doesn't have a password, but I keep getting asked for one. I'm hoping this is a prob with my ssh client. Help?
+[15:25] <wols> bakarat: mount it synced
+[15:25] <Dr_willis> bakarat,  speed,  is the reason.
+[15:25] <Yodude> pike_: it's not working on any computer i plug it into, wether it was Linux/Mac/Windows
+[15:25] <bakarat> wols: it automounts, how can i change this?
+[15:25] <wols> Yodude: what OS does this chumby run?
+[15:25] <Dr_willis> actually ive sene windows do similer things.  :)
+[15:25] <bakarat> Dr_willis: could you explain?
+[15:25] <Vlet> YouKnowMe: your chumby?
+[15:25] <bobbyd> bakarat: the reasoning is that it extends the life of your flash device because if you decide to write wiles and move them around, then delete them etc. you're shortening the life of your device
+[15:25] <Dr_willis> bakarat,  it caches the writes so it can do them all at once in one big write = more efficient.
+[15:25] <bakarat> Vlet: a rather useless but populair device :)
+[15:26] <pike_> Yodude: i have to go sorry. screencast time. good luck
+[15:26] <Vlet> bakarat: ahh :)
+[15:26] <YouKnowMe> vlet, small networked computer
+[15:26] <Yodude> wols: doesn't matter, i testted and it doesn't work on XP and Vista and Ubuntu
+[15:26] <bobbyd> bakarat: what's the problem you have with it?
+[15:26] <Dr_willis> bakarat,  also watch out for .Trash type directories getting made when you delete things.
+[15:26] <poningru_> whochismo, ah ok here we go thats a rv380
+[15:26] <whochismo> i tried to uninstall the restricted drivers (to see if gnome automatically used the free ones) but that was not the case
+[15:26] <poningru_> need to do research
+[15:26] <Yodude> pike_: thanks for the help anyway
+[15:26] <poningru_> hold on
+[15:26] <bobbyd> bakarat: you can force it to write the data by giving it "sync" from the command line
+[15:26] <Vlet> YouKnowMe: what client are you using?
+[15:26] <Yodude> so anybody has any ideas ?
+[15:26] <bakarat> bobbyd: well for one, it takes a longer time then you would expect (since it only starts once you want to stop) and the latter has seemingly broken a flash drive of my m8
+[15:27] <bakarat> bobbyd: another mate pulled it out after unmounting, but it was only then starting to write
+[15:27] <YouKnowMe> vlet, OpenSSH_4.6p1 Debian-5build1, OpenSSL 0.9.8e 23 Feb 2007
+[15:27] <Dr_willis> bakarat,  ive done similer things under windows also. :)
+[15:27] <xalanthyr__> Hi, I've got a problem - every time I log in i get the same message - "user's $HOME/.dmrc is being ignored". What's wrong?
+[15:27] <whochismo> poningru, sorry, what do you mean with "r380" is it the version of the driver?
+[15:27] <bobbyd> bakarat: I'm pretty sure windows does the same when you "safely remove hardware" no?
+[15:27] <Vlet> YouKnowMe: then I would guess that it's the chumby asking for a password
+[15:28] <bakarat> bobbyd: i doubt it a bit, since i've always been able to pull it out immediatly in windows, whereas in linux if you have a big file waiting, it will take a long while
+[15:28] <Dr_willis> windows and its 'safely remove hardware' right now - tells me i can remove my internal SATA drive.. still not sure how. :P
+[15:28] <Yodude> elde1: so is it doomed or what ?
+[15:28] <Yodude> god i feel so guilty
+=== misnix2 is now known as misnix
+[15:29] <bakarat> Dr_willis: i never said windows was perfect, far from it ;) i'm just saying i haven't had the same problem in windows :D
+[15:29] <Dr_willis> You are NOT supposed to idmentaly pull it out on windows either. :)
+[15:29] <Gpalco> I cannot believe Ubuntu doesn't have the "alternative configuration" feature in network setup like in Windows!
+[15:29] <YouKnowMe> vlet, hmm, it shouldn't be. I followed the wiki and supposedly if I log into it as root there's no password.. well that sucks..
+[15:29] <pvt_harv> wols: here's the apt-get output: http://pastebin.com/d77221747
+[15:29] <DSpair> Gpalco: What do you mean? You can do that.
+[15:29] <poningru_> whochismo, https://help.ubuntu.com/community/RadeonDriver
+[15:30] <bakarat> Dr_willis: bobbyd is there a way to change a setting or something so it is automounted as synced?
+[15:30] <DSpair> Gpalco: It's just different. It does the same thing, but the UI is different.
+[15:30] <Yodude> wols: so do you think it's totally dead ? or is there hope for it ?
+[15:30] <poningru_> whochismo, x600 is just the marketing term of the card
+[15:30] <Vlet> YouKnowMe: Perhaps they mean "the password is blank". I doubt it will simply not ask for one.
+[15:30] <whochismo> poningru, my intention is to install the free driver (in order to be able to login again), and then to use the restricted driver again
+[15:30] <whochismo> oh, ok
+[15:30] <whochismo> thnx
+[15:31] <whochismo> i'll have a look
+[15:31] <poningru_> whochismo, why do you want to use the restricted  driver?
+[15:31] <pvt_harv> wols: here's the apt-get output: http://pastebin.com/d77221747
+[15:31] <poningru_> the free one will work
+[15:31] <Gpalco> DSpair, I have a Q to you: How can I tell Ubuntu which IP to use in case it fales to receive one from a DHCP server ??? (Special thank you to Jowi_n1 and c9s who helped me learn how to specify one in addition the one given by DHCP! That's an amazing feature, but it only works if DHCP server DOES respond)
+[15:31] <whochismo> poningru, to be able to use compiz, and some 3D games
+[15:31] <bluephantom> ^_________________^
+[15:31] <whochismo> with the free driver they don't work
+[15:31] <poningru_> whochismo, you can use compiz with the free driver
+[15:31] <poningru_> just do what it says on there
+[15:31] <wols> pvt_harv: apt-cache policy clamav
+[15:31] <Mike1> lol
+[15:31] <whochismo> are you sure?
+[15:32] <wols> !info clamav
+[15:32] <ubotu> clamav: antivirus scanner for Unix. In component universe, is optional. Version 0.91.2-3ubuntu2.1 (gutsy), package size 856 kB, installed size 1284 kB
+[15:32] <whochismo> ok, i'll try
+[15:32] <poningru_> and it will work with the free drive
+[15:32] <poningru_> I just linked you to
+[15:32] <whochismo> if it works, i'll keep using the free one
+=== neozen is now known as neozen-work
+[15:32] <bakarat> Dr_willis: bobbyd or better yet, have a choice whether a file should be written immediatly (like a big 500+ meg file that takes very long if cached) while shorter files can be cached to save flash drive?
+[15:32] <carina> openoffice doesnt start on my machine anyone know whats wrong?, the openoffice logo comes up but nothing happends after awhile
+[15:32] <Mike1> carina: what happens when you start it via terminal?
+[15:33] <carina> how u start it via terminal_
+[15:33] <carina> ?
+[15:33] <pvt_harv> wols: here's the output: http://paste.ubuntu-nl.org/50596/
+=== playya_ is now known as playya
+[15:33] <Mike1> carina: for example with  the command 'ooffice -writer'
+[15:34] <Mike1> carina: or 'ooffice -impress' for OO Impress
+[15:34] <MikeH> I'm having troubles with firefox and java, applets just come up grey as if they're not loaing
+[15:34] <carina> ** (process:5418): WARNING **: Unknown error forking main binary / abnormal early exit
+[15:34] <carina> that the error message i get
+[15:35] <YouKnowMe> vlet, even leaving it blank don't work. But I agree with you. I guess there's no way to do it then, dang, I'll hop over to the chumby forums. Thanks.
+[15:35] <poningru_> carina, reinstall it
+[15:35] <poningru_> through synaptic
+[15:35] <carina> okey
+[15:35] <pvt_harv> wols: here's the output: http://paste.ubuntu-nl.org/50596/
+[15:35] <wols> pvt_harv: seen it. there is a clamav..
+[15:36] <pvt_harv> wols: so what could possibly the problem?
+[15:36] <wols> pvt_harv: list those missing dependencies explicitly on your apt-get install line
+[15:36] <wols> you shouldn't have to do that however
+[15:36] <IndyGunFreak> why not just go ahead an use synaptic to install it?
+[15:36] <siakattackj> one question pls!!!
+[15:36] <carina> where do lookit up as?
+[15:36] <wols> pvt_harv: maybe one of the other dependencies but unlikely. but then, its universe
+[15:37] <Mike1> poningru_: maybe carina should make aptitude purge openoffice.org
+[15:37] <Vlet> !ask | siakattackj
+[15:37] <ubotu> siakattackj: Please don't ask to ask a question, ask the question -- All On One Line, so others can read it and follow it easily --. and if anyone knows the answer they will most likely answer. :-)
+[15:37] <siakattackj> i want to install skype.....but when i search for a package in apt-get, it doesn't exists
+[15:38] <imaginaryboy> Trevinho,
+[15:38] <Vlet> siakattackj: https://help.ubuntu.com/community/Skype
+[15:38] <carina> how do i reinstall it under synatic when i cant find it
+[15:38] <pvt_harv> wols: ok, i've tried to list down but it only aks me for more dependencies. ive' installed clamav and clamtk for many times already in many ubuntu desktops (7.10) and this is the first prob i encountered
+[15:38] <siakattackj> %C6thanks
+[15:38] <Trevinho> imaginaryboy: ?
+[15:38] <siakattackj> thanks a lot
+[15:38] <pvt_harv> wols: asks*
+[15:39] <siakattackj> ok
+=== bizzy is now known as Sweet-P
+=== bizzy is now known as Sweet-P
+[15:42] <idyllic> hi,  i am on ubuntu 7.10 and i got a problem with my Ctrl-Alt-Backspace shortcut keys. Instead of restart GNOME, it reboots my comp. Any help will be much appreciated. Thank you very much.
+[15:42] <pike_> hmm is alt-ctrl-backspace like a sigkill?
+[15:43] <DSpair> pike_: Ctrl-Alt-Backspace is supposed to reset X
+[15:43] <loa> there are restarting X-Server
+=== Sweet-P is now known as bizzy
+[15:44] <Xintruder> osed the connection)
+[15:44] <Xintruder> * appaji has joined #debian
+[15:44] <Xintruder> <portwolf> ah ok
+[15:44] <Xintruder> * CHC has quit IRC
+[15:44] <Xintruder> * InsolitWork has joined #debian
+[15:44] <Xintruder> * CharminTheMoose has joined #debian
+[15:44] <Xintruder> <portwolf> so my old version was installed that way
+[15:44] <Xintruder> <portwolf> to install 0.7.9 i
+[15:44] <Xintruder> ops
+[15:44] <idyllic> ya, i want it to reset X not rebooting my comp >.<
+[15:44] <Xintruder> sorry about that
+[15:45] <Xintruder> mirc copies wierdly copies unintendidly when i want to paste something i copied a long time ago
+[15:45] <XinFei> a good cd burner besides Gnomebaker? any reccomendations
+[15:45] <Xintruder> did ubuntumake use of the fingerprint input provided by sony, and maybe others.. ?
+[15:45] <XinFei> omg another Xin
+[15:45] <idyllic> is there anyway to restore ctrl-alt-backspace to the default reset X?
+[15:45] <Xintruder> lol
+[15:46] <Xintruder> xin for the win!
+[15:46] <XinFei> lolz
+[15:46] <Xintruder> XinFei u using linux atm?>
+[15:46] <XinFei> i just thought it sounded cool.. but serious any reccomendations?
+[15:46] <XinFei> yep >_> ubuntu
+[15:46] <XinFei> notice the #ubuntu room
+[15:46] <Xintruder> we can start an xin team!
+[15:47] <Xintruder> at the ubuntu teams thing page
+[15:47] <Xintruder> :p
+[15:47] <XinFei> lolz i just need ur aim or msn
+[15:47] <Pici> Xintruder: Not to my knowledge, I was able to get my Thinkpad's fingerprint reader to work by reading up on pam.
+[15:47] <Pici> !ot
+[15:47] <ubotu> #ubuntu is the Ubuntu support channel, #ubuntu+1 supports the development version of Ubuntu and #ubuntu-offtopic is for random chatter. Welcome!
+[15:47] <XinFei> ok sry Pici
+[15:48] <Xintruder> can I change the ubuntu loading page?
+[15:48] <Xintruder> at the booting phase
+[15:48] <Tetracomm> Does anyone know of a virtual machine which can work in Ubuntu which can run Windows?
+[15:48] <Pici> !usplash | Xintruder
+[15:48] <ubotu> Xintruder: To select the usplash artwork you want, use "sudo update-alternatives --config usplash-artwork.so && sudo update-initramfs -u" - See https://help.ubuntu.com/community/USplashCustomizationHowto for adding your custom artwork
+[15:48] <XinFei> with themes u can
+[15:48] <XinFei> i think
+[15:48] <XinFei> woot i was right
+[15:49] <fogg> hello to all
+[15:49] <Tetracomm> Hi.
+[15:49] <Xintruder> XinFei come to the offtopic room!
+[15:49] <Xintruder> hey Tetracomm
+[15:49] <Pici> Tetracomm: Most of them can.
+[15:49] <XinFei> whats that one?
+[15:49] <XinFei> .... /join #offtopic?
+[15:49] <Xintruder> #ubuntu-offtopic
+[15:49] <Xintruder> :D
+[15:49] <pike_> Xintruder: also add a grub splash if ya wanna be super cool and framebuffer w/penguin ;)
+[15:50] <Xintruder> pike thx!
+[15:50] <Tetracomm> Could you name one that has a GUI?
+[15:51] <Tetracomm> Pici
+[15:51] <Tetracomm> Pici: One of my programs won't work with Wine.
+[15:51] <Pici> Tetracomm: Wine isnt a virtual machine though.
+[15:51] <Tetracomm> Pici: Which is why I need the virtual machine to run Windows in Ubuntu.
+[15:51] <Tetracomm> I know.
+[15:51] <Pici> !vm
+[15:51] <ubotu> There are several solutions for running other operating systems (or their programs) inside Ubuntu, while using the native CPU as much as possible: !QEmu (with !KQemu), !VirtualBox, !VMWare, as well as !WINE and !Cedega for Windows applications
+[15:52] <idyllic> hi,  i am on ubuntu 7.10 and i got a problem with my Ctrl-Alt-Backspace shortcut keys. Instead of restart GNOME, it reboots my comp. Any help will be much appreciated. Thank you very much.
+[15:52] <Pici> Tetracomm: Check out those things, ie: /msg ubotu vmware
+[15:53] <Pici> idyllic: Does it reboot your computer even if you arent in gnome? like when you're first booting or if you're in windows if you dual boot?
+[15:53] <idyllic> hmph, i havent try that Pici
+[15:53] <idyllic> don't you mind, give me a min or two
+[15:53] <Tetracomm> ubotu
+[15:54] <idyllic> to test it out, will be right back
+[15:54] <Tetracomm> !trigger
+[15:54] <ubotu> Sorry, I don't know anything about trigger - try searching on http://ubotu.ubuntu-nl.org/factoids.cgi
+[15:54] <Tetracomm> !vmware
+[15:54] <ubotu> VMWare Player is in Ubuntu's !Multiverse repository (package "vmware-player", not available for Gutsy, only Feisty and Edgy), and http://www.easyvmx.com/easyvmx.shtml can create VMs for it. Instructions can be found at https://help.ubuntu.com/community/VMware - See also !virtualizers
+[15:55] <Tetracomm> !virtual machine
+[15:55] <ubotu> There are several solutions for running other operating systems (or their programs) inside Ubuntu, while using the native CPU as much as possible: !QEmu (with !KQemu), !VirtualBox, !VMWare, as well as !WINE and !Cedega for Windows applications
+[15:55] <Pici> !msgthebot | Tetracomm  :)
+[15:55] <ubotu> Tetracomm  :): Please investigate with me only in /msg or in #ubuntu-bots (type also /msg ubotu Bot). Don't use commands in the public channels if you don't know if they really exist. Also avoid adding joke/useless factoids.
+=== tzd is now known as tzd_
+[15:55] <Jack_Sparrow> Tetracomm:  try using   /msg ubotu vmware
+[15:55] <Tetracomm> Sorry.
+[15:57] <Jack_Sparrow> Tetracomm: Dont worry about it too much...  I do it too often myself...
+[15:58] <idyllic> Pici, i just tried it. Got this error msg: "The greeter application appears to be crashing. Attempting to use a different one"
+[15:58] <idyllic> and I couldnt get the session loggin screen, have to force restart also
+[15:59] <Pici> idyllic: hrm, I didnt think it would do that.
+[15:59] <Pici> idyllic: Do you dualboot?
+[15:59] <kurumin> chanecs
+[15:59] <idyllic> ya, i dualboot with xp
+[15:59] <kurumin> af
+=== kurumin is now known as bart
+[15:59] <Pici> idyllic: Does it reboot in xp if you do ctrl-alt-backspace?
+[15:59] <idyllic> no, i got back to grub menu boot
+=== tzd_ is now known as tzd
+[15:59] <bart> af
+[15:59] <jdh6403> how do you install real player in ubuntu
+[16:00] <bart> affff
+[16:00] <bart> awe
+[16:00] <Tetracomm> :)
+[16:00] <bart> br?
+[16:00] <idyllic> ctrl-alt-backspace just restart my comp normally. So ya, first thing come is the grub bootloader
+[16:01] <Pici> idyllic: Are you sure that you are pressing backspace and not delete?
+[16:01] <imoska> idyllic: open your xorg.conf
+[16:01] <jdh6403> how do you install realplayer?
+[16:01] <whochismo> poningru, it didn't work
+[16:01] <Pici> !real > jdh6403 (Please see the private messsage from ubotu)
+[16:01] <idyllic> ya i m positively sure about that. Xorg.conf opened
+[16:02] <imoska> show me your ServerFlags section
+[16:02] <coldboot> How do I close NFS connections in the CLOSE_WAIT state when listed by `netstat -d`?
+[16:02] <whochismo> I tried some similar things before, but it doesn't works, gnome is unable to start except in failsave mode
+[16:02] <ChrisAshton84> are there x86 compatibility libs for x86_64 ubuntu?  I specifically need libtcl8.3.so
+[16:02] <idyllic> i don't have ServerFlags section
+[16:03] <loa> <coldboot> susctl
+[16:04] <Xintruder> can i install ubuntu in my current vista laptop, if i dont have a partition available and want to convert my files to? :D
+[16:04] <loa> it is not problem of NFS
+[16:04] <Xintruder> <lazy butt
+[16:04] <coldboot> loa: What is susctl?
+[16:04] <loa> sysctl
+[16:04] <ikonia> coldboot: he means sysctl
+[16:04] <loa> yes
+[16:04] <ikonia> Xintruder: no you can't do that
+[16:05] <coldboot> So let's say I have this: "tcp       45      0 nhooey-xeon.ne.ende:nfs 172.30.62.57:51494      CLOSE_WAIT"
+[16:05] <coldboot> How do I get rid of it with sysctl?
+[16:05] <whochismo> anyone know a way to reinstall all the video drivers for ATI?
+[16:05] <coldboot> whochismo: The proprietary drivers?
+[16:05] <ikonia> whochismo: why do you want to re-install ?
+[16:05] <coldboot> Probably because they're shitty and broken, as they always have been, and the acceleration never turns on.
+[16:05] <Pici> !language | coldboot
+[16:05] <ubotu> coldboot: Please watch your language and topic to help keep this channel family friendly.
+[16:05] <whochismo> coldboot, or the free ones, i don't mind, i just want to be able to start gnome
+[16:06] <imoska> idyllic: http://ubuntuforums.org/archive/index.php/t-495877.html
+[16:06] <whochismo> ikonia, to solve one issue, i reinstalled the restricted drivers, and now i'm not able to start gnome
+[16:06] <coldboot> Is there seriously anyone else in here but men from the ages of 16 to 50?
+[16:06] <ikonia> whochismo: so how will re-installing them again fix it
+[16:06] <coldboot> I don't see why the channel has to be "family friendly" in the puritan sense.
+[16:06] <whochismo> ikonia, i have tryed that many times
+[16:07] <valemon> in which repo can I find java runtime environment?
+[16:07] <Jack_Sparrow> coldboot: Please behave
+[16:07] <whochismo> i've reinstalled the restricted ones and then the free ones, and none worked
+[16:07] <ikonia> coldboot: thats an offtopic disussion, the rules are "family friendly"
+[16:07] <coldboot> whochismo: Why is gnome not starting?
+[16:07] <idyllic> ikonia: thanks, let me digest it first. Will get back as soon as i can
+[16:07] <ikonia> whochismo you don't install the free ones, they are already part of xorg
+[16:07] <coldboot> Swearing makes the language colourful.
+[16:07] <whochismo> coldboot, it happened when i reinstalled the drivers, i don't know why
+[16:07] <cronik> helle everyone and happy new years
+[16:07] <coldboot> It's hard to describe ATI's Linux drivers without saying bad words.
+[16:07] <ikonia> coldboot: please stop, this is not appropriate for a support channel
+[16:07] <cronik> yea coldboot
+[16:07] <whochismo> i mean, first i had the restricted drivers installed, with no problems
+[16:07] <coldboot> whochismo: Yes but what's the error?
+[16:08] <ikonia> whochismo: , so you have the restricted drivers with no problems
+[16:08] <whochismo> coldboot, once i put my username and password, it won't load gnome, and takes me back the login screen
+[16:08] <coldboot> whochismo: You need to tell us some sort of error from /var/log/Xorg.0.log or something.
+[16:08] <ChrisAshton84> hi is there a channel specifically for x86_64 support or anyone who knows where to go for support online?
+[16:08] <loa> <coldboot> yes yes... wait i give you a link
+[16:08] <ikonia> whochismo: that may not be a driver issue
+[16:08] <whochismo> i had the restricted, i tried to update them, and then everything started to fail
+[16:08] <cronik> whochismo:
+[16:08] <ikonia> whochismo: that could be no disk space, or permission to write to your home dir
+[16:08] <whochismo> i tryed to uninstall them and install the free ones, but now gnome doesn't start
+[16:08] <ikonia> whochismo: why did you try to update them
+[16:08] <cronik> did you ever manage to get in or configure the the username and password?
+[16:08]  * loa slap coldboot with your mum (CLEAN YOUR ROOM!).
+[16:09] <ikonia> whochismo: what free ones, the restricted ones are the ones from ati.com
+[16:09] <loa> ./usr/src/linux/Documentation/networking/ip-sysctl.txt
+[16:09] <coldboot> whochismo: Try to change the driver to vesa by editing /etc/X11/xorg.conf, just by changing the Driver "fglrx" to Driver "vesa", and try again
+[16:09] <whochismo> i updated them, because there was an issue regarding the ability to hibernate my computer
+[16:09] <whochismo> to vesa? let me try
+[16:09] <coldboot> whochismo: Trying vesa will narrow the problem.
+[16:09] <idyllic> ikonia: it doesnt work. And i am on 7.10
+[16:09] <cronik> hello
+[16:09] <coldboot> whochismo: Vesa is the most likely to always work
+[16:09] <whochismo> yes, but
+[16:09] <ikonia> idyllic: what was the question sorry
+[16:09] <whochismo> don't you think it's rare
+[16:09] <coldboot> So anyone know how to knock out a CLOSE_WAIT connection with sysctl?
+[16:09] <cronik> cco
+[16:09] <whochismo> that it works perfectly in failsave mode
+[16:10] <ikonia> coldboot: sysctl won't do that
+[16:10] <whochismo> and if i choose the normal session, it won't start?
+[16:10] <coldboot> ikonia: Well someone else said that...
+[16:10] <coldboot> ikonia: How can I get rid of it?
+[16:10] <idyllic> my Ctrl-Alt-Backspace reboots my comp, but not restart X
+[16:10] <ikonia> coldboot: I do'nt see how it could do that
+[16:10] <whochismo> ok, i'll try that and i'll come back
+[16:10] <poningru_> whochismo, do you have the restricted stuff uninstalled?
+[16:10] <whochismo> see you (and thnx)
+[16:10] <ikonia> coldboot: what is the process making that close wait ?
+[16:10] <coldboot> ikonia: I killed some process on my machine "xeon" which has nfs-kernel-server running.
+[16:10] <whochismo> poningru_, yes, i've nothing installed now
+[16:10] <whochismo> (well, I have the free drivers installed, but they don't work)
+[16:10] <coldboot> ikonia: Now any attempt to mount a drive that's on xeon, from "inspiron", results in a timeout.
+[16:10] <ikonia> coldboot: where any clients connected ?
+[16:11] <whochismo> (or only work in failsave)
+[16:11] <poningru_> whochismo, just do a sudo dpkg-reconfigure xorg-xserver-core
+[16:11] <ikonia> coldboot: if you have killed the NFS server, it will time out
+[16:11] <poningru_> or something like that
+[16:11] <poningru_> I forgot the exact command
+[16:11] <whochismo> i think i did some days ago...
+[16:11] <coldboot> ikonia: No clients are connected now, I suspect all these close_waits are from me not unmounting nfs volumes before shutting down my laptop.
+[16:11] <v3ctor> coldboot: yes it is
+[16:11] <ikonia> coldboot: that is a reasonable assumption
+[16:11] <whochismo> it lets me select again the screen resolution, driver, frequency, etc etc... but that doesn't solve anything
+[16:11] <siakattackj> I have a laptop toshiba A210 with soundcard ATI SB600 azalia but i don't have sound...any help?
+[16:12] <jdh6403> trying to play a dvd in gxine and this error message comes up   what do i need to do?    No demuxer found - stream format not recognised.
+[16:12] <whochismo> isn't there a place where the error messages regarding the X11 are shown?
+[16:12] <Pici> !dvd > jdh6403 (Please see the private messsage from ubotu)
+[16:12] <coldboot> ikonia: v3ctor: But that's not really a problem, 'cause I've shutdown my laptop so many times without unmounting the nfs volumes. It started timing out after I killed a process on the machine with the nfs volumes: "xeon"...
+[16:12] <v3ctor> coldboot: is the NFS share still showing as mounted on the client?
+[16:12] <poningru_> whochismo, do that again
+[16:12] <coldboot> ikonia: v3ctor: Do you know how I could recover from this without rebooting xeon?
+[16:12] <whochismo> i would like to see what really happens when i start session and x11 restarts itself..
+[16:12] <Pici> whochismo: /var/log/Xorg.0.log
+[16:12] <poningru_> and this time dont do the -plow
+[16:12] <kakashi> I have a problem configuring my network please help
+[16:12] <whochismo> ok, let me see
+[16:12] <poningru_> let it autodetect
+[16:13] <coldboot> v3ctor: Nope, "mount" shows nothing to do with nfs on the client machine: "inspiron"
+[16:13] <Bollinger> i've got a box which is seeing (random) access violations in dmsg, I've run a memory tester for a while with no errors detected. Is there another tool I could run which would detect flaky hardware?
+[16:13] <hades[nb]> m
+[16:13] <poningru_> Bollinger, stress
+[16:13] <Pici> coldboot: The connections will timeout a dissapear on their own.
+[16:13] <coldboot> Pici: They've been there for a day
+[16:13] <kakashi> ikonia: can you please help me
+[16:13] <poningru_> kakashi, whatsup?
+[16:13] <Bollinger> poningru_: Thanks . I'll look into it.
+[16:14] <whochismo> too much things on the log, i'll try to reconfigure the X11 again..
+[16:14] <loa> <coldboot> /usr/src/linux/Documentation/networking/ip-sysctl.txt
+[16:14] <v3ctor> coldboot: is the close_wait showing on the client or the server?
+[16:14] <loa> there you can find how to decrease this time out
+[16:14] <coldboot> loa: You've already told me about sysctl, could you tell me how it's used to knock out close_wait connections?
+[16:14] <coldboot> v3ctor: Several on the server, all the old IP addresses of inspiron each time it connected to the network.
+[16:15] <coldboot> v3ctor: But this is probably not the problem, I killed a process on the server, and now I time out when mounting NFS.
+[16:15] <kakashi> poningru: ah!! thanks
+[16:15] <v3ctor> coldboot: restart the process that you killed
+[16:15] <Roshev> ##level
+[16:15] <kakashi> poningru: it worked ;-D
+[16:15] <scott_> Helllo World.
+[16:15] <coldboot> v3ctor: Do you know how to restart NFS completely, 'cause /etc/init.d/nfs-kernel-server restart, and restarting nfs-common, both do nothing to help.
+[16:15] <coldboot> v3ctor: I don't remember which process it was.
+[16:16] <free_loader> is it possible to change the icons in Gutsy without changing the entire theme?
+[16:16] <Chui> coldboot: why restart ? exportfs -rav
+[16:16] <Roshev> ##level
+[16:16] <JC_Denton_> I'm formatting a usb disk. How do I change the FS to vfat16 ?
+[16:17] <cgs_bob> hello all.  is there an easy way to list the dependencies of a particular program?
+[16:17] <poningru_> JC_Denton_, how are you formating it?
+[16:17] <poningru_> what are you using to format?
+=== neversfelde_ is now known as neversfelde
+[16:17] <shaft0> If I do a software RAID0 (or Linear) setup in Gutsy, and I want to add drives to that array in the future, will the added drives have to be the same size?  Like can I start it out with 2x500, then add a 300, or a 750, or 1000?
+[16:17] <JC_Denton_> Not bothered - any util though fdisk is fine
+[16:17] <coldboot> Chui: How long should this command take to return?
+[16:17] <hades[nb]> cgs_bob, aptitude show <package_name>
+[16:18] <Chui> coldboot: immediately ;-)
+[16:18] <poningru_> shaft0, any partition of that size will do
+[16:18] <poningru_> the 500gb
+[16:18] <ikonia> shaft0 raid0 is a bad idea more so to use dynamiclly
+[16:18] <loa> <coldboot> sysctl -w net.ipv4.tcp_fin_timeout = 10
+[16:18] <ikonia> shaft0: what reason do you want raid0 ?
+[16:18] <Muppet-Boy> hiya, my kubuntu 7.10 system has started freezing for no reason :( is there a log i can check that might give a clue as to why?
+[16:19] <cgs_bob> hades[nb]: I was looking for a command line, but I will try aptitude show...thanks!
+[16:19] <ikonia> Muppet-Boy: syslog, messages ?
+[16:19] <coldboot> Chui: Still timing out, didn't help at all.
+[16:19] <coldboot> Chui: I suspect the same happens when you restart nfs-kernel-server.
+[16:19] <poningru_> JC_Denton_, I would do fdisk and do m
+[16:19] <JC_Denton_> poningru will fdisk write a single partition as vfat?
+[16:19] <poningru_> it should have ability to change it to vfat
+[16:19] <JC_Denton_> poningru thanks
+[16:19] <poningru_> JC_Denton_, yeah
+[16:19] <Chui> coldboot: is portmapper running ?
+[16:19] <Muppet-Boy> ikonia : do you mean syslog.log?
+[16:19] <coldboot> loa: That command says it's malformed, you can't space out the '=' symbol
+[16:19] <hades[nb]> cgs_bob, don't quite understand... you need a console command, right?
+[16:19] <ikonia> Muppet-Boy: ye,
+[16:19] <poningru_> JC_Denton_, you have to do mkfs.vfat afterward though
+[16:20] <ikonia> yes
+[16:20] <shaft0> ikonia: basically i have drives of music, video, and software, i like the idea of using free space of one drive for another, while still keeping it sorted
+[16:20] <loa> <coldboot> sysctl -w net.ipv4.tcp_fin_timeout=10
+[16:20] <coldboot> Chui: Yes and it's been restarted which didn't help either.
+[16:20] <ikonia> shaft0: then look at lvm
+[16:20] <loa> this command fixes long timeout
+[16:20] <ikonia> shaft0: rather than raid0
+[16:20] <shaft0> linear?
+[16:20] <loa> it will be 10 seconds
+[16:20] <coldboot> loa: Is this going to apply to old close_wait connections, or only new ones formed?
+[16:20] <Muppet-Boy> ok thanks i will check as soon as i can get to it! (its just gone offline again :( )
+[16:20] <Roshev> ##level
+[16:20] <Chui> coldboot: what is your prob anyway ? ;-) too lazy to scroll up
+[16:20] <loa> <coldboot> i think to all
+[16:20] <ikonia> shaft0: what do you mean by linear ?
+[16:20] <cgs_bob> hades[nb]: that's right.  in particular I want to see what programs depend on sip4
+[16:20] <loa> tyr this
+[16:20] <loa> try
+[16:20] <shaft0> ikonia: is that the one that fills one drive, moves on to the next, then fills that drive, then moves to the next, and so on?
+[16:21] <coldboot> loa: Is that 10 minutes or seconds?
+[16:21] <ikonia> shaft0: you can set up the volume as you want
+[16:21] <loa> i think you can try ifdown
+[16:21] <coldboot> Chui: I killed some process on my server, xeon, which exports some directory as nfs.
+[16:21] <loa> 10 seconds
+[16:21] <coldboot> Chui: Ever since I did that, I time out when trying to mount the nfs volume from the client.
+[16:21] <ikonia> coldboot: it would help if you stopped saying the server name as the name is quite confusing
+[16:21] <timrit> Hello, Does anyone know why every time I log in after a restart or logout that it asks me if I want to use X settings or Gnome settings?
+[16:21] <v3ctor> coldboot: did you kill that process for a reason?
+[16:21] <hades[nb]> cgs_bob, you mean list programs that depend on the given one, or list programs, that the given one depends on?
+[16:21] <coldboot> Chui: Restarting nfs-kernel-server, nfs-common, portmap, and doing the sysctl and your export -rav have all not helped at all.
+[16:22] <coldboot> v3ctor: I thought it would help get rid of the stale connection, it was obviously a mistake.
+[16:22] <Chui> coldboot: exportfs -uav ; and stop nfs-kernel server
+[16:22] <JC_Denton_> poningru mkfs.vfat: Will not try to make filesystem on full-disk device '/dev/sdb' (use -I if wanted) ?
+[16:22] <hades[nb]> cgs_bob, the aptitude show displays all information on the given package, including packages it depends upon
+[16:23] <coldboot> Chui: Stop it first or after exportfs?
+[16:23] <Chui> after
+[16:23] <pocketprotector> can someone see if they can access data2logistics.com?
+[16:23] <ikonia> timrit: pocketprotector why ?
+[16:23] <coldboot> Chui: Then what?
+[16:23] <ikonia> pocketprotector: why ?
+[16:23] <coldboot> Chui: Start nfs-kernel-server again?
+[16:23] <Chui> kill portmap
+[16:23] <pocketprotector> because i cant get to it.
+[16:23] <hades[nb]> pocketprotector, I can
+[16:23] <robdeman> Why can't Dovecot / IMAP not create any subfolders in ~Maildir/ ?
+[16:23] <Chui> and see if all nfs kernel processes are gone
+[16:23] <ikonia> pocketprotector: it's fine
+[16:24] <hades[nb]> join #initng
+[16:24] <hades[nb]> sorry
+[16:24] <Chui> kernel processes are between []
+[16:24] <coldboot> Chui: Nah they're all still there.
+[16:24] <Chui> coldboot: aight
+[16:24] <cgs_bob> hades[nb]: I want to find the list of programs that uses sip4
+[16:24] <coldboot> Man nfs is stupid
+[16:24] <fogg> hello to all
+[16:24] <Chui> coldboot: what procecces did you stop ?
+[16:25] <bazhang> hi fogg
+[16:25] <onizeth_> hi
+[16:25] <Chui> coldboot: what distro ?
+[16:25] <coldboot> Chui: I don't remember, something in "ps aux | grep -i nfs"
+[16:25] <coldboot> Chui: Gutsy
+[16:25] <ikonia> coldboot: just reboot
+[16:25] <Chui> coldboot: ghighi... had it comin ;-)
+[16:25] <onizeth_> hello
+[16:26] <ikonia> coldboot: you don't know what you've done so it's easier to put the machine back to a known status
+[16:26] <coldboot> ikonia: I can't, this machine is remote and I don't know if it will come back up.
+[16:26] <shaft0> ikonia: basically what you're saying is that using LVM I can essentially mount all my drives to one location (say /media/disk) and then add disks as needed?
+[16:26] <ikonia> coldboot: then you should treat things with more respect than killing processes and not knowing what you've done
+[16:26] <Oli``> is it possible to give ext3 partitions names like ntfs ones?
+[16:26] <coldboot> ikonia: Surely there's a way to get nfs to completely restart.
+[16:26] <ikonia> shaft0: correct
+[16:26] <coldboot> ikonia: That is obvious now.
+[16:26] <ikonia> coldboot: there are many but as you don't know what you've done
+[16:26] <shaft0> ikonia: awesome, sounds like a whole lot less setup and work than I was looking at :D
+[16:26] <ikonia> coldboot: and if you're not sure if the box will come back up
+[16:26] <ikonia> shaft0: it is
+[16:27] <wols> Oli``: yes, with tune2fs
+[16:27] <timrit> Hello, Does anyone know why every time I log in after a restart or logout that it asks me if I want to use X settings or Gnome settings?
+[16:28] <hades[nb]> cgs_bob, sorry, i don't know... try asking at #debian
+[16:28] <Chui> coldboot: second
+[16:29] <cgs_bob> hades[nb]: thanks for your help...I'll try #debian
+[16:30] <valemon> when installing java I cannot find sun-java6-bin, ubuntu 6.10
+[16:30] <valemon> please help me
+[16:30] <wols> !info sun-java6-bin edgy
+[16:31] <Pici> valemon: I believe you need to enable the backports repository for that.
+[16:31] <ubotu> Package sun-java6-bin does not exist in edgy
+[16:31] <Pici> !java
+[16:31] <ubotu> To install a Java runtime/interpreter on Ubuntu, look at https://help.ubuntu.com/community/Java - For the Sun Java runtime install sun-java6-jre from the !Multiverse repository (in !Backports for !Edgy)
+[16:31] <m1chael> i have an asus a7n8x delux motherboard
+[16:31] <m1chael> with an 80gb ide hard drive with windows xp installed on it.. i want to put another 80gb hard drive in, and dual boot with ubuntu (and have ubuntu installed on this new drive).. i've also got plans to add a sata card and put in a few more drives.. (and have both of these drives accessable from windows/linux) does all of this sound doable?
+[16:31] <whochismo> Grrr, nothing worked...
+[16:31] <[unix]> hm, anyone know something about _client_ java under x86_64?
+=== StoneApple is now known as StoneNewt
+[16:31] <whochismo> I still have the same problem
+[16:31] <wols> m1chael: yes
+[16:31] <ikonia> m1chael: yes
+[16:31] <wols> [unix]: ask a real question
+[16:31] <Chui> coldboot: rmmod nfsd exportfs lockd sunrpc
+[16:32] <whochismo> gdm starts, but as soon as I log in, it restarts itself, except in failsave mode
+[16:32] <jianuox> ..
+[16:32] <ikonia> [unix]: #java will discuss random java comments with you all day
+[16:32] <whochismo> isn't there a way to clone failsave mode to normal mode?
+[16:32] <wols> whochismo: xsessin-error
+[16:32] <whochismo> wols what's that?
+[16:32] <ikonia> coldboot: just reboot it, you're going to have to gamble at some point
+[16:33] <Arnaud__> Hello, does anyone can help me with Usplash screen ?
+[16:33] <fogg> re-hello :)
+[16:33] <rhs> m1chael: it is doable
+[16:33] <whochismo> ohm, a file
+[16:33] <Vlet> !ask | Arnaud__
+[16:33] <ubotu> Arnaud__: Please don't ask to ask a question, ask the question -- All On One Line, so others can read it and follow it easily --. and if anyone knows the answer they will most likely answer. :-)
+[16:33] <Arnaud__> Well
+[16:33] <Arnaud__> I've changes the uspash.conf
+[16:34] <Pici> !enter
+[16:34] <ubotu> Please try to keep your questions/responses on one line - don't use the "Enter" key as punctuation!
+[16:34] <Arnaud__> so that it is now 1024 768
+[16:34] <whochismo> (x-session-manager:5697): Gtk-WARNING **: cannot open display:
+[16:34] <Arnaud__> whcich is the real resolution of my screen
+[16:34] <Arnaud__> After rebooting I had a kernel panic
+[16:34] <Arnaud__> impossible to boot
+[16:34] <Pici> Arnaud__: Please don't use the enter key as punctuation.
+[16:35] <jianuox> hello
+[16:35] <Arnaud__> sorry
+[16:35] <whochismo> i don't understand the file .xsession-errors much...
+[16:35] <JC_Denton_> trying to format my usb stick to fat16 and make it bootable but when running part after fdisk and mkfs I'm getting  loop disk labels do not support partition names.
+[16:36] <italia90> !ciao
+[16:36] <ubotu> Sorry, I don't know anything about ciao - try searching on http://ubotu.ubuntu-nl.org/factoids.cgi
+[16:36] <italia90> !list
+[16:36] <Pici> !it | italia90
+[16:36] <ubotu> italia90: Vai su #ubuntu-it o su #kubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie!
+[16:37] <zhonghong> dns cannot work ,but nslookup works well
+[16:37] <whochismo> Fatal server error: no GLX visuals available -> translation?
+[16:38] <coldboot> ikonia: Yeah it looks like I have to reboot.
+[16:38] <evgeniXXX> i have a job running it's been "stopped" how do I remove it/kill it?
+[16:38] <rhs> whochismo: what xorg server do you use ?
+[16:38] <whochismo> rhs, how can I tell you this?
+[16:39] <rhs> it's in the file /etc/X11/xorg.conf
+[16:39] <whochismo> ok, let me check
+[16:39] <evgeniXXX> how can I kill a process that's been running?
+[16:39] <evgeniXXX> what arguments for kill?
+[16:39] <whochismo> by server, do you mean the driver?
+[16:39] <Sopor> killall
+[16:39] <rhs> whochismo: yes
+[16:40] <whochismo> ati
+[16:40] <rhs> whochismo: try vesa
+[16:40] <whochismo> (vesa doesn't starts)
+[16:40] <Sopor> killall processus or sudo killall processus if it is in root.
+[16:40] <evgeniXXX> Sopor: killall still asks for me some inputs
+[16:40] <whochismo> i've already tried it a few minutes ago
+[16:40] <Pici> evgeniXXX: use ps aux to find the PID of the process, and then use kill PID
+[16:40] <evgeniXXX> awesome, thanks Pici and thanks Sopor!
+[16:40] <rhs> whochismo: is there a glx option in the xorg.conf
+[16:41] <Sopor> np, the pici's answer is useful to me too ( :
+[16:41] <whochismo> "cat /etc/X11/xorg.conf | grep glx" returns nothing
+[16:41] <JC_Denton_>  loop disk labels do not support partition names.    How do I resolve this error to turn my usb stick partition bootable?
+[16:41] <rhs> whochismo: and in capital GLX
+[16:42] <whochismo> nothing
+[16:42] <rhs> whochismo: are you sure it is not xgl ?
+[16:43] <whochismo> there isn't any word referring to xgl or glx (and XGL and GLX) in xorg.conf
+[16:43] <rhs> whochismo: can't help you then
+[16:43] <whochismo> ok
+[16:43] <whochismo> what i don't undrestand, is why in failsave mode it works perfect
+[16:43] <whochismo> but not in the normal mode
+[16:43] <jianuox> help me
+=== emi is now known as xEMIx
+[16:44] <RedHeron> jianuox: can't help if we don't know what the problem is.
+[16:44] <Dr_willis> jianuox,  state the problem in a clear and concise maner. and see who can help.
+[16:44] <DanB> I there any place to watch live tv..I use to go on abc.com..but that wont work with this os
+[16:45] <poningru_> DanB, what do they use for streaming?
+[16:45] <DanB> not sure it just told me they only support windows/ie/firefox
+[16:45] <RedHeron> poningru: RealPlayer, WindowsMedia and FlashVideo.
+[16:45] <poningru_> link?
+[16:46] <rhs> whochismo: in the Sectin "Module" you could try to add "Load glx"
+[16:46] <RedHeron> DanB: get VLC Player
+[16:46] <DanB> where do i get that vlc player
+[16:46] <whochismo> ok, i'll try
+[16:46] <RedHeron> DanB: hold on, I'll get you the link
+[16:46] <DanB> thanks
+[16:47] <RedHeron> DanB: Try this...
+[16:47] <mike4785> hi everyone
+[16:47] <mike4785> quick question
+[16:47] <EtteSB> anyone know a program for linux that rips music to MP3. sound juicer doesn't want to rip to MP3
+[16:47] <whochismo> I don't have that section called "Module". Must i create it?
+[16:47] <RedHeron> DanB: sudo apt-get install vlc
+[16:47] <rhs> EtteSB: use command line lame
+[16:47] <mike4785> you know how apple has there buttons on the bottom set up wats the plugin that lets you set up linux like that
+[16:47] <Chui> coldboot: rmmod nfsd exportfs lockd sunrpc
+[16:48] <Vlet> It looks like abc.com uses flash
+[16:48] <Kuropon> using xchat I want to set
+[16:48] <rhs> whochismo: try it
+[16:48] <whochismo> ok
+[16:48] <Vlet> DanB: Do you have flash installed in firefox?
+[16:48] <scriptha> Is there a program to merger mpegs?
+[16:48] <Marfi> DanB, did you install flash from the repos?
+[16:48] <Kuropon> using xchat I want to set 'auto accept xdcc sends' but no one is willing to help in their channel. can anyone provide assistance?
+[16:48] <ChrisAshton84> hi I installed the 32-bit libtcl but it has a broken link /usr/lib32/libtcl8.3.so -> libtcl8.3.so.1, only libtcl8.3.a exists in that dir.  can anyone confirm what libtcl8.3.so should point to?
+[16:48] <DanB> i just upgraded to 7.10 last night
+[16:48] <rhs> whochismo: at the beginning of the file
+[16:48] <poningru_> hmm I believe they are being idiots and stopping based on UA
+[16:48] <RedHeron> Vlet: Even if DanB does have flash, it sometimes doesn't work.
+[16:49] <poningru_> DanB, hold on
+[16:49] <rhs> whochismo: after the files Section
+[16:49] <Filled-Void> What is the correct way of restoring all my updates and programs I have installed. AptOnCD only copies them locall I believe you have to select them from synaptic to actually install it. ANy alternative?
+[16:49] <Vlet> RedHeron: wouln't be surprides.
+[16:49] <Nostahl> hi all
+[16:49] <mike4785> whats the plugin that lets you make the bottom of your screen look like apple
+[16:49] <mike4785> ive seen it in youtube videos
+[16:49] <Filled-Void> mike4785, Awn ?
+[16:49] <MaKc> hi all )
+[16:49] <Nostahl> sounds like a window manager?
+[16:49] <RedHeron> Vlet: a lot of it has to do with the proprietary format Flash maintains.
+[16:50] <Marfi> DanB, there is a checksum if you download flash from the repositories. if you click the flash file on the net, firefox will direct you to the install from adobe's site. install from there, and works lke a charm
+[16:50] <Marfi> mike4785, avant-window-manager
+[16:50] <RedHeron> Marfi: not necessarily
+[16:50] <mike4785> u know how apple has those icons on the bottom that are shortcuts to programs/ in the right it is also the windows you have open
+[16:50] <Marfi> RedHeron, have they fixed it?
+[16:50] <Marfi> mike4785, its avant window manager. =)
+[16:50] <mike4785> thanks!
+[16:50] <RedHeron> Marfi: AMD64 platforms running 64-bit Ubuntu have issues with the flash player
+[16:50] <DanB> im new to this so i may need help doing this
+[16:51] <resnet> Anyone know how to get rid of this crackling noise that comes from any sounds played in Ubuntu? I am using an Intel HDA sound card. Turning down the PCM volume and other sound channels does not work. It is not specific to GStreamer. Anyone?
+[16:51] <Marfi> RedHeron, ah, ok. just hopped on, and i thought it was something else. =)
+[16:51] <RedHeron> Marfi: specifically because of code optimization issues.
+[16:51] <Nostahl> what do the 64 bit processsors do different then regular processors
+[16:51] <fb_> hi there. I have a small problem with kdenlive, anyone care to give me some help?
+[16:51] <Filled-Void> RedHeron, Strange IM on AMD64 and running flash the update from the forum fixed my problem
+[16:51] <RedHeron> Filled-Void: What version of Ubuntu are you using?
+[16:51] <Vlet> Nostahl: http://en.wikipedia.org/wiki/64-bit
+[16:51] <Nostahl> ty vlet
+[16:51] <mike4785> will that overide advanced desktop effects settings that i alreaddy have runing or will they run in sync?
+[16:52] <Filled-Void> RedHeron, Gutsy gibbon
+[16:52] <RedHeron> Filled-Void: 64 version or 32?
+[16:52] <Filled-Void> RedHeron, 64
+[16:52] <DanB> can you guide me..im not sure what im doing..this is my 2nd day on this os
+[16:52] <YouKnowMe> !off-topic youknowme
+[16:52] <RedHeron> Filled-Void: I'll have to see if it fixes my issue, then! I haven't been able to watch YouTube since I got my new system.
+[16:52] <Filled-Void> RedHeron, Installed recently?
+[16:52] <mike4785> will that overide advanced desktop effects settings that i alreaddy have runing or will they run in sync?
+[16:52] <RedHeron> DanB: what do you need?
+[16:52] <rhs> Gutsy Gibbon comes with flash, you can add it in synaptics
+[16:53] <RedHeron> Filled-Void: About 2 months ago.
+[16:53] <Filled-Void> rhs, Isnt flash broken? It says so int he topic
+[16:53] <Pici> !flashissues
+[16:53] <ubotu> The Flash plugin installation is currently broken. This is due to Adobe changing the tar file that the package downloads. See http://ubuntuforums.org/showthread.php?t=636397 if you need to fix this immediately, but it's recommended to wait for an official fix.
+[16:53] <RedHeron> rhs: the version of flash that came with it *is* broken.
+[16:53] <DanB> i need help to install this flash
+=== cZw0_ is now known as cZw0
+[16:53] <Filled-Void> RedHeron, Try the one in the thread ubotu says it might help.
+[16:53] <rhs> RedHeron: ah, it seemed to work fine with mine
+[16:54] <EtteSB> rhs: i dont seem to have lame installed and when i try and get it from apt it cant find it either
+[16:54] <RedHeron> rhs: the issue is specific to the 64-bit AMD version because of code optimization issues, but pops up every so often.
+[16:54] <DanB> do i go to add/remove programs
+[16:54] <RedHeron> DanB, hold on.
+[16:54] <DanB> tks
+[16:55] <rhs> EtteSB: what does "apt-cache search lame"
+[16:55] <resnet> Anyone know how to get rid of this crackling noise that comes from any sounds played in Ubuntu? I am using an Intel HDA sound card. Turning down the PCM volume and other sound channels does not work. It is not specific to GStreamer. Anyone?
+[16:55] <RedHeron> http://wiki.ubuntu.com/FlashPlayer9
+[16:55] <RedHeron> DanB: try that: http://wiki.ubuntu.com/FlashPlayer9
+[16:55] <Filled-Void> DanB, Just install the ubuntu0restricted extras package thenr ead the flash issue thread which you  can find out about by /msg ubotu flash
+[16:56] <Filled-Void> resivolve, have a tv tuner card?
+[16:56] <DanB> ok
+[16:56] <Filled-Void> er I mean resnet ^
+[16:56] <resnet> Filled-Void: No
+[16:57] <resnet> Filled-Void: It is a pretty standard Gateway model.
+[16:57] <Pici> !flashissues | DanB
+[16:57] <ubotu> DanB: The Flash plugin installation is currently broken. This is due to Adobe changing the tar file that the package downloads. See http://ubuntuforums.org/showthread.php?t=636397 if you need to fix this immediately, but it's recommended to wait for an official fix.
+[16:57] <poningru_> DanB, http://happylinuxthoughts.blogspot.com/2007/11/abccom-isnt-linux-friendly.html
+[16:58] <EtteSB> rhs: http://paste.ubuntu-nl.org/50601/ only liblame0 comes up and i have that (there are others but they aint there)
+[16:58] <tzd> I'll give this channel a try as well even though it's kde... I need help with a Kmail basic filter please?
+[16:58] <Filled-Void> resnet, There is a thread about finish Intel HDA sound problems on the boards however I would only try it after rulling everythign else out likeplaying with the settings in alsamixer checking your wires and speakers stuff like that
+[16:58] <Filled-Void> What is the correct way of restoring all my updates and programs I have installed. AptOnCD only copies them locall I believe you have to select them from synaptic to actually install it. ANy alternative?
+[16:59] <resnet> Filled-Void: I have tried different headphones and different speakers. The sound quality was fine under Windows. I have tried adjusting settings in alsamixer, but nothing changes the situation.
+[16:59] <resnet> Filled-Void: I have read different things about Intel HDA problems on Ubuntu, but I was not able to pinpoint a solution.
+[16:59] <Filled-Void> resnet, https://help.ubuntu.com/community/HdaIntelSoundHowto
+[17:00] <resnet> Filled-Void: Thanks.
+[17:00] <evgeniXXX> does anybody know how to install ImageMagick (component for Gallery2)?  I tried using apt-get but it doesn't find the packge... new to linux, plz help :)
+[17:00] <Filled-Void> resnet, Hope it helps. It did help me with my realtek problem
+[17:01] <Filled-Void> evgeniXXX, sudo apt-get install imagemagick ?
+[17:01] <evgeniXXX> Filled-Void: tried that
+[17:01] <Filled-Void> evgeniXXX, have enabled the necessary software sources?
+[17:02] <evgeniXXX> how do you make the text appear to be red when you respond?
+[17:02] <evgeniXXX> Filled-Void don't know what you mean by that sorry
+[17:02] <evgeniXXX> i have a tarball
+[17:02] <Filled-Void> evgeniXXX, Im using your name in the post hence it is red
+[17:02] <Marfi> evgeniXXX, extract the folder and see if there is a .sh file in there
+[17:02] <Filled-Void> evgeniXXX, Are you on Ubuntu at the moment if you are go to System > Admin >Software Sources
+[17:03] <evgeniXXX> Marfi and Filled-Void performing your suggestions now...
+[17:03] <Marfi> kk  =)
+[17:03] <Filled-Void> evgeniXXX, it is in the repositories cause I was able to do apt-cache search for it here.
+[17:03] <Filled-Void> imagemagick - Image manipulation programs
+[17:04] <Strel> Hi! Can somebody tell me how to wach satelite tv under ubuntu?
+[17:04] <evgeniXXX> Filled-Void what does that mean than?  What do I need to do to install it?
+[17:04] <evgeniXXX> Marfi, there are some .sh.in files
+[17:04] <scriptha> Is there an ubuntu program to merge videos?
+[17:04] <Filled-Void> evgeniXXX, Are you at your software sources window?
+[17:04] <evgeniXXX> and winpath.sh
+[17:05] <Marfi> evgeniXXX, you can extract them and run them with the terminal. it would be "sh <filename>.sh. they are scripts
+[17:05] <Marfi> evgeniXXX, you should have an install.sh
+[17:05] <fb_> can anyone give me a hand with kdenlive? when I load mpeg files from my dv camera, kdenlive only loads the video stream.
+[17:05] <evgeniXXX> ok, i'll try that Marfi, Filled-Void, I am there also
+[17:05] <Dr_willis> scriptha,  theres several video reencoder/encoder/tools out there. mencoder, avidmux, and others.
+[17:05] <bitterbug> sigh. it always pays to check to make sure you down type shutdown -h now in the host terminal instead of the VM
+[17:06] <guyvdb_> I am having a problem installing the package qt4-dev-tools - I get unmet dependency error from apt - qt4-dev-tools: Depends: libqt4-core (= 4.3.2-0ubuntu3) but 4.3.2-0ubuntu3.1 is to be installed - any ideas
+[17:06] <Dr_willis> bitterbug,  or on a SSH session to a server. :)
+[17:06] <Filled-Void> evgeniXXX, Do you have anythign checked under Ubuntu software. I have the first four selected. once you do that you will get an option to reload packages then imagemagick should be available for install.
+[17:07] <bitterbug> Dr_willis: hehe, yeah, it's a good thing i don't have shutdown privs on the SSH i was on
+[17:07] <evgeniXXX> Filled-Void, have those first 4 things also checked...
+[17:07] <snurre> im gonna set up ubuntu on this comp, but im having an issue with raid.. i currently have two drives in a raid array and one additional normal sata.. ubuntu doesnt seem to find the array, and only shows the drives separate.. im gonna install it on the 3rd, single drive, but will it mess up the already existing array?
+[17:07] <evgeniXXX> Filled-Void how do I reload packages?
+[17:08] <bitterbug> i need to give myself a nice visual reminder of which systems i'm logged into
+[17:08] <guyvdb_> snurre: just unplug the array for the install (physically)
+[17:08] <Filled-Void> evgeniXXX, Once you select somethign in there it will tell you it has to reload
+[17:08] <Gpalco> Guys, is there a way to make a separate partition where all "home" data will be stored and/or imported/recognized during next Ubuntu install ???
+[17:08] <Filled-Void> evgeniXXX, Are you on UBuntu GUtsy Gibbon?
+[17:09] <bitterbug> gpalco: yup! it's pretty straightforward to
+[17:09] <spooge> hi
+[17:09] <guyvdb_> can anyone help a dependency issue:  qt4-dev-tools: Depends: libqt4-core (= 4.3.2-0ubuntu3) but 4.3.2-0ubuntu3.1 is to be installed
+[17:09] <snurre> guyvdb_: that was my initial emergency solution, yeah.. but once im done installing and stuff, will ubuntu be able to find the correct array?
+[17:09] <bitterbug> gpalco: just format a partition/drive and copy your home folder contents to it, then once you've installed ubuntu just remap home to that drive
+[17:10] <evgeniXXX> Filled-Void, I am not sure, but under "ubuntu software" tab in Software Resources window at the bottom it says, "Cdrom with Ubuntu 7.10 'Gutsy Gibbon' Officially supported" with a check next to it
+[17:10] <mightybyte> Anyone know why my graphical package manager in Gutsy doesn't show all the packages that are available?
+[17:10] <guyvdb_> snurre: not sure
+[17:10] <phoenixz> I have a Dell latitude d620 laptop with external monitor, I just configured X for 2 monitors but once I switch to the external monitor of my laptop using fn+F8, I cant switch back.. is there anything known about that?
+[17:10] <spooge> anyone know how to run linux off a thumb drive on a mac?
+[17:11] <mightybyte> I have main, universe, restricted, and multiverse enabled.
+[17:11] <Filled-Void> evgeniXXX, Yeah that should be correct. Do you have the same thing enabled as mightybyte says above^
+[17:11] <panosru> Hi, does anyone knows any app to convert Clone CD's img/ccd files into .iso file? i tried ccd2iso but it not works...
+[17:11] <Filled-Void> mightybyte, Did you do an update after that>?
+=== savantine is now known as savantine|afk
+[17:11] <Gpalco> bitterbug, I would like it to be like my >home< folder. Can I do that?
+[17:11] <bitterbug> yup
+[17:12] <bitterbug> that's what i have set up
+[17:12] <mightybyte> Filled-Void: Yes.  Specifically, openssh doesn't show up.
+[17:12] <mightybyte> ...but I was able to install it manually with apt-get.
+[17:12] <bitterbug> i have a 320 gig drive that's dedicated tom /home
+[17:12] <bitterbug> to even
+=== aherrera is now known as airxdres
+[17:13] <yacek19> hi
+[17:13] <evgeniXXX> mightybyte, Filled-Void, what do I need to check in software resources?  I have the 1st 4 things checked on ubuntu software tab
+[17:13] <yacek19> please help me, I have set my mouse to work with evdev, everything works good beside I can move it only up and down
+[17:13] <bitterbug> then when i do a fresh install i just go into the partition manager and tell it that /home is on /sdc1 or whatever the drive is that i want to use
+[17:13] <Filled-Void> mightybyte, openssh-client openssh-server these are the two packages I think
+[17:13] <bitterbug> you can do it during the install, or leave it until after you've installed and just change the home location then
+[17:13] <Filled-Void> evgeniXXX, Try deselectign one and thenr eselectign ti and close that window and see fi it asks you to reload
+[17:13] <mightybyte> Filled-Void: Yes, I know.  But they're not visible in the graphical package manager.
+[17:14] <evgeniXXX> Filled-Void, tyring this...
+[17:14] <Filled-Void> mightybyte, In the left hand pane you have selected All is that correct?
+[17:14] <mightybyte> I typed "ssh" in the search box and nothing showed up.  But both openssh-client and ...server should have been there.
+[17:14] <brunno> alguem do Brasil?
+[17:14] <mightybyte> Yes
+[17:14] <Filled-Void> evgeniXXX, Itshould ask you to reload packages
+[17:14] <mightybyte> And in "Show" I have selected "All available applications"
+[17:15] <brunno> #Brasil
+[17:15] <taxman> hi I just did a backup and fresh install. I backed up my packages in /var/cache/apt/archives/  What is the best way to get all of those installed again?
+[17:15] <evgeniXXX> Filled-Void, it did, and I did reload it... I'll try running apt get again
+[17:15] <Filled-Void> evgeniXXX, Try sudo apt-get install imagemagick and tell me if it works
+[17:15] <evgeniXXX> Filled-Void, no dice
+[17:15] <kamizhiro> hey
+[17:15] <evgeniXXX> Filled-Void, case sensitive?
+[17:16] <Filled-Void> evgeniXXX, :(
+[17:16] <bitterbug> Gpalco: this is a good start: http://www.psychocats.net/ubuntu/separatehome
+[17:16] <MGalaxy> PLZ suggest me a GUI software for converting picture formats (any format to any format)
+[17:16] <evgeniXXX> Filled-Void it is just case sensitive... got it
+[17:16] <Filled-Void> evgeniXXX, Yes it should be but the spelling that I showed is correct I believe
+[17:16] <evgeniXXX> Filled-Void you rock, thanks... thanks mightybyte too!!!
+=== gradin_ is now known as gradin
+[17:17] <Filled-Void> mightybyte, Not sure why you would be able to  install through terminal but not synaptic. searching for oenssh returns nothign either right?
+[17:17] <khaotik> was good people
+[17:17] <taxman> MGalaxy: Gimp can do that. It's not terribly easy, but will work
+[17:17] <Gpalco> bitterbug, thank you
+[17:17] <mightybyte> Filled-Void: Correct
+[17:17] <evgeniXXX> Filled-Void, just to understand what the heck just happened.... so there is some apt-cache command... and i need to reload every once in a while to get the latest packages??  Trying to learn linux from scratch :)
+[17:18] <mightybyte> Filled-Void: Oh wait, typing "openssh" returs the package "Passwords and Encryption Keys"
+[17:18] <MGalaxy> taxman: except that
+[17:18] <taxman> MGalaxy: eh well, you asked. :)
+[17:19] <bitterbug> Gpalco: no problem. I find it very handy when doing an install in a busy environment. I just ungplug the drive with the home folder on it so i don't get distracted and wipe it. do the fresh install on the system drive, reconnect the home drive and then map it to the new install.
+[17:19] <mightybyte> Filled-Void, If it matters, I just installed ubuntu from an x86_64 liveCD a few days ago.
+[17:19] <Whitor> Where can I adjust system audio volume in KDE ?
+[17:19] <mightybyte> Filled-Void And I saw this same problem with another package a few days ago.  Can't remember which one though.
+[17:19] <MGalaxy> taxman: I want a image viewer + image converter ( GThumb is not good at all)
+[17:20] <DanB> ok i have vlc and the plugins installed but how do i use this to watch online video
+[17:20] <Filled-Void> mightybyte, I dont think that the repositories would vary for the different install you used. I used the DVD install thought So im not sure if that caused it
+[17:20] <taxman> MGalaxy: I only use gimp for that, so I don't know what to tell you. Like I said, it will work
+[17:20] <mightybyte> Filled-Void, I have updated, so I would think that it shouldn't matter which CD I used.
+[17:20] <Filled-Void> evgeniXXX, You would use apt-cache search to search for you rpackages and apt-get update to get updates.
+[17:20] <barbarella> Whitor:kmix
+[17:20] <P_Kable> Hi everyone. I just installed mplayer and I can't play any video: Failed to open file://*.mpg, *.avi ... all videos :|
+[17:20] <Filled-Void> mightybyte, Exactly
+[17:21] <Whitor> thanks barbarella
+[17:21] <Filled-Void> mightybyte, Could you post me a screencap of your synaptic :x
+[17:21] <Nicolaidis> help with gdesklet
+[17:21] <barbarella> P_Kable:try it with VLC
+[17:21] <mightybyte> Sure.  Where would I post it?
+[17:21] <Filled-Void> P_Kable, Install ubuntu-restricted-extras
+[17:21] <evgeniXXX> Filled-Void, ok I see, is that something i need to do every time i can't find a package I am looking for?
+[17:22] <sluimers> Hi, how do I change an external HD from fat32 to ntfs?
+[17:22] <MrFeetio> gparted
+[17:22] <Filled-Void> Nicolaidis, What type of problems. I have some common problems given on my blog. filledvoid.com it contains the ubuntuthreads I used and the methods I used to correct mines
+[17:22] <mightybyte> Filled-Void: FWIW, when I search for "vim" all I get is GVim.  vim-tiny and the others aren't there.
+[17:22] <P_Kable> barbarella>>  I do not want vlc but mpalyer. Filled-Void I have this package already
+[17:22] <Kuropon> is ti possible to have 2 OS running at the same time?
+[17:23] <mightybyte> Filled-Void: You just want a screenshot of the main window?
+[17:23] <Nicolaidis> when i start it gdesklwt becomes black and doesn't work
+[17:23] <sluimers> how? the format to button is grayed out
+[17:23] <Filled-Void> mightybyte, by any chance is your cd still in the software sources?
+[17:23] <mightybyte> No, I took it out.
+[17:23] <Nicolaidis> i install it from synaptic
+[17:23] <Filled-Void> P_Kable, Could you check if vlc would play it at all. if it doesnt then it would tell if the codec is not installed
+[17:23] <mightybyte> Filled-Void: Should I put it back in?
+[17:24] <Kuropon> is ti possible to have 2 OS running at the same time?
+[17:24] <Filled-Void> mightybyte, Add your cd to the sources if it is not there
+[17:24] <P_Kable> vlc works fine
+[17:24] <Filled-Void> Nicolaidis, Install gdesklet-data
+[17:24] <lukewarm> Kuropon, yes
+[17:24] <taxman> if I want to re-install all of my backed up debs in /var/cache/apt/archives/, can I just run aptitude install * in that dir?
+[17:24] <P_Kable> Filled-Void>>  VLC ok
+[17:24] <Nicolaidis> i 've installed it
+[17:25] <RenatoSilva> [Compiz] The borders of my monitor attract windows. I've found how to deactivate attraction among themselves, but what about attraction between windows and monitor's borders?
+[17:25] <barbarella> Kuropon:vmware
+[17:25] <Filled-Void> P_Kable, SO you can play in vlc but not mplayer correct?
+[17:25] <Kuropon> lukewarm, how would I go about running Linux with a cube interface(4 workplaces) and one of them being a window for windows
+[17:25] <Kuropon> barbarella, ?
+[17:25] <P_Kable> Filled-Void>>  correct
+[17:25] <Filled-Void> P_Kable, You get no output at all or garbled output
+[17:25] <Arelis> Hi all. I have a monitor with a resolution of 1440x900. I'd like to do many things at the same time, and see many windows at the same time. How do i do this? Already switched font DPI to size 70, makes everything good, but kind of unreadable. Or hard to read.
+[17:25] <taxman> or is there a better way?
+[17:25] <DanB> can someone help with installing flash player
+[17:25] <netcrash> Hello , while mounting nfs4 volume I get the error can't read superblock, any tips ?
+[17:26] <DanB> i have it downloaded
+[17:26] <lukewarm> Kuropon, you use a virtual machine
+[17:26] <Filled-Void> DanB, Downloaded? from where?
+[17:26] <sandeep> does any one know of a channel specific to F-spot
+[17:26] <mightybyte> Filled-Void: That didn't seem to change anything.
+[17:26] <Kuropon> lukewarm, you'll need to elaborate pls
+[17:27] <Filled-Void> taxman, Im looking for an easy way also I used aptoncd till now
+[17:27] <lukewarm> !vmware
+[17:27] <ubotu> VMWare Player is in Ubuntu's !Multiverse repository (package "vmware-player", not available for Gutsy, only Feisty and Edgy), and http://www.easyvmx.com/easyvmx.shtml can create VMs for it. Instructions can be found at https://help.ubuntu.com/community/VMware - See also !virtualizers
+[17:27] <mightybyte> Filled-Void: I did apt-cdrom add
+[17:27] <sluimers> DanB, how hard can it be? at most it's ./configure, make, make install, right?
+[17:27] <Filled-Void> mightybyte, And you updated your package list?
+[17:27] <lukewarm> Kuropon, ..googling...
+[17:27] <Nicolaidis> Filled-Void: is this a common problem???
+[17:27] <mightybyte> Filled-Void: Not sure.  Running apt-get update now.
+[17:27] <Filled-Void> Nicolaidis, is it working now?
+[17:27] <DanB> i downloaded the tar.gz file
+[17:28] <Filled-Void> mightybyte, Why i ask is cause both of those packages are on my dvd
+[17:28] <mightybyte> Filled-Void: It seems like synaptic is only displaying packages that have graphical interfaces.
+[17:28] <P_Kable> Filled-Void>>  no output, only an error message "Failed to open file..."
+[17:28] <Filled-Void> DanB, Why not install it from the repositories
+[17:28] <Filled-Void> P_Kable, Avi ?
+[17:28] <Nicolaidis> Filled-Void:i've installed it...it says that deamon does't work
+[17:28] <P_Kable> avi and mpeg
+[17:28] <lukewarm> Kuropon, have a look at http://linuxondesktop.blogspot.com/2007/12/running-windows-inside-your-ubuntu.html
+[17:28] <P_Kable> Filled-Void>>  avi & mpeg
+[17:28] <mightybyte> Filled-Void: Yeah.  I have installed openssh now, but it's still not visible in synaptic.
+[17:28] <taxman> DanB: why not just use synaptic to install it?
+[17:29] <Filled-Void> mightybyte, :( let me check one more thing brb
+[17:29] <mightybyte> Filled-Void: Ok.
+[17:29] <Huhnz0r> hello. something got killed in my linux.from windows the ifs partition appears broken, booting up ubuntu, there is an x server error. now i`m here with the live cd. how  can i find out what exactly is my problem and then fix the existing ubuntu install? or just install the 7.07 over the broken dapper drake_
+[17:29] <Filled-Void> Nicolaidis, http://www.filledvoid.com/2007/12/20/gdesklets-not-working-on-64-bit-installs/
+[17:30] <Filled-Void> Nicolaidis, That might help
+[17:30] <qolo> how can I get grep to not print the match, I only want the file names, so I can redirect its output to something that wants only filenames ( emacs )
+[17:30] <DanB> ok i guess i have that figured out.but i still cant watch flash video online
+[17:31] <Kuropon> lukewarm, sounds great tyvm.. you have any experience with this?
+[17:31] <taxman> qolo: man grep, it's definitely in there
+[17:31] <qolo> taxman: i have i topen, i cant find it
+[17:31] <crush_groove> Huhnz0r,  you shouldnt skip distros on an upgrade .. go from dappy to edgy to fiesty..
+[17:31] <rafi> hi all
+[17:31] <lukewarm> Kuropon, no.
+[17:31] <nixnoob> anyone know if i can access my home folder from windows on a dual boot?
+[17:31] <taxman> qolo: ok hold on, haven't read it in a while
+[17:31] <Kuropon> lukewarm,  +D
+[17:31] <Arelis> Hi all. I have a monitor with a resolution of 1440x900. I'd like to do many things at the same time, and see many windows at the same time. How do i do this? Already switched font DPI to size 70, makes everything good, but kind of unreadable. Or hard to read.
+[17:31] <crush_groove> !samba
+[17:31] <ubotu> Samba is the way to cooperate with Windows environments. Links with more info: https://wiki.ubuntu.com/MountWindowsSharesPermanently and http://help.ubuntu.com/ubuntu/serverguide/C/windows-networking.html - Samba can be administered via the web with SWAT.
+[17:32] <Huhnz0r> crush_groove: oh i didnt know...but isnt installing the new one wiping the existing away anyways_
+=== brent is now known as brentd
+[17:32] <Nicolaidis> i'll try it
+[17:32] <nixnoob> crush_groove, read the question its a dual boot not over the network
+[17:32] <Filled-Void> P_Kable, For some reason i recall the same issue somewhere however I cant pinpoint it. I think there was changing x11 to something try a search for x11 mplayer cannot play avi Im sure it involved changing x11 to xv something
+[17:32] <crush_groove> Huhnz0r,  no
+[17:33] <rafi> <Arelis>  whats you resolution right now ?
+[17:33] <taxman> qolo: -l is the switch you want I believe
+[17:33] <Arelis> rafi: 1440x900
+[17:33] <crush_groove> nixnnob .. thank you for telling to read the question
+[17:34] <DanB> ok i can see the video but i dont have sound
+[17:34] <rafi> <Arelis> 1 min..
+[17:34] <crush_groove> Huhnz0r,  each distro builds on the last 1 with upgrades . if you skip from dapper to fiesty you may not have some libs or dependencys that fiesty needs that were in egdy .
+[17:34] <Arelis> rafi: alright.
+[17:34] <taxman> DanB: do you have sound for other things?
+=== Yasumoto_ is now known as Yasumoto
+[17:34] <DanB> yes
+[17:34] <P_Kable> Filled-Void>>  ok I try that
+[17:35] <Filled-Void> mightybyte, Out of curiosity what server do you have set to get updates from
+[17:36] <P_Kable> Filled-Void>>  no it won't work
+[17:36] <qolo> taxman:  that got it thx!
+[17:36] <rafi> <Arelis> I think beryl does what you looking for
+[17:36] <taxman> qolo: np
+[17:36] <Arelis> rafi: i can't use that. I'd have to use xgl for that, but it's unstable.
+[17:36] <Filled-Void> P_Kable, :( What was the exact error message you were getting and if it is big please use pastebin
+[17:37] <crush_groove> sheesh this samba is just what I need I think
+[17:37] <P_Kable> "failed to open file:///*.mpg
+[17:37] <P_Kable> Filled-Void>>   "failed to open file:///*.mpg"
+[17:37] <nomic> what is the best resource for setting up dual head monitors with an ATI graphics card anyoneplese?
+[17:38] <mightybyte> Filled-Void: "Server for U.S."
+[17:38] <Felipe__> #faq
+[17:38] <rafi> does anyone know  a stable program that it let you see multiples windows @ onece like beryl? please help <Arelis> if anyone know
+[17:38] <Filled-Void> mightybyte, try just changing it to main server or eu and try again
+[17:38] <taxman> ok I tried aptitude -s install * in my directory of backed up packages, but I get a lot of errors like "Couldn't find package "Desktop", and more than 40
+[17:38] <taxman> packages contain "Desktop" in their name."
+[17:39] <mightybyte> Filled-Void: Ok.  I don't hane EU as an option.  Trying main.
+[17:39] <Arelis> rafi: I mean, like, have much screen space, everything smaller, but still readable, so i can have many windows open at the same time, on the same screen, on the same workspace, and look at them all at the same time.
+[17:39] <Arelis> Right now, it's so small it's burning my eyes
+[17:39] <barbarella> P_Kable:you kidding me.... *.mpg !!!
+[17:39] <mightybyte> Filled-Void: Nope, still the same.  No openssh and nothing but GVim, in a "vim" search.
+[17:39] <rafi> <Arelis> i have a frind of my from work that it use that alot but his not here right now I just page him ok let u know later
+[17:39] <Nicolaidis> Filled-Void: now i must change a script...how can i do it?
+[17:39] <Nicolaidis> Filled-Void: now i must change a script how can i do it???
+[17:39] <P_Kable> no kidding
+[17:39] <P_Kable> same thing with *.avi barbarella
+[17:39] <Arelis> rafi: ok
+[17:40] <RenatoSilva> [Compiz] The borders of my monitor attract windows. I've found how to deactivate attraction among themselves, but what about attraction between windows and monitor's borders?
+[17:40] <Dr_willis> theres settings in the ccsm tool for that.. somewhere.. :)
+[17:40] <Arelis> Does anybody know how i can maximize screen space, have like 10 windows open but still be able to read the contents, all next/below eachother, on one workspace, non-overlapping?
+[17:40] <nownot> how do i update ubuntu from the command line. also how do i update the kernel?
+[17:40] <Filled-Void> P_Kable, Playing all your files?
+[17:41] <Dr_willis> Arelis,  you mean auto-tile the windows. resizing them?
+[17:41] <P_Kable> Filled-Void>>  yes
+[17:41] <Filled-Void> P_Kable, can you play a single file?
+[17:41] <rafi> <RenatoSilva> I use my console terminal with out borders
+[17:41] <barbarella> nownot:apt-get upgrade
+[17:41] <P_Kable> with VLC only Filled-Void
+[17:41] <Filled-Void> Nicolaidis, Why create a script ?
+[17:42] <jakel1> i have a bit of a problem... i installed Ubuntu 7.10, then i installed windows
+[17:42] <Filled-Void> P_Kable, So when you play a single file with mplayer you get the same erro message with the file name?
+[17:42] <jakel1> now i can only boot windows and not linux
+[17:42] <Arelis> Dr_willis: That, too, if i can
+[17:42] <jakel1> however the partition is still there cuz i can see it with Gparted live CD
+[17:42] <P_Kable> Filled-Void>>  As I said above, yes
+[17:42] <nownot> barberella : will that do kernel and all system stuff? i guess im asking what all will that update
+[17:42] <qolo> jakel1:  thats why you do it the other way around
+[17:42] <jakel1> and it still has linux on it
+[17:42] <Dr_willis> Arelis,  tiling is a feature of the window manager. Some have it. some dont.
+[17:42] <crush_groove> jake what drive is windows on ?
+[17:42] <qolo> jakel1: insert a recovery CD
+[17:42] <mightybyte> Filled-Void: Ok, I tried another server.  Still no luck.  It really looks like I don't have any server (non-graphical) apps showing at all.
+[17:42] <crush_groove> leys qodo have it
+[17:42] <Clearzen> Could anyone recommend a piece of virtualization software for ubuntu
+[17:42] <jakel1> hld on a sec....   qolo... what?
+[17:42] <Arelis> Dr_willis: I'm using metacity right now
+[17:43] <rafi> <jakel1> install windows first then linux and you grub on lilo will take over your master boot sector
+[17:43] <jakel1> lol... to many answers
+[17:43] <crush_groove> clearzen openvm
+[17:43] <jakel1> rafi is there a way to do it without having to reinstall windows
+[17:43] <jakel1> errr.... linux as well
+[17:43] <Clearzen> crush_groove: I've been looking at virtual box too. Do you know if it is any good?
+[17:43] <qolo> yes - put in the live CD and boot into the existing linux
+[17:44] <jakel1> ok]
+[17:44] <crush_groove> Clearzen,  I havent used it
+[17:44] <Arelis> Dr_willis: I'm using metacity right now. DOes that have it?
+[17:44] <qolo> theres a way to tell grub to rewrite the MBR, im not sure how though you'll probably have to look for a tutorial
+[17:44] <mightybyte> Filled-Void: Oh, I feel stupid.  I just realized that I wasn't using synaptic.  I was just using the "Add/Remove" option from the Applications menu.
+[17:44] <Clearzen> crush_groove: thanks
+[17:44] <Filled-Void> mightybyte, gah check in synaptic :D
+[17:44] <Dr_willis> Arelis,  no idea.. look and see if it does.. I dont use metacity. I doubt if it does.
+[17:44] <Huhnz0r> ok so I now mounted the linux partitition in the live cd of ubuntu. the partitition seems to be fine and accessible. how can I solve the x server problems I get when trying to boot up ubuntu installed on that directory
+[17:45] <mightybyte> Filled-Void: I did.  Everything's there.
+[17:45] <mightybyte> Filled-Void: Now I know where to look.  Thanks for the help.
+[17:45] <Filled-Void> mightybyte, :D
+[17:45] <jakel1> it's booting now qolo
+[17:45] <Filled-Void> mightybyte, yw
+[17:45] <jakel1> hld on a sec
+[17:45] <rafi> <jakel1> yes boot from a live cd mount your hdd and run grub or lilo manually  you need to tell grub you boot martitions ok dont forget
+[17:45] <rafi> brb
+[17:46] <graelin> Anyone point me in the right direction for following: NVRM: RmInitAdapter failed! ....
+[17:46] <evgeniXXX> Filled-Void, do you know where apt-get install puts the binaries?
+[17:46] <evgeniXXX> I need to get a path for it
+[17:46] <nownot> when i try apt-get upgrade i get 0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded
+[17:47] <Clearzen> evgeniXXX: /usr/bin
+[17:47] <Filled-Void> evgeniXXX, The files apt-get installs should be found in the /var/cache/apt/archives folder I think
+[17:47] <Dr_willis> nownot,  you did 'apt-get update' first?
+[17:47] <evgeniXXX> thank you , i will look there
+[17:47] <nownot> err let me try that
+[17:47] <aCiD2> Hi, the OS X side of my Mac has just blown up so I was going to take this oportunity to try Ubuntu on it. I can't install refit however, is this going to cause any problems?
+[17:48] <Dr_willis> apt-get caches the debs it DOWNLOADS to  /var/cache/apt/archives, in theory the installed files could be going about anywehre. :)
+[17:48] <Filled-Void> evgeniXXX, Try the path Clearzen suggested I might be wrong here
+[17:48] <nownot> good god 135 to be upgraded
+[17:48] <aCiD2> I don't need to boot into any other operating systems - just Ubuntu
+[17:48] <Dr_willis> nownot,  rember.. "update" then "Upgrade" :)
+[17:48] <nownot> :) thanks
+[17:48] <Huhnz0r> I have been having problems with my x-server, I don-t even know what happened. i didnt install anything new. so now i mounted my ubuntu in the live cd , how can I fix it_
+[17:49] <Clearzen> Huhnz0r: What problem are you having with it?
+[17:50] <Nicolaidis> Filled-Void: i must modify a script for run gdesklet on amd 64
+[17:50] <jeeaar> question, I need to find the IP to a print server, I know the domain but need a terminal command to do a search???
+[17:50] <Filled-Void> Nicolaidis, I usually modify files using sudo gedit path/to file
+[17:51] <Dr_willis> jeeaar,  you could nmap the network, and see who all replies. :)
+[17:51] <barbarella> jeeaar:ping maybe
+[17:51] <Filled-Void> P_Kable, http://www.thinkdigit.com/forum/showthread.php?t=76259&highlight=mplayer+x11 this was the thread I had recalled seeing. Is this what you tried?
+[17:51] <nownot> dr_willis: if i want to build a custom kernel where would i get started?
+[17:51] <Dr_willis> nownot,  with lots of reading.. :)
+[17:51] <Huhnz0r> Clearzen: when starting ubuntu as normal at somepoint the screen will turn blue and say x-server error and it wont boot up gnome but keep stuck in command line modus
+[17:51] <Dr_willis> !kernel | nownot
+[17:51] <ubotu> nownot: The core of the Ubuntu Operating System is the Linux kernel: see https://help.ubuntu.com/community/Kernel - You shouldn't have to compile your own, but if you're convinced you do, see https://help.ubuntu.com/community/Kernel/Compile - For more: /msg ubotu stages
+[17:51] <Clearzen> jeeaar: nmap -sP 192.168.0.0/24
+[17:51] <barbarella> jeeaar:yes nmap  will do
+[17:51] <nownot> well wont it run faster and more efficient?
+[17:52] <jeeaar> well the ip will be 10.10.1.*
+[17:52] <jeeaar> what is the n,ap command?
+[17:52] <Dr_willis> nownot,  proberly not.
+[17:52] <jeeaar> nmap**
+[17:52] <Clearzen> Huhnz0r: try running sudo dpkg-reconfigure -phigh xserver-xorg
+[17:52] <nownot> oh nvm then i thought it made a difference
+[17:52] <salvatore_> hi
+[17:52] <Clearzen> nmap -sP 10.10.1.0/24
+[17:52] <jeeaar> why /24?
+[17:52] <RenatoSilva> what's the better way to get the real current directory of a script (if it's a link, then get the real file dir)????? $(dirname "$(readlink -f $0)")?????
+[17:52] <salvatore_> when i put on ettercap
+[17:53] <ericvw> !wiki
+[17:53] <ubotu> http://wiki.ubuntu.com - Ubuntu development documentation wiki. If you are looking for system help, please refer to https://help.ubuntu.com/community - the Ubuntu community documentation.
+[17:53] <ijn> hi all
+[17:53] <zobf> High.
+[17:54] <seenu> hi
+[17:54] <nownot> ok im full of question. what is a program i can use to caputre packets on the network my computer is hooked up to. interested in username and pass and webpages viewed. and yes this is on my personal network
+[17:54] <seenu> plz temme how to run a java prg thru GCJ
+[17:54] <ijn> who is the alternative app to open ppt file
+[17:54] <ijn> without installing open office
+[17:54] <Huhnz0r> Clearzen: but will that command reconfigure the xserver of the "real" ubuntu or just the one of the live cd? how do i point it to the real one
+[17:55] <Clearzen> nownot: Wireshark
+[17:55] <seenu> without installin openoffice
+[17:55] <seenu> i think v cant
+[17:55] <salvatore_> when i put on ettercap and i chose sniff remote connections it say to me : MITM attacks can't be used on unconfigured interfaces      can someone help me?
+[17:55] <barbarella> nownot:tcpdump
+[17:55] <Clearzen> Huhnz0r: reboot and take out the live cd
+[17:55] <ijn> powerpoint files
+[17:55] <salvatore_> i have already looking in google
+[17:55] <evgeniXXX> Filled-Void, Clearzen, I can't seem to find it there.... I installed imagemagick using apt-get install, but how can I find out where it physically put it?
+[17:55] <seenu> i think v dont hav somethin lik powerpoint viewer in linux
+[17:55] <salvatore_> please
+[17:55] <Huhnz0r> Clearzen: and then when in commandline modus do this command?
+[17:55] <ijn> seenu:what is the name of the app?
+[17:56] <ijn> V?
+[17:56] <salvatore_> give someone a sig
+[17:56] <Pici> salvatore_: That is not supported in this channel.
+[17:56] <Filled-Void> evgeniXXX, Tried /var/cache/apt/archives? if you are tryign to run the command then type man imagemagick
+[17:56] <salvatore_> sign
+[17:56] <salvatore_> why not?
+[17:56] <salvatore_> it is abut ubuntu
+[17:56] <Clearzen> evgeniXXX: Go to synaptic and in there it should be listed as installed. If it is right click go to properties and there is a tab for installed files
+[17:56] <salvatore_> about
+[17:56] <jakel1> they should have a simple option on the live cd to just reinstall grub
+[17:56] <Pici> !illegal | salvatore_
+[17:56] <Clearzen> evgeniXXX: It should be listed therre
+[17:56] <ubotu> salvatore_: piracy discussion and other questionably legal practices are not welcome in the Ubuntu channels. Please take this discussion elsewhere or abstain from it altogether. This includes linking to pirated software, music and video. Also see !guidelines and !o4o
+[17:56] <salvatore_> can u say to me the right channel please?
+[17:57] <Pici> salvatore_: Man in the middle attacks fall into the 'questionably legal' category there.
+[17:57] <Clearzen> evgeniXXX: also find / -name imagemagick should work
+[17:57] <seenu> plz temme how to run a java prg thru GCJ
+[17:57] <evgeniXXX> Filled-Void, man page comes up, but I just need the path to binary files..., Clearzen, how do I go to synaptic?  (trying find /-name right now)
+[17:57] <salvatore_> ok
+[17:57] <salvatore_> im sorry for that
+[17:58] <salvatore_> bye
+[17:58] <ijn> open powerpoint in ubuntu gutsy 64 bit.
+[17:58] <Clearzen> evgeniXXX: System>>administration>>synaptic package manager
+[17:58] <ijn> what alternative do I have??
+[17:58] <vee_> hi all
+[17:58] <ijn> eccept open office
+[17:58] <evgeniXXX> Clearzen, no luck on find /-name imagemagick, trying synaptic manager
+[17:59] <devilsadvocate> ijn ?
+[17:59] <The-Warlord> sombody there with cisco and linux routers expierence (pls ingnore my worse english) [oder gehts auch deutsch]
+[17:59] <Pici> seenu: The same way you would run any java program.
+[17:59] <ijn> any ideas please?
+[17:59] <devilsadvocate> ijn , whats wrong with open office?
+[17:59] <ijn> to heavy
+[17:59] <vee_> Im looking to install 7.10, i have 4gbs RAM - how much swap should i allocate?
+[17:59] <devilsadvocate> ijn, i think koffice as a powerpoint equivalent, im not sure  though
+=== corneliu1_ is now known as c9s
+[18:00] <ijn> any thing else?
+[18:00] <devilsadvocate> vee_ , for normal usage minimal swap will do. but hibernation might not be possible without swap> ram
+[18:00] <devilsadvocate> ijn, i'm not sure, but i dont think so
+[18:00] <devilsadvocate> people use latex to make presentations, if you want :|
+[18:00] <vee_> devilsadvocate would i be ok with 5gb swap or should i go for more then
+[18:00] <ijn> anything that is not a whole package
+[18:00] <Clearzen> vee_:  5GB is to much
+[18:01] <Clearzen> vee_: 2GB is all you need really
+[18:01] <ijn> like open office kofice
+[18:01] <vee_> Clearzen thanx
+[18:01] <The-Warlord> the swap memory will be used when you out of ram, this will take a while (with normal applications)
+[18:01] <Pici> vee_: Are you going to hibernating your computer ever?
+[18:01] <Yancho> how to check how much space i still got on my hard disk?
+[18:01] <Filled-Void> evgeniXXX, System > Adminstration > Synaptic > Right click on imagemagick and then select properties
+[18:01] <vee_> Pici not often
+[18:01] <Pici> Yancho: df -h
+[18:01] <Yancho> thanks Pichu0102
+[18:01] <Yancho> Pici
+[18:01] <evgeniXXX> Clearzen, I was able to locate it in synaptic manager, I clicked on it and under properties was able to find all the files it installed, thank you and thank you Filled-Void too!!
+[18:01] <Clearzen> evgeniXXX: np
+[18:02] <devilsadvocate> vee_, hibernation is the only problem you will have. if not even 1 gb of ram is more than sufficinet
+[18:02] <Pici> vee_: If you do, you'll need more swap than ram.
+[18:02] <devilsadvocate> vee_ , sorry.. 1gb of swap, not ram
+[18:02] <cheeby> hi.  is there a better alternative to gdesklets?
+[18:03]  * cheeby is new to gnome.
+[18:03] <Filled-Void> cheeby, Screenlets
+[18:03] <vee_> devilsadvocate so 2 gb of swap should let it go to hiber.?
+[18:03] <devilsadvocate> cheeby, there were some widgets with compiz fusion. I dont know any details though
+[18:03] <[unix]> vee_: no, you need 4 Gb swap or more to hiber
+[18:03] <cheeby> running compiz here.
+[18:03] <devilsadvocate> vee_, no. Hibernation basically puts all your ram onto the swap, so you will need >4gb
+[18:03] <Filled-Void> cheeby, I just use conky I like it . Its light weight also and very customizable
+[18:04] <Serg[GPRS]> hi ! i got a crappy USB ADSL modem, tried http://eciadsl.flashtux.org but it's config script asked me so many questions i was unable to answer
+[18:04] <vee_> Pici thanx, i keep get dif. answers but i htink it soundsw like more swap than ram is better ( [unix] )
+[18:04] <vee_> devilsadvocate 5gb it is!
+[18:04] <temetz> how can you define port that xchat connects to ?
+[18:04] <Serg[GPRS]> may i still hope to config it, or only option is to buy Ethernet modem ?
+[18:05] <vee_> devilsadvocate should all my partitions be Primary?
+[18:05] <cheeby> Filled-Void, is conky a window mgr?
+[18:05] <devilsadvocate> vee_, none of them need to be primary :)
+=== tuna-fish is now known as tuna
+[18:06] <cheeby> devilsadvocate, looking into it now...
+[18:06] <vee_> devilsadvocate so stick with all my partitions being logical
+[18:06] <evgeniXXX> I am very impressed with this forum, this is amazing support, thank you everybody!
+[18:06] <cheeby> all I want is a decent weather and calendar desklet.
+[18:06] <XxValetexX> hello
+[18:06] <cheeby> something that doesn't crash when I try to change something.
+[18:06] <XxValetexX> is there a 64 bit version of ubuntu?
+[18:06] <vee_> XxValetexX hello
+[18:06] <Whitor> XxValetexX: yes
+[18:06] <Filled-Void> cheeby,http://conky.sourceforge.net/
+[18:06] <devilsadvocate> cheeby, i dont relally remembey but i dont think conky has that
+[18:06] <Pici> cheeby: no, conky is a customizable system monitor, not a window manager.
+[18:06] <jakel1> https://help.ubuntu.com/community/RecoveringUbuntuAfterInstallingWindows i am using this tutorial and i have a question about one of the steps
+[18:06] <XxValetexX> Whit ty
+[18:06] <monkeyBox> Is there any way to unpack a ".sit" file in ubuntu?
+[18:06] <XxValetexX> Whitor: thnaks :D
+[18:07] <Filled-Void> cheeby, Id recommend screenlets then if you dont like gdesklets
+[18:07] <cheeby> Pici, thanks.
+[18:07] <jakel1> the sixth step reads, title Windows XP/Vista # You can use any title you wish, this will appear on your grub boot menu
+[18:07] <jakel1>  rootnoverify (hd0,0) #(hd0,0) will be most common, you may need to adjust accordingly
+[18:07] <jakel1>  makeactive
+[18:07] <jakel1>  chainloader +1
+[18:07] <cheeby> Filled-Void, ok.  apt-get install...?
+[18:07] <Yancho> Y am I getting FTP error 553 for a folder named : elev_contour_3m
+[18:07] <iOn|FuXeD> cheeby go to gnome-look.org and search for Screenlets, see if their "look" is appealing then
+[18:07] <devilsadvocate> vee_, whatever you like. usually the boot partition is kept primary, but most modern bioses seem to be able to havndle grub on a logica partition also
+[18:07] <XxValetexX> Whitor: I wanna get one of those tasty quad cores from AMD :X
+[18:07] <Filled-Void> cheeby,  Yup you would do an apt-get install of the package you want
+[18:07] <jakel1> after rootnoverify is that hd0,0 suppose to reflect where windows is or where Linux is
+=== Spec[x] is now known as Spec
+[18:08] <cheeby> ah.
+[18:08] <devilsadvocate> cheeby, if you are willing to run kde aps (they will eat up extra ram if you run them on gnome) then superkaramba is awesome
+[18:08] <cheeby> devilsadvocate, yeah, I ran superkaramba when I was on kde (gentoo).
+[18:08] <vee_> devilsadvocate thanx.... in the middle of reinstalling and last time i just made every partition Primary.... wasnt sure if that was a good or bad thing.... I guess I'll keep the system partition Primary
+[18:08] <cheeby> this is a new machine.
+[18:09] <NorthByNorthWest> Hi all! Had some problems with compiz and my NVidia 8800 GTS, so after much doubt i installed the drivers using Envy... now when I try to enable compiz/desktop effects Ubuntu says it wants to install the restricted drivers... what to do!?!?
+[18:09] <cheeby> so I put ubuntu on it to see how I liked it, trying to give it a fair shake.
+=== gradin_ is now known as gradin
+[18:09] <devilsadvocate> vee_, you cant have more than 4 primary partitions, included the extended one. PLan your partitioning scheme ar0ound that
+[18:09] <Filled-Void> Superkaramba is ncie but wont that require kde dependencies as well?
+[18:09] <santh_> how to resume download from bit torrent plz help me
+[18:09] <santh_> how to resume download from bit torrent plz help me
+[18:09] <imaginaryboy> NorthByNorthWest,
+[18:09] <imaginaryboy> 8800gt support comes with new 169.04 nvidia drivers
+[18:10] <Filled-Void> santh_, By clicking on it?
+[18:10] <vee_> devilsadvocate at this point I only have Ubunutu on it... but I will keep it to just one primary for now.... and logical for all oterh partitions
+[18:10] <santh_> how to click
+[18:10] <santh_> i cant find it
+[18:10] <nils_> hey guys
+[18:10] <Filled-Void> AFAIK there should be a torrent client installed by default
+[18:10] <XxValetexX> santh_: thats y I use deluge
+[18:10] <NorthByNorthWest> imaginaryboy: according to 'NVIDIA X Server Settings' I have 169.07 installed
+[18:10] <PirateHead> Filled-Void: It's a crappy torrent client, but it will download torrent files.
+[18:10] <imaginaryboy> ah ok
+[18:10] <nils_> how can I boot the desktop livecd without X11 (I only want console because I use it via IP KVM)?
+[18:10] <imaginaryboy> so it's ok
+[18:10] <santh_> help me plz
+[18:11] <graelin> what config would I alter vmalloc size in? Getting NVRM rmInitadapter failed error.. says to boost the vmalloc size
+[18:11] <Filled-Void> PirateHead, hey it does work. I hear that deluge is good . but I think it kind of hogs resources :x
+[18:11] <santh_> what is deluge
+[18:11] <XxValetexX> santh_: maybe using deluge and starting it over would be asier for you?
+[18:11] <PirateHead> nils_: Can't. Use the server CD instead.
+[18:11] <cheeby> Filled-Void, yeah.  superkaramba requires kdelibs and I think kdebase.
+[18:11] <NorthByNorthWest> imaginaryboy: I would think so, but compiz wont enable!
+[18:11] <Karyom> PirateHead have you tried KTorrent?!
+[18:11] <XxValetexX> santh_: or you can just browse your files and check where you are downloading it to and click it
+[18:11] <Filled-Void> cheeby, Whichis why i satyed away from it

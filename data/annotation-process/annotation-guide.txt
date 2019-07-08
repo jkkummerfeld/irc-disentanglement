@@ -1,0 +1,187 @@
+# General Guidelines
+
+This is both a guide for how to annotate, and instructions on what to annotate.
+At a high level, the goal of this annotation is to create a link/edge from each
+message to the 0+ messages that it is a response to.
+
+## How to annotate
+
+The line being linked will have green text. The line it is being linked to will
+be underlined. At the moment, the top line should be both green and underlineed.
+
+  >> Try moving the green line down by pressing SHIFT + DOWN (OS X only) or SHIFT + 'o'.
+  >> Now try moving it up with SHIFT + UP (OS X only) or SHIFT + 'i'.
+
+Move the green line down a few lines and try moving the underlined line with
+UP and DOWN (or 'o' and 'i'). Note that the underlined line cannot go below the
+green line.
+
+  >> Try creating a link by typing SHIFT + d (i.e. D).
+
+Note that once linked, the text turns blue (if it is not green).
+
+  >> Try removing the link by typing SHIFT + d again.
+  >> Now re-create the link with 'd'.
+
+Note that when typing lowercase 'd', the link is created and then the green
+line is moved down one and the underlined line is changed to be right above it.
+
+  >> Move the green line back up one
+  >> Link a second line to this one using SHIFT + d
+  >> Now press 'u' to undo all links for this line
+
+To search for text, type a '\' and the text you want to search for. Press ENTER
+and then n or p to go to the next or previous occurrence (or SHIFT + n and
+SHIFT + p to move the green line). To change the search query, type '\' again
+and edit. Note - '?' and '!' cannot be searched for, they are used as
+alternatives to ENTER and BACKSPACE.
+
+Do not do it yet, but you can move between files in your list with ']' and '['. Any
+annotations will be saved when you change files, and recovered when you return.
+To quit, type 'q'.
+
+If you ever want to see the help info without opening this, type 'h'
+
+------------------------------------------------------------------------------
+
+## General case
+
+For each message, link it to 1 or more messages it is a response to.
+
+If it does not respond to anything, link it to itself.
+
+If it appears to respond to something, but you can't find it, leave no link.
+
+
+
+## Scenarios:
+
+Find a tricky case not covered here? Note it and send it to me.
+
+Social messages
+    <kkathman> night ladies and gents :)
+    <Liberal_Tugboat> well night all!
+    <samatman_> night
+
+    [03:53] <chmod775> is there any VPN software for ubuntu ?
+    [03:53] <jind> love your nick
+    
+--- In the first case, <samatman_>'s comment would be linked to the previous
+--- two, but <jind>'s comment would not be linked to <chmod775>'s. The
+--- reasoning is that side comments like these are not part of the technical
+--- conversation, but rather form their own, separate conversation.
+
+
+Question is repeated
+--- Link the repeat to the original ask (e.g. if asked three times, the second
+--- and third would both link to the first).
+
+
+Message Responds to Multiple Previous Messages
+    <Bashing-om> Maube a fault in your mirror ? Maybe wait a spell and see if the
+                 mirror syncs up with mother .. or change your mirror ?
+    <lordcirth> Yes, the next thing to try would be switching mirrors
+    <ShinyShoes> this could be the mirror problem, you're right
+
+--- Link <ShinyShoes> message to both of the previous messages.
+
+
+User Responds to Messsage Multiple Times.
+    <OerHeks> you might want to reask in #ubuntu-server
+    <fels> Thanks -
+    <fels> are they brutal to newbies :)
+
+    <zxc_> I'm thinking of just locating it and then using MPV to open it
+    <nacc> not sure i follow -- of course you have to know where the file is
+    <nacc> oh you mean you want to do `locate ... | mpv` ?
+
+    <tgm4883> If you know you aren't supposed to come here, then why did you?
+    <ThePotato> because the other chat is broked
+    <ThePotato> for the distro
+
+--- There are two extremes here:
+--- (1) Each message could stand alone as a response (e.g. <fels>)
+--- (2) The messages form one thought (e.g. <ThePotato>)
+---
+--- In (1), link both messages from <fels> directly to the message from
+--- <OerHeks>. In (2), link the second message from <ThePotato> to the first
+--- message from <ThePotato>. The case with <nacc> is closer to (1), but is
+--- less clear.
+
+
+User is Engaged in Multiple Conversations
+    <henry> can anyone tell me how to install a new package on ubuntu 14.04?
+    <thomas> Is it necessary to create a liveUSB drive to install ubuntu?
+    <henry> you can also burn an .iso file to a cd to install
+
+    <Onepamopa> does anyone know HOW to auto execute a command AFTER user login
+                (Unity) ?
+    <Onepamopa> or how to permanently disable mouse acceleration
+    <dankan> let me tell you
+    <dankan> https://wiki.archlinux.org/index.php/Mouse_acceleration see the bit
+             "disabling mouse acceleration"ty
+
+--- No need to ensure all of a user's messages are in a single graph. Only link
+--- <henry>'s second message to <thomas>'s message. In the example of
+--- <Onepamopa> it is less clear, but they should probably be linked as they
+--- form one overall problem.
+---
+--- For <dankan>'s messages, you need to either:
+--- (1) Link both of them to the last message from <Onepamopa>
+--- (2) Link both of them to both of <Onepamopa>'s messages.
+--- 
+--- You should do (1) when <Onepamopa>'s messages formed a single question. Do
+--- (2) when they formed separate questions, but somehow were both answered at
+--- the same time.
+
+
+Interjections / Noise
+    <ctf2> ddd
+    <ctf2> adasdaasddas
+
+--- Treat each as a separate interjection - do not link to anything.
+
+
+Use of ubottu, an IRC bot:
+    <karen_> hi, guys, I just got lubuntu 16.04, don't know it well, but I
+             don't see anywhere to download "Skype". I looked in synaptic
+             package and Lubuntu Software. What should I do?
+    <OerHeks> !skype
+    <ubottu> To install Skype on Ubuntu, see
+             https://help.ubuntu.com/community/Skype - To record on Skype,
+             check: https://wiki.ubuntu.com/SkypeRecordingHowto - Please use
+             open protocols instead if you can, see !Ekiga
+    <karen_> I see, I'll try that.
+
+--- Link ubottu's response to both the person who called it (<OerHeks>) and the
+--- person the information is directed at (<karen_>). If someone then says
+--- something that is essentially a response to the bot, link the message to the
+--- bot's message.
+
+
+Handling a series of lines of output:
+    <discord> i get the msg
+    <discord> mplayer-k6:
+    <discord> Depends: libartsc0 but it is not going to be installed
+    <discord> Depends: libfribidi0 but 0.10.4-3 is to be installed
+    <discord> Depends: libggi2 but it is not going to be installed
+    <discord> Depends: libpng12-0 but 1.2.5.0-7ubuntu1 is to be installed
+    <discord> Depends: libungif4g but 4.1.0b1-6 is to be installed
+    <discord> What's wrong?
+    <henry> You need to install some libraries
+    <henry> Get libggi2 from http://...
+
+--- Here, link:
+---    "mplayer-k6:"      to "i get the msg"
+---    "Depends: ..."     to both the line one previous, and "i get the msg"
+---    "What's wrong?"    to "mplayer-k6"
+---    <henry>'s 1st msg  to "What's wrong?"
+---    <henry>'s 2nd msg  to the "Depends: libggi" message
+---
+--- The intuition is that messages in the sequence are all linked together in a
+--- chain, and also linked to the message the chunk is a response to. Follow-up
+--- messages (including from the same user) are linked to the message that is
+--- most semantically relevant, or the top of the chunk if they are generally a
+--- response to the whole chunk.
+
+

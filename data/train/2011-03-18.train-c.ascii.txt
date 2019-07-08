@@ -1,0 +1,1500 @@
+[06:47] <researcher1> also kile,latex,gcompiz, etc
+[06:47] <ejv> doesn't ubuntu store the binaries in a local cache somewhere
+[06:47] <ejv> why not copy them to a usb stick or something...
+[06:48] <raido> ejv: Because he has packages for one version that he wants to use on another. Not reccomended
+[06:48] <kaushal> is there a reminder in tasque ?
+=== safeWay is now known as dejan_
+[06:48] <tonnez> why is my Core i7 ubuntu server have a i686 kernel?
+[06:48] <tonnez> can i convert this?
+[06:49] <dejan_> I have probems watching videos in  the browser
+[06:49] <kaushal> like a pop up or some sort of alert
+[06:49] <raido> tonnez: no. you need to reinstall the entire OS
+[06:49] <dejan_> i did some command guy here told me and  since then i have problems
+[06:49] <ejv> raido: ah, im late to the conversation apparently.
+[06:49] <Leakin> yes hello does the latest ubuntu have support for MSI installers
+[06:49] <ejv> tonnez: if it's working you could just enable PAE and not break something that's fixed :p
+[06:50] <rww> tonnez: because you installed Ubuntu 32-bit. You can't go from 32-bit to 64-bit without a reinstall.
+[06:50] <raido> ejv: np, technically its possible but all the stuff he has there is bound to have newer packages
+[06:50] <ejv> it's prolly hit or miss with unknown scientific/academic software *shrug*
+[06:50] <dejan_> i had problems when I watched videos in fullscreen they had white flshes so one guy here on #ubuntu told me to execute terminal command and fter that sometimes I can watch videos in browser but sometimes no
+[06:50] <pythoned> Leakin,  It will never have such things, google for "WINEHQ"
+[06:50] <tonnez> ejv, rrw: 2.6.35-25-generic (SMP) i686
+[06:50] <tonnez> i'm assuming that is not good for i7
+[06:50] <tonnez> how do i enable PAE?
+[06:51] <tonnez> apache will not benefit from PAE will it?
+[06:51] <bazhang> tonnez, install linux-generic-pae
+[06:51] <raido> tonnez: do you want PAE to access more ram?
+[06:51] <ejv> would require compiling a new kernel if your memory isn't already fully addressed, or using a precompiled image
+[06:51] <Leakin> pythoned what if we petition the developers to include MSI support
+[06:51] <Leakin> for easier microsoft integration
+[06:51] <pythoned> Leakin,  MSI is proprietary...
+[06:51] <tonnez> raido: my server only has 4gb
+[06:51] <ejv> i think tonnez doesn't know what PAE is.. lol
+[06:51] <bazhang> !brainstorm > Leakin
+[06:51] <ubottu> Leakin, please see my private message
+[06:52] <rww> Leakin: #ubuntu is for Ubuntu technical support, not your personal amusement. Find somewhere else to troll.
+[06:52] <raido> tonnez: why do you think yo need it
+[06:52] <dejan_> any help?
+[06:52] <tonnez> raido: im just trying to figure out if apache will benefit
+[06:52] <tonnez> pae = physical address extension
+[06:52] <tonnez> i.e. 64bit
+[06:52] <raido> tonnez: no, it wont.
+[06:52] <tonnez> okay, then i guess i don't need it ;)
+[06:52] <ejv> pae != 64bit
+[06:52] <tonnez> thanks :)
+[06:52] <raido> tonnez: you dont need it.
+[06:53] <raido> ejv: there are PAE 32bit kernels
+[06:53] <ejv> i know
+[06:53] <tonnez> oh pae is only for 4gb>
+[06:53] <tonnez> i see
+[06:53] <ejv> im just saying that calling a memory allocation extension feature '64bit' is awfully negligent
+[06:54] <raido> ejv: gotcha
+[06:54] <dejan_> I have probems watching videos in  the browser
+[06:54] <dejan_> i did some command guy here told me and  since then i have problems
+[06:54] <dejan_> i had problems when I watched videos in fullscreen they had white flshes so one guy here on #ubuntu told me to execute terminal command and fter that sometimes I can watch videos in browser but sometimes no
+[06:54] <FloodBot1> dejan_: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[06:54] <Aquaguy> how can I create an alias of a folder and place it inside of /var/www/ ?
+[06:54] <tonnez> ejv: no need to flame the ignorant
+[06:55] <airtonix> Aquaguy: man ln
+[06:55] <ejv> not flaming, educating.
+[06:55] <airtonix> ejv: some people take offense at being educated
+[06:55] <airtonix> or 'edecated'
+[06:56] <tonnez> ejv: wikipedia educated me, you said the following: "i think tonnez doesn't know what PAE is.. lol" and "pae != 64bit" and "...calling a memory allocation extension feature '64bit' is awfully negligent"
+[06:56] <dejan_> why you dont help me?
+[06:56] <tonnez> airtonix: ^
+[06:56]  * tonnez sighs
+[06:56] <ejv> i doubt you'll see any noticeable performance gain moving to x86_64 from i686, it's likely more hassle than it's worth
+=== Guest6602 is now known as DarkDevil
+=== bxl4074 is now known as spivoler
+=== Amaranth__ is now known as Amaranth
+=== DarkDevil is now known as Guest2584
+[06:57] <raido> dejan_: relax friend, I suggest you make sure you have the flashplugin installed rather that the gnash plugin
+[06:57] <Aquaguy> airtonix, thank you, worked like a charm
+[06:57] <dejan_> browser evenn cant load pges with videos
+[06:58] <ejv> now if you had 32gb of available addresable space, I wouldn't recommend PAE because of the overhead, that's when a 64bit change would be a worthwhile ordeal.
+[06:58] <dejan_> it loads them veeeery slow
+[06:58] <dejan_> Rains: how to check
+=== cnegrete is now known as NuttyBunny
+[06:59] <airtonix> Aquaguy: the other way you can do it is to use the --bind function of mount ( which overcomes limitations imposed by soft symlinks)
+[07:00] <airtonix> Aquaguy: or you could rebase the /var/www (and it's associated /etc/apache2/sites-available/000-default to have a document root of /var/www/default/public_html/, then put your new content at /var/www/VIRTUALHOSTNAME/public_html/ and create a name based vhost def file in /etc/apache2/sites-available/VIRTUALHOSTNAME
+[07:01] <airtonix> Aquaguy: depends on what you want to achieve really
+[07:02] <dejan_> Rains: how to check
+[07:05] <litropy> I have downloaded all the files at http://bazaar.launchpad.net/~unity-team/nux/trunk/files/head:/examples/ and am now trying to compile. Any ideas?
+[07:05] <rww> !crossposting | litropy
+[07:05] <ubottu> litropy: Please don't ask the same question in multiple Ubuntu channels at the same time. Many helpers are in more than one channel and it's not fair to them or the other people seeking support.
+[07:05] <dejan_> teeeeeeeeeeeeeeeel me
+[07:05] <bazhang> dejan_, patience
+[07:05] <litropy> sorry, rww. I'll be sure so ship you some high quality oil :D
+[07:05] <dejan_> i have wait 20 min how much more?
+[07:06] <rww> !patience
+[07:06] <ubottu> Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[07:06] <bazhang> dejan_, check in your package manager
+[07:06] <dejan_> ok
+[07:07] <litropy> it's weird. the directory doesn't confain the files seemingly necessary for autoconf
+=== jh is now known as Guest90625
+=== blazie0 is now known as blaize
+[07:10] <litropy> I got it - the configure.ac was in the parent directory
+[07:13] <_antant> um, where do I find my smb.conf? I thought it was /etc/ but when I gedit it it's blank
+[07:14] <sidh> Greetings
+[07:14] <alkisg> Hi. Am I correct in that newer Ubuntu versions don't support floppy disks out of the box, and to get support for them, one would need to manually install the fdutils package?
+[07:14] <_antant> hi
+[07:14] <yurimxpxman> How can I find out what wireless adapter model I'm using?
+[07:15] <sidh> I have installed a theme for ubuntu , and I would like to copy that theme for others users , which directory do I have to copy ?
+[07:15] <Cork> yurimxpxman: should be listed in lshw
+[07:16] <_antant> Hey Cork. Should my smb.conf not be in /etc/ ?
+[07:17] <raido> alkisg: Im pretty sure you will have floppy support on a default install
+[07:17] <Evildaemon> How is the mouse controlled in linux? (I need to know so I can attempt to write a script that will control it with the arrow keys, thank you in advance, and if this already exists I'd be happy to use it.)
+[07:17] <_antant> service is running fine, but I need to wiggle around some valid/invalid users
+[07:17] <_antant> and it seems to have fled
+[07:17] <alkisg> raido: on some cases I didn't have /dev/fd0, and I needed to `modprobe floppy` to get those. But I'm not sure in which cases that happens.
+[07:17] <raido> _antant: /etc/samba/
+[07:18] <_antant> doh
+[07:18] <raido> alkisg: Prolly, in those cases the floppy kernel module was blacklisted by default.
+[07:19] <alkisg> raido: but when does this happen? Does ubiquity blacklist it, based on floppy availability upon installation?
+[07:19] <raido> alkisg: IDK
+[07:19] <alkisg> raido: thank you though
+[07:19] <raido> alkisg: np
+[07:19] <ChrisBuchholz> Hello guys. I was wondering if there exist a better driver MacBook touchpad/trackpad than what is set up default on ubuntu? I was trying out Touchegg and creating a file like described here https://code.google.com/p/touchegg/wiki/ConfigureDevices And that actually gave me a "better feeling" trackpad experience - it seemed to respond more like on OS X. No lost selections and failty clicks. I lost multitouch though so i reverted it.
+[07:20] <GeneralK> Anyone able to offer a bit of advice on how to mount an NTFS partition on an gpt partitioned drive? So far I am having no lucj,
+[07:20] <robbiethe1st> I've got some odd performance issues with OpenGL, Would anyone mind taking a look at this? http://ubuntuforums.org/showthread.php?p=10569583
+[07:20] <GeneralK> luck, rather.
+[07:21] <alkisg> Evildaemon: you can control the mouse from a script with this: http://manpages.ubuntu.com/xte
+[07:21] <Evildaemon> Thank you
+[07:21] <raido> GeneralK: whats gpt?
+[07:23] <raido> htop
+[07:23] <GeneralK> raido, It seems to be the type of partition table that Windows 7 uses.
+[07:23]  * raido oops
+=== zz_PhilMather is now known as PhilMather
+[07:25] <raido> GeneralK: So you have a ntfs partition that you want to use in Linux
+[07:25] <GeneralK> raido, Yes. According to parted, it's the number 2 partition on /dev/sda
+[07:26] <MichealH> GeneralK, Does it show up in the Places menu? You want to open the ntfs partition?
+[07:26] <raido> GeneralK: so make a mount point in /media, like "sudo mkdir /media/ntfsdrive"
+[07:27] <GeneralK> MichealH, No, not in the places menu.
+[07:27] <_antant> ok, how do allow a network user to delete files off a share?
+[07:28] <GeneralK> raido, Yep, done...
+[07:28] <MichealH> _antant, Im not familiar with Linux networking but I beleive "sudo chmod 777 file.file"can do the trick on the file
+[07:28] <raido> GeneralK: now do "sudo mount -t ntfs /dev/sda2 /media/ntfsdrive"
+[07:28] <MichealH> 777 = anyone an read wite delete and excecute
+=== P4R4N01D1 is now known as P4R4N01D
+[07:29] <GeneralK> raido, I tried that before... /dev/sda2 does not exist
+[07:29] <raido> You said it was #2 on sda
+[07:29] <GeneralK> Yep
+[07:30] <GeneralK> that is what parted says
+[07:30] <raido> GeneralK: Guess not then
+[07:30] <raido> what does "sudo fdisk -l" say
+[07:30] <qkit> Generalk: if you run fdisk -ll how many partition appear?
+[07:31] <GeneralK> qkit, raido : The output is long... what is that website where I can dump the output & give you a url?
+[07:31] <Lancelot> Does anyone know of a good resource that I can use to learn about the linux shell and how to use terminal?
+[07:31] <_antant> ok, I've made my network user have the main group of the user that owns the folder. That should work, no?
+[07:32] <MichealH> It should do
+[07:32] <raido> GeneralK: paste.ubuntu.com
+[07:33] <GeneralK> raido, qkit : http://paste.ubuntu.com/581956/
+[07:33] <_antant> how about adding create/directory mask = 0770 to my conf?
+[07:34] <Diverdude> ehhhh is there something wrong with ubuntus update servers? I am downloading with ~7 kb/s from it
+[07:35] <qkit> Ouch, the wifi here are damn slow....
+[07:35] <_antant> Woohoo! That's done it
+[07:36] <qkit> Raido, you mange to load the page? i getting timeout here. :(
+[07:37] <raido> GeneralK: You have 4 HDs?
+[07:38] <GeneralK> raido, Well, there are 2 'raid arrays'. The first is made up of 4 and the second is just one 1 tb hdd.
+[07:39] <raido> GeneralK: Is the ntfs partition on a raid volume
+[07:40] <_antant> Huh. Can I take ownership of my external ntfs drive away from root?
+[07:42] <GeneralK> raido, Well, I think the system might see it as one. Technically it isn't, it's just 1 HD. Check out http://paste.ubuntu.com/581964/ for the output from parted.
+[07:43] <raido> GeneralK: now do "sudo mount -t ntfs /dev/sda /media/ntfsdrive"
+[07:43] <schinken> morning
+[07:44] <GeneralK> raido, NTFS signature is missing. Failed to mount '/dev/sda': Invalid argument The device '/dev/sda' doesn't seem to have a valid NTFS. Maybe the wrong device is used? Or the whole disk instead of a partition (e.g. /dev/sda, not /dev/sda1)? Or the other way around?
+[07:44] <schinken> I've installed a package with dpkg -i --force-depends yesterday (because i dont need the dependencys (and i dont have em)) - but now, i cant update my system anymore - because of a broken package. Any idea?
+[07:45] <raido> GeneralK: try 1 sda1
+[07:45] <Softdroid> Hello
+[07:46] <GeneralK> raido, Same as before now... sda1 no such file or directory
+[07:46] <Softdroid> I there any other software for Ubuntu for playing swf beside Gnash player?
+[07:46] <Softdroid> Is
+[07:46] <Fuchs> Softdroid: vlc and mplayer should be able to (not interactivly) play it, else you can watch them in a browser with the adobe flash plugin
+[07:47] <raido> GeneralK: Ok, last try, use /dev/dm-0p1
+[07:47] <Softdroid> Fuchs: Thanks for your replay. I need a player so I can rewind or forward the movie
+[07:47] <cong06> Has anyone here experienced an RSA key change based entirely on an ISP restructure? ie: would an ISP restructure cause a RSA key change over ssh? SSH gives me a warning if the IP changed and the RSA key changed. and this time both have changed. the IP changing is normal. the IP address is dynamic after all... I'm just not sure if I should be worried or not. I realize it's more likely a hardware issue than someone actually being malicious, but I don't want to t
+[07:48] <GeneralK> raido, Yeah, I also tried that before... still the same, does not exist :-/
+[07:48] <raido> GeneralK: Im lost. Sorry buddy.
+[07:48] <Fuchs> Softdroid: try vlc or mplayer
+[07:49] <Starminn> Is there an app or a plugin for a media player that will show you the lyrics of the current song playing? For example, Windows Media Player has the option, and so do iPods while something is playing, so is there a pugin or something I could use? Even a separate app dedicated solely to the purpose of showing you a song's lyrics? (I'm using Banshee but others are fine)
+[07:49] <Softdroid> Fuchs: vlc can't play the files. But I will try mplayer. Thanks
+[07:49] <GeneralK> raido, Ah well. Buggered if I know either. Very frustrating :-/ Thanks for trying though.
+[07:50] <raido> GeneralK: np, BTW see this on GPT: http://en.wikipedia.org/wiki/GUID_Partition_Table
+[07:51] <qkit> GeneralK: how about running this command "sudo mount -t ntfs-3g /dev/sda /media/ntfsdrive"
+[07:51] <raido> cong06: Your key didnt change, there is just a mismatch between the hash for the IP you had before and the one you have now. Just delete the line in ~/.ssh/known_hosts that contains the old IP reference
+[07:52] <GeneralK> qkit, Same response as when we tried before with just the ntfs argument :-/
+[07:52] <cong06> raido: except it's set to warn me only if the IP and the RSA key changed.
+[07:53] <raido> Are you logging in via ssh keys without a password
+[07:53] <cong06> raido: or are you saying that the key is based on the ip? that doesn't make any sense because the ip changes constantly, and this is hte first time I saw it.
+[07:53] <cong06> yeah. without a password. auto-logging in: http://www.debian-administration.org/articles/152
+[07:53] <raido> cong06: Are you logging in via ssh keys without a password
+[07:53] <Diverdude> ehhhh is there something wrong with ubuntus update servers? I am downloading with ~7 kb/s from it
+[07:54] <raido> Did it log you in after the warning
+[07:54] <cong06> no.
+[07:54] <raido> cong06: can you copy the output and paste it
+[07:55] <cong06> raido: to the chat? or do you want me to send it to your PM?
+[07:55] <_antant> Can I set the owner of a mount in fstab?
+[07:55] <raido> cong06: to paste.ubuntu.com
+[07:55] <GeneralK> qkit, It's really annoying. Even in gdisk it is visible as partition 2 on /dev/sda
+=== stephane is now known as Guest94151
+[07:56] <qkit> GeneralK: if you run "sudo blkid /dev/sda2", what you get?
+[07:56] <cong06> raido: http://paste.ubuntu.com/581965/
+[07:56] <GeneralK> qkit, Nothing at all.
+[07:57] <qkit> GeneralK: how about run it on /dev/sda ?
+=== Guest2584 is now known as DarkDevil
+[07:57] <eristikophiles> ok this might sound dumb but why might the command "./configure --prefix=/usr" not be working?
+[07:57] <GeneralK> qkit, sudo mount -t ntfs-3g /dev/sda /media/ntfsdrive
+[07:57] <GeneralK> oops
+[07:58] <raido> cong06: Its like I said, delete line 2 in your known_hosts file, then youre ok
+[07:58] <GeneralK> qkit,  /dev/sda: TYPE="nvidia_raid_member"
+=== DarkDevil is now known as Guest14585
+[07:58] <eristikophiles> also, the source package i got has everything with a .bin extension for some reason. it's for "debian"
+[07:58] <cong06> thanks raido.
+[07:59] <raido> np, you understand now?
+[07:59] <qkit> GeneralK, The ntfs partition is riding on top of a hardware raid?
+[08:00] <GeneralK> qkit, Yeah, ther's a raid controller in the mobo. My main HD is a raid array
+[08:00] <eristikophiles> ok nm .. i found a .deb installer file
+[08:00] <eristikophiles> ;p
+=== shark is now known as Guest73740
+[08:01] <Guest73740>  Guest73740
+[08:01] <qkit> GeneralK: what is the output if you run " gdisk -l /dev/sda"
+[08:01] <Guest73740> Hard
+=== 14WAAX926 is now known as punknroll
+[08:02] <GeneralK> qkit, http://paste.ubuntu.com/581968/
+[08:02] <Guest73740> someone help me
+[08:03] <Guest73740> I know nothing about ubuntu
+[08:03] <Guest73740> someone help me
+[08:04] <Guest73740> I can't change my name     why??
+[08:04] <pylix> use /nick /newnamehere
+[08:04] <pylix> wai
+[08:04] <pylix> t
+[08:04] <qkit> Generalk: please try this "sudo mount -t ntfs-3g /dev/sda2 /mnt"
+[08:04] <pylix> nvm the second /
+[08:05] <Guest73740> I'll try
+[08:05] <GeneralK> qkit, ntfs-3g: Failed to access volume '/dev/sda2': No such file or directory
+[08:05] <GeneralK> gaaaah
+[08:05] <ericy> Guest73740: Do you mean in IRC or in your Ubuntu install?
+[08:06] <qkit> Generalk: in the /var/log/messages, do you spot any unsual error? when you run that command?
+[08:06] <qkit> or it cna be trace under dmesg also
+[08:06] <qkit> s/cna/can
+[08:07] <Guest73740> yes in IRC
+[08:07] <Guest73740> ericy
+[08:07] <GeneralK> qkit, Nah, nothing. I have a suspicion that it has something to do with the raid though
+[08:08] <_antant> When I try and chown an ntfs usb drive mounted in fstab from root won't let me. It doesn't give me an error it just doesn't do it. Is there a way I can take ownership?
+[08:08] <ericy> Guest73740: Do: /nick yournewnick
+[08:08] <researcher1> I want to customize liveCD with my personal logo made as .jpg file. How can that be done?
+[08:09] <ericy>  <qkit> Generalk: Thats -t ntfs    not -t ntfs-3g , ?? rightt ?
+[08:10] <Softdroid> Sometimes the menu or texts in a browser is missed up in Ubuntu. Have anyone got such a problem, any solutions for that?
+[08:10] <Softdroid> messed
+[08:10] <Guest73740>  /nick newnick  right?
+[08:10] <Morten_> yep
+[08:10] <ericy> Guest73740: Do: /nick joe       /nick  mary2
+=== Guest73740 is now known as shark1
+[08:11] <shark1> Thank you
+[08:11] <Starminn> Softdroid: YOu mean File/Edit/View/Tools/Help stuff?
+[08:11] <ericy> shark1: OK.  Try: /help
+=== vincent is now known as Guest78044
+[08:12] <shark1> shark was someone ,shark1 is my name
+[08:12] <Softdroid> Starminn: Yes, for example when i'm using Openoffice word
+[08:12] <Guest78044> do you know if certain font types are easier to read or make the reader more susceptible to convincing?
+[08:12] <GeneralK> qkit, ericy : See, the drive also seems to show up as /dev/dm-0
+[08:13] <Starminn> Softdroid: Certain apps (just by the way they're made) don't play well with various color schemes. For example, Firefox and OpenOffice/LibreOffice are notorious culprits for misbehaving with dark themes.
+[08:13] <Softdroid> Starminn: Thanks for your reply. Is it possible to change the themes?
+[08:13] <Starminn> Softdroid: While I've seen some fixes every so often I've never tried any of them because to get the normal white back it looks like you'd have to edit it by hand again. I could find them if you want, ubt in general the rule of thumb here is "Don't use dark themes if you need those menus."
+[08:14] <Starminn> Softdroid: I'm talking about system themes, which is what you've done to get that to happen.
+[08:14] <Starminn> Softdroid: System->Preferences->Appearance
+[08:14] <qkit> Generalk: hmm...try to mount using /dev/dm-0p1 rather then the sda
+[08:15] <shark1> Thank you  ericy  I'm trying ubuntu
+[08:15] <Starminn> Softdroid: The ones that come default should be fine but some you get from GNOME-Look may not play so well.
+[08:15] <Softdroid> Starminn: The menus are unreadable but when I move the mouse over the items its readable again. Is that the problem you are talking about?
+[08:16] <Starminn> Softdroid: Yep.
+[08:16] <Softdroid> Starminn: I don't use dark theme, but I have changed the theme
+[08:16] <GeneralK> qkit, Again, there's nothing other than dm-0 there's no dm-01 etc.
+[08:16] <Softdroid> Starminn: How can I change the theme back to default?
+[08:17] <ericy> shark1: good luck to you. Have fun.
+[08:17] <Starminn> Softdroid: http://imagebin.org/143654 and to change themes just go to System->Preferences->Appearance and choose one.
+[08:18] <qkit> Generalk: but your gparted show that the /dev/dm-0p1 is available? but when you run the mount command. It return no such partition?
+[08:19] <Softdroid> Starminn: Thanks. You are using dark theme :)
+[08:19] <GeneralK> qkit, Oh, cool... there's a gui for parted. :P
+[08:19] <shark1> ericy: I'm learning programming
+[08:19] <ericy> GeneralK: (I might be joining your conversation/problem very late) but if you can do command line, what do   sfdisk -l     blkid    and    df -h show?
+[08:19] <shark1> do you like it
+[08:19] <Starminn> Softdroid: Another thing to take ntoe of is when using dark themes (mine doesn't do it because it's a white foreground but the ones that are *really* dark) the icons go into "high contrast" mode in Open/Libre Office.
+[08:20] <qkit> :)
+[08:20] <ericy> GeneralK:    sfdisk -l      blkid    and    df -h show?
+[08:20] <Starminn> Softdroid: Yes, I am. I use Firefox 4 Beta though so the only apps I can't read well are LibreOffice and the logout/Sht Down button
+[08:20] <Softdroid> Starminn: Ok, thanks for the info
+[08:20] <Starminn> Softdroid: I deal with it. ;) Lol.
+[08:20] <GeneralK> ericy, I'll paste dump it all, hold one...
+[08:20] <qkit> Generalk: also the ls /dev/mapper ? anything show up?
+[08:21] <ericy> GeneralK:  That's 3 separate commands:  sfdisk -l       blkid         df -h
+[08:21] <Starminn> Anybody have suggestions for making my media player work again without not responding shortly after launch? This is the error I receive. I installed a plugin for Banshee and now it's doing this. How can I restore it to before the plugin? http://pastebin.com/qCgBycLg
+[08:23] <qkit> ericy: i believe sfdisk cant read gpt partition. His NTFS file system run on a gpt partition
+[08:23] <GeneralK> ericy, http://paste.ubuntu.com/581971/
+[08:24] <_antant> qkit / ericy, you seem to be the people to ask. I'm trying to get write access over samba to a usb hdd mounted in fstab. I've tried change owner from root but it won't let me. Do you know of a way to do it?
+[08:24] <ericy> antant: Hold on...
+[08:24] <_antant> cool
+[08:25] <superlinux> hi all. I just want to announce my youtube channel. It contains video lessons about using and installing Debian GNU/Linux. The special about them: Only Arabic language commentary . http://youtube.com/user/ranixlb . thanks. this is a one time advertisement.
+[08:26] <ericy> GeneralK:  Lines 43 - 45,  /dev/dm-0p1  to p4  ...
+[08:26] <qkit> _antant: you can try the solution given in this forum, http://kubuntuforums.net/forums/index.php?topic=3113457.0
+[08:27] <_antant> nice one, cheers
+[08:28] <Softdroid> Which IRC client is best for Ubuntu?
+[08:28] <ericy> GeneralK:  I didn't get in on the start of your problem, but I just thought this might help. Bye.  Lines 43 - 45,  /dev/dm-0p1  to p4  ...
+[08:28] <Softdroid> I'm using Quassel right now
+[08:28] <Tm_T> !best | Softdroid
+[08:28] <ubottu> Softdroid: Usually, there is no single "best" application to perform a given task. It's up to you to choose, depending on your preferences, features you require, and other factors. Do NOT take polls in the channel. If you insist on getting people's opinions, ask BestBot in #ubuntu-bots.
+[08:29] <GeneralK> ericy, Thanks man, I'll have a look
+[08:29] <ericy> antant: I don't know what to think (I've never used samba...).
+[08:29] <qkit> Generalk: what you get if you run "sudo mount -t ntfs-3g /dev/dm-0 /media/ntfsdrive"
+[08:30] <GeneralK> qkit, NTFS signature is missing. Failed to mount '/dev/dm-0': Invalid argument The device '/dev/dm-0' doesn't seem to have a valid NTFS. Maybe the wrong device is used? Or the whole disk instead of a partition (e.g. /dev/sda, not /dev/sda1)? Or the other way around?
+[08:31] <fairuz> Hi, whats PATH=$PATH:$HOME/bin (.bashrc) equivalent in .cshrc?
+[08:32] <qkit> Generalk: what you get if you run gpart on /dev/dm-0
+[08:33] <ethanol> [   35.131778] CIFS: Unknown mount option _netdev
+[08:33] <ethanol> since when?
+[08:33] <ethanol> it is clearly in the manpage for mount as a mount option
+[08:34] <pbear> what's the difference between kernel compiling from the git-tree or via apt-get and from kernel.org??
+[08:35] <Starminn> Anybody have suggestions for making my media player work again without not responding shortly after launch? This is the error I receive. http://pastebin.com/qCgBycLg I installed a plugin for Banshee and now it's doing this. How can I restore it to before the plugin?
+[08:35] <Sonne> pbear, the git-tree would be the most bleeding edge kernel i'd guess, apt-get would get you the ubuntu patched sources, and kernel.org would get you the lastest stable kernel without patches
+[08:36] <ethanol> Starminn: uninstall the plugin?
+[08:36] <Starminn> Yeah, how do I do that?
+[08:36] <ethanol> Starminn: how did you install it?
+[08:36] <Starminn> I navigated to it on my disk and deleted the file but it keeps coming back
+[08:36] <Starminn> ethanol: Eh, the install.sh included in the package
+[08:37] <ethanol> open that and see where it placed files
+=== D_N_X is now known as DNX
+[08:37] <GeneralK> qkit, A floating point exception!
+[08:37] <Xbios> imgonna own youre ass fag
+[08:37] <qkit> what you get in "ls /dev/mapper" ?
+[08:38] <Starminn> ethanol: Well I actually just purged Banshee, so if it doesn't work I'll let you know. ;)
+[08:38] <Starminn> After I reinstalled it it still had the plugin after I killed the ./.config/banshee-1 folder
+[08:38] <Starminn> Ho hum
+[08:39] <Sonne> Starminn, if you installed the plugin locally, reinstalling banshee won't help
+[08:39] <Starminn> Sonne: After a nice little purge it still is doing it so yeah, I'm discovering that.
+[08:39] <Sonne> that goes for everything else as well :)
+[08:40] <Sonne> Starminn, if you don't mind reconfiguring it, you might as well just annihilate the configuration whole
+[08:41] <Starminn> Sonne: I thought that's what purge did? remove+kill all configs. I tried hand-deleting the configs I could find in /home to no avail
+[08:41] <Starminn> I really odn't mind, though. I mean I've already got a lot of hours of crap to do now from uninstalling so I actually would love to start fresh.
+[08:41] <researcher1> how can I creat my own login screen name and personal LOGO?
+[08:42] <GeneralK> qkit, control          nvidia_ebbedadj   nvidia_ebbedadj5 nvidia_daifaeje  nvidia_ebbedadj1  nvidia_ebbedadj6
+[08:42] <bazZ061> Hi all
+[08:42] <Starminn> Sonne ethanol: Here's the install.sh by the way http://pastebin.com/NckXajnD
+[08:42] <Sonne> Starminn, purging removes the system-wide configuration, not the local one
+[08:42] <bazZ061> here is a noob, can somebody help me?
+[08:43] <Starminn> Sonne: Ah.
+[08:43] <Starminn> !ask | bazZ061
+[08:43] <ubottu> bazZ061: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[08:43] <qkit> Generalk: sorry, but i out of idea. Maybe you can try in other channel also, like debian or linux. Where there have people use gpt file system more often. :P
+[08:43] <bazZ061> no germans here?
+[08:43] <Starminn> !german | bazZ061
+[08:43] <ubottu> bazZ061: In den meisten ubuntu-Kanalen wird nur Englisch gesprochen. Fur deutschsprachige Hilfe besuchen Sie bitte #ubuntu-de, #kubuntu-de, #edubuntu-de oder #ubuntu-at. Geben Sie einfach /join #ubuntu-de ein! Danke fur Ihr Verstandnis.
+[08:43] <Sonne> Starminn, can you run "pkg-config --variable=bansheedir banshee-1-core" and paste the output here?
+[08:43] <ethanol> Starminn: you can try running pkg-config --variable=bansheedir banshee-1-core from terminal to figure out what path it used
+[08:43] <bazZ061> k
+[08:43] <GeneralK> qkit, Oh well. Thanks for trying
+[08:43] <bazZ061> ich hab nen ubuntu in meinem vm server aufgesetzt
+[08:43]  * Sonne highs five to ethanol
+[08:44] <ethanol> Sonne: :p
+[08:44] <bazZ061> der ist zu haus und ich mochte per remote ssh drauf zugreifen
+[08:44] <Starminn> :)
+[08:44] <bazZ061> welchen port muss ich freigeben
+[08:44] <bazZ061> 902 oder 22?
+[08:44] <ethanol> bazZ061: dude, stop and read what the bot said
+[08:44] <Starminn> bazZ061: Read what ubottu said
+[08:44] <abhis> getting the following error Unable to connect to in.archive.ubuntu.com:http:
+[08:44] <bazZ061> sorry
+[08:44] <bazZ061> i set up an ubuntu server in my vmware server
+[08:44] <bazZ061> @ home
+[08:44] <Starminn> ethanol Sonne: /usr/lib/banshee-1
+[08:44] <bazZ061> now i want to remote ssh on my server
+[08:45] <Sonne> Starminn, did you run that with sudo?
+[08:45] <ethanol> Starminn: then you will find your plugin there
+[08:45] <bazZ061> which port must opened?
+[08:45] <Starminn> Sonne: No.
+[08:45] <bazZ061> 902 or 22
+[08:45] <Sonne> Starminn, then i'm quite surprised it even worked
+[08:45] <Sonne> try looking if the plugin is in that directory
+[08:45] <bazZ061> and how can i make it more secure?
+[08:45] <Starminn> Sonne: Aha! Giving me bogus commands, I see! ;)
+[08:45] <abhis> hi any help for the following issue? Unable to connect to in.archive.ubuntu.com:http:
+[08:45] <Sonne> bazZ061, google for securing debian howto - same things apply to ubuntu
+[08:46] <Sonne> Starminn, i'll ask again
+[08:46] <bazZ061> ok
+[08:46] <Sonne> did you run *install.sh* with sudo?
+[08:46] <bazZ061> but which port ?
+[08:46] <bazZ061> 902 or 22?
+[08:46] <bazZ061> i have to forweard them also
+[08:46] <bazZ061> on my router
+[08:46] <Sonne> bazZ061, 22 is the standard port, i don't see why you wouldn't use it :)
+[08:46] <gamemakingdude> Hi, i am having trouble of installing ubuntu 10.10 onto my usb.
+[08:46] <Starminn> ethanol: Yeah, it's here. I'll delete it and let you know
+[08:46] <ethanol> Starminn: though a simple sudo locate Banshee.Lyrics.dll should have given you all locations too
+[08:47] <gamemakingdude> Whenever i install it, its the live cd
+[08:47] <gamemakingdude> and not a proper version of ubuntu
+[08:47] <bazZ061> ok port 22 i have to forward
+[08:47] <bazZ061> and which command is it in ubuntu?
+[08:47] <bazZ061> i didnt find anything @ google
+[08:47] <Starminn> ethanol: "sudo locate Banshee.Lyrics.dll" didn't work even though I'm looking at the file
+[08:47] <ethanol> bazhang: iptables for port forwarding
+[08:47] <ethanol> Starminn: define "didn't work"
+[08:47] <bazZ061> port forwarding is automated in my router
+[08:48] <Starminn> ethanol: It returned nothing.
+[08:48] <ethanol> Starminn: did you try a sudo updatedb ?
+[08:48] <bazZ061> but i have to open the port in my ubuntu machine
+[08:48] <Sonne> Starminn, follow me please - did you run the install.sh script with sudo?
+[08:48] <gamemakingdude> Ignore me....
+[08:48] <ethanol> gamemakingdude: ok :)
+[08:49] <gamemakingdude> ...
+[08:49] <Starminn> Sonne ethanol: It's working now. I just ran "sudo rm /usr/lib/banshee-1/Banshee.Lyrics.dll" and restarted Banshee. Voila, no issue.
+[08:49] <Starminn> Sonne: Are we going to Candy Mountain? Sorry, anyway, yes, I did
+[08:50] <ET-0nline> how do i install ssh is it sudo apt-get install ssh
+[08:50] <Sonne> Starminn, i missed your candy mountain reference - nevertheless i'm glad you managed to remove it
+[08:51] <Sonne> ET-0nline, definitely, yes
+[08:51] <Sonne> ET-0nline, the client should be already there though - for the server you might want openssh-server
+[08:51] <ET-0nline> sonne: and then if i want a user to connect to my ubuntu ssh how to do that
+[08:51] <beer_brouwer> does anyone know a tool to create your own api?
+[08:51] <Sonne> ET-0nline, create the user, give it a password, give your ip to your user
+[08:51] <Starminn> Sonne: Ah. It was simply one of those lame YouTube videos that gained popularity through some process full of facepalms a few years ago. Old news now. I would link you but it's highly irrelevant. Basically, "YouTube garbage" is a nice summary.
+[08:52] <Sonne> Starminn, noted
+[08:52] <ET-0nline> how is it to add user is it sudo add user
+[08:52] <Starminn> Sonne: Thanks for the help though. If you have time, care to tell me more of this "locate" command? I can see this being very useful.
+[08:52] <ethanol> candy mountain was awesome
+[08:52] <Sonne> ET-0nline, sudo adduser <username>
+[08:52] <peetoon> Can anyone help me with my wireless card? It shows up on lshw but it doesn't seem to have a logical name.
+[08:52] <ethanol> almost as awesome as romeo and juliet in leetspeak
+[08:52] <Witeds> i have a question for any one experianced enough in ubuntu or any other linux destro and wifi. is there a way to make it so i can see if there is hiden ESSIDs around me ? my ds using dsorganize can see them i was wondering if i could get my pc to ?
+[08:53] <Sonne> Starminn, periodically, your system stores a database of all the files you have on your disks (the update is done at some time during the night i believe)
+[08:53]  * Starminn tries to prevent the lines of #ubuntu/#ubuntu-offtopic from crossing *cough*ethanol*cough*
+[08:53] <Sonne> by launching "locate" you can query that database, and see where a file is
+[08:53] <ethanol> Sonne: sudo updatedb
+[08:53] <Gartral> Hello all, i'm trying too get pppd too run, but it appears i don't have a ppp_generic kernel module...
+[08:53] <ethanol> :p
+[08:53] <Starminn> Sonne: Ah. And what were you saying about updating said DB?
+[08:53] <Starminn> ethanol: ah.
+[08:53] <gamemakingdude> I have a problem with installing ubuntu on a usb and i do not want it to be the live version!
+[08:54] <Sonne> ethanol, why do you tell me that?
+[08:54] <ethanol> Sonne: it doens't have to be nightly, it can be at your will too
+[08:54] <Sonne> ethanol, i was about to mention that - by default is nightly
+[08:54] <schinken> I've installed a package with dpkg -i --force-depends yesterday (because i dont need the dependencys (and i dont have em)) - but now, i cant update my system anymore - because of a broken package. Any idea?
+[08:54] <ethanol> gamemakingdude: google install ubuntu on usb
+[08:55] <Sonne> schinken, dpkg -r <that_package_name>
+[08:55] <gamemakingdude> I have
+[08:55] <Starminn> gamemakingdude: What do you mean "Live version"?
+[08:55] <ethanol> gamemakingdude: this is irc, not your local how-to multichapter channel
+[08:55] <gamemakingdude> i've tried pen drive linux
+[08:55] <bonjoyee> schinken: sudo apt-get install -f
+[08:55] <gamemakingdude> Starminn: Live cd.
+[08:56] <ethanol> gamemakingdude: then don't install the live version
+[08:56] <gamemakingdude> ....
+[08:56] <gamemakingdude> I'm not installing it
+[08:56] <gamemakingdude> its the pendrive linux that does it
+[08:56] <Starminn> gamemakingdude: So you want it to run as a mini computer on the USB? AFAIK the newer Ubuntus don't work on that? Most people go with Damn Small Linux or Puppy Linux anyway, but the newer Ubuntus don't seem to be compatible with Pen Drive Linux according to their sit last I checked
+[08:56] <Witeds> i guess thats a no to my question
+[08:56] <Starminn> their site*
+[08:57] <linux> hello
+[08:57] <gamemakingdude> Then why is it included in the pendrivelinux list?
+[08:57] <lathan_devers> ethanol, if you need a live usb linux I suggest http://www.slax.org/ Very lightweight and small
+[08:58] <ethanol> I do not
+[08:58] <Starminn> !usb | gamemakingdude (read the second link)
+[08:58] <ubottu> gamemakingdude (read the second link): For information about installing Ubuntu from USB flash drives, see https://help.ubuntu.com/community/Installation/FromUSBStick - For a persistent live USB install, see: https://wiki.ubuntu.com/LiveUsbPendrivePersistent
+=== Guest14585 is now known as DarkDevil
+[08:58] <Starminn> gamemakingdude: Some of those might help?
+=== DarkDevil is now known as Guest24994
+[08:58] <schinken> Sonne: why remove? :/
+[08:59] <schinken> i dont want to remove that package
+[08:59] <Starminn> gamemakingdude: And yeah, I was thinking of the wrong program's site.
+[08:59] <ct529> hi guys, I cannot play asf files on *ubuntu 10.10 .... I googled and searched but did not find a solution
+[08:59] <ct529> can anyone help me?
+[08:59] <schinken> its working as it is, but i cant resolve the dependencies
+[08:59] <tensorpudding> what's an asf file?
+[08:59] <gamemakingdude> So what ubuntu 8.04 only works on usbs?
+[08:59] <researcher1> where are the .jpg files stored which give background to Ubuntu?
+[09:00] <ct529> tensorpudding: it is a microsoft (^*%~&$~!) multimedia file that is used by some internet radio streamers
+[09:00] <ct529> tensorpudding: for example http://live1.interoutemediaservices.com/?id=632ecab2-c76f-49f6-8faf-2a99d13131d2
+[09:00] <venkatesh_> hello every one can anyone tell me what this command will do "le16_to_cpu"
+[09:00] <tensorpudding> ct529: tried using banshee?
+=== lance_ is now known as Guest28668
+[09:00] <Starminn> researcher1: /usr/share/backgrounds I believe.
+[09:01] <venkatesh_> hello every one can anyone tell me what this command will do "le16_to_cpu"
+[09:01] <Gartral> ct529: install ubuntu restrictred extras and banshee
+[09:01] <Sonne> schinken, remove it, upgrade, reinstall it
+[09:01] <Sonne> brb
+[09:01] <ciphersson1> hi all
+[09:01] <Starminn> researcher1: /usr/share is where most system-wide files for users are. S if it's not in your home folder, check there.
+[09:01] <Starminn> So*
+[09:01] <DJones> ct529: This looks like a plug in for XMMS2 http://packages.ubuntu.com/lucid/sound/xmms2-plugin-asf You should be able to install the plugin via synaptic and sounds like it'll help you to play .asf files
+[09:01] <gamemakingdude> Most of the stuff on there is mostly for live stuff
+[09:01] <ciphersson1> is there a certin way I should install ubuntu 10.10 on an intel ssd?
+[09:01] <venkatesh_> hello every one can anyone tell me what this command will do "le16_to_cpu"
+[09:02] <gamemakingdude> and not for mini computer
+[09:02] <tensorpudding> venkatesh_: probably converts a 16bit int from little endian to whatever the cpu uses
+[09:02] <ct529> Gartral: I have already installed them
+[09:02] <Starminn> gamemakingdude:"This means that you can boot from a USB drive and keep customisations  such as keyboard layout, numlock, preferences, additional packages saved  on the drive. " What is lacking? That's what your desktop/laptop does.
+[09:03] <Gartral> ciphersson1: i believe ubuntu will recognize the SSD and automatically disable journaling, and enable wear-leveling.
+[09:03] <venkatesh_> thamk you Tensorpudding , do you have any link which as this information..
+[09:03] <fedora_newb> is there a way to save settings in xchat, like the servers and rooms you have joined to come up next time you start xchat?
+=== Michael is now known as Guest78834
+[09:03] <ciphersson1> us there a way to check?
+[09:03] <tensorpudding> venkatesh_: try man 3 endian
+[09:04] <schinken> Sonne: is there nothing else i can do? i need to install the vmware-view-client, but the version in the repro doesnt have PCoIP support - so i need to install the .dev
+[09:04] <Starminn> fedora_newb: Have you asked in #xchat?
+[09:04] <fedora_newb> I guess that would be a good start :P didn't know it had its own room, ty
+[09:04] <fedora_newb> starminn
+[09:04] <SnowmanX11> I need help for LibreOffice.Calc. How can you divide the text within a cell (no wrap) as you do it with MS Office Excel (ALT+Enter)?
+[09:05] <Starminn> fedora_newb: Not a problem. Questions abotu XChat are very common around here. I don't use it so I can't help much. If somebody here knows they'll tell you, but usually not many use it
+[09:05] <fedora_newb> kk
+[09:05] <linux> hello~
+[09:05] <venkatesh_> tensorpudding : Thank you for the information...
+[09:06] <linux> e..can you speak chinese?
+[09:06] <Starminn> !ch | linux
+[09:06] <ubottu> linux: Das Schweizer Team finden sie unter #ubuntu-ch, deutschsprachigen Support bekommen sie aber in #ubuntu-de, #kubuntu-de oder #edubuntu-de. Aus regionalen Grunden ist im Schweizer Channel nur Englisch erlaubt. Geben sie einfach /join #ubuntu-at ein! Danke fur ihr Verstandnis.
+[09:06] <Starminn> Oops
+[09:06] <Starminn> !chinese | linux
+[09:06] <ubottu> linux: For Ubuntu help in Chinese : /join #ubuntu-cn <unconvertable> <unconvertable> /join #ubuntu-tw  <unconvertable> <unconvertable> /join #ubuntu-hk
+[09:07] <ericy> linux: What a very good nick you have. Did you register it, yet?
+[09:07] <researcher1> I want a text to be floating for each background of Ubuntu.Actually the name of some holy diety
+[09:07] <Starminn> ericy: +1 How he managed that I do not know
+[09:07] <quietone> After logging out a user got a 'white screen of death', had to reboot and now can't get wifi up. SIOCSIFFLAGS: Operation not possible due to RF-kill
+[09:07] <researcher1> I want a text to be floating for each background of Ubuntu.Actually the name of some holy diety. can it be done?
+[09:08] <tensorpudding> researcher1: what do you mean by floating text?
+[09:08] <Starminn> researcher1: I'd say you'd need to just add the text yourself in GIMP or whatever pleases you. It would be nice if you could make a transparent .gif which is what I think you want to overlay it all, but I don't see it happening
+=== Aleks_Minton is now known as demonbell
+[09:08] <tensorpudding> you can edit the backgrounds to put in text
+[09:09] <Diverdude> How is it exactly this groupon works? Is it a place where i can recommend cheap offers to my friends or what is it?
+[09:09] <tensorpudding> there's also things which can paint on the background but that's a lot more painful
+[09:09] <researcher1> tensorpudding: its the name of a diety writeen as .jpg image which I want to be visible for each  Ubuntu background
+[09:09] <linux_> loco
+[09:09] <Fripon> hi ! I would like to know if on Ubuntu Lucid, it's possible in KDM to have like in GDM the users who have an account in order to only click on the nickname and supply the password (because in KDM you have to type the entire nickname) ?
+[09:09] <quietone> rfkill list shows wifi is hard and soft locked. unblock does not change that. there is no external switch on this machine
+[09:09] <iceroot> Fripon: you can use gdm for kde if you want
+[09:09] <Fripon> hoo?
+[09:10] <linux__> I can not understdand
+[09:10] <Starminn> researcher1: You want it to be a single image which automatically applies to all of them, right?
+[09:11] <Starminn> researcher1: OR do you have just one background in particular in mind?
+[09:11] <Gartral> Diverdude: severly OT
+[09:11] <researcher1> STarminn:YES
+[09:11] <researcher1> Starminn:I want same image to be applied to all backgrounds
+[09:12] <Starminn> researcher1: Okay. While I'm sure there's probably some way to set the background control file (wherever that is) to load two images with one being dynamic and the other static, I wouldn't knnow where to even find it, hat to do with it once I have it, or if it will even work. Your best bet (and possibly only bet) is to just make a background with the text you want there as a separate file.
+[09:13] <Starminn> researcher1: I like what you're trying to do, and if you want to try my earlier suggestion go for it as I see that as the only possible "hope" but I really wouldn't know what to tell you.
+[09:13] <Diverdude> Gartral, come on, its ok
+[09:13] <researcher1> Starminn:But I will have to edit each background and save it?
+[09:14] <Starminn> Diverdude: Why is it that every time I'm on here somebody's lecturing you for being off-topic?
+[09:14] <Starminn> researcher1: Yes. So, for example, open it up in GIMP and just add a text box there, save it as a different name (so you save the original) and set it as your background.
+[09:14] <researcher1> Starminn:ok .workable idea.thanks
+[09:15] <Diverdude> Starminn, Maybe you are just completely out of touch with reality mate
+[09:15] <quietone> I've been trying what I can find in the forums. But still no wifi.
+[09:16] <Starminn> researcher1: Sure thing. By the way, not sure if you know this or not, but backgrounds don't have to be in /usr/share/backgrounds to work. They can be anywhere. So to prevent accidentally overwriting stuff I'd save it in /home/yourUSERNAME/somewhere
+[09:16] <ericy> fedora_newb: I am using XChat 2.8.8.  I will tell you that you can configure any servers and multiple channels to automatically open.
+[09:16] <Starminn> Diverdude: In soviet Russia, reality touch you.
+[09:16] <researcher1> starminn:OK
+[09:16] <Starminn> :)
+[09:16] <quietone> anyone able to help get wifi working?
+[09:16] <Starminn> researcher1: Glad to help.
+[09:17] <Starminn> !wifi | quietone
+[09:17] <ubottu> quietone: Wireless documentation, including how-to guides and troubleshooting information, can be found at https://help.ubuntu.com/community/WifiDocs
+[09:17] <Gartral> Starminn: +1
+[09:18] <Starminn> :)
+[09:19] <Michael-farsight> hi everyong
+[09:19] <Michael-farsight> everyone
+=== Johan^izi is now known as johan^izi
+[09:19] <ericy> Michael-farsight: Hello.
+[09:19] <ville5> #ubuntu
+[09:20] <linuxuz3r> hello guys
+[09:20] <Michael-farsight> hi,i am new to ubuntu, how about you?
+[09:20] <ericy> linuxuz3r: Hello.
+[09:20] <linuxuz3r> im intermediate
+[09:20] <linuxuz3r> hi ericy
+[09:21] <ericy> Michael-farsight: I've been using it for 2 years, (after Windows XP).
+[09:21] <linux__> what ?
+[09:21] <ericy> linuxuz3r: Hello.
+[09:21] <linux__> hello
+[09:22] <ericy> linux__: Hello, do you have a problem.?
+[09:22] <quietone> Starminn, thx but I've tried what I see and I don't see my error msg
+[09:22] <ericy> linux__: Or a question?
+[09:23] <linux__> ^_^
+[09:23] <chaochao> :-)
+[09:23] <ericy> linux__: Which Ubuntu do you use? I use 10.10 on a (junk) Acer notebook.
+[09:23] <chaochao> i have a question
+=== RobotCow is now known as EastGermanDictat
+[09:25] <ericy> OK, you 3 nicks just listen, while the rest of us debug and troubleshoot 'real' problems.
+[09:25] <Starminn> quuietone: I have no experience with Wi-Fi. The bot call usually solves the problem. Sorry.
+[09:25] <ericy> chaochao: What?
+[09:27] <chaochao> can you tell me how to use 'apt-get',i am a student.
+[09:27] <amj> hi
+[09:27] <ericy> chaochao: Student of what?
+[09:27] <quietone> Starminn, thx for the reply, I got it working. I stopped listening to the user (told me there was no switch) and found the switch.
+[09:28] <RubenAlonzo> Greetings Everyone.
+[09:28] <johan^izi> chaochao, open a console and type: apt-get
+[09:28] <ericy> chaochao: First do: sudo apt-get update
+[09:28] <alk> Student of life
+[09:28] <quietone> good night all
+=== EastGermanDictat is now known as MsExterminator
+=== MsExterminator is now known as MicroflopExtermi
+[09:28] <alk> johan^izi: nice concise instructions there ;)
+=== MicroflopExtermi is now known as MicflopExtermina
+[09:28] <johan^izi> alk, ;)
+[09:28] <isbric_> Somthing in x is causing me packet loss every 10 minutes lasting 30-60 sec, from console im not experiancing any packetloss, wat can i do to norrow this problem down even more?
+[09:29] <ericy> chaochao: Then to install say firefox: sudo apt-get install firefox
+=== MicflopExtermina is now known as MuhammedTheProfe
+[09:29] <ericy> quietone: Good night.
+=== MuhammedTheProfe is now known as dammit
+[09:30] <Quintin> any tips on how to make ubuntu not so slow and craptastic?
+[09:30] <ericy> RubenAlonzo: Hello.
+[09:30] <Quintin> machine in question is PIII 1ghz 640mb ram
+=== dammit is now known as HillerdotPy
+=== HillerdotPy is now known as Hxixtxlxexrx
+[09:31] <linuxuz3r> well ubuntu is not slow
+=== Hxixtxlxexrx is now known as H_i_t_l_e_r
+[09:31] <Quintin> uhm
+[09:31] <DJones> Quintin: I would be tempted to use something like xubuntu or lubuntu rather than ubuntu, they're less memory intensive
+[09:31] <Quintin> yes, yes it is.
+[09:31] <DJones> !nickspam | H_i_t_l_e_r
+[09:31] <ubottu> H_i_t_l_e_r: You should avoid changing your nick in a busy channel like #ubuntu, or other Ubuntu channels; it causes excessive scrolling which is unfair to new users. Please set your preferred nick in your client's settings instead. See also <unconvertable> /msg ubottu Guidelines <unconvertable>
+[09:32] <chaochao> thanks
+[09:32] <chaochao> i know it a little.
+[09:33] <Quintin> linuxuz3r: windows xp UI is a billion times faster
+[09:33]  * Gnea looks at Quintin
+[09:33] <Quintin> ?
+[09:33] <overclucker> lubintu might be able to handle your 1gz
+[09:33] <overclucker> *lubuntu
+[09:34] <Gnea> Quintin: okay, just saw your original question - yeah, don't use Ubuntu on such a slow system, heh, try Xubuntu or Elivecd
+[09:34] <Quintin> not mine, mom's bf's. :P
+[09:34] <overclucker> ah
+[09:34] <Quintin> my pee cee is pretty fast-ish.
+[09:34] <Quintin> also if you coul dmake the tv out work, that would be grand
+[09:34] <linuxuz3r> Quintin, really
+[09:34] <Quintin> when I try tvout, everything goes to shit
+[09:34] <linuxuz3r> windows 2000 is much better than xp
+[09:34] <Gnea> Quintin: making the tv-out work is up to you
+[09:34] <Quintin> linuxuz3r: "better"?  no, not really
+[09:34] <DJones> Quintin: If you could upgrade the memory, that would probably make a big difference as well
+[09:35] <Gnea> #windows for windows talk
+[09:35] <Quintin> DJones: yea, I'll ask around for antoher 512m dimm I guess
+[09:35] <Quintin> sodimm*
+[09:35] <Quintin> oh boy, irc nazis
+[09:35] <ericy> Does any body have a 'real' question or problem with Ubuntu?
+[09:35] <Gnea> !windows | Quintin
+[09:35] <ubottu> Quintin: For discussion on Microsoft software, or help with same, please visit ##windows. See http://launchpad.net/distros/ubuntu/+bug/1 http://linux.oneandoneis2.org/LNW.htm and /msg ubottu equivalents
+[09:36] <Gnea> !guidelines | Quintin
+[09:36] <ubottu> Quintin: The guidelines for using the Ubuntu channels can be found here: http://wiki.ubuntu.com/IRC/Guidelines
+[09:36] <Gnea> Quintin: feel free to comment about it in #freenode if you like
+[09:36] <Quintin> whenever I run the tv out, it's like the video accel stops working ... dragging windows around is sloooowww
+[09:36] <Gnea> !pm | Quintin
+[09:36] <ubottu> Quintin: Please ask your questions in the channel so that other people can help you, benefit from your questions and answers, and ensure that you're not getting bad advice. Please note that some people find it rude to be sent a PM without being asked for permission to do so first.
+[09:36] <Tm_T> Quintin: also please keep that name calling off from the channel
+[09:36] <ana_> hi. I installed Pixum software in Lubuntu but when I try to execute it, appears that error "Failed to execute child process "/ home / ana / Pixum / Pixum" (No such file or directory)"
+[09:36] <linuxuz3r> ubuntu is cool
+[09:36] <linuxuz3r> its fast
+[09:36] <ana_> lubuntu is faster
+[09:36] <ana_> :S
+[09:37] <linuxuz3r> lubuntu?
+[09:37] <ana_> yes
+[09:37] <linuxuz3r> what is it
+[09:37] <Sonne> !lubuntu
+[09:37] <ubottu> lubuntu is a project to create a derivative of Ubuntu using the LXDE desktop environment. See https://wiki.ubuntu.com/Lubuntu . /join #lubuntu for lubuntu support.
+[09:37] <ana_> but horrible installing software
+=== solstice is now known as Guest35392
+[09:37] <ana_> linux is horrible to install software out repos
+=== H_i_t_l_e_r is now known as MuayThai
+[09:38] <ana_> I installed Pixum software in Lubuntu but when I try to execute it, appears that error "Failed to execute child process "/ home / ana / Pixum / Pixum" (No such file or directory)"
+[09:38] <ericy> ana_: (I'm running Lubuntu right now.) What is Pixum software?
+[09:38] <ana_> any soution?
+[09:38] <ana_> ok
+[09:38] <demonbell> !grub
+[09:38] <ubottu> grub is the default boot manager for Ubuntu releases before 9.10 (Karmic). Lost GRUB after installing Windows? See https://help.ubuntu.com/community/RestoreGrub - GRUB how-tos: https://help.ubuntu.com/community/GrubHowto - See !grub2 for Karmic onwards.
+[09:38] <ana_> is a photoalbum
+[09:38] <demonbell> !grub2
+[09:38] <ubottu> GRUB2 is the default Ubuntu boot manager since 9.10 (Karmic). Lost GRUB after installing Windows? See https://help.ubuntu.com/community/RestoreGrub - For more information and troubleshooting for GRUB2 please refer to https://help.ubuntu.com/community/Grub2
+[09:39] <Quintin> hrm... over 200 processes running.  seems very excessive for a desktop
+[09:39] <linuxuz3r> hey quintin do you know why ubuntu iso image says amd64
+[09:39] <ana_> pixum.com
+[09:39] <linuxuz3r> not general x86_64
+[09:39] <ericy> ana_: Is Pixum software in the Ubuntu repo?
+[09:39] <ana_> I try it in windows without problems
+[09:39] <ana_> no
+[09:39] <ana_> no repo
+[09:40] <linux_wd> HELLO!
+[09:40] <ana_> is not possible to install out ubuntu repos?
+[09:40] <ana_> I never runs anything not in the repos
+[09:40] <ericy> ana_: Is Pixum a windows program that came with your camera or printer?
+[09:40] <ana_> nono
+[09:40] <ana_> is linux native
+[09:40] <ericy> ana_: ok
+[09:41] <ana_> http://www.pixum.co.uk/fotobook/download/id/94
+[09:41] <ana_> that
+[09:41] <Gnea> ana_: usually there's a variant of what you're looking for in the repositories, but if not, you should be able to compile if it comes to that
+[09:42] <fedora_newb> Why isn't there OPs in this room? It could really use some for the trolls.
+[09:42] <Gnea> fedora_newb: what's the problem?
+[09:42] <Quintin> linuxuz3r: hmm?  why?
+[09:42] <ghosthn2010> hello
+[09:42] <ana_> that software is very near to hofmann
+[09:42] <fedora_newb> Gnea, just rude people in chat ;)
+[09:42] <linuxuz3r> Quintin, i was just wondering
+[09:43] <ana_> others no
+[09:43] <Gnea> fedora_newb: no worries :)
+[09:43] <AdvoWork> ive got a bit of perl script, im trying to run/pipe a program through, any ideas please? would it just  be cat file.txt | perlcode > outputfile ? i tried that but it didnt appear to do anything
+[09:43] <linuxuz3r> in fedora it says x86_64
+[09:43] <linuxuz3r> but ubuntu and debian the iso is amd64
+[09:43] <Gnea> !amd64
+[09:43] <ubottu> AMD64 and Intel 64 are fully supported architectures on Ubuntu. See https://help.ubuntu.com/community/CommonQuestions#AMD64%20Processors and http://en.wikipedia.org/wiki/Amd64 for more information.
+[09:44] <ana_> well
+[09:44] <Quintin> well, most compilers produce binaries that are compatible with both architecture.  I think amd was the first to have popular consumer 64 bit cpu, so it might be related to that
+[09:44] <ghosthn2010> 17:41:12
+[09:44] <ana_> I wait pixum support mail xD
+[09:45] <Gnea> ana_: what's the problem you're having, exactly?
+[09:46] <overclucker> AdvoWork: you script has to be able to handle sdtin
+[09:46] <krishna> chchc
+[09:46] <linuxuz3r> any elite hardware geeks here?
+[09:47] <linuxuz3r> just wanna chat really
+[09:47] <linuxuz3r> lol
+[09:47] <Sonne> !social
+[09:47] <Gnea> linuxuz3r: try #hardware, thanks
+[09:47] <DJones> linuxuz3r: You might be better joining ##hardware to chat about that, or #ubuntu-offtopic
+[09:47] <Sonne> gah, i thought there was a !command for this as well :P
+[09:47] <krishna> yes
+[09:47] <overclucker> s/sdtin/stdin/
+[09:48] <AdvoWork> overclucker, cant i do it from the CLI? the script is like: perl -MEncode -pe 'use bytes; sub c { my $d = decode("UTF-8",shift,Encode::FB_XMLCREF); $d =~ s/&#x(..);/decode("windows-1252",chr(hex($1)))/eg; $d } s/([\x80-\xFF]+)/encode("UTF-8",c($1))/eg'
+[09:48] <krishna> ok
+[09:48] <krishna> haa
+[09:48] <Cork> flash plays super fast (and no sound) in browsers for me (chrome, firefox and opera), tried to reinstall flash, totem, the browsers but can't find a solution; anyone have an idea?
+[09:48] <krishna> ahahkdha
+[09:48] <ericy> Gnea: She (ana_) said: I installed Pixum software in Lubuntu but when I try to execute it, appears that error "Failed to execute child process "/ home / ana / Pixum / Pixum" (No such file or directory)"
+[09:48] <K3rl0u4rn> hi people, I'm currently trying to install a subsystem with debootstrap, I wonder if this is possible to use debootstrap + chroot without root access ? does it even make sense ? are there any security issues ?
+[09:49] <mirshafie> Hello folks. I've been having some problems with booting Ubuntu since 10.10, the famous "Checking battery state" bit that freezes the boot process. I'm wondering if this check can be removed from the boot sequence, so that I can use Ubuntu?
+[09:49] <linuxuz3r> oh guys is there a pattern when ubuntu release is lts
+[09:49] <krishna> i need y messenger
+[09:49] <krishna> can u help ?
+[09:49] <nit-wit> linux, 3years
+[09:49] <nit-wit> linuxuz3r, 3 yeras
+[09:50] <linuxuz3r> nit-wit, but what release usually are lts
+[09:50] <DJones> krishna: Yahoo messenger? You can connect to yahoo accounts for chat using pidgin or empathy, although from memory, they don't support video chat
+[09:50] <Gnea> ericy: ah, okay - well we support Ubuntu here, Lubuntu support is in #lubuntu, and from what I can tell, it's just a perl script to install it, so it should "just work" if you type ./install.pl
+[09:50] <krishna> can u help ?
+[09:50] <Gnea> !lts | linuxuz3r
+[09:50] <ubottu> linuxuz3r: LTS means Long Term Support. LTS versions of Ubuntu will be supported for 3 years on the desktop, and 5 years on the server. The current LTS version of Ubuntu is !Lucid (Lucid Lynx 10.04)
+[09:50] <Gnea> !ask | krishna
+[09:50] <ubottu> krishna: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[09:51] <linuxuz3r> is the next release of ubuntu LTS?
+[09:51] <ana_> yes, y make ./install.pl
+[09:51] <Gnea> !11.04
+[09:51] <ubottu> Natty Narwhal is the codename for Ubuntu 11.04, due April 28 2011. Help and support (only) in #ubuntu+1. Natty is unstable and is not intended for production systems.
+[09:51] <Gnea> linuxuz3r: I would say 'no'
+[09:51] <ana_> install ok
+[09:51] <DJones> linuxuz3r: I think 12.04 is the next LTS
+[09:51] <linuxuz3r> gnea ok
+[09:51] <ana_> but program not run
+[09:51] <ericy> ana_: It appears that maybe when you installed, You should specify "/home/ana/"  not "/home/ana/Pixum/".
+[09:52] <Gnea> ana_: okay, I'm installing it now
+[09:52] <ericy> ana_: It appears that maybe when you installed, You should specify "/home/ana/"  not "/home/ana/Pixum/".
+[09:52] <linuxuz3r> im dumbfounded every time i see a software with so many features
+[09:52] <linuxuz3r> lol
+[09:53] <linuxuz3r> !gnome3
+[09:53] <ana_> oh
+[09:53] <linuxuz3r> is gnome3 gonna be on 11.04
+[09:53] <ana_> i try it
+[09:53] <ana_> i go to try it sorry xD
+[09:53] <Gnea> linuxuz3r: ask in #ubuntu+1 please
+[09:54] <krishna> hi ..
+[09:54] <K3rl0u4rn> anyone could help with this question ? I'm currently trying to install a subsystem with debootstrap, I wonder if this is possible to use debootstrap + chroot without root access ? does it even make sense ? are there any security issues ?
+[09:54] <overclucker> AdvoWork: yes, you should be able to pipe that alright. cat file.txt | perlcode > out.txt
+[09:54] <Gnea> krishna: talk here, not in PM, thanks.
+[09:55] <Gnea> !details | krishna
+[09:55] <ubottu> krishna: Please give us full details. For example: "I have a problem with ..., I'm running Ubuntu version .... When I try to do ..., I get the following output: ..., but I expected it to do ..."
+[09:55] <AdvoWork> overclucker, it doesnt seem to change anything in the file though?
+[09:56] <vivek200912> Wine is installed but having problem in playing games...!!!!
+[09:57] <linuxuz3r> i wonder from where the ubuntu funds comes from cause i am just wondering because it seems that it the distro is well maintained and updated
+[09:57] <linuxuz3r> if i want to be a developer for ubuntu what channel should i go to
+[09:57] <Gnea> vivek200912: not all games are going to work with wine, you might need cedega
+[09:57] <linuxuz3r> yeah cedega
+[09:58] <linuxuz3r> cool thanks for idea man
+[09:58] <K3rl0u4rn> i/join #debian
+[09:58] <Gnea> !canonical | linuxuz3r
+[09:58] <ubottu> linuxuz3r: Canonical Ltd. is committed to the development, distribution and promotion of open source software products, and to providing tools and support to the open source community. It is the driving force behind the Ubuntu, Kubuntu, Xubuntu, and Edubuntu Operating Systems. Canonical's website is at http://www.canonical.com/
+[09:58] <K3rl0u4rn> woops
+[09:58] <K3rl0u4rn> sorry
+[09:58] <FloodBot1> K3rl0u4rn: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[09:58] <vivek200912> Gnea: what is cedega?
+[09:58] <Gnea> !cedega | vivek200912
+[09:58] <ubottu> vivek200912: cedega is a project based on WINE, aimed at running Windows games on Linux. For more info, see http://help.ubuntu.com/community/Cedega
+=== Guest24994 is now known as DarkDevil
+[09:59] <vivek200912> Gnea: Thanks a lot....!! Have a good day..
+[09:59] <Gnea> vivek200912: cheers
+[09:59] <eso4g2> Hi! Everybody!
+=== DarkDevil is now known as Guest4489
+[09:59] <eso4g2> UBUNTU Rules
+[10:00] <ana_> now say denied permision
+[10:00] <ana_> :S
+[10:01] <eso4g2> ana crap!
+[10:01] <Gnea> ana_: it works fine here, what's saying denied permissions?
+[10:01] <ana_> with ubuntu?
+[10:01] <eso4g2> you are a silly xD
+[10:01] <eso4g2> Ana is a crap.
+[10:02] <DJones> !coc | eso4g2
+[10:02] <ubottu> eso4g2: The Ubuntu Code of Conduct is a community etiquette document to which we ask all Ubuntu users to adhere, and can be found at http://www.ubuntu.com/community/conduct/ .  For information on how to electronically sign the CoC, see https://help.ubuntu.com/community/SigningCodeofConduct .
+[10:02] <ana_> not insults please
+[10:02] <ericy> eso4g2: Name calling is not as good as politeness.
+[10:02] <Gnea> !attitude > eso4g2
+[10:02] <ubottu> eso4g2, please see my private message
+[10:02] <Gnea> ana_: yes, the GUI came up
+[10:02] <ana_> :O
+[10:03] <eso4g2> comanla
+[10:03] <ana_> BAN ESO4g please
+[10:03] <Gnea> ana_: now, you said you ran ./install.pl right?
+[10:03] <eso4g2> no.
+[10:03] <Gnea> ana_: stop.
+[10:03] <eso4g2> vive je.
+[10:03] <pbear> what's the difference between a data compressor(bzip2) and an archiver(rar)?
+[10:03] <eso4g2> el ubunto es una crap
+[10:03] <Baram> both are old, rar is very slow on linux
+[10:03] <ana_> yes
+[10:03] <Gnea> !es | eso4g2
+[10:04] <ubottu> eso4g2: En la mayoria de canales de Ubuntu se habla solo en ingles. Si busca ayuda en espanol o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[10:04] <ana_> y ran ./install.pl
+[10:04] <pbear> what's the difference?
+[10:04] <Gnea> ana_: okay, did you get any errors?
+[10:04] <ana_> i run again
+[10:04] <vivek200912> Gnea: which version of cedega I should install?
+[10:04] <Gnea> !patience | pbear
+[10:04] <ubottu> pbear: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[10:04] <ana_> i think no errors
+[10:04] <Baram> umm... everything?  They use completely different compression routines
+[10:04] <Gnea> vivek200912: the latest ought to work
+[10:05] <Gnea> ana_: okay good, do you still have the terminal open?
+[10:05] <vivek200912> Gnea: can u specify here?
+[10:05] <Gnea> vivek200912: whatever the latest is on the website.
+[10:05] <ana_> yes
+[10:05] <isbric_> Im havving a network problem and i think its related to X, wat can i do to norrow my search of the error?
+[10:06] <vivek200912> Gnea: ok, let me check..
+[10:06] <Gnea> vivek200912: it's fairly simple and straight-forward.
+[10:06] <Baram> network problem related to X?
+[10:06] <mirshafie> and by the way, I do not have a laptop, so I don't need Ubuntu to check the battery state. if that helps...
+[10:06] <ana_> downloading many archives
+[10:06] <Gnea> ana_: now type the following:  cd ~/Pixum
+[10:06] <vivek200912> Gnea: Its have cost.
+[10:06] <ana_> when finish installation
+[10:07] <Gnea> ana_: then:  cd Pixum\ Photo\ Book
+[10:07] <Gnea> ana_: yes, after installation is finished
+[10:07] <ana_> ok
+[10:07] <ana_> thanks for your help
+[10:07] <zvacet> vivek200912: you have to pay for cedega
+[10:07] <Gnea> vivek200912: yes, it's not free, but it's not expensive. not everything is without cost.
+[10:07] <Gnea> vivek200912: ubuntu is free, therefore less cost to play such games shouldn't be a problem.
+[10:08] <Gnea> ana_: you're welcome
+[10:08] <ana_> Pixum installed, no errors. now say: to run program click on /home/ana/Pixum/Pixum Easy book
+[10:08] <vivek200912> Gnea, zvacet: yes, obiviously, and not much prise only $5 per month which is good to buy..
+[10:08] <Gnea> ana_: yes, that's the problem.
+[10:08] <shlorine> hey, I cant start up xfce4 for some reason =/ xf86OpenConsole: Cannot open /dev/tty0 (No such file or directory)
+[10:09] <zvacet> vivek200912: so go for it
+[10:09] <ana_> :S ???
+[10:09] <Gnea> vivek200912: exactly - make sure you check the compatibility list to make sure your game works with it before buying
+[10:09] <Gnea> ana_: you have to type:  cd Pixum, then cd Pixum\ Photo\ Book
+[10:09] <Gnea> ana_: then type:  ./Pixum\ Photo\ Book
+[10:09] <vivek200912> zvacet,Gnea: thanks..
+[10:11] <ana_> I don't have Pixum\Photo\book :S
+[10:11] <iqpi> ana_: notice the spaces
+=== ogra is now known as Guest78603
+[10:12] <Gnea> ana_: the \ are to escape spaces on the commandline
+[10:12] <ericy> Gnea: ana_: You are making me dizzy with all of those forward slashes, back slashes and spaces!
+[10:12] <shlorine> Could anyone help me with something?, I cant get xfce to boot up for some reason
+=== Guest78603 is now known as ogra_
+[10:12] <ana_> mmm
+[10:12] <ana_> well
+[10:12] <Gnea> ericy: feel free to focus on something else :)
+[10:12] <iqpi> shlorine: how do you have tried to boot xfce?
+[10:12] <ana_> I I'm in terminal in /Pixum
+[10:13] <Gnea> ana_: yes, and if you type:  cd Pixum<tab>   where <tab> is the tab key, you'll see why the \ is necessary
+[10:13] <shlorine> iqpi just by using the startxfce4 cmd
+[10:13] <ana_> sorry I don't understand
+[10:14] <ana_> I install it in /home/ana/Pixum
+[10:14] <ericy> Gnea: ana_: Well as I said in an earlier post!: Spaces in file and directory names are evil!
+[10:14] <Gnea> ericy: that doesn't help solve the problem.
+[10:14] <ana_> ericy shut up please
+[10:14] <Fuwex> Hi. I need a simple, yet good-looking panel that works with Compiz to only show a taskbar, meaning only open windows. No other buttons. Any suggestions?
+[10:14] <Gnea> lol
+[10:14] <zvacet> shlorine: why do you want to start from cli
+[10:14] <iqpi> perhaps its because you are trying to start it from gnome?
+[10:14] <Gnea> ana_: let's just take this step-by-step and it will work, okay?
+[10:15] <ana_> ok
+[10:15] <ericy> Gnea: rudness
+[10:15] <ana_> I reinstall again
+[10:15] <Gnea> ericy: enough.
+[10:15] <Gnea> ana_: okay
+[10:15] <Gnea> ana_: let me know when you are ready
+[10:15] <ana_> in install no change anything?
+[10:16] <Gnea> ana_: correct.
+[10:16] <ericy> Gnea: I'm listening too.
+[10:16] <Gnea> ericy: please do.
+[10:17] <ana_> now the text is in english :S
+[10:19] <Gnea> ana_: okay, can you cd Pixum/Pixum\ Photo\ Book/
+[10:21] <ana_> WOW
+[10:21] <ana_> now it runs!
+[10:21] <ana_> but in english xD
+[10:21] <ana_> I try again in spanish version
+[10:22] <ana_> is strange that
+[10:22] <ana_> :S
+[10:22] <ana_> english version ok
+[10:22] <ana_> spanish no.....
+[10:23] <Gnea> ana_: weird... glad it works :)
+[10:23] <ana_> YES MANY GREAT
+[10:23] <ana_> THANKS
+[10:24] <j0llyr0tten> i upgraded to natty and wifi broke, where do i get help from? thx
+[10:24] <Gnea> cheers :)
+[10:24] <Gnea> !natty | j0llyr0tten
+[10:24] <ubottu> j0llyr0tten: Natty Narwhal is the codename for Ubuntu 11.04, due April 28 2011. Help and support (only) in #ubuntu+1. Natty is unstable and is not intended for production systems.
+[10:24] <ana_> now I try to reinstall spanish version
+[10:25] <ana_> is possible any mistake in spanish version :S
+[10:25] <ericy> .
+[10:25] <ejv> !enter | ana_
+[10:25] <ubottu> ana_: Please try to keep your questions/responses on one line. Don't use the "Enter" key as punctuation!
+[10:25] <ana_> ok sorry
+[10:28] <ana_> spanish version not run
+[10:28] <erry> Hi
+[10:28] <erry> Im trying to update and all im getting is 0% [Waiting for headers]
+[10:29] <erry> Quite a while now
+[10:29] <et-0nline> hey whats the command line when somebody ssh logs and i want to see what he does on my box
+[10:29] <lathan_devers> ana_, try asking at the spanish irc channel #ubuntu-es
+[10:30] <ana_> no
+[10:30] <ejv> et-0nline: they need to have a screen active, then you'd screen -x
+[10:30] <ana_> is a program error
+[10:30] <ana_> nothing to do
+=== ariana is now known as Phrul
+[10:31] <erry> Is there a problem with the update servers?
+[10:31] <ejv> i believe people are having difficulty communicating with you ana_ , you should try asking in the #ubuntu-es channel in your native language. :)
+[10:31] <zvacet> erry: try to change server and see if that works
+[10:32] <erry> zvacet, is there a way to know which server is the problem?
+[10:32] <erry> I use ubuntu.otenet.gr and badgerports.org
+[10:33] <zvacet> erry: under ubuntu software center>edit>software repositories change from one you use now to main and see
+[10:33] <erry> Where's ubuntu software center?
+[10:33] <Neosano> hello guys, I'm going to install ubuntu ON usb. Why can't I simply boot from cd and install it to usb exactly the same way I install ubuntu on my hard drive?
+[10:33] <erry> I'm on 10.04 lts
+[10:34] <zvacet> erry: under applications
+[10:34] <iqpi> Neosano: you can do as you say, i have done it but with debian
+[10:34] <erry> Oh that
+[10:34] <erry> never used it
+[10:34] <linuxuz3r> i saw a xoom tablet today and its something
+[10:34] <linuxuz3r> smaller than an ipad
+[10:34] <Neosano> iqpi, oh, right. Just wanted to be sure, thanks
+[10:35] <iqpi> Neosano: just be sure to select the correct drive
+[10:35] <iqpi> and also when you are going to install grub
+[10:35] <erry> zvacet, stuill 0% waiting for heeaders
+[10:35] <iqpi> install it in the pendrive, and not in other harddisk
+[10:36] <zvacet> erry:  sorry I don't know
+[10:36] <Neosano> iqpi, OK. uhhmm, more questions came to my mind :)
+[10:36] <erry> maybe badgerports is the prob
+[10:36] <Neosano> iqpi, is it possible to install more than 1 distrib on a pendrive?
+[10:37] <iqpi> Neosano: of course yes
+[10:37] <erry> Yep
+[10:37] <erry> That was the prob
+[10:37] <Neosano> iqpi, and is it possible to resize partitions on the pendrive like I usually do on my hdd?
+[10:37] <zvacet> erry:  so you solved it?
+[10:37] <iqpi> Neosano: yes, no problem, just make the partitions as if it will be a standart hd
+[10:38] <Neosano> iqpi, awesome :O thanks
+[10:38] <erry> zvacet, yes ty
+[10:38] <erry> :)
+[10:38] <azizLIGHTS> how do i make a new user  called 'dropbox'
+[10:38] <Ben64> adduser dropbox
+[10:38] <zvacet> erry:  glad to hear that  :)
+[10:38] <gamemakingdude> Ubuntu is now installing on my 8gb usb.
+[10:38] <iqpi> only one thin Neosano
+[10:39] <boota2> hello, I can't access webmin form the internet, works from localhost from root
+[10:39] <iqpi> Neosano: i dont advice you to use ext3 or ext4
+[10:39] <Fripon> Hi ! I modified keys in /etc/kde/kdm/kdmrc but changes are ignored, did I miss something?
+[10:39] <boota2> anyone had experience with it?
+[10:39] <Ben64> usb flash drives are really slow, i don't recommend them for an OS
+[10:39] <iqpi> Neosano: because of journaling
+[10:39] <mirshafie> ok i take it no one here is familiar with the ubuntu boot sequence. bye
+[10:39] <Neosano> iqpi, :O
+[10:39] <Neosano> iqpi, what should I use then?
+[10:40] <azizLIGHTS> how do i become the new user 'dropbox'
+[10:40] <Ben64> ext2, still gonna be slow though
+[10:40] <iqpi> Neosano: i think ext2 is the best, or parse a option to ext4 to disable journaling, and i dont know how to do that xD
+[10:40] <Neosano> Ben64, not for everyday use, of course! but for trying linux out and doing recovery things!
+[10:40] <Sonne> azizLIGHTS, su dropbox
+[10:40] <Sysi> !webmin | boota2
+[10:40] <ubottu> boota2: webmin is no longer supported in Debian and Ubuntu. It is not compatible with the way that Ubuntu packages handle configuration files, and is likely to cause unexpected issues with your system.
+[10:41] <boota2> I have old ubuntu.
+[10:41] <boota2> 8.4
+[10:41] <Sonne> Neosano, just out of curiosity, why do you want a filesystem without journaling?
+[10:41] <neurochrome> Is anyone else getting weird screen artefacts in Ubuntu.  If I have an app open in the foreground I always see either youtube videos or adverts for amazon come through from the background, even when a browser is minimised or closed altogether
+[10:41] <neurochrome> the only way to get rid of it is to restart
+[10:41] <neurochrome> this is a new problem, started at 10.10
+[10:41] <neurochrome> any ideas?
+[10:41] <Sonne> neurochrome, few other people are reporting the same issue - it's most probably due to the video drivers
+[10:42] <Sysi> Sonne: it's better when using usb drive, less writing to it
+[10:42] <Sonne> Sysi, aha
+[10:42] <mushrooms> Hi all, I have used ubuntu in the past (like version 6 or something) but gave up, and decided that I would give it another go today with version 10.
+[10:42] <neurochrome> Sonne, even switching between metacity/compiz/ emerald/gtk-win-dec doesn;t help
+[10:42] <neurochrome> strange
+[10:42] <ylmfos> dd
+[10:42] <Sonne> neurochrome, those are window managers, not video drivers :P
+[10:42] <neurochrome> Sonne, no fix?
+[10:42] <neurochrome> Sonne,  yeah I know
+[10:42] <Ben64> neurochrome: have you tried disabling hardware accel for flash
+[10:42] <Sysi> it's issue with flash
+[10:43] <ylmfos> yundao
+[10:43] <mushrooms> But I need help setting up my wireless card, more specifically... It doesn't seem to turn 'on' when I boot up
+[10:43] <neurochrome> No, I haven't
+[10:43] <Sonne> neurochrome, the proprietary flash plugin uses some kind of weird acceleration that causes problems on certain drivers, you might want to try switching to some alternatives
+[10:43] <ylmfos> what is this?
+[10:43] <Sonne> neurochrome, for example, you  might consider trying the proprietary drivers
+[10:43] <Neosano> iqpi, oh, and really, what's wrong with journaling?
+[10:43] <neurochrome> There is a way to disable hw accel though, I'll look into it
+[10:43] <neurochrome> Sonne, prop drivers for what?
+[10:43] <neurochrome> GFX?
+[10:43] <neurochrome> already do
+[10:43] <Sonne> neurochrome, for your video card
+[10:43] <DJones> ylmfos: This a a support channel for the ubuntu operating system
+[10:43] <Sonne> ah, nice
+[10:43] <olie> hi
+[10:43] <Sysi> Neosano: more writing to disc
+[10:44] <ylmfos> eeee
+[10:44] <iqpi> Neosano: journaling makes many write cycles to the disks to dont loose data in a crash
+[10:44] <GeneralK> Just in case there is anyone different around now, I am having an issue where I'm unable to mount a NTFS partition on a drive that has a gpt partition table... it's also connected through a nvidia raid array. Any help would be appreciated
+[10:44] <neurochrome> Sonne,  not that I like prop stuff, but I like my gfx with a kick up the ass
+[10:44] <Ben64> neurochrome: try disabling hardware accel for flash first :D right click flash vid -> settings -> uncheck box for accel
+[10:44] <ylmfos> i m first use it
+[10:44] <iqpi> Neosano: so it will destroy your pendrive
+[10:44] <Sonne> neurochrome, i know what you mean, i run proprietary drivers as well - but your issue appears often when using the free ones
+[10:44] <iqpi> Neosano: because pendrives are designed to support a limit of IO cycles
+[10:44] <neurochrome> Ben64, cheers 2sec, I thought there was a cfg file somewhere to switch it on/off
+[10:45] <ylmfos> where are u?
+[10:45] <Sysi> Ben64: i'd tried that but my settings aren't working either..
+[10:45] <mushrooms> when I type in, lshw -C network, and it shows up with an entry "*-network UNCLAIMED" what does this mean?
+[10:45] <Fripon> Hi ! I modified keys in /etc/kde/kdm/kdmrc but changes are ignored, did I miss something?
+[10:45] <Neosano> iqpi, oh :O
+[10:45] <ericy> Have you seen the channel list.  Do it. Filter it for channels with over 300 users.
+[10:45] <Ben64> Sysi: huh? i didn't say anything for you to do?
+[10:45] <zvacet> yimfos: do you have any question
+[10:46] <Sonne> GeneralK, i'm not familiar with your setup - you might want to try #ubuntu-server however
+[10:46] <Sysi> Ben64: throws to adobe website
+[10:46] <Neosano> iqpi, hmm.. ok.. but then what's going to happen if I pull my usb out while the system is doing something?
+[10:46] <Sysi> Fripon: you could try to ask from #kubuntu
+[10:47] <Sysi> Neosano: unclean mount, not good for journalized fs:es either
+[10:47] <gazzumatteo> :/quit
+[10:47] <azizLIGHTS> how do i give the new user dropbox, ability to read/write my home dir? /home/ubuntu
+[10:48] <iqpi> Neosano: i dont know, but the same that if while you are working with the system, you disconnect the hard drive, your system will crash
+[10:48] <Sonne> azizLIGHTS, you could try adding the dropbox user to your group - but why are you using a dedicated user for dropbox?
+[10:48] <iqpi> Neosano: I think it will become freeze
+[10:48] <iqpi> and you will cannot do anything, just hardreboot
+[10:48] <Fripon> Sysi thx
+[10:48] <mushrooms> How do I check if a particular driver in question is bound to a device, and talking to the kernel?
+[10:49] <azizLIGHTS> Sonne: because i tried with my own user and it does funny things when i try to share /home/ubuntu to other dropbox users
+[10:49] <Sysi> mushrooms: lspci -k
+[10:49] <Sonne> azizLIGHTS, using a different user won't change anything
+[10:49] <Sysi> for a start
+[10:49] <Neosano> iqpi, I mean would it broke the filesystem so I'd have to format it?
+[10:49] <Sonne> that's the way fuse woks i guess
+[10:49] <mushrooms> Sysi: so if it's listed, then a driver should be installed?
+[10:50] <fedora_newb> mushrooms, it will list the driver its using
+[10:50] <azizLIGHTS> Sonne: it tries to sync /home/ubuntu/.dropbox which has socket files and goes 100% cpu usage, if i exclude it , it deltes it and my db disappears, if i recreate it, and then try to share /home/ubuntu it makes a .dropbpx (Conflicted Copy) dir
+[10:50] <azizLIGHTS> Sonne: its funny businmess!
+[10:50] <azizLIGHTS> Sonne: im going to isolate the .dropbox dir into a new user, and not share that user's home. and keep my own home safe from that crap and able to be shared
+[10:50] <chasis> hi, i need a linux alternative for avisub detector, any help?
+[10:50] <mushrooms> fedora_newb: oh ok (sorry I'm not an advanced user.. so...) I'm trying to get my wireless card working with ubuntu :(
+[10:50] <death_> <unconvertable> <unconvertable>
+[10:51] <Sonne> azizLIGHTS, that doesn't really look like a good choice, but have fun experimenting :)
+[10:51] <fedora_newb> mushrooms, i had trouble with mine as well, however did you try connecting it to a wired connection and then checking for additional drivers with ubuntu online?
+[10:51] <DJones> !ru | death_
+[10:51] <ubottu> death_: <unconvertable> <unconvertable> #ubuntu-ru <unconvertable> <unconvertable> <unconvertable> <unconvertable> <unconvertable> <unconvertable>  / Pozhalujsta posetite /join #ubuntu-ru dlya polucheniya pomoshi na russkom yazyke
+[10:51] <fedora_newb> mushrooms, it fixed mine right up with that method
+[10:52] <azizLIGHTS> so how do i add 'dropbox' to my group?
+[10:52] <fedora_newb> mushrooms, system->administration->additional drivers
+[10:52] <mushrooms> fedora_newb: yes, i am connected via wire at the moment, and then i connected it to the 'restricted drivers', it said that system doesn't have any..
+[10:52] <fedora_newb> oh
+[10:52] <iqpi> Neosano: i dont know what will happen
+[10:52] <iqpi> but i dont think you will have any problem, but you will loose whatever you have not saved before
+[10:52] <fedora_newb> mushrooms, you made sure your wifi is on?
+[10:52] <mushrooms> fedora_newb: then... my wireless card is one of those ones where i insert into the PCI slot on my laptop. it won't light up either..
+[10:52] <Neosano> ok..
+[10:53] <Neosano> and..
+[10:53] <azizLIGHTS> !group
+[10:53] <azizLIGHTS> !groups
+[10:53] <Sonne> azizLIGHTS, adduser dropbox ubuntu
+[10:53] <chasis> any help with avisub detector for linux?
+[10:53] <mushrooms> fedora_newb: ^^;;; actually i don't know how to turn it on in ubuntu..
+[10:53] <Sonne> (if that's your username)
+[10:53] <zvacet> mushrooms:  read https://help.ubuntu.com/community/WifiDocs and see if it helps
+[10:53] <mushrooms> zvacet: yeah i'm reading that at the moment now too
+[10:53] <Neosano> iqpi, I want the free space of the pendrive to be shared for all os'es on my pendrive, how to do that?
+[10:53] <Sysi> mushrooms: should be bios setting
+[10:53] <azizLIGHTS> Sonne what about the permissions of /home/ubuntu dir? do i have to set it
+[10:53] <zvacet> mushrooms: ok then
+[10:53] <sougata> mushrooms: whats your network card ?
+[10:53] <fedora_newb> mushrooms, i would do what zvacet recommended...i am of no help from here, sorry
+[10:53] <mushrooms> zvacet: i was trying to figure out if the lshw -C network command meant anything :(
+[10:54] <Sonne> azizLIGHTS, if anything, chmod g+w
+[10:54] <jrn_a> mushrooms, look for the ubuntu netbook versions / it's extra packages
+[10:54] <neurochrome> Ben64, the settings is greyed out, and global settings takes me to adobe.com
+[10:54] <Sonne> if you wanna write to it, that is
+[10:54] <mushrooms> sougata: I have no idea >_< how do i tell? (i don't have the driver disc, nor do i have the original box)
+[10:54] <azizLIGHTS> yes
+[10:54] <iqpi> Neosano: just make a partition with the free space, and format it to fat32
+[10:54] <azizLIGHTS> do i do adduser dropbox ubuntu, as ubuntu or as dropbox user
+[10:54] <Sonne> adduser <dropbox user> <your user>
+[10:54] <iqpi> then make a fstab rule to mount that partition for example in /pendrive
+[10:54] <azizLIGHTS> yes but as who?
+[10:54] <sougata> mushrooms: so what was the output for lshw -C network ?
+[10:55] <Ben64> neurochrome: try it on a youtube vid?
+[10:55] <mushrooms> sougata: hang on i'll paste it in a pastebin
+[10:55] <neurochrome> yeah, that's where I am
+[10:55] <sougata> mushrooms: cool
+[10:55] <Neosano> iqpi, no, I mean..  I don't want to create 2 partitions for 2 different os'es, how can I install them on one? :O
+[10:55] <Ben64> neurochrome: well thats grayed for me too... hold on
+[10:56] <Neosano> iqpi, simply different root directory?
+[10:56] <zvacet> Neosano: you can not install two os on same partition
+[10:56] <neurochrome> Ben64, k
+[10:56] <iqpi> Neosano: you need at least one partition for each / so, you cannot install 2 systems in one partition
+[10:56] <mushrooms> sougata: http://paste.ubuntu.com/582022/
+[10:56] <Neosano> that doesn't sound good XD
+[10:56] <azizLIGHTS> Sonne: what about files in /home/ubuntu/* shouldnt those be g+w too?
+[10:56] <neurochrome> Ben64, think I found the text file to edit /etc/adobe/mms.cfg
+[10:57] <iqpi> Neosano: there is a posibilite
+[10:57] <Sonne> azizLIGHTS, aye most probably
+[10:57] <Ben64> neurochrome: :O
+[10:57] <neurochrome> Ben64, but it doesn't exist, does flash have hw accel on by default?
+[10:57] <iqpi> but you will need to use first a different partition
+[10:57] <Ben64> http://ben64.com/panda/test1.html
+[10:57] <Ben64> neurochrome: go there, right click, settings :D
+[10:58] <neurochrome> Ben64, nice one!
+[10:58] <Sysi> best workaround ever
+[10:58] <Ben64> worth a shot, i was having problems with accel on
+[10:59] <neurochrome> Ben64, the artefacts are still there, but I'll restart to see if it's fixed.... or is there another way to kill the programs running w/o restarting?
+[10:59] <sougata> mushrooms: hang on a while
+[10:59] <mushrooms> sougata: so i was wondering what "unclaimed" means... and if there were any way of actually enabling the wifi card...
+[10:59] <mushrooms> sougata:  ya
+[10:59] <iqpi> Neosano: you can first install both systems, in diferent partitions, then from one of the system, as root, you copy the whole root directoy of the other system into a directory of your system. Then when it is entired copied, you can chroot in the new folder, so it will be like using a diferent system into your system.
+[10:59] <Ben64> neurochrome: logging out would work, but if it didn't fix it, then that probably won't with a restart either
+[10:59] <iqpi> Neosano: and if it works, then destroy the partition
+=== Guest4489 is now known as DarkDevil
+[11:00] <neurochrome> Ben64, brb
+[11:00] <Neosano> iqpi, but I remember when installing linux there was an option called root point or smth
+=== DarkDevil is now known as Guest31578
+[11:00] <iqpi> Neosano: yes, you are right
+[11:00] <Ben64> smth?
+[11:00] <ninoe> !help
+[11:00] <ubottu> Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[11:00] <Neosano> something XD
+[11:01] <iqpi> but, you first install as many systems as you want in different partitions
+[11:01] <Ben64> wow
+[11:01] <iqpi> Neosano: and after that
+[11:01] <Sysi> Ben64: mine started working when i took acceleration off, thanks
+[11:01] <iqpi> Neosano: you have to copy each / of each system into diferent folders of the system you want to have as "master"
+[11:02] <iqpi> and then, for using those "client" systems
+[11:02] <Ben64> Sysi: cool
+[11:02] <iqpi> Neosano:  you can chroot to the folder of the system.
+[11:02] <iqpi> Neosano: i don't know if i have explain
+[11:03] <sougata> mushrooms: you need acx1xx driver
+=== Radios is now known as Radios_zzz
+[11:03] <azizLIGHTS> how do i make it so new files made in /home/ubuntu by ubuntu user are g+w by default upon creation
+[11:03] <mushrooms> sougata: oh ok, so what should I do from here?
+[11:03] <sougata> mushrooms: just hang on
+[11:03] <mushrooms> sougata: no problem
+[11:04] <sougata> mushrooms: http://linuxwireless.org/en/users/Drivers
+[11:04] <sougata> mushrooms: we have to match the vendor and the product id
+[11:04] <sougata> mushrooms: Then we can get the driver.
+[11:05] <mushrooms> sougata: oh ok, so it's that texas instruments one?
+[11:05] <Fripon> Hi ! I modified keys in /etc/kde/kdm/kdmrc but changes are ignored, did I miss something?
+[11:06] <Neosano> iqpi, but that would require some more brainfuck with grub :O
+[11:06] <Neosano> iqpi, hmm okay thanks!
+[11:07] <iqpi> Not really, in fact you wont need grub because you only have to boot one linux, and the others should "boot" from that linux
+[11:07] <iqpi> but Neosano thats fucking hard work make the partitions
+[11:08] <Neosano> iqpi, >.< ok
+[11:08] <Neosano> iqpi, thanks!
+[11:08] <gil> Hi all - is anyone here using natty with the gnome3 team ppa?
+[11:09] <iqpi> Neosano: np =)
+[11:09] <DJones> !natty | gil
+[11:09] <ubottu> gil: Natty Narwhal is the codename for Ubuntu 11.04, due April 28 2011. Help and support (only) in #ubuntu+1. Natty is unstable and is not intended for production systems.
+[11:09] <gil> thx
+[11:09] <mushrooms> sougata: :3 I think i found a fix
+[11:10] <sougata> mushrooms: cool
+[11:10] <sougata> mushrooms: I guess you need a acx100 driver
+[11:10] <azizLIGHTS> any idea on default file perms for any created new files
+[11:10] <mushrooms> sougata: D: it didn't work..
+[11:10] <sougata> mushrooms: so what did you install
+[11:11] <mushrooms> sougata: i did a search to see if i can find *-network UNCLAIMED, there was a forum entry that suggests i do a sudo apt-get install linux-backports-modules-jaunty
+[11:11] <sougata> mushrooms: yes :-)
+[11:11] <mushrooms> sougata: but it didn't work.. i got this message D: E: Unable to locate package linux-backports-modules-jaunty
+[11:11] <rizzuh> where are the GTK themes stored?
+[11:12] <Sysi> rizzuh: /usr/share/themes/ or ~/.themes/
+=== Craig_Dem_ is now known as Craig_Dem
+[11:13] <mushrooms> sougata: did i do something wrong with that :C
+[11:13] <sougata> mushrooms: that is not there in your apt list
+[11:14] <sougata> mushrooms: what version of ubuntu are you using
+[11:14] <mushrooms> sougata: the latest one, i grabbed it like 3 days ago. so that makes it 10.10?
+[11:15] <sougata> mushrooms: ok.you can see that using cat /etc/lsb-release
+[11:16] <sougata> mushrooms: so why would you like to install backport for jaunty ? . I am not quit sure about this.
+[11:16] <mushrooms> sougata: someone suggested this one: http://ubuntuforums.org/showthread.php?t=1314693
+[11:16] <EClaesson> Hi, i'm having some problems with bash scripts. I have a very simple script with two lines, including #/bin/bash. Then i cd to the directory where it is and type ./filename.sh Then it says command not found. I tried with sudo as well
+[11:16] <sougata> mushrooms: what I assume that your wifi should work with acx100 driver
+[11:17] <EClaesson> Nevermind
+[11:17] <EClaesson> Forgot to chmod to +x
+[11:18] <mushrooms> sougata: so, even if my listing says acx 111 i should still go with the acx 100?
+[11:18] <DavidB> Hi all
+[11:18] <DavidB> I have a File sharing problem on our Ubuntu File Server can someone please help me out?
+[11:19] <MrBushido> does anybody know where I can find the philosphy behind ubuntu/apt's directory structure? Some of the guides I'm learning from think things are in places to where they are on ubuntu
+[11:19] <mman> how to move a directory to a place and keep the same rights
+[11:19] <Quintin> how the hell do I get X zap back?
+[11:19] <mushrooms> sougata: it says if i get the backports, the driver should become available :D
+[11:19] <sougata> mushrooms: what I know there are some debian source availabe for acx100
+[11:20] <sougata> mushrooms: http://askubuntu.com/questions/12269/problem-with-texas-instruments-acx-100-22mbps-wireless-interface
+[11:20] <mman> lets say: mv  file  file.bak      which argument do i have to use so that file.bak has the same rigts (rwx for example)
+[11:20] <mushrooms> sougata: >_< I'm a newb tho.. so probably won't know what to do with them...
+[11:20] <sougata> mushrooms: Don't worry everyone learns this way.
+[11:20] <DavidB> I have a File sharing problem on our Ubuntu File Server can someone please help me out?
+[11:20] <rizzuh> I've installed oxygen-gtk and selected it as the GTK theme with lxappearance. However, GTK apps that run as root (with sudo) still use the crappy Redmond theme. How do I select the oxygen-gtk theme for those as well?
+[11:20] <Sysi> mman: shouldn't need any
+[11:21] <azizLIGHTS> !umask
+[11:21] <mman> sysi, but the ower changes
+[11:21] <sougata> mushrooms: Did you read the link, ubuntu does not ships a driver for this hardware
+[11:22] <mushrooms> sougata: I suspect that my card is not from texas instruments tho... because it doesn't have any markings on it that says TI... it looks generic to me..
+[11:22] <bullgard4> MrBushido: http://www.pathname.com/fhs/: "This page is the home of the Filesystem Hierarchy Standard (FHS)."
+[11:22] <mushrooms> sougata: also, it used to work when i was running ubuntu 6 (but i gave up using it)
+[11:22] <mushrooms> sougata: so i know drivers exist that runs with ubuntu >_<
+[11:22] <sougata> mushrooms: Ahhaaa
+[11:23] <Sysi> mman: maybe you'd need to use rsync
+[11:23] <sougata> mushrooms: you can try #linux-wireless channel
+[11:23] <sougata> mushrooms: I guess some one there can provide you some help
+[11:23] <DavidB> I have a File sharing problem on our Ubuntu File Server can someone please help me out?  We have 15 station running Windows Xp and Windows 7 and our File Server running Ubuntu, I configured 3 shares with full access, restarted Samba but some of the stations can not agges the server
+[11:24] <mushrooms> sougata: oh ok thanks for your help anyways! appreciate it
+[11:24] <Sysi> DavidB: you could try at #ubuntu-server
+[11:24] <sougata> mushrooms: I am not quit sure, I will do some googling to see what is available
+[11:24] <sougata> mushrooms: yw
+[11:24] <DavidB> Ty Sysi
+[11:26] <symmm> hi
+[11:27] <hasenj> question, when I click the mouse, it takes about half a second to register, so if I try to drag/drop, I have to wait sometime after clicking ... any help?
+[11:27] <symmm> I installed ubuntu via wubi but the keyboard layout is wacked (probably due to the windows locale not being english originally)
+[11:27] <symmm> e.g. I try to enter a colon and end up with a +
+[11:28] <symmm> is there a keyboard layout selector or somesuch?
+[11:29] <Sysi> of course (but i don't remember where, check menu)
+[11:30] <symmm> :
+[11:30] <symmm> yay thanks found it
+[11:31] <mushrooms> sougata: lol everyone there is so quiet D:
+[11:31] <Kre10s> hey. I'm trying to use empathy to make sip calls. I can make calls, but I can't accept incoming ones? it rings but i can't find a button to pick up. how do I accept incoming calls?
+[11:31] <hwnd> anyone know of a program to join video files together that works well
+[11:32] <fenghuo> what are u saying?
+[11:32] <erUSUL> hwnd: avidemux?
+[11:32] <rizzuh> I've installed oxygen-gtk and selected it as the GTK theme with lxappearance. However, GTK apps that run as root (with sudo) still use the crappy Redmond theme. How do I select the oxygen-gtk theme for those as well?
+[11:33] <sougata> mushrooms: yes, they will reply hang on. Most of them are upstream developers
+[11:33] <sougata> mushrooms: You can get it working with ndiswrapper
+[11:33] <HyperHoRse> W: Duplicate sources.list entry http://archive.canonical.com/ubuntu/ maverick/partner i386 Packages (/var/lib/apt/lists/archive.canonical.com_ubuntu_dists_maverick_partner_binary-i386_Packages)
+[11:33] <HyperHoRse> W: You may want to run apt-get update to correct these problems
+[11:33] <HyperHoRse> why do i always get this
+[11:34] <pooz>  day
+[11:34] <sougata> mushrooms:  http://ubuntuforums.org/showthread.php?t=1341794&highlight=d-link+dwl-g520
+[11:34] <HyperHoRse> everyday
+[11:34] <mushrooms> sougata: i thought ndsiwrapper requires that i have like a windows version of that driver
+[11:34] <mushrooms> sougata: im going to give that 'backports' method a crack, and see how i go lol
+[11:36] <Sysi> HyperHoRse: you have ran apt-get update?
+[11:36] <HyperHoRse> yes but it always spits a message saying i need to run it twice
+[11:36] <HyperHoRse> sometimes even 3 times
+[11:36] <HyperHoRse> every time. i do one it says run it again.
+[11:36] <HyperHoRse> eventually it stops
+[11:36] <HyperHoRse> but its weird.
+[11:37] <Sysi> try dpkg --configure -a
+[11:37] <mushrooms> i remember that in the days of ubuntu 6, my computer would always hang when it tried to go to youtube and watch flash videos, i hope this won't happen in ubuntu 10 >_<
+[11:39] <wk> hello
+[11:41] <symmm> hi
+[11:41] <symmm> just wondering, is there a way to have a keyboard layout shortcut like alt-shift or something?
+[11:41] <symmm> I have two languages installed
+[11:43] <neurochrome> Ben64, that did the trick! ;)
+[11:43] <neurochrome> Ben64, cheers
+[11:43] <neurochrome> Ben64, I'd like to know whether there is a key to edit using gconf to make such an alteration
+[11:43] <HyperHoRse> dpkg --configure -a what that do
+[11:44] <alexsn> man dpkg should know
+[11:44] <Sysi> fixes errors with package manager
+[11:44] <HyperHoRse> good fixer uper that oner
+[11:45] <Fuwex> Any suggestions for a window manager that includes a decent decorator, and has by default the ability to provide a panel/taskbar without using any plugins/external panel applications?
+[11:46] <HyperHoRse> The following extra packages will be installed:
+[11:46] <HyperHoRse>   alien-arena-common alien-arena-data libopenal1
+[11:46] <HyperHoRse> The following NEW packages will be installed:
+[11:46] <HyperHoRse>   alien-arena alien-arena-common alien-arena-data libopenal1
+[11:46] <HyperHoRse> 0 upgraded, 4 newly installed, 0 to remove and 2 not upgraded.
+[11:46] <FloodBot3> HyperHoRse: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[11:46] <HyperHoRse> Need to get 383MB of archives.
+[11:47] <juggernauts> I have a project for devloping USB device driver for a particular pendrive,I know how USB drivers are actually structured,but i m still clueless on how to proceed further,can anyone help plz
+[11:47] <Sysi> Fuwex: afaik panel is always separate program
+[11:47] <Fuwex> Sysi: awesome/fluxbox provides panels, I reckon?
+[11:47] <Sysi> possible
+[11:48] <Fuwex> unfortunately neither of those window managers suite me well
+[11:48] <HyperHoRse> what happens when i run out of memory
+[11:48] <Sysi> kernel starts killing processes
+[11:49] <juggernauts> how to write a driver for particular USB pendrive
+=== blackswan is now known as CignoNero
+[11:52] <ahmad598> hi all, is there anyone who has installed ubuntu on Vaio S series?
+[11:53] <HyperHoRse> who has run ubuntu 11.04 off a usb stick
+[11:53] <HyperHoRse> will multiboot
+[11:53] <HyperHoRse> do it
+[11:53] <ikonia> HyperHoRse: people in #ubuntu+1 channel may have
+[11:53] <ikonia> !11.04 | HyperHoRse
+[11:53] <ubottu> HyperHoRse: Natty Narwhal is the codename for Ubuntu 11.04, due April 28 2011. Help and support (only) in #ubuntu+1. Natty is unstable and is not intended for production systems.
+[11:54] <symmm> hi
+[11:54] <symmm> so can i bother you guys again about the switching the keyboard layout thing? :3
+[11:54] <HyperHoRse> unstable
+[11:54] <HyperHoRse> how
+[11:55] <HyperHoRse> does it crash easily
+[11:55] <HyperHoRse> is it me or is creating a usb stick from windows almost impossible? everytime it seems to fail but i havent made a usb from linux yet so im knowing this will work.
+[11:56] <rr0hit> HyperHoRse: use latest unetbootin. Works fine. And ask similar questions in #ubuntu+1.
+[11:58] <osse> Hi, I'm trying some bash scripting, but I encountered a problem. var='~/'; ls $var gives "ls: cannot access ~/: No such file or directory". It seems ~ is taken literally. Is there any way to avoid that?
+[11:59] <osse> It doesn't work with double quotes either
+=== Guest31578 is now known as DarkDevil
+=== DarkDevil is now known as Guest63472
+[12:01] <overclucker> osse: does var="~/"; do it? '' might not be expanding ~
+[12:01] <osse> overclucker, I get the exact same result
+=== pr0ton is now known as chingchong
+=== chingchong is now known as pr0ton
+[12:02] <overclucker> osse: then try var="$HOME/";
+[12:02] <lebear> Has anybody got the native Spotify client to play local files?
+[12:03] <mtlife> anyone knows how to get data of a harddrive which does not mount anymore but can still be detected by the bios (smart seems ok)
+[12:03] <Fuwex> OK, so does anyone know of a lightweight, yet (hopefully) composite window manager with "good looks"?
+[12:04] <mtlife> fluwex: lubuntu?
+[12:04] <mtlife> Fuwex
+[12:04] <erUSUL> mtlife: do you know why it does not mount? can you see the partitions on the drive? can you pass checks to those partitions' filesystems?
+[12:05] <Fuwex> mtlife: I need only the window manager. That's openbox, isn't it?
+[12:05] <j_ayen_green> arrrrgh!! the past week or two lucid has been going into some race condition on me. last night it was while using thunderbird. asked it to delete about a dozen imap messages, and the disk took off for about 30 minutes, and then the disk stopped and cpu was pegged and memory way up there. Went to sleep and 7 hours later was the same.
+[12:05] <mtlife> Fuwex: i think so...
+[12:06] <Fuwex> mtlife: OK, thanks
+[12:06] <mtlife> erUSUL: let me see if i can get to the partition table, I know it can read grub... but cantread the init
+[12:06] <overclucker> Fuwex: take a look at: http://xwinman.org/
+[12:06] <Fuwex> overclucker: thanks - though, is this list updated?
+[12:07] <j_ayen_green> mtlife, for what it's worth...I've had to abort a few times recently which left the volume not being usable for init...I found that booting from riplinux let me do a fsck -y every time and fix it.
+[12:08] <osse> overclucker, thanks! That will work nicely
+[12:09] <mtlife> erUSUL: partition table is there, what do you mean by passing checks to the tables?
+[12:09] <Laurenceb_> hi, im trying to setup gcc for xscale
+[12:10] <mtlife> j_ayen_green: im in lubuntu livedisk right now, think fsck -y works?
+[12:10] <Laurenceb_> anyone know how to install it?
+[12:10] <overclucker> Fuwex: not sure how updated it is, but it's got all teh big names, and a comprehensive list of you click others
+[12:10] <j_ayen_green> mtlife: i could not do it from ubuntu, because gnome would try to mount and leave the disk showing as mounted when it failed, and fsck wouldn't run
+[12:10] <j_ayen_green> hence using riplinux
+[12:10] <Pici> Laurenceb_: installing the build-essential package should get everything setup for compiling software (minus any specific build-dependencies that packages have)
+[12:10] <Kre10s> anyone using sfl-phone ?
+[12:10] <Laurenceb_> ah ok
+[12:10] <Fuwex> overclucker: enlightenment looks promising. will check it out :)
+[12:11] <Kre10s> I can't get contacts to work
+[12:11] <j_ayen_green> mtlife, that said, when I -could- run fsck -y, it always cleared a few orphaned inodes and all was well
+[12:11] <Kre10s> I've configures it, but they don't show up...
+[12:12] <fizy[laptop]> how do i enable the ctrl-alt-backspace shortcut for the logon screen in 10.04? and yes, it is neccessary
+[12:12] <mtlife> j_ayen_green: problem is, the mount /dev/sda1 /mnt/ hangs..
+[12:12] <rr0hit> Fuwex: take a look at bodhilinux. A quite good distro that ships enlightenment
+[12:13] <jrib> !dontzap | fizy[laptop]
+[12:13] <ubottu> fizy[laptop]: To re-enable the Ctrl-Alt-Backspace combination that restarts your X server see https://wiki.ubuntu.com/X/Config/DontZap
+[12:13] <j_ayen_green> mtlife: ah, that's different than in my case
+[12:13] <Fuwex> rr0hit, actually, I only need a window manager, but thanks. Just need one to bundle with an application I'm working on
+[12:13] <mtlife> j_ayen_green: lemme reboot and check if i can run fsck
+[12:13] <fizy[laptop]> jrib i enabled it for my account, i just need to enable it for the login screen
+[12:13] <mtlife> j_ayen_green: will take a while, booting in usb 1.1 legacy :(
+[12:13] <erUSUL> mtlife: fsck the filesystems... gparted can do it from a livecd
+[12:13] <Pici> fizy[laptop]: Then you'll probably need to follow the steps outlined on that page for modifying xorg.conf
+[12:14] <mtlife> erUSUL: fsck -y ?
+[12:14] <Pici> fizy[laptop]: If the file doesn't exist, you can create it and xorg should honor its contents.
+[12:14] <fizy[laptop]> Pici: i can view webpages right now. im in a virtual terminal. my graphics card is being pissy today, so i abandoned the x server
+[12:14] <fizy[laptop]> cant*
+[12:15] <Guest27661> hey guys i need help with something. im new to ubuntu and im having some problems installing my belkin wireless adapter which is not supported by ubuntu by default but its possible to get it to work. but im having some problems. any help would be appreciated?!!
+=== Guest27661 is now known as Dave105
+[12:15] <jrib> fizy[laptop]: w3m https://wiki.ubuntu.com/X/Config/DontZap
+[12:15] <erUSUL> mtlife: i do not know for sure what options gparted uses... if you want to do it from command lne i recommend reading the e2fsck man page
+[12:15] <Pici> fizy[laptop]: You can use w3m to browse webpages on your terminal, it should be installed by default.  Its a multi-line setting.
+[12:16] <Laurenceb_> http://pastebin.com/zHW4irBW
+[12:16] <mtlife> erUSUL: ok i will run gparted first..
+[12:16] <fizy[laptop]> pici how do i launch the page with w3m? is is indeed installed
+[12:16] <fizy[laptop]> it is*
+[12:16] <Laurenceb_> that script gives me : command not found ++ $'\r': command not found
+[12:16] <Pici> fizy[laptop]: see jrib's message
+[12:16] <Laurenceb_> why?
+[12:16] <mbnoimi> where can I find man pages directory?
+[12:16] <fizy[laptop]> ah
+[12:17] <Pici> mbnoimi: /usr/share/man/
+[12:17] <mbnoimi> Pici: thanks
+[12:17] <Pici> mbnoimi: If you're searching for a particular manpage 'apropos' is usually useful.
+[12:18] <Smiley> cpan modules, use them or not?
+[12:18] <Smiley> as I know some distros frown upon then?
+[12:18] <Dave105> and i thought i could find support here!!!
+[12:18] <Smiley> Dave105: dont be silly, your using ubuntu.
+[12:18] <bazhang> Dave105, for what
+[12:18] <Pici> Smiley: Please don't.
+[12:18] <Smiley> Sorry >_<
+[12:19] <mbnoimi> Pici: are you sure /usr/share/man/ has all man pages of my ubuntu?
+[12:19] <Dave105> im new to ubuntu and im having some problems installing my belkin wireless adapter which is not supported by ubuntu by default but its possible to get it to work. but im having some problems. any help would be appreciated?!!
+[12:19] <bazhang> Dave105, whats the chipset
+[12:19] <Dave105> Realtek RTL8192SU?!!
+[12:20] <Dave105> if its that what u mean!
+[12:20] <Pici> mbnoimi: Check out the contents /etc/manpath.config for additional configurations.
+[12:20] <Dave105> as i said im new to all this
+[12:20] <overclucker> Laurenceb_: you might want to add #!/bin/bash as the first line.
+[12:20] <SnowmanX11> Can somebody tell me a good scanner program? Probably good in OCR too?
+[12:21] <Laurenceb_> k
+[12:21] <_antant> Booo online scratch cards
+[12:21] <inveratulo> Dave105: you may want to look into ndiswrapper
+[12:22] <Laurenceb_> bash: ./build.sh: /bin/bash^M: bad interpreter: No such file or directory
+[12:22] <Dave105> its a belkin f5d8053. and btw i did look into ndiswrapper and it appears on the network list but it says its disconnected! i dont understand
+[12:22] <j_ayen_green> no one has heard of this... the system being pegged for hours after disk being pegged, with no apparent reason?  it's killing me...never know when I'll have to kill it and lose what I'd had open
+[12:23] <bazhang> http://samiux.blogspot.com/2010/05/howto-realtek-8192su-usb-dongle.html Dave105
+[12:23] <inveratulo> Dave105: maybe tail your /var/log/messages to make sure it is being recognized when plugged in?
+[12:23] <overclucker> Laurenceb_: ^M is a bad character.
+[12:23] <Laurenceb_> hmm odd
+[12:24] <overclucker> Laurenceb_: are you using a windows editor on the script?
+[12:24] <Laurenceb_> no, but its from a windows system
+[12:24] <Dave105> inveratulo:
+[12:24] <Dave105> david@david-desktop:~$ tail /var/log/messages
+[12:24] <Dave105> Mar 18 12:21:55 david-desktop kernel: [ 3108.204701] #
+[12:24] <Dave105> Mar 18 12:22:18 david-desktop kernel: [ 3131.632689] #
+[12:24] <FloodBot3> Dave105: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[12:24] <Dave105> Mar 18 12:22:34 david-desktop kernel: [ 3147.784686] #
+[12:24] <Dave105> Mar 18 12:22:39 david-desktop kernel: [ 3152.536565] #
+[12:25] <alejandro> hola
+[12:25] <bazhang> Dave105, I gave you a link
+[12:25] <bazhang> !es | alejandro
+[12:25] <ubottu> alejandro: En la mayoria de canales de Ubuntu se habla solo en ingles. Si busca ayuda en espanol o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[12:25] <inveratulo> Dave105: try the link first, also use a paste site and don't spam
+[12:25] <Dave105> im checking that link out
+[12:26] <Dave105> i want trying to spam
+[12:26] <Dave105> lol. i was pasting the output of "tail /var/log/messages"
+[12:27] <Pici>  !pastebin
+[12:27] <ubottu> For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://imagebin.org/?page=add | !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+[12:27] <Dave105> btw this is the output of /var/log/messages: http://paste.ubuntu.com/582065/
+[12:27] <inveratulo> Laurenceb_: make sure you're transferring the file in the correct mode so the windars control characters aren't inserted
+[12:28] <Dave105> any ideas? im checking that link too
+[12:28] <inveratulo> Dave105: sure... give the link a shot and let us know how it goes
+[12:28] <drellok> Laurenceb_, or use sed -i.bak -e 's/\r//g' build.sh
+[12:28] <Ploploploop> arg
+[12:28] <Dave105> ok :) thanks
+[12:28] <Ploploploop> mon image est bonne
+[12:28] <bazhang> Ploploploop, #ubuntu-fr for french
+[12:29] <Laurenceb_> thanks
+[12:29] <Ploploploop> wrong windows sorry
+[12:30] <confoocious> Hello. I can't mount my Motorola L9(on storage) mode via USB. The phone shows up fine as /dev/sdb when plugged in. But it says unknown device, unable to mount when I try to mount it.
+[12:30] <confoocious> What2does?
+[12:31] <plouffe> !tablet
+[12:32] <lampe2> hallo when i start ubuntu and after login i must type in 4 times the key password can some one help me to fix this?
+=== lance is now known as Guest70646
+[12:34] <geirha> lampe2: That probably means you are typing the keyring password wrong three times, so it falls back to ask you the password for your wireless network instead, which is the password you just typed three times.
+=== Dink[a] is now known as Dink
+[12:35] <lampe2> geirha,  no i type it right and i dont even got wlan iam on kabel ;) it tested it now 5 times when i start ubnutu
+[12:36] <geirha> lampe2: Hm. I see. Not sure then. If you don't have too many passwords stored in your keyring, I'd consider wiping it and create a new keyring.
+[12:37] <geirha> lampe2: I'm not on an Ubuntu machine atm, but you'd go to System -> Preferences -> Encryption keys and passwords (IIRC) to do that.
+[12:38] <lampe2> geirha, iam there and i got there 7 entries some for ubuntu one and gwibber and gmail can i delte them?
+=== Guest70646 is now known as lance--_--
+[12:39] <geirha> lampe2: Well, I hope you remember the passwords for those?
+[12:39] <Dave105> ok i was trying to follow that guide BUT both download links are broken. so obviously i cant do anything with it!
+[12:39] <lampe2> yes i do ;)
+[12:39] <Dave105> any ideas?
+[12:39] <lampe2> geirha,  yes i remeber all of them ;)
+[12:39] <lampe2> geirha, so i can just delete them?
+[12:40] <geirha> lampe2: Then it shouldn't be dangerous. If you remove the keyring, and create a new, default one,  you'll have to add those passwords again, one by one of course.
+[12:40] <Fripon> Hi ! I modified keys in /etc/kde/kdm/kdmrc but changes are ignored, did I miss something?
+[12:40] <Abhijit> hi
+[12:40] <Abhijit> help. how to add .bin executable application to application menu/
+[12:40] <Abhijit> ?
+[12:40] <Dave105> ubuntu is detecting it. but for some reason its not working
+[12:41] <Neosano> Hello guys. Still can't believe there's no solution for this: I have a USB flash drive and I'd like to install several linux distributions on it, the problem is that I don't want to use fixed size partitions because my pen drive isn't so big and I don't want the space to be wasted on another partition (and I don't want to resize them from time to time). Is there any way to install everything on one partition? Maybe there's something like a
+[12:41] <Neosano>  virtual file system? Or anything else?
+[12:41] <bazhang> http://ubuntuforums.org/showthread.php?t=1522815 Dave105
+[12:41] <ruan> Abhijit: i think you'll need to make a small bash script for that
+[12:41] <ruan> not sure
+[12:42] <Neosano> Abhijit try menu editor?
+[12:42] <Ploploploop> Hello all . I have an interesting porblem. I can't gain access to my computer (obviously not his one) for an apparently stupid reason. When the computer finish his boot, he won't show the space to enter my password. But here is he trick. If I try ctrl alt F1, the screen shut. If I try to boot in safe mode, the computer cracsh after loading the usb port and an live usb start fail with getpwuid_r(): failed due to unknown user id (
+[12:42] <Ploploploop> 0). I checked the md5sum of he iso and it's good, beside the problems started after I did he first upgrade, not right after the installation. Dos someone have an idea?
+[12:42] <Abhijit> Neosano, yes. it added menu entry. but that application dont run when click on it
+[12:42] <Dave105> thanks bazhang looks legit that link. going to try it now
+[12:42] <Abhijit> ruan, hmm
+[12:42] <bazhang> Abhijit, what package
+[12:42] <inveratulo> you can trust bazhang's links... mostly
+[12:43] <Abhijit> bazhang, eternal land game
+[12:43] <lampe2> geirha, thx for help
+[12:43] <ruan> Abhijit: ./file.bin, add it to main menu
+[12:43] <Neosano> Ploploploop, have you tried ctrl+alt+F1 to get the console?
+[12:43] <Abhijit> bazhang, i need to go to terminal and to ./game.bin then only it run. it dont run from menu entry. that entry i added manualy ru
+[12:43] <Abhijit> ruan, ^^
+[12:44] <[segfault]> Ploploploop: So you are unable to boot into live USB?  Can you use a live CD instead to get into it?
+[12:44] <ruan> Abhijit: use a bash script to do ./game.bin
+[12:44] <ruan> Abhijit: and add that script to main menu
+[12:44] <Abhijit> ohhh
+[12:44] <Abhijit> ok
+[12:45] <bazhang> https://help.ubuntu.com/community/EternalLands#The%20quick%20way%20-%20Install%20Ubuntu%20packages%20using%20an%20install%20program Abhijit
+[12:45] <bazhang> Abhijit, just use the ppa
+[12:45] <Abhijit> bazhang, ok
+[12:45] <[segfault]> Ploploploop: After boot, you can also try alt-sysrq-k to try to get back to a console.  it should kill the x server.  You may have to do the ctrl-alt-f1 first to get to a console (even if it appears blank), then do the alt-sysrq-k.
+[12:46] <bazhang> https://help.ubuntu.com/community/EternalLands  <--- Abhijit from this link
+[12:47] <Abhijit> yeah
+=== MuayThai is now known as RobotCow
+[12:49] <Ploploploop> [segfault],  what is sysrq?
+[12:49] <Ploploploop> suprr?
+[12:49] <bazhang> Ploploploop, the prntscrn button usually
+[12:49] <[segfault]> Ploploploop: if not so marked on your keyboard, it would also be the same key as print-screen
+[12:50] <Dave105> bazhang http://paste.ubuntu.com/582071/
+[12:50] <Dave105> bazhang its weird mate!! :(
+[12:50] <Ploploploop> [segfault], it crashed
+[12:51] <bazhang> Dave105, looks like you have two wireless nics there
+[12:51] <Ploploploop> I have a few with point on scrren , and the cursor, frozen
+[12:51] <[segfault]> Ploploploop: can you boot off of a live CD instead, so that you can repair things?
+[12:52] <Dave105> bazhang. yes im using my brothers because mines not working. mine is wlan1
+[12:52] <Ploploploop> I tried that (liveusb as I have no cddrive) and I got  getpwuid_r(): failed due to unknown user id (
+[12:52] <Ploploploop>  0)
+=== RobotCow is now known as MuayThai
+=== Cipher_ is now known as pankaj_sahrma
+[12:53] <Dave105> bazhang the other one was easy to install
+[12:53] <Ploploploop> any other idea?
+[12:53] <bazhang> Dave105, why not continue to use it then
+[12:54] <[segfault]> Ploploploop: hmm..well, since you already checked the MD5 checksum, the USB image seems good... maybe you are experiencing a hardware issue?  You might check your bios settings and refresh them for starters, maybe reseat the ram, check connections.
+[12:55] <Dave105> bazhang because my brothers needs it a lot. because he travels a lot. i used ubuntu before but i decided to give it a go again, but with this adapter im not having any luck
+[12:55] <bazhang> Dave105, well there are lots of fixes for it in the ubuntu forums, but they do involve some compiling and such.
+[12:56] <bazhang> Dave105, its simply not  a  well supported card at all
+[12:56] <Ploploploop> [segfault],  Yeah...
+[12:56] <EClaesson> A little newbie question. In windows you can use "start programname" to lauch the program but not in the current terminal. How do i do this in ubuntu? I.e i start emacs from terminal but i can continue using that same terminal window

@@ -1,0 +1,1500 @@
+[18:29] <TJ-> raidghost: in /boot/config I see CONFIG_DVB_MAX_ADAPTERS=8
+[18:29] <loginoob> ok I will try
+[18:31] <TJ-> raidghost: something to try to get more info, remove "quiet splash" from kernel boot parameters and add "debug systemd.log_level=info" then on boot look for the message "Registering adapters failed. Check DVB_MAX_ADAPTERS in config."
+[18:33] <raidghost> TJ-: You are a great person! Thanks. will check it out after late food
+[18:34] <TJ-> raidghost: it does look right now like you're limited by the Ubuntu kernel's config here; I don't see any way to dynamically increase the MAX value at runtime.
+[18:36] <raidghost> TJ-: just currious. What was your first computer (386/486/Pentium 1 2 3 ?
+[18:37] <JimBuntu> TJ-'s first computer was hand crafted from wood, I think.
+[18:37] <raidghost> :P
+[18:37] <raidghost> lol
+[18:37] <JonelethIrenicus> i am trying to connect to a device, but I think it might already be claimed
+[18:38] <TJ-> raidghost: JimBuntu isn't far wrong; A Sinclair ZX80
+[18:38] <raidghost> Have to google that:P
+[18:38] <loginoob> what does swapoff -a does?
+[18:38] <TJ-> loginoob: turns off swap for 'all' devices
+[18:38] <JimBuntu> loginoob, `man swapoff`
+[18:38]  * vlt had a https://en.wikipedia.org/wiki/KC_85
+[18:38] <raidghost> TJ-: Holly Molly. Looks like a early raspian pi :P
+[18:38] <TJ-> loginoob: see "man swapoff"
+[18:39] <TJ-> raidghost: 1MHz Zilog Z80 CPU :)
+[18:39] <raidghost> Ooh. What a lovely spec
+[18:39] <TJ-> 4KB of RAM and seemed like a lot :D
+[18:39] <raidghost> 4KB oh. Lord have mercy.
+[18:39] <loginoob> I saw man swapoff but i am not able to understand
+[18:40] <loginoob> if i run the command is it safe? Will it give problem
+[18:40] <raidghost> TJ-: Just enought ram and cpu for plex :P
+[18:40] <TJ-> raidghost: anyhow... your issue... can you "/join #ubuntu-kernel" I'm asking canonical kernel team if we can increase the config ... not had a reply yet
+[18:40] <vlt> TJ-: My KC-85 used an East German Z80 clone :-D
+[18:41] <TJ-> loginoob: "swapoff -a" will disable all swap files/partitions which are used as a backup if RAM starts to het exhausted, instead of killing processes
+[18:41] <TJ-> vlt: really? I've still got a ZX81 here in a shoe box :)
+[18:41] <raidghost> TJ-: how much did you pay for that xz80
+[18:42] <raidghost> Had to boot from floppy?
+[18:42] <vlt> No floppies here.
+[18:43] <vlt> We had our programs and data on cassette tape.
+[18:43] <raidghost> sounds like amiga/commondore
+[18:43] <mutante> you recycle some cassette tapes that had audio books for kids on them.. except they didnt have the term "audio book" yet
+[18:44] <raidghost> So. Saved stuff on casette tapes (for music?)
+[18:45] <raidghost> didnt know that was possible
+[18:45] <mutante> raidghost: yes, the device to play/record was a "datasette"
+[18:45] <raidghost> My first computer was a compaq 486 dx2 with 66Mhz and turbo button. And Hold on.
+[18:46] <raidghost> 4MB of ram :P
+[18:46] <mutante> https://www.google.com/search?q=datasette&client=firefox-b&tbm=isch&source=iu&i
+[18:46] <mutante> you know how a modem would make those sounds when it connected to the internet? dial-up ?
+[18:46] <mutante> just imagine recording those on a tape :p
+[18:47] <raidghost> piiiip dubabababababababab P
+[18:47] <mutante> yea:)
+[18:47] <raidghost> back in the good old days
+[18:48] <TJ-> let's throttle the off-topic please
+[18:48] <nemo> so. my friend followed https://wiki.ubuntu.com/LiveUsbPendrivePersistent to setup his ubuntu (14.04 LTS) on a flash drive using usb-creator-gtk
+[18:48] <raidghost> okey. as you wish ;)
+[18:48] <nemo> he then enabled "persistent" in the grub boot flags
+[18:48] <nemo> everything seemed fine. could save files to desktop, firefox profile was persisting.  he then ran updates to pick up fixes.  and on restart, got "filesystem is corrupt"
+[18:49] <raidghost> TJ-: See you around later. my girlfriend just made some late dinner. t2ul
+[18:49] <nemo> I was wondering if anyone here might have any ideas why that might be
+[18:51] <TJ-> nemo: sounds like the USB device was removed before the cached file-system data was flushed to the device
+[18:52] <nemo> hm
+[18:52] <nemo> TJ-: but it was a reboot
+[18:52] <nemo> that's ubuntu's job
+[18:52] <nemo> but can test with a sync I guess
+[18:52] <nemo> if so. could add explicit sync to shutdown scripts
+[18:52] <TJ-> nemo: indeed, it should have completed a "sync" before shutdown
+[18:52] <nemo> TJ-: other than that it should work right, even if kernel was changed?
+[18:52] <nemo> hm
+[18:52] <TJ-> nemo: yes; does an fsck have a chance of repairing it?
+[18:52] <nemo> wonder if grub would have a problem w/ kernel changes
+[18:53] <nemo> TJ-: can just fsck the union file?
+[18:53] <TJ-> nemo: no, GRUB doesn't care, all it does is load files into memory and pass control to them
+[18:53] <nemo> TJ-: was just wondering if it would be lacking the overlay
+[18:53] <nemo> but ok
+[18:53] <TJ-> nemo: fsck the underlying persistent file-system - boot without the persistent option on the command line so it's a regular Live session then run the fsck
+=== druid__ is now known as Guest28648
+[19:09] <virtuosoj> Keyboard settings question: In 16.04 Unity and also in Elementary, I could set my keyboard to U.S. International (AltGr Dead Keys) which allowed me to type easily in Spanish as well as English.  However in 17.10 Gnome I don't have this option.  Is there a way I can enable this?
+[19:10] <kostkon> virtuosoj, it isn't listed?
+[19:16] <z3u4r5dok_> Hi guys I have an issue trying to play videos... I get the following error Error loading player: No playable sources found
+[19:17] <z3u4r5dok_> I have done the following: Enable DRM Playback in Preferences under Content
+[19:18] <z3u4r5dok_> Install ffmpeg-libs and dependencies I believe I've done too
+[19:18] <virtuosoj> kostkon, no it becomes English and Spanish
+[19:20] <z3u4r5dok_> any ideas??
+[19:22] <ZorroT> anyone here familiar with the intel compute stick ?
+[19:22] <pikapika> Is it safe to perform a "normal" copy (ie cp, file manager, etc NOT dd) of /var, /bin, /etc, /usr, etc from a running Ubuntu system to an external drive?
+[19:23] <ZorroT> to the point: i have a unit that is coming up to the grub menu, and once you hit return to select 'ubuntu', it boots normally -- but i'm not sure how to make grub boot to this option automatically without interaction?
+[19:24] <DiecastMessiah> z3u4r5dok_: i think ya need to install ubuntu-extra or somehting i forget the name .. it has most of the nonfree things that you need to play back dvds and crap
+[19:25] <z3u4r5dok_> How can I do that.... Sorry I am new
+[19:26] <pikapika> Wait, now that I think, what I want is a tar. Ie tar -cvpf /ubuntu/path /externaldrive/xyz.tar
+[19:26] <pikapika> Is it safe?
+[19:26] <DiecastMessiah> one sec i'll look to see what the package is
+[19:26] <pikapika> Or would it be better to dd from live mode?
+[19:27] <z3u4r5dok_> I appreciatte it
+[19:27] <MonsieurBon> Hi
+[19:28] <DiecastMessiah> z3u4r5dok_: ok so termial .. sudo apt-get install ubuntu-restricted-extras
+[19:29] <DiecastMessiah> it adds all the things you need to used for mp3s, videos and playback dvds
+[19:29] <MonsieurBon> I'd like to build my own Router/Firewall/DNS Server/OpenVpn Gateway. I was looking to buy a Shuttle NS02A as it's not too expensive and the octa core with 16 GB RAM sound like a lot of power. Has anyone experience with this hardware and ubuntu server?
+[19:30] <kostkon> z3u4r5dok_, on what websites? in which browser? firefox?
+=== SimonNL is now known as SimonNL_Afk
+[19:31] <z3u4r5dok_> this is what I get
+[19:31] <z3u4r5dok_> https://pastebin.com/fvDGz73z
+[19:32] <z3u4r5dok_> Yes, firefox, Linux Academy
+[19:33] <DiecastMessiah> ohhhhhh thats not ubuntu lol
+[19:34] <z3u4r5dok_> Yes, my ubuntu version is 16.04 lts
+[19:35] <kostkon> z3u4r5dok_, why are you logged in as root?
+[19:35] <DiecastMessiah> oh ok. sorry than .. why root
+[19:35] <z3u4r5dok_> yes
+[19:35] <z3u4r5dok_> should I go back as a regular user??
+[19:36] <DiecastMessiah> bad idea to login to root..
+[19:36] <kostkon> !root | z3u4r5dok_
+[19:36] <ubottu> z3u4r5dok_: Do not try to guess the root password, that is impossible. Instead, realise the truth... there is no root password. Then you will see that it is 'sudo' that grants you access and not the root password. Look at https://help.ubuntu.com/community/RootSudo
+[19:36] <DiecastMessiah> yeah and anything that you need root for .. like installing things use sudo in fornt of the command you are doing
+[19:36] <TJ-> !info ubuntu-restricted-extras
+[19:36] <ubottu> ubuntu-restricted-extras (source: ubuntu-restricted-extras): Commonly used media codecs and fonts for Ubuntu. In component multiverse, is optional. Version 66 (artful), package size 3 kB, installed size 14 kB
+[19:37] <z3u4r5dok_> Thank you for the advice. I will go back
+[19:37] <z3u4r5dok_> to my regular user
+[19:37] <kostkon> z3u4r5dok_, open Software & Updates and enable the Multiverse repository
+[19:37] <TJ-> z3u4r5dok_: you see how it says ^^^^^ "In component universe" ? You need to enable "Multiverse" if Software Sources GUI
+[19:37] <TJ-> grrr s/universe/multiverse/
+[19:38] <z3u4r5dok_> I'm a regular user again
+[19:38] <z3u4r5dok_> let go to software tabs just a second please
+[19:38] <kostkon> z3u4r5dok_, open dash, search for "software"
+[19:39] <kostkon> z3u4r5dok_, open dash <unconvertable> click on the Ubuntu logo icon in the dock
+[19:39] <leftyfb> z3u4r5dok_: sudo apt-get install ubuntu-restricted-extras
+[19:40] <leftyfb> z3u4r5dok_: it's part of the multiverse repo which if you pasted in the sources.list I gave you earlier, you should have enabled
+[19:40] <pikapika> Anyone?
+[19:40] <z3u4r5dok_> which one I have 2 options
+[19:40] <leftyfb> z3u4r5dok_: huh?
+[19:40] <leftyfb> z3u4r5dok_: sudo apt-get install ubuntu-restricted-extras
+[19:41] <kostkon> z3u4r5dok_, Software & Updates
+[19:41] <z3u4r5dok_> community-maintained free and open source software (universe)
+[19:41] <z3u4r5dok_> and the second options is
+[19:42] <leftyfb> z3u4r5dok_: I thought you copied the sources.list I gave you earlier?
+[19:42] <leftyfb> z3u4r5dok_: if you had done it correctly, you would have multiverse already enabled
+[19:42] <kostkon> z3u4r5dok_, for the third time you need the Multiverse repo
+[19:42] <leftyfb> kostkon: ^
+[19:42] <z3u4r5dok_> Software restricted by copyright or legal issues (Multiverse)
+[19:43]  * leftyfb sigh
+[19:43] <kostkon> leftyfb, he didn't do it it seems
+[19:43] <DiecastMessiah> checkmark both
+[19:43] <leftyfb> kostkon: I'd like to confirm that
+[19:43] <leftyfb> kostkon: without the silly GUI
+[19:43] <z3u4r5dok_> I did, believe me I did
+[19:43] <kostkon> leftyfb, yeah go ahead
+[19:43] <leftyfb> z3u4r5dok_: cat /etc/apt/sources.list | pastebinit
+[19:44] <guardian> hello, I'm installing ubuntu for the first time. What does it change to select "minimal installation" in the 18.04 installer?
+[19:45] <leftyfb> guardian: 18.04 is not released yet and not recommended to install for a first time user
+[19:45] <leftyfb> guardian: if you insist on installing 18.04, please go to #ubuntu+1 for support
+[19:46] <guardian> ok fair enough
+[19:47] <DiecastMessiah> guardian: 16.04 would be better for ya
+[19:48] <DiecastMessiah> but don;t fall in love with unity desktop to much.. it will be going in the next version ..
+[19:48]  * DiecastMessiah cries a little tear
+[19:48] <guardian> yeah hence trying 18.04
+[19:48] <OerHeks> minimal would do -no-install-recommends, but a basic set of tools you need to continueinstallation
+[19:48] <dax> the minimal option in 18.04 doesn't install some desktop packages (e.g. libreoffice) to reduce disk usage
+[19:49] <dax> if you're installing from scratch currently, i'd personally go with 17.10 and upgrade to 18.04 and then stick with LTS from then on
+[19:49] <DiecastMessiah> for testing you could use 17.10 i don;t think unity is there
+[19:49] <dax> 17.10 doesn't use Unity either, so should be an easier transition to 18.04 than 16.04
+[19:49] <jdr> I think 18.04 is going to have a "light" version?
+[19:49] <leftyfb> I personally wouldn't recommend 17.10.
+[19:49] <ikonia> what's a light version ?
+[19:50] <dax> (17.10 defaults to wayland whereas 18.04 doesn't, but that's easy to turn off if desired)
+[19:50] <OerHeks> i hope gparted ans synaptic gets fixed for wayland
+[19:50] <z3u4r5dok_>           this is what I get now : https://pastebin.com/icMXaniA
+[19:51] <z3u4r5dok_> Honestly guys you know so much and I don't know anyhting
+[19:51] <z3u4r5dok_> sorry for the bother
+[19:51] <leftyfb> z3u4r5dok_: can you just "cat /etc/apt/sources.list" and copy and paste it on http://pastebin.ubuntu.com ?
+[19:51] <z3u4r5dok_> sure
+[19:51] <OerHeks> !info pastebinit
+[19:51] <ubottu> pastebinit (source: pastebinit): command-line pastebin client. In component main, is optional. Version 1.5-1 (artful), package size 14 kB, installed size 156 kB
+[19:53] <leftyfb> OerHeks: they cannot install pastebinit at the moment. We're trying to determine what repo's are enabled
+[19:54] <z3u4r5dok_> https://pastebin.com/uqVqrnNj
+[19:54] <OerHeks> leftyfb, yes i see, i thought it was in universe..
+[19:54] <leftyfb> z3u4r5dok_: sudo apt-get update && sudo apt-get install ubuntu-restricted-extras
+[19:55] <ioria> it's commented
+[19:55] <ioria> main,  i mean
+[19:55] <lord4163> hello
+[19:55] <leftyfb> damnit, just noticed that
+[19:55] <ioria> z3u4r5dok_, how that happened ?
+[19:55] <leftyfb> z3u4r5dok_: you'll need to remove those #'s at the top of /etc/apt/sources.list
+[19:55] <guardian> thanks for the info
+[19:55] <lord4163> I have a LAMP server with postfix set up, which works, but it whenever I sent an email using the PHP mail function it sends it using an old domain name.
+[19:56] <leftyfb> ioria: pasting from my pastebin
+[19:56] <lord4163> Is there any way to update this?
+[19:56] <ioria> oh
+[19:56] <leftyfb> lord4163: postfix configs
+[19:56] <leftyfb> lord4163: or whatever php script you're using
+[19:56] <lord4163> leftyfb: Postfix does its job tho
+[19:56] <leftyfb> lord4163: yup, and it could still have configs for an old domain
+[19:57] <lord4163> leftyfb: if I use the unix mail command it sends from the right domain
+[19:57] <leftyfb> lord4163: ok, then the php script you're using
+[19:57] <lord4163> leftyfb: Only Apache/PHP gets it wrong
+[19:57] <leftyfb> z3u4r5dok_: sudo nano /etc/apt/sources.list
+[19:57] <z3u4r5dok_> It is doing something
+[19:58] <leftyfb> z3u4r5dok_: what is doing something?
+[20:00] <leftyfb> z3u4r5dok_: ?
+[20:03] <z3u4r5dok_> I am working on it
+[20:04] <kostkon> z3u4r5dok_, is it still fetching and installing the packages?
+[20:04] <z3u4r5dok_> https://pastebin.com/DKatvUVu
+[20:04] <leftyfb> z3u4r5dok_: you are working on what? I told you to use sudo to edit your sources.list
+[20:05] <leftyfb> z3u4r5dok_: ok, great, save that, then run : sudo apt-get update ; sudo apt-get install ubuntu-restricted-extras
+[20:05] <z3u4r5dok_> I did, didn't i??
+[20:05] <kostkon> oh you haven't reached that step yet
+[20:06] <nemo> TJ-: but but. how could the non-overlay get corrupted?  it should never ever be modified
+[20:06] <nemo> anyway. guess I can fsck them both. why not
+[20:07] <z3u4r5dok_> https://pastebin.com/yKuvna37
+[20:08] <leftyfb> z3u4r5dok_: good, you're done
+[20:08] <z3u4r5dok_> what do I do now??
+[20:08] <leftyfb> z3u4r5dok_: profit?
+[20:08] <kostkon> what's that trusty media PPA about
+[20:09] <leftyfb> z3u4r5dok_: ubuntu-restricted-extras is installed
+[20:09] <leftyfb> z3u4r5dok_: I would suggest whatever PPA's you have in there for trusty you either remove or update to the xenial version where applicable
+[20:10] <z3u4r5dok_> I'm sorry I don't understand this PPA's you have in there for trusty you either remove or update to the xenial version where applicable
+[20:11] <ioria> z3u4r5dok_, that ppa is available only for trusty, you are on xenial (i suppose)
+[20:12] <leftyfb> ok, someone else will have to help you with that. It's taken us 5 hours to get to this point
+[20:12] <leftyfb> ioria: they don't understand any of this
+[20:12] <ioria> ok : <unconvertable>
+[20:13] <DiecastMessiah> he or she is very new,, i don;t know why they just let him do some of the stuff in the gui
+[20:13] <leftyfb> DiecastMessiah: because it was a bit of a mess to begin with and the GUI will not help with any of that
+[20:13] <z3u4r5dok_> https://pastebin.com/XJ4T1y9d
+[20:13] <ioria> it's the same
+[20:14] <z3u4r5dok_> you are right guys
+[20:14] <kostkon> z3u4r5dok_, that ppa is about media and you are having media/codec problems. is this a coincidence?
+[20:14] <leftyfb> ioria: to clean this up? https://pastebin.com/dEwpdMCd
+[20:14] <z3u4r5dok_> I'd really appreciatte all of your help
+[20:14] <DiecastMessiah> yes but he could have used software and updates easly and than told him the commands... let not try to discorage him too much
+[20:15] <ioria> wow
+[20:15] <leftyfb> ioria: yeah
+[20:15] <leftyfb> ioria: the GUI aint fixing that
+[20:15] <ioria> looks lie salem in 1691
+[20:15] <ioria> like
+[20:16] <leftyfb> z3u4r5dok_: try to play your media
+[20:17] <ioria> z3u4r5dok_, and what 's your kernel ? uname -r
+[20:17] <kostkon> z3u4r5dok_, you'll probably have to get rid of that PPA with ppa-purge
+[20:18] <leftyfb> kostkon: I would say we leave the cleanup till after the original issue (playing media) is resolved
+[20:19] <leftyfb> kostkon: during that process though, we should look at the actual repo and determine why it was added and if it's still needed/wanted and if there's an upgrade/alternative .... could be a small learning experience
+[20:19] <z3u4r5dok_> You guys are awesome now everything it's working including you tube
+[20:19] <z3u4r5dok_> I have no words to say thank you...
+[20:19] <leftyfb> z3u4r5dok_: ok, please hold on
+[20:20] <leftyfb> z3u4r5dok_: you should really let people here help you clean up your repo's
+[20:20] <leftyfb> z3u4r5dok_: you have some that are outdated and will only cause confusion for you down the road
+[20:20] <z3u4r5dok_> Thank you for you patience and support
+[20:20] <z3u4r5dok_> sure
+[20:20] <z3u4r5dok_> How can we do that??
+[20:21] <leftyfb> z3u4r5dok_: ls -l /etc/apt/sources.list.d # to get a list of the repo's you've added
+[20:22] <ioria> if we're lucky , given the wrong ppa,  nothing should have been installed from that there ...
+[20:22] <OerHeks> ioria, +1
+[20:22] <OerHeks> never had any packages for his version
+[20:22] <z3u4r5dok_> https://pastebin.com/HTKsmKuy
+[20:22] <ioria> OerHeks, i don't use ppa, so i don't really know
+[20:22] <leftyfb> OerHeks: we don't know 100% if this machine wasn't upgraded from trusty
+[20:23] <leftyfb> z3u4r5dok_: that isn't what I asked you to paste
+[20:24] <z3u4r5dok_> https://pastebin.com/PnccVggE
+[20:25] <leftyfb> z3u4r5dok_: cat /etc/apt/sources.list.d/mc3man-ubuntu-trusty-media-xenial.list
+[20:25] <leftyfb> z3u4r5dok_: actually, nevermind that ....
+[20:25] <OerHeks> i guess both ppa's are useless
+[20:25] <leftyfb> z3u4r5dok_: sudo rm /etc/apt/sources.list.d/mc3man-ubuntu-trusty-media-xenial*
+[20:26] <leftyfb> OerHeks: gwendal-lebihan-dev-ubuntu-hexchat-stable-xenial has hexchat 2.12
+[20:26] <tgm4883> OerHeks: mc3man didn't have trusty packages?
+[20:27] <leftyfb> OerHeks: xenial only has 2.10
+[20:27] <leftyfb> tgm4883: that repo was titled "Ubuntu Multimedia for Trusty"
+[20:27] <tgm4883> leftyfb: yea, and it has trusty packages
+[20:27] <ioria> tgm4883, he's on xenial (i suppose) welcome back, btw
+[20:27] <OerHeks> tgm4883, no xenial package, so cruft from trusty will be uninstalled i guess
+[20:28] <tgm4883> It only gets xenial packages if the xenial package version is newer
+[20:28] <leftyfb> z3u4r5dok_: once you remove the mc3man packages, you're good to go
+[20:28] <tgm4883> granted I haven't been keeping up with what's going on here, just wanted to step in and say it's entirely possible that packages in a trusty repo were installed on a xenial system
+[20:29] <leftyfb> er, repo I mean, not packages
+[20:29] <z3u4r5dok_> https://pastebin.com/v5LXyXJy
+[20:29] <leftyfb> z3u4r5dok_: sudo rm /etc/apt/sources.list.d/mc3man-ubuntu-trusty-media-xenial.list*
+[20:30] <leftyfb> hm, that should work
+[20:32] <z3u4r5dok_> https://pastebin.com/zdxXvacz
+[20:32] <tgm4883> hmm, sad. We don't have an equivelent to 'yum list installed'?
+[20:32] <TJ-> tgm4883: "apt list --installed"
+[20:33] <tgm4883> TJ-: yea I was looking at that trying to decode the output
+[20:35] <tgm4883> TJ-: I don't suppose you can point me at documentation for what the columns are in that list
+[20:36] <z3u4r5dok_> Is that wrong??
+[20:36] <OerHeks> so those ppa lines are already removed.
+[20:37] <Bashing-om> z3u4r5dok_: ^^ pastebin ' tail -v -n +1 /etc/apt/sources.list.d/* ' .
+[20:37] <willc> is there an easy way to reinstall ubuntu on a machine? Can I run like apt-get reinstall ubuntu? :P
+[20:37] <leftyfb> willc: no
+[20:38] <wafflejock> willc probably best off just installing from the original media again
+[20:38] <willc> shucks
+[20:38] <willc> lol
+[20:38] <willc> I tried :)
+[20:38] <TJ-> tgm4883: gcc/xenial,now 4:5.3.1-1ubuntu1 amd64 [installed] package/release[,now] version arch [status]
+[20:38] <wafflejock> willc you can reinstall lots of the parts but not worth it if you need to really wipe it out
+[20:38] <willc> Yea my liveboot cd is at home
+[20:38] <willc> running 16.04 on a raspberrypi and trying to get virtualenv+opencv running and it feels like I made a mess and just wanted a fresh start
+[20:39] <tgm4883> TJ-: xul-ext-ubufox/artful-updates,artful-updates,artful-security,artful-security,now 3.4-0ubuntu1.17.10.1 all [installed]
+[20:39] <willc> but I'll deal with my mess
+[20:39] <tgm4883> TJ-: that doesn't fit what you said
+[20:39] <MonsieurBon> exit
+[20:39] <tgm4883> TJ-: specifically, there's 4 things listed for the repo
+[20:39] <z3u4r5dok_> https://pastebin.com/WBz0f5N4
+[20:40] <TJ-> tgm4883: package/[release list][,now] version arch [status]
+[20:40] <TJ-> tgm4883: because the package is available from different release pockets
+[20:41] <tgm4883> TJ-: yea that's what I figured. However, it doesn't show which repo/pocket that the currently installed version is from
+[20:41] <TJ-> tgm4883: the repeats may be because you've got duplicated entries in your apt sources from different archive servers
+[20:41] <Rick13> Hii
+[20:41] <Rick13> Hola
+[20:42] <TJ-> tgm4883: them all! upgraded package started in artful-security (for speed) and also goes into artful-updates (but may be delayed getting to mirrors)
+[20:42] <TJ-> tgm4883: try "apt-cache policy xul-ext-ubufox"
+[20:42] <Bashing-om> z3u4r5dok_: Uh huh, gone as OerHeks suspected . no mc3man PPA present now .
+[20:43] <z3u4r5dok_> what it does mean??
+[20:43] <tgm4883> TJ-: yea I know how to do it by package, I was trying to get the information system wide
+[20:43] <tgm4883> TJ-: for comparision, this is what I can get from yum "python2-pip.noarch                  8.1.2-5.el7                        @epel" which shows me it's installed from epel
+[20:44] <leftyfb> Bashing-om: is + in tail the same as -A1 ?
+[20:44] <nacc> tgm4883: there are some scripts out there that take the --installed output and the provide the policy output, parsed for each ofthem
+[20:44] <tgm4883> TJ-: which makes it super easy to see all packages installed from there.
+[20:44] <leftyfb> Bashing-om: sorry, +1
+[20:44] <nacc> tgm4883: seems like it would be nic eot integrate that into apt-get itself
+[20:44] <Bashing-om> z3u4r5dok_: Your " sudo rm /etc/apt/sources.list.d/mc3man- " . Can not remove what does not excist :)
+[20:44] <tgm4883> nacc: I agree, that should get added to the apt list output
+[20:44] <Bashing-om> exist*
+[20:44] <leftyfb> Bashing-om: actually, no, i'm thinking of grep. What's the +1 all about in your tail?
+[20:45] <tgm4883> nacc: TJ- I was trying to find a command that they could run to see if any packages were installed from that ppa
+[20:45] <DomD5> Hey, I was wondering if anyone here could help me out, I've been trying to find the source of the debian-installer package that is installed on ubuntu installation iso's, specifically the one executable found in the /sbin/ of the initrd.gz filesystem, every source I've found is either just docs or something used to build a debian installation iso, I would appreciate anyone's help
+[20:45] <f0f0f0> im getting random freezing on my machine
+[20:45] <f0f0f0> it gets to the point have to cold boot
+[20:46] <f0f0f0> it happens 3+ times a day
+[20:46] <f0f0f0> don't even know where to start trouble shooting
+[20:46] <f0f0f0> any suggestions?
+[20:46] <z3u4r5dok_> So Do I need that?? Do I need to install it or my system is wrong??
+[20:46] <f0f0f0> have done a memory check
+[20:46] <f0f0f0> and memory is fine
+[20:47] <f0f0f0> dont have the problem on my windows boot
+[20:47] <kostkon> !reisub | f0f0f0, for next time
+[20:47] <ubottu> f0f0f0, for next time: In an emergency, you may be able to shutdown cleanly and reboot by holding down Alt+PrintScreen and typing slowly, in succession, R, E, I, S, U and B. For an explanation, see http://en.wikipedia.org/wiki/Magic_SysRq_key
+[20:47] <f0f0f0> dual boot win/ubuntu
+[20:47] <nacc> tgm4883: i think there is a way to filter by sources
+[20:48] <Lehthanis2> hey all...I'm running lubuntu, just upgraded to 17.10 and swapped from nvidia to radeon (7750) and video is runnign super slow...how do I make the radeon driver act right?
+[20:48] <Bashing-om> leftyfb: That +1 is how many lines 'n' is to return .
+[20:50] <f0f0f0> <ubottu> thanks for the info, that is extremely helpful!
+[20:51] <f0f0f0> is there a log file or some place I can find what caused the issue?
+[20:51] <z3u4r5dok_> So do I need to worry for anything else?? Do I still need clean up my repo's??
+[20:51] <leftyfb> Bashing-om: oooooo ,that's useful
+[20:51] <ioc_> DomD5, idk but dpkg -S filename could help
+[20:52] <leftyfb> I really gotta spend more time perusing man pages
+[20:52] <kostkon> f0f0f0, a plethora of logs in /var/log
+[20:53] <Bashing-om> leftyfb: Uh huh on useful // terminal can get amazing like that :P
+[20:53] <leftyfb> TJ-: blew my mind the other day with dmesg -w
+=== Lehthanis2 is now known as Lehthanis
+[20:54] <ioc_> f0f0f0, journalctl --list-boots     then search the line for the corresponding session, then journalctl --boot abcd      replacing abcd with the calue in 2nd column in that line
+[20:54] <ioc_> or any of the /var/log/syslog's
+[20:54] <Lehthanis> trying again now that I'm logge din verified:
+[20:54] <Lehthanis> hey all...I'm running lubuntu, just upgraded to 17.10 and swapped from nvidia to radeon (7750) and video is runnign super slow...how do I make the radeon driver act right?
+[20:55] <Bashing-om> leftyfb: Same - I too  made note .
+[20:55] <Lehthanis> I believe the radeo driver is built in, but It's not detecting any of my other displays
+=== neo_ is now known as shakary
+[20:55] <Lehthanis> is there a config app?
+[20:55] <Lehthanis> I uninstalled the nvicia drivers
+[20:56] <Lehthanis> I can't type on this machine, lol
+[20:56] <Bashing-om> Lehthanis: You did purge the old nvidia driver prior to installing the AMD card ?
+[20:57] <Lehthanis> additional drivers doesn't detect anything
+[20:57] <Lehthanis> I didn't purge, no...whats the command to purge?  I just uninstalled
+[20:57] <dlam> any opinions on best GUI irc client on ubuntu? :D   (i currently use emacs  x__x)
+[20:57] <Lehthanis> dlam: irssi
+[20:57] <kostkon> dlam, sudo snap install hexchat
+[20:57] <z3u4r5dok_> ok guys let me ask you something can I reboot my system?? or do we need to do something else before I tried to do it....????
+[20:58] <dlam> thx thx thx
+=== Ricardus_ is now known as Ricardus
+[21:00] <OerHeks> driver in use >> lspci -nnk | grep -i vga -A3 | grep 'in use'
+[21:00] <Bashing-om> Lehthanis: See what ' sudo apt purge nvida* ; sudo rm /etc/X11/xorg.conf ' produces .
+[21:00] <TJ-> leftyfb: if you like -w how about "dmesg -Hl err,warn"
+[21:00] <leftyfb> man  ... now I gotta go read the man page
+[21:01] <Lehthanis> sudo apt-get remove --purge nvidia-*
+[21:01] <Lehthanis> I just ran that
+[21:01] <leftyfb> oh, that's no that complicated
+[21:01] <TJ-> OerHeks: you can replace all that with "lspci -nnk -d::300"
+[21:01] <Lehthanis> there was a LOT to purge
+[21:01] <Bashing-om> leftyfb: Now ain't that ^just wonderful .
+[21:01] <leftyfb> TJ-: I noticed -w was also doing -H I think by default
+[21:01] <Lehthanis> Bashing-om: should I still remove the xorg.conf?
+[21:01] <TJ-> leftyfb: yes ... being able to limit to the log_level is very useful though, as is limiting to facilty or kernel-only
+[21:02] <kostkon> Lehthanis, that sounds... encouraging
+[21:02] <TJ-> OerHeks: 0300 is the PCI class for a VGA compatible controller
+[21:02] <z3u4r5dok_> I guess I will do that. Thank you all for everything....
+[21:02] <Bashing-om> Lehthanis: If it should happen to exist .. yes remove it as it applies to the old nvidia stuff .
+[21:03] <Lehthanis> it doesn't...should I just reboot now that I've purged that stuff
+[21:03] <kostkon> z3u4r5dok_, we did nothing that would endanger your system's stability
+[21:03] <OerHeks> TJ-, i knew there were short routes, i stored this version as one can see what is about to happen
+[21:04] <kostkon> z3u4r5dok_, you're safe to reboot (98% sure)
+[21:04] <Lehthanis> I'm gonna reboot too...will be back if it doesn't help, lol
+[21:04] <OerHeks> * and your comment is stored too
+[21:05] <winter> hi
+[21:05] <leftyfb> Bashing-om: TJ-: I don't always check, but I do follow @commandlinefu ... they've got some doozies on there on occasion
+[21:06] <TJ-> leftyfb: due to dealing with low-level recovery I've got into the habit of figuring out how to use shell/awk/grep and sysfs to reproduce output of commands like lspci lsusb and lshw :S
+[21:07] <leftyfb> TJ-: I've had to do that with usb lately. The past 6 months or so troubleshooting usb camera's killing usb ports till it got rebooted
+[21:07] <HairToday> I don't have bluetooth on this laptop, Yet blueman starts up and takes up a large part of my ram each time.  How can I uninstall all things bluetooth?
+[21:08] <leftyfb> TJ-: got a nice little script to reset the whole usb bus though which re-enumerates all the devices plugged in. That's handy
+[21:09] <TJ-> HairToday: blueman shouldn't auto-start unless you've got it configured to do so as an autostart in the user GUI session
+[21:09] <TJ-> leftyfb: Yes, it's a wonderful thing is sysfs
+[21:09] <Lehthanis> ok, so nvidia is all removed, but performance is still horrible
+[21:10] <HairToday> TJ-, Yeah, nope, bluetooth is turned off in my settings.  Using 16.04 BTW -- will upgrade to 18.04 in a few days
+[21:10] <TJ-> HairToday: I'd stick with 16.04 for a while longer if you use the system for something useful :)
+[21:11] <jdr> rfkill list HairToday
+[21:11] <HairToday> TJ-, oh?  well, I didn't plan to ON april fools day :OP  I was going to wait a month or so
+[21:11] <Bashing-om> Lehthanis: What release ? Such that is Xorg a factor ?
+[21:11] <TJ-> HairToday: there's an option in some DEs to save the session at log-out - maybe that was set once and blueman is set to autostart, but then you disabled the setting and so it never gets removed from the list?
+[21:11] <Lehthanis> Lubuntu 17.10
+[21:12] <Lehthanis> at this point I think I'm just unconfigured or unoptimized
+[21:12] <TJ-> HairToday: try something like "grep -rn blueman $HOME/.config $HOME/.gconf $HOME/.local"
+[21:12] <HairToday> TJ-, I'm not too sure.  Don't know where my autostart list is.... using a gnome callback on 16.04
+[21:12] <Lehthanis> 01:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Cape Verde PRO [Radeon HD 7750/8740 / R7 250E]
+[21:12] <Lehthanis> 07:00.0 VGA compatible controller: ASPEED Technology, Inc. ASPEED Graphics Family (rev 30)
+=== SimonNL_Afk is now known as SimonNL
+[21:13] <HairToday> TJ-, THANK YOU, i'll look into this, already some hits.
+[21:16] <sere_> is it possible to install lvm with btrfs from a usb 16.04 persistant /live
+[21:16] <Lehthanis> meh, I gotta go home for the day, I'll pick this back up tomorrow.
+[21:16] <Lehthanis> thanks
+[21:19] <TJ-> sere_: you mean via terminal? so it's installed in the persistent file system?
+[21:23] <sere_> TJ- no im actaully running off a live / persistnt 16.04 usb trying to install to a lvm btrfs sdd slam drive... im pretty sure that sd card is bad that i was using the other day..so i im trying this
+[21:24] <sere_> TJ- i can see it with the installer but there is no way to add the lvm partition when i boot to a miminal console /text install it doesnt show up or i could do it thrugh that
+[21:26] <TJ-> sere_: hmmm, I'm so used to installing manually now I'm not sure what you should have available, but for a Live session "Try Ubuntu" GUI with a terminal you cn install "lvm2" and then use "pvcreate / vgcreate / lvcreate" from a terminal
+[21:29] <sere_> TJ-  ok perfect i can manage that.. thank you  :)
+[21:30] <gabnerd> hey
+[21:31] <z3u4r5dok> I just came back to say thank you, everything still works after the reboot.... I will now do a snapshot just in case.... Thank all of you...
+[21:41] <virtuosoj> Keyboard settings question: In 16.04 Unity and also in Elementary, I could set my keyboard to U.S. International (AltGr Dead Keys) which allowed me to type easily in Spanish as well as English.  However in 17.10 Gnome I don't have this option.  Is there a way I can enable this???
+[21:46] <tyler-baker> anyone having issues rebuilding dkms modules with retpoline?
+[21:46] <tyler-baker> https://hastebin.com/etenidudug.md
+[21:47] <tyler-baker> trying to rebuild fglrx on 16.04 (which was working until latest kernel update)
+[21:47] <tyler-baker> do I need to pass a flag to dkms?
+=== umask078 is now known as umask077
+=== HairToday is now known as JPSman
+[22:15] <djgrapes> lit
+[22:19] <hans-peter> hall
+=== jstein_ is now known as jstein
+=== terra_ is now known as terraflux
+=== Iam1 is now known as eccles
+=== eccles is now known as Iam1
+[22:42] <xMopx> Hi, I have a vm that periodically fails to boot up with an error about my root device, /dev/mapper/<name>, not being found
+[22:42] <xMopx> I get an (initramfs) prompt that if I simply exit from using ctrl-D, the boot sequence completes normally
+[22:42] <ikonia> you need to know the error
+[22:42] <xMopx> the problem seems to be that lvm doesn't assemble it's array quickly enough
+[22:43] <ikonia> I doubt that
+[22:43] <xMopx> ikonia: it's Alert! <device> does not exist. Dropping to a shell!
+[22:43] <ikonia> I suspect it's more likley the virtual disk under lvm control isn't available
+[22:44] <ikonia> how many pv's are in the vg ?
+[22:44] <xMopx> one ikonia
+[22:44] <ikonia> so there is nothing to assemble
+[22:44] <xMopx> boot continues normally if I exit the initramfs prompt, though. So the disk is certainly available
+[22:44] <ikonia> it sounds like the disk device isn't being made available to the vm quick enough
+[22:45] <xMopx> ikonia: the root lvm and /boot/ partition are the same virtual device, so I think we'd see other errors if it wasn't available
+[22:45] <Iam1> will someone do me a favor and tell me if I diss and comeback, I want to check if my laptop suspends when I close the lid:)
+[22:45] <ikonia> xMopx: so thats interesting,
+[22:46] <Iam1> ???
+[22:46] <Iam1> maybe I should have asked someone who cares :P
+[22:46] <ikonia> probably
+[22:47] <kostkon> Iam1, check your logs as well
+[22:47] <Iam1> apparently not judging by the lack of reaction, ooh thanks kostkon I do appreciate that
+[22:48] <Iam1> do you mean like syslog?
+[22:48] <kostkon> Iam1, yep
+[22:48] <Iam1> cheers
+[22:50] <Iam1> kostkon, now it's worth my while reading the howto on making it suspend when I close it :)
+[22:54] <NikitaSadkov> https://github.com/saniv/free-game-art/blob/master/foss-copyright-infringement-records.md
+[22:56] <ikonia> NikitaSadkov: please don't spam
+[23:03] <tournesol> list
+[23:08] <Iam1> does anyone know a way to reverse the order of syslog?
+[23:08] <Iam1> seems a pain to have to scroll to whats happening now
+[23:09] <ikonia> what ?
+[23:09] <ikonia> just tail it
+[23:09] <NikitaSadkov> man tail
+[23:09] <Iam1> ohh cool, didn't think of using that
+[23:09] <Iam1> I was using the graphical one
+[23:10] <ee> hello all
+[23:11] <Iam1> what's the command to see syslog from the command line?
+[23:11] <ikonia> tail
+[23:11] <ikonia> as you've just been told
+[23:12] <dax> specifically, sudo tail /var/log/syslog
+[23:12] <ee> i have some problem in configuration of my vncserver insite of ubuntu 16.04. When i connect to server usign the vnc client i can't see the menu horzontal. Can you help me to resolve this problem?
+[23:12] <Iam1> I get nothing when I type "tail" or "syslog"
+[23:12] <dax> (I think that's the right filename, I'm not on Ubuntu right now)
+[23:12] <Iam1> I was presuming you piped it to tail
+[23:12] <ikonia> if you can't use the basic commands you're not going to be able to make sense of the syslog
+[23:13] <ikonia> dax: correct
+[23:13] <dax> and if you want to see everything instead of just recent stuff, sudo less /var/log/syslog and then type G (capital G) to go to the bottom/recent stuff
+[23:13] <Iam1> ok thanks will try that
+[23:14] <ee> ikonia: also do you have some solution for my problem ;-)
+[23:14] <ikonia> ee: not even read it
+[23:14] <Iam1> tail just locks up the terminal
+[23:15] <ee> ikonia: ok
+[23:15] <spotter> does anyone understand how start-stop-daemon is supposed to work?
+[23:15] <spotter> trying to have it leverage it to control some process life cycle and it doesn't work as I expect
+[23:15] <Iam1> cheers ikonia that works nicely
+[23:17] <Iam1> I find the man pages are a bit difficult to read atm
+[23:18] <Iam1> but I'm a fast learner :)
+[23:18] <Iam1> got tail to work for me now
+=== mwsb is now known as chu
+[23:20] <Iam1> I wasn't aware before that syslog was a file, I thought it was a program
+[23:21] <ee> some one had never my problem?
+[23:22] <Javabean> !patience
+[23:22] <ubottu> Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or https://ubuntuforums.org or https://askubuntu.com/
+[23:31] <Iam1> any opinions on running apt update daily?
+[23:33] <dax> Should be fine. If you're on desktop, there's an option somewhere to configure update frequency. If on server, sudo apt install unattended-upgrades; sudo dpkg-reconfigure unattended-upgrades
+[23:34] <dax> (or you can run it manually instead if you want, obviously)
+[23:34] <Iam1> I managed to mess up nextcloud running it, thats the only problem I've had so far
+[23:35] <Christian-M-NY> Anyone know anything about ULauncher or Alfred?
+[23:35] <Iam1> Given up on nextcloud since :)
+[23:37] <Iam1> I'm not sure if nextcloud let me down because I don't have a static IP address, could that be an issue?
+[23:37] <Christian-M-NY> IT is no longer showing results
+[23:37] <kalixus> :))
+[23:39] <kalixus> Shall we
+[23:41] <Christian-M-NY> anyone?
+[23:42] <Javabean> !patience
+[23:42] <ubottu> Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or https://ubuntuforums.org or https://askubuntu.com/
+[23:46] <Christian-M-NY> thanks
+[23:46] <Christian-M-NY> ok
+[00:07] <OerHeks> seems like not that many users for that albert thingy http://www.webupd8.org/2017/01/albert-quick-launcher-090-released-with.html
+[00:11] <dabblerdude> Hello.
+=== lan is now known as Kumool
+[00:12] <dabblerdude> https://pastebin.com/QDpheJBL I've got an issue here with Audacity. Most of the time when I record, the program freezes and I have to force quit.
+[00:12] <dabblerdude> I've been getting this with Ubuntu 14.04 and 16.04.
+[00:18] <Christian-M-NY> yeah
+[00:19] <Christian-M-NY> anyway Ulauncher stopped finding results after my hard drive space ran out....and deleted alot of things...but it didnt fix it...so I installed ALbert...and it does the same thing...............but Synapse and Kupfer work fine
+[00:28] <bosphus2> I'm at my wits end with trying to install a Brother MFC-L2750DW can anyone help?
+[00:29] <bosphus2> I've tried everything from letting the system auto detect it to scripts in the bowls of searches and nothing has worked
+[00:36] <mzaza> Anyone alife who can help with a mongo problem, not database related :D
+[00:44] <bosphus2> anyone?
+[00:44] <bosphus2> im dying over here
+[00:44] <konrados> Hi. Is the directory modification datetime always the modification datetime of recently modified file inside that directory? Even somewhere deeeply?
+[00:44] <bosphus2> not literally before someone calls an ambulance
+[00:45] <konrados> boshhead: just keep the faith, it's gonna be just fine!
+[00:45] <circuitfox> hello
+[00:45] <circuitfox> i could use some help
+[00:45] <nacc_> bosphus2: i'm pretty sure i have the exact same printer
+[00:45] <nacc_> bosphus2: and it 'just works'
+[00:45] <bosphus2> well ive spent 2 days trying to install this printer with every resource I can find...nothing works
+[00:45] <nacc_> bosphus2: it's on the network, though, not direct attached
+[00:45] <bosphus2> and I have to use it
+[00:46] <circuitfox> i'm having a hdd issue can anyone help?
+[00:46] <bosphus2> mine is visible...ubuntu and solus see it and auto install it...but cant print....solus devs said its a driver issue...but ive followed the directions on brothers site to instlal driver and it doesnt work
+[00:46] <bosphus2> even called brother and they "dont support linux:
+[00:46] <nacc_> bosphus2: sorry, i have the DCPL2540DW
+[00:47] <nacc_> bosphus2: no drivers are necessary
+[00:47] <bosphus2> well this one is capable of driverless printing as well...according to sources
+[00:47] <bosphus2> but it wont
+[00:47] <nacc_> bosphus2: then there's something else wrong, what version of ubuntu (i'm on 18.04)
+[00:47] <bosphus2> and even using their installer script etc wont work.....16.04
+[00:48] <bosphus2> ive seen several people saying the installer doesnt work for them either...typical stack exchange stuff with lots of answers and none that work
+[00:48] <nacc_> bosphus2: what 'installer' script?
+[00:48] <bosphus2> from Brother's site...standby
+[00:48] <nacc_> bosphus2: as i said, afaik, totally unnecessary
+[00:49] <bosphus2> well i first tried to just let ubuntu install it and it seems online but wont print
+[00:49] <bosphus2> jobs hang in processing forever
+[00:50] <Majost> konrados: I think the answer is, yes:  https://paste.ubuntu.com/p/hWN6gg8HS5/
+[00:50] <mzaza>   Process: 1555 ExecStart=/etc/init.d/mongodb start (code=exited, status=1/FAILURE)
+[00:50] <mzaza> Can anyone assist, online links doesn't help so far
+[00:50] <circuitfox> i recently moved my old computer into a server chassis but i'm having a hard time seeing the hdds installed in the chassis
+[00:50] <nacc_> mzaza: run that manually (sudo /etc/init.d/mongodb start) and pastebin the output
+[00:50] <Majost> konrados: There may be a mount option which can change that, but I am not aware of any off hand.
+[00:50] <shazbotmcnasty> Hey there can I ask a question regarding making a fail2ban regex filter? If no, where can I go? #fail2ban is dead
+[00:50] <circuitfox> they are connected via sas to sata on the motherboard (no raid controller)
+[00:51] <circuitfox> any ideas?
+[00:51] <bosphus2> this link is a driver script some people say works...hasnt for me http://support.brother.com/g/b/downloadend.aspx?c=us&lang=en&prod=mfcl2750dw_us_eu_as&os=128&dlid=dlf006893_000&flang=4&type3=625
+[00:51] <nacc_> cupswrapper is terrible
+[00:51] <bosphus2> and ive tried several variations of it people say works
+[00:51] <mzaza> nacc_: http://paste.ubuntu.com/p/p4CpyG8VDM/
+[00:51] <bosphus2> got any ideas?
+[00:51] <nacc_> bosphus2: dunno if it's necessary, but that whole thing is annoying
+[00:51] <nacc_> bosphus2: have you tried using 18.04?
+[00:52] <nacc_> iirc, there's been a lot of ipp: related changes in ubuntu since 16.04
+[00:52] <bosphus2> not in a position to upgrade right now...have 0.5mpbs internet as well so even getting an iso is an overnight affair
+[00:52] <nacc_> mzaza: `sudo bash -x /etc/init.d/mongodb start`
+[00:52] <nacc_> mzaza: that output in a pastebin
+[00:52] <nacc_> bosphus2: dunno, i can only report on what i know
+[00:52] <bosphus2> and its not working via IPP on solus which is rolling and updated
+[00:53] <bosphus2> so yours just plugged in and was detected and worked? no configurtion?
+[00:53] <nacc_> bosphus2: then i'd replace it with the one i'm telling you does work :)
+[00:53] <bosphus2> not up to me...this is a family house in rural nowhere and im visiting for a while
+[00:53] <circuitfox> if someone can help plz pm
+[00:53] <bosphus2> it works on their macs so they dont care
+[00:53] <nacc_> bosphus2: send your docs to their macs and print from there?
+[00:53] <konrados> Majost: thanks! Although I'm wondering if it's always the case, and I don't mean mounted devices. Like, when I look at the modification datetime of directory x, and it says 2017-01-01 - can I be sure that *no* file was created/modified after that time? Of course assuming I didn't modify the X directory mod date manually.
+[00:54] <bosphus2> they are out of town...believe me Im not trying to be difficult...workarounds common sense would imply just wont work
+[00:54] <nacc_> bosphus2: what if you direct connect to the printer?
+[00:55] <mzaza> nacc_: https://paste.ubuntu.com/p/fqK9Gdz9y6/
+[00:55] <bosphus2> cant...without moving the entire desktop far away
+[00:55] <bosphus2> its not a solution
+[00:55] <nacc_> mzaza: systemctl status mongodb.server and journaltcl -xe output
+[00:56] <bosphus2> believe me if it was as simple as a common sense workaround id have done it
+[00:56] <nacc_> mzaza: *mongodb.service*
+[00:56] <nacc_> bosphus2: sorry, i'm not sure otherwise
+[00:56] <nacc_> bosphus2: i've given you all the pragmatic solutions i can
+[00:56] <Majost> konrados: that example I linked is not devices -- it creates a new directory, sleeps, then creates a file inside the directory, and stats the directory and file to show the modify time, which is the default value `ls` displays.
+[00:57] <mzaza> nacc_: https://paste.ubuntu.com/p/XGTdwGyMjr/
+[00:58] <bosphus2> nacc im not bitching at you..ive jsut considered all that and am stuck
+[00:58] <konrados> Majost: yes yes, I did understand that (it took me a while:)) - but... I mean can I be *sure*? That without me playing with dir modification datetime, the directory modification datetime is same as the recently modified file inside it? Always?
+[00:58] <konrados> Majost: I assume "yes"?
+[00:58] <konrados> By looking at your example.
+[00:58] <Majost> konrados: The short answer is, yes -- its a safe assumption that no file was _created_ -- I think modified may be different.
+[00:58] <nacc_> bosphus2: never said you were
+[00:58] <bosphus2> seems my issues are always things the stack exchange answers are unresponded to like the xkcd comic...."who are you user1234" etc
+[00:58] <nacc_> bosphus2: and please watch the language
+[00:59] <konrados> Majost: my tests with modifyin file shows same results. Thanks again!
+[01:00] <Majost> konrados: you can run that same command on your box, and then add `touch /tmp/foo/bar ; stat /tmp/foo /tmp/foo/bar` to modify the file in the directory and see what the behavior is though
+[01:00] <nacc_> mzaza: waht version of ubuntu is this?
+=== Leion1 is now known as Leion
+[01:00] <nacc_> mzaza: your output is weird
+[01:00] <nacc_> mzaza: "Failed to start LSB: An object/document-oriented database."
+[01:00] <Majost> konrados: no problem
+[01:01] <mzaza> nacc_: 16.04
+[01:01] <nacc_> mzaza: apt-cache policy mongodb-server
+[01:03] <mzaza> nacc_: Let me tell you what happened their, i had a mongodb server up and runing fine for months now. Then it the disk ran out of space and afte I resized it, i tried to restart the process and it didn't work. I made a mistake and install mongodb, while I had mongodb-org. So I deleted mongodb and reinstall mongodb-org. I'm running on EC2 instance
+[01:03] <nacc_> mzaza: yeah, i think you possibly didn't purge something correclty
+[01:03] <nacc_> mzaza: but not sure
+[01:03] <mzaza> nacc_: nacc_ https://paste.ubuntu.com/p/m2VV57QrnC/
+[01:03] <nacc_> mzaza: the mongodb-org package is not supported here, though
+[01:04] <nacc_> mzaza: so you're using mongodb-org now?
+[01:04] <mzaza> nacc_: I hope that I didn't purge anything because I still need the database, and I'm afraid I might be missing the latest backup. Yes I am.
+[01:04] <nacc_> mzaza: purge would remove the package not its data (aiui)
+[01:04] <nacc_> mzaza: you would need to seek support from mongodb then
+[01:04] <mzaza> nacc_: So, I should purge mongodb or mongodb-org?
+[01:04] <nacc_> mzaza: i don't know, the latter is not a supported ubuntu package
+[01:04] <mzaza> nacc_: I tried to, before I got her. But they were all dead by the time I was there.
+[01:05] <mzaza> If I just could made it alittle bit earlier :D
+[01:05] <nacc_> mzaza: yeah, there's not much we can do
+[01:05] <mzaza> nacc_: Well, thanks for your help so far. If you change your mind, I will be there. *PS this problem is on production environment :D
+[01:06] <Christian-M-NY> bosphus2 I wasn't paying attention, but sholdnt you be able to install the driver via PRINTERS in the Administration Menu?  it may not have the exact model, but usually the closest simlar printer to it should work
+[01:06] <nacc_> mzaza: well, on a production environment, i hope you ahve backups and can just roll back :)
+[01:06] <nacc_> mzaza: and/or you should not have 'install'ed mongdob in prodcution without having done it first in dev
+[01:06] <Christian-M-NY> so look up similar Brother Printers and remember the models and then try to install the Printer you have Via the ADMINISTRATION/PRINTERS menu...and if yours is not on the list, choose a similar one....has always worked for me especially with Brother Printers
+[01:07] <shazbotmcnasty> Hey so - there's a variable in this script that's ".*"
+[01:07] <mzaza> nacc_: I have done it in dev first, everything was fine I had the production server up for months now with no problem what so ever, until the disk ran out of space and I resized.
+[01:07] <shazbotmcnasty> does that one period account for multiple periods?
+[01:07] <nacc_> mzaza: you installed mongdob on your dev server?
+[01:07] <shazbotmcnasty> Say an IP address?
+[01:08] <shazbotmcnasty> Gosh I should really put everything on one line rather than multiple.
+[01:08] <nacc_> shazbotmcnasty: dependson the context, but generally '.' means *any* charager
+[01:08] <nacc_> *charctger
+[01:08] <nacc_> bah, character :)
+[01:08] <shazbotmcnasty> nacc_: even if there are no periods at all?
+[01:08] <nacc_> shazbotmcnasty: yes.
+[01:08] <shazbotmcnasty> and did you mean ".*" or just "."
+=== dingir__ is now known as dingir_
+[01:09] <nacc_> shazbotmcnasty: again, it's hard to say without context
+[01:09] <nacc_> shazbotmcnasty: in a shell script, what's the variable being used for?
+[01:09] <nacc_> shazbotmcnasty: right now, iirc, that means 'a period followed by anything'
+[01:10] <mzaza> nacc_: Yes I had it. And it was fine. You see I'm not trying to install it, I'm trying to recover
+[01:10] <nacc_> mzaza: you just said you isntalled 'mongodb' in error?
+[01:10] <shazbotmcnasty> I'm attempting to make a fail2ban filter. In the walkthrough that I have, it doesn't match up with the actual log stuff, so I don't think that it will ever have a match to the current regex filter, from the walkthrough.
+[01:10] <shazbotmcnasty> Like for the "time" section it has ".*" has the variable, but there is no period in the time field
+[01:11] <nacc_> shazbotmcnasty: that's not necesarily shell is it?
+[01:11] <shazbotmcnasty> thus that will never be matched, eh?
+[01:11] <nacc_> shazbotmcnasty: if it's using standard regex, then it's a different syntax
+[01:12] <nacc_> shazbotmcnasty: on a quick google, they use python regex
+[01:12] <nacc_> shazbotmcnasty: there's also apparently a fail2bain-regex tool
+[01:12] <shazbotmcnasty> nacc_: well i don't really know it's just a .conf file.
+[01:12] <shazbotmcnasty> oh that sounds nice
+[01:13] <nacc_> shazbotmcnasty: right, not clear why you'd assume taht's shell-interpreted
+[01:13] <nacc_> shazbotmcnasty: keep in mind, i've never used fail2ban
+[01:13] <nacc_> :)
+[01:13] <shazbotmcnasty> i just figured ".*" and "*" or "." meant the same here and there
+[01:14] <nacc_> shazbotmcnasty: that would depend on the style of regex in question
+[01:14]  * shazbotmcnasty shrugs. ok.
+[01:15] <shazbotmcnasty> Well last thing - where do i find that fail2ban-regex tool?
+[01:15] <nacc_> shazbotmcnasty: i dunno, i was just reading their upstream docs
+[01:15] <shazbotmcnasty> ok thanks
+[01:15] <nacc_> shazbotmcnasty: in ubuntu it's in the fail2ban pacakge
+[01:15] <nacc_> (at least on 18.04)
+[01:16] <mzaza> nacc_: Yes, mongodb I was confused and installed it instead of install mongodb-org, to check if i have any missing part uninstalled by mistake
+[01:16] <circuitfox> how can i see what hardware needs drivers installed?
+[01:16] <nacc_> mzaza: right, so did you do that exactly on your dev server first?
+[01:16] <nacc_> mzaza: that's what i meant earlier
+[01:17] <shazbotmcnasty> oh hmm it's for like testing my already made filter, not one that i need to create
+[01:17] <nacc_> shazbotmcnasty: https://fail2ban.readthedocs.io/en/latest/filters.html
+[01:17] <nacc_> shazbotmcnasty: it says it's used for 'developing/testing a regex'
+[01:19] <mzaza> nacc_: no, because my dev server didn't have a problem with disk space, the production had
+[01:19] <nacc_> mzaza: right ... so that's not great devops :)
+[01:20] <nacc_> mzaza: not trying to pick at you, but now you've gone and done something bad to prod
+[01:20] <mzaza> nacc_: yes , you're right
+[01:20] <bodangly> So this is strange. somehow http_proxy and https_proxy got set in my bashrc randomly. Proxy turned off in systems settings. Any clues as to why?
+[01:20] <bodangly> It was causing problems with pip, I removed it, but am wondering why it happened and how to prevent it in the future
+[01:21] <bodangly> it happened rather suddenly too, I use a ton of python virtualenvs and never had a problem, then all the sudden pip was getting connection refused and I traced it back to http_proxy being in my env
+[01:22] <nacc_> bodangly: check if it happesn to a new user too (which would imply system shell rc files)
+[01:22] <nacc_> bodangly: if it doesn't, then check your ~/.bashrc, ~/.bash_profile, etc
+[01:23] <bodangly> well I removed it from ~/.bashrc, but good point I will check a new user
+[01:24] <macca> anyone else notice pinterest is messed up in firefox?
+[01:24] <macca> earth shattering news indeed...
+[01:26] -fqlvwfb:#ubuntu- All you ladies pop yo' pussy like this Shake your body, don't stop, don't miss All you ladies pop yo' pussy like this Shake your body, don't stop, don't miss Just do it, do it, do it, do it, do it now
+[01:26] -ulumtzy:#ubuntu- All you ladies pop yo' pussy like this Shake your body, don't stop, don't miss All you ladies pop yo' pussy like this Shake your body, don't stop, don't miss Just do it, do it, do it, do it, do it now
+[01:26] -yqitx:#ubuntu- All you ladies pop yo' pussy like this Shake your body, don't stop, don't miss All you ladies pop yo' pussy like this Shake your body, don't stop, don't miss Just do it, do it, do it, do it, do it now
+[01:26] -nhbjafl:#ubuntu- All you ladies pop yo' pussy like this Shake your body, don't stop, don't miss All you ladies pop yo' pussy like this Shake your body, don't stop, don't miss Just do it, do it, do it, do it, do it now
+[01:26] -osoqas:#ubuntu- All you ladies pop yo' pussy like this Shake your body, don't stop, don't miss All you ladies pop yo' pussy like this Shake your body, don't stop, don't miss Just do it, do it, do it, do it, do it now
+[01:31] <tx78028> tx78028
+[01:41]  * woods123
+[01:42] <woods123> quit
+=== Simarillion is now known as Guest58747
+=== Guest58747 is now known as Captain_Wind_X
+[02:08] <OerHeks> ai
+[02:08] <CarlFK> how can I restrict xrandr to only show me HDMI-3 stats?
+[02:18] <ubuntu> herro
+=== ubuntu is now known as Guest21361
+[02:19] <Guest21361> yo
+[02:36] <jaranGoyang> hi all
+[02:37] <sere> can you run a 64bit os on a 32bit systerm the reason i ask i booted a x64 on this machine w a intel atom cpu wich i think is 32bit
+[02:37] <jaranGoyang> how to download omegle?
+[02:37] <jaranGoyang> or something like that?
+[02:39] <cfhowlett> sere, no.
+[02:39] <Nachos11> sere: atoms are all x64, AFAIK.
+[02:39] <sere> cfhowlett: thats what i though so then my cpu must be 64then right
+[02:39] <sere> Nachos11: awesome.. im dumb lol ty
+[02:41] <cfhowlett> jaranGoyang, https://www.omegle.com/
+[02:42] <DiecastMessiah> yeah it wouldn't work at all if it wasn't // or maybe not even install
+[02:46] <jaranGoyang> @cfhowlett thanks alot
+[02:46] <cfhowlett> jaranGoyang, happy2help!
+[02:47] <joufflu> i am getting this error message when trying to install an app via apt-get "Unable to correct missing packages."
+[02:48] <cfhowlett> what app?  what ubuntu version?
+[02:48] <joufflu> i did search for a solution online but it says to upgrade my system using the updater, but the updater also fails
+[02:48] <joufflu> 17.10
+[02:48] <joufflu> oops 17.04
+[02:48] <joufflu> ^correction
+[02:48] <cfhowlett> dead.  end of life.  no longer supported
+[02:49] <cfhowlett> !eol | joufflu
+[02:49] <ubottu> joufflu: End-Of-Life is the time when security updates and support for an Ubuntu release stop, see https://wiki.ubuntu.com/Releases for more information. Looking to upgrade from an EOL release? See https://help.ubuntu.com/community/EOLUpgrades
+[02:49] <joufflu> thank you
+[02:49] <cfhowlett> happy2help!
+[02:49] <mail-man> I'm trying to repurpose an old MacMini G4 (1.4GHz CPU, Radeon 9200 32MB VRAM) computer with Ubuntu 14.04 PPC, but I'm having a lot of issues with choppy video reproduction on browsers like midori, firefox, etc. Video reproduction using VLC/Mplayer2 works fine though. What could be causing this?
+[02:50] <mail-man> err, I meant video playback.
+=== mooncakehexchat is now known as Guest35859
+[02:51] <DiecastMessiah> I think you may want to use xfce desktop env .. unity would be a bit much for that system
+[02:51] <DiecastMessiah> too much**
+[02:52] <mail-man> DiecastMessiah, I am currently using LXDE, the system seems relatively snappy
+[02:52] <cfhowlett> mail-man, try this: sudo apt install lxde xfce4
+[02:52] <cfhowlett> then logout, choose an alternate session and login
+[02:53] <DiecastMessiah> oh ok i think lxde is lighter than xfce but not by much.. but lighter still
+[02:53] <mail-man> the problem arises when playing videos from a browser exclusively, frame rate drops to 5 FPS or something like that, if I use a video player it runs well
+[02:53] <cfhowlett> suggesting that it's not hardware then.  perhaps too many active plugins in your browser?
+[02:54] <DiecastMessiah> well videos on the web are highly compressed
+[02:54] <DiecastMessiah> thats more ram and cpu power to decord than on the fly
+[02:54] <cfhowlett> might have to pass on the HD resolution videos, mail-man
+[02:55] <DiecastMessiah> decode sorry typos
+[02:55] <mail-man> actually, I've been doing all my tests with 480p videos.. the weird thing is that if I download 480p youtube videos, the playback works fine in VLC/mplayer, whereas it is very choppy in the browser
+[02:55] <cfhowlett> try a different browser.
+[02:55] <cfhowlett> chromium-browser perhaps?
+[02:56] <kenrin> well it has to decode the video and copy back into the frame buffer,  it takes more work to view on a browser versus just into VLC or mplayer
+[02:56] <mail-man> I attempted all these tests with midori, firefox, epiphany-browser. Chromium is not supported in PPC arch I think.
+[02:56] <DiecastMessiah> yeah cfhowlett would be right.. the browser is most likely taking just a bit too much ram for the video to run
+[02:56] <kenrin> There is plugins available like omxplayer for chromium that can "workaround" this
+[02:57] <kenrin> Mostly they are geared towards raspi units
+[02:57] <tylerrud2002> I am having problems connecting to OFTC
+[02:57] <tylerrud2002> using pidgin
+[02:58] <mail-man> I saw a video on YT of a guy who has a similar MacMini (the only difference is that his GPU has 32+ MB of VRAM), and everything works well, could this difference account for the huge disparity in performance?: https://youtu.be/m2mx9lmhEuQ?t=795
+[02:58] <kenrin> Is it the same GPU?  Maybe he has hardware decoding or something else
+[02:59] <cfhowlett> that vram advantage could very well explain the better performance.
+[02:59] <mail-man> yeah, it is the same GPU, but it only has 32MB vram, the one in the video has 64MB. are there any diagnostics I can check in order to verify if I have full 2d/3d accel?
+[03:00] <OerHeks> i am surpriced that this PPC/Radeon9200 plays video
+[03:00] <kenrin> In chrome you can do chrome://gpu/.  I'm sure there is similar for other browsers
+[03:00] <mail-man> to be honest, I didn't check if OSX 10.5 video performance was that good, I might install it again and check if video playback is as bad as I currently get on ubuntu ppc
+[03:00] <cfhowlett> https://www.howtoforge.com/tutorial/linux-gpu-benchmark/          mail-man
+[03:01] <cfhowlett> mesa-utils > glxgears might be a good starting point
+=== Guest35859 is now known as mooncakehexcha
+[03:02] <mail-man> just tried it, I get 30FPS if I maximize the glxgears window at a 1024x768@32 res
+[03:03] <kenrin> So about half of what it takes to not be choppy
+[03:03] <mail-man> glxinfo reports: OpenGL renderer string: Mesa DRI R200 (RV280 5962) DRI2
+[03:03] <cfhowlett> ram.  must have more ram!  see ebay/amazon for options
+=== mooncakehexcha is now known as obythd
+[03:04] <mail-man> It is running on 512mb ram so that must be an issue as well
+[03:05] <mail-man> I'll try installing 10.5 and checking its performance to see if it's a kernel module/driver issue
+[03:05] <mail-man> thanks for your help guys!
+[03:05] <DiecastMessiah> yeah not sure if mac are like pc's but vram just mean it uses 32mb on the normal ram... but thats with pc's
+=== obythd is now known as mookcakehexchat
+[03:07] <DiecastMessiah> but it may have its own decated ram.. hard to say without reading the full spec's
+[03:07] <mail-man> I think it may have its own dedicated ram, I only used the term VRAM because I thought that was appropriate to describe that spec
+[03:07] <kenrin> thats exactly what it means,  virtual ram
+[03:10] <cfhowlett> mail-man, props for keeping the device running.  as you've noticed, system demands invoked by media is increasingly exponentially.  Perhaps time to repurpose your device?  Personal cloud storage, music player or ubuntu mirror leap to mind ...
+[03:11] <DiecastMessiah> or to play oldold 90 games :)
+[03:12] <cfhowlett> we can always use another Doom server.  Always!
+[03:12] <mail-man> cfhowlett, indeed, at least in the browsing department it seems that the requirements have increased greatly, if I can't get it to play videos on a browser I might just turn it into a kodi box for streaming, it seems to handle 480p fine as long as it isn't being displayed on a browser :)
+[03:13] <cfhowlett> I like the way you think!  You make up your own rules.
+[03:13] <cfhowlett> Oh!  Steam server?  Counterstrike Source?
+[03:15] <DiecastMessiah> to bad prism broswer died .. that may have done the trick .. i miss it :)
+[03:19] <mail-man> midori and epiphany browser are quite lightweight, netsurf was the lightest of all but a lot of websites don't work well with its html/js interpreter
+=== dingir___ is now known as dingir
+[03:22] <DiecastMessiah> yeah can see that java is powerful but it a hog to
+=== Menzador90 is now known as Menzie
+=== mitch is now known as Guest95495
+[03:36] <mookcakehexchat> hi guys can anyone tell me the offtopic ubuntu channel was able to find for other flavors not ubuntu though
+[03:37] <cfhowlett> you mean xubuntu-offtopic ...?
+[03:37] <nacc_> mookcakehexchat: #ubuntu-offtopic
+=== nacc_ is now known as nacc
+[03:38] <mookcakehexchat> just general questions not related to help am running ubuntu so figure xubuntu wouldnt be it
+[03:39] <cfhowlett> some flavors have an offtopic channel.  most don't.  doesn't seem to be a frequent or high-priority request.
+[03:39] <mookcakehexchat> :)
+[03:40] <maki> qwasdxlo1
+[03:41] <mookcakehexchat> how do you guys find a channel on a given topic not using /list -verbose and small window som much to hover over to get details about channel topic
+[03:42] <DiecastMessiah> most irc clinets have a channel list window
+[03:42] <mookcakehexchat> anything eqiv to a search engine perhaps
+[03:42] <nacc> !alis | mookcakehexchat
+[03:42] <ubottu> mookcakehexchat: Alis is an IRC service to help you find channels. For help on using it, see "/msg Alis help list" or ask in #freenode. Example usage: "/msg Alis list http"
+[03:42] <mookcakehexchat> thannks
+[03:42] <mutante> mookcakehexchat: basically i just join it and see if it exists. if it's the name of a free software it usually just works on freenode :)
+[03:43] <mutante> (but you may have to try # and ##)
+[03:43] <garyserj> I don't fully understand this syntax for ufw. sudo ufw allow from 15.15.15.0/24 to any port 5432     Why does it say to any port, if it's only one port or the ports listed?
+[03:44] <mutante> i would think "any" means IP
+[03:44] <mutante> but it's unfortunate wrding
+[03:44] <nacc> imagine a comma there
+[03:44] <mutante> from 15.15.15.0/24 to any network, to port 5432
+[03:46] <mookcakehexchat> thanks for the alis suggestion
+[03:46] <segersjerry> Hi, I just set up my printer (canon pixma mg8120) using the directions at https://wiki.ubuntu.com/DebuggingPrintingProblems on a 16.04 ubuntu mate box. The printer functions perfectly, but it pops up 19 "error" messages as shown here - https://i.imgur.com/VaaJOK0.png How do I prevent status messages being displayed as error messages?
+[03:46] <mutante> almost more confusing than using iptables directly.. despite the point of ufw.. i guess
+[03:51] <DiecastMessiah> segersjerry: those look like notices .. is there an option in gnome setting.. sorru it been may year that i looked at gnome2 Desktop
+[03:52] <segersjerry> DiecastMessiah, checking, brb
+[03:53] <DiecastMessiah> i hope there is if not i have no other idea's... i'm still pretty newish
+[03:54] <DiecastMessiah> but i played with linux a few times over the years.
+[03:55] <garyserj> mutante: what does to any network mean? it's going to that machine isn't it?
+[03:58] <mutante> garyserj: probably "interface", as in one of possibly multiple network cards
+[03:58] <mutante> which could each be in different networks
+[03:58] <garyserj> ah ok, thanks
+[03:59] <mutante> they can also be virtual
+[03:59] <mutante> multiple interfaces and IP addresses in the same machine
+[04:07] <RA3OR> need some help, i have a symlink that keeps reverting to previous path, tried ln -sfn, tried removing it, forcibly overriding the path.... after some time it reverts to previous path
+[04:07] <RA3OR> ubuntu 16.04
+[04:07] <vern> RA3OR: symlinks don't change by themselves. something must be changing it
+[04:07] <RA3OR> vern: tell me about it
+[04:08] <vern> RA3OR: need more info. what symlink?
+[04:09] <RA3OR> vern: may I pm you?
+[04:09] <linocisco> hi
+[04:09] <vern> RA3OR: sure
+[04:10] <linocisco> how to edit pdf and add signature?
+[04:12] <DiecastMessiah> I believe you cannot edit a pdf itself.. i think you have to convert it to something and than edit .. and export it again toa pdf
+[04:13] <Triffid_Hunter> RA3OR: yeah something in ubuntu likes to overwrite stuff like that.. a while ago it was overwriting my graphics drivers with broken ones on boot, never did manage to find what was beraking things though
+[04:13] <RA3OR> well, its giving me gray hairs, wasted 6 hrs(and my sleep) trying to figure out whats happening
+[04:14] <RA3OR> and manually recreating it, to keep vital part of site online
+[04:18] <DiecastMessiah> linocisco: is the PDF the only file you have ? or do you have the origial document file?
+[04:18] <linocisco> DiecastMessiah, I can make duplicate and test
+[04:19] <DiecastMessiah> oh ok.. so you'll want to find a pdf converter and do like i said before
+[04:24] <DiecastMessiah> linocisco: sorry was just looking around i guess there are online tools to add things like signures or images ectect ..
+[04:26] <DiecastMessiah> but i think they just do the same thing your about to do.. just does it a bit for you.. PDF's are really more like images and a document
+=== DiecastMessiah is now known as IamGroot
+=== IamGroot is now known as DiecastMessiah
+[04:30] <Triffid_Hunter> DiecastMessiah: I've edited PDFs.. they're not strictly images, most documents are a large collection of tightly specified text labels possibly with some images added
+[04:36] <DiecastMessiah> more like images.. its not selectable text .. unless you use editor software but in that case its converting it back to real text
+[04:44] <Triffid_Hunter> DiecastMessiah: my pdf viewer can select text
+[04:44] <DiecastMessiah> ok than. been years but before a normal pdf viewer would be able to.
+[04:44] <DiecastMessiah> wouldn't
+[04:44] <Triffid_Hunter> DiecastMessiah: I use okular if you're curious, of all the PDF viewers I've tried I like that one the best
+[04:46] <DiecastMessiah> yeah sorry i guess it normal now to be able to select and copy. but still cannot change it with just a viewer
+[04:48] <DiecastMessiah> but anyway i must depart.. sleepyness .. later all
+=== messer440 is now known as Guest88251
+=== nchambers is now known as uplime
+=== uplime is now known as nchambers
+=== r0Oter is now known as r00ter
+=== Leion1 is now known as Leion
+=== Betonneklakske is now known as Garc
+[06:29] <badboyjer> sup
+[06:42] <lotuspsychje> !ask | badboyjer
+[06:42] <ubottu> badboyjer: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[06:43] <badboyjer> ok
+[06:43] <badboyjer> im thinking about making food
+[06:43] <badboyjer> should i do that now or wait till tomorrow?
+=== Betonneklakske is now known as Garc
+=== max is now known as Guest25062
+[07:21] <Guest25062> hi
+[07:22] <badboyjer> hey
+=== Betonneklakske is now known as Garc
+=== Iam1 is now known as macca
+[07:36] <noj_> hey all need to remove a version of hex chat can i get the terminal command not allowing me to do so from software center
+[07:36] <EriC^> noj_: sudo apt-get remove hexchat
+[07:37] <noj_> got two one i can remove from software center the other i cant install cus its already installed but shows no remove odd
+[07:37] <noj_> thanks
+[07:37] <ramy_d> yup
+[07:38] <noj_> is there a way to see all the versions installed from terminal incase i need to mention any other things like verion or stable etc
+[07:42] <EriC^> noj_: dpkg -l "hexchat*"
+[07:42] <ramy_d> apt-cache madison
+=== Leion1 is now known as Leion
+[07:51] <noj_> having problems removing hexchat from ubuntu guys currently have two versions installed but parts of one missing i suppose need help please to remove both
+[07:51] <noj_> when i search for hexchat two show up that i can open both open one works one does no
+[07:52] <noj_> tred removing from software center no joy only able to remove the working one
+[07:53] <noj_> tried to remove from terminal sudo apt-get remove hexchat
+[07:53] <noj_> no joy
+[07:54] <noj_> happy to smash out a terminal command and paste what ever you need
+[07:57] <noj_> https://imgur.com/a/7F2R1
+[07:57] <noj_> as you can see in the ubuntu software center this hexchat is already installed but wont allow removal
+[07:58] <noj_> used bleachbit perhaps the issue fix
+[07:58] <noj_> fx i dont knonw
+[07:58] <noj_> https://imgur.com/a/7F2R1
+[08:01]  * noj_ waits anxiously in anticipation begging ubuntu gods for help via terminal
+[08:03] <ramy_d> err
+[08:04] <ramy_d> did you install hexchat through a snap?
+[08:04] <noj_> help
+[08:04] <noj_> whats snap the orange a bag shapped thing
+[08:05] <noj_> used software center
+[08:05] <ducasse> noj_: does 'snap list' list hexchat?
+[08:05] <ramy_d> it says you installed a snap in your imgur link
+[08:06] <noj_> yes but it doesnt show remove
+[08:06] <ramy_d> snap remove hexchat
+[08:06] <noj_> no
+[08:06] <noj_> its still there and i can open it
+[08:06] <ramy_d> software center does not manage snaps
+[08:06] <noj_> also it is missing alot of its stuff
+[08:07] <noj_> tried removing from terminal no luck
+[08:07] <noj_> tried autoremove and clean after sudo apt-get remove hexchat no joy
+[08:08] <noj_> even -f at end
+[08:08] <noj_> nt sure what else to try
+[08:08] <ramy_d> it's not installed through apt-get
+[08:08] <auronandace> noj_: if something is installed via snap you need to remove it via snap. you don't remove a snap via apt-get
+[08:08] <noj_> okay
+[08:08] <ramy_d> snap remove hexchat
+[08:09] <ramy_d> that's the command
+[08:09] <noj_> given snap wont allow me to install (to fix-then remove) what do i do---I love you mate
+[08:09] <noj_> thank you
+[08:10] <noj_> i could kiss you
+[08:10] <ramy_d> worked I guess?
+[08:10] <noj_> so for my own learning curve anything from the software center is installed via a snap gui
+[08:10] <ramy_d> no
+[08:10] <noj_> yes it did
+[08:11] <ramy_d> I'm not sure how a snap got installed without your knowledge
+[08:12] <ramy_d> but snaps are not installed through the software center
+[08:12] <noj_> it was from the software center when i search hexchat two icons showed
+=== Zeff is now known as Guest69379
+[08:12] <noj_> i installed both
+[08:12] <ramy_d> <unconvertable>
+[08:12] <ramy_d> wait you installed both?
+[08:12] <ramy_d> but... why?
+[08:13] <ramy_d> at the same time?
+[08:13] <ramy_d> whoa it's 3 am, gn
+[08:14] <noj_> long story having issues with hexchat wanted to start from scratch so tried to remove had used bleachbit attributed my problems to use of bleachbit
+[08:14] <noj_> wasnt able to remove hexchat or use so installed the other one
+[08:15] <noj_> needed to get back online to ask for help and here i am ur command worked and the other hexchat offers install and remove
+[08:15] <noj_> where as the other hexchat offered only install
+[08:16] <noj_> but wouldnt allow it as was already installed
+[08:16] <noj_> go figure
+[08:16] <noj_> ciao
+=== noj_ is now known as mooncakehexchat
+=== Leion1 is now known as Leion
+=== Leion1 is now known as Leion
+[08:55] <gnomethrower> Cannot initiate the connection to au.archive.ubuntu.com:80 (2001:388:30bc:cafe::beef). - connect (101: Network is unreachable) [IP: 2001:388:30bc:cafe::beef 80]
+[08:55] <gnomethrower> ^ hopefully i'm not the first to mention this? :)
+[08:59] <xtetox> This is my source list: # deb cdrom:[Ubuntu 18.04 LTS _Bionic Beaver_ - Alpha amd64 (20180126)]/ bionic main restricted deb-src http://archive.ubuntu.com/ubuntu bionic main restricted #Added by software-properties  # See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to # newer versions of the distribution. deb http://ubuntu.mirror.garr.it/ubuntu/ bionic main restricted deb-src http://ubuntu.mirror.garr.it/ubuntu/
+[09:00] <auronandace> !ubuntu+1 | xtetox
+[09:00] <ubottu> xtetox: Bionic Beaver is the codename for Ubuntu 18.04 - Support only in #ubuntu+1
+=== Allanis_ is now known as Allanis
+[09:33] <enoq> hi, does the default ubuntu image ship memtest in an efi compatible version?
+[09:34] <enoq> currently figuring out which live cd to download for memtest
+=== EriC^ is now known as EriC^^
+[09:43] <kamichan> how bad is it to not have a firewall but use irssi/apache2
+[09:48] <kamichan> as long as ubuntu is updated, if a port isn't open/listening from an application
+[09:48] <kamichan> what difference does it make if there's a firewall on a given port vs no firewall (if ubuntu is secure/updated)?
+[09:49] <ah-donny> Has there been issues with Ubuntu's website today? I've been getting http 503 errors all day on multiple different networks
+[09:49] <EriC^^> kamichan: a firewall can be tuned to block certain ports, or allow incoming connections from certain ip's only or interfaces etc
+[09:54] <kamichan> well i was referring to digitalocean's initial setup guide that strongly recommends it even for newbies
+[09:54] <kamichan> and, i figure a firewall is just one layer of protection that isn't needed and also likely to cause problems for me if i try to do more
+[09:54] <EriC^^> kamichan: yeah, you could set it up and allow only apache's port and you probably want to allow ssh and change the port too
+[09:55] <Outy> ah-donny: ubuntu.com is working fine here
+[09:55] <Ool> change default port :(
+[09:55] <EriC^^> kamichan: it is useful and easy to set up
+[09:56] <EriC^^> kamichan: you wont need to open any port for irssi i believe, unless you disable outgoing connections, not sure
+[09:56] <kamichan> ok but there isn't a security problem right?
+[09:56] <kamichan> because the system is basically perfect, 16.04
+[09:57] <kamichan> security-wise
+[09:57] <EriC^^> yeah it's not a security issue, it's like preventative and layer as you said
+[09:57] <EriC^^> it could potentially become a security issue
+[10:00] <kamichan> k ty I'll try to learn as much about it as I can
+[10:01] <inky> i got a nodejs script that pushes data to firebase. i can run it just fine, but when i run it through cron i get this error: https://paste.ubuntu.com/p/97w6H9XbJz/ .
+[10:02] <inky> is cron not using the system proxy?
+[10:08] <inky> well, i had to export the proxy again indeed. problem solved (:
+[10:19] <ruslan_> Hi everyone
+[10:31] <Dbugger> Hello everyone
+[10:31] <Dbugger> I have a small issue here. After "sleep", my VPN is disconnected. Is there a way to reconnect it automatically after sleep?
+[10:34] <raidghost> Dbugger: After "sleep" as in hybernate?
+[10:34] <Dbugger> yes
+[10:35] <hateball> Dbugger: this should have info about that https://www.addictivetips.com/ubuntu-linux-tips/run-scripts-and-commands-on-suspend-and-resume-on-linux/
+[10:36] <Dbugger> ill take a look, thanks
+[10:36] <Dbugger> oh well, it is about building the functionalty yourself
+[10:36] <Dbugger> i was looking for a more native solution
+[10:36] <Dbugger> or "hoping" at least :)
+[10:36] <hateball> ah, I dont think that exists
+[10:36] <Dbugger> shame then
+[10:36] <hateball> well, doesnt mean it's true
+[10:37] <Dbugger> well, ill stand by, in case someone knows
+[10:37] <hateball> there would still need to be some daemon monitoring whatever scripts a user makes
+[10:39] <free_> hi
+[10:40] <free_> i have a proplm wth my linux
+[10:40] <free_> system not repondng
+[10:57] <soshiant> .
+[10:58] <soshiant> i want to install snmpd
+[10:58] <soshiant> apt-get install snmpd
+[10:58] <soshiant> errror is : libsnmp30 depends libsensores4
+[10:59] <soshiant> i use ubuntu server repository
+[10:59] <soshiant> trusty distribution
+[11:00] <soshiant> snmpd depends libmysqlclient18
+[11:05] <fstar> .
+[11:15] <sibaar_> ayyyyyyyyye
+[11:19] <magiq> Hello. I want to use lvm snapshots to make some backups, for example before installing amd drivers ;) The main question what lvcreate --size parameter means ?
+[11:21] <haskelltic> join #haskell-beginners
+[11:29] <vlt> magiq: You need to specify how much physical space you want to provide for your snapshot.
+=== wang is now known as Guest83570
+[11:30] <vlt> magiq: It's possible but in many cases not needed to use 100 %.
+[11:31] <vlt> magiq: If you assume, for example, that during the backup at most 1 GB of data will change on the source volume then a size of 2 GB for the snapshot volume should be sufficient.
+[11:31] <Guest83570> the net is slow
+[11:32] <jink> "The net" or "your net" ?
+[11:32] <vlt> magiq: As soon as more data is written the snapshot gets unusable.
+[11:32] <Guest83570> my
+[11:33] <magiq> vlt: so if zero data changed during making snapshot than snapshot will be zero sized? How it works if letter, for example 5 minutes ago I will try to restore snapshot if it zero ?
+[11:34] <magiq> omg *later
+[11:38] <soshiant> errror is : libsnmp30 depends libsensores4
+[11:38] <soshiant> apt-get install snmpd
+[11:41] <magiq> vlt: for example A is state before snapshot. A->B when we making snapshot. And A->B->C 5 minutes ago after snapshot. We want to restore to point A. How it could be, that only diff between A and B matters when we trying to restore from A to C backwards
+[11:44] <magiq> *from C to A
+=== pagios_ is now known as pagios
+[11:57] <hastu> user
+[12:05] <vlt> magiq: You can only restore to point B when you actually took the snapshot. Not to a state *before* you tool one.
+[12:06] <vlt> *took
+[12:06] <vlt> Oh, they left.
+=== debian is now known as Guest77626
+[12:06] <Guest77626> hmm...
+=== Quetzal2 is now known as Quetzal2_ping
+=== Quetzal2_ping is now known as Quetzal2_afk
+=== Jochen_wvdT is now known as Schlawiner
+=== zzz_ is now known as zzz
+[12:45] <BluesKaj> Hi folks
+[12:46] <DiecastMessiah> good Morning
+=== mike_ is now known as Guest95852
+=== kostkon_ is now known as kostkon
+=== valkyr1e_ is now known as valkyr1e
+[12:58] <Haris> hello all
+[12:59] <Haris> what conditions are coded in rsync tool for incremental updates to destination(s) ? I found out for one that change in timezone makes it deploy full build, rather than incremental changes. I'm in GMT+5 timezone. My servers are for e.g., in Ireland in UTC/GMT timezone. Is there a way to force/make rsync do incremental only transfers ? when I deploy or sync local servers, they go on incremental. but when I sync
+[12:59] <Haris>  machines in Ireland for e.g., rsync does a full scale transfer
+[12:59] <Haris> this is for 14.04 and above
+[13:14] <geirha> Haris: try #rsync
+[13:14] <Haris> hmm
+[13:18] <frazr> Hi there folks, quick question how do you force fsck to run on boot after ubuntu 16? /forcefsck is no longer working, the fsck.mode=force added to CMDLINE boot parameters doesnt seem to work either, ideas? :)
+[13:23] <Lehthanis> hello world!
+[13:24] <EriC^^> frazr: boot into recovery mode and choose it
+[13:24] <EriC^^> !recovery | frazr
+[13:24] <ubottu> frazr: If your system fails to boot normally, it may be useful to boot it into recovery mode. For instructions, see https://wiki.ubuntu.com/RecoveryMode
+[13:24] <Lehthanis> can someone point me to a nice set of instructions for 17.10 on how to configure radeon?  I can't find anything...
+[13:24] <Lehthanis> I'm actually on Lubuntu
+[13:27] <marenz__> Hello
+=== marenz__ is now known as Marenz
+[13:27] <DiecastMessiah> frazr: you want to force this on a root dir??? reading that all you have to do is make a empty file like on root fir. called /forcefsck
+[13:28] <DiecastMessiah> root dir**
+[13:29] <Marenz> I have some strange issues with my 16.04.2 LTS server. HTTP services and database access work all fine, however when I login with SSH, it either never succeeds at all, or if, it is extremely slow and usually stops working after one command, often not even showing the full output of it
+[13:29] <Marenz> It doesn't seem to be a Load problem:  uptime -> 13:25:49 up 244 days, 22:26,  2 users,  load average: 0.17, 0.05, 0.01
+[13:29] <Marenz> and also not network in general as the HTTP/db stuff works without any noticable delay
+[13:29] <Walex> Marenz: 'ssh -vvv' usually will show the problem
+[13:29] <frazr> DiecastMessiah: yea ive tried creating that file, doesnt seem to work over ubuntu 16 with systemd
+[13:30] <frazr> ubottu: it boots normally, i just want to perform that check on every single boot
+[13:30] <ubottu> frazr: I am only a bot, please don't think I'm intelligent :)
+[13:30] <frazr> EriC^^: i mean :)
+[13:30] <DiecastMessiah> frazr: kk sorry
+[13:31] <Marenz> Walex, it connected normally with ssh -vvv but while typing a command it just froze
+[13:31] <frazr> tried setting the fsck.mode=force kernel parameter, but doesnt seem to do anything either
+[13:31] <Marenz> or .. well, went into ultra-slow mode
+[13:31] <frazr> might work with the "ro" parameter but scared that the system wont boot up :)
+[13:31] <Walex> Marenz: most likely a netwoirk problem though. Check with: sudo tcpdump -i eth0 'host .... and port 22'
+[13:33] <Walex> Marenz: add option '-ttt' to see inter-packet times.
+[13:33] <nemo> Marenz: anything in dmesg?
+[13:34] <nemo> and sshd log.
+[13:34] <Marenz> dmesg had
+[13:34] <Marenz> [Mon Nov 27 20:55:39 2017] TCP: request_sock_TCP: Possible SYN flooding on port 3306. Dropping request.  Check SNMP counters.
+[13:35] <Marenz> eh.. not sure I can trust that time though
+[13:35] <Marenz> (I used the untrusted --ctime flag)
+[13:36] <Marenz> sshd shows some ips brute forcing
+[13:36] <Marenz> but not unusual amounts
+[13:36] <Marenz> hmm the problem seems to be gone for now..
+[13:36] <Marenz> whatever it was, is no more at this point
+[13:38] <Marenz> thanks for the ideas @all
+[13:38] <DiecastMessiah> frazr: i guess the old upstart way is gone.. this page tell how to get it working https://www.freedesktop.org/software/systemd/man/systemd-fsck@.service.html
+[13:39] <dserodio> Firefox's Ctrl+Tab (and Ctrl+Shift+Tab) for switching tabs stopped working recently. Any ideas? Firefox 58.0.2 on Ubuntu 17.10
+[13:40] <DiecastMessiah> frazr: this also has info about repair .. maybe other distro pages but they both talking about systemd https://wiki.archlinux.org/index.php/fsck
+[13:41] <Lehthanis> so all the docs for radeon point to xorg.conf because they're all 16.04 docs...where does the radeon config go in 17.10
+[13:43] <nemo> dserodio: still works here
+[13:43] <Lehthanis> I don't have an xorg.conf
+[13:43] <nemo> dserodio: maybe desktop manager key binding override, or extension override
+[13:43] <nemo> dserodio: testin in a clean profile
+[13:43] <nemo> dserodio: firefox -no-remote -P
+[13:43] <nemo> dserodio: make a new profile, see if it still happens
+[13:44] <nemo> dserodio: I have the habit of doing ctrl+pagedown ctrl+pageup btw, since I find the position of the keys more convenient
+[13:45] <nemo> dserodio: also no need to do a 3 key combo for reverse
+[13:45] <dserodio> nemo: the PageUp and PageDown keys on this notebook keyboard are hard to reach. I'll try with a clean profile
+[13:46] <DiecastMessiah> oh wow wish i know that one earlier lol .. i always used ctrl tab lol for all tabbed programs
+[13:49] <DiecastMessiah> well i guess now it fine on this keyboard i am using.. my laptop keyboard is also hard to hit the page keys without looking. also at the every top right
+[13:49] <DiecastMessiah> very top**
+[13:51] <dserodio> nemo: doesn't work on a clean Firefox profile either. Any other ideas?
+[13:52] <frazr> thanks DiecastMessiah will check those links out
+[13:55] <lionrouge> hi !
+[13:55] <lionrouge> i looked ata couple of mirrors' dists directory and there is no yakkety folder in them
+[13:55] <lionrouge> is it ok ?
+[13:56] <lionrouge> there is xenial and artful but no yakkety
+[13:58] <EriC^^> lionrouge: yakkety is eol
+[13:58] <EriC^^> !yakkety
+[13:58] <ubottu> Ubuntu Ubuntu 16.10 (Yakkety Yak) was the 25th release of Ubuntu.  Support ended on July 20th, 2017. See !eol and https://ubottu.com/y/yakkety
+[13:58] <lionrouge> EriC^^: and what should i do if i have it installed?
+[13:58] <nemo> dserodio: probably your desktop manager taking over those keystrokes then
+[13:58] <kostkon> lionrouge, upgrade to a supported release
+[13:59] <EriC^^> lionrouge: upgrade to 17.10 or fresh install 16.04 or 17.10
+[13:59] <nemo> dserodio: I mean, there's a set of keybindings in the firefox install, and they can be modified, but... why.
+[13:59] <lionrouge> kostkon: so it's ok if i just plug in 17.10 mirror ?
+[13:59] <EriC^^> lionrouge: i think you'll have to upgrade to 17.04 then 17.10
+[13:59] <nemo> dserodio: you could test a clean firefox download off of mozilla's site I guess, that would eliminate that.  but I bet it's your desktop environment.
+[14:00] <EriC^^> !eolupgrades | lionrouge no that's not really recommended
+[14:00] <ubottu> lionrouge no that's not really recommended: End-Of-Life is the time when security updates and support for an Ubuntu release stop, see https://wiki.ubuntu.com/Releases for more information. Looking to upgrade from an EOL release? See https://help.ubuntu.com/community/EOLUpgrades
+[14:00] <kostkon> lionrouge, no, it would be much safer to attempt an eol upgrade. chck the links above ^
+[14:00] <nemo> EriC^^: or 14.04 <unconvertable>
+[14:00] <EriC^^> sure :)
+[14:01] <kostkon> nemo, no point in recommending 14.04 anymore though
+[14:01] <Lehthanis> http://pasteall.org/847840 this may be part of my problem...
+[14:01] <nemo> EriC^^: in all seriousness, it was the only version of ubuntu that *didn't* corrupt my coworker's HD every time the laptop suspended
+[14:01] <nemo> kostkon: I just did last month for reason above
+[14:02] <EriC^^> nemo: yeah i liked it a lot too, though i cant complain about 16.04 it's served me well
+[14:02] <nemo> EriC^^: 16.04 killed his HD too, not too sure why.
+[14:02] <EriC^^> it's corrupting the filesystem on suspends?
+[14:02] <nemo> EriC^^: he must have reinstalled a good dozen times, tried everything, including various kernel updates. 14.04 fixed everything
+[14:03] <nemo> EriC^^: yeah. it was esp irritating 'cause not only did closing laptop lid trigger it, but accidentally hitting this icon in his left bar.  it's some unity thing I'm unfamiliar with, but he'd do it accidentally
+[14:03] <nemo> then "aw crap time to reinstall"
+[14:03] <EriC^^> that's odd
+[14:04] <nemo> yeeep
+[14:05] <nemo> EriC^^: my own personal reasons for staying on 14.04 are gonna get an off-topic flag tho <unconvertable>
+[14:05] <nemo> dserodio: you could maybe test a clean desktop environment by logging into a different one, or as a different user
+[14:07] <Marenz> hmm the issue isn't gone it seems
+[14:07] <Marenz> rsync completely fails to upload anything
+[14:07] <Marenz> it's really odd behavior
+[14:08] <EriC^^> nemo: haha :)
+[14:09] <raidghost> 14.04 is stoneage old :P
+[14:09]  * nemo shrugs
+[14:09] <Marenz> okay, this is interesting
+[14:09] <nemo> anything I care about I use a PPA.
+[14:09] <Marenz> if I login from another server, everything is normal fast
+[14:09] <nemo> gimp, libreoffice..
+[14:09] <nemo> firefox is up to date ofc
+[14:09] <Marenz> so it's some local problem then
+[14:09] <Marenz> but only with this server
+[14:10] <Marenz> how weird
+[14:10] <nemo> Marenz: hm
+[14:10] <kostkon> nemo, or snaps, it's even been given snap support posthumously
+[14:10] <nemo> Marenz: in that ssh -vvv maybe compare what encryption it is negotiating?
+[14:10] <nemo> kostkon: what is snaps?
+[14:11] <DiecastMessiah> snapshots it a newer packages file like .deb i bilieve
+[14:12] <DiecastMessiah> believe*
+[14:12] <nemo> ah
+[14:12] <nemo> never run into one.
+[14:12] <kostkon> nemo, the new universal package format by canonical? http://snapcraft.io/
+[14:12] <nemo> huh. interesting. first I've heard of it.
+[14:12] <Marenz> debug1: Server accepts key: pkalg rsa-sha2-512 blen 547
+[14:13] <nemo> Marenz: and for the cipher?
+[14:13] <Marenz> hmm the other server says
+[14:13] <Marenz> debug1: Server accepts key: pkalg ssh-rsa blen 547
+[14:13] <kostkon> nemo, you can browser its "catalogue" here https://uappexplorer.com/snaps  or just use Ubuntu Software or man snap etc.
+[14:13] <kostkon> browse*
+[14:13] <Marenz> debug1: kex: server->client cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+[14:13] <Marenz> debug1: kex: client->server cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
+[14:14] <nemo> Marenz: guess you could experiment w/ setting MACs/KexAlgorithms/Ciphers  in your ~/.ssh/config
+[14:14] <nemo> Marenz: or... maybe it's an intermittent bug and it just seems like it is client specific <unconvertable>
+[14:14] <nemo> kostkon: is debian onboard with this?
+[14:15] <kostkon> nemo, many distros are ditto about Debian
+[14:15] <nemo> kk
+[14:15] <nemo> kostkon: ah. I see. yeah
+[14:16] <nemo> kostkon: so... this is going to more the Apple/Microsoft/Steam kinda packaging I guess, where most libs are contained in the app
+[14:16] <nemo> kostkon: instead of shared system-wide
+[14:16] <kostkon> nemo, there are some shared ones but yeah everything needed is contained in the app
+[14:17] <nemo> kostkon: mm. yeah, I'm just not a fan of that approach
+[14:17] <nemo> kostkon: higher memory usage, space usage, more difficult to ensure a patch to a key lib got applied everywhere
+[14:17] <nemo> ah well
+[14:18] <nemo> kostkon: containerising can be good for security tho
+[14:18] <kostkon> nemo, yep
+[14:18] <nemo> and can help reliability.  like. physfs 3 broke ABI and we were getting ton of Arch users complaining Hedgewars broke
+[14:18] <nemo> when it was just that arch hadn't rebuilt Hedgewars
+[14:18] <nemo> and... physfs had changed portion of a key struct's size
+[14:19] <nemo> kostkon: but, I think I'd still take the space/memory/patching advantages over this
+[14:19] <nemo> kostkon: esp I guess in more constrained envs like my ubuntu chroot on my phone
+[14:19] <nemo> so long as it stays optional!
+[14:19] <kostkon> nemo, it will stay i guess
+[14:19] <nemo> great
+[14:22] <ioc_> it will always be optional, and anyway it's useful when the app is based on a framework that rapidly evolves like gnome
+[14:23] <ioc_> as in break backward compatibikity often
+[14:24] <ioc_> so you can have more than one version of the framework installed side-by-side without needing to recompile all the apps
+[14:26] <Marenz> nemo: you seem to be on the right track
+[14:26] <Marenz> if I enforce password auth on the client, it works smooth
+[14:27] <nemo> O_o
+[14:27] <frazr> DiecastMessiah: thanks for the fsck links , but sadly not a single method has worked.. tried almost everything now, manipulations mount times, last checked tim with tune2fs etc.. :)
+[14:27] <frazr> still wont run fsck
+[14:29] <DiecastMessiah> frazr: darn sorry that didn't help.. i am newbie so i have no other idea's .. but someone here will be able to help .. more users should be active soon
+[14:30] <norm_> quick question about default DE in 17.10
+[14:31] <frazr> no worries, thanks anyway
+[14:32] <akik> frazr: wasn't the file called /.forcefsck and not /forcefsck ?
+[14:32] <norm_> anyone know how to get Nautilus to act like it does in the modified version used in Unity?
+[14:33] <frazr> akik: dunno, doesnt matter its not used anymore
+[14:33] <kostkon> akik, i think it's /forcefsck
+[14:33] <akik> frazr: it's /.forcefsck
+[14:33] <kostkon> was* then
+[14:33] <akik> frazr: when did it stop working?
+[14:33] <DiecastMessiah> i read it used to be touch /forcefsck .. but that old.. with upstart , no good for systemd
+[14:33] <frazr> because of that it's foolish to trust an untrustworthy filesystem for writes, wich i can agree on
+[14:35] <frazr> https://unix.stackexchange.com/questions/400851/what-should-i-do-to-force-the-root-filesystem-check-and-optionally-a-fix-at-bo
+[14:35] <frazr> tried everything there
+[14:35] <frazr> still no dice :)
+[14:35] <void_false> Hello Tomer
+[14:37] <norobot> hi all, I am trying to bind the command "xte "mousedown 1"" to <CTRL>Button1 via CompizConfigManager in Ubuntu, but cannot seem to make that key+mouseclick combination do the "click and hold" action that I need. Advice, anyone?
+=== zenguy is now known as coffeeguy
+[14:38] <akik> frazr: on a clean root fs on a ssd, the fsck runs so fast that you can't really see it, but you can see it in the systemd journal
+[14:38] <norobot> (I have installed the xautomation package)
+[14:38] <frazr> should be able to see it on tune2fs -l
+[14:38] <akik> systemd-fsck[902]: /dev/sda2: clean, 309/65536 files, 152412/262144 blocks
+[14:38] <frazr> last check performed
+[14:39] <glitchfix[m]> Hello everyone!
+[14:39] <norobot> nick robbinzone
+[14:40] <norobot> robbinzone
+[14:40] <DiecastMessiah> missing the slash norobot / nick nickname
+[14:41] <glitchfix[m]> I have a finger print scanner that doesn't work on Ubuntu and I wish to build driver for it. Can anyone tell me how to proceed?
+[14:41] <akik> frazr: although that /dev/sda2 is my /boot
+=== norobot is now known as robbinzone
+[14:42] <robbinzone> there
+[14:42] <frazr> akik: ok, yeah this is concerning the root :)
+[14:42] <robbinzone> DiecastMessiah: thanx
+[14:42] <frazr> without physical access
+[14:42] <frazr> quite a pickle
+[14:42] <DiecastMessiah> No problem :)
+[14:42] <robbinzone> hi all, I am trying to bind the command "xte "mousedown 1"" to <CTRL>Button1 via CompizConfigManager in Ubuntu, but cannot seem to make that key+mouseclick combination do the "click and hold" action that I need. Advice, anyone? (I have installed the xautomation package)
+[14:44] <skinux> Why are all Ubuntu's software installation methods so slow?
+[14:44] <skinux> Those are officially developed packages, as far as I know....
+[14:46] <robbinzone> hi(gh) life (hei Leif) ;-)
+=== elkclone is now known as Guest32919
+[14:50] <pZombie> hello friends
+[14:50] <pZombie> what will happen if i install an old ubuntu with a 2.6 kernel? Will i be destroyed by malware?
+[14:51] <JimBuntu> pZombie, idk, malware is going to depend on your threat exposure... i.e., where you go via browser/etc and how open your system is in general to direct attack.
+[14:52] <pZombie> what about the spectre, does it affect old pentium-m systems?
+[14:52] <JimBuntu> pZombie, You are possibly orders of magnitude better off using a really old system with 2.6 and old distro version than a WinXP machine, for example.
+[14:53] <norm_> You'll be more susceptible to malware and exploits but unless you actively go around clicking on every free IPhone ad
+[14:53] <JimBuntu> pZombie, as far as I am aware, that CPU would be effected... you should check
+[14:54] <pZombie> do the old ubuntus get any updates at all?
+[14:54] <norm_> No longer supported, so unfortunately not
+[14:56] <kostkon> pZombie, as of now 14.04 is the oldest supported release
+[14:57] <ducasse> well, 12.04 gets security fixes if you pay for them
+[14:57] <DiecastMessiah> pZombie: if you looking for something that can run on much older machines about look into knoppix or something that made to be small
+[14:58] <pZombie> doesn't help me. The proprietary ati drivers for the radeon 9600 install only on 2.6 kernels. After that it is about using the slow free drivers
+[14:58] <pZombie> it is not about small but about having a 2.6 kernel and yet being supported still
+[14:58] <DiecastMessiah> oh kk sorry
+[14:59] <norm_> ah that's a toughie
+[14:59] <pZombie> centos 6 was an option but it does not allow me to install because it asks for pae
+[14:59] <pZombie> the pentium m actually has pae support but it is hidden
+[14:59] <akik> frazr: after using "fsck.mode=force", do you see /run/initramfs/fsck.log ?
+[15:03] <kostkon> pZombie, it's an old system anyways why not just settle for something lightweight, eg Lubuntu and use the open source driver
+[15:04] <pZombie> because the same issue applies. I would have to go with the free drivers which are slow as hell
+[15:06] <lupulo> frazr, this thread could be useful https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=788050
+[15:06] <ubottu> Debian bug 788050 in systemd "systemd-fsck : Check disks at each reboot" [Important,Fixed]
+[15:06] <pZombie> anyway, i will try an old xubuntu and see where this gets me
+[15:06] <lupulo> ubottu, bot who
+[15:07] <lupulo> ubottu,  https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=
+[15:07] <kostkon> pZombie, Lubuntu. xubuntu might be using an compositor
+[15:08] <OpenTokix> I am doing a preseeded installation of ubuntu 16.04.3 from a custom iso. - But the installer is failing on "apt-install or in-target is already running..." messages appear in syslog. - I have found a bug on lunchpad (1450597) however it seems to reference booting from usb stick. Bug is from 2013.
+[15:08] <pZombie> kostkon - what does a compositor do?
+[15:08] <nemo> graphics acceleration of desktop
+[15:08] <nemo> on old sucky machines disabling that is first suggestion
+[15:08] <pZombie> but with the accelerated drivers it should work well
+[15:08] <nemo> (memory usage comparison of desktops https://l3net.files.wordpress.com/2014/02/cmp-all4.png)  I use MATE personally which can run composited or non
+[15:09] <nemo> pZombie: I sometimes disable it just 'cause on my sucky card at home compositing the desktop plus running a game smoothly is too much to ask
+[15:09] <kostkon> pZombie, https://en.wikipedia.org/wiki/Compositing_window_manager
+[15:10] <nemo> pZombie: my boss once asked me why upgrading his OSX desktop completely killed his performance
+[15:10] <lupulo> ubottu, https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=lalala
+[15:10] <pZombie> well, the ati mobility 9600  is super speedy if the right drivers are used
+[15:10] <nemo> pZombie: wellll, new desktop was composited and his card had an itsy bitsy amount of vram <unconvertable>
+[15:10] <pZombie> so i see no problem with xubuntu if i can install the old proprietary drivers
+[15:10] <nemo> tearing, artifacting... was probably reconstructing new textures all the time
+[15:11] <pZombie> where can i find out which was the last version of xubuntu using the 2.6 kernel?
+[15:11] <nemo> pZombie: I used to use fglrx on the work desktop, but it had too many stability issues
+[15:11] <nemo> pZombie: radeon driver works fine for me - got adequate scores on globs test
+[15:12] <pZombie> nemo - i never had any issues back then when i was playing WoW at 100 fps back then
+[15:12] <nemo> pZombie: over a long enough period of time it would just start losing track of textures
+[15:12] <akik> pZombie: ubuntu 14.04 still supports fglrx, i think it was so that the hwe update doesn't support it any more
+[15:12] <pZombie> nemo - i highly doubt it they work fine. You probably don't have proper 3d acceleration enabled
+[15:12] <nemo> pZombie: cause crashes in browsers which do their own gl acceleration or in webgl
+[15:12] <qswz> What do you guys think of https://github.com/ddccontrol/ddccontrol? vs xrandr, to control brightness/gamma (more finally than xbacklight, and over it's bounds)
+[15:13] <nemo> pZombie: I lost some perf, but it's adequate for a work system, and haven't had a single browser texture crash in a couple of years
+[15:13] <nemo> pZombie: it used to happen a couple of times a week with fglrx
+[15:13] <pZombie> akik - it supports fglrx, but not for the 9600 radeon. The last driver by ati supporting this was 9.8 legacy
+[15:13] <nemo> (and yes, acceleration is enabled)
+[15:13] <nemo> 'k. I'm using [AMD/ATI] RV730 XT [Radeon HD 4670]
+[15:13] <nemo> according to lspci
+[15:14] <kostkon> pZombie, are you really willing to go 10 years back in time. you won't be able to do anything properly, like browse the web etc.
+[15:14] <leftyfb> pZombie: anything that requires a 2.x kernel needs to die in a fire.
+[15:14] <pZombie> kostkon - that is what i am about to find out i guess. If i cannot install firefox  on an old xubuntu, then this project is doomed
+[15:14] <nemo> pZombie: with radeon driver on the card above (which is 9 years old) I get 700fps in globs gl_smoke with vsync disabled
+[15:15] <nemo> pZombie: 1229.4 in gl_blit
+[15:15] <pZombie> nemo - that is because your card is newer. Mine is 15 years old
+[15:15] <pZombie> nemo - the free radeon drivers for your card just happen to be better
+[15:16] <nemo> pZombie: it's funny, in hedgewars due to request of a user we rework all our PNGs to support someone w/ a card that could only load 512x512px textures  <unconvertable>
+[15:16] <nemo> pZombie: it's crazy how much old stuff FOSS still supports
+[15:16] <nemo> pZombie: we never bothered to change it 'cause, eh, whatever. why not keep supporting it? <unconvertable>
+[15:16] <pZombie> nemo - if i enable proper 3d acceleration on the free radeon drivers, 3D works fine, with 2500-3000 fps in glxgears. But then 2D is superslow, making iti unusable. Like scrolling through text in mousepad etc
+[15:17] <nemo> hm
+[15:17] <nemo> let's see what I get in glxgears
+[15:17] <nemo> pZombie: I don't see why a composited desktop is necessary...
+[15:17] <nemo> most of the time
+[15:17] <nemo> 8695 frames in 5.0 seconds = 1738.878 FPS
+[15:17] <nemo> yeah. you have me beat in glxgears already
+[15:17] <pZombie> see, the radeon mobility 9600 is fast
+[15:17] <nemo> but, eh. FOSS driver perf is always meh
+[15:18] <nemo> it was the stability that made me switch
+[15:19] <nemo> pZombie: on my home desktop I finally switch to the nvidia blob in order to play Witcher Assassin of Kings - prior to that every game I'd tried had worked okish. even Planetary Annihilation
+[15:19] <pZombie> so basically, they turned my perfectly adequate hardware into trash by not releasing any proper drivers anymore
+[15:19] <norm_> anyone know of a way to get nautilus in 17.10 to act like the modded version used in the Unity DE?
+[15:19] <nemo> pZombie: heh. I'm sure their incentive for maintaining stuff that old is pretty low
+[15:19] <pZombie> i mean AMD
+[15:19] <nemo> I know
+[15:20] <nemo> if it was FOSS you might have a prayer of maintenance.
+[15:20] <pZombie> their incentive to get my money however wasn't that low back then
+[15:20] <nemo> 15 years is a long time...
+[15:21] <nemo> pZombie: you could probably buy a card like mine above for like $20 used now I bet
+[15:21] <pZombie> it's a notebook
+[15:21] <nemo> ah <unconvertable>
+[15:21] <pZombie> i am going to ask for a refund
+[15:21] <norm_> do it
+[15:22] <pZombie> anyway, back to my former question. Where can i check which xubuntu or ubuntu was using the 2.6 kernel still?
+[15:23] <norm_> archives
+[15:23] <norm_> give me a sec
+[15:24] <norm_> http://old-releases.ubuntu.com/releases/
+[15:24] <norm_> then it's just cross checking the release notes on the wiki
+[15:24] <akik> lucid lynx?
+[15:25] <Snicksie> I would like to request the ubuntu-toolchain-r ppa team to update their gcc-5 (or any other gcc for that matter, that contains the retpoline fixes) for xenial, since using that ppa you cannot build kernel modules for kernel -116. Where can I come into contact with them?
+[15:25] <pZombie> yes, i think lucid lynx but it does not tell me which kernel it uses at the page linked
+[15:25] <pZombie> yes, 2.6
+[15:26] <pZombie> lucid lynx it will be then
+[15:26] <leftyfb> Snicksie: contact the ubuntu-toolchain-r ppa team
+[15:26] <kostkon> pZombie, don't forget to share some screenshots of your desktop with us if you ever reach that point
+[15:27] <kostkon> pZombie, a big 'if' for me
+[15:27] <pZombie> sure thing
+[15:27] <Snicksie> leftyfb: that is my question indeed
+[15:28] <leftyfb> Snicksie: on https://launchpad.net/~ubuntu-toolchain-r/+archive/ubuntu/test look for "For questions and bugs with software in this PPA please contact PPA for Ubuntu Toolchain Uploads (restricted)."
+[15:28] <Snicksie> I was hoping I could actually contact them on like an irc channel or something
+[15:29] <norm_> so thoughts on the 17.10 release using standard Nautilus instead of the modded versions used prior?
+[15:29] <leftyfb> Snicksie: there's a link to contact the team members to ask questions
+[15:37] <robbinzone> hi all, I am trying to bind the command "xte "mousedown 1"" to <CTRL>Button1 via CompizConfigManager in Ubuntu, but cannot seem to make that key+mouseclick combination do the "click and hold" action that I need. Advice, anyone? (I have installed the xautomation package)
+[15:39] <sparrowsword> using a vm... how do i mount my windows c:/ drive?
+[15:40] <leftyfb> sparrowsword: that would be a bad idea
+[15:41] <sparrowsword> leftyfb: ?
+[15:41] <leftyfb> sparrowsword: a lot of the VM solutions out there have a method of transferring files between the host and guest. Use that.
+[15:41] <sparrowsword> leftyfb: thats not what im trying to do
+[15:42] <sparrowsword> leftyfb: im trying to use a program to scan my drive (all files) for specific text
+[15:42] <leftyfb> sparrowsword: what version of windows?
+[15:42] <sparrowsword> 10
+[15:42] <leftyfb> !wsl | sparrowsword
+[15:42] <ubottu> sparrowsword: Windows 10 has a feature called Windows Subsystem for Linux, which allows it to run Ubuntu (and other Linux distro) userspace programs without porting/recompliation. For discussion and support, see #ubuntu-on-windows or ##windows. For installation instructions, see https://msdn.microsoft.com/en-us/commandline/wsl/install_guide
+[15:43] <sparrowsword> leftyfb: interesting, will check it out, Thank you
+=== nacc_ is now known as nacc
+=== NickG365_ is now known as NickG365
+[15:55] <Sven_vB> hi again. still having the same xenial live USB problem, but today I have photos of initramfs. http://abload.de/img/xenial64-initramfs-0d0o2y.jpeg http://abload.de/img/xenial64-initramfs-0wuriq.jpeg any ideas?
+[15:58] <Sven_vB> usually I install the 32bit version, which boots to the graphical session then runs my install wizard (which in turn runs ubiquity). the only thing I'm doing different is using the other ISO.
+[15:59] <sparrowsword> leftyfb: how do i get access to the windows drive using the ubuntu like you said earlier?
+[15:59] <sparrowsword> !wsl
+[15:59] <ubottu> Windows 10 has a feature called Windows Subsystem for Linux, which allows it to run Ubuntu (and other Linux distro) userspace programs without porting/recompliation. For discussion and support, see #ubuntu-on-windows or ##windows. For installation instructions, see https://msdn.microsoft.com/en-us/commandline/wsl/install_guide
+[16:00] <sparrowsword> !wsl
+[16:00] <sparrowsword> leftyfb: nvm figured it out
+[16:02] <Sven_vB> from what I've figured so far, that initramfs is probably missing some overlayfs kernel module, so how do I add that to my live USB drive?
+[16:04] <Sven_vB> on the other hand, I'd wonder how unetbootin on a 32bit ubuntu trusty machine could have forgotten that, given the windows version of unetbootin seems to be able to create 64bit xenial live USB drives.
+[16:08] <Sven_vB> oh also that "(initramfs)" prompt seens ti only appear in the same line due to timing issues. so the actual error "/cow format specified as overlayfs and no support found" probably isn't about initramfs.
+[16:12] <lab21> hi
+[16:12] <DiecastMessiah> Sven_vB: i don;t really know what i am talking about.. still new .. but I would guessing there is something with ext3 on a ext4 filesystem .. maybe a problem .. i see it says subsystem so I could be far off
+[16:12] <lab21> thtf
+[16:13] <lab21> hi
+[16:13] <lab21> im sad
+[16:14] <mutante> lab21: have a cookie
+[16:14] <lab21> thank you
+[16:14] <doublehp> http://paste.debian.net/1012405/ how to debug the underlying problem ?
+[16:14] <Sven_vB> DiecastMessiah, thanks, however the mounted file systems look ok. my canary config is readable too, which means the casper-rw filesystem is accessible.
+[16:14] <mutante> lab21: got Ubuntu troubles?
+[16:14] <lab21> no
+[16:15] <mutante> ok. let us know how we can help
+[16:16] <nicomachus> my laptop seems to randomly dim the screen, and I have to bump up the brightness for it to "wake up". But just one touch on brightness up brings it all the way up, so it's more like a "wake" than anything else. Which log can I check to see what's causing it to dim?
+[16:17] <nicomachus> it just happened 2-3 mins ago so I want to look quickly.
+[16:17] <Sven_vB> nicomachus, I'd check syslog and dmesk
+[16:17] <Sven_vB> *dmesg
+[16:17] <Sven_vB> nicomachus, also check the BIOS power settings next time you reboot
+[16:18] <Sorfrost> TJ-, hey man, you up for some easy debugging? I updated my laptop firmware and sound was working untill i decided to plug in the headphones. If you're up, let me know. Thanks a lot!
+[16:18] <mutante> nicomachus: for me it's "System -> Preferences -> Hardware -> Power Management -> Actions
+[16:19] <TJ-> Sorfrost: Yeah, I'm here... that's good news... so switching to the headphone port killed speakers permanently, even after a reboot?
+[16:19] <nicomachus> this is syslog, dmesg just shows startup stuff: https://paste.ubuntu.com/p/QDgZMvTPBQ/
+[16:20] <Sorfrost> TJ-, enable pm 1 min pls
+[16:20] <Saint_Philomena> Sorry about the question... but in kubuntu... when i open the gui "network connections" to change the dns and other things... after i make the changes and click ok the settings dont save it... someone knows why?
+[16:21] <TJ-> Sven_vB: grep the initramfs; you've got a mount command (or an fstab entry) failing because the 'type' is set to /cow (which presumably is a mountpoint) which suggests you need to stick a "-t overlayfs" or something in the command.
+[16:21] <nicomachus> mutante: thanks but that's not what I'm looking for, and is DE specific to your setup because I don't even have those GUI options.
+[16:21] <nicomachus> Saint_Philomena: your router may be providing the DNS address.
+[16:22] <nicomachus> Saint_Philomena: a lot of ISPs do quite a bit to force you to use their DNS
+[16:22] <Sven_vB> TJ-, would I need to have a line with "overlay" in /proc/filesystems for that to work?
+[16:22] <Saint_Philomena> nicomachus is not the router i'm talking about the kubuntu gui "network connections"
+[16:22] <Saint_Philomena> it dont save the settings...
+[16:23] <raspi3> dhkj
+[16:23] <TJ-> Sven_vB: I'd expect "modprobe overlay" to have been executed first
+[16:23] <TJ-> Sven_vB: Is 'overlay.ko' not installed in the initramfs?
+[16:23] <mutante> nicomachus: i know you asked for logs to see what is causing it, but can i assume the real thing is you want to change the settings too?
+[16:24] <mutante> nicomachus: how about /etc/default/tlp
+[16:24] <nicomachus> mutante: no I don't want to change the settings because they are correct.
+[16:24] <Sven_vB> TJ-, not sure. how can I check both? (whether modprobe had run and had succeeded, and whether I have that kernel module)
+=== KingPin1 is now known as KingPin
+=== Elimin8r is now known as Elimin8er
+=== mypapit_rulz is now known as mypapit
+=== themattbeballin is now known as WARBIRD199
+=== purple-pod is now known as purplepod
+=== OpenToki1 is now known as OpenTokix
+=== dcmorton_ is now known as dcmorton
+=== hsiktas_ is now known as hsiktas
+=== TotallyAnnaRooks is now known as AnnaRooks
+=== shalok_ is now known as shalok
+=== sunrunner20_ is now known as sunrunner20
+[16:24] <nicomachus> mutante: tlp doesn't exist in /etc/default/
+=== Swant_ is now known as Swant
+[16:25] <TJ-> Sven_vB: "lsmod | grep overlay" or "grep overlay /proc/modules", "modinfo overlay" to check it's there and see it's details
+=== Map is now known as Guest21480
+[16:25] <Sven_vB> TJ-, will do, takes a few minutes.
+=== JackK_ is now known as JackK
+[16:26] <TJ-> Sven_vB: I'd expect to find the module at "/lib/modules/$(uname -r)/kernel/fs/overlayfs/overlay.ko"
+[16:27] <DanielK_WMDE> hi all! I'm running 16.04. Since a recent update, my desktop background is broken: not only does it not show the wallpaper I select, it doesn't redraw at all. It shows artefacts of whatever window i last dragged accross. It's quite fun.
+[16:27] <DanielK_WMDE> Like this: https://imagebin.ca/v/3tHR9VRpO7O5
+[16:27] <Sven_vB> TJ-, thanks, will check that as well.
+[16:27] <DanielK_WMDE> it looks fun, but it's now annoying me sufficiently to come here to get help
+[16:27] <DanielK_WMDE> any ideas how to fix that?
+[16:27] <mutante> nicomachus: ok, then the best i have to literally answer what is causing it is  https://help.ubuntu.com/stable/ubuntu-help/power-whydim.html   but not a log file either.. sorry
+=== Betonneklakske is now known as Garc
+[16:28] <DanielK_WMDE> oh hey mutante!
+[16:30] <tpham> #zfs
+[16:31] <mzaza> Is it possible to make something like source .profile in a bash script, so newely added commands in the PATH get's red by the bash script?
+[16:31] <tpham> does anywhere here use zfs?
+[16:31] <akik> mzaza: "hash -r" not sure if that's what you need
+[16:32] <TJ-> mzaza: 'commands in the path' ? do you mean new directories added to PATH environment variable?
+[16:32] <mutante> mzaza: maybe safer to use full pathes in the script in the first place
+[16:32] <mzaza> TJ-: akik like for example after I install nvm, I have to use "source .profile" so nvm get's recongnized. Is their something similar to be done in a bash script?
+[16:33] <mutante> mzaza: in general.. if you can type it manually in bash, you should be able to just paste it into a bash script as well
+[16:33] <mzaza> mutante: your right
+[16:33] <lab21> will someone be my friend?
+[16:33] <nacc> mzaza: that shouldn't be necessary if nvm is a binary in your PATH
+[16:33] <doublehp> apt / munin issue: /var was full.
+[16:34] <doublehp> tpham: yes
+[16:34] <doublehp> tpham: #zfsonlinux
+[16:34] <tpham> thanks
+[16:34] <mzaza> But it seems an issue when trying to install npm, http://paste.ubuntu.com/p/9nq5t9JTBt/
+[16:35] <mzaza> nacc: I usually use source .profile or quite the current shell session and re-connect to get changes propagate
+[16:36] <mutante> lab21: sure!
+[16:37] <nacc> mzaza: it depends on what you're doing
+[16:37] <mzaza> nacc: export NVM_DIR="$HOME/.nvm"
+[16:37] <mzaza> [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[16:37] <mzaza> Wops
+[16:37] <mzaza> nacc: http://paste.ubuntu.com/p/9nq5t9JTBt/
+[16:38] <nacc> mzaza: i'm not really able to debug this for you right now
+=== deepend- is now known as deepend
+[16:39] <mzaza> nacc: ok, thanks so far :)
+=== RGamma_ is now known as RGamma
+=== kallesbar_ is now known as kallesbar
+=== arunpyas- is now known as arunpyasi
+=== nat_ is now known as Natkeeran
+[16:50] <rfleming> Greetings.  With 16.04.3 LTS; is there a way to turn on Ubuntu Desktop Sharing via systemd on boot?
+[16:51] <ikonia> isn't the desktop sharing a desktop service, in that it requires the user to login to start it
+[16:52] <DanielK_WMDE> no ideas for fixing https://imagebin.ca/v/3tHR9VRpO7O5 ?
+=== w0dencafe is now known as wodencafe
+[16:53] <rfleming> ikonia: yep.
+[16:54] <ikonia> rfleming: so how can you expect to share a desktop thats not been "logged in" yet
+[16:54] <ikonia> wouldn't it be better to enable the desktop sharing as a session service so that the second the user logs in the desktop sharing service is started
+[16:54] <rfleming> by that same token, BASH is also an application that requires a user to log in before it can be used, yet you can run scripts as a service account
+[16:54] <ikonia> rfleming: right, and those service accounts "login"
+[16:55] <rfleming> so I'm asking if the Ubuntu Desktop sharing app can be set as a service to run.  If not, then I'll install VNC or something
+[16:55] <ikonia> rfleming: how can you launch a bash script without a UID owning it
+[16:56] <rfleming> ikonia: you can't :)
+[16:57] <Sorfrost> TJ-, https://pastebin.com/E6Z51pJg
+[16:57] <garyserj> Are there any up to date Ubuntu with full desktop as docker image that I can VNC to?
+[16:57] <garyserj> so I can see and use the latest ubuntu desktop, with docker
+[16:58] <Sorfrost> TJ-, selinux is enforcing even if i selected no policy during installation
+[16:58] <Sorfrost> TJ-, and with this kernel i get 6 warnings
+[16:59] <Sorfrost> TJ-, i should put selinux on permissive
+[16:59] <ikonia> selinux on ubuntu ?
+[17:00] <Sorfrost> no, not on ubuntu. sry if im writing here
+[17:00] <ikonia> Sorfrost: we only support ubuntu here, apologies, I'm not seein how this relates to ubuntu (but I maybe missing context)
+[17:02] <Sorfrost> ikonia, yes i know, sry if i used the group chat
+[17:02] <ikonia> no problem
+[17:05] <TJ-> ikonia: Sorfrost and I are diagnosing a weird 'lost sound device' issue affecting Ubuntu, so we have been comparing with other OSes/kernels to try to pin it down
+[17:05] <ikonia> interesting
+[17:05] <TJ-> ikonia: Works great... until headphones are plugged in. From then on no speaker output, and no sound device discovered even after cold-reboots etc
+[17:07] <Sven_vB> TJ-, good news is I have text I/O now. bad news is I seem to not have that overlay kernel module. https://paste.ubuntu.com/p/q9zGJgJczk/
+[17:07] <TJ-> Sorfrost: I'm tending to think I may need to disassemble that Vostro's ACPI DSDT to see if it has code to manipulate the sound device output port
+[17:07] <TJ-> Sven_vB: no modules in the initrd at all? or just overlay not there?
+[17:08] <Sven_vB> TJ-, the modinfo error sounds like the initramfs is even more broken, "modinfo: can't open '/4.10.0-28-generic/': No such file or directory"
+[17:08] <Sven_vB> well, maybe because it's just a busybox at that stage
+[17:09] <Sven_vB> also "lsmod: not found" and grep "overlay /proc/modules" is quiet, rv=1
+[17:09] <Sven_vB> quote should have begun before grep
+[17:09] <TJ-> Sven_vB: but the initrd usually has some/most kernel modules in to ensure it can start the system before root FS is available, so check if any are there at all
+[17:10] <TJ-> Sven_vB: should be /lib/modules/$(uname -r)
+[17:10] <Sven_vB> will do
+=== LiENUX is now known as LiENUS
+=== enko-w is now known as enko
+=== enko is now known as enko-w
+=== Tacoder is now known as DarkPsydeLord
+[17:26] <robbinzone> hi all, I am trying to bind the command "xte "mousedown 1"" to <CTRL>Button1 via CompizConfigManager in Ubuntu, but cannot seem to make that key+mouseclick combination do the "click and hold" action that I need. Advice, anyone? (I have installed the xautomation package)
+[17:35] <elkclone> work from home http://www.surveyclub.com/r/19217159
+=== samcv_ is now known as samcv
+[17:37] <darkneo98> hello world
+[17:44] <Sven_vB> TJ-, here's what I have in /lib/modules https://paste.ubuntu.com/p/xNPkFWxPDj/
+=== NET||abuse_ is now known as NET||abuse
+[17:54] <TJ-> Sven_vB: so there's your issue, no overlayfs
+=== Quetzal2_afk is now known as Quetzal2
+[17:57] <Sven_vB> TJ-, is this a problem with the ISO I used (ubuntu-16.04.3-xenial-desktop-amd64.iso), with unetbootin, or rather that I made the live USB on a 32bit ubuntu?
+[17:58] <Sven_vB> (the "xenial-" in the filename is my addition)
+[18:01] <TJ-> Sven_vB: the same files should be in the initrd.img. Did your tool create a fresh intrd.img or use the one provided by the installer ISO?
+[18:02] <Sven_vB> I have no idea what unetbootin did. I'll compare the files.
+[18:04] <mzaza> Is it possible to get output without nginx/ dir, only file names? http://paste.ubuntu.com/p/3GbG59mjsM/
+[18:04] <mzaza> That is a bash script, if I'm in the wrong channel please guide me
+[18:05] <Saint_Philomena> is true ubuntu will start to colllect information inside of our pcs and start send to ubuntu servers?
+[18:05] <mzaza> Saint_Philomena: I think it already does that, when system crashes
+[18:05] <akik> Saint_Philomena: you can uncheck the box during the install
+[18:07] <akik> mzaza: apport catches app crashes
+[18:07] <Saint_Philomena> <unconvertable> akik i hope ubuntu dont goes like windows telemetry big problem...
+[18:08] <mzaza> akik: Since I got your attention, could you tell me how can I remove a string from within a variable in bash? So that a file name in the following script show without directory name, http://paste.ubuntu.com/p/3GbG59mjsM/
+[18:08] <mzaza> :D
+[18:08] <nacc> mzaza: there is a bash channel, btw
+[18:09] <mzaza> nacc: I'll go there now, thanks :D
+[18:09] <akik> thanks
+[18:10] <Sven_vB> Saint_Philomena, use the "basename" command instead of string manipulation.
+[18:10] <mzaza> akik: he saved u, didn't he :D

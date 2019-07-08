@@ -1,0 +1,1100 @@
+[12:02] <theptr> MonkeyDust, thanks
+[12:02] <mcphail> Langley: try adding "drm_kms_helper.edid_firmware=edid/1920x1080.bin" to your boot parameters
+[12:03] <mcphail> Langley: (between "quiet" and "splash" will be fine)
+[12:05] <theptr> MonkeyDust,
+[12:05] <pikkunen> exit
+[12:07] <Langley> Thanks I'll try that
+[12:10] <Axton> In setting up ssh for pw free acces. When I have copied my p key to server and connect, it ask me if I wanna add server to known_host. I type "yes" and it then ask for a password. Which password is it asking for? User pw on server? Passphrase for key? user pw on client?
+[12:11] <k1l> on client
+[12:11] <Seveas> Axton: which key did you copy and how? Can you pastebin the output of this command on the server: ls -laR ~/.ssh
+[12:12] <Langley> I don't have any /etc/default/grub ... do you know if it's different on ARM, mcphail ?
+[12:12] <stimoceiver> whats the preferred driver for my Radeon R9-290? With the default driver, apps like youtube or mplayer are definitely not running accelerated. I see two packages, fglrx and fglrx-updates. Whats the deal?
+[12:12] <k1l> Langley: ARM is a total different setup.
+[12:13] <mcphail> Langley: no idea about ARM, I'm afraid
+[12:13] <Axton> Seveas: http://pastebin.com/2J2EGEh4
+[12:13] <k1l> Langley: better ask in #ubuntu-arm for help and name the exact hardware you use etc.
+[12:13] <wumpus> with ARM you have a bootloader (e.g. uboot) instead of grub
+[12:13] <Langley> Ugh... okay, thanks
+[12:13] <wumpus> this differs per device unfortunately, some are supported out of the box, some need manual fidgeting
+[12:14] <mcphail> Langley: I have an old ARM device running Debian, but I have never been brave enough to tackle uboot :(
+[12:14] <Seveas> Axton: ok, those permissions look good. And the content of authorized_keys is the same as your local public (not private!) key?
+[12:15] <Langley> Well I think I found it... it's configured in /boot/config.txt
+[12:15] <wumpus> messing with uboot can brick your device, so if there is no way to recover it's not recommended
+[12:15] <stimoceiver> whats the preferred driver for my Radeon R9-290? With the default driver, apps like youtube or mplayer are definitely not running accelerated. I see two packages, fglrx and fglrx-updates. Whats the deal? or should I use the stuff from the xorg-edgers ppa??? Cuz I definitely end up needing crap like RandR on some of my monitors...
+[12:16] <wumpus> (eg a serial console, jtag, some vendor-supported to re-flash the firmware over USB, ...)
+[12:17] <Axton> Seveas: Yeah, im pretty sure. I have used ssh-copy-id to copy it over...
+[12:17] <Axton> Seveas: I have ssh acces to server without pw on local network, but if I try with ip from ISP it ask for my password...
+[12:18] <Seveas> ah, the server is behind a nat? Is the port forwarded properly?
+[12:18] <Axton> Seveas: I can see in the debug output that it connect
+[12:19] <Axton> Seveas: Ill just make a pastebin with ssh -vvv output
+[12:19] <Seveas> Axton: but is it connecting to the right thing?
+[12:20] <Seveas> does the connection attempt show up in /var/log/messages or /var/log/auth.log on the server?
+[12:21] <Axton> Seveas: http://pastebin.com/HwNmk2Dd
+[12:22] <Axton> Seveas: I am not sure. I have changed loglevel to VERBOSE in sshd_config but im not sure its in the log. Only entry for the local connection is in the log... I think, not sure..!
+[12:23] <Seveas> debug1: Remote protocol version 2.0, remote software version dropbear_0.46
+[12:23] <Seveas> I bet that's the ssh on your router
+[12:24] <Seveas> which really shouldn't be made publicly accessible, you should fix that first...
+[12:24] <Axton> Seveas: When i forwarded the port on my router it told me that the router ssh was moved to another port
+[12:26] <Seveas> Axton: looks like it lied.
+[12:26] <Axton> Seveas: I think your right... I just got into my router and removed ssh. Now i just get a connection refused...
+=== dreamon__ is now known as dreamon
+[12:28] <Axton> Seveas: All this shit actually started course my F#%& ISP flashed the router and all of the settings. When i redid the settings, I got a man-in-the-middle dialog when connecting to my server... 2 hours later, I still dont have connection to my server from outside the network....
+[12:34] <Axton> Seveas: THX for the help. You notice that my router was messing up, Now I fixed everything..! I owe u a beer ;-)
+[12:36] <LibertyWeNeed> Has UBUNTU home directory encryption been broken?
+[12:37] <OerHeks> LibertyWeNeed, we don't know if it is broken for you, is it?
+[12:37] <LibertyWeNeed> I don't know that's why i asked. Any way what kind of encryption is it?
+[12:38] <OerHeks> AES256 i think
+[12:39] <LibertyWeNeed> Is it 100% Free Software?
+[12:40] <bazhang> !free | LibertyWeNeed
+[12:40] <ubottu> LibertyWeNeed: freedom is important. Ubuntu is as free as we can make it, which means mostly free software. See http://www.gnu.org/philosophy/free-sw.html and  http://www.ubuntu.com/project/about-ubuntu/licensing
+[12:40] <k1l> LibertyWeNeed: its ecryptfs
+[12:40] <LibertyWeNeed> I was referring to the encryption
+[12:41] <bazhang> contast the fsf for the one hundred percenter there LibertyWeNeed
+[12:41] <k1l> LibertyWeNeed: see their website about how free that is
+[12:41] <bazhang> #fsf  < LibertyWeNeed
+[12:41] <OerHeks> https://launchpad.net/ecryptfs
+[12:42] <LibertyWeNeed> Does UBUNTU have a section on their website that anyone knows of where I can look about how the encryption in ubuntu works?
+[12:42] <bazhang> try the wiki LibertyWeNeed
+[12:42] <LibertyWeNeed> thank you
+[12:42] <bazhang> !rute | LibertyWeNeed have a good read
+[12:42] <ubottu> LibertyWeNeed have a good read: documentation is to be found at http://help.ubuntu.com and http://wiki.ubuntu.com - General linux documentation: http://www.tldp.org - http://rute.2038bug.com
+[12:42] <OerHeks> :-)
+[12:44] <benbro1> is there a simple tool to generate stats graphs locally for cpu, ram, disk usage...?
+[12:45] <bazhang> something like conky perhaps benbro1
+[12:46] <OerHeks> First think i learned to program is Conky, here are 2000+ with examples http://ubuntuforums.org/showthread.php?t=281865&page=2322
+[12:46] <bazhang> https://en.wikipedia.org/wiki/Conky_(software) benbro1
+[12:46] <OerHeks> 2000+ pages *
+[12:46] <bazhang> nice
+[12:46] <OerHeks> then cronjobs..
+[12:49] <hateball> benbro1: glances is pretty nice, or you can use nmon to save logs
+[12:49] <hateball> benbro1: here is a tool to parse nmon data http://nmonvisualizer.github.io/nmonvisualizer/
+[12:50] <OerHeks> nice page with indicaters for 14.04 and above http://askubuntu.com/questions/30334/what-application-indicators-are-available
+[12:50] <OerHeks> hateball, glances can be used for remote monitoring too ?
+[12:52] <hateball> OerHeks: define remote? you can set it to run in web mode if you like https://github.com/nicolargo/glances/blob/master/docs/glances-doc.rst#web-server-mode
+[12:52] <OerHeks> hateball, that is what i point at, thanks.
+[12:54] <benbro1> bazhang: thanks
+[12:54] <benbro1> hateball: thanks
+[12:55] <bazhang> welcome
+[12:55] <hateball> benbro1: enjoy
+[12:56] <kyniker> hi
+[12:59] <kyniker> is there a possibility to find out how many threads a given process has started during it's lifetime? The process runs only for a fraction of a second (it's a unit test of a library I've written)
+=== marshal0605 is now known as marshal0505
+[13:06] <Spartan> italiani?
+[13:06] <bazhang> !it
+[13:06] <ubottu> Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi « /join #ubuntu-it » senza virgolette)
+=== Spartan is now known as Guest1716
+[13:09] <DWSR> Hey all, I'm creating a Lubuntu system image for some fire and forget loaner netbook machines for use while staff laptops are in for repair. If I simple use dd to capture the image and then change /etc/hostname, will that work?
+=== Rob_zZz is now known as Rob_C
+[13:14] <Seveas> DWSR: you'll also want to change /etc/udev/rules.d/70-persistent-net.rules
+[13:15] <kocis> ciao
+[13:15] <kocis> !list
+[13:15] <ubottu> kocis: No warez here! This is not a file sharing channel (or network); read the channel topic. If you're looking for information about me, type « /msg ubottu !bot ». If you're looking for a channel, see « /msg ubottu !alis ».
+[13:15] <DWSR> Seveas: For what purpose?
+[13:15] <Seveas> DWSR: to keep network interface naming consistent.
+[13:15] <electron_shell> sup
+[13:16] <Seveas> DWSR: you might even just delete it before dd'ing (it's what I do), it'll be generated again at the next reboot
+[13:16] <OerHeks> Seveas +1
+[13:16] <OerHeks> how about oem install ?
+[13:16] <DWSR> Seveas: Hmm, good to know.
+[13:17] <Seveas> OerHeks: I've never played with the OEM install. dd does the trick for me
+[13:17] <Seveas> I have a fleet of raspberry pi's driving wallboards
+[13:17] <Seveas> all done this way
+[13:17] <OerHeks> cluster?
+[13:17] <electron_shell> query: I recently installed 14.04 LTS and everything iz up however, wifi wlan0 interface drops link intermittently - is this a known issue?
+[13:18] <Seveas> (bloody pi's can't boot from the network, so no PXE install :/)
+[13:18] <DWSR> Seveas: iirc, newer PIs can?
+[13:19] <DWSR> Seveas: Alternatively, can't you boot to a PXE install environment and then swap disks?
+[13:19] <swenzel> hateball: problem with the wifi adapter persists under 15.04 -.-
+[13:19] <DWSR> Boot, swap, done.
+[13:19] <lotuspsychje> electron_shell: wich wifi chipset?
+[13:19] <theptr_> Seveas, how do you drive the wallboards ? what software do you use on the pi ?
+[13:20] <electron_shell> lotus: let me check
+[13:20] <Seveas> theptr_: chrome :)
+[13:21] <theptr_> Seveas, aaa . i thought u used a package so it is like a info kiosk
+[13:21] <hateball> swenzel: that's very strange. what sort of network is it connecting to? or does it not see networks at all?
+[13:21] <Seveas> theptr_: just montoring graphs being shown all around the office. chrome can do that just fine
+[13:21] <electron_shell> lotus when I ran wlist it came on and connected ;)
+[13:22] <lotuspsychje> electron_shell: check sudo lshw -C network
+[13:22] <lotuspsychje> electron_shell: chipset + driver=
+[13:22] <swenzel> hateball: device is not recognized... it is listed with 'lshw -class network', though.
+[13:23] <swenzel> hateball: or may it just not be enabled?
+[13:23] <electron_shell> thanks lotus it is running now
+[13:23] <lotuspsychje> electron_shell: ok
+[13:24] <electron_shell> it iz a realtek rtl8187se
+[13:24] <lotuspsychje> electron_shell: realteks needs updated firmwares in many cases to work properly
+[13:25] <electron_shell> lotus: iz it propriertory or foss?
+[13:25] <hateball> swenzel: hmmm, I may have spoken too quickly earlier, I'm wondering if the machines we have didnt come with intel chipsets but rather realtek/broadcom...
+[13:25] <lotuspsychje> !info linux-firmware | electron_shell look in here
+[13:25] <ubottu> electron_shell look in here: linux-firmware (source: linux-firmware): Firmware for Linux kernel drivers. In component main, is optional. Version 1.143.3 (vivid), package size 24170 kB, installed size 84290 kB
+[13:25] <hateball> swenzel: because reading https://bugs.launchpad.net/ubuntu/+source/linux-firmware/+bug/1476900 suggests you need a mainline kernel
+[13:25] <ubottu> Launchpad bug 1476900 in linux-firmware (Ubuntu Vivid) "Backport Intel 8260 Wifi/BT firmwares" [Medium,Fix released]
+[13:25] <electron_shell> do I need a diff repo or is it the mainz?
+[13:25] <lotuspsychje> electron_shell: main
+[13:26] <lotuspsychje> electron_shell: system also up to date to 14.04.3?
+[13:26] <hateball> swenzel: without an ethernet connection it get's a bit annoying to sort it tho... as per comment https://bugs.launchpad.net/ubuntu/+source/linux-firmware/+bug/1476900/comments/11 supposedly 15.10 works ootb, so one could grab the beta and install
+[13:26] <ubottu> Launchpad bug 1476900 in linux-firmware (Ubuntu Vivid) "Backport Intel 8260 Wifi/BT firmwares" [Medium,Fix released]
+[13:26] <electron_shell> yesy ran update
+[13:27] <lotuspsychje> electron_shell: ok, keep an eye on your syslog/dmesg to see whats your card doing
+[13:27] <electron_shell> thank you ubottu iz ubottu a bot ;)?
+[13:27] <Pici> !bot
+[13:27] <ubottu> Hi! I'm #ubuntu's favorite infobot, you can search my brain yourself at http://ubottu.com/factoids.cgi | Usage info: http://ubottu.com/devel/wiki/Plugins | Bot channels and general info: https://wiki.ubuntu.com/IRC/Bots | Make a clone of me: /msg ubottu botclone
+[13:28] <JohnnyW78> ciao
+[13:28] <Pici> !it
+[13:28] <ubottu> Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi « /join #ubuntu-it » senza virgolette)
+[13:28] <electron_shell> thank you lotuspsychje
+[13:28] <swenzel> hateball: could he use windows driver with ndiswrapper?
+[13:29] <lotuspsychje> swenzel: dont think that it would give same firmware version
+[13:35] <bishops> Hi all, I'm curious to know your advice on getting a USB audio-interface that is compatible with ubuntu 14.04.
+[13:36] <hateball> swenzel: that would be more of a pain than going to 15.10 (which is released stable in a few days anyhow)
+[13:36] <MonkeyDust> bishops  ask in #ubuntu-offtopic
+[13:36] <bishops> MonkeyDust: Ah ok thanks
+[13:36] <hateball> swenzel: actually... I may have been running 15.10 these thumbdrives I've been using to test our 430/450 machines
+[13:36] <lotuspsychje> bishops: or maybe here: http://www.ubuntu.com/certification/
+[13:38] <swenzel> hateball: I'm not so good with linux low-level stuff, but isn't it possible to install this 4.1 kernel along with that linux-firmware package?
+[13:38] <spider> Hello. I have an executable (application/x-executable) file. Right now it is in a folder. If I move this file to bin, do you think it will function without being in the folder it started with?
+[13:39] <lotuspsychje> spider: what kinf of program are we talking about?
+[13:40] <MonkeyDust> spider  what happesn if you try?
+[13:40] <spider> Good question, I will try.
+[13:40] <lotuspsychje> lol
+[13:40] <hateball> !mainline
+[13:40] <ubottu> The kernel team supply continuous mainline kernel builds which can be useful for tracking down issues or testing recent changes in the Linux kernel. More information is available at https://wiki.ubuntu.com/Kernel/MainlineBuilds
+[13:40] <hateball> swenzel: ^
+[13:40] <spider> Been fixing errors whole day ^^was hoping to avoid
+[13:41] <hateball> swenzel: But as I said it's a pain without an internet connection, as you'll need to manually copy packages instead of using the repos
+[13:41] <hateball> swenzel: and since it's not LTS, you'll want to go to 15.10 anyway since 15.04 support drops after 9 months
+[13:41] <swenzel> k
+[13:43] <spider> Ok, that did not work, the application was not too happy about not having rest of the folder with it
+[13:43] <lotuspsychje> spider: wicj application is this
+[13:44] <spider> it is of type: executable (application/x-executable)
+[13:44]  * Guest89083 is cooking a turkey mmmmm
+[13:44] <Guest89083> ermagerd
+[13:45] <spider> it also has another file installation instructions (text/x-install) type file
+=== Guest89083 is now known as BAdDream
+=== BAdDream is now known as BadDream
+[13:45] <MonkeyDust> Guest89083  no random comments here
+[13:45] <lotuspsychje> spider: and the name of the package?
+[13:45] <BadDream> oh erm sorry MonkeyDust....is there a ubuntu chat channel?
+[13:45] <spider> #ubuntu-offtopic
+=== Bish_ is now known as Bish
+[13:45] <BadDream> cool thanks
+[13:47] <spider> It is just a debugging program OllyDbg
+[13:48] <the_nic> hi, I'd like to report a hardware bug with ubuntu wily, but each time i click on "report a bug" only the wiki page opens...
+[13:49] <MonkeyDust> the_nic  #ubuntu+1 for wily
+[13:49] <the_nic> thanks
+[13:50] <lotuspsychje> !info edb | spider can this help?
+[13:50] <ubottu> spider can this help?: edb (source: edb): database program for GNU Emacs. In component universe, is optional. Version 1.31-3 (vivid), package size 351 kB, installed size 1127 kB
+[13:50] <spider> Ah, I already have EDB
+[13:50] <lipeng> how to use IRC?
+[13:50] <spider> Evans Debugger, good stuff.
+[13:51] <cfhowlett> lipeng, you ARE using irc.
+[13:51] <MonkeyDust> lipeng  type text, then hit enter
+[13:51] <hateball> !irc | lipeng
+[13:51] <ubottu> lipeng: A list of official Ubuntu IRC channels, as well as IRC clients for Ubuntu, can be found at https://help.ubuntu.com/community/InternetRelayChat - For a general list of !freenode channels, see http://freenode.net/faq.shtml#channellist - See also !Guidelines
+[13:51] <lipeng> ok  thanks
+[13:51] <spider> lipeng, you are. This irc is based on freenode, others might be on other servers
+[13:51] <lotuspsychje> spider: seems like winehq has ollydbg in its database aswell
+[13:52] <michael_2015>  Hi i realy like to see a Ubuntu image which can be deployed to any Tablet
+[13:52] <spider> Lotus, the program functions well, I just wanted to move it to the bin folder, so I could quick launch the application by typing in the executable
+[13:52] <spider> into the terminal*
+[13:52] <cfhowlett> michael_2015, and?
+[13:53] <OerHeks> spider, why not add the folder in your home to your %PATH ?
+[13:53] <michael_2015> well i can not find any tablet supporting it
+[13:53] <spider> hmm, yea I could do that
+[13:53] <lotuspsychje> michael_2015: nexus7, ubuntu-touch
+[13:54] <cfhowlett> !touch | michael_2015,
+[13:54] <ubottu> michael_2015,: Information about the Ubuntu Touch platform for Phone and Tablet is available here https://wiki.ubuntu.com/Touch . Support and discussion in #ubuntu-touch
+[13:54] <spider> Anyway thanks for the help, I gotta run!
+[13:55] <lotuspsychje> michael_2015: you can also install ubuntu desktop on some win8 based tablets
+[13:59] <lipeng> how to come true files share?
+[13:59] <lipeng> couldn't install VMware tools
+[14:00] <lotuspsychje> lipeng: what are you trying to do?
+[14:02] <C_minus> what can i type into terminal to get a readout of wverything my WIFI card is doing? because i have hella problems connecting (has been trying to connect for hours)
+[14:02] <lotuspsychje> C_minus: ubuntu version and wifi chipset please?
+[14:03] <C_minus> 14.04 intel 7260
+[14:03] <lotuspsychje> C_minus: try a tail -f /var/log/syslog and tail -f /var/log/dmesg and play around with wifi
+[14:04] <hateball> C_minus: You'll want a recent kernel such as in 15.04 for 7260 to work properly. I have the same chipset
+[14:04] <OerHeks> C_minus, were you here before ? intel 7260 should be supported OOTB in 15.10
+[14:05] <OerHeks> oh, 15.04 too
+[14:05] <C_minus> Yes i was. Funny, no sooner do I ask you guys about it, it connected straight away. I hate computers!
+[14:05] <OerHeks> magic irc room
+[14:05] <lotuspsychje> lol
+[14:05] <cfhowlett> gremlins ...
+[14:05] <hateball> the kernel in 14.04 can have problems unless you disable N or AC
+[14:06] <hateball> but if you run 15.04 and onwards, everything works glorious
+[14:06] <hateball> C_minus: ^
+[14:06] <lotuspsychje> hateball: thats good to know, just for that chipset?
+[14:06] <hateball> lotuspsychje: Well surely other chipsets can have malfunctioning drivers, I just happen to know about 7260 since I have it myself
+[14:07] <lotuspsychje> hateball: ok nice
+[14:07] <hateball> lotuspsychje: but it's not uncommon for various chipsets using iwlwifi/iwlagn to struggle, forcing you to disable N
+[14:07] <lotuspsychje> hateball: does your card show firmware version? might be interesting to compare with him
+[14:07] <C_minus> hmmm, that's interesting to know. i have been reluctant to upgrade to 15.04 because my laptop came with 14.04, and it has "long term support".
+[14:08] <hateball> lotuspsychje: Sadly I am at work now, I have that chipset at home
+[14:08] <lotuspsychje> kk
+[14:08] <cfhowlett> C_minus, current version is 14.04.3 ...
+[14:08] <hateball> Well the kernel/modules are still "old" in .3
+[14:10] <lotuspsychje> hateball: so upgrading trusty kernel could be usefull in this case?
+[14:10] <cfhowlett> can't hurt to try???
+[14:10] <C_minus> How come I can't just install some driver that will make it work properly? I got the driver package from the Dell website, but it contains about 30 different .dpkg files whose names are just garbled strings of numbers and letters. Dell want you to use their "dell recovery tool" to load the driver package onto a stick (but this doesn't work).
+[14:11] <C_minus> I might as well just upgrade to 15.04 for all the help dell has been.
+[14:11] <lotuspsychje> C_minus: you can try few things now, 14.04.3 or kernel upgrade or 15.10
+[14:12] <cfhowlett> C_minus, sudo apt full-upgrade will grab new kernels and package upgrades
+[14:13] <C_minus> did i mention - it only gives me this problem at home. it connects to all other networks just fine. even its Win7 partition connects fine, as well as all other computers/phones/tablets.
+[14:13] <MonkeyDust> am doing that now with 15.10 vm
+[14:14] <hateball> C_minus: yes, it depends on how the SSID you're broadcasting is set up.
+[14:14] <hateball> C_minus: That's why it can work properly if you disable N speeds, but then... you wont have N speeds
+[14:15] <C_minus> sometimes the other machines struggle to connect to the home router for a while, but they come around. the androids say "acquiring IP address...", the Macs and the Win7s show a little exclaimation mark over their WIFI icons... but Ubuntu just tries and fails.
+[14:15] <hateball> C_minus: If other devices struggle as well you might want to look into upgrading the routers firmware
+[14:15] <C_minus> hateball yeah trouble is, the rest of the fam need the N speeds.
+[14:16] <hateball> C_minus: Yes, but you can disable N in the intel driver in ubuntu
+[14:16] <C_minus> i think its running latest. lousy D-Link router came free from the ISP.
+=== user is now known as Guest54659
+[14:16] <hateball> C_minus: See http://zeroset.mnim.org/2014/04/22/unstable-wifi-connection-on-ubuntu-14-04-trusty-tahr-ctrl-event-disconnected-reason4-locally_generated1/
+[14:17] <iamrohit7> in freya, i get graphical glitches when changing the wallpaper or when in multasking mode, when using midori. I use a Dell Vostro 1400. How can I fix my problem? I know this isn't for elementary but there isn't much activity in #elementaryos
+[14:17] <C_minus> hateball oh i've tried that fix, didn't work so well for me
+[14:17] <cfhowlett> iamrohit7, not supported here.  not ubuntu.  sorry.
+[14:17] <hateball> C_minus: I see, well then either grab a mainline kernel, or upgrade to 15.04+ I am afraid
+[14:18] <iamrohit7> cfhowlett: its based on ubuntu, isn't it?
+[14:18] <C_minus> while i'm here, what can I do about screen tearing while playing videos etc.?
+[14:18] <cfhowlett> iamrohit7, it is.  but it is NOT ubuntu and not supported here.
+[14:18] <cfhowlett> !elementary
+[14:18] <ubottu> Elementary OS is an Ubuntu derivative which is supported in their IRC channel #elementary on irc.freenode.net - http://elementaryos.org/ for more information on this distribution.
+[14:18] <hateball> C_minus: what GPU chipset are you using, and what browser?
+[14:19] <iamrohit7> cfhowlett: there isn't much activity there.
+[14:19] <hateball> C_minus: or is it tearing in video players outside the browser? the usual fail is flash, is why I am asking
+[14:19] <lotuspsychje> iamrohit7: feel free to install an ubuntu version from topic
+[14:19] <cfhowlett> iamrohit7, if you need support, I strongly urge you to install an official ubuntu flavor.  if elementary OS doesn't support you - perhaps there's a cosmic message for you rhtere
+[14:19] <C_minus> not just browser. I have intel integrated graphics and NVidia Quadro.
+[14:20] <cfhowlett> !flavors | iamrohit7
+[14:20] <ubottu> iamrohit7: !Ubuntu-GNOME, !Kubuntu, !Xubuntu and !Lubuntu are simply flavors of Ubuntu that come with GNOME, KDE, Xfce, and LXDE (respectively) installed as default, instead of Unity. Other specialized flavors of Ubuntu include !Edubuntu, Ubuntu !Studio, and !Mythbuntu.
+[14:20] <hateball> C_minus: For nvidia there are ways to prevent tearing globally, see https://wiki.archlinux.org/index.php/NVIDIA#Avoid_tearing_with_GeForce_500.2F600.2F700.2F900_series_cards
+[14:20] <iamrohit7> lotuspsychje: i currently use ubuntu. i want to switch. and then there are all those problems.
+[14:20] <hateball> C_minus: But if you're using optimus so the intel card is used.... I am not sure how you set that up
+[14:21] <lotuspsychje> iamrohit7: if you have troubles on ubuntu desktop, come to us
+[14:21] <C_minus> i don't have the NVidia prime, nor the Bumblebee thing whatever. So I'm not sure how my computer is sharing out the workload to my GPUs...
+=== [n0mad] is now known as lil_dc2
+[14:23] <MonkeyDust> iamrohit7  learning something new can be frustrating, we're here to help and assist
+=== loki_ is now known as loa
+=== lil_dc2 is now known as [n0mad]
+[14:27] <Sn4k3> Hi! does anyone know if this ISO https://ubuntu-mate.org/ provides an OEM installation option, or do i need to use a "normal" 15.04 Desktop ISO?
+[14:28] <cfhowlett> Sn4k3, pretty sure all buntus (except server?) offer OEM
+[14:29] <Sn4k3> cfhowlett: excellent! :) thank you
+[14:29] <cfhowlett> happy2help! Sn4k3
+=== taco is now known as Guest95064
+[14:29] <Asdasd> Where can i find any sql injection dork fuzzer project thats written in C?
+[14:31] <stestststst> #bro
+[14:31] <lotuspsychje> Asdasd: no hacking here
+[14:32] <ger0448> than what forum is the one to ask?
+[14:33] <cfhowlett> !alis | ger0448
+[14:33] <ubottu> ger0448: alis is a services bot that can help you find channels. Read "/msg alis help list" . For more help or questions relating to alis, please join #freenode. Example usage: /msg alis list #ubuntu* or /msg alis list *http*
+=== axtx_ is now known as axtx
+[14:37] <lerys> hi
+[14:37] <MonkeyDust> the wildcards * are no longer required for alis
+[14:44] <Pici> MonkeyDust: updated
+[14:52] <Che-Anarc> Hi I'm trying to use `aptitude -r -y -f install _software_` to resolve unmet decencies as part of a script.... but the the recommended resolution is not actually done post `Keep the following.... No packages will be installed.`
+[14:52] <Che-Anarc> Is it something I'm doing wrong?
+[14:55] <daftykins> why use aptitude since it doesn't come with a default install?
+[14:55] <daftykins> are you expecting users to install it before running your script?
+[14:55] <thebwt> Howdy folks, is there a document out there that details packaging destination directory best practices?  like when to use /sbin vs /usr/sbin ?
+[14:56] <cfhowlett> thebwt, I've only ever seen one with suggested "best practice".  I suspect #ubuntu-server would have the lin,
+[14:56] <cfhowlett> link
+[14:56] <thebwt> thanks cfhowlett
+[14:56] <cfhowlett> happy2help! thebrush
+[14:56] <Che-Anarc> daftykins - its there as part of my current image... just having issue with getting `Y` as per manual process which works to also work from cli.
+[14:56] <cfhowlett> thebwt ^^
+[14:56] <mcphail> thebwt: https://en.wikipedia.org/wiki/Filesystem_Hierarchy_Standard
+[14:57] <thebwt> mcphail: I know about that one, was more curious about ubuntu specific best practicies
+[14:57] <mcphail> thebwt: Ubuntu tends to stick to the FHS
+[14:57] <thebwt> though they should be similar :)
+[14:57] <thebwt> roger
+[14:58] <OerHeks> Che-Anarc, in that aptitude line, what software are you trying to install ? hard to give answer in this hypothetical question
+[15:00] <mcphail> thebwt: basically, if a binary might be needed before disks are mounted it has to go in /bin or /sbin. If it can wait for disk mounting, it goes in /usr/bin or /usr/sbin (if provided by the package manager) or /usr/local/bin (if provided by the user self-installing)
+[15:00] <elysium_> exit
+[15:00] <Che-Anarc> Orphis, ```aptitude -q -r -f -y install libperl5.14 libsnmp15```
+[15:01] <thebwt> mcphail: gotcha, thanks for the insight, that's exactly what I needed
+[15:01] <Rexter> hello
+[15:02] <SchrodingersScat> I have a reverse tunnel that I'm trying to ssh over, but my ssh hangs and sometimes doesn't connect. stops at "debug1: Local version string SSH-2.0-OpenSSH_6.7p1 Ubuntu-5ubuntu1.3" with ssh -vv after it checks identity files.  Do I need to tunnel more ports?
+[15:03] <Che-Anarc> SchrodingersScat,  is that an OSX device your trying to do it from out of interest?
+[15:03] <SchrodingersScat> Che-Anarc: no, both are ubuntu 15.04
+[15:03] <OerHeks> Che-Anarc, -q & -y ? that bites AFAIK
+[15:05] <Che-Anarc> OerHeks,   I tried it with simply `-y -r`  still the same it seems to take suggestion but doesnt do / take its course of action.
+=== geheimnis` is now known as geheimni1`
+[15:05] <mcphail> thebwt: there are exceptions, such as games going into /usr/games (probably due to draconian office politics!)
+[15:06] <thebwt> hah
+[15:06] <thebwt> most of the stuff i'm working on is /usr/sbin so no worries about that
+=== geheimni1` is now known as geheimnis`
+[15:07] <SchrodingersScat> after the long hang, it gave this error, "ssh_exchange_identification: read: Connection reset by peer"
+[15:07] <thebwt> SchrodingersScat: can the remote server 'ssh localhost' well?
+[15:07] <thebwt> that's a timeout and typically a firewall thing
+[15:08] <thebwt> if it's can ssh localhost, and then ssh <public IP>, then we know the ssh server is runnign fine and that it's a network thing
+[15:11] <SchrodingersScat> thebwt: I'm using -R 7667:localhost:22 from the server, then on the publicly reachable machine ssh -p 7667 user@localhost  and sometimes it seems to connect, others it has issues :/
+[15:12] <thebwt> very strange
+=== Haugli92 is now known as Haugli92_Away
+[15:13] <pmaxk> hi
+[15:16] <Che-Anarc> SchrodingersScat does it make a differance if you add `ssh -o ServerAliveInterval=2 -o ServerAliveCountMax=1 ....` before the reset?
+[15:16] <regum> hi all, I  am trying to boot to the command line with ubuntu 14 arm running on a raspberry pi 2, how can I go about doing this?
+=== Onion is now known as Guest70094
+[15:17] <SchrodingersScat> Che-Anarc: I'm getting connection refused, so we may have to pause this troubleshooting until tonight xD  thanks for trying.  I think power went off at home...
+[15:18] <daftykins> regum: step 1, would be to pop to #ubuntu-arm - but likely i would've thought Pis get disk images you dd onto an SD card?
+[15:20] <regum> yes, I burned the image into a microsd
+[15:20] <daftykins> regum: what image?
+[15:20] <daftykins> and it's only burn with optical media
+=== StathisA_ is now known as StathisA
+[15:22] <regum> this one: https://wiki.ubuntu.com/ARM/RaspberryPi
+=== Guest19173 is now known as Gambrit
+[15:23] <daftykins> regum: so what's the problem, it's doing graphical boot but you want command line only?
+[15:23] <regum> exactly
+[15:23] <coy_> hi
+[15:23] <daftykins> regum: ok, edit the boot parameter to have "text" instead of where it says "quiet splash"
+[15:24] <regum> daftykins,  where is the boot parameter?
+[15:24] <amanata> hi :)
+[15:24] <daftykins> regum: you can either boot as normal and edit the config, or if you are attaching a mouse and keyboard, holding left shift at startup should give GRUB
+[15:25] <ytixdecaf> Has anyone tried installing Aurous in Ubuntu?
+[15:25] <regum> daftykins, I dont have GRUB
+[15:25] <daftykins> regum: you won't see it as standard with normal boot processes, but it's likely there regardless.
+[15:25] <a1_> hi i've installed raid 1 ubuntu server according to https://help.ubuntu.com/community/Installation/SoftwareRAID
+[15:25] <regum> I've read that the raspberry pi doesn't use it
+[15:25] <a1_> how do i check if it installed correctly
+[15:26] <a1_> in raid 1 2 harddrives
+[15:26] <daftykins> regum: ah, this justifies asking in #ubuntu-arm then :) perhaps getting a server image would make more sense also
+[15:27] <regum> it's the only image that sofar works for what I need
+[15:27] <regum> :/
+[15:27] <daftykins> well, ask the right people and you might get a good reply ;)
+[15:27] <daftykins> a1_: well your own link has a "checking the status of your RAID" section
+=== nuno_nunes is now known as Guest63687
+[15:27] <daftykins> cat /proc/mdstat
+[15:27] <daftykins> :)
+[15:27] <a1_> thanks
+[15:28] <DWSR> Is there a way to compress data from stdin via tar?
+[15:28] <DWSR> I'm trying to create a compressed disk image via dd and tar
+[15:29] <regum> daftykins, thanks, but I think I've got it
+[15:29] <regum> daftykins, if you're interested, adding 'single' to the kernel parameters did it
+[15:30] <a1_> does installation take twice as long since your write to 2 hardrives
+[15:30] <a1_> ?
+[15:30] <mcphail> DWSR: tar doesn't compress. But you can pipe teh output of dd through bzip2 or gzip
+[15:30] <daftykins> regum: and you gained access to change that via editing /etc/default/grub or...?
+[15:30] <daftykins> a1_: no
+[15:30] <ruind> Did this change recently?  Failed to fetch http://archive.canonical.com/ubuntu/dists/trusty/partner/binary-amd64/Packages  Hash Sum mismatch
+[15:30] <daftykins> a1_: depends whether you did RAID-0 or RAID-1 also
+[15:30] <DWSR> mcphail: I know that it doesn't, but I want a compressed tarball because reasons.
+[15:30] <a1_> raid 1
+[15:30] <a1_> mirrored
+[15:31] <regum> daftykins, no, just editting /boot/cmdline.txt
+[15:31] <a1_> there doesnt seem to be a straight forward way of putting zfs on ubuntu 14.04
+[15:31] <daftykins> regum: ah yeah the Pis do things by text file, of course :)
+[15:31] <DWSR> a1_: zfsonlinux, or linux-zfs.
+[15:31] <regum> daftykins, thank you nevertheless
+[15:31] <regum> bye!
+[15:31] <daftykins> a1_: well it'd not be appropriate for ubuntu nor two disk only
+[15:32] <daftykins> cya \o
+[15:32] <a1_> it has someadvatged of regular raid 1
+[15:32] <a1_> advantages
+=== Guest63687 is now known as TuxTek
+[15:34] <daftykins> a1_: i would even say it is a mistake for you to put the OS onto the RAID, but that's just my preference :)
+[15:35] <dawntreader> !details
+[15:35] <ubottu> Please elaborate; your question or issue may not seem clear or detailed enough for people to help you. Please give more detailed information, errors, steps, and possibly configuration files (use the !pastebin to avoid flooding the channel)
+[15:35] <andresr_> hello can somebody help me to configure a DEBIAN/control file to support 2 sames packages? One is OS version , the another Commercial support version, and have shared files inside. The problem come when i have Depends: packageOS | packageCS and packagesCS is already installed on system when i try to run the install of the third package with thats Depends it fail because it try to unpack and it break the apt loop
+[15:36] <dawntreader> I'm running Ubuntu 15.04, but I can't seem to get my Epson WP-4530 printer to work.
+[15:37] <SonikkuAmerica> dawntreader: Hmm... let me look at up for you.
+[15:39] <SonikkuAmerica> I think this question on AskUbuntu will help you: http://askubuntu.com/questions/349835/cant-install-drivers-for-epson-wp-4530 It shows how to install LSB to get your printer working.
+[15:39] <SonikkuAmerica> dawntreader: ^
+[15:40] <dawntreader> OK, thank you!
+=== defcon is now known as Guest35205
+[15:44] <Guest35205> what up
+[15:47] <CharlieSu> Anyone know why ncsd would be opening /etc/services a ton?  sysdig shows the file being opened hundreds of times a second.
+[15:48] <aarobc> Okay this is interesting: if I hibernate with an external monitor attached, then unplug it, it won't recover from hibernate
+[15:49] <skweek> anyone know why my background picture wont change?
+[15:49] <ulot0> join ubuntucn
+[15:49] <ulot0> join ubuntu-cn
+[15:49] <ulot0> join in ubuntu-cn
+[15:49] <ulot0> ?
+[15:50] <Pici> ulot0: /join #ubuntu-cn
+[15:50] <ytixdecaf> No, I wont.
+[15:50] <ytixdecaf> No, I wont.
+[15:50] <ytixdecaf> No, I wont.
+[15:50] <Pici> ytixdecaf: knock it off
+[15:50] <ytixdecaf> :D :D :D
+[15:51] <ytixdecaf> I was just giving a valid reply.
+[15:52] <alexander_> gday
+[15:55] <adrian_lc> so I have some machines running 14.04.3 LTS on AWS and some have a package named python3.4-venv but the others don't ... any idea?
+[15:55] <daftykins> adrian_lc: what makes it matter?
+[15:56] <adrian_lc> daftykins, it's listed as a dependency in our deployment script
+[15:57] <daftykins> apt-cache showpkg python...
+[15:57] <daftykins> see what wants it :)
+[15:57] <thebwt> adrian_lc: you can do dpkg --rdepends python3.4-venv
+[15:57] <thebwt> or that
+[15:58] <thebwt> my bad it's apt-cache rdepends
+[16:06] <littlebit> hi poeple, I have a deamon working in the background that uses 25% of my cpu alone. it is called tumblerd. Any idea what that deamon is supposed to do?
+[16:08] <Pici> littlebit: looks like it generates thumbnails for things you see in your file manager.
+[16:08] <Pici> !info tumbler
+[16:08] <ubottu> tumbler (source: tumbler): D-Bus thumbnailing service. In component universe, is optional. Version 0.1.31-1 (vivid), package size 62 kB, installed size 294 kB
+[16:14] <adrian_lc> turns out the package was on the update was released for a while and then reverted https://bugs.launchpad.net/ubuntu/+source/python-urllib3/+bug/1500768
+[16:14] <ubottu> Launchpad bug 1500768 in python-urllib3 (Ubuntu Trusty) "python3.4.3 SRU break requests" [High,Fix committed]
+[16:17] <ulot0> help me
+[16:17] <ulot0> Sometimes, I will open up a lot of terminals, and will switch to the ROOT permissions, but each terminal is running the command is a continuous different command, with the script should be how to achieve?
+[16:20] <syntroPi> ulot0, that is very difficult to understand. can you try to be more specific?
+[16:22] <ulot0> syntroPi, Execute a script, the script will open N terminals, each terminal automatically execute different commands!
+[16:25] <pmaxk> syntroPi: what you like to do...?
+=== zz_`ar|elo` is now known as `ar|elo`
+[16:26] <ulot0> syntroPi, ?
+[16:27] <ulot0> Do you speak Chinese?
+[16:27] <ulot0> syntroPi, Do you speak Chinese?
+[16:27] <syntroPi> i dont speak Chinese sorry
+[16:27] <cfhowlett> !cn | ulot0,
+[16:27] <ubottu> ulot0,: 如欲獲得中文的協助，請輸入 /join #ubuntu-cn 或 /join #ubuntu-tw
+[16:27] <erkburgles> I am trying to install a program it says I need these dependencies, which I just downloaded and installed and it says i still need them
+[16:27] <erkburgles> why
+[16:28] <erkburgles> can someone please help me fix this
+[16:28] <Pici> erkburgles: what are you trying to install, and how?
+[16:28] <erkburgles> pspp
+=== `ar|elo` is now known as zz_`ar|elo`
+[16:28] <erkburgles> the most up to date version is not available through the software center
+[16:29] <erkburgles> so I downloaded the tarball
+[16:29] <Pici> erkburgles: if you're trying to compile it, you'll need the build dependencies, which are different that the package dependencies.
+[16:29] <cfhowlett> !lastest | erkburgles
+[16:29] <Pici> erkburgles: sudo apt-get build-dep pspp   will install the build dependencies for you
+[16:30] <erkburgles> ok what does that mean
+[16:30] <erkburgles> ok
+[16:30] <Pici> erkburgles: those are the pacakges required to compile the software
+[16:30] <cfhowlett> !newest | erkburgles
+[16:30] <ubottu> erkburgles: Packages in Ubuntu may not be the latest. Ubuntu aims for stability, so "latest" may not be a good idea. Post-release updates are only considered if they are fixes for security vulnerabilities, high impact bug fixes, or unintrusive bug fixes with substantial benefit. See also !backports, !sru, and !ppa.
+[16:30] <erkburgles> thats not helpful
+[16:30] <erkburgles> i need the latest for this package
+[16:31] <pmaxk> erkburgles: are you trying to compile from source..?
+[16:31] <erkburgles> the pspp version in the center is utterly lacking
+[16:32] <adityam> Hello everybody. I needed some help with Xchat IRC Client for Ubuntu.
+[16:32] <pmaxk> hi
+[16:32] <cfhowlett> adityam, xchat is unsupported and dead.  use hexchat
+[16:33] <adityam> It shows the following message when I hit Connect button after filling the Alias Details:
+[16:33] <ulot0> syntroPi, thanks
+[16:39] <adityam> "Python interface loaded  \nPerl interface loaded  \nMessaging Indicator 0.3.11 plugin loaded.  \nTcl plugin for XChat - Version 1.64   \nCopyright 2002-2005 Daniel P. Stasinski  \nhttp://www.scriptkitties.com/tclplugin/  \nTcl interface loaded \n* Looking up irc.ubuntu.com \n* Connecting to chat.freenode.net (84.240.3.129) port 8001...  \nNot connected. \nTry /server <host> [<port>]"
+=== terminus is now known as Guest88697
+[17:08] <k1l> erkburgles: "cat /proc/mounts" in a pastebin please
+=== Toledo is now known as croberts
+[17:10] <decci> genii: ok
+[17:10] <erkburgles> http://paste.ubuntu.com/12782869/
+=== vincent is now known as Guest51121
+[17:12] <ioria> decci from your paste http://pastebin.com/CQyLbHKq i see only links .... where are the lib ?
+[17:12] <k1l> erkburgles: cat /var/log/apt/term.log  in a pastebin please
+[17:15] <erkburgles> how do i navigate to the last command prompt
+[17:15] <lotuspsychje> erkburgles: history can help you
+[17:16] <erkburgles> i dont want to just scoll up looking waiting to find my last prompt
+=== HeathHayle is now known as Guest81325
+=== fraq_ is now known as fraq
+[17:18] <erkburgles> ok how do i find use that
+[17:19] <k1l> erkburgles: are you talking about getting the output to a pastebin? you can use pastebinit. install the package "pastebinit" and then run "pastebinit /var/log/apt/term.log "
+[17:20] <erkburgles> k1l: http://paste.ubuntu.com/12782916/
+[17:21] <lapinozz> hmm, would it be possible assign a keybiding to pastebin something in the clipboard?
+[17:21] <erkburgles> how do i install that package
+[17:23] <lapinozz> erkburgles: sudo apt-get install pastebinit
+=== Haugli92 is now known as Haugli92_Away
+[17:24] <k1l> erkburgles: "sudo rm /etc/gshadow.lock"
+[17:27] <erkburgles> dpkg: error processing package postgresql (--configure):
+[17:27] <erkburgles>  dependency problems - leaving unconfigured
+[17:27] <erkburgles> No apport report written because the error message indicates its a followup error from a previous failure.
+[17:27] <erkburgles>                           No apport report written because the error message indicates its a followup error from a previous failure.
+[17:27] <erkburgles>                                                     Errors were encountered while processing:
+[17:27] <erkburgles>  postgresql-common
+=== Mavrikant is now known as mavrikant1
+=== mavrikant1 is now known as mavrikant
+=== mavrikant is now known as Mavrikant
+[17:28] <erkburgles> http://paste.ubuntu.com/12782961/
+[17:28] <erkburgles> that's what i get when i try sudo apt-get install pastebinit
+[17:29] <erkburgles> thanks k1l now what?
+[17:30] <k1l> erkburgles: "sudo apt update&& sudo apt full-upgrade"
+=== seed_ is now known as Guest561
+[17:32] <SCHAAP137> oh nice, libssl1.0.2 for Trusty
+=== marshal0605 is now known as marshal0505
+[17:32] <SCHAAP137> that's great
+[17:36] <erkburgles> that should now put me in a position to do what k1l?
+[17:36] <k1l> erkburgles: that depends on what the exact output is
+=== newbie is now known as Guest12250
+[17:42] <dp> With an /etc/sudoers like http://paste.linux.chat/view/bdbcb4a3, with the "glens" user not in the admin or sudo groups, is there a reason why "service php5-fpm restart" still requires a password? I've tried changing the order for that users sudo lines, but it doesn't seem to matter.
+=== nuno_nunes is now known as Guest90548
+[17:43] <pizzaparty> exit
+[17:44] <MotherMGA> Hello, Ubuntu 15.04 here. I just pulled the kernel 3.19.0-31 update and it freezes my laptop. I can select 3.19.0.30 to use my system, but I'd like to know how to troubleshoot the problem  so I can write up a bug report. Does anyone know where I can find out how to do that?
+[17:45] <k1l> MotherMGA: look into the older dmesg and syslog in /var/log/ after the reboot.
+=== Vampire0_ is now known as Vampire0
+=== kpease_ is now known as kpease
+[17:59] <energizer> I just did a dist-upgrade, then restarted. Now whenever I try to log in, I enter my correct password and then it changes to logging me in but lands me at the login screen again. The same thing happens with the guest (passwordless) account.
+[17:59] <EriC^^> energizer: press ctrl+alt+f1, do you get a terminal?
+[17:59] <energizer> EriC^^: yes
+[18:00] <k1l> energizer: sounds like the video driver is not working and the desktop crashes and you get back to the lightdm
+[18:00] <EriC^^> energizer: ok, type lspci | grep VGA
+[18:01] <energizer> 1:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Curacao XT [Radeon R9 270X]
+[18:01] <EriC^^> energizer: ok, type dpkg -l | grep fglrx
+=== kpease is now known as kpease_
+[18:02] <tuelho> How to install java ?
+[18:03] <MotherMGA> k1l: my most recent dmesg log file is from May 1. I don't think dmesg is getting saved as a logfile.
+[18:03] <bazhang> !java | tuelho
+[18:03] <ubottu> tuelho: To just use java you need a "Java Runtime Environment" (JRE) and/or a browser plugin. If that is not sufficient you will need a "Java Development Kit" (JDK) aka "Software  Development Kit" (SDK).  Please see https://help.ubuntu.com/community/Java about how to install one of three current implementations.
+[18:03] <energizer> ok when i try logging in now it turns to black (with mouse in the middle) for a second, i see a little "System problem detected" box for a half second, then I land back at login.
+[18:03] <tuelho> thanks
+[18:03] <tuelho> im a new one here
+[18:04] <tuelho> can i hack anyone with ubuntu
+[18:04] <tuelho> ?
+[18:04] <EriC^^> energizer: what's the output of dpkg -l | grep fglrx ?
+[18:04] <k1l> tuelho: no
+[18:04] <tuelho> ;//
+[18:04] <energizer> EriC^^: nothing
+[18:04] <k1l> MotherMGA: seems they changed it with systemd
+[18:04] <erkburgles> k1l: http://paste.ubuntu.com/12783192/
+[18:05] <EriC^^> energizer: ok, type cat /var/log/Xorg.0.log | nc termbin.com 9999
+[18:06] <energizer> EriC^^: http://termbin.com/xh9f
+[18:06] <kubast2> http://ubuntuforums.org/showthread.php?t=2226702 bumping for myself
+=== fwef is now known as vlakno
+=== kpease_ is now known as kpease
+[18:09] <brainchild> hi. does anybody use thunderbird here?
+[18:09] <brainchild> i am having trouble with the firetray extension
+[18:09] <ihsan_> Hi there. Is there a way to force my ubuntu system to run on noveau drivers instead of i915 ?
+[18:10] <ihsan_> and I am referring to the whole session. not just isolated software on bumblebee
+=== Haugli92_Away is now known as Haugli92
+[18:11] <energizer> EriC^^: k1l: Further thoughts?
+[18:12] <OerHeks> brainchild, on what ubuntu version?
+[18:12] <brainchild> lubuntu 14.04.3 LXDE
+[18:13] <k1l> energizer: what video driver did you use before? how was it installed?
+[18:13] <brainchild> firetray displays a mail icon on the lxpanel
+[18:13] <brainchild> but clicking on it does nothing
+[18:13] <k1l> erkburgles: so it did install postgresql now
+[18:13] <energizer> k1l: unfortunately/fortunately i haven't needed to do anything video-driver related for a long time, so i can't recall
+[18:14] <energizer> k1l: but i dont think i did anything to it manually -- whatever comes out of the box ubnutu 14.04
+[18:14] <EriC^^> energizer: did you try an older kernel?
+[18:15] <k1l> energizer: you could install the fglrx package and try the amd prop. driver
+[18:15] <OerHeks> brainchild, oh no idea on that, you might want to check the #firefox channel too.
+[18:16] <canaima_> hola
+[18:16] <OerHeks> brainchild,  ore #ubuntu-mozillateam
+[18:16] <brainchild> thanks :)
+[18:16] <sortkwik> Looking for help on prolonged shutdown issue, 15.04. Fairly noob here. PM me (=
+[18:17] <bazhang> sortkwik, in channel help here not PM
+[18:17] <canaima_> hola
+[18:17] <erkburgles> k1l: thanks, so recap, what did you do to troubleshoot
+[18:17] <sortkwik> bazhang: didn't want to clog things up too much
+[18:17] <OerHeks> !es | canaima_ this channel is english only
+[18:17] <ubottu> canaima_ this channel is english only: En la mayoría de los canales de Ubuntu, se habla sólo en inglés. Si busca ayuda en español entre al canal #ubuntu-es; escriba " /join #ubuntu-es " (sin comillas) y presione intro.
+[18:18] <bazhang> !details | sortkwik
+[18:18] <ubottu> sortkwik: Please elaborate; your question or issue may not seem clear or detailed enough for people to help you. Please give more detailed information, errors, steps, and possibly configuration files (use the !pastebin to avoid flooding the channel)
+[18:18] <canaima__> hola
+[18:19] <k1l> erkburgles: somehow some process in the past  did change the user/group settings and didnt remove the lock file properly that blocks other processes to change stuff their. we removed that lock file and now it works again
+=== rajak is now known as Guest77060
+[18:19] <erkburgles> ok ty
+[18:19] <canaima__> fgmddjdmjgs
+[18:19] <erkburgles> where did you see that that had happened?
+[18:19] <sortkwik> Well there's not much to tell. When I use the normal GUI shudown, it takes around 20 minutes to shutdown. When I use terminal and shutdown through there, it's immediate. Any insight or suggestions on why this is so?
+[18:19] <erkburgles> or "we"
+[18:21] <k1l> erkburgles: look at the error when trying to install postgresql: something like "could not lock file...."
+[18:21] <sortkwik> bazhang: would the shutdown command be routed differently from command prompt to the graphical shutdown?
+[18:22] <EriC^^> sortkwik: yeah
+[18:23] <sortkwik> Eric^^: so if this is the case, why does shutting it down graphically take so long?
+[18:23] <EriC^^> i have no idea
+[18:23] <sortkwik> Eric^^: is there somewhere I can look or modify to do this?
+[18:23] <sortkwik> Hmmm...
+[18:23] <EriC^^> when you mean it takes long, do you mean after the ubuntu logo and dots come?
+[18:23] <EriC^^> or until they come?
+[18:24] <sortkwik> It sits at the shutdown screen, for a long time. Like 20 minutes.
+[18:24] <EriC^^> press esc and it should say what it's trying to do or waiting for
+[18:24] <sortkwik> Tried that, nothing popped up.
+[18:25] <EriC^^> it should show you a terminal
+[18:25] <sortkwik> I can try again but I don't see it working.
+[18:25] <Morpheus> Does ubuntu kernel supports TProxy by default?
+=== Morpheus is now known as Guest83578
+[18:25] <sortkwik> I'll brb.
+[18:25] <EriC^^> sortkwik: does it hang on the dots?
+[18:26] <sortkwik> Dots meaning while it shutdowns or when it reboots? I haven't quite memorized the before and after screens.
+[18:26] <ubuntu923> hello
+[18:26] <ubuntu923> someone to help me to install ubuntu
+[18:26] <flab> hi
+[18:26] <EriC^^> sortkwik: while its shutting down it shows the logo & dots at the bottom
+[18:26] <sortkwik> Ah heck, let me reboot and I will get a bit more info for you Eric^^
+[18:26] <EriC^^> sortkwik: try this command it's close to the one used by the menu i think /usr/bin/dbus-send --system --print-reply --dest="org.freedesktop.ConsoleKit" /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop
+[18:26] <sortkwik> brb
+[18:27] <mcphail> ubuntu923: what problems are you having?
+[18:27] <ubuntu923> i always got Gave up waiting for device error
+[18:27] <wileee> ubuntu923, Outline where your at in the process if you can to the channel.
+[18:27] <Guest83578> !ubottu |tproxy
+[18:27] <ubottu> tproxy: Hi! I'm #ubuntu's favorite infobot, you can search my brain yourself at http://ubottu.com/factoids.cgi | Usage info: http://ubottu.com/devel/wiki/Plugins | Bot channels and general info: https://wiki.ubuntu.com/IRC/Bots | Make a clone of me: /msg ubottu botclone
+[18:27] <sortkwik> Eric^^: I'll try that
+[18:27] <ubuntu923> with 14.04,12.04 i trying right now with 15.04
+[18:28] <flab> small technical guestion, I'm installing a UX303L with 14.04 and the touchpad is not recognized by the 3.19 kernel. I read that the 4.0 support it. Should I install now the 4.0 or will the 4.0 kernel ship in 15.10 and will be backported to 14.04?
+=== Chex- is now known as Chex
+[18:30] <ubuntu923> i acidently install it with encyption my home directory
+[18:30] <erkburgles> kl1: I think I just compiled pspp from source, now how do I run it?
+[18:30] <OerHeks> flab, 15.10 ( 9 days from now) ships with 4.2, you can try the live iso
+[18:31] <ubuntu923> i formated my hdd and installed win7 and i try again ubuntu but same error again
+[18:31] <OerHeks> flab, as of 15.04 ubuntu changes to systemD. too.
+[18:31] <wileee> ubuntu923, So, is this error associated with a separate home partition encrypted?
+[18:31] <flab> OerHeks, hi. I don't want to install 15.10 this is not my computer so I want a LTS on it. The question is, will the kernel of 15.10 be backported to 14.04? (as the previous ones have been..)
+[18:32] <OerHeks> flab, not sure it will, maybe someone else here knows?
+[18:32] <mcphail> flab: you can try a mainline kernel right now
+[18:32] <mcphail> !mainline | flab
+[18:32] <ubottu> flab: The kernel team supply continuous mainline kernel builds which can be useful for tracking down issues or testing recent changes in the Linux kernel. More information is available at https://wiki.ubuntu.com/Kernel/MainlineBuilds
+[18:32] <genii> !mainline
+[18:32] <ubuntu923> sec plz
+[18:33] <energizer> k1l: EriC^^ fixed by reinstalling lightdm. Used this thread. http://askubuntu.com/questions/223501/ubuntu-gets-stuck-in-a-login-loop.
+[18:33] <ubuntu923> this is full error: Gave up waiting for root device. Common problems:  - Boot args (cat /proc/cmdline)    - Check rootdelay= (did the system wait long enough?)    - Check root= (did the system wait for the right device?)  - Missing modules (cat /proc/modules; ls /dev) ALERT! /dev/disk/by-uuid/920903aa-762f-40d2-8126-87f4b0e6f975 does not exist. Dropping to a shell!  BusyBox v1.19.3 (Ubuntu 1:1.10.3-7ubuntu1.1) built-in shell (ash) E
+[18:33] <energizer> thanks guys
+[18:33] <EriC^^> energizer: great
+=== ryan__ is now known as sortkwik
+[18:34] <sortkwik> Eric^^: That command triggered the same slow shutdown, at the dots, as a normal graphical shutdown.
+[18:34] <Pici> ]/70
+[18:34] <sortkwik> Eric^^: So yes, it's at the dots.
+[18:35] <sortkwik> Eric^^: Esc didn't work or any other key. I let it sit for 5 minutes than forced shutdown with power button.
+=== TuxTek is now known as nuno_nunes
+=== nuno_nunes is now known as Guest22057
+[18:36] <ubuntu923> wileee do you know some solutions how to fix that?
+[18:37] <flab> mcphail, yeah I use upubuntu.com to download the last kernel
+=== Guest22057 is now known as TuxTek
+[18:37] <flab> I was just wondering if I could wait a few days and have it without installing it manually ;)
+[18:38] <wileee> ubuntu923, I see this basic error on google, not sure the exact answer. Some context might help you here, when you see it as a start, for the channel.
+[18:38] <sortkwik> Eric^^: Get my last couple of messages?
+[18:38] <mcphail> flab: aah! Don't know about that one, I'm afraid
+[18:38] <erkburgles> hey everyone, so I just installed a program, how do i run it from the cmdprompt?
+[18:39] <OerHeks> erkburgles, care to share the name?
+[18:39] <erkburgles> pspp 0.8.5
+[18:39] <Pici> erkburgles: typically you just type the program name.
+[18:39] <bazhang> !info pspp
+[18:39] <ubottu> pspp (source: pspp): Statistical analysis tool. In component universe, is optional. Version 0.7.9+git20120620-1.2 (vivid), package size 3825 kB, installed size 10444 kB
+[18:40] <mcphail> erkburgles: have you installed through the package manager?
+[18:40] <bazhang> is that even from the ubuntu repos
+[18:40] <OerHeks> just type: pspp
+[18:40] <erkburgles> ok i did that
+[18:40] <erkburgles> i got this
+[18:40] <bazhang> installed from where erkburgles
+[18:40] <erkburgles> PSPP is free software and you are welcome to distribute copies of it
+[18:40] <erkburgles> under certain conditions; type "show copying." to see the conditions.
+[18:41] <erkburgles> There is ABSOLUTELY NO WARRANTY for PSPP; type "show warranty." for details.
+[18:41] <erkburgles> GNU pspp 0.8.5 (Wed Oct 14 18:18:09 UTC 2015).
+[18:41] <erkburgles> PSPP>
+[18:41] <erkburgles> sorry for no pastebin
+[18:41] <Pici> erkburgles: then it looks like you've started your program.
+[18:41] <mcphail> erkburgles: sounds as if it worked, then
+[18:41] <OerHeks> full  documentation  is  available in directory `/usr/share/doc/pspp
+[18:42] <erkburgles> Igives me a new line with: "PSPP> "
+[18:42] <Pici> erkburgles: what did you expect?
+[18:42] <erkburgles> hmm
+[18:42] <OerHeks> erkburgles, see their manual how to use it http://www.gnu.org/software/pspp/manual/pspp.html
+[18:42] <erkburgles> its a statistical analysis program
+[18:43] <sortkwik> erkburgles: it's working
+[18:43] <erkburgles> so a window with graphs
+[18:43] <erkburgles> spreadsheets
+[18:43] <Pici> erkburgles: it has no gui
+[18:43] <erkburgles> it typically does though
+[18:43] <erkburgles> how do I add one
+[18:43] <Pici> erkburgles: it looks like there is a gui part called psppire
+[18:43] <erkburgles> ok
+[18:44] <erkburgles> how to add this?
+[18:44] <Pici> erkburgles: exit the app and type that
+[18:44] <erkburgles> ill just follow oerheks
+[18:44] <erkburgles> ok
+[18:46] <OerHeks> erkburgles, there is a GUI, just type pspp in dash
+[18:46] <erkburgles> well i just did what pici said
+[18:46] <erkburgles> and it opened
+[18:47] <sortkwik> erkburgles: I am guessing this program would work well with a statistics class in college??
+[18:48] <erkburgles> its for a political science class
+[18:48] <erkburgles> but yeah
+[18:48] <wileee> mmmm stats
+[18:48] <erkburgles> spss has historically been better, but this new version of pspp is really good
+[18:48] <sortkwik> I just downloaded it and will check it out
+[18:48] <sortkwik> I have a stats class I have to take and if this helps me out then I am golden
+[18:49] <sortkwik> All I need now is a program to help out with calculus
+[18:49] <erkburgles> spss is proprietary thout
+[18:49] <erkburgles> though
+[18:49] <sortkwik> Yeah
+[18:49] <erkburgles> hmm calculus, what kind of calculus
+[18:49] <sortkwik> Calc I
+[18:49] <erkburgles> oh
+[18:50] <sortkwik> Yeah, that's what most people say...
+[18:50] <sortkwik> (=
+[18:51] <erkburgles> gnu octave
+[18:52] <sortkwik> does it have a gui??
+[18:52] <erkburgles> THANK GOD
+[18:52] <erkburgles> oh
+[18:52] <sortkwik> ??
+[18:52] <erkburgles> yeah
+[18:52] <sortkwik> heh k
+[18:53] <erkburgles> sorry I am just very happy that this works
+[18:53] <erkburgles> thanks a bunch k1l
+[18:53] <sortkwik> Yeah, I bet.
+[18:53] <erkburgles> wherever you are
+[18:53] <sortkwik> I still don't have an answer to my shutdown issue.
+[18:53] <EriC^^> sortkwik: try cat /var/log/dmesg.0
+[18:53] <sortkwik> Oh
+[18:53] <sortkwik> Speak of the devil...
+[18:55] <sortkwik> Eric^^: Straight from dmesg... (Nothing has been logged yet.)
+[18:56] <wowox> Hello guys. I've just installed an apache server on my ubuntu machine through ssh but I can't access it through internet
+[18:56] <sortkwik> EriC^^: Actually, there was no dmesg.0, just dmesg
+[18:56] <wowox> netstat -nlp  tells me that it's listening on port 80
+[18:57] <EriC^^> sortkwik: anything in /var/log/kern.log ?
+[18:57] <cobradabest> Can someone help me? Cinnamon has started to only run in software rendering mode...
+[18:58] <dp> With an /etc/sudoers like http://paste.linux.chat/view/bdbcb4a3, with the "glens" user not in the admin or sudo groups, is there a reason why "service php5-fpm restart" still requires a password? I've tried changing the order for that users sudo lines, but it doesn't seem to matter.
+[18:58] <bazhang> cobradabest, mint?
+[18:58] <sortkwik> EriC^^: kern.log, kern.log.1 and 3 .gz's
+[18:58] <cobradabest> bazhang: Actually, it's Ubuntu Studio, but their chat is seems deserted...
+[18:59] <ubuntu923> now with 15.04 version is little diferent
+[19:00] <nishikino-maki> Ubuntu Distribution it's like explosion,one by one "UD" linux created <like kubuntu(Actually just change the desktop to KDE) Lubuntu(change the desktop to LXDE) elementary OS(MAC theme OS)>
+[19:00] <erkburgles> While I'm here, why is there still a Kubuntu graphic upon startup if I don't have it installed?
+[19:01] <sortkwik> EriC^^: Going to initiate another shutdown so I can get the logs.
+[19:01] <ubuntu923> new error is: BusyBox v1.22.1 (Ubuntu 1:1.22.0-9ubuntu1) built-in shell (ash) Enter 'help' for a list of built-in commands.
+[19:02] <cobradabest> I've tried uninstalling and reinstalling cinnamon, but that didn't do anything...
+[19:02] <cobradabest> What do i do?!
+[19:03] <ubuntu923> after typing help: (initramfs) [   56.483912] ata2: CMRESET failed (errno=-16)
+[19:04] <ubuntu923> COMRESET
+[19:05] <cobradabest> Sorry, but can someone help me with my problem of cinnamon only running in software mode? I'm kind of in a rush...
+[19:05] <sortkwik> EriC^^: So that graphical shutdown worked. I was able to get esc to show me what it was doing.
+[19:05] <Elw3> Hey there. I have a laptop here with this efi stuff and i dont know how to install, the installer just fails when it comes to installing grub. What are the steps that differ from a normal install?
+[19:05] <wileee> cobradabest, Is there a 2d or 3d choice with cinnamon, this is free volunteer help, so rush is not really relevant.
+[19:06] <vacho> guys, how do I install an ssh keypair on a user account that I cannot acess, since I don't have ssh keypair setup .. :) I have root access.
+[19:06] <cobradabest> wileee: No, there isn't...
+[19:06] <EriC^^> sortkwik: ok
+[19:07] <sortkwik> EriC^^: So I have no idea why it did it now. I've tried restarting many times and that's the fastest shutdown graphically. Was it due to the command you recommended me to put in??
+[19:07] <wileee> cobradabest, No idea what the issue is, might help if you name the graphic hardware. If this is a PPA cinnamon you would have to contact them, if that is the fault.
+=== Haugli92 is now known as Haugli92_Away
+[19:08] <EriC^^> sortkwik: i have no idea
+[19:08] <EriC^^> so it didn't hang?
+[19:08] <sortkwik> EriC^^: No hang, maybe 15-20 seconds and then it shutdown.
+[19:08] <sortkwik> EriC^^: PFM
+[19:09] <vacho> anyone?
+[19:10] <cobradabest> wilee: it isn't though, I haven't used a PPA for cinnamon... Also, I have an AMD R9 200X card.
+[19:10] <sortkwik> vacho: a good question I don't have an answer to, maybe someone else does.
+[19:10] <vacho> thx
+[19:10] <wileee> cobradabest, Sure, just a heads up on the support model here is all.
+[19:11] <OerHeks> vacho, so you want ssh login to an account you have no access to? that is called hacking?
+[19:11] <vacho> OerHeks: I have root access.
+[19:12] <OerHeks> vacho, why do you not have access to that account? that makes no sense.
+[19:12] <cobradabest> wileee: Well, I'm kind of in a panic right now, I don't know why...
+[19:14] <wileee> cobradabest, You will probably get this fixed, I would assume you still have other desktops; which give you some time to follow the right lead.
+[19:16] <cobradabest> wileee: I hope so. Do you have any suggestions on what to try to fix it?
+[19:17] <wileee> cobradabest, Not really, other than if you're sure it is a ppa cinnamon, contact them is our standard response.
+[19:18] <wileee> and sure it is that desktops issue
+[19:18] <OerHeks> wileee, cinnamon is in the repos too
+[19:19] <wileee> OerHeks, Right I've clearly stated PPA here, just info, I'm all for support.
+[19:21] <OerHeks> cobradabest, did you try the driver tool in ubuntu for fglrx 15.9 or higher?
+=== metal_camp is now known as metalcamp
+[19:22] <cobradabest> OerHeks: driver tools?
+[19:22] <OerHeks> cobradabest, open dash and type driver, the tool should show up
+[19:22] <cobradabest> OerHeks: you mean the drive manager?
+[19:25] <doomlord> can any spin of ubuntu with its' desktop environment do this https://www.youtube.com/watch?v=rMsqA4k0J34
+[19:25] <doomlord> very similar to the way desktops work on mac OSX; microsoft have copied it. i was under the impression linux worked differently to avoid legal issues
+[19:25] <OerHeks> doomlord, maybe/maybe not, how should we know?
+[19:26] <k1l> doomlord: virtual desktops have been on linux desktops since very long time
+[19:26] <doomlord> yes they have
+[19:27] <doomlord> and the feature has been evolved. I've seen expo/scale.
+[19:27] <k1l> doomlord: is there any specific support issue? for general talk please join the #ubuntu-offtopic channel
+[19:27] <doomlord> wheres' a good place for this question
+[19:29] <Pici> doomlord: whats the question?
+[19:30] <doomlord> is there a way to get this specific behaviour in ubuntu. (the desktop overview seen in OSX mission control and now windows 10). .. amongst the various array of plugins and desktop environments
+[19:31] <Pici> doomlord: compiz has been able to do that for a few years now/
+[19:31] <doomlord> i've seen expo and scale - is that what you're talking about
+[19:32] <Pici> doomlord: there are a number of compiz plugins, of which those are two.
+[19:32] <Pici> doomlord: the folks in #compiz might be able to suggest which ones will give you functionality like that
+[19:32] <doomlord> (so has someone written a plugin that does this: simultaneously show desktop thumbnails *and* current desktop windows)
+[19:33] <Pici> I don't know, I don't use a desktop regularly, but the #compiz people would be the ones most familiar with their plugin offerings
+[19:33] <doomlord> the point is the overview in mission-control and OSX combines desktop&window overview in one screen
+[19:33] <doomlord> ok
+[19:33] <doomlord> the second question is:
+[19:34] <cobradabest> Does anybody know a way to do system restore points on Ubuntu?
+[19:34] <cobradabest> Systemback doesn't work properly for me.
+[19:34] <doomlord> Do legal issues prevent the linux community sharing such a plugin?  I assumed thats' why it never appeared before. Seeing Win10 now questions that view.
+[19:34] <Pici> doomlord: I would doubt it.
+=== nothing is now known as Guest30883
+[19:35] <lorenzo522> hello
+[19:36] <zerowaitstate> doomlord: it's possible there's a cross-licensing agreement that lets them do things another party wouldn't be able to. Software patents are dumb to start with, so trying to work out logically why a particular patent applies is the path to madness
+[19:36] <cobradabest> So does anyone know a good restore point program for ubuntu?
+[19:37] <doomlord> zerowaitstate thanks .
+[19:37] <zerowaitstate> cobradabest: LVM snapshotting?
+[19:37] <mcphail> cobradabest: are you using btrfs?
+[19:37] <k1l> doomlord: the compiz plugin is called window spread
+[19:37] <cobradabest> zerowaitstate: Well, whatever the equivalent to windows system restore is.
+[19:38] <zerowaitstate> cobradabest: windows system restore doesn't really do what it advertises
+[19:38] <cobradabest> zerowaitstate: Well it's always worked for me...
+[19:39] <zerowaitstate> cobradabest: you've been fortunate
+[19:39] <k1l> doomlord: press super+w or super+shift+w
+[19:39] <mcphail> cobradabest: if you use btrfs, you can snapshot your filesystem at any point. If you don't use btrfs you will need to use something like LVM
+[19:39] <cobradabest> mcphail: I don't know what btrfs or lvm are...
+[19:41] <doomlord> k1l i've seen that and its' related, but last time I tried it it wasn't the specific behavior i'm after - unless its' gained options lately.   In ubuntu unity out of the box, you had super+W for windows, or super+S for desktops. The beauty of OSX is its' one shortcut for both, and you can move windows between desktops on that, and slide between them
+[19:41] <TR3M3R3> hi everyone... somebody speak spanish?
+[19:41] <mcphail> cobradabest: then you are probably not using them :) Btrfs is a filesystem you can use instead of the default (ext4). LVM is a technology for managing partitions and filesystems which you set up at install time
+[19:41] <Pici> !es | TR3M3R3
+[19:41] <ubottu> TR3M3R3: En la mayoría de los canales de Ubuntu, se habla sólo en inglés. Si busca ayuda en español entre al canal #ubuntu-es; escriba " /join #ubuntu-es " (sin comillas) y presione intro.
+[19:42] <Piperanci> Helloo
+[19:42] <cobradabest> mcphail: Oh, okay, so if I reinstall, I could choose btrfs instead of ext4?
+[19:42] <mcphail> cobradabest: if you want to be able to simply snapshot your filesystem, it is a good choice. But it is not as well tested as ext4
+[19:43] <Piperanci> I have an app running but it's not showing in the panel, just in the task manager. What can I do?
+[19:43] <k1l> doomlord: well, you can still move the apps on ctrl+s
+[19:43] <mcphail> cobradabest: personally, I think the advantages outweigh the risks, but you may disagree
+[19:44] <cobradabest> mcphail: It sounds like a better idea, at least I can do risky stuff on btrfs.
+[19:44] <doomlord> k1l i realise its' "useable", it certainly isn't 'bad'. I just have a very specific preference and would be surprised if I was unique in that
+[19:45] <Piperanci> nvm I opened it somehow
+[19:45] <mcphail> cobradabest: there are a few apps which will automatically make snapshots on btrfs when you use the package manager etc, but I have never found them to be much use. I create the snapshots manually as I need them
+[19:45] <doomlord> k1l recently in linux I have used XFCE/xbuntu more, sticking with a simpler environment... but I also enjoy using the mac
+[19:46] <k1l> doomlord: there is a huge amount of users that have never used OSX before. so they might not be used to that like you are.
+=== HarryCross_ is now known as HarryCross
+[19:46] <cobradabest> mcphail: Can you make schedules for backups?
+[19:47] <mcphail> cobradabest: you can make schedules from crontab, if you wish
+[19:47] <mcphail> cobradabest: these are not "backups", though. They are "snapshots"
+[19:47] <k1l> doomlord: so "it needs to be exactly like OSX" is not what most users or developers might think in the first place.
+[19:48] <MonkeyDust> doomlord  only OSX is exactly like OSX
+[19:48] <doomlord> k1l whilst I'm no mac fanboy, in this instance I think apple got it right. v1 of mission control was terrible but v2 fixed it (app bundles).  Windows10 seems to have copied the behaviour. Whats so good about it is you get an overview of everything, but with recent windows larger , and older ones (on other desktops) smaller; its not eye-candy - the information is readable
+[19:49] <doomlord> MonkeyDust oh sure - i'm not after the specific *look*, but the specific *behaviour* i.e. what information is visible at one time, and the transitions
+[19:49] <SchrodingersScat> Che-Anarc: -o ServerAliveInterval=2 -o ServerAliveCountMax=1 had no effect
+[19:49] <doomlord> Windows10 replicates that, but with a windows 'look' rather than an apple 'look' (and slightly different  options)
+[19:50] <k1l> doomlord: well, than suggest bugfixes or whishes to the desktop enviroments. but it might not be seen like you do from other users/devs
+[19:51] <jancoow> Hi guys
+[19:51] <doomlord> i'd be very surprised if no one else wants it. I had assumed legal issues prevented it
+[19:51] <jancoow> Could someone help me fixing broken packages? For some reason python3 wouldn't update. With some tricks here i had to downgrade some packages. But now the module threading doesn't exist
+[19:52] <jancoow> I really need python3 but i can
+[19:52] <OerHeks> doomlord, if the behaviour is exactly the same, we would have legal issues. a 'start' button is very expensive
+[19:52] <jancoow> 't do anything with it if the module threading is missing
+=== jhutchin1 is now known as jhutchins_wk
+[19:52] <doomlord> OerHeks intersting, you seem to have speciic information there, "a start button"
+[19:53] <doomlord> there's a specific patent for that?
+[19:53] <OerHeks> just an example.
+[19:53] <OerHeks> doomlord, sure, google for that, i don't have an url ready
+[19:53] <doomlord> gnome-shell almost does what I want - but I find it offputing in other ways (to date, xubuntu/xfce is my favourite environemnt in linux)
+[19:54] <lorenzo522> hello
+[19:56] <lorenzo522> mk
+[19:56] <lorenzo522> uk
+[20:00] <shokkonut> salve
+[20:01] <balance> how can I check a png for an alpha channel using terminal?
+[20:01] <apatheticsheep> howdy, anyone know if byobu is supposed to work in like teraterm or putty?
+[20:02] <MonkeyDust> apatheticsheep  byobu is a layer over screen multiplexer
+[20:03] <MonkeyDust> !info byobu
+[20:03] <ubottu> byobu (source: byobu): text window manager, shell multiplexer, integrated DevOps environment. In component main, is optional. Version 5.92-0ubuntu1 (vivid), package size 102 kB, installed size 641 kB
+[20:03] <MonkeyDust> apatheticsheep  putty is a windows program to connect over ssh
+[20:03] <apatheticsheep> ok ... let me clarify, it's not recognizing function keys.  I am guessing that has more to do with my terminal software settings than the program i am using.
+[20:04] <MonkeyDust> apatheticsheep  true, byobu has its own key settings... for that reason I cannot use it for irssi
+[20:05] <apatheticsheep> MonkeyDust I know what putty and byobu are ...
+[20:05] <MonkeyDust> apatheticsheep  then you should know that you were comparing apples with pears
+[20:07] <apatheticsheep> i guess a better way to phrase the question would've been ... why can't I create a new window using F2 or access help (shift+f1) in a putty ssh terminal using byobu?
+[20:09] <apatheticsheep> I can use screen ...
+[20:10] <zerowaitstate> apatheticsheep: probably the terminal emulation you have selected in putty
+[20:10] <sortkwik> Hmmm... so there is a new version of a program called octave, when I apt-get it it installs v3.8.2 but v4.0.0 is available according to the website. What repository do I need to update in order to get this newer version??
+[20:10] <SchrodingersScat> Che-Anarc: heh, and then it randomly worked just now, without those -o options, my reverse tunnel threw these errors on the server, Warning: remote port forwarding failed for listen port 60111, Warning: remote port forwarding failed for listen port 7667;  7667 is the one I forward, should I also forward the 60111?
+[20:10] <SchrodingersScat> !info octave
+[20:10] <ubottu> octave (source: octave): GNU Octave language for numerical computations. In component universe, is extra. Version 3.8.2-4 (vivid), package size 905 kB, installed size 3171 kB
+[20:11] <MonkeyDust> sortkwik  v4.0 is not yet in the repos, maybe in a later ubuntu release
+[20:11] <SchrodingersScat> sortkwik: right, would have to go outside the scope of this help for that, ie whatever they recommend, if you want the version not in ubuntu
+[20:12] <apatheticsheep> zerowaitstate ... I am using vt100
+[20:12] <zerowaitstate> sortkwik: If you need bleeding edge I would either check for a ppa, or build from source and use checkinstall to generate a machine-specific package
+[20:12] <Guest34450> How can I write to files, example: sudo "x" >> /etc/rc.local
+[20:12] <sortkwik> I gotcha. I guess I would need to learn how to compile then?? I've downloaded the tarball for it from their website.
+[20:12] <Guest34450> I try to do that and get: bash: /etc/rc.local: Permission denied
+[20:12] <zerowaitstate> apatheticsheep: I think there's another emulation type called Linux, did you try that?
+[20:13] <Guest34450> How can I write to files, example: sudo "x" >> /etc/rc.local
+[20:13] <Guest34450> I try to do that and get: bash: /etc/rc.local: Permission denied
+[20:13] <bmsr256> !info glut
+[20:13] <ubottu> Package glut does not exist in vivid
+[20:13] <MonkeyDust> Guest34450  try echo "x" >> /etc/rc.local
+[20:13] <OerHeks> !info freeglut
+[20:13] <ubottu> Package freeglut does not exist in vivid
+[20:14] <Pici> OerHeks: its freeglut3
+[20:14] <sortkwik> Thanks for the assist MonkeyDust, SchrodingersScat, zerowaitstate. (=
+[20:14] <k1l> Guest34450: that doesnt work with files that need root permissions
+[20:14] <bmsr256> !info freeglut3
+[20:14] <ubottu> freeglut3 (source: freeglut): OpenGL Utility Toolkit. In component main, is optional. Version 2.8.1-2 (vivid), package size 66 kB, installed size 269 kB
+[20:14] <OerHeks> Pici, thanks, just found it https://launchpad.net/ubuntu/+source/freeglut
+[20:14] <Guest34450> MonkeyDust, I tried echo both with and without sudo in front and still get Permission denied
+[20:15] <MonkeyDust> Guest34450  look what k1l said
+[20:15] <mcphail> Guest34450: the "sudo" does not carry beyond the redirect, so that is to be expected
+[20:15] <Guest34450> k1l, so how can I write to those files using command line (I can vim into the file and edit it, but I am trying to write script to update some settings)
+[20:16] <mcphail> Guest34450: see http://superuser.com/questions/136646/how-to-append-to-a-file-as-sudo
+[20:16] <k1l> Guest34450: echo "hello" | sudo tee foo.txt
+[20:16] <balance> why can I see a folder via terminal but not from emacs?
+[20:16] <balance> *i mean kate
+[20:17] <zerowaitstate> k1l: he needs a -a on the tee command, in order to append
+[20:17] <k1l> Guest34450: right, you need "-a" for tee to append. i forgot that
+[20:18] <job-home> hi
+[20:18] <daftykins> hi
+[20:18] <k1l> zerowaitstate: thanks
+[20:19] <Guest34450> k1l, thanks that did the trick, thanks man!
+[20:21] <zerowaitstate> sortkwik: cd to untarred source tree, "sudo auto-apt run ./configure", then do "make && sudo checkinstall". That helps deal with the dependency hell that comes with building C stuff from source.
+[20:22] <zerowaitstate> sortkwik: before that will work though, you need to "sudo apt-get install auto-apt build-essential checkinstall"
+[20:22] <sortkwik> zerowaitstate: so run "checkinstall" after I run "make"?
+[20:22] <sortkwik> Got it
+[20:22] <zerowaitstate> sortkwik: then "sudo auto-apt update && sudo auto-apt updatedb && sudo auto-apt update-local"
+[20:22] <zerowaitstate> sortkwik: then do the cd to untarred...
+[20:24] <sortkwik> zerowaitstate: Already ran "./congifure" and now installing said programs you stated earlier then I will run "make" and then "checkinstall"
+[20:24] <zerowaitstate> sortkwik: so ./configure didn't produce errors?
+[20:24] <sortkwik> zerowaitstate: None
+[20:25] <zerowaitstate> sortkwik: k. usually when compiling from source on debian, you often are missing "-dev" packages, which contain the header files (.h) for libraries you are compiling against
+[20:25] <sortkwik> This will be my first compiled program from source code, I'm excited.
+[20:25] <dickGraySon> so what is this about
+[20:25] <zerowaitstate> sortkwik: auto-apt is designed to automatically fetch the necessary -dev packages during the ./configure step
+[20:26] <sortkwik> zerowaitstate: We'll see how it pans out and go from there. Would the errors have been glaring in all the scrolling text? I didn't see anything.
+[20:26] <zerowaitstate> sortkwik: however, if ./configure isn't producing errors, then means auto-apt isn't necessary
+[20:26] <zerowaitstate> sortkwik: yeah, it will fail loudly
+[20:26] <dickGraySon> \r
+[20:26] <SpyderSnake> ciao
+[20:26] <sortkwik> zerowaitstate: Awesome, no loud fails then.
+[20:26] <SpyderSnake> !list
+[20:26] <ubottu> SpyderSnake: No warez here! This is not a file sharing channel (or network); read the channel topic. If you're looking for information about me, type « /msg ubottu !bot ». If you're looking for a channel, see « /msg ubottu !alis ».
+[20:27] <dickGraySon> any1 know how to run a command remotely
+[20:27] <dickGraySon> using ssh
+=== robcsi_ is now known as robcsi
+[20:27] <sortkwik> zerowaitstate: I'll let you know how it goes, it looks like it might take awhile.
+[20:27] <gull> Hi guy, i've got some really annoying (not)bug happening to my laptop.
+[20:27] <gull> i have a xmodmap config file which i use to redefine some buttons, but when i replug my usb mouse it looks like xmodmad reserts its config, so i have to run it again with my own config
+[20:28] <gull> what exactly happens when i plug my usb mouse?
+[20:28] <zerowaitstate> sortkwik: on a generic linux system, make install directly copies the necessary files to the default install location (this is normally set up by configure, and it is normally under /usr/local by default). However, checkinstall analyzes the locations where the "make install" script is trying to copy stuff and instead makes a .deb package out of it
+[20:28] <dickGraySon> remote command via ssh in background?
+[20:28] <k1l> dickGraySon: use screen
+[20:28] <Pici> or tmux
+[20:29] <zerowaitstate> sortkwik: if you don't use checkinstall, and do it the generic linux way, you have to keep the source around, so you can run "make uninstall" later to remove the software. the deb package makes that unnecessary, as you can use dpkg or other tools to remove it
+[20:29] <brother_> hi all, somebody help me doing this from command line
+[20:29] <brother_> I want to replace multiple empty lines with just one blank line, recursively in all the files in a directory, and they have to keep their filenames
+[20:29] <sortkwik> zerowaitstate: That makes sense, sort of. Still a bit of a newb at this but we're all here to learn!!
+[20:29] <reisio> brother_: what's the one blank line for?
+[20:30] <sortkwik> Slow mo compiling right now. I don't have a super speedy machine. (=
+[20:30] <brother_> reisio to keep it organized
+[20:30] <brother_> not to remove them all
+[20:30] <dickGraySon> @
+[20:31] <zerowaitstate> sortkwik: as I learned on freenode a day or two ago, you can apparently do something like "make -j 2" to run multiple build tasks in parallel, but you have to be careful when you use it
+[20:31] <reisio> brother_: uniq would do it, though it'd also remove other duplicate consecutive lines
+[20:31] <zerowaitstate> sortkwik: compiling is CPU bound, so the more cores you can use, the faster you will get done
+[20:31] <reisio> brother_: another way: perl -0pe 's/\n\n+/\n\n/g'
+[20:32] <brother_> aha reisio, and how can I apply that to all the files in the directory, and they keep their original name after the removal of the blank lines?
+[20:34] <reisio> brother_: how big are these files?
+[20:35] <sortkwik> zerowaitstate: Yeah, I have 4 cores but not a super speedy cores. toshiba satellite radius 11
+[20:35] <reisio> brother_: I'd probably do something like: mkdir ../cleaned; ls | while IFS='' read -r item; do uniq "$item" > ../cleaned/"$item"; done
+[20:35] <brother_> reisio they vary from 4 KB to 150 KB in some cases, but norm is 30 kb let's say
+[20:35] <reisio> brother_: okay, so tiny
+[20:35] <sortkwik> zerowaitstate: My monitor shows all 4 cores are chugging away.
+[20:35] <s1dr0> hola a toc from italy
+[20:35] <reisio> brother_: fine to make a duplicated 'cleaned' dir, then
+[20:35] <zerowaitstate> sortkwik: well, never mind then
+[20:35] <reisio> if they were huge files, you'd have to modify them and delete the original basically simultaneously, which you have to be more careful about
+[20:35] <reisio> copying to another dir is simpler, and requires less care :)
+[20:36] <reisio> brother_: what's nice about that loop is you just make the ls output what you want, if there are exceptions
+[20:36] <reisio> brother_: so "ls | while IFS=''..." could be instead "ls | egrep -iv 'not wanted|also not wanted' | while IFS=''..."
+[20:37] <reisio> lots of other ways you could do it, though
+[20:37] <sortkwik> zerowaitstate: Yeah, I am not going to try any parallel builds.
+[20:40] <brother_> reisio but in that expresion, where do you refer to the files inside the directory?
+[20:40] <reisio> brother_: 'ls'
+[20:40] <reisio> you'd run it from in the dir
+[20:41] <reisio> if the output of 'ls' is all the files you want to process, and nothing more, then it's good to go
+[20:41] <reisio> mkdir ../cleaned; ls | while IFS='' read -r item; do uniq "$item" > ../cleaned/"$item"; done
+=== jtrucks_ is now known as jtrucks
+[20:44] <brother_> ok reisio I would try what you suggest, thanks for your interest
+[20:45] <aivi> Good morning all
+[20:45] <reisio> mornin'
+[20:45] <gull> any ideas what happens behind the scene when initializing usb mouse?
+[20:46] <reisio> brother_: this would also work, but is way less cautious :p -> perl -i -0pe 's/\n\n+/\n\n/g' *
+[20:46] <reisio> gull: ?
+[20:46] <gull> reisio: my xmodmap resets my custom setting to default
+[20:46] <brother_> aha, yes I will try that too, making sure I have a back up before, thanks reisio
+[20:51] <gull> Or whats the proper way to redefining keys in linux
+[20:51] <reisio> xmodmap is okay
+[20:51] <GodFather> \d
+[20:52] <reisio> GodFather: you're a delicious pepper
+[20:53] <gull> there must something a lever higher, cause autorunnig "xmodmap .xmodmap" on login dosent help
+[20:53] <gull> i have to type that manually in terminal
+[20:54] <gull> feels like something overpowering xmodmaps behavior
+[20:54] <korne> hello
+[20:55] <jancoow> Hello, could someone help me fix a broken package of python3?
+[20:55] <jancoow> i'm on ubuntu server and i can't reinstall it for some reason
+[20:55] <jancoow> The threading module is missing
+=== m_wynn is now known as incompletebreads
+[20:57] <daftykins> share a pastebin of what package management processes error, so someone can assist - jancoow
+=== incompletebreads is now known as m_wynn
+[20:58] <eb0t> i dont knwo what to install ...ubuntu gentoo or archlinux
+[20:59] <k1l> eb0t: ubuntu. for all other answers #ubuntu is obviously wrong
+[20:59] <eb0t> hmm
+[20:59]  * eb0t slaps his thigh
+[21:08] <jancoow>  daftykins: https://jancokock.me/f/83ccf
+[21:08] <regum> hi everyone, why doesn't ssh work if the host computer hasn't logged in?
+[21:08] <regum> how can i fix this?
+[21:08] <daftykins> jancoow: i meant to the channel really and not me, i know nothing about python :)
+[21:09] <daftykins> regum: sounds like an issue that's come about through upgrading.
+[21:09] <regum> daftykins, what do you mean'
+[21:09] <k1l> regum: can you give more details?
+[21:10] <regum> yeah
+[21:10] <regum> I have a raspberry pi 2, and it boots as root
+[21:10] <regum> i can't ssh into it until I log in as a user
+[21:10] <regum> it says 'connection refused'
+[21:10] <blakdog> Do the ubuntu lts versions able to run as a live cd ?
+[21:11] <bekks> regum: Because the root accoutn is disabled in Ubuntu, by default.
+[21:11] <daftykins> blakdog: run as live for testing, yes
+[21:11] <regum> which is really inconvenient, as it means I have to plug a keyboard every time I turn it on
+[21:11] <blakdog> thanks
+[21:11] <daftykins> regum: so reconfigure SSHd
+[21:11] <jancoow> daftykins: oh haha sorry
+[21:11] <regum> how can i do that?
+[21:12] <regum> what should I change?
+[21:12] <jancoow> https://jancokock.me/f/83ccf someone can help me reinstalling python3?
+[21:12] <jancoow> its broken
+[21:12] <k1l> regum: ask in #ubuntu-arm if that sort of setup is common on that arm image. its not on pc
+[21:12] <regum> ok, I'll try there
+[21:12] <regum> thanks
+[21:12] <daftykins> jancoow: also i meant to pastebin what happens when you try "sudo apt-get install --reinstall <pythonpackage>" :)
+[21:12] <regum> there's noone there
+[21:12] <regum> I just remembered I sked a while ago and there have been no answers
+[21:12] <regum> it's always kinda dead
+[21:12] <daftykins> regum: sure you didn't typo the channel?
+[21:13] <daftykins> heh, figures.
+[21:13] <regum> I mean, there are people, but they seem to be afk
+[21:13] <regum> or just ignoring the channel
+[21:13] <daftykins> you can't say they're not there in 5 seconds of joining
+[21:14] <regum> it's been close to 10 min now
+[21:14] <regum> and it's always kinda empty, it's not my first visit
+[21:14] <daftykins> and i guess your issue is mission critical :)
+[21:14] <k1l> regum: welcome to irc
+[21:14] <daftykins> regum: so to be sure, you're ssh'ing as username@host when you try after the Pi boots up?
+[21:15] <regum> no, just ssh hostname
+[21:15] <regum> the users have the same name
+[21:15] <regum> that way it's less of a hassle
+[21:15] <daftykins> ok so it's not trying root@ to begin with, that's good
+[21:16] <daftykins> it's possible SSHd isn't even running until your user logs in then
+[21:16] <regum> is there any way i can set it up so that it logs into my user at boot time?
+[21:16] <regum> yeah, it's probably something like that
+[21:16] <regum> because after I log in it works perfectly
+[21:16] <bekks> regum: Ensure your raspi isnt in sleep mode or something, and wakes up only upon the user logging in.
+[21:16] <k1l> regum: is it encrypted?
+[21:17] <regum> it isn't encrypted
+[21:17] <regum> and it isn0t in sleep mode
+[21:17] <bekks> How do you know, if you arent logged in? :)
+[21:17] <regum> I can work on it as root without logging in if it's connected to a display
+[21:17] <regum> I connected a display before to check
+[21:17] <daftykins> check SSHd is configured to run at boot
+[21:17] <bekks> ah :)
+[21:17] <regum> that's how I know
+[21:18] <regum> how can I check that?
+[21:18] <k1l> i still dont understand what the issue is
+[21:18] <daftykins> don't know.
+[21:18] <daftykins> it's a weird Pi image for ARM so all of my usual bets are off
+[21:18] <daftykins> what about that boot text file from last time?
+[21:18] <regum> k1l, my pi boots as root, and it refuses ssh connection until i log into it from the same pi
+[21:18] <daftykins> does it mention SSHd?
+[21:19] <k1l> regum: no. it boots as nothing.
+[21:19] <regum> i don't think it did
+[21:19] <regum> I'll check
+[21:20] <k1l> regum: seems you are mixing loging in and the base system running.
+[21:20] <regum> dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootwait single
+[21:20] <regum> this is what it says
+[21:20] <bindi> Can anyone point me to an up to date guide for running a program (irssi) in a jail?
+[21:20] <jancoow> daftyskins: well that's the problem, no errors lol
+[21:21] <regum> I just added 'single' to that file, so that it wouldn't start the gui
+=== wook is now known as Guest10242
+[21:21] <jancoow> daftyskins: but i can't use pip3 or easy install because all of these packages are using threading and i have NO idea why this package is gone
+[21:21] <daftykins> jancoow: i wonder if this is the bad build i heard about on the bug site
+[21:21] <jancoow> yes it is
+[21:21] <daftykins> and that bug doesn't have an answer yet?
+[21:21] <regum> can't I add some sort of script at boot time that inputs 3 commands?
+[21:21] <regum> exit
+[21:21] <regum> username
+[21:21] <regum> passwrd
+[21:22] <regum> that logs me in
+[21:22] <daftykins> not really.
+[21:22] <k1l> regum: well, you boot into single user mode then. that is not loading the regular system then
+[21:22] <k1l> regum: so better use text.
+[21:22] <daftykins> ah yeah regum did that yesterday
+[21:22] <jancoow> last time i asked it here also because "python.h" was missing. Then someone helped me downgrading some stuff to get it extally updated. Since then the module threading is missing for some reason
+[21:22] <daftykins> i did suggest text but you did single instead, mmm
+[21:22] <daftykins> so there you go.
+[21:22] <daftykins> k1l: good catch!
+[21:22] <regum> but i can't use grubs
+[21:22] <regum> that's why
+[21:23] <daftykins> put text into the boot text file instead
+[21:23] <k1l> regum: so there you need to talk to the guys that made that image
+[21:23] <Silentloud> how do i enable firewall
+[21:23] <regum> the image boots into text
+=== roo_ is now known as roo
+[21:23] <daftykins> !ufw | Silentloud
+[21:23] <ubottu> Silentloud: Ubuntu, like any other Linux distribution, has built-in firewall capabilities. The firewall is managed using the 'ufw' command - see https://help.ubuntu.com/community/UFW | GUI frontends such as gufw and ufw-kde also exist. | An alternative to ufw is the 'iptables' command - See https://help.ubuntu.com/community/IptablesHowTo

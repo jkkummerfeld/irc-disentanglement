@@ -1,0 +1,1500 @@
+[08:07] <Ben64> the newest hwe in 16.04 has 4.11
+[08:08] <PlusMinus> i dont see no 17.10 only see 17.04
+[08:08] <PlusMinus> https://www.ubuntu.com/download/desktop
+[08:09] <ducasse> 17.10 is under development -  http://cdimage.ubuntu.com/daily-live/current
+[08:10] <PlusMinus> is this the file i want?   artful-desktop-amd64.iso
+[08:10] <Herdo> yes
+[08:10] <PlusMinus> k
+=== r0Oter is now known as r00ter
+[08:11] <PlusMinus> i had to put acpi=off in the cmd line when i booted up 17.04 will i need to do it with 17.10?
+[08:11] <Ben64> that causes problems
+[08:12] <PlusMinus> if i don't put acpi=off with 17.04 it wouldn't boot kept giving me interupt 7 errors
+[08:12] <Ben64> probably because your cpu wasn't supported
+[08:13] <PlusMinus> cruddy, yah i was reading up and found out that linux is having issues with gigabyte boards
+[08:14] <PlusMinus> and then giga goes out and rls a shitty bios that is frying some ppl's systems, heh
+[08:15] <PlusMinus> ok, well thx for the help, i will test out 17.10 and report what i find out, GN!
+[08:19] <Herdo> PlusMinus: I was just about to ask you that.
+[08:20] <Herdo> turning acpi=off will cause this 1 core problem you are having
+[08:32] <blakes5> is there a way to see the free space of individual drives on logical volume in LVM?
+[09:31] <CountryfiedLinux> howdy
+[09:31] <CountryfiedLinux> My speakers aren't detected in Linux when plugged into the monitor's audio jack.
+[09:31] <CountryfiedLinux> Still confirmed.
+[09:32] <CountryfiedLinux> Plugged speakers into monitor's audio jack. Speakers not detected. Laptop audio jack detected fine.
+[09:32] <CountryfiedLinux> But that limits me to 1 headphone jack.
+[09:39] <CountryfiedLinux> Is this a driver issue?
+[09:39] <koomen> Hi there. I run ubuntu 16.04 LTS on a macbook and have problems with xbacklight. When I do: xbacklight -dec 20 I get "No outputs have backlight property"... I googled a lot already but can't find something that works for me
+[09:48] <|subz3r0|> hi
+[09:48] <|subz3r0|> after installing a DE on ubuntu server 16.04, after a reboot no desktop comes up. its bootin in the cli again. any ideas?
+[09:52] <ledeni> |subz3r0|, what de you using?
+[09:56] <|subz3r0|> mate
+[09:57] <tomreyn> |subz3r0|: how did you install mate?
+[09:58] <|subz3r0|> mate-desktop without recommends
+[10:00] <ledeni> |subz3r0|, try startx to see it come up
+[10:01] <|subz3r0|> startx is not installed
+[10:04] <tomreyn> you probably lack a display manager
+[10:05] <|subz3r0|> lightdm-gtk-greeter is fine?
+[10:05] <|subz3r0|> or do i need the whole lightdm?
+[10:07] <smithmail> Hello , irc can't connect with mobile hotspot :)
+[10:07] <smithmail> Please anyone tell me why
+[10:07] <|subz3r0|> smithmail: I guess you should provide us more details what's not working exactly.
+[10:08] <brainwash> |subz3r0|: lightdm-gtk-greeter should pull in lightdm anyway
+[10:09] <smithmail> Okay sir : Urunbu Pidgin use wifi from mobile phone
+[10:09] <tomreyn> |subz3r0|: you need any x-display-manager (that's a meta package you can search for)
+[10:09] <|subz3r0|> brainwash: i installed now xinit and lightdm-gtk-greeter... its still not bootin in the DE
+[10:09] <smithmail> Wep/wep2 personal
+[10:09] <tomreyn> |subz3r0|: and you also need X, of course.
+[10:10] <smithmail> I can receive email and visit websites
+[10:10] <tomreyn> |subz3r0|: if you choose lightdm, lightdm-gtk-greeter is not enough
+[10:10] <brainwash> |subz3r0|: does the greeter load?
+[10:11] <smithmail> And pidgin works well under wifi when I have WiFi route
+[10:12] <|subz3r0|> brainwash: no
+[10:13] <|subz3r0|> smithmail: are you sure your provider is not blocking it? Which irc client do you use? what errors does it show you?
+[10:13] <brainwash> |subz3r0|: I would try this: sudo systemctl start lightdm
+[10:14] <smithmail> I use Pidgin
+[10:14] <smithmail> And it works fine in normal wifi
+[10:14] <smithmail> But can't connect when I use mobile phone hotspot
+[10:14] <|subz3r0|> brainwash: i can see now the greeter. but it looks horrible and i cannot login with my credentials
+[10:15] <|subz3r0|> smithmail: everything else is working, right?
+[10:15] <smithmail> Sometimes I make a wifi hotspot by my mobile phone ,
+[10:15] <|subz3r0|> smithmail: yeah, but that should not be the issue
+[10:15] <smithmail> Yes. Everything good
+[10:15] <smithmail> Expect IRC
+[10:16] <|subz3r0|> please pastebin following commands from terminal
+[10:16] <brainwash> |subz3r0|: uhm. the theme can be changed I guess. maybe the wrong keyboard layout is selected, so check the keyboard indicator in the top bar
+[10:16] <|subz3r0|> 1. ifconfig 2. route -n 3. ping -c3 google.com
+[10:17] <tomreyn> smithmail: reconfigure the pidgin IRC module to connect to Freenode on port 6697 and to use SSL
+[10:17] <|subz3r0|> this way we can see your network config, if name res works and the set routes
+[10:17] <smithmail> Well. Everything okay but pidgin
+[10:17] <brainwash> |subz3r0|: to enable lightdm permanently, run: sudo systemctl enable lightdm
+[10:18] <|subz3r0|> brainwash: what packages do i exactly need to install minimal mate desktop after a fresh ubuntu install? Just standard system utilities are isntalled
+[10:19] <brainwash> |subz3r0|: I think that you need to install with recommends
+[10:19] <|subz3r0|> smithmail: also do a ping to the irc server from CLI and paste it
+[10:19] <|subz3r0|> brainwash: but i dont want to install all this bloatware
+[10:20] <ddellav> |subz3r0| installing a window manager requires a ton of extra packages, you'll need them all
+[10:20] <|subz3r0|> smithmail: you will give us the info now or not?
+[10:20] <|subz3r0|> smithmail: since its pretty hard to investigate issues with just explanations like "it's not working, but the other way it does..."
+[10:20] <brainwash> |subz3r0|: then it's just "mate"
+[10:21] <|subz3r0|> ddellav: but i installed it
+[10:22] <|subz3r0|> ddellav: mate-desktop (without recommends), lightdm-gtk-greeter, lightdm
+[10:22] <|subz3r0|> that should be sufficient under normal circumstances. so actually im not sure whats missing
+[10:23] <ddellav> if its in recommends then you don't need it
+[10:25] <|subz3r0|> i give "mate" a shot
+[10:26] <|subz3r0|> ddellav, brainwash: the thing is, i dont need or want to install all the bloat like firefox, thunderbird, screensaver, libre office, ...
+[10:26] <ddellav> so then don't, i guess i don't see the issue
+[10:27] <brainwash> so, problem solved?
+[10:27] <|subz3r0|> still dl-ing
+[10:27] <brainwash> ok
+[10:27] <bazhang> |subz3r0|, get the mini iso and build up
+[10:28] <bazhang> |subz3r0|, put lxqt lxde/opnbox on that
+[10:28] <bazhang> !mini | |subz3r0|
+[10:28] <ubottu> |subz3r0|: The Minimal CD image is very small in size, and it downloads most packages from the Internet during installation, allowing you to select only those you want.  The installer is text based (rather than graphical as used on the Desktop DVD). See https://help.ubuntu.com/community/Installation/MinimalCD
+[10:28] <|subz3r0|> bazhang: correct me when im wrong. but i guess when i select there the DE, for example mate, it will install all the unwanted apps i don't want to get installed on the system
+[10:29] <bazhang> |subz3r0|, it wont
+[10:29] <|subz3r0|> also i dont want lxde, because it looks horrible ;)
+[10:29] <|subz3r0|> I use it in different types of settings, but not for that machine
+[10:29] <bazhang> so get the mini
+[10:30] <bazhang> you've not even tried lxqt
+[10:33] <|subz3r0|> bazhang: Because it looks as shitty as lxde does
+[10:33] <bazhang> |subz3r0|, no cursing here
+[10:33] <|subz3r0|> I dont need or want a super light weight DE on that machine
+[10:38] <ledeni> |subz3r0|, why not install 'sudo apt-get install xinit' and with startx load mate
+[10:40] <|subz3r0|> ledeni: already done. the greeter looks horrible and it wont accept my credentials. connecting via ssh works fine instead
+=== rax-Y is now known as rax-
+[10:45] <ledeni> |subz3r0|, try 'dpkg-reconfigure lightdm'
+[11:30] <tsousa> When is ubuntu comming with Gnome?
+[11:31] <brainwash> !17.10
+[11:31] <ubottu> Ubuntu 17.10 (Artful Aardvark) will be the 27th release of Ubuntu.  It is due to be released in October 2017. Discussion in #ubuntu+1
+=== def_jam is now known as eb0t
+[11:48] <kriech0r> morning, i'm look into saving some power with a hp gen 8 microserver and ubuntu 16.04. according to my UPS its using ~60Watts when idle... would like to lower that if possible
+[11:49] <ddellav> try removing the CPU
+[11:49] <kriech0r> hehe ;)
+[11:49] <ddellav> :P
+[11:50] <kriech0r> its a E3-1265L
+[11:52] <kriech0r> shutting down cores or lowering the frequ would be good... additionally it looks like the two md raid1 i have are not going to sleep
+[13:09] <helllp> am I now in?
+[13:13] <ddellav> thats what he said
+[13:18] <Ascavasaion> I have a Gigabit controller in my laptop.  but in Network connection information it says it is 100Mb/s.  I plugged the same cable into a Windows 7 laptop and connection was 1Gb/s.  any ideas why the Ubuntu (Lubuntu actually) is not utilising the network card to its full potential?
+[13:19] <ducasse> Ascavasaion: chipset?
+[13:19] <helllp> so, where else could I post a thread about data recovery? https://ubuntuforums.org/showthread.php?t=2370295&p=13682116#post13682116
+[13:20] <Ascavasaion> ducasse: lspci gives "Realtek... ... ... RTL8101/2/6E" and connection Information gives "Driver 8169"
+[13:22] <ducasse> Ascavasaion: that's a common problem with that chipset IIRC, try doing some searches like 'realtek 8169 only 100mbps' etc, and I'm sure you'll find something relevant. i'm a bit busy now, or i'd do it for you.
+[13:23] <Ascavasaion> ducasse: Aaah, thank you... will do... and come back and bother you again if I do not come right :-)
+[13:23] <ducasse> Ascavasaion: iirc, there is an alternative driver available that works in some scenarios
+=== ShalokShalom_ is now known as ShalokShalom
+[13:43] <pankaj> What is the difference between usage of 'sudo' and 'sudo -'. I had studied that it has some minor difference and is related to login prompt
+[14:09] <Reventlov> Hi. Let's say my ubuntu loop at the login screen (even if my password is good), what logs should I read to find out what happens?
+[14:09] <Reventlov> (ubuntu 17.04, migrated from 12.04, but the installation failed at the grub installation, but I can still manage to boot to ubuntu)
+[14:10] <Ascavasaion> ducasse: I just checked the Lenovo website... This laptop only has a 10/100 Mbs network card... how sucky.
+[14:10] <Ascavasaion> Anyone know if ethernet cards can be upgraded?
+[14:10] <Ascavasaion> In a laptop.
+[14:12] <tgm4883> Ascavasaion: no. You could get a USB network card
+[14:13] <Ascavasaion> tgm4883: Sigh... what a disappointment.  Thank you.
+[14:18] <leftyfb> Reventlov: you went through 10 upgrades to get to 17.04?
+[14:18] <Reventlov> well, yeah, sinec the 17.04 iso proposed so.
+[14:18] <Reventlov> <unconvertable> update to 17.04 <unconvertable>
+[14:18] <Reventlov> also bios -> uefi Ithink.
+[14:19] <leftyfb> Reventlov: was it a fresh install or did you go through 10 upgrades? because 12.04 will most certainly not prompt you to upgrade to 17.04
+[14:19] <Reventlov> It was a boot to the ubuntu 17.04 iso, and they proposed me to update the 12.04 to ubuntu 17.04, in the installation prompt
+[14:19] <tgm4883> leftyfb: the 17.04 installer prompted the upgrade it sounds like
+[14:20] <tgm4883> Reventlov: does guest mode work?
+[14:20] <leftyfb> tgm4883: 12.04 will not prompt for 17.04
+[14:20] <leftyfb> ah, ok
+[14:20] <tgm4883> leftyfb: that's not what I said
+[14:21] <leftyfb> Reventlov: as tgm4883 suggestion, try guest mode or try creating a new user and logging in with that. If either of those work, then this might be an easy fix
+[14:21] <ChaosD> Hello, my sd-card is randomly remounting as ro. because of a very small internal onchip ssd i moved my /home on an sd card. sometimes it goes ro and i have to restart my laptop. someone know this issue ?
+[14:22] <leftyfb> ChaosD: possible bad SD card. I do not recommend putting your /home or anything important on an SD card.
+[14:23] <ChaosD> leftyfb i had to, my internal is just 16 gb
+[14:23] <ChaosD> leftyfb can i check if the sdcard is bad ?
+[14:23] <leftyfb> ChaosD: ok, then this is the issue you're going to continue to run into
+[14:24] <leftyfb> ChaosD: look at dmesg
+[14:27] <ChaosD> I found something:
+[14:27] <ChaosD> [21006.415286] usb 2-4: string descriptor 0 read error: -22
+[14:27] <ChaosD> [    3.419070] sd 2:0:0:0: [sdb] No Caching mode page found
+[14:27] <ChaosD> [    3.419076] sd 2:0:0:0: [sdb] Assuming drive cache: write through
+[14:28] <ChaosD> for more i have maybe wait till the remount
+=== juboxi is now known as jubo2
+[14:47] <ChaosD> leftyfb can it possibly have something to do with some usb energy saving features? i think it happens only on low bat.
+[14:47] <ChaosD> but im not sure
+[14:55] <tomreyn> ChaosD: can you not connect external storage using usb or something? which hardware is this?
+[15:00] <ChaosD> tomreyn i have a toshiba chromebook cb 30 with an build in sd card reader. a usb storage is a bit unhandy for portable usage.
+[15:00] <ChaosD> and a sdcard is internaly like an usb device or not ? so, where is the difference ?
+[15:02] <kk4ewt> ChaosD, yes sdcard is  most likely useing usb to connect but the speed of the media is the real difference
+[15:03] <tomreyn> sd cards have quite limited write cycles. they are okay for storing medium to large files temporarily, but not for storing data in the long run, nor for extensive create / remove cycles.
+[15:04] <tomreyn> an external SSD or HDD could last much longer and provide faster writes
+[15:04] <tomreyn> well, just the SSD, not the HDD
+[15:05] <kk4ewt> hdd would be faster than sdcard
+[15:06] <tomreyn> possibly, depends
+[15:06] <Ascavasaion> Later all
+[15:07] <ChaosD> but sadly i neither can exchange my onchip ssd nor tape a usb device on the back of my laptop :D
+[15:11] <tomreyn> 16 GB can actually be fine for ubuntu.you could place a subdirectory of your home directory (e.g. 'Downloads' or 'Music') on your SD card, as long as you regularly back that up
+[15:26] <CountryfiedLinux> I'm having issues installing the AMDGPU-Pro driver. https://pastebin.com/j1eytfEu any suggestions?
+[15:28] <CountryfiedLinux> Are these drivers compatible with 17.04+?
+[15:30] <oerheks> CountryfiedLinux, did you run updates before installing? and did you add any ppa or used the driver from the amd site?
+[15:30] <oerheks> sudo apt update && sudo apt full-upgrade
+[15:32] <CountryfiedLinux> oerheks, Just to rule out this issue, could it be because I'm on the 17.10 live session?
+[15:32] <linuxnoob011> hi all, i'm having networking issues and I'm hoping someone can point me in the right direction. basically, I can't get internet over a wired ethernet connection. problem is specific to my ubuntu setup as the same ethernet cable works fine when plugged into my windows laptop. happy to provide details on what i have tried so far, if someone has a minute to help me sort this out
+[15:32] <yasonTR> Hi, question regarding rsync. I am executing rsync with options --backup and --backup-dir=.../`date +\%Y\%m\%d_\%H\%M\%S`/. Now, for every execution of rsync, all files are copied in the backup directory, and not only the changed files. Why is that? I also added the -a and --delete parameters.
+[15:33] <CountryfiedLinux> And I more recently read that the AMD Carrizo chips have AMDGPU-Pro support by default.
+[15:33] <ChaosD> tomreyn, the problem is texlive, which let me alive with 700 mb on /
+[15:33] <oerheks> CountryfiedLinux, live session.. yeah,   never done that before.. and for 17.10, join #ubuntu+1 for support until release
+[15:33] <CountryfiedLinux> ok thanks
+[15:34] <CountryfiedLinux> I just haven't had success having audio from my monitor's audio jack and found a link that suggested installing the AMDGPU-Pro driver, then later read that it should be installed by default if supported.
+[15:35] <pavlos> linuxnoob011: can you paste this one line, lspci | grep Ethernet to find which chip you have
+[15:35] <leftyfb> yasonTR: because you're copying it to a new directory every time. There's nothing to compare to.
+[15:35] <oerheks> open amdgpu yes, closed pro-driver not
+[15:35] <oerheks> !amd
+[15:35] <ubottu> Open driver for AMD cards: amdgpu (cards >= GCN1.2 aka GCN 3rd gen), radeon (older cards). Closed drivers: amdgpu-pro (>= GCN1.2) fglrx (older cards, unsupported by AMD in 16.04+). For info on GCN levels, see https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units . For fglrx info, see https://help.ubuntu.com/community/BinaryDriverHowto/AMD
+[15:36] <linuxnoob011> pavlos yes, one second--walking back over to the ubuntu comp
+[15:36] <yasonTR> leftyfb: makes sense... I want to achieve that a file is 'archived' when a new version is detected... is that possible?
+[15:36] <CountryfiedLinux> I have an AMD A10-8700p.
+[15:36] <leftyfb> yasonTR: not with rsync alone
+[15:36] <leftyfb> yasonTR: https://github.com/leftyfb/backup_script/blob/master/backup.sh
+[15:37] <leftyfb> yasonTR: I'ven been using that script for years. Feel free to use it or modify it to your needs
+[15:37] <CountryfiedLinux> oerheks, So my hardware should be good to go by default?
+[15:37] <linuxnoob011> pavlos can't copy and paste (not internet on the other computer), but it is a Qualcomm Atheros QCA8171 Gigabit Ethernet card
+[15:37] <linuxnoob011> card worked a day ago on another internet connection. just moved to a new apartment and currently having trouble getting internet
+[15:37] <yasonTR> leftyfb: many thanks, I will take a look!
+[15:38] <oerheks> CountryfiedLinux, if the amdgpu driver is loaded, yes.
+[15:39] <pavlos> linuxnoob011: do you have DHCP from your router (if it worked in another place, the config is probably ok)
+[15:39] <CountryfiedLinux> oerheks, What do you mean if it is loaded?
+[15:39] <oerheks> amdgpu is loaded by default, else the open radeon driver.
+[15:39] <linuxnoob011> pavlos internet connection on current modem/router works on other computers, both wireless and wired
+[15:39] <oerheks> but you should join #ubuntu+1
+[15:40] <CountryfiedLinux> oerheks, How do I check?
+[15:40] <linuxnoob011> so think dhcp settings on the router fine. that said, dont think my ubuntu comp is actually getting a lease
+[15:40] <CountryfiedLinux> I'm asking in regards to 17.04. I will boot it up next.
+[15:40] <pavlos> linuxnoob011: which ubuntu release, kernel (paste lsb_release -a and uname -r
+[15:41] <oerheks> driver in use >> lspci -nnk | grep -i vga -A3 | grep 'in use'
+[15:41] <linuxnoob011> 16.04.2 LTS (xenial); 4.10.0-33-generic
+[15:41] <CountryfiedLinux> ok thanks
+[15:41] <linuxnoob011> pavlos ^
+[15:42] <CountryfiedLinux> It says amdgpu driver in use.
+[15:43] <CountryfiedLinux> Kernel driver in use: amdgpu
+[15:43] <CountryfiedLinux> So that means I have it loaded?
+[15:44] <CountryfiedLinux> I don't know the difference between amdgpu and amdgpu-pro.
+[15:44] <yasonTR> will rsnapshot work on ubuntu 16.04?
+[15:45] <pavlos> linuxnoob011: try sudo modprobe alx (you can see the modules loaded with lsmod
+[15:46] <linuxnoob011> a lot to re-type. let me see if i can throw in a usb wireless card and connect from the ubuntu comp
+[15:46] <linuxnoob011> is it ok if i brb in 2 mins pavlos?
+[15:46] <pavlos> sure
+[15:46] <CountryfiedLinux> Is amdgpu and amdgpu-pro the same thing? Am I using the supported driver or the dead one?
+[15:46] <ChaosD> leftyfb: my internal cardreader disconnects, not my sdcard. i got ro and dmesg shows that my dev 4 on bus 2 disconnects an after a few ms it reconnects as dev 6 on bus 2.
+[15:49] <oerheks> CountryfiedLinux, take a read firsthttps://help.ubuntu.com/community/AMDGPU-Driver
+[15:49] <oerheks> i already explained
+[15:50] <CountryfiedLinux> ok thanks
+[15:51] <CountryfiedLinux> I didn't clearly understand but that articled answered my question.
+[15:54] <linuxnoob011> hi pavlos--having a hard time getting my wireless to work through ubuntu as well, so i will retype as necessary
+[15:55] <linuxnoob011> the commands you last asked me to run returns a long output--is there anything in particular you are looking for?
+[15:55] <pavlos> linuxnoob011: your card should work with 16.04 and that kernel
+[15:55] <linuxnoob011> agreed--and it has as recently as 48 hours ago
+[15:55] <pavlos> linuxnoob011: the modprobe adds a module just in case it was not loaded ... lsmod lists all the modules you have
+[15:56] <linuxnoob011> ah, i see
+[15:56] <linuxnoob011> so i had a semi-complex network setup before
+[15:56] <pavlos> linuxnoob011: can you boot with another kernel?
+[15:56] <pavlos> linuxnoob011: what is semi-complex?
+[15:56] <linuxnoob011> i had a split tunnel vpn set up. not sure i would have changed anything that would affect basic connectivity
+[15:57] <linuxnoob011> i mean, i undid the obvious things, like the static ip address to a gateway that no longer exists
+[15:57] <linuxnoob011> but if there are other sanity checks i should do, i'm happy to run them
+[15:57] <linuxnoob011> and i'm sure i can figure out how to boot to another kernel. maybe 4.8?
+[15:57] <pavlos> linuxnoob011: look at your /etc/network/interfaces
+[15:58] <linuxnoob011> it's set back to a vanilla version
+[15:58] <linuxnoob011> both the loopback interface and the ehternet are set to auto
+[15:58] <linuxnoob011> and the ethernet to use dhcp
+[15:58] <pavlos> linuxnoob011: to boot another kernel, during boot press the left shift so that the grub menu comes up and you select older kernel
+[15:59] <pavlos> linuxnoob011: auto eth0 inet dhcp (or another device enp2s0
+[15:59] <linuxnoob011> ah, wasn't sure if i'd have to download an old kernel
+[15:59] <linuxnoob011> i'll try to boot up an old version now
+[15:59] <pavlos> linuxnoob011: the kernels you have are in /boot
+[16:00] <BluesKaj> HI folks
+[16:00] <linuxnoob011> pavlos already restarting. i should have checked /boot first. i think i purged after my last upgrade
+[16:00] <pavlos> linuxnoob011: are you using Network Manager to manage your connections?
+[16:00] <linuxnoob011> usually, no. but right this second, yes.
+[16:01] <linuxnoob011> basically, i tried to undo as much as my added complexity as possible and revert to base settings
+[16:01] <pavlos> linuxnoob011: if so, the interfaces file should just have auto lo iface lo inet loopback
+[16:02] <linuxnoob011> ah, fair point. i'll change that on reboot
+[16:02] <pavlos> linuxnoob011: you plugged a usb wifi and it did not pick up wireless ?
+[16:03] <linuxnoob011> it did not, but i'm not certain the card works natively with linux
+[16:04] <linuxnoob011> pavlos unfortunately, i'm having trouble booting into an older kernel. the left half of my screen is dead, so i can't tell what the boot options are. and plugging into an external didn't work
+[16:04] <pavlos> linuxnoob011: ifconfig lists just lo, no other network, right?
+[16:04] <linuxnoob011> when i'm back booted up, i'll confirm
+[16:05] <linuxnoob011> think ifconfig lists my ethernet device
+[16:05] <linuxnoob011> enp7s0
+[16:05] <pavlos> linuxnoob011: but no ip?
+[16:05] <linuxnoob011> if i manually assign it one
+[16:05] <linuxnoob011> it will show a local network ip
+[16:05] <linuxnoob011> i.e., if i give a static ip in /etc/network/intefaces
+[16:06] <pavlos> linuxnoob011: Network Manager should manage that if the wired connection is set to as DHCP
+[16:06] <pavlos> linuxnoob011: top right of screen, properties of the wired connection
+[16:07] <linuxnoob011> i'm going to try to boot into my usual kernel. i'll start network manager (it is not set to run by default so i have to start it on boot) pavlos
+[16:07] <linuxnoob011> and i will confirm my interfaces file only configures the loopback device
+[16:07] <pavlos> linuxnoob011: ok
+[16:10] <linuxnoob011> pavlos ok, all that is done
+[16:10] <linuxnoob011> pinging google returns an unknown host error
+[16:10] <linuxnoob011> ifconfig shows two network devices
+[16:10] <linuxnoob011> my ethernet card (no ip address)
+[16:10] <linuxnoob011> and the loopback device
+[16:11] <pavlos> linuxnoob011: if you look at the NM properties of the wired connection, the ipv4 settings should be DHCP. can you verify?
+[16:11] <linuxnoob011> hmm, the network manager menu is all greyed out
+[16:12] <linuxnoob011> i cannot edit the connections
+[16:12] <linuxnoob011> pavlos never mind--just took a bit for network manager to come up i guess. the options are no longer greyed out
+[16:13] <pavlos> linuxnoob011: your system is able to see the atheros card, it assigns enp7s0, the issue is you dont get dhcp and probably dns
+[16:13] <linuxnoob011> pavlos good intuition--the NM was set to manual
+[16:13] <linuxnoob011> changed it back to DHCP
+[16:13] <linuxnoob011> looks like i have an ip address on the ethernet card now
+[16:13] <pavlos> linuxnoob011: connection info might tell you your ip
+[16:13] <linuxnoob011> but pinging googles till returns an unknown host
+[16:14] <linuxnoob011> ah, just noticed:
+[16:14] <linuxnoob011> i now have an avahi profiled device
+[16:14] <linuxnoob011> i stil don't know what avahi is--i just usually try to avoid it
+[16:14] <pavlos> linuxnoob011: can you ping 8.8.8.8
+[16:14] <linuxnoob011> pavlos: no--unreachable
+[16:14] <pavlos> linuxnoob011: what ip did you get
+[16:15] <linuxnoob011> i'll pm my IP--one sec
+[16:16] <linuxnoob011> just sent over PM
+[16:17] <pavlos> linuxnoob011: saw it, this is a local ip
+[16:42] <hosas> does anyone here uses radiotray? do you still have access to SKY.fm? thanks
+[16:55] <imstucklikealway> I'm trying to make changes to nautilus and I need a little guidance. To start with I'm trying to find where a tooltip is used. I've found the tooltip and it references a c file that doesn't seem to exist. I've downloaded a few versions and in each case the file(s) a tooltip in en_GB.po references doesn't exist for example  ../src/nautilus-window-menus.c:548
+[17:01] <jdjn> huzza! the window buttons are finally in the proper place
+[17:09] <ioria> imstucklikealway, afaik only in the left panel
+[17:14] <pepee> hi. I have this intel skylate (i7-6700hq) + nvidia 960m laptop, asus n552vw, that freezes on resume from suspend (magic sysrq keys work), when running on battery... has anyone had a similar issue, or has any clue on what could be the problem/solution?
+[17:44] <brainwash> pepee: I would check the system log
+[17:52] <m15k> Hi. Can someone tell me what's happening when I've got a virtual server and curl the servers domain. Is the request going via loopback interfaces or is it handles like a normal internet request.
+[17:54] <pepee> brainwash, yeah, tried that already... read/write to disk freezes, then the whole system does, so there is nothing in the logs
+[17:54] <tgm4883> m15k: it would depend on what IP is getting returned
+[17:55] <vlt> m15k: The request goes to the IP address the DNS returns.
+[17:55] <brainwash> pepee: well, then test with the latest kernel from the kernel ppa site
+[17:55] <tgm4883> m15k: ping the address and it will tell you what IP address it's doing
+[17:55] <pepee> brainwash, i'll just update the system to 17.10, thanks.
+[17:56] <m15k> tgm4883: it's the ip if the eth0 interface
+[17:56] <tgm4883> m15k: then it sounds like it's not using the loopback address
+[17:58] <m15k> Mh. But there seems to be a difference if I request request the server via the server itself or via outside. Currently I'm play a little bit with lxd and have a iptables routing to the container. Fromt outside it works fine. But from the box itself it does not.
+[18:01] <tgm4883> m15k: well that's a different beast all together. Unfortunately, I won't be much help there. I give my lxd containers direct access to the network
+[18:04] <m15k> tgm4883: macvlan?
+[18:05] <tgm4883> m15k: bridge
+[18:06] <m15k> tgm4883: How do you grant the "direct access"?
+[18:08] <hosas> pepee: do have dual graphic card? nvidia has been known to cause such issues. normally I just switch to Intel using nvidia-setting and the issue only comes up when using using nvidia as the default graphics
+[18:09] <akik> m15k: i'm also using lxd and there's a lxdbr0 interface which is used to access the containers
+[18:10] <m15k> akik: I wan't to access the container via the servers domain.
+[18:11] <akik> m15k:
+[18:11] <akik> oops
+[18:11] <tgm4883> m15k: lxd can use any bridge interface
+[18:11] <m15k> remote -> domain.com -> host (lxd) -> container1 [works]
+[18:11] <tgm4883> m15k: so I just set the default lxc profile to use br0 and setup a br0 interface
+[18:11] <m15k> but what does not work host (lxd) -> domain.com -> host -> container1 - I get a connection refused
+[18:12] <m15k> tgm4883: Do you access the containers from outside the server?
+[18:12] <tgm4883> m15k: yes
+[18:12] <tgm4883> m15k: https://pastebin.com/z2e6mr1h
+[18:13] <tgm4883> m15k: when I bring up new lxc containers, they get an IP from my DHCP server on my lan
+[18:14] <m15k> I understand that. But you also need to define which container for example contains a webserver or?
+[18:14] <tgm4883> m15k: well I would need to setup whatever I needed inside the container
+[18:14] <tgm4883> so if it was a webserver, I would setup webserver stuff
+[18:15] <m15k> tgm4883: But when you request port80 of you server it needs to get redirect to the container?!
+[18:15] <tgm4883> m15k: no. Each container has it's own IP address on my LAN.
+[18:16] <m15k> tgm4883: I see. You access your containers only inside your lan.
+[18:17] <tgm4883> m15k: well yes. If I was going to put them on the public internet I'd do that work at the firewall
+[18:21] <m15k> mhh I see
+[18:26] <Hexal>  Hi, yesterday some of the guys here tried to help for recovering my Ubuntu, but unfortunately, didn't worked, he suggested me to download fresh ubuntu and copying my important file with Live USBm now I trying to copy but other part ion is ntfs and showing me read only, May I ask you to help me about it?
+[18:27] <arun007> Hexal: are you dual booting
+[18:28] <Hexal> yes ubuntu 16.4 and windows 10
+[18:28] <arun007> Hexal: disabled fast boot?
+[18:28] <Hexal> I don't think so
+[18:29] <arun007> That's why you got this error
+[18:29] <Hexal> I should do that from bios?
+[18:29] <Hexal> can you help me please recovering my ubuntu?
+[18:29] <arun007> Hexal: No you can do it from windows command prompt
+[18:29] <Hexal> I don't like to installing fresh ubuntu yet
+[18:30] <arun007> Hexal: In windows command prompt type powercfg /h off
+[18:30] <Hexal> Actually if I can fix my ubuntu there's no need for moving my files
+[18:31] <akik> Hexal: here's a guide https://www.howtogeek.com/236807/how-to-mount-your-windows-10-or-8-system-drive-on-linux/
+[18:31] <Hexal> arun007, this your suggetion for moving files
+[18:32] <Hexal> akik, My current ubuntu won't booting up I rather to fix this then if didn't worked I'll moving my stuffs
+[18:32] <arun007> Hexal: Not only moving files it will solve many issues like disk error that show up when you boot windows
+[18:32] <akik> Hexal: can you still boot to windows as you need to do it in windows?
+[18:33] <Hexal> arun007, take look at this please https://i.imgur.com/CgxHYgP.jpg
+[18:33] <Hexal> akik, yes I can boot to windows only problem is ubuntu now
+[18:33] <AndroUser> All: Trying to fix a wifi problem. I'm clueless on how wifi works. Have 3 page writeup at: https://www.linuxquestions.org/questions/linux-general-1/wifi-disabled-by-metropcs-script-4175611950/page3.html
+[18:34] <Hexal> akik, arun007 https://i.imgur.com/eXA9EG4.jpg
+[18:34] <akik> Hexal: your inability to mount the windows partition needs to be fixed in windows
+[18:34] <Hexal> Those photos are for yesterday
+[18:35] <Hexal> akik, I don't wanna mount, please help me to fix this problem forget moving files
+[18:35] <arun007> Hexal: Try command startx
+[18:36] <Hexal> let me check please
+[18:38] <Hexal> arun007, I'm booting again, because I was in Live Ubuntu
+[18:39] <Hexal> arun007, stuck on here https://i.imgur.com/JWbWD6v.jpg
+[18:39] <akik> Hexal: you can use the following commands to change to text mode and graphics mode "sudo systemctl isolate multi-user.target" and "sudo systemctl isolate graphical.target"
+[18:40] <Hexal> akik, from where recovery mode?
+[18:40] <akik> Hexal: your pasted image shows a login prompt so it's not in recovery
+[18:41] <Hexal> akik, that image from yesterday and Eric told some commands on grub before booting up
+[18:42] <akik> Hexal: so what did you do before it got broken?
+[18:43] <Hexal> akik, My ubuntu updated and the showed me this error:you are running with low graphic mode" something like that, I tried to fix this problem and then didn't boot again
+[18:45] <akik> Hexal: how far does it boot?
+[18:46] <EriC^^> akik: the last thing it was showing was start gnome display
+[18:46] <Hexal> akik, actually not boot just stuck on this https://i.imgur.com/JWbWD6v.jpg
+[18:46] <Hexal> EriC^^, Hi
+[18:46] <oerheks> hit ctrl alt F7 ?
+[18:46] <EriC^^> Hi Hexal
+[18:46] <Hexal> akik, Eric helped me yesterday
+[18:46] <akik> good that EriC^^ is here then :)
+[18:47] <Hexal> EriC^^, I already download fresh ubuntu but I would like to trying again for fixing that isuue
+[18:47] <EriC^^> Hexal: why? the ubuntu you're using right now is outdated and stuff
+[18:48] <EriC^^> might as well update *shrug*
+[18:49] <Hexal> EriC^^, I know but middle of moving my stuffs I got problem :D and decided to fix first issue again :))
+[18:49] <EriC^^> what problem?
+[18:50] <Hexal> EriC^^, I waned to move home directory to other partion (ntfs) but showed me read only
+[18:50] <Hexal> wanted*
+[18:50] <EriC^^> Hexal: try sudo ntfsfix /dev/sdxY
+[18:51] <Hexal> let me check please
+[18:51] <EriC^^> put the actual partition for windows there instead of sdxY
+[18:51] <akik> EriC^^: that works? ntfsfix
+[18:51] <Hexal> ok
+=== fr0tzed is now known as Master_BBQChip
+[18:51] <oerheks> ubuntu home to ntfs?
+[18:51] <EriC^^> akik: yeah, i was pretty surprised, it seems to do the job well
+=== Master_BBQChip is now known as fr0tzed
+[18:51] <EriC^^> (for hibernated fs)
+[18:52] <akik> EriC^^: but doesn't windows enable it again?
+[18:52] <EriC^^> akik: yeah its a one time thing i guess, just to mount it rw if its hibernated
+[18:55] <Hexal> EriC^^, error wile copying the folder "gtk-2.0" cannot be handeld because you dont have permissions to read it
+[18:55] <Hexal> while*
+[18:55] <EriC^^> Hexal: add sudo to the command
+[18:56] <Hexal> EriC^^, actually I used drag and drop :D
+[18:56] <EriC^^> Hexal: type "sudo nautilus" then do your thing
+[18:58] <Hexal> EriC^^, I used cp -r and works I think still copying
+[18:59] <Hexal> EriC^^, after copying please help me for installing fresh one, because I have dual os
+[19:01] <EriC^^> Hexal: ok
+[19:06] <Hexal> EriC^^, it's about 55GB takes time for copying
+[19:08] <w9qbj> Trying to setup ACPUPSD, how do I send a message to all desktops warning of the shutdown event. 'wall' messages do not seem to work on Ubuntu 16.04
+[19:08] <w9qbj> actually all events that apcupsd triggers on - like battery time, low voltage, etc
+[19:09] <skypce> hey
+[19:09] <skypce> good day
+[19:10] <skypce> how can i connect my hifi to bluetooth with ubuntu 14.04
+[19:10] <skypce> ?
+[19:10] <skypce> bluetooth do not pair my device
+=== juboxi is now known as jubo2
+[19:23] <AndroUser> (AndroUser) All: turned off wpa supplicant and network manager. Wicd connects to the hotspot but always fails on cmd: dhclient wlan0. Would my dhclient be corrupted or config messed?
+[19:25] <AndroUser> All: How do I fund that/those?
+[19:40] <akik> is it a ubuntu bug that networkmanager doesn't work after running "sudo systemctl isolate multi-user.target" and "sudo systemctl isolate graphical.target" ?
+[19:41] <brainwash> akik: anything in the journal log?
+[19:42] <akik> brainwash: i'll check
+[19:42] <J^3> Anyone experienced a flickering screen with an AMD RX 480 card
+[19:43] <J^3> suspect it is graphics related, everytime a window refreshes or if I use graphic intense programs
+[19:43] <J^3> Usually a restart solve it but not now.
+[19:43] <J^3> My current searches have not provided any good fixes
+[19:44] <J^3> So in short, help?
+[19:45] <brainwash> which ubuntu release is that?
+[19:45] <J^3> 16.04.03 LTS
+[19:45] <J^3> I also have the latest MESA PPA installed
+[19:45] <brainwash> ok
+[19:45] <akik> brainwash: "systemctl isolate multi-user" kills wpa_supplicant and "systemctl isolate graphical" doesn't start it
+[19:45] <brainwash> maybe give a newer kernel version a test run
+[19:46] <brainwash> J^3: 4.12 or even 4.13rc
+[19:47] <glitsj16> AndroUser: Have you confirmed wlan0 is indeed your current interface name? Systemd changed to static names for network devices --> http://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames
+[19:48] <glitsj16> AndroUser: what version of Ubuntu are you running?
+[19:51] <J^3> moonwash: Thanks I checked I am running 4.10.0.33 I will find the relevant wiki and try a test run.
+[19:52] <brainwash> akik: bug 1576024
+[19:52] <ubottu> bug 1576024 in ubiquity (Ubuntu Xenial) "Wifi "device not ready" after booting into OS for the 1st time" [Undecided,Confirmed] https://launchpad.net/bugs/1576024
+[19:52] <J^3> Apologies moonwash, meant for brainwash:
+[19:53] <akik> brainwash: this happens in a normal installation too if you run those commands
+[19:55] <brainwash> akik: wpa_supplicant.service in 17.04 has this additional line under the [Unit] section -> IgnoreOnIsolate=true
+[19:56] <akik> brainwash: oh there's a new wpa package that should have it too. i'm on 16.04
+[19:56] <Hexal> EriC^^, I'm ready
+[19:57] <brainwash> akik: indeed. it's currently in the -proposed repo
+[19:57] <brainwash> 2.4-0ubuntu6.1
+[19:58] <tripelb> https://www.washingtonpost.com/news/morning-mix/wp/2017/09/01/why-violinist-glen-donnelly-jumped-out-of-a-plane-naked-playing-the-lark-ascending/?utm_term=.921d198435b2
+[19:59] <Gallomimia> i guess only WP readers could wonder why
+[20:05] <skypce> hey
+[20:05] <Hexal> EriC^^, are you still there?
+[20:05] <skypce> some solution for my bluetooth problem?
+[20:05] <akik> brainwash: that wpasupplicant/xenial-proposed fixed it on 16.04
+[20:14] <lordcirth> 'systemd-analyze critical-chain' shows 'irqbalance.service' taking 20 seconds - any idea how to find out what's taking so long/speed it up?
+[20:17] <brainwash> systemctl status irqbalance.service
+[20:17] <brainwash> or check the journal log
+[20:17] <brainwash> maybe you can find some hints in there
+[20:18] <brainwash> I assume that you can just disable this service
+[20:18] <brainwash> at least I don't have it running
+[20:18] <lordcirth> brainwash, I found this bug: https://bugs.launchpad.net/ubuntu/+source/ubuntu-meta/+bug/1023020
+[20:18] <ubottu> Launchpad bug 1023020 in ubuntu-meta (Ubuntu) "irqbalance shouldn't be installed in Ubuntu Desktop" [Undecided,Fix released]
+[20:19] <lordcirth> Seems it may not be useful at all
+[20:19] <dahitokiri> Hi folks. My ubuntu installation is screwed up. glxinfo returns the typical error of not being able to find the rgb buffer. The Ubuntu live-USB works great though. Is there anyway I can fix my install without reinstalling the whole system?
+[20:20] <brainwash> what did you do to end up with a broken installation?
+[20:21] <brainwash> you probably don't want to make the same mistake twice
+[20:21] <dahitokiri> unsure. could be when i was trying to install xfce/xubuntu or x2go or NoMachine
+[20:22] <dahitokiri> other than that, haven't done anything to impact that part of the system
+[20:24] <brainwash> dahitokiri: maybe reinstall these two packages: libgl1-mesa-glx libgl1-mesa-dri
+[20:25] <dahitokiri> brainwash: apt install --reinstall?
+[20:25] <brainwash> I guess so
+=== orezci is now known as iczero
+[21:12] <PlusMinus> hey thx to whoever it was that recommened 17.10 over 17.04, it seems to have solved most of my issues, i cant boot with out having to disable acpi=off and it detects all my cores!
+=== luc4_ is now known as luc4
+[21:23] <linuxlove> hi
+[21:24] <linuxlove> i just installed ubuntu 16.04 and when i downloaded a file text in persian i see some texts in this format CaOEE ENICN
+[21:24] <linuxlove> what should i do ?
+[21:27] <linuxlove> anyone here?
+[21:30] <brainwash> PlusMinus: great news
+[21:33] <brainwash> linuxlove: are the two packages fonts-farsiweb and fonts-sil-scheherazade installed?
+[21:34] <Bashing-om> dahitokiri: Graphics's driver broke ? What shows ' sudo lshw -C display ' ?
+[21:34] <linuxlove> brainwash, no
+[21:34] <linuxlove> i think problem is in utf8
+[21:36] <linuxlove> fonts-sil-scheherazade is already the newest version
+[21:36] <linuxlove> both packages are installed
+[21:36] <linuxlove> whats should i do ?
+[21:37] <brainwash> I would open the file in the web browser
+[21:37] <brainwash> see if that works fine
+[21:38] <linuxlove> it is str
+[21:38] <linuxlove> subtitle
+[21:39] <linuxlove> 00:01:28,768 --> 00:01:31,088
+[21:39] <linuxlove> i NE <unconvertable> NE aii
+[21:39] <linuxlove> when i add to film i see this format too
+[21:40] <brainwash> sadly, no idea then
+[21:47] <linuxlove> anyone here?
+[21:51] <birdman007> I put the ubuntu iso image on a flash drive with rufus and it boots into grub instead of the regular live wm enviroment. Did i do something wrong?
+[21:54] <brainwash> birdman007: did you change the boot order?
+[21:56] <hellp> have you ever lost a password to important data and recovered it 5 years later. due to technological advances?
+[21:56] <birdman007> in my bios? no
+[21:57] <hellp> anywhere
+[21:57] <hellp> external hdd
+[21:57] <hellp> online storage
+[21:57] <hellp> partition
+[21:57] <birdman007> im booting directly from the flash drive
+[21:58] <brainwash> birdman007: so, you are stuck in grub from the ubuntu live image?
+[21:59] <brainwash> hellp: that's offtopic, isn't it?
+[21:59] <brainwash> !ot
+[21:59] <ubottu> #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please register with NickServ (see /msg ubottu !register) and use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[22:00] <birdman007> brainwash: yeah right off the bat it goes into grub, i dont know why
+=== gr33n7007h is now known as al2o3-cr
+=== bazhang_ is now known as bazhang
+[22:34] <m15k> Someone has a lxd setup and access the containers from the internet?
+[22:40] <solidfox> hello! I am using ubuntu 16.04 on my acer laptop and sometimes when I turn on, certain keys like to do sporadic shit.
+[22:41] <solidfox> I usually fix it by rebooting. but is there some way to just reset the keyboard driver?
+[22:42] <MarkusDBX> Has any of you guys experienced issues with systemd and dns.
+[22:42] <tgm4883> m15k: Does your lxd host have a public IP address?
+[22:42] <MarkusDBX> I got a few 16.04 and 17.04 systems and with a new chrome install (version 60) all of a sudden it started to misbehave.
+[22:43] <m15k> tgm4883: Yes it has. I still have the problem that I cannot access the container via the public domain from the server itself :(
+[22:43] <MarkusDBX> I needed to disable the dnsmaps and to restart the networking service
+[22:46] <tgm4883> MarkusDBX: I've not had any issues with it and network manager, but I've seen other people with issues
+[22:48] <MarkusDBX> it was so annoying, I didn't even do anything with the system it was running 24/7, then just... suddenly.. fail
+[22:49] <MarkusDBX> and was only chrome and browsers that failed
+[22:49] <MarkusDBX> so weird.
+[22:49] <MarkusDBX> on many systems as well
+[22:50] <birdman007> I put the ubuntu iso image on a flash drive with rufus and it boots into grub instead of the regular live wm enviroment. How do i boot into ubuntu?
+[23:50] <piremi> hi all
+[23:52] <piremi> apt and apt-get are same now?
+[00:02] <MarianoAlipi> Hey, guys. I have a question. I own a 2011 MacBook Pro. I have OS X and Windows 10 installed via Boot Camp. Can I add Ubuntu for a triple boot?
+[00:15] <Herdo> piremi: apt is just newer, but yes, for the most part apt can be used in most cases rather than apt-get.  apt-get should still be used inside of scripts you write however.
+[00:16] <Herdo> apt also has a progress bar :)
+[00:20] <jeffer> looking for help configuring/overclocking nvidia cards - more specifically changing settings for a non-active cards. i can change the value for the video card im using but not the other ones.
+[00:21] <bazhang> jeffer, using which ubuntu software
+[00:21] <jeffer> is that a hint?
+[00:21] <bazhang> just a simple question
+[00:21] <jeffer> sounds like a loaded question
+[00:22] <jeffer> sounds like you want me to ask this question in an nvidia room
+[00:22] <bazhang> is this somehow ubuntu related? there are hw overclock channels on freenode
+[00:22] <jeffer> alright take it easy
+[00:22] <jeffer> faggot
+[00:24] <MarianoAlipi> lol
+[00:24] <MarianoAlipi> I own a 2011 MacBook Pro. I have OS X and Windows 10 installed via Boot Camp. Can I add Ubuntu for a triple boot? If so, how can I do it?
+[00:24] <piremi> Herdo: Thanks man ;)
+[00:25] <piremi> MarianoAlipi: i don't think it is possible.
+[00:27] <bazhang> MarianoAlipi, there are several guides, the most reliable not involving the use of bcamp
+[00:27] <MarianoAlipi> piremi: dang :/ And what if I removed Windows?
+[00:28] <MarianoAlipi> bazhang: Oh, great! So would I need to reinstall Windows with a method different from Boot Camp?
+[00:28] <MarianoAlipi> I don't mind if Ubuntu is not installed via Boot Camp, I'd just prefer to keep the three systems.
+[00:30] <bazhang> MarianoAlipi, I aM looking at several guides, all from 2017, in the last 3-4 months, including a yt tutuorial
+[00:30] <bazhang> tutorial
+[00:30] <bazhang> MarianoAlipi, none of them inviolve bootcamp
+[00:30] <MarianoAlipi> bazhang: Great! I saw a forum post about it but it was from 2012 so I didn't want to follow that.
+[00:30] <piremi> MarianoAlipi: is there any reason why you need it on boot? cuz i would recommend virtual machine like vb or parallels if you need it sometimes
+[00:31] <MarianoAlipi> bazhang: That's okay. I'd love to see them.
+[00:31] <MarianoAlipi> bazhang: Hmm, well, I think running it natively would be better because it's a somewhat old MacBook, and it struggles sometimes.
+[00:32] <bazhang> MarianoAlipi, these are all unoffical and as such not supported guides; as seach term s I used your exact wording and the top out of eight were five from this year
+[00:32] <MarianoAlipi> bazhang: I mean, it runs Windows and OS X well but not really optimal. I've reformatted it a couple of times but it just isn't as fast anymore.
+[00:34] <MarianoAlipi> bazhang: Woah. I may seem lazy for not really looking at them, but I prefer to talk with a real person since I'm new to Linux and all of this. And I don't wanna screw up anything :(
+[00:36] <bazhang> MarianoAlipi, perhaps as a starter you should consider using a vbox or the like, to better familiarize yourself witht he OS
+[00:38] <MarianoAlipi> bazhang: Well, I've booted Ubuntu from a USB stick several times. I've decided that I want to install it.
+[00:39] <MarianoAlipi> bazhang: And I'm not sure if running it in a vbox will have the same performance I could get running it natively.
+[00:39] <MarianoAlipi> What do you think?
+[00:39] <Gallomimia> MarianoAlipi: great. are you going to install it dedicated, or dual boot with your existing OS?
+[00:39] <bazhang> MarianoAlipi, then repeat your issue every so often, I have no clear knowledge on using that with a mac
+[00:39] <bazhang> Gallomimia, trip boot
+[00:39] <Gallomimia> sorry what install on a mac eh.
+[00:39] <bazhang> triple
+[00:40] <Gallomimia> what type of mac? there's a few issues with some macs. you need to chainload a bootloader called rEFInd
+=== Schnabeltierchen is now known as Guest52809
+[00:45] <MarianoAlipi> Gallomimia: I currently have my Mac with dual boot OS X and Win 10. I'd like to add Ubuntu, for triple boot.
+[00:45] <MarianoAlipi> Gallomimia: MacBook Pro Early 2011 13''
+[00:45] <Gallomimia> cool. i had mine with win 7 and osx. now i have a triple boot set up with no windows installed yet. but ubuntu is there
+[00:46] <Gallomimia> it had to get some kinda extra bootloader. every time i install an update to osx it disrupts it
+[00:46] <Gallomimia> haven't used it in a long while. not bothering for now
+[00:47] <MarianoAlipi> Gallomimia: Hmm, I see. That's what I want too.
+[00:48] <Gallomimia> well, it's possible. just do a little research on a perm install on the model you have
+[00:48] <Gallomimia> also, prepartition.
+[00:48] <Gallomimia> that ain't easy.
+[00:48] <hackedhead> I'm looking for information about installing ubuntu onto an existing machine alongside another distro and windows: https://gist.github.com/hackedhead/ad787217e274751ed31c5034d5f69eda
+[00:48] <Gallomimia> like... you have to make plans and stuff. shuffle around existing installs.
+[00:49] <MarianoAlipi> Or what do you think about virtual boxes? Win 10 runs fairly okay, but sometimes it does get slow. Would running a vbox be affected by that?
+[00:49] <MarianoAlipi> dang
+[00:49] <Gallomimia> depends why you want to run the ubuntu then don't it?
+[00:50] <Gallomimia> if you put it in a vbox, its just that. virtual. is that okay with you?
+[00:50] <Gallomimia> i don't think the performance will suffer much at all, unless you start running some kind of gpu heavy stuff
+[00:51] <MarianoAlipi> Gallomimia: Right. What I want is an OS that feels fast and light, even with this sluggish computer. I use this laptop for web browsing, Office and programming. That's why I think Linux could work for me.
+[00:52] <Gallomimia> probably would. but there's some hardware issues with broadcomm devices and drivers. they're very OSS averse
+[00:52] <MarianoAlipi> Gallomimia: Isn't a vbox somewhat demanding for the computer? I mean, running alongside whatever is open.
+[00:52] <Gallomimia> for example, in my laptop, i have a wifi/bluetooth dual card that only works with a proprietary driver blob, non open source, and it doesn't do bluetooth. wifi only
+[00:53] <Gallomimia> well... it'll be like running two operating systems
+[00:53] <Gallomimia> i hear overhead for virtualising is pretty low these days. never done it long term myself
+[00:53] <Gallomimia> but do you want to run a window to do all your work inside? i think not
+[00:53] <MarianoAlipi> Hmmm
+[00:53] <Gallomimia> anyway. drivers. they're a problem.
+[00:54] <Gallomimia> my laptop is a macbook pro late 2010 13 inch fyi
+[00:54] <Gallomimia> probably more sluggish than yours. i get by
+[00:54] <MarianoAlipi> gee
+[00:55] <MarianoAlipi> I think I could just remove Windows for ease of installing it if Linux works well.
+[00:56] <MarianoAlipi> But what can guarantee me that it will? :(
+[00:56] <MarianoAlipi> Installing Windows is kind of a long process.
+[00:56] <Gallomimia> yeah. don't remove it
+[00:56] <Gallomimia> or.... backup the image
+[00:57] <MarianoAlipi> The Windows installation image?
+[00:57] <MarianoAlipi> Or what do you mean?
+[00:57] <Gallomimia> anyway. i made 4 partitions. 1 is osx boot. one is for windows, one is for ubuntu. i can't read the ubuntu image while booted to the others, so, the 4th is for data. it's in fat32 so all three OS flavors can read it. not the best, but it works
+[00:58] <Gallomimia> i mean... your windows installation. back it up if you plan to delete it
+[00:58] <Gallomimia> keep it somewhere
+=== Amm0n| is now known as Amm0n
+[00:58] <Gallomimia> you might as well back up the mac one too before you try something as bigwhild crazy as this.
+[00:58] <Gallomimia> seriously. big install. big op. chance of data loss high.
+[00:59] <MarianoAlipi> whoa
+[00:59] <MarianoAlipi> this is making me very nervous hahah
+[01:00] <MarianoAlipi> I don't really have anything to lose. They're both "fresh" installations with a few programs installed. All of my important stuff is on MEGA.
+[01:00] <Gallomimia> okay 0o
+[01:00] <Gallomimia> well the saying goes, and i heard it in here. if it wasn't backed up, it wasn't that important to you
+[01:01] <Gallomimia> if you have nothing to lose on your drive then why are you nervous? get started
+[01:01] <Gallomimia> uh. how many computers do you have?
+[01:01] <MarianoAlipi> It's just that messing with the OSs isn't easy
+[01:01] <Gallomimia> no. its not.
+[01:02] <MarianoAlipi> cause I don't want to have to spend a whole day resetting my computer if something goes wrong :( haha
+[01:02] <Gallomimia> now, here's the rub. while your laptop is in boot mode, or possibly messed up, what are you going to use to look up a way to fix it, or possibly come in here to ask someone what to do next. (like not me)
+[01:02] <Gallomimia> hah.
+[01:02] <MarianoAlipi> For me it is, I'm not familiar to pretty much any of that.
+[01:02] <MarianoAlipi> I have custom desktop PC which I use for pretty much everything, and a laptop which I take to school.
+[01:02] <Gallomimia> this one time... i decided to take my laptop apart and look at what was wrong with the keyboard. i'd spilled something on it
+[01:02] <Gallomimia> it took 3 days, and i had to use a family's imac to look up how
+[01:03] <Gallomimia> alright good. as long as you have a spare
+[01:03] <Gallomimia> but yeah. that's the reality. you might have it down all weekend. so, either get it fixed and ready for tuesday or
+[01:03] <Gallomimia> leave it until..... thanksgiving?
+[01:03] <MarianoAlipi> haha, true
+[01:04] <MarianoAlipi> well
+[01:04] <MarianoAlipi> I guess I have a few things to think about.
+[01:04] <MarianoAlipi> And some courage to find. But I'll do it eventually. I can feel the pain the Mac feels while running Windows.
+[01:05] <MarianoAlipi> I'll possibly start in a few hours, once I've thought it through.
+[01:28] <Glamdesk> I find myself needing to run something in 256 colors. To that end, I wish to run another X server. Would somebody please tell me what's the best way to do that presently? I'm not seeing much about comparisons between Xnest and Xephyr, for example.
+[01:31] <daddesio> Glamdesk: using wine?
+[01:34] <Glamdesk> daddesio: Yes, but its own internal 256 color mode doesn't do the trick. Tried it, even making its own desktop environment. Something about Missionforce: Cyberstorm just doesn't cope.
+[01:34] <bazhang> Glamdesk, check the appdb
+[01:35] <bazhang> Glamdesk, then #winehq
+[01:35] <Glamdesk> bazhang, Did, they get the same results I do; did, they directed me to this contingency indirectly.
+[01:35] <Glamdesk> So I'm at the point of saying screw it time to run another X server.
+[01:35] <Glamdesk> Suffice to say, it's an unusual problem, even in context.
+[01:40] <Glamdesk> bazhang, daddesio, I take it neither of you are overly familiar with running an additional X server and the tools thereof?
+[01:46] <darthanubis> I hard shutdown my PC, and now, gnome login loops, and evolution loops for gmail authorization for my mail accounts. Should I clean out my temp or something? Is there a way to make things right? It seems something is amiss after the dirty shutdown.
+[01:48] <Bashing-om> darthanubis: A dirty shutdown == a file system check/repair .
+[01:48] <darthanubis> Is there a way to make things right?
+[01:49] <debkad> of corse
+[01:50] <hellp> i have a notebook. In this notebook I had xubuntu installed. I made a backup of it and tried to install a new OS in the notebook. I reverted and installed xubuntu again. I dont have access to the backup copy. Can I , with a live cd of any kind, look for the remaining files of the previous installation in the notebook?
+[01:50] <darthanubis> I'm asking for help here guys. Can someone link me to the resource if no cmd wants to be dropped here?
+[01:51] <debkad> darthanubis: alt+ctrl+F1 can do the job
+[01:51] <darthanubis> I've got the system running, but I have to tty to kill systemd/user
+[01:51] <darthanubis> debkad, that doesn't fix anything
+[01:51] <debkad> that just the hint to start
+[01:51] <Bashing-om> darthanubis: ^^ What release are you running ? ^^ 1st is to do a file system check ( fsck ) .
+[01:52] <darthanubis> 4.10.0-33-generic #37-Ubuntu 17.04
+[01:53] <darthanubis> Bashing-om, The fsck run upon reboot and nothing/errors were found
+[01:53] <darthanubis> it just seems my gnome user state is stale or not clean
+[01:54] <darthanubis> even after reboot i have to kill systemd/user to login
+[01:54] <daddesio> Glamdesk: sadly no, I am not. I ended up hacking my game to bypass the 256-color check (still seemed to work with some minor graphical bugs).
+[01:54] <debkad> darthanubis: another hint check the /var/log/syslog for any errors during loggin
+[01:54] <darthanubis> debkad, i've done that as well
+[01:55] <darthanubis> didn't see anything related to login
+[01:55] <Glamdesk> daddesio: I take it that's non-trivial. It wouldn't happen to have been Missionforce: Cyberstorm, would it?
+[01:55] <darthanubis> I check xresources file
+[01:55] <daddesio> no, The Sims Online. :)
+[01:55] <Glamdesk> Was the error "unable to create a surface"?
+[01:55] <Bashing-om> darthanubis: Lost authorization to the desltop ? What shows ' ls -al .ICEauthority .Xauthority ' for the owner and group ?
+[01:56] <daddesio> Something like that! Your game uses DirectDraw?
+[01:56] <darthanubis> I've never had this type of issue in quite some time
+[01:56] <Glamdesk> Yes! I think. Definitely used DirectX 2.
+[01:56] <darthanubis> Bashing-om, my user name and group. I checked that as well
+[01:57] <Bashing-om> darthanubis: Then next thought is a broke graphic's driver . ' sudo lshw -C display .
+[01:59] <darthanubis> Bashing-om, what are we looking for in this readout? Is just showing my display driver resources as normal
+[01:59] <darthanubis> I have accelerated AMD driver, OSS running
+[02:00] <Bashing-om> darthanubis: In the configuration line. what driver is listed ?
+[02:00] <Glamdesk> daddesio: I had problems with Fallout in this regard, but it was a different error, and oddly easy to fix with instructions.
+[02:00] <darthanubis> configuration: driver=radeon latency=0
+[02:00] <debkad> My guess is about a permission files ( in some hidens folders like .gnome , .gnome2 ... ) or a dm ( gdm, lightdm ... )
+[02:00] <darthanubis> debkad, that's what i'm thinking
+[02:01] <darthanubis> that's why gdm login and evolution are borked. Chromium was as well
+[02:01] <daddesio> Glamdesk: It's been a while but IIRC I believe Wine's IDirectDraw and IDirect3D interfaces support 256-color rendering targets regardless of your actual display mode, but it does require hacking your game to fix crashes (which requires knowledge of OllyDbg or x64dbg). setting up another xorg is probably the simpler method.
+[02:01] <darthanubis> anything to do with my user state was toast since that bad shutdown
+[02:01] <daddesio> which I don't know how to do.
+[02:01] <Bashing-om> darthanubis: If you can boot a guest session to the desktop, then that points to an issue within "your" user space configs .
+[02:02] <Glamdesk> daddesio: I've had other (rare) occasions when it seemed the most reasonable response to the (non-Wine) situation too, so it'd be a good thing to know how to do regardless.
+[02:02] <darthanubis> Bashing-om, how can I reset/clean/refresh, my gnome user state/settings please?
+[02:02] <debkad> darthanubis: try to rename one of those hidden folders until the problem gone ( don't forget to copy it back when finish )
+[02:03] <w9qbj> Trying to setup ACPUPSD, how do I send a message to all desktops warning of the shutdown event. 'wall' messages do not seem to work on Ubuntu 16.04
+[02:03] <w9qbj> actually all events that apcupsd triggers on - like battery time, low voltage, etc
+[02:03] <Bashing-om> darthanubis: I can not advise about gnome . I do not use that DE and have no experience to say .
+[02:03] <hellp> im going to try to get some files from a notebook using a live usb. To be sure and to have a backup computer ill be doing this form college. Will somebody who offers help be in 14 hours here?
+[02:03] <darthanubis> ok
+[02:04] <darthanubis> brb
+[02:09] <debkad> /quit
+[02:15] <theSanDiegoKid> how can I move a folder from my Documents folder into usr/local
+[02:16] <Ben64> theSanDiegoKid: why would you want to do that
+[02:17] <theSanDiegoKid> Ben64: I am trying to install Android Studio and it is telling me to move the unpacked folder there.
+[02:17] <Ben64> theSanDiegoKid: that's not correct
+[02:17] <theSanDiegoKid> Ben64: oh okay. Any suggestions on where I just move it to?
+[02:17] <theSanDiegoKid> Ben64: Also, if you don't mind me asking. Why not? Sorry pretty new to Ubuntu.
+[02:18] <Ben64> shouldn't mess with system directories
+[02:18] <theSanDiegoKid> okay.
+[02:18] <Ben64> what are you following to install android studio
+[02:18] <theSanDiegoKid> the user guide from android (https://developer.android.com/studio/install.html)
+[02:20] <Ben64> put it in /opt/android-studio/ then
+[02:20] <theSanDiegoKid> okay thank you. I will do that.
+[02:24] <theSanDiegoKid> Ben64: Which opt folder? I am seeing one in my etc directory and one in the var directory.
+[02:24] <mindofmateo> I walked away from my desktop while doing some work, only for a few minutes, but the screens turn black and it's unresponsive.  I don't see it active on the network, tapping the power button does nothing, un/plugging peripherals does nothing, putting in a CDROM, nothing happens. One, what caused this, and two, is everything I was working on f***ed?
+[02:24] <Ben64> theSanDiegoKid: just /opt
+[02:24] <mindofmateo> 16.04 LTS
+[02:24] <theSanDiegoKid> thank you/
+[02:26] <Bashing-om> mindofmateo: System froze up ?? Do have another system on the LAN and try and ping the froze box ?
+[02:26] <mindofmateo> I only had web browsers open and probably one terminal emulator. I was gone only long enough to get a drink and put something in the fridge. Now it's unresponsive.
+[02:27] <mindofmateo> Bashing-om: I tried to ssh, no go, on the router it says inactive. :/  it's still "on" though, the lights are on, fans spinning...
+[02:28] <mindofmateo> It just looks like it's suspended or locked, but the keyboard/mouse/whatever does nothing. Caps/num lock LED won't even toggle.
+[02:29] <Bashing-om> !SysRq | mindofmateo Sounds like a hard freeze, but try :
+[02:29] <ubottu> mindofmateo Sounds like a hard freeze, but try :: In an emergency, you may be able to shutdown cleanly and reboot by holding down Alt+PrintScreen and typing slowly, in succession, R, E, I, S, U and B. For an explanation, see http://en.wikipedia.org/wiki/Magic_SysRq_key
+[02:29] <mindofmateo> I searched the web but I get a lot of results talking about laptops and closing the top/clamshell
+[02:30] <Ben64> reisub doesn't work by default
+[02:31] <mindofmateo> Maybe kernel panic? IDK what happened
+[02:32] <mindofmateo> I cam back and thought nothing of it, as in, oh I'll have to log in again
+[02:35] <Bashing-om> mindofmateo: Well, If you can not ssh in, no keyboard, no monitor . not much choice but to do the dirty and hope for the best and then clean up any mess afterward .
+[02:41] <theSanDiegoKid> I am trying to move my folder from /Documents/android to /opt but I keep getting the following error "cp: cannot stat '/Documents/android': No such file or directory" I am using the following command: "sudo cp /Documents/android /opt" any suggestions as to what is happening?
+[02:41] <mindofmateo> Bashing-om is there any kind of log I could look at that would some me something if I restarted it?
+[02:42] <on3pk> I have a really freaking dumb question.  How do I create a symlink?
+[02:42] <mindofmateo> Thesandiegokid you're missing the last /
+[02:42] <on3pk> like I'm trying to get /var/www/html/index.php to link to ~/html/index.php
+[02:42] <mindofmateo> Er, I mean you need ~/Documents
+[02:43] <mindofmateo> Otherwise it's looking for the documents folder in  root
+[02:43] <Bashing-om> mindofmateo: only if you have previously enabled persistent logging for the journal .
+[02:44] <mindofmateo> Dang.
+[02:44] <on3pk> do both files need to exist before a simlink can be created?
+[02:46] <Bashing-om> mindofmateo: Also, bear in mind that if this is a system freeze, then logging is frozen . Will have nothing to see in that event ( that has been my esperience with this sytem intermittently freezing up - resolved  )
+[02:47] <mindofmateo> Rrrrrrrr I won't even know what happened...
+[02:48] <Bashing-om> on3pk: NO . If the symlink file already exist, then the tool will not function to make/change the link .
+[02:48] <mindofmateo> This happened once before, but SOME things still worked
+[02:51] <Bashing-om> mindofmateo: All USB  peripherals ? ( can not hot plug PS2 devices ) . Might try again and see if the system awakes when re-plugging USB devices .
+[02:52] <on3pk> Oh ok.  I'm just dumb.  I was typing ls instead of ln
+[02:52] <on3pk> I was kinda losing my mind there for a minute
+[02:52] <foul_owl> How do I edit the metadata of an mp4? Thanks!
+[02:53] <Bashing-om> on3pk: Happens to the best of us .. one large cup of coffee is subscribed :)
+[02:53] <on3pk> Indeed.
+[02:53] <on3pk> Maybe 8 hours of sleep at this point :)
+[02:59] <on3pk> Oh, this is a question I definitely don't know.  What user does a cron job use?  Is it it's own user?
+[03:00] <Ben64> on3pk: depends where the job came from
+[03:00] <on3pk> What do you mean?
+[03:01] <Ben64> uh. where it came from. is it your user's crontab? then it'd run as you
+[03:02] <on3pk> Oh, I was setting up a crontab, so it would run as me
+[03:02] <on3pk> thanks
+[03:02] <leftyfb> on3pk: unless you used sudo crontab, then it would run a root
+[03:02] <on3pk> Right
+[03:52] <stranglerfish> hey, i just completely wiped my 16.04.2 drive and installed 16.04.3 over it and i'm having some issues
+[03:52] <stranglerfish> mainly that my software center doesn't want to install stuff. any package i've tried so far, i click install, it shows that it's starting then stops immediately
+[03:53] <zelozelos> have you updated?
+[03:53] <stranglerfish> i did sudo apt-get update && sudo apt install
+[03:53] <stranglerfish> and i ran the software updater
+[03:53] <stranglerfish> is that right?
+[03:54] <zelozelos> update manager says you are up to date?
+[03:54] <zelozelos> <i ask because there have been ppa changes
+[03:54] <stranglerfish> yeah, software updater says up to date
+[03:55] <Ben64> stranglerfish: why would you wipe and install to go up a point version
+[03:55] <stranglerfish> that wasn't the reason
+[03:55] <Ben64> cool
+[03:56] <stranglerfish> i get a bit OCD sometimes. i was having anxiety, imposter syndrome kinda stuff and i didn't know what i should do. i've been slacking on programming and couldn't think of a project or thing to learn so i figured i'd do a fresh slate on my laptop
+[03:56] <stranglerfish> cause that sometimes gives me a bit of a motivation boost
+[03:56] <on3pk> One thing I'm sort of curious about.  How does Ubuntu get my timezone from SSH?
+[03:56] <Ben64> on3pk: explain
+[03:56] <daddesio> stranglerfish: sounds like something I should try then, haha
+[03:57] <on3pk> Ben64: Well, I have a VPS in London.  when I use the date command, it is using my local timezone, not BST
+[03:57] <stranglerfish> i wouldn't recommend, it's a result of not knowing how to deal with anxiety
+[03:57] <stranglerfish> anywho, thoughts on how to fix?
+[03:58] <Ben64> on3pk: then it's just on your time zone
+[03:58] <daddesio> i've haven't used the GUI package manager since around 2013 so I can't really say
+[03:58] <stranglerfish> one sec i'm trying it out since the software update restart
+[03:59] <stranglerfish> yeah it's not working for .deb packages that i've downloaded
+[03:59] <on3pk> Ben64: I guess I never set it.  Could it have gotten that information from my host's vps control software?
+[03:59] <stranglerfish> and if i try a second time i get a ? icon in my launcher with a progress bar that doesn't move
+[03:59] <Ben64> on3pk: possibly
+[03:59] <Ben64> stranglerfish: try dpkg -i blah.deb
+[04:00] <on3pk> Ok, so it is possible that it could have?  I wouldn't be surprised if that's the case.  I just was a little curious...
+[04:00] <Ben64> on3pk: sure, when they're setting up the vm they could do whatever
+[04:00] <stranglerfish> errors were encountered while processing, though i dunno if that's just cause it's already attempting to be installed elsewhere?
+[04:00] <stranglerfish> one sec brb, logging off and on
+[04:00] <on3pk> Well that's neat
+[04:01] <stranglerfish> back
+[04:01] <zelozelos> you shoulda just restarted
+[04:01] <zelozelos> but did it fix it?
+[04:01] <Ben64> stranglerfish: put full command and errors on paste.ubuntu.com
+[04:02] <stranglerfish> http://paste.ubuntu.com/25455652/
+[04:03] <stranglerfish> just seems weird to me that i would have to install a .deb from terminal, shouldn't it work in software center when i double click?
+[04:03] <Ben64> i don't use gui stuff
+[04:03] <stranglerfish> even google chrome package was doing the same issue
+[04:03] <Ben64> well theres your problem, you need app indicator
+[04:04] <stranglerfish> is there a way to run it so it asks me to install dependencies?
+[04:04] <Ben64> idk, but you could just install them
+[04:06] <stranglerfish> found an answer
+[04:06] <stranglerfish> sudo apt-get -f install
+[04:06] <stranglerfish> it installed the complained about dependencies and the package, after i attempted with dpkg
+[04:07] <stranglerfish> it's annoying that a fresh install is already giving me an issue like this but, whatever. i'm okay with ditching gui
+[04:09] <stranglerfish> ok, now to deal with the whole reason i did this reinstall. anyone got advice on dealing with imposter syndrome? i finished college 1 year ago, am currently on welfare and haven't practiced programming in a while
+[04:10] <stranglerfish> i need projects to help build confidence but i'm getting myself worked up trying to decide what language, what kinda project, etc
+[04:10] <stranglerfish> anxiety is making it hard to think straight, anyone else go through this kinda stuff / have advice?
+=== purist_ is now known as purist
+[04:18] <stranglerfishy> sorry got logged out
+[04:46] <netitux> Hi
+[05:17] <ALTF5> Hello, anybody can help with a problem of mouse freeze when trying ubuntu 16.04 from live cd or when I install it and possibly why i cannot boot to my windows7 after both fresh install. I am using a PC desktop with a bios having uefi
+[05:20] <ALTF5> I have looked up youtube for videos about those problems but could not find solution that fix the random freezes or my windows boot always going back to grub
+=== r0Oter is now known as r00ter
+=== JanC is now known as Guest3516
+=== JanC_ is now known as JanC
+[06:05] <Loshki> stranglerfish: anxiolytics (drugs) to help with the anxiety, talk therapy to help with the impostor syndrome.
+=== deathonater is now known as Smeef
+[06:47] <stranglerfish> Loshki: anxiolytics are bad news for me
+[06:48] <stranglerfish> i am going to a therapist currently but so far it hasn't helped :s
+[07:06] <creat> In Ubuntu, when connecting a USB-powered HDD (WD My Passport) or a flash key through a USB3 hub (AmazonBasics 4-port), the HDD/key isn't detected automatically. And they get detected only after doing "sudo lsusb -v" Connecting them directly to system works though.
+[07:06] <vadi> My Ubuntu 17.04 is not detecting my Android phone at all when I plug it in - nothing new shows up on dmesg and it's not on lsusb. The phone however blips and starts charging fine when I plug it in. How can I fix this?
+[07:07] <ducasse> vadi: check that you're using a data cable, not just a charging cable
+[07:08] <creat> The issue is present in last two LTS releases.
+[07:08] <creat> Have not checked on other versions
+[07:08] <vadi> ducasse: how do I check that?
+[07:10] <vadi> Ah yep, a different cable worked. Thanks
+[07:11] <ducasse> creat: i'd suspect that's a problem with the hub, not ubuntu
+[07:12] <creat> No driver problems or anything like that?
+[07:12] <ducasse> i doubt it
+[07:13] <creat> I see
+[07:14] <chakli> Hello guys, I was trying to install ubuntu, i have tried 17.04 gnome and 17.10 ubuntu. and in both i get an error. grub-efi-amd64-signed package failed to install in /target/ . Is there any way to solve this
+[07:24] <hypermist> can someone help me with the error /lib/ld-linux-armhf.so.3: No such file or directory
+[07:24] <hypermist> trying to cross compile
+[07:25] <ducasse> hypermist: try #ubuntu-arm
+[07:25] <hypermist> yu
+[07:25] <hypermist> ty *
+[07:41] <theSanDiegoKid> How can I edit a text file that requires root access?
+[07:42] <ducasse> theSanDiegoKid: gui or terminal?
+[07:43] <theSanDiegoKid> ducasse, gui but I think I just figured it out in terminalby using nano.
+[07:47] <ducasse> theSanDiegoKid: if you want to use a gui editor, don't start it with sudo - use gksudo
+[07:48] <theSanDiegoKid> ducasse: oh okay.. thanks!
+[07:49] <theSanDiegoKid> Has anyone used android studio on ubuntu? For some reason my device is not showing up as a run environment.
+[07:53] <theSanDiegoKid> Ignore that, figured it out.
+[07:54] <koomen> Hi there. I use ubuntu with i3 and I have some problems with my brightness. When I use the brightness-controller and I adjust the screen brightness, it instantly changes back to my current state (something keeps overwriting it I think) and with xbacklight I get the message: "No outputs have backlight property" ... even though I have some settings in /etc/X11/xorg.conf to define my card and backlight property,
+[07:54] <koomen> it nothing works... anyone knows this problem or can help me debug? I tried sooo many things already...
+[07:56] <Hexal> Hi, I'm using dual OS Ubuntu 16.4 and Windows 10, I would like to installing Ubuntu 17 which is I already downloaded and burn in USB Live
+[07:56] <ducasse> koomen: please don't crosspost
+[07:56] <koomen> ducasse: np
+[07:58] <ntinos> koomen: what `ls  /sys/class/backlight` gives you?
+[07:58] <koomen> ntinos: intel_backlight -> ../../devices/pci0000:00/0000:00:02.0/drm/card0/card0-eDP-1/intel_backlight
+[07:59] <Hexal> May I ask you someone help me about this without loosing my data on windows and grub working again
+[08:00] <ntinos> koomen: do `cat brightness` and then `echo number | sudo tee /sys/class/backlight/intel_backlight/brightness`
+[08:00] <koomen> ntinos: yeah that does work already.
+[08:01] <ntinos> so the problem is using your fn keys and xbacklight?
+[08:01] <koomen> ntinos: well the keys are set properly, but xbacklight needs an output or so which it doesn't have... can't find my screen I think since it says: "No outputs have backlight property"
+[08:06] <ntinos> yes, xbacklight has issues with Intel
+[08:06] <ntinos> mind posting /etc/X11/xorg.conf?
+[08:06] <koomen> ntinos: well it worked before ...
+[08:06] <koomen> ntinos: sure, sec
+[08:07] <ntinos> koomen: did update anything? kernel, xorg, driver?
+[08:07] <koomen> ntinos: well I did install a lot of system stuff on my previous install of ubuntu ... I did a re-install because I accidently upgraded, instead of updated
+[08:08] <koomen> so I did a reinstall and now it doesn't work and I can't find out what I need to get it fixed
+[08:09] <koomen> ntinos: https://wiki.archlinux.org/index.php/backlight#xbacklight this is what I used
+[08:09] <koomen> the section about: put this in your "/etc/X11/xorg.conf"
+[08:12] <ntinos> maybe you can put your busid as well; what `lspci -k | grep VGA` gives you?
+[08:13] <koomen> ntinos: 00:02.0 VGA compatible controller: Intel Corporation Broadwell-U Integrated Graphics (rev 09)
+[08:13] <ntinos> Hexal: start the installation, format ONLY the ubuntu partition and reinstall it on it
+[08:13] <Hexal> ntinos, I'll starting now
+[08:14] <ntinos> koomen: put: BusID    "PCI:0:2:0"
+[08:14] <ntinos> below Option on your xorg.conf
+[08:14] <koomen> ntinos: did that already, didn't work either
+[08:17] <ntinos> maybe rm intel_backlight symlink, rm backlight dir, and do ln -s ../devices/pci0000:00/0000:00:02.0/drm/card0/card0-eDP-1/intel_backlight backlight
+[08:18] <spexi> Hi! I just installed Ubuntu server 16.04.3 LTS and I can't get wired or wireless connection working. Devices are Realtek RTL8111/8168 and Qualcomm Atheros AR9287.
+[08:18] <spexi> I have tried different configurations to /etc/network/interfaces. Setting iface enp3s0 inet dhcp takes forever to run, over 5min on boot. With static it won't work either. What was weird, was that with both wired and wireless I could ping the very first time, and every other ping attempt after that was packet loss. What should I try?
+[08:19] <koomen> ntinos: how can I remove it ? it says: Operation nothing permitted when I am in "sudo -i"
+[08:19] <koomen> operation not permitted **
+[08:21] <ntinos> well, crap; do you really need xbacklight tho? you can use a script to wrap cat/echo on /sys/.../brightness
+[08:22] <koomen> ntinos: I don't mind ... I just want somthing that can help me adjust my brightness, but without having it to run with sudo
+[08:23] <koomen> ntinos: I just want something that adds +2% or so to the brightness when I press my keyboard key...
+[08:23] <ntinos> https://ptpb.pw/67pn
+[08:23] <ntinos> I'm using this
+[08:23] <ntinos> on STEP change 20 to 50 if you want 2% steps
+[08:24] <ntinos> the just call it as /path/to/script.sh up and /path/to/script.sh down
+[08:24] <koomen> ntinos: yeah but .. I still have to run that as sudo ...
+[08:24] <koomen> ntinos: ain't gonna work right when I bind it in i3 to my keyboard key?
+[08:25] <EriC^^> koomen: try xbacklight
+[08:25] <koomen> EriC^^: I have a problem with that ... that's  the point of not using it
+[08:25] <EriC^^> what's the problem?
+[08:25] <koomen> EriC^^: it says: "no outputs have backlight property"
+[08:25] <Hexal> ntinos, I'm in "Installation type"but none of the options on this page is not active
+[08:25] <EriC^^> oh, write a script that adds or removes
+[08:26] <Hexal> Hi EriC^^
+[08:26] <EriC^^> hi Hexal
+[08:26] <koomen> EriC^^: yeah but I have to run that script as sudo
+[08:26] <Hexal> I'm started installing :D
+[08:26] <koomen> EriC^^: and then I can't bind it to my keyboard keys ...
+[08:26] <EriC^^> koomen: yeah, add it to /etc/sudoers with NOPASSWD
+[08:26] <koomen> EriC^^: oh, haven't thought about that ..
+[08:26] <koomen> mhmh, let me try!
+[08:28] <ntinos> as alternative and if you're running acpid, add it to your actions/events
+[08:31] <Hexal> ntinos, Please check this link https://i.imgur.com/tPpGkLM.jpg
+[08:32] <ntinos> Hexal: something else and new pic
+[08:32] <Hexal> ntinos, yes :))
+[08:33] <Hexal> ntinos, but not working on something else too
+[08:33] <Hexal> ntinos,  "continue" is detractive
+[08:34] <Hexal> detective*
+[08:34] <Hexal> sorry for typo
+[08:34] <Hexal> deactivate*
+[08:34] <ntinos> you mean the option to continue is disabled? cannot really help with that
+[08:35] <Hexal> ntinos, yes exactly
+[08:35] <Hexal> ntinos, I'll start installation from beginning
+[08:40] <Hexal> ntinos, "Primary" or "Logical"?
+[08:41] <ntinos> what you had already; don't delete anything; just format current ubuntu partition
+[08:41] <ntinos> supposing you have no files needed
+[08:43] <Hexal> ntinos, I did that and now I'm choosing my country
+[08:55] <Hexal> ntinos, already done thank you
+[08:58] <Hexal> ntinos, I start updating and showing me this message "E: Could not get lock /var/lib/apt/lists/lock - open (11: Resource temporarily unavailable)
+[09:00] <ntinos> Hexal: sudo apt update?
+[09:00] <Hexal> yes
+[09:00] <Hexal> it's works now ntinos
+[09:01] <Hexal> ntinos, Thank you so much for your time
+[09:11] <Hexal> Why after all years this brightness problem didn't solved on Ubuntu :(
+=== KindTwo is now known as KindOne
+=== brainwash_ is now known as brainwash
+=== brainwash_ is now known as brainwash
+[09:51] <vlt> Hexal: Which brightness problem?
+[10:07] <Hexal> vlt brightness key problem on laptop
+[10:08] <Hexal> but I already fixed it from grab
+[10:08] <Hexal> Actually my current issue is I can't save any files in other drives "ntfs"
+[10:09] <Hexal> vlt can you help me about this please?
+[10:10] <vlt> Hexal: Is there a bug report for your brightness problem?
+[10:14] <Hexal> vlt actually I have this problem from long time, I have lenovo and every time I installing fresh Ubuntu I have to go on "/etc/default/grub" and changing GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_backlight=vendor"
+[10:14] <Hexal> and then update-grub and restart every time I should do that to fixing my brightness key issue
+[10:15] <pumpkinz> I can't seem to set a resolution with 240hz with xrandr is there any way to do this?
+[10:16] <pumpkinz> or register add a resolution I should say.
+[10:16] <vlt> Hexal: How would it look like when you considered this problem solved?
+[10:20] <Hexal> vlt let me explain this: without changing this line, if I pressing on brightness key for high or low, getting so dark until I have to restart ubuntu and then before booting I should fix brightness, but when I editing this line and adding "acpi_backlight=vendor" after quiet splash, I'll able to using brightness key normally
+[10:22] <Hexal> vlt I had this problem on Ubuntu 14-15-16 and now still exist on 17
+[10:29] <vlt> Hexal: Where is the bug report for this problem?
+[10:30] <Hexal> vlt I didn't sent any bug report actually
+[10:32] <vlt> Hexal: Well ...
+[10:33] <cfhowlett> that happened
+[10:33] <histo> :)
+[10:34] <akik> Hexal: are you saying that the acpi_backlight parameter doesn't fix it?
+[10:35] <akik> Hexal: you can also set it in xorg config snippet Option         "Backlight" "intel_backlight"
+[10:35] <akik> if using intel graphics, that is
+=== SIa_ is now known as SIa
+[10:40] <akik> https://www.google.com/search?q=site%3Alaunchpad.net+acpi_backlight%3Dvendor
+=== Israphel is now known as Guest74772
+=== Israphel_ is now known as Israphel
+[10:51] <Dbugger> Hello everyone
+[11:00] <Dbugger> How do you guys do it to manage different SSH connections? I have quite a few servers to manage, all of them with different password and users. Is there a effective way you guys and girls use manage connections?
+[11:05] <vlt> Dbugger: The most important file for me is ~/.ssh/config
+[11:05] <ddellav> Dbugger yes, ssh keys. You can use the same one for all servers or use different keys per server and set them up to be used in your ssh config file
+[11:05] <vlt> Dbugger: And logins with key instead of passwords, of course.
+[11:06] <renatoneto> hi, I'm having some trouble shutting down my ubuntu 16.04.3 LTS
+[11:07] <renatoneto> it hangs on "Stopping Raise network interfaces"
+[11:08] <renatoneto> tricky part is maybe that i've booted it from an iSCSI target using iPXE and iBFT
+[11:09] <renatoneto> i don't see anything useful in syslog, could anyone assist me where to look?
+[11:09] <Dbugger> well, i was using ssh keys. But the other day my Ubuntu system exploded, and I had to install a new system
+[11:09] <onla> I need to make sure glib-devel and gtk-devel packages or similar are installed. What are they called in ubuntu 14.04?
+[11:09] <Dbugger> meaning I lost all connections
+[11:11] <vlt> Dbugger: Lost? What happened to your backup?
+[11:11] <Dbugger> vlt, you mean I should I should bring the private and public key to my new system=
+[11:11] <Dbugger> ?
+[11:12] <ddellav> you should always keep a backup of your keys somewhere, yes
+[11:12] <ddellav> just make sure they are secure
+[11:12] <Dbugger> well, I never really thought about that..
+[11:12] <vlt> Dbugger: Yes. The key is usually stored in ~/.ssh/id_rsa and ...id_rsa.pub
+[11:12] <Dbugger> Can keys be simply copied into a different system?
+[11:13] <ddellav> of course
+[11:13] <vlt> Dbugger: If you restore these files into your home you should be able to access the servers.
+[11:13] <ddellav> they are just text files
+[11:13] <Dbugger> oh well... I gotta admit the idea never crossed my mind...
+[11:13] <Dbugger> I am gonna see if there is any possible way for me to recover them...
+[11:13] <vlt> Dbugger: Mind that ssh client refuses to use a key that is readable for too many users ;-)
+[11:14] <ddellav> yea, they usually need to be 600
+[11:15] <Dbugger> oh really?
+[11:15] <Dbugger> good to know
+[11:15] <Dbugger> should I just copy both keys?
+[11:15] <Dbugger> Or should I copy the whole .ssh folder
+[11:15] <Dbugger> ?
+[11:16] <vlt> Dbugger: Try the whole folder.
+[11:16] <Dbugger> meaning "known_hosts", "config", and so on
+[11:16] <Dbugger> Cool. Ill give it a god
+[11:16] <Dbugger> GO
+[11:19] <Dbugger> I got this: "sign_and_send_pubkey: signing failed: agent refused operation"
+[11:21] <linocisco> hi all,
+[11:21] <linocisco> this guide (http://naingyeminn.com/posts/burmese-keyboard-for-ubuntu-1404/) still valid?
+[11:23] <akik> linocisco: you should use english language
+[11:23] <linocisco> akik, i m asking for local folks here if someone is online
+[11:34] <vlt> Dbugger: vlt said something about refuse before. Your error message also contains refused ;-)
+[11:37] <Dbugger> Oh, you mean that is not restricted enough...
+[11:37] <Dbugger> I was using the default permissions. What are the right ones?
+=== ShalokShalom_ is now known as ShalokShalom
+[11:40] <blz> Hello, I'm getting a permission denied error when attempting a connection to an NFS server on ubuntu 17.04.  Could someone please have a look at my configuration and see if I've missed anything obvious?  https://askubuntu.com/q/952374/62958
+[11:40] <Dbugger> my public key is rw-r--r-- and my private key is rw-------
+[11:41] <Dbugger> aaah! I found it! I had to run "ssh-add" after changing the keys :P
+[11:41] <Dbugger> I thought that just moving text files was way too easy.. :P
+[11:46] <akik> blz: did you run "sudo exportfs -a" after configuring it?
+[11:50] <renatoneto> for those who are interested, this is the only error message i'm seeing
+[11:50] <renatoneto> https://imgur.com/MXWxbp9
+[11:51] <BluesKaj> Hi folks
+[11:58] <fdah> is there a way to find who sshed to our machine?
+[12:02] <EriC^^> fdah: see /var/log/auth.log
+[12:11] <renatoneto> so I narrowed my problem down to this, when I remove "net.ifnames=0 biosdevname=0 ubuntu" from mij grub.conf everything works fine again
+[12:12] <renatoneto> i got the idea from this askubuntu question https://askubuntu.com/questions/767786/changing-network-interfaces-name-ubuntu-16-04
+[12:15] <renatoneto> does some1 know why my shutdown hangs when I try to set my network interfaces name to "eth0" instead of "enp6s0"?
+[12:19] <akik> renatoneto: why did you have "ubuntu" as a kernel parameter? net.ifnames=0 works for me
+[12:19] <BluesKaj> eth0 isn't recognized in systemd, it's now known as enp-something
+[12:20] <BluesKaj> renatoneto,^
+[12:21] <renatoneto> akik: sorry, wrong copy/paste, i meant "net.ifnames=0 biosdevname=0" as stated by the askubuntu question
+[12:22] <Hexal> vlt I never bug reported before
+[12:22] <akik> renatoneto: you can read the systemd logs with "journalctl -xe" and also read the logs of previous boots
+[12:23] <Hexal> akik actually my laptop is Lenovo Z500 and dual GPU intel and nvidia
+[12:23] <akik> renatoneto: the "-b" option
+[12:24] <Hexal> akik, btw, how can I get permission for save files on other partions ntfs?
+[12:24] <akik> Hexal: there are mount options that handle that for your current user. doesn't your file manager allow it?
+[12:24] <Hexal> At moment I'm not able for save even text file to another drives
+[12:25] <akik> Hexal: did you change that fast start-up option in windows?
+[12:26] <Hexal> akik, no let me first do that you said fast boot isn't it right?
+[12:26] <akik> Hexal: it's explained here https://www.howtogeek.com/236807/how-to-mount-your-windows-10-or-8-system-drive-on-linux/
+[12:27] <Hexal> Ok. I'm booting windows now
+[12:28] <renatoneto> BluesKaj is there some way I could make systemd "eth0"-aware?
+[12:31] <BluesKaj> renatoneto, not sure, I haven't bothered since it's systemd naming convention at work here and to me it;s just something new being a home user.
+[12:33] <renatoneto> BluesKaj i need it because otherwise my servers are not accepting to get their hostname from our dhcp server
+[12:35] <renatoneto> BluesKaj also some other scripts and feature are depending on the "eth0" naming convention of the earlier days
+[12:36] <BluesKaj> renatoneto, http://www.itzgeek.com/how-tos/mini-howtos/change-default-network-name-ens33-to-old-eth0-on-ubuntu-16-04.html
+[12:39] <renatoneto> BluesKaj, that's exactly what i did :)
+[12:40] <akik> renatoneto: try without the biosdevname=0. you don't need it on 16.04
+[12:42] <renatoneto> akik: already did, same problem. I also tried it with and without /etc/udev/rules.d/70-persistent-net.rules being manually created
+[12:43] <akik> renatoneto: this is not related to your problem but if i had a cifs mount in /etc/fstab, ubuntu would shutdown the interface before unmounting the share
+[12:45] <renatoneto> akik: i'm using my ubuntu diskless, booted from an iSCSI LUN using iBFT & iPXE
+[12:46] <akik> renatoneto: did you read the journalctl logs after this problem=
+[12:48] <renatoneto> akik: i did, but it's not logging any errors from my last shutdown. I think because iSCSI is already stopped after networking is trying to stop so it has no place on disk to log to
+[12:49] <renatoneto> akik: just for the record, when i remove the "net.ifnames=0 (biosdevname=0)" from grub.conf, everything works fine
+[12:54] <akik> renatoneto: this is a long shot but maybe compare the logs when using net.ifnames=0 and when not
+[12:55] <akik> renatoneto: maybe the interface name is stuck in some of your iscsi config
+[13:17] <renatoneto> akik: i never see the shutdown events in journalctl
+[13:17] <renatoneto> akik: any idea what i'm doing wrong? I'm using it with -xe and -b
+[13:20] <akik> renatoneto: try maybe without the -xe
+[13:21] <akik> -xe goes to the end of the log
+[13:21] <renatoneto> akik: same thing
+[13:21] <MonkeyDust> renatoneto  i guess it's easier and faster to get used to the new names
+[13:29] <renatoneto> MonkeyDust: problem is my hostname aren't set using dhcp when use the new interface names
+[13:36] <blz> akik, yes I did.
+[13:37] <blz> akik, (re: NFS problem)
+[13:38] <akik> blz: does your server see the client ip as you expect?
+[13:39] <blz> akik, yes:  10.3.0.102, as expected.
+[13:39] <blz> akik, as reported by `ping`.  That is, pinging the hostname returns the IP I expect.
+[13:40] <akik> blz: have you tried mounting the nfs share on the command line?
+[13:41] <blz> akik, I have not.  The client is OSX, but I suppose it must be possible there too
+=== jstein_ is now known as jstein
+[13:43] <blz> akik:  https://hastebin.com/amovesaqiz.txt
+[13:44] <blz> akik: the error messages are completely useless :C
+[13:44] <akik> blz: that's a new error message. maybe search for that
+[13:44] <akik> blz: to me that looks like a client machine error
+[13:45] <blz> akik: hmm, that's encouraging as I don't really intend to mount the nfs share to osx
+[13:45] <akik> https://thornelabs.net/2013/10/15/operation-not-permitted-mounting-nfs-share-on-os-x-mountain-lion.html
+[13:45] <blz> akik: i'll try from another linux machine if googling doesn't help
+[13:46] <blz> akik: yep, found the same link :)
+[13:46] <akik> blz: does it work? :)
+[13:46] <blz> akik: reading as we speak :)
+[13:48] <blz> akik: well I'll be damned... It works
+[13:48] <blz> akik: typical.  I saw saw the `insecure` option in a tutorial, looked it up on the manpage, decided I didn't need it ...
+[13:49] <blz> akik: thanks for the help, in any case :)
+[13:57] <renatoneto> Could you think with me on this one? When i remove the ""net.ifnames=0" from grub.conf i need to edit my /etc/network/interfaces so it uses the new name for the interface
+[13:58] <renatoneto> but the problem is that this ubuntu image will server as an "golden image" i will duplicate it using CoW on top of this
+[13:58] <renatoneto> so the interface names will different, depending on which hardware i will be deploying
+[14:04] <vfw> I guess we have to be registered to get into #ubuntu now.  Right?
+[14:04] <vfw> When did that change?
+[14:10] <Hexal> akik, I did that and works so great thanks
+=== jstein_ is now known as jstein
+[15:31] <Reventlov> tHi
+[15:31] <Reventlov> the 17.04 boot of my ubuntu is really slow
+[15:32] <Reventlov> Here is the  systemd-analyze critical-chain: https://ptpb.pw/URHh
+[15:36] <brainwash> Reventlov: I would check the journal
+[15:37] <zack263> Question:  I have firefox developer edition installed from a .deb in the download folder; but if I type firefox from terminal it says firefox not installed
+[15:38] <zack263> so my question is how to i run the firefox developer edition from the terminal?
+[15:39] <zack263> i see what happen
+[15:39] <brainwash> zack263: is that an official deb?
+[15:39] <oerheks> zack263, install that .deb, sudo dpkg -i /path/to/package
+[15:39] <zack263> i didnt install it properply manually
+[15:40] <oerheks> but if you don't even know how to install, why the development version?
+[15:40] <zack263> i didnt install in /opt or /usr/local
+[15:40] <zack263> developer version is cause I like that verison, LOL
+[15:41] <zack263> i would assume it's official.. i got it from mozzila website? not sure what u mean by official
+[15:41] <zack263> well.. normally i install a .deb by just double clicking it
+[15:41] <zack263> but the directions i just ran into.. i see i did it wrong
+[15:41] <oerheks> development versions are never official, it is a beta
+[15:41] <Auctus> if i share internet over ethernet with ubuntu, what's the first ip address it hands out? I plugged in a raspberry pi and i want to ssh to it but idk what ip it has
+[15:41] <zack263> the ppi might be easier
+[15:42] <zack263> i will just delete it and try the ppi
+[15:42] <zack263> moving the folder doesn't sound like it would work
+[15:45] <oerheks> Auctus, you could scan with nmap > sudo nmap -sn 192.168.X.Y/24
+[15:48] <Auctus> oerheks: im connected to a wifi router with this computer, which is 192.168.*, and the raspberry pi is plugged into the ethernet jack on this computer, and im sharing internet out over the ethernet jack, via the network manager gui
+[15:48] <Auctus> i tried scanning 10.42.*.*, looks like im the only one, 10.42.0.1
+[15:48] <Auctus> i shouldnt be doing this at 4am but its fun :p
+[15:49] <oerheks> or check your router to see connected clients & ip
+[15:50] <Auctus> thats what im sayin, the pi isnt connected to a router, its connected directly to this computer
+[15:51] <Auctus> im out in my garage so i get wifi on this computer, but the pi has too weak an antenna to get any reception out here, and theres no router out here
+[15:52] <oerheks> well, find the ip range the ICS is using, in your nerwotkmanager perhaps?
+[15:53] <tgm4883> Did you setup a DHCP server on your computer?
+[15:53] <tgm4883> I don't know if it sets one up automatically
+[15:54] <Auctus> all i did was go network manager -> edit connections -> wired connection -> ipv4 settings -> shared to other computers
+[15:54] <minimec> Auctus: https://askubuntu.com/a/194526
+[15:54] <tgm4883> Auctus: yea I don't think that sets up a DHCP address
+[15:55] <tgm4883> DHCP server*
+[15:56] <CreativeWolf> Heya all :)
+[15:56] <EriC^^> hey CreativeWolf
+[15:56] <linuxnoob011> hi all. i'm having networking trouble with ubuntu and i'm hoping someone can help me out. i have connectivity over wifi, but ethernet does not work
+[15:57] <CreativeWolf> I'm trying to block USB Storage on a desktop - Tried adding blacklist usb_storage in /etc/modprobe.d/blacklist.conf and modprobe -r usb_storage in /etc/rc.local
+[15:58] <CreativeWolf> But still as a desktop user i'm able to mount USB
+[15:58] <CreativeWolf> Heya EriC^^ :)
+[15:58] <CreativeWolf> linuxnoob011, what happens with ethernet?
+[15:59] <linuxnoob011> so if i manage it through network manager, it's a giant mess--i don't even get an assigned IP address
+[15:59] <linuxnoob011> if i set it up to use a static address, i get the desired ip address, but only spotty connectivity--maybe it'll work for a few mins after reboot, but usually not
+[15:59] <EriC^^> CreativeWolf: try udevadm monitor and plug it in and see which ones it's using
+[16:00] <linuxnoob011> when i monitor tcp activity
+[16:00] <linuxnoob011> it appears that the ubuntu machine cannot locate the gateway
+[16:00] <EriC^^> CreativeWolf: if something else depends on usb_storage you have to remove it too
+[16:00] <linuxnoob011> (by monitor tcp activity, i mean tcpdump)
+[16:01] <CreativeWolf> EriC^^, Says Kernel
+[16:01] <EriC^^> CreativeWolf: try to plug the usb hdd in
+[16:02] <linuxnoob011> oh, other piece of useful information, CreativeWolf. I was in here with this q yesterday and could not get it sorted--ended up reinstalling ubuntu and i'm still having issues (although somewhat different issues)
+[16:02] <CreativeWolf> EriC^^, I just did...it's mounting :/
+[16:02] <EriC^^> CreativeWolf: try lsmod | grep usb_storage
+[16:02] <EriC^^> CreativeWolf: did it mention the modules it loaded? (udevadm)
+[16:03] <CreativeWolf> EriC^^, lsmod | grep usb_storage says usb_storage 69632 2 uas
+[16:04] <CreativeWolf> EriC^^, scsi_disk, scsi_generic bdi block
+[16:04] <CreativeWolf> usb as well
+[16:05] <CreativeWolf> (that's from udevadm)
+[16:05] <CreativeWolf> linuxnoob011, Checked different cable, check port
+[16:06] <EriC^^> CreativeWolf: ok remove the usb, then try modprobe -r uas
+[16:06] <EriC^^> and usb_storage and see how that goes
+[16:06] <linuxnoob011> CreativeWolf I have tried a different cable and port on the router; computer only has one ethernet port, which worked in my old apartment but does not work in my new apartment (new internet and router as of a day or so ago)
+[16:07] <linuxnoob011> CreativeWolf: my windows laptop can connect to the router via ethernet, however
+[16:08] <hellp> hi
+[16:09] <EriC^^> hi
+[16:09] <lordcirth> linuxnoob011, what ethernet chip is it? 'lspci'
+[16:10] <linuxnoob011> lordcirth Qualcomm Atheros QCA8171 Gigabit Ethernet
+[16:12] <linuxnoob011> lordcirth i do recall that when i last installed ubuntu (i.e., before this current fresh install), I had to dick around with things to get ethernet to work. IIRC, i just had to upgrade the kernel to something 4.8 or later. i'm currently at 4.10 so that isn't the issue this time around
+[16:12] <CreativeWolf> EriC^^, Still gets mounted
+[16:12] <lordcirth> linuxnoob011, what does 'lsmod | grep alx' return?
+[16:13] <EriC^^> CreativeWolf: try to modprobe -r the modules that udevadm mentions, scsi_ ... etc
+[16:13] <linuxnoob011> lordcirth: lsmod | grep alx
+[16:13] <linuxnoob011> alx                    45056  0
+[16:13] <linuxnoob011> mdio                   16384  1 alx
+[16:13] <EriC^^> CreativeWolf: as well as usb_storage and uas
+[16:13] <CreativeWolf> EriC^^, Okay
+[16:13] <lordcirth> linuxnoob011, ok so the driver is running
+[16:14] <linuxnoob011> lordcith yes, definitely (one of the first things i chcekd, as this was an issue in earlier distributions, like 12.0x era)
+[16:15] <linuxnoob011> is there anything unusual about fios (and how it is installed) that might lead to this issue? i struggle to see how ethernet plug n play could be failing...
+[16:17] <renatoneto> i'm still having trouble finding the cause my ubuntu hangs when i shut it down
+[16:18] <renatoneto> i'm really clueless, some1 who can offer help?
+[16:18] <EriC^^> renatoneto: did you try pressing esc and seeing what it says?
+[16:18] <renatoneto> EriC^^ yes, it doesn't do anything
+[16:18] <EriC^^> renatoneto: did you try acpi stuff?
+[16:18] <EriC^^> (for grub)
+[16:18] <om26er> Hi! Can anyone using Unity confirm what this returns for them: `echo $XDG_CURRENT_DESKTOP`
+[16:18] <netitux> what OS version do u have?
+[16:19] <om26er> (in terminal)
+[16:19] <EriC^^> Unity
+[16:19] <EriC^^> om26er: ^
+[16:19] <renatoneto> Eric^^: nope, didn't foul around with apci
+[16:19] <om26er> EriC^^: all caps ?
+[16:19] <EriC^^> no, literally that
+[16:19] <om26er> EriC^^: thanks.
+[16:19] <EriC^^> np
+[16:20] <om26er> could anyone running Gnome shell do the same ?
+[16:20] <om26er> (background: I am writing a software that has some environment specific features, so need to check if I should rely on that variable)
+[16:20] <linuxnoob011> lordcirth, woops, i replied earlier but mistyped your name (serves me right for not using tab complete)
+[16:21] <lordcirth> linuxnoob011, yeah I'm not sure how to fix it.  Anything in dmesg or syslog?
+[16:21] <EriC^^> renatoneto: try sudo strings /sys/firmware/acpi/tables/DSDT | grep Windows
+[16:21] <linuxnoob011> lordcirth so right now, the ethernet is disabled, as i don't get wireless connectivity when my ethernet is on.
+[16:21] <linuxnoob011> i'll pop the ethernet on, check dmesg and report back
+[16:21] <[n0mad]> i use gnome and echo $XDG_CURRENT_DESKTOP returns blank
+[16:22] <linuxnoob011> my sense is that dmesg shows no errors, but that tcpdump shows a bunch of arp requests asking about the ip address of the gateway
+[16:22] <renatoneto> EriC^^:  https://paste.ubuntu.com/25459125/
+[16:22] <linuxnoob011> lordcirth, that is, i see the ubuntu computer asking "who has 192.168.1.1"
+[16:22] <om26er> [n0mad]: thanks :)
+[16:22] <oerheks> omgmaybe this page is a help https://askubuntu.com/a/227669
+[16:22] <lordcirth> linuxnoob011, Does your router have logs you can read, or a shell?
+[16:23] <EriC^^> renatoneto: do you know how to edit grub and add nomodeset?
+[16:23] <lordcirth> Personally I would run tcpdump on my router to see if the arps are getting there
+[16:23] <linuxnoob011> lordcirth probably. brand new router so i am super not savvy at it. but it's the default verizon fios router so i'm sure google will have my back
+[16:23] <oerheks> echo $GDMSESSION
+[16:23] <linuxnoob011> i'm pretty sure arps are not getting there--the router shows the ubuntu comp's ethernet connection as inactive
+[16:24] <linuxnoob011> but i'll try to dig into that a bit more. guess i'll do dmesg and tcpdump on my ubuntu comp, then see if i can figure out diagnostics from the router's end, and then i'll report back
+[16:24] <renatoneto> EriC^: i'll try that, just so you know, i'm running it inside a VM (VMware ESXi 5.2)
+[16:25] <EriC^^> renatoneto: ohh, nevermind then
+[16:26] <EriC^^> renatoneto: well, actually who knows i guess, try editing grub, and instead of adding nomodeset, put "acpi_osi="Windows 2006" "
+[16:27] <CreativeWolf> EriC^^, modprobe -r usb_storage throws error that it's in use, even after removing the drive and none of the other modules (usb, scsi_disk, scsi_host, bdi, scsi_generic) are found
+[16:27] <om26er> [n0mad]: last one: what does `echo $XDG_SESSION_DESKTOP` return ?
+[16:27] <EriC^^> CreativeWolf: remove uas and try again
+[16:28] <[n0mad]> om26er: blank
+[16:29] <om26er> dude, that session is screwed.
+[16:29] <EriC^^> i think XDG_CURRENT_DESKTOP usually gives the de
+[16:29] <EriC^^> not just unity
+[16:29] <EriC^^> i mean it works on lubuntu gnomeshell etc
+[16:30] <om26er> EriC^^: yeah, for me it says KDE
+[16:32] <CreativeWolf> EriC^^, modprobe -r uas did the trick but after reboot it still gets mounted
+[16:32] <EriC^^> CreativeWolf: blacklist it
+[16:33] <CreativeWolf> EriC^^, do you think I should add blacklist uas in /etc/modprobe.d/blacklist.conf (I've already added modprobe -r uas in /etc/rc.local)
+[16:33] <CreativeWolf> EriC^^, cool.
+=== deathonater is now known as Smeef
+[16:35] <CreativeWolf> EriC^^, Thanks a lot, that did the trick!
+[16:35] <EriC^^> CreativeWolf: cool, np
+[16:36] <renatoneto> EriC^^ : when i try to update-grub it says "/usr/sbin/grub-mkconfig: 11: /etc/default/grub: 2006: not found"
+[16:36] <EriC^^> renatoneto: type "cat /etc/default/grub | nc termview.me 9999"
+[16:36] <EriC^^> paste the link it gives you here
+[16:37] <renatoneto> EriC^^ http://termview.me/vkmf
+[16:38] <renatoneto> EriC^^ note my shutdown problem only occurs when i have net.ifnames=0 set
+[16:38] <EriC^^> renatoneto: make it "acpi_osi=\"Windows 2006\""
+[16:38] <EriC^^> ah
+[16:40] <renatoneto> EriC^^: just for the record, i've tried rebooting with  "acpi_osi=\"Windows 2006\"" but it didn't change a thing
+[16:43] <[n0mad]> om26er: hahaha i'm dumb
+[16:44] <[n0mad]> I was in an ssh and didn't even notice
+[16:44] <[n0mad]> echo $XDG_SESSION_DESKTOP = gnome
+[16:44] <om26er> [n0mad]: cool, that would explain it :)
+[16:44] <[n0mad]> echo $XDG_CURRENT_DESKTOP = GNOME
+[16:44] <EriC^^> renatoneto: oh ok
+[16:48] <pinkisntwell> I just installed ubuntu 16.04 as a Vagrant VM and for the life of me I can't get syntax highlighting to work
+[17:06] <stumpys> Is there a way to restore a win10 mbr using a ubuntu (xubuntu) live(ish) usb drive?
+[17:14] <EriC^^> !info install-mbr
+[17:14] <ubottu> Package install-mbr does not exist in zesty
+[17:14] <EriC^^> !info install-mbr xenial
+[17:14] <ubottu> Package install-mbr does not exist in xenial
+[17:15] <EriC^^> !info mbr xenial
+[17:15] <ubottu> mbr (source: mbr): Master Boot Record for IBM-PC compatible computers.. In component universe, is optional. Version 1.1.11-5ubuntu1 (xenial), package size 19 kB, installed size 46 kB
+[17:15] <EriC^^> stumpys: https://askubuntu.com/questions/5748/how-to-restore-windows-7-mbr-without-a-cd
+[17:25] <stumpys> EriC^^/ubottu Thx for the pointers, will check them (and the link) out. much appreciated.
+[17:44] <maxcell_> 17.10?
+[17:44] <maxcell_> how its going?
+[17:49] <EriC^^> stumpys: np
+[17:53] <rfshark> what sox do?
+[18:00] <illuminated> why is google chrome ignoring my mime type settings.  I have a mime type set for torrents, and when I open the .torrent file via chrome it opens in anything other than the program I've specified.  the .torrent file opens correctly when I open it via nautilus and it opens with the correct program in firefox.  chrome, however, nope.
+[18:01] <birdman007> I put the ubuntu iso image on a flash drive with rufus and it boots into grub instead of the regular live wm enviroment. How do i boot into ubuntu?
+[18:01] <Ben64> birdman007: well what happens after grub
+[18:03] <birdman007> it boot into the grub cli, grub>
+[18:04] <Ben64> then the usb wasn't created properly
+[18:05] <birdman007> ive done it a couple of times using rufus and pendrive and it still wont boot properly, could it be the flash drive
+[18:05] <EriC^^> birdman007: try "configfile /boot/grub/grub.cfg"
+[18:06] <birdman007> EriC^^: alright, lets see what happens
+[18:07] <rfshark> what sox command do?
+[18:09] <Ben64> rfshark: man sox
+[18:09] <rfshark> thanks Ben64
+[18:09] <rfshark> :)
+[18:09] <godsring> Hey there I am having an issue setting up mobile broadband with a samsung galaxy s8 on any 12+ version of ubuntu or any other flavour It gives me a message on my phone when it attempts to connect invalid mmi or bad connection but it sets up fine as a modem on windows
+[18:09] <rfshark> man sox
+[18:09] <rfshark> No manual entry for sox
+[18:10] <godsring> As my cell is my only source of net this prevents me from using linux without a work around
+[18:10] <[n0mad]> rfshark: http://manpages.ubuntu.com/manpages/trusty/man1/sox.1.html
+[18:11] <rfshark> thanks [n0mad]
+[18:11] <rfshark> :)
+[18:14] <godsring> At one time ubuntu had very dedicated support for DUN connections
+[18:15] <godsring> Used to never have issues with mobile devices
+[18:15] <godsring> I suppose that was actuallu due to whoever maintains the networking portion of the code and drivers
+[18:16] <godsring> Regardless though if it works on windows using drivers from 2005 it should work on linux
+[18:20] <godsring> I guess im stuck using windows 10
+[18:43] <keb_> anyone use rofi with ubuntu? trying to figure out how to set it up with hotkeys to pull up the launcher. can't find a guide anywhere.
+[18:46] <ducasse> keb_: the man page is really good, i use rofi a lot
+[18:47] <keb_> ducasse, i've been looking at the manpage, but perhaps i'm too nooby to understand lol. once i install it, should i be able to use a hotkey to bring up the launcher?
+[18:47] <keb_> or does that have to be specified somewhere
+[18:49] <ducasse> keb_: you have to bind it to a key and launch it with the modes you want, "rofi -i -show" will open it in default mode. (-i means non-case sensitive)
+[18:50] <keb_> ducasse, i just tried 'rofi -i -show' but nothing happens
+[18:50] <keb_> do i have to specify window or run mode?
+[18:51] <ducasse> it works here, which version are you using?
+[18:52] <keb_> ducasse, 0.15.11
+[18:53] <ducasse> oh, that is ancient. yes, that had a daemon mode. you configure rofi through the x resources to act on whatever key you want, then launch it.
+[18:53] <ducasse> it has changed quite dramatically :)
+[18:53] <keb_> ducasse, ahh where can i find a more modern version?
+[18:54] <keb_> is there a new ppa?
+[18:55] <ducasse> which release are you running?
+[18:55] <keb_> xubuntu 16.10
+[18:55] <ducasse> erm.., that is eol...
+[18:56] <ducasse> you need to upgrade
+[18:56] <keb_> woops
+[18:56] <keb_> ducasse, sorry i meant 16.04 LTS
+[18:59] <ducasse> keb_: try "deb http://debian.sur5r.net/rofi/ xenial universe", but that is of course totally unsupported
+[19:00] <keb_> ducasse, i thought 16.04 is still supported Ubuntu? :(
+[19:00] <keb_> what is the newest version?
+[19:01] <kostkon> keb_, it's still supported (and will be until april 2021). 3rd party repos do not get support here.
+[19:01] <EriC^^> the release is, the ppa isn't technically supported by the channel, like "officially"
+[19:01] <ducasse> keb_: 16.04 is still supported. latest official rofi is 1.3.1, which is in that repo
+[19:02] <keb_> ah i see thank you
+[19:03] <godsring> Hmm
+[19:03] <godsring> Is my question supported here
+[19:03] <godsring> Mentioning that it is a mmi issue
+[19:04] <godsring> I honestly dont know where else to go
+[19:04] <keb_> ducasse, is "deb http://debian.sur5r.net/rofi/ xenial universe" a command? how can i add this so that i can download a newer version of rofi? thanks. :S
+[19:05] <EriC^^> keb_: echo "deb http://debian.sur5r.net/rofi/ xenial universe" | sudo tee /etc/apt/sources.list.d/rofi.list
+[19:05] <godsring> I suppose I need someone who knows how the mobile broadband feature works in the network manager
+[19:05] <EriC^^> use that command, followed by sudo apt-get update
+[19:05] <fuser> Is it possible to upgrade to 17.10 beta from 17.04?
+[19:05] <ducasse> keb_: put it ib a file, call it /etc/apt/sources.list.d/rofi.list
+[19:05] <EriC^^> fuser: no
+[19:05] <fuser> ok thanks
+[19:05] <EriC^^> wait
+[19:06] <fuser> ok
+[19:06] <EriC^^> thought you meant downgrade, yeah it is possible
+[19:06] <fuser> and would this beta then be upgradable to the standard later release?
+[19:06] <EriC^^> sudo do-release-upgrade -d
+[19:06] <EriC^^> yeah
+[19:06] <godsring> At this point I would take any suggestions
+[19:06] <fuser> okay cool, I'm really looking forward to some fixes that are in there, at the risk of other bugs!
+[19:06] <ducasse> keb_: you can give -show arguments like a list of modes, all this is in the man page
+[19:06] <fuser> Thanks Eric
+[19:07] <EriC^^> fuser: sure, np
+[19:07] <keb_> thanks ducasse and EriC^^ i will try to install the new version now :)
+[19:08] <godsring> $5 if you can fix my issue with the mobile broadband networking and my samsung galaxy s8?
+[19:08] <hackedhead> how can I install 17.04 without installing a bootloader
+[19:09] <hackedhead> (i have an existing LILO bootloader in place that I will add ubuntu into)
+=== pepee- is now known as pepee
+[19:09] <ioria> sudo ubiquity --no-bootloader ?
+[19:10] <EriC^^> hackedhead: ubiquity -b or the above
+[19:10] <ducasse> !patience | godsring
+[19:10] <ubottu> godsring: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[19:11] <hackedhead> thanks, trying
+[19:12] <godsring> I get an error when trying to use mobile broadband connection with my samsung galaxy s8. A message displays on my phones screen saying invalid mmi or invalid connection. This issue is not present in windows 7-10 using the 2006 samsung modem driver
+[19:12] <godsring> The mmi code appears the same as whats used in windows *99#
+[19:14] <hackedhead> let's hope skipping the 3rd party and updates will allow me to complete installation without running out of space... (on the ramdisk? i guess?)
+[19:14] <silvian> Hai World!
+[19:14] <cyphex> Hello, can someone please help me create a bootable win7 usb. I've been trying to do that for the past 10 hours and I'm starting to lose it.
+[19:14] <godsring> A solution such as a way to issue a dun connection without the network manager would help aswell
+[19:14] <godsring> Are you on linux or windows cyphex?
+[19:15] <EriC^^> cyphex: you tried winusb i presume?
+[19:15] <cyphex> I'm on 17.04 ubuntu
+[19:15] <cyphex> tried woeusb since I read that winusb is not working
+[19:15] <EriC^^> oh
+[19:15] <ducasse> cyphex: http://askubuntu.com/questions/289559/how-can-i-create-a-windows-bootable-usb-stick-using-ubuntu
+[19:15] <godsring> Have you tried copying over the files and setting up the drive manually
+[19:15] <cyphex> yep
+[19:15] <godsring> Hmm
+[19:16] <godsring> Are you trying to do UEFI?
+[19:16] <cyphex> godsring, whatever works
+[19:17] <godsring> You could try using unetbootin
+[19:17] <cyphex> didn't they drop support for windows images?
+[19:17] <silvian> cyphex: are you trying to build a win 7 image using Ubuntu?
+[19:17] <EriC^^> cyphex: check the link ducasse gave you, it has a ton of solutions
+[19:17] <godsring> Not to my knowledge regardless you would partition with gparted anyhow
+[19:18] <cyphex> EriC^^, I've tried most of them to no avail
+[19:18] <EriC^^> cyphex: does the windows image you have support uefi?
+[19:18] <cyphex> silvian, I have an image ready, I need to flash it to the usb media and be able to boot from it
+[19:18] <EriC^^> making a uefi bootable usb is easy
+[19:18] <godsring> Here is a good guide for you cyphex
+[19:18] <godsring> http://www.webupd8.org/2010/10/create-bootable-windows-7-usb-drive.html
+[19:18] <godsring> Will guide you through using unetbootin
+[19:19] <cyphex> I'll give that a shot, thanks
+[19:19] <EriC^^> cyphex: are you trying to dual boot with your current ubuntu?
+[19:19] <hackedhead> last resort: microsoft will mail you such a USB ;-)
+[19:20] <silvian> cyphex: if you are building it using ubuntu then strongly recommend Ubuntu's Startup Disk Creator app :)
+[19:20] <cyphex> my story is long and painful EriC^^
+[19:20] <EriC^^> silvian: that's just for ubuntu images
+[19:20] <ioria> silvian, why you say that ? have you tried it ?
+[19:20] <godsring> I feel where you are coming from cyphex I have also had to go back to windows
+[19:21] <EriC^^> cyphex: if you use uefi it will become less painful
+[19:21] <godsring> 16.10 onward has had loads of driver issues
+[19:23] <godsring> You should listen to some of Bryan Lunduke's videos
+[19:23] <ducasse> godsring: us? why? we are support volunteers only.
+[19:23] <silvian> i would have thought that startup disk creator would take any .iso file... i guess not?
+[19:24] <silvian> last resort would be to use dd
+[19:24] <akik> silvian: neither works for windows isos
+[19:24] <EriC^^> silvian: that's also for linux hybrid iso images
+[19:24] <ducasse> no, windows iso's are not hybrid images
+[19:24] <cyphex> yeah, dd doesn't work with windows because microsoft is special
+[19:25] <godsring> Try using rufus with DD if you are on windows
+[19:26] <EriC^^> cyphex: for uefi all you have to do is make a fat32 partition and extract the iso there, you'll know if it's uefi if it has a efi dir in it
+[19:26] <godsring> I have made a few good ubuntu usb drives with rufus
+[19:26] <EriC^^> i doubt win7 was uefi though
+[19:26] <godsring> Windows 7 definitely supports uefi
+[19:26] <godsring> Just not secure boot
+[19:26] <silvian> oh that's really annoying... so you have to install windows to create bootable windows install USB stick lol!
+[19:27] <akik> silvian: you can create it in linux just fine
+[19:27] <godsring> You could just take your windows image make a virtualbox install of it
+[19:27] <godsring> use rufus to put it on a drive
+[19:27] <EriC^^> cyphex: are you going to dual boot with ubuntu?
+[19:27] <godsring> I have done that before as well
+[19:28] <godsring> As a game developer I wish supporting linux wasnt so painful
+[19:28] <cyphex> EriC^^, I wanna install win7 and then my usual linux distro (manjaro)
+[19:28] <silvian> cypex: oh BINGO https://unetbootin.github.io/
+[19:29] <EriC^^> cyphex: ok, extract the iso to a fat32 usb
+[19:29] <cyphex> EriC^^, I've tried that
+[19:29] <silvian> I think I foudn it... unetbootin was a tool i used to use on windows back in the day to make USB bootable linux images. I guess its cross platform :)
+[19:29] <EriC^^> does it have an efi dir? cyphex
+[19:29] <godsring> silvian yes I told him about that I think he was having issue with it
+[19:29] <cyphex> I'm trying out unetbootin right now, I'll check afterwards if it doesn't work out
+[19:30] <silvian> cybpex: cool best of luck
+[19:30] <cyphex> thanks
+[19:30] <godsring> cyphex as a last resort you could setup a vm and put the iso on with rufus from there
+[19:30] <silvian> cyphex i can't even spell lol
+[19:30] <cyphex> godsring, I tried to set up a VM but qemu decided to hit me with all the bugs it could find
+[19:31] <cyphex> everything just went wrong for me today lol
+[19:31] <godsring> You could try the trial of vmware OR you could use vitrualbox cyphex
+[19:31] <cyphex> vmware didn't work either
+[19:31] <cyphex> I am a broken man at this point
+[19:31] <godsring> Now that is weird
+[19:31] <ioria> remember something about mkusb ...
+[19:31] <silvian> cyphex: VM WORK DIDN'T WORK??? That's unpossible! :D
+[19:31] <cyphex> hahaha
+[19:32] <godsring> Well his drive my be corrupt or his install of ubuntu is just broken
+[19:32] <godsring> might*
+[19:32] <cyphex> I installed ubuntui because I thought my manjaro install was messed up
+[19:32] <silvian> I've always reliad on VMware... because its very stable and supports nearly everything you can throw at it.
+[19:33] <silvian> I have a personal vendetta with virtual box. It hates me even more than I hate it.
+[19:33] <godsring> cyphex maybe you have drive corruption
+[19:33] <godsring> Have you run a smart test?
+[19:33] <cyphex> I used the same drive to install ubuntu
+[19:33] <cyphex> about 30 minutes ago
+[19:37] <cyphex> oh dear god qemu decided to work. I am saved
+[19:37] <cyphex> I LOVE ALL OF YOU DEEPLY AND FOREVER
+[19:37] <zachg5757> Hello
+[19:38] <zachg5757> Can I get some help booting into my ubuntu partition?
+[19:38] <hackedhead> i'm trying to use boot-repair, but I'm getting gzip: stdout: No space left on device when trying to generate the initramfs
+[19:38] <hackedhead> (I'm booted into a liveUSB 17.04)
+[19:38] <silvian> cyphex: well done indeed! So now qemu is our new lord and saviour :D
+[19:39] <hackedhead> my target boot partition is a 100MB LV
+[19:40] <cyphex> hackedhead, have you mounted your boot partition? (or the partition that contains it)
+[19:41] <ducasse> hackedhead: 'sudo apt autoremove'
+[19:41] <hackedhead> I assume boot-repair did the appropriate thing that it wanted, I'm following it's instructions
+[19:41] <hackedhead> ducasse: i'm not booted into the target system, so that seems unlikely to help
+[19:41] <hackedhead> I can grow the LV....
+[19:41] <zachg5757> I'm using ubuntu 1604 and I've been trying to set up grub to dual boot ubuntu and windows 10 on two different ssds
+[19:41] <hackedhead> but how large would I expect it to need to be?
+[19:42] <ducasse> hackedhead: chroot into it, then
+[19:42] <zachg5757> But for some reason I'm now in recover mode on ubuntu and I can't boot into windows 10
+[19:42] <zachg5757> This happened from boot-recovery
+[19:42] <zachg5757> and os prober
+[19:42] <hackedhead> cyphex: it certainly looks mounted, per mount/df, and the boot-repair command that is failing is using a chroot, so I assume it's already mounted in the expected place
+[19:42] <hackedhead> ducasse: thing is... this is a brand new install
+[19:43] <hackedhead> but let's try it.
+[19:43] <ducasse> hackedhead: a 100mb /boot is a bit small imo
+[19:44] <hackedhead> ducasse: autoremove failed with the same error =P
+[19:44] <hackedhead> ducasse: okay, what's appropriate?
+[19:44] <hackedhead> (I figured that storing a couple kernels and initrds would not consume much room, but apparently ubuntu wants to do other things with that partition as well.....)
+[19:45] <akik> hackedhead: one kernel + other files for that version takes about 50 megs
+[19:46] <hackedhead> akik: yeah, i'm okig around now, apparently the existing initrd is 43MB
+[19:46] <hackedhead> which is a lot larger than I expected
+[19:46] <zachg5757> Whenever someone get's a chance, ping me please. I'll hop back onto this tab
+[19:48] <marcisb> Hello all how i can see my ipconfig info like in windows with command ipconfig
+[19:48] <marcisb> simillar in ubuntu
+[19:48] <marcisb> ?
+[19:48] <ducasse> zachg5757: you need to re-ask every 15-20 minutes, or nothing will happen
+[19:48] <silvian> marcisb: ifconfig
+[19:49] <marcisb> ok thx
+[19:49] <hackedhead> okay. now 500MB, seems to be working
+[19:49] <silvian> you're welcome :)
+[19:49] <hackedhead> TIL
+[19:49] <zachg5757> ducasse: Thanks. I'll be sure to keep reasking. I just didn't want to clog up the chat
+[19:49] <marcisb> I m windows user who understand linux is way better : )
+[19:51] <silvian> marcisb: another alternative is also: ip a
+[19:51] <silvian> so you got choices ;)
+[19:51] <marcisb> silvian, Thank yu so much i like learn linux with help
+[19:52] <silvian> marcisb: linux is a lot of fun especially when you have a good community to back you up
+[19:53] <marcisb> silvian, Yes : )
+[19:54] <zachg5757> Can someone help me with my ubuntu boot issues
+[19:54] <godsring> Linux is better in the sense of its core mission perhaps
+[19:54] <godsring> As a game developer Windows is still better
+[19:55] <godsring> Though linux is getting better then it used to be
+[19:55] <silvian> macrisb: also if you have spare 5-6 minutes a day i recommend you watch some of these videos: https://www.youtube.com/watch?v=klP_Ik9NN7o
+[19:55] <godsring> Developing on linux is a pain the lack of dedicated driver support is a pain etc
+[19:55] <MonkeyDust> godsring  as opposed to windows, you mean?
+[19:55] <silvian> I highly recommend them to beginners and even some advanced users who wish to learn more
+[19:56] <godsring> Comparing windows and linux yes monkeydust
+[19:57] <godsring> With the direction windows is taking with its linux subsystem it might end the need of us developers even using linux
+[19:58] <godsring> As sad as it may be
+[19:58] <hackedhead> godsring: hahahahahahaha
+[19:59] <oerheks> how is this related to ubuntu technical support? try #ubuntu-discuss or offtopic?
+[19:59] <hackedhead> call me when windows fixes it's windowing stack, process control and has a decent terminal emulator
+[19:59] <hackedhead> oerheks: apologies, i'll drop it.
+[20:00] <MonkeyDust> godsring  i'm sure you're right ...  https://insights.ubuntu.com/case-studies/ ...
+=== Drone` is now known as Guest32014
+[20:02] <zachg5757> Can I get some help with setting up my bootable drives?
+[20:04] <godsring> I would say more but oerheks has a point its not entirely related to #ubuntu tech support
+[20:04] <oerheks> #ubuntu-on-windows is usually dead
+[20:07] <zachg5757> Is anyone around that can help? I can't login to my computer
+[20:07] <silvian> zachg5757: how can we help you? what is the issue?
+[20:07] <lordcirth> It's in scrollback
+[20:07] <lordcirth> zachg5757, BIOS or EFI?
+[20:08] <zachg5757> I'm not too sure. How can I check this? I think EFI though
+[20:08] <hackedhead> when using LVM, should grub be installed to /dev/sda MBR or /dev/dm-# (the LV)
+[20:09] <lordcirth> hackedhead, sda, BIOS doesn't understand LVM
+[20:09] <zachg5757> And the issue is that when I login to ubuntu, it says that there are errors reading usb devices then it shows up in a terminal on a black screen. I think it's recovery mode
+[20:10] <silvian> zachg5757 so you got past your Grub menu yes?
+[20:10] <hackedhead> .... core.img unusually large, embedding failed, but embeding is required for LVM
+[20:10] <hackedhead> so now what?
+[20:10] <zachg5757> silvian Yes. I did. But in my grub menu, I don't see my Windows boot disk which is a separate issue
+[20:11] <lordcirth> hackedhead, did you forget to leave a 1MB space before your partitions?
+=== obZen_ is now known as obZen
+[20:11] <silvian> hmm ok one thing at a time (although they could be related). What USB devices do you have plugged in?
+[20:11] <hackedhead> lordcirth: likely, since this is system used to just boot via LILO
+[20:12] <silvian> and are you booting ubuntu from usb or directly off your main drive?
+[20:12] <zachg5757> The usual stuff. Mouse, keyboard, bluetooth connector and a web cam. I have ubuntu installed on its own SSD
+[20:13] <zachg5757> I can still use my keyboard when it's in the terminal though
+[20:13] <silvian> ok that is interesting...
+[20:13] <zachg5757> I was booting in successfully before
+[20:13] <silvian> first thing I would try (I suspect this is kernel/driver issues with usb devices) is to boot back into the Grub menu and downgrade the kernel. Select a previous kernel installed from the menu.
+[20:13] <lordcirth> hackedhead, so, this is an existing install you are switching from LILO to GRUB?
+[20:14] <silvian> zachg5757: yeah try downgrading kernel first and lets see how it behaves :)
+[20:14] <hackedhead> lordcirth: it's an existing slackware install on LVM using LILO
+[20:14] <hackedhead> (LILO also boots windows of sdb)
+[20:14] <hackedhead> (or did, it's been blown awaay by repeated attempts to get ubuntu going)
+[20:15] <hackedhead> ubuntu has two LVs of its own (50G /,500MB /boot)
+[20:15] <hackedhead> sda is one big PV with (now) 4LVs
+[20:15] <hackedhead> all in one volgroup
+[20:15] <zachg5757> I was attempting to get windows to appear on grub and following some tutorials. I used os prober to find windows but that actually broke the windows partition. Second, I used boot-repair and that stopped my ubuntu from allowing me to log in
+[20:15] <zachg5757> silvian. How do I downgrade it? I'm in grub
+[20:15] <hackedhead> (and I want to preserve the slackware install)
+[20:16] <silvian> ok so in your grub menu is you use the down arrows do you see more kernel versions listed?
+[20:16] <silvian> like 4.4.0.93-generic 4.4.092-generic etc
+[20:17] <zachg5757> I have "Advanced options for ubuntu", "efi/ubuntu/mmx64.efi", "efi/ubuntu/mmx64.efi sdb1", and "system setup"
+[20:17] <zachg5757> And of course "ubuntu"

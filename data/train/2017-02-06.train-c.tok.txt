@@ -1,0 +1,1500 @@
+<s> the physical one ;) </s>
+<s> <user> : the live cd should n't be mounting your hdd , if its mounted then you need to umount it before you can change the paritions </s>
+<s> <user> : apt-cache rdepends insserv </s>
+<s> i cannot because is mount it to the DIR/cdrom/ ;) </s>
+<s> which i need it for the installation if i do n't have a cdrom . nor a usb </s>
+<s> wat </s>
+<s> how are you using a live cd if your cd drive and usb boot is n't working then ? </s>
+<s> <user> : that 's no going to work , you ca n't unmount the filesystem because you're using it . </s>
+<s> <user> : sysv-rc and in turn rpcbind . where i assume sysv-rc is <unka> by systemd ? </s>
+<s> *not </s>
+<s> <user> : so you are actually booted from the hard disk ? </s>
+<s> umount : DIR/cdrom/ : target is busy </s>
+<s> yes i did ;) </s>
+<s> <user> : you ca n't do that . </s>
+<s> ok ;) </s>
+<s> <user> : do not install that way </s>
+<s> you need to find a way to boot from either a cd , usb or network </s>
+<s> <user> : you can boot from one partition and install to another , but you cannot resize partitions etc that way </s>
+<s> <user> : apt-cache rdepends sysv-rc , etc . </s>
+<s> i just plugged in my 5 tb external h/d ; </s>
+<s> bus 002 device 001 : id 1d6b:0002 linux foundation 2.0 root hub </s>
+<s> <user> : well , you can , just not for the partition that his DIR/cdrom/ is a part of </s>
+<s> there it is , </s>
+<s> <user> : basically , the partition you wo n't be able to modify is the one you're running from , your DIR/cdrom/ is apparently part of the partition you want to modify . </s>
+<s> <user> : <unka> mbr when even 1 partition ( even swap ) is in use never worked out well for me in linux . either access denied , or writing nothing , or even worse , completely breaking things </s>
+<s> <user> : ah , good point . </s>
+<s> i did manage to install to 2nd partition while booting the .iso from 1st partition though , no issues there </s>
+<s> unfortunately ubiquity does n't allow booting from 1st partition with .iso as a file there , and installing again to 1st partition , it complains </s>
+<s> <user> : hu , i thought i got a recursive list but i guess not . sysv-rc seems to be the only provider for a lot of different packages , and looking at the list of apt-get remove sysv-rc a lot of things , including the linux kernel itself gets removed with it . </s>
+<s> <user> : <user> is right , make sure to do this from a separate disk , like that external drive you just plugged in . </s>
+<s> <user> : what does it complain about ? </s>
+<s> <user> : probably required by the system , then </s>
+<s> <user> : if i remember correctly , it wants to unmount it right after the partitioning step , and chokes and dies </s>
+<s> i tried it 5-6 months ago , i do n't remember the exact message </s>
+<s> <user> : ah , i wonder if using " toram " in the grub line might let it work </s>
+<s> <user> : that 's a good idea , yes it might work </s>
+<s> i 'm not sure if casper supports this , or if it 's only a d-i thing ... </s>
+<s> what 's d-i ? </s>
+<s> debian installer </s>
+<s> i.e . the text mode installer , ubuntu-server etc </s>
+<s> oh </s>
+<s> <user> : casper claims to support it , nice ! </s>
+<s> cool </s>
+<s> <user> _ is now known as <user> </s>
+<s> <unk#a_> is now known as <user> </s>
+<s> hi all </s>
+<s> 14.04 boots up , cannot login : keyboard and mouse do not <unka> </s>
+<s> <unka> over to tty i can enter <unka/> but says " login incorrect " </s>
+<s> <user> : on an installed system , or with the live cd ? </s>
+<s> keyboard setting has been checked ok </s>
+<s> <user> , installed </s>
+<s> <user> : did it work previously ? what happened and it stopped , some kernel update ? </s>
+<s> used to boot fine , acer laptop , came out of blue air </s>
+<s> no update that caught my eye . it announced the new ubuntu version but that was canceled for the moment </s>
+<s> can you use the keyboard in the recovery mode ? </s>
+<s> <unka> is now known as <user> </s>
+<s> URL/https:/ URL/wiki.ubuntu.com/ URL/recoverymode/ </s>
+<s> <user> , cannot get the user to enter grub ... </s>
+<s> <user> : well , if you ca n't login , you either need recovery mode or a live cd </s>
+<s> also try a ps2 <unka/> if you want </s>
+<s> ( until the issue gets fixed ) </s>
+<s> <unk#a> is now known as <user> </s>
+<s> what is the easiest way to upgrade ubuntu in virtualbox </s>
+<s> sudo apt-get upgrade </s>
+<s> <user> , recovery session is on now </s>
+<s> will it install the latest version ? </s>
+<s> <user> : do-release-upgrade , if you mean a release upgrade </s>
+<s> <user> : enable networking from the menu there , then run : ls -lha DIR/boot/ | nc termbin.com 9999 </s>
+<s> <user> : you can also ( <unka)> the password for users , with passwd username </s>
+<s> im on ubuntu 14 and it runs super slow in virtualbox . i read that ubuntu 14 uses a lot of resources for its gui . will upgrading to ubuntu 15 fix the issue ? </s>
+<s> <user> : ubuntu <unk#*.> is eol </s>
+<s> <user> : use a lighter gui </s>
+<s> can you recommend one that is n't graphic intensive ? </s>
+<s> <user> : did you try to change settings ? </s>
+<s> i mean adding ram , cores etc </s>
+<s> i tried everything </s>
+<s> but video only 128 mb ? </s>
+<s> i read a whole bunch of blog posts recommending all types of settings </s>
+<s> <user> : lxde or xfce . lxde is slightly lighter , but imo xfce is a more complete desktop environment </s>
+<s> yea 128mb </s>
+<s> ubuntu-mate is very light too </s>
+<s> and very complete </s>
+<s> how do i check which desktop environment im currently running . i think i installed a few versions before </s>
+<s> also , check if you have hardware acceleration for virtualization enabled in your bios settings </s>
+<s> ls DIR/usr/ DIR/share/ DIR/xsessions/ </s>
+<s> what 's the output of that ? </s>
+<s> they are all enabled </s>
+<s> wow </s>
+<s> one sec . i have to boot up ubuntu </s>
+<s> <user> : i will be back soon , i also interested in vb performance but have to go </s>
+<s> 9 11 attacks , did usa do it itself or it just let it happen ? </s>
+<s> did usa administration murder 3000 american citizen in 9 11 attacks to justify starting a war against iraq ? </s>
+<s> if <unka-> did it , why go to kill 2 million iraqi ? </s>
+<s> URL/http:/ <unka./> URL/https:/ <unka./> </s>
+<s> some of the benefits americans say they achieved after 9 11 attacks include : </s>
+<s> <unka*> flow of oil , which price is in continuous decline . trump said he will simply take the iraqi oil , and when he was told that iraqi oil belongs to iraq he said there is no <unka(> usa destroyed it ). </s>
+<s> <unka*> of <unka> with construction of not less than 14 american military base which give a close eye on china . </s>
+<s> when i run ls DIR/usr/ DIR/share/ <unka/> i get gnome.desktop <unka-.> </s>
+<s> <unka-.> ubuntu.desktop </s>
+<s> <user> : that means that you have those sessions installed . you can try to login with gnome-fallback , it requires little resources , you do n't need to install another desktop environment </s>
+<s> <user> : you can select it from the login screen </s>
+<s> login screen ? i was never prompted </s>
+<s> <user> : if you have autologin enabled , then just logout </s>
+<s> ok </s>
+<s> if i switch , will i lose my data ? </s>
+<s> <user> : of course not ; you 'll just see different menus , and you can select the previous " menus " the same way , with a <unka+> </s>
+<s> so quick question </s>
+<s> rufus is supposed to not have the " boot error " problem that unetbootin can have right </s>
+<s> it 's supposed to be a bit more stable , but i would n't assume any software is <unka-> ... </s>
+<s> i have 3 options gnome flashback compwiz , gnome flashback metacity and ubunut </s>
+<s> im currently on metacity </s>
+<s> <user> : try gnome flashback <unka> </s>
+<s> thats what im using </s>
+<s> <user> : that 's the lighter you can get </s>
+<s> at the moment </s>
+<s> <user> : what 's your host cpu ? </s>
+<s> then why is it still slow </s>
+<s> win me </s>
+<s> windows millenium ? </s>
+<s> ya </s>
+<s> erm </s>
+<s> no sorry win 7 </s>
+<s> that makes more sense . :) </s>
+<s> what processor do you have ? </s>
+<s> the one before the latest windows </s>
+<s> like , " intel " and the number there </s>
+<s> <unka(-> ) <unk#a-> cpu <unk#a.@> </s>
+<s> and how much ram ? </s>
+<s> 8 gb </s>
+<s> hello , i have dual boot win10 and ubuntu . i was working in windows wanted to restart , when it came to the grub menu it was very weird because resolution was very low . the windows suddenly has black screen on login and if i try to logon to ubuntu it succeeds but only has 2 resolutions available which wasnt the case before . i have integrated intel graphics , i load optimized bios defaults but it doesnt help . is it possible that graphics is are d </s>
+<s> ead ? </s>
+<s> <user> : what 's the output of this command , inside ubuntu ? ( grep model DIR/proc/ DIR/cpuinfo/ ; free ; ) | nc termbin.com 9999 </s>
+<s> i just shut down my vm </s>
+<s> i was recommended to give my vm <unk#a> and 6gb ram </s>
+<s> is that good idea </s>
+<s> that does n't leave much for windows ... 4 gb might be better </s>
+<s> finally , did you install the guest additions ? </s>
+<s> ya </s>
+<s> should i give it <unk#a> ? </s>
+<s> you already said you did </s>
+<s> i followed this guide URL/http:/ <unka./> <unk#a-/> </s>
+<s> ok the vm now has <unk#a> , 5gb of ram . im going to boot up and see what happens </s>
+<s> actually i gave it 4gb ram ... lets see how that goes fist </s>
+<s> <user> : you did check " enable <unka-/> " , right ? </s>
+<s> i followed that guide exactly as it is ... i must have double checked my settings like 10 times </s>
+<s> i installed ubuntu on virtualbox probably around 2 years ago </s>
+<s> hey all , i really hope one of you can answer me . </s>
+<s> resolution in grub changed suddenly .. why could this happen , please help </s>
+<s> oh wow ... its actually running a lot better now </s>
+<s> it 's about a blanc computer , only bios is working . <unka;> idea is to install linux on it as a os . but how to do ? i 've downloaded the program , ubuntu , but the computer is telling me that there is no bootable disk . </s>
+<s> <user> : are you using an ubuntu live cd to boot it ? </s>
+<s> <unk#a> is now known as <user> </s>
+<s> <unk#a> is now known as <user> </s>
+<s> < <user> > i downloaded it to a usb hdd </s>
+<s> <user> , which <unka/> did you use to make the hdd bootable ? </s>
+<s> < <user> > wait a sec , then i find it again ;) </s>
+<s> < <user> > i used this link , " URL/http:/ URL/releases.ubuntu.com/ <unk#a-./> " </s>
+<s> <user> : you can control it with grub_gfxmode and <unka_> in DIR/etc/ DIR/default/ DIR/grub/ </s>
+<s> <user> : this is a file . i 'm asking for the steps you did to create the bootable hdd . something like this : URL/https:/ URL/www.ubuntu.com/ URL/download/desktop/create-a-usb-stick-on-windows/ </s>
+<s> <user> , im also getting unknown display suddenly </s>
+<s> <user> , i assume graphics are dead </s>
+<s> <user> : oh of course , i understand that no software is 100% bug-free but iirc , it does n't have ( usually ) the same problem that unetbootin has with syslinux , yes ? </s>
+<s> yes </s>
+<s> <user> : boot a usb live session and check with it </s>
+<s> <user> : is there any way to put persistence on it ? </s>
+<s> < <user> > did n't se something like that , but i will follow your link , and try again . just i do n't have to use anything from windows . everything is really blanc . </s>
+<s> <user> , what am i gonna find out with live ? </s>
+<s> <user> : whether the graphics are ok or not </s>
+<s> <user> , if same happens on live than i can assume it 's faulty hardware ? </s>
+<s> btw - does the system disc creator of ubuntu still have problems ? i had to move over to unetbootin because of the bugs . </s>
+<s> <user> : sorry i 'm not able to confirm that </s>
+<s> <user> : has it worked before ? </s>
+<s> <user> , im not really sure why are you suggesting it </s>
+<s> <user> , yes .. it was like that </s>
+<s> i was working in windows reboot </s>
+<s> and suddenly </s>
+<s> grub menu has low resolution </s>
+<s> and windows has black screen on login </s>
+<s> how are you </s>
+<s> hi </s>
+<s> hi </s>
+<s> and ubuntu only has 2 resolution available and unknow display </s>
+<s> <user> : what 's up </s>
+<s> <unka> </s>
+<s> nothing </s>
+<s> <user> , could this be faulty graphics ? how can i check </s>
+<s> <user> , any ideas ? </s>
+<s> <user> : using live cd or stick gives you high certainty about where the problem is . if things are ok with live <unka/> , the problem is in you os . if not , it is very probably faulty hw . </s>
+<s> ok , thank you </s>
+<s> i try live </s>
+<s> and see </s>
+<s> <user> : laptop or desktop ? </s>
+<s> desktop </s>
+<s> why matters ? </s>
+<s> <user> : check the cable . </s>
+<s> screen is working , how could be the cable ? </s>
+<s> <user> : what kind of display cable are you using ? </s>
+<s> amm ... old one </s>
+<s> not hdmi </s>
+<s> what was ... </s>
+<s> <user> , screen would not work if it was faulty cable </s>
+<s> <user> : it is possible that you have slightly moved the cable connector and disconnected some of the pins . </s>
+<s> helloworld !!! </s>
+<s> <user> , wow ... even that 's possible thank you for that </s>
+<s> <user> : you are quite wrong in what you are saying . :)) </s>
+<s> <user> , ill try both </s>
+<s> <user> , im very surprised that can work in such way </s>
+<s> <user> : been there , done that . :) </s>
+<s> im <unka> grateful </s>
+<s> ill try both , first cable then live </s>
+<s> <user> : good luck ! come back to tell about your progress . </s>
+<s> ok </s>
+<s> ill report when done </s>
+<s> bb </s>
+<s> < <user> > thanks , now i 've something to work with . </s>
+<s> hey chat , using ubuntu 16.04 with <unka> and logrotate . i 'm having an issue where some logs are n't sent to the remote server and it seems to be related to <unka> . there is a logrotate conf.d file which calls invoke-rc.d but it seems like it 's not working :s </s>
+<s> i called service rsyslog force-reload and that picked up the rotated logs but i 'm not sure if 'service rsyslog <unka'> or the <unka'-.> rsyslog <unka'> are working </s>
+<s> <user> , it was a cable ! </s>
+<s> <user> : was it loose ? </s>
+<s> <user> , so good suggestion thank you , yes it was </s>
+<s> probably it moved </s>
+<s> when i restarted </s>
+<s> omg .. what i learned today </s>
+<s> <user> : no you want to know why it worked partially ? :) </s>
+<s> screen working but not detected </s>
+<s> <user> , yes please </s>
+<s> <user> : not all of the <unka/> of the cable are used in all modes . and also you may get lower resolutions working without proper gnd . </s>
+<s> this makes sense </s>
+<s> more modular </s>
+<s> <user> : so , my guess is that your connector was a bit sideways and not all of the pins were connected . :) </s>
+<s> hi guys ! i 've mounted an nfs share from a synology nas .. non-root are not able to access the mount point </s>
+<s> what 's going on ? </s>
+<s> <user> , im really grateful .. i wonder how much time i would lose for that , greate answer see you next time , have a nice day </s>
+<s> <unka_> is now known as <user> </s>
+<s> <user> : you too , happy to help . :) </s>
+<s> all you black and whites , you just not cool </s>
+<s> msg chu hi </s>
+<s> <unk#a> has joined </s>
+<s> hi folks </s>
+<s> hmm something missed there </s>
+<s> _ <user> is now known as <user> </s>
+<s> well . 14.04lts on <unk#-.> boots to lightdm but then wo n't accept <unka/> input there apart from ctrl+alt+f1 . on tty1 login works . booted previous kernel -25 instead : keyb <unka> on lightdm , but after login session starts , then no <unka/> again and the session is garbled . </s>
+<s> <unka> is now known as <user> </s>
+<s> but i forgot with whom </s>
+<s> <user> is now known as <user> </s>
+<s> <user> is now known as <user> </s>
+<s> bash : DIR/etc/ DIR/apt/ DIR/sources.list.d/ <unk#a-./> : access denied </s>
+<s> anyone had any luck with the i3 installation guide on 16.04 ? </s>
+<s> <user> : if you want to edit that file , you 'll have to use sudo to get root privileges </s>
+<s> <user> , im root . thats why it surprises me . </s>
+<s> okay . missing <unka-> . </s>
+<s> strange experience . at first i was frustrated when switching to arch . then i switched back to ubuntu , because ms <unka> ubuntu . but now i miss arch , becuase when stuff doesnt work in ubuntu , all you can do is pray . </s>
+<s> hello ! could someone please give me a couple of <unka/> for a simple <unka-> <unka-> -> indicator-messages solution ? ( ubuntu 16.04 ) </s>
+<s> what i actually need is a more reliable replacement of notify-send in use cases like this one : </s>
+<s> { <unka-> ; notify-send " finished : code = $ ?, timestamp = ( $(date <unk").;> } </s>
+<s> hello </s>
+<s> by " reliable " i mean that i want to be sure i wo n't miss the message . </s>
+<s> i am in troble with <unka> how l2tp vpn is working , could someone help me with seting up l2tp server ( xl2tpd )? </s>
+<s> ey </s>
+<s> hey </s>
+<s> <unka> </s>
+<s> nothing <unka,> slept </s>
+<s> lol </s>
+<s> where do you come from </s>
+<s> not english speaking country </s>
+<s> what is the name of the country ? </s>
+<s> not important </s>
+<s> i want to know </s>
+<s> but i do n't want to <unka,> dude </s>
+<s> <user> : for general chat we do have #ubuntu-offtopic . this channel here is for technical support only </s>
+<s> kk </s>
+<s> hello . on a basic home network , is there any <unka> benefit of using a subnet mask such as <unk#.> over 255.255.255.0 ? i only have my router and three connected devices . </s>
+<s> <user> : no need . using DIR/24/ mask in home is <unka> </s>
+<s> <user> : i would n't say so , no . if i saw such net mask i would be extremely confused too </s>
+<s> ok , thanks , i thought so . i 'll just leave it at .0 then . thanks ! </s>
+<s> <user> : do you know how mask works ? </s>
+<s> can you make your own chat in hexchat ? </s>
+<s> also , keep in mind that such hardcore <unka-> introduces obscure errors . such as a friend trying to connect to wifi and it not working </s>
+<s> <user> : yeah , i think so . i just wondered whether there was any benefit , <unka/> wise of restricting the network more . </s>
+<s> <user> : you mean your own room ? </s>
+<s> blast , too late :- ) </s>
+<s> <user> : masks is using in difficult situations . when there is to low ips in one subnet , or need to make hard routing table with isolated subnets . in home you no need that . </s>
+<s> ok , got it . </s>
+<s> s </s>
+<s> hi bitches </s>
+<s> welcome , <user> . keep in mind kids could be watching ! </s>
+<s> <user> : you </s>
+<s> <user> : are you ok with vpn ?) </s>
+<s> <unka*> </s>
+<s> <user> _ is now known as <user> </s>
+<s> dman it ... </s>
+<s> i need to configure l2tp </s>
+<s> nobody had experience with replacing notify-send with a solution based on indicator-messages ( a.k.a . messaging menu ) in ubuntu ? </s>
+<s> well , that 's a pity ... :) </s>
+<s> <user> : thats the question not for this chat </s>
+<s> no one customizing ubuntu in that way </s>
+<s> some arch - maybe </s>
+<s> but not ubuntu </s>
+<s> or debian </s>
+<s> when no x11 configured and all system building by user </s>
+<s> ubuntu - <unka> for ... </s>
+<s> <user> : i dont know of a solution . </s>
+<s> um ... </s>
+<s> <user> : enough of that fud </s>
+<s> how to call them ... </s>
+<s> why ?) </s>
+<s> i started to think about using a gui im client ( empathy ?) together with a command line app for sending messages ... but there are so many options that i 'm kind of lost :) </s>
+<s> i am in pause - i am in troubles with l2tp </s>
+<s> another issue is that the options i can think of require setting up a local <unka/> ... server which i 'm reluctant about ( seems to me like too much of efforts for a seemingly simple task ). </s>
+<s> <user> : look into gentoo documentation </s>
+<s> htere is a lot of notify <unka> </s>
+<s> <unka*> </s>
+<s> and there is full info about configuring it </s>
+<s> <user> , you mean i should migrate to gentoo , then ? :) </s>
+<s> <user> : no , i saying that ubuntu poor for low level documentation . there is a lot of manual how to do something . but not a lot of manuals where it saying how it works </s>
+<s> <user> : that is not true . </s>
+<s> hello everybody ! </s>
+<s> gentoo is better in that way . coz quality of that documentation is better </s>
+<s> <user> : i am saying for my subjective expirience . </s>
+<s> always using <unka\> docs . </s>
+<s> <user> , i think i understood your point </s>
+<s> i 've got a problem with <unka-> not working ... i keep getting " error exchanging keys ." whatever i do :( </s>
+<s> <user> : so you want a messaging client for the cli that uses the messages menue on the desktop ? </s>
+<s> i would prefer to find a simple ( maybe not obvious but ready-to-use ) solution in ubuntu . a local <unka-> + empathy seems to be working solution . i just thought someone could think of a simpler one . </s>
+<s> even if i try to use <unka-> -h hostname > > DIR/~/ DIR/.ssh/ DIR/known_hosts/ </s>
+<s> <user> : you are stating personal fud as general facts . that is wrong . stop that . </s>
+<s> <user> : there are <unka> like empathy that support several different protocols and are integrated in the messages menue </s>
+<s> hi guys , i planning make a video for my class . i have to record my screen . do you know a application for <unka(?> os is ubuntu 16.04 lts ) </s>
+<s> <user> : the deal is , i am not used to talk in eng comunity . so do not really what the situation is here . for my world - that is true . </s>
+<s> <user> : vlc can do that . or <unka> </s>
+<s> desktop* </s>
+<s> thx </s>
+<s> also obs </s>
+<s> to install " adb " and " fastboot " should i use the " adb " and " fastboot " package , or " android-tools-adb " and " <unka-> " ? </s>
+<s> <user> , i think about empathy , but i 'm not sure how to organize sending messages from command line to empathy without ( if it 's possible ) setting up and configuring a local instant messaging server . </s>
+<s> <user> : i dont understand the setup with cli and desktop you seem to have . </s>
+<s> <user> : use fifo file . and thats strange , coz empathy is gui app </s>
+<s> if you would use , for example , <unka> - ok . </s>
+<s> but gui and cli combined ... do not really understand . </s>
+<s> so , would someone help me with l2tp ? </s>
+<s> <user> , <user> : well ... i do things in a terminal window , then i run a <unka-> program there . then i switch to other tasks . i want to be notified that the <unka-> process is finished in my terminal window . now i can use notify-send for this . but the issue with notify-send is that i can easily miss the notification message ( it appears for several seconds and disappears then ). i need such a notification as i have with thunderbird , for example : i </s>
+<s> never miss a new email due to persistent indication . i want something like that . </s>
+<s> <user> : ah ok , so you dont want a messaging protocol , you want a notification </s>
+<s> <user> , yeah . using im for this was a first thing i could think of . </s>
+<s> <user> : fifo file and run wrote a scritp for notify </s>
+<s> <user> , i 'm not sure i understood regarding fifo files . </s>
+<s> so , here it is my xl2tpd config and logs . URL/https:/ URL/paste.ubuntu.com/ <unk#a/> </s>
+<s> what i am doing wrong ? </s>
+<s> <user> , ah , okay ... but i also need a desktop notification about the fact of an incoming event , not just a log of events </s>
+<s> <user> : well , you could send yourself a email :) </s>
+<s> <user> : um ... i can recomend you to open gento docs for notify <unka> </s>
+<s> <user> : notify-send got -t look at that </s>
+<s> <user> : URL/http:/ URL/manpages.ubuntu.com/ <unk#a-./> </s>
+<s> <user> , i thought of this but i need to set up email server then :) ( using existing email server is not an option due to security reasons -- my email password should be in a script , that 's bad ) </s>
+<s> -t 0 will stay there forever </s>
+<s> <user> , notify-send 's -t option is ignored </s>
+<s> <user> : -t 0 should work . what ubuntu is that exactly ? </s>
+<s> checking ... </s>
+<s> <user> , the last time i checked was broken ; silly workaround just repeat the command 3 times : <unconvertable > </s>
+<s> <user> , you are right . i tried large values , but it seems i never tried it with -t 0 : it displays a dialog window with <unka/> instead of notification in this case . it 's okay for a workaround but it 's not <unka/> enough . i would prefer " <unka> <unka"-> way of notifications . is it a way to achieve that ? </s>
+<s> <user> , ubuntu 16.04.1 lts </s>
+<s> hello i am using ubuntu 16.04 lts and wants to install <unka-> but when i open the drive i always get this error " could not read actual profil " " could not open file DIR/dev/ <unk#a/> for device key <unk#a> : permission denied " </s>
+<s> # ugly and loud noise , getting on everyone 's nerves ; this should be done by a </s>
+<s> # nice pulseaudio bing ( ubuntu : <unk##> ) </s>
+<s> i 'm a tad closer to something here .. if i use the terminal , i get " error exchanging keys " , but with filezilla it works , it asks me to accept the certificate and then goes on to connecting </s>
+<s> ubuntu bug <unk#> in pulseaudio ( ubuntu ) " overuse of system beep without volume control " [ medium,confirmed ] URL/https:/ URL/launchpad.net/ <unk#a/> </s>
+<s> <user> : have you created udev rules ? </s>
+<s> <user> , it'a ugly , but have you tried xmessage <unka-> 20 hello ? </s>
+<s> so what is <unk##> , and how do i use pulse then ? i want to enquire more about that </s>
+<s> <user> no i am very new to ubuntu </s>
+<s> <user> , it 's really ugly :) but thanks anyway . </s>
+<s> <user> : got that ... </s>
+<s> <user> : first of all - look up into manuals and drivers needed for your device . on vendor site there is readme usally . </s>
+<s> <user> , maybe can be modified .... you're welcome </s>
+<s> then - URL/https:/ URL/wiki.archlinux.org/ <unka./> </s>
+<s> <user> : stop pointing users to wrong distro documentation . that is not helpfull </s>
+<s> <user> : does it ?) </s>
+<s> <user> : yes . stop it . last warning now </s>
+<s> ! guidelines | <user> </s>
+<s> <user> : the guidelines for using the ubuntu channels can be found at URL/https:/ URL/wiki.ubuntu.com/ URL/irc/guidelines/ </s>
+<s> sorry , we are always doing that .. maybe there is something wrong with us ... but arch wiki is really huge and helpful </s>
+<s> retro is now known as <user> </s>
+<s> and linux distros are pretty close to each other ... </s>
+<s> so ... </s>
+<s> do not know what the problem . </s>
+<s> anyway </s>
+<s> <user> : " just look at the arch wiki " is not how the ubuntu community support works . i guess you dont want to hear for your l2tp issue : just read the manuals from the other distro </s>
+<s> <user> : i would be very thanks if you'd give me gentoo docs for l2tp . </s>
+<s> <user> : which roccat mouse do you got there ? </s>
+<s> sorry , am just in another world ... </s>
+<s> <user> roccat <unka+> </s>
+<s> <user> is now known as <user> </s>
+<s> is n't anyone here a bit more familiar with the <unka-> from the terminal ? </s>
+<s> <user> : did you look at using this ppa ? URL/https:/ URL/launchpad.net/ <unka+/~> </s>
+<s> <user> : i will uninstall mine and try this one </s>
+<s> i used another one </s>
+<s> <user> , there is alwys zenity , if you want zenity --info <unk#a-=> <unka"-=> notification " <unka-> " $(date <unka%+-> ): my notification " </s>
+<s> <user> , thanks , but i would still prefer " messaging <unka"-> way of notification , not a dialog windows </s>
+<s> <user> , ok </s>
+<s> <user> : i get still same error could not open file DIR/dev/ <unk#a/> for device key <unk#a> : permission denied </s>
+<s> <unka-> my issue : </s>
+<s> is there an application integrated with the " messaging menu " </s>
+<s> which is able to ( relatively simply ) accept messages </s>
+<s> from a command line ( or a script )? </s>
+<s> qwert is now known as <user> </s>
+<s> are there scripts or pre-built deb packages for stripping down ubuntu kernel automatically , or is it better to just download tiny core and add it the things one may need ? </s>
+<s> <user> is now known as <user> </s>
+<s> <user> is now known as <user> </s>
+<s> jungle is now known as <user> </s>
+<s> <user> is now known as <user> </s>
+<s> <user> is now known as <user> </s>
+<s> <user> is now known as <user> </s>
+<s> <user> is now known as <user> </s>
+<s> <user> is now known as <user> </s>
+<s> <user> , idk if i got you , but in theory you can add other program to the indicator-messages ; one of this program could be a socket sever that accept strings from a socket client ... </s>
+<s> <user> , and displays the string in a bubble notification or something similar </s>
+<s> jordy is now known as <user> </s>
+<s> <user> , URL/http:/ URL/www.omgubuntu.co.uk/ <unk#a-/> URL/http:/ <unka./> <unka-/> </s>
+<s> so i 've gotten <unka> <unka> installed , and it works if i call the <unka> file directly , it loads java and a gui , however i made a .desktop file that <unka> the exact same binary , and it loads it in tty2 , instead of in pts/0 </s>
+<s> any ideas on how to do that ? </s>
+<s> <user> , what is the exec line </s>
+<s> DIR/usr/ DIR/local/ DIR/bin/ <unka-/> </s>
+<s> <user> : do DIR/query/ me once , i would like to explain your problem </s>
+<s> the solution i mean </s>
+<s> DIR/query/ <user> </s>
+<s> <user> : that above exec works if i type it in a terminal </s>
+<s> <user> , what do you mean by " loads in tty2 " ? generally a <unka> console is on tty2 , but you're mentioning a gui </s>
+<s> <user> : did you put yourself into the group like its told in the <unka> of that ppa ? and made a relogin afterwards ? </s>
+<s> <user> : i <unka> $ sudo adduser username roccat in termianl , i didnt restart my pc yet </s>
+<s> <user> : hmm , i just notice , that if i run that exec line in a terminal , then check ps aux | grep <unka> , the processes started are running , and it 's noted that it 's running in pts/0 . opening the .desktop file on the other hand , shows it running in tty2 </s>
+<s> <user> : relogin </s>
+<s> <user> _ is now known as <user> </s>
+<s> <user> , that does n't make sense to me , but does the gui appear ? and what happens if ctrl+alt+f2 after launching the desktop file ? do you have other x sessions ? </s>
+<s> <user> : f2 is the current desktop session </s>
+<s> <user> : and the gui does n't appear </s>
+<s> hi guys , i have to delete a text and rewrite a new text in a video with openshot app . but i did n't do that . how can i do ? </s>
+<s> <unka_> is now known as <user> </s>
+<s> <user> : still not i re-login and restartet my pc </s>
+<s> <user> . i guess it dosent work </s>
+<s> <user> : seems like your first run with root did make a mess . delete DIR/var/ DIR/lib/ <unka/> URL/https:/ URL/sourceforge.net/ <unk#a/> </s>
+<s> i am back </s>
+<s> < <user> > <user> : seems like your first run with root did make a mess . delete DIR/var/ DIR/lib/ <unka/> URL/https:/ URL/sourceforge.net/ <unk#a/> </s>
+<s> <user> : i reboot my system and now its working </s>
+<s> <user> : ok </s>
+<s> <user> : thanks for your help </s>
+<s> hi guys , i have to delete a text and rewrite a new text in a video with openshot app . but i did n't do that . how can i do ? </s>
+<s> <unka> ? </s>
+<s> i have a question ? </s>
+<s> how do i get <unka-> on 32bit </s>
+<s> <user> : </s>
+<s> e : unable to locate package <unka-> </s>
+<s> r </s>
+<s> <user> is now known as <user> </s>
+<s> <user> is now known as <user> </s>
+<s> <user> : <unka-> maybe ? </s>
+<s> sergio is now known as <user> </s>
+<s> <user> : okay , i think i know where the problems <unka> . the program needs sudo </s>
+<s> <user> , if the gui is designed to run sudo that 's bad design . if it is n't designed , then prefer pkexec ( or <unka/> depending on your desktop environment ) as sudo is known to give problems with gui programs </s>
+<s> designed to require sudo and it 's some sort of workaround on your user 's <unka*> </s>
+<s> <user> : okay , so i checked the file i was running . it just has the normal shebang at the top , then this : sudo java -jar DIR/opt/ <unka/> <unka-/> <unka-./> </s>
+<s> so yea , designed to run sudo . :/ </s>
+<s> <user> , if i understood you right ( regarding bubble notification ), you propose to use an alternative way of notification , while using indicator-messages just for launching an alternative notification application ( which is itself not integrated with indicator-messages ). indicator-messages seems to be unnecessary in this scenario . </s>
+<s> <user> , thank you for the links ! i will probably fall back to this approach if i do not find one which re-use existing applications . </s>
+<s> <unka> is now known as <user> </s>
+<s> cyberspace is now known as <user> </s>
+<s> i suffer a black background on 16.04 gnome , the screen saver shows pictures and it also looks good in the system settings but for some reason the desktop stays black </s>
+<s> how do i switch from openjdk to <unka> <unk#a-> </s>
+<s> <user> _ is now known as <user> </s>
+<s> <user> is now known as <user> </s>
+<s> <user> , sudo add-apt-repository ppa:webupd8team/java & sudo apt-get update and after that sudo apt-get install oracle-java8-installer </s>
+<s> <user> , it 's installed , so now i have two javas , there is some command to switch between them , that 's what i need </s>
+<s> hay </s>
+<s> the following article on local dns ( URL/https:/ URL/www.stgraber.org/ URL/2012/02/24/dns-in-ubuntu-12-04/ ) reads " this dnsmasq server isnt a caching server for security reason to avoid risks ( ... )". does that mean that there 's no performance benefit to using a local dns , because domains will be resolved anew each query , or am i misunderstanding the part about it being <unka-> ? </s>
+<s> good night </s>
+<s> <unk#a,> URL/https:/ URL/www.digitalocean.com/ <unk#a-/> </s>
+<s> <user> _ is now known as <user> </s>
+<s> hey there . i have a file called <unka> , it is executeable , but running <unka./> just returns that no such file or directory exists </s>
+<s> it 's really weird </s>
+<s> <user> : try chmod +x <unka> </s>
+<s> it 's already green when using ls , but i did it and no change </s>
+<s> <user> : maybe it expects an argument ? </s>
+<s> <user> : paste ls -l ; <unka./> in a pastebin </s>
+<s> <user> : URL/http:/ URL/pastebin.com/ <unk#a/> </s>
+<s> <user> : it might expect arguments , but the way i 'm reading that , it does n't think the file exists </s>
+<s> <user> : yeah you're right </s>
+<s> <user> : what kind of file is it ? try " file <unka> : </s>
+<s> file <unka> </s>
+<s> <user> : i guess it 's a problem with bash </s>
+<s> <user> : <unka> : elf 64-bit lsb executable , x86-64 , version 1 ( sysv ), dynamically linked , interpreter DIR/lib64/ <unk#a-./> , for gnu/linux 2.6.9 , stripped </s>
+<s> <user> : try using the full path to execute it </s>
+<s> tried that as well . no luck </s>
+<s> aha so it 's not a bash issue </s>
+<s> <user> : maybe you have noexec on the filesystem </s>
+<s> <user> : the <unka> file next to it works </s>
+<s> <unka> is a c program too ? </s>
+<s> what 's <unka> ? </s>
+<s> <user> : try lsattr <unka> </s>
+<s> <user> : <unka-> <unka> </s>
+<s> <user> : i'd assume the <unka> executeable is the same kind as <unka> </s>
+<s> <user> : odd </s>
+<s> very </s>
+<s> i 've found another install guide for this software now . i 'll try and follow that </s>
+<s> <user> : what does it say when you use the full path ? </s>
+<s> <user> : the same as in the paste above </s>
+<s> just as if the file was n't there </s>
+<s> <user> : maybe the filename has a \n ? </s>
+<s> try " stat <unka*> " </s>
+<s> URL/http:/ URL/paste.ubuntu.com/ <unk#a/> </s>
+<s> i think that 's it </s>
+<s> nope </s>
+<s> <user> : try find -maxdepth 1 -iname " <unka*> " -exec { } \ ; </s>
+<s> <user> : </s>
+<s> find : <unka./> : no such file or directory </s>
+<s> find : <unka./_> terminated by signal 11 </s>
+<s> <user> : are you able to tab complete it ? </s>
+<s> <user> : are you running the xilinx application on a supported os ? </s>
+<s> <user> , paste the output of ldd <unka./> </s>
+<s> (" no such file or directory " for an elf executable can mean that a library is not found , in which case ldd will show it as unresolved ) </s>
+<s> <user> _ is now known as <user> </s>
+<s> retro is now known as <user> </s>
+<s> hi . is it possible to set mailto for cron in DIR/etc/ DIR/environment/ ? i have lots of servers and do not want to use " crontab -e " on every server . i use msmtp ( and puppet ). </s>
+<s> can anyone help me out on a renaming issue from command line </s>
+<s> <user> _ is now known as <user> </s>
+<s> when i try to run a program that relies on qt5 ( cockatrice ), i am getting a not found message even though apt-get says that it is installed . how do i locate and link to qt5 ? i have qt installed under the anaconda python package , which may be confusing things . </s>
+<s> i have a dir with many diff folders , inside those folders there is always a text file that i want to edit , all those text files have more or less the same things written into them and i want to edit a name like <unka-> to <unka-> </s>
+<s> but i dont want to go through all those folders and edit <unka> </s>
+<s> <user> , i am not familiar with qt5 but in general you'd want to paste ldd DIR/usr/ DIR/bin/ <unka/_> </s>
+<s> hello , i 've mounted a remote nsf share via DIR/etc/ DIR/fstab/ like so <unk#a-./:> DIR/home/ <unka/> DIR/workspace/ <unka-/> nfs <unk#a,=> . however , am having challenges with the permissions it 's settings . it gives the mounted folder permissions in the form of <unk#a-:> . i do n't know where it 's getting user <unk#> from > > PERMISSIONS_d PERMISSIONS_rwx PERMISSIONS_rwx PERMISSIONS_r-x 14 <unk#> www-data 4096 feb 6 <unk#:> <unka-> something like this . how can i re </s>
+<s> sove this . thanks </s>
+<s> is there any command that can go inside those folders and find <unka-> and rename it to <unka-> </s>
+<s> this would save me 1/2 an hour of work </s>
+<s> <user> , something like thunar 's bulk rename ? or : for i in <unka*/> ; do mv " <unka$/> " " <unka$/> " </s>
+<s> ; done </s>
+<s> renaming must be done inside the text files not at the text files </s>
+<s> then that 's not renaming </s>
+<s> where it finds this <unka-> to be renamed to this <unka-> </s>
+<s> or replace <unka-> with <unka-> </s>
+<s> <user> , sounds to me like you would need to write a short script for something like that </s>
+<s> thing is i dont know how to do it </s>
+<s> that would be awesome and i would use it many times btw </s>
+<s> bash or python will do it pretty easily </s>
+<s> <user> : look at se </s>
+<s> sed </s>
+<s> anon is now known as <user> </s>
+<s> hello </s>
+<s> <user> : ty </s>
+<s> i have a <unka> <unk#a> 4g usb dongle and it also has internal storage . sometimes when i plug it in the usb port only the storage device is detected , other times the lte modem , the lte modem works out of the box so how can i make it so that only it is detected when the dongle is plugged ? </s>
+<s> does anyone actaully game on linux ? </s>
+<s> hello ! </s>
+<s> i need some help . </s>
+<s> <user> : not exactly a support question </s>
+<s> ! ask | <user> </s>
+<s> <user> : please do n't ask to ask a question , simply ask the question ( all on one line and in the channel , so that others can read and follow it easily ). if anyone knows the answer they will most likely reply . :- ) see also ! patience </s>
+<s> whenever i do nvidia-settings in terminal and change the refresh rate of my monitor to 144 hz it works and applies then after restarting it 's back to 60 hz again . i always have to change it when restarting and such , anyone knows fix ? </s>
+<s> ! ask </s>
+<s> please do n't ask to ask a question , simply ask the question ( all on one line and in the channel , so that others can read and follow it easily ). if anyone knows the answer they will most likely reply . :- ) see also ! patience </s>
+<s> join <unka#> </s>
+<s> ! patience </s>
+<s> do n't feel ignored and repeat your question quickly ; if nobody knows your answer , nobody will answer you . while you wait , try searching URL/https:/ URL/help.ubuntu.com/ or URL/http:/ URL/ubuntuforums.org/ or URL/http:/ URL/askubuntu.com/ </s>
+<s> <user> : this might help ? URL/http:/ URL/askubuntu.com/ <unk#a-/> </s>
+<s> hi ! i uploaded a new version of a corrupt package to a private repo , how i can remove it easily ? </s>
+<s> hi </s>
+<s> i am installing webmin on ubutnu server .. but when i tried lsb_release -a it is showing me " no lsb modules are available . | distributor id : debian | description : debian gnu/linux 8.6 ( jessie ) | release : 8.6 " </s>
+<s> test </s>
+<s> <user> : sounds like you are n't using ubuntu then . </s>
+<s> ok .. then how can i install webmin there ? </s>
+<s> <user> , ^ </s>
+<s> <user> : you should start by asking in #debian </s>
+<s> for ones interested in a solution to my problem ( the one i asked here several hours ago ) ... </s>
+<s> the workaround : </s>
+<s> $ </s>
+<s> $ ( <unka'./=> && cat -- " <unka$> " && echo <unk'=> && expect " <unka$> " > DIR/dev/ DIR/null/ ) </s>
+<s> set timeout 1 </s>
+<s> spawn ircii -q -d -p 6667 sender 127.0.0.1 </s>
+<s> expect <unka-> " there are <unk#+-[\]> users and 0 services on 1 servers " { </s>
+<s> <user> : but but debian = ubuntu does n't <unka> </s>
+<s> URL/http:/ URL/paste.ubuntu.com/ <unk#a/> </s>
+<s> ! paste | <user> </s>
+<s> <user> : for posting multi-line texts into the channel , please use URL/http:/ URL/paste.ubuntu.com/ | to post ! screenshots use URL/http:/ URL/imgur.com/ ! pastebinit to paste directly from command line | make sure you give us the url for your paste - see also the channel topic . </s>
+<s> sorry guys </s>
+<s> URL/http:/ URL/paste.ubuntu.com/ <unk#a/> </s>
+<s> <user> : fyi , drone send that info when it mutes people . </s>
+<s> oh </s>
+<s> the <unka> requires expect , ircii , and <unka> installed . </s>
+<s> i could not find a fancy solution to my problem , though . </s>
+<s> thanks <user> , <user> and <user> for useful information and for trying to help . </s>
+<s> bye guys . </s>
+<s> i 'm having problems with ubuntu 14.04 on a 2011 dell ( 8gb ram ). after installing some updates , suddenly the x session freezes . everything works fine if i log in with xfce or tty . i 've got nvidia graphics card . is it possible to diagnose and fix this , perhaps ? </s>
+<s> <user> _ is now known as <user> </s>
+<s> it 's ok to use xfce ( not as slick as unity ) but i keep thinking this is something that should be fixed regardless ? i have purged the old nvidia drivers , but nothing else . </s>
+<s> hello ! can you install two versions of the fglrx drivers at the same time ? i have 4 graphics cards of differing models . </s>
+<s> or -- to put it another way -- is there any reason not to simply stick with xfce ( on this old laptop )? </s>
+<s> xfce is still a maintained so yea if you like it use it , really good for older hardware anyway <user> </s>
+<s> *it 's still being maintained i mean </s>
+<s> <user> : so , if i do n't see the freezing problem with xfce , then i 'm essentially not missing anything important ? </s>
+<s> <user> : fglrx does n't exist in 16.04 and on ( iirc ) </s>
+<s> <user> : so you are on 14.04 ? </s>
+<s> is it alt+f2 " r " to restart gnome so my .desktop files will be recognized ? </s>
+<s> not away of a freezing problem , you would have to share the bug report for me to answer that </s>
+<s> <user> _ is now known as <user> </s>
+<s> <unka*> </s>
+<s> i ran <unka-> on my <unka> created .desktop file and no errors but im not seeing an entry in my menus </s>
+<s> ah i c , documentaion is off , desktop files go into <unka./> </s>
+<s> <user> , user desktop files yes , system wide in DIR/usr/ DIR/share/ DIR/applications/ URL/https:/ URL/help.ubuntu.com/ URL/community/unitylaunchersanddesktopfiles/ </s>
+<s> hey , my syslog is pretty big so i looked arround and i found some weird stuff </s>
+<s> like lots of <unka-> errors altough i rarely use openvpn </s>
+<s> URL/http:/ URL/pastebin.com/ <unk#a/> </s>
+<s> any ideas how ? </s>
+<s> *why ? </s>
+<s> and <unka> some things about reloading laptop mode URL/http:/ URL/pastebin.com/ <unk#a/> </s>
+<s> someone ? </s>
+<s> saa is now known as <user> </s>
+<s> i <unka> lubuntu 16.04 and trying to create livecd i installed mysql but when i try to login it says <unka> denied </s>
+<s> can someone help to get into mysql </s>
+<s> so that i can create my own mysql database in livecd environment </s>
+<s> <user> , have you made a folder to save your msql database in ? or made the live with persistance ? </s>
+<s> <user> , seems like there are 2 deamons ? URL/https:/ URL/openvpn.net/ <unk#a-./> </s>
+<s> i am using uck to create my own mysql database </s>
+<s> by installig mysql in uck mode </s>
+<s> <unk#a> is now known as <user> </s>
+<s> basically iso is running in chroot </s>
+<s> error 1045 ( 28000 ): access denied for user ADDRESS_'root' ADDRESS_@'localhost' ( using password : yes ) this is the error </s>
+<s> <user> , how can i make sure openvpn does n't run without me specifically running it ? ( delete the deamon maybe ?) </s>
+<s> <unk#a> in a live environment you have nothing to write to </s>
+<s> systemctl status mysqld </s>
+<s> well you have ram </s>
+<s> should i run the above command </s>
+<s> and as soon as you reboot its gone </s>
+<s> <user> , yes </s>
+<s> wht will this command do </s>
+<s> man systemctl </s>
+<s> zero is now known as <user> </s>
+<s> <user> , not sure what exactly is going on , it seems like 2 deamons </s>
+<s> <user> , i see only 1 at 'ps -a' </s>
+<s> <user> : may i ask what your use case is ? why do you try to setup a mysql server from a live cd ? </s>
+<s> we install software and create livecd </s>
+<s> as many times users do not know how to install it in ubuntu </s>
+<s> hence i am trying to preinstall it and redistribute iso </s>
+<s> i ran systemctl status mysqld </s>
+<s> <user> _ is now known as <user> </s>
+<s> it says running in chroot </s>
+<s> ignoring request </s>
+<s> when i run mysql -u root -p command </s>
+<s> i get error error 1045 ( 28000 ): access denied for user ADDRESS_'root' ADDRESS_@'localhost' ( using password : yes ) </s>
+<s> fixed it by deleting DIR/etc/ DIR/openvpn/ DIR/client.conf/ and killing <unka_> <unka.@_> </s>
+<s> can some one help me to login to mysql </s>
+<s> <user> : 'command' is actually the database </s>
+<s> ... you wish to connect to </s>
+<s> i wish to <unka> to mysql </s>
+<s> when i run mysql -u root -p </s>
+<s> i get error error 1045 ( 28000 ): access denied for user ADDRESS_'root' ADDRESS_@'localhost' ( using password : yes ) </s>
+<s> and the password you are providing is correct ? </s>
+<s> oh yes </s>
+<s> and you're connecting from localhost ? </s>
+<s> most people organizations with your use case would distribute make available appliances instead . </s>
+<s> hello </s>
+<s> have are you guys ??? </s>
+<s> <user> : that 's " virtual appliances " , so an image of a vm . </s>
+<s> hi <user> </s>
+<s> another thing , what is starting laptop mode tools ? i get this a lot too in syslog URL/http:/ URL/pastebin.com/ <unk#a/> </s>
+<s> sorry did not get wht u are saying </s>
+<s> <user> : have are you </s>
+<s> i just need to login to mysql </s>
+<s> <user> : do you have an ubuntu support question ? if not , please chat i #ubuntu-offtopic instead . thank you ! </s>
+<s> help ! on kubuntu 14.04 lts ! dpkg has a major error and has trashed my server . getting error : " call to <unka> failed ( temporary <unka> fulld ?). check your installation " . this is because dpkg is hanging and causing the disk to fill . help please . also experiencing the same on my laptop here , but refusing to reboot , so as to not loose inet connection to get help ! </s>
+<s> all : went through recovery mode , deleted all in the DIR/tmp/ dir , but did n't help . the enabled disk r/w and looked for all the *.deb and <unka*.> downloads , deleted , but still get msg . do not know what file types dpkg creates , so no idea what to delete for that ! </s>
+<s> all : the error is in the dpkg created for mysql to upgrade from <unk#a.> to 5.7 and on the laptop , during build , has called this 7 times , even though only declared once </s>
+<s> how can i disable apport ? it hangs my system for about <unk#a-> while i 'm playing with things in chrome dev tools </s>
+<s> i had to ctrl+alt+f3 and login to see it was taking up 100% cpu </s>
+<s> <user> : uninstall it </s>
+<s> if apport consumes a lot of cpu cycles , it probably means it is preparing an error report because some application crashed </s>
+<s> dpkg --configure -a && apt upgrade cmds do not work , since its disk full and those require space to run ! any cmd to dpkg , recalls the bad mysql config that was downloaded . have to be able to erase the file for dpkg that contains the pointer to the package containing the error . </s>
+<s> it worked ! it is definitely something crashing , but after removing apport the <unka/> restart is relatively instant as opposed to locking up the system for a painfully long time </s>
+<s> <user> : you would not get to upgrade from mysql 5.5 to 5.7 while using 14.04 unless you were using thrid party packages </s>
+<s> <user> : service apache2 start - command or make a fake site after someone wrote id password on the site i can not help you find out where to register ie <unka-> entry id password is where it is registered i keep the fake site ip </s>
+<s> <user> : so please describe your ( non standard ) configuration closer . </s>
+<s> part &2 </s>
+<s> <user> : this id password will be stored in <unka> where ? </s>
+<s> <user> : i ca n't parse what you just said , please rephrase it . </s>
+<s> SUB/s/ <unka/> <unka/> </s>
+<s> <user> : please show all the commands you run and the errors they produce on a pastebin </s>
+<s> ! pastebin | <user> </s>
+<s> <user> : for posting multi-line texts into the channel , please use URL/http:/ URL/paste.ubuntu.com/ | to post ! screenshots use URL/http:/ URL/imgur.com/ ! pastebinit to paste directly from command line | make sure you give us the url for your paste - see also the channel topic . </s>
+<s> <user> : <unka> up at : URL/http:/ URL/www.linuxquestions.org/ <unk#a-/> </s>
+<s> also post the output of 'df -h ' </s>
+<s> <user> : restarting server to recovery mode </s>
+<s> server recovery mode says " df-h " not found </s>
+<s> <user> : fake web site made example URL/www.facebook.com service apache2 start - with command where is the id code entered in this </s>
+<s> <user> : you ar <unka> a space character </s>
+<s> <user> : df -h is correct </s>
+<s> is there any method to encrypted my usb stick in ubuntu 16.04 lts </s>
+<s> <user> : cant't <unka-> so what do you want to see ? </s>
+<s> <user> : you seem to be using some kind of online translator machine translation . i am afraid we cannot communicate <unka> way . </s>
+<s> please try to get help in your native language ubuntu channel </s>
+<s> <user> : DIR/dev/ DIR/sda1/ is 99% full </s>
+<s> <user> : you ca n't bring up the system to multi user mode with networking ? </s>
+<s> <user> : i enabled networking to get into r/w mode </s>
+<s> so you can use pastebinit </s>
+<s> ! pastebinit </s>
+<s> pastebinit is the command-line equivalent of ! pastebin - command output , or other text can be redirected to pastebinit , which then reports an url containing the output - to use pastebinit , install the <unconvertable > pastebinit <unconvertable > package from a package manager - simple usage : command | pastebinit -b URL/http:/ URL/paste.ubuntu.com/ </s>
+<s> also , you have not yet answered my question about why you have a mysql server version 5.7 on ubuntu <unk##.> </s>
+<s> <user> : also published writeup , before this crash at : URL/http:/ URL/www.linuxquestions.org/ <unk#a-/> </s>
+<s> <user> , this may help ... URL/http:/ URL/ubuntuhandbook.org/ <unk#a-./> </s>
+<s> <user> is now known as <user> </s>
+<s> <user> is now known as <user> </s>
+<s> <user> : thanks i take a look </s>
+<s> <user> : i 'm a <unka> ! magento requires 5.7 . there is no stable release of ubuntu/kubuntu lts til april this year of an lts ( never stable until 18 months after initial release .) so can not upgrade to 16.04 lts </s>
+<s> <user> : i 'm a <unka> ! magento requires 5.7 . there is no stable release of ubuntu/kubuntu lts <unka(> stable until 18 months after initial release .) so can not upgrade to 16.04 lts till oct 2017 when it becomes stable ! </s>
+<s> <user> : i only run fully stable versions of lts </s>
+<s> ... so instead you run an unsupported version of mysql </s>
+<s> <user> : mysql says it 's fully supported , but finding the dpkg <unka/> is in error , so therein lies my issue </s>
+<s> <user> : if mysql says it is supported on 14.04 , then they are supporting it , not ubuntu ... </s>
+<s> <user> : also <unka/> says it 's supported in the 16.04 release , but they are still using the same dpkg file , so again 16.04 is not yet stable . these are the kinds of bugs that have to be fixed before a <unka/> can be declared stable . </s>
+<s> <user> : yes and the " wget " for dpkg is on their site . so if a bug is opened will have to be against their dpkg config file ! </s>
+<s> can anyone else using gnome and chromium on 16.04 reproduce this bug ? when i use the dev tools in chromium and drag an element in the elements pane , just the act of trying to grab and drag it quickly causes app focus to change , then either gnome shell <unka-> or i get logged out entirely </s>
+<s> 9 11 attacks , did usa do it itself or it just let it happen ? </s>
+<s> <user> : are you claiming that wherever you got the .deb ( not 'dpkg file' ) for mysql 5.7 from is the same .deb that ubuntu ships for 16.04 ? in 16.04 , you do n't use an external .deb , mysql 5.7 is provided by ubuntu . </s>
+<s> did usa administration murder 3000 american citizen in 9 11 attacks to justify starting a war against iraq ? </s>
+<s> if <unka-> did it , why go to kill 2 million iraqi ? </s>
+<s> URL/http:/ <unka./> </s>
+<s> URL/https:/ <unka./> </s>
+<s> some of the benefits americans say they achieved after 9 11 attacks include : </s>
+<s> <unka*> flow of oil , which price is in continuous decline . trump said he will simply take the iraqi oil , and when he was told that iraqi oil belongs to iraq he said there is no <unka(> usa destroyed it ). </s>
+<s> ! ops | <user> </s>
+<s> <user> : help ! channel emergency ! ( only use this trigger in emergencies ) - <user> , myrtti , jrib , amaranth , tonyyarusso , nalioth , lamont , carlk , elky , mneptok , pricechild , tm_t , jpds , ikonia , flannel , <user> , wgrant , stdin , h00k , idleone , nhandler , jordan_u , popey , corey , ocean , cprofitt , djones , madpilot , gnomefreak , lhavelund , <user> , rww , phunyguy , <user> , chu </s>
+<s> </s>
+<s> hey <user> , cut it out </s>
+<s> <user> : so how does one reset dpkg to not call the .deb file downloaded by " wget " ? </s>
+<s> i have a question , i encrypted my 32gb usb stick and now i get this error when i try to mount the usb stick the unlocked device does not have a recognizable file system on it </s>
+<s> <user> : i do n't know what you're asking , but i think you need to uninstall the corresponding package ? </s>
+<s> <user> : what 's the fs ? </s>
+<s> <user> <unk#a+> </s>
+<s> hey , i 'm running ubuntu minimal with awesome wm on a 4th gen thinkpad x1 carbon , and i 'm trying to get the fn keys to work for volume and brightness . acpi_listen shows the events properly but i 'm not entirely sure where to go from there </s>
+<s> <user> : with disk full and unable to login any way shape or form and only at " root " in recovery mode an " uninstall " is impossible ! </s>
+<s> hi </s>
+<s> hi' </s>
+<s> <user> : must be able to purge the files off the hd , so i can actually login ! </s>
+<s> any1 there </s>
+<s> <user> : yes there are a ton of people here </s>
+<s> <unk#a> is now known as <user> </s>
+<s> i just ( remotely ) started the upgrade process on my ubuntu yakkety server to zesty , although am unable to ping addresses by names ( dns ) </s>
+<s> looking into getting that working again but no luck yet </s>
+<s> it looks like nslookup works </s>
+<s> nslookup google.com . . . but ping google.com does not </s>
+<s> ! zesty | <user> </s>
+<s> <user> : ubuntu 17.04 ( zesty zapus ) will be the 26th release of ubuntu . it is due to be released in april 2017 . discussion in #ubuntu+1 </s>
+<s> ok </s>
+<s> so basically revert back </s>
+<s> got it thanks ! </s>
+<s> i have a firewall on ubuntu ... have set policy rules and zones ... app on ubuntu itself does it use loc or fw ? </s>
+<s> i only did update & dist-upgrade , i backed up the sources.list </s>
+<s> hello guys </s>
+<s> all : so guys if i can solve the problem at : URL/http:/ URL/www.linuxquestions.org/ <unk#a-/> </s>
+<s> <user> : did you update <unka(*./> ) to point to zesty sources and then did apt-get dist-upgrade ? </s>
+<s> did an auto-remove of stuff i just added , doing a reboot now , but before the reboot i was still unable to access addresses by names </s>
+<s> hi </s>
+<s> will this let me recover from my disk full issue ? </s>
+<s> i did not touch ( <unka*./> ) </s>
+<s> only modified sources.list ( after creating backup of original ) </s>
+<s> it 's probably in a bit of a wonky state now </s>
+<s> <user> : but did you do dist-upgrade after editing DIR/etc/ DIR/apt/ DIR/sources.list/ to point to zesty ? </s>
+<s> yes </s>
+<s> i just pointed sources.list back to yakkety and did another dist-upgrade but do n't think that worked , it gave me an auto-remove option so i did that </s>
+<s> that 's not how dist-upgrades are supposed to be done on ubuntu for a good while now </s>
+<s> :( </s>
+<s> like , some lts releases ago </s>
+<s> all : we used to do this all the time , when 40gb and 80gb were always holding the os and we only have 250 gb drives for data . remember mounting up to 10 drives all as part of the primary fs so everything worked seemlessly ! </s>
+<s> <user> : zesty is not released . its in <user> state . #ubuntu+1 is the channel for issues with that </s>
+<s> just forgotten the actual fstab syntax for doing that ! </s>
+<s> how do i go back to yakkety </s>
+<s> <user> : and you cant revert back </s>
+<s> well it 's technically still mostly yakkety </s>
+<s> <user> is now known as <user> </s>
+<s> since apt will just isntall the highest version number . which you are on state from 17.04 now </s>
+<s> <user> : reinstall </s>
+<s> no </s>
+<s> are there any hackers between you </s>
+<s> seth is now known as <user> </s>
+<s> there has to be a way around it without <unka> the entire system </s>
+<s> ? </s>
+<s> <user> : no . you ruined your system manually . </s>
+<s> <user> : you broke it , might as well just face reality . </s>
+<s> <user> : ^ </s>
+<s> sorry <user> </s>
+<s> #perl </s>
+<s> <user> is now known as <user> </s>
+<s> how do i turn on syntax highlighting on leafpad ??? </s>
+<s> hi </s>
+<s> i seem to have multiple versions of node installed on my ubuntu machine </s>
+<s> i ca n't seem to update the actual node binary to the latest </s>
+<s> <unka> is now known as <user> </s>
+<s> how can i map a sequence of button presses to either constantly repeat or be tied to a single button press ? </s>
+<s> <user> look at creating macros </s>
+<s> <user> : check out xdotool </s>
+<s> hi i 'm trying to put my broadcom <unk#> card in monitor mode on ubuntu 16.04 </s>
+<s> or at least use an alternative driver than <unka> , which crashes <unka> </s>
+<s> any ideas ? </s>
+<s> please :) </s>
+<s> <user> _ is now known as <user> </s>
+<s> maybe someone has an iwlist script they'd like to give me :) </s>
+<s> <user> , there is channel about wireless or linux wireless search and ask there </s>
+<s> thanks <user> </s>
+<s> i 'm using streamtuner along with streamripper to record shoutcast channels . i get an access forbidden error stating to change the user agent . how do i do this in ubuntu 16.10 mate ? </s>
+<s> i need your help . </s>
+<s> i got mint </s>
+<s> ! mint | <user> </s>
+<s> <user> : linux mint is not a supported derivative of ubuntu . please seek support in #linuxmint-help on irc.spotchat.org </s>
+<s> but the problem is that it does n't let me install my nvidia card drivers </s>
+<s> we cant help you with linux mint . please ask the mint specialists </s>
+<s> why it is not supported </s>
+<s> <user> : it 's not ubuntu </s>
+<s> <user> : because they change stuff . its not ubuntu . ask them </s>
+<s> sorry i just got it installed . but what then is the original linux system that will be stable and will work fine </s>
+<s> hi </s>
+<s> <user> : if you want suppport in here install ubuntu or one of the flavors </s>
+<s> hii </s>
+<s> can you just tell me please what is the official ubuntu version </s>
+<s> and how can i check if it 's compatible with my hardware </s>
+<s> ! flavors | <user> </s>
+<s> <user> : recognized ubuntu flavors build on ubuntu and provide a different user experience out of the box . they are supported both in #ubuntu and in their flavor channel . the current list is : ! edubuntu , ! ubuntu-gnome , ! kubuntu , ubuntu ! kylin , ! lubuntu , ! mythbuntu , ubuntu ! studio , ! xubuntu , and ubuntu ! mate </s>
+<s> what 's the best for a slow hardware </s>
+<s> ? </s>
+<s> lubuntu or xubuntu </s>
+<s> or mate i suppose , nowadays </s>
+<s> what 's the best for games </s>
+<s> cs go </s>
+<s> any </s>
+<s> i highly recommend ##linux for those sorts of " <unka-> " questions though </s>
+<s> ok </s>
+<s> thank you very much </s>
+<s> <user> : for slow or old hardware best is to start with lubuntu </s>
+<s> ok </s>
+<s> DIR/cs/ register <unka#> 123 </s>
+<s> < <user> > hai </s>
+<s> hii </s>
+<s> i try to get access on my usb stick but i get this erorr URL/http:/ URL/pastebin.com/ <unk#a/> </s>
+<s> what is going on </s>
+<s> nee ubuntu <unka> ane </s>
+<s> <user> : boot into windows , run chkdsk DIR/f/ </s>
+<s> <unka> <unka> </s>
+<s> <unka> </s>
+<s> <user> : okey i will try this soon </s>
+<s> how exactly do you change the user-agent in python 3 ? by putting something like this <unka={> </s>
+<s> <unka'-> : <unk#a'./> ( macintosh ; intel mac os x <unk#_> ) <unk#a./> ( khtml , like gecko ) <unk#a./> <unk#a'./> </s>
+<s> i renamed my headers but want to know for certain that my user-name has indeed been changed . is there a way to test that ? </s>
+<s> oops , sorry </s>
+<s> da </s>
+<s> hello :) </s>
+<s> is there anyt other software store for kubuntu other than discover ? </s>
+<s> ! apt | <user> </s>
+<s> <user> : apt is the advanced package tool , which together with dpkg forms the basic ubuntu package management toolkit . short apt-get manual : URL/https:/ URL/help.ubuntu.com/ URL/community/aptgethowto/ - also see ! synaptic ( gnome ), ! muon ( kde ) or ! apper ( kde ) </s>
+<s> i would go for synaptic , detailed softwarecenter </s>
+<s> ! info synaptic </s>
+<s> <user> i knew about that but wanted <unka> be able to browse the software like i could with discover ,. i would use discover , but it is buggy and does not work </s>
+<s> synaptic ( source : synaptic ): graphical package manager . in component universe , is optional . version <unk#a+.> ( yakkety ), package size <unk#> kb , installed size <unk#> kb </s>
+<s> thank you <unka> did n't know iof i could isntall another in kubuntu version of ubuntu </s>
+<s> it is universal , so you are fine . </s>
+<s> <unka> : cool i really wish they would fix the discover in kubuntu 16.04 </s>
+<s> <user> : maybe they know more in #kubuntu channel </s>
+<s> im so concerned about the graphical manager as i am using this computer in an office of someone who is not too linux savy but it saved thenm from havign to <unka> a new pc and i have it looking identical to windows 7 that is on the other pc they use </s>
+<s> okay .. setup vnc server , but when i connect i get this and ca n't do anything .. i was hoping to see something more like the <unka> on console .. but at least i want to be able to do something .. URL/https:/ URL/ibin.co/ <unk#a./> where did i go wrong ? </s>
+<s> <user> : which desktop is running ? you need to turn off 3d accel or run a desktop without it </s>
+<s> <user> : i 'm learning , how do i find the answers to your question ? </s>
+<s> is that information in my xstartup ? </s>
+<s> dmesg </s>
+<s> </s>
+<s> <user> : is this a plain ubuntu install , or xubuntu , kubuntu , etc ? </s>
+<s> that does n't seem like the right place to find that info , really ? ( kubuntu ) </s>
+<s> you wo n't find it in dmesg , no . do n't know if kde can run without 3d accel , ask in #kubuntu </s>
+<s> anyone connect remotely to a windows instance ? is remmina the way to go ? ( the link i see recommending remmina is from 2013 ) </s>
+<s> use samba </s>
+<s> <user> : remmina works well for vnc , so i'd guess it does for rdp too . i know it is supported , at least . </s>
+<s> <user> , you could use nomachine to remotely connect to either win/linux systems . </s>
+<s> hi </s>
+<s> <user> is now known as <user> </s>
+<s> is samba good program to share files between pc and phone quickly ?? </s>
+<s> i dont know this is my firs time </s>
+<s> <user> : why dont you just connect per usb ? </s>
+<s> <user> : what do you mean </s>
+<s> you mean plug my phone with pc </s>
+<s> <user> : yes </s>
+<s> mohammad is now known as <user> </s>
+<s> <unk#a:_> it 's so <unka> to plug my phone to pc , just to move 1-2 pictures </s>
+<s> hi everybody ! what is the best dictation software under ubuntu ? something equivalent to dragon dictate . </s>
+<s> <user> : samba is a lot of unnecessary complexity for doing something simple . and plugging in a cable is not hard work . </s>
+<s> <unka> : true , i thought about to buy another usb stick with normal usb plug and micro </s>
+<s> they are so cheap meanwhile </s>
+<s> <user> : just use something like kde connect and send the files over bluetooth or over your network if the phone connects to a wap on the same lan that the target machine is on </s>
+<s> <user> , depends , julius works fine for japanese , simon for english ( after <unka-> ) URL/https:/ URL/www.howtoforge.com/ <unka-/> URL/https:/ URL/en.wikipedia.org/ <unka/_> </s>
+<s> <user> : thanks , i will check it out later , </s>
+<s> this is probably ot but i needed to vent somewhere since i could n't find an appropriate forum to do so - godaddy wo n't let me transfer my domain until the end of march because i changed my contact info prior to the transfer and they wo n't free it up so i had to <unka-> with them for another year </s>
+<s> <user> : please dont misuse this channel if you already know its not related to ubuntu at all . </s>
+<s> <user> , indeed ot , try #linux or #ubuntu-offtopic perhaps ? </s>
+<s> anyone able to point me in the right direction for ubuntu 16.04 system settings crash on launch ? new install , can share unity-control-center launch error - my google-fu is failing and i am a *nix noob . thanks </s>
+<s> <user> , paste that output on paste.ubuntu.com please </s>
+<s> share here or pm ? </s>
+<s> <user> : here . </s>
+<s> URL/http:/ URL/paste.ubuntu.com/ <unk#a/> </s>
+<s> so you start systemsettings through terminal ? </s>
+<s> that 's what i get when i try , if i click on gui i get a hourglass that goes away , no error </s>
+<s> tried remove/install unity control center </s>
+<s> seems like you encountered URL/https:/ URL/bugs.launchpad.net/ <unk#a+-/> URL/https:/ URL/bugs.launchpad.net/ <unk#a+-/> </s>
+<s> launchpad bug <unk#> in unity-control-center ( ubuntu ) " duplicate for <unk##> unity-control-center crashed with sigsegv in <unka(_> )" [ medium,confirmed ] </s>
+<s> launchpad bug <unk#> in unity-control-center ( ubuntu ) " unity-control-center crashed with sigsegv in <unka(_> )" [ medium,confirmed ] </s>
+<s> i 've encountered the string in bug reports , but no resolution . i have not switched any theme settings for what it 's worth </s>
+<s> hii </s>
+<s> new here any insight how to rule the world </s>
+<s> <user> , step 1 . read the topic .. </s>
+<s> <user> : thanks for looking , i will consider it an open bug , maybe try reinstalling </s>
+<s> <user> , one comment says it does not happen allways .. </s>
+<s> always for me , gui or terminal launch </s>
+<s> <user> , not sure what to do , besides confirm that bugreport , or maybe some updates are kept back > sudo apt update && sudo apt dist-upgrade </s>
+<s> <user> : are you ready for a laugh ? i applied my windows troubleshooting skills and rebooted the laptop . now it launched :d i have spent 1 hour on this . lmao thanks . i will confirm report if behavior reappears </s>
+<s> <user> , oke good action . </s>
+<s> how do you know whether to use ntfs or ntfs-3g when mounting a windows partition in ubuntu ? </s>
+<s> and are the options <unk#a,.=_> sufficient or do i need to set uid , gid dmask and fmask ? </s>
+<s> iirc , i think ntfs is deprecated and ntfs-3g is the standard way now . </s>
+<s> hello :) </s>
+<s> hey guys </s>
+<s> quick question for bash here </s>
+<s> i have a script that i run with : bash script 2 > &1 | tee -a DIR/var/ DIR/scripts/ DIR/logs/ </s>
+<s> <user> : bash is not around to answer . :p </s>
+<s> now in that script there 's a line : nano DIR/some/ DIR/file/ </s>
+<s> <user> : iirc , there is a bash channel </s>
+<s> it fails and i ca n't exit , only shows my key combinations ( ctrl + x etc ... ) </s>
+<s> any idea ? </s>
+<s> ca n't exit ? </s>
+<s> so what does ctrl+x do ? </s>
+<s> also , it 's not clear how " it fails " if it shows you your " key combinations " </s>
+<s> is n't that what you'd expect success to look like ? </s>
+<s> <user> : fails how ? </s>
+<s> o.0 jesus , i mean <unka> warned me , but i did n't think there would be that many entries in DIR/list/ </s>
+<s> <user> is now known as <user> </s>
+<s> o.0 i really hope you did n't just sign in from a <user> account > . > </s>
+<s> <user> : offtopic ? </s>
+<s> no , watching someone just sign into irc and then change their nick from <user> , and as such could be a good starting point to account security > . > <unka#> </s>
+<s> <user> : this is the support channel , please take chatter elsewhere . </s>
+<s> kk </s>
+<s> dan_ is now known as <user> </s>
+<s> <user> is now known as <user> </s>
+<s> <unka> </s>
+<s> <unka> could you share the best script on paste bin and tell us what is happening and what you expect to happen when the script is ran </s>
+<s> ^^ </s>
+<s> <user> , your script redirects stderr to stdout ( 2 > &1 ) and the output of the script appends to the file DIR/var/ DIR/scripts/ DIR/logs/ </s>
+<s> <user> , as <user> suggested , cat script | pastebinit so we can take a look </s>
+<s> <unka> is now known as <user> </s>
+<s> oh sorry forgot the 50 </s>
+<s> hi </s>
+<s> someone here ? </s>
+<s> ! ask | <user> </s>
+<s> <user> : please do n't ask to ask a question , simply ask the question ( all on one line and in the channel , so that others can read and follow it easily ). if anyone knows the answer they will most likely reply . :- ) see also ! patience </s>
+<s> <user> : yes , just ask :) </s>
+<s> do you know any ide to develop lisp </s>
+<s> i have " <unka> " but is command-line tool based </s>
+<s> do n't you develop lisp on <unka> today ? </s>
+<s> <user> , there is <unka> </s>
+<s> <unk#a> </s>
+<s> <unk#a> </s>
+<s> i hope that is n't your password </s>
+<s> <user> - eclipse w/ a lisp plugin ? </s>
+<s> <unk#a> </s>
+<s> is <unka> free ? </s>
+<s> mmm eclipse could be a good option </s>
+<s> <unka=> 16.04 , then installed arduino , but when it starts i get errors : URL/http:/ URL/termbin.com/ <unk#a/> looks like i have a java setup problem , but i do n't know what it is . any help ?? </s>
+<s> <unk#a> is now known as <user> </s>
+<s> <user> when does this problem occur provide more details </s>
+<s> <unka> is now known as <user> </s>
+<s> <user> , at startup </s>
+<s> right sorry you did say that . are you able to boot to single user mode ? </s>
+<s> just a quick guess , that 's because it 's using <unk#a-> </s>
+<s> it should be using <unk#a-> </s>
+<s> <user> : i think <user> means on startup of arduino </s>
+<s> the arduino board correct ? </s>
+<s> you insall ubunut on this URL/https:/ <unka./> and its not booting yes ? </s>
+<s> <user> : it 's a package in ubuntu </s>
+<s> yes , at arduino start , never gets to config the board </s>
+<s> so it failed after install or before ? </s>
+<s> <user> : can you pastebin `apt-cache policy <unk#a-`> ? </s>
+<s> URL/http:/ URL/askubuntu.com/ <unk#a-/> </s>
+<s> anyone into <unk#a,> lacp ? </s>
+<s> <user> , ask your issue with some great details please </s>
+<s> <user> , if someone knows , then they will respond </s>
+<s> <user> , URL/http:/ URL/termbin.com/ <unk#a/> </s>
+<s> well my problem are what lacp mode should i choose </s>
+<s> bonding modes </s>
+<s> <user> what are you using to aggregate links ? ifenslave ? </s>
+<s> yes </s>
+<s> what problem are you having ? </s>
+<s> <user> : ok , how about `which java` ? </s>
+<s> am on step to decide what bonding mode to choose </s>
+<s> <user> : and <unka`> <unka-`> </s>
+<s> so it must be switch that limits what modes i can choose ? </s>
+<s> if you want to use lacp , than your switch must have support for it . </s>
+<s> <user> i have hp <unka> <unk#a-> switch 2 layer ... my goal was to have load balancing </s>
+<s> openjdk runtime environment ( build <unk#a+-.> ) </s>
+<s> openjdk 64-bit server vm ( build <unk#a+-.> , mixed mode ) </s>
+<s> <user> and what is the problem or question you have ? </s>
+<s> <user> : please use a pastebin </s>
+<s> ifenslave is well documented URL/https:/ URL/help.ubuntu.com/ <unka/> </s>
+<s> <user> what modes i can use on mine hp <unka> </s>
+<s> <user> : i guess for sanity 's sake `which java` as well </s>
+<s> ie load balancing will work or not </s>
+<s> thats more a question for hp no ubuntu support </s>
+<s> ubuntu is now known as <user> </s>
+<s> it looks like that switch does support lacp URL/https:/ <unka./> <unk#a-/> </s>
+<s> <user> , DIR/usr/ DIR/bin/ DIR/java/ - but i have both open and oracle installed , i need oracle - that 's how the alternatives are set now , if arduino <unka> openjdk how do i for force that </s>
+<s> <user> : i think you'd need to cahnge the arduino script to invoke the correct java </s>
+<s> bello </s>
+<s> i 'm on lubuntu 16.10 and having some issues with a steam install - should i go here , or somewhere else </s>
+<s> ! steam </s>
+<s> valve have officially announced that they are developing steam and are working with ! ubuntu during their development , see URL/http:/ URL/blogs.valvesoftware.com/ URL/linux/steamd-penguins/ for further details , see URL/https:/ URL/wiki.ubuntu.com/ URL/valve/ for install instructions , you can also join #ubuntu-steam for discussion . </s>
+<s> <user> , i 'll have to look , thanks </s>
+<s> the error involves " <unka> : failed to create directory " with something in DIR/bin/ </s>
+<s> i 'll go over that direction then </s>
+<s> <user> ask the #lubuntu channel </s>
+<s> it does n't seem to be a <unka-> issue , but you never know - there could be some esoteric interaction . i 'll try there too </s>
+<s> <user> : is it the 32bit hell or the video driver hell with steam :) </s>
+<s> kll_ : the issue happens every time i attempt to update steam </s>
+<s> it downloads <unk#a/~> of files </s>
+<s> then attempts to install them , and fails to do so </s>
+<s> fails with what errror <user> ? </s>
+<s> <unka> : failed to create directory </s>
+<s> <user> : details matter </s>
+<s> with regards to something in DIR/bin/ ( not DIR/~/ DIR/bin/ ) </s>
+<s> <user> : put the error on paste.ubuntu.com and show the link here </s>
+<s> the last time i tried was a few days ago and i do n't have the whole beast - would something like this be logged </s>
+<s> i could try downloading again but it takes like an hour to do so </s>
+<s> thats a known steam bug when install from apt-get </s>
+<s> <user> is now known as <user> </s>
+<s> try this chmod -r 777 steam directory </s>
+<s> and than try the update again </s>
+<s> i found another instance of the error , nearly identical to mine URL/http:/ URL/paste.ubuntu.com/ <unk#a/> </s>
+<s> gnu make version <unk#.> or newer is required ; other make programs or older gnu make versions will not work . gnu make is often installed under the name gmake ; this document will always refer to it by that name . ( on some systems gnu make is the default tool with the name make .) </s>
+<s> uh , <user> that doesnt sound right </s>
+<s> i 'm trying to setup a php bot on an ubuntu server , and apache is giving me the error " access to <unka-/> denied because search permissions are missing on a component of the path </s>
+<s> does that mean that the default tool of `make` will suffice ? </s>
+<s> since it called it out i the ( ) ? </s>
+<s> just to see if its a permission error ? </s>
+<s> URL/https:/ URL/bugs.launchpad.net/ <unk#a+/> </s>
+<s> launchpad bug <unk#> in steam ( ubuntu ) " fatal error : failed to load <unka.> " [ undecided,confirmed ] </s>
+<s> now , that'd make sense if it was n't because all the folders and files in that path are 774 </s>
+<s> and i did : usermod -ag <unka> www-data </s>
+<s> <user> : no , that is a real bad advice to see if its just a permission issue </s>
+<s> i tried to install it via the download package ( <unka-> ) but that version would not even start </s>
+<s> and groups www-data returns : www-data : www-data <unka> </s>
+<s> the apt-get version starts , it just wo n't update </s>
+<s> im trying to set up a vnc server on my ubuntu 16.04 laptop ; i installed tightvncserver ; and i can connect to it ; but i dont see anything ... ideas ? </s>
+<s> <user> , you should have gnu make 4 </s>
+<s> <user> : can you show a " ls -al DIR/~/ <unka./> " </s>
+<s> <user> try adjusting the screen resolution on the vnc server </s>
+<s> <user> : i see , it was telling me to use the command `make <unka-`> instead of <unka`> <unka-`> </s>
+<s> " no such file or directory " </s>
+<s> <user> : to ? </s>
+<s> for me gnu make is just " make " </s>
+<s> how about trying to remove steam folder and than remove reinstall steam ? <user> </s>
+<s> twice . </s>
+<s> if you need more assistance , try <unka#> or <unka#> </s>
+<s> try something lower , than test and than try something higher and than test <user> </s>
+<s> so am i adjusting that on the <unka> or the server side </s>
+<s> is tightvnc the reccomended server ? </s>
+<s> server side </s>
+<s> <user> : that is just guessing in the dark . the actual errormessages would be better </s>
+<s> tobecloud is now known as <user> </s>
+<s> fear is now known as <user> </s>
+<s> <user> is now known as <user> </s>
+<s> i 'm running the download again . </s>
+<s> i think the default is x11vnc but i 'm not sure </s>
+<s> this will take quite some time </s>
+<s> adjusted to 1024x768 ; mno output </s>
+<s> no </s>
+<s> i think this server doesnt work </s>
+<s> does it prompt you for the password ? </s>
+<s> i already have a gui ; its for my laptop ; mabye tightvnc is for headless servers </s>
+<s> it does ; i can log in </s>
+<s> but i dont see anything </s>
+<s> <user> running this stop vnc server vncserver -kill :1 ? </s>
+<s> how do you check for a library ? </s>
+<s> <user> : the actual error message output by steam is " failed to load <unka.> " </s>
+<s> good evening </s>
+<s> ie : does a system have the readline lib ? </s>
+<s> also what desktop environment are you using ? </s>
+<s> <user> : i can get an ls -al of the <unka.> directory , would that be of any help </s>
+<s> <user> : what video driver is in use ? </s>
+<s> uncertain </s>
+<s> i did opt to install proprietary drivers and download new ones from the internet during setup </s>
+<s> sudo apt-get install libgl1-mesa-dri:i386 libgl1-mesa-glx:i386 </s>
+<s> already did both of those </s>
+<s> <user> : the sensible way is to use autoconf ( or similar ) to create a ./configure script to check for a library . but that is out of scope for this channel </s>
+<s> kernel modules for gpu : " nvidiafb , nouveau " </s>
+<s> <user> : i suggested that before , i think we should make the steam stuff an <user> factoid :) </s>
+<s> <user> : run libgl_debug=verbose steam </s>
+<s> stram obviously wants the nvidia driver , not nouveau </s>
+<s> <unka*> </s>
+<s> <user> ok seems <unk#a-> switch supports dynamic lacp <unk#a,> :) </s>
+<s> uh wait i take it back , i should read the question first :) </s>
+<s> although the output of my command ca n't hurt </s>
+<s> @ <user> URL/http:/ URL/paste.ubuntu.com/ <unk#a/> </s>
+<s> there 's no actual information from the error itself , because it will take an hour to download the files before it attempts to extract and install them </s>
+<s> is there a reason why people would or would not use apt-get install for postgresql ? </s>
+<s> and it completely voids the files if it ca n't successfully install , because it 's retarded </s>
+<s> <user> : that does n't look like a fatal error </s>
+<s> yep </s>
+<s> <user> : that is not an error </s>
+<s> it 's just the startup text </s>
+<s> it 's everything from the debug that i 've been able to obtain so far </s>
+<s> so please get the actual errors </s>
+<s> the error occurs later , after the download </s>
+<s> i 'm trying , but i have to wait for all 270 mb to download on a 1.5 <unka/> connection </s>
+<s> so i figured i'd give you that information on the <unka-> chance it 's actually at all relevant </s>
+<s> <user> : so far you 've talked about three or four incredibly different errors </s>
+<s> only two , that i know of </s>
+<s> the <unka.> and the failed to create directory </s>
+<s> i think the former is just a consequence of the latter </s>
+<s> in that it never got to create <unka.> because it ca n't extract , so of course it 's going to fail loading </s>
+<s> okay . paste the errors once they pop up </s>
+<s> 103 mb of 270 mb downloaded </s>
+<s> hi everybody ! what is the best dictation software under ubuntu ? something equivalent to dragon dictate . </s>
+<s> hello everyone , i found this tool for metadata editing on libreoffice , is it familiar to anyone here : URL/http:/ <unka./> <unka-./?> </s>
+<s> <user> , try #libreoffice </s>
+<s> <user> i did </s>
+<s> disc utility reports that it is ok but has <unk#> bad sectors , i this the right way to fix it URL/http:/ URL/askubuntu.com/ <unk#a-/> ? </s>
+<s> <user> : i would first make sure backups of the data is ok , asap </s>
+<s> <user> : and as a rule of thumb : you dont fix broken hardware issues on disks . they will fail shortly </s>
+<s> <user> : there are 2 partitions , one for windows data - almost empty and one with <unka> DIR/home/ </s>
+<s> <user> : there is no way to fix it </s>
+<s> the drive is dying </s>
+<s> but also nothing importand thatt ca n't be loaded from my cloud server </s>
+<s> so best fix is to drop this 500 gb hdd and buy new one ? </s>
+<s> yes </s>
+<s> <user> : your link is just covering the bad blocks as not to be used by the filesystem . that works for short time . but there will be new bad blocks and will continue to eat your data </s>
+<s> so maybe better would be to buy second ssd now :) </s>
+<s> john is now known as <user> </s>
+<s> wait , an ssd does n't have sectors </s>
+<s> hello all , i am trying to install ubuntu server thou i get stuck and theres no help found in google , can someone please help me ? </s>
+<s> but maybe the tool is n't picky there ... </s>
+<s> ! ask | <user> </s>
+<s> <user> : please do n't ask to ask a question , simply ask the question ( all on one line and in the channel , so that others can read and follow it easily ). if anyone knows the answer they will most likely reply . :- ) see also ! patience </s>
+<s> ! details | <user> </s>
+<s> <user> : please elaborate ; your question or issue may not seem clear or detailed enough for people to help you . please give more detailed information ; for example , we might need errors , steps , relevant configuration files , ubuntu version , and hardware information . use a ! pastebin to avoid flooding the channel . </s>
+<s> <user> : bad blocks are an indicator that your disk is about to die . you can keep using it but at some point in the very near future there will be <unka> data loss </s>
+<s> <user> : i come to the detecting hardware and it just stands still on 0% im there right now ... </s>
+<s> <user> : i am only a bot , please do n't think i 'm intelligent :) </s>
+<s> hi everybody ! what is the best dictation software under ubuntu , or speech to text ? something equivalent to dragon dictate or google voice . </s>
+<s> <user> : is it possible that bad blocks have huge <unka> on loading some data , for example i have cs:go game installed it and lately loading it , maps etc . taking serveral minutes and i was wondering hat happend </s>
+<s> <user> : yes , read errors can cause that </s>
+<s> i though it might be due to <unka> cpu and ram , but using default settings results with the same long loading time </s>
+<s> anyway this fault hdd is several years old , i put it to ne pc only because i had it </s>
+<s> <user> : stop asking me for more <unka> if you cant even respons with answers </s>
+<s> <user> : i am only a bot , please do n't think i 'm intelligent :) </s>
+<s> i have an ubuntu 12.04 lts server running , most importantly , nginx , php-fpm and mysql . the version of openldap is too old to connect to an ldap server i need to talk to . what is my play here ? is upgrading ubuntu altogether an option or will that be a huge headache ? i 'm running openldap <unk#.> ( which does n't work but is latest available via apt-get ). a centos box that does work is using <unk#.> . </s>
+<s> that 's old . </s>
+<s> @ <user> @ <user> _ URL/http:/ URL/paste.ubuntu.com/ <unk#a/> </s>
+<s> i am trying to install ubuntu server <unk#a.> thou i get stuck at hardware detection and the % stand stil on 0% what to do ? </s>
+<s> then again , we're still deploying new 14.04lts boxes here , so i should n't talk :p </s>
+<s> yeah , it 's a bit of a <unka> even to login and see the version number . :( </s>
+<s> how can i change the output of 'echo <unka$'> so i can use a different term on login ? </s>
+<s> <user> : upgrading to 16.04 " can " be <unka> for server applications installed ; see the release notes : URL/https:/ URL/wiki.ubuntu.com/ URL/xenialxerus/releasenotes/ . </s>
+<s> i have fbterm all set to go but that 's been the primary <unka> stopping me and i 've been reading it has something to do with getty , but no information exists that 's definitive for 16.10 </s>
+<s> <user> : reading . thanks :) </s>
+<s> zesty any good ? </s>
+<s> <user> : URL/http:/ URL/paste.ubuntu.com/ <unk#a/> this is the error log , the download completed </s>
+<s> <user> , if you like betas , yes </s>
+<s> specifically the excerpt where it starts messing up </s>
+<s> still in beta , then nope thanks </s>
+<s> 16.10 uses alternative getty ( <unka> ), how can i configure <unka> to use fbterm instead of xterm-256color for term , if <unka> has anything to do with it at all ? </s>
+<s> <user> : i 'll obviously do some googling , but i 'm curious what gets " wiped out " when you do such a major upgrade ... would i have to <unka/> php , mysql , nginx , etc ? </s>
+<s> <user> : URL/http:/ URL/paste.ubuntu.com/ <unk#a/> have at thee </s>
+<s> <user> : it 's safe to assume you 'll lose everything and prepare for the worse than to figure it out in advance . </s>
+<s> exactly </s>
+<s> i agree <user> </s>
+<s> i can take a system image and restore it if needed . i 'm just wondering if i 'm looking at 2 hours or 12 hours to " recover " :) </s>
+<s> <user> : mostly it is the config files that have to be rebuilt .. going from upstart to systemd as the control <unka> . </s>
+<s> so none knows a solution or what ? ( my question is not even visible any more ) </s>
+<s> i 'll guess closer to 12 . hehe </s>
+<s> thanks ! </s>
+<s> it 's best to figure these things out with scripts so you can run a single script that calls upon your smaller config scripts . </s>
+<s> after you run a single script , pipe the output to a log for later reading and see what went wrong so you can resolve it . </s>
+<s> rather , the single script which calls upon others . </s>
+<s> URL/https:/ URL/wiki.ubuntu.com/ URL/lts/ </s>
+<s> who updates this ? </s>
+<s> does n't even list 16.04 lts </s>
+<s> last updated in 2013 for reals ? </s>
+<s> evidently the answer to the question " who updates this " is " nobody " </s>
+<s> clearly hahaha </s>
+<s> <user> : open source , you see a need , step up and take care of it :) </s>
+<s> oh and </s>
+<s> :d </s>
+<s> man i just started playing with ubuntu <unka> i use opensuse and debian more </s>
+<s> but love to learn </s>
+<s> URL/http:/ URL/paste.ubuntu.com/ <unk#a/> while there 's actually someone active here </s>
+<s> trying to figure this out </s>
+<s> so none ... must i downoad a pirate win server instead -_- </s>
+<s> the program will download the files , but not install the downloaded files - guessing some sort of permission fluke but i have n't any idea how to proceed </s>
+<s> <user> : understood .. i came in from slackware . open source is always short on help .. and documentation is always in need to helping hands . </s>
+<s> indeed seems permission based issue </s>
+<s> open source is n't the only one with that issue </s>
+<s> <user> > did you check your iso ? </s>
+<s> hahaha i find that <unka> sometimes with the big guys </s>
+<s> ms and <unka> are far and few between </s>
+<s> is there a way for me to get more detail on my hardware detection freeze ? </s>
+<s> google the issue </s>
+<s> sorry to ask this here , but what is the channel to get help about freenode ? </s>
+<s> done it </s>
+<s> odds are someone else has already had the exact same problem . try different specifics , like your computer model </s>
+<s> ive sat for over a hour and no solution via google </s>
+<s> <user> : #freenode </s>
+<s> <user> > so you did not check the iso </s>
+<s> <user> : that be #freenode on this server . </s>
+<s> explain in more detail . </s>
+<s> thanks <user> </s>
+<s> 0erheks what do you mean by that ? </s>
+<s> ! md5sum </s>
+<s> to verify your ubuntu iso image ( or other files for which an md5 checksum is provided ), see URL/https:/ URL/help.ubuntu.com/ URL/community/howtomd5sum/ </s>
+<s> if you downloaded the image on windows you can use <unka> </s>
+<s> that is almost certainly not what is wrong </s>
+<s> i guess you mean " check disc for defects " </s>
+<s> <user> is now known as <user> </s>
+<s> i always check my downloaded files against a md5 , given the providers provides them </s>
+<s> the disc should know it 's defects and mark them . </s>
+<s> i went in there now and the screens started a disco for me ... </s>
+<s> if you disc image got corupted during transmission , it wo n't magically get marked ... </s>
+<s> flashes black and white </s>
+<s> <user> , where did you download from ? </s>
+<s> from <unka> server </s>
+<s> did you verify the disc integrity ? </s>
+<s> <user> , that makes no sense . they have many servers . you mean pirate bay ? </s>
+<s> no , the install iso suggested <unka.> something i dont remeber what it was </s>
+<s> i did n't catch teh whole back story , what was the inital question ? i came in late </s>
+<s> the install gets stuck on hardware detection </s>
+<s> thou this check disc for defects is clearly somthing wrong <unka(> flashes white and black and nothing <unka> ) </s>
+<s> thats happened to me too . i hd to try install 3 times to get 16.04 to install </s>
+<s> hello </s>
+<s> <user> , what is your hardware </s>
+<s> ? </s>
+<s> hello </s>
+<s> <user> , have you examined the list of hardware ubuntu allows . ( although of late is is endless ) </s>
+<s> msi big bang 2 is the mother board with a intel <unk#> something i dont remeber the number , and a geforce hd .. now i dont remeber the names -_- </s>
+<s> thou the motherboard is a big bang 2 </s>
+<s> intel i7 </s>
+<s> <user> : what is the output of " ls -al <unka./> " ? </s>
+<s> i dont even know how to get there </s>
+<s> only suggestion in those cases ( at least what i do given i have time ) i build the system with the bare minimum hardware pieces , and see if it passes that part </s>
+<s> do i load the wrong thing ? cuz i got uefi and one without uefi </s>
+<s> <user> , ok found it msi <unka> ? </s>
+<s> then add hardware , and re-install , or see if the os can simply install drivers for them </s>
+<s> <user> : actually scratch that shaders at the end </s>
+<s> <user> , cool board :) </s>
+<s> does anyone know how to use ubuntu mate and <unka-> </s>
+<s> ye its kinda cool ( first overclocking motherboard ) </s>
+<s> the option is not showing in the gnome-control-center </s>
+<s> <user> > if there is windows 10 on that machine , maybe it is an fastboot issue ( not secureboot ) that prevents hw detection </s>
+<s> <user> , have you overclocked it ? </s>
+<s> trying to connect to google drive </s>
+<s> oh overclocking .. </s>
+<s> wouldent it stop me from even booting the instalation ? </s>
+<s> and yes its a win 10 </s>
+<s> maybe , still worth a try to disable </s>
+<s> i dont know how to do that </s>
+<s> <user> , my board a asus using the same 2011 <unka> has <unka> button that <unka> <unka> . that can cause problems </s>
+<s> or yes i do .. i think its an option in click bios 2 </s>
+<s> well i cant do <unka> there -_- seems my mouse dont work in the bios anymore </s>
+<s> nope , tryed a secound time and still no muse function .. so i cant turn anything of in bios </s>
+<s> xd well , seems like it works with the keyboard .. </s>
+<s> well now ive checked the click bios 2 and it seems its on standard mode and i cant see anything with the words fastboot </s>
+<s> hi </s>
+<s> im gonna download the iso again and boot with usb too see if the download got corupted .. </s>
+<s> what are you downloading ? </s>
+<s> hello , <unka!\> </s>
+<s> hi </s>
+<s> ubuntu server 16.04lts from main ubuntu download page </s>
+<s> hell im running a old one still </s>
+<s> but i am looking for help from people . </s>
+<s> <user> , which version </s>
+<s> idk <unk#a.> or 14 . i dont remember </s>
+<s> details matter <user> </s>
+<s> please , help me . i want to scroll text in konsole . and shift+pageup is a great thing for this . but it 's not real ... if mc started . mc - midnight commander . i want to find this hotkey for scrolling . </s>
+<s> is it wrong to use universal usb installer to make install usb ? </s>
+<s> lsb_release -a in terminal <user> </s>
+<s> yes they do , i downloaded it a while ago </s>
+<s> what is the thingy called when i start the ubuntu iso where i can press f2 for language f3 for keymap etc .? </s>
+<s> bootup logo ? .. </s>
+<s> can anybody scroll text with keyboard while mc is running ? ( sorry for my english ) </s>
+<s> like URL/http:/ <unka./> <unk#a-./> </s>
+<s> i dont even know if it has a name .. i would call it install menu </s>
+<s> <user> <user> : well its like i said when entering the editor ( after executing the bash script with the 2 > &1 etc ) the script just stops </s>
+<s> everything else works fine </s>
+<s> its just a nano DIR/etc/ DIR/network/ DIR/interfaces/ line </s>
+<s> which breaks the whole script , ill post my git hub link </s>
+<s> <user> : URL/https:/ URL/github.com/ <unk#a#-./> </s>
+<s> if you have the time to help could you post an issue or private msg me ? i have to go right now ill be on in a few hours again thanks very much for the help ! </s>
+<s> ehm is the iso supposed to be called amd64 even thou i have a intel i7 ? </s>
+<s> yes </s>
+<s> the 64bit patent is from amd , but intel uses the same </s>
+<s> ok .. well its downloading again now .. thou very slow , think il test the wifi instead .. </s>
+<s> what boot loader does ubuntu use ? </s>
+<s> <user> : grub </s>
+<s> i had to forcefully terminate thunderbird from its <unka> loop </s>
+<s> it has become bloated and slow - 150 mb immediately used </s>
+<s> is it also grub the first screen i see with f2 language f3 keymap at the bottom ? </s>
+<s> <unka> is now known as <user> </s>
+<s> <user> : you mean on the live iso ? </s>
+<s> yeah </s>
+<s> <unk#a> is now known as <user> </s>
+<s> <user> : that is syslinux </s>
+<s> <user> : no grub in the install medium . to see the boot options screen on a efi machine ; as soon as the firmware screen clears spam the escape key -> language screen , escape key to accept the default -> boot options screen . </s>
+<s> and where does the translation come from ? like when i press f2 and select my language </s>
+<s> <user> : what is the issue ? </s>
+<s> i have a question regarding switching to ubuntu , are the only possilbe ways with a cd and usb ? </s>
+<s> where is a good place for me to upload a file , but also shows the timestamp of when it was uploaded ? </s>
+<s> i wonder like for other distrubution to be able to be used in my language from the beginning so i 'm trying to figure out what is it and where the translation is at </s>
+<s> <user> : no , dvd , too . or pxe boot . </s>
+<s> i am not familiar with some of those is there anyway i could do it virtually ? and not need the physical item like usb as i currently have none </s>
+<s> ! install | <user> </s>
+<s> <user> : ubuntu can be installed in lots of ways . please see URL/https:/ URL/help.ubuntu.com/ URL/community/installation/ for documentation . problems during install ? see URL/https:/ URL/wiki.ubuntu.com/ URL/commonproblemsinstall/ - do n't want to use a cd ? see URL/http:/ URL/tinyurl.com/ URL/3exghs/ - see also ! automate </s>
+<s> <user> : without a hardware medium its technically a lot more difficult . </s>
+<s> <user> _ is now known as <user> </s>
+<s> <unka[> ] is now known as <user> </s>
+<s> <user> _ is now known as <user> </s>
+<s> <user> _ is now known as <user> </s>
+<s> <unk#a-> is now known as <user> </s>
+<s> <user> _ is now known as <user> </s>
+<s> <user> _ is now known as <user> </s>
+<s> <user> _ is now known as <user> </s>
+<s> <user> _ is now known as <user> </s>
+<s> i have tried the unetboot method and am getting errors , does this method still work ? </s>
+<s> <user> _ is now known as <user> </s>
+<s> <user> is now known as <user> </s>
+<s> <unka> is now known as <user> </s>
+<s> <unk#a> is now known as <user> </s>
+<s> well this new download was exactly the same size as the iso i got on the usb now , should i take the new iso on the usb anyways ? </s>
+<s> <user> _ is now known as <user> </s>
+<s> <unk#a> is now known as <user> </s>
+<s> <user> _ is now known as <user> </s>
+<s> ! md5sum | <user> </s>
+<s> <user> : to verify your ubuntu iso image ( or other files for which an md5 checksum is provided ), see URL/https:/ URL/help.ubuntu.com/ URL/community/howtomd5sum/ </s>
+<s> <user> _ is now known as <user> </s>
+<s> hiya </s>
+<s> <user> _ is now known as <user> </s>
+<s> <unk#a> is now known as <user> </s>
+<s> <user> _ is now known as <user> </s>
+<s> <user> _ is now known as <user> </s>
+<s> when using wubi what determines how big i should put the instillation size ? </s>
+<s> <user> _ is now known as <user> </s>
+<s> dont use wubi </s>
+<s> oh </s>
+<s> it will break your ubuntu and your windows </s>
+<s> <user> , never use wubi </s>
+<s> <user> _ is now known as <user> </s>
+<s> <user> : if you look out for an easy install then get a dvd or a usb pendrive . </s>
+<s> ok </s>
+<s> im guessing the unetbooting no longer works either right ? </s>
+<s> do anybody know how to scroll text in konsole while mc is running ? shift+pageup does n't work properly ( </s>
+<s> <user> _ is now known as <user> </s>
+<s> well ive started the format anyways now ... </s>
+<s> <user> _ is now known as <user> </s>
+<s> missed the md5sum , doing it now ... </s>
+<s> <user> _ is now known as <user> </s>
+<s> <user> _ is now known as <user> </s>
+<s> bouth the iso files was the same .. </s>
+<s> ok , now im in the boot selection .. what should i do now ? uefi usb or usb ? </s>
+<s> last time i took the usb </s>
+<s> does anyone know why cpan <unka:> errors ? </s>
+<s> <user> : best guess here as you have a efi board is " uefi usb ' with fast boot disabled . </s>
+<s> well i cant disable fast boot anywhere in the click bios 2 no option exist there </s>
+<s> someone asked me where i downloaded from now i got the adress infront of me ( in the installation process ) se.archive.ubuntu.com it says </s>
+<s> just great .. now when picked uefi the installation froze <unka> , im at the archive mirror thing now and it stands still on 0% </s>
+<s> <user> is now known as <user> </s>
+<s> URL/http:/ <unka./> </s>
+<s> <user> _ is now known as <user> </s>
+<s> so uefi freezes at archive mirror and none uefi freezes at hardware <unka> that even tell you anything ? </s>
+<s> <user> : how long did you wait on searching for archive mirrors ? </s>
+<s> hello all ! how do i check the if the network buffers are full or what ? i 'm copying a file over the lan network at 1mb/s :| </s>
+<s> i waited about over 3 minutes , thou with none uefi the <unka> thingy took only under 30 secounds to do </s>
+<s> im at the boot selection now again and i see a " uefi : built-in efi shell " is that something i can use maby ? </s>
+<s> il go in the setup again and double check if theres some fast boot thingy meanwhile ... </s>
+<s> hello again , what could be the most effective way to check the security of external <unka/> ? </s>
+<s> hey i deleted a <unka> key and made a new one . but when i try and download the code of conduct it trys to make me use my old key </s>
+<s> <user> , installs from where </s>
+<s> is there a way to make it use my new key i created </s>
+<s> <user> , relating to my former question about libreoffice tool , from here : URL/http:/ <unka./> <unka-./> </s>
+<s> hello , i 'm looking to install ubuntu directly from the iso , without putting onto usb drive . is that possible ? </s>
+<s> how can i check if the tool does what it is supposed to do ? </s>
+<s> <user> : well , i guess you have to ask the <unka> guys about that </s>
+<s> <user> : possible : URL/https:/ URL/help.ubuntu.com/ URL/community/grub2/isoboot/ . if tou can figure out how to unmount the booting root partition . i have failed . </s>
+<s> <user> : they may also be using some unusual boot manager , like plop </s>
+<s> i found " memory fast boot " is that the one ? </s>
+<s> hi people </s>
+<s> need help here </s>
+<s> <user> , thanks . i 'm reading </s>
+<s> <user> , like this : <unka'> , could you please suggest me one way to check if your tool might contain <unka'?> ? :) </s>
+<s> <user> , no , i 'm using whatever is default with ubuntu 16.04 </s>
+<s> <user> : yes :) </s>
+<s> <user> : ask them how they make sure it doesnt contain malicious code </s>
+<s> <user> : you could <unka/> someone to audit the code ( if its open source or if they will let you do this ). but this is not really ontopic for this ubuntu support channel . </s>
+<s> ! ask | <user> </s>
+<s> <user> : please do n't ask to ask a question , simply ask the question ( all on one line and in the channel , so that others can read and follow it easily ). if anyone knows the answer they will most likely reply . :- ) see also ! patience </s>
+<s> man this process looks like a major <unka-/> <user> . i 'm probably just being dumb . used to do it , have n't for <unk#a./~> years . basically , i have a new ssd that i want to install to . i 've got the iso on my hdd which is my boot drive . is there an article that explains how to install from my current boot drive to the new ssd ? i have the ssd in my laptop and the hdd in an external enclosure at this point </s>
+<s> <user> , yes , i am aware , sorry .. did n't intend to go deeper into it , but was just wondering if i could use any program on ubuntu to check the packages . </s>
+<s> <user> : most easy way is using a ubuntu dvd or usb . everything else needs some more effort for the setup </s>
+<s> yeah i do n't have a dvd or spare usb <user> </s>
+<s> not without formatting things that i do n't have backups for and ca n't back up at this time </s>
+<s> <user> : so it might be better to invest 10minutes to free or find a usb pendrive instead of reading and trying to do the setup for other methods for one hour :) </s>
+<s> seems the problem maby has been solved ... ( memory fast boot turned off ) </s>
+<s> <user> : i tried the install from the <unka> <unka-> - .. i did not spend a lot of time at it but i did not see a ready means to unmount the booting root partition to proceed with the install . but i am sure there is a way . </s>
+<s> well i just went and purchased the new drive and enclosure today . i 'm not going out to find a usb stick at this point </s>
+<s> ok now im at harddrive detection again ... the comuter has stoped making thinking sound and it still is on 0% </s>
+<s> <user> : you can use clamav to scan for ( windows ) malware . you could sniff the traffic to see what is beeing send <unka/> with wireshark or such . but there is not a " press here and get a guarantee for malware free software " tool for beginners . </s>
+<s> <user> , the only option to free data is to back up this current drive which i " m using , and then would be to erase it and that leaves me without an os </s>
+<s> unless i can put the iso onto the ssd and then boot directly to that and also install to that drive </s>
+<s> is that possible ? installing to the same ssd that i have the install iso on ? </s>
+<s> i assumed i would have to install to a different drive </s>
+<s> <user> , oh ? was n't that what the key with the windows symbol was for ? </s>
+<s> i am starting to give up ... ive searched google for answers for over one hour and been here for over one hour and nothing works .... </s>
+<s> <user> : putting the .iso on the ssd is a good thought . might even work . </s>
+<s> <user> , it 's already there , and i was going to try it but then i thought about it more and talked myself out of trying it </s>
+<s> i guess it wo n't hurt anything to try , right now it 's just the iso and the rest is blank </s>
+<s> <user> : i doubt . it might want to load data from the usb while erasing the ssd to isntall wont work </s>
+<s> that 's what i figured <user> </s>
+<s> anyone have steam on ubuntu not open the menu in right upper icon </s>
+<s> so only thing i see is either debootstrap onto the ssd or load the iso from the hdd </s>
+<s> i was hoping that i could mount the iso on my boot drive , and install directly to the ssd , while still in the current boot environment </s>
+<s> if that makes sense </s>
+<s> <user> : what os is on that hdd ? </s>
+<s> without restarting and booting to the iso </s>
+<s> <unka> is easy when grub is already installed </s>
+<s> <user> , ubuntu 16.04 </s>
+<s> so put that iso on the hdd and make grub boot that . </s>
+<s> or use debootstrap form the running ubuntu </s>
+<s> still on 0% so it seems that turning off fast boot dident fix the problem , any other suggestions ? </s>
+<s> <user> : i dislike the taste of defeat . in my attempt to install from .iso i had the .iso on my booted system and attempting to install to a 3rd drive . install failed as could not unmount the root partition . </s>
+<s> i 'm talking to you via the hdd right now , ca n't resize the partition </s>
+<s> no need to resize </s>
+<s> if its ext4 grub should be able to read from the ubuntu partition </s>
+<s> so i can tell grub to boot to an iso on my desktop ? </s>
+<s> that 's what that article was explaining ? that <user> sent ? </s>
+<s> <user> , yeah i see what you are saying </s>
+<s> <user> : wait , you didnt even read that article yet ? </s>
+<s> i started to , but i was having trouble following . let me look again </s>
+<s> you made it look like this method will not <unka/> dont want it . </s>
+<s> i thought it was wanting me to go a different direction </s>
+<s> URL/https:/ URL/help.ubuntu.com/ <unk#a#/_> </s>
+<s> ( had too do a manual shutdown this time to restart the computer ) </s>
+<s> <user> : here might be a solution : URL/https:/ URL/bugs.launchpad.net/ <unk#a+/> . </s>
+<s> launchpad bug <unk#> in ubiquity ( ubuntu ) " unable to umount <unka> " [ undecided,confirmed ] </s>
+<s> i have another question . sometimes -like now- when transferring files in file manager , the file transfer bar is shown in the launcher , but its window is nowhere to be seen on the desktop , running in the background . is there something that can make the window appear in these cases ? </s>
+<s> anyone here able to help me with a logical volume problem i 'm having ? </s>
+<s> i have a logical volume at DIR/dev/ DIR/sda5/ that i 'm trying to extend with " sudo lvextend -l <unk#a%+> DIR/dev/ DIR/ubuntu-vg/ DIR/root/ " </s>
+<s> but , that 's not working . :-( </s>
+<s> is there a better channel for ubuntu ?? </s>
+<s> where are the people ?? </s>
+<s> ! patience </s>
+<s> do n't feel ignored and repeat your question quickly ; if nobody knows your answer , nobody will answer you . while you wait , try searching URL/https:/ URL/help.ubuntu.com/ or URL/http:/ URL/ubuntuforums.org/ or URL/http:/ URL/askubuntu.com/ </s>
+<s> thx </s>
+<s> atleast you probably have a problem that can be <unka> , ive been here for two hours or more now ... </s>
+<s> i 've <unka> those links and many more . but , sincerely thank you for them . i 'm just stuck . :(( </s>
+<s> does n't chromium on ubuntu support java applets ? </s>
+<s> if so , that 's lame </s>
+<s> <user> : have you read URL/http:/ URL/www.howtogeek.com/ <unk#a-/> </s>
+<s> <user> _ is now known as <user> </s>
+<s> <user> _ is now known as <user> </s>
+<s> <user> , <user> thanks for the help . time to reboot and see how it goes .... </s>
+<s> <user> : :) i will hve a <unka> interest here . </s>
+<s> <unka> is now known as <user> </s>
+<s> i just upgraded to ubuntu 16.10 ( from 14.04 ), and i ca n't connect to a windows share through samba . mount -a gives me : mount <unk#a(> ): remote i/o error </s>
+<s> <user> _ is now known as <user> </s>
+<s> well im giving up ... no ubuntu for me ... </s>
+<s> why </s>
+<s> whats the problem </s>
+<s> the problem is that the installation locks at hardware detection </s>
+<s> been trying to solve this for over 5 hours now so ... </s>
+<s> <user> : is your hard disk failing ? </s>
+<s> nothing is wrong with my harddrive as of what i know </s>
+<s> hard disk* </s>
+<s> <user> : perhaps you should run a check on it , i got the same issue once but it was because my disk failed </s>
+<s> well ive installed windows on it many times , none of the times has had any problem so it would be wierd if it has a problem </s>
+<s> and way way before i tryed to install just ubuntu and that failed too </s>
+<s> hello again , the external software that i mentioned earlier requires java 1.7 or higher .. i found out that openjdk is no more available .. how can i install it ? </s>
+<s> and then when i tryed that i had another hard disk ... </s>
+<s> <user> : what version of ubuntu ? openjdk is absolutely still available ... </s>
+<s> <user> , 16.04 . </s>
+<s> 16.04.1 . to be more accurate </s>
+<s> ! info openjdk-8-jre xenial | <user> </s>
+<s> <user> : openjdk-8-jre ( source : openjdk-8 ): openjdk java runtime , using hotspot jit . in component main , is optional . version <unk#a-.> ( xenial ), package size 68 kb , installed size 251 kb </s>
+<s> ! info openjdk-7-jre xenial | <user> </s>
+<s> <user> : package openjdk-7-jre does not exist in xenial </s>
+<s> <user> : so 7 is n't , but 8 is ( and iirc , a broken 9 ) </s>
+<s> <user> , indeed , both are installed already .. but when i wan to see java version with 'java --version' it tells me java is n't installed </s>
+<s> <user> : ot </s>
+<s> <user> : err , sorry , it 's <unka`> <unka-`> </s>
+<s> oh , thank you , <user> ! :) </s>
+<s> now i see it is 1.8 . </s>
+<s> <unk#a.> </s>
+<s> <user> , it is shown as openjdk version , but it means java version , right ? </s>
+<s> <user> : java -version shows you the jre version ( as it says ) </s>
+<s> <user> , ok , i guess it must be right :) </s>
+<s> is there a way to proxy aptitude ( apt-get , mainly ) through a socks5 proxy ? </s>
+<s> <user> : sure , aptitude mostly uses http , so just proxy port 80 </s>
+<s> finished configuring lacp <unk#a,> looks good switch says partner <unk#a,> are verified :) </s>
+<s> hey folks ; i have tightvnc viewer set up ; and i can connect ; but when i do ; i dont see anything at all . ideas on how to fix ? </s>
+<s> <user> , how would i do that ? this is through a virtual machine , of course - virtualbox </s>

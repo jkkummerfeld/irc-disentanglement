@@ -1,0 +1,1100 @@
+[22:19] <wonderworld> michaelaguiar: yes might be. fdisk -l listed all 24 disks. these are the disks the kernel itself sees. so all disks are available to linux. cat /proc/mdstat lists the disks available to the array. there are only 22 used. check which 2 are missing
+[22:19] <momomo> compdoc, for about a week or two
+[22:19] <k1l> sabotender: in most cases its eth0 for the ethernet lan
+[22:19] <undecim> voip_, By default, /root is open to the root user, but not the root group. Do 'chmod g+rwx /root' to give the root group access
+=== cr is now known as Guest20062
+[22:19] <michaelaguiar> wonderworld: ok so prob x and y are the 2 missing
+[22:19] <sabotender> k1l: the stuff that is commented out have 'wlan0'
+[22:20] <k1l> sabotender: i dont know what you are using there to connect. is it a wifi? is it a lan cable?
+[22:20] <sabotender> #auto wlan0, #iface wlan0 inet dhcp
+[22:20] <undecim> voip_, You can do the same with any system files in /usr, if the group of the file is set to "root"
+[22:20] <sabotender> its a lan cable
+=== `Yoda is now known as Yoder
+[22:20] <voip_> undecim, thank you
+[22:20] <k1l> sabotender: so dont worry about the wlan entries
+[22:21] <sabotender> you see, I thought it would be eth0 too, but I think it is important to find out to be certain, but I will believe you if eth0 is what is being used
+[22:21] <undecim> voip_, "chmod g+r" is read, +w is write, and +x is execute. You need +x on a directory to cd
+[22:21] <wonderworld> michaelaguiar: ok. somebody here had a similar problem: http://www.linuxquestions.org/questions/linux-general-1/recovering-mdadm-superblocks-713234/ maybe this can help. be VERY careful with the --create switch. it can destroy all your data. don't just copy and paste it.
+[22:22] <wonderworld> michaelaguiar: they say in that thread that they were able to add the disks with their uuid. does --examine on the disks still return the uuid?
+[22:23] <michaelaguiar> yep, the device and array uuid
+[22:23] <sabotender> okay, ifconfig -a shows that eth0 is the proper interface
+[22:24] <k1l> sabotender: the stuff you put into the network interfaces should look like this: http://paste.ubuntuusers.de/421128/
+[22:24] <k1l> change the ip numbers as needed
+[22:25] <wonderworld> michaelaguiar: OK. i don't want to give any further reccomendations, because i am not experienced with RAID10 and you can lose data here. but the two missing disks are your problem.
+[22:25] <sabotender> sweet, I will try it out, give me a moment
+[22:25] <michaelaguiar> wonderworld: Can I safely remove them from the array, and try to mount again?
+[22:26] <undecim> I've seen more data lost to RAID than I've seen lost to disk failures...
+[22:26] <undecim> michaelaguiar, What exactly is going on with the raid?
+[22:26] <Talidan> the drive is sda
+[22:26] <michaelaguiar> undecim: I have an array of 24 drives.  Worked fine last week, today it didnt work.  So now Im just trying to get this raid mounted
+[22:27] <undecim> michaelaguiar, Is there any particular reason you have a 24-drive raid? And also, what kind of configuration?
+[22:27] <michaelaguiar> undecim: Not sure, didnt set it up.
+[22:28] <wonderworld> michaelaguiar: try a reboot first. after the reboot check "dmesg" and "cat /var/log/syslog" for clues on whats going on
+[22:28] <undecim> Is this using any RAID controllers, or just Linux software?
+[22:28] <oizoer> what software do I used to put ubuntu image to a usb drive?
+[22:28] <undecim> Not always a good idea to just reboot
+[22:28] <Talidan> seems like sda3 is causing a problem
+[22:28] <undecim> Unless you've done it once already
+[22:28] <michaelaguiar> Ive rebooted already, had to skip mounting because it would just stay on the mounting screen
+[22:29] <wonderworld> undecim: he did. that caused the problem
+[22:29] <undecim> michaelaguiar, So what system are you working with now? A live Cd?
+[22:33] <jbrun> Hey guy, I'm trying to compile Veejay on Ubuntu 10.04 (old, i know), and i get on error 1 leaving directory '/.../veejay-server/libyuv' any idea what I could do to solve this?
+[22:33] <wonderworld> michaelaguiar: do you understand the difference between assebling an array and mounting it into the filesystem? because thats essential for your task. i think you are mixing up the two terms.
+[22:34] <jbrun> I'm a bit a noobie on these things but I'm so close to getting it... Please!
+[22:34] <sabotender> why can I not edit 'resolv.conf' by hand? it says that my changes would be overwritten?
+[22:34] <sabotender> how can I set my nameservers to something more permanent?
+[22:34] <daftykins> you can by removing the package resolvconf
+[22:35] <wonderworld> sabotender: NetworkManager overwrites resolv.conf if it's used. you can set nameservers in the GUI for your connections
+[22:35] <daftykins> though in my experience, remove the package, set the content then it disappears on reboot. you have to set it after reboot for it to stay there
+[22:35] <sabotender> wonderworld: this is a headless server. I have no GUI
+[22:35] <sabotender> daftykins: so I have to uninstall the network manager?
+[22:35] <michaelaguiar> wonderworld: yea, assembling puts the array together, then you mount it
+[22:36] <wonderworld> ok. i guess this warning is about NetworkManager overwriting it. if you have no GUI it should work
+[22:36] <k1l> sabotender: stop. you said there is a desktop installed
+[22:36] <daftykins> sabotender: didn't refer to NM at any point
+[22:36] <zippo^> Hello, I have a question. I am on Mac OS X now. I want install Ubuntu 14.04 LTS on another laptop (Asus). How do I doing Ubuntu (setup) on USB Stick via Mac OS X?
+[22:36] <sabotender> k1l: this is true. this is the desktop version of ubuntu and not the server version
+[22:36] <k1l> sabotender: so you have a desktop, you just dont have a monitor attached to it to use the monitor. that is not running a server which doesnt start x11 at all
+[22:37] <wonderworld> michaelaguiar: did you reboot the machine?
+[22:37] <michaelaguiar> wonderworld: a couple times already today
+[22:37] <daftykins> zippo^: you can 'dd' the ISO onto the correct device, no idea how macs handle device naming though. look up a guide.
+[22:37] <zippo^> what is 'dd'?
+[22:37] <jbrun> Hey guy, I'm trying to compile Veejay on Ubuntu 10.04 (old, i know), and i get on error 1 leaving directory '/.../veejay-server/libyuv' any idea what I could do to solve this?
+[22:37] <bubbasaures> jbrun, You have support till april 2015 on the server, just info.
+[22:38] <zippo^> daftykins?
+[22:38] <jbrun> Sorry?
+[22:38] <sabotender> k1l: right...so what do you recommend that I do?
+[22:38] <daftykins> zippo^: a command line program for image writing.
+[22:38] <trism> jbrun: you would need to pastebin the actual error
+[22:38] <Ben64> jbrun: sounds like you're compiling it, get support from the developer. manually compiled stuff isn't supported here
+[22:38] <zippo^> i don't know how, daftykins ?
+[22:38] <michaelaguiar> wonderworld: here are a few lines from my syslog
+[22:38] <michaelaguiar> https://gist.github.com/michaelaguiar/8cee15c33fa64bf1e55f
+[22:39] <k1l> sabotender: what are you trying to do now? did you set the static ip in network interfaces?
+[22:39] <daftykins> zippo^: what did i say?
+[22:39] <zippo^> yes, but how do i with dd
+[22:39] <zippo^> i have no idea
+[22:39] <zippo^> :/
+[22:39] <sabotender> k1l: yes I did. I want to change the name servers to google's
+=== Fuchs is now known as zombiefox
+[22:39] <daftykins> zippo^: so the part where i said look up a guide?
+[22:39] <bubbasaures> jbrun, with a nick Sorry? means nothing. https://wiki.ubuntu.com/Releases
+[22:40] <bubbasaures> without*
+[22:41] <k1l> sabotender: its time to read the documentations :) https://help.ubuntu.com/12.04/serverguide/network-configuration.html#name-resolution
+[22:41] <wonderworld> michaelaguiar: sdp1: Raid device exceeded read_error threshold. this sounds bad. your h/w seems to be failing. you really should get a tech guy if there is important data on the raid.
+[22:42] <undecim> Well with 24 disks, it won't take long to see one fail
+[22:42] <wonderworld> michaelaguiar: did you set up e-mail alerts with mdadm for failing disks?
+[22:42] <michaelaguiar> wonderworld: no I didnt
+[22:43] <michaelaguiar> undecim: is there an easy way to add one to the array, mount it, add another, etc until I find the fail?
+[22:43] <wonderworld> michaelaguiar: maybe disks were failing one after another without you noticing it.
+[22:43] <undecim> michaelaguiar, your data might be gone
+[22:43] <undecim> michaelaguiar, It might be a situation where you need to recover a physical disk to get it back
+[22:43] <michaelaguiar> Well what if the data I need is on just one disk?
+[22:43] <sabotender> k1l: where do you think I was reading?
+[22:44] <michaelaguiar> would I lose it if any of the raid fails?
+[22:44] <undecim> michaelaguiar, It depends on the configuration of the data
+[22:44] <wonderworld> michaelaguiar: mdadm already assembled all the disks it could use. 22 of the 24. the link i gave you explained how to add devices with missing superblock but available UUID.
+[22:44] <undecim> configuration of the raid*
+[22:44] <undecim> michaelaguiar, Your main goal is to get your data?
+[22:44] <michaelaguiar> wonderworld: the ones that say missing superblock dont provide the uuid
+[22:45] <michaelaguiar> undecim: Yea, I only really need a small amount of data that is on one of these drives
+[22:45] <michaelaguiar> wonderworld: How can I just remove the two from the list and mount this bad boy
+[22:46] <undecim> michaelaguiar, let me load a VM with raid to I have a similar system to test e.g. small scripts on
+[22:46] <sabotender> I was reading https://wiki.debian.org/NetworkConfiguration
+[22:46] <undecim> michaelaguiar, If they are all in the same raid, that might not be possible. It depends on the configuration of the raid and which drives failed
+[22:46] <michaelaguiar> undecim: oh ok
+[22:46] <undecim> michaelaguiar, So I can't say anything for sure until I learn more
+[22:47] <Talidan> fixed it
+=== zombiefox is now known as Fuchs
+[22:47] <undecim> michaelaguiar, Can you paste your logs? dmesg, syslog, etc
+[22:47] <k1l> sabotender: if its ubuntu i would stick to the official ubuntu guides.
+[22:47] <Mrono> I'm running Ubuntu 14.10 on an MSI GS70 and i'm unable to set the performance governor using cpufreq cli.  When I set it with /etc/default/cpufrequtils
+[22:47] <Mrono> It sets to performance then goes back to powersave
+[22:48] <undecim> michaelaguiar, also, /proc/mdstat
+[22:48] <Mrono> I read that when using the intel_pstate driver it's better to use the performance governor
+[22:48] <undecim> michaelaguiar, 'lshw' couldn't hurt
+[22:49] <michaelaguiar> undecim: https://gist.github.com/michaelaguiar/4cba750e517e25b5c7d9
+[22:49] <wonderworld> michaelaguiar: what does smartctl -H /dev/sdx say?
+[22:49] <michaelaguiar> wonderworld: smartctl is not installed
+[22:50] <michaelaguiar> undecim: https://gist.github.com/michaelaguiar/a7682ded35203b90e604
+[22:50] <wonderworld> michaelaguiar: ok. that would have shown you if the disks are ok. are you allowed to install stuff?
+[22:51] <michaelaguiar> wonderworld: yes, I have full access, let me install
+[22:51] <wonderworld> michaelaguiar:  "apt-get install smartmontools"
+[22:52] <michaelaguiar> wonderworld: says test result passed
+[22:53] <michaelaguiar> wonderworld: found a fail
+[22:53] <eatyourguitar> I have AMD E-300 1.1Ghz 2GB ram. I'm currently on Ubuntu 14.04.1 LTS kernel 3.13.0-44-generic (x86_64). I am looking for a distro that runs better with 2GB ram
+[22:54] <michaelaguiar> wonderworld: https://gist.github.com/michaelaguiar/949e8b3696599e40af2f
+[22:54] <eatyourguitar> something for youtube, firefox, vlc
+[22:54] <daftykins> eatyourguitar: run xubuntu or lubuntu
+[22:54] <michaelaguiar> wonderworld: found the 2nd,
+[22:54] <eatyourguitar> do you think xmbc would run better?
+[22:55] <eatyourguitar> I never tried xmbc
+[22:55] <eatyourguitar> I was planning to try xubuntu anyway
+[22:56] <bubbasaures> try both and than you will know
+[22:56] <michaelaguiar> wonderworld: Ok so 2 failed drives total, and I know which ones.  Now if I can just remove them from the array and get this mounted
+[22:56] <wonderworld> michaelaguiar: it were not x and y?
+[22:56] <eatyourguitar> I remember 4 years ago I tried ubuntu netbook edition it was super fast on old hardware
+[22:56] <michaelaguiar> wonderworld: nope.  it was q and j
+[22:56] <michaelaguiar> wonderworld: x and y were the ones with the missing superblock or something.  So maybe thats the 4 that are the reason its not starting
+[22:56] <bubbasaures> anymore support issues?
+[22:56] <eatyourguitar> the only problem was the launcher was huge on a 10in netbook
+[22:57] <daftykins> netbooks are only good for scrapping now
+=== none is now known as Guest59299
+=== andrex|off is now known as andrex
+[22:58] <eatyourguitar> you can use a netbook to code py all day
+[22:58] <eatyourguitar> no internet needed
+=== Guest59299 is now known as inversesquarelaw
+[22:58] <eatyourguitar> or just write a book
+[22:58] <bubbasaures> about half the world has no net or hardware, there is a use
+[22:58] <wonderworld> michaelaguiar: try "mdadm --examine --brief --scan " should give us more info on the array
+[22:58] <michaelaguiar> wonderworld: ARRAY /dev/md/0 metadata=1.2 UUID=6d89d5f4:3e5a2ab7:c2bd2acb:7d6bf108 name=tatooine:0
+[22:59] <eatyourguitar> in the 80's computers were doing payroll
+[22:59] <eatyourguitar> and other accounting tasks
+[22:59] <eatyourguitar> it saved a lot of man hours
+[22:59] <wonderworld> michaelaguiar: mdadm found j and p and added them to the array. the hardware is failing but mdadm was still able to add them. they will fail soon, you need to replace them but it wasn't the cause your array didnt start
+[22:59] <undecim> michaelaguiar, Do you have /etc/mdadm/mdadm.conf?
+[22:59] <wonderworld> michaelaguiar: it's the missing x and y
+[22:59] <eatyourguitar> imagine what a free computer could do for a fishing village
+[23:00] <wonderworld> michaelaguiar: they somehow lost their superblocks
+[23:00] <michaelaguiar> undecim: https://gist.github.com/michaelaguiar/7bc78054ffae4475323f
+[23:01] <eatyourguitar> ok I googled LUNITY its a 16 year old girl
+[23:01] <eatyourguitar> lol
+[23:01] <eatyourguitar> oh was it Lubuntu
+[23:02] <k1l> !lubuntu | eatyourguitar
+[23:02] <ubottu> eatyourguitar: lubuntu is Ubuntu with LXDE instead of !GNOME as desktop environment, which makes it extremely lightweight. See https://wiki.ubuntu.com/Lubuntu - /join #lubuntu for lubuntu support.
+[23:02] <wonderworld> michaelaguiar: "mdadm --detail /dev/md0" please.
+[23:02] <michaelaguiar> wonderworld: mdadm: md device /dev/md0 does not appear to be active.
+[23:02] <michaelaguiar> wonderworld: remember?  Cant activate it
+[23:03] <eatyourguitar> so LXDE I'm guessing is a KDE fork?
+[23:03] <Jordan_U> eatyourguitar: No, not even close.
+[23:03] <michaelaguiar> I cant seem to get array info either, to remove the 2 drives via mdadm <unconvertable> manage /dev/md0 <unconvertable> remove /dev/sdy1
+[23:03] <eatyourguitar> is LXDE only available on Lubuntu?
+[23:04] <davidd> Hi, I could not log in via tty7 (but I could log in via tty1 through 6). So I installed a fresh ubuntu 14.04 LTS and then transferred my home directory to the current one. But after that now I can not log in via tty7 again. There is a .xsession-errors file in my home directory which contains this:
+[23:04] <Jordan_U> eatyourguitar: No. The only difference between different flavors of Ubuntu is the software installed by default. They all use the same repositories, and thus anything that can be installed on one can also be installed on another.
+[23:05] <eatyourguitar> so I can try LXDE right now with apt-get?
+[23:05] <eatyourguitar> how do I kill the unity desktop?
+[23:05] <undecim> michaelaguiar, I think "mdadm -s" will make it appear in /proc/mdstat
+[23:05] <eatyourguitar> C-M-F1
+[23:05] <davidd> It is /usr/sbin/lightdm-session: 23: .: Can't open /usr/bin/byobu-launch
+[23:05] <eatyourguitar> then something
+[23:06] <undecim> (I'm a little rusty on raid though, and still loading a VM with one...)
+[23:06] <bubbasaures> eatyourguitar, desktops are chosen at login
+[23:06] <davidd> Please help. It takes about a day to transfer my home directory.
+[23:06] <davidd> :(
+[23:06] <eatyourguitar> but its an automatic script
+[23:06] <eatyourguitar> autologon
+[23:06] <wonderworld> michaelaguiar: ok, you could try http://www.linuxquestions.org/questions/linux-general-1/recovering-mdadm-superblocks-713234/ . but no guarantees. never use --create, this will destroy all of your data.
+[23:06] <bubbasaures> eatyourguitar, log out than in
+[23:06] <eatyourguitar> from the C-M-F1 term?
+[23:07] <eatyourguitar> and does it kill xchat?
+=== andrex is now known as andrex|off
+[23:07] <wonderworld> michaelaguiar: gotta go. good luck. and don't forget to take care of p and j. hardware is broken on these devices. x and y lost their superblock somehow but hw seems to be ok.
+[23:07] <davidd> Hi, I could not log in via tty7 (but I could log in via tty1 through 6). So I installed a fresh ubuntu 14.04 LTS and then transferred my home directory to the current one. But after that now I can not log in via tty7 again. There is a .xsession-errors file in my home directory which contains this: /usr/sbin/lightdm-session: 23: .: Can't open /usr/b
+[23:07] <davidd> in/byobu-launch
+[23:08] <eatyourguitar> brb
+[23:08] <bubbasaures> thanks for the warning
+[23:12] <pancakes9> Hi, I am launching an Ubuntu instance on AWS with the following cloud-init user data script (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html#user-data-cloud-init) but it doesn't seem to be applying, what am I doing wrong?
+[23:12] <sabotender> just as i thought, I am having DNS resolution problems
+=== parduse is now known as Guest72861
+[23:14] <davidd> Hi, I could not log in via tty7 (but I could log in via tty1 through 6). So I installed a fresh ubuntu 14.04 LTS and then transferred my home directory to the current one. But after that now I can not log in via tty7 again. There is a .xsession-errors file in my home directory which contains this: /usr/sbin/lightdm-session: 23: .: Can't open /usr/b
+[23:14] <davidd> in/byobu-launch
+[23:16] <sabotender> I think I fixed it, we shall see :-D
+[23:17] <basichash> How do I extract a .xz file on ubuntu?
+[23:17] <basichash> dw
+[23:18] <michaelaguiar> undecim: hey you still there?
+[23:18] <undecim> michaelaguiar, yeah
+[23:19] <michaelaguiar> undecim: so I was able to run mdadm <unconvertable> assemble <unconvertable> scan and it says /dev/md/0 has been started with 22 drives
+[23:19] <undecim> michaelaguiar, Cool
+[23:19] <michaelaguiar> undecim: How can I get these mounted so I can get to the data?
+[23:19] <wonderworld> michaelaguiar: cool, how did you do it?
+[23:19] <undecim> michaelaguiar, paste /proc/mdstat and "blkid"
+[23:19] <eatyourguitar> ok I'm back
+[23:19] <kimphill> basichash, xz -d <filename>
+[23:19] <sabotender> k1l: GENIUS! Cheers mate. That fixed it right up
+[23:20] <michaelaguiar> wonderworld: Not sure exactly, ran a bunch of commands.  Brain is fried at the moment
+[23:20]  * porfa later
+[23:20] <wonderworld> michaelaguiar: just "mount"
+[23:20] <eatyourguitar> logged out and in of my user via unity
+[23:20] <wonderworld>  "mount" tries to mount everything in /etc/fstab
+[23:20] <eatyourguitar> did not get to choose a desktop environment
+[23:20] <bubbasaures> eatyourguitar, dropdown gear at the login
+[23:21] <michaelaguiar> undecim: here is mdstat: https://gist.github.com/michaelaguiar/c55c36142d367058df73
+[23:21] <eatyourguitar> tried C-M-F1 exit [user] [pass]
+[23:21] <eatyourguitar> startx
+[23:21] <michaelaguiar> undecim: and the other: https://gist.github.com/michaelaguiar/50bfaac2e73dca6a7f9f
+[23:21] <eatyourguitar> just gives me my wallpaper
+[23:21] <bubbasaures> eatyourguitar, startx is wrong
+[23:21] <eatyourguitar> ok brb
+[23:22] <undecim> michaelaguiar, You should be able to mount /dev/md0
+[23:22] <michaelaguiar> undecim: https://gist.github.com/michaelaguiar/5459aee32c4ec49dcb7f
+[23:22] <michaelaguiar> undecim: I typed that command above, and get this error
+[23:23] <undecim> michaelaguiar, Okay, this RAID is also an LVM
+[23:23] <undecim> that seems somewhat redundant
+[23:23] <undecim> Unless RAID is doing something I don't understand the LVM can't do
+[23:23] <michaelaguiar> undecim: not sure why
+=== gms is now known as Guest5195
+[23:24] <eatyourguitar> after I logout that gear in unity has a menu to shutdown or suspend
+[23:24] <eatyourguitar> that is all
+[23:24] <michaelaguiar> undecim: is that a big problem?  What can I do to get this mounted?
+[23:24] <bubbasaures> eatyourguitar, wrong gear
+[23:24] <undecim> michaelaguiar, vgscan
+[23:24] <Lugal> how can I compile a file.c with include gtk/gtk.h ? I get error gtk: no such file or directory
+[23:24] <eatyourguitar> ?
+[23:25] <michaelaguiar> undecim: https://gist.github.com/michaelaguiar/1d0c8262b44843aef606
+[23:25] <bubbasaures> eatyourguitar, turn off the auto login and reboot so you actually see the login and know what it is.
+[23:25] <mr392> Lugal: Code::Blocks IDE?
+[23:25] <undecim> michaelaguiar, It should find the vg, then you can do: vgchange -ay name_of_volume_here
+=== CyberJacob is now known as zz_CyberJacob
+[23:25] <eatyourguitar> ok
+[23:25] <undecim> michaelaguiar, vgchange -ay RAIDVG
+[23:26] <michaelaguiar> undecim: ok, says 1 logical volume is group is active
+[23:26] <michaelaguiar> try to mount again?
+[23:26] <undecim> yeah
+[23:26] <michaelaguiar> same error.  Should I do the vgchange to the other group to?
+[23:26] <Lugal> i was trying with terminal. will it be easier with code blocks?
+[23:27] <michaelaguiar> undecim: tried, same error
+[23:27] <undecim> michaelaguiar, you mount the lvm, not md0
+[23:27] <undecim> michaelaguiar, /dev/RAIDVG/somethinginhere, I think
+[23:27] <undecim> michaelaguiar, or it's in /dev/mapper/
+[23:28] <michaelaguiar> undecim: YOU ARE THE MAN!  Im back in business!
+[23:28] <michaelaguiar> wonderworld: You too, man.  Thanks for the help!
+[23:28] <undecim> michaelaguiar, You might want to figure out your drive configuration. It's important to know
+[23:29] <michaelaguiar> undecim: for sure.  Need to make sure this doesnt happen again
+[23:29] <undecim> michaelaguiar, With raid 10, some drives are copies of each other. If all the copies of a drive goes out, the whole thing fails
+[23:29] <michaelaguiar> undecim: Ah good to know
+[23:30] <michaelaguiar> Man, that was complicated.  Thanks again for the help guys, Im outta here!
+[23:30] <eatyourguitar> ok so I tried logout I tried reboot, I disabled autologon
+[23:30] <undecim> michaelaguiar, I'm actually not sure how to see which drives are copies....
+[23:30] <wonderworld> michaelaguiar: remeber the 2 failing drives
+[23:30] <eatyourguitar> still no other options for the gear in the top right
+[23:30] <bubbasaures> eatyourguitar, what extra desktop did you install lxde?
+[23:30] <eatyourguitar> no I did not
+[23:30] <michaelaguiar> undecim: Im recommended we move all of our files to Dropbox for business.  There is no need to manage something like this for what we need
+[23:30] <bubbasaures> eatyourguitar, what than?
+[23:30] <eatyourguitar> nothing
+[23:31] <eatyourguitar> I thought you said this would work
+[23:31] <eatyourguitar> misunderstanding
+[23:31] <bubbasaures> eatyourguitar, really so you expected them to magically appear?
+[23:31] <eatyourguitar> I thought you were telling me I had default packages I could use in Ubuntu
+[23:32] <bubbasaures> eatyourguitar, never said anything resembling that
+[23:32] <undecim> michaelaguiar, If you keep the raid config, consider using some of those drives as hot spares if you can spare the space
+[23:32] <eatyourguitar> I can ap-get lxde
+[23:33] <i0d9i20> eatyourguitar, just get lubuntu
+[23:33] <bubbasaures> eatyourguitar, one bit of advice, forget the funky found commands on the net, read the ubnutu wiki's only and be clear.
+[23:33] <Qbuo> I have a sound issue, can anyone help me out?
+[23:34] <eatyourguitar> bubbasaures> eatyourguitar, desktops are chosen at login
+[23:34] <eatyourguitar> then you told me to logout etc..
+[23:34] <Codmadnesspro> sudo: add-apt-repository: command not found what's wrong?
+[23:35] <eatyourguitar> did tell me to apt-get
+[23:35] <Codmadnesspro> it says its a ubuntu command on my tutorial
+[23:35] <wonderworld> apt-add-repository
+[23:35] <eatyourguitar> did not rather
+[23:35] <undecim> wonderworld, Both are supposed to exist?
+[23:35] <Codmadnesspro> bash: apt-add-repository: command not found
+[23:35] <wonderworld> hmm
+[23:35] <Codmadnesspro> y
+[23:35] <undecim> Codmadnesspro, what version?
+[23:36] <Codmadnesspro> Wait, it's not ubuntu, it's a raspberry pie
+[23:36] <undecim> lol
+[23:36] <Codmadnesspro> running wheezy
+[23:36] <Codmadnesspro> I get confused with my vps and pi lol
+[23:36] <neoromantique> quit
+[23:36] <little> hi
+[23:36] <undecim> what you're trying to doesn't sound like it will work on the pi
+[23:36] <Codmadnesspro> wheezy and ubuntu are basically the same
+[23:37] <Codmadnesspro> I think wheezy is debian actuallly
+[23:37] <Jordan_U> wonderworld: It's add-apt-repository
+[23:37] <wonderworld> Codmadnesspro: PPAs are not available in Debian
+[23:37] <Codmadnesspro> uhm so what would I use instead?
+[23:37] <Jordan_U> wonderworld: Interesting, it looks like it may be both :)
+[23:37] <wonderworld> i only knew mine :)
+[23:37] <little> what O.o
+[23:37] <Qbuo> Every time my internet goes out, things f*ck themselves up. Last time it was steam, now I cant hear out of my headphones??
+[23:38] <Qbuo> Any idea why this is
+[23:38] <undecim> it's BOTH add-apt-repository AND apt-add-repository, but apt-add is just a link to add-apt
+[23:38] <undecim> So technically add-apt-repository is the real command
+[23:38] <wonderworld> Codmadnesspro: you could manualy try to get the package from the ppa. maybe it works on Debian.
+=== Guest21512 is now known as llllll
+[23:39] <wonderworld> otherwise you would have to compile the thing for yourself
+=== llllll is now known as mars31
+[23:39] <undecim> If the PPA doesn't have arm packages it will be no good
+[23:39] <undecim> Codmadnesspro, what software are you installing?
+=== andrex|off is now known as andrex
+[23:41] <xpro256> hi, when i log in to ubuntu my keyboard layout changes itself, can someone help me?
+=== andrex is now known as andrex|off
+[23:43] <Qbuo> My sound just went out after the internet restarted, here is my alsa: http://www.alsa-project.org/db/?f=4af9719549980a13aa8174fea95ce151b322b4c0
+[23:43] <little> how many boys theres in here ?
+[23:45] <k1l> Qbuo: audio and internet dont mix together. there must be some other reason. see "dmesg"
+[23:45] <k1l> little: this channel is support only. we have #ubuntu-offtopic for chatting
+[23:45] <Qbuo> what do you mean see "dmesg"
+[23:46] <k1l> !dmesg
+[23:46] <ubottu> dmesg is a console command which outputs the kernel ring buffer - an important log for diagnosing problems in  Linux. Often when something errors with hardware it will result in additional lines reported which can be seen by running dmesg in a console.
+[23:47] <Qbuo> want me to send a pastebin after running it?
+[23:47] <k1l> that could people in here help see if there is a cause for your issue
+[23:49] <Qbuo> http://paste.ubuntu.com/9789740/
+[23:49] <miguel> hola
+[23:49] <eatyourguitar> ok so I'm running LXDE on ubuntu now
+=== miguel is now known as Guest80985
+[23:49] <eatyourguitar> there is a 600ms delay when clicking browser tabs in firefox
+=== jazzi is now known as Guest33251
+[23:49] <eatyourguitar> it was cached differently in unity
+[23:49] <Guest80985> ayuda con ubuntu porfavor
+[23:50] <eatyourguitar> it was instant until I used all my ram
+[23:50] <Guest33251> hey guys my friend is having some weird trouble in ubuntu. the right click a folder and select the rename option and try to type something, however whatever they type does not appear at all even though the folder name is highlighted.
+[23:50] <Guest33251> any ideas?
+[23:50] <k1l> Guest80985: espaniol or portuguese?
+[23:50] <eatyourguitar> I like not having a massive launcher though
+[23:50] <Jensit> heyho
+[23:51] <Guest80985> jajaja hablan espanol?
+[23:51] <k1l> Qbuo: did you reboot after that sound issue?
+[23:51] <Qbuo> K1l: I can barely hear it on the highest setting if i listen loud enough.
+[23:51] <Qbuo> yes
+[23:51] <k1l> !es | Guest80985
+[23:51] <ubottu> Guest80985: En la mayoria de los canales de Ubuntu, se habla solo en ingles. Si busca ayuda en espanol entre al canal #ubuntu-es; escriba " /join #ubuntu-es " (sin comillas) y presione intro.
+[23:51] <k1l> Qbuo: dmesg gets erased after every reboot.
+[23:51] <Qbuo> well th sound problem appeared after the reboot
+[23:52] <k1l> Qbuo: see in system sound settings if there is some switch on low volume
+[23:52] <Qbuo> k1l: no, I just checked
+[23:52] <eatyourguitar> I am getting 2FPS in youtube
+[23:53] <eatyourguitar> does the desktop environment install a different version of flash/firefox?
+[23:53] <k1l> Qbuo: see "alsamixer" if there is the lines not at full power
+[23:53] <eatyourguitar> switching from unity to lxde
+[23:53] <k1l> Qbuo: or even muted "MM under the line"
+[23:53] <k1l> "MM"
+[23:54] <Qbuo> k1l: how do i tell if the lines are at full power?
+[23:55] <k1l> Qbuo: if its red. white is middle, green is low. MM is muted. use the arrowkeys
+[23:56] <Qbuo> each of the "PDIFs" have a "00" above them
+=== thomas1 is now known as thomas
+[23:56] <Qbuo> S/PDIF is red. S/PDIF 1 and S/PDIF 2 are white.
+[23:57] <k1l> Qbuo: 00 is fine, but see at the bar/press arrow up/down
+[23:57] <k1l> Qbuo: and what about master, pcm?
+[23:57] <Qbuo> Opps, all red
+[23:57] <Qbuo> what?
+[23:57] <Qbuo> i need a screencapture
+[23:57] <Qbuo> *all white
+[23:58] <mete> Windows 8 hangs after selecting it on grub screen anyone have an idea?
+[23:58] <Qbuo> k1l: This is what I see: http://paste.ubuntu.com/9789793/
+[23:59] <k1l> Qbuo: only those 3?
+[23:59] <Qbuo> yeah
+[00:00] <Qbuo> k1l: I have an external headset w/ mic. 5.1 true surround
+[00:01] <k1l> dont know then.
+[00:01] <Qbuo> Any idea why whenever the power goes out and i restart my computer, things mess up? last time this happened steam broke and i had to reinstall the os
+[00:01] <mete> boot-repair solved the issue
+[00:03] <Codmadnesspro> Hi, how can I install ubuntu for my raspberry pi model a?
+[00:03] <k1l> Codmadnesspro: you cant since the chip is too old.
+[00:03] <Codmadnesspro> Ugh really?
+[00:03] <Codmadnesspro> that sucks
+[00:04] <Ben64> not really, you wouldn't want ubuntu on it anyway
+[00:04] <k1l> see raspian debian fork for the rpi
+[00:04] <Codmadnesspro> would model b support it?
+[00:04] <Ben64> nope
+[00:04] <zippo^> is 14.04 or 14.10 better?
+[00:04] <k1l> zippo^: do you want to upgrade all 6 months?
+[00:04] <Ben64> zippo^: 14.04 has 5 years support, 14.10 has 9 months support
+[00:04] <xpro256> when i log in to my ubuntu, the keyboard layout become misconfigured, why this happen?
+[00:04] <eatyourguitar> how do I check if unetbootin is installed?
+[00:04] <zippo^> no matter, but what is your opion
+[00:04] <zippo^> ?
+[00:05] <Ben64> zippo^: up to you
+[00:05] <k1l> zippo^: on 14.10 you need to upgrade all 6 months. so its up to you
+[00:05] <Codmadnesspro> I don't really like raspbian thats why i really need to change to something else
+[00:05] <zippo^> i ask you , is that difficult question, Ben64 ?
+[00:05] <Ben64> eatyourguitar: dpkg -l unetbootin
+[00:05] <zippo^> yes i know it, k1l
+[00:05] <Ben64> zippo^: for me, no. for you, you have to decide
+=== Julian is now known as Guest15312
+[00:06] <zippo^> 10.04 LTS is the best of Ubuntuversions
+[00:06] <zippo^> :)
+[00:06] <k1l> zippo^: every user got his own workflow and opinion. better is to make your own thoughts about it. what works for me doesnt need to work for you.
+[00:06] <Ben64> zippo^: incorrect
+[00:06] <k1l> zippo^: and no need to become rude in here. we try to help.
+[00:06] <Guest15312> hablan espanol?
+[00:06] <k1l> !es | Guest15312
+[00:06] <ubottu> Guest15312: En la mayoria de los canales de Ubuntu, se habla solo en ingles. Si busca ayuda en espanol entre al canal #ubuntu-es; escriba " /join #ubuntu-es " (sin comillas) y presione intro.
+[00:07] <Guest15312> gracias
+[00:07] <Eletious> Hello!
+[00:07] <ahr3n> hey
+[00:08] <Eletious> hi
+[00:08] <Jensit> heyho
+[00:08] <Eletious> I am havings of the question for yuo
+[00:08] <Eletious> about ubuntu, of course!
+[00:08] <Eletious> not about the personal lines
+[00:08] <Eletious> *lives
+[00:08] <ahr3n> So I've got a MeteorJS app running on a Ubuntu 14.04 --- I seem to be running out of connections though because nginx keeps giving me 502 bad gateways... how do I increase the max number of simultaneous connections on the server?
+[00:09] <Eletious> It just occurred to me that I should not be an idiot in a support channel, my bad.
+[00:10] <k1l> Eletious: just ask a support question :)
+[00:10] <Eletious> Gotcha
+[00:11] <Eletious> I have a LAMP stack on 14.04 that I need to back up
+[00:11] <ahr3n> net.ipv4.ip_local_port_range = 32768	61000
+[00:11] <ahr3n> net.ipv4.tcp_fin_timeout = 60
+[00:11] <ahr3n> are my current settings
+=== Regginllemsi is now known as Lisa_Xavier
+[00:11] <Eletious> the guy in charge of this project wants the drive cloned but I can't get clonezilla to work... not sure why, that's not my question
+[00:11] <Qbuo> Hey, for some reason, after restarting my computer, my sound is extremely low.. please give me instructions on how to check my volume and such
+[00:12] <Eletious> the question is, are there any drive cloning (or really good backup) utilities native for ubuntu 14.04?
+[00:12] <xpro256> when i login to my ubuntu session, the keyboard layout changes itself, can you help me?
+[00:13] <Eletious> Oh my gosh I feel so bad throwing my question out there :(
+[00:14] <krabador> !ops
+[00:14] <ubottu> Help! Channel emergency! (ONLY use this trigger in emergencies) - Pici, Myrtti, jrib, Amaranth, tonyyarusso, Nalioth, lamont, CarlK, elky, mneptok, PriceChild, Tm_T, jpds, ikonia, Flannel, genii, wgrant, stdin, h00k, IdleOne, nhandler, Jordan_U, popey, Corey, ocean, cprofitt, djones, Madpilot, gnomefreak, lhavelund, k1l, rww, phunyguy, bazhang
+[00:14] <k1l> krabador: dont do that
+[00:14] <Qbuo> ubottu: what constitutes an emergency?
+[00:14] <ubottu> I am only a bot, please don't think I'm intelligent :)
+[00:14] <elky> krabador: why did you do that?
+[00:15] <Qbuo> ubottu: are you actually a bot?
+[00:15] <ubottu> Qbuo: I am only a bot, please don't think I'm intelligent :)
+[00:15] <Eletious> Wow why did that happen
+[00:15] <Qbuo> ohh
+[00:15] <Eletious> Qbuo: krabador put in a command
+[00:15] <eatyourguitar> how do I mount usb ubuntu 14.04 lts
+[00:15] <Eletious> ubottu just responded because he's a good bot :)
+[00:15] <ubottu> Eletious: I am only a bot, please don't think I'm intelligent :)
+[00:16] <Eletious> Yes you are!  Yes you are a good bot!
+[00:16] <ahr3n> ....this isn't a very good support channel.
+[00:17] <Eletious> My friend told me that rm -rf was a good backup command and I trust him
+[00:18] <k1l> Eletious: dont troll in here
+=== megabit|away is now known as megabitdragon
+[00:18] <elky> ahr3n: you're expecting niche help, people here cannot know everything about everything in the repositories. try asking #nginx about how their stuff works
+=== AnimeAidan33 is now known as Leelah`s_Crushed
+=== Leelah`s_Crushed is now known as Moron_Leelah_Alc
+=== Moron_Leelah_Alc is now known as TCSZ
+[00:33] <eatyourguitar> I found the symlink for my usb storage device how to I resolve it?
+[00:33] <eatyourguitar> I see ../../sdb
+[00:33] <TCSZ> Travis Charles Senechek IS DA BEST! All bow down to Travis Charles Senechek! Travis Charles Senechek rulez da land!
+[00:33] <TCSZ> Everybody look at Travis Charles Senechek and tell him how great he is! Travis Charles Senechek RULES! Nobody has the power, might and wisdom of the Travis Charles Senechek.
+[00:34] <TCSZ> No one is better than the Travis Charles Senechek! Travis Charles Senechek is the way to go! Travis Charles Senechek RULES! Travis Charles Senechek AINT OUTDONE BY NO ONE!
+[00:34] <TCSZ> Can I get a hell yeah for Travis Charles Senechek? Travis Charles Senechek is just simply awesome and completely amazing!
+[00:34] <TCSZ> The crowd chants: TTTTrrrraaaavvvviiiissss CCCChhhhaaaarrrrlllleeeessss SSSSeeeennnneeeecccchhhheeeekkkk!! TTTTrrrraaaavvvviiiissss CCCChhhhaaaarrrrlllleeeessss SSSSeeeennnneeeecccchhhheeeekkkk!! TTTTrrrraaaavvvviiiissss CCCChhhhaaaarrrrlllleeeessss SSSSeeeennnneeeecccchhhheeeekkkk!!!
+[00:34] <TCSZ> Travis Charles Senechek IS DA BEST! All bow down to Travis Charles Senechek! Travis Charles Senechek rulez da land!
+[00:35] <eatyourguitar> lol that guy
+=== TCSZ is now known as Travis_Senechek
+[00:35] <cheesepufftyler> who here runs kali linux?
+[00:35] <stongo> how does one enable auto-login on boot in Ubuntu 14.04 server ?
+[00:35] <Travis_Senechek> Travis Charles Senechek IS DA BEST! All bow down to Travis Charles Senechek! Travis Charles Senechek rulez da land!
+[00:35] <Travis_Senechek> Everybody look at Travis Charles Senechek and tell him how great he is! Travis Charles Senechek RULES! Nobody has the power, might and wisdom of the Travis Charles Senechek.
+[00:35] <Travis_Senechek> No one is better than the Travis Charles Senechek! Travis Charles Senechek is the way to go! Travis Charles Senechek RULES! Travis Charles Senechek AINT OUTDONE BY NO ONE!
+[00:36] <cheesepufftyler> who here runs kali linux?
+[00:36] <rww> cheesepufftyler: #ubuntu only support Ubuntu, not unofficial derivatives. See #kali-linux for their channel.
+[00:36] <eatyourguitar> repeaters are not good
+[00:36] <cheesepufftyler> wait how do i see their server??
+[00:36] <rww> cheesepufftyler: It's on this server. Just /join #kali-linux.
+[00:37] <cheesepufftyler> where do i type it in?
+[00:37] <cheesepufftyler> im new to xchat lol
+[00:37] <rww> cheesepufftyler: the box you're typing in.
+[00:38] <cheesepufftyler> thanks.
+[00:38] <cheesepufftyler> now is there a command to leave lol
+[00:38] <rww> /part
+[00:38] <cheesepufftyler> thanks again lolo
+[00:43] <bihaber> I upgraded to utopic and no longer have gui.  system is unusable.
+[00:43] <sabotender> I am trying to figure out which channel I would need to ask about the methods to add to my server. I recently moved from OSX Server to Ubuntu and I don't know which method would be best to get the server to auto update when my IP changes
+[00:44] <eatyourguitar> ok I found the location of my usb storage in /dev/sdb how do I mount?
+=== Erick is now known as Guest22399
+[00:45] <eatyourguitar> mount /dev/sdb /home/bob/usb
+[00:45] <eatyourguitar> ?
+[00:46] <bihaber> I upgraded to utopic and no longer have gui.  system is unusable. how can i fix this?
+[00:46] <juddus> yeah @eatyourguitar
+[00:47] <sudormrf> quick question, how can I run a cron job immediately from the CLI without modifying the job itself?
+[00:47] <juddus> is /home/bob/usb a dir?
+[00:47] <owen1> how to find the correct sha of my ubuntu iso file? is it here? https://help.ubuntu.com/community/UbuntuHashes
+[00:47] <elky> sabotender: are you behind a router, if so do it via dyndns in the router if the router supports it. otherwise there are plenty of dyndns services (dyndns, no-ip, etc) and there are clients for them in the repositories
+[00:47] <sudormrf> nm, I think I got it.
+[00:47] <owen1> sha256sum => ffb00501808306c047a37377511734c31782f0ebb5677118c07df82f48013ed6
+[00:47] <sabotender> elky: I am using freedns.afraid.org
+[00:47] <owen1> how do i know it's the correct sha?
+[00:48] <elky> sabotender: they will have instructions on their website for how to use their service
+=== hello_i_am_othel is now known as cpt_othello
+[00:50] <eatyourguitar> juddus it asks to specify filesystem so I just formatted with the disks app
+[00:50] <eatyourguitar> now it automounts and shows up in filebrowser devices
+[00:51] <eatyourguitar> and unetbootin sees it :)
+[00:51] <k1l_> sabotender: see first if your router doesnt have a dyndns setting
+[00:52] <owen1> how to verify that my iso is indeed the correct file?
+[00:52] <Stanley00> owen1: hmm... your checksum cannot be found on that page
+[00:52] <owen1> Stanley00: right
+[00:52] <Stanley00> owen1: where did you download that?
+[00:52] <owen1> it's 922M btw
+[00:53] <eatyourguitar> why does unetbootin switch to floppy (iso/floppy) after I select my .img?
+[00:53] <Stanley00> owen1: where did you download it from?
+[00:53] <k1l_> owen1: md5sum?
+[00:53] <sudormrf> or maybe I don't
+[00:53] <Stanley00> owen1: yep... md5sum... :(
+[00:53] <inj3ct0r-ji> :3
+[00:53] <sudormrf> yeah, any way to run a cron job immediately from the CLI without modifying the job itself?
+[00:53] <owen1> Stanley00: b448aa5b1de963731c21344f803
+[00:53] <owen1> a
+[00:53] <owen1> http://www.ubuntu.com/download/desktop
+[00:54] <inj3ct0r-ji> fuckk
+[00:54] <owen1> from here ^
+[00:54] <inj3ct0r-ji> shut up
+[00:54] <inj3ct0r-ji> bitches
+[00:54] <owen1> 33be2394cbbd6856849d430101835a6d
+[00:54] <elky> inj3ct0r-ji: stop that
+[00:54] <inj3ct0r-ji> okay :3
+[00:54] <inj3ct0r-ji> hhhhhhhhhhhh
+[00:54] <rww> inj3ct0r-ji: You're in Ubuntu's technical support channel. Is there something we can help you with?
+[00:55] <k1l_> which md5sum hash do you have now?
+[00:55] <Stanley00> owen1: hmm... first md5sum looks fine, except it missing some char at begining, right?
+[00:55] <owen1> Stanley00: i am downloading it again
+[00:55] <owen1> just in case
+[00:56] <Stanley00> owen1: okay. just use md5sum when you finish.
+[00:57] <owen1> Stanley00: ok
+[00:57] <owen1> thanks!
+[00:57] <Bashing-om> owen1: Yes, try again as the MD5sum does not match .
+[00:58] <Bashing-om> ^^does not match current releases *
+[00:59] <eatyourguitar> is there a chromeos channel?
+[01:00] <eatyourguitar> the distro is ~250mb
+[01:03] <bihaber> I upgraded to utopic and no longer have gui.  system is unusable. anyway i can boot into command shell?
+[01:03] <daftykins> bihaber: try booting with !nomodeset
+[01:03] <eatyourguitar> in what way is it unusable
+[01:03] <rww> eatyourguitar: #chromium-os
+[01:05] <kline> i have an ubuntu desktop vm with a static ip. ive entered my venders strange but known good (other VMs work fine) network details into /etc/network/interfaces, and after an ifup it connects fine, for about 1 minute
+[01:05] <compdoc> kline, its pppoe or something?
+[01:05] <kline> is there something like a dhcp client thats breaking the correct config by default on a 14.10 install
+=== timothy is now known as Guest55024
+=== V0id is now known as V0idFunction
+[01:06] <kline> no, its just a regular lan internet with an esxi virtual switch up the line connected to a router after tahat
+[01:07] <compdoc> what kind of network card?
+[01:08] <kline> Intel E1000
+[01:08] <k1l_> bihaber: do you see the login screen?
+[01:08] <kline> should be very supported
+[01:08] <bihaber> i got it with ctrl-alt-f1
+[01:08] <compdoc> can you pastebin.com the contents of /etc/network/interfaces
+[01:09] <kline> no, its not connected to the internet
+[01:09] <V0idFunction> can someone help me out? mitigated my irc server over to a new vps, having a problem with ssl trying to set the new unreal up. I installed openssl and installed the correlating libraries and still receiving the message saying ssl isn't installed when setting up my unrealircd config
+[01:09] <kline> actually, ill try really fast
+[01:10] <bihaber> k1l_  there is no login screen. gui broke after upgrade to utopic
+[01:10] <k1l_> bihaber: what exact ubuntu is that?
+[01:10] <k1l_> bihaber: and what video card is it? what driver is installed?
+[01:11] <bihaber> AMD Radeon on Toshiba laptop
+[01:11] <Finetundra> hello, how do I get youtube-dl to not give me a 403 error?
+[01:12] <kline> compdoc, heres the best i can do: http://i.imgur.com/QxsmqV3.png
+[01:12] <eatyourguitar> http://en.wikipedia.org/wiki/HTTP_403
+[01:13] <kline> compdoc, its notable that 1) on the debian host it works fine, 2) it works fine for about 1 min after ifup on the ubuntu machine
+[01:13] <compdoc> kline, you sure that netmask is right?
+[01:13] <kline> compdoc, 100%
+[01:13] <eatyourguitar> this is a result of you not having permissions to get what you want via the url/port/directory/host etc...
+[01:13] <kline> like i said, its strange vendor mask, but it does work
+[01:13] <eatyourguitar> like if google updates how the site works the app will create a bad url
+[01:14] <eatyourguitar> so you get the same message if you are blocked or it doesn't exist
+[01:14] <eatyourguitar> cause you have whitelist permissions to the regular parts of youtube but not private server stuff
+[01:15] <compdoc> kline, its very odd. you ever try commenting out the post-down line?
+[01:17] <stongo> is this abnormal: in ubuntu 14.04 server I cannot login via ssh until I log in through console?
+[01:17] <kline> compdoc, survived 44 seconds
+[01:18] <eatyourguitar> Finetundra what is the url you requested that returned 403?
+[01:18] <eatyourguitar> maybe there are messages in a log file or output to the console you can read?
+[01:18] <Finetundra> eatyourguitar, I've tried multiple url's
+[01:19] <eatyourguitar> well that doesn't mean anything
+[01:19] <eatyourguitar> have you actually investigated why you are getting 403?
+[01:19] <eatyourguitar> do you have solid information that these are working links?
+[01:19] <Finetundra> I can make a pastebin of the terminal output
+[01:19] <Finetundra> yes they are working links
+[01:20] <eatyourguitar> youtube changes stuff around from time to time
+[01:20] <eatyourguitar> how do you know they are working?
+[01:20] <Bashing-om> bihaber: Often times we see your condition as a result of a 3rd party (proprietary) graphics driver installed, when the system is upgraded that driver is not, and you have a broke display. Show the channel -> sudo lshw -C display | pastebinit . Shows the card and IF/what driver is installed.
+[01:21] <eatyourguitar> watching a video and downloading it are most likely different links
+[01:21] <Finetundra> eatyourguitar, because I used the link today? I'm not sure what your're asking
+[01:21] <eatyourguitar> the app youtube downloader is getting 403 for a link that was created from some user input
+[01:22] <eatyourguitar> you told it what video you wanted how?
+[01:22] <Finetundra> copied and pasted the link
+[01:22] <kline> compdoc, found it, theres a little widget i didnt notice in the topbar scrolled off my tiny windows VM screen for networking, it was convinced that eth0 needed dhcp
+[01:22] <eatyourguitar> ok
+[01:22] <kline> disabling it resolved the issue
+[01:22] <eatyourguitar> is this a website or an app?
+[01:23] <eatyourguitar> you paste it into the youtube-dl app?
+[01:24] <Finetundra> eatyourguitar, um, its a youtube video
+[01:24] <eatyourguitar> youtube-dl is a youtube video?
+[01:24] <eatyourguitar> or is it an app
+[01:24] <eatyourguitar> or a website
+[01:25] <Finetundra> eatyourguitar, oh, thats what you're asking. its a program
+[01:25] <eatyourguitar> ok so you need something like http://xmodulo.com/sniff-http-traffic-command-line-linux.html
+[01:25] <eatyourguitar> this will tell you what is happening that you can not see
+[01:26] <eatyourguitar> so you can see what the broken link is that generates the 403 error
+[01:26] <plasmasnake> would anybody here happen to know why /etc/shadow is owned by root:shadow (with permissions 640) and not root:root? what's the use of the shadow group?
+[01:26] <eatyourguitar> like if it points to youtube.com/?olddownloadapi.php
+[01:27] <eatyourguitar> I just made that up
+[01:27] <eatyourguitar> youtube.com/olddownloadapi.php?v=83dd8d
+[01:28] <eatyourguitar> then youtube deletes or renames olddownloadapi.php cause of copyright complainers or bandwidth leeches such as yourself
+[01:28] <eatyourguitar> youtube-dl is adfree
+[01:29] <eatyourguitar> they hate that
+[01:29] <eatyourguitar> they lose money
+[01:29] <eatyourguitar> well it might not be adfree but they don't like it
+[01:30] <Finetundra> eatyourguitar, I got it to work
+[01:31] <danishanish> hey guys
+[01:41] <happyfr0gg> Hello. How reliable and stable is Ubuntu 14.10?
+[01:42] <juddus> its fine
+[01:42] <juddus> why not go lts?
+[01:43] <happyfr0gg> I am using Ubuntu 14.04. I was just wondering if 14.10 was any more stable and reliable.
+[01:43] <juddus> stick to 14.04
+[01:43] <happyfr0gg> Will do.
+[01:44] <zacwalls> How can i connect to the internet using the built in ssl certs and the keys? Or can i?
+[01:44] <bihaber> you might lose your gui when you upgrate to 14.10 like i did
+[01:45] <happyfr0gg> bihaber, screw that.
+[01:45] <bihaber> me too, if i had know brfore :)
+[01:46] <Bashing-om> bihaber: Did you see my xx:20 entry ?
+[01:46] <zacwalls> Im on 14.10 and im fine
+=== andrex|off is now known as andrex
+[01:46] <bihaber> Bashing-on: no. what?
+[01:46] <zacwalls> Time to consult the Internet
+[01:46] <freeroute> !backports
+[01:46] <ubottu> If new updated Ubuntu packages are built for an application, then they may go into Ubuntu Backports. See https://help.ubuntu.com/community/UbuntuBackports - See also !packaging
+[01:47] <Bashing-om> bihaber: " bihaber: Often times we see your condition as a result of a 3rd party (proprietary) graphics driver installed, when the system is upgraded that driver
+=== archyme is now known as archyme123
+[01:47] <Bashing-om>                     is not, and you have a broke display. Show the channel -> sudo lshw -C display | pastebinit . Shows the card and IF/what driver is installed
+[01:48] <juddus> @zacwalls create your own cert?
+[01:48] <bihaber> Bashing-om: there is something on the wiki to remove fglrx drivers but of course the command to fix it doesn't work
+[01:48] <freeroute> I'm trying to install a package from precise backports using aptitude but first I would like to see which version it is, the commands 'sudo aptitude show chromium-browser -t precise-backports' nor 'sudo aptitude show chromium-browser/precise-backports' are doing what I'm expecting them to do.
+[01:49] <Bashing-om> bihaber: Removing a FGLRX driver depends on how it was installed .
+[01:49] <k1l_> freeroute: i prefer apt-get over aptitude
+[01:49] <bihaber> Bashing-om: the gui worked fine on 14.04, but broke after upgrade to 14.10
+[01:50] <k1l_> bihaber: yes, but that is not helping to solve the issue. we asked a lot of question and you dont answer that but keep repeating "its broken after upgrade"
+[01:51] <k1l_> bihaber: "my car is broken" "oh, what is broken" "my car"... how should we help that? we dont know and see what do know and see in front of you.
+[01:51] <Bashing-om> bihaber: And I say again .. proprietary drivers DO get broke in the upgrade . 3rd party software that the system has no control over .
+[01:52] <bihaber> Bashing-om: is says driver=fglrx_pci  - how do i get rid of it?
+[01:52] <sabotender> k1l_: good news, the web server is up and running and live! The code is broken because it needs a slight rewrite, but the name resolution is cool
+[01:53] <freeroute> k1l_: I chose aptitude because I got to be lazier with auto completion lol. Also, 'apt-cache show chromium-browser -t precise-backports' doesn't show what I want either.
+[01:54] <k1l_> freeroute: you are on 12.04?
+[01:54] <freeroute> k1l_: yep
+[01:54] <happyfr0gg> bihaber, all I can think of to do is to reinstall 14.04 and then make a backup copy of the graphics drivers that work for your GUI, upgrade to 14.10 and then restore those graphics drivers in 14.10.
+[01:54] <k1l_> freeroute: run a "sudo apt-get update && sudo apt-get upgrade" then try again
+[01:55] <Bashing-om> bihaber: IF you installed from OEM site, use the OEM un-installer .. IF from our repo .. we use 'apt-get remove <packages>' to remove the driver .
+=== foxtrot is now known as Guest55581
+[01:55] <Dawid90d> Hello
+[01:55] <Dawid90d> Anyone there?
+[01:55] <Ben64> freeroute: doesn't look like there is one in backports
+[01:55] <freeroute> Dawid90d: no
+[01:55] <k1l_> freeroute: or to make sure: what do you expect and what do you get?
+[01:55] <happyfr0gg> Dawid90d, we are here.
+[01:55] <Dawid90d> sorry for that kind of question but im stuck on the terminal
+[01:56] <freeroute> Ben64: that is horrible :(
+[01:56] <Dawid90d> brb
+[01:56] <Ben64> freeroute: not really
+[01:57] <k1l_> freeroute: so again: what do you want to do and what is the issue? (not talking baout the apt-get stuff but your endgoal)
+[01:57] <freeroute> 'apt-cache show chromium-browser -t precise-backports' just shows whatever 'apt-cache show chromium-browser'
+[01:58] <k1l_> freeroute: what are you looking for?
+[01:58] <freeroute> k1l_: I just want to see which version of chromium-browser there is in the backports using either aptitude of apt-get
+=== Lisa_Xavier is now known as LisaXavier
+[01:58] <Ben64> freeroute: again, there isn't one
+[01:58] <k1l_> freeroute: i think you are on the whole wrong spot.
+[01:58] <Dawid90d> Guys is this gonna be bad, if i will ask something about kubuntu, not ubuntu?
+[01:58] <k1l_> freeroute: chromium-browser is in security and updates in universe
+[01:58] <Ben64> Dawid90d: probably not
+[01:59] <k1l_> freeroute: http://packages.ubuntu.com/precise-updates/chromium-browser
+[01:59] <Dawid90d> I have problem with kubuntu - it gets stuck when its loading
+[01:59] <Bashing-om> bihaber: To see if this might be OEM, terminal command -> ls -al /usr/share/ati/ <- , do you see anything ( maybe like fglrx-uninstall.sh ) ?
+=== LisaXavier is now known as Ghost_Of_J_Alcor
+[02:00] <Dawid90d> i can only load kubuntu recovery mode, and console
+=== Ghost_Of_J_Alcor is now known as GhostOf_J_Alc0rn
+[02:00] <Dawid90d> now typing from it
+[02:00] <Dawid90d> i can't load graphical kubuntu
+[02:00] <Dawid90d> I think i have messed up with lightDB screen manager, because it doesn't want to load it
+[02:00] <Dawid90d> can someone help me?
+[02:01] <freeroute> k1l_: right, currently I have the same one. But I was just looking for whether there was one in precise-backports. So what would you recommend me to install a newer version of chromium on 12.04?
+[02:01] <Ben64> freeroute: upgrade to 14.04
+[02:01] <bihaber> Bashing-om: nothing like that there. i installed long time ago from your repo and have upgraded several times.
+[02:02] <freeroute> Ben64: wish I could currently. I thought 12.04 was also still supported.
+=== GhostOf_J_Alc0rn is now known as Faggot_Leelah
+[02:02] <Ben64> freeroute: supported = security updates, not "newest software"
+[02:02] <k1l_> freeroute: make a bug request on launchpad.net and see what the maintainer thinks about that
+[02:03] <Ben64> freeroute: why can't you upgrade? things aren't really going to improve on 12.04 in the future
+[02:03] <Dawid90d> guys can you help me?
+[02:03] <Bashing-om> bihaber: Then we must ask if the card is still supoortd .. -> lspci -nnk | grep -iA3 vga <- .
+[02:03] <Dawid90d> im totaly stuck in recovery console
+=== Faggot_Leelah is now known as Travis_Senechek
+[02:04] <Travis_Senechek> Travis Senechek IS DA BEST! All bow down to Travis Senechek! Travis Senechek rulez da land!
+[02:04] <Bashing-om> !paste | bihaber
+[02:04] <ubottu> bihaber: For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://imgur.com/ !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+[02:04] <Travis_Senechek> Everybody look at Travis Senechek and tell him how great he is! Travis Senechek RULES! Nobody has the power, might and wisdom of the Travis Senechek.
+[02:04] <Travis_Senechek> No one is better than the Travis Senechek! Travis Senechek is the way to go! Travis Senechek RULES! Travis Senechek AINT OUTDONE BY NO ONE!
+[02:05] <Travis_Senechek> Can I get a hell yeah for Travis Senechek? Travis Senechek is just simply awesome and completely amazing!
+[02:05] <Travis_Senechek> The crowd chants: TTTTrrrraaaavvvviiiissss SSSSeeeennnneeeecccchhhheeeekkkk!! TTTTrrrraaaavvvviiiissss SSSSeeeennnneeeecccchhhheeeekkkk!! TTTTrrrraaaavvvviiiissss SSSSeeeennnneeeecccchhhheeeekkkk!!!
+[02:05] <Travis_Senechek> Travis Senechek IS DA BEST! All bow down to Travis Senechek! Travis Senechek rulez da land!
+[02:05] <Dawid90d> please someone
+[02:05]  * Ben64 pokes phunyguy and k1l_
+[02:06] <Bashing-om> Dawid90d: Wait for someone familiar with (K)ubuntu . patience .
+[02:06] <anondawg> anyone here
+[02:06] <ObrienDave> NOOOOO
+[02:07] <Ben64> Dawid90d: more information would be good, like what happened that made it stop working
+[02:07] <bihaber> Bashing-om: there is several lines of output describing device. what am i looking for?
+[02:07] <Dawid90d> i think i have messed something with deps
+[02:07] <freeroute> Ben64: I don't have things backed up the way I want at this moment, and this is pretty much a 24/7 running system. I'm thus a bit afraid of things breaking. I'm currently testing 14.04 in a VM though, so hopefully I should upgrade sooner. I just wish chromium-browser wouldn't be such a wreck at this moment.
+[02:08] <Dawid90d> When im trying to load kubuntu
+[02:08] <Dawid90d> i only get loading screen
+[02:08] <Dawid90d> doesn't load login screen
+[02:08] <anondawg> kubuntu isnt good
+[02:08] <anondawg> use ubuntu
+[02:08] <bob184> what are the steps to create a RAID 1 array using an existing volume and an empty disk? I had them partitioned identical (ext4 on gpt tables) and flipped the raid flag on both and then started mdadm and it is syncing - but /dev/md0 has no file system on it
+[02:08] <anondawg> i know how to fix it though
+[02:08] <Finetundra> how do i set a program to automatically  run from terminal?
+[02:08] <ObrienDave> ROFL same system, different DE
+[02:08] <Bashing-om> bihaber: use pastebin and I will read the output ..-> sudo apt-get install pastebinit , lspci -nnk | grep -iA3 vga | pastebinit <- will give you a URL, pass that URL back here .
+[02:08] <Ben64> Dawid90d: yes we know, you've mentioned that many times. however, it'd really be helpful if you let us know what you did
+[02:09] <Dawid90d> i was trying to install some of the dependies for myPaint
+[02:09] <NegativeFlare> anondawg: Whoa whoa whoa. You can't say that. Kubuntu is just a desktop environment.
+[02:09] <k1l_> anondawg: be helpfull and do be destructive in here, thanks
+[02:09] <ObrienDave> anondawg, ROFL, same system, different DE
+[02:09] <anondawg> do ctrl +alt+f
+[02:09] <anondawg> i know dude
+[02:09] <Dawid90d> and when i was trying to load dolphin file manager, terminal or other things
+[02:09] <Dawid90d> it wasn't working
+[02:10] <Dawid90d> so i restarted kubuntu
+[02:10] <anondawg> but the desktop enviorment is ugly and hard to navigate in my opionion
+[02:10] <ObrienDave> nobody asked for your opinion
+[02:10] <bihaber> Bashing-om: it is going to be painful. that machine is console mode. not connected to network
+[02:10] <Dawid90d> and i have this problem now that i can't load it
+[02:10] <anondawg> how do you cend a msg to one person
+[02:10] <daftykins> Dawid90d: sounds like graphics issues, do you know what graphics card type you use?
+[02:10] <Ben64> Dawid90d: can you be more specific than "i was trying to install some of the dependies for myPaint"
+[02:11] <Dawid90d> Nividia GeForce GT 430
+[02:11] <Ben64> Dawid90d: earlier you mentioned "LightDB" .... what else did you do
+[02:12] <Bashing-om> bihaber: Truthfull, until I know what we are dealing with, I hesitate to offer advise .
+[02:12] <Dawid90d> nah, i wasn't doing anything with it, i just
+[02:12] <Dawid90d> when i logged in
+[02:12] <Dawid90d> into recovery mode
+[02:12] <ObrienDave> !details | Dawid90d
+[02:12] <ubottu> Dawid90d: Please elaborate; your question or issue may not seem clear or detailed enough for people to help you. Please give more detailed information, errors, steps, and possibly configuration files (use the !pastebin to avoid flooding the channel)
+[02:12] <happyfr0gg> Is there a way to get PlayOnLinux to accept the lastest version of the iTunes installer? I try and it says it needs Windows Vista x64 or greater. I am on a x64 machine.
+[02:12] <Dawid90d> i noticed that its not loading lightDB screen manager
+[02:12] <Dawid90d> i mean it fails loading it
+[02:13] <NegativeFlare> happyfr0gg: What is saying that you need Windows Vista or higher? The iTunes installer or PlayOnLinux
+[02:13] <Dawid90d> i cant use pastebin im in recovery mode console
+[02:13] <Ben64> !appdb | happyfr0gg
+[02:13] <ubottu> happyfr0gg: The Wine Application DB is a database of applications and help for !Windows programs that run under !WINE: http://appdb.winehq.org - Join #winehq for application help
+[02:13] <k1l_> Dawid90d: you mean lightdm?
+[02:13] <Dawid90d> can't even use any graphical programs
+[02:13] <Dawid90d> yeah
+[02:14] <Ben64> Dawid90d: you can use pastebin, to show us a command do something like this "command | nc termbin.com 9999"
+[02:14] <NegativeFlare> !pastebinit
+[02:14] <ubottu> pastebinit is the command-line equivalent of !pastebin - Command output, or other text can be redirected to pastebinit, which then reports an URL containing the output - To use pastebinit, install the <unconvertable> pastebinit <unconvertable> package from a package manager - Simple usage: command | pastebinit -b http://paste.ubuntu.com
+[02:14] <bihaber> Bashing-om: http://paste.ubuntu.com/9790625/
+[02:15] <Bashing-om> bihaber: look'n at your http://paste.ubuntu.com/9790625/ .
+[02:15] <SubCool> has anyone seen TJ?
+[02:15] <k1l_> SubCool: this is a support channel, try #ubuntu-offtopic for chat
+[02:16] <Dawid90d> can you tell me, if i can split my screen into sessions so i can switch from irc to console?
+[02:16] <Dawid90d> not kinda sure how to do it in recovery terminal
+[02:17] <Finetundra> how would one set a program to automatically run in a terminal?
+[02:17] <NegativeFlare> Dawid90d: if you're running irssi right now, just do control+alt+f2 to open another vtty
+[02:17] <NegativeFlare> and then do control+alt+f1 to come back to this one
+[02:17] <Dawid90d> ok
+[02:18] <Dawid90d> umm
+[02:18] <Dawid90d> i get this session but i can't really type anything
+[02:19] <happyfr0gg> NegativeFlare, The PlayOnLinux app says it requires a Windows Vista 64 bit edition or later.
+[02:19] <bubbasaures> Dawid90d, lspci in your terminal you see will show hardware
+[02:19] <wastrel> Finetundra: please explain
+[02:20] <NeedSomeHelp> Help, I am trying to install the newest Ubuntu on a brand new PC through USB. Within a minute, it stops and I am met with a black screen "drm_kms_helper: panic occured, switching back to text console". What to do?
+[02:20] <SubCool> k1l_, im not looking for chat.
+[02:20] <NegativeFlare> happyfr0gg: I'm still wondering why you're using PlayonLinux with iTunes. But from what I can tell. PlayOnLinux isn't reporting the right OS to the installer
+[02:21] <Dawid90d> guys, ctrl+alt+f1...f2...f3 works, but i can't type anything, i can't type/execute any commands
+[02:21] <Finetundra> wastrel, I have a python script that I would like to run from the terminal as soon as I click it
+[02:21] <happyfr0gg> NegativeFlare, thanks for your input.
+[02:21] <NegativeFlare> Dawid90d: you have to login ;)
+[02:21] <NegativeFlare> happyfr0gg: No problem
+[02:22] <Finetundra> Dawid90d, you have to enter your login
+[02:22] <Ben64> happyfr0gg: have you checked wine's appdb
+[02:22] <Dawid90d> im logged as root as default when im logging into console
+[02:22] <Dawid90d> from recovery mode
+[02:22] <Bashing-om> bihaber: -> sudo mv /etc/X11/xorg.conf /etc/X11/xorg.conf.bak , sudo apt-get purge fglrx fglrx-amdcccle fglrx-updates fglrx-amdcccle-updates , sudo apt-get install dkms , sudo apt-get install xserver-xorg-video-radeon , sudo apt-get install --reinstall libgl1-mesa-glx libgl1-mesa-dri xserver-xorg-core , sudo dpkg-reconfigure xserver-xorg , sudo update-initramfs -u // brings you up clean on open source driver .
+[02:23] <Finetundra> NeedSomeHelp, have you tried recreating the live USB ir perhaps using a disc?
+[02:23] <Dawid90d> how can i login from linux?
+[02:23] <Dawid90d> terminal
+[02:24] <Finetundra> Dawid90d, type username, press enter. type pass, hit enter. should be that simple
+[02:24] <bubbasaures> Dawid90d, reboot choose kubuntu wait a minute or so and ctrl-alt-f1 login run lspci and identify the graphic hardware and what you have done the best you can.
+[02:24] <NeedSomeHelp> Finetundra: yes I tried re-creating it with pendrivelinux. The PC is a mini PC and has no CD-ROM.
+[02:25] <NeedSomeHelp> downloading the iso and burning it to the usb was no problem
+[02:25] <happyfr0gg> Ben64, no not yet. I will now. I am in the 'winehq' channel waiting for a reply to my question.
+[02:25] <Ben64> the channel isn't very active
+[02:25] <Dawid90d> ok, ty brb.
+[02:25] <bihaber> Bashing-om: thanks. i'll give it a shot, will be back after.
+[02:28] <Finetundra> NeedSomeHelp, hmm, perhaps a different flavor would work such as ubuntu GNOME. I realize that this may not be a proper solution however you can install unity and have the same end result. sort of.
+[02:28] <farva> hey guys, I just had my admin log into the fstp on my account, he saved the file he was supposed to, and when I went to edit it, it did not have rw--rw--r access. I opened a different file, saved it and the perms were fine. How do I get the access back on that file?
+[02:28] <Bashing-om> bihaber: Roger that ,, IF and only IF there are problems with the open source driver, then from "Additional Drivers" install the recommended  FGLRX driver once more .
+[02:28] <dawid90dd> Test
+[02:28] <dawid90dd> ok im in
+[02:29] <NeedSomeHelp> Finetundra: where can I choose that? do I need to download a different package  then?
+[02:29] <juddus> farva: fstp? u mean sftp?
+[02:29] <farva> yes, sorry
+[02:29] <cheesepufftyler> hey
+[02:29] <farva> mistype
+[02:29] <juddus> np
+[02:30] <Finetundra> NeedSomeHelp, comes from the ubuntu GNOME site. punch it up into google and you should be able to find it
+[02:30] <bihaber> Bashing-om: first command failed.
+[02:30] <bubbasaures> dawid90dd, I can only help you on this part, run lspci and identify the graphic info and describe what you did best you can, all in one post if possible.
+[02:30] <farva> its just odd to me that it would remove perms for the sftp on that one file under my account
+[02:30] <dawid90dd> ik, how can i scroll, page up page down doesnt work
+[02:31] <juddus> farva: who owns the file?
+[02:31] <farva> I do
+[02:31] <Finetundra> NeedSomeHelp, and you may wish to use the 14,04 as it has long term support
+[02:31] <NeedSomeHelp> Finetundra: ok thanks, will try
+[02:31] <bihaber> Bashing-om: /etc/X11/xorg.conf.failsafe in the folder
+[02:31] <farva> and I have full access to everything
+[02:31] <farva> but that one file removed the access
+[02:31] <Bashing-om> bihaber: That is ok , just means that file does not exist .. continue on .
+[02:31] <juddus> farva: root user, sudoer?
+[02:32] <farva> as sftp, just a user with perms
+[02:32] <samthewildone> Incompatible version of libgstreamer
+[02:32] <juddus> ok
+[02:32] <samthewildone> I just installed libgstreamer
+[02:32] <farva> I have full console access though
+[02:32] <juddus> farva: you using an sftp client?
+[02:32] <farva> yes
+[02:32] <farva> filezilla
+[02:32] <wastrel> Finetundra: did you figure out how to run the thing
+[02:33] <Ben64> farva: paste the output of "ls -l /path/to/that/file"
+[02:33] <dawid90dd> Nividia Corporation GF108 [GeForce GT 430]
+[02:33] <farva> k
+[02:33] <SubCool> Is anyone famlilart with ZFS filesystem and maybe able to help me find my missing ZFS pools adn dataset?
+[02:33] <samthewildone> This is my error > http://pastebin.com/UTieW4M6
+[02:34] <Finetundra> wastrel, I can run it just fine but I was wanting to know if the convenience of it automatically opening in terminal was something that could be done
+[02:34] <juddus> farva: ok, you see the owner/group column next to file in filezilla
+[02:35] <farva> http://gyazo.com/16c5af671ca526ff3a907d34439d6834
+[02:35] <farva> yes
+[02:35] <farva> it is all dashes
+[02:35] <farva> ------------
+[02:35] <wastrel> Finetundra: if you open a nautilus window , edit > preferences > behavior > executable text files
+[02:36] <wastrel> you can choose "ask each time" there's a "run in terminal" button in the dialog that pops up
+[02:36] <dawid90dd> guys tell me at least where i can find kubuntu offical help irc channel
+[02:36] <dawid90dd> on which server
+[02:36] <juddus> farva: o.O
+[02:36] <bubbasaures> dawid90dd, #kubuntu
+[02:36] <farva> yea...odd =[
+[02:36] <juddus> farva: dont see why you cant open it
+[02:36] <dawid90dd> on which server..
+[02:37] <farva> it shows I have perms in the console
+[02:37] <Finetundra> wastrel, and that should run it?
+[02:37] <farva> but the sftp shows all dashes
+[02:37] <bubbasaures> dawid90dd, freenode,
+[02:37] <wastrel> i guess so :)
+[02:37] <bubbasaures> same your on dawid90dd
+[02:38] <juddus> farva: can u set perms in sftp?
+[02:38] <Finetundra> wastrel, 'cause right now it doesn't do anything with that option selected
+[02:38] <farva> nope
+[02:38] <farva> console only I am sure
+[02:38] <farva> how do I double check though?
+[02:39] <juddus> right click the file in sftp
+[02:39] <juddus> file permissions
+[02:39] <juddus> etc
+[02:39] <wastrel> Finetundra: it pops up a terminal for me that immediately exits
+[02:40] <Finetundra> NeedSomeHelp, I'd also like to go on the record and say that ubuntu GNOME does NOT look like normal ubuntu by default. you'll have to add (do sudo apt-get install ubuntu-desktop and then change the session) the unity desktop
+[02:40] <Finetundra> wastrel, weird
+[02:41] <farva> http://gyazo.com/f3ccf1f9fa41ad0783a5e257843526f0
+[02:41] <juddus> thats whats there
+[02:41] <juddus> ?
+[02:41] <farva> wait
+[02:41] <farva> I got it
+[02:41] <farva> I checked the wrong file on that screen shot
+[02:41] <farva> it let me set perms though
+[02:41] <farva> so its good
+[02:42] <juddus> ok good
+[02:42] <farva> weird that happened
+[02:42] <juddus> multiple users via same sftp account can do that
+[02:42] <farva> Thanks juddus <3
+[02:42] <juddus> does he have a seperate user account?
+[02:42] <juddus> on the server?
+[02:44] <juddus> farva: np :3
+[02:44] <juddus> farva: does the other admin have a user account?
+[02:45] <bihaber> Bashing-om: unable to locate package libgl1-mesa-dr1
+[02:45] <Bashing-om> bihaber: Humm... checking !
+[02:46] <bihaber> Bashing-om: ooops my typo
+[02:46] <TheTopBloke> if you didnt or couldnt do ubuntu or freebsd for whatever reason, what would be your next best choice for a new droplet?
+[02:46] <Bashing-om> bihaber: Ueah .. ne an 'i' not a '1' .
+[02:47] <bazhang> TheTopBloke, try ##linux for that, its offtopic here
+[02:47] <TheTopBloke> oh yeah sorry wrong channel. doh!
+[02:49] <bihaber> Bashing-om: finished and rebooted, came back up in busybox - no gui
+=== qwerty is now known as Guest38548
+[02:51] <Bashing-om> bihaber: Yuk, surprised .. busybox means can not find the boot files .. nothing related to graphics driver .. hummm ..
+[02:53] <bihaber> Bashing-om: this is dual-boot box using grub. i think grub is messed up
+[02:56] <eddieftwlolz> hey.
+[02:56] <daftykins> hi
+[02:56] <eddieftwlolz> how do I run an exe(linux wise)? :P
+[02:56] <daftykins> so, an .exe or not an .exe ?
+[02:56] <eddieftwlolz> .exe
+[02:57] <bazhang> !appdb | check here eddieftwlolz
+[02:57] <ubottu> check here eddieftwlolz: The Wine Application DB is a database of applications and help for !Windows programs that run under !WINE: http://appdb.winehq.org - Join #winehq for application help
+[02:57] <daftykins> what is it of? there might be a better way to do what you're trying to do
+[02:57] <eddieftwlolz> what do you mean what is it of?
+[02:57] <eddieftwlolz> I want to host a game dev tycoon server and the mod is only for windows xP
+[02:57] <bazhang> what software eddieftwlolz
+[02:57] <bazhang> check the appdb above
+[02:57] <eddieftwlolz> software? huh
+[02:58] <bazhang> thats what an exe is , yes
+[02:58] <bazhang>  /join #winehq for help with that eddieftwlolz
+[02:58] <eddieftwlolz> nothing for game dev ty cooon that runs well
+[02:58] <eddieftwlolz> since im using a mod
+[02:59] <eddieftwlolz> and latest version ^^
+[02:59] <eddieftwlolz> eerr so I can't ask help for how to run an exe on ubuntu? :P
+[02:59] <bazhang> eddieftwlolz, check the appdb, step one
+[02:59] <eddieftwlolz> yea I did
+[02:59] <bazhang> what did it say
+[03:00] <eddieftwlolz> well it doesn't support the latest version of the one I have
+[03:00] <Bashing-om> bihaber: Yeah .. seems so .. ok .. let's see if we can get ya booted . Can you boot to the grub boot menu ?
+[03:01] <bazhang> step two, /join #winehq for support eddieftwlolz
+[03:01] <eddieftwlolz> ok
+[03:01] <k1l_> eddieftwlolz: since .exe is not meant to run on linux, your best chance is when wine supports it. if not, well, ask the one who makes the .exe to make a linux one
+[03:02] <bihaber> Bashing-om: i am in edit for ubuntu grub entry
+[03:03] <Bashing-om> bihaber: instead of 'e' for edit .. we want 'c' for command line .
+[03:03] <bihaber> Bashing-om: ok i am there
+[03:04] <ns5> I have added this ppa (https://launchpad.net/~mosquitto-dev/+archive/ubuntu/mosquitto-ppa), when I run apt-get source mosquitto, it gets the source of the ubuntu official package (very low version), how can I apt-get source from the ppa?
+[03:04] <Bashing-om> bihaber: Do you know what drive and what partiton ubuntu is installed to .. the /boot directory ?
+[03:05] <k1l_> ns5: did you run "sudo apt-get update"?
+[03:05] <bihaber> Bashing-om: nope
+[03:05] <k1l_> ns5: and what ubuntu are you on?
+[03:05] <bihaber> Bashing-om: i will have to reboot windows to map the drive
+=== gerald is now known as Guest3853
+[03:06] <ns5> k1l_: yes I ran "sudo apt-get update"
+[03:06] <ns5> k1l_: 14.04.1 server
+[03:06] <Bashing-om> bihaber: OK, we find it then -> ls -lh (hd0,1)/boot <- get a good return ?
+[03:07] <k1l_> ns5: please show a "apt-cache policy mosquito" in a pastebin
+[03:08] <ns5> k1l_: http://paste.ubuntu.com/9790912/
+[03:12] <ns5> k1l_: any idea?
+[03:13] <bihaber> Bashing-om: syntax error
+[03:13] <k1l_> ns5: i dont know why that shouldnt work
+[03:14] <ns5> k1l_: could you help to try it on your test host
+[03:14] <Bashing-om> bihaber: GPT partitioning ?
+=== archyme123 is now known as archyme
+[03:15] <k1l_> ns5: sorry, no test host right here to test. maybe someone other can confirm
+[03:16] <bihaber> Bashing-om: syntax error near unexpected token '('
+[03:16] <ns5> k1l_: ok, thanks
+[03:17] <Bashing-om> bihaber: Is the partitioning scheme then GPT ?/ what results -> ls -lh
+[03:17] <k1l_> ns5: maybe you can find the code here: https://launchpad.net/~mosquitto-dev/+archive/ubuntu/mosquitto-ppa/+packages
+[03:18] <ns5> k1l_: I have no idea which files are the package sources
+=== drkokandy_ is now known as drkokandy
+[03:18] <k1l_> ns5: the tar.gz ones
+[03:19] <k1l_> https://launchpad.net/~mosquitto-dev/+archive/ubuntu/mosquitto-ppa/+files/mosquitto_1.3.5.orig.tar.gz
+[03:19] <bihaber> Bashing-om: os is on hd0 3rd partition
+[03:19] <Finetundra> so a window popped up saying updating system configuration. what might that mean?
+[03:20] <ns5> k1l_: then what
+[03:20] <k1l_> ns5: what do you want?
+[03:20] <Bashing-om> bihaber: Try -> ls -lh (hd0,msdos3)/boot
+[03:20] <Finetundra> please, I'm a tad worried
+[03:21] <ns5> k1l_: modify the source and rebuild the package
+[03:21] <Spotontoprut> Is there a post or something i can read about installing with encryption such as which program would be best and preferrably support multiple key files?
+[03:21] <k1l_> ns5: there you go. open the tar.gz and see
+[03:22] <CsharpCode> so anyone gonna go buy them a ubuntu phone in a few weeks :D
+[03:23] <Finetundra> and now its repeating, please help
+[03:23] <bubbasaures> !touch | CsharpCode
+[03:23] <ubottu> CsharpCode: Information about the Ubuntu Touch platform for Phone and Tablet is available here https://wiki.ubuntu.com/Touch . Support and discussion in #ubuntu-touch
+[03:24] <bihaber> Bashing-om: still getting syntax error
+[03:24] <ns5> k1l_: how to build the package
+[03:24] <k1l_> ns5: read the readme and the how to build a package on ubuntu
+[03:25] <hunter> hello
+[03:26] <archyme> hunter, hello
+[03:26] <Finetundra> the issue has resolved itself
+[03:27] <hunter> how do i change my username
+[03:27] <Bashing-om> bihaber: Got me wondering .. what returns -> ls -lh ?
+[03:28] <Spotontoprut> Is there a post or something i can read about installing with encryption such as which program would be best and preferrably support multiple key files?
+[03:29] <bihaber> Bashing-om: returns directory contents
+[03:32] <Bashing-om> bihaber: Not what I had expected .. "direcory contents" I had expected a list of partitions in the form (hd0,msdosX) . Think'n .
+[03:33] <Finetundra> so, I've now tried to install amarok but it won't launch. what gives?
+[03:34] <xangua> Finetundra: what gives? you tell us, you tried how? what graphical error do you get? what message do you get when try it on terminal?
+[03:34] <xangua> !details
+[03:34] <Bashing-om> bihaber: I would accept "diectory contents" from -> ls -lh (hd0,msdos3)/  <- . then we can try and boot to the system .
+[03:34] <ubottu> Please elaborate; your question or issue may not seem clear or detailed enough for people to help you. Please give more detailed information, errors, steps, and possibly configuration files (use the !pastebin to avoid flooding the channel)
+[03:44] <bihaber> Bashing-om: what now. i rebooted and back in busybox
+[03:45] <CsharpCode> if i encrypt my entire hard drive with linux will it slow my computer down.  All i have is a q8200 core2quad that doesn't have AES
+[03:47] <Bashing-om> bihaber: Still trying to find out what the partitioning scheme is .. when you got "directory contents" was that from -> ls -lh (hd0,msdos3)/ <- command ?
+[03:48] <nicomachus> Has anyone here dealt with the HWE out of support issue?
+[03:48] <bihaber> Bashing-om: from -> ls =lh <- only.  full command gives syntax error
+[03:51] <Finetundra> xangua, it literally does nothing. heres the terminal output: http://pastebin.com/gHs1e6JH
+[03:52] <Bashing-om> bihaber: I am a bit confused .. as that command should have returned partition info .. not directories . How about just -> ls <- . what is that result ?
+[03:55] <Term1nal> Having a weird issue... geoip finds info for an address on one ubuntu server, but not on another.
+[03:55] <Term1nal> Whereas the one cuirrently not finding it, had been finding it without issue a few days previously.
+[03:55] <Term1nal> currently*
+[03:59] <O_OniGiri> hi there, I am trying to install Ubuntu along Windows 8.1
+[03:59] <O_OniGiri> but it doesn't show grub on boot :(
+[04:00] <bihaber> Bashing-om: from -> ls <- gives directory contents
+[04:02] <Bashing-om> bihaber: are you booting into grub's command line from 'c' at the grub menu, OR booting into the operating system ?
+[04:03] <O_OniGiri> Bashing-om you talking to me?
+[04:03] <bihaber> Bashing-om: booting into operating system.
+[04:03] <Bashing-om> 0_0
+[04:04] <O_OniGiri> bihaber having same problem as me?
+[04:04] <O_OniGiri> bihaber grub not showing on boot?
+[04:04] <Bashing-om> O_OniGiri: not that I am awaare of .. did I ping at ya ?
+[04:05] <O_OniGiri> Bashing-om nope, but it looked like you were talking about my problem
+[04:05] <Bashing-om> bihaber: Shucks .. I lost track .. last I was aware you were booting to a busy box ? So, still not able to boot to the GUI desktop ?
+[04:05] <lacrymology> after installing nvidia-331 x fails to start (running 14.04)
+[04:06] <lacrymology> if I uninstall it, it works, but.. well, I'd like my drivers, you know
+[04:06] <lacrymology> don't really know how to diagnose what's wrong exactly
+[04:07] <Bashing-om> O_OniGiri: Sorry, no I was not directing to you .. I know nothing of Win8 or UEFI configs .
+[04:07] <Bashing-om> !uefi | O_OniGiri
+[04:07] <ubottu> O_OniGiri: UEFI is a specification that defines a software interface between an operating system and platform firmware. It is meant as a replacement for the BIOS. For information on how to set up and install Ubuntu and its derivatives on UEFI machines please read https://help.ubuntu.com/community/UEFI
+[04:08] <lacrymology> ah, wait. dmesg says "the nvidia gpu installed in this system is not supported by driver 331"
+[04:08] <O_OniGiri> the problem is that grub isn't showing up
+[04:09] <bihaber> Bashing-om: can't boot into system from grub. at one point i had a pretty user background after your fix but lost that.  i think my system is sot and i have to figure out how to salvage my files.  i'll NEVER do an Ubuntu upgrade again.
+[04:09] <Bashing-om> O_OniGiri: Try: As soon as the bios screen clears press and hold the escape key . does the grub boot menu appear ?
+[04:10] <O_OniGiri> Bashing-om going to try now
+[04:11] <svetlana`> bihaber: from what to what version were you upgrading out of curiousity?
+[04:11] <lacrymology> anyone knows why nvidia-319 depends on nvidia-331?
+[04:12] <O_OniGiri> Bashing-om not working :k
+[04:12] <Bashing-om> bihaber: Release upgrades when done properly are not a problem . The thing now is to fix this install .. One can always copy off files from a live(USB)/DVD .
+[04:13] <O_OniGiri> Bashing-om during the installation of Ubuntu I recall that it didn't recognize the windows loader,  is that a problem?
+[04:14] <bihaber> Bashing-om: where can i go from here? once gub is fixed i still have gui that doesn't work
+[04:14] <Bashing-om> O_OniGiri: Sorry, I do not have the knowledge of Win8/UEFI to advise. Await others help .  And yes IF ubuntu did not recognize Windows, there is a problem ( Windows installed UEFI and ubuntu installed CCSM ??) .
+[04:15] <Bashing-om> bihaber: If you can boot the operating system, then grub is functional and doing it's job . So the thing now is to find out why the GUI does not start .
+[04:18] <bihaber> Bashing-om: grub isn't right. i have to pick ubuntu recovery and then pick a version to boot
+[04:19] <bihaber> Bashing-om: i'm not even sure i'm getting the one we built. likely not because the gui doesn't work.
+=== zz_saschpe is now known as saschpe
+[04:21] <Bashing-om> bihaber: Maybe a grub config issue, but only maybe . What is grub set to boot ? -> ls -al /vmlinuz <- .
+[04:21] <sudharsan> I get this list of error when I run "apt-get update" : https://pastebin.mozilla.org/8256694 I am now unable to install anything new from apt-get due to this. Pl help
+[04:21] <sudharsan> I run xubuntu 14.04
+[04:24] <bihaber> Bashing-om: link to /boot/vmlinuz-3.16.0.29-generic
+[04:25] <Bashing-om> bihaber: OK, so you upgraded to 'utopic' .. now let's see that the kerenl is infact installed, show me . -> ls
+[04:26] <ObrienDave> sudharsan, sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3B4FE6ACC0B21F32
+[04:26] <Bashing-om> bihaber: Tired and getting stupid .. show mw -> ls -al /boot/grub | pastebinit <- .
+[04:26] <ObrienDave> sudharsan, sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5
+[04:27] <bihaber> Bashing-om: yes when i upgraded to utopic this issue began. ls what folder?
+[04:27] <lacrymology> I just figured that the reported device number is wrong. I've installed bumblebee before, which mangles that in order to achieve the switching, I think, but it doesn't seem to be installed now. Any clues what other optimus drivers might I have tried that have been doing this, or how can I check whether there's some module in the kernel that's acting up?
+[04:27] <lotuspsychje> lacrymology: bumblebee isnt good anymore, use nvidia-prime instead
+[04:28] <lacrymology> lotuspsychje: I just said, I don't have it anymore. But there's something that's making my videocard report the wrong ID
+[04:28] <lacrymology> it's saying something like 0001.01 or something, and the nvidia driver doesn't recognize it
+[04:29] <Bashing-om> bihaber: Too tired to do this any longer .. but the return from -> ls -al /boot } pastebinit <- .
+[04:29] <lotuspsychje> lacrymology: wich version of ubuntu?
+[04:29] <lacrymology> 14.04
+[04:30] <Bashing-om> bihaber: Many many errors .. ls -la /boot | pastebinit <- .
+[04:30] <lacrymology> lotuspsychje: ^
+[04:30] <sudharsan> ObrienDave, i've run that, now running apt-get update, givee me a minute, thanks
+[04:30] <lotuspsychje> lacrymology: sudo lsh -C video still shows right info?
+[04:30] <lotuspsychje> lshw
+[04:31] <bihaber> Bashing-om: http://paste.ubuntu.com/9791385/
+=== Malsasa_ is now known as Malsasa
+[04:33] <lacrymology> lotuspsychje: it says "display UNCLAIMED" in the first line, product name and stuff seems right, physical id is 0, the only weird thing about it is that the intel card reports physical ID 2, not 1, bus info pci@0000:01:00.0 which I think is the weird ID I had seen in dmesg, everything else seems right
+[04:33] <lotuspsychje> lacrymology: you sure you disabled intel card in bios?
+[04:34] <lacrymology> lotuspsychje: all in all, it looks all right. The intel bus info says pci@0000:00:02.0
+[04:34] <lotuspsychje> kk
+[04:34] <lacrymology> lotuspsychje: I'm sure I *didn't*. I don't think my BIOS supports it
+[04:34] <lotuspsychje> lacrymology: normally if you got 2 cards, there should be an option to switch
+[04:34] <nukeu666> i keep getting hash mismatch when trying to apt update with trusty security/updates...already tried to clear the var/apt folder but no luck
+[04:35] <lacrymology> lotuspsychje: also, it worked before updating the distro release (and therefore the kernel)
+[04:35] <lacrymology> lotuspsychje: and it works under windows
+[04:35] <lotuspsychje> lacrymology: maybe its time to re-install trusty clean with internet/updates enabled
+[04:35] <lacrymology> lotuspsychje: not all optimus laptops come with a switching-enabled BIOS, don't know why
+[04:35] <lotuspsychje> nukeu666: apt-get clean and apt-get update maybe
+[04:36] <lacrymology> I'd *really* rather not. I was actually about to switch to arch instead of upgrading, but decided to save myself the time.
+[04:36] <lotuspsychje> !info bleachbit | nukeu666 to clean out your system
+[04:36] <ubottu> nukeu666 to clean out your system: bleachbit (source: bleachbit): delete unnecessary files from the system. In component universe, is optional. Version 1.2-1 (utopic), package size 249 kB, installed size 1930 kB
+[04:37] <lotuspsychje> lacrymology: for driver support, ubuntu stays the best
+[04:37] <lacrymology> lotuspsychje: anyway, can you remind me the open driver's name?
+[04:37] <lotuspsychje> !info nvidia-prime | lacrymology
+[04:37] <ubottu> lacrymology: nvidia-prime (source: nvidia-prime): Tools to enable NVIDIA's Prime. In component main, is optional. Version 0.6.7 (utopic), package size 11 kB, installed size 102 kB (Only available for i386; amd64)
+[04:38] <lacrymology> no, not that one
+[04:38] <lacrymology> the open driver
+[04:38] <lotuspsychje> oh
+[04:38] <lacrymology> !info nvdia
+[04:38] <ubottu> Package nvdia does not exist in utopic
+[04:38] <lacrymology> !nvidia
+[04:38] <ubottu> For Ati/NVidia/Matrox video cards, see https://help.ubuntu.com/community/VideoDriverHowto
+[04:38] <lotuspsychje> lacrymology: nvidia-current ?
+[04:38] <Bashing-om> bihaber: Looks good to me .. I am considering rebuilding the initramfs image .. think'n about it .. for now make sure the package manager is happy -> sudo apt-get update, sudo apt-get upgrade , sudo apt-get dist-upgrade <- .
+[04:38] <lacrymology> no, that's also the propietary drivers
+[04:38] <lacrymology> damn, I can't remember
+[04:39] <lacrymology> lotus or soemething
+[04:39] <lacrymology> let me check
+[04:40] <lotuspsychje> lacrymology: maybe this can help: https://help.ubuntu.com/community/BinaryDriverHowto/Nvidia
+[04:40] <lacrymology> lotuspsychje: ok, I think I found the offending module
+[04:40] <lotuspsychje> kk good
+[04:40] <lacrymology> lotuspsychje: yeah, well, I sort of don't quite have a browser right now, do I?
+[04:40] <lacrymology> bbswitch
+[04:40] <lacrymology> !info bbswtch
+[04:40] <ubottu> Package bbswtch does not exist in utopic
+[04:40] <lacrymology> !info bbswitch
+[04:41] <ubottu> Package bbswitch does not exist in utopic
+[04:41] <lacrymology> !info bbswitch-dkms
+[04:41] <ubottu> bbswitch-dkms (source: bbswitch): Interface for toggling the power on nVidia Optimus video cards. In component main, is extra. Version 0.7-2ubuntu1 (utopic), package size 10 kB, installed size 55 kB (Only available for linux-any)
+[04:42] <bihaber> Bashing-om: all done!
+[04:42] <lacrymology> lotuspsychje: the one I was looking for is xserver-xorg-video-noveau

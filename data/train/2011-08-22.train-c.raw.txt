@@ -1,0 +1,1500 @@
+[11:18] <monty156> i thought about tweak but unity seems pretty locked down so i didnt think  there was much point
+[11:18] <glebihan> m_fulder, did you try sending mails using directly the command-line before trying in php ?
+=== aron is now known as Guest74279
+[11:19] <monty156> brb
+=== adante_ is now known as adante
+[11:20] <ravigdrk> what is the command for Remove broken package?
+=== xtor_ is now known as extor
+[11:21] <m_fulder> glebihan when I do sudo nullmailer-send I only get Rescanning queue. and it loads forever :P
+[11:22] <spo0kz> Does anybody here manage to use virtualbox without compromising your cpu usage  ?
+[11:22] <extor> If I want my mailserver to reside on mail.mydomain.com but I also want to be able to send mail to *@mydomina.com and *@client.mydomain.com and *@support.mydomain.com then how do I do the MX and CNAME and A entries for mydomain.com to reflect all that?
+[11:23] <rumpe1> spo0kz, define "compromising"
+[11:23] <monty156> you can all relax, im back now lol
+[11:23] <ActionParsnip> spo0kz: depends on your spec, you can always tell virtualbox to use less CPU (I believe). I suggest you ask in #vbox too
+[11:23] <spo0kz> rumpe1,  anything over 50% while the virtual guest is idle
+[11:24] <spo0kz> ActionParsnip,  been to #vbox sent logs had it out for good hour or two, no joy
+[11:24] <vkushner> I need to apt-get update an old jaunty server but all the sources seem to be gone... where can I get a sources.list for jaunty?
+[11:24] <ActionParsnip> spo0kz: which version of virtualbox?
+[11:25] <spo0kz> ActionParsnip, 4.1.2
+[11:25] <rumpe1> !jaunty
+[11:25] <ubottu> Ubuntu 9.04 (Jaunty Jackalope) was the tenth release of Ubuntu. End Of Life: October 23, 2010. See !eol and !upgrade for more details.
+[11:25] <ActionParsnip> vkushner: http://ubuntuforums.org/showthread.php?t=997890
+[11:25] <rumpe1> vkushner, jaunty is dead
+[11:25] <wolfric> i have a strange issue with the screen not updating sometimes. I'm not exactly sure on what level it is. So if i change workspace and then try type in a terminal or a text editor or even do something in the browser, the image stays still and i can't see anything. if i just do alt tab (even if there aren't any other windows) the changes start appearing and it's fine from then onwards
+[11:26] <wolfric> it doesn't always happen though. i'd say every 15/20 mins?
+[11:26] <ActionParsnip> wolfric: is your video chip onboard or is it on a dedicated video card?
+[11:26] <vkushner> rumpe1: well, duh! I know its officially dead. this doesn't change the fact that I got this client with a couple years old jaunty server and I just need to install some package.
+[11:27] <glebihan> m_fulder, I think you have to use nullmailer-queue then nullmailer-send, once again you should have a look at the manpages, also for it to work in php, you may have to edit your php.ini file and set the sendmail_path to "sendmail -t -i -f<name>@<domain>"
+[11:27] <wolfric> ActionParsnip: onboard nvidia and i have the restricted drivers
+[11:27] <ActionParsnip> vkushner: the jaunty servers are all off, you won't be able to get any packages online
+[11:27] <vkushner> so the question is still: is there any place still hosting old jaunty repo?
+[11:27] <ActionParsnip> wolfric: have you tested your RAM?
+[11:27] <sipior> vkushner: which package? might be easier just to install from source at this point.
+[11:27] <ActionParsnip> vkushner: very very unlikely
+[11:27] <wolfric> ActionParsnip: no, you mean with a memtest right?
+[11:28] <ActionParsnip> wolfric: yes, in Grub
+[11:28] <wolfric> ActionParsnip: i seriously doubt there's a problem there but sure i'll give it a shot next time
+[11:28] <wolfric> ActionParsnip: any other ideas in the mean time
+[11:28] <KcGenesis> hello i am new .please any can help me what is this about
+[11:28] <vkushner> sipior: no, thats a whole server configuration script that is running and failing.
+[11:28] <rumpe1> vkushner, what's the point? jaunty isn't even LTS.
+[11:28] <ActionParsnip> pretty cool link: http://www.sourceslist.eu/tag/jaunty/
+[11:28] <spo0kz> ActionParsnip, i get high cpu usage with vmware and virtualbox, what could that mean ?
+[11:28] <ActionParsnip> KcGenesis: this channel is for support. That's what it is about
+[11:29] <sipior> vkushner: configuration script? we were talking about software packages, as i recall...
+[11:29] <ActionParsnip> spo0kz: what speed etc is your CPU?
+[11:29] <vkushner> sipior: well, there is this server configuration script that as part of its running does apt-get update and then tries to install some packages
+[11:29] <spo0kz> ActionParsnip, its perfectly capable, its an i3 2.9ghz i run 3gb of ram
+[11:30] <KcGenesis> ActionParsnip, thanks
+[11:30] <sipior> vkushner: i see.
+[11:30] <zfe> no luck installing ubuntu on my mac
+[11:30] <zfe> both the burnt images say
+[11:30] <zfe> "no livefs media found"
+[11:31] <KcGenesis> ActionParsnip, one thing guys  who are u guys actually
+[11:31] <ActionParsnip> KcGenesis: that is moot here
+[11:32] <ActionParsnip> spo0kz: I see, what destktop is the guest OS using?
+[11:32] <spo0kz> ActionParsnip, Teh cpu hangs with backtrack and xp
+[11:33] <rumpe1> spo0kz, default version (which? which ubuntu?) of vbox or something more fancy?
+[11:33] <KcGenesis> ActionParsnip, how does this chat actually works
+=== Roberto35 is now known as Richard|
+[11:34] <ActionParsnip> spo0kz: hmm, not sure then personally, maybe others can advise. Have you tried a light OS like xpud/puppy etc, see if it happens there
+[11:34] <spo0kz> rumpe1, ubuntu is 11.04 vbox is 4.1.2 nothing fancy going on here lol
+[11:34] <ActionParsnip> KcGenesis: you are doing it now. You ask a support question. If people can help they will reply
+[11:34] <m_fulder> glebihan ok I have now read through the docs for nullmailer-queue and nullmailer-send .. I have also added the -f flag to my php.ini .. but I don't get one thing in the nullmailer-queue doc. there is written I should terminate all lines with single line-feed character? Which one is that?
+[11:34] <spo0kz> ActionParsnip, yeah man its frustrating, something is conflicting somwhere
+[11:35] <rumpe1> spo0kz, afair there are some options with warnings in virtualbox (3d-acceleration, etc.) which maybe cause problems. Try to deactivate as much stuff as possible and try again.
+[11:35] <spo0kz> rumpe1, tried it all
+[11:36] <ActionParsnip> spo0kz: try disabling stuff like ACPI and APIC in the vbox config
+[11:36] <glebihan> m_fulder, it is the "\n" character
+[11:36] <rumpe1> spo0kz, well... do you think it's a hardware-specific problem?
+[11:36] <m_fulder> glebihan you mean a simple line break?
+[11:36] <spo0kz> rumpe1, no, most definitely not
+[11:37] <glebihan> m_fulder, yes
+[11:37] <KcGenesis> how to know which software is installed in ubuntu.?software that mostly run from terminal.
+[11:37] <m_fulder> glebihan cause when I as in the documentation of nullmailer-queue write: senderAddress-ENTER-reciptienist-ENTER-ENTER-message-ENTER .. nothing happends :S
+[11:38] <ActionParsnip> KcGenesis: how do you mean?
+[11:38] <ActionParsnip> KcGenesis: you can run all comamnds from terminal, some will just spawn graphical applications
+[11:38] <glebihan> m_fulder, well I won't be able to help you much more with nullmailer as I've never used it, but why do you want to use it anyway instead of sendmail
+[11:38] <glebihan> ?
+[11:39] <glebihan> m_fulder, I've been googling a bit on it and nullmailer does seem very php-friendly
+[11:39] <glebihan> does *not* seem
+[11:40] <KcGenesis> ActionParsnip, i mean which application doesnot have GUI and doesnot show up in menu .
+[11:40] <m_fulder> glebihan aha weird :S maybe I should try sendmail instead then
+[11:41] <glebihan> m_fulder, I would recommend it anyway
+[11:41] <m_fulder> glebihan btw how can I just unlink nullmailer from sendmail now :P ?
+[11:41] <orated> I'm getting following errors on every upgrade, installaion - debconf: unable to initialize frontend: Dialog debconf: (Dialog frontend requires a screen at least 13 lines tall and 31 columns wide.) debconf: falling back to frontend: Readline. What's the reson and how to fix i?
+[11:42] <glebihan> m_fulder, just delete /usr/sbin/sendmail
+[11:42] <ActionParsnip> KcGenesis: thats a LOT of commands, what do you want to achieve?
+[11:42] <ActionParsnip> orated: can you give a pastebin of the output of:  lsb_release -a; sudo apt-get update
+[11:43] <KcGenesis> ActionParsnip, i want to know which commands are there to run. or installed
+[11:44] <rumpe1> KcGenesis, dpkg --get-selections | grep '[^e]install$' | cut -f 1 | less
+[11:44] <ActionParsnip> KcGenesis: Its very ambiguous dude
+[11:44] <spo0kz> rumpe1, if vmware and virtualbox are producing the same problem, what on gods earth could that mean to you ?
+[11:44] <ActionParsnip> rumpe1: s/he wants the ones which don't fire a GUI app
+[11:45] <glebihan> rumpe1, that'll give package names not commands
+[11:46] <rumpe1> KcGenesis, what problem do you want to solve (effectively) or it this more a theoretical question?
+[11:46] <spo0kz> rumpe1, could it have been the kernel update that recently came through ?
+[11:47] <rumpe1> KcGenesis, i really have absolutely no idea, in which situations such a list would be helpful
+[11:48] <rumpe1> spo0kz, maybe. You could try older kernels, if you have any.
+[11:48] <KcGenesis> rumpe1, not actually few month ago i installed a security application and i can't remember its name and and i have no idea how find it that why.
+[11:49] <glebihan> KcGenesis, what was that application doing ?
+[11:50] <rumpe1> KcGenesis, well... you could search with "apropos <term>"  with word=security or something relevant  ... or "aptitude search <term>", or "apt-cache search <term>"...
+=== richard is now known as Guest53740
+[11:50] <KcGenesis> glebihan, that was a ip/portscanner
+[11:51] <Guest53740> hi yall
+[11:51] <rumpe1> KcGenesis, try "apt-cache search portscan"
+[11:52] <orated> ActionParsnip: Sorry, I lost connection. I'll pastebin what you asked for in a moment
+[11:52] <glebihan> KcGenesis, or variant "apt-cache search port | grep scan" "apt-cache search scan | grep port"...
+[11:53] <spo0kz> rumpe1, well luckily this is all set up on an external hard drive, i use clonezilla but only have a clone of this new kernel update, might try reinstalling ubuntu and see if it still lags idk, seems like alot of work just to play poker
+[11:53] <spo0kz> cloning more often seems wise
+[11:53] <spo0kz> gonna go for a bacon butty first
+[11:53] <spo0kz> nah mean lul
+[11:53] <spo0kz> must be an easier more technical way of troubleshooting this
+[11:53] <FloodBot1> spo0kz: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+=== `mOOse` is now known as m00se
+[11:54] <spo0kz> get up that werent flooding
+[11:54] <glebihan> spo0kz, the bot disagrees
+[11:55] <spo0kz> i noticed ...
+[11:56] <rumpe1> spo0kz, grub stores per default more than one kernel... except you have customized the config.
+[11:56] <orated> ActionParsnip: http://pastebin.com/pNwyrYd6 . I don't see it on update but on upgrades followed by installation
+[11:56] <spo0kz> rumpe1, yeah clonezilla did that right
+[11:56] <spo0kz> rumpe1, im running of a restore as i stand
+[11:56] <KcGenesis> thanks guys it worked..one thing what is difference between "aptitude search<term>" and "apt-cache search"
+[11:57] <ActionParsnip> orated: can youu pastebin the output of:  sudo apt-get upgrade    please
+[11:57] <spo0kz> brb commiting suicide
+[11:58] <rumpe1> KcGenesis, aptitude is a higher level interface to APT than apt-cache, which only queries the cache, but apt-cache is faster.
+[11:58] <flecha> Is there an option on Unity that avoids focus stealing?
+=== Guest74279 is now known as gerula
+[12:00] <gerula> .
+[12:00] <KcGenesis> rumpe1, and how to logout windows from terminal ?
+[12:03] <Night-Hacks> i want to add natty repos to my 10.04. will i face any problem ?
+[12:03] <auronandace> yes
+[12:03] <auronandace> lots
+[12:03] <bazhang> Night-Hacks, yes, dont do it
+[12:03] <ActionParsnip> Night-Hacks: yes
+[12:03] <Night-Hacks> bazhang: just want to install gettext.18
+[12:04] <ActionParsnip> Night-Hacks: is it a desktop install?
+[12:04] <Night-Hacks> ActionParsnip: yes
+[12:05] <Night-Hacks> i wonder there just gettext.17 available for 10.04 !
+[12:05] <Night-Hacks> there is*
+[12:06] <auronandace> !info gettext lucid | Night-Hacks
+[12:06] <ubottu> Night-Hacks: gettext (source: gettext): GNU Internationalization utilities. In component main, is optional. Version 0.17-8ubuntu3 (lucid), package size 1691 kB, installed size 7084 kB
+[12:06] <KarpEnOkk> hi to all)
+[12:06] <root-jr> hi
+[12:06] <root-jr> i have got a problem
+[12:07] <Night-Hacks> auronandace: but thats 017 version
+[12:07] <root-jr> my notebook acer 5745g
+[12:07] <KarpEnOkk> what's you problem?)
+[12:07] <root-jr> can't open cd-drive
+[12:07] <auronandace> Night-Hacks: why do you want 018?
+[12:07] <KarpEnOkk> ok =)
+[12:08] <Night-Hacks> auronandace: im working on gnu grep which depends on 18
+[12:08] <root-jr> on another system it works
+[12:08] <ActionParsnip> Night-Hacks: why not just rinstall natty, the desktop of Lucid is EOL around the time Natty is
+[12:08] <root-jr> but here - nothing
+[12:08] <th0r> root-jr: have you tried using a paperclip to open it manually?
+[12:08] <auronandace> Night-Hacks: can you update to natty?
+[12:09] <root-jr> th0r: what?
+[12:09] <Night-Hacks> im developing right now upgrading is time consuming
+[12:09] <th0r> root-jr: you said your cd drive won't open, have you tried to open it manually? There is a small hole in the front, a paper clip should release the drive
+[12:09] <root-jr> ok wait a minutr
+[12:09] <Night-Hacks> wonder why it calls LTS !!!
+[12:09] <root-jr> *minute
+[12:10] <auronandace> !lts | Night-Hacks
+[12:10] <ubottu> Night-Hacks: LTS means Long Term Support. LTS versions of Ubuntu will be supported for 3 years on the desktop, and 5 years on the server. The current LTS version of Ubuntu is !Lucid (Lucid Lynx 10.04)
+[12:11] <shaneo> hi guys wuick question it seems someone has been trying to remote access my pc is there a way to check logs for the incoming ips
+[12:11] <Night-Hacks> just mean why they dont upgrade some packages
+[12:11] <root-jr> th0r: i can't open it
+[12:11] <auronandace> !latest | Night-Hacks
+[12:11] <ubottu> Night-Hacks: Packages in Ubuntu may not be the latest. Ubuntu aims for stability, so "latest" may not be a good idea. Post-release updates are only considered if they are fixes for security vulnerabilities, high impact bug fixes, or unintrusive bug fixes with substantial benefit. See also !backports, !sru, and !ppa.
+[12:11] <th0r> shaneo: login attempts should show in /var/log/messages among others
+[12:11] <ActionParsnip> shaneo: what service are they trying to connect to?
+[12:11] <bjhaid> how do i configure ifconfig to run @ startup and as root, before other apps startup?
+[12:12] <th0r> root-jr: How did it get jammed? Is there a disk in the drive?
+[12:12] <root-jr> no
+[12:12] <shaneo> i woke up and multiple connections were trying to connect to my pc via  ubuntu ccess
+[12:12] <rumpe1> bjhaid, try /etc/rc.local
+[12:12] <root-jr> but i installed ubuntu from cd
+[12:12] <shaneo> *ubuntu remote access
+[12:12] <bjhaid> rumpe1: i did but somehow my machine didnt pick the address
+[12:12] <gulzar> how to install "Canola Media Center " in Ubuntu 111.04?
+[12:12] <th0r> root-jr: could you feel the release mechanism when you tried to release it with the paperclip>
+[12:13] <ActionParsnip> shaneo: what is "ubuntu access"?
+[12:13] <richard_> how do i find the ip address of my parents computer I want to hack in remotely
+[12:13] <richard_> ???
+[12:13] <root-jr> yes
+[12:13] <rumpe1> gulzar, manually executing rc.local works?
+[12:13] <bjhaid> rumpe1: i had (ifconfig eth0 x.x.x.x broadcast x.x.x.x netmask x.x.x.x) and it didnt work
+[12:13] <orated> ActionParsnip: I was searching for an example to show the problem. Upgrade won't show it now as there is nothing to install but http://pastebin.com/83kntL9u
+[12:13] <richard_> Oops Hi my name is richard
+[12:13] <shaneo> sorry mistyped the stadard ubuntu remote desktop
+[12:14] <richard_> Im new to Linux
+[12:14] <rumpe1> bjhaid, so manually also don't work?
+[12:14] <th0r> richard_: do you have access to the computer to check from there?
+[12:14] <root-jr> i don't want to open it  manually
+[12:14] <ActionParsnip> orated: http://ubuntuforums.org/showthread.php?t=485885
+[12:14] <root-jr> is there any program for this
+[12:14] <root-jr> or any command in terminal
+[12:14] <root-jr> ??
+[12:14] <ActionParsnip> shaneo: oh, so vnc then. Why are you allowing vnc access from the WWW?
+[12:15] <th0r> root-jr: it usually will open with the command
+[12:15] <th0r> root-jr: (oops) eject /dev/cdrom
+[12:15] <ActionParsnip> th0r: needs sudo
+[12:15] <shaneo> im not
+[12:15] <Guest71158> ActionParsnip some guy tell me to type cd $home <-- why not cd /home/ ?
+[12:15] <Guest71158> what's the difference
+[12:15] <aiserid> clear
+[12:15] <fantomas> all
+[12:15] <shaneo> like i said i woke up and there were to connections asking for acess
+[12:15] <th0r> root-jr: make that 'sudo eject /dev/cdrom' (thanks ActionParsnip)
+[12:15] <shaneo> *two
+[12:15] <rumpe1> Guest71158, $HOME = /home/user
+[12:15] <bjhaid> rumpe1: it sets it for current session but the problem is that i  have an app that runs @ startup, but if it doesnt detect network it wouldnt run, and when i included ifconfig in the script, it require root access to do it
+[12:16] <orated> ActionParsnip: Your link is asking me to login to that forum
+[12:16] <root-jr> sudo eject /dev/cdrom works
+[12:16] <fantomas> How can I know the type of RAM w/o opening my laptop?
+[12:16] <shaneo> what log would i check for vnc login attempts
+[12:16] <root-jr> thx man :)
+[12:16] <tomodachi> fantomas: often memory companies have nice webapps that tell you what ram. Like kingston memory configurator
+[12:16] <orated> ActionParsnip: Usually, its available to take help from afaik
+[12:16] <th0r> root-jr: it would have been easier if you had just asked how to open the drive...it wasn't really stuck
+=== himcesjf1 is now known as himcesjf
+[12:17] <wei> e
+[12:17] <wei> <unconvertable>
+[12:17] <rumpe1> bjhaid, which ap? what has it to do with ifconfig? and why is it an problem, that ifconfig needs root-access?
+[12:17] <Guest71158> nice
+[12:17] <ActionParsnip> orated: I see, gimme a sec and I will pastebin
+[12:17] <wei> <unconvertable>
+[12:17] <wildbat> !cn | wei
+[12:17] <ubottu> wei: , /join #ubuntu-cn <unconvertable> /join #ubuntu-tw
+[12:17] <ActionParsnip> orated: http://pastebin.com/TEhYpFMu
+[12:17] <DJones> !cn | wei
+[12:17] <gulzar> getting this -  W: Failed to fetch http://ppa.launchpad.net/canola/ppa/ubuntu/dists/natty/main/source/Sources  404  Not Found  W: Failed to fetch http://ppa.launchpad.net/canola/ppa/ubuntu/dists/natty/main/binary-amd64/Packages  404  Not Found
+[12:18] <ActionParsnip> gulzar: the ppa doesn't support natty: http://ppa.launchpad.net/canola/ppa/ubuntu/dists/
+[12:18] <bjhaid> rumpe1: i wrote an app that needs to run @ startup, the issue is that the app doesnt run @ root, it runs @ user level, but i want to use ifconfig to set a static address and let the machine pick up the address before it starts my app
+[12:18] <ActionParsnip> gulzar: I suggest you remove the ppa
+[12:18] <gulzar> <ActionParsnip> Is there any for 11.04
+[12:18] <prodigel> hi all. I have a linux server, ubuntu installed, and I forgot the password for my only account in the system. root password is not set, and when selecting recovery mode in grub, and going to root shell, it asks me for the root password - which is not set afaik. Is this something new? Before I was greeted by the root shell, no questions asked. Can I bypass this step to change my password(s)?
+[12:19] <aiserid> that`s too bad
+[12:19] <japan> how to add my latter in lxde ?
+[12:19] <japan> letter
+[12:19] <orated> ActionParsnip: Thanks! But why I was not able to view that post myself here
+[12:19] <rumpe1> bjhaid, still don't get it. rc.local runs with root-permissions and you can always let root execute a script as a user
+[12:19] <bjhaid> rumpe1: would rc.local run before any other app @ startup?
+[12:19] <chewed-on> Yo !
+[12:19] <japan> how to add my language on keyboard ?
+[12:20] <japan> in lxde
+[12:20] <rumpe1> no... as last boot-script i guess. Another solution would be upstart, but rc.local is much simpler.
+[12:20] <chewed-on> How big is Ubuntu ? I'm planning on installing it on Virtual Box since Mac is so incompetent to even just mount a ntfs-3g drive.
+[12:20] <gry> japan, No clue and try #xubuntu / #lubuntu please or wait here
+[12:20] <gry> chewed-on, just 4GB space requirement
+[12:20] <japan> i have ubuntu and i installed lxde
+[12:20] <gry> chewed-on, lubuntu/xubuntu might be even smaller
+[12:20] <chewed-on> gry: is that everything ?
+[12:21] <gry> yes
+[12:21] <bjhaid> rumpe1: i need something that would start ifconfig, if possible before other scripts
+[12:21] <chewed-on> what if I download just the standard ubuntu from the website
+[12:22] <wildbat> prodigel: you mst have set it . try in LiveCD remoce the root passwd or chroot there
+[12:23] <ActionParsnip> orated: some posts require logons I guess, not sure
+[12:23] <antony> hello
+[12:23] <antony> could you help me
+[12:23] <ActionParsnip> gulzar: 11.04 == Natty
+[12:23] <chewed-on> Ubuntu is commercial ?
+[12:23] <chewed-on> or commercial supported ?
+[12:24] <ActionParsnip> chewed-on: https://help.ubuntu.com/community/Installation/SystemRequirements
+[12:24] <Pici> chewed-on: Canonical does offer commercial support contracts.
+[12:24] <Calinou> chewed-on: nope
+[12:24] <prodigel> wildbat, luckily I don't need to do that, because I've just remembered the password :). Still, since when you need to to that. If you're able to reboot the machine and access grub console, you're probably also able to plug a bootable usb stick and do nasty stuff... I see no reason in the extra security measure...
+[12:24] <chewed-on> oh right
+[12:24] <antony> i whant convert a h264 video 1920x1080 to 1280*720
+[12:24] <antony> xhithout rencoding i want keep h264 codec
+[12:25] <wildbat> prodigel: errr? good that you remember but extra security measure? what do you mean ?
+[12:26] <bazhang> antony, convert how then?
+[12:26] <prodigel> wildbat, asking for the root password in recovery mode, I mean
+[12:26] <ActionParsnip> chewed-on: about 7Gb to 10Gb space and you'll be fine
+[12:26] <chewed-on> THanks
+[12:27] <wildbat> prodigel:  you lost me ~ i said to remove it
+[12:27] <japan> how to delete all without asking ?
+[12:27] <bazhang> japan, delete what
+[12:27] <antony> bazhang, what ?
+[12:27] <japan> every thing, i know there is some code for deleteing everything without asking
+[12:28] <iridium> japan, lets say you want delete a directory, rm -rf directory/
+[12:28] <bazhang> antony, you want to convert without re-encoding; how do you propose to do that
+[12:28] <antony> bazhang, i want to keep h264, but simply reduce the resolution
+[12:28] <prodigel> wildbat, never mind, it was just smalltalk. Thanks for the help anyway!
+[12:28] <ActionParsnip> japan: you can use gparted to format partitions easily, is that what you mean?
+[12:28] <antony> bazhang, ok for reencoding
+[12:29] <wildbat> japan: everything? as the whole harddrive? whole folder? whole ...errr world?
+[12:30] <japan> but ye
+[12:30] <japan> yes
+[12:30] <Pici> 08:27:15 <?japan> how to delete all without asking ?
+[12:30] <Pici> (sorry)
+[12:30] <bazhang> japan, use gparted then
+[12:32] <ActionParsnip> antony: try mencoder, or maybe handbrake can do it
+[12:32] <kyle_> Qucick command to eject Cd-ROM ??
+[12:32] <kyle_> *quick
+[12:33] <Pici> kyle_: 'eject'
+[12:33] <japan> i cummed on dead bird
+[12:33] <antony> i think this is a good command: ffmpeg -i input.mp4 -s 1280x720 output.mp4
+[12:33] <overclucker> antony: ffmpeg -i in.mp4 -sameq -aspect 16:9 out.mp4
+[12:34] <antony> ha no it is mp4 now...
+[12:34] <kyle_> pici: unable to eject, last error: Input/output error
+[12:34] <antony> overclucker, where is resolution in your command ?
+[12:35] <overclucker> the aspect ratio 16:9 = 1280x720
+[12:35] <LABcrab> Hello everyone!  i can't boot from a real CD.  Can i boot from an ISO using GRUB2 instead?  Please let me know.
+[12:37] <alks> Hello
+[12:37] <ActionParsnip> LABcrab: yes you can. Did you MD5 test the ISO you downloaded?
+[12:39] <branant> Pici (japan), You need to learn the basics of Linux/Unix before abusing dead birds.
+[12:39] <LABcrab> ActionParsnip: Pretty sure.
+[12:39] <LABcrab> ActionParsnip: To double check, how is it done?
+[12:39] <ActionParsnip> LABcrab: you either did or didn't, it's a concious process
+[12:39] <ActionParsnip> !md5 | LABcrab
+[12:39] <ubottu> LABcrab: To verify your Ubuntu ISO image (or other files for which an MD5 checksum is provided), see http://help.ubuntu.com/community/HowToMD5SUM or http://www.linuxquestions.org/linux/answers/LQ_ISO/Checking_the_md5sum_in_Windows
+[12:39] <LABcrab> ActionParsnip: Why do people do this?
+[12:40] <ActionParsnip> LABcrab: so that you know the file you have is complete and consistent
+[12:40] <Feldegast> LABcrab to confirm the downloaded iso is error free
+[12:40] <LABcrab> Fair enough.
+[12:40] <ActionParsnip> LABcrab: you clearly didn't check it
+[12:40] <LABcrab> How fast is it?
+[12:41] <ActionParsnip> LABcrab: as fast as your PC, takes a few seconds
+[12:41] <LABcrab> Sorry.  :(  i usually don't.
+[12:41] <ActionParsnip> LABcrab: you should
+[12:41] <LABcrab> ActionParsnip: Why can't, say, Opera do this automatically?  i'm guessing there's a Fx add-on?
+[12:41] <alks> i get a very interesting boot problem with ubuntu with lots of back history of how i got where i am now .. i have dual boot win7 and ubuntu. if i start PC in WIN7 and then shut down PC and launch again to win 7 everything is fine. IF i restart o launch at first to ubuntu and then SHUTDOWN from ubuntu i get bios startup crash/restart and  i am able to boot to win7or ubuntu again from grub. If I REBOOT from ubuntu i can boot to ubuntu with no problem but if i try
+[12:41] <alks>  WIN7 it crashes on login screen. i updated my bios (did not help) and have no idea what to do next as i can not find any more info
+[12:41] <Somelauw> Any xrdb experts here?
+[12:42] <LABcrab> 8b1085bed498b82ef1485ef19074c281.  Yes, it's good to go.  But how does it work, and why the cryptic code?  ActionParsnip & Feldegast
+[12:43] <ActionParsnip> LABcrab: possibly, torrents add extra error checks
+[12:43] <Feldegast> LABcrab i have not seen a firefox add-on
+[12:43] <ActionParsnip> LABcrab: it calculates some values based on the data within the file. When you boot the CD, do you get a black screen?
+[12:44] <LABcrab> So now the check is done.  Why does it say "bed" in the check?  Where do we go from here?
+[12:44] <LABcrab> ActionParsnip: The computer is unable to boot from CD, and probably doesn't even detect the drive(s).
+[12:44] <alks> hello?
+[12:45] <LABcrab> alks: Sorry.  :(
+[12:45] <ActionParsnip> LABcrab: can it boot usb?
+[12:45] <alks> sry no idea if my msg were shown
+=== arch is now known as Guest12234
+[12:45] <LABcrab> ActionParsnip: Likely not.  800mhz Precario 5000 series.
+[12:45] <Guest12234> ok
+[12:45] <ActionParsnip> LABcrab: do you have a floppy drive?
+[12:46] <LABcrab> Recap: alks says something about Windows 7 dual boot.
+[12:46] <LABcrab> ActionParsnip: Yes.
+[12:46] <Guest12234> is there anyone who can LFS
+[12:46] <overclucker> Guest12234: ask on the lfs irc server
+=== iqpi is now known as iqpi|comida
+[12:47] <LABcrab> Life For Sharing?  Let Frank Swim?  Little Friendly Seal?
+[12:47] <overclucker> linux from scratch
+[12:47] <Guest12234> overclucker, i tried , but i have some problems to enter the lfs irc server , could you teach me hoe
+[12:47] <Guest12234> how
+[12:48] <LABcrab> overclucker: Why?
+[12:48] <ActionParsnip> LABcrab: there is a floppy image on pendrivelinux to make the system boot usb
+[12:48] <Guest12234> i am using xchat , and i can not enter the lfs irc
+[12:48] <Somelauw> xrdb anyone?
+[12:48] <japan> #ubuntu-sr
+[12:48] <ylmfos> hello  :)
+[12:48] <japan> i cum on dead birds
+[12:49] <alks> maybe anyone could suggest where i could go to solve the problem
+[12:49] <ylmfos> i`m running from live CD ylmf (ubuntu based) and i have a problem:
+[12:49] <Guest95319> How to join yahoo chat rooms on ubuntu as yahoo massenger don't support linux?
+[12:49] <ActionParsnip> Guest12234: did you burn the CD as slowly as possible?
+[12:49] <ylmfos> it doesn't detect the hdd (sata 120 gb) ...
+[12:50] <LABcrab> ActionParsnip: Yes, he burned it by taking little baby steps.  ;)  Trying to find an empty USB.
+[12:50] <overclucker> Guest12234: /connect irc.linuxfromscratch.org
+[12:50] <Guest95319> How to join yahoo chat rooms on ubuntu as yahoo massenger don't support linux?
+[12:50] <Guest12234> ActionParsnip,  what your mean
+[12:50] <auronandace> Guest95319: tried using pidgin?
+[12:50] <LABcrab> 2 gigs is enough ActionParsnip
+[12:50] <Guest12234> overclucker,  let try
+[12:51] <Guest95319> Pidgin have facality to join yahoo chat rooms...?
+[12:51] <ylmfos> guest95319 : tried gyachi?...
+[12:51] <LABcrab> Guest95319: Ditto with auronandace.  Pidgin, although for some reason,
+[12:51] <LABcrab> Empathy is default.
+[12:51] <ActionParsnip> Guest12234: sorry, crossed wires in my brain
+[12:51] <LABcrab> Are Y! Chatrooms discontinued?
+[12:51] <Somelauw> bitlbee is what I like
+[12:51] <ActionParsnip> LABcrab: did you burn the CD as slowly as possible?
+[12:51] <Guest12234> ok
+[12:51] <gry> LABcrab: No clue.
+[12:51] <ActionParsnip> LABcrab: no, yahoo is still around
+[12:51] <ylmfos> anyway, can anyone help me?...
+[12:51] <Guest95319> Guys they connect person to person not allow to join yahoo chat rooms
+[12:51] <gry> ylmfos: If you ask.
+[12:52] <BluesKaj> Hiyas all
+[12:52] <ActionParsnip> Guest95319: gyache lets you use voice and webcam in yahoo rooms etc (afair)
+[12:52] <LABcrab> ActionParsnip: Is two gigs enough for the USB?  i don't remember how slow i burned it, but the fat penguin must have been walking sluggishly.
+[12:52] <ylmfos> this ylmfOS (ubuntu based) live CD doesn't detect my laptop hdd (amilo LI 1718)
+[12:52] <Guest12234> en , it dosen't work .
+[12:52] <Feldegast> LABcrab k3b will do an md5 check after burning the cd.....
+[12:52] <Guest12234> in xchat
+[12:52] <LABcrab> Feldegast: Konqueror?
+[12:53] <ylmfos> i want to install it on the laptop, and i wiped the hdd... still, it doesn't detect it
+[12:53] <ActionParsnip> ylmfos: ylmfOS isn't supported here
+[12:53] <Feldegast> LABcrab i have never used Konqueror to burn cds
+[12:53] <Guest95319> M haveing a 3G modem but unable to change the mode to edge
+[12:53] <Guest12234> ylmfos?
+[12:53] <ActionParsnip> Guest12234: its another Ubuntu spinoff thing
+[12:53] <LABcrab> Feldegast: What is k3b?  Text-based?
+[12:53] <ylmfos> just consider it ubuntu, for 3.0 is kind of purely ubuntu, just some themes and stuff like that :) ...
+[12:53] <Guest95319> 3G to edge and edge to 3G .....?
+[12:54] <ylmfos> what can i do?... terminal stuff, or whatever?...
+[12:54] <Feldegast> LABcrab k3b is a cd buyrning application for linux
+[12:54] <Guest12234> yeah, got it !
+[12:54] <LABcrab> Guest95319: Move away from the edge or else you will fall!
+[12:54] <ActionParsnip> ylmfos: it's not supported here, this is ubuntu support only. The multitude of other spinoffs are equally not supported here
+=== nik is now known as Guest89628
+[12:54] <ActionParsnip> ylmfos: this includes (but is not limited to): backtrack, mint, gnewsense, moonOS and so on
+[12:54] <Guest95319> M haveing a 3G modem but unable to change the mode to edge
+[12:55] <ylmfos> mint detected my hdd ...
+[12:55] <Guest95319> M haveing a 3G modem but unable to change the mode to edge
+[12:55] <Guest95319> 3G to edge and edge to 3G .....?
+[12:55] <Guest12234> ActionParsnip, i want my ubuntu faster , how should i do?
+[12:55] <Feldegast> LABcrab if you want to boot the 700mb iso from usb a 2gb usb is big enough
+[12:55] <LABcrab> Guest95319: Go to the network icon, modify connexions.
+[12:55] <ActionParsnip> ylmfos: mint isn't supported here either
+[12:55] <ylmfos> i understand...
+[12:55] <ActionParsnip> ylmfos: thanks
+[12:55] <tsimpson> ylmfos: we have no clue what changes were/wern't made to ylmf, so we wouldn't know how to help anyway
+[12:56] <Guest12234> ylmfos is a nick of someone
+[12:56] <ylmfos> can you at least give me some ubuntu konsole cmds to check if it detects somehow the hdd, just that i didn't find them?...
+[12:56] <LABcrab> Guest95319: When you modify your connexions you can change it to 2G only.
+[12:56] <Jensit> xubuntu is supported here right?
+[12:56] <LABcrab> Jensit: #xubuntu
+[12:56] <ActionParsnip> Jensit: yes, it is an official canonical release
+[12:56] <Guest12234> possibly
+[12:56] <Jensit> okay thanks :)
+[12:56] <Feldegast> ylmfos if it is mounted, then you can use df -h
+[12:57] <ylmfos> no, it is not mounted. i mean something like fdisk or dd ...
+[12:57] <LABcrab> Jensit: No worries.  :)  #ubuntu is good if it's not xubuntu-specific, but Xubuntu's been bloaty over the years.
+[12:57] <tsimpson> ylmfos: in general, look for /dev/sd*, and "sudo fdisk -l" to list all disks and partitions
+[12:57] <LABcrab> Guest95319: Where are you?
+[12:57] <winut> is amarok worth installing? thanks
+[12:57] <Guest95319> My dear frnd LABcrab wen signals r lost in one mode then again on restarting it don't change the mode...untill same signals are available
+[12:58] <ylmfos> lol, fdisk -l doesn't list anything :) ...
+[12:58] <Guest95319> M in india
+[12:58] <ActionParsnip> winut: if you want amarok, then yes
+[12:58] <Jensit> LABcrab: im just looking for a channel to give support for xubuntu users ;)
+[12:58] <Guest95319> LABcrab
+[12:58] <winut> wow, thanks :-)
+[12:58] <Guest12234> you should use this command as a root
+[12:58] <Guest95319> LABcrab m in india
+[12:58] <ActionParsnip> ylmfos: i suggest you find the channel for your OS
+[12:58] <overclucker> Guest12234: oh fir xchat it's: /server irc.linuxfromscratch.org
+[12:58] <LABcrab> Guest95319: Have you changed the settings so that it does 2G only or 3G only?
+[12:58] <Guest95319> Yes
+[12:58] <Guest12234> let me see
+[12:58] <auronandace> !xubuntu | Jensit
+[12:58] <ubottu> Jensit: Xubuntu is Ubuntu with Xfce instead of !GNOME. More info at http://www.xubuntu.org and http://wiki.ubuntu.com/Xubuntu/ - To install from Ubuntu: <unconvertable> sudo apt-get install xubuntu-desktop <unconvertable> - Join #xubuntu for support - See also: !Ubuntu and !Xubuntu-Channels
+[12:58] <ylmfos> i would, just that it has a chinese developer so i don't know where i can find an English help channel :)
+[12:59] <LABcrab> auc
+[12:59] <Jensit> thx
+[12:59] <LABcrab> auronandace: That wasn't necessary.  :|
+[12:59] <LABcrab> But anyway.
+[12:59] <Guest95319> How to make file system in a flash device
+[12:59] <ylmfos> i think the point might be that i wiped completely the hdd using some disk wiper in Ultimate Boot CD 4 windows
+[12:59] <Guest95319> How to make file system in a flash storage device
+[13:00] <ActionParsnip> Guest95319: use gparted
+[13:00] <cameron_> Hey - can anyone here help me with GRUB2 .. it's not showing up my windows 7 and when I add it manually it says "signature error" .. I went through a few threads yesterday (10+ pages) and still can't figure it out
+[13:00] <Guest95319> I wrk in embedded systems will it work there ActionParsnip
+[13:00] <ActionParsnip> ylmfos: you do realise you can install a proper ubuntu then run a script to make the OS look like XP....
+[13:01] <alks> cameron_,  try boot-repair
+[13:01] <ActionParsnip> Guest95319: sure, as long as it and all it's dependencies are installed
+[13:01] <Guest95319> Thanx
+[13:01] <ylmfos> you think it will detect the hdd?... :) 'cause i`d try that if so :)
+[13:01] <ylmfos> also, i have a dual core with 2 gb ram, which version of ubuntu you recommend?...
+[13:01] <ActionParsnip> ylmfos: i'd say try it
+[13:02] <Guest95319> OpenCV can be cross compiled for an arm processor
+[13:02] <cameron_> alks: is that a package or command?
+[13:02] <alks> cameron_,  https://help.ubuntu.com/community/Boot-Repair
+[13:02] <ActionParsnip> ylmfos: using spinoffs like that isn't too smart. The community for Ubuntu dwarfs any other, and I'm sure you want good support from more users...
+[13:02] <Guest95319> Any dedicated channel server for embedde linux or simply linux
+[13:03] <cameron_> alks: excellent yI've yet to see this.. all those threads were from 2009
+[13:03] <cameron_> alks: I'll get back in a minute
+[13:03] <ylmfos> it's my sister's laptop and she wants linux :)
+[13:03] <ylmfos> she's got enough of Windows :)
+[13:03] <ActionParsnip> ylmfos: then install Ubuntu
+[13:03] <Guest95319> Any dedicated channel server for embedde linux or simply linux
+[13:03] <Guest95319> Anybody knows cross compilation
+[13:04] <overclucker> ##linux
+[13:04] <ylmfos> last version of ubuntu won't work too slow?... i wanted a fast way to get an ubuntu windows-like to make it easier for her, but i stuck on stupid things like no hdd detection or different errors :)
+[13:04] <ylmfos> this live cd with compiz started works pretty smooth :)
+[13:05] <Craw^> Hi. When creating a bootable USB drive, does the USB drive need to be a clean one (no other files in it except for Ubuntu)? Also, what's the minimum capacity of the USB drive I need to use? Thanks.
+[13:05] <Guest95319> 2GB
+[13:06] <chroot> en,hi
+[13:06] <chroot> hi , ubuntu
+[13:07] <chroot> hi , how can i boot my ubuntu faster?
+[13:07] <VictorCl2> I can't do updates it tells me that some libraries are not trusted
+[13:08] <chroot> VictorCl2, maybe you should update your source list of apt
+[13:09] <VictorCl2> equires installation of untrusted packages = "dhcp3-client dhcp3-common firefox firefox-branding firefox-globalmenu firefox-gnome-support firefox-locale-ca firefox-locale-en isc-dhcp-client isc-dhcp-common libreoffice-base-core libreoffice-calc libreoffice-common libreoffice-core libreoffice-draw libreoffice-emailmerge libreoffice-gnome libreoffice-gtk libreoffice-help-ca libreoffice-help-en-gb libreoffice-help-en-us libreoffice-impress libreoffice-l10
+[13:09] <VictorCl2> n-ca libreoffice-l10n-common libreoffice-l10n-en-gb libreoffice-l10n-en-za libreoffice-math libreoffice-style-human libreoffice-writer libxfont1 python-uno ttf-opensymbol uno-libs3 ure"
+[13:09] <FloodBot1> VictorCl2: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[13:09] <VictorCl2> didnt know it was that long
+[13:09] <chewed-on> Uh...that's a bit of a false advertisement here: http://www.ubuntu.com/ubuntu  "With Ubuntu, you can do everything you can do with other operating systems. But faster. And for free!"
+[13:10] <hiwk> I recently installed ubuntu 11, and sometimes the unity bar (?) gets messed up (graphics get stuck on it, needs a refresh from buffer), how can I force it to re-draw without logging out from X?
+[13:11] <hiwk> I bet it really is a nvidia driver issue, but it seems easier to mitigate than to fix
+[13:11] <chroot> VictorCl2, can u tell me what you want to do
+[13:11] <VictorCl2> to do about what?
+[13:11] <chroot> means , your problem
+[13:12] <VictorCl2> ahh. well update manager tells me that
+[13:12] <VictorCl2> Requires installation of untrusted packages
+[13:12] <VictorCl2> I dont know what to do
+[13:12] <chroot> oh  , maybe you want to update your sys , and the issue occurs
+[13:13] <chroot> right?
+[13:13] <VictorCl2> no the update manager pop ups telling me that there are updates
+[13:13] <VictorCl2> when I click .. Update .. it tells me that
+[13:13] <chroot> i have met them before
+[13:14] <chroot> first , type this command  in a console
+[13:14] <chroot> sudo apt-get update
+[13:14] <cameron_> alks: no such luck
+[13:14] <cameron_> alks: http://paste.ubuntu.com/672420/
+[13:14] <LABcrab> What is the point of a FloodBot?
+[13:14] <chroot> this will refresh your source list
+[13:15] <chroot> it is safe
+[13:15] <compdoc> a bot that floods the feilds so you can grow your crops
+[13:15] <auronandace> LABcrab: to prevent people flooding the channel
+[13:15] <hiwk> if anyone answers my question (force re-draw of unity bar), please higlight me
+[13:16] <chroot> i'd like to
+[13:16] <chroot> hiwk , tell me how highlight you
+[13:16] <cameron_> I see the bit where it is finding OSs, and it simply doesn't SEE windows at all
+[13:16] <hiwk> chroot: like that :)
+[13:16] <cameron_> however, i can pick it out of the /sda/1 things
+[13:16] <chroot> let me try
+[13:16] <chroot> hiwk:
+[13:17] <chroot> not work , as you see
+[13:17] <chroot> hiwk:)
+[13:17] <hiwk> chroot: what?
+[13:17] <LABcrab> lol auronandace.
+[13:17] <chroot> ok , tell me what is your problem
+[13:17] <hiwk> chroot: do you happen to know how to force a re-drawof the unity bar/interface when it gets messed up?
+[13:17] <chroot> here
+[13:17] <alks> cameron_,  sry i am not expert :/ when i had problems with dual boot, i played with boot repair and it fixed everything
+[13:18] <cameron_> alks: bummer - thanks
+[13:18] <hiwk> chroot: I suspect that it really is a nvidia driver problem, but it seems easier to mtigiate than to fix
+[13:18] <Jensit> hiwk: give me a sec i think i found something on ubuntuusers.de
+[13:18] <chroot> and what problem u enconter
+[13:18] <auronandace> LABcrab: what's so funny?
+[13:19] <auronandace> LABcrab: flooding the channel with text (sometimes bots spam the channel)
+[13:19] <cameron_> Can anyone help make windows appear on boot menu? http://paste.ubuntu.com/672430/
+[13:20] <chroot> hiwk, is that when you login x window , the desktop can't be represent imeadiately
+[13:20] <chroot> cameron,
+[13:20] <doriad> I just installed 11.04 and there doesn't seem to be a package named kde4-devel - anyone know what it might be called?
+[13:20] <chroot> are u there
+[13:20] <cameron_> yeah
+[13:20] <hiwk> doriad: why do you want that?
+[13:21] <chroot> so , what is your ubuntu version
+[13:21] <doriad> I am getting "ERROR: Could not find KDE4 kde4-config" when configuring kdevplatform
+[13:21] <wsagent> How can I install tweetDeck on ubuntu 10.10
+[13:21] <cameron_> chroot: 11.04
+[13:22] <chroot> cameron_, are u install the ubuntu first on your computer
+[13:22] <hiwk> doriad: 'apt-file search kde4-config0 willl give you kdelibs-bin'
+[13:23] <chroot> wsagent, download tweet through the internet explore
+[13:23] <hiwk> doriad: hm, I failed that paste :)  executing 'apt-file search kde4-config' will point you to the package 'kdelibs-bin'
+[13:23] <Pici> wsagent: Install the adobeair package, and then download the tweetdeck air app from their website.
+[13:23] <cameron_> chroot: yes
+[13:23] <etfb> Is there a way to tell if ACPI is working properly on my laptop?  I suspect it isn't, which is why many things are currently not working.
+[13:23] <tsimpson> doriad: why not just install kdevelop?
+[13:23] <wsagent> Thanks Pici and Chroot
+[13:23] <chroot> cameron_, and u install the windows afterward
+[13:24] <cameron_> chroot: oh no, Windows was first, ubuntu came afterwards
+[13:24] <doriad> tsimpson, there are very recent patches that I need
+[13:24] <chroot> cameron_, and in the grub list when booting , there is no windows entry
+[13:24] <chroot> ?
+[13:24] <doriad> himcesjf, I was not aware of "apt-file" - I had been trying "apt-cache search"
+=== sysadamin|away is now known as sysadamin
+[13:25] <chroot> am i right
+[13:25] <chroot> cameron_,
+[13:25] <tsimpson> doriad: you probably want to make sure you have kdebase-workspace-dev installed then
+[13:25] <cameron_> chroot: there is no windows entry
+[13:25] <hiwk> Jensit: did yyou find anything?
+[13:25] <Jensit> hiwk: just some spam posts -.-' got many stuff to search through ^^
+[13:25] <tsimpson> doriad: and probably some boost stuff too
+[13:26] <chroot> are u sure about that, when u booting os , there is no entry in grub list for windows
+[13:26] <cameron_> chroot: I am positive
+[13:26] <cameron_> chroot: there is no entry
+[13:26] <cameron_> http://ubuntuforums.org/showthread.php?p=11175830#post11175830
+[13:26] <cameron_> this thread shows pastebin
+[13:26] <LABcrab> i can't execute a Java file!  Please help me!
+[13:27] <iceroot_> LABcrab: error? the command you used?
+[13:27] <chroot> what pastebin
+[13:27] <cameron_> http://paste.ubuntu.com/672420/
+[13:27] <chroot> let me have a look
+[13:28] <LABcrab> iceroot_: Works from GUI but not terminal.  Thanks anyway!
+[13:29] <etfb> Is there a way to tell if ACPI is working properly on my laptop?  I suspect it isn't, which is why many things are currently not working.
+[13:29] <rocket16> Is there an easy process to use the Maverick kernel in Natty? (Natty kernel isn't working well with my USB modem and sound, and maverick was indeed well). I mean, without changing the sources to Maverick sources
+[13:29] <chroot> the same situation , the first os in my computer is windows , and later i installed the ubuntu  too . but in my grub list , that is ok .
+[13:30] <cameron_> chroot: any ideas?
+[13:30] <chroot> yeah
+[13:31] <chroot> there is a grub.cfg in /etc
+[13:31] <chroot> if you want to add a entry for win  , u need edit this file
+[13:31] <chroot> just add a windows entry  in this file
+[13:32] <auronandace> chroot: grub.cfg shouldn't be edited directly
+[13:32] <bazhang> chroot, thats not correct
+[13:32] <cameron_> yeah
+[13:32] <cameron_> and i already wrote the function
+[13:32] <bazhang> !grub2 | chroot please have a read
+[13:32] <ubottu> chroot please have a read: GRUB2 is the default Ubuntu boot manager since 9.10 (Karmic). Lost GRUB after installing Windows? See https://help.ubuntu.com/community/RestoreGrub - For more information and troubleshooting for GRUB2 please refer to https://help.ubuntu.com/community/Grub2 - See !grub1 for releases before Karmic (9.10)
+[13:32] <auronandace> chroot: you either want /etc/default/grub or the individual files in /etc/grub.d/
+[13:32] <chroot> i know , the offical  document said too ,
+[13:32] <cameron_> i wrote a function to add it.. and it looks like it does.. but then i get "signuatre reror"
+[13:33] <cameron_> I added an individual file to /etc/grub.d
+[13:33] <bazhang> chroot, the wiki says do not edit that directly, very explicitly
+[13:33] <cameron_> can someone just tell me what the proper (hd0,x) code is given my pastebin?
+[13:33] <cameron_> http://paste.ubuntu.com/672420/
+[13:33] <chroot> there is three file , i have changed that  before , to add a picture on my grub men
+[13:35] <cameron_> /dev/sda2    *     30,801,920   383,628,349   352,826,430   7 NTFS / exFAT / HPFS
+[13:35] <cameron_> this is my windows partitoin
+[13:35] <cameron_> it's the second one down and has a asterisk under BOOT
+[13:35] <cameron_> is that (hd0,1) or (hd0,2) (regardless, I already tried both of those
+[13:35] <chroot> who
+[13:38] <csu010245> I have a running printer - works fine with lp - I need to send things directly to it, I assumed I could just send to /dev/lp0 but this is not the case, how do I do it
+[13:38] <chroot> cameron, there is a one way , find a ubuntu livecd , using it , and reboot your sys , and then fix your grub right
+[13:39] <zagibu> i think (hd0,1) should be correct in your case for sda2
+[13:40] <chroot> hi, who knows how to forbidden  network when booting ,
+[13:41] <chroot> i want my computer boot faster
+[13:41] <chroot> faster is best
+[13:41] <auronandace> chroot: how fast does it boot now?
+[13:41] <chroot> ha ,about 44
+[13:41] <chroot> how about it ,
+[13:42] <chroot> i heard that ubuntu is faster
+[13:42] <chroot> but , in my situation , it is the same as windows
+[13:43] <chroot> auronandance , got any idea
+[13:43] <auronandace> chroot: 44 seconds sounds reasonable to me
+[13:44] <chroot> i want it faster , about 30
+[13:44] <voxcroix> :)
+[13:45] <markitoxs> hi there, anyone knows why an ssh session would become completely unresponsive after executing certain commands (as in "top","history" )... speed is not an issue as the machines are on our own network
+[13:45] <chroot> and also , do u know the command --chroot
+[13:46] <chroot> what is time now
+=== iqpi|comida is now known as iqpi
+[13:48] <chroot> markitoxs, maybe the config not right , u should check the document for more detail
+[13:48] <silverarrow> when will ubuntu get the latest VLC version (1.1.11 , current in package manager is 1.1.09
+[13:48] <chroot> what is vlc
+[13:48] <silverarrow> meh
+[13:48] <auronandace> chroot: a good media player
+[13:49] <chroot> a good media player?
+[13:49] <chroot> for what
+[13:49] <auronandace> !latest | silverarrow
+[13:49] <ubottu> silverarrow: Packages in Ubuntu may not be the latest. Ubuntu aims for stability, so "latest" may not be a good idea. Post-release updates are only considered if they are fixes for security vulnerabilities, high impact bug fixes, or unintrusive bug fixes with substantial benefit. See also !backports, !sru, and !ppa.
+[13:49] <auronandace> chroot: to play media files
+[13:49] <skim1776> did anyone has problem with endless boot from usb drive?
+[13:49] <silverarrow> latest VLC are major upgrades, but bug fixes
+[13:50] <chroot> oh , i remember , like gnome mplayer
+[13:50] <chroot> thanks auronandace]
+[13:50] <skim1776> Did anyone have problem with endless boot from usb drive?
+[13:51] <auronandace> chroot: no worries :)
+[13:51] <chroot> auronandace, what is your time now
+[13:51] <silverarrow> I might just go for download from vlc site
+=== nik is now known as Guest76003
+[13:51] <silverarrow> can't be that much difference
+[13:51] <ActionParsnip> silverarrow: what are you after?
+[13:51] <auronandace> chroot: uk 2:51 pm
+[13:51] <silverarrow> vlc that works
+[13:52] <markitoxs> chroot, what config?
+[13:52] <silverarrow> ;- )
+[13:52] <ActionParsnip> silverarrow: what version are you using?
+[13:52] <ryankask> do any of you guys know of a program that monitors network connections made from a specific process?
+[13:52] <silverarrow> 1.1.09
+[13:52] <chroot> en? mine  21:44
+[13:52] <chroot> funny uh
+[13:52] <ActionParsnip> silverarrow: there is a 1.1.11 PPA
+[13:52] <silverarrow> in package manager?
+[13:52] <silverarrow> I have been looking
+[13:52] <ActionParsnip> silverarrow: what is the output of:  lsb_release -c
+[13:52] <ActionParsnip> silverarrow: you'll need a 3rd party ppa
+[13:52] <chroot> markitoxs, i think there is something in your ssh config file , read it ,
+[13:53] <silverarrow> clever Parsnip
+[13:53] <chroot> markitoxs, and also search ssh with ubuntu in google
+[13:53] <silverarrow> !!
+[13:53] <ActionParsnip> silverarrow: what is the output of the command I gave?
+[13:53] <markitoxs> chroot, the host machine you mean? because i am trying to ssh from different  machines and still experiencing the same issue, so i assume its the host that has a problem
+[13:54] <silverarrow> natty
+[13:54] <silverarrow> ActionParsnip natty
+[13:54] <chroot> yes , ssh server is on host , and u shoul check out host
+[13:54] <Ramses> you welcome
+[13:54] <ActionParsnip> silverarrow: sudo apt-add-repository ppa:chimerarevo/vlc/ubuntu; sudo apt-get update; sudo apt-get upgrade
+[13:54] <dreich> silverarrow, I agree.  ActionParsnip natty.
+[13:55] <ActionParsnip> silverarrow: I can suggest ditching VLC (unless you need one of it's features) and use gnome-mplayer
+[13:56] <chroot> yeah , gnom mplayer is great
+[13:56] <chroot> Ramses, hi
+[13:57] <silverarrow> ActionParsnip, something is happening !!
+[13:58] <ActionParsnip> silverarrow: read the screen, you can see the version being installed
+[13:58] <silverarrow> ActionParsnip, I would, but in my experience gnome can't handle everything, so I go for both Gone and vlc
+[13:59] <chroot> ActionParsnip, are u installed vlc the same time
+[13:59] <ActionParsnip> silverarrow: same, I only use vlc for the remote control via my Android phone
+[13:59] <ActionParsnip> chroot: sure why not :)
+[13:59] <zagibu> chroot: if you want it even faster, get an SSD
+[13:59] <chroot> ActionParsnip,  i just wonder.
+[13:59] <zagibu> <10 sec boot of ubuntu for me
+[13:59] <chroot> zagibu, what is ssd
+[13:59] <zagibu> solid state disk
+[13:59] <chroot> really
+[14:00] <chroot> details
+=== RA_drc____ is now known as RA_drc
+[14:00] <compdoc> SSD is pretty nice, but expensive
+[14:00] <bazhang> !ot | chroot
+[14:00] <ubottu> chroot: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[14:00] <chroot> there is only ubuntu11.04 on my computer
+[14:00] <silverarrow> ActionParsnip, yes, sometimes gnome has behaved better, so I like to have them both
+[14:02] <JWelch> Morning, all
+[14:02] <ActionParsnip> JWelch: afternoon
+[14:03] <vtt4> JWelch, morning
+[14:03] <chroot> bazhang, ssd , is hardware , need but it
+[14:03] <chroot> right
+[14:03] <JWelch> So this morning, my Empathy client's contact list is empty. I can chat with folks, so I'm connected, but nothing appears.
+[14:03] <bazhang> chroot, chat in #ubuntu-offtopic Ubuntu support only here.
+[14:04] <JWelch> Have rebooted, killed/restarted Empathy, and searched, but haven't found a fix - is this the right place to check on that?
+[14:04] <silverarrow> ActionParsnip: was I suppose to get VLC 1.1.11? darn, I still have 1.1.09
+[14:05] <skim1776> is it possible to install full OS from liveCD?
+[14:05] <silverarrow> yes
+[14:05] <zamba> i have an old fx5200 graphic card.. it has dvi, vga and tv-out.. does it support dual screen? does anyone know?
+[14:05] <silverarrow> skim1776, yes
+[14:06] <silverarrow> skim1776, it is pretty much identical, just following the install guide from desktop, at least in Ubuntu
+=== RA_drc_ is now known as RA_drc
+[14:07] <ActionParsnip> silverarrow: restart the app
+[14:07] <vtt4> JWelch, why don't you use another program instead of Empathy?
+[14:07] <skim1776> I have endless loop while boot - the sign is "automatic boot will be in 10"...9 - 0 then again from 10 to 0
+[14:07] <JWelch> vtt4 - I could, but I like Empathy's integration into the OS
+[14:07] <ActionParsnip> skim1776: is that on the liveCD or has the CD not booted yet?
+[14:07] <skim1776> I install from usb drive
+[14:07] <Dans326> Im looking for a way to clone a hard drive of a networked windows  computer with a ubuntu server and then restore it later via network boot is this possible?
+[14:08] <silverarrow> <ActionParsnip, I have, maybe I need to reboot
+[14:08] <skim1776> it's not livecd but minimal-iso
+[14:08] <ActionParsnip> skim1776: ok, did you MD5 test the ISO you downloaded?
+[14:08] <JWelch> So, to answer the question more directly, personal preference. It's worked for over a year, so I'm curious as to what may have changed over the weekend.
+[14:08] <skim1776> yes, md5 is the same as in the repository
+[14:08] <ActionParsnip> silverarrow: for a media player, not at all
+[14:08] <matariel> does empathy work with a skype account?
+[14:08] <silverarrow> <ActionParsnip, I have to do some thinking then, hmm
+[14:08] <Pici> matariel: Not to my knowledge.
+[14:08] <ActionParsnip> silverarrow: what is the output of:  apt-cache policy vlc     us a pastebin to hold the text
+[14:09] <ActionParsnip> skim1776: is the system set to boot USB first?
+[14:09] <vtt4> materiel, i don't think so
+[14:09] <auronandace> matariel: no, only skype does
+[14:09] <lestat> hi folks
+[14:09] <auronandace> matariel: skype is closed source
+[14:10] <skim1776> ActionParsnip, of couse, the process is being started but then endless loop goes
+[14:10] <vtt4> JWelch, do you know emesene?
+[14:10] <lestat> it seems the command add-apt-repository is broken concerning proxy etc. I'm trying to use it over a socks proxy but it just fails as you can see here http://pastebin.com/vmFjQ5n1
+[14:10] <TheMatrix3000> Anyone here using NFSv4 on Ubuntu Server, and is able to explain to me what would be involved in migrating NFSv3 to NFSv4?
+[14:10] <lestat> any clue about that problem ?
+[14:10] <mah454> Gnome3 or KDE-4.7 for Laptop ?
+[14:10] <JWelch> Had not looked into it, vtt4
+[14:10] <JWelch> Will go poke about a bit
+[14:11] <ActionParsnip> lestat: do you use a proxy?
+[14:11] <auronandace> mah454: why not xfce? lxde? enlightenment?
+[14:11] <ActionParsnip> mah454: either
+[14:11] <silverarrow> http://pastebin.com/bCya5tf2
+[14:11] <lestat> ActionParsnip: yes otherwise second command wouldn't work
+[14:11] <lestat> ActionParsnip: actually using ssh -D
+[14:11] <LABcrab> How do i use chntpw with Vista?
+[14:11] <silverarrow> actionparsnip http://pastebin.com/bCya5tf2
+[14:11] <JWelch> Still curious as to what broke a long-functional app - I can honestly say that there's been NO change since it was last working
+[14:11] <vtt4> JWelch, you should try it
+[14:11] <bazhang> LABcrab, try ##windows
+[14:11] <bazhang> !gnome3 | mah454
+[14:11] <ubottu> mah454: Gnome 3 is not currently supported on Ubuntu. A PPA for natty is available at https://launchpad.net/~gnome3-team/+archive/gnome3 but these packages are EXPERIMENTAL and UNSTABLE, will break Unity and possibly other parts of your system, and cannot be downgraded safely.
+[14:12] <ActionParsnip> silverarrow: you chopped of the top lines. Can you pastebin the whole output please
+[14:12] <ActionParsnip> LABcrab: vista isn't supported here, try ##windows
+[14:13] <silverarrow> actionparsnip http://pastebin.com/8z16vEyn
+[14:14] <mah454> ubottu without checking distrobutions ... I use Arch linux . Gnome3 or KDE-4.7 ?
+[14:14] <ubottu> mah454: I am only a bot, please don't think I'm intelligent :)
+[14:14] <Dans326> My wife crashes her computer more than anyone Ive ever seen so I want to simply install windows and her apps then clone the hard drive to my server then next time she crashes it I just go to the server and tell it to restore her computer is this possible
+[14:14] <bazhang> mah454, #archlinux NOT here
+[14:15] <silverarrow> maybe it's hardware issues, like hard drive error?
+[14:15] <silverarrow> <Dans326>
+[14:15] <silverarrow> Dans326: maybe its' hard ware issues
+[14:15] <mah454> bazhang distobutions not important for me ... . only comparison Gnome3 or KDE-4.7 in Laptop ...
+[14:16] <Dans326> silverarrow: 2 years ago I got us identical systems  with in three months hers had crashed twice the second time the hard drive was toast  shes on her third computer and countless reinstalls
+[14:16] <bazhang> mah454, arch is not supported here
+[14:16] <ActionParsnip> silverarrow: try:   sudo apt-get update; sudo apt-get clean; sudo apt-get --reinstall vlc;
+[14:16] <ActionParsnip> silverarrow: without the last ;
+[14:16] <auronandace> mah454: then ask in a generic channel like #linux
+[14:16] <tensorpudding> mah454: this is not the appropriate place to ask, ask in #ubuntu-offtopic
+[14:16] <silverarrow> probably too much facebook or pron
+[14:16] <silverarrow> <Dans326>
+[14:17] <mah454> ohhh ... ! Ok i use Ubuntu . OK ? unity or KDE netbook edition for laptop ?
+[14:18] <Roken> XFCE for a laptop, but thats just my opinion
+[14:18] <auronandace> mah454: try both, see what you like
+[14:18] <Roken> Uber lightweight, and I use it on my laptop
+[14:18] <ActionParsnip> mah454: depends which apps you intend to use, if you use more KDE apps then use KDE, if you use Gnome apps then use Gnome
+[14:18] <rypervenche> I agree. Unity and KDE are not my type. Xfce or Gnone 2.x
+[14:18] <ActionParsnip> Roken: use Lubuntu, it's super light
+[14:18] <Myrtti> !polls | mah454
+[14:18] <ubottu> mah454: Usually, there is no single "best" application to perform a given task. It's up to you to choose, depending on your preferences, features you require, and other factors. Do NOT take polls in the channel. If you insist on getting people's opinions, ask BestBot in #ubuntu-bots.
+[14:18] <silverarrow> actionparsnip, invalid operation vlc?
+[14:18] <ActionParsnip> rypervenche: Natty uses Gnome 2 and uses Unity
+[14:19] <Roken> @Action I'll have to check it out, but I've been mainly running ubuntu inside of VMs as of late
+[14:19] <ActionParsnip> silverarrow: sudo apt-get --reinstall install vlc
+[14:19] <ActionParsnip> rypervenche: unity isn't a DE
+[14:19] <Roken> Guys, this is completely unrelated to ubuntu, but how do I change my nick without relogging? =D
+[14:19] <Dans326> silverarrow: nope Ive done scans of her machine checked for anything and everything  hell last time I did a reinstall got it all working she installed her sims game then rebooted and it came up with system restore
+[14:19] <ActionParsnip> Roken: use:  /nick name
+[14:20] <Dans326> Roken  "/nick new nick"
+[14:20] <Roken> t
+=== Roken is now known as pixel_shift
+[14:20] <pixel_shift> There we go =]
+[14:20] <ActionParsnip> pixel_shift: simples
+[14:21] <pixel_shift> @dans326 Is it a dual boot system?
+[14:21] <rypervenche> ActionParsnip: I know, it's a shell interface, but I still don't like it. To each his own though.^^
+[14:21] <silverarrow> Dans326, really weird
+[14:22] <ActionParsnip> rypervenche: but then you can't say you prefer gnome 2.x ...makes no sense
+[14:22] <rypervenche> ActionParsnip: Gnome 2.x without Unity, I sure can.
+[14:23] <hobbel> hey there, i completely destroyed my wifi capability's. How can i restore it to the default drivers etc. Tried to get ndiswrapper running due to slow wifi speed bug (Intel 3945) but right now I have no wifi at all
+[14:23] <silverarrow> ActionParsnip; worked !!!!
+[14:23] <ActionParsnip> rypervenche: unity desktop which is installed i Ubuntu USES gnome 2, it just has the extra shell. You need a DE to be running to get Unity, the default DE is Gnome 2.x in Natty
+[14:23] <ActionParsnip> silverarrow: cool
+[14:23] <silverarrow> Dans326 : something is definitely messing up
+[14:24] <Dans326> silverarrow so Ive basically given up on figuring out what she is doing to it and just looking for a quick fix for it. So is there a way to just install everything and then clone the HD to my server  and then later restore using network boot
+[14:24] <ActionParsnip> rypervenche: when you use Ubuntu Classic, the unity shell doesn't run and Gnome panel runs instead. Both use Gnome 2.x
+[14:24] <auronandace> hobbel: slow wifi? i use the same wifi, works fine for me
+[14:24] <silverarrow> Dans326, like full backup?
+[14:24] <pixel_shift> @dans326 I'm jumping in a little late here, but have you tried reinstalling grub to the MBR via a live CD? (I'm assuming its a dual boot sytem)
+[14:25] <JWelch> vtt4 - Does emesene support Jabber? All I see is live messenger as an option
+[14:25] <hobbel> auronandace intel3945, its maxed out at 1mbit down on ubuntu. https://bugs.launchpad.net/ubuntu/+source/linux/+bug/621265
+[14:25] <ubottu> Ubuntu bug 621265 in Linux "Slow Wireless Connection in Intel 3945abg" [High,Confirmed]
+[14:25] <hobbel> thats the bug
+[14:25] <silverarrow> Dans326, regular back up hard drive is common though?
+[14:25] <auronandace> hobbel: itel wifi is usually very good under linux (at least in my experience)
+[14:25] <Arilyn> i imagine a fast connection
+[14:25] <Arilyn> ubuntu bug 621265 in the list is pretty epic hahahha
+[14:25] <rypervenche> ActionParsnip: I'm aware of that. You don't need to be completely politically correct here. I have tried Unity and do not like it. That is that.
+[14:25] <hobbel> and its annoying, so tried to evade it with windows drivers, but its completely gone now
+[14:25] <Dans326> silverarrow yea just clone it once and then use that same starting point
+[14:25] <Arilyn> fuck yea
+[14:25] <hobbel> Arilyn, I have 50/50mbit, i can use 1/50 due to the bug
+[14:25] <Arilyn> which modules to my site due to buying
+[14:26] <Max00355> hey how can i make my own IRC server ?
+[14:26] <ActionParsnip> rypervenche: that's fine, just making sure you don't confuse what unity is ;)
+[14:26] <Arilyn> am not have tried unity and it was bored and it pains me open the drama fuck yeah
+[14:26] <bazhang> Arilyn, stop the cursing
+[14:26] <rypervenche> ActionParsnip: It's all good. We all use what use because of preference. That's the great thing about Linux.^^
+[14:26] <auronandace> hobbel: you using maverick?
+[14:27] <Arilyn> hobbel: itel wifi is egotastic faggot!
+[14:27] <ActionParsnip> Max00355: http://nickmcd.tv/2011/01/set-up-a-irc-server-in-ubuntu-tutorial/
+[14:27] <silverarrow> I'm not shore really, i have always had a separate harddisk for that
+[14:27] <pixel_shift> Rofl
+[14:27] <hobbel> auronandace Arilyn im on 11.04 and this bug has been haunting us for ~2 years now. Fixed it in the past with ndiswrapper
+[14:28] <silverarrow> dans326; really crashing the os irreparable should be rare stuff
+[14:29] <auronandace> hobbel: hmm, sorry i've never had a problem with it (i know that doesn't help you, but i'm not sure what to suggest)
+=== Fuchs_ is now known as Fuchs
+[14:29] <pixel_shift> @hobbel The only thing I know of to fix wireless driver problems is ndiswrapper =(
+[14:29] <silverarrow> Dans326 : I'm not shore really, i have always had a separate harddisk for that
+[14:29] <Dans326> silverarrow destroying 3 sets of hardware in 2 years should also be unheard of
+[14:30] <ActionParsnip> hobbel: if the wifi device is an internal PCI device then it can be changed easily
+[14:30] <hobbel> pixel_shift any idea how I can fix ndiswrapper then? driver loaded but no Wifi or wlan0
+[14:30] <silverarrow> Dans326, yeah, a bit weird
+[14:30] <ActionParsnip> hobbel: some laptops even have mini-pci wifi cards
+[14:30] <Dans326> silverarrow:  its been theorized that my wifes body has an excess electrical charge that effects electronics but the only proof of this is the number of toasted computers she leaves in her wake
+[14:30] <silverarrow> Dans326; a laptop on a bike or something like that?
+[14:31] <silverarrow> Dans326  lol, a seriously led-padded laptop lol
+[14:31] <pixel_shift> @hobbel Try this is terminal sudo /etc/init.d/networking restart
+[14:31] <pixel_shift> But other than that... I have no idea
+[14:32] <hobbel> Running /etc/init.d/networking restart is deprecated because it may not enable again some interfaces
+[14:32] <pixel_shift> Even manually restarting from terminal?
+[14:32] <silverarrow> Dans326, I have heard of that, one guy had to walk around with one onion in each of his hands every day, for his body to decharge
+[14:32] <hobbel> pixel_shift yes
+[14:32] <pixel_shift> @hobbel Had no idea, but thanks for the info! lol
+[14:33] <hobbel> its pretty dead right :P
+[14:33] <pixel_shift> @hobbel Have you tried finding drivers for the chipset on the card and not the card itself?
+[14:33] <hobbel> pixel_shift it has the right driver for the wifi chipset, and hardware has been found
+[14:34] <Dans326> silverarrow:  I dont know about that but my wife cannot wear digital watches they never last more than a week or so even with coating the metal portions with nail polish
+[14:34] <pixel_shift> @hobbel Some other drivers for other cards may work (Thats what I had to use ndiswrapper for in 8.04) if they have the same chipset as your card.
+[14:34] <hobbel> pixel_shift might try that
+[14:34] <hobbel> pixel_shift but is there anything i should do beside loading the driver in order to get wifi?
+[14:34] <filo1234> hey guys wich is the name of amministration server tool that can I use instead of not yet supported webmin?
+[14:35] <ActionParsnip> !ebox
+[14:35] <ubottu> zentyal is a web-based GUI interface for administering a server. It is designed to work with Ubuntu/Debian style configuration management. See https://help.ubuntu.com/community/Zentyal (Project formally known as eBox - including in Lucid/10.04).
+[14:35] <hobbel> might as well just reinstall
+[14:35] <filo1234> ActionParsnip: thanks
+[14:35] <silverarrow> Dans326, maybe she should try a good walk in nature, every day, with one onion in each of her hands LOL
+[14:35] <Phoenixz> I have a Dell E6400 latitude, BCM4312 WiFi card, have tried just about everything to get it to work, but it wont.. At first modprobe b43 did it, I had wifi, rebooted, and it was gone. Ever since, with the b43 driver loaded, ifconfig -a shows a wlan0 device, with MAC address which seems to be correct, but I can not use it.. Any help? OS is Kubuntu 11.04
+[14:35] <pixel_shift> @hobbel Make sure your wireless switch is on =P
+=== Guybrush_Threepw is now known as Guybrush88_
+[14:36] <ActionParsnip> filo1234: useing pure SSH will make your OS more secure and enable you to manage servers without GUI
+[14:36] <silverarrow> ActionParsnip, update was successful, playing downloaded youtube videos are till a mess
+[14:36] <ActionParsnip> Phoenixz: can you give the output of:  dmesg | grep -i firm
+[14:36] <fission6> is zenity prefered means of cheap dialogs?
+[14:36] <ActionParsnip> silverarrow: can you give the output of:  lsb_release -a; uname -a; dpkg -l | egrep "flash|gnash|swf"
+[14:36] <silverarrow> are there any other super hero vegetables here?
+[14:37] <Phoenixz> ActionParsnip: one sec
+[14:37] <hobbel> pixel_shift wireless switch has never worked, i think im just going to reinstall. Allows me to get rid of Unity as well
+[14:37] <filo1234> ActionParsnip: yeah isn't for my own use...I use only SSH :p was an info for a new user :)
+[14:37] <compdoc> < captain carrot
+[14:37] <ActionParsnip> silverarrow: there is a carrot based nick on sometimes
+[14:37] <Phoenixz> ActionParsnip:  http://paste.ubuntu.com/672480/
+[14:37] <pixel_shift> @hobbel Was the problem non-existant on a fresh install of 11.04?
+[14:38] <hobbel> pixel_shift well, partially. One of the kernels did work
+[14:38] <hobbel> others did not
+[14:38] <ActionParsnip> Phoenixz: you need the firmware cutter package
+[14:38] <silverarrow> actionparsnip, didn't result in anything?
+[14:38] <ActionParsnip> Phoenixz: the device can't come up due to missing firmware files, as you can see from the paste
+[14:38] <pixel_shift> @hobbel If you can afford a reinstall, then hey... Why not? =D
+=== rafase282 is now known as Rafase282
+[14:38] <ActionParsnip> silverarrow: it doesn't it gives text you can pastebin
+[14:39] <hobbel> pixel_shift it takes time.. but might be the best option. Back to gnome as well then :P
+[14:39] <silverarrow> no
+[14:39] <ActionParsnip> !broadcom | Phoenixz This link shows how to get the cutter
+[14:39] <ubottu> Phoenixz This link shows how to get the cutter: Help with Broadcom bcm43xx can be found at https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx
+[14:39] <silverarrow> actionparsnip, no nothing
+[14:39] <Phoenixz> ActionParsnip: mmmm, well, I have the b43-fwcutter package.. tried the firmware-b43-installer package, but that failed to install.. So I did everything manual, got the driver, ran b43-fwcutter, but after that, I have found no instructions.. How would I proceed?
+[14:39] <tjiggi_fo> can Debian and Ubuntu share a /Home partition?
+[14:39] <pixel_shift> @hobbel I've, unfortunently, been in your shoes with wireless problems on Ubuntu. 9+ got rid of my ndiswrapper problem, though
+=== marcelo is now known as Guest68303
+[14:40] <pixel_shift> Well, got rid of my use for ndiswrapper
+=== Guest68303 is now known as marcelo__
+[14:40] <hobbel> pixel_shift i would like to.. but this wireless card has been a pain since its been released. and the dev's havent managed to fix it either
+[14:40] <ActionParsnip> silverarrow: http://paste.ubuntu.com/672482/   trust me, it works
+[14:41] <silverarrow> actionparsnip, what am I doing wrong? copy and paste is correct
+[14:41] <silverarrow> ?
+[14:41] <ActionParsnip> silverarrow: copy the command as I gave it and it works
+[14:41] <ActionParsnip> Phoenixz: try: sudo apt-get --reinstall install b43-fwcutter firmware-b43-installer
+[14:41] <hobbel> pixel_shift thanks for your help, going for a full reinstall now :)
+[14:42] <pixel_shift> @hobbel NP, man. Hope you can find a good fix
+[14:42] <yao_ziyuan> is there a plan to use chromium as the default browser in ubuntu?
+[14:42] <hobbel> pixel_shift yeah, lets hope so
+[14:42] <Phoenixz> ActionParsnip: the apt-get install firmware-b43-installer fails on --configure, cheking logs it mentions somehting about an unsupported mini card, but AFAIK, the BCM4312 IS supported ,right?
+[14:42] <ActionParsnip> yao_ziyuan: it is default in Lubuntu
+[14:42] <hobbel> btw gotto separate home partition first
+[14:42] <marcelo__> i need a help, how change the local of Documents folder in a /home?
+[14:42] <ActionParsnip> Phoenixz: yes
+[14:42] <CoverSlide> apt-get install chromium
+[14:42] <CoverSlide> easy-breezy
+[14:42] <ActionParsnip> CoverSlide: chromium-browser
+[14:43] <ActionParsnip> CoverSlide: chromium is a game
+[14:43] <CoverSlide> o yeah
+[14:43] <Phoenixz> ActionParsnip: anyway, so I installed b43-fwcutter, then got the drivers, then ran the cutter, got fw files in there , which I moved to lib/modules/b43 (just now)
+[14:43] <Phoenixz> rmmod b43, modprobe b43, but no resultt
+[14:43] <silverarrow> actionparsnip http://paste.ubuntu.com/672487/
+[14:43] <ActionParsnip> Phoenixz: cool, reboot and it should be ok
+[14:44] <silverarrow> actionparsnip, I closed and reopened terminal window, then it worked
+[14:44] <Phoenixz> ActionParsnip: so rmmod will not do it? (as in, I have to go the way of the windows?)
+[14:44] <ActionParsnip> silverarrow: weird. ok try: sudo apt-get --purge remove http://paste.ubuntu.com/672487/
+[14:44] <ActionParsnip> ooopp
+[14:44] <ActionParsnip> silverarrow: this: sudo apt-get --purge remove flashplugin-installer; sudo apt-get update; sudo apt-get install flashplugin-nonfree
+=== Timic_ is now known as Timic
+[14:45] <Phoenixz> ActionParsnip: last dmesg shows http://paste.ubuntu.com/672489/  will try reboot now
+[14:46] <marcelo__> how to change  the location of the Documents folder in linux?
+[14:46] <ActionParsnip> Phoenixz: its all about those files :)
+[14:47] <ActionParsnip> marcelo__: I suggest you make a folder and move the files across. Then delete ~/Documents and make a symlink from the new location to ~/Documents
+[14:47] <silverarrow> actionparsnip, no change, it plays sound, but no picture
+[14:47] <ActionParsnip> silverarrow: in all browsers?
+[14:47] <marcelo__> ActionParsnip,  thanks,  but how do I do this?
+[14:48] <JWelch> Hrm. Uninstalling/reinstalling Empathy fixed it - I can see my contact list now. Still wonder what was up, but meh.
+[14:48] <ActionParsnip> marcelo__: ok where do you want the new folder to be?
+[14:48] <marcelo__> ActionParsnip,  in windows partition
+[14:48] <ActionParsnip> marcelo__: ok but what path?
+[14:48] <marcelo__> /dev/sda4
+[14:48] <silverarrow> no, not browser, but downloaded youtube video, neither flash streams
+[14:48] <gulzar> I messed the nautilus-elementry. The sidebar,menubar,and navigation bar are gone .... I deselected then in the options.... Now how to have them back ? The option to select and deselect needs atleast one BAR....
+[14:48] <ActionParsnip> marcelo__: you can't access raw block devices, it needs mounting
+[14:49] <ActionParsnip> !info nautilus-elementary
+[14:49] <ubottu> Package nautilus-elementary does not exist in natty
+[14:49] <silverarrow> ActionParsnip no, not browser, but downloaded youtube video, neither flash streams
+[14:50] <silverarrow> actionparsnip, in browser it's only adobe flash player
+[14:50] <ActionParsnip> silverarrow: have you installed ubuntu-restricted-extras
+[14:50] <ActionParsnip> silverarrow: could try minitube
+[14:50] <silverarrow> yes, well two packages called "lubuntu restrickted" and lots for the dvd player
+[14:50] <ActionParsnip> silverarrow: so you are using lubuntu?
+[14:51] <silverarrow> yes
+[14:51] <gulzar> <ActionParsnip> yes but I installed with ppa.... and want to reset the bars... Any shortcut key?
+[14:51] <ActionParsnip> silverarrow: i see, ok you need lubuntu-restricted-extras
+[14:51] <ActionParsnip> gulzar: then its
+[14:51] <ActionParsnip> gulzar: then it's not supported here
+[14:51] <silverarrow> VLC, has worked no problem a couple of months ago ActionParsnip
+[14:51] <gulzar> <ActionParsnip>  OK
+[14:51] <marcelo__> ActionParsnip,  For example, I want my music files, videos and documents, I can access it in windows and  ubuntu, so I'll have to put the three folders to mount at startup, and after it, link to  sites that I set up folders?
+[14:51] <ActionParsnip> silverarrow: tried as a different user?
+[14:51] <Phoenixz> ActionParsnip: Just rebooted, no result
+[14:51] <silverarrow> actionparsnip, I have those I think, but I suppose there are lots of them?
+[14:52] <ActionParsnip> marcelo__: you will need to make the partition mount at boot, do you have that already?
+[14:52] <ActionParsnip> silverarrow: its just a metapackage if you are talking about lubuntu-restricted-extras
+[14:52] <marcelo__> ActionParsnip, no, i dont
+[14:53] <silverarrow> yes, I found two in package manager and always install them
+[14:53] <Travis-42> I'm having some problems booting into Ubuntu after the latest kernel update, with claims about the "disk drive for /dev/mapper/cryptswap1 is not ready yet or not present" -- when I boot into the root recovery command line and run fdisk -l, it locks up. Is this a hardware problem?
+[14:53] <ActionParsnip> marcelo__: you will need to get that sorted first, then you can simply make symlinks to the docs in your windows partition to your home folder and you will have easy access
+[14:53] <silverarrow> <ActionParsnip I found two in package manager and always install them
+[14:54] <ActionParsnip> silverarrow: cool, then I'm not sure dude, never used vlc for youtube etc. Always flash or minitube
+[14:54] <Taroven> Travis-42: If it only happens under the new kernel, no. Have you been able to try with an older kernel?
+[14:54] <silverarrow> actionparsnip, minitube?
+[14:56] <Travis-42> Taroven, how do I run the old kernel?
+[14:56] <Travis-42> Taroven, ah nevermind I see it under Previous versions
+[14:56] <marcelo__> ActionParsnip,  in fstab?
+[14:56] <Taroven> Travis-42: Yep, you got it. Try there, if it works just remove the new kernel and don't worry about it.
+[14:57] <Travis-42> Taroven, heh nope, same error and still won't boot. I guess something is going on with the drive. thanks
+[14:57] <Taroven> Travis-42: Possibly. Give a live cd a shot before doing anything drastic.
+[14:59] <Taroven> Travis-42: http://ubuntuforums.org/showthread.php?p=10766689
+[14:59] <winut> how do i set up alsa to work at 24/96? i am trying to play flac at 96khz but it gets resampled to 44100 or 48000, not sure (slow)
+[15:00] <nronksr> Off Topic, but could really use some advice.  I don't know gps units at all, but I need a decent one for work.  Anybody have suggestions? (Most appreciated) - Thanks!
+[15:00] <Pici> nronksr: #ubuntu-offtopic
+[15:00] <nronksr> kk, thanks.
+[15:00] <Taroven> winut: You'll be looking into your .asoundrc file for that.
+[15:00] <Hemangpatel> hiii
+[15:01] <Taroven> nronksr: Get a smartphone :)
+[15:01] <winut> do you have to make one?
+[15:01] <Hemangpatel> i need some info about ubuntu
+[15:01] <Travis-42> Taroven, ah, I'll give that a try... didn't find that page in my search
+[15:01] <tensorpudding> Hemangpatel: just ask
+[15:02] <Taroven> winut: Sometimes, depends entirely on the installation. Quick google for "alsa 96khz" should point you in the right direction
+[15:02] <Hemangpatel> ubuntu support gnome 3 ?
+[15:02] <Taroven> Hemangpatel: Depends on who you ask. :)
+[15:02] <tensorpudding> in 11.04, not yet
+[15:02] <tensorpudding> in 11.10, it will
+=== marcelo_ is now known as macfiree
+[15:02] <Taroven> Officially not yet, tensorpudding is correct.
+[15:02] <tensorpudding> 11.10 will release in october
+[15:02] <tensorpudding> right now it's in alpha
+[15:02] <tensorpudding> not recommended
+[15:02] <Hemangpatel> k
+[15:03] <Hemangpatel> unity support ?
+[15:03] <Hemangpatel> ubuntu support unity ?
+[15:03] <tensorpudding> Hemangpatel: by default, 11.10 will have unity, on gnome 3
+[15:03] <Hemangpatel> and on 11.04 ?
+[15:03] <tensorpudding> it will be gnome 3 underneath, but use the unity panel/launcher/dash
+[15:04] <tensorpudding> on 11.04, unity on gnome 2 is default, with a fallback to gnome 2
+[15:04] <tensorpudding> the fallback behaves like 10.10 and previous ubuntu versions
+[15:04] <Hemangpatel> from where i can downlad nvidia drivers ?
+[15:04] <Hemangpatel> for ubuntu >
+[15:04] <Hemangpatel> ?
+=== zz_RobinJ is now known as RobinJ
+[15:05] <genii-around> !nvidia
+[15:05] <ubottu> For Ati/NVidia/Matrox video cards, see https://help.ubuntu.com/community/VideoDriverHowto
+[15:05] <tensorpudding> Hemangpatel: there is an nvidia driver available, just search nvidia in the software center
+[15:05] <Hemangpatel> k
+[15:05] <nicofs> What can I do about "sudo: must be setuid root" when trying to "sudo -s" in xterm?
+[15:05] <tensorpudding> actually, run the Additional Drivers program
+[15:05] <Hemangpatel> ok
+[15:05] <Hemangpatel> thanks
+[15:06] <tensorpudding> if you have an nvidia card, it should give you the option to install a driver for it, quick and easy
+[15:06] <macfiree> how i mount a partition?
+[15:06] <tensorpudding> macfiree: by default, partitions should be mounted automatically
+[15:07] <Uldics> Anyone could help me on sharing folders, so Win users can access them? Have set it up with Nautilus share and it worked, but now somehow it just doesnt work anymore. Hav reinstalled nautilus share package, samba, samba4, at some time got it working, but then it disappeared again.
+[15:07] <ActionParsnip> nicofs: use:  sudo -i
+[15:07] <goodtimes_eca> Hello all, anyone have any advice on where to go for help for networking problems with atheros cards (aspire laptop)
+[15:07] <ActionParsnip> !mount | macfiree
+[15:07] <ubottu> macfiree: mount is used to attach devices to directories. See also https://help.ubuntu.com/community/Mount
+[15:07] <ActionParsnip> Uldics: installing samba and samba4 will cause all sorts of complications
+[15:07] <ndiogou> assalam
+[15:08] <Uldics> how do I get it without complications?
+[15:08] <ActionParsnip> Uldics: I'd uninstall samba and samba4 and then reinstall samba
+[15:09] <macfiree> ActionParsnip,  tks
+[15:09] <Uldics> hmm, i think have done that , but will try
+[15:10] <Hemangpatel> Very good support
+[15:10] <blup> is there a way to send a running process to the background? i know i can start it in the background with 'process &', but i'd rather not stop it.
+[15:10] <zagibu> goodtimes_eca: how about manufacturer support channel?
+[15:10] <Hemangpatel> :-) keep it up..
+[15:10] <Taroven> Issue of my own: On a 10.04 server box which is still kinda in the works, I was unable to set a static IP via the GUI, ended up going through /etc/network/interfaces and /etc/resolv.conf to get it working. Somewhere in there, the connections manager 'lost' eth0 (not on the list), and now when the computer boots I need to run 'ifup eth0' manually - works fine from there. This is a box with no keyboard or mouse, so a bit problematic. Any ideas?
+[15:10] <nicofs> ActionParsnip, same error
+[15:11] <Uldics> ActionParsnip: you also mean I have to reinstall samba-common and samba-common-bin along samba?
+[15:12] <goodtimes_eca> cheers zagibu, I've tried everywhere, i thought at least, I installed 10.04 but i can't seem to get the drivers working for the card
+[15:12] <Taroven> Note on that: I've got no problems with bash scripts to work around the problem, but I'd really rather just fix the problem itself.
+[15:13] <zagibu> goodtimes_eca: well, if you have already tried everywhere, your question is kind of redundant
+[15:13] <hp00pr> anyone which directory fms is installed in by default ?
+[15:13] <genii-around> !info fms
+[15:13] <ubottu> Package fms does not exist in natty
+[15:13] <genii-around> Hm
+[15:13] <zagibu> goodtimes_eca: is it a built-in wifi card?
+[15:13] <goodtimes_eca> zagibu: yep
+[15:14] <jo-erlend_> I've made an ssh key and a GPG key. Now I want to use those on my laptop as well. Can I just copy ~/.ssh and ~/.gnupg?
+[15:14] <hp00pr> i looked on adobe site but it says go to the root folder I cant find it
+[15:14] <goodtimes_eca> its not just the wireless though
+[15:14] <zagibu> goodtimes_eca: then I suggest buying a cheap and known to work usb wifi adaptor off ebay
+[15:14] <goodtimes_eca> its the whole card,
+[15:14] <zagibu> hmmm, that's a bigger problem of course
+[15:15] <goodtimes_eca> zagibu: good idea
+[15:15] <zagibu> what are the lspci lines, have you already googled them?
+[15:15] <OerHeks> hp00pr,   fms to Determine a tapes capacity and a tape devices filemark size ?
+[15:15] <goodtimes_eca> zagibu:  thanks, gtg
+[15:15] <hp00pr> no, i meant flash media server, sorry
+[15:15] <genii-around> OerHeks: I believe it's Flash Media Server
+[15:16] <derpella> hello, my dvd drive won't mount, my fstab looks weird
+[15:16] <hp00pr> adobe just says rootinstall/conf ect I cant find it!! :|
+=== bethany is now known as Neytiri
+=== Neytiri is now known as _Neytiri_
+[15:18] <qwaz> If i install gentoo along side my ubuntu will  gentto automatically use the ubuntu swap partition for itself?
+[15:18] <_Neytiri_> where can i find the autoexpect package?
+[15:19] <Pici> qwaz: Ubuntu doesn't have a problem with other distros using the swap partition, but whether it will do that automagically is a question for #gentoo
+[15:19] <rypervenche> jo-erlend_: Yes, you can just copy them.
+[15:19] <skim1776> who uses natty narwell?
+[15:19] <qwaz> Pici, k thanks
+[15:20] <Pici> skim1776: Just ask your question please. No need for something as vauge as that.
+[15:20] <hp00pr> bah, I found it.. sorry guys I feel retarded
+[15:20] <jo-erlend_> rypervenche, is there any good reason not to sync them on ubuntu one?
+[15:20] <_Neytiri_> where can i find the autoexpect package?
+[15:20] <hp00pr> _Neytiri_, did u try apt-get ?
+[15:21] <rypervenche> jo-erlend_: Security reasons.
+[15:21] <_Neytiri_> yes
+[15:21] <skim1776> do you have problems with suspend and hibernate modes?
+[15:21] <Pici> _Neytiri_: What is autoexpect?
+[15:21] <rypervenche> jo-erlend_: Just copy them once, and then you'll be done with it. You only need your private keys.
+[15:21] <_Neytiri_> it interacts with the passwd utitility so i can write a script to auto creat user accounts
+=== hacked is now known as vinces
+[15:21] <jo-erlend_> rypervenche, yes, you mean canonical has access? I meant syncing in general, really. I've just been working so much with u1 lately that sync and u1 have become almost synonymous. :)
+[15:22] <Pici> _Neytiri_: It appears to be part of the 'expect' package.
+[15:22] <rypervenche> jo-erlend_: You never want to share your private keys, syncing them is not wise.
+[15:22] <jo-erlend_> rypervenche, right. I actually meant known_hosts and such.
+[15:22] <jo-erlend_> ok.
+[15:22] <Uldics> ActionParsnip: No, did not help reinstalling samba. I got some error at starting samba and now it shows with flags, my old shares, but nothing is visible on network
+[15:23] <Calinou> where do I disable the compiz effects on unity?
+[15:23] <Calinou> been searching for 30 minutes the setup menu
+[15:23] <rypervenche> jo-erlend_: known_hosts is a useless file to sync.
+[15:23] <jo-erlend_> rypervenche, why is that?
+[15:23] <Calinou> sorry for being an idiot, though
+[15:24] <kaellan> how to find and instal riched30? (need to get the txt echo in zmud to work)
+[15:24] <rypervenche> jo-erlend_: Because you can delete it and it will just ask you if you want to add a host to it when you connect. For what you'll be doing it has no use really.
+[15:24] <kaellan> opps wrong channel
+[15:24] <funkyHat> blup: ctrl+z followed by bg. That might cause problems for some processes though. What are you trying to background?
+[15:25] <kiko_> need help. been getting an error on metadata installing ubuntu on windows  7. i tried saving the wubi and ubuntu-10.04-netbook-i386 in  one folder but i still get the error
+[15:25] <Uldics> and actually, when I try as root entering: samba stop, i get info, that samba is not installed ... but I just have installed it, restarted the machine
+[15:25] <skim1776> does unetbootin always work sooo long?
+[15:26] <funkyHat> Uldics: you probably want service smbd stop
+[15:26] <claudiu> j security
+[15:27] <skim1776> has anyone used unetbootin? it copies files for 2 hours
+[15:27] <claudiu> hello, everyone
+=== daavis is now known as aldcor
+[15:29] <Calinou> skim1776: what's your connection's speed
+[15:29] <skim1776> Calinou, how can I determine?
+[15:29] <gr33n7007h> Good afternoon from Manchester England ;)
+[15:29] <Calinou> http://speedtest.net
+[15:30] <skim1776> no, I'm making it from local ISO
+[15:30] <aguitel> i am running amsn ,how block some contact by the way this contact not to see when i am online?
+[15:31] <Uldics> so, anyone - how do I get my samba shares working?
+[15:31] <adnc> hello, I've an icon pack called Iris. I like them very much, unfortunately the application icons are not shown. still the old one is used. for example the icon for xchat is called xchat.svg in .icons/iris/scalable/apps/ does someone see if it is a problem with the filename? is there somewhere a list how they need to be called?
+=== claudiu is now known as claudiuvlad
+[15:34] <rullie> hi, is there a switcher that switches between same application windows? like just between terminal or jsut between firefox
+[15:34] <Calinou> anyone?
+[15:35] <Calinou> to disable the compiz effects on unity
+[15:35] <silverarrow> is there a clever way to use terminal to install vlc nightly ?
+[15:35] <Pici> silverarrow: There might be a PPA for it.
+[15:36] <silverarrow> I cant find  any Pici?
+[15:36] <silverarrow> I have been googeling east and west, and the direct downloads from the nightly site, I cannot make work
+[15:36] <genii-around> silverarrow: https://launchpad.net/~videolan/+archive/master-daily
+[15:40] <ActionParsnip> genii-around: nice
+[15:43] <Calinou> how do I switch to gnome?
+[15:44] <Calinou> logging out doesn't allow me to switch to gnome
+[15:44] <manoy> need help installing ubuntu in windows 7 netbook. i get this everytime. cannot download the metalink and therefore the ISO
+[15:45] <sprung> Hello, After mush reluctance to upgrade to Natty I finally did it, and am encountering two problems: 1) I have to reinstall my NVIDIA driver on every reboot of the system from the command line, it is extremely annoying and even after killing gdm completely and installing the driver and starting gdm, then rebooting, I have to do it again
+[15:45] <silverarrow> genii-arround, it doesn't work, do you know if directions for karmic is too old?
+[15:45] <sprung> the second problem i am having is now when i use Synergy, there's about a 1 second flicker every time i switch between desktops, which is NOT acceptable.
+[15:46] <chewed-on> how come ubuntu feel so sluggish on Virtual Box ?
+[15:46] <chewed-on> (64 bit Ubuntu)
+[15:46] <wmoxam> chewed-on: because yer computer sucks
+[15:47] <zykotick9> wmoxam, not helpful
+[15:47] <wmoxam> ;)
+[15:47] <silverarrow> Pici, are you clever with ppa-s and terminal?
+[15:47] <Pici> silverarrow: Depends what the question is.
+[15:47] <chewed-on> har har har
+[15:47] <sprung> Linux mybox 2.6.38-11-generic-pae #48-Ubuntu SMP Fri Jul 29 20:51:21 UTC 2011 i686 i686 i386 GNU/Linux 11.04 natty narwhal
+[15:48] <anthony_> what is the name of the function in Compiz that allows you to place windows on your screen with the keypad hotkeys (top left, left half, bottom left, bottom, bottom right, right half, top right, top, full screen)
+[15:48] <anthony_> ?
+[15:48] <silverarrow> genii-around, I think directions for karmic might be too old?
+[15:48] <zykotick9> chewed-on, are you using Unity in VBox?
+[15:48] <chewed-on> or the interface is not written properly
+[15:48] <wmoxam> chewed-on: HW limitations could very well be the reason. How much RAM and how many cores are you running?
+[15:48] <chewed-on> Dual core, 4 GB DDR 3 ram.
+[15:48] <silverarrow> pici, I'm using this guide, and I get messages like "no such file or directory"
+[15:48] <silverarrow> https://launchpad.net/+help/soyuz/ppa-sources-list.html
+[15:49] <chewed-on> Not sure what's Unity doing but Mac OS X Lion with all it's fancy GUI effects runs quite smooth.
+[15:49] <chewed-on> Then again, this is emulation
+[15:49] <Pici> silverarrow: is The python-software-properties package installed.
+[15:49] <silverarrow> Pici, might not be
+[15:50] <chewed-on> hey...how come fdisk -l in Virtual Box doesn't show my external hard drive ?
+[15:50] <Pici> silverarrow: try to install it, that package provides  add-apt-repository
+[15:50] <maalac> chewed-on: it may not be mounted properly .
+[15:50] <zykotick9> chewed-on, you might be interested in the #vbox channel for VBox specific questions/issues
+[15:51] <genii-around> silverarrow: It works fine here. eg: sudo add-apt-repository ppa:videolan/master-daily && sudo apt-get update    ... then apt-cache policy vlc shows the ppa version (in my case of: Candidate: 1.2.0~~git20110731+r780-0~r32~oneiric1 )
+[15:51] <cwood> On Ubuntu 10.04.2 LTS, which component of Upstart checks /etc/init for new files? I added a config for monit but it's not starting, or logging about not starting.
+[15:52] <genii-around> silverarrow: Then you can install it with sudo apt-get update vlc
+[15:52] <genii-around> *upgrade* rather
+=== RobinJ is now known as zz_RobinJ
+[15:56] <iceroot_> genii-around: sudo apt-get install vlc
+[15:56] <silverarrow> genii-around; can you make any sense of this ?  http://pastebin.com/b0s5CUAx
+[15:56] <gdea73> um, hi. I'm running Ubuntu 11.04 in Classic Gnome, and when I change my output in 'sound preferences', terminal opens (and it's not closable), and something says audibly "welcome to orca" and then something ending with "classic Gnome"
+[15:56] <iceroot_> chewed-on: because you are not using sudo
+[15:57] <gdea73> silverarrow: also, sudo apt-get up*grade* vlc
+[15:57] <TheEvilPhoenix> gdea73:  no, its not.  "upgrade" will do a full upgrade
+[15:57] <TheEvilPhoenix> gdea73:  just do `apt-get install vlc`
+[15:57] <TheEvilPhoenix> after you've done the update
+[15:57] <iceroot_> genii-around: silverarrow please use "sudo apt-get install package" to install OR upgrade a single package
+[15:57] <TheEvilPhoenix> ^
+[15:58] <silverarrow> gdea73, "invalid operation" ?
+[15:58] <gdea73> TheEvilPhoenis: oops, sorry. I'm not that great with terminal :X
+[15:58] <chewed-on> iceroot_: I did use sduo
+[15:58] <iceroot_> chewed-on: sudo fdisk -l  ?
+[15:58] <chewed-on> yes
+[15:58] <iceroot_> chewed-on: what you expect?
+[15:58] <trijntje> How can I insert ctrl+alt+f1 into vbox guest? All websearches suggest hostkey+f1, but this does not work for me
+[15:58] <iceroot_> trijntje: #vbox
+[15:58] <silverarrow> iceroot,  something is happening !!
+[15:59] <chewed-on> iceroot_: to see my samsung external usb drie
+[15:59] <Aer> Hi I was wondering if anyone is available to give me a hand with the ubuntu "Remote Desktop Viewer" as I have a small problem with ?
+[15:59] <chewed-on> the live cd for ubuntu seems to show it no problem
+[15:59] <chewed-on> not sure what's  up with the one I installed to virtual box
+[15:59] <iceroot_> chewed-on: vbox-nonfree? usb enabled? sounds like the general usb-vbox issue. please use #vbox
+[15:59] <iceroot_> !ask | Aer
+[15:59] <ubottu> Aer: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[15:59] <chewed-on> virtual box is free isn't it ?
+[15:59] <gdea73> well anyway, can anyone tell me why my computer talks to me? it's kind of creeping me out :P
+[16:00] <Aer> the ubuntu machine im trying to connect to shows in the remote desktop preferences
+[16:00] <Aer> "Your desktop is only reachable over the local network. Others can access your computer using the address "
+[16:00] <iceroot_> chewed-on: #vbox, the free version doesnt support usb, the nonfree version supports usb
+[16:00] <krux> HAL
+[16:00] <Aer> now does that mean when i leave home tomorrow I will not be able to connect to my ubuntu PC using my Ubuntu laptop ? cus it isnt on the same network anymore ?
+[16:00] <iceroot_> chewed-on: free as in free speech not as in free beer
+[16:00] <chewed-on> iceroot_: ah crap = /
+[16:00] <sprung> Hello, After mush reluctance to upgrade to Ubuntu Natty I finally did it, and am encountering two problems: 1) I have to reinstall my NVIDIA driver on every reboot of the system from the command line, it is extremely annoying and even after killing gdm completely and installing the driver and starting gdm, then rebooting, I have to do it again and 2) my Synergy desktop will flicker for about 1 second every time i switch desktops, which is unacceptable.  nvid
+[16:00] <sprung> ia 280.13
+[16:00] <zykotick9> iceroot_, FYI but the free/non-free VBoxs have been merged (obviously not yet in Ubuntu repos)
+[16:01] <sprung> please help
+[16:01] <genii-around> silverarrow: The vlc ppa page top right shows some "failed to build", but it should still try to pull the last good one
+[16:01] <iceroot_> zykotick9: so the free one supports usb now?
+[16:01] <silverarrow> iceroot, still a bit difficult, http://pastebin.com/qWEbuGiu
+[16:01] <Aer> anyone know if my "Remote Desktop Viewer" message is normal and will work when im away from home ?
+[16:01] <zykotick9> iceroot_, from the site yes - there is no "free one" anymore, just one version now
+[16:01] <chewed-on> i was hoping to install ubutnu onto my virtual box so I can mount my external hard drive because Mac is unable to mount it.
+[16:01] <iceroot_> zykotick9: oracle......
+[16:01] <silverarrow> <genii-around>, i see, thanks
+[16:01] <cwood> chewed-on: What filesystem is the external drive?
+[16:02] <chewed-on> ntfs
+[16:02] <zykotick9> iceroot_, seems out of place for Oracle to do something right for a change ;)
+[16:02] <iceroot_> silverarrow: i dont see an error
+[16:02] <iceroot_> zykotick9: they destroy every free software... openoffice, vbox, java...
+[16:02] <cwood> chewed-on: There's an "ntfs" kernel module. If you enable that with "modprobe ntfs" you might be able to mount that drive.
+[16:02] <iceroot_> zykotick9: ksplice
+[16:03] <zykotick9> iceroot_, oh, i hear ya!
+[16:03] <chewed-on> cwood: kinda disappointing how fat 32 is windows and ntfs is also windows but can't be written to like how fat 32 can.
+[16:03] <Aer> "Your desktop is only reachable over the local network. Others can access your computer using the address " means I cant access my computer remotely with remote desktop viewer away from home ?
+[16:03] <cwood> chewed-on: or, "sudo modprobe ntfs".
+[16:03] <gdea73> why is speech-dispatcher running when I open Sound Preferences?!
+[16:03] <iceroot_> chewed-on: its not a ntfs issue
+[16:03] <chewed-on> cwood: I'll get it a shot and see.
+[16:03] <iceroot_> chewed-on: i already told you why you dont see the drive
+[16:03] <chewed-on> I had to modprobe that kernel on gentoo linux too, I remember that
+[16:04] <cwood> iceroot_: Aha, wasn't following along. Didn't think the drive was unavailable.
+[16:04] <Aer> How can I make Remote Desktop Viewer in Ubuntu work over internet instead of just local home network ? I have forwrded the 5900 port on my router still no luck
+[16:04] <chewed-on> modprobe command not found
+[16:04] <silverarrow> iceroot, genii-around, gdea73, VLC is working !! ;- )
+[16:04] <iceroot_> chewed-on: sudo but again!!! that is not the problem
+[16:04] <gdea73> silverarrow: great
+[16:04] <iceroot_> chewed-on: you are using the "wrong" version of vbox which doesnt support usb
+[16:05] <chewed-on> iceroot_: I did type sudo! I just pasted the error it returned
+[16:05] <gdea73> but, @everyone: "Welcome to orca. Current desktop environment is classic gnome." it says this when I open sound preferences.
+[16:05] <iceroot_> chewed-on: and you dont need to modprobe anything to write on ntfs
+[16:05] <edbian> Aer: If you nmap your public IP address do you see 5900 open?
+[16:05] <gdea73> lol, I thought my box was hacked or something weirder
+=== anthony_ is now known as anth0ny
+[16:05] <chewed-on> iceroot_: wait...are you talking about mac osx or ubuntu ?
+[16:05] <Aer> where do you mean do i see 5900 open ? in my router ?
+[16:05] <sprung> Hello, After mush reluctance to upgrade to Ubuntu Natty I finally did it, and am encountering two problems: 1) I have to reinstall my NVIDIA driver on every reboot of the system from the command line, it is extremely annoying and even after killing gdm completely and installing the driver and starting gdm, then rebooting, I have to do it again and 2) my Synergy desktop will flicker for about 1 second every time i switch desktops, which is unacceptable.  nvid
+[16:05] <sprung> ia 280.13
+[16:06] <silverarrow> genii-around, I wish I could remember what I did though
+[16:06] <iceroot_> chewed-on: you said you are using vbox and dont see your external usb drive there
+[16:06] <edbian> Aer: In the output of nmap
+[16:06] <edbian> Aer: Have you ever used nmap?
+[16:06] <Aer> ive never used nmap :s
+[16:06] <sprung> www.nmap.org read
+[16:06] <edbian> Aer: install it: sudo apt-get install nmap
+[16:06] <Aer> ok
+[16:06] <Aer> ok ill install now
+[16:06] <Mkaysi_> Zenmap could be easier
+[16:06] <edbian> Aer: then what we want to do is : nmap <public ip>   It's output is pretty clear I think.
+[16:06] <chewed-on> iceroot_: fdisk -l would show the hard drive it vbox free version had support for it.
+[16:06] <Mkaysi_> It's GUI for nmap.
+[16:07] <Aer> ok
+[16:07] <Aer> ill go do it now
+[16:07] <sprung> Mkaysi_, wow, fail
+[16:07] <chewed-on> I know how to mount the hard drive on linux with write permission
+[16:07] <chewed-on> this channel is very laggy...
+[16:07] <Aer> im assuming nmap on the computer i want to connect to right ? just making sure lol
+[16:07] <iceroot_> chewed-on: if you dont see the drive with fdisk -l you cant mount the drive because its not there
+[16:07] <edbian> Aer: nmap on the computer you're using to nmap
+[16:07] <edbian> Aer: Umm, this isn't clear :P
+[16:07] <sprung> nmap is a port scanner, Aer. it just helps find port connectivity problems.
+[16:08] <edbian> Aer: no.  You want nmap on some other computer
+[16:08] <Aer> ok
+[16:08] <edbian> Aer: I suppose is really doesn't matter
+[16:08] <Aer> ok
+[16:08] <iceroot_> Aer: if you want to access your ubuntu over the internet you have to use port-forwarding in your router
+[16:08] <sprung> i'm going to ask for help in #linux i'm not getting what i need here
+[16:08] <edbian> iceroot_: he knows, we're checking using nmap
+[16:08] <iceroot_> edbian: ah ok, because someone said use nmap on the local machine
+[16:09] <Aer> yeah, i have forwarded the port 5900 but the remote desktop viewer still says its only connetable on the local network
+[16:09] <edbian> iceroot_: I guess it doesn't matter right?  He wants to nmap the public IP
+[16:09] <iceroot_> sprung: feel free to do so
+[16:09] <edbian> Aer: The gui doesn't know what it's talking about
+[16:09] <somethinginteres> why does GPGDir ask for the name of the recipient over and over again how do I use -r to tell it that each file goes to the one person?
+[16:09] <Aer> lol
+[16:09] <edbian> Aer: ignore that, have nmap yet?
+[16:09] <iceroot_> edbian: no the router is seeing that the wan ip is maped to itself
+[16:09] <Aer> yup just installed it
+[16:09] <iceroot_> edbian: so its a lan request
+[16:09] <sprung> iceroot_, thank you for your permission
+[16:09] <iceroot_> edbian: let me correct, most routers act like that
+[16:10] <iceroot_> edbian: so you have to use nmap outside from the lan
+[16:10] <gdea73> fyi: figured it out, it was this bug:
+[16:10] <gdea73> https://bugs.launchpad.net/ubuntu/+source/gnome-orca/+bug/773450
+[16:10] <ubottu> Ubuntu bug 773450 in gnome-orca (Ubuntu Natty) "sound preferences opens speech-dispatcher" [Undecided,In progress]
+[16:11] <edbian> iceroot_: I don't think so if you use public IP
+[16:11] <Aer> edbian, my results are here http://pastebin.com/Wv5bUySj
+[16:11] <Aer> hope i done it right
+[16:11] <edbian> Aer: reading...
+[16:11] <Aer> ok :)
+[16:11] <root_> Hi guys
+[16:12] <iceroot_> edbian: but your request is not from outside
+[16:12] <iceroot_> edbian: the request is coming from the router to the router
+[16:12] <sprung> Hello, After mush reluctance to upgrade to Ubuntu Natty I finally did it, and am encountering two problems: 1) I have to reinstall my NVIDIA driver on every reboot of the system from the command line, it is extremely annoying and even after killing gdm completely and installing the driver and starting gdm, then rebooting, I have to do it again and 2) my Synergy desktop will flicker for about 1 second every time i switch desktops, which is unacceptable.  nvid
+[16:12] <sprung> ia 280.13
+[16:13] <iceroot_> edbian: and the routers sees the reuqest is coming from 192.168.0.2 and he has a route from wan <-> 192.168.0.2 so its a local request because of the nat
+[16:13] <fasta> Is there anyone here who actually knows something about Linux?
+[16:13] <iceroot_> !ask | fasta
+[16:13] <ubottu> fasta: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[16:13] <sipior> fasta: one imagines so.
+[16:13] <rypervenche> fasta: Nope, we're all Windows users :P Yeah, what do you need?
+[16:13] <bobweaver> hi there I messed up my terminal bad up and down arrows are not working so that means no control in nano vi ect... any one know how to compleatly reset terminal or where the conf file might be ?
+[16:13] <sipior> bobweaver: try "stty sane"
+[16:14] <silverarrow> anyone using minitube ?
+[16:14] <fasta> I get mtrr: type mismatch for e0000000, 10000000 old: write-back new: write-combining.
+[16:14] <edbian> iceroot_: yeah, but the request is going to a public IP so it at least ends up at the outside of his LAN
+[16:14] <iceroot_> edbian: no because of the nat
+[16:14] <edbian> Aer: port 5900 is not open (because it isn't listed)
+[16:14] <Aer> oh :/
+[16:14] <fasta> While I understand the function of mtrr, I feel that as a user I should not have anything to do with it.
+[16:14] <bobweaver> sipior: will look into Thanks bro
+[16:14] <Aer> my router is set to allow for 5900 though :s
+[16:14] <edbian> iceroot_: What does not have to do?  So it NAT's and send it out to <public address X>
+[16:15] <fasta> Currently it takes 5 _minutes_ to boot my system, not seconds.
+[16:15] <edbian> Aer: What address does it forward 5900 too?
+[16:15] <edbian> iceroot_: His nmap would indicate that 5900 was open if you are right correct?
+[16:15] <iceroot_> edbian: the router knows that the public_ip is himself. because of that thr reuqest is NOT leaving the lan
+[16:15] <fasta> So, it would be nice if someone with some actual clue would be able to respond.
+[16:15] <sprung> Hello, After mush reluctance to upgrade to Ubuntu Natty I finally did it, and am encountering two problems: 1) I have to reinstall my NVIDIA driver on every reboot of the system from the command line, it is extremely annoying and even after killing gdm completely and installing the driver and starting gdm, then rebooting, I have to do it again and 2) my Synergy desktop will flicker for about 1 second every time i switch desktops, which is unacceptable.  nvid
+[16:15] <sprung> ia 280.13
+[16:15] <Aer> i have it set to any so any 5900 will be open for any computer connected to this router
+[16:15] <iceroot_> edbian: nmap -p 5900 wan-adress should be open
+=== fantomas is now known as onkeltem
+[16:16] <silverarrow> iceroot: can you explain how you added a ppa?
+[16:16] <iceroot_> edbian: when -p 5900 lan-ip is open  and the reuqest is coming from inside the lan on most routers
+[16:16] <Aer> just noticed 5900 isnt set in my "inbound" services though...that could be part of the problem i guess :s
+[16:16] <iceroot_> silverarrow: sudo add-apt-repository ppaname
+[16:16] <bobweaver> sipior: no dice but thanks any way
+=== zz_RobinJ is now known as RobinJ
+[16:16] <edbian> Aer: It doesn't work like that.  You have to tell the router (when you get a request for 5900 send it to ip address X).  I think you're allowing 5900 requests to go out (which is fine)
+[16:16] <zykotick9> sprung, 280.13 doesn't appear to be the natty version, did you install directly from nvidia.com?
+[16:17] <iceroot_> edbian: sudo traceroute wan-ip
+[16:17] <fasta> rypervenche: well, I just described what I need.
+[16:17] <silverarrow> iceroot, then I am adding a source to dowload from or check for updates?
+[16:17] <Aer> hmm ok ill take another look and see about setting it to the computer i need to connect
+[16:17] <iceroot_> edbian: on my router the requstion is going to my router and directly answered by the interlan lan ip from the router
+[16:17] <iceroot_> !ppa | silverarrow
+[16:17] <ubottu> silverarrow: A Personal Package Archive (PPA) can provide alternate software not normally available in the offical Ubuntu repositories - Looking for a PPA? See https://launchpad.net/ubuntu/+ppas - WARNING: PPAs are unsupported third-party packages, and you use them at your own risk. See also !addppa
+[16:17] <iceroot_> :(
+[16:17] <Aer> if it dont work like that, routers are annoying lol means i need to make a 5900 exception for every computer i wanna connect to remotely whilst away >.< lol
+[16:18] <sipior> fasta: http://linuxindetails.wordpress.com/2010/06/27/mtrr-type-mismatch-for-e000000010000000-old-write-back-new-write-combining/
+[16:18] <iceroot_> silverarrow: a ppa is another repositoryxy, holding new packages
+[16:18] <fasta> sipior: of course I tried that.
+[16:18] <fasta> sipior: and no, it does not work.
+[16:18] <edbian> Aer: that's right
+[16:18] <iceroot_> silverarrow: you can just install new packages from that ppa with "sudo apt-get install package"
+[16:18] <Aer> damn xD
+[16:18] <sprung> zykotick9, <zykotick9> sprung, 280.13 doesn't appear to be the natty version, did you install directly from nvidia.com?  <-- Yes, I did, and I have to do it every time i reboot.
+[16:18] <sipior> fasta: wow, nice. hope you suffer greatly.
+[16:18] <edbian> iceroot_: What router?
+[16:18] <iceroot_> edbian: fritzbox 73xx
+[16:18] <silverarrow> iceroot; how risky then? like when they ask you to consult your doctor for any vitamin out there?
+[16:18] <edbian> iceroot_: a real router!
+[16:18] <edbian> :)
+[16:19] <silverarrow> iceroot, thanks
+[16:19] <edbian> iceroot_: mine is a linksys wrt54g
+[16:19] <iceroot_> edbian: dont know if it is also the english name
+[16:19] <edbian> iceroot_: It's a great name regardless :)
+[16:19] <iceroot_> edbian: :)
+[16:20] <iceroot_> edbian: because the linksys wrt54gl doesnt have a modem, i am not using it
+[16:20] <edbian> iceroot_: indeed, it is garbage
+[16:21] <Aer> edbian, THANK YOU :D its working now you were right i had to assign the local IP address to that port in my router settings lol
+[16:21] <edbian> Aer: sure
+[16:21] <Aer> so i gotta create rules for that port for every comp on my network lol
+[16:21] <edbian> People are always so surprised when I'm right :(
+[16:21] <fasta> sipior: just because you can only Google for information, does not mean that you should treat me like that.
+[16:21] <Aer> lol i just thought it worked a litle differntly thats all :P
+[16:21] <iceroot_> Aer: you can only forwarding a port ones
+[16:21] <Aer> huh ?
+[16:21] <iceroot_> Aer: you cant forward 5900 to 192.168.0.2 and 192.168.0.3
+[16:21] <Aer> oh :s
+[16:22] <edbian> Aer: well now that doesn't make sense.  Every request for remote desktop will be 'remote desktop to publicIP port 5900' how do you know which computer you'll get to?
+[16:22] <iceroot_> Aer: you have to to something like 5900 on 192.168.0.2:5900 5901 on 192.168.0.3:5900 and so on
+[16:22] <edbian> iceroot_: (ones = once)
+[16:22] <iceroot_> edbian: :(
+[16:22] <edbian> iceroot_: :P
+[16:22] <sipior> fasta: why not? so you can cop a bigger attitude? please.
+[16:22] <iceroot_> edbian: ( edbian = debian) :)
+[16:22] <Aer> so I have one rule iceroot_ ? but i set it to more than one IP in one rule ?
+[16:22] <edbian> hahaha
+[16:23] <iceroot_> Aer: you have one rule for every port-forwarding
+[16:23] <edbian> Aer: You have one rule for each computer
+[16:23] <Aer> hmm ok
+[16:23] <Aer> ill have to look into this then :) but i have atleast got the ball rolling and have an idea what to do now :) got one computer working online atleast :P
+[16:23] <Aer> thanks a lot for your time guys :)
+[16:23] <yuvateja> there is a need of any packages for java beens program
+[16:23] <edbian> Aer: sure :)
+[16:24] <iceroot_> Aer: and use a good password :)
+[16:24] <Aer> yeah :P
+[16:24] <Aer> I needed to get this working because im moving out tomorrow and got my parents on ubuntu lol, they are quite noobish xD im going to be needing remote control now and then to help them :P
+[16:25] <edbian> Aer: teamviewer is also a good solution
+[16:25] <Aer> yeah i tried that one :) it seems to be running in wine though ?
+=== michael is now known as Guest6643
+[16:25] <iceroot_> Aer: yes
+[16:25] <Aer> that kinda put me off id prefer to be using something that runs native
+[16:25] <Aer> incase of any bugs etc
+[16:25] <edbian> Aer: I agree
+[16:25] <Aer> im guessing im more likely to find a bug in remote control in wine than a native program
+[16:26] <Aer> Team viewer is my main choice for a windows computer though it is a good program :)
+[16:26] <iceroot_> Aer: and you dont have to "fight" with NAT
+[16:26] <silverarrow> I cannot make minitube work, neither update to 1.1.5 from 1.1.3
+[16:26] <Aer> lol yeah :P
+[16:27] <iceroot_> silverarrow: whats the error when starting it?
+[16:28] <Max00355> how can i go about making an IRC channel that is public and not only local?
+[16:28] <iceroot_> silverarrow: ah i saw "minicom" never heard of minitube
+[16:28] <Aer> anyway guys thanks for the help but i need to go now I have to finish preparing to move tomorrow :)
+[16:28] <iceroot_> Max00355: /join #foobar
+[16:28] <silverarrow> irceroot, cannot connect to source, or something like that, it finds videos, they get listed, but doesn't run
+[16:28] <rypervenche> Aer: TeamViewer has prevented people from using it for more than 55 seconds now. :/
+[16:29] <Aer> prevented them from using what ? :S
+[16:29] <rypervenche> Aer: Their software. You have to buy the pro version to be able to use it for more than 55 seconds now. :(
+[16:29] <Aer> really ? :s
+[16:29] <Max00355> +
+[16:29] <silverarrow> iceroot_, I tried adding a ppa too, but it didn't work
+[16:30] <Aer> thats kinda...well not gonna swear but you know lol... i been using team viewer for ages when connecting to a windows comp
+[16:30] <Aer> gonna need to find something new
+[16:31] <rypervenche> Aer: Ditto :(
+[16:31] <cwood> How often does upstart re-read /etc/init?
+[16:32] <Aer> we can connect to windows "Remote Desktop client" using ubuntus Remote Desktop Viewer I guess, just need to find out how xD
+[16:32] <Aer> but for me thats a task for another day too busy today lol
+[16:33] <xeux> Aer - that's essentially a VNC client not an RDP client
+[16:33] <Aer> ahh ok
+[16:33] <scoundrel50a> I am running ubuntu 10.10 and last week there was a update, and a new kernel and it broke Google Chrome and Chromium, aned now I cant use it.......Bug 827198 I was asked to do this command sudo dpkg -i linux-image-2.6.35-30-generic_2.6.35-30.58~01d376eab177859e859416c23416f6fd2a9ec3c769_amd64.deb but i I get an error, and I would liek to get to be able to use Chrome again, can somebody help?
+[16:33] <ubottu> Launchpad bug 827198 in linux (Ubuntu Maverick) "Kernel update google Chrome and Chromium freeze" [Undecided,Fix committed] https://launchpad.net/bugs/827198
+[16:33] <silverarrow> anyone using minitube?
+[16:33] <Aer> anything internet related isnt my strong point lol :P
+=== jamsux is now known as J_sux
+[16:34] <Polah> Aer: rdesktop <address> You can specify options for screen size and suchlike.
+[16:34] <Aer> ohh ok, cool
+[16:35] <silverarrow> <scoundrel50a, have you tried reinstalling the packages from package manager?
+=== nick is now known as Guest97333
+[16:35] <scoundrel50a> yep, and nothing it wont work
+[16:35] <Aer> but ill cya guys later thanks again :) but i have a lot of work to do before i move tomorrow
+[16:35] <Aer> bye
+[16:35] <ActionParsnip> scoundrel50a: you may need to run:  cd /var/cache/apt/archives     first
+[16:37] <gr33n7007h> what runs on port 1001
+[16:37] <benwork> I have ubuntu 11.04 installed, and it works fine in ubuntu classic mode. I have ATI with proprietary drivers installed with 2 monitors, both in single display mode. The issue is one display (the non-primary one) opens apps ala unity style with the title bar being part of the top bar, how can I styop this?
+[16:37] <benwork> gr33n7007h, cat /etc/services |grep  1001
+[16:37] <gr33n7007h> cheers
+[16:37] <cwood> benwork: that's a superfluous use of cat (grep 1001 /etc/services)
+[16:38] <scoundrel50a> I think it might be a  problem with the update though, they forgot to include Maverick in the updates to Chrome, how do I get over the install problem, that I added in my first post
+[16:38] <benwork> I prefer the superfluous cat
+[16:39] <xeux> benwork - sudo apt-get remove unity
+[16:39] <rypervenche> scoundrel50a: Use chromium maybe?
+[16:39] <scoundrel50a> same problem
+[16:40] <scoundrel50a> its affected both
+=== Justasic_ is now known as Justasic
+[16:41] <ekebbeh> how are u?
+[16:41] <ekebbeh> okay
+[16:41] <majormeng> <unconvertable>
+[16:41] <Pici> !zh | majormeng
+[16:41] <ubottu> majormeng: , /join #ubuntu-cn <unconvertable> /join #ubuntu-tw
+[16:45] <calwig> hi, I have a bit of an issue with the scrolling of the mousepad. Seemds like either code changed in xorg.conf or somewhere. What happens now is that I cannot scroll anywhere, and I used to be able to before (like 3 days ago) so where can I check this?
+=== Mud is now known as Guest95744
+[16:47] <ActionParsnip> scoundrel50a: could try the daily build ppa
+[16:53] <calwig> The mouse is out of whack. How can I reset it? I mean the Mouse settings work but still its too sensitive. Ubuntu 8.04. on an Inspiron E1505
+[16:54] <nicofs> how do i generate a new .Xauthority file?
+=== klebers is now known as klebers[afk]
+[16:57] <flametai1> Hey guys need some help, I'm trying to convert using vlc and I get this message. http://pastebin.com/mvyHQ8kB
+[16:57] <flametai1> What do I need to do to fix this? o-o
+=== \l is now known as luigi
+=== luigi is now known as \l
+[17:01] <\n> Can anyone point me to an *open source* driver for Broadcomm wireless B43 card? I've been going absolutely bonkers trying to make buggy proprietary drivers work with ndiswrapper!
+[17:02] <Jojo__> hi, i recenly updated my 10.10 version to 11.04 through the update manager and now its takes about 20 second for the desktop to show up after loggong in. Any solutions ?
+[17:02] <nicofs> flametai1, the ffmpeg version provided by ubuntu might be out of date... it *might* help to compile ffmpeg yourself...
+[17:02] <zykotick9> !broadcom | \n does this help?
+[17:02] <ubottu> \n does this help?: Help with Broadcom bcm43xx can be found at https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx
+=== mrslv_ is now known as mrslv
+[17:02] <flametai1> nicofs, more than likely lmao you have a point. Thank you for the idea.
+[17:03] <\n> Let me check - this is such a relief finding folks looking to help!
+[17:03] <nicofs> flametai1, otherwise try #fmpeg
+[17:03] <nicofs> flametai1, sorry, #ffmpeg
+[17:03] <calwig> can anyone give me tips on the Mousepad?
+[17:03] <Jojo__> arrrm, hi, i recenly updated my 10.10 version to 11.04 through the update manager and now its takes about 20 second for the desktop to show up after loggong in. Any solutions ? Anyone?
+[17:03] <zykotick9> calwig, mousepad or touchpad?
+[17:04] <tystr> I'm running ubuntu server 10.04....I just did a apt-get dist-upgrade....now, I've got broken php packages :(
+[17:04] <ActionParsnip> Jojo__: what video chip do you use?
+[17:04] <zykotick9> calwig, 8.04 isn't supported any longer
+[17:04] <\n> But won't I have to cut out of the windows driver? I think this is what's been causing my problem. You mean nobody's written an open source Ubuntu compatible driver? I think every Acer out there uses Broadcom...
+[17:05] <\l> tystr: Next time, use aptitude for a full upgrade like that.
+[17:05] <doriad> everything that uses opengl seems to be horribly slow on my new 11.04 install. I'm using the nvidia driver that ubuntu recommend I install
+[17:05] <\l> tystr: Try opening aptitude, and see if it can resolve your dependency problems.
+[17:05] <tystr> \l: what do you mean? I used apt-get
+[17:05] <\l> tystr: run "sudo aptitude -u"
+[17:05] <zykotick9> \l, aptitude isn't included in ubuntu by default!
+[17:05] <\l> tystr: It has a text user interface.
+[17:05] <Slart> doriad: it might be using the nouveaeu driver instead of the nvidia binary driver
+[17:06] <\l> zykotick9: I assume he uses ubuntu-server, since he's talking about PHP.
+[17:06] <ActionParsnip> doriad: can you pastebin the output of:  sudo lshw -C display; lsb_release -a; dpkg -l | grep nvidia
+[17:06] <Jojo__> ActionParsnip: i have an hd5770
+[17:06] <doriad> Slart, how would I check?
+[17:06] <glebihan> flametai1, installing libavcodec-extra-52 might help

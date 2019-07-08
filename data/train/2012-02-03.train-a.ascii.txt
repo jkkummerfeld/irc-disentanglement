@@ -1,0 +1,1242 @@
+[16:10] <theadmin> Barcel0: Well, add "text" to this at the very end
+[16:10] <awhitehatter> so my wireless card has decided to stop connecting to networks...I can see them, i try to connect it rejects the password. It's the right password, other devices connect just fine...I tried both Network-Manager and WICD, I get the same result. Any thoughts where to look next? Using BCM4312 card
+[16:11] <bambu85> ActionParsnip: so that should be set to true? ok
+[16:11] <ActionParsnip> bambu85: if you want to boot to CLI only then theadmin's advise will sort you
+[16:11] <ActionParsnip> bambu85: read and think ;)
+[16:11] <pconwell> does a combo cd/dvd drive show up differently in /dev/ depedning on if it's a cd or dvd in the drive?
+[16:11] <pconwell> or is it always /dev/sr0 (or whatever(
+[16:12] <theadmin> pconwell: Nah it's usually just srN where N is a number from 0 to infinity
+[16:12] <bambu85> ActionParsnip: thanks!
+[16:12] <urlin2u> awhitehatter, you have seen the broadcom wiki?
+[16:12] <zykotick9> raj: regarding your aptitude question, have you seen -s simulate?
+[16:12] <Barcel0>  theadmin , so? kernel /casper/vmlinuz  append  boot=casper  initrd=/casper/initrd.gz quiet splash  text
+[16:12] <ActionParsnip> pconwell: if you put in a DVD then /dev/dvd will be used
+[16:12] <pconwell> theadmin: thanks... I'm having issues with ddrescue
+[16:13] <raj> zykotick9, no I haven't
+[16:13] <theadmin> Barcel0: Something like this, I'm not familiar with syslinux actually
+[16:13] <pconwell> ActionParsnip: as opposed to /dev/cdrom?
+[16:13] <raj> I'll just use apt-get for now
+[16:13] <ActionParsnip> pconwell: if you run:   sudo lshw -C disk; sudo lshw -C drive     you will see the device names
+[16:13] <pconwell> ActionParsnip: cool
+[16:13] <raj> I usually substitute aptitude for apt-get, and usually works
+[16:13] <raj> but in this case it didn't
+[16:13] <Barcel0> ok thank! theadmin :)
+[16:13] <Barcel0> urlin2u, yes I use ubuntu
+[16:14] <urlin2u> Barcel0, cool look like you got help. :D
+[16:14] <urlin2u> loos*
+[16:14] <linskyrate> ls
+[16:15] <awhitehatter> urlin2u, no..I will look for that
+[16:15] <airtonix> oh ok
+[16:15] <urlin2u> !broadcom > awhitehatter
+[16:15] <ubottu> awhitehatter, please see my private message
+[16:15] <elijah> Looks like it is scp ~/{file1,file2} elijah@hostname.com:~/
+[16:16] <pconwell> ActionParsnip: it shows up as "logical name: /dev/scd0" and the next line says "logical name: /dev/scd0". Is it normal to have two entries like that?
+[16:18] <ActionParsnip> pconwell: maybe its a combi drive thing
+[16:19] <bw_> Is there a preferred method of disabling services on boot? Create an service.override file or use chkconfig?
+[16:20] <theadmin> bw_: err huh? chkconfig is a redhat thing, I have no idea what "service.override" is at all. Just use bum or rcconf
+[16:20] <pconwell> ActionParsnip: yes it is, but both seem to work the same (as far as I can tell)...
+[16:20] <zo1d> got a general question:  does anyone know if there is an interactive tutorial to learn C/C++ programming for linux?  want to learn so i can start working on learning how to update android kernels to 3.x from 2.6
+[16:20] <calmpitbull> How to record desktop in HD, ubuntu 11.10
+[16:20] <auronandace> zo1d: that isn't a ubuntu support question
+[16:21] <raj> what's 127.0.1.1 ?
+[16:21] <zwoxyz> 1ip
+[16:21] <kpas_> loop address
+[16:21] <raj> in /etc/hosts
+[16:21] <kpas_> in hosts file under etc
+[16:21] <raj> it's listed for 'ubuntu'
+[16:21] <bw_> theadmin: You can DL chkconfig from the repo. And the service.override is an upstart feature. All you do is place a file with manual in it /etc/init/ssh.override
+[16:22] <mneptok> raj: the common loopback address for localhost
+[16:22] <theadmin> bw_: Oh, I see, sorry, I wasn't aware.
+[16:22] <raj> what does the loopback do?
+[16:22] <zwoxyz> hello
+[16:22] <mneptok> raj: it's how the machine talks to itself using TCP/IP, UDP or other network protocols
+[16:22] <raj> also, some entries have two columns, some have 3, that's okay?
+[16:22] <zwoxyz> What's the backtrack irc?
+[16:22] <ActionParsnip> raj: loopback IP
+[16:22] <ekaleido> http://lmgtfy.com/?q=loopback+address
+[16:23] <ActionParsnip> raj: its how systems talk to services running on the same system
+[16:23] <zwoxyz> backtrack linux irc channel?
+[16:23] <mneptok> ekaleido: lmgtfy URLs are most unwelcome
+[16:23] <raj> some are--> 127.0.0.1    localhost.localdomain   localhost
+[16:23] <awolfey> I'm trying to set up a vpn to the office win server. I have made a vpn connection but I can't figure out how to mount the drive. Google not giving much help. Do I use Connect to server from the file browser to do this?
+[16:23] <raj> some are--> 127.0.1.1  ubuntu
+[16:23] <ActionParsnip> !google |  ekaleido
+[16:23] <ubottu> ekaleido: While Google is useful for helpers, many newer users don't have the google-fu yet. Please don't tell people to "google it" when they ask a question.
+[16:23] <auronandace> !backtrack | zwoxyz
+[16:23] <ubottu> zwoxyz: There are some Ubuntu derivatives that we cannot provide support for due to repository and software changes. Please consult their websites for more information. Examples: gNewSense (support in #gnewsense), Linux Mint (see !mint), LinuxMCE (support in #linuxmce), CrunchBang (support in #crunchbang), BackTrack (support in #backtrack-linux), Ultimate Edition
+[16:23] <raj> another 3 column-->  43.24.243.34   hello.com   raj
+[16:24] <ActionParsnip> raj: 127.0.0.0/8 are effectively the same
+[16:24] <raj> is that okay for some to have 2 columns, some to have 3?
+[16:24] <ActionParsnip> raj: sure
+[16:24] <raj> k
+[16:24] <kpas_> yes it is raj
+[16:24] <bw_> theadmin: no problem..were you recommending I edit rc*.d by hand?
+[16:24] <raj> thank you
+[16:25] <theadmin> bw_: Meh? I just do "sudo mv /etc/init/something.conf /etc/init/something.conf.DISABLED"
+[16:25] <theadmin> bw_: Upstart ignores stuff not ending in conf so
+[16:26] <satty> how to reset the screen brightness after login
+[16:27] <theadmin> bw_: That, and, well, I myself don't use Upstart (or Ubuntu as such), but that's how I'd do it if I were
+[16:27] <satty> every time i login it brightness is at maximum. I want this to as I want
+=== matt_ is now known as Guest43216
+[16:27] <bw_> theadmin: Not quite sure I understand you, but what do you mean?
+[16:28] <artao> ubottu@satty: i just discovered grandr .. might that do it?
+[16:28] <ubottu> artao: I am only a bot, please don't think I'm intelligent :)
+[16:28] <theadmin> bw_: initscripts with Upstart are located under /etc/init/*.conf -- if the file doesn't end in .conf Upstart ignores it and doesn't start the respective service, so...
+[16:28] <g-wiz> hi everyone
+[16:28] <slipttees> ActionParsnip: i need create image of partition using dd and foremost to rescue files :D
+=== tdgunes|away is now known as tdgunes
+[16:29] <satty> ubottu, touchpad
+[16:29] <ubottu> For a comprehensive Synaptics Touchpad guide, see https://help.ubuntu.com/community/SynapticsTouchpad
+[16:29] <hamed> hey there
+[16:30] <ActionParsnip> slipttees: may want to use dd_rescue
+[16:30] <bw_> theadmin: I see, preciate it.
+[16:31] <theadmin> bw_: There are tools like rcconf, chkconfig (you just mentioned), update-rc.d and bum that will help with it
+[16:31] <theadmin> Oh.
+[16:32] <freezey> hey anybody have a link to the main ubuntu repos?
+[16:33] <ActionParsnip> freezey: packages.ubuntu.com
+[16:34] <satty> grandr is not for brightness
+[16:35] <newbie|3> helooooooooooooooooo
+[16:35] <MonkeyDust> wow
+[16:35] <newbie|3> need some help here
+[16:35] <freezey> is anyone running maverick? wondering if they can paste their sources.list
+[16:35] <urlin2u> !help > newbie|3
+[16:35] <ubottu> newbie|3, please see my private message
+[16:36] <newbie|3> ubottu: are you there
+[16:36] <ubottu> newbie|3: I am only a bot, please don't think I'm intelligent :)
+[16:36] <newbie|3> i just download backtrack5 from the wedside
+[16:36] <iceroot> freezey: its the same sources.list for every ubuntu just the name of the release changed
+[16:36] <newbie|3> but i  dont know how to make it work
+[16:37] <iceroot> !backtrack | newbie|3
+[16:37] <ubottu> newbie|3: There are some Ubuntu derivatives that we cannot provide support for due to repository and software changes. Please consult their websites for more information. Examples: gNewSense (support in #gnewsense), Linux Mint (see !mint), LinuxMCE (support in #linuxmce), CrunchBang (support in #crunchbang), BackTrack (support in #backtrack-linux), Ultimate Edition
+[16:37] <MonkeyDust> newbie|3  type /join #backtrack-linux
+[16:37] <freezey> iceroot: so why i am seeing this? http://pastie.org/3310096
+[16:37] <selite> Hey, my sony vaio charger died. There are some universal ones though they have different voltages than the original one... Should I buy it?
+[16:38] <MonkeyDust> selite  wrong channel
+[16:38] <selite> It's a common topic.
+[16:38] <newbie|3> anyone
+[16:38] <newbie|3> __??
+[16:38] <MonkeyDust> newbie|3  type /join #backtrack-linux
+[16:38] <rohit> A newbie
+[16:38] <lightpriest> Hey, I just installed Ubuntu on ThinkPad E320 and for some reason network manager doesn't show any wireless cards (not channels)
+[16:38] <selite> Hey, my sony vaio charger died. There are some universal ones though they have different voltages than the original one... Should I buy it?
+=== rohit is now known as Guest76384
+[16:38] <sybariten> gah
+[16:38] <ActionParsnip> newbie|3: I suggest you use ubuntu and get familiar with the OS first
+[16:39] <MonkeyDust> selite  how is your question ubuntu related?
+[16:39] <selite> MonkeyDust: Shut your noisy hole, or answer my question.
+[16:39] <sybariten> first i tried running thttpd. I wasnt too succesful i think. Then i realized apache is maybe already running on this host
+[16:39] <theadmin> selite: Go to ##hardware , we don't support such things here.
+[16:39] <newbie|3> see
+[16:39] <lightpriest> selite, you should the connector on your laptop, they sometimes accept a range of voltages
+[16:39] <hamed> i
+[16:39] <newbie|3> i download it yestaday
+[16:39] <ActionParsnip> lightpriest: run:  sudo lshw -C network; lsb_release -a; uname -a; sudo rfkill list     then use http://pastie.org   to host the output
+[16:39] <hamed> hi
+[16:39] <newbie|3> but for somerearon i dont know how to make it work
+[16:39] <sybariten> i checked with ps -aux and it seems like it was. Then i tried stopping it, and got it out of the ps result. But i still get a test page when pointing a browser to the host. What gives?
+[16:39] <ActionParsnip> newbie|3: backtrack isn't supported here in any way
+[16:40] <freezey> anybody know why this is going down? http://pastie.org/3310096
+[16:40] <hamed> hi
+[16:40] <hamed> hi
+[16:40] <hamed> hi
+[16:40] <iceroot> freezey: because the "ubuntu" is wrong
+[16:40] <FloodBot1> hamed: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[16:40] <freezey> ?
+[16:40] <iceroot> freezey: its not ubuntu-main and so on, its main
+[16:40] <sybariten> so basicly i dont know what server is serving that test page
+[16:40] <hamed> hi
+[16:40] <freezey> ah
+[16:40] <freezey> gotcha
+[16:41] <newbie|3> i download the arm version...i made a mistake instead of downloadin iso
+[16:41] <iceroot> freezey: why is that sources-list broken? you edit it by hand?
+[16:41] <iceroot> !backtrack | newbie|3
+[16:41] <newbie|3> i did arm
+[16:41] <iceroot> newbie|3: this channel is not for backtrack
+[16:41] <ActionParsnip> newbie|3: ask in #backtrack-linux please
+[16:41] <freezey> iceroot: yeah it looks like something is screwy with it
+[16:41] <iceroot> freezey: the question is why
+[16:41] <iceroot> freezey: you are using ubuntu? you did not edit it by hand?
+[16:41] <ActionParsnip> freezey: try switching server
+[16:41] <freezey> iceroot:  it was an AMI
+[16:41] <newbie|3> how_?
+[16:42] <freezey> yeah it was am AMI that i got from amazon that seems to be a bit screwy
+[16:42] <iceroot> ActionParsnip: its not the server, the lines in sources.list are wrong
+[16:42] <ActionParsnip> freezey: maverick is EOL in april so i suggest you upgrade soon
+[16:42] <ActionParsnip> iceroot: ahhhh
+[16:42] <ActionParsnip> newbie|3: type:   /join #backtrack-linux
+[16:42] <freezey> yeah i was about to upgrade right now
+[16:42] <iceroot> ActionParsnip: he is using deb http.//foobar ubuntu-main ubuntu-universe instead of main universe and so on
+[16:43] <spir> Hi, how can I do to store various public/private keys? Shall I copy them all in a respective file? id_dsa.pub/id_dsa
+[16:43] <shergill> i'm using 11.04. while running do-release-upgrade, i get an error of no upgrade available. i have some oneiric sources in my /etc/apt/sources.list (which i've used to install select packages from oneiric (in case that's relevant). any ideas how to troubleshoot the issue?
+[16:44] <iceroot> freezey: http://paste.ubuntu.com/827788/  replace precise with maverick
+[16:44] <kinesis> hey i cannot install git at all
+[16:44] <zwoxyz> type /join #backtrack-linux
+[16:44] <kinesis> E: Unable to locate package git
+[16:44] <freezey> ahh gotcha
+[16:44] <ActionParsnip> freezey: its gonna be a while, you'll need to upgrade to 11.04 then to 11.10. If you can hang until April and clean install Precise which is LTS
+[16:44] <kinesis> and git-core
+[16:44] <theadmin> kinesis: sudo apt-get update
+[16:44] <ActionParsnip> !info git
+[16:44] <ubottu> git (source: git): fast, scalable, distributed revision control system. In component main, is optional. Version 1:1.7.5.4-1 (oneiric), package size 4550 kB, installed size 10864 kB
+[16:44] <xangua> shergill: mixing repositories is Always bad idea
+[16:44] <zwoxyz> sudo apt-get upgrade
+[16:44] <zwoxyz> su root
+[16:44] <ActionParsnip> kinesis: if you run:  sudo apt-get update     is it then installable?
+[16:44] <MonkeyDust> kinesis  try sudo apt-get update, first
+[16:44] <zwoxyz> su userfuck
+[16:45] <freezey> iceroot: perfect thanks
+[16:45] <ActionParsnip> zwoxyz: su root    won't work in Ubuntu
+[16:45] <hamed> how can I know that I have the latest drivers for my hardwares on my UBUNTU
+[16:45] <hamed> ??
+[16:45] <shergill> xangua: it can be tricky getting packages to work, but once they are installed and running i don't see why there should be any other issues. am i missing something?
+[16:45] <theadmin> ActionParsnip: (s)he's just trolling
+[16:45] <zwoxyz> Theadmin: NO
+[16:45] <ActionParsnip> hamed: most are installed by default so as long as your system is up to date you are ok
+[16:45] <spir> Hi, how can I do to store various public/private keys? Shall I copy them all in a respective file? id_dsa.pub/id_dsa
+[16:45] <MonkeyDust> hamed  try sudo apt-get update; sudo apt-get upgrade to get the latest
+[16:45] <theadmin> zwoxyz: Yes, you're giving senseless commands and can't even spell my nick right -_-
+[16:46] <zwoxyz> theadmin: sorry
+[16:46] <lightpriest> ActionParsnip, http://pastie.org/3310147 thanks
+[16:46] <newbie|3> yoooo
+[16:46] <zwoxyz> How can I join backtrack irc?
+[16:47] <newbie|3> there is nobody on the link that you gave me
+[16:47] <newbie|3> so where to find information on bt5___
+[16:47] <newbie|3> ?
+[16:47] <MonkeyDust> zwoxyz  newbie|3 type /join #backtrack-linux
+[16:47] <zwoxyz> newbie|3
+[16:47] <newbie|3> i didnt but there is nobody the3re
+[16:47] <zwoxyz> http://www.backtrack-linux.org/wiki/index.php/FAQ
+[16:47] <iceroot> newbie|3: we dont support backtrack here
+[16:47] <iceroot> newbie|3: so please stop that here
+[16:47] <ActionParsnip> zwoxyz: type:  /join #backtrack-linux
+[16:48] <GranCenSail> My laptop has screen so dark that I have to use a flashlight to see what I'm doing.  The function keys don't work to change the brightness, and the command "sudo setpci -s 00:02.0 F4.B=xx" seems to take (I have to enter password, no errors), but the brightness doesn't change.  What else can I do?
+[16:48] <ActionParsnip> zwoxyz: it is mootif anyone replies, backtrack isn't supported here so you cannot 'default' here if you get no replies
+[16:48] <spir> Hi, how can I do to store various public/private keys? Shall I copy them all in a respective file? id_dsa.pub/id_dsa
+[16:48] <ActionParsnip> !broadcom | lightpriest
+[16:48] <ubottu> lightpriest: Help with Broadcom bcm43xx can be found at https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx
+[16:48] <zwoxyz> ActionParsnip: I've done it
+[16:48] <newbie|3> why is there something wrong with it?i heard is a tool to secure my wep....so why are you telling me not to ask about it____??:?
+[16:49] <zzecool> GranCenSail: what is your graphics card?
+[16:49] <MonkeyDust> newbie|3  you came to the wrong channel
+[16:49] <ActionParsnip> zwoxyz: :D
+[16:49] <Slart> GranCenSail: what brand and model is the  laptop
+[16:49] <zwoxyz> ActionParsnip: It won't work
+[16:49] <GranCenSail> Its an hp Pavilion g series.  I don't know the graphics card
+[16:50] <spir> Hi, how can I do to store various public/private keys? Shall I copy them all in a respective file? id_dsa.pub/id_dsa
+[16:50] <GranCenSail> I tried to run lspci but I don't understand the output except for the wireless card.
+[16:50] <jonko> understand the output except for
+[16:50] <ActionParsnip> zwoxyz: what won't work?
+[16:50] <newbie|3> what!!!why??yo im new to this even my name say it so why arent you telling me the whole thing about me talkin about that tool here_?
+[16:50] <ActionParsnip> newbie|3: your OS isn't supported here, it has its own channel
+[16:50] <zwoxyz> joining the backtrack irc channel
+[16:50] <MonkeyDust> GranCenSail  type lshw -C display to find out
+[16:50] <newbie|3> i konw
+[16:50] <zwoxyz> ActionParsnip: by typing it
+[16:51] <ActionParsnip> newbie|3: how many times do you need telling?
+[16:51] <iceroot> newbie|3: is "this is the ubuntu channel and we dont support backtrack here" not enough?
+[16:51] <jonko> synaptic ?
+[16:51] <newbie|3> i did it my self what is wrong with it_?
+[16:51] <Slart> newbie|3: this channel is about ubuntu user support.. backtrack is another distro, with its own support channels. We don't discuss other distros here
+[16:51] <iceroot> newbie|3: what else infos do you want from us about "backtrack is not supported here"?
+[16:51] <ActionParsnip> newbie|3: nobody will support you as discussing backtrack is offtopic here
+[16:51] <rumpelstilchen> +i
+[16:51] <Slart> newbie|3: you will be kicked out of here if you keep asking about it
+[16:51] <GranCenSail> I ran it and I'm trying to read the output.  I'll note if I figure it out.
+[16:51] <ActionParsnip> Slart: thanks
+[16:51] <newbie|3> aaaaaaaaaaah
+[16:52] <ActionParsnip> zwoxyz: do you mean:  su root     ?
+[16:52] <GranCenSail> Intel, version 09
+[16:52] <zzecool> GranCenSail:  install Hardinfo  from software center
+[16:52] <zzecool> its a the same but with nice gui
+[16:53] <zwoxyz> ActionParsnip: what?
+[16:53] <GranCenSail> I'm working on it now.
+[16:53] <jonko> GranCenSail : it won't work
+[16:53] <ActionParsnip> zwoxyz: what isn't working?
+[16:54] <zzecool> GranCenSail: form there you will know what your hardware is and be able to find a solution fast even searching google
+[16:54] <spir> Hi, how can I do to store various public/private keys? Shall I copy them all in a respective file? id_dsa.pub/id_dsa
+[16:54] <zzecool> form*
+[16:54] <zzecool> from*
+[16:54] <btby> How do I run a script upon laptop suspend / lid close before the network is down?
+[16:54] <zwoxyz> ActionParsnip: OK, asdfhello
+[16:54] <zwoxyz> * #backtrack-linux :Cannot send to channel
+[16:54] <GranCenSail> zzecool: Thanks.
+[16:54] <awhitehatter> urlin2u, thanks for the on the broadcom wiki, no luck though. Complete purge of the driver and still same thing, Wifi sees the network, attempts to connect and rejects the pass phrase
+[16:54] <zzecool> GranCenSail: np
+[16:54] <zykotick9> !register | zwoxyz
+[16:54] <ubottu> zwoxyz: Information about registering your nickname: https://help.ubuntu.com/community/InternetRelayChat/Registration - Type <unconvertable> /nick <nickname> <unconvertable> to select your nickname. Registration help available by typing /join #freenode
+[16:55] <ActionParsnip> zwoxyz: ahhh
+[16:55] <zwoxyz> ty
+[16:55] <urlin2u> awhitehatter, well that all my knowledge here in that where the wiki is lol. :)
+[16:55] <ActionParsnip> zwoxyz: I'm i #backtrack-linux right now...
+[16:55] <Slart> btby: I think there might be some scripts/folders in /etc/acpi/  .. it's possible you have to install acpid first.. but that should at least get you a place to start searching
+[16:56] <awhitehatter> urlin2u, no problem...maybe it's a hw failure, it's an older lappy... i'm going to try a live distro to see what happens.
+[16:56] <urlin2u> awhitehatter, that is a excellent plan.
+[16:57] <zwoxyz> ActionParsnip: Well I can't write
+[16:57] <jonko> i don't work
+[16:57] <zwoxyz> #backtrack-linux :Cannot send to channel
+[16:57] <btby> Slart: Thanks, I've been trying to work with /etc/acpi/handler.sh, case "$1" in, button/suspend, button/lid sections, but by echoing the output of 'ip addr' to a file from there, I see that when these are run, they interfaces are down already.
+[16:57] <spir> Hi, how can I do to store various public/private keys? Shall I copy them all in a respective file? id_dsa.pub/id_dsa
+[16:58] <MonkeyDust> zwoxyz  maybe you have to register, first
+[16:58] <llutz> zwoxyz: what part of" Registration help available by typing /join #freenode" you don't understand?
+[16:58] <DXBLouie> hi everyone
+[16:58] <ActionParsnip> zwoxyz: sounds like you need identifying and registering
+[16:58] <DXBLouie> how do i set ethernet speed in 11.10? i can run "ethtool -s eth0 speed 100 duplex full" at boot, but is there a way to get NetworkManager to do it?
+[16:59] <awolfey> I'm trying to set up a vpn to the office win server. I have made a vpn connection but I can't figure out how to mount the drive. Google not giving much help. Do I use Connect to server from the file browser to do this?
+[16:59] <artao> crap! I think i poochedmy system. Grub should come right up on boot, yes?
+[16:59] <compdoc> DXBLouie, thats automatically done when the nic detects the switch
+=== glebihan_ is now known as glebihan
+[17:01] <DXBLouie> compdoc, i know.. i have gigabit switch and wiring, but on this box whenever the link is 1000mbps, it keeps going up and down, till i set the speed down to 100
+[17:01] <DXBLouie> [67406.373042] r8169 0000:05:00.0: eth0: link down
+[17:01] <DXBLouie> [67408.594268] r8169 0000:05:00.0: eth0: link up
+[17:01] <jonko> channel is about ubuntu user support
+[17:01] <artao> now my computer won't boot to win 7 OR linux. it's just sitting there blinking a cursor at me. ... I had my doubts about letting grub go on the MBR .. the installer didn't see my win 7, but i figured i could adjust that
+[17:01] <zwoxyz> ActionParsnip: ok
+[17:02] <MonkeyDust> can ethernet handle speeds of 1000mbps?
+[17:02] <compdoc> DXBLouie, you have a problem with the nic, wiring, or switch. might be better to fix it, than manually setting the speed
+[17:02] <jonko> its a the same but with nice gui
+[17:02] <ActionParsnip> MonkeyDust: sure, as long as both ends support it
+[17:02] <Spec> MonkeyDust: can ethernet handle gigabit? sure.
+[17:02] <artao> soooo .. why won't grub load for me? i'm on my 1st reboot after install
+[17:03] <DXBLouie> compdoc, the switch works fine, my windows box (identical) runs 1000mbps, i switched cables.. but that's besides the point
+[17:03] <zwoxyz> ActionParsnip: Join BACKTRACK channel
+[17:03] <ActionParsnip> artao: what GPU do you use?
+[17:03] <artao> gpu? ati x600
+[17:03] <DXBLouie> compdoc, at this point i'd much rather just set it to 100mbps.. the NIC is embedded, and my expansion PCIe ports are used
+[17:03] <ActionParsnip> zwoxyz: done
+[17:03] <jonko> tool artao ?
+[17:03] <artao> ??
+[17:03] <jonko> artao ?
+[17:04] <DXBLouie> agian, that's besides the point, my question is really whether there's a way to set adapter options via NetworkManager, as opposed to setting an if-up script in /etc/network/interfaces and ditching NetworkManager
+[17:04] <artao> i'm trying to get my comp. to boot ... grub won't start .. 1st boot after install
+[17:04] <compdoc> DXBLouie, yeah, I often see bad onboard nics. No pci slots?
+[17:04] <ActionParsnip> !nomodeset | artao
+[17:04] <ubottu> artao: A common kernel (boot)parameter is nomodeset, which is needed for some graphic cards that otherwise boot into a black screen or show corrupted splash screen. See http://ubuntuforums.org/showthread.php?t=1613132 on how to use this parameter
+[17:04] <GranCenSail> I installed Hardinfo and it has a lot of great information, but I still can't tell what my graphics card is or how to adjust the screen brightness.
+[17:04] <DXBLouie> compdoc, two pci-e, one used with the video card, one used with a fax modem (fax server)
+[17:04] <zykotick9> ActionParsnip: if artao isn't seen any grub, i'm not sure nomodeset will help (or is an option to set)
+[17:05] <thegauntlet> Ubuntu 11.10 update manager just installed some updates, wanted to reboot and when it came back, every time i move the mouse, the screen goes black and then the login prompt appears. How can I fix?
+[17:05] <ActionParsnip> zykotick9: the default is to not show grub though
+[17:05] <artao> but the bootloader isn't even coming up .. i have no opportunity to use nomodeset
+[17:05] <ActionParsnip> artao: hold shift at boot, does it show?
+[17:05] <artao> i'll try
+[17:06] <compdoc> DXBLouie, if you have to set the card manually, it might be best not to use the network manager. you can set everything by hand
+[17:06] <ederico> hello all, I'm running Ubuntu 11.10. I was wondering, when I go to the music lens and click on a track it plays automatically in Totem. However, if I click on an album nothing happens. Is this normal, or is there a way I could get the whole album to play and be queued in Totem (or any other app)?
+=== arun_ is now known as arunsonnet
+[17:06] <artao> holding shift .. all i get is a blinking cursor in the upper left of the screen
+=== mang0 is now known as Seryth
+[17:06] <davidcalle> ederico, the Music lens is (by default) only working with Banshee.
+[17:06] <artao> i think i pooched my MBR .. won't boot into win 7 either
+[17:07] <zykotick9> !grub | artao
+[17:07] <ubottu> artao: GRUB2 is the default Ubuntu boot manager since 9.10 (Karmic). Lost GRUB after installing Windows? See https://help.ubuntu.com/community/RestoreGrub - For more information and troubleshooting for GRUB2 please refer to https://help.ubuntu.com/community/Grub2 - See !grub1 for releases before Karmic (9.10)
+[17:07] <auronandace> artao: how many harddrives do you have?
+[17:07] <jonko> i have a ws which bought something, how can
+[17:07] <zykotick9> artao: i'd try following the directions on restroing grub, sounds like it's not installed.
+[17:08] <artao> 3 ... one sata (primary drive) one IDE, one USB external
+[17:08] <davidcalle> ederico, that's why the albums don't play, Totems doesn't understand the concept of albums as Bansheed does.
+[17:08] <davidcalle> Totem*
+[17:08] <auronandace> artao: maybe you need to change the boot order in the bios
+[17:08] <artao> i did that
+[17:09] <auronandace> artao: so you are set to boot from the drive hat grub was installed to?
+[17:09] <artao> that i'm not sure
+=== cristiano is now known as Guest70057
+[17:10] <artao> i let grub go to the MBR, assuming it was the SATA drive
+[17:10] <auronandace> artao: trial and error, try booting from the other
+[17:10] <artao> the IDE is set to boot 1st right now, but it also didn't work with the SATA booting 1st
+[17:10] <auronandace> artao: ah, in that case i think zykotick9 might be right and grub didn't install
+[17:11] <artao> hunh
+[17:11] <artao> k
+[17:12] <zykotick9> artao: are you using a cd or usb as a live medium?
+[17:12] <jonko> mark as manually installed ?
+[17:12] <artao> cd
+[17:12] <artao> dvd
+[17:12] <jbs> cd ..
+[17:12] <jbs> cd horseporn
+[17:12] <zykotick9> artao: ok, just checking.  USB might cause additional issues.
+[17:12] <jbs> woopse wrong window
+[17:13] <thegauntlet> Ubuntu 11.10 update manager just installed some updates, wanted to reboot and when it came back, every time i move the mouse, the screen goes black and then the login prompt appears. How can I fix?
+[17:13] <auronandace> jbs: yeah, right
+[17:13] <agentgasmask> How can I make policykit not prompt for a password when conecting to a wireless network?
+[17:13] <johndoe_> hi, is anyone else experiencing crashes in lightdm after the latest updates?
+[17:14] <johndoe_> i was using unity-2d from the PPA
+[17:14] <auronandace> johndoe_: tried removing the ppa to see if the issue persits?
+[17:15] <becom33> Im having issue with opening a mysql port to the net , maby somthing is wrong with iptable . can any of you help ?
+[17:15] <johndoe_> its not that easy
+[17:15] <johndoe_> i cannot use the desktop
+[17:15] <jonko> filesystjohndoe_ to use for /boot on centos 6
+[17:15] <johndoe_> if I use the mouse it crashes
+[17:15] <auronandace> johndoe_: perhaps you see now why ppas aren't supported
+[17:16] <johndoe_> auronandace: thanks for being so helpful
+[17:16] <becom33> anyone ?
+[17:17] <Barcel0> you think this is correct/good?  append   boot=casper   initrd=/casper/initrd.gz autostart=serere --terminal single --
+[17:17] <MonkeyDust> johndoe_  try ppa-purge
+[17:17] <zykotick9> becom33: having a DB directly accessible from the net, isn't the greatest security idea.
+[17:18] <auronandace> johndoe_: fun to learn the hard way eh? i'm just glad this isn't an issue of failing to make a backup (that lesson can hurt)
+[17:18] <becom33> zykotick9: its local machine
+[17:18] <jonko> to this even my name say it so why arent you telling me the whole thing about
+[17:18] <johndoe_> MonkeyDust: thanks, is there an easy way to revert the packages also? or should I go and inspect them using aptitude?
+[17:18] <Barcel0> ?
+[17:19] <MonkeyDust> johndoe_  you mean downgrade? don't!
+[17:19] <johndoe_> auronandace: theres nothing to learn here, I just want to know if anyone else is experiencing the bug
+[17:19] <Barcel0> this line is good?  append   boot=casper   initrd=/casper/initrd.gz autostart=serere --terminal single --
+[17:19] <Barcel0> for isolinux
+[17:19] <johndoe_> MonkeyDust: yes, I mean downgrade
+[17:19] <MonkeyDust> !downgrade > johndoe_
+[17:19] <ubottu> johndoe_, please see my private message
+[17:20] <zykotick9> johndoe_: downgrading doesn't work, the apt files involved are a one way process
+[17:20] <raj> can someone please remind me how to add a user to the sudo group?
+[17:20] <raj> or admin group
+[17:20] <johndoe_> MonkeyDust: I dont think you are understanding
+[17:20] <jonko> command can i run to install from a centos 6
+[17:20] <ederico> davidcalle: Once we get Rhytmbox with 12.04 I guess that will play the albums, right?
+[17:20] <jonko> can you provide more details ?
+[17:20] <johndoe_> I mean reverting the packages to their old state
+[17:21] <johndoe_> its not a problem with unity though
+[17:21] <zykotick9> johndoe_: you'll need to remove the affected packages, then reinstall them fresh.
+[17:21] <jonko> you with that i'll have to be a hybrid iso
+[17:21] <gadeynebram_> Hi, Could someone help me with this issue http://ubuntuforums.org/showthread.php?p=11661282#post11661282
+[17:21] <johndoe_> the problem is with the latest X upgrades
+[17:21] <auronandace> jonko: why are you asking about centos in #ubuntu?
+[17:21] <gadeynebram_> When I boot my laptop my screen remains blank
+[17:22] <jonko> to boot
+[17:22] <davidcalle> ederico, yes.
+[17:22] <zykotick9> gadeynebram_: have you tried nomodeset?  "/msg ubottu nomodeset" for details.
+[17:22] <ederico> davidcalle: thanks for your explanation :)
+[17:22] <EvilResistance> jonko, if your question is about CentOS and its live environment, you need a CentOS channel.  SInce I just showed up, can yo uelaborate: <jonko> [02/03/12 12:20:44] command can i run to install from a centos 6
+[17:22] <johndoe_> let me start again, is here anyone having problems with using the mouse in X?
+[17:23] <EvilResistance> jonko, "install what from centos 6"
+[17:23] <jonko> working with banshee
+[17:23] <meerkats> giugok
+[17:23] <davidcalle> ederico, if you want to use an other music player with the music lens, it's still possible with a PPA. What music player are you using?
+[17:23] <meerkats> hear me!!!
+[17:24] <auronandace> johndoe_: latest X upgrades? are you using a xorg ppa?
+[17:24] <ederico> davidcalle: I currently enjoy using xnoise, as it is lightweight
+[17:24] <meerkats> davidcalle, hello?
+[17:24] <johndoe_> auronandace: no, just plain stock ubuntu, nothing strange
+[17:24] <davidcalle> meerkats, hi
+[17:24] <johndoe_> auronandace: but I tried with lightdm, gdm, kdm and even though I can login
+[17:24] <johndoe_> the desktop crashes
+[17:25] <johndoe_> when I move or click with the mouse
+[17:25] <davidcalle> ederico, then no. It only supports rhythmbox, gmusicbrowser, guayadeque and clementine.
+[17:25] <johndoe_> and the login screen reappears
+[17:25] <jonko> default only working with banshee
+[17:25] <auronandace> johndoe_: odd, i don't get that
+[17:26] <auronandace> johndoe_: my touchpad and usb mouse works great
+[17:26] <johndoe_> yes, it used to work all okay, until I rebooted because of the lateste updates
+[17:26] <rohit__> here is output of ping -c 3 www.google.com
+[17:27] <meerkats> update manager is extremely slow: it took 30 minutes to upgrade vlc, what could cause it? the download speed was normal, it was the installation speed (deb files and so) that took like 28 minutes
+[17:27] <zwoxyz> hei
+=== root is now known as Guest36976
+[17:27] <zwoxyz> ok
+[17:27] <ederico> davidcalle: Too bad, I'll have to avoid this functionality. Yet, just in case, how I do I do it with Rhythmbox? I have that installed.
+[17:27] <auronandace> !rootirc | Guest36976
+[17:27] <ubottu> Guest36976: It's not technically our business, but we'd like to tell you that IRC'ing as root is a Very Bad Idea (tm). After all, doing anything as root when root is not needed is bad, and especially bad with software that connects to the Internet.
+[17:28] <zzecool> GranCenSail: if you look under pci you will find your graphic card
+[17:28] <zzecool> its there
+[17:29] <ActionParsnip> meerkats: apt-get is nice and fast, apt-fast is even faster
+[17:29] <davidcalle> ederico, https://launchpad.net/~markjtully/+archive/ppa. Add this PPA and install rhythmbox-scope. Log out, log in. And Music from your Rhythmbox collection should appear in the Music lens.
+[17:29] <zykotick9> meerkats: is your install on a USB thumb drive/SD Card?
+[17:29] <ruesy> .
+[17:29] <MonkeyDust> GranCenSail  type lshw -C display|grep vendor to find out
+[17:31] <zwoxyz> #backtrack-linux.
+[17:31] <MonkeyDust> zwoxyz  it's /join #backtrack-linux
+[17:31] <zzecool> zwoxyz:  /j #backtrack-linux
+[17:31] <auronandace> zwoxyz: you've been told how to register
+[17:31] <zwoxyz> I know
+[17:31] <zwoxyz> I've done it
+[17:32] <zzecool> :D
+[17:34] <Nach0z> hey can someone tell me where ubuntu 11.10's grub2.cfg is? I've checked my whole HDD and it doesn't seem to exist
+[17:34] <MonkeyDust> Nach0z  try locate grub2
+[17:34] <auronandace> Nach0z: /boot/grub/grub.cfg
+[17:34] <Nach0z> MonkeyDust: already did that
+[17:34] <zykotick9> Nach0z: you're probably looking for /etc/default/grub
+[17:34] <ederico> davidcalle, thanks, logging out!
+[17:34] <Nach0z> auronandace: that's what someone else said, thought that was grub legacy though
+[17:34] <davidcalle> ederic, no problem :)
+[17:35] <auronandace> Nach0z: but you're not meant to edit it directly (you should edit the files under /etc/grub.d/)
+[17:35] <root_z> anyone know why my windows are laged while i resize it?
+[17:35] <Nach0z> auronandace: NO idea how to mess with grub.d. >_>
+[17:35] <Nach0z> but thanks
+[17:35] <auronandace> Nach0z: grub legacy uses menu.lst
+[17:35] <goldcityman> hello, I use Ubuntu 9.10 on old pc. It is very slow, AMD Athlon(TM) XP 2400+, 1 GB Ram... What can I do? I have a lot of lags on flash sites...
+[17:35] <Nach0z> auronandace: alrighty thanks
+[17:36] <auronandace> goldcityman: there is no way to improve flash performance, ask adobe
+[17:36] <zykotic10> !9.10 | goldcityman
+[17:36] <ubottu> goldcityman: Ubuntu 9.10 (Karmic Koala) was the eleventh release of Ubuntu. !End-Of-Life on April 29th 2011, see http://goo.gl/UUTAB for details.
+[17:36] <auronandace> !lubuntu | goldcityman
+[17:36] <ubottu> goldcityman: lubuntu is Ubuntu with LXDE instead of !GNOME as desktop environment, which makes it extremely lightweight. See https://wiki.ubuntu.com/Lubuntu - /join #lubuntu for lubuntu support.
+[17:36] <ActionParsnip> goldcityman: upgrade, karmic now has zero support
+[17:36] <goldcityman> mmm u think I can update?
+[17:36] <goldcityman> 1 gb ram?
+=== newbot is now known as bobweaver
+[17:36] <ActionParsnip> goldcityman: I'd wait til April then install Precise which is LTS
+[17:36] <Nach0z> goldcityman: you could theoretically re-nice the plugin-container, but auronandace is right, installing LXDE instead of Gnome is a much better option
+[17:36] <theadmin> goldcityman: Try Xubuntu or Lubuntu, or maybe Crunchbang or even Arch. We don't support the latter two, but they have brilliant performance :)
+[17:37] <oldman> Does ubuntu support HID (usb) compliant touchscreens?
+[17:37] <ActionParsnip> goldcityman: sure, minimum requirement is still 512Mb, you will get a more responsive OS with Lubuntu
+[17:38] <theadmin> oldman: Yes, Ubuntu does have touchscreen support iirc
+[17:38] <goldcityman> what version?
+[17:38] <goldcityman> last?
+[17:38] <ActionParsnip> oldman: depends on make and model
+[17:38] <theadmin> goldcityman: Grab the latest Lubuntu is what I say
+[17:38] <goldcityman> what does it mean libasound2>>1.0.22 I'm trying to update chrome
+[17:38] <metbsd> lubuntu?
+[17:38] <DinoMuffin> You might also like xubuntu
+[17:38] <metbsd> whats that
+[17:38] <ActionParsnip> goldcityman: oneiric (11.10) is the latest stable
+[17:38] <DinoMuffin> if you prefer xfce
+[17:38] <ActionParsnip> !lubuntu | metbsd
+[17:38] <ubottu> metbsd: lubuntu is Ubuntu with LXDE instead of !GNOME as desktop environment, which makes it extremely lightweight. See https://wiki.ubuntu.com/Lubuntu - /join #lubuntu for lubuntu support.
+[17:39] <metbsd> is there buntu?
+[17:39] <metbsd> without x window
+[17:39] <Zilly> Is there a way to get which input the monitor is displaying (like whether it is displaying from the VGA port or the HDMI)?
+[17:39] <ActionParsnip> metbsd: you can install minimal ubuntu which will give a CLI based OS...
+[17:39] <MonkeyDust> metbsd  ubuntu server
+[17:39] <goldcityman> can I upgrade from ubuntu 9.10 or I have to format?
+[17:39] <auronandace> !mini | metbsd
+[17:39] <ubottu> metbsd: The Minimal CD image is very small in size, and it downloads most packages from the Internet during installation, allowing you to select only those you want (the installer is like the one on the !Alternate CD). See https://help.ubuntu.com/community/Installation/MinimalCD
+[17:40] <theadmin> goldcityman: You can only upgrade to 10.04, then to 10.10, then to 11.04 and finally to 11.10. Which is a horrible mess. I suggest a reinstall.
+[17:40] <zwoxyz> hey
+[17:40] <auronandace> !eol | goldcityman
+=== matt_ is now known as Guest51852
+[17:40] <ubottu> goldcityman: End-Of-Life is the time when security updates and support for an Ubuntu release stop, see https://wiki.ubuntu.com/Releases for more information. Looking to upgrade from an EOL release? See https://help.ubuntu.com/community/EOLUpgrades
+[17:40] <ActionParsnip> goldcityman: you can upgrade to lucid (10.04) then jump straight to Precise when it is released
+[17:40] <ActionParsnip> goldcityman: I'd clean install personally
+[17:40] <zwoxyz> knowledge of armitage?
+[17:40] <libnotify> zwoxyzgo to #armitage
+[17:40] <mikeliss> anybody ever set up internet connection sharing? I'm trying to use my laptop as a wireless card for my desktop, but the desktop can't connect to the Internet even though it's connected to the wired device.
+[17:41] <LemonAid> Hello. I have an other monitor connected to my laptop. I want to adjust the brightness of that monitor. How can i do that?
+[17:41] <ActionParsnip> !ics | mikeliss
+[17:41] <ubottu> mikeliss: If you want to share the internet connection of your Ubuntu machine with other machines in the network see https://help.ubuntu.com/community/Internet/ConnectionSharing
+=== rohit is now known as Guest27271
+[17:41] <ActionParsnip> LemonAid: what model laptop?
+[17:41] <mikeliss> ActionParsnip: I read over that -- doesn't seem to be working, though I did stop short of restarting my laptop. Seemed unnecessary.
+[17:42] <auronandace> LemonAid: aren't there any buttons on the monitor?
+[17:42] <libnotify> zwoxyz: www.fastandeasy.com
+[17:42] <ederico> davidcalle: It didn't work apparently, I added the ppa and installed the scope, but clicking on the album in the dash doesn't launch rhytymbox at all
+[17:42] <ActionParsnip> libnotify: please don't bother next time. Thanks
+[17:43] <libnotify> why @ ActionParsnip ?
+[17:43] <LemonAid> ActionParsnip, Toshiba satelite l655. auronandace, i want to be able to fine tune everything on the monitor.
+[17:43] <LemonAid> auronandace, so the buttons are not helpful.
+[17:43] <Jean_Jackson> houla!
+[17:44] <ActionParsnip> libnotify: its nothing to do with ubuntu support
+[17:45] <libnotify> well i have the right to help, thank you!!
+[17:45] <ActionParsnip> libnotify: sure but not post links of that nature..
+[17:45] <libnotify> and i run armitage on ubuntu, so laylow
+[17:46] <ActionParsnip> libnotify: why do I need to know that?
+[17:46] <MonkeyDust> libnotify  please stop
+[17:46] <libnotify> then shoulda shut up in the first place
+[17:46] <johndoe_> auronandace: I fixed it!
+[17:46] <ActionParsnip> libnotify: spamming the channel with spurious links is offtopic, that is my point...
+[17:46] <auronandace> !yay | johndoe_
+[17:46] <ubottu> johndoe_: Glad you made it! :-)
+[17:47] <rohit__> j
+[17:47] <johndoe_> in case anyone cares, I downgraded the latest version of xorg form unity-2d ppa
+[17:47] <scott__> i'm trying to install handbrake from a PPA. i've followed the instructions to open the ppa on my system and have done the sudo apt-get update afterwards. At the bottom of the page there are four candidates, yet no linkage.... i'm sure its just me and altzeimers but could someone help me with the next step(s)? here's the page:https://launchpad.net/~stebbins/+archive/handbrake-releases
+[17:47] <johndoe_> to the regular ubuntu version
+[17:47] <mikeliss> ActionParsnip, libnotify: Alas, you guys debating whether links can be posted like this has stolen the thunder from my question. Human nature is a pain.
+[17:47] <MonkeyDust> johndoe_  kindly share the solution with the channel, for future reference
+[17:47] <libnotify> drop it then and mind your own business next time..... :)
+[17:47] <MonkeyDust> ok
+[17:47] <auronandace> johndoe_: tod you the ppa was at fault :)
+[17:47] <auronandace> told
+[17:47] <ActionParsnip> mikeliss: that guide is all I know
+[17:47] <johndoe_> hahah, yes, I realized when I saw it contained a different version of xorg
+[17:48] <johndoe_> should I file a bug?
+[17:48] <libnotify> johndoe_: do
+[17:48] <mikeliss> ActionParsnip: Was afraid of that - I guess a restart it is, then...brb...
+[17:48] <ederico> davidcalle: I reinstalled banshee, and that works, I'll go with that for now and then when 12.04 is out I'm doing a fresh install anyways
+[17:48] <rohit__> can i ask 1 question about suse here?
+[17:49] <scott__> i'll allow it
+[17:49] <auronandace> rohit_: is it ubuntu related?
+[17:49] <libnotify> rohit_: its all linux ask
+[17:49] <xangua> rohit__: no, go to the suse  channel
+[17:49] <zykotic10> libnotify: wrong answer
+[17:49] <scott__>  /wink
+[17:50] <ActionParsnip> rohit__: ask in #suse please, this is ubuntu support
+[17:50] <libnotify> zykotic10: didn't see your answer
+[17:50] <DummyMode> hi there
+[17:50] <auronandace> libnotify: drop the attitude please
+[17:50] <libnotify> lol @ DummyMode
+[17:50] <scott__> so...how to install a package from a PPA?
+[17:50] <rohit__> I have ubuntu 10.10 and suse 12.1 running on my laptop ! i get good internet speed on ubuntu 1mbps,but on suse i only get 30bps or something like that
+[17:50] <zykotic10> johndoe_: if the bug is with a PPA, be sure to report it to the PPA - not Ubuntu
+[17:51] <auronandace> !ppa | scott__
+[17:51] <ubottu> scott__: A Personal Package Archive (PPA) can provide alternate software not normally available in the offical Ubuntu repositories - Looking for a PPA? See https://launchpad.net/ubuntu/+ppas - WARNING: PPAs are unsupported third-party packages, and you use them at your own risk. See also !addppa
+[17:51] <ActionParsnip> scott__: add ppa then refresh packages, you can then install it like any other package
+[17:51] <DummyMode> is there a way to upgrade to a new release without reinstalling? for example, from 10 to 12, just to say something..
+[17:51] <theadmin> scott__: Add the ppa, install the package. To add the ppa, use something like this: sudo add-apt-repository ppa:username/repo (e.g: sudo add-apt-repository ppa:mozillateam/firefox-next)
+[17:51] <johndoe_> yes
+[17:51] <Mixxit> hey is there a way i can snap to right side like windows 7
+[17:51] <auronandace> rohit_: in that case, thats a suse support question
+[17:52] <theadmin> rohit__: Disable IPv6, also please go to #suse
+[17:52] <xangua> DummyMode: you can upgrade from 10.04 to 12.04 as both are LTS
+[17:52] <MonkeyDust> Mixxit  no, but there is a PPA to snap to the bottom
+[17:52] <ActionParsnip> Mixxit: its the grid plugin in ccsm
+[17:52] <rohit__> but some people are still interested
+[17:52] <MonkeyDust> ah
+[17:52] <MystMan> Hello all.  I am installing subversion on a rackspace cloud ubuntu server that i just spun up.  I have installed all pre requisites but never installed and set up svn before.  If anyone knows should I create a repository in the home or www directory and what is the difference
+[17:52] <Mixxit> ccsm?
+[17:52] <MystMan> Ty ahead of time
+[17:52] <DummyMode> xengua, how's the way? apt- something?
+[17:52] <Mixxit> sorry i'm pretty new to this :-)
+[17:52] <MonkeyDust> Mixxit  compiz config
+[17:52] <Mixxit> oh where's that system?
+[17:52] <ActionParsnip> Mixxit: install compizconfig-settings-manager    then run: ccsm
+[17:53] <scott__> actionparsnip  theadmin : i've gotten so far as adding the PPA key, but i still have no access to the package itself. here's the page: https://launchpad.net/~stebbins/+archive/handbrake-releases
+[17:53] <rohit__> <libnotify>
+[17:53] <libnotify> yes rohit__
+[17:53] <theadmin> scott__: Very well then, now run sudo apt-get update && sudo apt-get install whatever
+[17:53] <Mixxit> installing ccsm now thanks
+[17:53] <gadeynebram_> Hi, Someone told me to use the nomodeset property to resolve my thread http://ubuntuforums.org/showthread.php?p=11639631#post11639631
+[17:53] <auronandace> rohit_: you've been asked to take it to #suse, please
+[17:53] <rohit__>  I have ubuntu 10.10 and suse 12.1 running on my laptop ! i get good internet speed on ubuntu 1mbps,but on suse i only get 30bps or something like that
+[17:53] <scott__> there's simply nothing to click on, unless i'm just being obtuse
+[17:53] <gadeynebram_> It didn't work however. Any other toughts?
+[17:53] <xangua> scott__: that ppa has only packages for natty, maverick, lucid and karmic, do you have any of those <unconvertable>
+[17:53] <ActionParsnip> scott__: sudo add-apt-repository ppa:stebbins/handbrake-releases; sudo apt-get update; sudo apt-get install handbrake
+[17:54] <libnotify> do what auronandace has just said
+[17:54] <ActionParsnip> rohit__: ask in #suse please
+[17:54] <rohit__> k
+[17:54] <zykotic10> ActionParsnip: i believe the package is handbrake-gtk (or handbrake-cli)
+[17:54] <scott__> actionparsnip: i've tried that to no avail
+[17:54] <MonkeyDust> root_z  "#suse Channel is open."
+[17:54] <ActionParsnip> scott__: what is the output of:  lsb_release -sc
+[17:54] <ActionParsnip> zykotic10: not on the ppa ;)
+[17:54] <scott__> moment
+[17:55] <lanoxx> trism, are you there?
+[17:55] <libnotify> well i am not an ubuntu fan.... just run my irc client on a remote machine.
+[17:55] <scott__> actionparsnip: natty
+[17:55] <wildc4rd> evenin all
+[17:56] <Cop3rnic> anyone here ever install ubuntu on a eee transformer?
+[17:56] <libnotify> evening wildc4rd
+[17:56] <ActionParsnip> scott__: the PPA supports that release
+[17:56] <Mixxit> ok i found grid in ccsm
+[17:56] <TheExplorer> Greetings fellow ubuntu users, I have a 2 quick questions: firstly i backed up my old harddrive in a single *.tar.gz format, attempting to open the file and extract it is EXTREMELY slow, is there any way to write an index to speed up the process?
+[17:56] <Mixxit> do you mean the bindings? i see put bottom left
+[17:56] <Mixxit> if so what is KP8 etc?
+[17:56] <ActionParsnip> Mixxit: you configure it there dude, have a play
+[17:56] <theadmin> TheExplorer: You don't have to open it to extract, you can use the command-line
+=== Nunux is now known as Putx
+[17:57] <scott__> actionparsnip: please go to the page i've linked, and find the link to the package, then come tell me where to click. i know it sounds rather acedemic, but the link escapes me
+[17:57] <ActionParsnip> scott__: there is nothing to 'click' you need the command I ave
+[17:57] <ActionParsnip> *gave
+[17:57] <TheExplorer> Dear "theadmin", the file is so big that i cannot extract it at once for a lack of space. I wish to recover select files.
+[17:58] <theadmin> TheExplorer: Ah, I see, uh, I think the tar command has some option for that, just a sec
+[17:58] <jonko> to see if the issue persits ?
+[17:58] <Mixxit> hmm doesnt seme to be doing anything
+[17:58] <jonko> might be better to fix it, than manually setting the speed
+[17:58] <ActionParsnip> scott__: all you have to do is copy and paste the command I gave and it will install the app...
+[17:59] <ActionParsnip> scott__: no idea where you go the idea you click something
+[17:59] <TheExplorer> Secondly does anyone know of an "all in one" file explorer, or know of how i would go about setting nautilus to do that. I wish to view all files without folders to recover scattered various documents.
+[17:59] <theadmin> TheExplorer: Well to get the list of files all over your hard drive, you can do this: sudo find / | less
+[17:59] <MonkeyDust> TheExplorer  try midnight commander
+[17:59] <jonko> MonkeyDust : ok
+[17:59] <Gentoo64> TheExplorer, what do you mean
+[18:00] <libnotify> ok see y'all later, and for you ActionParsnip, kid with your fellow noobs next time and not me
+[18:00] <gandhijee_> hey how can i get my monitors back on the top bar in  11.10 like they were in 10.04?
+[18:00] <ActionParsnip> libnotify: as long as you don't spam, its all good
+[18:01] <scott__> actionparsnip: i have tried the normal input. and gotten back something about it being outdated so on, should i try it again and give you a concise output? this isn't my first time installing from a PPA. i'm just at a loss as to why i can't get the package in this casse
+[18:02] <TheExplorer> Gentoo64, I... being the unorganized sort i am, end up saving files to random places for whatever reason. Because i have no single folder that i save my documents in, they are scattered deep in a 15 years worth of sloppy backups and random dirs.
+[18:02] <libnotify> i know what spamming is, get a clue
+[18:02] <libnotify> ok outta here have important things to do right now
+[18:02] <Guest97674> hello
+[18:02] <auronandace> libnotify: maybe you should just leave, like you said you were about to
+[18:03] <Gentoo64> TheExplorer, i dont get what you want from the file manager, most have tabs
+[18:03] <auronandace> !pm | libnotify
+[18:03] <ubottu> libnotify: Please ask your questions in the channel so that other people can help you, benefit from your questions and answers, and ensure that you're not getting bad advice. Please note that some people find it rude to be sent a PM without being asked for permission to do so first.
+=== mang0 is now known as Seryth_
+[18:04] <kuhno> are the ubottu commends listed somewhere?
+[18:04] <auronandace> !brain | kuhno
+[18:04] <ubottu> kuhno: Hi! I'm #ubuntu's favorite infobot, you can search my brain yourself at http://ubottu.com/factoids.cgi | Usage info: http://ubottu.com/devel/wiki/Plugins | Bot channels and general info: https://wiki.ubuntu.com/IRC/Bots
+[18:04] <zykotick9> !bot | kuhno
+[18:04] <ActionParsnip> scott__: can you give a pastebin of the output please
+[18:04] <libnotify> kuhno: is just but a BOT
+[18:04] <kuhno> :D i knew there was a command for that too
+[18:05] <ActionParsnip> libnotify: I never doubted yourawareness of the word, just the fact that you comitted it
+[18:05] <ActionParsnip> libnotify: think
+[18:06] <Cleaner_> LAS MALVINAS SON ARGENTINAS
+[18:07] <Cleaner_> LAS MALVINAS SON ARGENTINAS
+[18:07] <Cleaner_> LAS MALVINAS SON ARGENTINAS
+[18:07] <scott__> actionparsnip: Package handbrake is not available, but is referred to by another package.
+[18:08] <scott__> This may mean that the package is missing, has been obsoleted, or
+[18:08] <scott__> is only available from another source
+[18:08] <scott__> E: Package 'handbrake' has no installation candidate
+[18:08] <zykotick9> scott__: you might want to verify the package name, "apt-cache search handbrake"
+[18:09] <n3o> hey
+[18:09] <ActionParsnip> scott__: did the ppa add ok?
+[18:09] <n3o> alguien
+[18:09] <gmachine_24> is there any way to view a list of recently opened docs, regardless of whether they were word-processing (IE typing), a spreadsheet or whatever.
+[18:09] <n3o> que hable espanol
+[18:09] <n3o> ??
+[18:09] <auronandace> scott__: what version of ubuntu are you using, and what version is the ppa for?
+[18:09] <zykotick9> !es | n3o
+[18:09] <ubottu> n3o: En la mayoria de canales de Ubuntu se habla solo en ingles. Si busca ayuda en espanol o charlar entra en el canal #ubuntu-es. Escribe "/join #ubuntu-es" (sin comillas) y dale a enter.
+[18:09] <Aferreiramelo> Somebody use Cinnamon in Oneric?
+[18:10] <ActionParsnip> Aferreiramelo: its not supported here
+[18:10] <scott__> auronadace: natty : natty
+[18:10] <Aferreiramelo> Hey!
+[18:12] <raj> when adding a user, how do I give them access to sudo ?
+[18:12] <ActionParsnip> raj: add them to the admin group
+[18:12] <scott__> actionparsnip: handdbrake-cli  -  vesatile DVD   ripper and video transcoder - command line
+[18:12] <MonkeyDust> raj  visudo
+[18:12] <Aferreiramelo> Someone uses Cinnamon?
+[18:12] <ActionParsnip> scott__: then run:  sudo apt-get install handbrake-cli
+[18:12] <raj> ActionParsnip, I meant, could it be done in one shot with the adduser script?
+[18:12] <ActionParsnip> Aferreiramelo: its offtopic here
+[18:13] <ActionParsnip> raj: sure, read:  man adduser
+[18:13] <zykotick9> scott__: the handbrake-cli is command line, are you sure there isn't a handbrake-gtk (GUI)
+[18:13] <scott__> actionparsnip: handbrake-gtk - versatile DVD ripper and video transcoder - GTK GUI
+[18:13] <zykotick9> ActionParsnip: ;) ^
+[18:13] <ActionParsnip> scott__: that too
+[18:14] <AkaSrinivasan> hi
+[18:14] <AkaSrinivasan> anybody there?
+[18:14] <MonkeyDust> no
+[18:14] <n3o> yes
+[18:15] <kpas_> useradd <username> -G wheel
+[18:15] <g105b> Hi, I'd like to allow remote root login to my server - but I don't want the password exposed - can I do this with a priv/pub key?
+[18:15] <strapippo> ciao
+[18:15] <n3o> I understand
+[18:15] <zykotick9> kpas_: admin group is used to determin sudo in ubuntu
+[18:15] <MonkeyDust> list
+[18:15] <ActionParsnip> g105b: why not use normal users and use sudo as usual?
+[18:16] <g105b> ActionParsnip: because I'm allowing remote root for MySQL management through MySQL workbench application
+[18:16] <kpas_> oops wrong OS
+[18:16] <strapippo> buonasera a tutti
+[18:16] <g105b> ActionParsnip: the users won't be in the terminal - the application needs to have root privilages.
+[18:16] <zykotick9> !it | strapippo
+[18:16] <ubottu> strapippo: Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi <unconvertable> /join #ubuntu-it <unconvertable> senza virgolette)
+[18:17] <scott__> guys i am simply not very ubuntu saavy...not to mention ppa saavy...i've done this before with other packages, but for some reason i'm running into issues in this case. which is why i keep posting the page assuming someone will have checked the links there to see if there's issue there
+[18:17] <zykotick9> scott__: what happens with "sudo apt-get install handbrake-gtk"?
+=== smit_ is now known as smit
+[18:18] <RKyle> In the event that I forgot my root password to a remote server, what would my options be?
+[18:19] <scott__> here's the page once more: https://launchpad.net/~stebbins/+archive/handbrake-releases
+[18:20] <zykotick9> !lostpassword | RKyle but why root password?
+[18:20] <ubottu> RKyle but why root password?: Forgot your password? See https://help.ubuntu.com/community/LostPassword What's the root password? See !sudo. Don't see *** in password prompts? That's normal. Sudo doesn't ask for your password? It remembers you for several minutes. Please use strong passwords, see https://help.ubuntu.com/community/StrongPasswords
+[18:21] <RKyle> zykotick9, I can't do that on a remote server though.
+[18:21] <scott__> zykotick9: you win.  the suffix -gtk was all i needed. yer my hero.
+[18:22] <ActionParsnip> RKyle: there is a reason there is no root pass
+[18:22] <scott__> honorable mention to actionparsnip for attempting to help. thanks my friend
+[18:22] <ActionParsnip> scott__: got the PPA added though :)
+[18:23] <RKyle> ActionParsnip, I forgot the password to the account with root access, I do however have access to other accounts on the server.
+[18:23] <kuhno> it's really confusing having no root pw anymore... a week ago i still had one :D
+[18:23] <ActionParsnip> RKyle: use your account which is in the admin group
+[18:24] <RKyle> ActionParsnip, There was only one account in the admin group and I lost that accounts passwords.
+[18:24] <RKyle> The rest of the accounts are just basic accounts without root access.
+[18:24] <ActionParsnip> RKyle: then you will need to pysically attend the server and use a chroot
+[18:24] <scott__> handbrake successfully installed now. thanks folks. much love to the ubuntu community!!   NEXT ROUND'S ON ME!!
+[18:24] <damo22> RKyle: can you boot off a livecd and then chroot into it
+[18:25] <RKyle> I know the outline of my password but I don't remember the characters.
+[18:25] <raj> how do I modify an existing uesr?
+[18:25] <RKyle> damo22, It is a remote server.
+[18:25] <ActionParsnip> raj: usermod
+[18:25] <raj> nm
+[18:25] <raj> oh ok
+[18:25] <raj> thanks
+[18:25] <ActionParsnip> RKyle: time for a smarthands request
+[18:25] <damo22> RKyle: you could hack it with a rootkit
+[18:25] <anonomegasmasher> hello
+[18:25] <sidney_> I get this popup that says something about my network being slow. Is there a log file, somewhere I can see the message
+[18:25] <RKyle> damo22, And how would that be done?
+[18:25] <anonomegasmasher> frst time user
+[18:25] <Cube``_> hey guys, thunar doesn't automount for some reason!
+[18:25] <Cube``_> hey guys, thunar doesn't automount for some reason!
+[18:26] <Cube``_> oops
+[18:26] <anonomegasmasher> first time irc user
+[18:26] <anonomegasmasher> kiout
+[18:26] <damo22> RKyle: you download a small root partition from somewhere and then chroot into it
+=== ashaszin is now known as august1
+[18:27] <ActionParsnip> Cube``_: are there any bugs reported?
+[18:29] <ActionParsnip> sidney_: dmesg    maybe..
+[18:30] <tigrang> I have to press my touchpad pretty hard for it to register. I have Acceleration and Sensitivity all the way in Mouse and Touchpad settings but same thing. I know the touchpad isnt messed up because I dual boot and in my other OS its fine. Is there any other setting for this?
+[18:30] <LemonAid> Hello. I`m running 11.10 with unity. I tried to adjust the desktop brightness with ccsm but no settings seem to register. Any ideas on what i should do so that the setting take effect ?
+[18:30] <meberhart> tigrang - there are more settings in the dconf-editor
+[18:30] <ActionParsnip> tigrang: what make and model system????
+[18:30] <tigrang> ActionParsnip, Samsung RV515
+[18:31] <Cube``_> ActionParsnip: ?
+[18:31] <Cube``_> ActionParsnip: it works sometimes
+[18:32] <ActionParsnip> Cube``_: is the network stable?
+[18:32] <Cube``_> ActionParsnip: network?
+[18:32] <Cube``_> im using usb
+[18:32] <Cube``_> no internet
+[18:32] <ActionParsnip> tigrang: can you give the output of:  sudo apt-get install pastebinit; clear; dmesg | pastebinit        Thanks
+[18:32] <ActionParsnip> Cube``_: I see, is the partition healthy?
+[18:33] <tigrang> ActionParsnip, sure. Here it is http://paste.ubuntu.com/827899/
+[18:34] <Cube``_> ActionParsnip: yeah, it works sometimes!
+[18:35] <ActionParsnip> Cube``_: have you checked its health, if its NTFS you'll need a windows OS. When you unplug it do you use the safe removal or do you just pull it out?
+[18:36] <ActionParsnip> tigrang: try:    echo "options psmouse proto=imps" | sudo tee /etc/modprobe.d/psmouse.conf        Reboot to test
+=== arunsonnet is now known as arun_sram
+[18:36] <theadmin> ActionParsnip: If it's ntfs you can as well use "ntfsck" which is a part of ntfsprogs nowadays iirc
+[18:36] <theadmin> ActionParsnip: Not sure Ubuntu has that tho
+[18:36] <theadmin> !find ntfsck
+[18:36] <tigrang> ActionParsnip, ok brb. Thanks
+[18:36] <ubottu> File ntfsck found in ntfs-3g, ntfs-3g-dbg
+[18:37] <theadmin> Ah there
+[18:37] <ActionParsnip> theadmin: NTFS is proprietary to Microsoft, I wouldn't scan it with anything else
+[18:37] <theadmin> ActionParsnip: Makes sense heh
+[18:37] <theadmin> ActionParsnip: Just saying that it is possible
+[18:37] <Oxicore> was macht der rechner?
+[18:37] <tigrang> ActionParsnip, oh and also. When I press shutdown (ubuntu 11.10) it just logs me out. I need to reboot via a terminal, but one problem at a time :)
+[18:37] <errorboy> time
+[18:38] <kuhno> is there a way to upgrade an existing xubuntu oneiric to pengolin alpha?
+[18:38] <Mixxit> man
+[18:38] <Mixxit> don't untick window decorations in ccsm
+[18:38] <Mixxit> had to power off my pc
+[18:38] <ActionParsnip> kuhno: sudo update-manager -d
+[18:39] <ActionParsnip> kuhno: -d is for the (d)evelopment release
+[18:39] <kuhno> thx
+=== sitic|numbercrun is now known as sitic|afk
+[18:40] <LjL> kuhno: do that while keeping in mind it's not released and may break at any time
+[18:40] <kuhno> yeah, i know that, this is my testing machine
+[18:41] <GranCenSail> In Ubuntu 11.10, is there a way to add text to the icons in the launcher (or even make them text-only)?
+[18:42] <raj> does ubuntu have some backports type thing so I can get the latest in a package?
+[18:42] <LjL> !backports > raj
+[18:42] <ubottu> raj, please see my private message
+[18:42] <GranCenSail> I don't like having to identify programs by pictures.
+[18:42] <ActionParsnip> raj: you can enable backports, or try find a ppa
+[18:43] <tigrang> ActionParsnip, thats MUCH better. thank you
+[18:43] <ActionParsnip> tigrang: total guess, thepsmouse module has a few other options. I suggest you make a backup of /etc/modprobe.d/psmouse.conf  for future installs
+[18:44] <tigrang> ActionParsnip, I lost Touchpad tab in Mouse and Touchpad settings. I cant live without two finger scroll :(
+[18:45] <tigrang> ActionParsnip, if I want to undo it, do I just remove psmouse.conf?
+[18:45] <raj> LjL, I already have deb http://us.archive.ubuntu.com/ubuntu/ oneiric-backports main restricted universe multiverse
+[18:46] <raj> in my /etc/apt/ources.list
+=== sevard is now known as beatsake
+[18:46] <raj> sources
+[18:46] <LjL> raj: then you have the backports enabled
+[18:46] <Monkeypaws> im tryin to input a mjpeg http stream from an ip camera and output to something apache can stream.  Is VLC what i need or is there a better way?
+[18:46] <ActionParsnip> tigrang: yes just remove the file and reboot :)
+[18:46] <ActionParsnip> !ppa | raj
+[18:46] <ubottu> raj: A Personal Package Archive (PPA) can provide alternate software not normally available in the offical Ubuntu repositories - Looking for a PPA? See https://launchpad.net/ubuntu/+ppas - WARNING: PPAs are unsupported third-party packages, and you use them at your own risk. See also !addppa
+[18:47] <raj> where can I see a list of ubuntu backports online?
+=== beatsake is now known as sevard
+[18:47] <LjL> raj: http://packages.ubuntu.com/oneiric-backports/
+=== sevard is now known as beatsake
+=== beatsake is now known as sevard
+[18:50] <grubbyone> what's the best tool to use to do a complete backup of a server to another hard drive?
+[18:50] <reisio> from the running server?
+[18:50] <ActionParsnip> grubbyone: there is no single best tool for anything in any OS
+[18:51] <ActionParsnip> !backup
+[18:51] <ubottu> There are many ways to back your system up. Here's a few: https://help.ubuntu.com/community/BackupYourSystem , https://help.ubuntu.com/community/DuplicityBackupHowto , https://wiki.ubuntu.com/HomeUserBackup , https://help.ubuntu.com/community/MondoMindi - See also !sbackup and !cloning
+[18:51] <reisio> sure there is
+=== milind is now known as abyss42
+[18:51] <grubbyone> ok, well I have a fresh installation, the first command I want to run is to backup the entire disk, including the mbr
+[18:51] <slipttees> ActionParsnip: dd Erro input/output
+[18:51] <slipttees> =/
+[18:51] <ActionParsnip> slipttees: dd_rescue will keep going
+[18:51] <ActionParsnip> slipttees: sounds like a bad drive
+[18:51] <reisio> grubbyone: why the mbr
+[18:52] <grubbyone> I want to be able to restore the disk image
+[18:52] <slipttees> ActionParsnip:  :-(
+[18:53] <reisio> you can save a lot of time by just making a cp/rsync of the filesystem, possibly the mbr, and the partition table
+[18:53] <reisio> if you really want an "image", though, read http://mark.koli.ch/2009/05/howto-whole-disk-backups-with-dd-gzip-and-p7zip.html
+[18:54] <grubbyone> I want to be able to boot from a stick and restore the drive to a brand new fresh state if I mess anything up
+[18:54] <grubbyone> I will probably mess things up quite a bit
+[18:54] <ActionParsnip> grubbyone: you can reinstate grub from livecd
+[18:55] <ubukou> ActionParsnip, kde is really good..
+[18:56] <zykotick9> grubbyone: learning to fix issues, rather then reinstalling - is the first step to getting a lot better on gnu/linux
+[18:56] <ubukou> ActionParsnip,  takes me a little time to find things but better that unity
+[18:56] <ActionParsnip> ubukou: its good to try new things :)
+[18:56] <grubbyone> I know, I just want the option, in case I suspect the machine has been compromised
+[18:57] <ubukou> ActionParsnip, that depends.
+[18:57] <ubukou> ActionParsnip, hahahahahahah
+=== Knorre is now known as Knorre`BNC
+[18:57] <ubukou> folks what is the command to see what drivers your VGA is running ?
+[18:58] <ActionParsnip> ubukou: sudo lshw -C display | grep driver
+[18:58] <ubukou> ActionParsnip, cool.. im having an issue with compiz.. it runs but it is very choppy..
+[18:59] <zykotick9> ubukou: if you don't have lshw installed, you can use "lspci -vnvn" then find the VGA section, OR check /var/log/Xorg.0.log
+=== SchutzStaffeln2 is now known as DCore
+[19:00] <ubukou> ActionParsnip, configuration: driver=fglrx_pci latency=0
+[19:00] <grubbyone> is there a built in tool to zero out free space?
+[19:00] <ubukou> ActionParsnip, i dont think that was it.. there is a command that gives another output..
+[19:00] <ActionParsnip> grubbyone: use dd
+[19:01] <ActionParsnip> ubukou: then you are using the proprietary driver
+[19:01] <ubukou> ActionParsnip, hmmmm..
+[19:01] <zykotick9> grubbyone: ActionParsnip's dd command would be for an empty partition, not just free space on an active partition
+[19:02] <ActionParsnip> grubbyone: i believe bleachbit can do it
+[19:02] <grubbyone> ok, basically I just want to make a direct copy of an entire disk, but not have it take up 120 gigs, so I want to compress what's not in use
+[19:02] <surskitty> my kernel logs are between 1.3gb to 1.7gb each and this is only for a span of about two weeks.  apparently the workaround I found to get my wireless card gets it so it logs multiple times a second that the wireless card exists.  how do I get it to not do that?
+[19:02] <DinoMuffin> grubbyone: it would help to know why you would need to do this
+[19:02] <ActionParsnip> grubbyone: partimage can make a disk image and compress it
+=== cookiecache is now known as buck_
+[19:03] <surskitty> better yet, just get the log to NOT SAY THE SAME THING A BILLION TIMES
+[19:03] <grubbyone> so if I'm on the other side of the world, I can tell someone to "insert this usb stick and type this command" to restore the system
+[19:04] <ActionParsnip> grubbyone: sure, why not?
+[19:04] <zykotick9> grubbyone: you "might" want to check out the clonezilla livecd
+[19:05] <Mixxit> hey all
+[19:05] <reisio> grubbyone: but depending on what device/configuration they have, including the mbr could be unhelpful :p
+[19:05] <Mixxit> most stuff is working now but wondering about my g15 keyboard
+=== buck_ is now known as cookiecache
+[19:05] <Mixxit> how can i get this going i found an article on the wiki but its for ubuntu 9
+[19:06] <grubbyone> it's the same system, I'm not restoring the image to a different system
+[19:06]  * zykotick9 thinks drive image backups are a waste of space, save config files and personal documents - reinstall then replace configs and files
+[19:06] <reisio> grubbyone: honestly just make a tar of the unmounted system, and include a script or instructions to install/reconfig the partitions, filesystems, and grub
+[19:07] <xcyclist> As of my most recent login, my audio has stopped working on my 11.10 64 bit system.  It was working find yesterday.  The output setting always says "Dummy".
+[19:07] <kubanc> i get errors composite sync not supported, and the X server doesn't start fully. I have ATI Technologies Inc Radeon Mobility X1400. Any ideas hot to solve it?
+[19:07] <ActionParsnip> Mixxit: if you run:  xev     do the keys make events?
+[19:08] <Mixxit> they do
+[19:08] <jonko> donating to be run securely on smart cards and similar ActionParsnip devices
+[19:08] <grubbyone_> is it not way simpler to just do dd if=/restore.img of=/dev/hda
+[19:08] <Mixxit> oh wow it just skipped my track
+[19:08] <ActionParsnip> Mixxit: then use either ccsm or the keyboard settings to assign commands to them
+[19:08] <jonko> 7 either
+[19:08] <Mixxit> yay!
+[19:10] <ubukou> how do i deactivate proprietary driver in kubuntu ?  i activated it in ubuntu but now i cant find the option under KDE
+=== andre__ is now known as Guest58686
+[19:10] <holstein> ubukou: should be similar.. depends on where you got it, but you can just remove the driver... uninstall
+[19:11] <zykotick9> grubbyone_: hda?  What is it 2001 again ;)
+[19:11] <xcyclist> Hopping back out.  Looks like the group is way too busy today.
+[19:11] <ubukou> holstein, will that activate the opensource driver automaticaly?
+[19:11] <grubbyone_> zykotick9: yeah I don't know, please enlighten me
+[19:11] <grubbyone_> last time I did this stuff was probably 2001
+[19:11] <zykotick9> grubbyone_: everything should be sda these days
+[19:11] <holstein> ubukou: the open one didnt go anywhere.. again, it depends on which driver and how you installed it...
+[19:11] <grubbyone_> ah yeah, that's what I meant
+[19:12] <zykotick9> grubbyone_: even IDE drives should show as SCSI (sd) i mean
+[19:12] <jonko> universzykotick9l ide with super powers yeah
+[19:12] <ubukou> holstein, i activated the fglrx driver in ubuntu but i swiched to kde
+[19:12] <ubukou> holstein, thing is i am running compiz successfully
+[19:12] <jonko> hmm, one more thing
+[19:13] <holstein> ubukou: cool.. you can just uninstall it as you choose...
+[19:13] <ubukou> holstein, but it is really choppy and it freezes a lot
+[19:13] <holstein> ubukou: yeah, just depends on what driver and where you got it from
+[19:13] <ubukou> holstein, should i boot unity and go deactivate it from there?
+[19:13] <holstein> sometiems you can get newer ones from the site
+[19:13] <jonko> i don't get better when you reboot, the free encyclopedia
+[19:13] <holstein> ubukou: you can.. however you want... that will remever the driver as i am suggesting
+[19:14] <kartonschachtel> lmgi www.google.com
+[19:14] <kartonschachtel> http://tinyurl.com/ccuwpq
+[19:14] <tigrang> does anyone know where synclient settings get saved to? Im trying to do 'synclient PressureMotionMinZ=20' but get an error message. I can change other values though.
+[19:15] <ubukou> holstein, cheers i ll try
+[19:16] <campee> does ext4 have the journal_checksum option turned on in ubuntu 11.04 by default?
+[19:17] <MiO-NiCk> Un SLuT AffettusO <unconvertable> Tutto IL ChN I <unconvertable> #ubuntu <unconvertable>
+[19:18] <Oer> !it | MiO-NiCk
+[19:18] <ubottu> MiO-NiCk: Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi <unconvertable> /join #ubuntu-it <unconvertable> senza virgolette)
+[19:18] <MiO-NiCk> CioOO A TuTtI ALlA PrOsSiM AmIcI <unconvertable> i <unconvertable> #ubuntu <unconvertable> :D ExOSCRiPT
+[19:19] <foormea> hey. i'm getting kinda confused over ubuntu's handling of init scripts. a while ago there was a mix between sysv-rc style and upstart style. but with 11.10 it looks like all scripts in /etc/init.d are sysv-rc style?
+[19:19] <kubanc> anyone knows what should be the problem. I randomly got error composite sync not supported when i would like to have split screen (LCD and TV) on my Dell notebook. I'm using ATI mobility radeon X1400
+[19:21] <vbb> ...
+=== vbb is now known as golfhacker
+[19:24] <petrov>  [95] Blogi i opowiadania
+[19:24] <petrov>  [450] Budownictwo: usugi, domy, hale
+[19:24] <petrov>  [159] Edukacja: szkoy, kursy, prace magisterskie
+[19:24] <petrov>  [83] Erotyka i seks
+[19:24] <petrov>  [167] Finanse: kredyty, windykacja, ubezpieczenia
+[19:24] <petrov>  [58] Fora dyskusyjne
+[19:24] <FloodBot1> petrov: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[19:25] <reisio> uhhhh, is it normal for the window manager to crash during an update? :p
+[19:25] <reisio> never seen that happen
+[19:26] <reisio> looks like all the panels and things died as well
+[19:28] <kartonschachtel> http://tinyurl.com/n3yjxs
+=== Monkeypaws is now known as jennnnnn
+[19:28] <oCean> kartonschachtel: don't post that sillyness here
+=== jennnnnn is now known as jennnnnnnnnnnnn
+[19:30] <kartonschachtel> http://tinyurl.com/n3yjxs
+=== jennnnnnnnnnnnn is now known as Monkeypaws
+[19:32] <oCean> kartonschachtel: don't post offtopic nonsense again
+=== Monkeypaws is now known as jennnnn
+[19:34] <oCean> !nickspam > jennnnn
+[19:34] <ubottu> jennnnn, please see my private message
+=== jennnnn is now known as Monkeypaws
+[19:38] <GiB_> How would I go about asking for support?
+[19:39] <zykotick9> !ask | GiB_
+[19:39] <ubottu> GiB_: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[19:39] <EvilResistance> GiB_, you just ask your question to the channel :P
+[19:42] <francy> ciao a tuttiu
+[19:42] <francy> ciao a tutti
+[19:42] <zykotick9> !it | francy
+[19:42] <ubottu> francy: Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi <unconvertable> /join #ubuntu-it <unconvertable> senza virgolette)
+[19:43] <ubukou> anybody knows the proper way to remove the ati driver and re-enable the open source driver? i used   sudo apt-get remove --purge xorg-driver-fglrx fglrx* and it resulted in failure.. had to reanable  it so i could boot gui..
+[19:45] <zykotick9> ubukou: (just a guess), but after you remove the ATI driver, you probably have to move xorg.conf to a different name.
+[19:45] <ubukou> zykotick9, hmm you think xorg.conf was trying to load fglrx?
+[19:46] <zykotick9> ubukou: yes i do
+[19:46] <ubukou> zykotick9, any reconfigure commands?
+[19:47] <zykotick9> ubukou: just move it to a different name, xorg shouldn't be required for "open" drivers (ATI's open driver still relies on proprietary firmware - so i don't consider it open)
+[19:47] <GiB_> Understandable, I was just reading the rules and it said something about topics. Anyways, recently got my computer today, installed compiz via the terminal. Since then when I log in using the 3D version the I no longer have a side dock or functionallity of top bar. At this point, seeing as how I have no data on this system yet, I would like to revert it back to its fresh out the box state.
+[19:47] <damo22> does ubuntu 11.04 server auto mount usb drives?
+[19:48] <zykotick9> damo22: if you haven't install a GUI - then NO
+[19:48] <sudipta> chat.freenode.net
+[19:48] <damo22> i need a way to write some files to a full OS
+[19:48] <damo22> i have 8kb of free space
+[19:49] <damo22> can i write a c program that runs a command as root without the root password?
+[19:49] <ActionParsnip> damo22: uninstall unused kernels to free up space
+[19:49] <ActionParsnip> damo22: run it with sudo.
+[19:49] <ubukou> zykotick9, according to some folks over at #ati it does..
+[19:49] <damo22> i dont have access to an account with admin rights
+[19:50] <ubukou> zykotick9, ohhh sorry misread what you wrote...
+[19:50] <damo22> i just have console access to 8kb of space
+[19:50] <damo22> and a c compiler
+[19:50] <ubukou> zykotick9, according to them the open source dirver tho can support compiz and dual screens
+[19:50] <raj> can I locally mount a remote drive I have access to via ssh/sftp ?
+[19:50] <ubukou> zykotick9, any expirience on that ?
+[19:50] <raj> and is this a safe idea?
+[19:50] <ActionParsnip> damo22: you can add the command to the sudoers file, it will not need password for sudo (you may need to still be in the admin group)
+[19:50] <zykotick9> ubukou: no personal experience no, i avoid ATI
+[19:51] <selina2> hi
+[19:51] <FreeSunRide> Hacker wanted go ahead and ping me
+[19:51] <LjL> FreeSunRide: sorry?
+[19:52] <FreeSunRide> I need help to access by boyfrinds PC I think he is cheating on me
+[19:52] <tigrang> Ok so Using synclient -m 100 Im looking at the pressure of my finger. Looks like what I want the min to be to start moving cursor is around 20-25. I set PressureMotionMinZ to 1 and restarted. Doing synclient -l I can see it is set. Now when I do synclient -m 100 again and monitor as I move, it only moves after about 30 pressure.
+[19:52] <tigrang> ^ touchpad
+[19:52] <Oer> FreeSunRide, wrong channel, this is Ubuntu support.
+=== Trystam is now known as Tristam
+[19:52] <GiB_> How do I restore my computer to its out of the box state?
+[19:53] <zykotick9> GiB_: reinstall
+[19:53] <webnet> GiB_, reinstall
+[19:53] <LjL> FreeSunRide: that's offtopic for this channel, and probably for this whole network.
+[19:53] <webnet> zykotick9, haha beat me to it :P
+[19:53] <ActionParsnip> GiB_: could rename the hidden folders in $HOME
+[19:53] <sklo> question: am using SSH via putty to get to my "server" but only think i cant do ise use apt-get. When it asks me to install, am soposed to choose "Y" or "n", what ever i do it says "interrupted"
+[19:54] <FreeSunRide> Anyone that can help me for a bonus $
+[19:54] <oCean> FreeSunRide: please drop that discussion
+[19:54] <ActionParsnip> sklo: can you give the output of: sudo apt-get update    use a pastebin
+[19:55] <sudipta> <FreeSunRide>drop it.....this channel is for ubuntu
+[19:55] <LjL> sudipta: they're gone
+[19:55] <ubukou> zykotick9, ok thanks a lot .. take carte
+[19:56] <sudipta> ljl:yeah
+[19:57] <sklo> ActionParsnip: it goes without errors
+[19:58] <tigrang> ActionParsnip, doing synclient -m 1 and slowly increasing pressure, I see the cursor starts moving at 30+. In my /etc/X11/xorg.conf.d/10-synaptics.conf I have http://paste.ubuntu.com/828001/ I set the Min pressure to 1. Any idea
+[19:58] <ubukou> anyone knows how i can install radeon/mesa drivers ?
+=== Trystam is now known as Tristam
+[19:59] <grubbyone_> ok, I'm in a livecd, how do I copy the entire filesystem from /dev/sda?
+[19:59] <root_z> how i can fix cursor size with compiz enabled?
+[20:00] <heinz> grubbyone_: dd if=/def/sda of=youroutput.file
+[20:00] <Ashii> anyone know a tool to set/manipulate title, name, class of window?
+[20:00] <grubbyone_> heinz: that will copy the entire drive, I don't have that kind of space
+[20:00] <heinz> grubbyone_: more likely you need sda1, though
+[20:00] <grubbyone_> I want to just get the files
+[20:00] <grubbyone_> non of the unused space
+[20:00] <grubbyone_> none*
+[20:01] <DummyMode> which is the code name of ubuntu 11? maverik?
+[20:01] <sklo> ActionParsnip: solved, coding problem putty via ubuntu ;) ty
+[20:01] <xangua> !maverick | DummyMode
+[20:01] <ubottu> DummyMode: Ubuntu 10.10 (Maverick Meerkat) was the thirteenth release of Ubuntu. Download http://releases.ubuntu.com/10.10/ - Release Info: http://www.ubuntu.com/getubuntu/releasenotes/1010
+[20:01] <Slart> !11.10 | DummyMode
+[20:01] <ubottu> DummyMode: Ubuntu 11.10 (Oneiric Ocelot) is the current release of Ubuntu | Download http://releases.ubuntu.com/11.10/ - Release Info: http://www.ubuntu.com/getubuntu/releasenotes/1110
+[20:01] <grubbyone_> it's a LVM
+[20:01] <Sona__> hi people what is the easiest way to transfer files (ftp?) from a win7 pc onto ubuntu server over local network
+[20:02] <sudipta> <DummyMode>!11.04|Dummyboy
+=== vahid is now known as Guest13076
+[20:03] <root_z> how i can fix cursor size with compiz enabled?
+[20:05] <ona7O> hi. is there an good tutorial for using systemd instead of upstart?
+[20:05] <blitz> when I installed win using apt-get I got an error while processing winbind
+[20:05] <blitz> does anyone know about how to fix that issue? I'll post the log
+[20:08] <blitz> http://paste.ubuntu.com/828020/ this is the error
+[20:11] <ubukou> sudo apt-get install xserver-xorg-video-ati
+[20:11] <ubukou>   sudo apt-get install --reinstall libgl1-mesa-glx libgl1-mesa-dri xserver-xorg-core
+[20:12] <harhar> teach me ubuntu
+[20:12] <erika_> ciao
+[20:12] <ubukou> these commands will get me the opensounce drivers ?
+[20:12] <erika_> !list
+[20:12] <ubottu> This is not a file sharing channel (or network); be sure to read the channel topic. If you're looking for information about me, type <unconvertable> /msg ubottu !bot <unconvertable> . If you're looking for a channel, see <unconvertable> /msg ubottu !alis <unconvertable> .
+[20:12] <harhar> cum cum cum cum cum cum cum
+[20:12] <harhar> cum cum cum cum cum cum cum
+[20:12] <harhar> cum cum cum cum cum cum cum
+[20:13] <FloodBot1> harhar: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[20:13] <shovell> how can i remove a quick launch icon
+[20:13] <shovell> in ubuntu 11.10
+[20:14] <blitz> right click it shovell ?
+[20:15] <shovell> that gines properties
+[20:15] <ubukou> can anyone confim this? Vesa = generic driver  Mesa = opensource fglrx = binary?
+[20:15] <blitz> right click the icons in the actual quick launch area shovell
+[20:15] <mellifera> Vesa = generic driver, if your video card has got it
+[20:16] <blitz> should get the keep in launcher icon
+[20:16] <blitz> option*
+[20:16] <shovell> blitz yes it gives me launch or properties
+[20:16] <ubukou> mellifera, vesa is the driver that runs when you initialy install ubuntu then ?
+[20:17] <blitz> idk what to tell you then, I don't get either of those options, I get keep in launcher
+[20:17] <mellifera> ubukou: not sure. never checked
+[20:17] <distatica> Hi folks, I installed DenyHosts on my ubuntu server and now whenever I connect I get put in the deny.hosts file. I can remove myself from that file and login just fine but then disconnect and try again and it's blocked again. Any ideas why that might be?
+[20:18] <auronandace> ubukou: i think vesa only gets loaded as a fallback option if no other driver is used and if the card supports vesa
+[20:18] <mellifera> ubukou: probably either vesa or plain-vga for the beginning of install
+[20:18] <ubukou> auronandace, thats what i understand too...
+[20:19] <ubukou> anyone has compiz running with mesa ?
+[20:19] <dale__> How do you disable fast user switching? Configuration Editor does not work for this.
+[20:19] <ZynuiMaiche> Hello!  I have kind of an odd question...I'm trying to install the Java jdk on a USB using my netbook which has ubuntu on it, but I want the jdk to be usable for a Windows computer.  Is this possible?
+[20:20] <dRounse> iceroot: last night when i tried 12.04 it said something like "No UI configruation"
+=== guampa|2 is now known as guampa
+[20:21] <auronandace> ubukou: compiz requires 3d acceleration and mesa alone won't get you that
+[20:21] <mellifera> ubukou: at http://mesa3d.org, they say they are opensource
+[20:21] <dRounse> anyone know what "No UI configuration" means?
+[20:22] <root_z> how i can fix cursor size with compiz enabled?
+[20:22] <ubukou> mellifera, damn this is so confusing.. some people write that they have compiz running with opensource driver... could there be some other opensource driver that i am no aware of ?
+=== russf_ is now known as russf
+[20:23] <ZynuiMaiche> dRounse: what gave you that error?
+[20:23] <auronandace> ubukou: mesa works in conjuction with other opensource drivers (like nouvaux or radeon)
+[20:24] <dRounse> ZynuiMaiche: installing 12.04 on a gateway with a P$
+[20:24] <ubukou> so i should install both ?
+[20:24] <dRounse> p4*
+[20:24] <ZynuiMaiche> from a CD or a USB?
+[20:24] <mellifera> ubukou: maybe they mean opensource videocard driver? Some linux drivers aren't opensource. For example, for nvidia cards there is both an opensource and a non-opensource driver
+[20:24] <ubukou> auronandace, so i should install both ?
+[20:24] <auronandace> ubukou: both of what?
+=== mohammed is now known as Guest6785
+[20:24] <xangua> !pangolin | dRounse
+[20:24] <ubottu> dRounse: Ubuntu 12.04 LTS (Precise Pangolin) will be the sixteenth release of Ubuntu. Codename announcement here: http://www.markshuttleworth.com/archives/784 | Discussion and support in #ubuntu+1
+[20:25] <ubukou> auronandace, both libg11-mesa-dri         libg11-mesa-glx   and radeon driver...?
+[20:25] <auronandace> ubukou: yes, if you use a radeon card
+[20:25] <ZynuiMaiche> dRounse: sorry I'm not sure what you mean by a "P$"
+[20:26] <dRounse> ubottu: i tried with other distros someone told me last night that i should try 12.04 because they fixed a lot of things
+[20:26] <ubottu> dRounse: I am only a bot, please don't think I'm intelligent :)
+[20:26] <dale__> How do you disable fast user switching? Configuration Editor does not work for this.
+[20:26] <dRounse> ZynuiMaiche: sorry i meant P4
+[20:26] <ubukou> auronandace, ok i ll check it out... shouldnt the mesa driver install the radeon as a dependency?
+[20:26] <allure> I need a hand with iptables and squid. I have them on different boxes and I am forwarding port 80 on the gateway for 3128 on  que squid box. It works, but I can only see the gateway's IP on the log files. Relevant rules: http://pastebin.com/PhJFej6p  Could anyone give me a hand?
+[20:26] <tbocs> radeon ... ah ... that one got me. Is radeon driver already fixed?
+[20:26] <auronandace> ubukou: other way around
+[20:26] <ZynuiMaiche> sorry dude gotta go good luck though
+[20:27] <ubukou> auronandace, hmmm ..
+[20:27] <ubukou> auronandace, how can i check if i have radeon ?
+[20:27] <dRounse> im gonna update the BIOS
+[20:27] <tbocs> if you have another intel video card alongside, you can force using it ... in modprobe
+[20:28] <auronandace> ubukou: there is a way yes, but i'm not sure (i got a nvidia card)
+[20:28] <mellifera> ubukou: do you know what kind of video card you have?
+[20:28] <ubukou> auronandace, good choice :P
+[20:28] <tbocs> ubukou, lspci ...
+[20:28] <tbocs> ubukou, lspci is the command
+[20:28] <ubukou> mellifera, i got a R600 hd3850
+[20:28] <shovell> blitz i am sorry i am using the gnome desktop
+[20:28] <MonkeyDust> ubukou  type lshw -C display
+[20:28] <mellifera> ubukou: that soungs like a Radeon to me
+[20:29] <ubukou> mellifera, it is :)
+[20:29] <tbocs> mellifera, yea it's a radeon
+[20:29] <ubukou> mellifera, ohh im talking about a radeon package...
+[20:29] <tbocs> ubukou, do you have an intel alongside by chance?
+[20:29] <tbocs> ubukou, well try lspci | grep radeon
+[20:29] <ubukou> mellifera, hmmm intel ? onboard?
+[20:29] <ubukou> tbocs, intel onboard?
+[20:30] <tbocs> ubukou, some computers has intel graphics card and a dedicated card at the same time
+[20:30] <tbocs> right?
+[20:30] <ubukou> tbocs, lspci | grep radeon gives no output...
+[20:30] <tbocs> ubukou, then lspci | grep Radeon
+[20:30] <tbocs> it's case sensitive, lol
+[20:31] <ubukou> sudo lshw -C display | grep driver gives fglrx..
+[20:31] <ubukou> but i just purged it and installed mesa.
+[20:31] <tbocs> works on my computer with "R" in Radeon
+[20:31] <ubukou> havent rebooted yet.
+[20:31] <ubukou> "R"?
+[20:31] <ubukou> hhhh :P
+[20:31] <ubukou> ohhhh :P
+[20:32] <tbocs> ubukou, "Radeon"
+[20:32] <tbocs> yea
+[20:32] <tbocs> capitalized
+[20:32] <ubukou> r679pro
+[20:32] <ubukou> tbocs, R670PRO hd3850 ?
+[20:32] <tbocs> yeah .
+[20:32] <tbocs> that is a Radeon
+[20:32] <ubukou> tbocs, i didnt get the R the first time ..
+[20:32] <mellifera> ubukou: if you want to be sure you are using the radeon driver, you could specify that in your xorg config file (in /etc/x11)
+[20:33] <auronandace> ubukou: https://help.ubuntu.com/community/RadeonDriver
+[20:33] <cartoonbarsmars> can ubuntu be booted from a cd on a mac
+[20:33] <ubukou> auronandace, i have that tab open...
+[20:33] <acerimmer> !mac|cartoonbarsmars
+[20:33] <ubottu> cartoonbarsmars: For help on installing and using Ubuntu on a mac, see: https://wiki.ubuntu.com/MactelSupportTeam/CommunityHelpPages
+[20:33] <auronandace> ubukou: awesome, great minds think alike :)
+[20:33] <xangua> cartoonbarsmars: you have the instructions on ubuntu.com
+[20:33] <ubukou> auronandace, i just purged fglrx driver and moved to mesa...i ll reboot and see what happens...
+[20:34] <ubukou> auronandace, and your talking about your brain and ... whose? :P
+[20:34] <ubukou> auronandace, rebooting
+=== frankenstein is now known as signalpoint
+=== signalpoint is now known as frankenstein
+[20:34] <cartoonbarsmars> okay thanks, but i have a short time frame to doing something for somebody and i was wondering as far as booting from a cd goes, will i be able to do that just fine like on a toshiba
+[20:35] <mellifera> cartoonbarsmars: trying it wouldbe the fastest way to see if it boots
+[20:35] <tbocs> I don't know if flgrx will work. It doesn't work on my machine. you can try using the ATI proprietary driver
+=== raider_ is now known as karol
+=== karol is now known as guy
+=== guy is now known as fawkes1
+[20:36] <theadmin> tbocs: fglrx *is* the propertiary driver.
+[20:36] <theadmin> I... think
+[20:37] <theadmin> And yeah, I'm right
+[20:37] <ratcheer> theadmin: Yes, that is correct
+[20:37] <tbocs> thanks, theadmin ...
+[20:38] <raj> what's the package that pastebin's CL output?
+[20:38] <pirat> xcv
+[20:38] <raj> i have it and forget what it is
+[20:38] <pirat> xcv
+[20:38] <pirat> xcvx
+[20:38] <pirat> xvc
+[20:38] <pirat> xv
+[20:38] <FloodBot1> pirat: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[20:38] <mellifera> can windows tell the difference between a file written by linux using ntfs-3g and any normal windows/ntfs file?
+[20:38] <xangua> raj: pastebinit i believe
+[20:38] <raj> yeahh
+[20:38] <raj> thanks
+[20:39] <pirat> hello people ))
+[20:39] <zykotick9> mellifera: if it's a text file, yes.  The newlines are handled differently.
+[20:40] <mellifera> zykotick9: what if it's not a text file?
+[20:40] <zykotick9> mellifera: they "should" be the same
+[20:40] <pirat> how a you?
+[20:41] <zykotick9> pirat: do you have an ubuntu support question?
+[20:41] <theadmin> mellifera: Nah they're the same, but Windows doesn't like Unicode so if the name is, say, Cyrillic Windows might display it as some complete mess. Same goes for text file content.
+[20:43] <theadmin> raj: wgetpaste also works well.
+=== foobar_ is now known as Guest63529
+[20:44] <Guest63529> hello. When I turn on my laptop running Ubuntu it says *starting MTA
+[20:44] <Guest63529> Does that mean Mail transfer agent?
+[20:44] <mellifera> usually
+[20:44] <Guest63529> mellifera: I never installed any MTA
+[20:44] <ubukou> auronandace, seems like when ubuntu is about to start it turns off  both screens and it stays there .. only thing that make the gui boot is apt-get install fglrx*
+[20:44] <Guest63529> mellifera: how do I turn it off and why does it say now
+[20:44] <Guest63529> when it never said it before.
+[20:45] <TGIBT> I managed to install with nomodeset... I do get same problem with graphic driver when i just restart... Any solutions?
+[20:45] <mellifera> "sendmail" counts as a MTA, and it's sort of needed
+[20:45] <alexdevillx> Hi guys
+[20:45] <auronandace> ubukou: when you say gui are you refering to any specific desktop? or does it not even make it to lightdm?
+[20:46] <alexdevillx> I have a problem i dont know english well so can anybody give me an answer why i get this error  (voice_nitech_us_slt_arctic_hts) Error: HTS_Model_load_pdf: Failed to load header of pdfs.
+[20:47] <mellifera> alexdevillx: are you sure it's really a pdf file, and not just called ".pdf"?
+[20:47] <ubukou> auronandace, nope... :S
+[20:47] <r3d0ctob3r> Hi guys ! I have a problem with my "apt-get"... And a old proxy I got. I deleted it, clean my /etc/apt/apt.conf file... and the console keep saying I cannot connect to 127.0.0.1:8118. Nobody knows about it please ?
+[20:48] <ubukou> auronandace, it should at least crash trying to load lightdm right ? instead screens go out of range.
+[20:48] <auronandace> ubukou: so you can't even get to the login manager?
+[20:48] <zykotick9> mellifera: the error appears to be in connection with Festival, not PDFs
+[20:48] <ubukou> auronandace, right
+[20:48] <theadmin> r3d0ctob3r: Check the gnome's proxy settings as well as the $PROXY variable
+[20:48] <auronandace> ubukou: wow, thats bad
+[20:48] <ubukou> auronandace, https://wiki.ubuntu.com/X/Troubleshooting/FglrxInteferesWithRadeonDriver#Problem:%20%20Need%20to%20fully%20remove%20-fglrx%20and%20reinstall%20-ati%20from%20scratch check this out and tell me what you think
+[20:48] <auronandace> ubukou: seems like you're stuck with using fglrx
+[20:49] <mellifera> r3d0ctob3r: 127.0.0.1 should be your loopback interface, and should work on any port if your networking is configured correctly
+[20:49] <ubukou> auronandace, search for need to purge
+=== Arnold_ is now known as Arnold
+[20:49] <alexdevillx> mellifera its a TTS. Voice synth. I'm trying to make GlaDOS's voice
+[20:49] <r3d0ctob3r> I checked it. It is "direct connection to Internet", I apply this setting to the entire system with the butto
+[20:49] <r3d0ctob3r> button
+[20:50] <ubukou> alexdevillx, i have glados kernel running on my nexus .. is that the same :P :)
+[20:50] <theadmin> alexdevillx: Check http://glados.biringa.com , other than that I can't suggest anything which sounds even remotely similar
+[20:50] <mellifera> r3d0ctob3r: net packets for 127.0.0.1 should never leave your machine
+[20:50] <TGIBT> What to do after install with nomodeset, i dont what to do next
+[20:50] <alexdevillx> I had puted my text at quee
+[20:50] <theadmin> alexdevillx: The system is currently down, but it has instructions
+[20:50] <alexdevillx> I cant install
+[20:51] <alexdevillx> getting this hell error  it's really a pdf file, and not just called ".pdf"?
+[20:51] <iwoj> does anyone know how I could test my parallel port without hooking it up to a printer?
+[20:51] <alexdevillx> no no
+[20:51] <auronandace> ubukou: sorry i can't help
+[20:51] <TGIBT> What to do after install with nomodeset, i dont what to do next
+[20:52] <r3d0ctob3r> mellifera I know. But I seek for the why apt-get redirect my commands to localhost but I dont find it. Indeed, I do everything I know... I used to use privoxy before I had this problem
+[20:52] <ubukou> auronandace, im running compiz right now .. you should see how bad it looks..
+[20:52] <ubukou> auronandace, its ok ;)
+=== siric is now known as sitic|busy
+[20:52] <iwoj> gnome3 looks awesome.
+[20:52] <iwoj> any thoughts on testing a parallel port?
+[20:52] <alexdevillx> Ok, so i'll give a link with instructions http://glados.biringa.com/ go to the how the voice is generated. So i go (voice_nitech_us_slt_arctic_hts) in Festival through command prompt and at (SayText "I'm your master") a Error: HTS_Model_load_pdf: Failed to load header of pdfs.
+[20:53] <mellifera> iwoj: you have no printer?
+[20:53] <iwoj> mellifera: no printer : (
+[20:53] <iwoj> mellifera: I'm trying to test a home-made CNC machine.
+[20:54] <iwoj> mellifera: the problem could be the machine or the parallel port set-up.
+[20:54] <iwoj> mellifera: I need to test the port first.
+[20:54] <mellifera> iwoj: not too easy to test the port when you have nothing to test it with
+[20:54] <tigrang> Ok so Using synclient -m 100 Im looking at the pressure of my finger. Looks like what I want the min to be to start moving cursor is around 20-25. I set PressureMotionMinZ to 1 and restarted. Doing synclient -l I can see it is set. Now when I do synclient -m 100 again and monitor as I move, it only moves after 30+ pressure. What can I do?
+[20:55] <xj88> Hello all, and thanks to everyone who hangs out here, helping. I'm having some issues with a new install of 11.10. It installs without problem, but upon logging in, all I get is the desktop image and a cursor. Nothing else loads. I CTRL+ALT+F2'd my way into a terminal and upgraded all packages, so I should be completely up to date. Going into "Ubuntu 2D" works but isn't what I need. Any thoughts?
+[20:55] <alexdevillx> How to generate glados voice?
+[20:56] <TGIBT> Nvm, found it
+[20:56] <theadmin> xj88: You need your graphics driver
+[20:56] <lorenzo> hi, i am following this guide: https://help.ubuntu.com/community/Router to set my ubuntu machine as a router. One thing I do not understand: when I set the internal network interface (https://help.ubuntu.com/community/Router#Configuring_the_Internal_Network_Interfaces) what addresses should I put in? Thanks
+[20:56] <alexdevillx> theadmin, Hello There
+[20:56] <theadmin> alexdevillx: Uh, hi.
+[20:56] <xj88> theadmin: How to get it?
+[20:57] <alexdevillx> theadmin< Ok, so i'll give a link with instructions http://glados.biringa.com/ go to the how the voice is generated. So i go (voice_nitech_us_slt_arctic_hts) in Festival through command prompt and at (SayText "I'm your master") a Error: HTS_Model_load_pdf: Failed to load header of pdfs
+[20:57] <theadmin> xj88: Log in to unity2d and from there search for an app called "Hardware Drivers". Run that, it should find the appropriate ones.
+[20:57] <mellifera> lorenzo: your "inside" address, like (for example) 10.0.0.1
+[20:57] <xj88> theadmin: I'll give that a shot. Regardless of whether or not it works, thanks for helping. =)
+[20:58] <lorenzo> the one I get from iwconfig ath0 (ath0 is my internal network interface)
+[20:59] <theadmin> alexdevillx: I'm not familiar with speech synthesis honestly -- I just gave you a possible solution. I have no idea how to work it
+[20:59] <lorenzo> mellifera, I have an address for my cabled connection going to the outside (eth0), but I cannot see any address for ath0 which is my internal network interface
+[20:59] <r3d0ctob3r> I ask my question again : I installed Privoxy few weeks ago, then uninstalled it. It seems to change my network settings... When I run a "apt-get update", I'm said that He cant download from 127.0.0.1:8118 ; however I uninstalled this proxy server, I changed my setting from system preference (dirrect connection to internet), /etc/apt/apt.conf is empty . What is going wrong ?
+[20:59] <mellifera> lorenzo: if your outside interface is eth0, your inside interface would be eth1

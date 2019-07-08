@@ -1,0 +1,1100 @@
+[07:11] <hiexpo> shazzr, cause i'm smart  lol
+[07:12] <rabbitear_sdf> https://www.youtube.com/watch?v=wI2fRCrhQSw
+[07:13] <hiexpo> i don't think you had right permissions when issuing rmrf command
+[07:13] <shazzr> hiexpo: Why would not 'sudo rm -rf [folder]' do the trick from console? Weird that one has to use a GUI to get rid of the folder structure like that...
+[07:13] <greenride> hiexpo: I get `Error while deleting.`
+[07:14] <F2Knight> don't do : sudo rm -rf /
+[07:14] <vonsyd0w> you could have a hardware or filesystem issue
+[07:14]  * F2Knight or do do it.
+[07:14] <hiexpo> greenride, with gksudo nautilus
+[07:14] <greenride> yes
+[07:15] <hiexpo> what error greenride
+[07:15] <F2Knight> shazzr there is no difference , however try looking at extended attributes. us lsattr to see if any are set
+[07:16] <F2Knight> lsattr
+[07:16] <F2Knight> -------------e- ./findilo.sh
+[07:16] <shazzr> F2Knight: No worries now. The folder is gone. So hiexpo's tip worked.
+[07:16] <greenride> hiexpo: Let me verify that I did this correctly. At a terminal, I typed `gksudo nautilus`. Then, I went to the folder in the gui and right clicked. Then, I went to `Move To Trash`. Is that correct?
+[07:16] <hiexpo> greenride, yes
+[07:16] <F2Knight> still fun to know, you can also set the 'i' or immutable attribute. I do this a lot on things like authorized keys files and such keeps even root from deleting it with out unsetting it
+[07:17] <shazzr> greenride: I just did ALT+F2 and typed gksudo nautilus
+[07:18] <hiexpo> greenride, it my be a file owner issue
+[07:18] <greenride> hiexpo: When I did that, I get the message `Quiz` can't be put in the trash. Do you want to delete it immediately?
+[07:18] <greenride> hiexpo: Then, I clicked Delete.
+[07:18] <hiexpo> say yes
+[07:19] <greenride> Then, I get the error message `Error while deleting.` Could not remove the folder .git.
+[07:19] <greenride> If I click, `Show more details`, I see...
+[07:20] <greenride> Error removing file: Directory not empty
+[07:20] <hiexpo> .git is that a hidden file in your home folder?
+[07:20] <greenride> It's a hidden file in the Quiz folder that I'm trying to delete.
+[07:21] <F2Knight> if you just want to delete the .git file, use rm -rf .git/
+[07:21] <greenride> The folder name is irrelevant. I have another folder with the same problem that errors on a different directory.
+[07:21] <greenride> F2Knight: `rm -rf .git` errors with the message:
+[07:22] <rabbitear_sdf> https://www.youtube.com/watch?v=safkWMNJdDg
+[07:22] <greenride> `rm: cannot remove ‘.git’: Directory not empty`
+[07:22] <shazzr> greenride: Dive into the dir and delete all the content that you are allowed to delete first?
+[07:23] <shazzr> greenride: My folder was empty except on folde/file
+[07:23] <greenride> shazzr: I can cd .git. However, I cannot ls -alh in that directory.
+[07:23] <greenride> ls -alh gives me:
+[07:23] <greenride> ls: reading directory .: Input/output error
+[07:23] <greenride> total 0
+[07:24] <F2Knight> greenride are you providing the -rf
+[07:24] <F2Knight> because it won't work with out it
+[07:24] <greenride> F2Knight: Yes. I am. I realize this is strange because the error message is like I'm not providing it.
+[07:25] <greenride> F2Knight: I've used Linux for some time, and I've never encountered this before.
+[07:25] <greenride> Oddly, I can `cd .git`, but I cannot run ls -alh in that directory.
+[07:26] <shazzr> greenride: Log in to Unity, alt+f2, gksudo nautilus, delete folder.
+[07:27] <greenride> shazzr: How do I Log in to Unity?
+[07:27] <shazzr> greenride: Well...the default gui in Ubuntu is Unity.
+[07:28] <greenride> shazzr: I just tried that, and I described the error messages that I got when doing it.
+[07:28] <greenride> Should I post screen shots?
+[07:29] <researcher123> how to know processor and graphic card information using command line?
+[07:29] <hiexpo> greenride, try this go into your home folder click show hidden files find that folder and try to open it
+[07:29] <greenride> researcher123: lspci -vvv
+[07:29] <shazzr> greenride: Did you do a alt+f2? Or did you open a terminal window where you wrote 'gksudo nauilus'?
+[07:30] <bazhang> sudo lshw researcher123
+[07:31] <sebastian_> Hello
+[07:32] <greenride> shazzr: I did both, but I did the alt+f2 after you requested. The initial steps were different, but the latter steps and errors were identical.
+[07:32] <greenride> hiexpo: When I goto the folders, they open, but nothing is inside.
+[07:32] <shazzr> greenride: how about if you try to mv the folder to a different location? Then delete it?
+[07:33] <greenride> hiexpo: When I try to ls -alh these folders from the command line, I get errors.
+[07:33] <[Saint]> might be worth checking filesystem consistency.
+[07:33] <sebastian_> don't working flah player Ubuntu 14.10 Why ?
+[07:33] <hiexpo> greenride, how about just ls
+[07:34] <greenride> hiexpo: Just `ls` gives
+[07:34] <greenride> ls: reading directory .: Input/output error
+[07:34] <Ben64> sounds like a dead hard drive
+[07:34] <vonsyd0w> definitely sounds like a filesystem/hardware issue
+[07:34] <[Saint]> livedistro; filesystem check
+[07:35] <[Saint]> sounds like your fs is hosed honey.
+[07:35] <greenride> shazzr: I can move the files to a different location, but I can't delete from the new location either.
+[07:35] <[Saint]> yeah - sounds like a HW error or a hosed filesystem.
+[07:35] <[Saint]> fsck is your new friend.
+[07:35] <[Saint]> ...maybe.
+[07:35] <shazzr> greenride: Move it to a USB and delete?
+[07:36]  * [Saint] sometimes wonders if people just roll a dice or flip through a dictionary to suggest random shit that might work
+[07:36] <[Saint]> tried standing on one leg?
+[07:36] <[Saint]> singing soprano?
+[07:36] <hiexpo> hehe
+[07:38] <greenride> shazzr: If I copy to another file system, I can delete it. Let me try fsck
+[07:46] <greenride> [Saint]: fsck /dev/sdb1 after unmounting the hard drive fixed those files, which allowed me to rm -rf them.
+=== xubuntu is now known as Guest93977
+[07:46] <greenride> [Saint]: Thanks for the help.
+[07:48] <greenride> hiexpo, shazzr, F2Knight: Thanks for your help. Your advice (and commands to run) probably led [Saint] to suggest fsck, which ultimately worked.
+[07:48] <[Saint]> HollllllaaaahhhhhhhhhhH!
+[07:48] <hiexpo> kool
+[07:49] <greenride> [Saint]: Thanks man
+[07:49] <[Saint]> not a problem it just sounded very much like filesystem corruption to me, so I ran with it.
+[07:50] <pentarex> guys does anyone have experience with akamai or aws, or just to have a clue how the pricing is calculated... sorry for the question but no idea where to ask
+[07:51] <hiexpo> [Saint], i was thinking that also good call
+[07:57] <lenovo> Hola alguien que hable español
+=== allstarsnorks is now known as devbasis
+[08:16] <devbasis> Hi there. Is it currently possible to make an Ubuntu distribution that makes a PC a media center and a gaming device?
+[08:19] <newke> how can i add additional partition to fstab file?
+[08:21] <Rory> newke: read the wiki page on fstab, it explains what each entry in the lines mean
+[08:21] <Rory> newke: link, sorry https://help.ubuntu.com/community/Fstab
+[08:21] <datakid> hi, looking for the keyboard shortcut equiv of alt-tab but that just swaps between the windows of the focused software?
+[08:22] <datakid> I'vev read that alt-tilde is the answer, but that's not working ofr me
+[08:22] <newke> isnt there a tool to generate fstab from mounted partitions?
+[08:22] <Rory> Not that I know of
+[08:27] <devbasis> May I know if WINE can launch games from Games for Windows CDs?
+[08:29] <F2Knight> some of them
+[08:29] <F2Knight> you need to look at the winehq database
+=== islandmonkey is now known as islandmonkeee
+[08:43] <SaucisseCocktail> hi
+[08:49] <ssn> hi guys
+[08:50] <ssn> my x201 wont resume after putting it to sleep while the decryption prompt at boot time was open
+[08:50] <ssn> how do i tell it to cold boot instead of trying to resume?
+[08:51] <DukeDrake> hi
+[08:52] <DukeDrake> I got problems logging in with lightdm
+[08:52] <DukeDrake> I try 'sudo dpkg-reconfigure lightdm' from Terminal, but nothing happens :(
+[08:53] <Ricky_Rat5005> Hi, I am trying to install Ubuntu. When I am at the section where it partitions the drive, I get an error popup of just question marks. I'm not sure what the issue is, can anyone help please?
+[08:54] <ssn> ok my bad
+[08:54] <ssn> encrypted home...
+[08:59] <zztopless> Wondering if anyone has experience with any of the steelseries v2 headsets and specifically if there is any way to disable the LED illumination in Ubuntu...?
+[08:59] <zztopless> Oops, Hi!  That should come first when asking for help :)
+=== Sorel is now known as Soorel
+=== `hypermist` is now known as sleepypc
+[09:06] <DukeDrake_> any hints?
+[09:06] <svetlana> DukeDrake_: sudo service lightdm restart
+[09:07] <DukeDrake_> svetlana: err ... shouldn't recoonfigure ask me questions or something?
+[09:08] <svetlana> not always
+[09:08] <phpcoder> hello everybody
+[09:08] <phpcoder> how can i check what is causing the block of my system? i can use mouse and keybord i must to hard reboot the laptop
+[09:13] <DukeDrake_> hm .. I can't login at lightdm .... I can see a "System program problem detected" flashing for a moment, then it switches back to the login screen
+[09:13] <DukeDrake_> I just upgraded from 12.x to 14.04
+[09:13] <Seveas> are you sure the upgrade went ok and was completed?
+[09:13] <Ben64> try logging in as guest
+[09:14] <Ricky_Rat5005> Hi, I am trying to install Ubuntu. When I am at the section where it partitions the drive, I get an error popup of just question marks. I'm not sure what the issue is, can anyone help please?
+[09:14] <Seveas> Ricky_Rat5005: first thing that comes to mind is a translation issue. Are you installing in english?
+[09:14] <zztopless> Ricky_Rat5005: Any chance you could take a photo with your phone and upload it?
+[09:14] <DukeDrake_> Ben64: logging in as guest doesn't work as well
+[09:15] <DukeDrake_> Seveas: how can I tell?
+[09:15] <Ben64> DukeDrake_: can you log in as console
+[09:15] <Ben64> on console*
+[09:15] <DukeDrake_> There were no errors during the upgrade
+[09:15] <Seveas> DukeDrake_: log in on the console (ctrl+alt+f1 to go there, alt+f7 to go back). Run sudo apt-get dist-upgrade
+[09:15] <DukeDrake_> Ben64: yes
+[09:17] <warsh> how do I change my username? I know about usermod -l [newName] [oldName]
+[09:17] <DukeDrake_> Seveas: no network ....
+[09:17] <warsh> but even when logged in as root, my old username is still running bash
+[09:17] <warsh> and pkill doesn't hel
+[09:17] <warsh> p
+[09:17] <Ben64> warsh: recovery mode
+[09:17] <warsh> can anyone lend a hand?
+[09:17] <Seveas> DukeDrake_: oh, wifi only?
+[09:18] <warsh> Ben64: this is on a arm based board, so no bios
+[09:18] <DukeDrake_> It wants to upgrade 7 packages, all referring to gvfs
+[09:18] <phpcoder> no way?
+[09:18] <Ben64> warsh: i meant ubuntu recovery mode, but join #ubuntu-arm for that
+[09:18] <warsh> ahh
+[09:18] <DukeDrake_> Seveas: yes, only wifi and can't connect ...
+[09:19] <phpcoder> is there no wway to check why the system is blocked?
+[09:19] <Ben64> phpcoder: your question doesn't make sense
+[09:20] <Seveas> DukeDrake_: log in on the console, dot this: grep EE /var/log/Xorg.0.log -- anything useful?
+[09:22] <DukeDrake_> it says "Failed to load module fglrx"
+=== sleepypc is now known as `hypermist`
+[09:22] <Seveas> did you manually install fglrx drivers on 12.x?
+[09:23] <DukeDrake_> (why did I only grep for "WW" yesterday, not "EE"? xD)
+[09:23] <zztopless> Wondering if anyone has experience with any of the Steelseries v2 headsets and specifically if there is any way to disable the LED illumination in Ubuntu...? I'm in a dark room and my head is making the room glow...
+[09:24] <DukeDrake_> as I remember, everything was installed automatically ...( I'll try to google from here )
+[09:24] <Seveas> DukeDrake_: http://ubuntuforums.org/showthread.php?t=2249841 maybe?
+[09:24] <Seveas> DukeDrake_: also look in ~/.xsession-errors
+[09:26] <DukeDrake_> I alerady checked .xsession-errors, but couldn't figure it out xd
+[09:26] <DukeDrake_> thanx for the link! =D
+[09:26] <phpcoder> Ben64, ?
+[09:26] <phpcoder> it freeze
+[09:27] <Jakey2> How to run bash script to update sql scripts from a folder
+[09:28] <Jakey2> im looking for a bash script to update my sql scripts on a server
+[09:28] <Seveas> Jakey2: the same way as you run all bash scripts.
+[09:28] <Jakey2> the sql scripts are in a specific folder
+[09:28] <Jakey2> eg folder a
+[09:28] <Jakey2> 1.sql, 2.sql
+[09:31] <mark_fawkes> hello
+[09:31] <iskuhdzljsl> I'm currently working off a liveUSB session on a laptop, and woud like to gain access to a Windows drive (Windows is in hibernate) without starting Windows. Lubuntu won't let me mount through the GUI, as it says the drive is in hibernate... but suggests that I should attempt to mount with the read-only flag. I went to /media/lubuntu, but naturally, there's nothing listed there, because the drive's not mounted. How do I mount in
+[09:32] <Seveas> iskuhdzljsl: mkdir /mnt/windows; mount -t ntfs-3g -o ro /dev/yourwindowsdrivehere /mnt/windows
+[09:32] <phpcoder> Ben64, maybe aproblem with nvidia driver
+[09:33] <phpcoder> i do not know
+[09:33] <iskuhdzljsl> Seveas - and get the ID of the Windows drive from gparted?
+[09:33] <DukeDrake_> Seveas: hmm .. fglrx doesn't seem to be installed at all .... yet when I try to install it via apt-get, it fails with "Unabble to correct problem. You have held broken packages" :(
+[09:33] <phpcoder> for example i was listening music on youtube....the system (cursor/keybord) was blocked but i still was listening the music
+[09:33] <phpcoder> so it is not a complete "block"
+[09:33] <Seveas> iskuhdzljsl: or from fdisk -l
+[09:33] <phpcoder> so i am asking if there is a way to check the reason in log file for example
+[09:34] <Jakey2> i want to run a batch of sql scripts from a folder does anyone know a script for this
+[09:34] <iskuhdzljsl> Seveas - cool. Giving it a shot now.
+[09:34] <Seveas> DukeDrake_: the held broken packages thing is a clue that not all went well in the upgrade. Time to get a wired connection and do more apt-get
+[09:36] <Avihay_work> Jakey2: maybe you can use your cli sql client, and use xargs, or some bash for loop
+[09:36] <zztopless> Just switched from a windows host with a couple of ubuntu guests to a Mint guest with the same ubuntu guests and for whatever reason all TOR traffic on the guests is very slow (fine on the host and fine on the guests if I boot back in to my not-yet-deleted windows7 installation on the host), I mean like ~ 1 MB/s on either host or the guests on the win7 host vs ~30-40k/s tops for the gusts on the ubuntu host.  Any ideas
+[09:36] <zztopless> would be much appreciated...
+[09:36] <DukeDrake_> Seveas: ok
+[09:37] <Jakey2> Avihay_work, looking to do it in bash
+[09:37] <DukeDrake_> maybe, I'm affected by this: https://bugs.launchpad.net/ubuntu/+source/fglrx-installer/+bug/1424491
+[09:37] <ubottu> Launchpad bug 1424491 in fglrx-installer-updates (Ubuntu Precise) "apt-get fails to install fglrx or fglrx-updates in 14.04.2 and 12.04.5" [High,In progress]
+[09:38] <DukeDrake_> (found a patch cable by now ^^)
+[09:39] <Avihay_work> Jakey2: seems simple enough. combine http://www.cyberciti.biz/faq/bash-loop-over-file/ with https://dev.mysql.com/doc/refman/5.0/en/mysql-batch-commands.html
+[09:39] <phpcoder> someone could help me?
+[09:40] <Seveas> DukeDrake_: ok, apt-get -f install
+[09:40] <DukeDrake_> Seveas: ok, I'll try....
+[09:41] <iskuhdzljsl> Seveas - Mounting worked. Thanks!
+[09:42] <DukeDrake_> same error
+[09:42] <DukeDrake_> hm
+[09:42] <DukeDrake_> I guess, I'll settle for being a victim of above mentioned bug
+[09:43] <Seveas> DukeDrake_: neh, if your upgrade failed anything could have happend
+[09:43] <Bartoaster> .
+[09:43] <DukeDrake_> I did the dist-updgrade by now and it finished
+[09:44] <Seveas> DukeDrake_: ok, and the apt-get -f install, does it work now?
+[09:45] <DukeDrake_> no, same error: ... you have held broken packages
+[09:45] <Seveas> DukeDrake_: I'd like to see the full error, can you run this: apt-get -f install 2>&1 | nc seveas.net 1234
+=== Tsunami1 is now known as Guest83427
+[09:46] <Seveas> that nc makes it send the output to me. Ordinarily I'd ask to pastebin it, but that's tricky without a webbrowser :)
+[09:46] <DukeDrake_> ó.o
+[09:46] <DukeDrake_> that's ... neat
+[09:47] <DukeDrake_> I know nc ... but never thought about that possibility xD
+[09:48] <DukeDrake_> theeere you go
+[09:48] <Seveas> hmm, didn't get anything
+[09:48] <DukeDrake_> whoops
+[09:49] <DukeDrake_> now?
+[09:49] <Seveas> yeah, so the problem is with the fglrx package
+[09:49] <Seveas> you upgraded to 14.04, right?
+[09:49] <DukeDrake_> yes, I try  apt-get -f install fglrx ....
+=== zz_CyberJacob is now known as CyberJacob
+[09:50] <DukeDrake_> ... that's the output from  "apt-get -f install "
+[09:51] <soman> Hi all. I installed some packages to machine without internet with 'dpkg' and broke the package system. Now I cannot remove them nor via synaptic neither via apt-get. Both suggest to remove a big amount of packages not related to my installed. How can I find out what packages I installed with dpkg?
+[09:52] <Seveas> DukeDrake_: (apt-cache policy xserver-xorg-core; apt-cache show xserver-xorg-core) | nc seveas.net 1234
+[09:53] <Seveas> those will give me some info about what looks like a broken dependency
+[09:53] <Seveas> soman: /var/log/dpkg.log
+[09:54] <DukeDrake_> Seveas: ok, hang on ...
+[09:54] <soman> ЫумуфыЖ ерфтлы
+[09:54] <soman> Seveas: thanks
+[09:54] <phpcoder> guys are better nouveau or nvidia-346 driver?
+[09:55] <Seveas> DukeDrake_: while you're at it, repeat that command but with fglrx instead of xserver-xorg-xore
+[09:56] <DukeDrake_> check
+[09:56] <phpcoder> ?
+=== delta is now known as Guest50528
+[09:57] <Seveas> DukeDrake_: you.... don't have xserver-xorg-core installed. This surprises me greatly :)
+[09:58] <DukeDrake_> Seveas: oh? o.O
+[09:58] <Seveas> DukeDrake_: what happens if you try to install that package?
+[09:58] <Ricky_Rat5005> Seveas - yes in english
+[09:59] <colbyf> ..
+[09:59] <rahulprodev> Hello!
+[09:59] <DukeDrake_> Seveas: hm o.O
+[09:59] <DukeDrake_> hm??
+[09:59] <Seveas> yes?
+[10:00] <DukeDrake_> apt-cache show xserver-xorg-core shows me a lot of stuff ... sure, it's not installed?
+[10:00] <Seveas> DukeDrake_: apt-cache policy says it's not installed. show will happily show packages you didn't install :)
+[10:01] <DukeDrake_> ohhh ... xd
+[10:01] <rahulprodev> this problem occuring from morning whenever I try to login in ubuntu (after entering password) it pause for 5-6 seconds and the shows black screen and then again show login window... I can't login.
+[10:01] <rahulprodev> Please anyone have idea what's problem.
+[10:02] <trijntje> rahulprodev: sounds like your graphical environment crashes as soon as you login
+[10:02] <DukeDrake_> oh :(
+[10:02] <trijntje> can you log into the guest account?
+[10:02] <rahulprodev> trijntje, no, I can't login in guest account. :(
+[10:02] <DukeDrake_> Error: pkgProblemResolver: Reseolve generated breaks, this may be caused by held packages
+[10:02] <trijntje> rahulprodev: do you get the same problem when you try to login with guest account?
+[10:03] <rahulprodev> trijntje, yes same problem...
+[10:03] <rahulprodev> same thing happening there
+[10:03] <DukeDrake_> heh
+[10:03] <DukeDrake_> everyone has same problem? ;)
+[10:03] <Seveas> DukeDrake_: try the 2>&1 | nc seveas.net 1234 trick again
+[10:03] <DukeDrake_> trijntje: same here
+[10:03] <DukeDrake_> Seveas: hang on
+[10:04] <trijntje> rahulprodev: can you log in via the terminal? (Ctrl + alt +f1, you wont see your password as you type it)
+[10:04] <rahulprodev> trijntje, yes, I can login there :)
+[10:05] <DukeDrake_> there.
+[10:05] <DReynolds> Hi all. hoping someone can help. im trying to stick Ubuntu on an old intel macbook. rEFIt is istalled and working, but with both the Ubuntu ans Xubuntu install dvds im just getting "Select CD-ROM boot type" and 2 empty options, not accepting any input
+[10:05] <mark_fawkes_1> hi
+[10:05] <Ricky_Rat5005> Seveas?
+[10:05] <trijntje> rahulprodev: can you take a look at the apt log to see if you updated something recently that could have caused this?
+[10:05] <trijntje> cat /var/log/apt/history.log
+[10:05] <Seveas> !info libcheese7 trusty
+[10:05] <ubottu> libcheese7 (source: cheese): tool to take pictures and videos from your webcam - base library. In component main, is optional. Version 3.10.2-0ubuntu2 (trusty), package size 78 kB, installed size 334 kB
+[10:05] <DukeDrake_> (wtf is libcheese, anyway? ^^)
+[10:05] <Seveas> webcam library
+[10:06] <DukeDrake_> ah
+[10:06] <rahulprodev> trijntje, yes I try to look there
+[10:06] <Seveas> DukeDrake_: we'll have to dig deeper. Try installing the libcheese7 package.
+[10:06] <Seveas> (and if it fails, nc trick :)
+[10:06] <DukeDrake_> I don't have a webcam in the notebook ... >.>
+[10:07] <Seveas> Ricky_Rat5005: hmm, then I'm afraid I have no idea what it could be.
+[10:07] <Ricky_Rat5005> Seveas ok, thanks.
+[10:08] <Ricky_Rat5005> Anyone else? Pop-up of ????? when installing Ubuntu (no other error message just question marks)
+[10:09] <DukeDrake_> libcheese is already the newest version
+[10:10] <trijntje> rahulprodev: can you see which package were upgraded/installed last? If you want you can post them to pastebin using the command line program 'pastebinit'
+[10:10] <trijntje> cat /var/log/apt/history.log | pastebinit
+[10:10] <trijntje> you'll have to install it first though: sudo apt-get install pastebinit -y
+[10:10] <Seveas> DukeDrake_: hmm. apt-cache policy libcheese7 | nc seveas.net 1234
+[10:12] <DukeDrake_> there ^
+[10:13] <DukeDrake_> hm ... I really appreciate your patience ... but do you still consider that this issue can be solved?
+[10:13] <Seveas> yeah, these issues can always be solved by digging deep enough :)
+[10:13] <rahulprodev> trijntje, I think my internet is not working on command line
+[10:13] <DukeDrake_> ok :}
+[10:13] <DukeDrake_> (is my first issue of this kind ^^)
+[10:14] <Seveas> DukeDrake_: apt-get install unity-control-center 2>&1 | nc seveas.net 1234
+[10:14] <trijntje> rahulprodev: internet should work just as normal
+[10:14] <Seveas> I've had such issues dozens, if not hundreds of times. I tend to break apt horribly or do utterly unsupported upgrades like 9.10 to 14.10 :)
+=== norm is now known as Guest59268
+[10:16] <rahulprodev> trijntje, I use wifii, I think it's not connected
+[10:17] <DukeDrake_> incoming
+[10:17] <rahulprodev> DukeDrake_, :)
+[10:18] <Seveas> DukeDrake_: ok now I'm even more confused. It's installed, but not installed at the same time!?
+[10:18] <Seveas> DukeDrake_: apt-cache policy unity-control-server | nc seveas.net 1234
+[10:19] <rahulprodev> trijntje, I think I will reinstall a window...
+[10:19] <DukeDrake_> there.
+[10:20] <rahulprodev> trijntje, thanks.
+[10:20] <trijntje> rahulprodev: you can if you want, but you can also fix ubuntu
+[10:21] <DukeDrake_> (by the way: how can I jump by words on the terminal? (like ctrl+left and ctrl+right on windows))
+[10:21] <Seveas> ctrl-left/right should do the trick
+[10:21] <rahulprodev> trijntje, I'm not that familiar that much with terminal... Is there any recovery system like windows?
+[10:23] <DukeDrake_> (nope ^^)
+[10:23] <rahulprodev> DukeDrake_, ok :0
+[10:23] <trijntje> rahulprodev: can you see which programs were updated or installed last on your pc? Thats probably the problem
+[10:24] <Seveas> DukeDrake_: I'm a bit at a loss I'm afraid, so I want to tackle the problem from a different angle. So first more debug info for me:
+[10:25] <Seveas> more /etc/apt/sources.list /etc/apt/sources.list.d/* | nc seveas.net 1234
+[10:25] <Seveas> And then another apt-get attempt: apt-get -f --fix-policy install
+[10:25] <Seveas> which will probably fail, if it does, append the ususal 2>&1 | nc seveas.net 1234
+[10:25] <DukeDrake_> o.o
+[10:26] <nashant> Hey, is there any way I can increase the effective resolution of my display? I want to shrink everything so I can fit more on the screen
+[10:26] <DukeDrake_> ok, I'll try ... hang on
+[10:26] <rahulprodev> trijntje, hm I think its it's lot of work. I will reinstall it, anyway thanks so much
+[10:27] <trijntje> rahulprodev: you're welcome ;)
+[10:27] <DukeDrake_> the fix policy installed libatm1
+[10:28] <DukeDrake_> !info libatm1 trusty
+[10:28] <ubottu> libatm1 (source: linux-atm): shared library for ATM (Asynchronous Transfer Mode). In component main, is optional. Version 1:2.5.1-1.5 (trusty), package size 23 kB, installed size 123 kB (Only available for linux-any)
+[10:30] <saaid> hi
+[10:30] <xpand> Calling ->flush() on a memcached instance doesn't flush all items. When I call `memcached-tool 127.0.0.1:11211 stats` I get "total_items         655"
+[10:30] <DukeDrake_> there.... /etc/apt/soures.list.d doesn't exist
+[10:31] <xpand> oups..
+[10:31] <xpand> not here
+[10:31] <Seveas> DukeDrake_: it's sources nout soures :)
+[10:32] <DukeDrake_> yeah, well .. I had the 'c' in the command ... I can also see the directory in /etc/apt/ ... errrrr... hmm o.O
+[10:33] <Seveas> DukeDrake_: are there any files in there?
+[10:33] <DukeDrake_> no Xd
+[10:33] <DukeDrake_> no
+[10:33] <Seveas> ok, good enough :)
+[10:33] <DukeDrake_> =)
+[10:33] <DukeDrake_> (brb)
+[10:34] <Seveas> then I'm lost. At this point I'd like to request access to your machine to take a closer look and do more prodding, but I completely understand if you don't want to do that.
+[10:37] <iseon> Hello, has anyone tried to build an ubuntu kernel on Debian? I just tried but had errors.. should it be successful following for example https://help.ubuntu.com/community/Kernel/Compile ?
+[10:40] <Seveas> iseon: depends on which part of that document you followed. But it should generally work
+[10:42] <DReynolds> Does anyone know how to fix the problem "select CD_ROM boot type" with 2 empty options when trying to load ubuntu install cd on intel macbook?
+[10:42] <iseon> Seveas: ah actually I followed this step-by-step http://blog.avirtualhome.com/compile-linux-kernel-3-2-for-ubuntu-11-10/
+[10:42] <iseon> I think it might be a little out-dated now though.
+[10:42] <DukeDrake_> re
+[10:42] <Seveas> see the title of that already spells trouble
+[10:43] <iseon> Seveas: got any pointers for similar step-by-step example for  ubuntu 15.04?
+[10:43] <DukeDrake_> hm
+[10:44] <Seveas> iseon: you're trying the 15.04-to-be kernel on debian?
+[10:44] <DukeDrake_> "Installed none" with the xserver-xorg-core is really weird
+[10:44] <iseon> I'm building the kernel for another computer running ubuntu 15.04 on the Debian machine
+[10:45] <Seveas> iseon: ok, so you're building the 15.04 kernel for a 15.04 machine on a debian box? (I really want to make sure I understand you correctly before gicing bad advice)
+[10:45] <iseon> Yes, that is correct
+[10:45] <Seveas> ok, then I suggest you look at pbuilder
+[10:46] <Seveas> on debian you can create an ubuntu 15.04 build chroot with pbuilder and then use pbuilder to build the kernel package. That way you get closest to what Ubuntu itself does.
+[10:46] <Seveas> If you need to make changes before building, you can do that on Debian just fine and build source packages (debuild -s) which you then turn into binary packages with pbuilder.
+[10:47] <phpcoder> gys is there a log where can i see why my the gui is messed up
+[10:47] <iseon> I will check it out, does it mean that I need a full ubuntu 15.04 filesystem on the debian box though?
+[10:47] <phpcoder> ?
+[10:47] <Seveas> phpcoder: /var/log/Xorg.0.log and ~/.xsession-errors
+[10:47] <Seveas> iseon: you need a minimal chroot, which pbuilder will create for you.
+[10:48] <iseon> Seveas: very cool, thanks that is super helpful :):)
+[10:48] <DukeDrake_> bbl
+[10:48] <Seveas> iseon: it caches it compressed, that takes 113MB. During build you'll need a bit more diskspace.
+[10:49] <phpcoder> Seveas, thanks!
+[10:54] <Jakey2> is this correct to get a specific value from an sql database
+[10:54] <Jakey2> Ver = $(mysql mydatabase -u $USER -p $PASS -se "select b from table_a")
+[10:55] <sheer> off topic but... how do I prevent people from seeing the channels I'm in + the IRC client I use?
+[10:55] <lotuspsychje> sheer: ask in #freenode
+=== Starthunder is now known as Moonlighting
+[11:03] <haskell0_> I think I uninstalled both nouveau and NVidia drivers, now after logging in nothing appears (although I can move the mouse), can I use the live CD to install NVidia drivers?
+[11:04] <lotuspsychje> haskell0_: try grub recoverymode/fix broken packages
+[11:05] <lotuspsychje> haskell0_: or a terminal from recoverymode and install drivers from there
+[11:05] <ioria> haskell0_, never done that, but you can enable  cdrom in  sources.list and add nomodeset in grub
+[11:06] <haskell0_> lotuspsychje, I tried recoverymode/fix broken packages, but I keep seeing "Failed to fetch http://..."
+[11:08] <lotuspsychje> haskell0_: sudo apt-get update maybe?
+[11:09] <lotuspsychje> haskell0_: maybe boot nomodeset as ioria sugests
+[11:10] <haskell0_> lotuspsychje, I am able to get terminal access, I used sudo apt-get update, and I see similar "Failed to fetch http..." messages, perhaps I should wget the nvidia driver and install that?
+[11:10] <ioria> enable networking from grub
+[11:10] <haskell0_> ioria, thanks let me try that
+[11:12] <coemoraes> Hello, I am trying to configure DeployHQ, and how we dont use User and Password , they are providing us SSH-Key, but I really cant figure it out where I must to put this key inside server, anyone know it?
+[11:22] <boabsta> coemoraes: you'll need a username at least
+[11:24] <mailsender> Hi ubuntu people, i am having 2 issues with my ubuntu 14.04 .       first i wanted to send mail using php mail() and it did not seem to work. after debugging and installing of some mailing systems, the server was slow so i restarted it. it now will not run a simple "hello world".
+[11:24] <mailsender> i looked at netstat and i do not see anything on port 80
+[11:25] <mailsender> htop shows apache running and i also restarted apache which showed no error
+[11:26] <mailsender> how can i tell if apache is running on port 80?
+[11:26] <mailsender> what to look for in the netstat output?
+[11:26] <lotuspsychje> mailsender: try an nmap -PN -sV on your ip
+[11:27] <mailsender> nmap -PN -sV 172.88.my.ip
+[11:27] <mailsender> is this the syntax?
+[11:28] <lotuspsychje> mailsender: yes
+[11:28] <mailsender> thanks, i am doing it
+[11:28] <bekks> mailsender: lsof -i | grep 80
+[11:29] <Apachez> any of you who knows if theres a virtual usb driver within ubuntu repositories? that is so I can mount a directory to behave as a usb drive (to then be used as a usb drive for virtualbox for the vmguest to reach)?
+[11:29] <mailsender> lsof -i | grep 80 showed nothing
+[11:29] <bekks> So nothing is running.
+[11:29] <bekks> Did you use sudo?
+[11:29] <mailsender> ok thanks
+[11:30] <mailsender> ahhh, sudo brings up all kinds of things
+[11:30] <mailsender> so if apache is listening on port 80, why can't i run a simple hello world?
+[11:31] <bekks> mailsender: firewall blocking issue, routing issue, configuration issue, etc.
+[11:34] <mailsender> the thing is i just used that file to test the mail() function and after i rebooted it does not run any php code on the server
+[11:34] <mailsender> all i did was installing and uninstalling sendmail, postfix and similar ubuntu mail packages
+[11:35] <mailsender> so i do not know which of those actions might have impacted apache
+[11:35] <Dumle29> I just did a fresh install of xubuntu on an older laptop of mine. Sound over the headset jack works fine, but sound over the internal speakers does not
+[11:36] <lotuspsychje> !sound | Dumle29
+[11:36] <ubottu> Dumle29: If you're having problems with sound, click the Volume applet, then Sound Preferences, and check your Volume, Hardware, Input, and Output settings.  If that fails, see https://help.ubuntu.com/community/Sound - https://help.ubuntu.com/community/SoundTroubleshooting - http://alsa.opensrc.org/DmixPlugin - For playing audio files,  see !players and !mp3.
+[11:37] <Dumle29> I just barely hear anything over the speakers. So low that I had to get my ear down to the laptop in a quiet room, to even make sure it wasn't my imagination
+[11:37] <Dumle29> thanks :)
+[11:38] <rahulprodev> hello, anyone please tell me or give me a link How to manually partition ubuntu i mean how much space I can give to partition...:)
+[11:39] <lotuspsychje> rahulprodev: thats a users choice really, what will you be doing on that partition?
+[11:40] <lotuspsychje> !partition | rahulprodev
+[11:40] <ubottu> rahulprodev: For help with partitioning a new install see: https://help.ubuntu.com/community/PartitioningSchemes l - For partitioning programs see !GParted, or !PartitionManager (!Kubuntu 9.04 and up) - Other partitioning topics include !fstab !home and !swap
+[11:40] <rahulprodev> lotuspsychje, going to install ubuntu by manual partition, I mean how much space i can give root, /etc ...
+[11:42] <lotuspsychje> rahulprodev: you dont like the automatic partitioning from ubuntu? or need more then default partitions?
+[11:42] <rahulprodev> lotuspsychje, yes
+[11:43] <lotuspsychje> rahulprodev: see the link i triggered you :p
+=== Vampire0_ is now known as Vampire0
+[11:45] <rahulprodev> lotuspsychje, I think the link is about some other partition... I want to know how much space i can give for /boot, /swap, /etc and other
+[11:46] <somsip> rahulprodev: again, https://help.ubuntu.com/community/PartitioningSchemes
+[11:48] <phpcoder> when will be released 15.04 ?
+[11:48] <somsip> phpcoder: 20th
+[11:48] <phpcoder> oh good! tomorrow
+[11:48] <rahulprodev> lotuspsychje, somsip thanks yes it's given,
+[11:48] <somsip> phpcoder: sorry - worng. 23rd
+[11:48] <phpcoder> ah ok
+[11:49] <phpcoder> tis this the current right? http://cdimage.ubuntu.com/daily-live/current/
+[11:49] <rahulprodev> Is it going to release on 23rd, then i will install ubuntu on 23rd :)
+[11:49] <phpcoder> :D
+[11:50] <lotuspsychje> phpcoder: yes its same from #ubuntu+1
+[11:50] <phpcoder> where can i see the new features?
+[11:51] <lotuspsychje> phpcoder: https://wiki.ubuntu.com/VividVervet/ReleaseNotes
+[11:52] <phpcoder> thanks
+[11:53] <mircx1> Hello
+[11:53] <mircx1> i want ask something
+[11:53] <mircx1> in ubuntu is have options if i want install something from Terminal and i want search him what commands for this?
+[11:54] <mircx1> sudo search libstdc++6-4.4-dev ?
+[11:54] <lotuspsychje> mircx1: apt-cache search packagename
+[11:54] <WilliamDotAT> apt-cache search libstdc
+[11:55] <mircx1> thanks
+[11:56] <lotuspsychje> cfhowlett: afternoon :p
+[11:57] <cfhowlett> lotuspsychje, greetings!
+[11:57] <cfhowlett> lotuspsychje, dare I ask how the crowd is tonight?
+[11:57] <lotuspsychje> cfhowlett: you forgot autojoin :p
+[11:57] <lotuspsychje> cfhowlett: they are all waiting for you :p
+[11:57] <cfhowlett> lotuspsychje, LOl
+[11:57] <svetlana> ?
+[11:58] <lotuspsychje> !discuss > cfhowlett
+[11:58] <ubottu> cfhowlett, please see my private message
+[12:06] <mircx1> i want ask something please i try find re2 for c++ and in ubuntu 14.04 is no find what i need install for this?
+[12:06] <lotuspsychje> !find re2
+[12:07] <ubottu> Found: libdjvulibre21, libhardware2, libmono-system-reactive-core2.2-cil, re2c, apertium, audacious-dbg, gofigure2, gofigure2-doc, libaudcore2, libbpp-core2 (and 23 others) http://packages.ubuntu.com/search?keywords=re2&searchon=names&suite=utopic&section=all
+[12:07] <lotuspsychje> !info re2c
+[12:07] <ubottu> re2c (source: re2c): tool for generating fast C-based recognizers. In component main, is optional. Version 0.13.5-1build2 (utopic), package size 201 kB, installed size 403 kB
+[12:07] <lotuspsychje> mircx1: is this what you need?
+[12:07] <mircx1> i need something like this include/library paths in order
+[12:08] <mircx1> ?
+[12:09] <ILOVEGNU> Is it possible to get the Ubuntu 8.04 theme for the latest distro?
+[12:09] <ILOVEGNU> latest release
+[12:09] <lotuspsychje> !theme | ILOVEGNU
+[12:09] <ubottu> ILOVEGNU: Find your themes at: http://www.gnome-look.org - http://art.gnome.org - http://www.kde-look.org - http://kubuntu-art.org - http://themes.freecode.com/tags/theme - http://www.guistyles.com - https://wiki.ubuntu.com/Artwork/ - Also see !changethemes and https://help.ubuntu.com/community/UbuntuEyeCandy
+[12:09] <mircx1> someone please?
+[12:09] <mircx1> lotuspsychje
+[12:10] <mircx1> i need something like this include/library paths in order
+[12:10] <haskell0_> Is it possible to install updates through the ubuntu live-cd? i.e. sudo apt-get update (for some reason I cannot do it normally)
+[12:10] <lotuspsychje> mircx1: try the ##programming guys, i dont know what you need mate
+[12:10] <gsilva> ILOVEGNU, I think that's based in GNOME - so you can download Ubuntu Gnome
+[12:10] <mircx1> i told to you
+[12:10] <gsilva> yes, haskell0_, it is
+[12:10] <cfhowlett> haskell0_, update the USB?  yes, but only until the session ends
+[12:11] <haskell0_> cfhowlett, no I want to update my actual ubuntu installation by using a live cd, is that possible?
+[12:11] <cfhowlett> haskell0_, what version of ubuntu are you attempting to update?
+[12:11] <lotuspsychje> mircx1: im not a programmer, so i would not know..
+[12:11] <haskell0_> cfhowlett, ubuntu 14.04
+[12:12] <cfhowlett> haskell0_, nope.
+[12:12] <haskell0_> cfhowlett, in that case, can I download a driver using the live cd, then access that on the actual ubuntu installation?
+[12:13] <mircx1> never mind i get this
+[12:13] <cfhowlett> haskell0_, probably.  details??
+[12:13] <mircx1> is need patch for this
+[12:13] <mircx1> and in search no have patch
+[12:13] <haskell0_> cfhowlett, I think I uninstalled both nouveau and NVIDIA drivers and I can't get past the login screen.
+[12:13] <mircx1> re2 for pacth
+[12:14] <cfhowlett> haskell0_, login with nomodeset
+[12:14] <cfhowlett> !nomodeset | haskell0_
+[12:14] <ubottu> haskell0_: A common kernel (boot)parameter is nomodeset, which is needed for some graphic cards that otherwise boot into a black screen or show corrupted splash screen. See http://ubuntuforums.org/showthread.php?t=1613132 on how to use this parameter
+[12:14] <lotuspsychje> mircx1: re2 doesnt exist, is it re2c you need?
+[12:14] <haskell0_> cfhowlett, thanks let me try that
+[12:15] <ioria> cfhowlett, he cannot use the installation cd enabling cdrom in sources.list to reinstall nouveau ?
+[12:16] <legal> ?
+[12:16] <cfhowlett> ioria, that wasn't what I understood his question to be but if you can advise him on this, please do
+[12:17] <legal> если по русски?
+[12:17] <lotuspsychje> !ru | legal
+[12:17] <ubottu> legal: Пожалуйста наберите /join #ubuntu-ru для получения помощи на русском языке. | Pozhalujsta naberite /join #ubuntu-ru dlya polucheniya pomoshi na russkom yazyke.
+[12:17] <ioria> cfhowlett, thanx
+[12:18] <legal> мне подсказать - ядро впервые устанавливаю...
+[12:18] <lotuspsychje> !english | legal
+[12:18] <ubottu> legal: The main Ubuntu channels require that you speak in calm, polite English. For other languages, please visit https://wiki.ubuntu.com/IRC/ChannelList
+[12:19] <legal> ok
+[12:24] <haskell0_> cfhowlett, I pressed e at the grub menu and added 'nomodeset' after 'quiet splash'. Things loaded up with a lower resolution, but I am still not able to get past the login screen
+[12:24] <colbyf> hi anyone know who I install a smb printer on ubuntu gnome or even better who to install the normal ubuntu print manager
+=== testBOT is now known as Guest56493
+[12:24] <cfhowlett> haskell0_, ow.  next option: login to command line mode and install things from there
+[12:25] <lotuspsychje> colbyf: what kind of printer?
+[12:25] <ioria> haskell0_, eventually, check ~/.Xauthority for permissions
+[12:26] <lotuspsychje> !printer | colbyf
+[12:26] <ubottu> colbyf: Printing in Ubuntu is done with cups. See https://help.ubuntu.com/community/Printers - https://wiki.ubuntu.com/HardwareSupportComponentsPrinters - http://linuxprinting.org - Printer sharing: https://help.ubuntu.com/community/NetworkPrintingWithUbuntu
+[12:26] <awatt> hi
+[12:26] <lotuspsychje> awatt: welcome, what can we do for you?
+[12:26] <colbyf> its an epson printer connected to win7 via usb
+[12:27] <colbyf> I had it working yesterday but reinstalled ubuntu gnome but can't remember who I downloaded the normal print manager
+[12:27] <lotuspsychje> colbyf: see the trigger
+[12:27] <awatt> i am connected to internet i can ping websites but i cant browse
+[12:28] <colbyf> ya see the ubuntu gnome dosent have the wizard that says install windomes printer via smb
+[12:28] <haskell0_> cfhowlett, from command line, when I run "sudo apt-get update" I keep getting "could not resolve http:..."
+[12:28] <awatt> how do i know if my dns is correct?
+[12:28] <haskell0_> cfhowlett, so it seems I don't have access to the internet? I also tried a wired ehternet connection and I got the some messages
+[12:29] <haskell0_> cfhowlett, I can put the nvidia driver on a USB stick (it's a .run file), could I then access that file and install the nvidia driver?
+[12:29] <cfhowlett> haskell0_, ow.  I was really hoping the wired internet would automagically appear.  sorry, amigo, this problem is officially outside my narrow range of knowledge. ask again in channel.  lots of smart folk herein
+[12:30] <cfhowlett> haskell0_, yes
+[12:30] <haskell0_> cfhowlett, cool let me try that then
+[12:30] <colbyf> whats the name of your print manager
+[12:33] <ioria> haskell0_, can you ping something ? like 8.8.8.8  ... if not try sudo service network-manager restart
+[12:34] <haskell0_> ioria, if I try "ping 8.8.8.8" it says network is unreachavle
+[12:34] <haskell0_> trying the restart
+[12:40] <TimeVirus> I installed ktouch the other day and its not in the menu.  I cant start it from the terminal though.  How do I get a menu entry for it?
+[12:41] <MonkeyDust> TimeVirus  that's in KDE ?
+=== Moonlighting is now known as Moonlightning
+[12:45] <TimeVirus> Xfce
+[12:45] <TimeVirus> MonkeyDust, ^
+[12:49] <BluesKaj> Hiyas all
+[12:50] <TimeVirus> I installed ktouch the other day and its not in the menu.  I cant start it from the terminal though.  How do I get a menu entry for it? Xfce DE btw.
+[12:51] <TimeVirus> howdy BluesKaj
+[12:51] <BluesKaj> hi TimeVirus
+[12:52] <MonkeyDust> TimeVirus  I found something about "whisker menu", not sure what that is, and als o this... i agree when you say it should be easier... http://xubuntugeek.blogspot.be/2011/12/add-items-to-xfce-applications-menu.html
+[12:53] <codemagician> If a release is "64-bit PC (AMD64)" should I choose this for an Intel 64-bit Core i5 processor?
+[12:53] <BluesKaj> codemagician, yes
+[12:53] <TimeVirus> thanks MonkeyDust :)
+[12:53] <rahulprodev> Hello, ubuntu which one is better installing ubuntu default partitioning or installing manual partitioning ?
+[12:54] <BluesKaj> rahulprodev, manual is if you're familiar with partitioning and mount points etc
+[12:54] <codemagician> BluesKaj: Thanks.  I just understand that "EM64T" is for Intel
+[12:54] <k-stz> rahulprodev: default, but maybe you want to read a bit into manual partitioning, so you know what your missing, it is rather simple too
+[12:55] <cfhowlett> rahulprodev, depends on the user.  if you're not comfortable with manual control, let the autopilot
+[12:55] <codemagician> BluesKaj: I didn't realise before now
+[12:55] <BluesKaj> codemagician, yes and your cpu will be detected, so not to worry
+=== dave is now known as ticcc
+[12:56] <codemagician> I've just got a new core i5-5250U processor Intel NUC so I'm keen to install Ubuntu, but should I wait a few days for 15.04 or take a beta.. or what?
+[12:57] <rahulprodev> thanks BluesKaj, k-stz ,cfhowlett
+[12:57] <sysop2> how do I use the onscreen keyboard on the decrypt hard drive screen?
+[12:58] <dasjoe> codemagician: install either the latest version (14.10) or the latest long-term support version (14.04)
+[12:59] <k-stz> ubottu: !LTS
+[12:59] <ubottu> LTS means Long Term Support. Until 12.04 LTS versions of Ubuntu were supported for 3 years on the desktop, and 5 years on the server; since 12.04 (Precise Pangolin) LTS versions will be supported for 5 years on the desktop and server. The latest LTS version of Ubuntu is !Trusty (Trusty Tahr 14.04)
+[13:00] <SCHAAP137> anyone here run 14.10 with MATE? anyone notice that the icons in the notification tray don't automatically "center" themselves within the panel?
+[13:01] <SCHAAP137> if i shrink the panel size to 31px and enlarge it again to 32px, then all icons in the notification tray are correctly center-snapped
+[13:01] <codemagician> dasjoe: I think my hardware might need some things from 15 though.. as it uses the onboard intel graphics
+[13:01] <sysop2> so is my answer "you cant?"
+[13:02] <SCHAAP137> but at first, the icons in there appear "snapped-to-top"
+[13:02] <SCHAAP137> was wondering if someone knows a workaround for this
+[13:02] <rahulprodev> Hi, what will be the good size of /swap for 4 gb ram?
+[13:02] <dasjoe> codemagician: try a live version of 14.xx, then :)
+[13:03] <cfhowlett> rahulprodev, 1.5 to 2 times ram = 6 - 8
+[13:03] <kostkon> rahulprodev, 4
+[13:03] <MonkeyDust> SCHAAP137  don't struggle with 14.10 too much or too long... next week 15.04 is released
+[13:03] <codemagician> dasjoe: It's an Intel NUC 5i5RYH (5th Gen) with Intel HD Graphics 6000
+[13:03] <codemagician> dasjoe: ah, I see run from the USBPEN direct to test
+[13:03] <rahulprodev> cfhowlett, kostkon thanks.
+[13:04] <dasjoe> codemagician: exactly. You can do a full installation to USB media, too.
+[13:04] <SCHAAP137> cool MonkeyDust, eagerly awaiting it
+[13:05] <SCHAAP137> hope Intel brings their 1.0.9 gfx driver release soon as well, for 15.04
+[13:05] <MonkeyDust> SCHAAP137  guess you installed mate with a ppa? in 15.04, it's in the repos
+[13:06] <rahulprodev> I'm installing ubuntu manual partitioning is this is good to go with /(root) - 20 gb, /swap - 6gb and /home - rest of the space?
+[13:06] <SCHAAP137> no MonkeyDust, i just installed the packages mate-desktop-environment-core and mate-desktop-environment-extra
+=== CyberJacob is now known as zz_CyberJacob
+[13:06] <sysop2> question with 15.04 next will I be about to decrypt the harddrive with the on screen keyboard?  FDE is essential for mobile devices.
+[13:07] <SCHAAP137> have not added a ppa for it
+[13:07] <cfhowlett> rahulprodev, pretty close to my set up - looks legit
+[13:07] <rahulprodev> cfhowlett, cool, thanks :)
+[13:09] <rahulprodev> if I want to make extra partition like for videos, can i make in future I mean after ubuntu is installed?
+[13:09] <rebs> if i upgrdaee from 14.04 -> 15.05 will i expected to manual backup personal data and .rc files etc
+[13:09] <cfhowlett> rebs, you should always do a manual backup before upgrding
+[13:09] <rebs> yes
+[13:09] <rebs> thats not quite my question
+[13:10] <rebs> is an ubuntu upgrade a clean slate kind of thing
+[13:10] <rebs> ive never done one, only clean installs
+[13:10] <tga> greetings
+[13:10] <tga> do you know of any decent web interface to luks/cryptmount?
+[13:11] <tga> I have a few encrypted volumes that I want to enable by typing the password in a web interface instead of ssh
+[13:11] <nrdb> I am having trouble with setting the grub boot record ... I in a chroot, I have used mount bind ... to mount /dev etc... but I am still having a lot of trouble with doing the 'grub-install' ... it keeps complaining about /dev not being mounted... how do I fix this.
+[13:12] <kostkon> rebs, not it keeps your files and settings.
+[13:12] <kostkon> no*
+[13:14] <rebs> ty kostkon
+[13:15] <rahulprodev> hi, I'm installing ubuntu by manual partition, if I have to create partition after installion, is i need save free space this time?
+[13:15] <rahulprodev> or is i can use /home space in future to create extra partition.
+[13:16] <nrdb> rahulprodev, have you considered LVM?
+[13:17] <BluesKaj> ra recommend you create a / and /home partition with gparted before installing the OS
+[13:17] <rahulprodev> LVM? I don't know about it :(
+[13:17] <BluesKaj> rahulprodev,^
+[13:18] <rahulprodev> BluesKaj, hm, I created it by going ubuntu installing option "something else"
+[13:18] <nrdb> rahulprodev, it allows you to create partitions as needed... but you could always create the partitions before installation but not use them until after the installation is done.
+[13:19] <BluesKaj> rahulprodev, not sure, but that might work
+[13:21] <rahulprodev> nrdb, hm then I will let 60 gb free space.
+[13:21] <rahulprodev> BuesKaj, ok thanks.
+[13:21] <rahulprodev> nrdb thanks.
+[13:21] <nrdb> rahulprodev, ok
+[13:22] <marianne> hey guys... anyone get MaxGo to work? I've gotten AMC and HBOGo to work, but maxgo is dead in the water
+[13:28] <ams__> is there a cli tool to manage mp3s in bulk? editing id3, converting, moving, tagging, et.
+[13:28] <raymondillo> join #apache2
+[13:34] <Avihay_work> ams__: there was a fuse file system where you could manage mp3s with file operations
+[13:34] <ams__> Avihay_work: remember the name of it?
+[13:34] <Avihay_work> no :-<
+[13:35] <hexhaxtron> Is there a way to have box.net/dropbox/onedrive/google drive and others in one single local directory?
+=== jhattara_ is now known as jhattara
+=== ph is now known as Guest9614
+[13:35] <Jacoub92> hello, I need to define many cron job, can I define these in separate file? and remove by remove file?
+[13:36] <tga> hexhaxtron: well you can have them all sync the same dir
+[13:36] <Avihay_work> ams__:  it was in the repos more then 3 years ago, maybe still is
+[13:36] <tga> hexhaxtron: sounds like asking for trouble though
+[13:36] <nrdb> Jacoub92, why not use the /etc/cron* directories.
+[13:38] <Avihay_work> ams__:  https://github.com/eduble/SimpleFilesystems/blob/master/taggerfs/taggerfs.py I think I'd remember the name if that was it, I must be thinking of somth else
+[13:40] <ams__> ok ta
+[13:41] <thms> Hi everyone. I installed Ubuntu on my UX303LA from Asus which is a 13" screen, it had windows 8 before and fonts/pages were zooming/displaying fonts much larger
+[13:42] <thms> Everytime I visit a website I have to zoom, and for exemple in Skype the font is too small
+[13:42] <thms> any way to make everything larger ?
+[13:42] <x706f68> why isn't there a crouton or chromeos or chromebook channel
+=== newbie is now known as Guest718
+[13:43] <cfhowlett> x706f68, ask freenode
+[13:43] <Fuchs> ask alis, telling you that there is one
+[13:43] <Fuchs> why freenode should be able to answer that is beyond me, mind
+[13:44] <x706f68> the chrome channels are registered but empty
+[13:44] <x706f68> crouton is a script for installing ubuntu on chromeos
+[13:44] <x706f68> it's wonderfully simple
+[13:48] <`hypermist`> Not relevant to ubuntu in anyway but its it possible to change laptops cpus or does it get soldered to the board ?
+=== test is now known as Guest40802
+[13:49] <Johnny_Linux> you can change them, but beyyer stick with oem
+[13:49] <Johnny_Linux> better'
+[13:50] <Fuchs> `hypermist`: try ##hardware, but in most cases the answer will be "terribly hard towards nearly impossible to"
+[13:50] <`hypermist`> Fuchs, thanks haha
+[13:50] <x706f68> fgts bsd 4 lyfe
+[13:50] <`hypermist`> and thanks Johnny_Linux :D
+[13:51] <Johnny_Linux> ok
+[13:51] <Xz0rdz> hey guys, can anyone tell me Anonymous irc channel?
+[13:51] <nrdb> I am having trouble with setting the grub boot record ... I in a chroot, I have used mount bind ... to mount /dev etc... but I am still having a lot of trouble with doing the 'grub-install' ... it keeps complaining about /dev not being mounted... how do I fix this.
+[13:51] <cfhowlett> Xz0rdz, that's just lazy.  ask google
+[13:53] <DReynolds> Hi, can anyone tell me how to have my Ubuntu/Xubuntu install boot to console by default? i.e. not boot a GUI until I "startX"?
+=== jan is now known as Guest31332
+[13:54] <sysop2> I am now able to login with the onscreen keyboard, and when poking around in onboard it asked me to turn on accessibility and reboot, I did that, logged in with on screen keyboard, and  then locked the screen, no on screen keyboard?
+[13:54] <nrdb> DReynolds, use the 'server' install disks.
+[13:57] <DReynolds> really? Its taken me all day and 3 blank DVDs to get the desktop install on :( is there not a way to get desktop to do it? seems a farily simple need
+[13:57] <baxx> I'm having probolems scripting the install of packages from one system to another
+[13:57] <baxx> *problems
+[13:58] <nrdb> DReynolds, have you tried to take the 'lightdm' out of the startup sequence.
+[13:59] <cfhowlett> DReynolds, choose advanced ubuntu options > recovery ode
+[13:59] <cfhowlett> *mode*
+[14:01] <DReynolds> nrdb: i shall try that in a min, when im back booted into it. .. cfhowlett: doesn't recovery mode do more than just not load GUI?
+[14:01] <haskell0_> Can I install 32 bit CUDA 7, on my 64 bit Ubuntu 14.04?
+[14:01] <cfhowlett> DReynolds, straight to CLI as you requested
+[14:03] <baxx> I'm trying to use dselect and dpkg to script the creating of a package list and the install to another system
+[14:03] <baxx> I've found guides and followed them, it's not working though
+[14:03] <rahulprodev> hello, what's the root (su) password?
+[14:03] <rahulprodev> toor?
+[14:03] <baxx> going from a 14.04 system to 14.04 in VirtualBox
+[14:04] <cfhowlett> !root | rahulprodev
+[14:04] <ubottu> rahulprodev: Do not try to guess the root password, that is impossible. Instead, realise the truth... there is no root password. Then you will see that it is 'sudo' that grants you access and not the root password. Look at https://help.ubuntu.com/community/RootSudo
+[14:04] <nrdb> rahulprodev, you can log in as a user the user "sudo -i" to get to a root shell
+[14:04] <rahulprodev> thanks it's working :)
+[14:05] <rahulprodev> cfhowlett, nrdb
+[14:05] <nrdb> rahulprodev, yes
+[14:06] <rahulprodev> I wipe my home partition LOL :P
+[14:06] <rahulprodev> now again I can't login :P
+[14:06] <nrdb> rahulprodev, at least it wasn't '/'
+[14:06] <rahulprodev> nrdb hahaha
+[14:07] <rahulprodev> do you have idea how can get that back?
+=== jean is now known as Guest2150
+[14:07] <baxx> does anyone know anything about scripting the install of packages here or not? rahulprodev nrdb , cheers
+[14:07] <oopaine> hi@ll, i like to use two network interfaces on my machine at the same time, how can i set this up?
+[14:07] <nrdb> rahulprodev, does coping the /etc/skeleton directory to the /home/<user> help?
+[14:08] <rahulprodev> nrdb, ok I'll try that.
+[14:08] <sleepee> hey guys.  anybody know what's the worst that could happen if i reinstall and leave the /var partition unformatted?
+[14:09] <nrdb> oopaine, you can bind two interfaces into one virtual one that is faster.
+[14:09] <baxx> ok thanksssssssssssss
+[14:09] <rahulprodev> baxx, i'm naive in linux scripting and command line :)
+[14:10] <oopaine> i use virtualbox
+[14:10] <sleepee> i'm reinstalling a machine i was using as a kvm host but i want to save the kvm guests that were in the /var partition...
+[14:10] <rahulprodev> baxx, someone else can help u:)
+[14:10] <rahulprodev> nrdb for /etc/skelton you mean skel directory?
+[14:11] <nrdb> rahulprodev, yes thats it.  I didn't remember it correctly
+[14:12] <baxx> rahulprodev: no worries! thanks for letting me know :)
+[14:12] <sleepee> now that i think, i should probably ask in the ubuntu-server channel
+[14:15] <nrdb> sleepee, I would suggest that you install as usual ... and after installation edit the /etc/fstab to mount the partition on top of the /var directory
+[14:16] <sleepee> ahhh.. ok.  so just keep var in the / during the install and then separate it after the installation?
+[14:18] <nrdb> sleepee, that way the '/var/' partition won't be touched during the install process.  and your VMs should be left alone... but as always a backup is always a good idea.
+[14:18] <sleepee> ok.  thanks nrdb!  i'm going to give that a try!
+[14:18] <sleepee> thanks for your help!
+[14:20] <nrdb> I am having trouble with setting the grub boot record ... I in a chroot, I have used mount bind ... to mount /dev etc... but I am still having a lot of trouble with doing the 'grub-install' ... it keeps complaining about /dev not being mounted... how do I fix this.
+[14:22] <bodo_> hi. i want to install ubuntu unity. and i dont want only 1 partition i did create 2 beside swap. what type do i need to chose primary or logical?
+[14:23] <nrdb> bodo_, it really doesn't matter, but you must use logical only if you need more than 4.
+[14:24] <bodo_> oh ok. so if i have swap, / and /home i can use primary
+[14:24] <nrdb> bodo_, yes.
+[14:24] <bodo_> thank you
+[14:26] <bodo_> is there any way to make ubuntu unity more fun? i mean can i personalize it somehow? like some effects or so?
+[14:26] <bodo_> and make it look better?
+[14:30] <kostkon> bodo_, sure, you can install gnome3 themes, icon themes (unity tweak will make the process easier) and enable more compiz effects using ccsm
+[14:32] <bodo_> ccsm?
+[14:32] <somsip> !info ccsm | bodo_
+[14:32] <ubottu> bodo_: Package ccsm does not exist in utopic
+[14:33] <somsip> bodo_: https://apps.ubuntu.com/cat/applications/compizconfig-settings-manager/
+=== `hypermist` is now known as sleepypc
+[14:37] <oopaine> i like to use two networkinterfaces to connect two diffrend networks and just one of these is connected with to the internet, but how to configure it??
+[14:39] <zerowaitstate> oopaine: are you providing routing to the internet for the other network?
+=== jcara_ is now known as jcara
+[14:41] <sysop2> still cant unlock using onboard.  I tried this but didnt help gsettings set org.gnome.desktop.screensaver embedded-keyboard-enabled false
+[14:44] <oopaine> it's a virtualbox settings: 1 interface NAT and the second hostOnly ....  this machine is connected to the internat at the momend and packagesdownload works.
+[14:45] <sysop2> I meant true on the end of that.
+[14:46] <zerowaitstate> oopaine: it should just work. the host-only interface will get its routes via DHCP from virtualbox, and ditto for the NAT adapter
+[14:47] <zerowaitstate> oopaine: that NAT adapter needs to be the default route (i.e., 0.0.0.0/0)
+[14:47] <zerowaitstate> oopaine: the default route for the VM that is, not your actual computer
+[14:47] <zerowaitstate> oopaine: but virtualbox usually handles this right
+[14:48] <oopaine> i like to have a static ip adress for the hostOnly
+[14:49] <zerowaitstate> oopaine: that's fine. just ensure that the 0.0.0.0 route always points to the NAT adapter and you're good
+[14:49] <zerowaitstate> oopaine: the route to the host-only adapter will need to be a network that matches the IP assigned to the interface
+[14:50] <zerowaitstate> oopaine: but generally, in a virtualbox environment, you are only talking about single-hop for hostonly connections, so there's no route propagation to worry about
+[14:51] <oopaine> okay, thx ... i'll try. :)
+[14:51] <zerowaitstate> oopaine: hence, the ip-address and subnet mask of the hostonly interface automatically creates a "direct-connect" route for that interface
+[14:51] <wolfdog> ive been using cmus as my music player, which i LOVE. . while im working in console its great, but if I start X it wont play in the background while im working in that, comes back on only when i ctrl-alt-f2 back to my terminal. .. is there any way to get it persistently whever i am?
+[14:52] <zerowaitstate> oopaine: what you're talking about is real easy man. I do it in vagrant all the time
+[14:52] <SCHAAP137> u could run it inside a tmux or screen session, wolfdog
+[14:55] <sms> hi
+[14:56] <wolfdog> SCHAAP137: just getting back into linux tbh, unfimilar with tmux ... by screen session do you mean within X?
+[14:56] <sms> I have tried to use ubuntu iso 14.10, (No install, simply booted it) on hp stream 7
+[14:57] <sms> unfortunately there are too many bugs, it got very slow and buggy to the point that i had to do a hard shutdown, it also did not detect wifi
+[14:57] <SCHAAP137> no wolfdog, i mean a session inside /usr/bin/screen or /usr/bin/tmux
+[14:57] <SCHAAP137> it's like, a console session that you can detach/attach to
+[14:58] <SCHAAP137> so for instance, after boot, in non-X, you start tmux
+[14:58] <sms> so what can i do about this? really want to use ubuntu, dont wanna be stuck with windows
+[14:58] <rabaprodev> hello everyone :), if i wipe data by shred will it really become unrecoverable?
+[14:58] <SCHAAP137> in there you start your stuff, then detach with Ctrl b, d
+[14:58] <SCHAAP137> later inside X, you start a terminal application
+[14:58] <SCHAAP137> and type: tmux attach
+[14:58] <SCHAAP137> bam, back in the original tmux console session
+[14:59] <cfhowlett> !arm | sms
+[14:59] <ubottu> sms: ARM is a specific (RISC) processor architecture used in a variety of applications such as handhelds and networkdevices. For more information see https://wiki.ubuntu.com/ARM . For ARM specific support, stop by the #ubuntu-arm channel.
+[14:59] <Annoyed> Greetings.
+=== emanuele is now known as Guest97014
+[14:59] <wolfdog> SCHAAP137: that sounds liek it might work. ... thanks :) ill look into it
+[14:59] <sms> yes?
+=== xangua_ is now known as xangua
+[15:00] <Guest97014> ma qualcuno italiano?
+[15:00] <cfhowlett> !it | Guest97014 si
+[15:00] <ubottu> Guest97014 si: Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi « /join #ubuntu-it » senza virgolette)
+[15:00] <sms> any solutions?
+=== maryamhonary is now known as akhdskd
+[15:01] <cfhowlett> sms, it's an arm device.   ask in #ubuntu-arm
+[15:01] <sms> hey there howlett, i think not, hp stream 7 use bay trail
+[15:01] <sms> thnx for reply :)
+[15:02] <Annoyed> Has anyone else encountered a problem with proprietary Nvida driver package 331.113 ? constant "system problem detected" boxes ?
+[15:03] <sms> does ubuntu run on bay trail? had very bad experience.....
+[15:04] <sms_> does ubuntu run on bay trail? had very bad experience.....
+[15:04] <shinka> If I want to use a bash command like "echo "export PATH=$HOME/Applications/sbt/bin/:$PATH" >> .bashrc ", $PATH and $HOME will be evaluated, but I want the send the strings $HOME and $PATH to bashrc, not evaluate them. Is there an escape character for this?
+[15:05] <goose> shinka: \${HOME}
+[15:06] <[n0mad]> i found information on this in the past but now cannot. when i add programs to the launcher it's just adding blank spaces. Is there anything I can do besides logout/login? Why is this happening?
+[15:06] <goose> shinka: also, if you're going to be using the variable in a continuous path (i.e. $HOME/stuff) you should put the variable in brackets (i.e. ${HOME}/stuff)
+[15:06] <goose> shinka: but \$ will escape the $
+[15:07] <shinka> goose: Thanks!
+[15:07] <goose> shinka: alternatively, if you quote it using single ticks (i.e. echo 'export PATH=${HOME}/Applications/sbt/bin/:${PATH}') then the string will be printed as-is
+[15:07] <goose> and there won't be any need to escape anything
+[15:11] <[n0mad]> well this time unity apparently crashed and restarted itself to resolve lol
+[15:13] <J6Dof> I used to be able to connect to my home wifi router without any trouble but since yesterday, the connection isn't even detected. I can see my neighbors' wifi SSID but not my own. I'm on Ubuntu trusty and Macbook pro
+[15:14] <Annoyed> Has anyone else encountered a problem with proprietary Nvida driver package 331.113 ? constant "system problem detected" boxes ?
+[15:16] <d2l> Annoyed: yeah i've had that happen after updates a few different times
+[15:17] <Annoyed> I've seen several bug reports related to it.. any solution?
+[15:17] <Annoyed> For now, I'm installing an older package, 304
+[15:19] <d2l> Annoyed: not really. it seems its a common problem and the only thing you can do is dpkg reconfigure the nvidia packages. but it breaks itself again when there is another kernel related update. so another reconfiguration is in order.
+[15:20] <Annoyed> Bah.. ok, unfixed.. I'll have to see what happens with the 304 drivers. Had never seen this till 14.04 andt he 331 drivers.
+[15:20] <d2l> Annoyed: https://bugs.launchpad.net/ubuntu/+source/nvidia-graphics-drivers-331/+bug/1268257 is where i have followed the issue
+[15:20] <ubottu> Launchpad bug 1268257 in nvidia-graphics-drivers-331-updates (Ubuntu) "nvidia-331-updates 331.38-0ubuntu3: nvidia-331-updates kernel module failed to build, with only error: "objdump: '... .tmp_nv.o': No such file"" [High,Incomplete]
+[15:20] <sms> can ubuntu run on bay trail device? mine is hp stream 7. i tried booting using iso image on bootable flashdrive, but its way too buggy, no wifi, too many errors
+[15:21] <sms> what can i do?
+[15:21] <Annoyed> And I'm not of a mindset to manually rebuild the damned graphics drivers on every kernel update
+[15:21] <d2l> Annoyed: I'm surprised it hasn't been addressed yet... *shrug* but i hear you
+[15:21] <TimeVirus> I installed ktouch a few days ago and there is no menu entry for it.  I can start it from terminal np.  What do I need to do to have a menu entry for it?  /usr/share/app-install/desktop/ktouch:kde4__ktouch.desktop - I'm running Xfce DE
+[15:22] <Annoyed> d2l: Thanks
+[15:23] <admin3> hi
+[15:23] <admin3> i am new to ubuntu
+[15:23] <Annoyed> I'll see what happens with the older 304 drivers. Its a 5 year old machine anyway, I don't need the latest greatest.
+[15:23] <admin3> how can i install a setup in ubuntu?
+[15:23] <zerowaitstate> admin3: a setup?
+[15:24] <TimeVirus> to me menus prevent forgetting what programs are present in my system
+[15:24] <admin3> yes
+[15:24] <MonkeyDust> admin3  what kind of setup?
+[15:24] <admin3> i mean a software
+[15:24] <admin3> it is sublime text 2.0.2
+[15:24] <MonkeyDust> admin3  use the software center, or apt-get install
+[15:25] <admin3> tnx
+[15:25] <TheNumb> admin3: tried double clicking the icon?
+=== ochorocho1 is now known as ochorocho
+[15:26] <zerowaitstate> MonkeyDust, TheNumb, admin3 sublime text is not part of the standard repo. it is closed source
+[15:26] <admin3> yes but didn't work
+=== zz_Thelks is now known as Thelks
+[15:26] <TheNumb> zerowaitstate: I know.
+[15:27] <zerowaitstate> admin3: btw, i recommend sublime 3 over 2
+[15:27] <admin3> ok tnx
+[15:28] <SCHAAP137> if i upgrade my system now using 'update-manager -d', from 14.10 to 15.04, will it upgrade to the release version as well next week?
+[15:28] <admin3> but i couldn't find it on my software center
+[15:28] <bazhang> SCHAAP137, yes
+[15:28] <OerHeks> SCHAAP137, yes
+[15:28] <zerowaitstate> admin3: there is a ppa you can add to your software sources that will keep sublime text up to date. check this: https://launchpad.net/~webupd8team/+archive/ubuntu/sublime-text-2
+[15:28] <bazhang> admin3, its not there
+[15:28] <TimeVirus> seems no one knows how to get a KDE program menu entry for Xfce ?
+[15:28] <SCHAAP137> cool
+[15:29] <bazhang> TimeVirus, sometimes it takes a re login to populate the menu
+[15:29] <bazhang> !info ktouch
+[15:29] <ubottu> ktouch (source: ktouch): touch typing tutor for KDE. In component universe, is optional. Version 4:4.14.1-0ubuntu1 (utopic), package size 170 kB, installed size 764 kB
+[15:31] <zerowaitstate> admin3: i.e., you can use "sudo apt-add-repository ppa:/webupd8team/sublime-text-2" to add their repository to your sources, then run "apt-get update" to update your cache, the run "apt-get install sublime-text" to install sublime 2
+[15:31] <zerowaitstate> admin3: make sure to preface each command with "sudo"; I forgot to do that
+[15:31] <TimeVirus> pretty sure it have reboot since the install but I'll relog see
+[15:32] <admin3> tnx
+[15:32] <bazhang> TimeVirus, there are plenty of gtk typing tutors
+[15:32] <zerowaitstate> admin3: the nice thing about the PPA is you don't have to reinstall each time there is a new version; apt handles checking for new versions and does installation for you
+[15:32] <TimeVirus> lol
+[15:33] <TimeVirus> o\
+[15:33] <SCHAAP137> there we go
+[15:33] <zerowaitstate> admin3: bear in mind we do not typically support software from PPA's here
+[15:33] <OerHeks> .. but if something goes wrong, we cannot help you with a PPA, then you must get help from owner
+[15:33] <bazhang> typically as in never
+[15:34] <zerowaitstate> i really like webupd8's oracle java ppa though
+[15:35] <zerowaitstate> i realize that's ot
+[15:35] <bazhang> its a crapshoot playing with PPA
+[15:35] <bazhang> so entirely on your own
+[15:36]  * OerHeks does not waste time with programs that do not run with openJDK.
+[15:36] <MonkeyDust> admin3  http://www.technoreply.com/how-to-install-sublime-text-2-on-ubuntu-12-04-unity/
+[15:37] <yar_> want some hints on how to optimize the kernel?
+[15:37] <TimeVirus> who?
+[15:37] <TimeVirus> optimized how?
+[15:38] <yar_> ???
+[15:38] <yar_> by compiling it to my own needs?
+[15:38] <OerHeks> yar_, that would be beyond the scope of this channel, i think.
+[15:39] <infinitesum> Is there a way to use apt to install python3.3 on trusty/64? I only see a 3.4 package, so not sure if I can just install it manually or what?
+[15:39] <yar_> OerHeks: i don't think so
+[15:39] <OerHeks> infinitesum, downgrade is a bad idea
+[15:39] <TimeVirus> so you are not really asking if someone wants hints on optimizing the kernel
+[15:39] <bazhang> yar_, what is the exact issue
+[15:39] <infinitesum> OerHeks: So if I want to use Python 3.3, should I just use an older version of Ubuntu?
+[15:40] <bazhang> install build-essential yar_
+[15:40] <bazhang> !compile | yar_ read this
+[15:40] <xangua> yar_: yes you can compile your own kernel and see about a 1% plus in performance
+[15:40] <ubottu> yar_ read this: Compiling software from source? Read the tips at https://help.ubuntu.com/community/CompilingSoftware (But remember to search for pre-built !packages first). Also read !checkinstall
+[15:40] <TimeVirus> why the question mark?
+[15:40] <TimeVirus> lol
+[15:40] <ioria> infinitesum, i remember something like pythonbrew... it creats a virtual enviroment... not sure  ...
+[15:40] <infinitesum> My logic is the pypy says they are working on 3.3 compatibility, but 3.4 probably won’t happen for a very long time
+[15:40] <yar_> can't find exact word for that
+[15:41] <TheNumb> infinitesum: you can download the sources and build it yourself.
+[15:41] <bazhang> the word is gentoo yar_
+[15:41] <TheNumb> bazhang: not really.
+[15:41] <bazhang> read the links, install build-essential yar_
+[15:41] <TheNumb> the python ebuild only has 2 slots
+[15:41] <OerHeks> infinitesum, that would be 12.10, which is EOL, maybe this ppa is any help (  http://askubuntu.com/questions/244544/how-do-i-install-python-3-3 )  >>  https://launchpad.net/~fkrull/+archive/ubuntu/deadsnakes
+[15:41] <yar_> you know, It is kinda cool to have customized kernel
+[15:42] <bazhang> yar_, please stay on topic here
+[15:42] <yar_> ubottu: check!
+[15:42] <yar_> bazhang: what?
+[15:42] <bazhang> yar_, this is support only not chit chat
+[15:42] <TheNumb> yar_: it's not a chit chat channel. /j #ubuntu-offtopic
+[15:42] <bazhang> yar_, chit chat in #ubuntu-offtopic Thanks
+[15:43] <TimeVirus> I installed ktouch a few days ago and there is no menu entry for it.  I can start it from terminal np.  What do I need to do to have a menu entry for it?  /usr/share/app-install/desktop/ktouch:kde4__ktouch.desktop - I'm running Xfce DE is on toppic :P
+[15:43] <bazhang> TimeVirus, what about from alt f2 run menu
+[15:44] <infinitesum> OerHeks: Thanks! I’m an ubuntu beginner, and I’m trying to configure it through ansible which is only making things worse
+[15:44] <TheNumb> infinitesum: /j #ansible.
+[15:44] <OerHeks> TimeVirus old, but still valid http://xubuntugeek.blogspot.co.at/2011/12/add-items-to-xfce-applications-menu.html
+[15:44] <TheNumb> Should be more helpful ;-)
+[15:45] <OerHeks> infinitesum, if you are a beginner, question the program why it does not work with python 3.4
+[15:45] <infinitesum> TheNumber: The issue isn’t ansible, it’s that python3.4 on trusty is broken in a bunch of ways, but because I’m running the commands using ansible it’s hard to figure out what’s wrong
+[15:46] <OerHeks> infinitesum, so how do you tell python 3.4 is broken?
+[15:46] <infinitesum> if you google `ubuntu ensurepip`, there are several threads about how the trusty version of 3.4 is missing some key libraries needed to make virtualenvs work out of the box
+[15:47] <TheNumb> infinitesum: I hope you're not trying to install ansible in a 3.4 virtualenv
+[15:47] <infinitesum> haha no
+[15:47] <TheNumb> Good ;p
+[15:47] <infinitesum> just trying to use ansible to provision an ubuntu box, including creating a virtualenv and installing my requirements.txt
+[15:47] <TheNumb> infinitesum: well, is there a bug report?
+[15:48] <infinitesum> yeah there is, it’s unclear when it will be fixed… there is a workaround that works when just running the commands with the command line, but then reconciling that with ansible is proving to be kind of a pain
+[15:49] <TheNumb> infinitesum: well, https://bugs.launchpad.net/ubuntu/+source/six/+bug/1433324
+[15:49] <ubottu> Launchpad bug 1433324 in six (Ubuntu Trusty) "provide whl packages in trusty to enable pyvenv in python3.4" [Undecided,Fix committed]
+[15:49] <TheNumb> The last comment says that is has been fixed 4 days ago.
+[15:49] <TheNumb> Have you synced your repos recently?
+[15:50] <infinitesum> ahh interesting… i’ll try that
+[15:57] <Kolbe15> is anyone here
+[15:59] <infinitesum> so you’re saying I need to build ubuntu from source in order to get this fix?
+[15:59] <gryzor> Kolbe15: no, you're alone.
+[16:00] <infinitesum> or just that I need to reinstall python-pip
+=== islandmonkey is now known as islandmonkeee
+[16:09] <Kolbe15> All people do is leave,join,change
+[16:12] <OerHeks> Kolbe15, they have no ubuntu support question, do you?
+[16:12] <k-stz> Kolbe15: that's irc for you, you just ask your question and if someone knows the anser they'll try to help
+[16:14] <Kolbe15> OerHeks: No I just answer them.
+=== Thelks is now known as zz_Thelks
+[16:22] <Kolbe15> thomas are you still here
+[16:31] <knojoko> Is there social connector for linux email clients like the one for MS outlook
+[16:40] <MrElendig> knojoko: lots
+[16:41] <MrElendig> there is no single "best"
+=== alpha is now known as noob
+=== ubuntu is now known as Guest40228
+[16:51] <Guest40228> when I plug in audio output into my laptop it doesn't make any sound. the default audio works though
+[16:54] <OerHeks> Guest40228, what do you plugin that line-out? a headphone is not really a good device for that.
+[16:54] <Guest40228> OerHeks: I dont understand the question
+[16:54] <Kolbe15> could I have a list of the staff
+[16:55] <Guest40228> I just found the solution. I can manually switch the output device in pavucontrol but it seems as if it doesn't switch automatically
+[16:55] <Kolbe15> or people in power
+[16:55] <bazhang> Kolbe15, look in #freenode NOT here
+[16:56] <OerHeks> Kolbe15, https://help.ubuntu.com/community/InternetRelayChat#Operators
+=== ripthejacker is now known as akhil
+[17:02] <Broli> .
+[17:04] <OerHeks> lnr fix your connection please
+=== norm is now known as Guest30664
+[17:14] <smallmouse> hi all i have an external disc which i cannot see on file manager on ubuntu is there any command i can use to see if it is even connected via usb, i can hear the dis wirring so there is power there it is an external hard drive thanks
+[17:15] <ioria> smallmouse,  lsusb, dmesg | tail
+[17:15] <OerHeks> smallmouse, it should show up with 'lsusb' else see if fdisk shows anything >   sudo fdisk -l
+[17:15] <OerHeks> it would be handy if you knew the partitiontype
+=== ph is now known as Guest86454
+[17:17] <smallmouse> OerHeks: not sure I think it was windows, i see http://pastebin.com/XWuBQcbY but not sure which one it is
+[17:18] <ioria> smallmouse,  that's not lsusb
+[17:19] <smallmouse> ioria: http://pastebin.com/d22M1PUV
+=== homelesspirate is now known as PaulP
+[17:19] <jones_> Hello
+=== PaulP is now known as homelesspirate
+[17:20] <ioria> smallmouse,  what is your external usb disk ?
+[17:21] <OerHeks> sdb i guess, gpt
+[17:21] <smallmouse> ioria: it is a wester digital
+[17:22] <OerHeks> smallmouse, is this a hdd inserted in an external casing from a machine ? i wonder about the cryptswap1
+[17:23] <smallmouse> OerHeks: yes HDD external casing, may have security on this but i cant recall, just want to wipe it
+[17:23] <ioria> smallmouse,  did you connect the disk via hub ?
+[17:24] <smallmouse> ioria: no hub but via casing yes,
+[17:24] <bodo_> hi guys. how can i personalize my ubuntu unity? to be more fun? like effects and more stuff?
+[17:24] <OerHeks> small install gparted, unmount the drive sdb and wipe it
+[17:24] <psusi> smallmouse, open the disks utility and see if it sees it
+[17:24] <OerHeks> bodo_, take a look at unity-tweak
+[17:24] <OerHeks> !info unity-tweak
+[17:24] <ubottu> Package unity-tweak does not exist in utopic
+[17:25] <OerHeks> !info unity-tweak-tool
+[17:25] <ubottu> unity-tweak-tool (source: unity-tweak-tool): configuration tool for the Unity desktop environment. In component universe, is optional. Version 0.0.6ubuntu2 (utopic), package size 325 kB, installed size 2550 kB
+[17:26] <ioria> smallmouse,  i'll try a direct connection in the pc and i'll use a double usb cable, just to be sure
+[17:26] <smallmouse> psusi: does not see it on disc utility
+[17:27] <_X_C_V_B_> I get this while trying to play me and my shadow: ./bin/meandmyshadow-debian-64: error while loading shared libraries: libarchive.so.2: cannot open shared object file: No such file or directory
+[17:27] <ioria> smallmouse,  what is dmesg | less soon after plugging the disk ?
+[17:28] <smallmouse> ioria: I only have a laptop but yes have a double USB to help with the power.. you think it is a power thing ?
+[17:28] <rabaprodev> Hi, is there other open source imaging/cloning software except clonezilla?
+[17:28] <ioria> smallmouse,  mine was :-)
+[17:28] <Voyage_> need a video editing tool that can cut some parts of a .mov file, delete audio, put a watermark on top of video.
+=== Yukkii is now known as Dhs92
+[17:30] <OerHeks> _X_C_V_B_, how did you install that game? i see the ppa is old ppa:odamite/meandmyshadow-stable
+[17:31] <smallmouse> ioria: what ever dmeseg | less does it appears to have kicked off the disck
+[17:31] <smallmouse> ioria: I can now see it in my explorer thanks
+[17:31] <_X_C_V_B_> OerHeks:http://sourceforge.net/projects/meandmyshadow/?source=typ_redirect <-- from here
+[17:31] <ioria> smallmouse, ^_^
+[17:32] <ioria> smallmouse, remember to set permissions
+[17:32] <smallmouse> ioria: do i just format the whole disk ? it looks like it was a windows recovery
+[17:32] <ioria> smallmouse, if  ya wanna to get rid of it, ys
+[17:32] <smallmouse> ioria: there are a number of partitions on this, shall i delete them first ?
+[17:33] <ioria> smallmouse, i don't know what  you want to do ....
+[17:33] <ome> oi
+[17:33] <smallmouse> ioria: just need it to store stuff... ext4 or NFTS ?
+[17:34] <Guest86454> excuz me smallmouse but what's your problem maibe i can help you ??
+[17:34] <ioria> smallmouse, well, ntfs does not support permissions...
+[17:34] <smallmouse> ioria: its only for some photos and videos nothing sensitive etc
+[17:34] <ioria> smallmouse, yes, but you think to interchange with a win machine ?
+[17:35] <smallmouse> ioria: but the disc can be connected to my tv to play etc so prob win compatible is best, they still have some control of the world
+[17:35] <Guest86454> if you want to access your disk must be formated  ntfs 3G
+[17:35] <OerHeks> _X_C_V_B_, yeah,, i get a bunch of errors too, about libsdl-gfx
+[17:35] <ioria> smallmouse, so, go for fat or ntfs
+[17:35] <smallmouse> ioria: thank you for your time, much appreciated
+[17:36] <ioria> smallmouse, np
+[17:36] <Guest86454> ok
+[17:38] <OerHeks> _X_C_V_B_, just found a fresh ppa, hold on, i'll test it. https://launchpad.net/~upubuntu-com/+archive/ubuntu/games
+[17:40] <OerHeks> _X_C_V_B_, that gives a lot of issues too, bad luck , seems like a nice game > Depends: libarchive12  but it is not installable
+[17:40] <OerHeks>  Depends: libsdl-gfx1.2-4 (>=2.0.22) but it is not installable
+[17:40] <_X_C_V_B_> OerHeks: i'm going try install the windows version though wine
+[17:40] <_X_C_V_B_> I played on a windows machine before
+=== dm7freek is now known as macfreek
+[17:43] <_X_C_V_B_> OerHeks: works tough wine
+[17:43] <OerHeks> _X_C_V_B_, good, have fun :-)
+[17:50] <iampoz> hi everyone, I am new to making scripts and would like to make a fairly simple one. I am wondering if anyone could help or if it is off topic for here. shell or even awk would be fine.
+[17:50] <yoosi> _X_C_V_B_: what are you trying to install?
+[17:50] <_X_C_V_B_> yoosi: me and my shadow
+[17:50] <EriC^^> iampoz: script to do what?
+[17:50] <_X_C_V_B_> I got it working
+[17:51] <sysop2> I need to run a perl script to make my touchscreen work,  where do I configure it to run right as lightdm does, it requires  x to be running so I cant put it in rc.local.
+[17:52] <sysop2> that way I can use my touchscreen to login with.
+[17:52] <iampoz> the goal of the script would be, for example: take the first text (csv file) of each line and then run a command that makes a file with that name
+[17:53] <EriC^^> iampoz: first text of each line? can you give a sample of the line?
+[17:53] <EriC^^> is the only thing on the line the filename?
+[17:53] <iampoz> AAA,BBB,CCC ; first text of the line is AAA
+[17:55] <SchrodingersScat> iampoz: echo "AAA,BBB,CCC" | cut -d , -f1
+[17:56] <EriC^^> iampoz: for i in $(sed 's/,/\n/g' /path/to/file); do touch $i;done
+[17:56] <EriC^^> SchrodingersScat: that will only take the first column of every line
+[17:56] <MonkeyDust> iampoz  there's also #bash and #ubuntu-app-devel
+[17:57] <konam> am i the only one experiencing EXTREME memery leak from firefox 37 ubuntu 14.04?
+[17:57] <konam> memory*
+[17:58] <iampoz> EriC^^, I will try that
+[17:58] <TheNumb> konam: disable all the extensions and try again.
+[17:58] <SchrodingersScat> EriC^^: thought that was the point, oh well.
+[17:59] <ioria> iampoz i'll do a little c prog that fread each line and then calls system touch to create the file in a loop
+[17:59] <EriC^^> iampoz: use for i in $(sed 's/,/\n/g' /path/to/file); do touch "$i"; done
+[17:59] <EriC^^> in case it has spaces in the filename
+[17:59] <konam> that kind of would beat the point of firefox wouldn't it? :)  TheNumb
+[17:59] <konam> I'll just go back to 34
+[18:00] <TheNumb> konam: one of the extensions might be buggy.
+[18:00] <sysop2> konam, whenever I run chrome and firefox my swap starts filling up, I have to activate a swap file and then swapoff the partition and then swapon it and then swapoff the swapfile.
+[18:01] <sysop2> that will clear out the swap for awhile till it starts building back again.
+[18:01] <iampoz> SchrodingersScat, that was the point. you were right. Just not sure how to change "AAA,BBB,CCC" into the input file, I guess if I am in the directory, I just need to put the file name so I will try that.
+[18:01] <konam> sysop2 i don't use swap partitions
+[18:01] <sysop2> its been happening for years across many different versions.
+[18:01] <sysop2> you dont use swap at all?
+[18:02] <sysop2> or do you use a swap file?
+[18:02] <EriC^^> iampoz: if you use SchrodingersScat command it will only take AAA from the first line, and ignore BBB and CCC
+[18:02] <konam> i never have issues with memor + firefox, just started happening on this version sysop2
+[18:02] <konam> sysop2 no, i don't use swap at all, i used to but saw that the benefits were minimal
+[18:03] <iampoz> EriC^^, sorry that I was not more clear, that is what I want. I ran yours and it worked, but it also made files with names from BBB and CCC
+[18:03] <sysop2> if you have enough ram your are right,  but I still use them, I guess out of tradition lol
+[18:03] <konam> sysop2 if there were any benefits at all. i haven't missed it, everything has kept running smoothly
+[18:03] <EriC^^> iampoz: oh ok
+[18:03] <konam> sysop2 yes, i used to do it out of tradition too haha
+[18:04] <SchrodingersScat> EriC^^ / iampoz: would sed 's/,.*//g' work?  would remove everything after the first comma, yeah?
+[18:04] <Bashing-om> sysop2: One can do away with swap if one has enough ram installed to meet their needs, and do not ever intend to hebernate . I run with 4 Gigs and a very small swap partition - just in case .
+[18:05] <EriC^^> iampoz: for i in $(cut -d, -f1 /path/to/file); do touch "$i"; done
+=== z_ is now known as Guest85802
+[18:06] <sysop2> yea I never hibernate either, I should stop using the swap part since I upgrade ram, but oh well. the tradition continues.
+[18:06] <ikonia> there is nothing wrong with using a swap partition
+[18:06] <iampoz> EriC^^, yes, that worked
+[18:06] <ikonia> even if you have a lot of ram
+[18:06] <ikonia> it can still be helpful
+[18:07] <konam> ikonia yeah, there's nothing wrong with using one
+[18:07] <Bashing-om> ikonia: sysop2 ^^ aggreed, is cheap insurance .
+[18:07] <ikonia> not even insurance, it can help your system run, even with a lot of ram
+[18:08] <konam> sysop2 when my pc doubled as media center i didn't hibernate much either. changed my setup and now i do it a lot
+[18:09] <Bashing-om> ikonia: OK, I am in a learning mode .. as I understand it, swap is not even touched till there are ram usage contraints ?
+[18:09] <ikonia> Bashing-om: no, thats not true
+[18:09] <ikonia> Bashing-om: the system will swap out pages if things like the program is sleeping allowing for better ram usage for living programs
+[18:09] <BZWingZero> I have a samba share set up on my linux server, being accessed from my windows desktop. Files created on the share in windows are given the wrong permissions: 770. I need help getting newly created files to have 774 permissions.
+[18:09] <ikonia> swap is not just used as an overflow buffer
+[18:10] <BZWingZero> I have already configured my samba.conf, but it seems to be ignored
+[18:10] <daftykins> BZWingZero: use the samba share declaration to force default perms
+[18:10] <BZWingZero> daftykins, they're being ignored
+[18:10] <daftykins> your values must be wrong
+[18:10] <Bashing-om> ikonia: Noted ! Thanks for the instruction .
+[18:10] <daftykins> double check them with testparm
+[18:10] <daftykins> BZWingZero: bear in mind in the conf, i think they need to be written as 0774
+[18:10] <ikonia> Bashing-om: there is more to it than that, but thats just a high level summary
+[18:11] <BZWingZero> daftykins, http://pastebin.com/vbzLved3 current relevant config from testparm
+[18:12] <daftykins> lol path removed
+[18:12] <Bashing-om> ikonia: Good place to start the thought process, though . I have yet to ever know enough .
+[18:12] <daftykins> oh noes i don't know your local share
+[18:13] <BZWingZero> considering this will end up being a web-root...
+[18:13] <daftykins> oh no you're not one of those web devs that copies and pastes are you?
+[18:13] <BZWingZero> (either way, path is irrelevant for the problem, its functioning properly)
+[18:13] <daftykins> BZWingZero: so the Windows client is being used via guest?
+[18:13] <BZWingZero> correct
+[18:14] <daftykins> to which query?
+[18:14] <sysop2> I need to run a perl script to make my touchscreen work,  where do I configure it to run right as lightdm starts, it requires  x to be running so I cant put it in rc.local.
+[18:14] <BZWingZero> windows has mapped the share via guest.
+[18:14] <daftykins> valid users and guest seems a contradiction to me
+[18:14] <BZWingZero> I think
+[18:15] <BZWingZero> smbstatus shows the correct username
+[18:15] <BZWingZero> but turning off guest access prevents from connecting.
+[18:16] <daftykins> only as that's how you've authed with the samba host most likely
+[18:16] <daftykins> you would have to disconnect the share, remove it from the Windows user accounts' cache then retry
+[18:17] <daftykins> what ubuntu is running on the host end?
+[18:17] <BZWingZero> lts 14.04.2
+[18:17] <BZWingZero> server
+[18:17] <ehsan> salam
+[18:18] <daftykins> ok let me just check out the configs on the hosts i deal with
+[18:18] <BZWingZero> take your time. I appreciate the help. Spent 6 hours fruitlessly googling yesteday on this problem.
+[18:19] <daftykins> BZWingZero: first off, keep a copy of your current /etc/samba/smb.conf then and we'll mess with it :D
+[18:19] <BZWingZero> Something else that makes me go "huh". If I change my create mask and force create mode to 0777, newly created files get all permissions EXCEPT global read.
+[18:19] <BZWingZero> which is what I need
+[18:20] <EriC^^> BZWingZero: oh hey :)
+[18:20] <daftykins> so i take it the use case here is web dev work?
+[18:20] <EriC^^> BZWingZero: daftykins will get you all set i'm sure ;)
+[18:20] <BZWingZero> daftykins, for now. I built a linux server to learn. Web is my day job, figured I might as well start with learning how to config a webserver
+[18:20] <BZWingZero> EriC^^, ty for your help yesterday :)
+[18:20] <EriC^^> np :)
+[18:21] <daftykins> ooh am i making 3 a crowd? was there some input on this one yesterday?
+[18:21] <BZWingZero> daftykins, we ran into a brick wall a few times. Not much success.
+[18:21] <EriC^^> daftykins: no, i was trying to help him, i don't know anything about samba though
+[18:22] <daftykins> BZWingZero: so as default the apache2 doc root is /var/www/html, what've you done to handle file ownership in there?
+[18:22] <daftykins> i tend to create a web site management group, then add my user and www-data to it
+[18:22] <BZWingZero> I'm using nginx. I have a user account with full access to the folder.
+[18:22] <daftykins> right but you can't really have your user own the path and nginx run as a different user
+[18:23] <daftykins> so i do the above then have the doc root owned by www-data:mygroup
+[18:24] <daftykins> BZWingZero: just as an example this is the config i have for someone - http://paste.ubuntu.com/10852300/
+[18:25] <daftykins> i make use of the Windows user accounts on the clients to auth directly with the samba host, i create the users then set their smb passwords with smbpasswd
+[18:25] <BZWingZero> I suspect its a user account issue, and not actually a samba.conf issue. And I know next to nothing about linux user accounts
+[18:27] <daftykins> righty-o, well first step you'll want to disconnect the mapped drive on your Windows host, then run "control userpasswords2" and check the advanced tab -> manage passwords for any stored passes for that host. Probably nothing there though since guest is in use
+[18:27] <BZWingZero> The windows network drive mapping is dead
+[18:29] <_jay> issues on upgrade 12.04-14.04- currently I have no desktop icons. They start to load, but is seems like it crashes when generating jgeg or pdf previews? Folder icons are there already at first login.
+=== dm7freek is now known as macfreek
+[18:31] <daftykins> BZWingZero: as in removed?
+[18:32] <BZWingZero> yes. The windows computer has no trace of the mapped share.
+[18:33] <wafflejock> BZWingZero, regular linux user accounts aren't really very complicated, /etc/passwd has all the users and their login shell, /etc/group has the group listings, you can use the "groups" command to see groups for the logged in user or "groups username" to see groups for a particular user... so a user can be in many groups, each path (file/directory) has two parts to the ownership the user and the group, then it has the permissions
+[18:33] <wafflejock>  which control read/write/execute for the paths user, group, and anyone else (other)
+[18:33] <BZWingZero> wafflejock, so a lot less granualr than windows accounts.
+[18:33] <wafflejock> BZWingZero, unless you install some access control list (ACL) stuff it's really a little less sophisticated than windows permissions
+[18:34] <wafflejock> but I'm not really privvy to the samba problems, I do use VirtualBox for running dev environments but I just use the virtual box shared folder settings and it's linux in linux
+[18:34] <daftykins> BZWingZero: so right now does your Linux user match your Windows username?
+[18:35] <BZWingZero> daftykins, at the moment yes. I can create a new account on either if needed.
+[18:35] <daftykins> nah that's ideal

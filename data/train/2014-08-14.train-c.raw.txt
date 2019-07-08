@@ -1,0 +1,1500 @@
+[02:16] <daftykins> FLCl: can you take a picture with a camera of each of your EFI setup screens and share them online?
+[02:16] <mitchelwb> daftykins: looks like http://paste.ubuntu.com/8041334
+[02:16] <FLCl> when i enable uefi support
+[02:16] <daftykins> mitchelwb: and can you confirm the graphics hardware from 'lspci' ?
+[02:17] <FLCl> I'm sorry what exactly is the EFI setup screen?
+[02:17] <Beldar> FLCl, So what are you going to load there to fool them, I think they are on your side basically. Booting a disc or usb is probably a user skill issue.
+[02:17] <Beldar> unless it is broken
+[02:18] <daftykins> FLCl: the setup screens you go into to configure boot mode etc etc
+[02:18] <kz> sudo: error in /etc/sudo.conf, line 0 while loading plugin `sudoers_policy'
+[02:18] <kz> sudo: /usr/lib/sudo/sudoers.so must be only be writeable by owner
+[02:18] <kz> sudo: fatal error, unable to load plugins
+[02:18] <FLCl> Okay Dafty, thank you for the help I will upload now. Give me a few mins.
+[02:18] <daftykins> FLCl: possibly your Lenovo has a special button you press when powered off to boot and enter the setup, otherwise it's likely a key like delete, F2, F8, F10, F12... the usual
+[02:19] <enjoi> nvm, seems to work fine with firefox, no ,desktop shortcut needed
+[02:19] <enjoi> woop woop
+[02:19] <mitchelwb> daftykins: I think the line you're looking for is: 04:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] RV770 [Radeon HD 4850/4870]
+[02:19] <enjoi> juniper vpn success on ubu 14.04 yayyyyyy
+[02:19] <Beldar> the manual will say FLCl key
+[02:19] <enjoi> this makes me so so so so happy lol
+[02:20] <anonymous9037611> what version?
+[02:20] <FLCl> dafty
+[02:20] <FLCl> before I upload the pictures I think i should mention thast
+[02:21] <FLCl> I just noticed that after removing all the os's on this computer, and going into bios and switching to UEFI support only I now have the option to boot into USB
+[02:21] <FLCl> but only USB
+[02:21] <FLCl> nothing else is listed
+[02:21] <daftykins> mitchelwb: ah-har, you've got an old 4-series card that's only supported by the legacy radeon driver now i believe.
+[02:21] <antiPoP> Hi,
+[02:21] <Beldar> FLCl, Hit the tab key after typing dafty to get the nick correct.
+[02:21] <hol> enjoi: what version of juniper vpn are you using?
+=== rrrre445534 is now known as the_mighty_bogan
+[02:22] <daftykins> FLCl: USB in EFI mode?
+[02:22] <mitchelwb> daftykins: yeah, I think you're right... And I realized that AFTER I tried to install newer drivers today.  I tried to back it out, but apparently, I took a wrong turn at Albuquerque.
+[02:22] <antiPoP> While updating ubuntu I got a few strange errors, I googled for tehse but I didn't got any info. Is this something I shoudl worry about? Here are the update logs: https://gist.github.com/antiPoP/d97e0d70407fb3255905
+[02:22] <FLCl> daftykins:yes sir
+[02:23] <FLCl> daftykins: i will be done uploading pictures soon
+[02:23] <wahben> Hey Ubuntuers, question: I want a specific service that managed by rc.d to execute as a specific user instead of by root.
+[02:23] <wahben> how to do?
+[02:23] <daftykins> mitchelwb: whoops :D ok, i'd only be guessing which to install, i'd google for radeon legacy and 14.04 i think to see what you can do. from the log you can see it's failing then trying to use FBDEV, which isn't going to allow 3D and thus doesn't let Unity work
+[02:24] <daftykins> wahben: disable it from rc.d then look if it can be executed as a user, then find the binary and run it
+[02:24] <wahben> daftykins: .. obviously, but I want it to run as a service when system boots, just not with root
+[02:25] <mitchelwb> daftykins: let me see if I can find it again.  I had it up earlier on my machine, but I'm on a different machine now so I'll have to try and relocate it.
+[02:25] <wahben> can't you change user id in init.d script?
+[02:26] <daftykins> wahben: perhaps a course of action could be suggested why you're trying to do something so ass-backwards :>
+[02:26] <daftykins> +if you share
+[02:27] <icecube45> HOLY KITTEN!
+[02:27] <icecube45> daftykins: no idea what I did
+[02:27] <icecube45> guess what's working?
+[02:27] <daftykins> world peace!?
+[02:27] <icecube45> NO!
+[02:27] <icecube45> hehe
+[02:27] <daftykins> ;) glad to hear it
+[02:27] <icecube45> streaming
+[02:28] <icecube45> i dont even know
+[02:28] <wahben> meh.. nevermind, thanks for suggestion though.
+[02:28] <wahben> peace
+[02:28] <icecube45> Actually.. I might know what happened
+[02:28] <icecube45> added my user to the video group
+[02:28] <icecube45> haha
+[02:28] <FLCl> daftykins: Hey sorry im taking so long its taking forever to upload. here is one of the pictures tho. This is with legacy support turned on. http://oi62.tinypic.com/2ez49rd.jpg
+[02:29] <FLCl> daftykins: And here is with only uefi http://oi58.tinypic.com/2h4xoj5.jpg
+[02:29] <daftykins> ah yes that's looking better, in the first
+[02:29] <daftykins> oh, well in both :>
+[02:29] <daftykins> FLCl: what's on the USB flash drive right now?
+[02:30] <icecube45> hey daftykins, new question. best way to run scripts upon startup?
+[02:30] <daftykins> icecube45: no idea :)
+[02:30] <icecube45> good!
+[02:30] <FLCl> currently the usb contains elementary os
+[02:30] <_unreal_> hello. ok I can noit shut down this computer with out it feezing and having to force shutdown. 14.04 LTS desktop
+[02:30] <FLCl> daftykins: THE USB CONTAINS ELEMENTARY OS
+[02:30] <FLCl> daftykins:sorry for the caps
+[02:30] <_unreal_> I know it froze on install on a network card driver error I believe
+[02:30] <wafflejock> icecube45: have you typed start up in the lens
+[02:30] <daftykins> FLCl: zomg caps, my ears! ok, so you want win7 and ubuntu eventually, yes? dualboot?
+[02:31] <icecube45> whatnow wafflejock?
+[02:31] <wafflejock> icecube45: oh you mean when a streaming server starts?
+[02:31] <wafflejock> icecube45: just caught the end of that conversation
+[02:31] <icecube45> no, system startup
+[02:31] <FLCl> daftykins: yes sir ^.^ i would like both installed under efi if possible
+[02:31] <_unreal_> any way it searchnig any logs? that would give a clue why the  computer is feezing every time I try to shut it down
+[02:31] <wafflejock> icecube45: oh yeah so are you using a desktop environment, Unity, Gnome, KDE?
+[02:31] <daftykins> FLCl: do you have another computer?
+[02:31] <icecube45> wafflejock: 14.04 server
+[02:32] <FLCl> daftykins: yes sir, I am on it currently
+[02:32] <Panik> hey
+[02:32] <icecube45> so. no to the desktop environment
+[02:32] <daftykins> FLCl: ah good stuff, so you're going to want to make up that flash drive with win7 SP1 EFI bootable
+[02:32] <icecube45> hey Panik, whadup
+[02:32] <Panik> if I have to install ndiswrapper and the source pc doesnt have internet access... can i do it via windows then throw it on a usb and vala?
+[02:32] <_unreal_> also TERMINAL is not giving me a command prompt. its totally blank
+[02:32] <Panik> I mean, I assume i can, just wondering if there is any probelsm with doing it that way
+[02:33] <daftykins> FLCl: make sure that on the other setup pages, 'secure boot' is disabled if it is present
+[02:33] <FLCl> daftykins: Im sorry im rather noobish, how would i make it efi bootable?
+[02:33] <wafflejock> icecube45: think you need .bashrc but ubottu has no ifno
+[02:33] <wafflejock> info*
+[02:33] <icecube45> mm
+[02:33] <icecube45> Can't I just drop a script into init.d?
+[02:33] <icecube45> or init
+[02:34] <wafflejock> icecube45: https://help.ubuntu.com/community/UbuntuBootupHowto
+[02:34] <_unreal_> ?
+[02:34] <daftykins> Panik: you can pass the .deb's over, but you should be 100% sure there's no better way before resorting to ndiswrapper
+[02:34] <FLCl> daftykins: secure boot is currently disabled sir, how should i turn the Windows 7 into efi bootable
+[02:34] <daftykins> FLCl: see PM
+[02:35] <daftykins> as we are drifting into Windows support territory right now, and here be dragons.
+[02:35] <Panik> its what my manufactors is suggesting to do
+[02:36] <daftykins> Panik: really? that's terrible, what wireless device is it?
+[02:36] <mitchelwb> daftykins: I believe this is the correct driver  https://help.ubuntu.com/community/RadeonDriver  But the part about purging fglrx seems to be a sticking point.
+[02:37] <daftykins> mitchelwb: did you attempt to install any AMD driver from their website, or fglrx package when you were updating earlier?
+[02:37] <wafflejock> icecube45: looks like that document is a bit dated but it links to an up to date guide for the upstart cookbook
+[02:37] <mitchelwb> daftykins: the fglrx one, yes.
+=== Guest-9800 is now known as zealotnagah
+[02:38] <icecube45> yea, wafflejock I found rc.local
+[02:38] <daftykins> mitchelwb: was that via package or download?
+[02:38] <Psil0Cybin> hey guys if i am backing up my home folder and am copying all the files over, do i need to access it as root on the computer to copy it? or can i just copy and paste on to the ext4 thumbdrive.
+[02:39] <daftykins> Psil0Cybin: user is fine, but ideally you'd do it from a live session so no files are locked/in use
+[02:39] <mitchelwb> daftykins: package.  I don't have the url of the page that I got the instructions from now though.
+[02:39] <Psil0Cybin> daftykins, i have an encrypted home directory so i cant do it via live cd..
+[02:39] <Psil0Cybin> what is the next best method?
+[02:39] <daftykins> you could if you then unlocked the home in the live session
+[02:40] <daftykins> mitchelwb: "dpkg -l | grep fgl | pastebinit"
+[02:40] <Psil0Cybin> daftykins, is there a guide on doing that? I am new, never done that before...so I dont want to make mistakes, nor i guess flood this channel; asking for basic help questions
+[02:40] <Psil0Cybin> regarding that issue
+[02:40] <Psil0Cybin> unless its a simple process?
+[02:41] <mitchelwb> daftykins: http://paste.ubuntu.com/8041484
+[02:41] <daftykins> Psil0Cybin: i'm too sane and un-worried about my cat pictures to use encryption
+[02:41] <daftykins> mitchelwb: yeah, "sudo apt-get remove --purge fglrx* " then - be sure you include that * at the end
+[02:44] <Nordom> Hello, I installed a package for Xen. And it had a grub file that came with it. Somehow I bugged it and caused my system to crash so I removed the grub using grub customiser. I fixed the issue and now I need that grub back. I dont know what was on the grub I deleted and guides haven't been very helpful on how to set that up. Is there some way I can remove Xen and reinstall it to get it back?
+[02:44] <Nordom> I tried udo apt-get remove xen-hypervisor-amd64 but it didnt seem to remove it
+[02:44] <daftykins> sudo apt-get install --reinstall <package>
+[02:44] <Nordom> Daftykins thanks I will try that
+[02:46] <Psil0Cybin> daftykins, lol, so what would i do when i boot the live CD to mount the home directory...its located in the default partition sets, so it does not have a seperate directory or anything funky yet..until I learn how to do these things of course, but....
+[02:46] <Psil0Cybin> you suggested i can just mount the home directory and copy it via the live cd?
+[02:46] <TJ-> Psil0Cybin: In the Live ISO environment, "sudo apt-get install ecryptfs-utils" and then "ecryptfs-recover-private /home/$USER". See "man ecryptfs-recover-private" first!
+[02:47] <Psil0Cybin> Thank you TJ-.
+[02:48] <Psil0Cybin> hmmm it keeps saying Collecting Files when I just tried to copy and paste from the home directory onto the thumb drive, sigh..lol
+[02:48] <mitchelwb> daftykins: I did purged the fglrx (that was a slightly different command from the instructions linked on the driver page) and then did a reinstall of mesa-utils and a reboot and I seem to be back in business!
+[02:49] <TJ-> Psil0Cybin: Abandon the GUI and embrace the terminal shell  :)
+[02:49] <Psil0Cybin> TJ-, nvm it worked now, and i should....I think I need to start compiling my own documents on what i do so I remember all these steps you guys tell me...its all golden!
+[02:50] <evoly> Hello! Why do i get the message "bash: cowsay: command not found" if i try to run cowsay as root? Cowsay as normal user works, but not as root... This is not a serious problem but i'm just curious about why this does not work.
+[02:50] <Psil0Cybin> last question how can i double check that my permissions copied over properly, i guess..just on the home directory type ls -l and then do the same in the terminal of the dir of the backup?
+[02:51] <Psil0Cybin> yea the GUI is telling me "Can't copy special file"
+[02:51] <daftykins> mitchelwb: excellent :D
+[02:51] <TJ-> Psil0Cybin: unless the copy is destined for a file-system that doesn't store POSIX/*nix permissions (such as NTFS or FAT), then permissions should be the same
+[02:52] <Psil0Cybin> okay cool
+[02:52] <Psil0Cybin> yea i am using ext4. ty
+[02:52] <TJ-> Psil0Cybin: "Special files" are usually things like FIFO pipes
+[02:52] <Psil0Cybin> so i should be fine correct...it looked like a gnome thing anyway..
+[02:53] <Psil0Cybin> I really only want to back up my information/themes/icons/ssh keys/gpg keys
+[02:53] <Psil0Cybin> information is easy to back up...but the rest, is in the home directory correct?
+[02:54] <TJ-> Psil0Cybin: This is a reason for working directly from a Virtual Terminal (VT) when doing these kind of operations, because the GUI will be using several files within the home directory for live activity.
+=== valhalla- is now known as foD
+=== foD is now known as foD_
+[02:55] <TJ-> Psil0Cybin: If you only want to preserve data you created, in *general*, copying everything except 'dotfiles' (files and directories beginning with a "." that 'hides' them from directory listings by default) is sufficient. If you want settings and configurations from the applications you use, you must ensure you get the 'dotfiles' too
+[02:56] <Psil0Cybin> TJ-, thank you that answers actually my next few questions...thank you.
+[02:56] <TJ-> Psil0Cybin: In a terminal you can see 'dotfiles' by using the "-A" switch to "ls". In GUI there's usually an option to enable listing of 'hidden' files which does the same thing
+[02:56] <Psil0Cybin> yea CTRL+H enables it... i am getting the .dot files, but i am worried that some of the files in use would be like SSH keys? If that is not the case then i am fine regardless...
+[02:57] <Psil0Cybin> i am not using anything just copying stuff over, so i was assuming the stuff thats locked is mostly stuff for the current system
+[02:57] <daftykins> you're not copying them graphically? :S
+[02:57] <Psil0Cybin> I am, i was told i could open up thunar, and just copy and paste into the thumb-drive? as one way of backing up?
+[02:57] <Psil0Cybin> should i not be?
+[02:58] <TJ-> Psil0Cybin: No, files are generally only held open when being actively written to, or read into memory. The files that are likely to be cause issues are desktop-environment control files for inter-process communication - which you can ignore
+[02:58] <daftykins> flash drives != backup
+[02:58] <Psil0Cybin> daftykins, ill do what ever you recommend, if i should not do it via the GUI then fine, just what would be the command to copy my directory into the thumbdrive :( sorry...guys, i know i am being very stupid atm but when I google, i find 1000 of methods of doing things, and i come here because i know you guys recommend the best lmao
+[02:58] <daftykins> TJ-'ll sort you out :) i have to sleep now, i'm punching out for the night ;)
+[02:58] <Psil0Cybin> but off google it just says make a ext4, and copy and paste with the .files that are normally hidden
+[02:59] <TJ-> Psil0Cybin: Graphically will generally be a *lot* slower than a terminal shell, because the tools spend ages building internal lists of files ands trying to present a graphical representation too... whereas the shell just gets on with the job
+[02:59] <daftykins> TJ-: ^5
+[02:59] <Psil0Cybin> TJ-, Makes plenty of sense, what would be the best command to copy them over... a simple cp?
+[02:59] <TJ-> Psil0Cybin: Also, when things go wrong, the GUI often gets in the way of identifying *what* was the exact cause.
+[03:00] <Psil0Cybin> cp (dir of home) (dir of backup)?
+[03:01] <TJ-> Psil0Cybin: We have a tool for that! "rsync" ... it is designed for efficient synchronisation of two directories, usually one is on a remote server, but can be used just as well locally. So you could do, for example: "rsync -av /home/$USER /media/$USER/USB/home/$USER/" (assuming "/media/$USER/home/$USER/" exists!)
+[03:02] <Psil0Cybin> oh wow!
+[03:03] <Psil0Cybin> well maybe at the moment if your saying i should be fine, I will just copy and paste and learn more about that for next time, all i really want is my SSH keys/GPG keys, stuff like that..should be easy to back up regardless..
+[03:03] <TJ-> Psil0Cybin: slight correction here, to avoid creating an additional directory in the destination: "rsync -av /home/$USER/ /media/$USER/USB/home/$USER/"
+[03:03] <Psil0Cybin> wow thanks i need to look into rsync!
+[03:03] <Psil0Cybin> never even knew this stuff exist
+[03:04] <TJ-> Psil0Cybin: the keys are in "/home/$USER/.ssh/" and "/home/$USER/.gnupg/" I think
+[03:04] <Psil0Cybin> TJ-, silly question gpg keys are stored in the home directory as well, as the SSH ones correct? like I know for a fact .ssh should be what i need
+[03:04] <Psil0Cybin> oh wow...ur amazing
+[03:04] <Psil0Cybin> lol!
+[03:04] <Psil0Cybin> i just died
+[03:04] <TJ-> Psil0Cybin: I think we have a telapathic connection :)
+[03:05] <PCworker> Hello, I am looking for a program or a set of commands to be able to copy a partition and all its files to another hard drive. Or clone one disk to other disks. Anyone have any ideas on this subject?
+[03:05] <TJ-> PCworker: "sudo dd if=/dev/sdX9 of=/path/to/file.img bs=1M"
+[03:05] <daftykins> clonezilla - PCworker
+[03:06] <Beldar> PCworker, +1 clonezilla
+[03:06] <TJ-> PCworker: to clone a disk - assuming the target is the same size or larger than the source: "sudo dd if=/dev/sdX of=/dev/sdY bs=1M"
+[03:07] <PCworker> Can I get that from Software center or apt-get?? (clonezilla)
+[03:07] <daftykins> PCworker: downloadable bootable ISO too
+[03:08] <PCworker> Tj: I am going to try your command as well, I need to learn more about the terminal.
+[03:08] <PCworker> daftykins: gotcha, thanks
+[03:10] <s1ckness> o/
+=== lbaway is now known as luckybunny
+[03:10] <evil_dan2wik> How long is the 'patch' command supposed to take?
+[03:10] <s1ckness> Anyone use ubuntu 14.04 here guys ?
+[03:11] <TJ-> evil_dan2wik: You ran it without piping it a patch didn't you? :) press Ctrl+C and then show us the command you're trying to use and we'll correct it
+[03:11] <evil_dan2wik> initrd@initrd-Aspire-xxxx:~/usbasp.2011-05-28/firmware$ sudo patch /home/initrd/Downloads/usbasp-pdi-usbaspfirmware-20120816.diff
+[03:12] <Beldar> s1ckness, There are only two supported releases %50 chance here people are.
+[03:12] <evil_dan2wik> TJ-, ^
+[03:14] <TJ-> evil_dan2wik: firstly, you shouldn't need sudo. Secondly the .diff file probably contains directory levels you'll need to tell 'patch' about with its "-p X" argument, and thirdly we use it from the base directory of the files we are patching like: "patch -p1 < /home/initrd/Downloads/usbasp-pdi-usbaspfirmware-20120816.diff"
+[03:14] <s1ckness> Beldar, Ok thanks .. lol
+[03:14] <evil_dan2wik> ok
+[03:14] <evil_dan2wik> oh, that worked, thanks
+[03:17] <icecube45> weird
+[03:19] <Psil0Cybin> Quick question guys after coping my home directory into a thumbdrive (ext4) i checked my permissions and on the home directory on my computer the same folder that is drwx-----  is now drwxrwxr-x is that normal?
+[03:19] <Psil0Cybin> or is that fine or are all my permissions messed up?
+[03:21] <somsip> Psil0Cybin: how did you copy? Did you use whatever flag it is to preserver permissions?
+[03:21] <Psil0Cybin> somsip, no i used thunar in root..and copied and pasted it into an ext4, and everyone said i should be fine
+[03:21] <Tedel> hello, has anybody tried to create a calendar as a "template" for korganizer/kontact? see, I have about 20 tasks which repeat over and over again on all the projects I need to manage, so I created an ical of all those tasks and saved it on one file, with the intention of importing it (merging) with the main calendar every time I get a new project. has anybody tried this successfully? I just tried, but it failed.
+[03:21] <Psil0Cybin> somsip, would that not work?
+[03:22] <somsip> Psil0Cybin: depends how the ext4 is mounted, but maybe "everyone" will have an answer for you
+[03:22] <eeee_> Psil0Cybin: cp -p
+[03:23] <eeee_> cp changes permissions, mv doesn't (unless across volumes)
+[03:23] <Loshki> Psil0Cybin: they're slightly messed up, but the new permissions are more generous than the old ones, so most of the time it won't matter. A few programs e.g. ssh are fussy about directory permissions and may complain. You can fix them as you encounter them. Or do the copy all over again with better software...
+[03:24] <Psil0Cybin> Loshki, well i really only want them for SSH and stuff like that, so how would I recopy it using cp - p (home folder) (folder of backup?)
+[03:24] <Loshki> I prefer "rsync -av", not least because it has a "dry run" option....
+[03:24] <somsip> Psil0Cybin: in this case, better software might be rsync
+=== Sleepnbum is now known as Guest30968
+[03:25] <Psil0Cybin> somsip, so i would (rsync -av /home/$USER/ /media/$USER/USB/home/$USER/)
+[03:27] <Psil0Cybin> what would be the best method to use rsync in order to make sure i copied it over properly so i may not deal with problems down the road
+[03:27] <somsip> Psil0Cybin: I use rsync -rtlDvu but you'd have to check what they all mean 'cos I don't remember. But your command looks okay in itself
+[03:27] <Loshki> Psil0Cybin: rsync -n -av --partial --progress  /home/$USER /media/$USER/USB/home  <--- note shorter path for destination, and use of -n
+[03:28] <Psil0Cybin> Loshki, what does the n do? sorry, i guess ill have to go through the man page
+[03:28] <Psil0Cybin> I just want tostart coping it over while i do that
+[03:29] <Loshki> Psil0Cybin: -n is a dry run. When you're happy the args are correct, remove it to do the actual copy...
+[03:29] <vigoo> im having 64bit ubuntu 14.04 with a ralink rt5360. it detects wifi but does not connect. keeps asking for password and never connects. any idea what to do folks?
+[03:30] <Tedel> does anybody know how to duplicate tasks on kontact?
+[03:30] <Loshki> Psil0Cybin: if you're very lucky, rsync will notice that only the permissions have changed, and it will fix them without a bunch of copying.
+[03:31] <eeee_> Psil0Cybin: and if you're very unlucky it will think the size and mod time are the same and not do squat
+[03:31] <eeee_> :D
+[03:32] <Psil0Cybin> Loshki, okay wait so i just run the command you said  rsync -n -av --partial --progress  /home/$USER /media/$USER/USB/home
+[03:32] <Psil0Cybin> and if it works good remove the -n
+[03:32] <Psil0Cybin> and i should be good to go? and my permissions should be good?
+[03:32] <Loshki> Psil0Cybin: exactly, and then you should be good to go, and the permissions should be correct. You will need to spot check a few of them to be sure, of course.
+[03:33] <Psil0Cybin> okay good :D
+[03:33] <icecube45> hmm
+=== mgodzilla is now known as chocolate_cake
+[03:34] <Psil0Cybin> Loshki, what does the dry run do, test that it can actually copy the files over? its showing me all the files..
+=== chocolate_cake is now known as mgodzilla
+[03:34] <Loshki> Psil0Cybin: You could log the output as it runs, in case you have questions later.
+[03:34] <Psil0Cybin> going down the list, so once it completes and it has no major error messages i would just remove the -n?
+[03:35] <Loshki> Psil0Cybin: dry run does everything except the actual copy. If it looks ok, then yes, just remove the -n
+[03:36] <Psil0Cybin> Loshki, thank you guys, i really appreciate this..
+[03:36] <Loshki> Psil0Cybin: it worked?
+[03:36] <Psil0Cybin> Well its working at the moment via the dry run, its showing all my files
+[03:37] <Psil0Cybin> okay trhe dry run finished
+[03:37] <Psil0Cybin> it said
+[03:37] <Psil0Cybin> rsync error: some files/attrs were not transffered (see previous errors) (code 23) at main.c(1183)
+[03:38] <Loshki> Psil0Cybin: you might wanna redo the dry run, log the output, then check the particulars of those errors...
+[03:39] <Psil0Cybin> how can i write the output to a file, because it seems to cut off the top part of what it copied over..
+[03:40] <Loshki> Psil0Cybin: rsync -n -av --partial --progress  /home/$USER /media/$USER/USB/home | tee logfile.txt
+[03:40] <Psil0Cybin> thank you Loshki you are a big help. btw.
+[03:40] <Psil0Cybin> Loshki, like spoons?
+[03:40] <Loshki> Psil0Cybin: see the pipe "|" symbol? It's not a typo...
+[03:40] <Loshki> Psil0Cybin: Apparently. You speak Russian?
+[03:41] <Psil0Cybin> :D
+[03:41] <CHUPULXIIB> i speak tirixta
+[03:41] <CHUPULXIIB> i love to guzzle diarrhea
+[03:41] <CHUPULXIIB> don't you?
+[03:41] <Psil0Cybin> Loshki, i do speak russian. ;) good guess.
+[03:41] <CHUPULXIIB> i like it when niggers stick their asses in my face
+[03:41] <antiPoP> where can I see ufw logs?
+[03:41] <CHUPULXIIB> and spray their diarrhea
+[03:41] <CHUPULXIIB> niggerdiarrhea is the tastiest fecal matter I have ever had
+[03:41] <CHUPULXIIB> you all should travel out here to ferguson, mo to try some
+[03:41] <eeee_> !ops
+[03:41] <ubottu> Help! Channel emergency! (ONLY use this trigger in emergencies) - Pici, Myrtti, jrib, Amaranth, tonyyarusso, Nalioth, lamont, CarlK, elky, mneptok, PriceChild, Tm_T, jpds, ikonia, Flannel, genii, wgrant, stdin, h00k, IdleOne, nhandler, Jordan_U, popey, Corey, ocean, cprofitt, djones, Madpilot, gnomefreak, lhavelund, k1l, rww, phunyguy, bazhang
+[03:41] <Psil0Cybin> CHUPULXIIB, you here to sturr up the blood and the masses eh?
+[03:42] <msx> hello guys, i just noticed my telepathy-indicator is gone (14.04.1 up-to-date here), any1 else?
+[03:42] <Loshki> Psil0Cybin: No need to feed the troll. The ops will take care of it.
+[03:43] <Psil0Cybin> Yea you rright, but thank you i will try the dry run again and log the files, its prob the GUI files that are in use
+[03:43] <Psil0Cybin> right?
+[03:44] <Loshki> Psil0Cybin: whenever I've had copy errors like that it's usually been something unimportant, but it never hurts to check. The only thing worse than a corrupted backup is no backup at all...
+[03:44] <Psil0Cybin> Loshki, you are correct, thank you for giving me this advice, it really would save me the stress / be worth it to be double checking prior to nuking my drives.
+[03:46] <Loshki> Psil0Cybin: In my experience, nothing relieves the stress of doing system mods like knowing you have a good, solid backup
+[03:48] <binoburrcobbhd> wzup peeps im a new user too linux is pretty cool
+[03:49] <Psil0Cybin> you are right Loshki exactly, that is why I am glad i came here and ask these questions I know I ask silly ones...but this is how I learn :)
+=== Schrodin1 is now known as SchrodingersScat
+[03:51] <binoburrcobbhd> SO HOW IS EVERYBODY DOING TONIGHT!!!
+[03:51] <wafflejock> binoburrcobbhd: great are you having issues if not you might want to try #ubuntu-offtopic
+=== corey_ is now known as Guest64670
+[03:51] <binoburrcobbhd> NO JUST CHECKING IF IT WORK PROPERLY LOL
+[03:51] <wafflejock> binoburrcobbhd: this chat is meant for support issues really not general chat the offtopic channel is good to just generally chat
+=== abrkn is now known as Guest18330
+=== Mrokii_ is now known as Mrokii
+=== Schnabel- is now known as Schnabeltierchen
+=== surfsue is now known as surfdue
+[03:53] <Psil0Cybin> Loshki, question and i think i should have asked this before, i do not need to run rsync in root or what ever, just the command you provided should be fine right? like i do not need to do anything funky ?
+=== praqzis_ is now known as praqzis
+[03:53] <Loshki> Well, this *is* a support group and beginners are welcome. I don't find your questions silly, and even if I did, I would try to be gentle.
+=== Mattias___ is now known as Mattias
+[03:53] <Psil0Cybin> haha thank you, because as you can tell this is my first backup :D be gentle..
+=== eide___ is now known as eide__
+=== ribasushi_ is now known as ribasushi
+[03:54] <Psil0Cybin> but i guess I should be fine , like running it in root would not do anything
+[03:54] <Psil0Cybin> i was just wondering if it had access rights to copy certain files, but i guess that is what the dry run would explain etc, right?
+=== blindsight is now known as Guest26923
+=== Franz`_ is now known as Franz`
+=== furier__ is now known as furier_
+=== ubuntu is now known as Guest61369
+=== _andyj__ is now known as _andyj_
+=== xubuntu is now known as Guest28952
+[03:58] <Loshki> Psil0Cybin: See what the dry run says. If you have sufficient permissions to read the files from the source directory and write them to the destination you can get away without root. If not, then run it as root. If you own the files you are backing up, running as root may be overkill but it pretty much forestalls any permissions problems. Of course, root can write anywhere, so you need to be a little more careful before you hit return...
+[03:58] <antiPoP> Hi, I have installed ufw and seems it's running, but when I reboot it's not longer active and I need to manually start it
+[03:58] <antiPoP> what I'm doing wrong?
+[04:00] <Psil0Cybin> Loshki, wow i love linux, and i love that commands dry run system!
+[04:01] <Psil0Cybin> <3
+=== SittingShiva is now known as Polymorphism
+[04:01] <Loshki> Psil0Cybin: in general, the command line is where the big boys play. GUIs are for windows users...
+[04:02] <Psil0Cybin> Loshki, well that is what I am learning :) 2 years into Linux, completely without any windows partitions...I even dropped photoshop for gimp, so soon the terminal is all i will use.
+[04:02] <lyyy> <unconvertable> <unconvertable>
+[04:02] <xubuntu_> me
+[04:03] <lyyy> hello
+[04:03] <xubuntu_> ni hao
+[04:03] <lyyy> xbuntu 3d
+[04:03] <lyyy> nihao
+[04:04] <Loshki> Psil0Cybin: there are always one or two windows apps I can't seem to manage without. For those I either I use wine, or virtualbox. No sense being puritan about these things...
+[04:04] <xubuntu_> zhi chi ,zai luntan kan ren peizhi guo
+[04:04] <Loshki> !cn
+[04:04] <ubottu> , /join #ubuntu-cn <unconvertable> /join #ubuntu-tw
+[04:05] <xubuntu_> shurufa mei nong hao
+[04:05] <Psil0Cybin> Loshki, virtualbox! See I never even thought of really running it because I have been managing with out windows, but actually the only thing I need from Windows or Mac is Unity, for Gaming Development.
+[04:05] <Loshki> Hmm. Quite a compact written language. That takes about 3 lines in a romance language..
+[04:05] <Psil0Cybin> that would be phenominal, but they said as unity gains steam they might add a linux engine shortly
+[04:06] <Psil0Cybin> Loshki, loll
+[04:07] <Psil0Cybin> okay home folder backed up I think its time to format and install xubuntu 14.04
+[04:07] <tables> how do i create an ubuntu live usb from ubuntu?
+[04:07] <Loshki> Psil0Cybin: One last step. Please stand by...
+[04:08] <Loshki> Psil0Cybin: Optionally, run diff -r /home/$USER /media/$USER/USB/home and just verify it says the two trees are identical...
+[04:10] <Loshki> tables: like this one? http://www.instructables.com/id/How-to-make-your-own-Ubuntu-LiveUSB/
+[04:13] <testerr> Hi all. I'm following some comments at http://stackoverflow.com/a/11686912, trying to give a default value to a bash variable if it's not yet set. I'm using '${VAR:="foo.sh"}', trying to set VAR equal to the string "foo.sh", but bash is trying to execute "foo.sh" when I do so. Anyone here have a better solution to recommend?
+[04:14] <testerr> (*It's to set an environment variable if it's not yet set)
+[04:20] <testerr> Ah, got it -- I was missing a colon.
+[04:21] <Beldar> Psil0Cybin, So tell me, have you regretted yet not having proper backups or a clone of 12.04 yet?
+[04:25] <Loshki> Beldar: And you told *me* off for being sarcastic yesterday...
+[04:27] <Beldar> Loshki, It's not sarcasm, just wondering if they are learning from all of this help.
+[04:28] <Loshki> Beldar: it
+[04:28] <Loshki> Beldar: it's an interesting question. But we're more like an ER here than a doctor's office.
+[04:29] <Beldar> Loshki, I have been here for years.
+[04:29] <alfonsojon> Hello
+[04:29] <alfonsojon> I installed Ubuntu 14.04 on my Power Mac G4, but it boots to a black screen with a cursor.
+[04:30] <Beldar> !nomodeset | alfonsojon
+[04:30] <ubottu> alfonsojon: A common kernel (boot)parameter is nomodeset, which is needed for some graphic cards that otherwise boot into a black screen or show corrupted splash screen. See http://ubuntuforums.org/showthread.php?t=1613132 on how to use this parameter
+[04:30] <alfonsojon> It seems lightdm is not loading correctly, any suggestions?
+[04:30] <jaymaker> Hello everyone!
+[04:30] <alfonsojon> Beldar: I will take a look, thanks
+[04:31] <ttal> any idea why mounting my raid drive to /mnt/ doesnt show up in the file browser under devices?
+[04:32] <alfonsojon> Beldar: how can I boot using that from yaboot?
+[04:32] <alfonsojon> My Mac is a PowerPC, so it doesn't use Grub
+[04:32] <ttal> but when I mount to /media/ it shows up.
+[04:33] <Beldar> alfonsojon, The link is for a grub mod, so probably not. Grub should be involved somewhere, not sure the answer.
+[04:33] <Takkun> Can someone help me install ubuntu?
+[04:33] <alfonsojon> Darn.
+[04:34] <Takkun> guys?
+[04:35] <alfonsojon> Beldar: I got it, a quick Google search sent me on the right path
+[04:35] <Beldar> cool
+[04:35] <alfonsojon> It is booting now
+[04:36] <Takkun> Beldar: can you help me out friend?
+[04:36] <lotuspsychje> !patience | Takkun
+[04:36] <ubottu> Takkun: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[04:36] <Beldar> Takkun, Tell the channel the issue, f I recognize it I will try.
+[04:36] <Beldar> if*
+[04:37] <wafflejock> Takkun: where are you trying to install and what version?
+[04:38] <Takkun> Basically I have two hard drives in my computer, an SSD and a normal 1tb hard drive. I had Ubuntu installed on the SSD in legacy mode, but my entire boot got messed up so I reformated both hard drives. I currently have no os installed. I am trying to install Ubuntu onto the SSD however, it does not get detected only my normal hd does
+[04:38] <Takkun> Any way to fix this?
+[04:39] <Takkun> I have used Gparted to see all paritions, but it only shows my 1tbh hard drive
+[04:39] <wafflejock> Takkun: you're using the 14.04 desktop install?
+[04:39] <Beldar> Takkun, pastebin sudo parted -l
+[04:40] <Takkun> Correct I am using the 14.04 install and i will pastebin tht in a moment plz hold
+[04:40] <_2_landa> hey
+[04:41] <wafflejock> Takkun: are both drives internal as well? it might be worth disconnecting the secondary and just leaving the SSD hooked up to see if it's any different
+[04:41] <_2_landa> okay
+[04:41] <wafflejock> _2_landa: hello
+[04:41] <_2_landa> hey
+[04:41] <youngziyi> hi
+[04:41] <Takkun> wafflejock: yes you are correct sir, they are both internal inside a laptop.
+[04:41] <_2_landa> how old are you
+[04:42] <youngziyi> me?21
+[04:42] <_2_landa> are u a girl or boy
+[04:42] <Beldar> !ot | _2_landa
+[04:42] <ubottu> _2_landa: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[04:42] <youngziyi> boy
+[04:42] <youngziyi> i just install ubuntu:)
+[04:42] <_2_landa> do u have a girlfriend
+[04:42] <wafflejock> yeah go to #ubuntu-offtopic for general chat, this is just for support/issues/questions
+[04:42] <Beldar> !ops | _2_landa a bot
+[04:42] <ubottu> _2_landa a bot: Help! Channel emergency! (ONLY use this trigger in emergencies) - Pici, Myrtti, jrib, Amaranth, tonyyarusso, Nalioth, lamont, CarlK, elky, mneptok, PriceChild, Tm_T, jpds, ikonia, Flannel, genii, wgrant, stdin, h00k, IdleOne, nhandler, Jordan_U, popey, Corey, ocean, cprofitt, djones, Madpilot, gnomefreak, lhavelund, k1l, rww, phunyguy, bazhang
+[04:43] <Beldar> youngziyi, this your bot?
+[04:43] <Flannel> _2_landa: Please stop.
+[04:43] <_2_landa> I ask if u have a girlfriend
+[04:44] <Flannel> _2_landa: That's not appropriate conversation for this channel, please stop.
+[04:44] <_2_landa> let's go in a private chat u make it
+[04:45] <TJ-> Flannel: ignore it, it's a java bot not a human
+[04:47] <Beldar> Takkun, I suspect the ssd is a gpt and the TB HD is a msdos can you run that command and pastebin it?
+[04:49] <_2_landa> hello
+[04:50] <stiv2k_> is it possible to have passwordless ssh connection to my server
+[04:50] <_2_landa> yes it is b
+[04:50] <stiv2k_> i want to be able to open my ssh terminal automatically without login, since the login is terminated every time the computer goes to sleep
+[04:50] <TJ-> stiv2k_: Yes, using certificates
+[04:50] <Takkun> Beldar: here is the pastebin http://pastebin.com/raw/php?!=nQ5AmhwP
+[04:50] <stiv2k_> but my computer is windows using PuTTy
+[04:51] <stiv2k_> and server = ubuntu
+[04:51] <_2_landa> okay did u install that
+[04:51] <Takkun> Beldar: sorry link doesnt work ill make a new one
+[04:51] <stiv2k_> install what
+[04:51] <TJ-> stiv2k_: See "man ssh-copy-id"
+[04:51] <stiv2k_> TJ-: ok
+[04:52] <_2_landa> are u a girl or boy because am horny
+[04:52] <TJ-> stiv2k_: ignore _2_landa , it's an IRC 'bot
+[04:52] <Beldar> Takkun, You have to hit submit
+[04:53] <Takkun> Beldar: here it is :) http://pastebin.com/nQ5AmhwP
+[04:53] <stiv2k_> lmao
+[04:53] <stiv2k_> what the hell
+[04:54] <stiv2k_> i need to reformat my server
+[04:54] <stiv2k_> im still using ubuntu 12.10 on it
+[04:54] <Beldar> Takkun, I assume the SSD is more than 8gigs and not a USB, it is not showing.
+[04:54] <stiv2k_> then again, i have bigger problems, my server is a pentium 4
+[04:54] <stiv2k_> i need new hardware entirely
+[04:54] <Takkun> Beldar: correct the SSD is 25 gigs and not showing :C
+[04:54] <cfhowlett> stiv2k_, you can still run i386 server 14.04
+[04:55] <Takkun> Beldar: what should i do :C?
+[04:55] <TJ-> Takkun: check in the system firmware in case it has been disabled
+[04:55] <stiv2k_> cfhowlett: i want to lower my power consumption ...... or at least get more computing power per kW
+[04:55] <Takkun> TJ-: Sorry sir, how do i do that?
+[04:55] <Beldar> Takkun This is there, /dev/sr0 read-write (Read-only file system).  /dev/sr0 and note TJ-'s comment
+[04:55] <stiv2k_> i keep it under 100% load
+[04:55] <stiv2k_> this one has been running for about 2 years now
+[04:56] <kryptonradon> I'm looking for 32 bit compatability libs for 14.04, I can't find libfreetype
+[04:56] <Takkun> Beldar: Yeah i noticed that too. I'm not really sure how to do what tj has recommend.
+[04:57] <TJ-> Takkun: Beldar 'sr0' is the SCSI name for a read-only CD-ROM device
+[04:57] <cfhowlett> !info libfreetype
+[04:57] <ubottu> Package libfreetype does not exist in trusty
+[04:57] <TJ-> Takkun: investigate the system's firmware Setup options when the PC is switched on
+[04:57] <stiv2k_> TJ-: can i do ssh-copy-id on a windows machine
+[04:58] <TJ-> stiv2k_: Not unless you have cygwin installed
+[04:58] <Beldar> TJ-, I thought it might be but the unrecognized disk label I did not recognize, thanks.
+[04:58] <Takkun> TJ-: that makes alot of sense :/, are the systems firmware settings the same thing as the bios settings?
+[04:58] <TJ-> Takkun: Yes :)
+[04:58] <kryptonradon> !info libfreetype6
+[04:58] <ubottu> libfreetype6 (source: freetype): FreeType 2 font engine, shared library files. In component main, is optional. Version 2.5.2-1ubuntu2.2 (trusty), package size 293 kB, installed size 878 kB
+[04:59] <Takkun> TJ-: thank you sir :) i don't believe thats the problem :C seeing as how the bios also does not list the ssd, and there is no option to disable :C
+[04:59] <TJ-> Takkun: It is unusual that the system firmware can disable a device such that Linux cannot see it; You could have a device that has got a fault
+[04:59] <kryptonradon> I need the 32 bit lib for 64 bit system?
+[04:59] <Takkun> TJ-: Do you thin the ssd might have broken?
+[04:59] <lotuspsychje> Takkun: wich brand is your ssd?
+[05:00] <cfhowlett> kryptonradon, 32 bit will run if no 64 bit version is available
+[05:00] <Takkun> lotuspsychje: I am not sure sir :C it came preinstalled on this laptop
+[05:00] <lotuspsychje> Takkun: wich laptop plz?
+[05:00] <TJ-> Takkun: If even the firmware doesn't report finding it, either it has become disconnected or it has broken. I'd be investigating if it is possible to open the flap that covers where the SSD is installed, remove it, then reseat it carefully to ensure a firm physical connection
+[05:00] <kryptonradon> 32 bit program needs libfreetype6
+[05:01] <Takkun> TJ-: i have searched through the bios options, the ssd is not listed and there is no option to disable any devices
+[05:01] <TJ-> kryptonradon: If the system has the foreign architecture i386 configured it is possible to install 32-bit libraries with "apt-get install <package>:i386"
+[05:02] <kryptonradon> the problem i have is i don't know the name of the package
+[05:02] <TJ-> Takkun: Try the second option then - physical refit
+[05:02] <lotuspsychje> Takkun: you bought a laptop with ssd inside that doesnt work?
+[05:02] <lotuspsychje> Takkun: wich laptop brand, and wich Os was preinstalled on it?
+[05:03] <Takkun> lotuspsychje: The ssd used to work, its jus tht i installed ubuntu on it, and then erased it and now its no longer detected :/ Its a lenovo y510p and windows 8 was preinstalled
+[05:03] <lotuspsychje> Takkun: did you check uefi settings?
+[05:03] <TJ-> Takkun: You said earlier you "reformatted both drives" - how, exactly, did you do that?
+[05:04] <TJ-> Takkun: Is Secure Boot or Rapid Boot enabled in firmware? try disabling them
+[05:04] <Takkun> TJ-: secure boot is indeed disabled, and i reformated by inserting a WIndows 7 install disc and deleting the partitions and reformated them from there
+[05:10] <lotuspsychje> Takkun: did your ubuntu setup recognize your ssd?
+[05:10] <TJ-> Takkun: "reformatting" ... you mean you deleted the partition entries in the partition table and re-added them?
+[05:10] <TJ-> Takkun: Have you powered the laptop down completely since doing that?
+[05:10] <Takkun> TJ-: Correct sir I have powered it down completely, and correct that is how i reformated them
+[05:10] <TJ-> lotuspsychje: Apparently so - Ubuntu was installed on the SSD
+[05:10] <TJ-> Takkun: I go back to doing a physical re-fit of the SSD
+[05:10] <Takkun> lotuspsychje:yes it recognized it, it actually wouldnt let me isntall it anywhere besides the ssd
+[05:10] <Takkun> TJ-: i am not able to physically re-fit it as it would void the warranty
+[05:10] <MrSalt> What's a good open source news source on the web?  It seems like there's a bunch of stuff going on that I keep missing.
+[05:10] <lotuspsychje> MrSalt: omgubuntu
+[05:10] <cfhowlett> MrSalt, so much ... sign up for the ubuntu newsletters www.opensource.com
+[05:10] <cfhowlett> www.reddit.com/r/ubuntu       /r/linux
+[05:10] <lotuspsychje> Takkun: did you try a firmware upgrade from windows on your ssd?
+[05:10] <MrSalt> It might seem silly, but sometimes I get closed up in my little world.  I hadn't seen the opensource.com page.  I've looked at omgubuntu from time to time.
+[05:10] <Takkun> lotuspsychje:my firmware is currently the latest
+=== amir_ is now known as Guest45467
+[05:11] <lotuspsychje> Takkun: did you see special ssd software in windows?
+[05:11] <TJ-> Takkun: Please carefully read https://forums.lenovo.com/t5/X-Series-ThinkPad-Laptops/Error-when-trying-to-format-my-22GB-SSD/m-p/1449465/highlight/false#M55727
+[05:11] <Takkun> lotuspsychje:what do you mean by special software
+[05:11] <lotuspsychje> Takkun: well some ssd brand deliver ssd software to 'tune' or accelerate from windows
+[05:12] <MrSalt> I remember reading the "H", but I guess that's gone now.
+=== Malsasa_ is now known as Malsasa
+[05:12] <lotuspsychje> TJ-: nice find!
+[05:13] <TJ-> Takkun: It doesn't help that you currently have no Windows OS to use to extract that bootable image from. It might be possible to hack it from Linux
+[05:13] <Takkun> TJ-: thanks friend. I guess i will go install windows now :C
+[05:14] <TJ-> Takkun: don't do that yet!
+[05:14] <lotuspsychje> Takkun: what happened exactly after you installed ubuntu on your ssd?
+[05:14] <TJ-> Takkun: You first need to confirm the SSD in your laptop is made by Toshiba
+[05:14] <TJ-> Takkun: Then we can look at extracting the bootable USB image from that Windows executable file
+[05:16] <TJ-> Takkun: OK, it should be easy to create the bootable image from Linux - it's a just a bootable DOS image
+[05:16] <Takkun> TJ-: how would i confirm this? I am looking at the lenovo website and it doesnt list wht brand it is
+[05:16] <Takkun> TJ-: do you mean i should use like virtual box to install windows?
+[05:16] <TJ-> Takkun: look inside the laptop at the label on the SSD, if it is accessible
+[05:16] <cfhowlett> Takkun, virtualbox still requires a working OS
+[05:17] <TJ-> Takkun: No, you don't need Windows. Please be patient, I am creating a bootable USB image for you from the Win7.zip file.
+[05:17] <Takkun> TJ-: im rly sorry for being troublesome, :( also i cannot open the laptop
+[05:18] <TJ-> Takkun: OK, then you'll need to wait for me to get this ready for you, so you can boot the laptop with a USB drive connected, and test it that way
+[05:18] <alfonsojon> Hello
+=== duncannz is now known as Guest36449
+[05:19] <Takkun> TJ-: okay thank you friend
+[05:21] <alfonsojon> I am running Ubuntu 14.04 on my Power Mac G4 with an ATI Radeon 9000 Pro. When I boot using "radeon.modeset=1 video=radeonfb:off radeon.agpmode=4", I can make it to the login screen but it hangs after a few seconds.
+[05:21] <cfhowlett> !mac | alfonsojon
+[05:21] <ubottu> alfonsojon: For help on installing and using Ubuntu on a Mac, see: https://wiki.ubuntu.com/MactelSupportTeam/CommunityHelpPages
+[05:21] <alfonsojon> It is installed already cfhowlett
+[05:24] <Beldar> alfonsojon, Has that computer ever run ubuntu, seems a bit low in needed hardware?
+[05:24] <alfonsojon> Yes, 12.04 ran fine
+=== badon_ is now known as badon
+[05:24] <alfonsojon> Also, Lubuntu 13.10 ran on it too
+[05:25] <Beldar> alfonsojon, It seems lubuntu would be much better
+[05:25] <alfonsojon> But I am stuck at LightDM
+[05:25] <alfonsojon> Does Lubuntu not also use LightDM?
+[05:26] <alfonsojon> I found that radeon.nomodeset=1 should not be used
+[05:27] <alfonsojon> And now it does not hang, but I still cannot log in.
+[05:27] <alfonsojon> gnome-session-flashback just loops back to lightdm
+[05:27] <kernel13> is there a way to generate preseed file from existing server..just like kickstart file in centos. i need for cobbler.thanks
+[05:28] <cfhowlett> kernel13, great question!  IDK but ask #ubuntu-server
+[05:28] <jakesyl> hey, wheres the dev channel?
+[05:29] <cfhowlett> !devel | jakesyl
+[05:29] <cfhowlett> #ubuntu-devel
+[05:29] <somsip> jakesyl: #ubuntu-devel
+[05:29] <jakesyl> thanks!
+[05:29] <kernel13> cfhowlett:thanks
+[05:29] <cfhowlett> kernel13, happy2help
+[05:30] <TJ-> Takkun: Just about to test it here
+[05:31] <Takkun> TJ-: thanks friend :)
+=== dreadneck is now known as Dreadneck
+[05:35] <crazyhorse18> i'm not longer able to mount an external hdd
+[05:36] <crazyhorse18> https://gist.github.com/anonymous/ddea4e00220f3bad174a << this is the errors i get
+[05:36] <crazyhorse18> sudo mount /dev/sdf1 /media/test2 << however this works
+[05:36] <crazyhorse18> can anyone explain what the issue could be?
+[05:37] <Beldar> crazyhorse18, What is the file system?
+[05:37] <crazyhorse18> ext4
+[05:38] <crazyhorse18> 4.0 TB ext4 and there's also a 5.2gb FAT
+[05:38] <Dreadneck> ma2505
+[05:39] <crazyhorse18> interestingly the only other thing i did yesterday was an sudo apt-get update, sudo apt-get dist-upgrade.. i don't know if that's related
+=== irfan is now known as Guest27611
+[05:42] <crazyhorse18> beldar: did any of that help?
+[05:43] <crazyhorse18> could it be a change to apparmor that's causing the problem?
+[05:49] <TJ-> Takkun: Having some issues proving the image is bootable in a virtual machine, do you want to continue waiting?
+[05:50] <Takkun> TJ-: i dont mind the wait i just feel bad for troubling you
+[05:51] <TJ-> Takkun: argh! I used the wrong image file like a dufus! give me a couple more minutes :)
+[05:51] <Takkun> TJ-: np x33
+=== amir_ is now known as Guest69272
+[05:58] <TJ-> Takkun: OK, tested, working, and ready! You need a USB flash drive available that can be overwritten, and be at the terminal shell prompt
+[05:59] <Takkun> I have a flash drive ready ^^
+[05:59] <TJ-> Takkun: 1) download the file: "wget http://iam.tj/projects/misc/ssd_fw_up.img"
+[06:01] <Takkun> TJ-: i have downloaded it
+[06:01] <Takkun> brasero does not seem to detect it tho
+[06:02] <TJ-> Takkun: next, identify which device name the USB flash drive has... usually you can tell by doing "ls -l /dev/disk/by-id/usb-*"
+[06:02] <TJ-> Takkun: You don't need brasero
+[06:02] <Takkun> the flash drive it called sandisk ^^
+[06:02] <TJ-> Takkun: On my system that command shows me "/dev/disk/by-id/usb-SanDisk_Cruzer_Micro_20060775000A7FF0D518-0:0 -> ../../sdc"
+[06:02] <TJ-> Takkun: So I now know the device is "/dev/sdc"
+[06:03] <TJ-> Takkun: on your system it will likely be a different name
+[06:03] <TJ-> Takkun: what is the device name on your system?
+[06:03] <_Kyon_> Que pedo putos
+[06:03] <_Kyon_> de donde son?
+[06:04] <TJ-> !mx | _Kyon_
+[06:04] <TJ-> !es | _Kyon_
+[06:04] <ubottu> _Kyon_: En la mayoria de los canales de Ubuntu, se habla solo en ingles. Si busca ayuda en espanol entre al canal #ubuntu-es; escriba " /join #ubuntu-es " (sin comillas) y presione intro.
+[06:04] <netlar> 14.04 is so much more stable than 13.04
+[06:04] <Takkun> TJ-: tht command does not seem to work for me
+[06:04] <TJ-> Takkun: you get no result?
+[06:05] <Naruto> lol
+[06:05] <Takkun> TJ-: i get the error no such file or directory
+[06:05] <Naruto> cai
+=== Naruto is now known as _Kyon_
+[06:05] <_Kyon_> ey TJ-
+[06:05] <_Kyon_> where you from vato?
+[06:05] <Takkun> TJ-: sorry it works now
+=== badon_ is now known as badon
+[06:06] <TJ-> Takkun: OK :) what's the deivce/
+[06:06] <Ben64> _Kyon_: this channel is for ubuntu support only. for other things, join #ubuntu-offtopic
+[06:06] <Takkun> TJ-: i seem to get two results
+[06:06] <_Kyon_> Ya esta la calabaza
+[06:06] <Takkun> TJ-: here is the output chanu@chanu:~$ ls -l /dev/disk/by-id/usb-*
+[06:06] <Takkun> lrwxrwxrwx 1 root root  9 Aug 14 02:00 /dev/disk/by-id/usb-SanDisk_Cruzer_20060876901194B1427D-0:0 -> ../../sdb
+[06:06] <Takkun> lrwxrwxrwx 1 root root 10 Aug 14 02:00 /dev/disk/by-id/usb-SanDisk_Cruzer_20060876901194B1427D-0:0-part1 -> ../../sdb1
+[06:07] <cfhowlett> !es | _Kyon_
+[06:07] <ubottu> _Kyon_: En la mayoria de los canales de Ubuntu, se habla solo en ingles. Si busca ayuda en espanol entre al canal #ubuntu-es; escriba " /join #ubuntu-es " (sin comillas) y presione intro.
+[06:07] <_Kyon_> [Ben64] que pedo contigo quieres un zape en la cabeza? xD
+[06:07] <TJ-> Takkun: Yes, you will... OK, the device is /dev/sdb  ... sdb1 is the 1st partition on sdb
+[06:07] <TJ-> Takkun: Now do "sudo dd if=ssd_fw_up.img of=/dev/sdb"
+[06:07] <_Kyon_> gracias cfhowlett
+[06:07] <_Kyon_> very friendly vato
+[06:07] <Ben64> _Kyon_: stop the offtopic and offensive comments
+[06:08] <Takkun> TJ-: i get the no such file or directory error
+[06:08] <_Kyon_> [Ben64] comete un sniker we
+[06:08] <cfhowlett> _Kyon_, behave or be gone
+[06:09] <netlar> Even the video driver just worked
+=== dhusen is now known as dojodgh
+[06:09] <TJ-> Takkun: You downloaded the ssd_fw_up.img using 'wget' as I showed? Then it should be in the current directory. Check with "ls -al"
+[06:09] <Takkun> TJ-: im sorry the command no works since i moved locations to the downloads folder
+[06:09] <OERIAS> _Kyon_, por favot vayase al canael de #ubunut-es
+[06:09] <Takkun> TJ-:now*
+[06:10] <TJ-> Takkun: Where is the ssd_fw_up.img ? You need to 'cd' (change directory) into the directory where that file is
+[06:10] <izabera> is there a way to see keyboard shortcuts associations? for some reason ctrl+alt+t is not bringing up a terminal anymore
+[06:10] <izabera> in system / keyboard it's still set correctly
+[06:10] <TJ-> Takkun: OK, so the "sudo dd if=..." command worked ?
+[06:10] <Takkun> TJ-: sorry correct it works
+[06:11] <coolstar> I have ubuntu running on my system, but the trackpad doesn't appear to be working
+[06:11] <coolstar> a USB mouse works but I'd want the trackpad to work too
+[06:11] <coolstar> I have the Acer C720
+[06:11] <coolstar> (yes it's a chromebook)
+[06:11] <TJ-> Takkun: OK :) So reboot the system with the USB plugged in, the system should suggest a key you can press to get to the boot menu (often the key is F11 or F12), then select the USB device and boot.
+[06:12] <somsip> coolstar: http://ubuntuforums.org/showthread.php?t=2190187 (first link on a search, and there are others)
+[06:12] <TJ-> Takkun: That'll boot to the FreeDOS operating system which will automatically run the firmware updater, which will first check for the SSD, and if it is supported, it will offer to do the update
+=== dojodgh is now known as dojodgh_
+[06:13] <Takkun> TJ-: Ur one of those mad geniuses arent you x3 soo cool ^^ give me one sec plz i will do that now x3
+[06:14] <Takkun> TJ-: i have ran the usb and it says this pc does not need an updated firmware
+[06:18] <TJ-> Takkun: That's not helpful, but it does suggest that the tool recognised that there is a Toshiba SSD installed, yes?
+[06:18] <Takkun> i think it would be safe to assume tht indeed
+[06:19] <Takkun> or perhaps it has no relation
+[06:19] <Takkun> :D
+[06:19] <Takkun> :C
+[06:19] <TJ-> Takkun: I ran it here and it told me there was no supported SSD in the system
+[06:19] <Takkun> oh
+[06:20] <TJ-> Takkun: so it sounds as if it found such a device in your system, checked the firmware version, and found it is already the correct version
+[06:20] <Takkun> okay then yes i think its safe to assume that toshiba would be the brand
+[06:20] <TJ-> Takkun: This doesn't help you of course... let me hack the files on that image in case it is possible to force it to reinstall the firmware
+[06:20] <Takkun> TJ-: one more question
+[06:21] <Takkun> TJ-: how do i become a godly programmer like u x3
+[06:21] <TJ-> Takkun: spend years and years hacking
+[06:21] <cfhowlett> Takkun, you must first purify yourself in the waters of Lake Minetonka.
+=== Vampire0_ is now known as Vampire0
+[06:22] <TJ-> Takkun: You saw the message "This PC does NOT need an updated Firmware." I guess?
+[06:22] <malkauns_> cfhowlett: no, river ganges
+[06:22] <malkauns_> :P
+[06:22] <cfhowlett> malkauns_, ewwwwwww!
+[06:22] <alfonsojon> Does Kubuntu 14.04 use LightDM or KDM?
+[06:22] <cfhowlett> alfonsojon, kdm
+[06:22] <alfonsojon> Great
+[06:22] <malkauns_> cfhowlett: LOL
+[06:22] <Takkun> TJ-:correct
+[06:22] <cfhowlett> alfonsojon, KDE actually
+[06:22] <malkauns_> alfonsojon: lightdm
+[06:23] <malkauns_> oh
+[06:23] <malkauns_> Kubuntu
+[06:23] <malkauns_> yea KDE
+[06:23]  * rww sighs
+[06:23]  * malkauns_ goes to bed
+[06:23] <rww> Kubuntu uses lightdm. KDE's moving away from KDM.
+=== malkauns_ is now known as malkauns
+[06:23] <TJ-> Takkun: did it also show "Target[FWVer = %s, BinFileName = %s]" and "Local[FWVer = %s, BinFileName = %s]" with the version numbers filled in?
+[06:23] <alfonsojon> Oh. Darn.
+[06:24] <alfonsojon> Is KDM still supported for now?
+[06:24] <Takkun> TJ-: no sir
+[06:24] <TJ-> Takkun: OK, that must be part of another option in the program then
+[06:24] <rww> alfonsojon: it's in Ubuntu's repositories, yes
+[06:24] <alfonsojon> LightDM doesn't behave on my Power Mac
+[06:24] <alfonsojon> Is there an alternative you would suggest?
+[06:25] <Takkun> TJ-: do you think its possible that i can call lenovo and call them to replace the ssd?
+[06:25] <cfhowlett> !mac | alfonsojon, the mac ubuntu, ubuntu mac or mac-tel projects would know more.
+[06:25] <ubottu> alfonsojon, the mac ubuntu, ubuntu mac or mac-tel projects would know more.: For help on installing and using Ubuntu on a Mac, see: https://wiki.ubuntu.com/MactelSupportTeam/CommunityHelpPages
+[06:25] <Takkun> TJ-: perhaps they would agree since its a hardware problem and not a software one
+[06:25] <rww> doubtful
+[06:25] <rww> alfonsojon: I'd ask #kubuntu or #kde
+[06:25] <alfonsojon> That covers Intel Macs
+[06:26] <rww> alfonsojon: there's another one some KDE people use, but it's slipping my mind :(
+[06:26] <TJ-> Takkun: Definitely - it has failed in a way that is already known
+=== bodhizazen is now known as bodhi_zazen
+[06:26] <Takkun> TJ-: do you think they will blame it on ubuntu?
+[06:26] <cfhowlett> Takkun, everything gets blamed on ubuntu/shuttleworth
+[06:27] <alfonsojon> cfhowlett: Mactel: Intel Mac
+[06:27] <Takkun> TJ-:they once told me that installing linux does not void my warranty and that they would still provide me with hardware support but that they would not provide me with nay software support unless i reinstalled windows 8
+[06:27] <alfonsojon> Takkun: that sounds correct
+[06:28] <TJ-> Takkun: that is good, Windows isn't needed to sort this afterall
+[06:29] <Takkun> TJ-: okay I will call them tomorrow i guess. I was worried thatt they wouldnt agree because i called them earlier today, and they said they wanted to remotely control my computer to check to see if it was perhaps a software problem
+[06:29] <Takkun> TJ-: and i didnt tell them i have linux installed i just said i'd call back later x3
+[06:29] <cfhowlett> Takkun, well that sounds ... "legit" ...
+=== alienatu is now known as Guest60947
+[06:30] <Takkun> cfhowlett: wht do you mean
+[06:30] <cfhowlett> Takkun, remote control of my PC?  I think not ...
+=== alienatu2 is now known as alienatu
+[06:31] <Takkun> cfhowlett: xD NSA can already do tht!
+[06:31] <Takkun> im glad i dont need to install windows T.T
+[06:31] <cfhowlett> Takkun, true.  anyway - on to ubuntu topic!
+[06:31] <Takkun> i blame this all on windows
+[06:31] <alfonsojon> Takkun: what is the issue?
+[06:32] <Takkun> alfonsojon: it's a long story T.T i'm going to just ask lenovo to replace my ssd and move on with my life
+[06:32] <alfonsojon> What is the issue?
+[06:32] <alfonsojon> Bad blocks?
+=== Stv is now known as orven
+[06:32] <Takkun> my ssd does not show up anymore
+=== sudhir_ is now known as nrange
+[06:33] <TJ-> Takkun: One thing to check before talking to Lenovo. In the Firmware Setup, check that Intel Rapid Storage option is disabled
+[06:33] <Takkun> TJ-: yes sir it is disabled ^^
+[06:34] <TJ-> alfonsojon: There's a known issue with Toshiba SSDs where the firmware gets corrupted and the device isn't seen by the system (firmware or OS). We've checked using the Lenovo/Toshiba SSD firmware updater and the device doesn't need the firmware update
+[06:34] <Psil0Cybin> Reformatted TJ- much better.
+[06:35] <alfonsojon> Never trust Toshiba hard drives
+[06:35] <alfonsojon> Never.
+[06:35] <Psil0Cybin> :o
+[06:35] <Psil0Cybin> thanks for the hdups
+[06:36] <TJ-> Psil0Cybin: :)
+[06:36] <Takkun> TJ-: I'm not sure if this question is appropriate for this irc channel, but could you perhaps give me tips to becoming as good as a programmer like you? esp so i can handle linux as well as you?
+[06:36] <dohzer> Can anyone recommend some software to synchronise files between devices (desktop, laptop, usb thumbdrive, etc)?
+[06:36] <TJ-> Takkun: years of hard hacking with hardware and software
+[06:36] <sadistic1heart> hi all
+[06:36] <cfhowlett> Takkun, wide question: allow me to suggest www.fullcirclemagazine.org   download and follow the very many programming tutorials
+[06:36] <TJ-> Takkun: never be afraid to tinker and ask "how?" and "what if?"
+[06:37] <cfhowlett> Takkun, and "you break it, you fix it"
+[06:38] <sadistic1heart>  any one into BDSM in here????
+[06:38] <Takkun> cfhowlett: thanks for the link friend ^^, any other good resources to get me started? :)
+[06:38] <cfhowlett> Takkun, http://www.linuxlinks.com/article/20090405061458383/20oftheBestFreeLinuxBooks-Part1.html
+[06:39] <TJ-> Takkun: I've found this: this is the direct Lenova page for the SSD tools: http://support.lenovo.com/gb/en/downloads/ds034646
+[06:39] <TJ-> Takkun: According to the notes with that it covers more than just Toshiba SSDs
+[06:40] <linuxuz3r> anyone knows how to take a screenshot in ubuntu window fullscreen and selection
+[06:41] <TJ-> Takkun: I'd download the bootable ISO image, use 'dd' to write to your USB flash drive, and then reboot using it and test again... worth trying, if it avoids having to return the PC and get a replacement
+[06:41] <Takkun> TJ-: but thts for thinkpads
+[06:42] <Takkun> TJ-: i have an ideapad, does tht make a difference?
+[06:42] <trijntje> linuxuz3r: just use the screenshot app that is installed by default
+[06:42] <TJ-> Takkun: Well that came up as I was looking at the downloads for the Y510P
+[06:42] <linuxuz3r> ok
+[06:43] <linuxuz3r> how about a tool to write with a tablet on the desktop
+[06:43] <TJ-> Takkun: the program checks the SSD versions... it won't do anything invasive without asking permission, so there is no harm trying it
+[06:43] <Takkun> TJ-:since its an iso is it okay if i use brasero or do i have to use dd
+[06:44] <TJ-> Takkun: 'dd' is quicker - you're writing to a USB
+[06:44] <TJ-> Takkun: "sudo dd if=file.iso of=/dev/sdb bs=1M; sync" and you're done
+[06:45] <trijntje> TJ, Takkun, dont run that command unless you are sure /dev/sdb is your usb drive
+[06:45] <TJ-> trijntje: We know it is already
+[06:46] <TJ-> Takkun: reading the notes for the ISO, it isn't certain it'll boot from USB... the install notes only talk about writing to a physical optical disk
+[06:46] <dotDeb> dd is amazing
+[06:46] <dotDeb> way better than any frontend
+[06:47] <Takkun> TJ-: i will try the usb jus in case
+[06:48] <TJ-> Takkun: Are you 100% sure that Y510P *has* an SSD!? I ask since I'm reading the Leonvo engineers service manual and it shows no SSD nor anywhere for one to fit!
+[06:49] <Takkun> TJ-: that might be because i got my y510p when it was on sale, and they were giving the ssd for free
+[06:49] <Takkun> TJ-: i know for a fact an ssd is there
+[06:49] <TJ-> Takkun: I can't see a space inside for it, that's the weird part
+[06:49] <Takkun> TJ-:the site even list an option to pay to install an additional ssd
+[06:50] <Takkun> TJ-: i believe its installed in the ultra bay drive
+[06:50] <TJ-> Takkun: The only thing mentioned is a 1TB hybrid drive (combined spinning disk with flash cache), 5,400rpm
+[06:50] <TJ-> Takkun: Ahh, found it! 256GB SSD
+[06:52] <Takkun> TJ-: i knew i wasnt going crazy x3
+[06:53] <abhishek__> I want to install ubuntu in blade that will go for production.Please give me tips for partition.I am planning to give /boot swap and / partitions only
+[06:53] <Takkun> TJ-: the usb didnt work going to try on a dvd now
+[06:53] <TJ-> Takkun: No, wait!
+[06:54] <Blue1> might want to create a seperate /home partition - makes upgrading software a lot easier
+[06:54] <TJ-> Takkun: I've just read in the Lenovo support that, and this is very weird, the SSD may not be seen in EFI mode! I don't know how accurate that is, but if the system is booting in EFI mode (as the Ubuntu Live ISO may be doing) that could explain this!
+[06:55] <abhishek__> Blue1 thanks should I consider lvm over xfs ?
+[06:55] <Blue1> abhishek__: I use lvm  -
+[06:55] <Takkun> TJ-: i dont believe its booting in efi
+[06:56] <Takkun> TJ-: there was a seperate option to boot into efi mode
+[06:56] <Takkun> TJ-: also i have installed the os now, and am sure its not in efi
+[06:56] <TJ-> Takkun: So, I'd suggest rebooting with the Live ISO and making sure the UEFI firmware has Compatibility Support Module (CSM) enabled and at the manual boot device menu, if there are 2 choices for the Installer device, try to determine which is the CSM BIOS and which the EFI, and choose the BIOS
+=== sudhir_ is now known as nrange
+[06:56] <TJ-> Takkun: OK... that shoots that idea down then! You can check if it is in EFI mode with "ls -l /sys/firmware/efi/" ... that will exist if in EFI mode
+[06:57] <abhishek__> Blue1 default / partitions will create /home directory . this will not changed at least for five years
+[06:59] <Takkun> TJ-: it says no such file or directory
+[06:59] <Takkun> also i believe the SSD can be see in efi mode because when i had wins 8 on this machine it was able to see it
+[07:00] <TJ-> Takkun: So, it is in BIOS mode then. OK, so its back to the "return to manufacturer" option I think
+[07:00] <TJ-> Takkun: I'd have expected it could, but it was worth investigating
+[07:00] <Syria> Hi, after using this command "sudo openvpn --config vpnbook-euro1-tcp80.ovpn" I get this "Segmentation fault (core dumped)" i don't know why!
+[07:01] <Takkun> TJ-: true :) i guess i'll just call them up then, i hope they arent jerks
+[07:01] <boichev> If I have a script that forks to do its job and now the load average is 10 on a 4CPU machine.... will it run faster if I make it to fork 4 times and lower the cpu load average to be between 3.5 and 4
+[07:02] <Syria> anyone can help me with this openvpn thing please.
+[07:03] <ObrienDave> syria, hang on a sec
+[07:04] <cfhowlett> !ask | Syria, that lack of response = give the details.  No telepaths in the channel
+[07:04] <ubottu> Syria, that lack of response = give the details.  No telepaths in the channel: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[07:04] <ObrienDave> Syria, i'll send you a link for install instructions
+[07:04] <TJ-> Takkun: http://ubuntuforums.org/showthread.php?t=2209694
+[07:04] <boichev> Syria I got problems like this because of wrong server:port syntax
+[07:05] <cfhowlett> Syria, doh!  you did give details... pardon my snark, please.
+[07:05] <Syria> ObrienDave: I have it installed already, Also I am using the same command that I have used before, Usually it works but I got this one suddenly.
+[07:06] <ObrienDave> Syria, they change passwords often
+[07:06] <ObrienDave> http://ubuntuhandbook.org/index.php/2014/05/establish-openvpn-connection-ubuntu-1404/
+[07:06] <TJ-> Takkun: I'm also reading that the Ultra Bay Caddy that the SSD sits in could become physically disconnected. Remember what I said earlier about removing it and re-fitting it firmly - If it were me I'd be doing that now
+[07:06] <Takkun> TJ-: are you suspecting thts its not faulty?
+[07:07] <jemandus> Hi, BIG prob: UNITY doesn't start after Login. Any clues?
+[07:07] <Takkun> TJ-: you are probably right about refitting it however, i believe they said it would void my warranty to open it
+[07:07] <Takkun> TJ-: i will let them do the refitting
+[07:07] <TJ-> Takkun: I have no clear evidence yet, that's what I'm searching for.
+[07:08] <Syria> ObrienDave: I usually type the user name then password but now i am getting this suddenly "Segmentation fault (core dumped)"
+[07:08] <TJ-> Takkun: I thought the Ultra Bay is user-removable... it's just an interchangeable slot for additional devices.
+[07:08] <Takkun> TJ-:correct however im not 100 percent sure thts where the ssd is
+[07:08] <Takkun> TJ-: i assumed it would be there
+[07:08] <boichev> Syria, can you show us your vpnbook-euro1-tcp80.ovp ( remove passwords/keys/ other sensitive data )
+[07:09] <TJ-> Takkun: Take a look at this: http://www.mydigitaldiscount.com/PDFs/Tutorial-Replace-Lenovo-Y510P-Cache-Drive-with-MyDigitalSSD-Super-Cache-2-SSD.pdf
+[07:09] <TJ-> Takkun: If it isn't in the Ultra Bay, this is where it will be
+[07:09] <volkan> Hi
+[07:09] <volkan> When I try to install H.264 decoder, I get this error: http://pastie.org/9472399 How can I solve this problem?
+[07:10] <Syria> boichev: http://pastebin.com/xp2jHY2g  / I did not remove anything, It is a free account.
+[07:10] <Takkun> TJ-: tht is indeed not the ultra bay
+[07:11] <TJ-> Takkun: right, so there are 2 locations where it can be fitted :)
+[07:11] <Takkun> TJ-: correct ^.^
+[07:11] <TJ-> Takkun: I think the article I pointed you to is only for mini PCIe flash cache modules though. If your system has a 256GB SSD it'll be a 2.5" form-factor, and therefore have to be in the Ultra Bay because it is too big to go internally
+[07:12] <Takkun> TJ-: i'm afraid to break it more >.>
+[07:13] <ObrienDave> Syria, i sent you the new password changed today
+[07:13] <TJ-> Takkun: Ultra-Bay release is easy... watch this video (shows removing the ultra-bay GPU option) https://www.youtube.com/watch?v=V9LmpAoby4w
+[07:14] <Syria> ObrienDave:  this is it "nUG7kewr"
+[07:14] <boichev> Syria, .... no passwords on irc directly please :) keep it on private...
+[07:14] <Syria> ObrienDave:  I will try establishing a connection using the tutorial you gave me.
+[07:14] <TJ-> Takkun: If you do remove the ultra-bay you can get the exact make and model of the SSD, so we have more accurate info to investigate
+[07:15] <ObrienDave> Syria, that tutorial is the one i used
+[07:16] <Takkun> TJ-: i will remove it right now one sec
+[07:16] <TJ-> Takkun: We'll make a hacker out of you yet :)
+[07:16] <ObrienDave> the Gods weep ;P
+=== dkessel_ is now known as dkessel
+[07:17] <Syria> ObrienDave: Sorry about that, But this password is free and anyone can use it. :P
+[07:17] <ObrienDave> not to worry Syria
+[07:17] <Takkun> TJ-: wow im dumb i just realized there is no way its in the ultra bay becuz thts where my cd drive is...
+[07:18] <TJ-> Takkun: !! ... OK... so where is it then? It won't fit in the small flash-cache slot we saw
+[07:18] <hjdadhaniya> hi
+[07:18] <ObrienDave> Syria, i just tested new password and it works
+[07:19] <Takkun> TJ-: my internet is being rly slow but im trying to figure tht out now
+[07:20] <izabera> is there a way to see keyboard shortcuts associations? for some reason ctrl+alt+t is not bringing up a terminal anymore
+[07:20] <izabera> in system / keyboard it's still set correctly
+[07:20] <TJ-> Takkun: It *must* be in the M.2 NGFF slot inside the case, and it must be a modern M.2 SSD rather than a hard disk form-factor 2.5" device
+[07:20] <Takkun> TJ-:found it
+[07:21] <Takkun> TJ-:http://forums.lenovo.com/t5/image/serverpage/image-id/39544iEC990A3D116F417B/image-size/original?v=mpbl-1&px=-1
+[07:21] <Takkun> TJ-: u see where it says SSD
+[07:21] <TJ-> Takkun: Yes, that is the M.2 slot, just like in that PDF we looked at
+[07:21] <hjdadhaniya> hi
+[07:21] <Takkun> TJ-: thts apparently it
+[07:22] <Takkun> TJ-: so insanely small
+[07:22] <TJ-> Takkun: So, you've got a modern M.2 Interface 256GB SSD ... I'd whip the case cover off and give it a poke :)
+[07:22] <TJ-> Takkun: Yeah, everything is when it is silicon only
+[07:23] <Takkun> TJ-: i sadly dont have a screw driver this small :C
+[07:23] <TJ-> Takkun: OK... let Lenovo sort it then :)
+[07:23] <TJ-> Takkun: not much else we can do when it doesn't even show up to the party
+[07:23] <Takkun> TJ-: i'm rly sorry for all the trouble ive put you thru
+[07:23] <hjdadhaniya> hi
+[07:24] <Takkun> TJ-: im going to head to bed for now friend. thank you for everything
+[07:26] <gnok> hello everyone! I've a connector that enables use of a regular headset via a USB port but the kernel doesn't detect it correctly - "unknown kernel: [ 1465.543947] hub 2-0:1.0: unable to enumerate USB device on port 2" is logged in syslog.
+[07:26] <hjdadhaniya> hi
+[07:26] <gnok> Oh and I'm running Ubuntu 14.04.
+[07:27] <hjdadhaniya> hi
+[07:28] <TJ-> gnok: The device isn't responding to USB initialisation
+[07:28] <TJ-> gnok:  what is the USB device?
+=== urda1 is now known as urad
+=== urad is now known as urda1
+=== urda is now known as Guest96095
+[07:36] <nights> anyone who know nginx well and is prepared to help config for some $$ ?
+[07:38] <gnok> is there some other pastebin that I could try? I'm on a slow internet connection so paste.ubuntu.com, pastebin and paste.debian.net all don't respond :/.
+[07:41] <trijntje> if apt is stuck with some broken packages it cant configure bc of a  bug, is it safe to rm /var/cache/apt/archives to get things unstuck?
+[07:42] <trijntje> i've already tried apt-get install -f and and apt-get remove package, but that didn't work
+=== notzopsi is now known as zopsi
+[07:44] <eudakimau> hi
+[07:44] <eudakimau> <unconvertable>
+[07:44] <Shadow}}> Hi all; I'm hoping theres a freeware app for "live desktop recording", Both my audio and video.
+[07:44] <Shadow}}> Documentations purposes.
+[07:45] <DJones> !screencast | Shadow}} There's a few app's mentioned in the bot's link,
+[07:45] <ubottu> Shadow}} There's a few app's mentioned in the bot's link,: Some programs to capture your screen are Kazam, Vokoscreen & Simple Screen Recorder. Also ffmpeg/libav with x11grab option on the command line. Also see https://wiki.ubuntu.com/ScreenCasts.
+[07:45] <Shadow}}> Do they record audio simultaneously?
+[07:46] <DJones> Shadow}}: Not sure, I would assume so, but you may need to try a couple to find the best one for yourself
+[07:46] <trijntje> if apt is stuck with some broken packages it cant configure bc of a bug, is it safe to rm /var/cache/apt/archives to get things unstuck?
+[07:47] <Shadow}}> Very well; Thank you, DJones. o/
+[07:50] <cynicallemon> trijntje: what packages(s) are broken or are you stuck with?
+[07:50] <trijntje> cynicallemon: http://paste.ubuntu.com/8043108/
+[07:53] <cynicallemon> trijntje: ah ok - /usr/share/kde4/apps/katepart/syntax/nesc.xml, its trying to overwrite an existing file which is shared by another package
+[07:54] <html> hello everyone
+[07:54] <cynicallemon> trijntje: i have had this before and usually get around it by renaming the offending file then the package should be ale to write its version and install
+[07:55] <trijntje> cynicallemon: thats clever, I'll try that
+[07:55] <cynicallemon> trijntje: no guarantees...
+[07:56] <sireorion> hey i have no promission to change some files. It have al locker on it
+[07:56] <sireorion> i have tryed all kind of stuff... but i think i need to write some at the terminal
+[07:56] <html> how do i copy  files from one local computer to a local server?
+[07:57] <eeeeee> html: scp filetocopy user@remotehost:/path/to/destination
+[07:58] <cynicallemon> html: assuming both machines have openssh then you coulc use scp on the command line or install filezilla for gui use
+[07:58] <html> ok how do i setup filezilla?
+[07:58] <trijntje> cynicallemon: that didn't work sadly, looks like dpkg knows another package has that file and doesn't even check if it exists
+[07:58] <trijntje> cynicallemon: hold on, something went wrong with moving the file, sorry
+[07:59] <Shadow}}> How do I install a tar.gz?
+[08:00] <eeeeee> Shadow}}: install ?
+[08:00] <cynicallemon> html: software centre or "sudo apt-get install filezilla" in terminal
+[08:00] <JNixx_> You decompress it
+[08:00] <html> cynicallemon,  thanks, i alreasdy have it.
+[08:00] <JNixx_> eeeeee: YOu decompress a .tar.gz file. It's an archive.
+[08:00] <eeeeee> Shadow}}: do you mean you want to make a tar.gz or extract one?
+[08:00] <Shadow}}> eeeeee; screencast's recordmydesktop. Extract? I downloaded the .tar.gz..
+[08:01] <JNixx_> Shadow i mean :P
+[08:01] <Shadow}}> Yes. But its a command-line only file, per se. All the info I have.
+[08:01] <bcvery> !info gtk-recordmydesktop | Shadow}}, install from repos
+[08:01] <ubottu> Shadow}}, install from repos: gtk-recordmydesktop (source: gtk-recordmydesktop): Graphical frontend for recordMyDesktop screencast tool. In component universe, is optional. Version 0.3.8-4.1ubuntu1 (trusty), package size 118 kB, installed size 795 kB
+[08:02] <Shadow}}> Thank you. What I'm used to, and love.
+[08:03] <Shadow}}> Um... I meant to Delete the Highlighted tar.gz but I hit Delete All Files... In "/" :/
+[08:04] <eeeeee> ?
+[08:04] <Shadow}}> All still there. Just thats not gonna cause problems later on,right? >->'
+[08:04] <chrissg> Hey folks. Updating a 13.10 *server* to 14.04 is done by apt-get update && do-release-upgrade ?
+[08:04] <Psil0Cybin> I also have another question if perhaps you can help me, when I try to SSH into my device after copying my keys over, it is asking me to enter my password via a GUI, but its Xubuntu 14.04 without Unity .. How can I get it to ask for my password like it used too on 12.04?
+[08:04] <sebastianlutter> I need to install nginx, but I need to avoid that it tries to start on port 80 / 443 while it installes (ports are already used). Is there a way to tell apt-get that it should NOT start the service after installation?
+[08:04] <Psil0Cybin> I want to be able to enter my password via the terminal and not be asked via the GUI.
+[08:05] <Psil0Cybin> I was told yesterday if I reformatted and went with straight Xubuntu, it would not do this.
+[08:05] <eeeeee> Psil0Cybin: get rid of the desktop manager maybe ?
+[08:06] <nibbler_> oh i like.... "Moving files...
+[08:06] <nibbler_> All done. Click to the link below to start database upgrade." next line: "Please fix this and retry."
+[08:06] <Shadow}}> bcvery?...
+[08:06] <eeeeee> not sure, but maybe you could remove lightdm, and when you login in the terminal have startx in .bashrc and let it start your de
+[08:06] <bcvery> Shadow}}, Yes?
+[08:06] <eeeeee> @ Psil0Cybin
+[08:06] <Psil0Cybin> eeeeee, how do i get rid of the desktop manager? so that I do not have to enter my pasword into the GUI for SSH
+[08:06] <Shadow}}> bcvery: Can you type up the line I need to do that gtk-recordmydesktop?... I don't know how.
+[08:07] <Psil0Cybin> I didnt install a desktop manager for ssh eeeeee
+[08:07] <bcvery> Shadow}}, Yes, sorry: sudo apt-get install gtk-recordmydesktop
+[08:07] <Shadow}}> bcvery: I forgot the the Install...-Sighs-
+[08:07] <trijntje> cynicallemon: looks like moving the file didn't help, any other ideas
+[08:07] <html> cynicallemon,   so how do i set up the server to connect to it? is there a ftp/scp/ssh server alreasdy installed and setup?
+[08:08]  * Shadow}} hits the extra the with a rum bottle.
+[08:08] <eeeeee> Psil0Cybin: oh, nevermind, i didn't see your first post :)
+[08:09] <johnquebec> is there anyone who can guide me to make a single file to double click and run teamspeak 3 client ?
+[08:10] <eeeeee> johnquebec: you can make an icon in the launcher that launches it, or you want a double clickable file?
+[08:11] <cynicallemon> trijntje: i assume its the kate text editor youre trying to install or add too. maybe remove any kate stuff and reinstall...
+[08:11] <johnquebec> double clickable file for now would be nice
+[08:11] <johnquebec> i can run it by entering sudo path/teamspeak3-runscript.sh
+[08:12] <trijntje> cynicallemon: I've tried that, but I cant do anything because it wants to complete the installation first
+[08:12] <cynicallemon> html: assuming the destination machine has ssh installed then it just a matter of connecting to it via filezilla using a user/pass valid on that machine
+[08:13] <html> cynicallemon,  ok i got it-but i have a 70 some mb zip thats not showing up. how do i ?
+[08:14] <chrissg> "sudo do-release-upgrade -d" still gives me "No new release found" on 13.10 Server- even after apt-get clean/ update. Any ideas?
+[08:16] <iscorpion> hello every one how can i upgrade ubuntu 14.04 to 14.0.1
+[08:16] <iscorpion> 14.04.1
+[08:16] <Psil0Cybin> So would anyone know what i can do in order to remove the GUI when i am trying to access anything via SSH, I want to be able to type in my password in all the time via the terminal but what happens is it has a pop up asking me to unlock my key via the GUI which is a little troubling.
+[08:17] <johnquebec> did you try apt-get update ?
+[08:17] <CrypticSquared> iscorpion: apt-get dist-upgrade?
+[08:17] <johnquebec> i think its in Setting meny out there
+[08:17] <_ikke_> I'm trying to get bonding to work under ubuntu, but it either says waiting for slave to join, or gives errors about files already existing for bond9. here is my interfaces: http://tinyurl.com/l4hwov9 . I was able to manually fix it now
+[08:18] <_ikke_> any idea how I could fix it so that it works on boot?
+[08:23] <Tachyon`> hi, I've atm got grub2 installed with its loader in the mbr, however, for reasons I need not go into, that's no longer useful, I want to install it to the superblock of the root partition, is that as simple as doing a grub-install /dev/sda6 or is there more to it than that?
+[08:23] <cynicallemon> trijntje: well just do a sudo apt-get clean - that will flush the apt archives
+[08:24] <cynicallemon> trijntje: also theres a bug report for this issue - https://bugs.launchpad.net/ubuntu/+source/tinyos-tools/+bug/1355930
+[08:24] <ubottu> Launchpad bug 1244291 in tinyos-tools (Ubuntu) "duplicate for #1355930 package nescc (not installed) failed to install/upgrade: trying to overwrite '/usr/share/kde4/apps/katepart/syntax/nesc.xml', which is also in package kate-data 4:4.11.2a-0ubuntu1" [Undecided,Confirmed]
+[08:27] <html> _ikke_,  what is this machine purpose?
+[08:27] <_ikke_> It's a server for various purposes
+=== douwe is now known as dreugeworst
+[08:29] <dragos> who like minecraft
+[08:29] <dragos> nobody chat with me im so sad
+[08:29] <trijntje> cynicallemon: thanks, looks like that solved it
+[08:29] <dreugeworst> Hi, I'm running ubuntu 14.04 and am trying to run /tmp, /var/run and /var/lock in ram. In debian I can do this by setting ramtmp, ramrun and ramlock to yes in /etc/default/rcS. However, the man page for rcS in ubuntu doesn't mention these options.. anyone know how I can do this in ubuntu?
+[08:30] <cynicallemon> trijn
+[08:30] <cynicallemon> trijntje: np
+[08:30] <dragos> ubuntu 12.04 dosen't detect my bluetooth
+[08:31] <dragos> Hi i'm running ubuntu 12.04 and i try to connect my wii mote via bluetooth but ubuntu says no adapters found but i have an adapter
+[08:35] <dragos> Hi i'm running ubuntu 12.04 and i try to connect my wii mote via bluetooth but ubuntu says no adapters found but i have an adapte
+[08:36]  * Tachyon` wonders how long he should wait after a question is ignored before asking it again..
+[08:36] <dragos> Hi i'm running ubuntu 12.04 and i try to connect my wii mote via bluetooth but ubuntu says no adapters found but i have an adapter
+[08:37] <bcvery> !patience
+[08:37] <ubottu> Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[08:38] <dragos> i try
+[08:39] <Tachyon`> unfortunately icaros and its inability to play nice with other OS's isn't really a use case that would end up documented -.-
+[08:40] <dragos> ubuntu dosen't detect my bluetooth adapter
+[08:40] <Tachyon`> does it show up on an lsusb?
+[08:40] <Tachyon`> if not, the bt adapter may actyally be not working
+[08:40] <dragos> on lsusb it shows
+[08:40] <Tachyon`> then it is detecting it...
+[08:40] <Tachyon`> it's just not using it for some reason
+[08:40] <dragos> on ubuntu 10.04 it works fine
+[08:41] <Tachyon`> anything in logs hinting itm ight need proprietary drivers?
+[08:41] <dragos> drivers is good
+[08:41] <Tachyon`> oh well, that's me out of ideas -.o
+=== ikonia_ is now known as ikonia
+[08:48] <Kaco> good morning everybody
+[08:48] <Tachyon`> well, it's morning, the jury is still out on good.
+[08:49] <[^DarkGod^]> good morning Kaco
+[08:51] <Psil0Cybin> So would anyone know what i can do in order to remove the GUI when i am trying to access anything via SSH, I want to be able to type in my password in all the time via the terminal but what happens is it has a pop up asking me to unlock my key via the GUI which is a little troubling.
+[08:52] <Psil0Cybin> I am using Xubuntu 14.04, but I did not think it would use a GUI for the SSH password input..
+=== skyrunner is now known as Guest86940
+[08:54] <[^DarkGod^]> Psil0Cybin if you are connecting using ssh you dont need the GUI. Connecting via ssh has nothing to do with de GUI
+=== idimmu_ is now known as idimmu
+[08:55] <Psil0Cybin> [^DarkGod^], but I copied over my ssh keys from 12.04, and now when i type my command ssh user@ip.com it gives me a popup asking me to enter my password instead of letting me type it into the terminal like I am used too.
+[08:55] <Psil0Cybin> I want that same feature back like 12.04, I want to type it in the terminal and am confused why am getting the GUI pop up..
+[08:56] <[^DarkGod^]> is your private key password protected?
+[08:56] <Psil0Cybin> is that a one time password? i would use to unlock it? and then it would ask me via the terminal?
+[08:57] <Psil0Cybin> what do you mean protected?
+[08:57] <Psil0Cybin> when i clicked cancel on that gui screen it said pub key denied, because i was confused what it was
+[08:57] <[^DarkGod^]> you should follow this tutorial
+[08:57] <[^DarkGod^]> https://help.ubuntu.com/community/SSH/OpenSSH/Keys
+[08:58] <[^DarkGod^]> i think that you configured your ssh auth only once while you were using 12.04
+[08:58] <[^DarkGod^]> and now you dont remenber that config
+[08:59] <Psil0Cybin> [^DarkGod^], dang does that mean i cannot recreate that config? like I backed up my .ssh folder
+[08:59] <Psil0Cybin> and thought i copied it all over..
+[09:00] <Psil0Cybin> if I enter my password would it save it? or would it let me enter it in terminal every time after I type it in? I am confused
+[09:00] <anew> when i sudo crontab -e, i set the crontab but it doesnt run?
+[09:00] <somsip> anew: what is the crontab entry that is not working?
+[09:00] <anew> 0 */2 * * * perl /var/www/Users.pl
+[09:01] <somsip> anew: does it run in terminal?
+[09:01] <anew> yep
+[09:01] <anew> if i just do perl Users.pl
+[09:01] <anew> it works
+[09:01] <somsip> anew: and what time are you expecting that to run?
+[09:01] <anew> every 2 hours
+[09:01] <somsip> anew: any output in /var/log/syslog?
+[09:01] <anew> let me see
+[09:02] <Psil0Cybin> [^DarkGod^], following that guide it says if follow it, it will make it so I wont have to enter the password in again, but the thing is I want too, every time.. I connect like I did in 12.04 but in the terminal not the GUI
+[09:02] <anew> nope... how do i make it every minute
+[09:02] <anew> to tet it
+[09:02] <anew> test it better
+[09:02] <somsip> anew: * * * * *
+[09:02] <[^DarkGod^]> Psil0Cybin: have you copied the public key to the server?
+[09:02] <anew> k
+[09:02] <Psil0Cybin> yes
+[09:02] <Psil0Cybin> [^DarkGod^], its asking me locally via the GUI
+[09:02] <Psil0Cybin> to enter the password
+[09:02] <Psil0Cybin> i want it to ask me in the terminal.
+=== Cybert1nus is now known as Cybertinus
+[09:03] <Psil0Cybin> to unlock the key
+[09:03] <anew> somsip i am logged in as 'will' user, so when i crontab -l it says no crontabs
+[09:03] <anew> but i have to sudo to change theh crontab -e
+[09:03] <[^DarkGod^]> are you connecting using putty?
+[09:03] <somsip> anew: so you set it as a sudo crontab. You probably need to set the full path to /usr/bin/perl or create it in will's crontab
+[09:03] <[^DarkGod^]> or are you using a linux terminal?
+[09:04] <anew> yes but everytime i just do 'crontab -e' it says permission denied...
+[09:04] <anew> Error reading /home/will/.nano_history: Permission denied
+[09:05] <anew> actually i dont think that matters... i think i set it now
+[09:05] <anew> that error doesnt mean anything right
+[09:05] <somsip> anew: it means it can't edit the crontab for that user
+[09:05] <anew> argh
+[09:05] <anew> ok so it does matter lol
+[09:06] <anew> whey the hell cant it edit the cron for will
+[09:06] <anew> i am logged in as will
+[09:06] <somsip> anew: it depends. You've gone from 'a cronjob is not running' to 'I havent set the cronjob on the right user' to 'I cant edit crontabs for a user'
+[09:06] <somsip> anew: check http://serverfault.com/questions/78159/what-could-cause-permission-denied-for-command-crontab-e
+[09:07] <Psil0Cybin> [^DarkGod^], this is kind of like my problem but I do not want to automatically log in
+[09:07] <Psil0Cybin> http://ubuntuforums.org/showthread.php?t=1008797
+[09:07] <Psil0Cybin> so what i did was sudo killall gnome-keyring-daemon and it worked....
+[09:07] <Psil0Cybin> after i killed that
+[09:07] <Psil0Cybin> i can type my password in the terminal
+[09:07] <Psil0Cybin> normally like i used too
+[09:07] <Psil0Cybin> wow
+[09:08] <Psil0Cybin> why is gnome-keyring-daemon on my computer!
+[09:08] <Psil0Cybin> this is Xubuntu not Ubuntu!
+[09:08] <cynicallemon> Psil0Cybin: xubuntu has gnome packages
+[09:08] <ikonia> Psil0Cybin: because you installed ubuntu and then installed xubuntu-desktop package
+[09:09] <ikonia> Psil0Cybin: you where complaining the otherday about unity lenses
+[09:09] <Psil0Cybin> ikonia, This time I reformatted and used a standard Xubuntu 14.04 ISO
+[09:09] <Psil0Cybin> from the Xubuntu website.
+[09:09] <ikonia> Psil0Cybin: `xubuntu does have some gnome base libraries
+[09:09] <ikonia> to be honest I don't see why this is a problem
+[09:09] <Psil0Cybin> so i guess that keyring package, was one of them
+[09:10] <Psil0Cybin> I dunno im paranoid and the more i google it so are other people
+[09:10] <Psil0Cybin> lol
+[09:10] <ikonia> keyring is very useful, so I wouldn't be surprised if it was
+[09:10] <[^DarkGod^]> ikonia is right, xubuntu logically is based on ubuntu
+[09:10] <ikonia> Psil0Cybin: paranoid about what ???
+[09:10] <anew> somsip sorry i was figuring all this out while i was typing
+[09:10] <anew> so when i get the warning... even tho i get the warning, i do crontab -l and see the crontab for will
+[09:10] <anew> ?
+[09:11] <[^DarkGod^]> Psil0Cybin: now its working because you "disabled" the ssh auth using SSL
+[09:11] <PechosRey> Hi
+[09:11] <[^DarkGod^]> if you reboot your server, it will fail again
+[09:11] <somsip> anew: did you work through the suggestions on the page I linked for you?
+[09:11] <[^DarkGod^]> you have to check your ssh config and place the certs on the correct folders
+[09:11] <anew> doing it now
+[09:12] <[^DarkGod^]> the password prompt problem you have is because the server is asking for the ssl passphrase you used when you created the certs on 12.04
+[09:12] <idimmu> Psil0Cybin: if you really want to know, install apt-rdepends and run  apt-rdepends -r gnome-keyring
+=== thkang0 is now known as skyrunner14
+[09:12] <ObrienDave> what? Psil0Cybin complain? naw, say it isn't so ;P
+[09:13] <Psil0Cybin> oh you guys
+[09:13] <idimmu> also what are you paranoid of?
+[09:13] <Psil0Cybin> i want to re-enter my password in the terminal each time, I do not want someone to just type my last command in the terminal if i left my computer on and access my raspberry pi, and view my cat videos
+[09:13] <PechosRey> How can i deactivate the samba service in Ubuntu 14.04 which is active by default
+[09:13] <idimmu> use a screensaver that requires a password to unlock ..
+[09:14] <PechosRey> i can't find it in the runlevels
+[09:14] <Tachyon`> 'cat', heh, never heard it called that before
+[09:14] <Psil0Cybin> ObrienDave, be a lover, not a hater..
+[09:15] <Tachyon`> also, isn't that the active ingredient in magic mushrooms?
+[09:15] <ikonia> Psil0Cybin: I don't understand tha actual problem ?
+[09:16] <Psil0Cybin> nvm i figured it out i just wanted to disable gnome-keyring daemon
+[09:17] <ikonia> so that's all you had to ask
+[09:17] <Psil0Cybin> if i chmod it to 0, it stops bugging me.
+[09:17] <ikonia> bad solution but "ok"
+[09:17] <Psil0Cybin> what do you recommend.
+[09:17] <ikonia> disabling the service
+[09:17] <anew> somsip i dont understand what to do with the first answer...
+[09:17] <anew> what do i type into the terminal?
+[09:18] <Psil0Cybin> in what way ikonia? just kill it every start or boot? or can I physically set it to off?
+[09:18] <ikonia> it's called from dbus I think from memory
+[09:18] <ikonia> so disable it within dbus
+[09:18] <ikonia> or just click "cancel" when it asks you for your password, it shouldnt ask you again for that session
+[09:18] <ObrienDave> Psil0Cybin, i don't hate you, i think you worry too much and waste peoples time on really silly stuff
+[09:19] <ikonia> if you're certain you don't want it ever, just remove the package
+[09:19] <somsip> anew: the input after "nick@home-sv-1:~$ " gives the ouput shown underneath it. Do the ones in Problem and Solution. And read the rest
+[09:20] <Psil0Cybin> ikonia, okay, but when I cancel obviously it just says pubkey denied because I did not enter a password. I am worried if I remove the package it might remove other packages I need for a standard Xubuntu install, How can I disable it through dbus perhaps in case it may cause problems later I can enable it..
+[09:20] <PechosRey> nobody knows from where the samba service is autostarted in 14.04? the rc.local is empty
+[09:20] <ikonia> Psil0Cybin I'd just remove it if you're that against it
+[09:20] <Psil0Cybin> okay.
+[09:21] <Psil0Cybin> ikonia, it wants to remove software center.
+[09:21] <ikonia> https://wiki.gnome.org/Projects/GnomeKeyring/Ssh
+[09:21] <Psil0Cybin> I think disabling it is a better method should I just google it ( how to disable via dbus? )
+[09:21] <Psil0Cybin> can I disable via dconf-editor?
+[09:22] <ikonia> Psil0Cybin: I'd be surprised if software center depended on gnome-ask-pass/keyring
+[09:22] <ikonia> ls -la
+[09:22] <Psil0Cybin> ikonia, it wanted to remove gnome-keyring, oneconf, python-ubuntu-sso-client software-center ubuntu-sso-client
+[09:22] <ikonia> oops
+[09:22] <ikonia> surprising
+[09:22] <ikonia> Psil0Cybin: what package did you tell it to remove ?
+[09:23] <Psil0Cybin> gnome-keyring
+[09:23] <ikonia> surprising
+[09:23] <Tachyon`> hi, I've atm got grub2 installed with its loader in the mbr, however, for reasons I need not go into, that's no longer useful, I want to install it to the superblock of the root partition, is that as simple as doing a grub-install /dev/sda6 or is there more to it than that?
+[09:24] <ikonia> http://askubuntu.com/questions/243397/xubuntu-disable-gnome-keyring worth a glance too
+[09:25] <ikonia> le of using a wrapper script http://askubuntu.com/questions/412793/xubuntu-stop-gnome-keyring-daemon-from-impersonating-ssh-agent
+[09:25] <ikonia> this should in my mind by changed at the dbus "call" line
+[09:25] <menace> hi, i am just installing the netboot 14.10 image, and i had several lvs/vgs on the disk before. It seems i cannot stop the nulling of the disk. is that right? any experience with that?
+[09:25] <somsip> !14.10 | menace
+[09:25] <ubottu> menace: Ubuntu 14.10 (Utopic Unicorn) is the next development release of Ubuntu due for release in October 2014. Support in #ubuntu+1. For more info, see the announcement at http://www.markshuttleworth.com/archives/1363
+[09:25] <blubaustin> hello
+[09:26] <blubaustin> Was just wondering one thing can I have a NFS server and client running on the same machine? I am trying to share folders from both machines to each other
+[09:26] <ikonia> blubaustin: yes you can
+[09:27] <blubaustin> Alright was just wondering since I know with some things a client and server you can only have one or the other not both
+[09:27] <ikonia> nfs is fine
+[09:27] <blubaustin> I've never set up a NFS so I was just wondering
+[09:27] <blubaustin> So this will be fun ^_^ . I hope at least
+[09:27]  * Tachyon` gives up and just tries it and prepares a lot of cursing in case his system ends up unbootable
+=== apodio is now known as nooooooooiz
+[09:28] <menace> *sigh* I know that 14.10 is not released yet.... I don't want to complain, i just ask, if anyone knows this behaviour. if not, i surely will look for a bug, or even open one...
+[09:28] <blubaustin> ikonia Have is it very difficult to setup or is it pretty easy? I'm trying to make it where each user can access their home folder.
+=== raz1 is now known as Raz1
+[09:29] <cfhowlett> menace, and ALL of that can and should be discussed in #ubuntu+1
+[09:29] <somsip> menace: try in 14.10. That's where users of 14.10 are
+[09:29] <blubaustin> So if one person is on one computer they can still access files on the other computer
+[09:29] <somsip> menace: s/14.10/#ubuntu+1 ...
+[09:29] <menace> thanks :)
+[09:29] <menace> that's a better place, i agree
+[09:29] <ikonia> blubaustin: doddle
+[09:29] <blubaustin> I do want security though which is whats bothering me with the guide its wanting everyone to access it instead of authentication
+[09:30] <Raz1> So, should I ask MIR questions in this channel or 14.10 - or something completely different?
+=== helpme is now known as Guest57281
+[09:30] <blubaustin> doddle?
+[09:30] <Psil0Cybin> thank you so much ikonia
+[09:30] <cfhowlett> !mir | razl
+[09:30] <ubottu> razl: Mir is the next-generation display server currently under development by Canonical and Ubuntu. It's slated for inclusion in Ubuntu 14.04. For more information on it, see https://wiki.ubuntu.com/Mir/Spec . For code, see https://launchpad.net/mir
+[09:30] <Raz1> cfhowlett: I already read it
+[09:30] <cfhowlett> Raz1, not in 14.04 so ... 14.10 I suppose
+=== eeeeee is now known as EriC^^
+[09:31] <blubaustin> I have ubuntu 14.10 ubottu >_>
+[09:31] <blubaustin> I like gentoo but its to hard for the other users to manage
+[09:31] <blubaustin> ubuntu*
+[09:31] <ikonia> why are you using pre-release software ?
+[09:31] <Raz1> cfhowlett: All right
+[09:31] <ikonia> blubaustin: doddle = very easy
+[09:32] <blubaustin> Why not
+[09:32] <blubaustin> I have backups
+[09:32] <ikonia> blubaustin: because it's pre-release, it breaks it is unstable
+[09:32] <blubaustin> read above ^
+[09:32] <ikonia> blubaustin: ok, then please join #ubuntu+1 for 14.10 discussion
+[09:32] <cfhowlett> blubaustin, AND it's not supported here so >>> #ubuntu+1 for support please
+[09:32] <blubaustin> So to me if I can help the team, and other people can its worth it
+[09:32] <ikonia> blubaustin: this channel only suppors the stable release
+[09:32] <blubaustin> crap >_>
+[09:33] <PechosRey> can someone tell me how the new autostart of services in ubuntu 14.04 works?
+[09:33] <PechosRey> the rc.local is empty
+[09:34] <PechosRey> my samba autostarts with 14.04 but i can find out where to deactivate the samba service
+[09:34] <ikonia> it uses upstart
+[09:34] <ikonia> that's the init system
+[09:34] <blubaustin> delete it in the /etc/init.d/
+[09:35] <ikonia> rc.local is only for very specific and pretty much obsolete stuff now
+[09:35] <ikonia> do not delete it
+[09:35] <ikonia> do not delete init scripts
+=== Guest95615 is now known as Layke
+[09:35] <Raz1> *unless you created them
+[09:35] <blubaustin> or mv it
+[09:35] <ikonia> do not move it
+[09:36] <blubaustin> ?!
+[09:36] <PechosRey> ah great there is a samba autostart script thx a lot
+[09:36] <Raz1> They can be disabled
+[09:36] <ikonia> disable init jobs using upstart
+[09:36] <ikonia> do not try to get around it
+[09:36] <blubaustin> yes they can be disabled but I've always moved it or deleted it >_>
+[09:36] <blubaustin> <_<
+[09:36] <ikonia> then you have bad practices
+[09:36] <ikonia> please don't offer them as solutions
+[09:37] <PechosRey> where can i find upstart?
+[09:37] <ikonia> PechosRey: it's an init system it's made up of a few components
+[09:37] <ikonia> !upstart | PechosRey
+[09:37] <ubottu> PechosRey: Upstart is meant to replace the old Sys V Init system with an event-driven init model.  For more information please see: http://upstart.ubuntu.com/
+=== Guest57281 is now known as samuraiRM
+[09:39] <PechosRey> ah thx a lot i try to disable it using upstart
+=== sudhir_ is now known as nrange
+[09:40] <Psil0Cybin> I just typed in free -m on a fresh install of Xubuntu and it says i have 0 swap 0 used 0 free, so i can assume I have no swap...why is this so, would it no task me to make a swap or make one automatically, if i just did a standard install when it erases everything?
+[09:40] <cfhowlett> Psil0Cybin, swap is not automatic
+[09:40] <Raz1> upstart is going to be replaced eventually, by the way
+[09:40] <cfhowlett> !swap | Psil0Cybin
+[09:40] <ubottu> Psil0Cybin: swap is used to move unused programs and data out of main memory to make your system faster. It can also be used as extra memory if you don't have enough. See https://help.ubuntu.com/community/SwapFaq for more info
+[09:41] <Raz1> Psil0Cybin: It just means that your system hasn't needed to page anything yet because you have enough memory
+[09:41] <Psil0Cybin> cfhowlett, would it get created automatically, if i need more memory
+[09:41] <Psil0Cybin> even if total says 0?
+[09:41] <Raz1> It's just the space used on the swap partition
+[09:41] <PechosRey> it seems samba is not managed with upstart service
+[09:42] <cynicallemon> i dont usually run with swap enabled due to having enough memory
+[09:42] <cfhowlett> Psil0Cybin, swap IS NOT created unless you choose to do so.  Did you?  If not = no swap.  Read the wiki and add one if you wish12
+[09:42] <PechosRey> initctl list -> doesn`t list samba processes
+[09:42] <Raz1> cynicallemon: It's kind of useful for hibernation though
+[09:42] <Raz1> Psil0Cybin: Oh, sorry. I didn't see the 0 free part
+[09:42] <Psil0Cybin> i did the whole LVM encrypted / home encrypted, it never gave an option for swap..it just gave me the option to create my own partitions or let the Install do its own thing.
+[09:42] <cynicallemon> Raz1: yes maybe for laptops
+[09:43] <cuddylier> Does anyone know how to apt-get install programs without it prompting for a yes/no? I need it not to for a bash script.
+[09:43] <Psil0Cybin> so i clicked erase all previous partitions and do a fresh install
+[09:43] <Psil0Cybin> so i thought it would create a swap just incase...
+[09:43] <Psil0Cybin> like in 12.04..
+[09:43] <Raz1> cynicallemon: Especiall so, but I use it for desktops aswell in order to keep session state
+[09:43] <cfhowlett> Psil0Cybin, don't feel bad.  I just installed my 14.04 upgrade and manage to forget to set the swap partition.  It's present from 12.04 but I didn't assign it so = no swap.  Easily fixed thought
+[09:43] <Raz1> cynicallemon: No real need to shut down your system if you don't have to
+[09:44] <winem> cuddylier: use -y
+[09:44] <cuddylier> winem: Thanks
+[09:44] <winem> this will automatically answer the question with yes and skips the prompt
+[09:44] <devlin> what if it's installed on tablet
+=== Pupeno_ is now known as Pupeno
+[09:44] <Psil0Cybin> cfhowlett, is it easy to create an encrypted swap in 14.04 and link it in? or is that not as easily fixed lol?
+[09:44] <cynicallemon> Raz1: i dont worry about that on laptops anyway as i shut mine down anyway, always have
+[09:45] <smittix> Has anyone experienced boot problems when installing Nvidia drivers?
+[09:45] <cfhowlett> Psil0Cybin, all I can suggest is read the swap wiki.  I just verified that my 12.04 /swap is present, so I' need to boot a USB and then do some mtab/fstab assignments or something.  seems caveman easy ...
+[09:46] <Psil0Cybin> Okay ty.
+[09:46] <ObrienDave> unless you're a caveman
+[09:46] <ObrienDave> ;P
+[09:52] <NiNou0013> irc.root-me.org:6667
+=== stockfish is now known as winb
+[09:54] <cuddylier> Does anyone know a fairly easy way to change a single line or a variable in a config file via bash script? All the change config things I can find on Google are extremely complicated and I'm not sure it's what I'm looking for.
+[09:55] <irgendwer4711> hello, anyone using Ubuntu 10.04 LTS with openssl/postfix, havin this error in log: ccs received early?
+[09:55] <irgendwer4711> I think openssl update 0.9.8k is damaged
+[09:57] <cfhowlett> irgendwer4711, 10.04 server??
+[09:58] <irgendwer4711> yes
+[09:58] <irgendwer4711> 10.04.04 LTS
+[09:58] <H4ml3t> cuddylier, can I advice you to use a Perl script?
+[09:58] <irgendwer4711> cfhowlett: there seems to be a bug regression with TLS
+[09:58] <H4ml3t> is much more easy
+[09:59] <cuddylier> H4ml3t Is it similar to bash in terms of simplicity for comands?
+[09:59] <cuddylier> commands*
+[09:59] <irgendwer4711> maybe encryption is worthless
+[09:59] <cfhowlett> irgendwer4711, over my head.  ask #ubuntu-server
+[09:59] <irgendwer4711> cfhowlett: do you use this version with postfix?=
+[09:59] <H4ml3t> the syntax is different, but not too much!
+[09:59] <cfhowlett> irgendwer4711, no server on my machine.   you might ask in the server channel.
+[10:00] <H4ml3t> you can just focus on what you have to do, without learning all the language
+[10:00] <H4ml3t> maybe you can write a little perl script and execute it inside you bash script
+[10:01] <irgendwer4711> cfhowlett: did
+[10:04] <irgendwer4711> cfhowlett: may I should ask some dev?
+[10:04] <cfhowlett> irgendwer4711, pretty sure the first thing they'll they'd suggest is upgrade to 14.04 --- as do I.  10.04 support ends in 2 months.
+[10:05] <irgendwer4711> cfhowlett: lts ends in april 2015
+[10:05] <cfhowlett> and an upgrade may easily fix the problem.
+[10:05] <cuddylier> For exiting mysql in my bash script, you would usually use 'exit' normally but I can't do that can I in a script as exit is a function too?
+[10:05] <cfhowlett> irgendwer4711, doh!  right.
+[10:05] <work> list
+[10:05] <work> list
+[10:06] <cfhowlett> work ... ha ha.  no warez here.  go elsewhere
+=== EriC^^ is now known as Guest52399
+[10:08] <havarka> cfhowlett: HA HA
+=== carlo is now known as Guest17189
+[10:11] <Guest17189> ok
+=== Gaming is now known as AMD-Z
+[10:12] <AMD-Z> Goodmorning people
+=== Guest52399 is now known as EriC^^
+[10:16] <rewt__> hi
+[10:16] <rewt__> i was wondering if it could be possible to configure OpenLDAP to use radius challenge during authentication, for example let s say you want to implment 2factor auth on services that does not support radius, but supports LDAP auth (cf VMWare etc...) is there any way to do this ?
+[10:22] <blaab> hello! I'm running Ubuntu 14.04 and I've connected a USB audio device. It shows up in pulseaudio volume control as
+[10:22] <blaab> CM108 audio controller analog stereo. However, I don't hear any sound even after setting audio at 145%
+[10:22] <blaab> and the mic isn't detected either. Could someone help out here?
+[10:25] <Ja[r]od> hi mom!
+[10:26] <delf_> hi guys! i'm trying to install puppet 2.7 on my ubuntu 14.04 box...i created a pref-file in /etc/apt/preferences.d, but somehow it seems like apt ignores it...any ideas what i could have done wrong?
+[10:26] <mlody> Hi guys, What are default permissions and owners to /var/log in ubuntu 14.04? In my install i have 775 root syslog which causes my logratate to fail
+[10:27] <ChaosBringer> Hello all. I have about 6 LVs that I seem to be running into some small issues with
+[10:27] <ChaosBringer> @ mlody drwxrwxr-x 15 root syslog   4096 Aug 13 08:03 log
+[10:28] <ChaosBringer> So, I noticed I have duplicate entries in proc/mounts
+[10:28] <ChaosBringer> for some of my Logical Volumes
+[10:28] <ChaosBringer> they also do not seem to be automounted or unmounted
+[10:28] <ChaosBringer> on boot and shutdown, even though they are in /etc/fstab
+[10:28] <ChaosBringer> any ideas?
+[10:30] <mlody> do you think that somethink can go wrong when i set chmod 755 /var/log ?
+[10:32] <ChaosBringer> why wouldn't you give whatever user is running logrotate
+[10:32] <Ja[r]od> mlody: yup
+[10:32] <ChaosBringer> you add whatever user to the syslog group
+[10:32] <ChaosBringer> instead of messing with permissions in / :)
+[10:32] <k1l> mlody: 775 root:syslog is fine for /var/log/ . but the files in there have different permissions
+[10:32] <ChaosBringer> anyone have any idea about dupes in /proc/mounts concerning LVM?
+[10:32] <k1l> mlody: did you fiddle with the permissions in there already?
+[10:33] <ChaosBringer> ubuntu 14.04
+[10:33] <mlody> k1l, 775 isnt fine in case of my logrotate
+[10:34] <mlody> error: skipping "/var/log/tarara.log" because parent directory has insecure permissions (It's world writable or writable by group which is not "root")
+[10:34] <mlody> when i run logrotate -f /etc/logrotate.d/tararar
+[10:34] <mlody> it clearly says that /var/log is writable by group
+[10:34] <mlody> and this causes the error
+[10:34] <ChaosBringer> right
+[10:35] <ChaosBringer> you have given too broad permissions
+[10:35] <ChaosBringer> to tarara.log
+[10:35] <ChaosBringer> syslog is the default group
+[10:35] <ChaosBringer> that the folder belongs to
+[10:36] <TJ-> mlody: It sounds as if logrotate isn't being run as the syslog user, but as root
+[10:36] <mlody> TJ-, in logrotate.conf: su root syslog
+[10:36] <ChaosBringer> ^ probably right
+[10:36] <mlody> directive is set
+[10:36] <TJ-> mlody: That's correct .... have you got any logrotate customisations?
+[10:36] <mlody> may this be the problem?
+[10:36] <k1l> mlody: what program gives that error? 755 is the regular ubunut setup
+[10:36] <ChaosBringer> anyone know why my LVM partitions are not automounting (they are in /etc/fstab) and I have dupes in /proc/mounts?
+[10:37] <mlody> k1l, logrotate gives it
+[10:37] <TJ-> My systems /var/log/ are 775 root:syslog
+[10:37] <k1l> mlody: not on a regular ubuntu
+[10:37] <mlody> btw. when I add this directive to the conf for tararara the it is ok
+[10:37] <mlody> and it rotates the log
+[10:37] <k1l> mlody: which ubuntu is that exactly?
+[10:37] <mlody> Ubuntu 14.04.1 LTS \n \l
+[10:38] <k1l> so 775 is all fine
+[10:39] <InsaneReality> Hi, after upgrading to Trusty, Gnome-shell is acting very sluggish, with windows getting stuck or twitching. What should I do?
+[10:39] <TJ-> mlody: What is the owner:group of tarara.log?
+[10:39] <k1l> InsaneReality: try a different user to see if it is some user setting (old theme, old config etc)
+[10:40] <mlody> -rw-------  1 root    root
+[10:40] <EriC^^> mlody:  try setting the group to syslog?
+[10:40] <InsaneReality> k1l: Ok, I will try that. Just in case that issue doesn't happen with a new user, what should I do?
+[10:41] <TJ-> mlody: I think you need a custom "/etc/logrotate.d/<daemon_name>" with "/var/log/tarara.log { ... su root root }"  in
+[10:41] <k1l> InsaneReality: good question. i would consider to reset the user configurations from gnome desktop.
+[10:42] <TJ-> mlody: That... or change the group ownership of tarara.log to syslog
+[10:43] <InsaneReality> k1l: Can you tell me how to reset user config please?
+[10:43] <mlody> TJ-, yup. I have custom config. When i add there a directive "su root syslog" then it rotates the log. Also when i change /var/log permissions to 755 instead of 775 it works aswell. We have big environment and its easier to change in ansible single config (to change /var/log) instead of all logrotate configs
+[10:43] <mlody> TJ-, i wonder wheter there will be some porlbmes with /var/log chmoded to 755
+[10:43] <mlody> (as it was in ubuntu 13.04 for example)
+[10:43] <frib> when i run sudo pm-hibernate, the screen just flashes and pc doesn't shut off .. how can I make hibernate work?
+[10:44] <EriC^^> frib: do you have a swap partition?
+[10:45] <TJ-> mlody: There could be, the point of the group rw is that daemons can drop root privs but still have access to write logs
+[10:45] <k1l> InsaneReality: see f that helps: http://askubuntu.com/questions/56313/how-do-i-reset-gnome-to-the-defaults
+[10:46] <InsaneReality> k1l: Thanks a lot. :)
+[10:46] <frib> EriC^^, one sec, checking
+[10:47] <frib> EriC^^, it seems I dont
+[10:48] <EriC^^> frib: you need a swap partition/file to hibernate
+[10:48] <AMD-Z> frib: that's what I told you yesterday too
+[10:48] <frib> EriC^^, atm i have a boot/efi partition (fat32) and a root partition ext4
+[10:48] <frib> AMD-Z, i thought i had one
+[10:49] <k1l> you can only standby without a swap partition
+[10:49] <frib> with this new laptop the install was some weird efi thing that I had never seen before and i couldn't partition things the way I wanted to
+[10:49] <k1l> frib: "sudo fdisk -l" will tell you
+[10:50] <frib> my ram is 12 gb but gparted says i have 11.93 gb of free disk space
+[10:51] <InsaneReality> One more question: Something has happened while upgrading to 14.04 that libreoffice-base is showing as half-installed and it remains in its old precise version without updating to the trusty one. Is there a way to solve that?
+[10:52] <EriC^^> frib: you mean unallocated space?
+[10:52] <frib> EriC^^, gparted called it "unknown" so i just formatted it to swap
+[10:52] <k1l> InsaneReality: run a "sudo apt-get udpate &&sudo apt-get dist-upgrade" and put the whole output into a pastebin please
+[10:52] <frib> but despite gparted showing 3 partitions, fdisk only shows 1 still
+[10:53] <k1l> frib: dont just guess! pastebin the output and let the peer review it
+[10:53] <TJ-> frib: That is because the disk using GPT, not MBR. With fdisk all you see is the Protective MBR... use "gdisk"
+[10:53] <InsaneReality> k1l: Ok
+[10:53] <k1l> else you may be deleting your stuff
+[10:53] <EriC^^> frib: try parted -l
+[10:54] <frib> EriC^^, that shows them all
+=== rawagner is now known as rawagner_afk
+[10:54] <frib> so now that i have a swap i should try to hibernate again?
+[10:54] <EriC^^> np
+[10:54] <EriC^^> *no
+[10:54] <EriC^^> first does it say the partition is linux-swap ? (under filesystem)
+[10:54] <frib> linux-swap(v1)
+[10:55] <EriC^^> ok
+[10:55] <EriC^^> type swapon /dev/sdxY
+[10:55] <EriC^^> where sdxY is the swap
+[10:55] <frib> done
+[10:56] <TJ-> frib: the swap partition needs to be slightly larger than installed RAM for hibernation to work, for an 8GB RAM PC I needed to allocate 8.25GB to the swap partition
+[10:56] <frib> TJ-, my ubuntu system info lists my ram as 11.7GB and parted -l lists the swap partition as 12.8GB
+[10:56] <EriC^^> now type blkid
+[10:56] <TJ-> frib: That looks about right
+[10:56] <EriC^^> and get the UUID
+[10:56] <frib> got it
+[10:57] <EriC^^> sudo nano /etc/fstab
+[10:57] <frib> ok
+[10:57] <frib> im there
+[10:58] <InsaneReality> k1l: Here's the paste: http://paste.ubuntu.com/8044367/ . I entered Y when it asked me to upgrade.
+[10:58] <EriC^^> add this UUID=UUIDhere    none    swap    sw      0   0
+[11:00] <iptable> please also note that you need more than "slightly" bigger swap than ram. linux by default will swap out unused memory to swap, so you may end up with your ram + 1GB of swap utilised after a few hours of doing certain things. A good rule of thumb is SWAP=RAM*1.5. So for 12GB RAM, have at least 18GB SWAP. that will ensure you can hibernate after a few days of not rebooting
+[11:00] <frib> EriC^^, done
+[11:01] <EriC^^> ok, sudo nano /etc/initramfs-tools/conf.d/resume
+[11:01] <frib> iptable, then iwill have to shrink my os partition
+[11:02] <frib> EriC^^, there
+[11:02] <EriC^^> add this RESUME=UUID=UUIDhere
+[11:02] <frib> done
+[11:02] <iptable> just a note ;) free -m can tell you if you have enough swap free. you need swap free = your ram size + a few MB in order to be able to hibernate
+[11:03] <frib> http://paste.ubuntu.com/8044419/
+[11:03] <EriC^^> then sudo update-initramfs -u
+[11:03] <frib> done
+[11:03] <EriC^^> ok, you're good
+[11:04] <EriC^^> pm-hibernate
+[11:05] <frib> am i still here
+[11:05] <EriC^^> ok, you need to restart i think
+[11:05] <k1l> InsaneReality: you use libreoffice from a PPA and that PPA is broken
+[11:05] <frib> the hibernate seemed to work
+[11:05] <frib> the pc shut off
+[11:05] <frib> i'm just surprised i didn't get disconnected from irc
+[11:05] <k1l> !info libreoffice-base | InsaneReality see the package version
+[11:05] <ubottu> InsaneReality see the package version: libreoffice-base (source: libreoffice): office productivity suite -- database. In component main, is optional. Version 1:4.2.4-0ubuntu2 (trusty), package size 1366 kB, installed size 5192 kB
+[11:06] <EriC^^> maybe cause the connection didn't timeout yet
+[11:06] <frib> ok so then all is good
+[11:06] <EriC^^> my wifi goes away sometimes, and when its back i resume in irc
+[11:06] <frib> can i just ask -- all that i just did, did it fix my problem of not being able to come back from suspend also?
+[11:07] <InsaneReality> k1l: So what should I do now?
+[11:07] <k1l> remove that PPA with ppa-purge
+[11:07] <EriC^^> no idea
+[11:07] <frib> ok hopefully it did
+[11:07] <k1l> !ppa-purge | InsaneReality
+[11:07] <ubottu> InsaneReality: To disable a PPA from your sources and revert your packages back to default Ubuntu packages, install ppa-purge and use the command: <unconvertable> sudo ppa-purge ppa:<repository-name>/<subdirectory> <unconvertable> <unconvertable> For more information, see http://www.webupd8.org/2009/12/remove-ppa-repositories-via-command.html
+[11:07] <frib> and now hibernate shows up in the gui shutdown options too so that's good
+[11:07] <frib> thanks for the help
+[11:07] <InsaneReality> k1l: Ok I will do that
+[11:07] <EriC^^> np
+[11:07] <InsaneReality> k1l: Thanks for all your help
+[11:11] <daGrevis> hi! any idea what these errors mean? https://gist.githubusercontent.com/anonymous/2468487701e2762d36c8/raw/eadf1ad2da04fb10d1787e7e2fb318c15962791c/gistfile1.txt
+=== Alessandro is now known as Guest16057
+[11:12] <jackarius86> hello, can anyone recommend a good cd/dvd writing program for burning a .iso file on to
+[11:12] <frib> jackarius86, k3b is good
+[11:14] <DJones> !burning | jackarius86 I use any of gnomebaker/k3b/brasero depending on which comes to mind first
+[11:14] <ubottu> jackarius86 I use any of gnomebaker/k3b/brasero depending on which comes to mind first: CD/DVD burning software: k3b (KDE), brasero (GNOME), gnomebaker, xcdroast, wodim (command-line) | To burn ISO files, see https://help.ubuntu.com/community/BurningIsoHowto
+[11:15] <k1l> if its just a iso any program will do, imho. even nautilus can do that
+[11:15] <anew> * * * * * /usr/bin/perl /var/www/Users.pl anyone have any idea whats wrong with this. i do crontab -l and i see it
+[11:16] <anew> permissions maybe
+[11:16] <anew> ?
+[11:16] <EriC^^> anew: it isn't set to run at any time anyways?
+[11:16] <jackarius86> ok cool, thanks guys
+[11:17] <anew> EriC^^, what do u mean
+[11:17] <EriC^^> it's all *'s, it isn't set to run
+[11:18] <anew> EriC^^, shouldnt that run every minute ?
+[11:18] <EriC^^> no
+[11:18] <frib> i recently got my bluetooth to work using these instructions: http://ubuntuforums.org/showthread.php?t=2231813
+[11:18] <EriC^^> use */1 * * * *
+[11:18] <frib> but the effect doesn't seem to be permanent -- is there anyway I can make it permanent? thanks
+[11:20] <anew> EriC^^, didnt work
+[11:20] <anew> did not run
+[11:20] <EriC^^> check /var/log/syslog
+[11:21] <anew>  /var/log/syslog is empty
+[11:21] <EriC^^> what do you mean?
+[11:21] <EriC^^> no [CRON] ?
+[11:22] <popl> I'd like to install Apache Solr. I have been comparing Tomcat vs. Jetty. So far I have noticed that solr-tomcat requires tomcat6, which is at version 6.0.39 (which is a version that has multiple security issues). For that reason I am now considering using solr-jetty. Is Jetty preferred for using Solr with Ubuntu?
+[11:22] <anew> eric^^ nothing... it has nothing in the file
+[11:22] <anew>  cannot open 20 for reading: No such file or directory
+[11:22] <anew> ==> /var/log/syslog <==
+[11:23] <EriC^^> is this ubuntu?
+[11:23] <anew> yes
+[11:24] <popl> The only wiki page on Solr is https://wiki.ubuntu.com/Solr (which reports being last edited in 2012 but includes data marked as from 2008).
+[11:24] <EriC^^> type mail
+[11:24] <EriC^^> anew: do you get anything about the cronjob?
+[11:25] <anew> mail?
+[11:25] <EriC^^> in the terminal
+[11:25] <daGrevis> why i don't have /boot/grub/menu.lst ?
+[11:25] <anew> there is nothing in /var/mail
+[11:26] <daGrevis> can i edit grub.cfg directly?
+=== Germanaz0|0FF is now known as Germanaz0
+[11:26] <EriC^^> daGrevis: it'll be erased the next time you update-grub
+[11:27] <daGrevis> EriC^^, hmm. but where are the files are should be editing?
+[11:27] <EriC^^> daGrevis: edit /etc/default/grub & the grub.d
+[11:28] <EriC^^> /etc/grub.d
+[11:29] <daGrevis> cool, thanks
+[11:29] <EriC^^> np
+[11:29] <EriC^^> then update-grub after editing
+[11:30] <daGrevis> what day is it today?
+[11:30] <anew> argh can anyone help me with this cron???
+[11:32] <EriC^^> i don't know why you don't have a /var/log/syslog
+[11:33] <EriC^^> there was a file to select which logs to have, like kern.log and cron.log (which come from the syslog i think)
+[11:33] <elmaestro> how do i access deluge or transmission from dash?
+[11:33] <EriC^^> i don't know if you can get the syslog from there too
+[11:34] <EriC^^> ok got the file /etc/rsyslog.d/50-default.conf
+[11:35] <anuvrat> why is apt-get failing on older versions of ubuntu? how can I fix it?
+[11:35] <anuvrat> I am getting 404s on my instances running ubuntu 13. Also my colleagues running ubuntu 13 are facing the same issue of not being able to install packages on their laptops.
+[11:36] <EriC^^> anew: mine says *.*;auth,authpriv.none          -/var/log/syslog
+=== joar_ is now known as joar
+[11:38] <bugtraq> Escd
+[11:40] <SanuraiRM> aviator shut down command?
+[11:40] <hughsaunders> hey, why does http://archive.ubuntu.com/ubuntu/dists/trusty/Release contain architectures that are not present in the repo eg main/binary-arm64?
+[11:41] <theadmin> anuvrat: You can't "fix" it, 13.X is EOL.
+[11:41] <theadmin> anuvrat: You have to upgrade to install packages.
+[11:43] <theadmin> anuvrat: For general use, stick to EOL versions (12.04, 14.04, 16.04, 18.04 and so on). Only use non-LTS if you want to play with new features.
+[11:45] <theadmin> Err
+[11:45] <k1l> anuvrat: the repos get shut down after its even too late to have a secure system due to stopped updates. so better stick with LTS in first place. you got 5 years support on that
+[11:45] <SanuraiRM> example aviator shut down command
+[11:45] <theadmin> anuvrat: stick to LTS versions
+[11:45] <ikonia> SanuraiRM: what is the issue ?
+[11:45] <theadmin> SanuraiRM: We're not a search engine, explain what you want please
+[11:45] <k1l> SanuraiRM: can you make a real support question out of that?
+[11:45] <SanuraiRM> yes i make aviator for pc off
+[11:45] <daGrevis> where can i find logs about services stopping?
+[11:45] <jackarius86> DJones: i am trying to use brasero, but i cant figure out how to make it detect my blank dvd
+[11:46] <SanuraiRM> icons for pc off
+[11:46] <theadmin> SanuraiRM: oooh, launcher
+[11:46] <SanuraiRM> launcher
+[11:46] <SanuraiRM> but
+[11:47] <theadmin> SanuraiRM: gnome-session-quit --power-off is what you want
+[11:47] <SanuraiRM> xfce4-session-logout
+[11:47] <SanuraiRM> but no logout
+[11:47] <SanuraiRM> off
+[11:47] <theadmin> Oh, XFCE
+[11:47] <theadmin> SanuraiRM: xfce4-session-logout --halt
+[11:47] <SanuraiRM> tk
+[11:49] <jackarius86> how can i make brasero "see" my blank DVD?
+[11:49] <linuxthefish> how can i boot into ubuntu live usb on EFI pc?
+=== lbaway is now known as luckybunny
+=== charles is now known as Guest77116
+[11:52] <theadmin> linuxthefish: Windows 8 PC?
+[11:53] <linuxthefish> theadmin yeah, i just need to boot into live for fixing some files
+[11:53] <saif> can any one tell me where i can download ultra iso for xubuntu
+[11:54] <theadmin> saif: UltraISO is a Windows program, doesn't exist for Ubuntu. You can mount ISOs in Ubuntu directly by double-clicking them.
+[11:54] <TJ-> linuxthefish: Removable media should appear in the UEFI boot menu, possibly twice (once for the BIOS boot, once for the EFI boot) options
+[11:54] <linuxthefish> yeah i can boot usb by pressing escape, but it comes up with grub command line
+[11:54] <k1l> !find ultraiso
+[11:54] <ubottu> File ultraiso found in openvas-plugins-dfsg
+[11:54] <theadmin> k1l: UltraISO is a DaemonTools-like program for Windows
+[11:55] <k1l> theadmin: ok
+=== soee_ is now known as soee
+[11:55] <TJ-> linuxgeek_: Do you see more than one entry for the USB device in the UEFI boot menu?
+[11:56] <linuxthefish> if you mean me, then no
+[11:56] <SanuraiRM> i want to cereate a file that off the pc
+[11:56] <SanuraiRM> http://postimg.org/image/5nt9eo8k9/1d9ee36b/
+[11:56] <ikonia> SanuraiRM: resolve your ban in #ubuntu-irc - your english is not good enough to actually help you
+[11:57] <saif> but i cant mount them on usb
+[11:57] <theadmin> linuxthefish: Disable Secure Boot in your EFI settings first
+[11:57] <theadmin> linuxthefish: Then try again
+[11:57] <linuxthefish> ah ok thanks
+[11:58] <SanuraiRM> ikonia my english is not enough for a simple file
+[11:58] <ikonia> SanuraiRM: no
+=== AEM` is now known as aem`
+[11:59] <SanuraiRM> i want create a icon that i push and off pc
+[11:59] <EriC^^> SanuraiRM: you're basically asking about pc-hitmen in your question
+[11:59] <SanuraiRM> pc-hittmen
+[11:59] <SanuraiRM> no

@@ -1,0 +1,1175 @@
+[19:41] <ikonia> but he'll have to make the modifications suggested
+[19:42] <Ramtron> I suppose ubuntu has it set to off on default, there's an extension to enable backspace :D
+[19:43] <root________> ikonia: I'm really hoping someone in an enterprise environment has an iso with exactly these modiciations that they can share a link to, to save me from fumbling around with tthe unfamiliar iso command and attempting to troubleshoot without a known-good iso.
+[19:44] <Bsims> root________: what are you trying to do?
+[19:44] <mhahe> i just played with display settings while i had an HDMI connected and i set my laptop display to off.. so now everytime i put in the HDMI the setting takes effect and only resets on restart... how do i get rid of this setting or restore to defaults?
+[19:44] <ikonia> very doubtful
+[19:45] <root________> Bsims: install ubuntu server on a completely headless system remotely over SSH
+[19:45] <Ramtron> Sounds entirely too complicated
+[19:45] <Bsims> root________: Ah you will wish to do server install... and most likely will need the bootstrap files for the install on the remote server
+[19:47] <Bsims> root________: http://serverfault.com/questions/208128/how-to-remotely-install-linux-via-ssh
+[19:49] <root________> Bsims: I already linked to the exact steps that need to be performed in my original question.  I just lack the comfort with the tools to be comfortable attempting to follow the guide myself, and to attempt to troubleshoot the system when I don't even know if the ISO is of known good quality
+[19:49] <Bsims> Ah for that, just do a md5sum on the iso
+[19:50] <root________> Bsims: can you type "/lastlog root________" and read my initial question again please?
+[19:51] <Bsims> your inital question was after I had joined sorry, you will have to paste it again
+[19:51] <Sheikhmak> hey kids, how can i turn this command into a /etc/fstab rule? mount -o proto=tcp,port=2049 grinder:/ /mnt/nfs/
+[19:52] <ikonia> Sheikhmak: that looks like an NFS mount
+=== carlos is now known as Guest3810
+=== Guest3810 is now known as Ripper
+[19:52] <ikonia> just add it like a normal fstab entry host:share and set the file system to nfs
+[19:52] <root________> Bsims: Can anyone provide a ubuntu netinst iso that launches an openssh server after network config and then waits, by default?  Preferably from a corporate site, someone trustworthy?    there's a howto at https://help.ubuntu.com/community/Installation/NetworkConsole but I'm not comfortable preparing that ISO or USB drive.
+[19:53] <Sheikhmak> ikonia, it is, i've mounted the drive, but I want to make sure, I write it right in fstab
+[19:53] <ikonia> just treat it like a normal entry file system nfs, and the source device is host:device
+[19:54] <Sheikhmak> yup that seem to work ikonia
+[19:56] <DWSR> can I force a reinstall of a metapackage and ALL it's depends?
+[19:57] <root________> DWSR: I've had that question a dozen times.
+[19:59] <CQN> if i'm doing an full system rsync backup, should i backup the ~/.cache directory?
+[20:00] <escott> CQN, i would not
+[20:00] <tozen> Hi gals I've used FreeBSD before, now I've got 12.04. So where can I found xorg.conf?
+[20:01] <francesca> ciao! :)
+[20:01] <ikonia> tozen: it doesn't exist
+[20:01] <ikonia> tozen: it's dynamic
+[20:02] <tozen> ikonia: well how can I configure image demention if need?
+[20:02] <ikonia> tozen: you create the file
+[20:02] <francesca> si capisce ben poco :(
+[20:02] <bekks> !it | francesca
+[20:02] <ubottu> francesca: Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi <unconvertable> /join #ubuntu-it <unconvertable> senza virgolette)
+[20:02] <ikonia> tozen: youre settings override the dynamic detection
+[20:03] <tozen> ikonia: well I need to override them oneself but where its located in 12.04
+[20:03] <tozen> ?
+[20:03] <whoever> hi all i need some help with rythom box, its isn't displaying all my music in the directory. When i run install additioal software required , I get this error : Python (v2.7) requires to install plugins to create media files of the following type: ID3 tag muxer, so what am I supose to install
+[20:04] <ikonia> tozen: it doesn't exist, as I said. If you want to create a file, you should create it in /etc/X11 and it should be called xorg.conf
+[20:04] <tozen> ikonia: thx for advise
+[20:05] <francesca> i don't understand :|
+[20:09] <k1l> !it | francesca
+[20:09] <ubottu> francesca: Vai su #ubuntu-it se vuoi parlare in italiano, in questo canale usiamo solo l'inglese. Grazie! (per entrare, scrivi <unconvertable> /join #ubuntu-it <unconvertable> senza virgolette)
+[20:10] <drecute> I will like to know, how do I make sure a host and guest vm have different ip addresses and are accessible from any external host, just like a physical box?
+[20:11] <drecute> So far, I've done bridged networking but when I try to ssh from the host to the bridged interface ip address, I land on the host machine but not the guest vm
+[20:11] <drecute> since i'm doing bridged networking, what IP address is the guest meant to have so it can be accessible just like a physical host
+[20:12] <cheesecakes> umm i was running an uodate from 12.04 to 12.10 and its been running for more than an hour now
+[20:12] <cheesecakes> how much longer will it take ?
+[20:13] <drecute> everytime I ssh to the bridged interface ip, I land on the host
+[20:13] <root________> drecute: okay, so you assign an IP address to the bridge device br0 for your local host, then the guest should have an IP address in the same subnet that's not used by another host.  Say you're using the 192.168.100.xx addresses, and your router is .1, your host is .2, and your desktops are above .100.  You might pick .3 for your VM, or anything else that's unused.
+[20:13] <cheesecakes> anyone else updated ... can someone some time estimates ?
+[20:13] <cheesecakes> s/some/give
+[20:14] <drecute> root________: you mean i can go ahead and assign a static ip to the guest vm?
+[20:14] <Pymous> I try to edit my rc.local, do I need some specifiq syntax ? Or I just copy/paste my command ? (like => mount /this/here /to/this/here)
+[20:15] <Noskcaj> i cant replicate it :(
+[20:15] <root________> drecute: if you would like to, yes.  Assign it to the eth0 device inside the VM though, not the vmnet0 device that is visible from the host.  You can also use DHCP to auto configure the guest if you prefer.
+[20:15] <guntbert> drecute: do you have a DHCP sevrer in your network? Then let it assign an IP address to the guest
+[20:17] <drecute> root________: thank you. It worked
+[20:19] <fugitivecoast> Hi, I was wondering if anyone could help me figure out how to gain access to super user.  I am admin and the only account but when I type su and put in my password it tells me that the authentication failed.  I am trying to install a NVIDIA video driver.
+[20:20] <memomemo> hi! how can i make my memo file atomatically open when i log in? for example in gedit.
+[20:20] <drecute> guntbert: if a service is not running on a port, can that port be opened via iptables?
+[20:21] <drecute> guntbert: I mean just some random port number I want to open up
+[20:21] <cheesecakes> fugitivecoast: try using sudo -i
+[20:21] <root________> drecute: you can "open" it in iptables, but with nothing listening there, it doesn't have any effect.
+[20:21] <guntbert> drecute: a port is only regarded as "open" if some server is listening there
+[20:21] <Cavisty> http://www.ustream.tv/channel/live-dnb-j-anderson
+[20:22] <escott> memomemo, add it to gnome-session-properties
+[20:22] <fugitivecoast> Cheesecakes: thank you I will give this a try
+[20:22] <drecute> i can make a service listen there right?
+[20:22] <drecute> like ssh ?
+[20:23] <memomemo> escott: oh, ok, and the command is just "gedit /file/path/momo.txt ?
+[20:23] <escott> memomemo, sure
+[20:24] <guntbert> drecute: please start by telling us your goal
+[20:24] <escott> memomemo, there are also various yellow stick pad type applications
+[20:24] <root________> drecute: sure.  You can pretty much make any service listen anywhere you want.
+[20:24] <drecute> guntbert: sorry. I just wanted to do something simple
+[20:25] <fugitivecoast> I am root but now while trying to run the .run file I get this message:    ERROR: You appear to be running an X server; please exit X before
+[20:25] <fugitivecoast>          installing.  For further details, please see the section INSTALLING
+[20:25] <fugitivecoast>          THE NVIDIA DRIVER in the README available on the Linux driver
+[20:25] <fugitivecoast>          download page at www.nvidia.com.
+[20:25] <FloodBot1> fugitivecoast: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[20:25] <drecute> guntbert: I just want to make ssh listen on a different port so I can forward port a request to it on that non-standard port
+[20:25] <memomemo> escott: thanks =) i tough it would be much harder, thanks! i don't like those yellow things, i have a small screen but thanks i'll see in the next start up if it works, thanks!
+[20:25] <TheLordOfTime> !pastebin | fugitivecoast
+[20:25] <ubottu> fugitivecoast: For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://imagebin.org/?page=add | !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+=== Moreno is now known as m8
+[20:25] <cheesecakes> fugitivecoast: first stop the x server
+[20:25] <cheesecakes> fugitivecoast: open a tty by pressing ctrl+alt+f1
+[20:26] <cheesecakes> fugitivecoast: then run sudo lightdm stop
+[20:26] <guntbert> drecute: in that case tell ssh to listen on another port (in /etc/ssh/sshd_config)
+[20:26] <cheesecakes> fugitivecoast: and then install your driver
+[20:26] <guntbert> drecute: by default there is no firewall active
+[20:27] <cheesecakes> fugitivecoast: once your driver installation is done, so a sudo lightdm start to get back the gui
+[20:27] <drecute> guntbert: there is on the guest vm
+[20:27] <guntbert> !firewall | drecute
+[20:27] <ubottu> drecute: Ubuntu, like any other Linux distribution, has firewall capabilities built-in. The firewall is managed using the 'ufw' command - see https://help.ubuntu.com/community/UFW | An alternative to ufw is the 'iptables' command - See https://help.ubuntu.com/community/IptablesHowTo | GUI frontends such as Gufw (GNOME) and Guarddog (KDE from Lucid onwards) also exist.
+[20:30] <Dougie187> How do you get rtorrent to work on core armhf?
+=== dark3n|off is now known as dark3n
+=== nikolam_ is now known as nikolam
+=== brandon is now known as Guest29403
+=== drecute_ is now known as drecute
+[20:36] <Dougie187> What does this mean? Could not open/bind port for listening: Address family not supported by protocol
+[20:36] <vite> Hi, on a server what does sytem load mean, and is it bad that the load is over 2.0?
+[20:37] <escott> vite, load is the number of runnable processes at any one time
+[20:37] <escott> vite, if load is > # of processors that means things are waiting
+[20:38] <vite> escott: and the fans going off like crazy is it a bad sign?
+[20:39] <michalchik> Anyone know how i can get my old motorola phone talking to my ubuntu box?
+[20:39] <escott> vite, check the system monitor
+[20:39] <escott> Dougie187, what protocol are your trying to setup?
+[20:39] <Dougie187> escott: I'm trying to run rtorrent on core armhf
+[20:40] <escott> Dougie187, not familiar with core armhf
+[20:40] <Dougie187> escott: :/ basically for ARM devices, like raspi or cubox.
+[20:40] <vite> escott: its a server and its headless
+[20:40] <Dougie187> yeah
+[20:40] <Dougie187> for arm devices.
+[20:40] <escott> vite, then "top"
+[20:40] <Dougie187> oh, :P
+[20:40] <escott> Dougie187, don't see what it being arm has anything to do with this
+[20:41] <escott> Dougie187, what interface is this that you are trying to run rtorrent on?
+[20:41] <Dougie187> I don't know what it has to do with it either.
+[20:41] <Dougie187> It's a basic ethernet card
+[20:41] <jackarg> hello, i would appreciate if anyone could help me with a webcame problem
+[20:41] <jackarg> webcam*
+[20:42] <k1l> !ask | jackarg
+[20:42] <Dougie187> escott: gigabit ethernet. http://www.solid-run.com/images/CuBox/product%20brief.pdf
+[20:42] <ubottu> jackarg: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[20:42] <vite> escott: thanks, its two ffmpeg running at the same time
+[20:42] <escott> Dougie187, is it not a tcp/ip ethernet?
+[20:43] <Dougie187> escott: It is. afaik
+[20:43] <k1l> vite: well, that uses alot of cpu. so that is not a surprise
+[20:44] <Dougie187> escott: is there an easy way to check?
+[20:44] <RoySegall> hello
+[20:44] <jackarg> my webcam is not working, and gives a black scren when i try it with skype, cheese, etc. I beleive it worked in 12.04, and it is the first time i've tested it since i upgraded to 12.10. does anyone know how to solve this?
+[20:44] <escott> Dougie187, i would want to look at "ifconfig" and the configuration you are using for rtorrent
+[20:45] <Dougie187> escott: ifconfig http://pastebin.com/pjjufaaf
+[20:45] <vite> If I close the ffmpeg shells will the process continue?
+=== Professo1Bacon is now known as ProfessorBacon
+[20:45] <Bernard__> is there a way to set boot parameters for install during installation from live cd? computer requires noapic no1apic nosetmode. I can get live cd up and running, but subsequent install does not have those settings and screen is all messed up upon reboot at end of install
+[20:46] <k1l> vite: if its started in screen, yes.
+[20:46] <Dougie187> I'm trying to find the rtorrent config
+[20:46] <RoySegall> I have a problem with git auto complete in the terminal
+[20:46] <RoySegall> Any solution?
+[20:47] <fugitivecoast> cheesecakes: when I run the command sudo lightdm stop It brings me back to the desktop and says that there was an error. Is this normal?
+[20:47] <Dougie187> escott: I don't think I have a configuration file for rtorrent.
+[20:48] <vite> k1l: nope they shut down
+[20:48] <escott> fugitivecoast, sudo service lightdm stop
+[20:48] <BluesKaj> fugitivecoast, sudo service lightdm stop
+[20:48] <fugitivecoast> Thank you
+[20:48] <k1l> vite: di use start them in "screen" ? screen is a program
+[20:48] <edoceo_> My machine keeps telling me I ned to execute `do-release-upgrade` when I login; however when I run that it shows there are no updates available.
+[20:48] <Dougie187> escott: I'm going to lunch now, but I'll bbl. PM me if you have any ideas.
+[20:48] <Dougie187> Thanks!
+[20:48] <jackarg> !ask
+[20:48] <ubottu> Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[20:48] <edoceo_> What keeps updating motd with that nonsense?
+[20:49] <jackarg> !ask my webcam does not work, it shows a black screen in cheese and skype. help?
+[20:49] <ubottu> jackarg: I am only a bot, please don't think I'm intelligent :)
+[20:49] <FloodBot1> !netsplit
+[20:49] <ubottu> netsplit is when two IRC servers of the same network (like freenode) disconnect from each other, so users on one server stop seeing users on the other. If this is happening now, just relax and enjoy the show. See http://en.wikipedia.org/wiki/Netsplit
+[20:49] <TheLordOfTime> jackarg, just ask your question, and provide details, and then have patience.
+[20:49] <vite> k1l: hmm dunno heh
+[20:49] <k1l> edoceo_: do a "lsb_release -sc" in terminal please
+[20:50] <k1l> vite: so i think you didnt start them with screen. so its no surprise that they closed
+[20:50] <edoceo_> precise
+[20:50] <k1l> !screen | vite
+[20:50] <ubottu> vite: screen is a window manager for terminal sessions, also useful over SSH. The 'byobu' package provides very useful additional utilities. See https://help.ubuntu.com/community/Screen
+[20:50] <edoceo_> So, precise is the newest one right?
+[20:50] <jackarg> TheLordOfTime: yeah sorry it was a timing problem the browser bugged. didn't mean to post it twice
+[20:52] <k1l> edoceo_: no, its quantal = 12.10 is the newest
+=== hhu is now known as wouitmil
+[20:52] <TheLordOfTime> edoceo_, 12.10 (Quantal) is the latest release, but the latest LTS is 12.04.
+[20:52] <k1l> edoceo_: if you dont want to upgrade make your release-prompt to LTS
+[20:52] <soulz> jackarg:
+[20:52] <TheLordOfTime> depending on what you're looking ;)
+[20:52] <wouitmil> Hi every body !
+[20:52] <TheLordOfTime> looking for *
+[20:52] <edoceo_> quantal!  Ok, rhm,,, so `do-release-upgrade` is confused then, not pam_motd...
+[20:53] <jackarg> soulz: yes?
+[20:53] <guntbert> edoceo_: on server you probably only want LTS releases
+[20:53] <schultza> i think i screwed up my installation. my date/time in the upper right has disappeared.. what are the packages i need to install to get it back?
+[20:53] <edoceo_> `do-release-upgrade -c` doesn't even show 12.10;
+[20:54] <k1l> edoceo_: can you put a "sudo apt-get update && sudo apt-get dist-upgrade" into a pastebin?
+[20:54] <edoceo_> apt-get update has nothing do do, I've done that only a few minutes ago
+[20:55] <edoceo_> dist-upgrade only show: linux-image-3.2.0-34-generic
+[20:56] <edoceo_> If I do `do-release-upgrade -d` then it allow 12.10;
+[20:57] <ikonia> no
+[20:57] <ikonia> -d = development
+[20:57] <ikonia> 12.10 is not development
+[20:58] <edoceo_> ikonia: please read from the start of the conversation
+[20:58] <edoceo_> do-release-upgrade is not working propery
+[20:58] <ikonia> edoceo_: that doesn't change what I just said
+[20:58] <cardpuncher> guys, on a LiveCD, trying to resize an Ubuntu partition so that WIndows 7 can be installed afterwards. The problem is that gparted offers no option to unmount or resize the partition.
+[20:59] <cardpuncher> Anyone can help on this one?
+[20:59] <ikonia> cardpuncher: right click the drive on the desktop and click unmount
+[20:59] <ikonia> cardpuncher: (or do it in nautilus)
+[20:59] <edoceo_> ikonia: well, motd says I need to upgrade, and `do-release-upgrade` says I'm on the latest version.  I'm on Precice and Quantal is the latest
+[20:59] <cardpuncher> the option is grayed out apparently, the question is from bangarang
+[20:59] <edoceo_> One of those two things is not working properly
+[20:59] <k1l> edoceo_: what is your release-prompt?
+[21:00] <bangarang> ikonia: only the unallocated is able to do parttition
+[21:00] <bangarang> http://i.imgur.com/XjmZ3.png
+[21:00] <ikonia> are you sure you set it to upgrade to non-lts ?
+[21:00] <edoceo_> New release '12.10' available.  \n  Run 'do-release-upgrade' to upgrade to it.
+[21:01] <k1l> edoceo_: and is this a server? or a pc? if a server: are that hoster-specific sources or theoriginal ubuntu. etc. etc.etc.
+[21:01] <ikonia> bangarang: you're trying to restart a 1mb partition, there is no space
+[21:01] <edoceo_> do-release-upgrade: No new release found
+[21:01] <ikonia> edoceo_: please show me the output of "uname -a"
+[21:01] <edoceo_> orignal ubuntu
+[21:01] <bangarang> how can i check
+[21:01] <bangarang> not sure
+[21:01] <k1l> if you refuse to give information im not motivated to help you. :/
+[21:01] <ikonia> bangarang: i'm telling you
+[21:01] <edoceo_> uname: Linux calf 3.6.5-x86_64-linode28 #1 SMP Sun Nov 4 12:40:43 EST 2012 x86_64 x86_64 x86_64 GNU/Linux
+[21:02] <ikonia> edoceo_: you can keep saying that over and over it won't change anything
+[21:02] <ikonia> edoceo_: ahhh linode
+[21:02] <ikonia> vps
+[21:02] <ikonia> !info linux-image
+[21:02] <ubottu> linux-image (source: linux-meta): Generic Linux kernel image.. In component main, is optional. Version 3.5.0.14.14 (quantal), package size 1 kB, installed size 31 kB
+[21:02] <ikonia> look at that kernel
+[21:02] <ikonia> it's later than the original ubuntu 12.10 version
+[21:02] <k1l> edoceo_: oa, its a vps. so talk to your hoster for that problem
+[21:02] <ikonia> that's not an ubuntu install
+[21:02] <fugitivecoast> How do I disable the Noveau graphics driver?
+[21:03] <ikonia> that's some bastardised thing
+[21:03] <edoceo_> So, even pulling apt-sources direct from Ubuntu don't do it?
+[21:03] <ikonia> edoceo_: no
+[21:03] <ikonia> edoceo_: it's a vps,
+[21:03] <edoceo_> dang
+[21:03] <bangarang> ikonia:  the option is gray on the 450gb disk
+[21:04] <ikonia> the option in the gry is 1.2MB as it says
+[21:04] <ikonia> bangarang: you have an lvm physical volume assigned that is 465GB
+[21:04] <ikonia> (the brown thing)
+[21:04] <wN> lvm++
+[21:04] <ikonia> that PV is inside an extended partition (the light blue thing)
+[21:04] <bangarang> so what do I need to do? change to what
+[21:05] <ikonia> bangarang: what do you want to change ?
+[21:05] <edoceo_> So, perhaps I file bug with Linode that their mods make some inconsistencies show up up between motd & d-r-u
+[21:05] <ikonia> no
+[21:05] <bangarang> anything that allows me to make a new partition...
+[21:06] <ikonia> it's a bastardised version
+[21:06] <ikonia> bangarang: you need to remove the PV then create partition out of that
+[21:06] <ikonia> bangarang: do you have any logical volumes assigned to that PV
+[21:06] <edoceo_> bastards!
+[21:06] <edoceo_> thanks!
+[21:06] <ikonia> edoceo_: no need for that
+[21:07] <k1l> edoceo_: a vps install is no real install. the guest (your vserver) shares alot with the host. so they have special installations. talk to you hoster for that
+[21:08] <edoceo_> Hmm, in my shop my Gentoo bare metal running Ubuntu under KVM seems to be not so bastardized
+[21:08] <bangarang> ikonia:  how do I remove the PV? and PV means...
+[21:08] <edoceo_> I suppose, we build differently than Linode
+[21:08] <ikonia> edoceo_: why would it be bastardised....unless you've done it
+[21:08] <ikonia> edoceo_: what ?
+[21:09] <ikonia> edoceo_: you've just a default install, linode use a custom distribution, why are you comparing the two things
+[21:09] <edoceo_> Cause I'm as dumb as you think I am; thanks for making me feel welcome
+[21:10] <bangarang> hello? ikonia
+[21:10] <ikonia> bangarang: yes ?
+[21:10] <guntbert> bangarang: you cannto remove a PV- its the base of LVM - and be patient please
+[21:10] <guntbert> *cannot
+[21:11] <qubit> guntbert: you can, as long as there's nothing on it
+[21:12] <guntbert> qubit: correct :-) but I doubt that this is the case here
+[21:12] <bangarang> so.. how do I make a partition out of this?
+[21:12] <bangarang> http://i.imgur.com/44Rqd.png
+[21:13] <ikonia> bangarang: you need to remove the PV
+[21:13] <bangarang> im not ubuntu pro lol
+[21:13] <ikonia> bangarang: and then make a partition out of the free space as I said earlier
+[21:13] <ikonia> bangarang: "click the brown thing, click remove"
+[21:13] <bangarang> fellow helpers are saying its not possible to remove it.. and how do I do that?
+[21:14] <ikonia> bangarang: probably because you have logical volumes in i
+[21:14] <ikonia> in it
+[21:14] <bangarang> what u said didnt work lol
+[21:14] <guntbert> bangarang: I did not follow, please liste to ikonia
+[21:15] <ikonia> why is that funny ?
+[21:15] <bangarang> right click on the brown icon wont display the delete bottom
+[21:15] <ikonia> yes you said that a minute ago
+[21:16] <ikonia> I told you why
+[21:16] <bangarang> coz os lvm?
+[21:16] <bangarang> of*
+[21:16] <ikonia> bangarang: because you probably have a logical volume assigned
+[21:16] <ikonia> bangarang: are you currently running from a livecd ?
+[21:16] <bangarang> yea...
+[21:17] <bangarang> what if i change it to prep
+[21:17] <bangarang> instead of lvm
+[21:17] <ikonia> bangarang: ok, so open a terminal and type "sudo pvdisplay" (I doubt this will give you any info)
+[21:17] <ikonia> bangarang: change it to "prep" ?
+[21:17] <ikonia> what ???
+[21:17] <bangarang>  --- Physical volume ---   PV Name               /dev/sda5   VG Name               ubuntu   PV Size               465.52 GiB / not usable 2.00 MiB   Allocatable           yes    PE Size               4.00 MiB   Total PE              119173   Free PE               12   A --- Physical volume ---   PV Name               /dev/sda5   VG Name               ubuntu   PV Size           llocated PE          119161   PV UUID               l1
+[21:18] <ikonia> please use a pastebin infuture
+[21:19] <ikonia> bangarang: please now do "sudo vgdisplay"
+[21:19] <bangarang> sorry, here - http://pastie.org/5532732
+[21:19] <ikonia> bangarang: please now do "sudo vgdisplay"
+[21:19] <bangarang> here - http://pastie.org/5532736
+[21:20] <jure_> hy all.. need some help over linux ubuntu 12.04 lts.. graphic software
+[21:20] <ikonia> bangarang: do you are sure you want to remove this ?
+[21:21] <bangarang> what are the implications? i just want to create a NFST
+[21:21] <bangarang> NFTS partition
+[21:21] <jure_> cant run compiz... help
+[21:21] <sevenforall> Does anyone happen to know a tool that downloads subtitles for TV series and merges them with the file, all automatically?
+[21:21] <ikonia> bangarang: the implications are any data on that partition/volumes under it will go
+[21:22] <bangarang> damn...
+[21:22] <jure_> any1?
+[21:23] <bangarang> so there is no can Do.. ikonia
+[21:23] <ikonia> bangarang: I've just told you the options
+[21:25] <hysp> hola, soy nuevo. tengo dos preguntas, supongo que las podre hacer aqui... es posible hacer un acceso directo a una aplicacion que corre bajo wine, para que nada mas darle click se abra con wine y todo eso?
+[21:26] <bradlee> Any experts in kernel buffer allocation here?
+[21:26] <bekks> !es | hysp
+[21:26] <Pici> !es | hysp
+[21:26] <ubottu> hysp: En la mayoria de los canales de Ubuntu, se habla solo en ingles. Si busca ayuda en espanol entre al canal #ubuntu-es; escriba "/join #ubuntu-es" (sin comillas) y presione intro.
+[21:26] <bangarang> ikonia: is it possible to play highend res games on virtualbox?
+[21:26] <bekks> bangarang: Why?
+[21:26] <ikonia> bangarang: not really
+[21:26] <bangarang> bekks:  why? what?
+[21:27] <ikonia> bangarang: but that's just my opinion - I don't think virtual machines should be used for that sort of thing
+[21:27] <ikonia> especially on home hardware
+[21:27] <bekks> bangarang: Sorry :) It was ment for bradlee
+[21:27] <Evaldas>   '%%' .%%' .%%'  /!\ Attention "FFT" /!\ Si je fais l'amour dans un monde virtuel, j'ai tu des dangers de poigner des virus informatiques? ,%%' .%%' .%%'
+[21:27] <Evaldas>   '%%' .%%' .%%'  /!\ Attention "FFT" /!\ Si je fais l'amour dans un monde virtuel, j'ai tu des dangers de poigner des virus informatiques? ,%%' .%%' .%%'
+[21:27] <Evaldas>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:27] <Evaldas>   (`'.z(`'.z  /!\ Attention "FFT" /!\ Qui dort dine ? Or l'appetit vient en mangeant ! Si j fais de l insomnie j va tu maigrir? z.'Z)z.'Z)
+[21:27] <Evaldas>   (`._(`._(`._(`->> /!\ Attention "FFT" /!\ L'amour. Il y a ceux qui en parlent et il y a ceux qui le font. A partir de quoi il m'apparait urgent de me taire. !! <<-Z)_.Z)_.Z)_.Z)
+[21:27] <Evaldas>   ,!`~`!, /!\ Attention "FFT" /!\ En cas de guerre nucleaire, est-ce que les pulsions electromagnetiques de la bombe thermonucleaire peuvent endommager les bandes de mes cassettes video ? ,!`~`!,
+[21:27] <FloodBot1> Evaldas: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:27] <Toshiya>   '%%' .%%' .%%'  /!\ Attention "FFT" /!\ Si je fais l'amour dans un monde virtuel, j'ai tu des dangers de poigner des virus informatiques? ,%%' .%%' .%%'
+[21:27] <Toshiya>   '%%' .%%' .%%'  /!\ Attention "FFT" /!\ Si je fais l'amour dans un monde virtuel, j'ai tu des dangers de poigner des virus informatiques? ,%%' .%%' .%%'
+[21:27] <Toshiya>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:27] <Toshiya>   (`'.z(`'.z  /!\ Attention "FFT" /!\ Qui dort dine ? Or l'appetit vient en mangeant ! Si j fais de l insomnie j va tu maigrir? z.'Z)z.'Z)
+[21:27] <Toshiya>   (`._(`._(`._(`->> /!\ Attention "FFT" /!\ L'amour. Il y a ceux qui en parlent et il y a ceux qui le font. A partir de quoi il m'apparait urgent de me taire. !! <<-Z)_.Z)_.Z)_.Z)
+[21:27] <FloodBot1> Toshiya: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:28] <hysp> oops, sorry, i didnt realize that it is an english-speaking room. Im new here and new with linux, is it possible to create a shortcut for an application that must run in wine, so that when you click the shortcut the application opens in wine? Im using ubuntu
+[21:28] <fugitivecoast> how do you disable the nouveau kernel?
+[21:28] <Toshiya>   (`._(`._(`._(`->> /!\ Attention "FFT" /!\ Il est interessant de voir que les gens qui se moquent de la science-fiction se fient a la meteo et aux economistes. <<-Z)_.Z)_.Z)_.Z)
+[21:28] <Toshiya>   ______ /!\ Attention "FFT" /!\ Si on construit la maison du Bonheur, la plus grosse piece ca vas-tu etre la salle d'attentes? ______
+[21:28] <Toshiya>   ______ /!\ Attention "FFT" /!\ Si on construit la maison du Bonheur, la plus grosse piece ca vas-tu etre la salle d'attentes? ______
+[21:28] <Toshiya>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:28] <petronia>   (`._(`._(`._(`->> /!\ Attention "FFT" /!\ Il est interessant de voir que les gens qui se moquent de la science-fiction se fient a la meteo et aux economistes. <<-Z)_.Z)_.Z)_.Z)
+[21:28] <petronia>   ______ /!\ Attention "FFT" /!\ Si on construit la maison du Bonheur, la plus grosse piece ca vas-tu etre la salle d'attentes? ______
+[21:28] <petronia>   ______ /!\ Attention "FFT" /!\ Si on construit la maison du Bonheur, la plus grosse piece ca vas-tu etre la salle d'attentes? ______
+[21:28] <petronia>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:28] <petronia>   ----------------> /!\ Attention "FFT" /!\ En nage synchronisee, si une nageuse se noie, est-ce que les autres se noient aussi? <----------------
+[21:28] <Evaldas>   (`._(`._(`._(`->> /!\ Attention "FFT" /!\ Il est interessant de voir que les gens qui se moquent de la science-fiction se fient a la meteo et aux economistes. <<-Z)_.Z)_.Z)_.Z)
+[21:28] <FloodBot1> Toshiya: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:28] <FloodBot1> petronia: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+=== len is now known as Guest19086
+[21:29] <Toshiya>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:29] <Toshiya>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:29] <Toshiya>   ,!`~`!, /!\ Attention "FFT" /!\ En cas de guerre nucleaire, est-ce que les pulsions electromagnetiques de la bombe thermonucleaire peuvent endommager les bandes de mes cassettes video ? ,!`~`!,
+[21:29] <Toshiya>     `%%,`%%,`%%, /!\ Attention "FFT" /!\ On dit que seulement dix personnes au monde comprenaient Einstein. Personne ne me comprend. Suis-je un genie ? `%%,`%%,`%%
+[21:29] <petronia>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:29] <petronia>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:29] <petronia>   ,!`~`!, /!\ Attention "FFT" /!\ En cas de guerre nucleaire, est-ce que les pulsions electromagnetiques de la bombe thermonucleaire peuvent endommager les bandes de mes cassettes video ? ,!`~`!,
+[21:29] <petronia>     `%%,`%%,`%%, /!\ Attention "FFT" /!\ On dit que seulement dix personnes au monde comprenaient Einstein. Personne ne me comprend. Suis-je un genie ? `%%,`%%,`%%
+[21:29] <cherice>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:29] <cherice>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:29] <FloodBot1> Toshiya: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:29] <FloodBot1> petronia: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:29] <ikonia> a/b Toshiya
+[21:29] <ikonia> oops
+[21:29] <travis>   ----------------> /!\ Attention "FFT" /!\ En nage synchronisee, si une nageuse se noie, est-ce que les autres se noient aussi? <----------------
+[21:29] <travis>   '%%' .%%' .%%'  /!\ Attention "FFT" /!\ Si je fais l'amour dans un monde virtuel, j'ai tu des dangers de poigner des virus informatiques? ,%%' .%%' .%%'
+[21:29] <travis>   (`.z(`.z(`.z  /!\ Attention "FFT" /!\ Un journal decoupe en morceaux, ca n'interesse pas une femme. Mais une femme decoupee en morceaux, ca interesse les journaux. !! z.Z)z.Z)z.Z)
+[21:29] <travis>    ( ) ( )  /!\ Attention "FFT" /!\ Dans deux jours, demain sera hier.  ( ) ( )
+[21:29] <travis>    ( ) ( )  /!\ Attention "FFT" /!\ Dans deux jours, demain sera hier.  ( ) ( )
+[21:29] <dynah>   ----------------> /!\ Attention "FFT" /!\ En nage synchronisee, si une nageuse se noie, est-ce que les autres se noient aussi? <----------------
+[21:29] <dynah>   '%%' .%%' .%%'  /!\ Attention "FFT" /!\ Si je fais l'amour dans un monde virtuel, j'ai tu des dangers de poigner des virus informatiques? ,%%' .%%' .%%'
+[21:29] <dynah>   (`.z(`.z(`.z  /!\ Attention "FFT" /!\ Un journal decoupe en morceaux, ca n'interesse pas une femme. Mais une femme decoupee en morceaux, ca interesse les journaux. !! z.Z)z.Z)z.Z)
+[21:29] <dynah>    ( ) ( )  /!\ Attention "FFT" /!\ Dans deux jours, demain sera hier.  ( ) ( )
+[21:29] <dynah>    ( ) ( )  /!\ Attention "FFT" /!\ Dans deux jours, demain sera hier.  ( ) ( )
+=== travis is now known as Guest4817
+[21:29] <FloodBot1> travis: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:29] <FloodBot1> dynah: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:29] <TeamRocket1233c> How well will a Lumix work in Ubuntu?
+[21:29] <high-hat> good lord, looks like the spammers found this channel
+[21:30] <ikonia> it will pass in a minute
+[21:30] <Guest4817>    ( ) ( )  /!\ Attention "FFT" /!\ Dans deux jours, demain sera hier.  ( ) ( )
+[21:30] <Guest4817>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:30] <Guest4817>   ,!`~`!, /!\ Attention "FFT" /!\ En cas de guerre nucleaire, est-ce que les pulsions electromagnetiques de la bombe thermonucleaire peuvent endommager les bandes de mes cassettes video ? ,!`~`!,
+[21:30] <Guest4817>   '%%' .%%' .%%'  /!\ Attention "FFT" /!\ Si je fais l'amour dans un monde virtuel, j'ai tu des dangers de poigner des virus informatiques? ,%%' .%%' .%%'
+[21:30] <dennet>    ( ) ( )  /!\ Attention "FFT" /!\ Dans deux jours, demain sera hier.  ( ) ( )
+[21:30] <dennet>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:30] <dennet>   ,!`~`!, /!\ Attention "FFT" /!\ En cas de guerre nucleaire, est-ce que les pulsions electromagnetiques de la bombe thermonucleaire peuvent endommager les bandes de mes cassettes video ? ,!`~`!,
+[21:30] <dennet>   '%%' .%%' .%%'  /!\ Attention "FFT" /!\ Si je fais l'amour dans un monde virtuel, j'ai tu des dangers de poigner des virus informatiques? ,%%' .%%' .%%'
+[21:30] <dennet>   (`.z(`.z(`.z  /!\ Attention "FFT" /!\ Un journal decoupe en morceaux, ca n'interesse pas une femme. Mais une femme decoupee en morceaux, ca interesse les journaux. !! z.Z)z.Z)z.Z)
+[21:30] <tanhya>    ( ) ( )  /!\ Attention "FFT" /!\ Dans deux jours, demain sera hier.  ( ) ( )
+[21:30] <FloodBot1> Guest4817: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:30] <FloodBot1> dennet: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:30] <ikonia> please hang in
+[21:30] <TeamRocket1233c> Sorry I have to say this, but SHUT THE **** UP!
+[21:30] <ikonia> TeamRocket1233c: you don't have to say anything
+[21:30] <ikonia> TeamRocket1233c: please drop the langauge
+[21:30] <Guest4817>   ,!`~`!, /!\ Attention "FFT" /!\ En cas de guerre nucleaire, est-ce que les pulsions electromagnetiques de la bombe thermonucleaire peuvent endommager les bandes de mes cassettes video ? ,!`~`!,
+[21:30] <Guest4817>                   /!\ Attention "FFT" /!\ Si la moisissure est de couleure verte, comment reconnaitre un celeri moisi d'un bon?               _
+[21:30] <Guest4817>   (`.z(`.z(`.z  /!\ Attention "FFT" /!\ Un journal decoupe en morceaux, ca n'interesse pas une femme. Mais une femme decoupee en morceaux, ca interesse les journaux. !! z.Z)z.Z)z.Z)
+[21:30] <Guest4817>   (`'.z(`'.z  /!\ Attention "FFT" /!\ Qui dort dine ? Or l'appetit vient en mangeant ! Si j fais de l insomnie j va tu maigrir? z.'Z)z.'Z)
+[21:30] <dennet>   ,!`~`!, /!\ Attention "FFT" /!\ En cas de guerre nucleaire, est-ce que les pulsions electromagnetiques de la bombe thermonucleaire peuvent endommager les bandes de mes cassettes video ? ,!`~`!,
+[21:30] <dennet>                   /!\ Attention "FFT" /!\ Si la moisissure est de couleure verte, comment reconnaitre un celeri moisi d'un bon?               _
+[21:30] <dennet>   (`.z(`.z(`.z  /!\ Attention "FFT" /!\ Un journal decoupe en morceaux, ca n'interesse pas une femme. Mais une femme decoupee en morceaux, ca interesse les journaux. !! z.Z)z.Z)z.Z)
+[21:30] <dennet>   (`'.z(`'.z  /!\ Attention "FFT" /!\ Qui dort dine ? Or l'appetit vient en mangeant ! Si j fais de l insomnie j va tu maigrir? z.'Z)z.'Z)
+[21:30] <dennet>   (`.z(`.z(`.z  /!\ Attention "FFT" /!\ Un journal decoupe en morceaux, ca n'interesse pas une femme. Mais une femme decoupee en morceaux, ca interesse les journaux. !! z.Z)z.Z)z.Z)
+[21:30] <dennet>   (`'.z(`'.z  /!\ Attention "FFT" /!\ Qui dort dine ? Or l'appetit vient en mangeant ! Si j fais de l insomnie j va tu maigrir? z.'Z)z.'Z)
+[21:30] <FloodBot1> Guest4817: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:30] <FloodBot1> dennet: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:30] <TeamRocket1233c> ikonia: Sorry, but trying to shut this spammer up somehow.
+[21:31] <ikonia> TeamRocket1233c: use your brain
+[21:31] <ikonia> TeamRocket1233c: it will do nothing
+[21:31] <Evaldas>   ----------------> /!\ Attention "FFT" /!\ En nage synchronisee, si une nageuse se noie, est-ce que les autres se noient aussi? <----------------
+[21:31] <Evaldas>   (`._(`._(`._(`->> /!\ Attention "FFT" /!\ Il est interessant de voir que les gens qui se moquent de la science-fiction se fient a la meteo et aux economistes. <<-Z)_.Z)_.Z)_.Z)
+[21:31] <Evaldas>   (`'.z(`'.z  /!\ Attention "FFT" /!\ Qui dort dine ? Or l'appetit vient en mangeant ! Si j fais de l insomnie j va tu maigrir? z.'Z)z.'Z)
+[21:31] <Evaldas>   (`._(`._(`._(`->> /!\ Attention "FFT" /!\ L'amour. Il y a ceux qui en parlent et il y a ceux qui le font. A partir de quoi il m'apparait urgent de me taire. !! <<-Z)_.Z)_.Z)_.Z)
+[21:31] <salvador>   ----------------> /!\ Attention "FFT" /!\ En nage synchronisee, si une nageuse se noie, est-ce que les autres se noient aussi? <----------------
+[21:31] <salvador>   (`._(`._(`._(`->> /!\ Attention "FFT" /!\ Il est interessant de voir que les gens qui se moquent de la science-fiction se fient a la meteo et aux economistes. <<-Z)_.Z)_.Z)_.Z)
+[21:31] <salvador>   (`'.z(`'.z  /!\ Attention "FFT" /!\ Qui dort dine ? Or l'appetit vient en mangeant ! Si j fais de l insomnie j va tu maigrir? z.'Z)z.'Z)
+[21:31] <salvador>   (`._(`._(`._(`->> /!\ Attention "FFT" /!\ L'amour. Il y a ceux qui en parlent et il y a ceux qui le font. A partir de quoi il m'apparait urgent de me taire. !! <<-Z)_.Z)_.Z)_.Z)
+[21:31] <ivy>   ----------------> /!\ Attention "FFT" /!\ En nage synchronisee, si une nageuse se noie, est-ce que les autres se noient aussi? <----------------
+[21:31] <ivy>   (`._(`._(`._(`->> /!\ Attention "FFT" /!\ Il est interessant de voir que les gens qui se moquent de la science-fiction se fient a la meteo et aux economistes. <<-Z)_.Z)_.Z)_.Z)
+[21:31] <FloodBot1> Evaldas: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:31] <FloodBot1> salvador: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:31] <TeamRocket1233c> ikonia: I'm one of the few actually trying to ask something.
+[21:31] <Evaldas>   '%%' .%%' .%%'  /!\ Attention "FFT" /!\ Si je fais l'amour dans un monde virtuel, j'ai tu des dangers de poigner des virus informatiques? ,%%' .%%' .%%'
+[21:31] <Evaldas>                   /!\ Attention "FFT" /!\ Si la moisissure est de couleure verte, comment reconnaitre un celeri moisi d'un bon?               _
+[21:31] <Evaldas>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:31] <Evaldas>   ----------------> /!\ Attention "FFT" /!\ En nage synchronisee, si une nageuse se noie, est-ce que les autres se noient aussi? <----------------
+[21:31] <Evaldas>   ----------------> /!\ Attention "FFT" /!\ En nage synchronisee, si une nageuse se noie, est-ce que les autres se noient aussi? <----------------
+[21:31] <bekks> TeamRocket1233c: Then just ask - maybe someone can help you?
+[21:31] <FloodBot1> Evaldas: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:31] <FloodBot1> odella: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:31] <TeamRocket1233c> ikonia: Specifically if Lumix's play nice with Ubuntu.
+[21:31] <TeamRocket1233c> ikonia: Or Cybershots.
+[21:32] <Evaldas>   ||| /!\ Attention "FFT" /!\ Pourquoi les etablissements ouverts 24 heures sur 24 ont-ils des serrures ? |||
+[21:32] <Evaldas>   (`._(`._(`._(`->> /!\ Attention "FFT" /!\ L'amour. Il y a ceux qui en parlent et il y a ceux qui le font. A partir de quoi il m'apparait urgent de me taire. !! <<-Z)_.Z)_.Z)_.Z)
+[21:32] <Evaldas>   *!* /!\ Attention "FFT" /!\ Laquelle de ces phrases est vraie? La phrase suivante est fausse. La phrase precedente est vraie *!*
+[21:32] <Evaldas>    ( ) ( )  /!\ Attention "FFT" /!\ Dans deux jours, demain sera hier.  ( ) ( )
+[21:32] <Evaldas>   (`._(`._(`._(`->> /!\ Attention "FFT" /!\ Il est interessant de voir que les gens qui se moquent de la science-fiction se fient a la meteo et aux economistes. <<-Z)_.Z)_.Z)_.Z)
+[21:32] <Evaldas>   (`.z(`.z(`.z  /!\ Attention "FFT" /!\ Un journal decoupe en morceaux, ca n'interesse pas une femme. Mais une femme decoupee en morceaux, ca interesse les journaux. !! z.Z)z.Z)z.Z)
+[21:32] <FloodBot1> Evaldas: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:32] <ikonia> TeamRocket1233c: I'm busy at the moment
+[21:32] <FloodBot1> odella: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[21:32] <TeamRocket1233c> ikonia: I'm about to get outta here anyways, since it's impossible to ask anything with this flooding. lol
+[21:32] <ikonia> bye
+[21:32] <bekks> TeamRocket1233c: They should be detected as USB mass storage device - and then they will work just fine, using digikam, e.g.
+[21:33] <TeamRocket1233c> ikonia: I'll be in offtopic, which should hopefully be easier to speak in ATM.
+[21:33] <fugitivecoast> How do you disable the nouveau kernel to install an nvidia?
+[21:33] <TeamRocket1233c> ikonia: Don't tolerate spammers very well, have to deal with them all the time in dA chat and they royally tick me off.
+[21:34] <ikonia> TeamRocket1233c: yet you're talking about it in a support channel and adding to the noise.....
+[21:34] <zykotick9> fugitivecoast: actually installing nvidia-propritary (if you use ubuntu method) will automatically blacklist nouveau
+[21:34] <fugitivecoast> zykotick9: how do I go about doing this?
+[21:35] <zykotick9> fugitivecoast: install nvidia... from the drivers thing.
+[21:35] <fugitivecoast> I am sorry, I am still pretty new to ubuntu, what drivers thing
+[21:35] <zykotick9> fugitivecoast: sorry, i don't know what it's called these days...
+=== dark3n is now known as dark3n|off
+[21:39] <fugitivecoast> I have jockey installed which is supposed to be for proprietary drivers but I can not figure out how to use it to install those drivers
+[21:40] <zykotick9> fugitivecoast: if you have a recent nvidia card you could just use "sudo apt-get install nvidia-current"
+[21:40] <BluesKaj> fugitivecoast, alt+F2 , type jockey
+=== dark3n|off is now known as dark3n
+[21:41] <fugitivecoast> zykotick9: i will try this
+[21:41] <BluesKaj> guyg or better still use zykotick9 's suggestion
+[21:41] <BluesKaj> oops fugitivecoast
+[21:42] <fugitivecoast> zykotick9: I will have to reboot after this correct?
+[21:42] <zykotick9> fugitivecoast: yes
+[21:43] <fugitivecoast> zykotick9: Thank you
+[21:44] <fugitivecoast> while this is going I was wondering what the difference is between the 32bit and 64bit os
+[21:44] <zykotick9> fugitivecoast: ammount of memory supported is probably the biggest difference
+[21:45] <fugitivecoast> I am guessing that 64 would support more
+[21:45] <zykotick9> fugitivecoast: 32bit is limited to less then 4GB (unless you use the "hack" called PAE, but you shouldn't)
+[21:45] <fugitivecoast> oh okay thank you
+[21:45] <neha_> any admin speaks urdu/hindi?
+[21:48] <BluesKaj> !in
+[21:48] <ubottu> #ubuntu-in is the channel for Ubuntu in India
+[21:48] <BluesKaj> neha_, ^
+[21:48] <neha_> dhanyawad.. i meen thenk u
+=== Artpicre_ is now known as Artpicre
+[21:53] <Frogzilla> Quick question, I have PPTPD VPN setup on my 12.04 Server, how can I monitor data being transfered?
+[21:54] <Ogredude> Frogzilla: I don't know how to monitor it, but I do know that you'll only ever be able to tell how much data is going through that tunnel, not what the data is.
+[21:54] <Frogzilla> Ogredude: So I won't be able to see what people are doing? How do I know if people are using the VPN to do illegal things?
+[21:55] <Ogredude> Frogzilla: you can't.
+[21:55] <Ogredude> a VPN tunnel is encrypted, unless you've got a supercomputer handy to do your decryption, there is no man-in-the-middle attack on a VPN
+[21:55] <Frogzilla> Ogredude: So somebody could download 1 terabyte of pirated things, and I would have no idea? Ever?
+[21:56] <Frogzilla> Ogredude: I host the VPN so even from server-side I can't see?
+[21:56] <Ogredude> Frogzilla: you'd know they transferred a terrabyte of stuff, but you'd never be able to tell *what* stuff
+[21:56] <Ogredude> the whole point of VPN is that it's a virtual *private* network
+[21:56] <qubit> Frogzilla: yes, if you are the vpn endpoint, you can see what comes out of the vpn
+[21:56] <Frogzilla> qubit: Any idea how?
+[21:57] <qubit> Frogzilla: depends how you want to monitor, you can use something like `ntop` to get general info, or tcpdump to see data
+[21:57] <RomulusDaniel> hello
+[21:58] <Frogzilla> qubit: More like something to notice how much data is flowing, and if I see a huge spike, like a 4 gig file downloaded, I'd like to see where the data was transfered from, e.g. piratebay or isohunt
+[21:58] <Ogredude> good old man-at-the-endpoint attack, eh?
+[21:58] <qubit> Frogzilla: ntop then
+[21:58] <RomulusDaniel> i need help pls
+[21:58] <Pici> !ask
+[21:58] <ubottu> Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[21:59] <RomulusDaniel> i want to make an installation usb stick
+[21:59] <RomulusDaniel> i followed all the steps
+[22:00] <RomulusDaniel> and the command syslinux /dev/ doesent work
+[22:00] <RomulusDaniel> can anyone help?
+[22:01] <RomulusDaniel> bye
+[22:01] <Ogredude> RomulusDaniel: what do you mean "doesn't work"? head off to http://paste.ubuntu.com and give us the exact command you're using and the response you get, please.
+[22:01] <Ogredude> RomulusDaniel: also be a little more patient goddamnit
+[22:01] <RomulusDaniel> ok thx
+[22:04] <RomulusDaniel> i did what you said
+[22:05] <Pici> RomulusDaniel: you need to provide us with the URL that the pastebin gave you
+[22:05] <RomulusDaniel> ok
+[22:05]  * Ogredude dies a little inside
+[22:05] <RomulusDaniel> http://paste.ubuntu.com/1440381/
+[22:06] <Ogredude> RomulusDaniel: okay and now link us to the instructions you're following.
+[22:06] <Ogredude> I think I see the problem.
+[22:06] <RomulusDaniel> i want to make a bootable usb for installing ubuntu12.10
+[22:06] <RomulusDaniel> https://help.ubuntu.com/12.04/installation-guide/amd64/boot-usb-files.html
+[22:08] <ekhaat> RomulusDaniel: are you on a live cd?
+[22:08] <RomulusDaniel> no
+[22:08] <RomulusDaniel> i am on an old version of ubuntu
+[22:08] <guntbert> RomulusDaniel: syslinux /dev/sX1 means: syslinux /dev/sdb1    or   syslinux /dev/sdc1   or ...  depending on your situation
+[22:08] <ekhaat> RomulusDaniel: so you have ubuntu 12.10 installed?
+[22:08] <Ogredude> RomulusDaniel: yeah here's your problem, that's a really involved way of doing it. This way might be easier. https://help.ubuntu.com/community/Installation/FromUSBStick
+[22:08] <RomulusDaniel> nope
+[22:09] <ekhaat> RomulusDaniel: What have you then?
+[22:09] <RomulusDaniel> w8
+[22:09] <ekhaat> oh
+[22:09] <RomulusDaniel> 10.10
+[22:10] <RomulusDaniel> Ubuntu 10.10
+[22:10] <ekhaat> RomulusDaniel: boot from livecd, in the dash type usb, "create startup disk" or something shoul come up, and just run that
+[22:10] <Ogredude> RomulusDaniel: also http://www.ubuntu.com/download/help/create-a-usb-stick-on-ubuntu
+[22:10] <RomulusDaniel> yes but i can't make a cd
+[22:11] <ekhaat> RomulusDaniel: hmm, why not?
+[22:11] <Ogredude> RomulusDaniel: well then skip the boot from livecd part, follow http://www.ubuntu.com/download/help/create-a-usb-stick-on-ubuntu
+[22:11] <RomulusDaniel> because i don;t have the hardware to create a dvd
+[22:11] <ekhaat> RomulusDaniel: ok
+[22:11] <Dougie187> can anyone help with this issue "rtorrent: Could not open/bind port for listening: Address family not supported by protocol"? I get it when I try to run rtorrent on core armhf 12.04.
+[22:12] <RomulusDaniel> thats way i want to install from usb
+[22:12] <kloqq> hi
+[22:12] <Porto> hi, i've ubuntu 12.10 and i lost my wireless 10 in 10 minutes
+[22:12] <Porto> anyone can help?
+[22:12] <RomulusDaniel> i;ll try that link thx
+[22:12] <Porto> please
+[22:13] <ekhaat> RomulusDaniel: Does 10.10 not have that startup disk creation utility? I don't remember
+[22:13] <kloqq> I've got a half-installed ubuntu (not working fully only log in display), can I reach it via another cpu in some way?
+[22:15] <Nightwatch> what does it mean when you get an Invalid Argument on a du -sh command?
+[22:15] <Nightwatch> http://pastebin.ca/2293626
+[22:16] <ekhaat> Porto: Not sure what you mean by "lost my wireless 10 in 10 minutes"
+[22:17] <salihk87> Hello guys, i have a serious problem but i don't know how to solve it. When i click shutdown ubuntu stucks. I am using 12.04 LTS
+[22:18] <Pici> Nightwatch: don't use a * at the end. the space in your filename is confusing du
+[22:19] <kloqq> is there anyway i can reinstall Ubuntu on a notebook from another cpu?
+[22:19] <Nightwatch> Pici - now it just hangs
+[22:19] <zykotick9> Pici: personally i use "du -sh *" on a regular basis...
+[22:20] <Nightwatch> and du -sh * works on all other cases
+[22:20] <zykotick9> kloqq: perhaps reask your question without using the work "cpu" (as that doesn't make any sense)
+[22:21] <Nightwatch> ok, same result Pici - invalid argument
+[22:21] <etfb> Is there a way to stop that overlaid command-line thing appearing whenever I press Alt?
+[22:22] <kloqq> zykotick9:what do you mean? I meant can I re-install ubuntu on the notebook via another computer?
+[22:22] <zykotick9> kloqq: sorry that was suppose to be word, not work...
+[22:22] <ekhaat> Nightwatch: well, what is the argument? or rather the whole commandline you are typing
+[22:22] <Pici> Nightwatch: hm... I've seen similar errors with unescaped spaces...
+[22:22] <zykotick9> kloqq: not that i'm aware of, unless you take the HD out of one, and put it in the other
+[22:22] <Nightwatch> ekhaat - I pasted
+[22:22] <Nightwatch> nothing else
+[22:22] <Nightwatch> think I have a file system issue
+[22:23] <zykotick9> Nightwatch: can you just ignore the error?  "du -sh * 2>/dev/null" ?
+[22:23] <ekhaat> Nightwatch: ok, sorry
+[22:23] <kloqq> zykotick9:damn, because I can access the notebook via grub or whatever its called, but I have no idea how I'm to send over files etc to another computer
+[22:24] <zykotick9> kloqq: network boot/installs are possible, but not something i've done before
+[22:24] <kloqq> zykotick9:ah okay, if I'd download an installation unto a usb-stick?
+[22:25] <zykotick9> kloqq: usb boot/install should be straight forward
+[22:26] <kloqq> zykotick9:but then I'll loose all files I've got on it right? the notebook also has dual partitition with windows XP on it, but that only gives a blue screen
+=== matt is now known as Guest66372
+[22:27] <zykotick9> kloqq: yes, reinstalling from usb would wipe system most likely.  good luck, don't reply to me further - i won't see it.
+[22:27] <ekhaat> kloqq: are you able to boot from a livecd?
+[22:29] <kloqq_> hmm
+[22:29] <deper29> zykotick9: he could boot from network and install could he not?
+[22:30] <Porto> anyone can help please
+[22:30] <zykotick9> deper29: ya, that's possible.
+[22:30] <kloqq_> zykotick9:I'm sorry, the browser just shut down, what was the last thing you said?
+[22:30] <deper29> oh, n/m, you mentioned that :P
+[22:30] <deper29> sorry, just got here and am catching up
+[22:30] <zykotick9> kloqq_: don't include me in your messages, i won't see it.  best of luck.
+[22:31] <ekhaat> Porto: Not sure what you mean by "lost my wireless 10 in 10 minutes"
+[22:31] <kloqq_> zykotick9: thanks, and thanks for the tips!
+[22:32] <Porto> ekhaat dono if is the driver
+[22:32] <ekhaat> Porto: Still not sure what you mean by "lost my wireless 10 in 10 minutes"
+[22:33] <Porto> i try to open a website and doesn't open and i click in network wirless icon and restart the connection
+[22:33] <Porto> and i can open the page
+[22:33] <Porto> my wireless is bcm4313 i think
+[22:34] <RomulusDaniel> i maneged to create the usb for installation but now i get the message: This kenrnel requires the following features notpresent on the CPU
+[22:34] <RomulusDaniel> please use a kernel appropiate for your CPU
+[22:34] <ekhaat> Porto: do you mean you loose connection after 10 minutes?
+[22:34] <Porto> yap
+[22:34] <Porto> 07:00.0 Network controller: Broadcom Corporation BCM4313
+[22:34] <Porto> is that
+[22:35] <Porto> the issue
+[22:35] <Porto> :(
+[22:35] <FloodBot1> Porto: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[22:35] <ekhaat> Porto: you using 12.04?
+[22:36] <Porto> sorry 12.10
+[22:36] <RomulusDaniel> http://paste.ubuntu.com/1440586/
+[22:36] <ekhaat> Porto: ok, I haven't had that problem. Have you tried to restart your wireless router?
+[22:37] <Porto> yes, in window$ i don't have that issue
+[22:37] <RomulusDaniel> can anyone help?
+[22:37] <ekhaat> hmm
+[22:38] <tgm4883> I've created a custom upstart job and placed it in /etc/init/ and rebooted, but it still says unknown job when trying to work with it
+[22:38] <fugitivecoast> what is the command to restart the x server?
+[22:38] <zykotick9> fugitivecoast: "sudo service lightdm restart" should work, assuming you use lightdm
+[22:39] <fugitivecoast> thank you
+[22:39] <Porto> ekhaat the security wireless is wpa & wpa2
+[22:39] <Porto> and the ecriptation tkip & aes
+[22:40] <RomulusDaniel> pls anyone :)
+[22:41] <ekhaat> Porto: well, I'm afraid I don't know too much about all that. But I've heard people having problems with some routers even with windows being cut off the network
+[22:41] <Porto> ekhaat i run grep 'blacklist' /etc/modprobe.d/blacklist.conf
+[22:42] <Porto> and appears http://paste.ubuntu.com/1440603/
+[22:42] <ekhaat> Porto: Then you probably know more about all this than me :-)
+[22:42] <Jordan_U> Porto: Please pastebin the output of "dmesg".
+[22:43] <Porto> Jordan_U can i grep?
+[22:43] <Porto> http://paste.ubuntu.com/1440608/
+[22:44] <domo_> hey everyone.. my syslog is simply empty
+[22:44] <domo_> ive restarted rsyslogd and that has not helped at all
+[22:45] <domo_> any ideas?
+[22:45] <RomulusDaniel> i'll try diferent channel bye
+[22:45] <Porto> Jordan_U you check the pastbin?
+[22:45] <Jordan_U> Porto: I'm doing so now, please be patient.
+[22:46] <Porto> great
+=== matt_ is now known as Guest409
+[22:50] <Porto> Jordan_U if bcm43xx appears in my /etc/modprobe.d/blacklist.conf
+[22:50] <Porto> the mod doesn't start in restart of ubuntu ?
+[22:50] <Jordan_U> Porto: The open source driver for broadcom wireless cards is now called b43, bcm43xx is the old name.
+[22:50] <Porto> ah ok
+[22:51] <deper29> Jordan_U: would he have better luck with a proprietary driver than the open source one?
+[22:52] <Jordan_U> deper29: According to the bug reports I'm reading that may be the case, yes.
+[22:52] <pinebei> hey. my video tends to work really well. youtube, vimeo etc but i like to watch shows on citytv but they don't work on any browser. could someone give me a hand figuring it out. here is a link to a video: http://video.citytv.com/video/detail/2016437660001.000000/my-whole-life-is-thunder/
+[22:52] <humberto> Has anyone experienced this?
+[22:52] <humberto> https://answers.launchpad.net/ubuntu/+question/216827
+[22:53] <Porto> Jordan_U -> http://askubuntu.com/questions/59694/what-driver-should-i-use-for-bcm4313
+[22:53] <Porto> i think that is the way what you think?
+[22:54] <dr_willis> pinebei:  totally black video screen here.
+=== chiluk is now known as chiluk_away
+[22:55] <pinebei> dr_willis: yeah, that is what i get. but it is just flash which works everywhere else for me. do you know why it is black?
+[22:55] <dr_willis> no idea.. its flash.. its supriseing it works at all. ;)
+[22:55] <dr_willis> I would guess it s somthing th site is doing weirdly. ive had sites that use advertisements goof up on linux.
+[22:56] <pinebei> dr_willis: are there any work arounds that you know of?
+[22:56] <deper29> pinebei: what browser are you using?
+[22:57] <balduin> hi, knew everyone the in which directory trac.wsgi should be?
+[22:57] <Jordan_U> Porto: This appears to be the bug you're seeing: https://bugzilla.redhat.com/show_bug.cgi?id=861022 and at least one person has said that they don't have this problem (or the related warning messages) when using the proprietary driver. I normally recommend open source drivers, but in this case it's worth trying the STA driver.
+[22:57] <ubottu> bugzilla.redhat.com bug 861022 in kernel "[abrt]: WARNING: at drivers/net/wireless/brcm80211/brcmsmac/main.c:7968 brcms_c_wait_for_tx_completion+0x8a/0xa0 [brcmsmac]()" [Unspecified,New]
+[22:58] <Porto> yap i gona reboot to try
+[22:58] <Porto> brb
+[22:59] <deper29> Jordan_U: in my experience with anything linux, the proprietary drivers are so much better than the open source ones. I agree iwth you though, I normally recommend open source as well
+[23:01] <SunMoonStar> anyone here been able to get rhythmbox to work with pandora? If so please let me know how you did it thank you
+[23:02] <SunMoonStar> nvm I think I got the plugin to work
+[23:06] <pinebei> deper29: i have tried it using firefox and chromium
+[23:06] <deper29> pinebei: yeah, just tried both as well :(
+[23:07] <pinebei> deper29: i assume it didn't work for you either
+[23:08] <deper29> nope
+[23:10] <pinebei> deper29:  any ideas what is wrong with it or how to fix it?
+[23:11] <deper29> pinebei: i'm checking stuff now. it's likely a flash issue
+[23:17] <arronhunt> Hey guys...my VPS is having issues. I can ssh in but I'm getting request timeouts when I try and ping it 66.172.33.142
+[23:17] <arronhunt> anyone know where I can begin troubleshooting?
+[23:18] <Jordan_U> arronhunt: Your server is probably behind a firwall that blocks ICMP echo requests (pings).
+[23:18] <arronhunt> oops it is suddenly working
+[23:18] <arronhunt> Thanks Jordan_U
+[23:18] <LaRock> HelloComputer15, is there a way to safly download a older verson of Ubunto for a laptop that hate some newest linux-kernels
+[23:18] <LaRock> *ftw
+[23:18] <Jordan_U> arronhunt: You're welcome.
+[23:19] <LaRock> .hello, is there a way to safly download a older verson of Ubunto for a laptop that hate some newest linux-kernels
+[23:19] <linxeh> LaRock: archive.ubuntu.org ?
+[23:19] <LaRock> I know it was there, could find it
+[23:19] <Jordan_U> LaRock: What problem are you having with newer kernels? Staying with unsupported kernels forever isn't a great idea.
+[23:19] <linxeh> .com even
+[23:19] <mrojas6996> hello! I have a small problem
+[23:20] <daftykins> !ask | mrojas6996
+[23:20] <ubottu> mrojas6996: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[23:20] <dr_willis> LaRock:  theres the archive ubunti sites that have all the old versions.. Not sure how the term 'safely' applies...
+=== jimerickson is now known as Guest53595
+[23:22] <MonkeyDust>  LaRock http://old-releases.ubuntu.com/
+[23:22] <LaRock> Jordan_U, have a Aspire One D270, and have tryed alot of the lates linux distros now, and apernetly it just hate some linux kernels (acording to google)
+[23:22] <LaRock> Thanks
+[23:22] <mrojas6996> I installed the privative driver of the Realtek HD Audio, but the privative driver only supports the Kernel 3.2 and 2.6..., I don't know it, then I install and the f*ck*ng program is destroyed ALL config of my ALSA sound
+[23:23] <mrojas6996> I can not to execute the alsamixer or nothing to else
+[23:23] <Jordan_U> LaRock: You haven't said what problem(s) you're seeing specifically.
+[23:24] <LaRock> its just finnish the install and when I try to boot it it just frezes is a mather of seconds
+[23:24] <daftykins> !no | mrojas6996
+[23:24] <ubottu> mrojas6996: Hvis du vil diskutere pa Norsk, vennligst ga til #ubuntu-no. Takk!
+[23:24] <crowdedhouse> !cn | crowdedhouse
+[23:24] <ubottu> crowdedhouse, please see my private message
+[23:25] <mrojas6996> eh? I do not to know  that you say :S
+=== jimerick1on is now known as jimerickson
+[23:26] <mrojas6996> sorry i dont speak norwegian
+=== jimerickson is now known as Guest96463
+[23:27] <mrojas6996> and my english is so experimental, hahaha, and the channels of ubuntu in spanish is so frozen :/
+[23:27] <k1l_> mrojas6996: so you used a ppa and that wrecked up the configs?
+[23:29] <mrojas6996> kll_ amm, I have not uses PPA's I downloaded the file from the Realtek page
+[23:29] <mrojas6996> *used
+[23:31] <mrojas6996> the f*ck**g file has broken all my config, and replaced and deleted files and directories
+[23:32] <mrojas6996> so I can not hear anything on my PC
+[23:33] <dr_willis> staying calm and collected will get you better help then going berzerk.
+[23:34] <shantorn> mrojas6996, keep the language clean
+[23:35] <mrojas6996> sorry but I am so angry for this :(
+[23:35] <zoite_> then kill yourself
+[23:35] <zoite_> omg
+[23:35] <zoite_> this was the wrong channel
+[23:35] <mrojas6996> only I have the echo's and reverberations of the Realtek program that is in Windows
+[23:36] <mrojas6996> sorry, is I wanted, no have
+[23:37] <mrojas6996> Only I want the echo's of the realtek cards, and sound FX
+[23:37] <mrojas6996> that is in Windows
+[23:37] <mrojas6996> so I wanted to install the privative driver, and look... my alsa is broken
+[23:38] <mrojas6996> I need to reinstall all and remove this package
+[23:38] <pinebei> deper29: any luck?
+=== hamstereye is now known as datname0x
+[23:41] <datname0x> i get this error when iam trying to install somethink from ubuntu software center Software can't be installed or removed because the authentication service is not available. (org.freedesktop.PolicyKit.Error.Failed: ('system-bus-name', {'name':  ':1.76'}): org.debian.apt.install-or-remove-packages
+=== marowanna is now known as ar0nic
+[23:42] <zlacker> datname0x: whats the output of sudo apt-get check ?
+[23:43] <datname0x> zlacker, Reading package lists... DoneBuilding dependency tree       Reading state information... Done
+[23:43] <RomulusDaniel> what version should i install for non pae cpu processor
+[23:43] <RomulusDaniel> of Ubuntu
+[23:43] <dr_willis> RomulusDaniel:  you have to go with 12.04 i belive.
+[23:43] <RomulusDaniel> but not LTE?
+[23:43] <dr_willis> 12.04 is LTS
+[23:44] <datname0x> zlacker, it gives me an authentication error
+[23:44] <RomulusDaniel> i tryed but it fails because pae
+[23:44] <mopeyennui> Hello. I have a problem with lubuntu. I need to kill a virtual monitor.. I only use one desktop.
+[23:44] <dr_willis> I think however the default UBUNTU installer does do pae. Lubuntu and xubuntu does not.
+[23:44] <mrojas6996> anyone know how to uninstall at least what the install of a. tar.bz2 installed?
+[23:44] <RomulusDaniel> ok
+[23:44] <dr_willis> mrojas6996:  it could be most anything, to anywhere. totally depends on what was in it.
+[23:44] <RomulusDaniel> but i have low ram
+[23:44] <RomulusDaniel> what should i install?
+[23:45] <mrojas6996> is there any way to generate a script that uses the contents of that package to install or remove content that I install? as do. deb
+[23:46] <mrojas6996> *installed
+[23:46] <mrojas6996> not is "i install" is "installed"
+[23:46] <Jordan_U> mrojas6996: Could you please rephrase the question? What is your end goal?
+[23:47] <mrojas6996> I have to re-configure ALSA and reinstall
+[23:47] <mrojas6996> the guides in internet not work in my config
+[23:47] <Jordan_U> mrojas6996: What problem are you having and what guide(s) are you trying to follow?
+[23:48] <mrojas6996> i can't open Alsamixer
+[23:48] <mrojas6996> and I not have sound
+[23:48] <mrojas6996> the privative driver has broken my ALSA
+[23:48] <Jordan_U> RomulusDaniel: I believe that the Lubuntu installer uses a non-pae kernel by default. Have you tried that?
+[23:48] <mrojas6996> and the guides I follow totally and not work the steps
+[23:49] <RomulusDaniel> i will
+[23:49] <RomulusDaniel> thx
+[23:49] <tarelerulz> Do any of you have  a  Android Tablet?
+[23:50] <k1l_> tarelerulz: where is the ubuntu issue?
+[23:50] <Jordan_U> mrojas6996: You still haven't said what guides you're trying to follow.
+[23:51] <mrojas6996> sorry my english is so bad...
+[23:51] <mrojas6996> and the ubuntu-es channel is frozen
+[23:52] <tarelerulz> When I plug the Tablet nothing happens.  When I use MTP fuse  , I could put small files on it , sub  ,but the movie itself did not transfer on.  Anyone else have this problem
+[23:52] <mrojas6996> I have sound in my PC, ALSA is broken, when I try to execute the command: alsamixer, it shows: can not open mixer: No such file or directory
+[23:53] <mrojas6996> alsa is broken because I installed a driver that only supports the 3.0 kernel and 2.6 kernel
+[23:53] <mrojas6996> and i have the 3.5 kernel
+[23:54] <Jordan_U> mrojas6996: If you boot an Ubuntu 12.10 LiveCD/USB does sound work?
+[23:54] <mrojas6996> when i follow the guides that says "How to reinstall ALSA" or something, install all the packages but no sound
+[23:55] <mrojas6996> Yes, when I boot from my LiveUSB the sound work
+[23:55] <daftykins> you need to reinstall the packages and force config defaults to return, not just check they're installed
+[23:56] <Jordan_U> mrojas6996: What guides did you follow?
+[23:56] <mrojas6996> even, the sound worked before of I install the privative driver
+[23:56] <mrojas6996> http://ubuntuforums.org/showthread.php?t=1313253&page=15
+[23:57] <mrojas6996> it guide is that i follow
+[23:57] <mrojas6996> other guides are in spanish
+[23:57] <mrojas6996> but is the same
+[23:58] <Jordan_U> mrojas6996: What proprietary driver did you install? Why did you install it? How did you install it?
+=== mikestewart is now known as mikestewart|yogu
+=== mikestewart|yogu is now known as ms|yougurtland
+[23:59] <mrojas6996> the propietary driver is the Realtek High definition audio for linux 3.0 kernel, I installed but I would the audio FX' that is in my Windows 7
+[00:00] <mrojas6996> i installed the driver uncompressing the .tar.bz2 file and executing the "install" file
+[00:00] <dr_willis> so it compiled and then installed the drivers/modules?
+[00:00] <mrojas6996> yes
+[00:01] <mrojas6996> all automatically
+[00:01] <dr_willis> weird they had an install file.. ;) normally its just directions.
+[00:01] <Jordan_U> mrojas6996: Please link to the tar.bz2 file that you used.
+[00:01] <mrojas6996> ok
+[00:02] <mrojas6996> http://www.realtek.com.tw/downloads/downloadsCheck.aspx?Langid=1&PNid=24&PFid=24&Level=4&Conn=3&DownTypeID=3&GetDown=false#High Definition Audio Codecs
+[00:02] <mrojas6996> i downloaded this with another browser, but chromium not work in this older page
+[00:17] <bubba1> Hi, newb looking for help installing usb wireless adapter
+=== Marius is now known as nkts
+[00:19] <root> What channel can i find VPN help?
+=== root is now known as Guest62360
+[00:20] <k1l_> !rootirc > Guest62360
+[00:20] <ubottu> Guest62360, please see my private message
+[00:20] <k1l_> !alis > Guest62360
+=== Guest62360 is now known as blahhhh
+[00:22] <blahhhh> where might i find help for vpn?
+[00:23] <k1l_> ask alis for a specific channel
+[00:23] <k1l_> !alis
+[00:23] <ubottu> alis is a services bot that can help you find channels. Read "/msg alis help list" for help and ask any questions about it in #freenode. Example usage: /msg alis list #ubuntu* or /msg alis list *http*
+[00:26] <Gacnt> Does anybody know a channel where I can ask VPN related channels? If not I have a simple question I have a VPN setup and I'm wondering how to restrict certain ports from certain accounts.
+[00:33] <Porto> Jordan_U
+[00:33] <Porto> back :S
+[00:34] <Porto> the issue now is connecting wireless with tkip
+[00:34] <Porto> :S
+[00:34] <She153> hello
+[00:34] <She153> i am having a problem running a game i downloaded
+[00:34] <She153> i have installed wine tricks
+[00:34] <She153> and wine
+[00:35] <She153> any help will be appreciated
+[00:35] <She153> im new to unbuntu
+[00:35] <k1l_> She153: best is to see in the wine appdb to see if there are some workarounds
+[00:35] <k1l_> !appdb | She153
+[00:35] <ubottu> She153: The Wine Application DB is a database of applications and help for !Windows programs that run under !WINE: http://appdb.winehq.org - Join #winehq for application help
+[00:36] <bubba1> hi, just looking for help setting up a wireless usb
+[00:36] <MrGizmo757> Hey con somebody help me out?  i upgraded to 12.10 and my Intel HD 3000 graphics are terrible.  they worked fine in 12.04. are there any solutions?
+[00:37] <She153> yes it is in the winedb
+[00:37] <k1l_> She153: its not enough to be in the db. see what is needed to get the game running and see how good it runs
+[00:38] <She153> k1l_: it is in the db
+[00:39] <k1l_> She153: yes. then read what is written there
+[00:39] <She153> just says a bunch of gold platinum silver
+=== ms|yougurtland is now known as mikestewart
+[00:42] <bubba1> hi, looking for some help installing wireless usb drivers
+=== Psi-Jack_ is now known as Psi-Jack
+[00:43] <Psi-Jack> She153: The channel is not here for you to PM people with, randomly. PLEASE USE THE CHANNEL!
+[00:44] <She153> wow
+[00:44] <She153> so rude
+[00:45] <Psi-Jack> No, it's completely rude to randomly PM people.
+[00:45] <Tex_Nick> bubba1 : state your version of linux & the adapter manufacturer & model ... that will give people here a better idea of what you're wanting to install
+[00:45] <misterhe> im running ubuntu 12.04 and my computer wont resume from suspend. i hear the hdds spin up, and the fans running, but no power to my usb mouse/kb and no display
+[00:45] <bubba1> Linksys AE2500 dual -band wireless usb adapter
+[00:46] <She153> someone told me
+[00:46] <bubba1> im running ubuntu 12.04
+[00:46] <She153> you could not run games as root
+[00:47] <k1l_> bubba1: can you show the line from that adapter in "lsusb"
+[00:47] <Psi-Jack> She153: root is not a normal user. Don't use it as such.
+[00:47] <Psi-Jack> She153: Secondly. Do not use Enter as if it were punctuation. It's not punctuation.
+[00:48] <bubba1> Bus 001 Device 002: ID 13b1:003a Linksys AE2500 802.11abgn Wireless Adapter
+[00:49] <She153> It is a bad habit , No need to like tell me how to type ... Im just trying to get this game to run and if i knew linux alot better than what i know , I most liekly would not be in here seeking advice/help
+[00:50] <Psi-Jack> She153: If you
+[00:50] <Psi-Jack> She153: Kept doing this
+[00:51] <Psi-Jack> She153: It would be less
+[00:51] <She153> I do get your point
+[00:51] <Psi-Jack> She153: likely for people to
+[00:51] <Psi-Jack> She153: help you.  Get the point? :)
+[00:51] <She153> Thanks , bad habits =(
+[00:51] <k1l_> bubba1: http://ubuntuforums.org/showthread.php?t=1805830  see this thread. i seems its not that easy/possible
+[00:52] <k1l_> She153: i told you to read the appdb entries.
+[00:52] <Psi-Jack> She153: So, explain the problem, what errors you get trying, etc.. People need details to actually even begin to start helping you.
+[00:53] <bubba1> okay bummer. thanks anyway.
+[00:53] <k1l_> She153: there a millions of games with millions of combinations wiht linux and wine. so see the appdb entries and read if its possible to play the game or its even not playable.
+[00:53] <k1l_> She153: that is not a ubuntu issue, its more a wine-issue.
+[00:54] <Psi-Jack> Ohh, is this about wine?
+[00:54] <She153> Sorta yes
+[00:54] <misterhe> any ideas what could cause all usb peripherals to stop working after resuming from suspend? all the results ive got from searches has been for laptop issues; havent worked for me
+[00:54] <She153> let me explain
+[00:55] <She153> I downloaded this game that is in the winedb , I installed it , Clicked the .exe it brought up the menu to start the game than disappeared
+[00:56] <She153> a friend told me i could not run the game as a root , so than i installed kuser and tried to add another user but failed to do so
+[00:56] <She153> yes i am a noob of ubuntu/linux , if i could remove the partition to put windows back onto this computer i would
+[00:57] <daftykins> She153: what's stopping you removing the partition?
+[00:57] <Psi-Jack> She153: This problem is not Ubuntu-related specifically, but wine. Wine support is in #winehq
+[00:58] <Tex_Nick> bubba1 : there is also another link http://www.grailbox.com/2012/05/installing-cisco-linksys-ae2500-wireless-adapter-in-linux/ where comments seem to indicate people have had success ... looks like you'll need to use ndiswrapper with the winDoze XP driver
+[00:58] <She153> thank you everyone
+[01:05] <ramon__> anyone know where this class xajax.inc.php in ubuntu? I need to run a form in a web browser and save data in a mysql DB
+[01:05] <ramon__> guest
+[01:06] <ramon__> good evening.  Anyone know where this class xajax.inc.php in ubuntu? I need to run a form in a web browser and save data in a mysql DB?
+[01:08] <tomreyn> ramon__: http://packages.ubuntu.com/search?searchon=contents&keywords=xajax.inc.php&mode=&suite=quantal&arch=any
+[01:10] <ramon__> tomreyn: thank you very much.
+[01:11] <tomreyn> you're welcome
+[01:12] <marianne> hey guys... usb mouse issues... can someone point me in the direction of the fix?
+=== root is now known as KiKiRiKi
+=== KiKiRiKi is now known as KiKiRiKi2
+[01:12] <marianne> running 12.04 on a sony viao
+[01:13] <k1l_> !rootirc > KiKiRiKi2
+[01:13] <ubottu> KiKiRiKi2, please see my private message
+[01:15] <tomreyn> !ask | marianne
+[01:15] <ubottu> marianne: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[01:15] <tomreyn> sorry, that's the wrong auto-answer :)
+[01:15] <tomreyn> i was looking for one saying you should try to provide more details
+[01:16] <high-hat> shrug i thought it fit
+[01:16] <tomreyn> a better explanation of the problem and the output of the "lsusb" command (run in a temrinal) would help
+[01:17] <Tex_Nick> marianne : in terminal type - lsusb ... see if you're mouse is in the resulting list ... if so paste the line here ... that might better help people to help you
+[01:18] <marianne> Tex_Nick: Bus 005 Device 002: ID 046d:c51b Logitech, Inc. V220 Cordless Optical Mouse for Notebooks
+=== g_byers[Away] is now known as g_byers
+[01:19] <puppy_parade> is there a way to find out what is messing up my totem and vlc video playback? totem is flickering, and neither of them will play video at all above a certain window size.
+[01:20] <puppy_parade> this happens a few days after I reboot.
+[01:21] <intelikey> hi
+[01:21] <marianne> Tex_Nick: it will either freeze at random or move around like I'm trying to highlight stuff
+[01:21] <Tex_Nick> marianne : does your trackpad work ?
+[01:21] <deper29> is someone able to help me with mounting an nfs share? I am doing everything correct as far as I can tell, but my nfs server refuses the mount for all directories except one. my syslog http://bpaste.net/show/64472/
+[01:21] <THE_DUDEZ0R> is it possible to migrate from Ubuntu to Mint?
+[01:21] <k1l_> !mint | THE_DUDEZ0R
+[01:21] <ubottu> THE_DUDEZ0R: Linux Mint is not a supported derivative of Ubuntu. Please seek support in #linuxmint-help on irc.spotchat.org
+[01:21] <marianne> Tex_Nick: the trackpad has the same kind of issue
+[01:22] <Tex_Nick> does the trackpad work ok with the mouse disconnected ?
+[01:22] <intelikey> the_dudezor   in short  yes possible.   easy...  no.
+[01:23] <marianne> Tex_Nick:no... it's just as ramdom
+[01:24] <tomreyn> puppy_parade: run it from a terminal window, make it log (if possible), tail -f ~/.xsession-errors
+[01:25] <tomreyn> ...then reproduce the issue and see what is logged/printed to the terminal
+[01:25] <Sara> hey I got a install file with txt extention. it is vmware 7. how can i install a txt file?
+[01:25] <Tex_Nick> marianne : bout a yera ago a friend had a similar problem on an acer laptop ... what i had to do was disable the trackpad in BIOS ... it's a kludge to have to do that ... but you might give it a try
+[01:26] <escott> deper29, what line is working and what isnt
+[01:26] <Gwennifer> How do I make changes to my display settings using xrandr permanent?
+[01:26] <intelikey> sara do you mean "execute" it?    sh /path/to/filename.txt
+[01:26] <misterhe> im running ubuntu 12.04 and my computer wont resume from suspend. i hear the hdds spin up, and the fans running, but no power to my usb mouse/kb and no display
+[01:27] <marianne> Tex_Nick: thanks, I'll give it a try... it's only a setting, so it's easy to enable if it doesn't help
+[01:27] <deper29> escott: if I do "sudo mount server:/mnt/user/Books /mnt" that works. if I do "sudo mount server:/mnt/user/anything_else /mnt" that doesn't
+[01:27] <puppy_parade> I'm not seeing any log options for totem
+[01:27] <Sara> I don't know. its supposed to be installed but the install files in ubuntu are usually deb this one is txt
+[01:28] <Sara> its confusing
+[01:28] <Tex_Nick> marianne : right ... if that doesn't help ask agani in here ... you'll probly find a better solution from someone else ... good luck
+[01:28] <intelikey> sara you can try to execute it.   sh /path/to/filename.txt
+[01:28] <tomreyn> Sara: either the filename extension is incorrect or, more likely, it's actually not an installer but a text file which explains how the installation process works.
+[01:29] <escott> deper29, i guess check the permission on the server for those folders
+[01:29] <zykotick9> deper29: if you are using NFS, perhaps only /mnt/user/Books is exported?
+[01:29] <Sara> the file is on desktop so it is sh /Desktop?
+[01:29] <deper29> zykotick9: if I pastebin my /etc/exports would that help?
+[01:30] <Sara> hmm ok thanks :)
+[01:30] <intelikey> sara i would look inside first to see if tomreyn's post applies.  and without the leading slash   Desktop/filename......
+[01:30] <zykotick9> deper29: can you see what's exported?  is it /mnt/user or something else?
+[01:30] <gharz> guys, i miss ubuntu. just so happened that my laptop has pre installed win8... anyone successfully installed ubuntu alongside with win8? please help. thanks!
+[01:31] <deper29> zykotick9: if I ssh in, there is stuff in /mnt/user on the server
+[01:31] <puppy_parade> tomreyn, " freetype spu text error: Breaking unbreakable line" is all that appears, and that is only for VLC
+[01:31] <tomreyn> Sara: you can also install the 'file' package and run the 'file' command it provides on the file in question, this will give you a mostly reliable idea of what type of file it is.
+[01:31] <zykotick9> deper29: stuff yes, but what's in /etc/exports?
+[01:32] <gharz> anyone?
+[01:32] <tomreyn> puppy_parade: might be that you need to install !codecs
+[01:32] <gharz> !uefi
+[01:32] <tomreyn> !codecs > puppy_parade
+[01:32] <ubottu> puppy_parade, please see my private message
+[01:32] <msdaisy> gharz, yes. tons of people. Do you need a guide to dual boot?
+[01:33] <deper29> zykotick9: http://bpaste.net/show/64476/
+[01:33] <deper29> that is my exports
+[01:33] <intelikey> tomreyn  just out of curiousity </sp>  does file still ignore .extentions when determining file type ?
+[01:33] <Anonymous83n> hello
+[01:33] <gharz> msdaisy: yes please... i don't want to install ubuntu using virtualbox... :(
+[01:33] <puppy_parade> I have the restricted extras installed. Video works fine, for a while
+[01:34] <gharz> msdaisy: a wubi installed is preferred
+[01:34] <tomreyn> intelikey: i think it still ignores extensions and interprets magic bytes exlusively. but have not studied its source code.
+[01:34] <zykotick9> deper29: ya, just exporting /mnt/user instead of individual directories would be a LOT easier...
+=== YayWubs_ is now known as YayWubs
+[01:35] <Gwennifer> Is there a way to give myself write access to all system files? I'm really tired of having to give myself access every time :x
+[01:35] <zykotick9> deper29: you should be able to get to TV Music Movies Downloads Books though
+[01:35] <jrib> Gwennifer: what are you doing exactly that requires you to do that so often?
+[01:35] <deper29> zykotick9: the server is actually running unRAID, and so every time I make something in the web interface that is under /mnt/user it makes a new entry automatically
+[01:35] <tomreyn> puppy_parade: i think you may want to file a bug, since it's obscure enough that it's unlikely you'll find one here right now who knows the answer.
+[01:36] <Sara> thanks everyone vmware is working
+[01:36] <zykotick9> deper29: i have no idea what that is - and i'll be dropping out at this point.  best of luck.
+[01:36] <puppy_parade> I've had someone suggest it was flash and my Radeon drivers
+[01:36] <Gwennifer> jrib: My Intel graphics and monitor is poorly recognized on Ubuntu
+[01:36] <jrib> Gwennifer: go on...
+[01:36] <puppy_parade> this doesn't happen on my laptop, so I am inclined to blame it in AMD
+=== gavin is now known as gavinguo
+[01:36] <msdaisy> !wubi | gharz
+[01:36] <ubottu> gharz: Wubi is an Ubuntu installer for Windows users that allows you to install and uninstall Ubuntu like a Windows application, in a simple and safe way. http://wubi-installer.org/support.php and https://wiki.ubuntu.com/WubiGuide for troubleshooting. Please  file bugs at http://launchpad.net/wubi/+filebug. For Ubuntu Oneiric/11.10 http://releases.ubuntu.com/oneiric/wubi.exe
+[01:36] <deper29> zykotick9: it's linux is all it is.
+[01:36] <puppy_parade> and the Radeon drivers are still not usable.
+[01:37] <tomreyn> puppy_parade: it does sound like a driver issue to me. but i'm just guessing really.
+[01:37] <gharz> msdaisy: i already used wubi but i can't boot due to uefi issue with windows 8
+[01:37] <Gwennifer> jrib: I fixed the problem, sort of, but I still need write access and doing sudo <texteditor> gets really, really annoying really quickly
+[01:37] <zykotick9> deper29: and with that comment, i won't be seeing your posts further, good luck.
+[01:37] <puppy_parade> is there a way to reset it without logging out or rebooting?
+[01:37] <jrib> Gwennifer: you're not answering my question, so it's hard to suggest the best course of action for you.
+[01:38] <FloodBot1> !netsplit
+[01:38] <tomreyn> puppy_parade: closing and restarting the application is insufficient then?
+[01:39] <tomreyn> puppy_parade: look into the xrandr command to reset your video output.
+[01:40] <puppy_parade> right, I have to live with the viewable area getting a little smaller every time I want to watch a video
+[01:40] <puppy_parade> It's maddenning.
+[01:41] <tomreyn> puppy_parade: you can also try upgrading / downgrading drivers, and to try the open source ones (which can be a good option either in general or just to ensure it's indeed the driver that's at fault, not your hardware)
+[01:42] <puppy_parade> I upgraded to 12.10 for the oss drivers
+[01:42] <puppy_parade> and they were still unusable
+[01:42] <puppy_parade> I like being able to use all of my monitors
+[01:42] <intelikey> is there a free vmware ?
+[01:43] <puppy_parade> I think they have a free version, but virtual is a great way to get into VMs intelikey
+[01:43] <puppy_parade> *virtualbox
+[01:43] <intelikey> ty puppy_parade
+[01:45] <tomreyn> puppy_parade: radeon r300 drivers worked quite well for me on 12.04, including multi-monitor output.
+[01:45] <puppy_parade> I have a 7000 series card
+[01:46] <puppy_parade> support for them is still very rough
+=== msdaisy is now known as ms-daisy
+[01:50] <tomreyn> puppy_parade: then you may want a newer kernel, too
+[01:50] <kelvinella> very annoying, how come ubuntu wont do anything about it
+=== _JKL1234-_ is now known as NetSplitLover
+[01:51] <kelvinella> is there a way to disable screensaver while playing flash movie?
+[01:51] <puppy_parade> This card has been out nearly a year
+[01:52] <puppy_parade> I upraded to 12.10 for the newer kernel version, and it was still inadequate
+[01:52] <puppy_parade> I've done post release kernels before, and it's a pain
+[01:54] <jsbach> Are there any active mirrors for Ubuntu < 8.x?
+[01:55] <zykotick9> !eol | jsbach
+[01:55] <Flannel> jsbach: You realise those are all EOL and not supported (and many have major security holes) right?
+[01:55] <jrib> jsbach: all those versions are EOL and no longer supported.  Why not use a current, supported version?
+=== LikeLakers2 is now known as Guest89535
+=== rla is now known as Guest23901
+=== Jason is now known as Guest41832
+=== ikonia is now known as Guest53657
+[01:55] <ms-daisy> jsbach, http://old-releases.ubuntu.com/releases/
+[01:55] <tomreyn> puppy_parade: have you tried searching the web for an answer providing your very model name and a concise description of the major issue? i find this offten helps.
+[01:55] <jsbach> Flannel: Thanks for your input.
+[01:55] <jsbach> jrib: I have reasons.
+[01:55] <jsbach> ms-daisy: Thank you.
+[01:56] <Flannel> jsbach: old-releases will work fine.  It has mirrors and isos.  You just need to be aware of that fact first.
+[01:56] <jsbach> Flannel: Thanks again.
+[01:56] <tomreyn> puppy_parade: and so can reporting bugs, since chances are soemeone else reported it before, your bug report will be tagged a duplicate of that, and the other bug report has a workaround or fix in it.. that's part of why i suggested you file a bug.
+[01:56] <Ben64> jsbach: it also does not contain all the security fixes and could leave you vulnerable
+[01:56] <Tex_Nick> kelvinella : if you're using VLC there is an option to disable screensaver during playback
+[01:56] <Flannel> Ben64: He's aware, four times now.
+[01:57] <ms-daisy> The old releases are great for practicing attacks if that's what he's doing Flannel jsbach
+[01:57] <puppy_parade> who do I submit fglrx bugs to?
+[01:57] <raub> Quick nfs question: why am I being told rpc.statd is not being run? http://pastie.org/private/mdlvmbafdinijp4uotmvzg
+[01:57] <kelvinella> Tex_Nick, in ff or chrome
+[01:57] <tomreyn> puppy_parade: ati, i would guess
+[01:58] <kelvinella> Tex_Nick, and the option doesnt work in xubuntu
+[01:58] <Flannel> ms-daisy: Sure, but it's irresponsible to just hand it out without ensuring they're aware theyre getting unsupported (and potentially dangerous) software.
+[01:58] <raub> s/being run/running/
+[01:58] <Tex_Nick> kelvinella : sorry i thought you were playing flv files
+[01:58] <kelvinella> in xubuntu the screensaver just come on no matter what except i have to move the mouse once a while
+[01:58] <puppy_parade> I'm pretty sure ATI knows their drivers are crap
+=== tomaw is now known as 5EXAAG5WE
+[01:59] <ms-daisy> Last count 4 folks let him know Flannel ;) I was positing a valid reason for wanting them.
+[01:59] <tomreyn> kelvinella: try caffeine or file a bug with adobe about flash
+[01:59] <tomreyn> kelvinella: try caffeine or file a bug with adobe about flash
+=== AntORG_ is now known as AntORG
+[02:00] <Flannel> ms-daisy: There's plenty of valid reasons.  But usually its nice to make sure they respond (which is what I was waiting for) before handing it out.  He could've just as easily missed the rest of us and only seen the URL.  It only takes a few extra moments to have a proper conversation, and saves hours of headaches later.
+[02:04] <misterhe> im running ubuntu 12.04 and my computer wont resume from suspend. i hear the hdds spin up, and the fans running, but no power to my usb mouse/kb and no display
+=== 5EXAAG5WE is now known as tomaw
+=== mike is now known as Guest48683
+=== johan is now known as Guest36922
+[02:07] <marianne> Tex_Nick: I tried disabling the touchpad and still have the same issues with the pad and the mouse. any other suggestions?
+[02:08] <Guest48683> I have setup eth0 'shared to other computers' through network settings. However when a client tries to connect, the notifications show on and off repeatedly.. it works while it's connected but it immediately disconnects and reconnects. What might be the problem?
+=== g_byers is now known as g_byers[Away]
+[02:09] <ouyes> after install the nvidia driver, my window borders are all gone, where can I get mu window border back?
+[02:09] <ouyes> I am running ubuntu 12.10 amd64
+[02:09] <Tex_Nick> marianne : what version of linux are you running ... & what make & model is your laptop ?
+[02:10] <marianne> Tex_Nick: running 12.04 sony viao VGN-CS320J
+=== Sickki_ is now known as Sickki
+[02:10] <Tex_Nick> marianne : let me search a bit
+[02:11] <blackshirt> is apparmor just for confine aplication ?
+[02:11] <marianne> Tex_Nick: thank you
+[02:14] <She153> hmm
+[02:15] <tomreyn> in the philosophical or the carnivore sense?
+[02:16] <blackshirt> is apparmor just for confine aplication ?
+[02:16] <nibbler_> i have a hosted server, i installed 12.4 lts, the hoster (hetzner) has fast mirrors, but it seems he does not offer a Contents-amd64.gz or such, anyway apt-file update gives me: Ignoring source without Contents File:  http://mirror.hetzner.de/ubuntu/packages/dists/precise-backports/Contents-amd64.gz - any hint?
+[02:16] <She153> does anyone know how to remove ubuntu ?
+[02:16] <nibbler_> She153: just install whatever else you like
+[02:17] <ms-daisy> remove it from what She153 ?
+[02:17] <nibbler_> ...just don't want to switch everything to a new mirror.... makes sense to use the local one.
+[02:17] <tomreyn> blackshirt: its primary purpose is to reduce exploitability of bugs in certain applications
+[02:18] <tomreyn> !apparmor > blackshirt
+[02:18] <ubottu> blackshirt, please see my private message
+[02:22] <tomreyn> nibbler_: just tell them their mirror of this repository is incomplete
+[02:23] <She153> can someone help me remove ubuntu off this computer ?
+[02:23] <nibbler_> tomreyn: possibly the best solution....
+[02:23] <Sara> need to install vmware 7 on ubuntu 12.04. this is my error need a guide please
+[02:23] <Sara> http://www.mediafire.com/view/?12cycq00dflhc4c
+[02:23] <ms-daisy> how did you install it She153 ?  Is it a dual boot, is Ubuntu the only operating system on it, is it in a virtual machine, is it wubi?
+[02:23] <tomreyn> nibbler_: here's another mirror which shows this file should be there: http://mirrors.mit.edu/ubuntu/dists/precise-backports/
+[02:23] <nibbler_> She153: answering the questions people ask you might be a good first step
+[02:23] <nibbler_> tomreyn: thanks
+[02:24] <tomreyn> nibbler_: fwiw, i just confirmed the files ar emissing on hetzner mirrors
+[02:24] <Sara> its not wubi itsnot instlaled on windows
+[02:24] <She153> nibbler : im sorry i had to let the dogs out
+[02:24] <Frankko> steam related questions go in what #channel?
+[02:24] <tomreyn> #elsewhere
+[02:25] <Frankko> tomreyn: rude
+[02:25] <She153> ms-daisy: remove it from backtrack
+[02:25] <She153> and that dont work nibbler
+[02:25] <ms-daisy> wut? She153 you want to remove ubuntu from backtrack???
+[02:25] <She153> backtrack is a distro of ubuntu
+[02:26] <Sara> any idea how i can solve the error for http://www.mediafire.com/view/?12cycq00dflhc4c (vmware 7 on ubuntu 12.04)
+[02:26] <Frankko> tomreyn: i asked so i will not bother ubuntu developers and users, and it is a complete hassle to make run on anything other than ubuntu. Someone might be helpful
+[02:26] <She153> i want to put windows back on my pc
+[02:26] <ms-daisy> Yes She153 , correct. So how could you possibly remove the os that backtrack is built upon?
+[02:26] <Frankko> She153: noone is stopping you
+[02:26] <ms-daisy> so you want to remove backtrack and replace it with windows She153 ?
+[02:26] <She153> yes
+[02:26] <Tex_Nick> marianne : out of curiosity try hitting the escape key ... does that help
+[02:27] <She153> why do i keep getting smart ass answers ?
+[02:27] <tomreyn> !steam > Frankko
+[02:27] <ubottu> Frankko, please see my private message
+[02:27] <ms-daisy> She153, it's not smart-ass at all. The way you remove it is entirely dependent on how it was installed.
+[02:27] <tomreyn> Frankko: and i apologize.
+[02:27] <She153> i meant that for franko
+[02:28] <ms-daisy> You can put windows on the machine by using the windows install CDs. That will completely remove everything currently on the computer and replace it with a new windows installation She153
+[02:28] <She153> ok maybe i need to talk to someone who knows what backtrack is
+[02:28] <marianne> Tex_Nick: let me try
+[02:28] <She153> no it wont
+[02:28] <ms-daisy> I know what backtrack is.
+[02:28] <bazhang_> She153, its NOT supported here
+[02:28] <bazhang_> She153, go to the backtrack channel for support.
+[02:28] <Tex_Nick> marianne : You may have activated some accessibility options with a key-combination
+[02:28] <bazhang_> #backtrack-linux She153
+[02:28] <ms-daisy> to remove backtrack bazhang_ ?
+[02:28] <She153> i have a windows live cd , and have changed the bios
+[02:29] <She153> to boot from cd
+[02:29] <ms-daisy> Perfect, you're on your way She153
+[02:29] <nibbler_> She153: stop trolling
+[02:29] <bazhang_> She153, how does this relate to ubuntu support.  ##windows for windows install help
+[02:29] <She153> it keeps going back to backtrack
+[02:30] <marianne> Tex_Nick: seems ok for now... I'll keep an eye on it... next problem is the title bar on the windows doesn't have the exit resize or expand buttons
+[02:30] <bazhang_> She153, again, not an ubuntu issue.
+[02:30] <ms-daisy> figure out what the bios setting is to boot from the CD. If it's not working then you don't have a bootable CD She153
+=== Sickki_ is now known as Sickki
+[02:30] <rawr> test
+[02:30] <rawr> anyone here use a tomato router?
+[02:30] <She153> hmm i have installed that cd on other computers
+[02:30] <bazhang_> rawr, try #test
+[02:31] <bazhang_> !alis | rawr have a search for their channel
+[02:31] <ubottu> rawr have a search for their channel: alis is a services bot that can help you find channels. Read "/msg alis help list" for help and ask any questions about it in #freenode. Example usage: /msg alis list #ubuntu* or /msg alis list *http*
+[02:31] <rawr> I'm aware of a channel that exists I was asking if anyone here used it as their channel is dead
+[02:31] <rawr> thanks.
+[02:31] <bazhang_> rawr, try #ubuntu-offtopic
+[02:32] <Sara> I installed a package with txt extension.(install command :  sudo sh Desktop/VMware-Workstation-Full-7.0.0-203739.i386.txt ) it doesn't work how can i uninstall it?
+=== ericab_away is now known as ericab
+[02:33] <jrib> Sara: read documentation, ask author, read script
+[02:33] <Sara> where are these things?
+[02:34] <IdleOne> Sara: VMware-Workstation-Full-7.0.0-203739.i386.txt is a text file, not a package
+[02:34] <intelikey> sara    and  adding sudo to that command was your second mistake, and probably the biggest one.
+[02:34] <Tex_Nick> marianne : take a look at this ; http://askubuntu.com/questions/134172/window-title-bars-missing-occasionally-in-unity
+[02:34] <jrib> Sara: what do you mean?
+[02:34] <Sara> actually its not possible to open it with note pad or gedit
+=== NetSplitLover is now known as _JKL1234-_
+[02:34] <stiltzkin> Hey, anyone want to help me figure out why fglrx is failing all of the sudden? All I get when I boot now is commandline, no GUI (this includes recovery mode). Here's what I think is the relevant portion of /var/log/kern.log: http://paste.ubuntu.com/1441008/
+=== bazhang_ is now known as bazhang
+[02:35] <Sara> I extracted it using terminal sudo sh Desktop/VMware-Workstation-Full-7.0.0-203739.i386.txt
+[02:35] <jrib> Sara: when you run files like that, they could do absolutely anything they want to your system.  You should only do that with files you absolutely trust
+[02:35] <tomreyn> !vmware | Sara
+[02:35] <ubottu> Sara: VMWare is not available in the Ubuntu repositories. Consider using !QEmu or !VirtualBox as alternatives. Instructions for installing VMWare manually are at https://help.ubuntu.com/community/VMware
+[02:35] <Sara> and it asked for root privilage thats why i added sudo
+[02:35] <Tex_Nick> marianne : that's assuming you're runnint unity
+[02:35] <stiltzkin> For completeness, the output of uname -a is: Linux luna 3.5.0-18-generic #29-Ubuntu SMP Fri Oct 19 10:26:51 UTC 2012 x86_64 x86_64 x86_64 GNU/Linux
+[02:36] <bazhang> stiltzkin, MINT?
+[02:36] <marianne> Tex_Nick: yes, unity... but I can't get the window to resize
+[02:37] <Tex_Nick> marianne : did you look at the link i posted above ... http://askubuntu.com/questions/134172/window-title-bars-missing-occasionally-in-unity
+[02:37] <marianne> Tex_Nick: yes, looking now
+[02:37] <Sara> tomreyn   doesn't say anything about uninstall process
+[02:38] <Tex_Nick> that will reset unity to default settings
+[02:39] <tomreyn> stiltzkin: first of all, install all available system updates. you are behind, and chances are this issue was since fixed.
+[02:39] <robertzaccour> hey yall
+[02:39] <tomreyn> stiltzkin: oh and what bazhang asked
+=== chiluk_away is now known as chiluk
+[02:40] <stiltzkin> No, I am not running Mint. And I am fully up to date, except this is not the latest version of Ubuntu - I attempted to upgrade and it failed
+[02:40] <robertzaccour> I was thinkin about somethin recently
+[02:40] <intelikey> howto "minimize" a window in full screen mode ?
+[02:40] <stiltzkin> All individual packages are updated however.
+[02:40] <robertzaccour> Never could figure out why its so much harder to forgive myself than it is someone else.
+[02:40] <tomreyn> stiltzkin: how did it fail? this would be something you should look into first of all.
+[02:41] <IdleOne> robertzaccour: How is this ubuntu support related?
+[02:42] <stiltzkin> If I remember correctly the updater itself crashed. It threw a lot of messages about conflicting packages (I apologize for not having specifics here, this was about a month ago) and having no way to recover the installation, I shut down the system. Now I'm just looking to see whether there's any way to get the GUI back or whether I just need to bite the bullet and reinstall.
+[02:42] <bazhang> stiltzkin, is that elementary OS?
+[02:43] <marianne_> Tex_Nick: can you resend the link please, my bird hit the power button and rebooted me
+[02:43] <stiltzkin> bazhang, what are you talking about
+[02:43] <bazhang> stiltzkin, the luna kernel
+[02:43] <stiltzkin> no, luna is my hostname
+[02:43] <tomreyn> luna would be the hostname, right
+[02:44] <tomreyn> it's not like it's part of the kernel version
+[02:44] <Tex_Nick> marianne : lol what happened to the bird ?
+[02:44] <stiltzkin> I would not be asking a question here unless it was ubuntu related.
+[02:44] <Tex_Nick> marianne_ : http://askubuntu.com/questions/134172/window-title-bars-missing-occasionally-in-unity
+[02:45] <marianne_> Tex_Nick: nothing... he's just being a tool... I took the tv remote away cuz he was eating the buttons
+[02:46] <tomreyn> stiltzkin: getting package conflicts fixed and installing the remaining updates can be a requirement to get your system back into a working state. you can use the "apt-get" command line utility to do it.
+[02:46] <tomreyn> !apt-get > stiltzkin
+[02:46] <ubottu> stiltzkin, please see my private message
+[02:47] <stiltzkin> ...why are you telling me how to use apt-get?
+[02:47] <tomreyn> stiltzkin: because i think you want to fix your package managemnet system and that you would probably have done so by now if you knew how to.
+[02:48] <stiltzkin> There is no problem with my packages though...
+[02:48] <stiltzkin> this is a driver proble
+[02:48] <tomreyn> stiltzkin: for a matter of fact, your kernel version is a couple patch levels behind, so at least you don't have the latest patches. which could be a cause of the issues you're running into.
+[02:49] <stiltzkin> Well yeah, it is...because as I said, the upgrade was not successful
+[02:49] <stiltzkin> I mean this is not a critical issue or anything, I can always reinstall. I'm really more just curious as to what happened and if it's easier to fix than to reinstall
+[02:50] <GMDynamics> Hello!
+[02:50] <Tex_Nick> marianne_ : the only thing in the link i provided of importance is ... in terminal type unity --reset ... this will reset unity to default settings ... the link tells warns you that preferences will be reset also
+[02:52] <tomreyn> hi GMDynamics
+[02:54] <GMDynamics> I'm really tired and accidentally ran sudo apt-get remove apt.
+[02:54] <DaemonicApathy> Awesome!
+[02:54] <Hajime> gmdynamics, thats no problem if you want remove it
+[02:55] <marianne_> Tex_Nick: I was in there setting some of the other fun things I like and the windows decorations go unchecked
+[02:55] <GMDynamics> http://images1.wikia.nocookie.net/__cb20120531003431/castleminerz/images/thumb/5/58/Disgusted_Oh_God_Why.png/1067px-Disgusted_Oh_God_Why.png
+[02:55] <stiltzkin> Yeah, the driver itself is segfaulting. I think it's reinstall time unfortunately.
+[02:55] <GMDynamics> @Hajime i was that sarcasm ? :D
+[02:55] <ms-daisy> GMDynamics, you can replace it with dpkg.
+[02:56] <marianne_> Tex_Nick: thank you again...
+[02:56] <zykotick9> GMDynamics: i assume you want apt back?  do you know if anything else was removed with it?  download the DEB for apt and use dpkg to install it... hopefully that works.
+[02:56] <DaemonicApathy> GMDynamics, did you want to know how to reinstall apt?
+[02:56] <GMDynamics> dpkg is failing for some weird reason
+[02:57] <Hajime> gmdynamics, you can fetch apt,and install it with dpkg
+[02:57] <DaemonicApathy> http://www.ehow.com/how_8141696_reinstall-apt-ubuntu.html <~ 4 easy steps
+[02:57] <GMDynamics> dpkg keeps failin
+[02:57] <zykotick9> GMDynamics: error?
+[02:57] <GMDynamics> SegFault
+[02:57] <She153> does anyone know anything that will burn iso's ?
+[02:58] <GMDynamics> I'm thinking Ill just backup my stuff and reinstall
+[02:58] <Neo31> hello folks, i need to install libqt4-webkit 31 bit on ubuntu 12.04 64 bit. is there a way to install it from the repository so it keeps updated or I have to install the deb manually!? thanks
+[02:58] <DaemonicApathy> She153: Ubuntu comes with Brasero.
+[02:58] <hualet> brasero
+[02:58] <Hajime> she153, a lot of tools was available, wodim, brasero,k3b ...
+[02:59] <bazhang> !burners > She153
+[02:59] <ubottu> She153, please see my private message

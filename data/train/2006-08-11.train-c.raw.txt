@@ -1,0 +1,1500 @@
+[06:20] <cafuego> Tonren: http://mirror2.ubuntulinux.nl/dists/dapper-seveas/  -> search for 'Falcon'.
+[06:20] <selfharm> thanks dr willis, my next question was what flavor of vnc
+=== roving_prole [n=Harper@c-71-199-16-110.hsd1.co.comcast.net]  has joined #ubuntu
+[06:20] <RoninGurl> I get "W:MD5 mismatch for: main/binary-i386/Packages, W:MD5 mismatch for: main/binary-i386/Packages.gz, E:Read error - read (5 Input/output error)" when i try to add the 6.06.1 CD as a repository
+=== Zarathu [n=zarathu@adsl-68-94-22-13.dsl.rcsntx.swbell.net]  has joined #ubuntu
+[06:20] <Dr_Willis> selfharm,  then theres that xming tool  -->  http://freedesktop.org/wiki/Xming  thats handy
+[06:21] <Tonren> cafuego:  GPG error: http://ubuntu.cafuego.net dapper-cafuego Release: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 580E2519969F3F57
+=== user1 [n=user1@c-24-61-239-60.hsd1.ma.comcast.net]  has joined #ubuntu
+[06:21] <Dr_Willis> selfharm,  under linux - i tend to use the vnc4server  not noticed much differance in it and tightvnc..
+[06:21] <cafuego> RoninGurl: disc broken, I'd hazard.
+[06:21] <Tonren> cafuego: I've gotten that before, actually.  What in blazes does it mean?
+[06:21] <{K}Lubby> this is driving me crazy
+[06:21] <cafuego> Tonren: Check the home page at that url.
+=== SmrtJustin [n=SmrtJust@72.241.36.169]  has joined #ubuntu
+[06:22] <RoninGurl> it came straight from releases.ubuntu download page, hashes checked out. and i burned at half speed.
+[06:22] <cafuego> Tonren: Means apt doesn't have the gpg key aprt that signed the package lists.
+[06:22] <cafuego> Instructions on how toa dd are there.
+=== dfgas [n=dfgas@adsl-68-75-64-41.dsl.milwwi.ameritech.net]  has joined #ubuntu
+[06:22] <Tonren> cafuego: Figured it out; thanks.
+[06:22] <Tonren> cafuego: Didn't occur to me to just go to the freakin URL
+[06:22] <cafuego> <heh>
+[06:23] <user1> hi all a little wile ago I had a problem with APT
+=== lloyd-din is now known as foolswisdom
+[06:23] <Tonren> cafuego: So, now I'm supposed to restart?
+[06:23] <bruenig> user1, doyou still?
+[06:23] <Tonren> bruenig: cheeky
+[06:23] <user1> the real problem was with SU
+[06:23] <cafuego> Tonren: Or 'sudo rmmod bcm43xx; sudo modprobe bcm43xx'
+[06:24] <Tonren> cafuego: I already removed bcom AND ndiswrapper because neither worked
+=== Madpilot [n=brian@ubuntu/member/madpilot]  has joined #ubuntu
+[06:24] <cafuego> Tonren: bcom needs this firmware to work.
+[06:24] <pushpop> Is there a Wiki on how to install in vmware on a seperate partition from windows, then  boot nativly into ubuntu?
+[06:24] <user1> I just had to use sudo
+[06:24] <Tonren> cafuego: Gah, I shouldn't have removed BCom after all.  ERROR: Module bcm43xx does not exist in /proc/modules
+[06:24] <cafuego> Tonren: That's fine, just ignore that. modprobe it and voila
+[06:25] <Tonren> cafuego: sweet.
+[06:25] <Tonren> cafuego: OK, so, now do I restart?  And it's supposed to just work?
+=== Flyoc_ [n=flyin_do@APlessis-Bouchard-153-1-23-247.w83-200.abo.wanadoo.fr]  has joined #ubuntu
+[06:25] <bruenig> pushpop, I don't think that is possible, from what I have seen vmware creates virtual machines, it doesn't make an actual physical representation of all of the files that you can access
+[06:25] <el_isma> pushpop: I don't get what you want to do, could you explain a bit?
+=== mitrovarr [n=mitrovar@host-69-146-63-25.rvt-wy.client.bresnan.net]  has joined #ubuntu
+[06:25] <Tonren> cafuego: NO wait!  There it is!  eth1!
+=== Tonren 's heart skips a beat.
+=== Goldfisch [n=gregturn@user-0c6t46t.cable.mindspring.com]  has joined #ubuntu
+[06:25] <cafuego> Tonren: No, it you just modprobe'd the bcm43xx module, you need not restart. 'iwconfig' should now list the device.
+=== Gumby [n=gumby@unaffiliated/gumby]  has joined #ubuntu
+[06:26] <cafuego> Tonren: 'sudo iwlist eth1 scan'
+=== apoth_ [n=lev@c-24-126-78-70.hsd1.ca.comcast.net]  has left #ubuntu []
+[06:26] <Tonren> cafuego: eth1 Interface doesn't support scanning : No such device
+[06:26] <mitrovarr> hey guys, I'm running a really minimalistic laptop on xubuntu.  Anyone have any special advice on how to keep the memory usage down aside from the obvious?  (i.e. I know not to run everything at once like a dumbass.)
+[06:26] <Tonren> cafuego: eth1 clearly exists in iwconfig's output
+=== geoffTheFish [n=geoff@p12770-adslbkksp4.C.csloxinfo.net]  has joined #ubuntu
+[06:27] <cafuego> Tonren: Ooh, special! ;-)
+[06:27] <Tonren> cafuego: I know, I'm just too unique.
+[06:27] <bruenig> mitrovarr, don't use memory heavy applications :P
+[06:27] <RoninGurl> does this 6.06.1 release perhaps just have the updates ive already downloaded anyway perhaps? i have ubuntu upadate daily.
+[06:27] <user1> bruenig: it was just that su stopped working for some reason. I had to use sudo
+=== Samineru [n=Samineru@c-69-248-142-177.hsd1.nj.comcast.net]  has joined #ubuntu
+[06:27] <mitrovarr> heh... firefox doesn't like running on this.  It will, but it doesn't exactly fly
+[06:27] <cafuego> RoninGurl: Then there will not be anything newer on the cd.
+[06:27] <geoffTheFish> is there a CLI command to open a file with its default app?
+[06:27] <bruenig> user1, you are supposed to use sudo?
+[06:27] <mitrovarr> trying opera to see if it'll do better
+=== Goldfisch [n=gregturn@user-0c6t46t.cable.mindspring.com]  has left #ubuntu ["Leaving"]
+[06:27] <mercykiller> mitrovarr, remove any uneeded services from init
+[06:27] <Tonren> geoffTheFish: I've been searching for one of those for a while
+[06:28] <Tonren> geoffTheFish: OS X has an "open" command
+[06:28] <Samineru> does anyone know how to acquire a screenshot that includes a currently playing file?
+[06:28] <Samineru> *currently playing .mov file
+[06:28] <mitrovarr> mercykiller:  good idea, I'll go dig around and see if anything I don't need is there
+[06:28] <geoffTheFish> Tonren: yeah, also if you use the fish command line
+[06:28] <bruenig> user1, ubuntu uses sudo not su
+[06:28] <Tonren> geoffTheFish: fish command line?
+[06:28] <RoninGurl> cafuego, i haventn updated to 6.06.1...but i mean ive downloaded over 200 MB of updates since installing 6.06 LTS.
+[06:28] <Tonren> bruenig: You can be a heathen and use sudo su if you want, though
+[06:28] <hyperstream> ahh anyone know how link blocks work for unreal ? if so please msg me
+[06:28] <user1> bruenig: I had been using it
+[06:28] <Tonren> cafuego: Any hints?  I'm further than I got before, but now I'm stumped.
+[06:28] <bruenig> user1, you can use su if you setup a root account also
+=== j_j [i=jj@124.106.52.188]  has joined #ubuntu
+[06:29] <cafuego> Tonren: Does 'iwconfig' list anything useful?
+[06:29] <Tonren> cafuego: I'll pastebin it
+[06:29] <el_isma> bruenig: user1: you can always do "sudo su" :P
+[06:29] <cafuego> 'k
+[06:29] <geoffTheFish> Tonren: yeah you need to install it then you can have a slightly slower but more featured command line experience
+[06:29] <j_j> can anyone help me on installaing Ubuntu in VMWare ?
+[06:29] <geoffTheFish> j_j i did it last week
+[06:29] <j_j> cool
+[06:30] <j_j> hi geoff
+[06:30] <Tonren> cafuego: http://paste.ubuntu-nl.org/20247
+[06:30] <Dr_Willis> The fish shell has a feature that does that geoffTheFish
+[06:30] <Tonren> geoffTheFish: What kind of features?
+=== rexin [n=rexin@rdsl-0712.tor.pathcom.com]  has joined #ubuntu
+=== harisund [n=harisund@ip24-255-87-152.br.br.cox.net]  has joined #ubuntu
+[06:30] <mitrovarr> mercykiller:  I'm not totally familiar with all linux services.  Any particular ones that stick out as being unnecessary and memory sucking?
+[06:30] <j_j> Im runing a Winxp OS
+[06:30] <geoffTheFish> Tonren: 'open' for one
+[06:30] <Tonren> geoffTheFish: ahh
+[06:30] <cafuego> Tonren: Ok, just a single eth1. Can you paste 'ifconfig' as well?
+[06:30] <j_j> and i would like to install ubuntu on my VMWARE Server
+[06:30] <geoffTheFish> Tonren: stands for friendly interactive shell
+[06:31] <Tonren> geoffTheFish: I saw, in the repos
+[06:31] <Tonren> cafuego: eth1 does not show up in ifconfig
+[06:31] <Tonren> cafuego: jesus god
+[06:31] <Tonren> cafuego: sudo ifconfig eth1 up
+[06:31] <geoffTheFish> Tonren: tis ok but slower so i never use really
+[06:31] <cafuego> Tonren: it will be 'ifconfig -a' though ;-)
+[06:31] <Tonren> My blue wireless button just went on
+=== mall0c [n=bryan@67.183.244.112]  has joined #ubuntu
+[06:31] <cafuego> hey ho
+=== sirus [n=sirus@adsl-63-206-70-218.dsl.snfc21.pacbell.net]  has joined #ubuntu
+[06:31] <Tonren> cafuego: OK, it scanned, but it's not picking up my wireless network
+[06:32] <cafuego> Tonren: First: 'sudo iwconfig eth1rate 11M '
+[06:32] <mercykiller> mitrovarr, not particularly, at least in my experience. The services used by big desktops are the worst, but XFCE is pretty fast.
+[06:32] <user1> bruenig: I thought there was no root acount in ubuntu ?
+[06:32] <el_isma> anybody can help me with my bridge problem? Somehow when I add the bridge "route" hangs, and I don't get my default (to my router) route...
+[06:32] <cafuego> with a space between 'rate' and 'eth1'
+[06:32] <mercykiller> mitrovarr, you can always remove cups and such if you don't need printing
+[06:32] <bruenig> user1, there isn't by default but it can be set up
+[06:32] <cafuego> user1: There is, it's just not used.
+[06:32] <cafuego> user1: .. and not needed.
+[06:33] <selfharm> i am looking at ultravnc to connect to dapper from windows. do i need to install the server, or does it come packaged with some sort of remote connection server?
+[06:33] <mitrovarr> mercykiller:  I'm a little reluctant to do that since I'm mostly preparing this laptop for someone else who may need printing and won't be able to fix that sort of thing
+[06:33] <el_isma> mitrovarr: If you *really* want RAM, try fluxbox :)
+[06:33] <eternalswd> how do I reload .zshrc?
+[06:33] <cafuego> Tonren: And 'sudo iwconfig eth1 ap any'
+[06:33] <mercykiller> mitrovarr, it's not really necesary anyway
+[06:33] <Tonren> cafuego: http://paste.ubuntu-nl.org/20248
+[06:33] <user1> bruenig: thanks for the help
+[06:33] <el_isma> mitrovarr: Ain't pretty, but's small!
+=== HELLEN [n=ws005@202.95.134.234]  has joined #ubuntu
+[06:33] <geoffTheFish> j_j: i installed u under vmware on xp
+[06:33] <Tonren> cafuego: I should use "ap" instead of "essid"?
+[06:33] <mall0c> how do i disable screen locking when i close the lid on my laptop?
+[06:34] <geoffTheFish> j_j: it was a pain, the livecd ran like a dog
+[06:34] <mercykiller> mitrovarr, like el_isma said, you could run a lightweight window manager
+[06:34] <mitrovarr> el_isma:  Is it easy to get fluxbox going in ubuntu?  I've had bad experiences trying to get any window manager going but gnome/kde/xfce
+[06:34] <user1> cafuego: thanks for the help
+[06:34] <rexin> i'm trying to get read only access for all users... from fstab: "/dev/sda2 /media/osx hfsplus rw,exec,auto,users 0 0" anybody know what it should be?
+[06:34] <Tonren> mitrovarr: i did 'sudo aptitude install fluxbox' and it worked fine
+[06:34] <mitrovarr> Tonren:  Great, I'll do that
+=== doughboy [n=pchilds2@125-162.126-70.tampabay.res.rr.com]  has joined #ubuntu
+[06:34] <j_j> geoff
+[06:34] <el_isma> mitrovarr: I haven't tried fluxbox in ubuntu... But I used to run it under Debian... It ran just fine.
+[06:34] <j_j> so did you succefully
+[06:34] <j_j> installed
+[06:34] <cafuego> Tonren: the 'ap any' should make it scan
+=== Pizon [n=pizon@adsl-69-209-122-35.dsl.klmzmi.ameritech.net]  has joined #Ubuntu
+[06:34] <pushpop> Is there a Wiki on how to install in vmware on a seperate partition from windows, then  boot nativly into ubuntu?
+[06:34] <geoffTheFish> j_j: i had to stop all unnecessry services, create a custom vmx as default didnt work
+[06:35] <geoffTheFish> j_j: then it worked
+[06:35] <|thunder> wassup all
+[06:35] <bruenig> pushpop, it can't be done
+[06:35] <mercykiller> mitrovarr, openbox is the absolute lightest on RAM in my experience, but fluxbox is a tad snappier
+[06:35] <el_isma> pushpop: What do you want to do? Please explain
+=== xeh [n=xeh@S01060014bf9e2412.ss.shawcable.net]  has joined #ubuntu
+[06:35] <mitrovarr> has anyone tried getting ubuntu going on anything <64mb?  This is 64mb, and it runs, lots of swapping though.
+[06:35] <j_j> actually
+[06:35] <geoffTheFish> j_j: now i can use my winmodem from u
+[06:35] <Tonren> cafuego: Did you look at my second pastebin? the bitrate change didn't work
+[06:35] <j_j> im still trying to
+[06:35] <Samineru> can someone walk me through installing xanim?
+[06:35] <j_j> dodownload the ubuntu Virtual appliances but problem is i cant open it using
+[06:35] <bruenig> el_isma, he wants to use vmware in windows to create an ubuntu virtual machine, store that virtual machine on another partition and then boot into that partition
+[06:35] <j_j> azureus @geoff
+[06:35] <geoffTheFish> j_j: gotta go, good luck it is possible...
+[06:35] <bruenig> which can't be done I am almost possible
+=== Kagar [n=lordkaga@088.96-30-64.ftth.swbr.surewest.net]  has joined #ubuntu
+[06:36] <bruenig> positive*
+=== Kbird [n=keith@ip68-102-231-56.ks.ok.cox.net]  has left #ubuntu ["Ex-Chat"]
+=== Heartsbane [n=ne1469@166.70.210.102]  has joined #ubuntu
+[06:36] <el_isma> mitrovarr: I don't think you can get X in less than 32 Mb (at least, not a recent one)
+=== earthsound [n=another1@71-8-14-86.dhcp.leds.al.charter.com]  has joined #ubuntu
+=== verbose_ [i=nobody@24-155-26-181.dyn.grandenetworks.net]  has joined #ubuntu
+[06:36] <Tonren> cafuego: sudo iwconfig eth1 rate 11M worked (i change m to M)
+=== Kagar [n=lordkaga@088.96-30-64.ftth.swbr.surewest.net]  has left #ubuntu []
+[06:36] <pushpop> el_isma: I am installing via vmware on a new partition I created.  I need to know how to partition the drive in vmware also I want to be able to dual boot in with windows so I want to boot into ubuntu nativly
+[06:36] <mitrovarr> el_isma:  I wonder if you could do it in some wierd distro like DSL
+[06:37] <el_isma> bruenig: Vmware does have a weird option about enabling "native" access to a partition. It says it's risky...
+[06:37] <el_isma> mitrovarr: DSL would probably run in 32Mb
+[06:37] <Tonren> cafuego: The wireless signal is definitely strong enough; a laptop in the other room is picking it up.  I'm still not picking it up here, though
+=== tang^ [n=tang@S01060011d849d10f.cg.shawcable.net]  has joined #ubuntu
+[06:37] <earthsound> what is the partitioning program that Ubuntu uses on the alternate install CD?
+[06:38] <mitrovarr> el_isma:  I'll have to try that someday if I ever find a 32mb computer.  it's fun to try to get modern software to run on old machines... I once saw a 486 running quake2 in 16 colors
+[06:38] <|thunder> who can help me compile and install native wireless drivers. I have them. It's a makefile and a bunch of .h files. i have build-ess install from the dapper cd.
+=== ws006 [n=ws006@202.95.134.234]  has joined #ubuntu
+[06:38] <bruenig> I have used vmware to install windows and I went into the directory where windows was and it was just a bunch of foreign files with indecipherable data, nothing there that resembled a windows filesystem, so I assumed. It seems unlikely
+[06:38] <el_isma> pushpop: You could try adding the drive as "native" (I think you need vmware server for that). BUT! Beware, it says it's risky!
+[06:38] <bruenig> pushpop. why not just install ubuntu on the other partition and dual boot after that?
+[06:38] <cafuego> Tonren: Ok, check back on the wiki page and run through the debug options.
+=== tang^ [n=tang@S01060011d849d10f.cg.shawcable.net]  has left #ubuntu []
+[06:38] <mitrovarr> oh yeah, one last question:   Anyone know a web browser that's a decent combination of fast, light, and good?  Firefox and Opera are too heavy, dillo sucks too much.
+[06:38] <pushpop> Because It hangs on Mouting Disk on install
+[06:38] <pushpop> when I try to install nativly
+[06:39] <bruenig> pushpop, get the alternate cd
+[06:39] <el_isma> mitrovarr: just checked, minimum ram for DSL is 16Mb
+[06:39] <Tonren> cafuego: Would it not show up if I have DHCP disabled?
+=== Heartsbane [n=ne1469@166.70.210.102]  has joined #ubuntu
+=== dcnstrct [n=dcnstrct@c-24-30-24-53.hsd1.ga.comcast.net]  has joined #ubuntu
+[06:39] <el_isma> mitrovarr: lynx? :S
+[06:39] <mitrovarr> text?  ugh
+[06:39] <pushpop> bruenig: I did I have tried 2 diffrent cds
+=== mahiti [n=mahiti@203.145.183.210]  has joined #ubuntu
+[06:40] <cafuego> Tonren: No, it win't auto-associate, you need to tel it about tour essid (and wep key) before dhcp will even be attempted.
+[06:40] <Madpilot> mitrovarr, try Epiphany, it seems a bit faster than Firefox (Opera seems faster than FF too, for me...)_
+[06:40] <mall0c> can anyone tell me how to disable screen locking when i close the lid on my laptop?
+[06:40] <bruenig> pushpop, how long did you give it before you decided it had hung
+[06:40] <el_isma> mitrovarr: links? I know there was one that could do some pictures (under X or framebuffer)
+[06:40] <dcnstrct> could someone help me figure out what is wrong with my system ? Whenever I do an apt-cache search <anything> I get a segfault.  Whenever I load up a huge app like eclipse I get a seg fault... I thought this may be bad ram, so I REPLACED ALL MY RAM, but alas it still happens.  Any ideas ?
+[06:40] <mitrovarr> alright
+=== FloK [n=flo@dslb-084-056-001-166.pools.arcor-ip.net]  has joined #ubuntu
+[06:40] <cafuego> dcnstrct: cpu overheating?
+[06:40] <pushpop> bruenig: atleast 20 minutes
+[06:40] <Tonren> cafuego: But I have "broadcast essid" enabled and it's not showing up in iwlist
+[06:40] <mitrovarr> well, thanks for all the help guys!  Going to go try fluxbox and see if I can find a way to open up some ram
+[06:41] <doughboy> Is there any way that a laptop connected through a wireless router can access printer from desktop that is hardwired to the wireless router?
+[06:41] <cafuego> Tonren: Hmm... does 'dmesg' say anythingbout the wireless?
+=== ws006 is now known as I-W-A-N
+[06:41] <pushpop> bruenig: ill give you exact error 1 sec
+[06:41] <dcnstrct> cafeugo, doesn't that normally produce a system crash though ? why would it only cause certin apps to fail ?
+=== Flyoc_ is now known as Flyoc
+[06:41] <|thunder> malloc, ststem, prefs, power mangment
+[06:41] <I-W-A-N> HAI
+[06:41] <Tonren> cafuego: No.  Just the dreadful sense_key: 0x02 error I've had since I first installed Ubuntu 9 months gao
+[06:41] <bruenig> pushpop, you have tried the alternate cd? that is the one that is all text. No live cd boot up.
+[06:41] <pushpop> bruenig: O i havent, where could I dl that from
+[06:41] <cafuego> dcnstrct: SOmetimers, it's a bit odd in that respect.
+=== dispatcher [n=James@adsl-70-240-87-248.dsl.hstntx.swbell.net]  has joined #ubuntu
+[06:42] <cafuego> Tonren: Hmmm. I'd say try a reboot.
+[06:42] <Tonren> cafuego: Sure enough
+[06:42] <dcnstrct> well that definatly could be it... I leave this thing on all the time
+[06:42] <Tonren> cafuego: BTW, you wouldn't happen to know WTF this means, would you?: http://paste.ubuntu-nl.org/20250
+[06:42] <dcnstrct> I'll try giving it some shuteye
+[06:42] <pushpop> bruenig: nm dumb question.. ok ill try that
+[06:42] <Tonren> cafuego: It happens every two seconds.  If I exit X and go into single-user mode, it just keeps happening
+=== dcnstrct [n=dcnstrct@c-24-30-24-53.hsd1.ga.comcast.net]  has left #ubuntu ["WeeChat]
+[06:42] <Tonren> cafuego: It happens during boot-up, during shutdown.  It's just always happening
+[06:43] <bruenig> pushpop, it is pretty easy to use make sure you allow it to install grub to the master boot record as that is necessary for the dual boot
+[06:43] <Tonren> cafuego: I don't know what hdc is.  I only have one hard drive, and I'm pretty sure it's not my cdrom.
+[06:43] <cafuego> Tonren: Yes, it's the cdrom.
+[06:43] <Tonren> cafuego: What could be wrong with it?  What is a sense-key?
+[06:43] <Tonren> cafuego: Wait, Google may be my savior
+[06:44] <cafuego> :-)
+=== ral_hn [n=raul@205.211.251.11]  has left #ubuntu []
+=== {K}Lubby [i=ss661779@pool-71-112-59-147.sttlwa.dsl-w.verizon.net]  has joined #ubuntu
+[06:44] <Tonren> cafuego: Oooh, it's because of this stupid lightscribe sticker.  I don't even know what that does
+[06:44] <cafuego> You could always unload the cdrom driver.
+[06:44] <{K}Lubby> arrrrrrrg i STILL can't figure out what the problem is
+=== Pyromaniak cries cause his game doesn't run under wine now
+[06:45] <Tonren> cafuego: But... then I wouldn't be able to use my cd-rom?
+[06:45] <Tonren> Pyromaniak: What game?
+[06:45] <{K}Lubby> is it possible to have a lan between a windows xp computer and a ubuntu computer using a crossover ethernet cable?
+[06:45] <Pyromaniak> Tonren: Continuum
+[06:45] <pushpop> bruenig: ok thank you.
+[06:45] <yossman> lubby yea
+=== bruenig [n=bruenig@adsl-69-154-95-44.dsl.rcsntx.swbell.net]  has left #ubuntu []
+[06:46] <{K}Lubby> yossman, how?
+[06:46] <yossman> what's your definition of 'LAN'
+[06:46] <yossman> what are you trying to do
+[06:46] <Tonren> Pyromaniak: NOOOOOOOOO!! Continuum doesn't work with Wine?!!
+=== Tonren sobs!
+[06:46] <azureal> lol...i just went through a _lot_ of debfoster prompts
+[06:46] <cafuego> Tonren: Correct, until you loaded the driver again.
+[06:46] <{K}Lubby> hook the two computers together, so that i can share the dsl internet connection on my xp with my ubuntu computer
+[06:46] <Tonren> cafuego: Wouldn't it be a hassle to manually load and unload the driver every time I need to use the CD?  I mean, sure, I could write a script, but it just seems so... duct tape
+[06:46] <I-W-A-N> HAI
+[06:46] <{K}Lubby> basically, so that they can both be hooked into the internet
+[06:47] <Tonren> cafuego: Oop.  What do you think of this solution?  http://www.ubuntuforums.org/showthread.php?p=942785  Seems like it might work.  I'll TIAS.
+[06:47] <azureal> now it's removing enough packages to clear up 513mb.. idk if this irc chat program will eve work whene i'm done =P
+[06:47] <cafuego> Tonren: It is exactly that.
+[06:47] <yossman> lubby, you don't have a router?
+[06:47] <{K}Lubby> and i got it to work with them both on xp, but i want one to have ubuntu
+[06:47] <{K}Lubby> and yeah yossman i do, but thats for my home network that has dsl
+[06:47] <Pyromaniak> Tonren: I was playing it yesturday, and now I can't get it to work
+[06:47] <{K}Lubby> and im trying to set up a seperate one
+[06:47] <Tonren> Pyromaniak: Weird. It stopped working in Wine?  Did you upgrade anything?
+[06:47] <azureal> *gulps nervously*
+[06:47] <yossman> lubby if you have the DSL working already in windows you can tell windows to share the connect
+[06:48] <{K}Lubby> how?
+[06:48] <Pyromaniak> Tonren: yeah... can you accept /msg? I'll paste the story
+[06:48] <|thunder> lspci lists the name of my pcmcia linksys wireless card, does that indicate that there isa working driver? the card is not listed in sys/admin/networking
+[06:48] <I-W-A-N> HAI
+[06:48] <{K}Lubby> err wait i think i did that already
+=== Shadowline [n=shadowli@ppp-69-214-9-117.dsl.klmzmi.ameritech.net]  has joined #ubuntu
+[06:48] <{K}Lubby> it worked when both computers used xp
+[06:48] <Tonren> Pyromaniak: Go ahead
+[06:48] <{K}Lubby> but now that i put one (the one that isnt on the dsl network) to use ubuntu
+=== sulimo_ [n=recunius@ool-43509597.dyn.optonline.net]  has joined #ubuntu
+[06:48] <cafuego> |thunder: No, it just means the pci id is known.
+=== dnB [n=dnb@68-190-230-4.dhcp.wsco.ca.charter.com]  has joined #ubuntu
+[06:49] <{K}Lubby> and i can't get the xp and ubuntu to connect because when i try using a static ip on ubuntu it gives me an error
+=== pablo928_ [n=paul@yuma-cuda1-g2-70-36-69-223.losaca.adelphia.net]  has joined #ubuntu
+[06:49] <|thunder> cafuego, it lists the manufacturer and chipset properly.
+[06:49] <{K}Lubby> and btw, i haven't actually isntalled ubuntu yet, just running it off the disc i burned from the iso off ubuntu.com
+[06:49] <{K}Lubby> does that make a difference... rofl?
+=== shawn_grimes [n=shawn@12-218-98-134.client.mchsi.com]  has joined #ubuntu
+[06:49] <cafuego> |thunder: Yes, that's just a matter of add it to the 'pci.ids' file.
+[06:50] <cafuego> |thunder: It bears no relation to it having a driver.
+[06:50] <azureal> this is so trippy... half my applications in fluxbox don't work now =)
+[06:50] <|thunder> ok, thanks
+[06:50] <azureal> rather, clicking on them from the menu ;)
+[06:50] <shawn_grimes> Hello, very new to Ubuntu, could someone tell me how to swap out a xorg.conf file? It say I don't have permission to write to that folder?
+[06:50] <el_isma> shawn_grimes use sudo
+[06:51] <el_isma> shawn_grimes "sudo command", like "sudo mv xorg.conf xorg.old"
+=== Samineru [n=Samineru@c-69-248-142-177.hsd1.nj.comcast.net]  has joined #ubuntu
+[06:51] <azureal> !sudo
+[06:51] <ubotu> sudo is a command to run programs with superuser privileges ("root"). Look at https://help.ubuntu.com/community/RootSudo for all information.
+[06:51] <el_isma> shawn_grimes sudo gives you root powers
+[06:51] <shawn_grimes> el_isma: I'm sorry, but I'm a native Windows user and no good with terminal commands :(
+[06:51] <{K}Lubby> yossman, when i hit the okay button after putting in the static ip settings it says: could not enable the interface eth0. check that the settings are correct for this network and that the computer is correctly connected to it
+[06:52] <el_isma> shawn_grimes it isn't that hard :)
+[06:52] <Dr_Willis> 'use the shell luke! Give in to the Bash!'
+[06:52] <el_isma> hahaha
+=== GoDawgs [n=kelley@c-24-99-233-73.hsd1.ga.comcast.net]  has joined #ubuntu
+[06:52] <Tonren> shawn: Don't be intimidated by the console; it's easy to tame once you understand a few core concepts.  The concept of "permissions" exists in Windows as well, just less obviously
+[06:52] <azureal> shell is where it's at, lol
+[06:52] <GoDawgs> cafuego:
+[06:52] <{K}Lubby> anyone know how to fix it?
+[06:52] <el_isma> shawn: never used DOS?
+[06:52] <shawn_grimes> not at all
+[06:52] <cafuego> GoDawgs:
+[06:52] <GoDawgs> followed your directions... and for the first time I was able to activate the eth1.... it shows up... but for some reason I still can't get out
+[06:52] <azureal> el_isma: don't bring up that garbage ;)
+[06:53] <Dr_Willis> shawn,  check out   http://www.tldp.org/guides.html          - lots of guides to help ya there. (bookmark that site)
+[06:53] <el_isma> azureal: well... it's "console"y :P
+[06:53] <shawn_grimes> I have a MacBook and I'm just trying to swap out that file to use my correct resolution with Parallels desktop
+[06:53] <GoDawgs> cafuego: I was soooo excited... because this is my only obstacle to using Ubuntu full time.
+[06:53] <{K}Lubby> a possible problem i was thinking of is that im running ubuntu off the cd (the demo version type thingy) and haven't actually installed it yet
+[06:53] <eternalswd> gnome terminal is still using bash even though I ran chsh /usr/bin/zsh  do I need to relogin for this to change?
+=== etzerd [n=etzerd@ool-4579321c.dyn.optonline.net]  has joined #ubuntu
+=== cory [n=cory@24-179-182-38.dhcp.dlth.mn.charter.com]  has joined #ubuntu
+[06:53] <cafuego> GoDawgs: yeah, there's some tweaking you may need to do for 4318 cards; I just dunno what, as I don't have one :-(
+[06:53] <azureal> el_isma: it's nothing. it's.... bleh
+[06:53] <etzerd> hello all
+=== Therion [n=ccx@pdpc/supporter/active/Therion]  has joined #ubuntu
+=== flipfone [n=flipfone@seymour-cuda1-24-49-173-22.albyny.adelphia.net]  has joined #ubuntu
+[06:54] <seshomaru> can anyone tell me how to fix grub?
+[06:54] <azureal> el_isma: and yet... i find myself using it for random things like "del *.png"
+[06:54] <etzerd> can anyone tell me how to install KDE in ubuntu6.0?
+[06:54] <{K}Lubby> ...anyone know why it won't let me set static ip stuff?
+[06:54] <cafuego> etzerd: install 'kubuntu-desktop'.
+[06:54] <Dr_Willis> eternalswd,   try 'xterm -ls'  it may only change for your login shell.
+[06:54] <el_isma> azureal: It's been so long since I used that... I guess nowadays I'll get quite scared :P
+[06:54] <GoDawgs> cafuego: well, I understand that... kinda bummed because my heart raced when I saw it show up in the dropdown box... but then I was let straight down when I could get google to come up.
+[06:54] <etzerd> thanks cafuego
+=== caravena [n=caravena@165-45-112.adsl.terra.cl]  has joined #ubuntu
+[06:54] <el_isma> azureal: but I do use the command prompt in windows... every now and then
+[06:54] <azureal> today i've had enough of a fright, so now i'm not afraid of any consoles
+[06:54] <GoDawgs> cafuego: at least you were able to get me to the point where I can see it in the network dropdown
+[06:54] <cafuego> GoDawgs: Check https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx/Dapper (it list some possible fixes, added by people who have a 4318)
+[06:55] <GoDawgs> ok... let me give that a shot now...
+=== azureal is scared of debfoster ....
+=== azureal shivers
+[06:55] <etzerd> one more thing cafuego
+[06:55] <flipfone> who was just helping me a few minutes ago?
+[06:55] <TheGame> anybody have any success with ntfs-3g
+=== cafuego always hits 'p' when debfoster asks about libc6
+[06:55] <harisund> What is debfoster?
+[06:55] <cafuego> etzerd: yah?
+[06:55] <etzerd> where can i go to install the driver for dvd
+[06:55] <cafuego> harisund: A handy decrufting tool.
+[06:55] <el_isma> yeah, what's debfoster?
+[06:56] <eternalswd> Dr_Willis, that also used bash
+[06:56] <Pizon> debfoster looks like a good way to get yaself in trouble
+[06:56] <TheGame> has any1 here installed ntfs-3g
+[06:56] <azureal> shawn_grimes, excellent linux tutorial series called "Linux Survival"
+[06:56] <cafuego> etzerd: As in: to watch video?
+[06:56] <Dr_Willis> eternalswd,  yea.. noticing that also. :P
+[06:56] <Dr_Willis> eternalswd,  not sure what the deal is. heh.. make a new profile that runs the shell ya want. I perfer the 'fish' shell myself.
+[06:56] <el_isma> I get it... for finding "Orphan" debs.... :)
+[06:56] <etzerd> I know they have a site where you can go just copy and past I forgert the URL address
+[06:56] <cafuego> etzerd: Ah, easyubuntu.
+=== ubuntu [n=ubuntu@c-71-236-249-186.hsd1.wa.comcast.net]  has joined #ubuntu
+=== UnknownEvil [n=UnknownE@pool-71-109-1-174.lsanca.dsl-w.verizon.net]  has joined #ubuntu
+[06:57] <etzerd> thanks
+[06:57] <UnknownEvil> hello?
+[06:57] <cafuego> etzerd: http://easyubuntu.freecontrib.org/
+[06:57] <Dr_Willis>  chsh changes the user login shell. This determines the name of the users initial login command.
+[06:57] <{K}Lubby> is ubuntu the best version of linux for just using stuff like browsing the internet? (it has to be able to connect with a crossover ethernet cable to my windows xp computer so i have internet access on it)
+=== azureal plugs excellent linux tutorial for beginners -- www.linuxsurvival.com
+[06:57] <cafuego> {K}Lubby: Any version of Linux will be able to do that.
+=== horrork [n=z@ppp115-5.static.internode.on.net]  has joined #ubuntu
+[06:58] <|thunder> is there a tool to easily configure ndiswrapper? for choosing which AP to connect to ?
+[06:58] <{K}Lubby> okay
+[06:58] <{K}Lubby> so is there a valid reason why it's not working?
+[06:58] <Frankenstein> how can i flush the local dns cache in ubuntu?
+[06:58] <Dr_Willis> eternalswd,  try it at the console.. it used the new shell there for me. :P
+[06:58] <cafuego> |thunder: If you're in Gnome, try 'network-manager'
+[06:58] <cafuego> {K}Lubby: Routing not working, windows not sharing network, no dns server... those are the usuals.
+[06:58] <ubuntu> Hey everyone, I'm having troubles with my iMac G3. I am trying to install dapper, and after I do the known change to xorg.conf*changing the horiszontal and vertical settings* and try to restart gdm...it fails. Does anyone have any idea what I am doing wrong? That and for some reason my computer screen is cutting off 2 characters off of the left side.
+[06:58] <el_isma> I want to set up a bridge between my two eth. cards.... I think they hate each other and don't want to talk anymore :( They cut me off the internet everytime I try to bridge them... "Route" hangs when they're bridged. Help :'(
+[06:58] <UnknownEvil> Can someone tell me how to set up my wireless network card? I coulnd't conncect to the internet when I booted up my PC with the Live cd.
+[06:59] <|thunder> cafuego, thanks
+[06:59] <Samineru> the instructions for compiling xanim are a bit confusing, could someone help me?
+[06:59] <eternalswd> Dr_Willis, I figured it out. I'm running zsh as a custom command rather than my shell
+[06:59] <{K}Lubby> how do i get to /etc/hosts?
+[06:59] <Dr_Willis> eternalswd,  heh.
+[06:59] <Frankenstein> {K}Lubby, sudo nano /etc/hosts
+[06:59] <GoDawgs> cafuego: oh my god dude....
+[07:00] <GoDawgs> IT'S FRICKIN' WORKING!!!!
+[07:00] <{K}Lubby> thanks
+[07:00] <GoDawgs> I'm so happy I can't see straight.
+[07:00] <{K}Lubby> whats working godawgs?
+[07:00] <GoDawgs> My god this has been a thorn in my side for a year.
+[07:00] <azureal> a year!
+[07:00] <GoDawgs> {K}Lubby:  My broadcom 4318...
+=== azureal whistles
+[07:00] <Samineru> !xanim
+[07:00] <ubotu> I know nothing about xanim - try searching http://bots.ubuntulinux.nl/factoids.cgi?db=ubuntu
+[07:00] <{K}Lubby> cool
+[07:00] <GoDawgs> azureal: yep... cafuego is a god!!!
+[07:00] <GoDawgs> :)
+[07:01] <azureal> GoDawgs: that's a bad wireless card, right? lol
+[07:01] <GoDawgs> cafuego: dude, you rock!!!
+[07:01] <cafuego> GoDawgs: *whee!*
+[07:01] <{K}Lubby> and in /etc/hosts, is localhost the ip of the gateway/router type thing, or the ip of that computer that /etc/hosts is on?
+[07:01] <eternalswd> Dr_Willis under Edit -> Current Profile  in the tab Title and Command  I checked "Run a custom command instead of my shell"  and typed in zsh for the "Custom command"
+[07:01] <GoDawgs> azureal: misbehaving yes!!!
+[07:01] <Frankenstein> how can i flush the local dns cache in ubuntu?
+[07:01] <GoDawgs> azureal: sadly, I bought this computer when I knew nothing about linux...
+[07:01] <Dr_Willis> eternalswd,  thats one way. :P i set up that for mc, and screen, and other tools as well.
+[07:02] <cafuego> GoDawgs: If there is anything you needed to do that wasn't mentioned on the wiki, please add it.
+[07:02] <{K}Lubby> anyone know what localhost refers to?
+[07:02] <Frankenstein> {K}Lubby, your computer
+[07:02] <GoDawgs> cafuego: you know, the very last post in the wiki is what I needed...
+[07:02] <azureal> GoDawgs: you could always buy a nice wireless card =)
+[07:02] <azureal> *cough* orinoco
+[07:02] <GoDawgs> azureal: I thought I had... I bought an external...
+[07:02] <Tonren> {K}Lubby: It refers to "itself" .  localhost is a computer's way of saying "me" or "myself"
+[07:02] <{K}Lubby> okay thought so
+[07:02] <pushpop> THe swap partition is that Primary or logical?
+[07:02] <cafuego> azureal: orinocos (silver) are 16bit yaargh
+[07:02] <Frankenstein> so no one knows how to flush the dns?!
+[07:03] <{K}Lubby> so i want that ip address to be the ip address i want that computer to be, right?
+=== cafuego has  apile of them
+[07:03] <Tonren> Frankenstein: Ubuntu keeps a local DNS cache...?  I thought you had to specifically set that up
+[07:03] <GoDawgs> azureal: my god this is beautiful...
+=== azureal laughs
+[07:03] <Tonren> {K}Lubby: Actually, localhost shoulda lways be 127.0.0.1
+[07:03] <azureal> what was the solution?
+[07:03] <{K}Lubby> oh
+[07:03] <GoDawgs> never thought i would be so freakin' stoked by a wlan :)
+[07:03] <{K}Lubby> why tonren?
+[07:03] <pushpop> Question, The swap partition is the Primary or Logical?
+[07:03] <ubuntu> Anyone? Any help? Right now I am talking on this board from console. :-/ and well I want to get my computer fully working asap :(
+=== xquizit [n=xquizit@d64-180-60-102.bchsia.telus.net]  has joined #ubuntu
+[07:03] <Tonren> {K}Lubby: Whenever a computer accesses 127.0.0.1, it knows it should be looking for itself.  127.0.0.1 is the default IP for localhost.
+[07:03] <GoDawgs> azureal: are you asking me?
+[07:03] <Frankenstein> ubuntu, you would have to ask a question
+[07:03] <ubuntu> channel*
+[07:03] <{K}Lubby> cause i want it to be 192.168.0.something-other-than-1 so it can connect to my xp
+[07:04] <ubuntu> I did...
+[07:04] <Frankenstein> ubuntu, ask it again
+[07:04] <azureal> GoDawgs: yea, the original solution, the original 'directions'
+[07:04] <ubuntu> Ok
+[07:04] <Tonren> {K}Lubby: Ah.  Well, that IP address will be associated with your network card, rather than localhost.
+[07:04] <xquizit> hey, I got a simple question, I downloaded the Murrine Gtk2 Cairo Engine  from gnome-look and I have no clue how to use it, I downloaded the deb package and it installed fine, but how do I use it??
+=== october [i=october@vector.xyxx.com]  has joined #ubuntu
+[07:04] <Tonren> {K}Lubby: Are both computers connected to the same router?
+[07:04] <azureal> GoDawgs: did it involve editing /etc/network/interfaces?
+[07:04] <october> what is the best way to check a drive in Linux to see if it's OK?
+[07:04] <GoDawgs> azureal: sure...https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx/Dapper
+=== MystaMax [n=mystamax@c-24-98-118-36.hsd1.ga.comcast.net]  has joined #ubuntu
+[07:05] <GoDawgs> azureal: no not at all
+=== xquizit is now known as mystic
+[07:05] <{K}Lubby> tonren, im using a crossover cable to connect them together.... same thing basically as having them connected together through a hub
+[07:05] <GoDawgs> i just needed the firmware... then a few more steps and then to use the sudo ifconfig eth1 down  sudo ifconfig eth1 up commands
+[07:05] <ubuntu> I am on an iMac G3, and I switched the horizontal and vertical settings in xorg.conf as I had done previously when I installed ubuntu. But this time when I tried restarting gdm it failed to start. Can anyone help me fix my computer to actually work?
+[07:05] <GoDawgs> and bingo i am surfin' the net
+[07:05] <azureal> GoDawgs, oh yea, i saw that link, but i was wondering what directions he gave you before that ;)
+[07:05] <Tonren> {K}Lubby: ahh.  I haven't worked with cross-over cables before.  i'm not entirely sure how that woul dwork
+=== ailean [n=ailean@82-40-227-23.cable.ubr07.uddi.blueyonder.co.uk]  has joined #ubuntu
+[07:05] <october> GoDawgs heh, I'm in Macon
+=== GoDawgs tells cafuego he has no idea what he's done for me...
+[07:06] <GoDawgs> october: i just moved here from southern california
+[07:06] <|thunder> ive scanned the foums and cannot for the life of me figure out how to build or instsall this native wireless driver.
+[07:06] <{K}Lubby> tonren its the exact same as using a hub or soemthing similar
+[07:06] <mystic> so...nobody know how to confgure gtk-engines?
+[07:06] <GoDawgs> october: that's very cool :)
+[07:06] <october> GoDawgs nice... I used to live in the bay area, so there we go ;)
+=== mikeg [n=mlg@58.71.34.137]  has joined #ubuntu
+[07:06] <Tonren> {K}Lubby: Well, a cross-over cable usually doesn't know how to run a DHCP server and assign IP addresses to the computers connected to it.  :P
+[07:06] <GoDawgs> october: I grew up here in Stone Mountain but have been away for 12 years...
+[07:06] <|thunder> What do I do the a MAKEFILE and a bunch  of .h files ?
+[07:06] <october> anyhoo
+[07:06] <azureal> thing is, i was struggling very badly getting my intel wireless card to work under gentoo
+[07:06] <ubuntu> Oh and sorry my name is ubuntu, I dont know how to change it
+[07:06] <GoDawgs> october: right on!  My fiancee is from Santa Cruz.
+[07:06] <azureal> blah, bad sentence structure
+[07:06] <GoDawgs> azureal: Man, I sooooo understand.
+[07:06] <el_isma> ubuntu: i think it's /name yourname
+[07:06] <Tonren> |thunder: There's a special command called "make" which uses a Makefile as a set of rules to take the .h files and build them into an actual program
+[07:06] <|thunder> ubuntu use /nick name
+=== TheGame [n=mandeep@adsl-072-148-023-212.sip.bhm.bellsouth.net]  has joined #ubuntu
+[07:07] <october> GoDawgs ;)  catch me as "Trae"  (my name) on #ubuntu-offtopic sometime
+=== dystopianray [n=dystopia@210.0.108.13.static.nexnet.net.au]  has joined #ubuntu
+=== ubuntu is now known as tanlaan
+=== Nameeater [i=dean@priss.segfault.nl]  has joined #ubuntu
+[07:07] <GoDawgs> october: will do :)
+[07:07] <mikeg> Ubugtu:  wat to do if my sata drives are not detected
+[07:07] <october> not now though... trying to fix this damned laptop
+[07:07] <tanlaan> there we go :D
+[07:07] <|thunder> Tonren, ive tried that. make and make MAKEFILE
+[07:07] <|thunder> just errors
+[07:07] <azureal> GoDawgs: you do? did you have to make crazy kernel changes and recompile?  ;)
+[07:07] <mikeg> tanlaan:   wat to do if my sata drives are not detected
+[07:07] <TheGame> is there a way to change shift+ctrl+v in terminal to just ctrl+v
+=== `cenarius [n=Zzz@203.167.88.3]  has joined #ubuntu
+[07:07] <GoDawgs> october: I'm Kelley.  Nice to meet you.
+[07:07] <Tonren> |thunder: you'll have a hell of a time building them without knowing which packages you need installed to do it, though
+[07:07] <GoDawgs> azureal: no, i'm not that ballzy....
+[07:07] <Tonren> |thunder: Is there a list of "dependencies" on the site you downloaded them from?
+[07:07] <october> GoDawgs backatcha ;)
+[07:07] <GoDawgs> *smile*
+[07:07] <tanlaan> mikeg: what?
+=== Tixer [i=Tixer@toronto-HSE-ppp4245053.sympatico.ca]  has joined #ubuntu
+[07:07] <TheGame> any1?
+[07:07] <azureal> i kept trying to get that card to work that i broke gentoo
+[07:08] <GoDawgs> brb... have to call my fiancee and share the good news :)
+[07:08] <Tonren> {K}Lubby: Are both of the computers connected to the internet...?
+[07:08] <{K}Lubby> tonren, can you tell me how to set up the ip address to 192.168.0.2, gateway ip to 192.168.0.1, subnet mask to 255.255.255.0, dns server to 192.168.0.1?
+=== azureal smiles... memories
+[07:08] <october> meh....  bbl
+[07:08] <Tixer> um, ubuntu doesn't work for me anymore
+[07:08] <Tixer> anyone wanna PM me?
+[07:08] <mikeg> tanlaan:  my SATA drives are not detected. whats lacking?
+[07:08] <|thunder> Tonren, its the only non-ndiswrwapper reference i can find. came in some sort of d-link linux distro. i dont know. but the readme's are useless in the tar.gz
+[07:08] <azureal> and now i might have done something suicidal
+[07:08] <Tixer> kstartupconfig = dead
+[07:08] <Madpilot> Tixer, you're better off to just ask your questions here
+[07:09] <tanlaan> mikeg: sorry I have no idea.
+[07:09] <Tonren> |thunder: Your wireles sis'nt broadcom, is it?
+[07:09] <Tixer> hang on, I'll copy the message...
+[07:09] <Tonren> {K}Lubby: I'm pretty sure you can do all that using "sudo ifconfig"
+[07:09] <azureal> yea, proceed Tixer
+=== dystopianray [n=dystopia@210.0.108.13.static.nexnet.net.au]  has left #ubuntu ["Kopete]
+[07:09] <{K}Lubby> tonren, the xp is connected to the internet through a different network that i'm not allowed to hook the ubuntu directly into, so im hooking the ubuntu up to the xp and having the xp share the internet connection with the ubuntu (i already got this to work when the ubuntu was using xp, but i want to have an ubuntu computer)
+[07:09] <mikeg> tanlaan: its okay
+[07:09] <Tonren> {K}Lubby: For example, "sudo ifconfig eth0 gateway 192.168.0.1"
+[07:09] <|thunder> Tonren, no, Chipset: Linksys, A Division of Cisco Systems [AirConn]  INPROCOMM IPN 2220 Wireless LAN Adapter (rev 01)
+=== ricperry-ubuntu- [n=develope@kng1-p188.flets.hi-ho.ne.jp]  has joined #ubuntu
+[07:09] <Tonren> {K}Lubby: Or "sudo ifconfig eth0 address 192.168.0.2"
+[07:09] <Tixer> booting VPC
+[07:09] <Tonren> {K}Lubby: that MIGHT not work though
+[07:10] <sethk> no
+[07:10] <sethk> it is
+[07:10] <Tonren> |thunder: ndiswrapper didn't work for you?
+=== wweasel [n=weasel@modemcable154.138-81-70.mc.videotron.ca]  has joined #ubuntu
+[07:10] <sethk> {K}Lubby, ifconfig eth0 192.168.0.2 netmask 255.255.255.0
+=== horrork [n=z@ppp115-5.static.internode.on.net]  has left #ubuntu []
+[07:10] <Tonren> sethk: It'll work without an argument?
+[07:10] <tanlaan> Is there anything I need to change in xorg.conf other than the horizontal and vertical settings? Maybe I need to get a different version of the Dapper install *This is the live cd instead of the install*
+[07:10] <sethk> yes
+[07:10] <|thunder> ive never use ndiswrapper.
+[07:10] <sethk> Tonren, yes, I tried it here before I pasted it
+[07:10] <Tonren> sethk: Cool.  What about default gateway, though?  do you need to do sudo ifconfig eth0 gateway?
+=== byen [n=byen@69.245.112.247]  has joined #ubuntu
+[07:10] <Tonren> sethk: cool
+=== zcat[1]  [n=zcat@60-234-226-80.bitstream.orcon.net.nz]  has joined #ubuntu
+=== sirex [n=sirex@office.idamas.net]  has joined #ubuntu
+[07:11] <Tonren> |thunder: Maybe you should try ndiswrapper.  It won't involve building anything from source, which is like pulling teeth
+[07:11] <mikeg> cycom: hi
+[07:11] <sethk> Tonren, sudo route add default gw ###.###.###.###
+[07:11] <Tonren> |thunder: Go to wiki.ubuntu.com and search for "Ndiswrapper"
+[07:11] <sethk> Tonren, where ###.###.###.### is the gateway's IP address
+[07:11] <{K}Lubby> hey tonren i got a problem
+[07:11] <Tonren> sethk: Sweet.
+[07:11] <Tonren> {K}Lubby: Aye?
+[07:11] <{K}Lubby> it says SIOcSIFFLAGS: resource temporarily unnavailable
+=== mitch_ [n=mitch_on@c-67-164-41-22.hsd1.or.comcast.net]  has joined #ubuntu
+[07:12] <{K}Lubby> after i did the sudo ifconfig eth0 192.168.0.2 netmask 255.255.255.0
+[07:12] <Tonren> {K}Lubby: on what command?
+[07:12] <Tonren> oh
+[07:12] <Tonren> {K}Lubby: hmm.. sethk any words of wisdom?
+[07:12] <sethk> {K}Lubby, do ifconfig (no arguments) and paste the results
+[07:12] <{K}Lubby> you mean do sudo ifconfig?
+[07:12] <sethk> {K}Lubby, eth0 is locked up for some reason
+=== bimberi [n=bimberi@ubuntu/member/pdpc.active.bimberi]  has joined #ubuntu
+[07:12] <sethk> {K}Lubby, no sudo is necessary because you are just printing the configuration, not changing it
+[07:13] <Tonren> {K}Lubby: use pastebin to paste the results and link us from here
+[07:13] <{K}Lubby> uhhh theres a bunch of lines, give me a few to type them
+[07:13] <Tonren> !pastebin
+[07:13] <ubotu> pastebin is a service to post large texts so you don't flood the channel. The Ubuntu pastebin is at http://paste.ubuntu-nl.org (you can always find it in the channel topic, among other useful things)
+[07:13] <Tonren> {K}Lubby: just copy & paste them into pastebin and give us the link to the page.  :)
+[07:13] <sethk> {K}Lubby, do this:   ifconfig > some-file-name
+[07:13] <{K}Lubby> tonren, i can't do that if the ubuntu can't connect to the internet...
+[07:13] <Tonren> {K}Lubby: oh snap
+[07:13] <|thunder> Tonren, I am trying to install this card on a laptop for some ive crossed over to linux. she knows nothing. so I want it to be  easy. are you sure Network-Manager works with ndiswrapper ? i mean, once ndiswrapper is up and running does it function just like a native driver? As in, super easy config when swithcing APs and encryption.
+[07:13] <sethk> {K}Lubby, sure you can.  use a usb stick or whatever
+[07:13] <Tixer> kk, so I go to login, and I get the message after typing my password...
+[07:14] <{K}Lubby> oh yeah duh seth
+[07:14] <sethk> {K}Lubby, you must have something.
+[07:14] <Tonren> |thunder: I'm fairly certain it does.  I had ndiswrapper running a while ago, and it worked fine with the network manager GUI.
+[07:14] <sethk> {K}Lubby, if you reboot you will clear whatever has eth0 locked
+[07:14] <Tixer> could not start kstartupconfig. Check your install.
+[07:14] <{K}Lubby> mp3 player = flash drive > all
+=== `paul [i=proxy@203.167.88.121]  has joined #ubuntu
+=== BunnehWyld [n=Wyldfyre@cpe-70-120-191-2.houston.res.rr.com]  has joined #ubuntu
+[07:14] <{K}Lubby> seth, i tried rebooting once
+[07:14] <{K}Lubby> but i have an idea what has it locked *laughs at self*
+=== GoDawg1 [n=kelley@c-24-99-233-73.hsd1.ga.comcast.net]  has joined #ubuntu
+=== cbx33 [n=pete@ubuntu/member/cbx33]  has joined #ubuntu
+[07:14] <Tonren> {K}Lubby: what might have it locked?
+[07:14] <GoDawg1> sorry about that guys...
+[07:14] <|thunder> Tonren, thank you again.
+[07:14] <sethk> {K}Lubby, ok ...
+[07:14] <GoDawg1> I had to reboot...
+=== kintaro0e [n=kintaro0@203.177.212.164]  has joined #ubuntu
+[07:15] <GoDawg1> cafuego: could you send me that wiki link you sent me last?
+[07:15] <{K}Lubby> does the fact that im running ubuntu off a cd i burned from an iso file from linux.org make a difference? i mean running the live cd thingy instead of actually instlaling it
+=== fender [n=fender@mail.dropletsap.com]  has joined #ubuntu
+[07:15] <mikeg> Tonren: hi tonren.. can i ask u
+[07:15] <GoDawg1> I want to bookmark it so I can set up a few other people's computers using that method.
+=== Dr_Willis [n=willis@74.132.83.197]  has left #ubuntu ["Leaving"]
+[07:15] <sethk> {K}Lubby, for some things, yes.  but ifconfig should still work
+[07:15] <Tonren> |thunder: You're welcome.  Remember, you'll need to run the "modprobe" command once you've installed ndiswrapper, then the driver, and you'll need to run "ndiswrapper -l" in terminal to make sure it's been installed properly.
+[07:15] <{K}Lubby> so it *might* make a difference?
+[07:15] <Tonren> mikeg: sup?
+[07:15] <sethk> {K}Lubby, yes, it's possible
+[07:15] <Tonren> {K}Lubby: it might.
+[07:15] <mikeg> Tonren:  id like to ask, what to do  if my ubuntu 6.06 does not detect my SATA drive
+[07:16] <sethk> {K}Lubby, I'm not saying it is likely, but it is possible
+[07:16] <{K}Lubby> cause it seems like since its off a cd it would, cause you obviously can't save stuff like gateway info onto a cd once it's already burned
+[07:16] <Tonren> {K}Lubby: Yea, you won't be able to edit system files like that.  But you should still be able to change network configurations
+[07:16] <Tonren> mikeg: Hmmmm...
+[07:16] <{K}Lubby> think i'll try doing that.... can i format/clean install ubuntu from hitting the little install button on the desktop?
+[07:16] <sethk> mikeg, do lspci to find out what SATA chipset you have, then you may need to do an insmod for the kernel module for that chipset
+[07:16] <mikeg> Tonren: its unknown
+[07:16] <GoDawg1> cafuego: i'm sorry that request for a link was directed at you.  I didn't attach your name to it.
+=== rredd4 [n=jmb@66-191-17-237.dhcp.rsbg.or.charter.com]  has joined #ubuntu
+[07:17] <cafuego> godawg: hehe, if you don't do that, my irc client doesn't beep at me :-)
+[07:17] <cafuego> GoDawgs:  https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx/Dapper
+[07:17] <{K}Lubby> your irc beeps at you when someone says your name?
+[07:17] <el_isma> sethk: You're back :). I tried making the bridge and using route. Route just hangs, doesn't show my default route (it displays all others, no mention of eth1 either). Any idea?
+[07:17] <Tonren> {K}Lubby: mine too
+[07:17] <byen> hey fellas.. I broke my terminal :( my terminal open in "/" rather than home... how can i fix this.. Please help.
+[07:17] <GoDawg1> cafuego: i figured that's why I sent you the message to follow up.  Thank you so much!  If I knew you better, I'd kiss ya'!
+[07:17] <Tixer> whats the command to create a folder in konsole?
+=== GoDawg1 is a girl... I can say that! :)
+[07:17] <sethk> el_isma, that's could be trying to use DNS to resolve an IP to a name.  let me check route and see if that's possible
+[07:17] <cafuego> eww, girls germs.
+[07:17] <Tonren> mikeg: try this command:  lspci | grep -i "sata"
+[07:17] <Tixer> mkdir?
+=== jrojas_ [n=jrojas@200.8.29.136]  has joined #ubuntu
+[07:18] <cafuego> not to mention my wife would kill me ;-)
+[07:18] <jrojas_>  de ayuda
+[07:18] <mikeg> Tonren: thanks i'll this this
+[07:18] <sethk> el_isma, yes.  use the -n flag with route, telling it to not try to resolve numbers to names
+[07:18] <Tixer> whats the command to create a folder in konsole?
+[07:18] <Tonren> mikeg: it won't fix anything - it'll just tell you what SATA driver you have
+[07:18] <{K}Lubby> weird, mine doesnt (i think)
+[07:18] <sethk> Tixer, mkdir
+[07:18] <Tonren> Tixer: mkdir
+[07:18] <{K}Lubby> someone say my name
+[07:18] <sethk> my name
+[07:18] <Tonren> {K}Lubby: testing
+[07:18] <Tixer> so like mkdir /home/...
+[07:18] <sethk> :)
+[07:18] <Tonren> {K}Lubby: which client are you using?
+[07:18] <Tixer> ... being a name?
+[07:18] <Tonren> Tixer: mkdir home will make a directory called home
+[07:19] <byen> hey fellas.. I broke my terminal :( my terminal open in "/" rather than home... how can i fix this.. Please help.
+[07:19] <{K}Lubby> nope didn't do it lol
+[07:19] <|thunder> Tonren, thanks again. im going to run through thiis tutorial. i might be back to pick your brain. ;p
+[07:19] <{K}Lubby> and im using swifswitch irc
+[07:19] <sethk> Tixer, yes, assuming /home/ exists.  You can use mkdirhier in case you are creating multiple levels at once.
+[07:19] <Tonren> Does anyone know how to make Xchat blink in the taskbar (to sent the "ALERT" signal) when it beeps?
+[07:19] <el_isma> sethk: so, I should set the bridge again, and do route -n, and see what I get?
+=== horrork [n=z@ppp115-5.static.internode.on.net]  has joined #ubuntu
+[07:19] <Tonren> |thunder: I'm headin out soon, but I"m sure you'll be able to find someone who can help!
+[07:19] <sethk> el_isma, yes
+[07:19] <Tixer> thats the problem
+[07:19] <el_isma> sethk: ok, brb
+[07:19] <Tixer> home doesn't exist
+[07:19] <sethk> el_isma, I may get called away again...
+[07:19] <|thunder> cool.
+[07:19] <Tixer> hence kstartup dying
+=== mainer [n=mainer@bb-205-209-66-76.gwi.net]  has left #ubuntu ["Get]
+[07:19] <mikeg> Tonren: no results
+[07:20] <azureal> byen: what do you mean by 'broke'
+[07:20] <azureal> byen: what did you do
+[07:20] <{K}Lubby> is usa west coast gmt -8 or -7 right now?
+[07:20] <sethk> {K}Lubby, 8
+[07:20] <{K}Lubby> k
+=== JoshHendo [n=josh@197.9.233.220.exetel.com.au]  has joined #ubuntu
+[07:20] <byen> azrael0, i do not know.. my terminal just starts into "/" and not in home..
+=== noaXess_kubuntu [n=noaXess_@cust.static.217-11-45-147.cybernet.ch]  has joined #ubuntu
+[07:21] <{K}Lubby> for ubuntu install, it says select a city in my timezone and country... what if i can't find one lol?
+=== lightstar [n=lightsta@218.111.187.178]  has joined #ubuntu
+[07:21] <Tonren> {K}Lubby: Ignore that crap, it messes up later anyway.
+[07:21] <sethk> byen, it starts in your home directory.  You can look at your home directory by dumping out /etc/passwd
+[07:21] <mitch_> {K}Lubby, 7, 8 after daylight savings
+[07:21] <{K}Lubby> k
+=== jrojas [n=jrojas@200.8.29.136]  has joined #ubuntu
+[07:21] <{K}Lubby> that would explain why los angeles which is in my timezone showed up as gmt -7
+=== fender_ [n=fender@mail.dropletsap.com]  has joined #ubuntu
+=== horrork [n=z@ppp115-5.static.internode.on.net]  has left #ubuntu []
+[07:22] <byen> sethk, you men delete /etc/passwd?
+=== el_isma [n=opera@r201-217-149-164.dialup.adsl.anteldata.net.uy]  has left #ubuntu []
+=== el_isma [n=opera@r201-217-149-164.dialup.adsl.anteldata.net.uy]  has joined #ubuntu
+=== ras_ [n=ras@82.153.20.160]  has joined #ubuntu
+[07:22] <sethk> byen, no, cat /etc/passwd
+[07:22] <Tixer> I have a huge problem
+[07:22] <sethk> byen, to see what your home directory is set to
+[07:22] <Tixer> I need a space bar
+[07:22] <|thunder> Tonren, what does this mean ? "Used ndiswrapper -i WLINPDS.INF on Debian Sarge for the Linksys driver. Worked perfectly."
+[07:22] <Tixer> how do I create a space
+[07:22] <sethk> byen, deleting /etc/passwd would be a very bad thing to do  :)
+[07:23] <byen> oh
+[07:23] <byen> ::O
+=== xelados [n=xelados@63.135.139.31]  has joined #ubuntu
+[07:23] <Tixer> ALT-32 doesn't work
+=== KyMc [n=admin@stjhnf0122w-142162050138.pppoe-dynamic.nl.aliant.net]  has joined #ubuntu
+[07:23] <sethk> Tixer, usually ' '   (either single quote space single quote, or double quote space double quote)
+=== KyMc [n=admin@stjhnf0122w-142162050138.pppoe-dynamic.nl.aliant.net]  has left #ubuntu ["Leaving"]
+[07:23] <sethk> Tixer, on a command line
+[07:23] <Tixer> I don't have a space bar
+[07:23] <Tixer> yeah
+[07:23] <xelados> Could someone help me figure out "xset"'s usage?
+[07:23] <sethk> Tixer, you don't have a space bar?  what do you have?
+[07:23] <mikeg> sethk: how to use insmod?
+[07:23] <Tixer> a broken one
+[07:23] <Tixer> I
+[07:24] <xelados> I manpage'd it and it referred me to X(7), but I can't view that manpage.
+[07:24] <el_isma> sethk: It didn't work :'(
+[07:24] <Tixer> 've been pressing ctrl v all this time
+=== spiral777 [n=spiral@ip70-186-103-228.ma.dl.cox.net]  has joined #ubuntu
+[07:24] <xelados> It says it's undocumented.
+[07:24] <Tonren> |thunder: That means ... wait... are you the person trying to use a null modem cable to connect two computers, or trying to get wireless working by building the driver from source, but i suggested to use ndiswrapper?
+=== pusakat [n=xenos@203.167.88.65]  has joined #ubuntu
+=== basanta [n=basanta@202.79.37.177]  has joined #ubuntu
+[07:24] <|thunder> wireless / ndiswrapper
+[07:24] <sethk> mikeg, if you know the module to insert, it is easy.  actually, use modprobe instead.   modprobe knows what directory to look in
+[07:24] <Tixer> how do I generate a space in terminal
+[07:24] <sethk> mikeg, do you know what module to insert?
+[07:24] <Tixer> without using the space bar
+=== ZaR|Oblivion [n=zarathu@adsl-68-94-20-80.dsl.rcsntx.swbell.net]  has joined #ubuntu
+[07:25] <el_isma> sethk: http://paste.ubuntu-nl.org/20254
+[07:25] <Tonren> |thunder: OK, what have you done so far?
+[07:25] <Tixer> anyone?
+[07:25] <{K}Lubby> okay, ubuntu is installing
+[07:25] <Tonren> Tixer: copy & paste one
+[07:25] <mikeg> sethk: im not sure what module to insert. i just want my SATA drive to be detected
+[07:25] <Tixer> is there some numerical code to type?
+[07:25] <Tonren> Tixer: here: " "
+[07:25] <Tonren> Tixer: Highlight the apce, Ctrl + C to copy, enter terminal, Ctrl + Shift + V to paste
+[07:25] <Tixer> I can't copy it from windows to ubuntu
+[07:25] <CheetahMk2> If I have to recompile the kernel, do I need the full source, or do I just need the headers?
+[07:25] <Tonren> Tixer: eep
+[07:25] <azureal> actually, i'm not sure where you can change the directory you are presented with when you start bash =/
+[07:25] <byen> sethk, can you see this and tell me if this is ok? http://paste.ubuntu-nl.org/20255
+[07:25] <Tixer> ubuntu = virtual
+[07:25] <sethk> el_isma, the default route destination is br0 instead of eth0.  try deleting that route and adding the original route
+=== GoDawg1 [n=kelley@c-24-99-233-73.hsd1.ga.comcast.net]  has left #ubuntu []
+[07:26] <sethk> byen, looking
+[07:26] <byen> ty sethk :D
+[07:26] <el_isma> sethk: ok. Should I have br0 with dhclient? or eth0? or both?
+[07:26] <Tonren> Tixer: Why can't you use the space bar?
+[07:26] <sethk> byen, your home directory is correct, it is set to /home/byen
+[07:26] <mitch_> mikeg, did you do lspci to determin SATA controller?
+[07:26] <sethk> byen, why do you think it isn't starting you there?  did you do   pwd    at the prompt after starting the terminal?
+[07:26] <Tonren> mtich_: It didn't show up for him.
+=== ailean_ [n=ailean@82-40-227-23.cable.ubr07.uddi.blueyonder.co.uk]  has joined #ubuntu
+[07:27] <Tonren> mitch_: I had him do lspci | grep -i "sata" and nothing showed up
+=== RancidLM [n=rancidlm@S01060014bfe0c57f.cg.shawcable.net]  has joined #ubuntu
+[07:27] <Tixer> I spilt milk on it
+[07:27] <Tonren> Tixer: lol, that sux... hmmmm
+[07:27] <Tixer> while watching anime
+[07:27] <Tixer> ascii codes don't work in linux
+[07:27] <Pyromaniak> how do I change the <Applications> icon? I prefer blue stuff, and I'd like use the kubuntu icon
+[07:27] <mikeg> mitch_: wait i'll try it again.. thanks
+[07:27] <byen> sethk, this happened when i typed this into the terminsl
+[07:27] <byen> http://paste.ubuntu-nl.org/20255
+[07:27] <byen> no no
+[07:27] <byen> wait
+[07:27] <mikeg> Tonren: thanks tonren i'll be back
+[07:27] <byen> sethk, i typed this ftp://ftp.linux.ncsu.edu/pub/fedora/linux/core/development/i386/os/Fedora/RPMS/redhat-artwork-0.245-1.fc6.i386.rpm
+=== pablo928_ [n=paul@yuma-cuda1-g2-70-36-69-223.losaca.adelphia.net]  has left #ubuntu []
+[07:28] <byen> and after that it changed
+[07:28] <RancidLM> hey im trying to install paralles workstation.. but its using the wrong gcc version when compiling my kernel module.. (its using 3.4) how do i set it to use gcc-4.0  iv tried : set CC=gcc-4.0   but that doesn't work.. suggestions?
+[07:28] <Tixer> please tell me I'm not fucked
+[07:28] <sethk> byen, that's a fedora (== red hat) package.
+[07:28] <Tonren> |thunder: you there?
+=== jack|ass [n=jack@c-24-20-5-30.hsd1.or.comcast.net]  has joined #ubuntu
+[07:28] <Tixer> I really wanna boot
+[07:28] <{K}Lubby> about how long does ubuntu take to install on a computer?
+[07:28] <sethk> byen, you typed that where?
+[07:28] <|thunder> Tonren, YA, SORRY
+[07:28] <Tixer> isn't there some command for an OSK?
+[07:28] <Tonren> {K}Lubby: half an hour, i guess?
+[07:29] <el_isma> {K}Lubby depends on hardware
+=== zane [n=zane@qld-210-211-64-206.dial.veridas.net]  has joined #ubuntu
+[07:29] <|thunder> Tonren, whoops, didnt mean to yell
+[07:29] <Tonren> |thunder: What've ou done so far
+[07:29] <{K}Lubby> heh, ownage
+[07:29] <{K}Lubby> windows xp takes like 1-2 hours to install
+[07:29] <{K}Lubby> and this is on a 800mhz celeron with 512mb ram
+[07:29] <el_isma> {K}Lubby then you've got a slow HD
+[07:29] <jack|ass> Any of you set up a dial-up (modem) server with ubuntu?  Is there a package that'll do most of the setup work for my lazy ass?
+[07:29] <|thunder> i just realized there is a graphical installer for ndiswrapper. ndisgtk
+[07:29] <{K}Lubby> ....yeah...
+[07:29] <Tixer> blargh.
+[07:29] <{K}Lubby> im just guessing at 1-2 hours
+=== MoNkUnClE [n=ximian@ip68-110-200-177.ri.ri.cox.net]  has joined #ubuntu
+[07:29] <el_isma> {K}Lubby well... it's mostly that... the speed of you HD....
+[07:29] <Tixer> I require a space bar
+[07:30] <{K}Lubby> yeah
+[07:30] <AngryElf> i really dont mean to complain -- but why have the ubuntu package servers been so incredibly slow as of late?
+=== jond3rd [n=jond3rd@203.131.79.132]  has joined #ubuntu
+[07:30] <{K}Lubby> meh, it says 7 minutes remaing
+[07:30] <byen> sethk, in the terminalk
+[07:30] <el_isma> Try using a mirror, AngryElf
+[07:30] <|thunder> Tonren, im going to give this a shot.
+=== cschneid [n=cschneid@c-24-9-121-160.hsd1.co.comcast.net]  has joined #ubuntu
+[07:30] <sethk> AngryElf, everyone in the world is trying to update at the same time
+[07:30] <azureal> Tixer: rofl
+[07:30] <RancidLM> any idea's any one?
+[07:30] <Tixer> isn't there an on screen keyboard in ubuntu?
+=== sayno [n=sayno@c-24-9-79-69.hsd1.co.comcast.net]  has joined #ubuntu
+[07:30] <el_isma> sethk: Should I have br0 with dhclient? or eth0? or both?
+[07:30] <Pyromaniak> Tonren: is there a basic "everything you ever wanted to know about ubuntu, but didn't know the questions to ask" kinda guide?
+[07:30] <sethk> byen, that wouldn't really do anything typed into a terminal
+[07:30] <Tonren> |thunder: ndiswrapper -i "somefile.inf" installed the wireless driver associated with that .inf file
+[07:30] <AngryElf> what's a mirror for security.ubuntu.com?
+[07:30] <|thunder> Tonren, i jsut have the windows driver and im installing ndis from the ubuntu CD. well trying to. the apt-cd dialog didnt pop-up
+[07:31] <azureal> Tixer: you do realize how this sounds? spilling "milk" while watching "anime"
+[07:31] <Tixer> I do
+[07:31] <Tixer> I was eating fucking cheerios
+[07:31] <jrojas> hi, i need record a video from my desktop, what is the linux alternative to "Camtasia Studio" ? :S
+[07:31] <sethk> el_isma, not with dhclient.  I wanted to just try setting the route, to see if you get internet back
+[07:31] <{K}Lubby> azureal: shut up?
+[07:31] <Tonren> Pyromaniak: http://monkeyblog.org/ubuntu/installing/ also maybe http://tips.linux.com/tips/06/06/08/1651225.shtml?tid=50&tid=92&tid=96
+[07:31] <{K}Lubby> lol
+=== azureal laughs
+[07:31] <|thunder> Tonren, im sorry. im asking questions that i out not. i just need to read.
+[07:31] <sethk> el_isma, I don't want to reconfigure anything else, otherwise we won't know what caused what
+=== Awal [n=andy@adsl-69-149-214-187.dsl.wchtks.swbell.net]  has joined #ubuntu
+[07:31] <el_isma> sethk ok, so I don't do a dhclient for any interface?
+=== {K}Lubby kills everyone
+[07:31] <Tixer> theres gotta be an alt code for ubuntu
+[07:31] <Tixer> or an OSK
+=== xyblor [n=user@206-248-135-210.dsl.teksavvy.com]  has joined #ubuntu
+[07:32] <sethk> byen, and, especially, that wouldn't change anything that would happen if you start a new terminal
+=== Dravas [n=Admin@ppp-69-217-48-240.dsl.applwi.ameritech.net]  has joined #ubuntu
+=== Steggy [n=josh_ste@204.96.152.74]  has left #ubuntu []
+[07:32] <azureal> lol tixer...how are you making spaces atm?
+[07:32] <sethk> byen, just typing a url at the terminal prompt should do exactly nothing.
+=== HeXiOn [n=HeXiOn@84.77.107.117]  has joined #ubuntu
+=== piggybox [n=cookoo@London-HSE-ppp3541354.sympatico.ca]  has joined #ubuntu
+[07:32] <HeXiOn> helo
+[07:32] <HeXiOn> hello
+[07:32] <{K}Lubby> hi
+[07:32] <{K}Lubby> hi
+[07:32] <Tonren> |thunder: Are you using the Live CD or is it installed?
+[07:32] <HeXiOn> :P
+[07:32] <|thunder> Tonren, installed.
+[07:32] <HeXiOn> I need to run a program as a daemon
+[07:32] <azureal> tixer: what might suck is if you need to install a package, but you won't be able to type "apt-get install" because there's a space lol
+[07:32] <HeXiOn> how can I do it?
+=== horror1 [n=z@ppp115-5.static.internode.on.net]  has joined #ubuntu
+[07:32] <xyblor> Hi, how do I get the automounter to run during the boot sequence?
+[07:33] <HeXiOn> (it's irxevent, a part or LIRC)
+[07:33] <Tixer> I am
+[07:33] <Tixer> I copy/paste em in
+[07:33] <Tonren> |thunder: The idea here is to install ndiswrapper, which is a utility that takes windows (native) drivers and plugs them into Linux
+[07:33] <xelados> okay sweet, I figured out xset. How do I make my changes stick to Xorg?
+=== lxe [n=lxe@216.48.49.142]  has joined #ubuntu
+[07:33] <Tixer> I can copy a space once I'm in ubuntu
+=== lightstar [n=lightsta@218.111.187.178]  has joined #ubuntu
+[07:33] <Tixer> I'm at the login now
+[07:34] <Tonren> |thunder: Once you have ndiswraper, you get the drivers that match your wireless card, and then you install them using the ndiswrapper -i command
+[07:34] <Tixer> and I can't copy from terminal
+=== shiftily [n=jerome@60.166.113.218]  has joined #ubuntu
+[07:34] <xyblor> I already configured the files, I just need automount to run at boot time.
+[07:34] <|thunder> 74107410
+=== shuveb_ [n=shuveb@59.144.20.164]  has joined #ubuntu
+=== hubba42 [n=nnoe@adsl-75-18-186-177.dsl.pltn13.sbcglobal.net]  has joined #ubuntu
+[07:34] <Tonren> |thunder: ??
+[07:34] <hubba42> hey, can anyone help me out with a parted problem?
+[07:34] <|thunder> sry, thought i was in calc
+[07:34] <sethk> xelados, there is a file you can add them to, I believe it is .xinitrc, but let me check
+[07:35] <xelados> okay, thanks.
+[07:35] <azureal> Tixer: look into gtkeyboard
+[07:35] <Dravas> Uhh I have Intergrated nVidia graphics and I was wondering if I should install the nvidia drivers and switch to them
+[07:35] <HeXiOn> does someone know how to run a executable as a daemon? (or just re-execute it automaticly when it crashes)
+=== shiftily [n=jerome@60.166.113.218]  has left #ubuntu ["Leaving"]
+[07:35] <Tixer> holy shit
+[07:35] <|thunder> Tonren, i have to move the driver over with a flash drive. it'll take a sec
+=== NickaNicka [i=jensei@propelli.cop.fi]  has joined #Ubuntu
+[07:35] <xyblor> Is there an Ubuntu equivalent to Gentoo's rc-update?
+[07:35] <Tixer> I can't run gtkeyboard till I'm logged in
+[07:35] <Tonren> xyblor: what's rc-update do?
+[07:36] <Pntkl> private
+=== poopotootti [n=poopotoo@c193-229-41-204.elisa-laajakaista.fi]  has joined #ubuntu
+[07:36] <Tonren> HeXiOn: are you in GNOME?
+[07:36] <azureal> Tixer: er, it also might not be installed yet either
+[07:36] <cafuego> xyblor:  update-rc.d
+[07:36] <Tixer> there you go
+[07:36] <HeXiOn> xyblor, I think not, I was looking for it last week
+=== Flyoc_ [n=flyin_do@APlessis-Bouchard-153-1-23-247.w83-200.abo.wanadoo.fr]  has joined #ubuntu
+[07:36] <Tixer> how can I install it without being logged in
+[07:36] <HeXiOn> Tonren, yes I am
+[07:36] <Tonren> HeXiOn: if so, System -> Preferences -> Sessions
+=== farous [n=farous@d141-64-4.home.cgocable.net]  has joined #ubuntu
+[07:36] <azureal> what do you mean, logged in?
+[07:36] <cafuego> You'll find rc-update is the equivalent, not the other way around ;-)
+[07:36] <xyblor> cfuego: Thank you!
+[07:36] <Tixer> I can't do sudo apt-get
+=== Bananabob [n=bananabo@203-79-110-244.cable.paradise.net.nz]  has joined #ubuntu
+=== carrus85 [n=carrus85@216.83.145.38]  has joined #ubuntu
+[07:36] <azureal> you can't?
+[07:37] <Tonren> HeXiOn: Then go to the Current Session tab, select the application that is currently open, and change the "Style" dropdown to "Restart"
+[07:37] <byen> sethk, that is all i did mate and now i am stuck withthis.. i dont even know where to start or if this really effect the system in anywys
+[07:37] <azureal> Tixer: maybe you could "su" then?
+=== Bananabob [n=bananabo@203-79-110-244.cable.paradise.net.nz]  has left #ubuntu []
+[07:37] <Dravas> Uhh I have Intergrated nVidia graphics and I was wondering if I should install the nvidia drivers and switch to them
+[07:37] <Tonren> HeXiOn: don't forget to Apply before you hit OK
+[07:37] <sethk> Dravas, not unless something isn't working the way you want it to
+[07:37] <Dravas> ok
+[07:38] <Tixer> I can't SU
+[07:38] <HeXiOn> Tonren, but that affects to the current session... if I restart the program doesn't restart if it crashes.. do it?
+[07:38] <Tixer> to login, I just need to type mkdir /home/user
+[07:38] <|thunder> Tonren, does modprobe need any parameters after install of ndiswrawpper with synaptic?
+[07:38] <hubba42> has anyone used parted to partition a disk to only have it not show up in fdisk?  anyone know how to fix that?  im trying to install linux manually from a live cd and lilo freaks out when it sees the partition map that fdisk uses
+=== lxe [n=lxe@216.48.49.142]  has joined #ubuntu
+=== el_isma [n=opera@r201-217-149-164.dialup.adsl.anteldata.net.uy]  has left #ubuntu []
+=== el_isma [n=opera@r201-217-149-164.dialup.adsl.anteldata.net.uy]  has joined #ubuntu
+[07:39] <pushpop> For a New User like my self to the Ubuntu world, How would I learn or correct my xorg.conf because I am unable to startX ?
+[07:39] <Tonren> HeXiOn: I'm not sure how it handles CRASHes... but changing it to "Restart" Is supposed to make sure it always runs
+=== noaXess_kubuntu [n=noaXess_@cust.static.217-11-45-147.cybernet.ch]  has joined #ubuntu
+=== Oswyn [n=none@75.15.216.106]  has joined #ubuntu
+[07:39] <Tonren> HeXiOn: also you might want to look into the "daemon" package
+[07:39] <Tonren> !info daemon
+[07:39] <el_isma> sethk: Ok. Now I'm officially frustrated :'(
+[07:39] <HeXiOn> Tonren, even after rebooting? changes the "mode" of that exec. between sessions?
+[07:39] <ubotu> daemon: turns other processes into daemons. In repository universe, is optional. Version 0.6.3-1 (dapper), package size 97 kB, installed size 300 kB
+[07:40] <{K}Lubby> can someone give me a link to where i download all the free ubuntu programs?
+=== carpediem [n=dmartin@24-107-6-92.dhcp.stls.mo.charter.com]  has joined #ubuntu
+[07:40] <Tonren> {K}Lubby: apt-cache search <insert-name-of-application-here>
+[07:40] <hubba42> spt-get install your-mom
+[07:40] <Tonren> HeXiOn: It should, yes.  When you save a session, it stays that way forever
+[07:40] <el_isma> {K}Lubby: use synaptic / aptitude / adept
+=== secleinteer [n=secleint@70.230.152.70]  has joined #ubuntu
+[07:40] <{K}Lubby> Tonren: i thought it was a website?
+[07:40] <el_isma> you pick :P
+[07:40] <HeXiOn> Tonren, ok, I'll try the first and late look into daemon package
+[07:40] <lxe> ubuntu-forums is a good place for apps
+=== odat [n=emachine@c-71-207-39-41.hsd1.pa.comcast.net]  has joined #ubuntu
+[07:40] <HeXiOn> Tonren, thanks a lot :)
+=== horror1 [n=z@ppp115-5.static.internode.on.net]  has left #ubuntu []
+[07:40] <{K}Lubby> somewhere on linux.org...
+[07:41] <pushpop> For a New User like my self to the Ubuntu world, How would I learn or correct my xorg.conf because I am unable to startX ?
+[07:41] <Tonren> {K}Lubby: nah, use Synaptic
+[07:41] <lxe> you can ask us for advice on any particular application
+[07:41] <Tonren> {K}Lubby: Go to Applications -> Add / Remove Programs
+[07:41] <{K}Lubby> okay why?
+[07:41] <Tonren> HeXiOn: good luck!
+[07:41] <xelados> Ack.
+[07:41] <HeXiOn> thanks ;) bye
+[07:41] <el_isma> Tonren: I agree, synaptic is the best one... :) (even though I run kde)
+[07:41] <xelados> X-chat's being weird.
+=== Ademan [n=dan@h-67-101-146-58.snfccasy.dynamic.covad.net]  has joined #ubuntu
+[07:41] <Tonren> {K}Lubby: It's a list of thousands of free programs that you can install just by checking them off
+[07:41] <odat> pushpop, terminal    dpkg-reconfigure xserver-xorg
+[07:41] <{K}Lubby> oh
+[07:41] <Tonren> el_isma: I never use the GUI, myself
+[07:41] <xelados> Tab doesn't autocomplete nicks
+[07:41] <xelados> :<
+=== hubba42 [n=nnoe@adsl-75-18-186-177.dsl.pltn13.sbcglobal.net]  has left #ubuntu ["Leaving"]
+[07:41] <{K}Lubby> is it the same as the ones at www.linux.org/apps/ ?
+[07:41] <pushpop> odat: Just type that command?
+=== j_j [i=jj@124.106.52.188]  has left #ubuntu []
+[07:42] <Tonren> {K}Lubby: probably not, but it's pretty huge anyway
+[07:42] <Oswyn> can anyone point me to a document describing how ubuntus hardware detection works?
+[07:42] <el_isma> Tonren: don't you like aptitude? It even has games XD
+[07:42] <odat> pushpop, sudo first
+[07:42] <Tonren> el_isma: hehe no doubt
+=== xyblor [n=user@206-248-135-210.dsl.teksavvy.com]  has left #ubuntu ["ERC]
+[07:42] <{K}Lubby> sweet
+[07:42] <Pyromaniak> wine: creating configuration directory '/home/firestarter/.wine'...
+[07:42] <Pyromaniak> wine: cannot find 'rundll32.exe'
+[07:42] <Pyromaniak> wine: wineprefixcreate failed while creating '/home/firestarter/.wine'.
+[07:42] <odat> is the .1 update available through synaptic?
+=== Steggy [n=josh_ste@204.96.152.74]  has joined #ubuntu
+[07:42] <{K}Lubby> and does ubuntu need stuff like antivirus?
+=== ChaKy [n=chaky@lns01-0059.dsl.iskon.hr]  has joined #ubuntu
+[07:42] <Tonren> {K}Lubby: lol, nope
+[07:42] <pushpop> odat: new install how do I set a password for sudo/root
+[07:42] <{K}Lubby> didn't think so ;O
+=== sanmarcos [n=sanmarco@unaffiliated/sanmarcos]  has joined #ubuntu
+[07:42] <Tonren> {K}Lubby: There might be.. three viruses in existence for linux.  ever.  MAYBE.
+[07:42] <sanmarcos> can anybody print me the /etc/issue here?
+[07:42] <sanmarcos> default
+[07:42] <{K}Lubby> cause my friend is always bragging to me about how his stupid mac is immune to viruses
+[07:43] <odat> pushpop, you set it during installation
+[07:43] <Tixer> w00000t
+[07:43] <Tixer> success
+[07:43] <Tonren> {K}Lubby: trust me dude, you are now more immune
+[07:43] <Tonren> {K}Lubby: immuner, if you will
+[07:43] <{K}Lubby> Tonren: yeah i figured :lol: hackers only target noob xp users
+[07:43] <pushpop> odat: ? I created a user?
+[07:43] <Tonren> Tixer: how'd you do it?
+[07:43] <Tixer> I have logged in!
+[07:43] <cafuego> {K}Lubby: it is, but slightly less so that Linux (viruses for Office on Mac don't work on Linux ;-)
+[07:43] <azureal> {K}Lubby, haha... i have a friend just like that
+[07:43] <pushpop> odat: thats all
+[07:43] <{K}Lubby> i'm now more immuner? lol thats a good one
+[07:43] <Tixer> copied a space from the font change thing
+[07:43] <odat> pushpop, same password
+=== toxicfume [n=toxicfum@ppp-58.8.12.155.revip2.asianet.co.th]  has joined #ubuntu
+[07:43] <toxicfume> hi all
+[07:43] <Tonren> Tixer: rofl... resourceful
+[07:43] <el_isma> {K}Lubby: Indeed, only if you run unknown programs as root you'll have trouble... otherwise, you're pretty safe
+[07:43] <odat> anyone know about the .1 update?
+[07:43] <Tixer> thanks to that stupid brown fox....
+=== x-Dieu [n=nubuntu-@unaffiliated/x-tm]  has joined #ubuntu
+[07:44] <{K}Lubby> also, is it hard to find stuff like limewire and other windows programs for ubuntu?
+[07:44] <toxicfume> can someone please help me with partitioning? I already have ubuntu installed on a 3GB partition, but now I guess I need more capacity and i've tried increasing the capacity but it just wont work, can someone please help me? thanks
+[07:44] <azureal> hopeless...
+[07:44] <lxe> sudo apt-get install limewire
+[07:44] <Tonren> {K}Lubby: wine MIGHT run them, I don't know about filesahre apps myself since I just use bittorrent
+[07:44] <Tonren> lxe: no way, it's native?  sweet
+[07:45] <lxe> well try it
+[07:45] <azureal> ubuntu, or linux in general  != windows
+[07:45] <{K}Lubby> so wine is a program that makes windows programs run on linux?
+=== mvirkkil [n=mvirkkil@kosh.hut.fi]  has left #ubuntu []
+[07:45] <Tixer> sometimes
+[07:45] <Tonren> {K}Lubby: It's a program that ATTEMPTS to do so
+[07:45] <{K}Lubby> well yeah
+[07:45] <Tixer> basic programs work best
+[07:45] <Tonren> {K}Lubby: sometimes works, often does not
+[07:45] <cafuego> {K}Lubby: there's 'amule'  for the edonkey network and azureus for bittorrent. Dunno about limewire... people still use that?
+[07:45] <{K}Lubby> does it come with it, or do i have to download it?
+[07:45] <lxe> nevermind
+[07:45] <azureal> {K}Lubby,  search for different solutions; usually they work better ;)
+[07:45] <lxe> no limewire
+[07:45] <lumgwada> toxicfume: I know it help to run a scandisk on your windows partition before resizing helps
+[07:45] <sanmarcos> can anybody print me your /etc/issue file for me?
+[07:45] <odat> {K}Lubby, i use frostwire
+[07:45] <{K}Lubby> cafuego: ROFL limewire is only like the most popular windows xp file sharing program
+[07:46] <Tonren> sanmarcos: Ubuntu 6.06.1 LTS \n \l
+[07:46] <{K}Lubby> and i was just using it as an example, idc about it since i still have my main computer (brand new i might add)
+[07:46] <sanmarcos> Tonren, thank you sir
+[07:46] <toxicfume> lumgwada: I need more critical help than that :P but thanks ! :)
+[07:46] <xelados> frostwire can be downloaded for Linux.
+[07:46] <Tixer> cause alot of n00bs use it
+[07:46] <xelados> I couldn't get it to install, though.
+[07:46] <{K}Lubby> its not even a month old :D
+[07:46] <cafuego> {K}Lubby: Hmmyeah, I don't share files much. (only Ubuntu packages,and they're free anyway)
+[07:46] <azureal> {K}Lubby,  yay, a month old computer that is beginning to take on viruses!
+=== el_isma2 [n=opera@r200-40-234-222-dialup.adsl.anteldata.net.uy]  has joined #ubuntu
+=== aeread [n=aeread@d198-166-52-110.abhsia.telus.net]  has joined #ubuntu
+[07:47] <aeread> im trying to mv a bunch of .folders from my backup into my home, but its saying it cant overwrite some of them ... ive tried -f to force it ... any tips?
+[07:47] <sethk> toxicfume, rather than trying to expand your partition, just created an additional partition to give yourself more space
+[07:47] <odat> does anyone know about the .1 update?
+[07:47] <Tonren> aeread: what about sudo?
+[07:47] <{K}Lubby> heh, ubuntu's done installing already
+[07:47] <el_isma2> sethk: Well... I give up... the bridge beat me :(
+[07:47] <aeread> im am
+[07:47] <cafuego> {K}Lubby: Ah, limewire is a gnutella client; year, there are Linux apps for that network.
+=== Oswyn [n=none@75.15.216.106]  has left #ubuntu []
+[07:47] <aeread> err wait
+[07:47] <azureal> {K}Lubby, yea, ubuntu install is like 9x faster than gentoo install
+[07:47] <pushpop> odat: I did that now I get (EE) No Devices Detected ?
+[07:48] <lxe> try torrent clients
+[07:48] <aeread> im not, ill try
+=== rellim [n=max@ip70-179-171-74.dl.dl.cox.net]  has joined #ubuntu
+[07:48] <sethk> el_isma2, I'll have to look more carefully at what the bridge program does at the lower levels
+[07:48] <lxe> or amule
+[07:48] <toxicfume> sethk: but that wont always work too well, because over time in linux u need a lot of system files which are best to install in the root partition no?
+[07:48] <el_isma2> sethk: Thank you very much for all your help
+[07:48] <odat> cafuego, frostwire is the best   it looks just like limewire   with all the limewire pro features
+=== Chu [n=swebster@cpe-66-74-195-151.san.res.rr.com]  has joined #ubuntu
+[07:48] <rellim> anyone here know how the cherokee web server stacks up to apache?
+[07:48] <{K}Lubby> is limewire pro any good?
+[07:48] <lumgwada> toxicfume: sorry for being vague I had a similar issue a while back with partitioning that was resolved with a scandisk
+[07:48] <odat> pushpop, do you know anything about your computer?
+[07:48] <toxicfume> lumgwada: ohh okay
+[07:48] <aeread> Tonren: even as root it doesnt work
+[07:48] <sethk> toxicfume, in general that's probably true.  you can get around it with symlinks, or with the system that aggregates physical partitions into virtual partitions
+[07:49] <pushpop> odat: yes, I selected my video card and monitor settings
+[07:49] <Tonren> aeread: paste exact error plz
+=== eternaljoy [n=truth@idxnew02-198.idx.com.au]  has joined #ubuntu
+[07:49] <sethk> toxicfume, trying to modify partitions in place is risky and doesn't always work.
+[07:49] <cafuego> odat: Like I said, I need no filesharing apps.
+[07:49] <odat> pushpop, for montor setting what did you use  the simple selection?
+[07:49] <sethk> toxicfume, of course, you can back up the partition, create a new, larger one, and restore to it.
+[07:49] <aeread> "mv: cannot overwrite directory '/home/bung/.confg'" etc...
+[07:49] <lxe> sudo mv?
+[07:49] <pushpop> odat: it autodetected the correct model monitor
+=== rellim [n=max@ip70-179-171-74.dl.dl.cox.net]  has left #ubuntu []
+[07:50] <toxicfume> The problem I'm having with my ubuntu partition is that I already have some unallocated space on my darive, but for some reason i cannot increase the capacity of the Ubuntu partition using that unallocated space, i dont understand why. The partitioning program simply doesn't give me that option.
+[07:50] <aeread> lxe, i happen to be root
+[07:50] <sethk> aeread, you can't use mv to clobber a read only file even if you happen to be root
+[07:50] <odat> pushpop, yea but when it asked for a resolution setting like 15, 17 or 19 inch monitor
+[07:50] <sethk> aeread, you can use cp, then delete the original one
+[07:50] <lxe> oh my bad
+[07:50] <lxe> chmod it?
+[07:50] <pushpop> odat: dont recall ill try again
+[07:50] <sethk> aeread, or, you can rm the file before trying the mv  (remove the file by the same name in the target directory)
+[07:50] <toxicfume> sethk: but then i would have to configure GRUB and everything again no?
+[07:50] <{K}Lubby> heh nice, ubuntu basically has two passwords since it doesnt show your username like windows does
+[07:50] <aeread> sethk: there are alot, i dont want to remove
+[07:50] <aeread> but ill try to cp
+[07:51] <sethk> toxicfume, no, as long as the designation of the /boot directory hasn't changed
+[07:51] <el_isma2> Anybody knows how to make energy saving play nice? When I'm watching a movie I'd hope the monitor would stay on! I have to go to the control panel and disable it. (Running KDE... maybe this is not the place?)
+[07:51] <aeread> thanks cp works
+[07:51] <sethk> aeread, cp -f will work.  Of course, I'm assuming you know that it is safe to clobber all these things.  :)
+[07:51] <cafuego> {K}Lubby: Not by default anyway.
+[07:51] <azureal> {K}Lubby, you could make windows not show usernames either....
+[07:51] <cafuego> {K}Lubby: You *can* make it list users accounts on the login screen.
+[07:51] <Tonren> {K}Lubby: you can configure ubuntu to display usernames
+[07:51] <{K}Lubby> oh well doesnt matter
+[07:51] <{K}Lubby> i like it this way lol
+[07:51] <toxicfume> sethk: designation of /boot? what does that mean?
+=== Flyoc_ is now known as Flyoc
+[07:52] <pushpop> odat: ok chose 19" now its saying "No Screens Found"
+=== root_luse [n=root@208.202.161.53]  has joined #ubuntu
+=== eugman [n=eugene@c-71-199-127-163.hsd1.pa.comcast.net]  has joined #ubuntu
+[07:52] <Pyromaniak> is the 0.9.18 version of wine really that bad compared to the current?
+[07:52] <{K}Lubby> and a pass to do "admin tasks"
+[07:52] <Tonren> Pyromaniak: I though that was current
+[07:52] <pushpop> odat: Fatal IO error  104
+[07:52] <sethk> toxicfume, if your /boot is currently in /dev/hda1, for example, and you back up, create a new partition that is /dev/hda1, and restore to it, nothing in grub will need to be changed
+=== Cornellius [n=Alain@142-217-38-112.telebecinternet.net]  has joined #ubuntu
+[07:52] <Pyromaniak> their website sais 0.9.19
+[07:52] <odat> pushpop, how are you doing any commands if you can't see anything?
+[07:52] <eugman> ANyone know how to erase alpha from a layer in gimp?
+[07:52] <{K}Lubby> NOOO
+=== carthik [n=carthik@pdpc/supporter/student/carthik]  has joined #ubuntu
+[07:52] <sethk> toxicfume, the fact that /dev/hda1 is now a different size won't matter
+[07:52] <azureal> i actually don't like ubuntu's whole !root system
+[07:52] <Tonren> eugman: wrong channel
+[07:53] <{K}Lubby> im still having that beeping problem with setting up the LAN
+[07:53] <pushpop> odat: I run  dpkg-reconfigure xserver-xorg and it brings up the screens where I can choose settings?
+[07:53] <sethk> toxicfume, on the other hand, if you moved stuff around so that /boot was on /dev/hda1, and is now on /dev/hda2 (for example), that would require changes to the grub config
+=== KrisW [n=KrisWood@c-67-168-218-68.hsd1.or.comcast.net]  has joined #ubuntu
+[07:53] <toxicfume> sethk: I'm pretty comfortable with partition (i've done a lot of it) and i'm confident it wont screw up. But the only problem I'm having with my ubuntu partition is that I already have some unallocated space on my darive, but for some reason i cannot increase the capacity of the Ubuntu partition using that unallocated space, i dont understand why. The partitioning program simply doesn't give me that option.
+[07:53] <toxicfume> sethk: ohh okay
+[07:53] <eugman> Tonren, worth a shot. Gimp channel is dead and I'm running gimp off of ubuntu.
+[07:53] <odat> pushpop, do you have multiple video connections?
+[07:53] <Tonren> eugman: fair enough; someone had to say it. ;P
+[07:53] <KrisW> I just did an apt-get dist-upgrade and it seems like I'm still in breezy, how do I tell if the upgrade worked?
+[07:53] <{K}Lubby> okay, can someone give me some help?
+=== Randm [n=bef@physio4life.plus.com]  has joined #ubuntu
+[07:53] <visik7> Pyromaniak: what's the problem with wine 0.9.18 ?
+=== mikeg [n=mlg@58.71.34.137]  has joined #ubuntu
+[07:54] <eugman> In that case, anyone know how to switch channel view in irssi?
+[07:54] <lxe> {K}Lubby: what
+[07:54] <sethk> toxicfume, the partitioning program can't increase the size of an existing partition.  there are other programs that can, however.  gparted is one that people recommend
+[07:54] <pushpop> odat: I have a X800gto2 It has DVI and Svideo
+[07:54] <{K}Lubby> lxe: figuring out what's wrong with this thign
+=== xelados [n=xelados@63.135.139.31]  has joined #ubuntu
+[07:54] <el_isma2> KrisW: reboot? I don't really know
+[07:54] <pushpop> Odat: I just have the VGA from the monitor plugged in
+[07:54] <KrisW> yeah I rebooted
+[07:54] <odat> pushpop, sounds like you have the monitor plugged in the wrong port
+[07:54] <lxe> {K}Lubby: sorry, enter key was in the way. Wht's your issue again?
+[07:54] <KrisW> that's why I'm confused
+[07:54] <{K}Lubby> hey tonren or sethk, wanna try helping me again now that i have ubuntu installed and it's still got the same problem?
+[07:54] <toxicfume> sethk: no this program i am using usually can..but i dont know why, for this partition it does not give me the option (nor the reason)
+[07:54] <xelados> sethk: Any luck finding that .xinitrc?
+[07:54] <KrisW> I thought something would happen heh
+[07:54] <pushpop> odat: Its in the VGA port?
+[07:54] <Tonren> {K}Lubby: what was the prob?
+[07:54] <lxe> yes
+[07:54] <el_isma2> KrisW: if you reboot, it should show you the new kernel (Ie: a linuxOLD entry or something like that)
+[07:55] <sethk> toxicfume, I don't know, either, unless there is something about the layout of the existing partitions
+[07:55] <pushpop> odat: I know how to plug a monitor in =)
+[07:55] <el_isma2> KrisW: I meant, it should show you the new kernel and the old one
+[07:55] <{K}Lubby> Tonren: remember, it wouldn't let me modify my static ip settings so i could connect my ubuntu to my xp
+[07:55] <lumgwada> toxicfume: are you using qtparted?
+[07:55] <mikeg> sethk: hi sethk i have made the commands already the lspci | grep-i "sata" and it return IDE Technologies, In.c VT8251 AHCI/SATA 4-port controller
+[07:55] <sethk> toxicfume, I don't know what program you are using.  None of the linux partitioning programs allow resizing partitions.
+[07:55] <Tonren> {K}Lubby: snap.. sorry dude, i'm like braindead right now.  you'll have to hunt for another helper
+[07:55] <{K}Lubby> with the "could not enable the interface eth0" error when i try to activate it
+=== root_luse [n=root@208.202.161.53]  has left #ubuntu []
+[07:55] <KrisW> el
+[07:55] <{K}Lubby> sethk could you try helping me? (or anyone else smart ;O)
+[07:55] <Tonren> {K}Lubby: while you wait for help in here, use google, / wiki.ubuntu.com / ubuntuforums.org
+[07:55] <KrisW> el_isma, I didn't see anyting like that
+[07:55] <toxicfume> sethk: i guess that's where it's at, the layout of the existing partition, but i just dont know how to correct that.
+=== skypa [n=skypa@e178251195.adsl.alicedsl.de]  has joined #ubuntu
+[07:55] <sethk> mikeg, ok, first question is, does the kernel have support for that chipset
+[07:56] <mikeg> sethk: what will i do next , after i have determined the controller
+[07:56] <odat> pushpop, better check because you prolly have two spots you could plug into
+[07:56] <lxe> {K}Lubby: did you try network-admin?
+=== Zarathu [n=zarathu@adsl-68-94-1-123.dsl.rcsntx.swbell.net]  has joined #ubuntu
+[07:56] <toxicfume> sethk: I'm using a program in windows xp actually (i'm aware of the fact that i might have to update grub after the partitioning in windows is finished)
+[07:56] <el_isma2> KrisW: that's weird... I think that when you upgrade the old kernel still shows up
+[07:56] <{K}Lubby> yeah lxe, that's the only thing i've tried (or know to try... im a complete ubuntu noob)
+[07:56] <mikeg> sethk: how to know if this chipset r supported?
+[07:56] <sethk> mikeg, we need to find the name of the kernel module that supports that chipset (if it exists)
+[07:56] <el_isma2> lxe: where's network-admin?
+[07:56] <KrisW> el_isma, there's a good possibility that I just don't know what I'm looking for
+[07:56] <pushpop> odat: the blue VGA cable is plugged into the blue VGA port on the video card.
+[07:56] <lxe> {K}Lubby : and what happened after?
+[07:57] <mikeg> sethk:  how to find the kernel module then?
+[07:57] <sethk> mikeg, I would start by looking in the Documentation subdirectory of the kernel source tree.  a google search is also sometimes helpful.
+[07:57] <KrisW> well, I tried apt-get dist-upgrade again and it picked up where it left off
+[07:57] <lxe> el_isma2: just type in network-admin
+[07:57] <KrisW> so maybe it didn't finish last time
+[07:57] <Tonren> i've gotta run, folks
+[07:57] <Tonren> g'night all
+[07:57] <KrisW> last time it timed out on samba-common
+=== josie [n=josie@dhcp-0-1-2-43-c3-e7.cpe.mountaincable.net]  has joined #ubuntu
+[07:57] <mikeg> sethk: actually i havent installed yet ubuntu in my box.
+[07:57] <ricperry-ubuntu-> does anyone know of a way to install XAMPP (LAMPP) after installing Ubuntu Desktop 6.06?
+[07:57] <KrisW> so maybe the time-out caused it to not upgrade?
+[07:57] <odat> pushpop, the reason i am saying this is because if you have a add in video card then your probably have two different ports you monitor could go into too
+[07:57] <{K}Lubby> lxe: i click the ethernet connection, hit properties, choose static ip, put in the settings i need for it to connect to my windows xp computer using crossover ethernet cable, hit okay, then hit the activate button *ping* then the error comes up
+[07:58] <pushpop> odat: the X800 is PCI Express, is PCI:1:0:0 the right identifier for PCI express?
+[07:58] <el_isma2> KrisW maybe
+[07:58] <mikeg> sethk:  ihave an amd 64 processor, with new specs hardware..
+=== HellDragon [n=JD@about/copyleft/pdpc.active.HellDragon]  has joined #ubuntu
+[07:58] <el_isma2> KrisW I think that if it can't download all needed packages, it does nothing
+[07:58] <lxe> {K}Lubby: try ifconfig and see what it says
+[07:58] <{K}Lubby> lxe: the error says this "could not enable the interface eth0. check that the settings are correct for the network and that the computer is correctly connected to it."
+[07:58] <sethk> mikeg, the number 8251 doesn't occur in the kernel doc directory, which is discouraging.  it might be there with a different name or number, though.
+=== rexbinary [n=rexbinar@unaffiliated/rexbinary]  has joined #ubuntu
+[07:58] <el_isma2> ricperry-ubuntu- Have you searched the wiki? I think there was something about LAMP there
+[07:59] <sethk> mikeg, that hardware might well be a bit ahead of the kernel.
+[07:59] <josie> i'm having trouble configuring my soundcard
+=== CVirus [n=GoD@82.201.222.158]  has joined #ubuntu
+[07:59] <{K}Lubby> lxe, do you want me to copy and past what ifconfig says, transfer it to my other computer with a flash drive or something, and put it on the internet for you to see?
+[07:59] <sethk> mike-e, I checked 2.6.15.6.  that's not the latest, so there is still hope.
+[07:59] <josie> i've got two, and they both appear in gnome-sound-properties
+=== aeread [n=aeread@d198-166-52-110.abhsia.telus.net]  has left #ubuntu []
+[07:59] <CVirus> guys I enabled backports and apt-get still wants to fetch an old version of wine .. what could be wrong ?
+[07:59] <odat> pushpop, that should be fine
+[07:59] <josie> but when i change cards in the dropdown, and hit close, and open it up again, it's back at the default
+[08:00] <el_isma2> KrisW: To know which kernel are you running, do a "cat /proc/version". Dapper has 2.6.15.
+[08:00] <josie> anything i'm missing?
+[08:00] <{K}Lubby> lxe: do you want me to copy and past what ifconfig says, transfer it to my other computer with a flash drive or something, and put it on the internet for you to see?
+[08:00] <el_isma2> CVirus have you enabled the "official" wine rep?
+[08:00] <pushpop> odat: wanna ssh in hhaha
+[08:00] <sethk> mike-e, I'm downloading 2.6.17.8, but it is a 39 meg download so it will take a while
+[08:00] <CVirus> el_isma2: nope .. what is that ?
+[08:00] <lxe> {K}Lubby: no, bt does it state the correct ip addresses? or just the error message?
+[08:01] <el_isma2> CVirus: Add: "deb http://wine.budgetdedicated.com/apt dapper main" to your sources.list (/etc/apt/sources.list)
+=== printk [n=doobie@c-67-162-243-0.hsd1.tx.comcast.net]  has left #ubuntu []
+[08:01] <mikeg> sethk: what to do next if i have known the kernel?
+[08:01] <{K}Lubby> lxe: err.... where does it state the correct ip address, and what is the error message?
+=== redguy [n=mati@aff44.neoplus.adsl.tpnet.pl]  has joined #ubuntu
+[08:01] <CVirus> el_isma2: why would I do that ? isnt wine in universe backports ?
+[08:01] <ricperry-ubuntu-> el_isma2, I've seen the stuff about LAMP, but I'm looking for an easier way.  I figured since XAMPP comes in the server distro it should be pretty easy, but on the server disk, I can't find a .deb that installs it.  For that matter, I can't even find XAMPP on the server disk.  It's just an option at install time.
+[08:01] <lxe> {K}Lubby: and try every option, even using dhcp on network-admin
+[08:01] <toxicfume> sethk: okay lets say i copy my entire / from my current partition to a new/bigger partition..how do I make it so that the new partition will also be /dev/hda4 (which it is right now)?
+[08:01] <el_isma2> CVirus then do: apt-get update, or just go to synaptic or whatever you use and refresh
+=== noaXess_kubuntu [n=noaXess_@cust.static.217-11-45-147.cybernet.ch]  has joined #ubuntu
+[08:02] <el_isma2> CVirus: I think the latest ones are there...
+[08:02] <sethk> mikeg, if we find a kernel module that supports that chipset, we would use it in a modprobe command to load it.
+[08:02] <{K}Lubby> lxe: i've tried dhcp, but no go, cause dhcp needs a dhcp server... and my xp computer doesnt have one
+[08:02] <mikeg> ahh ok
+[08:02] <CVirus> el_isma2: isnt the latest wine in universe backports ?
+[08:02] <el_isma2> CVirus I don't know. Which version is there?
+=== jack|ass [n=jack@c-24-20-5-30.hsd1.or.comcast.net]  has left #ubuntu ["Leaving"]
+=== crazyglue [n=tesla@82-47-119-81.cable.ubr08.dudl.blueyonder.co.uk]  has joined #ubuntu
+[08:03] <lxe> {K}Lubby: were you able to connect to the network with ubuntu before?
+=== el_isma2 is now known as el_isma
+[08:03] <CVirus> el_isma2: no idea ... apt-get is fetching the universe version 0.9.9 ... not the universe backports one
+[08:03] <CVirus> el_isma: I need the universe backports one
+[08:03] <josie> anyone have any idea how to set the default sound card?
+[08:03] <{K}Lubby> lxe: no, but i got it to work on the same computer when it had windows xp on it
+[08:03] <farous> el_isma: el_naseeb
+[08:03] <el_isma> CVirus I've got 0.9.18 from wineHq
+[08:03] <farous> :)
+[08:03] <el_isma> farous: sorry, what?
+[08:04] <CVirus> el_isma: it seems that you dont get my point ... why isnt it in universe backports
+[08:04] <lxe> {K}Lubby: and your gateway computer is running windows xp?
+=== subir [n=subir@202.79.37.177]  has joined #ubuntu
+[08:04] <farous> el_isma: oh sorry that is a popular sayin in my country. one say il esma the other say il naseeb sorry about that
+[08:04] <el_isma> CVirus I don't know... Why don't you just add that rep?
+[08:04] <{K}Lubby> lxe: yes it is, windows xp home
+[08:04] <el_isma> farous: What does it mean?
+=== raphink [n=raphink@ubuntu/member/raphink]  has joined #ubuntu
+=== thedcm [n=thedcm@adsl-71-157-172-20.dsl.stlsmo.sbcglobal.net]  has joined #ubuntu
+[08:05] <CVirus> el_isma: I dont use except main restricted universe and multiverse
+[08:05] <thedcm> how two i instal programs
+[08:05] <KrisW> woot it seems to have finished this time, it's prompting me for some questions it didn't ask before
+[08:05] <farous> el_isma: roughly translated both mean destiny
+[08:05] <el_isma> CVirus ok... Apt always shows the latest available... did you do an update?
+[08:05] <ricperry-ubuntu-> josie, to set the default sound card, System -> Administration -> Ubuntu Control Center -> Sound (should be in the Hardware tab).  Then simply change the default sound card with the bottom drop-down list.
+[08:06] <el_isma> farous: what language is that?
+[08:06] <CVirus> el_isma: yes sure
+[08:06] <nicholas_paul> Q: Whats the diff between 'text mode' and 'OEM mode' in the installation?
+[08:06] <{K}Lubby> lxe: hold on, im uploading the pic of what ifconfig comes up with...
+[08:06] <Madpilot> thedcm, https://wiki.ubuntu.com/SynapticHowto
+[08:06] <el_isma> CVirus Then, probably, that's the latest version on the ubuntu repositories...
+[08:06] <farous> el_isma: the mother language of name starting with el arabic. Will stop now for i know better that this is offtopic :)
+[08:06] <lxe> {K}Lubby: ok thanks. does windows xp machine run some kind of wins proxy, or other weird stuff?
+[08:06] <{K}Lubby> not that i know of
+=== damned[office]  [n=vpol@prior.lanck.net]  has joined #ubuntu
+[08:07] <el_isma> farous: yeah, you're right. Anyway, interesting to know :)
+[08:07] <farous> :)
+[08:07] <{K}Lubby> it has a wireless internet receiver hooked up to router hooked up to modem hooked up to dsl though
+[08:07] <{K}Lubby> lxe: ^ that's my internet connection
+=== Awal [n=andy@adsl-69-149-214-187.dsl.wchtks.swbell.net]  has joined #ubuntu
+[08:07] <{K}Lubby> lxe: oh and here's the link to the pic http://img80.imageshack.us/img80/7136/ifconfigresultseb2.png
+[08:08] <pushpop> For a New User like my self to the Ubuntu world, How would I learn or correct my xorg.conf because I am unable to startX ?  I get an Error "No Screens Found" and its detect my model monitor?
+[08:08] <{K}Lubby> pushpop: no clue, im a ubuntu noob too lol
+[08:08] <farous> pushpop: sudo dpkg-reconfigure xserver-xorg
+[08:09] <pushpop> farous: tried that serveral times, and I get the same error each time
+[08:09] <{K}Lubby> lxe: you making any sense out of that pic?
+[08:09] <lxe> K}Lubby: lspci | grep Eth
+[08:09] <farous> what is your error
+[08:09] <farous> and what part do nto work is it the graphic card
+[08:09] <{K}Lubby> lxe: what's lspci | grep Eth?
+[08:10] <pushpop> farous: (EE) No devices Detected  Fatal Error No Screens found
+[08:10] <lxe> {K}Lubby: type it in and see what is says
+[08:10] <farous> pushpop: then you selected the wrong driver for your graphic card
+[08:10] <{K}Lubby> okay
+=== croak77 [n=scratch@69-164-89-254.albyny.adelphia.net]  has joined #ubuntu
+[08:10] <farous> pushpop: do you know what card you have
+[08:10] <pushpop> farous: x800
+[08:10] <lxe> {K}Lubby: like 'Ethernet Controller ... blah blah"
+=== Flyoc_ [n=flyin_do@APlessis-Bouchard-153-1-23-247.w83-200.abo.wanadoo.fr]  has joined #ubuntu
+[08:10] <pushpop> farous: its shows up as an x850
+=== PyroManiak [n=firestar@c-24-21-233-164.hsd1.or.comcast.net]  has joined #ubuntu
+[08:11] <farous> pushpop: did you select the ati driver when you did the dpkg-reconfigure
+[08:11] <PyroManiak> hells yeah! got my game working.. lol
+=== ricperry-ubuntu- [n=develope@kng1-p188.flets.hi-ho.ne.jp]  has left #ubuntu ["Ex-Chat"]
+[08:11] <pushpop> farous: it auto fills the ati x850
+[08:11] <{K}Lubby> lxe: "ethernet controller: intel corporation 82557/8/9 [ethernet pro 100]  (rev 01)
+[08:11] <lxe> {K}Lubby: the card seems to be working
+[08:12] <farous> pushpop: you know how to use the pastebin?
+[08:12] <{K}Lubby> lxe: yeah
+=== A2A [n=haha@CPE00045ad7991c-CM001225db7ac8.cpe.net.cable.rogers.com]  has left #ubuntu []
+=== engla [n=ulrik@193.212.97.9]  has joined #ubuntu
+[08:12] <{K}Lubby> lxe: just for grins, should i try another ethernet card?
+[08:12] <farous> !pastebin > pushpop
+[08:12] <farous> pushpop: check the pm from ubotu
+[08:13] <pushpop> farous: yes but this is on another pc
+[08:13] <lxe> {K}Lubby: you can try, but i doubt this is a card or a driver problem
+[08:13] <{K}Lubby> lxe: okay, then i won't try right now
+[08:13] <{K}Lubby> lxe: what next?
+[08:13] <pushpop> farous
+[08:13] <farous> pushpop: i need to have a look at your /etc/X11/xorg.conf file
+[08:13] <lxe> {K}Lubby: are you sure that you should be 192.168.0.2?
+[08:13] <pushpop> farous: ok ill ssh in one minutes
+[08:13] <farous> ok
+=== ZaR|Oblivion [n=zarathu@adsl-68-94-14-93.dsl.rcsntx.swbell.net]  has joined #ubuntu
+[08:13] <{K}Lubby> it needs to be 192.168.0.something-other-than-1
+[08:14] <{K}Lubby> something in the same range as the ethernet card on my xp, which is 192.168.0.1
+[08:14] <pushpop> farous: is ssh enabled by default?
+[08:14] <farous> the client not the server yes
+[08:14] <farous> for the server install openssh-server package
+[08:15] <pushpop> like i said im new to all this
+[08:15] <pushpop> what would be the actual command
+[08:15] <pushpop> sorry =/
+=== noiesmo [n=noiesmo@CPE-203-51-255-168.qld.bigpond.net.au]  has joined #ubuntu
+=== GnarlyBob [n=chris@pdpc/supporter/active/GnarlyBob]  has joined #ubuntu
+[08:15] <lxe> {K}Lubby: ahh
+[08:15] <farous> pushpop: sudo apt-get install openssh-server
+=== nicholas_paul is now known as WouldWork
+[08:15] <{K}Lubby> lxe: does the ahhh mean that you figured out the problem? :P
+[08:16] <lxe> {K}Lubby: no it means i have no idea what's going on
+=== P3L|C4N0 [n=gcamposm@222.124.3.26]  has joined #ubuntu
+[08:16] <mikeg> sethk: do u have any idea how to know my kernel module?
+[08:16] <{K}Lubby> lxe: YAY if you fix it ill umm... i dunno... ill be happy though
+=== klos_ [i=hans@p54A80D7C.dip0.t-ipconnect.de]  has joined #ubuntu
+[08:17] <lxe> {K}Lubby:  1. try another card. 2. run dhcp server on windows machine, and if that doesn't work, something's wrong
+[08:17] <{K}Lubby> lxe: how do i run dhcp on it?
+[08:17] <lxe> {K}Lubby: i donno
+[08:17] <{K}Lubby> great
+[08:17] <lxe> {K}Lubby: oh when you click "ok" in network-admin, what does the error say?
+[08:18] <{K}Lubby> hold on, ill screeny it
+[08:18] <verbose_> {K}Lubby: are you using internet connection sharing on the xp machine?
+[08:18] <lxe> thanks
+=== ctd [i=ctd@incubus.progsoc.uts.edu.au]  has joined #ubuntu
+=== mrPolite [n=michael@ip68-8-44-136.sd.sd.cox.net]  has joined #ubuntu
+[08:18] <{K}Lubby> lxe: its when i have ethernet connection selected and hit activate (or when i hit okay for the static ip settings of the connection if its already activated)
+=== Bob535 [n=chris@S01060004e221aa77.gv.shawcable.net]  has joined #ubuntu
+=== detectiveinspekt [n=jonathan@ip-58-28-154-33.ubs-dsl.xnet.co.nz]  has joined #ubuntu
+[08:19] <verbose_> {K}Lubby: what does ifconfig eth0 show?
+[08:19] <pushpop> farous: http://paste.ubuntu-nl.org/20262
+[08:19] <{K}Lubby> verbosoe_: hold on
+[08:19] <lxe> {K}Lubby: verbose had a good question about connection sharing
+[08:19] <verbose_> does `ifup eth0` work?
+[08:19] <farous> pushpop: ok give me sometime to read it
+[08:20] <verbose_> i just jumped into this conversation, so sorry if i'm asking stuff that other people have already asked
+=== mrPolite [n=michael@ip68-8-44-136.sd.sd.cox.net]  has left #ubuntu []
+[08:20] <pushpop> farous: you the man, thanks
+[08:20] <lxe> verbose_: I don't thing we tried ifup yet :-p
+[08:20] <visik7> anyone here with an r1000 driver ?
+[08:20] <verbose_> i just looked at the .png...looks like that's the problem
+[08:21] <farous> pushpop: you are using the open-source ati drivers
+=== Necrosan_ [n=necrosan@CPE-24-211-5-47.wi.res.rr.com]  has joined #ubuntu
+[08:21] <Necrosan_> How do I disable all the useless crap ubuntu tries to start when it boots?
+[08:21] <Necrosan_> Trying to quicken the bootime/disable stuff I don't use
+[08:21] <verbose_> Necrosan_: read /etc/init.d/README
+[08:21] <Necrosan_> is there an interactive tool of some sort?
+[08:21] <Necrosan_> I know how to do it manually
+=== dartmolx [n=dartmolx@58.71.14.245]  has joined #ubuntu
+[08:21] <Necrosan_> But I'm feeling lazy tonight
+[08:22] <pushpop> farous: i havent install any drivers
+[08:22] <pushpop> farous" fresh install
+[08:22] <ompaul> Necrosan_, you can install a program called "bum" boot up manager
+[08:22] <carthik> What's an easy to use mp3 tag editor that is intuitive to use too?
+[08:22] <Necrosan_> Can you vouch for it, ompaul?
+[08:22] <lxe> anyway i need to go sleep
+[08:23] <farous> pushpop: hmm i can not see any section for files or modules
+=== noiesmo [n=noiesmo@CPE-203-51-255-168.qld.bigpond.net.au]  has joined #ubuntu
+[08:23] <lxe> LEAVE
+[08:23] <farous> pushpop: did you cut those out
+=== Krhis [n=Krhis@cblcpe-79-205.suite224.net]  has joined #ubuntu
+[08:23] <{K}Lubby> vebose_: you wanted a screeny of when i do ifconfig eth0 and `ifup eth0`, right?
+[08:23] <pushpop> farous: no
+[08:23] <Necrosan_> well?
+[08:23] <verbose_> {K}Lubby: sure
+[08:23] <lxe> damn user commands
+[08:23] <{K}Lubby> okay
+=== Flyoc_ is now known as Flyoc
+=== aviper2k7 [n=alex@adsl-69-211-88-226.dsl.milwwi.ameritech.net]  has joined #ubuntu
+[08:23] <farous> pushpop: did you use the live cd to install
+[08:23] <ompaul> Necrosan_, in so far as you know what you want to turn off and turn it on again yes - obviously if you stop the wrong thing }:->
+[08:23] <pushpop> farous: no
+[08:23] <verbose_> {K}Lubby: also include `dmesg|grep eth` and `lspci -v` please
+[08:23] <pushpop> farous: alternate
+[08:24] <{K}Lubby> uhh okay one sec
+[08:24] <farous> pushpop: i would just say by the way your horiz and vet sync might be high
+[08:24] <Necrosan_> ompaul, Is there a comprehensive list somewhere that lists a good majority of things I can turn off?
+=== Se7h [n=MUAHAHAH@85.138.3.134]  has joined #ubuntu
+=== Dravas is now known as Drav|Away
+=== lxe [n=lxe@216.48.49.142]  has left #ubuntu ["Leaving"]
+[08:24] <{K}Lubby> verbose_: do you want the `'s in there?
+[08:24] <pushpop> farous: ok ill try changing
+[08:24] <farous> pushpop: looks fine except for the missing font and modules section
+[08:24] <carthik> Necrosan_, try searching the HOWTO forum at the ubuntu forums. I remember reading one such some time ago
+[08:24] <verbose_> {K}Lubby: either way it should work
+[08:24] <{K}Lubby> k
+[08:25] <Necrosan_> bum seems pretty awesome
+[08:25] <verbose_> i was using them mostly so you'd know where to start and stop the command versus my writing
+[08:25] <Necrosan_> I'm really surprised ubuntu is outperforming solaris on this sparc
+[08:25] <Necrosan_> Plus I get to use XFS as my FS, what a deal!
+[08:25] <farous> pushpop: xserver have been changed a lot lately do not know if this inform is still requ in the xorg.conf file or not
+[08:25] <verbose_> is it SMP?
+[08:25] <pushpop> no idea
+[08:26] <Necrosan_> Do I need powernowd on a sparc64 machine?
+[08:26] <farous> pushpop: ah the server default to the first resol which is the highest. Do you have the highest refresh rate with this resol or a lower one
+[08:26] <ompaul> Necrosan_, install that, read what comes up on screen when you start it - it is a you choose thing
+=== guest_guest_sam [n=amastude@210.213.122.91]  has joined #ubuntu
+[08:27] <farous> pushpop: let see what the room think
+[08:27] <ompaul> Necrosan_, and if you hit the wrong thing and you have no gui then all you need to remember is the > sudo /etc/init.d/$service start <
+=== verbose_ is now known as verbose
+=== Zarathu [n=zarathu@adsl-68-94-2-58.dsl.rcsntx.swbell.net]  has joined #ubuntu
+[08:27] <pushpop> farous: ok
+=== horrork [n=z@ppp160-32.as1.cbr1.internode.on.net]  has joined #ubuntu
+[08:27] <farous> Is it normal not to have a files section (for font path) and a module section for loaded modules in the xorg.conf file ??
+[08:28] <Necrosan_> im stopping the crap
+[08:28] <verbose> farous: i don't think it's normal, mine has both
+[08:28] <Necrosan_> but it just keeps appearing again
+[08:28] <verbose> i believe you definitely need FontPath directives
+[08:28] <verbose> but i'm not positive
+[08:29] <visik7> guys do you know if ati and nvidia driver can coexsists ?
+[08:29] <pushpop> farous: im retarted my copy paste skills are not up to par. I have modules
+[08:29] <verbose> "Module" section you should be able to get away with not having
+[08:29] <Necrosan_> ill brb
+[08:29] <Necrosan_> trying this
+[08:29] <visik7> I mean I'm building a ubuntu live cd and I would to put both
+[08:29] <farous> pushpop: no prob it was really strange. yet xserver have changed a lot lately
+[08:29] <{K}Lubby> gah
+[08:29] <verbose> visik7: i don't see why they couldn't
+[08:29] <{K}Lubby> imageshack is going mental
+=== horrork [n=z@ppp160-32.as1.cbr1.internode.on.net]  has left #ubuntu []
+[08:30] <{K}Lubby> what's another image hosting site?
+[08:30] <visik7> verbose: just to be sure dunno maybe libGL.so.1 are provided by both and can conflict
+[08:30] <farous> thanx verbose i thought it was strange too :)
+[08:30] <{K}Lubby> cause it's saying please hit browse and select a file to upload, even when i did
+=== sl8r [n=KK@84.236.19.135]  has joined #ubuntu
+[08:30] <Madpilot> {K}Lubby, try hitting your browser's reload button
+[08:31] <{K}Lubby> i did
+[08:31] <farous> pushpop: so when you do the reconfiguration just choose a lower resol and refresh rate for start
+=== D_Block [n=chatzill@pool-72-88-154-130.nwrknj.east.verizon.net]  has joined #ubuntu
+[08:31] <{K}Lubby> and tried internet explorer too
+=== guest_guest_sam [n=amastude@210.213.122.91]  has left #ubuntu []
+[08:31] <farous> pushpop: do not worry about the card name you have it right in the xorg.conf section X800
+[08:31] <pushpop> farous: www.digitizememories.com/IMG_0961.jpg
+=== Zdra [n=zdra@203.205-241-81.adsl-dyn.isp.belgacom.be]  has joined #ubuntu
+[08:32] <pushpop> farous:  www.digitizememories.com/IMG_0962.jpg
+=== slow [n=slow4@pool-72-66-94-139.washdc.fios.verizon.net]  has joined #ubuntu
+[08:32] <D_Block> hi sorry to change to topic but if I download and use a livecd, is there any way to save my settings/config?
+[08:32] <{K}Lubby> well anyways lxe and verbose here's the first of 3 pics
+[08:32] <{K}Lubby> the commands in terminal part a: http://img85.imageshack.us/img85/5352/part1js4.png
+=== DShepherd [n=dwight@port0163-abv-adsl.cwjamaica.com]  has joined #ubuntu
+[08:32] <carthik> !persistence
+[08:32] <ubotu> To have some persistent storage when using a Live CD, follow the instructions on https://wiki.ubuntu.com/LiveCDPersistence
+[08:32] <carthik> D_Block, ^^
+=== Steggy [n=josh_ste@204.96.152.74]  has joined #ubuntu
+=== sPiN- [n=spin@24-176-84-134.dhcp.hckr.nc.charter.com]  has left #ubuntu ["If]
+[08:32] <D_Block> ok I'll check it out
+[08:33] <DShepherd> anyone know where i can find a svg of the ubuntu icon on my system??
+[08:33] <farous> pushpop: ah much better :)
+[08:33] <pushpop> haha
+[08:33] <{K}Lubby> gimme a sec while i set up photobucket and ill have the rest uploaded
+[08:33] <verbose> {K}Lubby: well, before you spend time on that
+[08:33] <verbose> try this: `sudo ifup eth0`
+[08:33] <{K}Lubby> it says "password:"
+=== HellDragon [n=JD@about/copyleft/pdpc.active.HellDragon]  has joined #ubuntu
+[08:34] <verbose> {K}Lubby: enter your password

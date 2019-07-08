@@ -1,0 +1,1500 @@
+[06:25] <gregoru> Was kinda slow though 1.35h for 5runs of dodshort
+[06:25] <Khedron> I use a knoppix cd and run wipe
+[06:25] <SeanInSeattle> Hey all.  I've installed apache 2.3.8 and installed from source.  I wasn't aware that it wouldn't put apache into the same directory that ubuntu would normally install it to when installing from the dpkg in the repos.  It seems to have installed it to /usr/local/apache2.  I'm wondering if it would be appropriate to move that whole directory into /etc/ to match ubuntu style?
+[06:25] <Khedron> more...configurable
+[06:25] <gregoru> How fast was that ?
+[06:26] <Khedron> faster than dban
+[06:26] <Khedron> dban often doesn't put the drive into dma and stuff
+[06:26] <c0nv1ct> SeanInSeattle, /etc is for configurations, not apache installs
+[06:27] <SeanInSeattle> c8nv1ct:  ok.  so its fine to have it live where it was placed originally?
+[06:27] <Khedron> gregoru: with modern drives you rarely need more than 3 passes and a zeroing anyhow
+[06:27] <c0nv1ct> SeanInSeattle, i dont think it really matters where the binaries/libs are, symlink any configs to /etc/apache2 if you need to
+[06:28] <Memnochxx> Should upgrading a wubi installation generally be avoided?
+[06:28] <gregoru> 3 passes= 1 run I presume including a zeroing
+[06:28] <gregoru> anyhow is that netboot like 13M ?
+[06:28] <Khedron> it is
+[06:28] <gregoru> goodie
+[06:28] <Khedron> I use it on a pxe install
+[06:28] <SeanInSeattle> c8nv1ct:  When its installed from source, do I need to manually add the apache directory to my path?
+[06:28] <gregoru> Only have a burning optic left :P
+[06:29] <Khedron> so I just boot from the network and install them from that
+[06:29] <Gryllida> Hello! What is this distribution prominent for? It has read/write ntfs preinstalled, gnome (like many others), linux kernel (like many others), what else?
+[06:29] <Khedron> same with knoppix
+[06:29] <c0nv1ct> SeanInSeattle, why does it need to be in your path?
+[06:29] <gregoru> mini.iso ? is that it ?
+[06:29] <Khedron> the mini.iso is to burn yes
+[06:29] <SeanInSeattle> c8nv1ct:  I don't know.  I'm just learning some of this sys admin stuff.
+[06:29] <gregoru> this will be interesting :)
+[06:29] <Khedron> the other files are to network boot
+[06:30] <xixor> yo, so, I can browse to an smb share on a windows computer using the KDE file browser dolphin, I can copy files, etc, but I cannot stream the files when I open them with vlc, what gives?
+[06:30] <c0nv1ct> SeanInSeattle, you might want to stick to managed packages until you learn some more then and avoid compiling by hand
+[06:30] <Khedron> gregoru: if you're on a fast network, its faster to do it that way lol
+[06:30] <SeanInSeattle> c8nv1ct:  The only way that I'm going to learn this stuff is by doing it.  Not by shying away from it.
+[06:30] <gregoru> 100mbit in/out is that still faster than a ALT.iso ?
+[06:31] <Khedron> yes
+[06:31] <Khedron> way faster
+[06:31] <Khedron> your network will be faster than cdrom access speeds
+[06:31] <SeanInSeattle> c8nv1ct:  So, as I understand you, it doesn't matter if the apache2 directory is on the system path, yes?
+[06:31] <c0nv1ct> SeanInSeattle, true, but by doing what you did, you shifted the responsibility of maintaining the package on to yourself.  are you capable of keeping up with security patches yourself?
+[06:31] <gymophett> I have Ubuntu as the host OS, and Windows XP as guest OS in Virtualbox. I insert my SD card, and the card doesn't pop up in the windows xp virtual machine. how do i make it do so?
+[06:31] <gregoru> Cant remember how fast a 52x cd reads would have answered myself if I knew :P
+[06:31] <c0nv1ct> SeanInSeattle, learn to swim in the shallow end ;)
+[06:31] <SeanInSeattle> c8nv1ct:  Yes, I don't want my server to be upgrading automagically. :)
+[06:31] <Khedron> gregoru: not 100meg ;)
+[06:32] <Khedron> course, depends on the mirror used
+[06:32] <gregoru> My sata writes at 140mb/s I think
+[06:32] <c0nv1ct> SeanInSeattle, you choose when to run `apt-get upgrade`
+[06:32] <Khedron> should be way faster than the alt cd then
+[06:33] <kamalesh> I connected a monitor to my laptop, my PC : Vaio EA16FG, ATI Radeon 5650 1GB , the prob is , somehow the external laptop became my Primary screen (Screen 1), How do i change it back ?
+=== William_ is now known as WilliamHerry
+[06:34] <kamalesh> I connected a monitor to my laptop, my PC : Vaio EA16FG, ATI Radeon 5650 1GB , the prob is , somehow the external monitor became my Primary screen (Screen 1), How do i change it back ?
+[06:34] <gregoru> Last test was like 12,3mb/s so almost 100mbit
+[06:34] <Dr_Willis> kamalesh:  many laptops have a special FN-Somthing key that toggles the internal display and external.  Or are you wantuing to use both at the same time?
+[06:34] <kamalesh> Dr_Willis:  but it doesnt work in Ubuntu :)
+[06:35] <tiox> Mmmkay, I wanna ask.
+[06:35] <kamalesh> Dr_Willis: Oh sorry, the OS is Ubuntu 10.10 64bit
+[06:35] <Dr_Willis> kamalesh:  mine do.  but its proberly chipset specific. I dont use ATI. I only have nvidia box's
+[06:35] <tiox> Why in the installer are we forced to begin with lower case?
+[06:35] <Dr_Willis> tiox:  claify what you are asking...
+[06:35] <AbhiJit> i installed the dropbox nautilis addon. but where it goes? cant find it
+[06:35] <Memnochxx> tiox your username? because it has to be lower case.
+[06:36] <tiox> I just received an error when I wanted to begin my username with a capital letter.
+[06:36] <tiox> But why? What's the significance?
+[06:36] <AbhiJit> nvm
+[06:36] <kamalesh> Dr_Willis: The screens work fine, i can change the screen back to my laptop screen, but in my ATI Catalyst Control center, the primary display is the external monitor
+[06:36] <Dr_Willis> because in linux Case is siginificant.  MixxEdCaSe does not get maped  to lowercase equilivents like it does in other OS's
+[06:37] <Memnochxx> that can't be the reason Dr_Willis
+[06:37] <Dr_Willis> kamalesh:  for my nvidia stuff. theres a check box to make this display the primary.  No idea on ati.
+[06:37] <Dr_Willis> Memnochxx:  why not..
+[06:37] <Memnochxx> Because that's no reason to disallow lower case if case is significant.
+[06:37] <Dr_Willis> could be grandfathered in stuff also.. could also be to dissalow 2 users like Bill and bill getting confused.
+[06:38] <mtx_init> in firefox aboutconfig what does this mean distribution.canonical.bookmarksProcessed;true
+[06:38] <tiox> mtx_init: Might mean bookmarks from another OS.
+[06:38] <Dr_Willis> try adding a user with adduser command with Different Cases  see if it works,
+[06:38] <kamalesh> Dr_Willis:  Hm, Ok :)
+[06:38] <tiox> Like, with installation, bookmarks from Internet Explorer.
+[06:38] <Dr_Willis> may as well ask why theres no 'n' in the unmount command. :)
+[06:38] <dpreacher> help please. My computer stops working after n days of uptime. Can't seem to figure out where to check for errors
+[06:39] <Dr_Willis> its 'umount'
+[06:39] <AbhiJit> so how to get maverick font in my lucid?
+[06:39] <thaklos> Hello, I am trying to activate a driver and it errors, here is /var/log/jockey.log, can someone tell me what I should be changing? http://pastebin.com/4tFKUXJU
+[06:39] <Dr_Willis> AbhiJit:  theres some repos that have the Ubuntu font and downloads you can use in other OS's - i saw some posting about that a few weeks back on OMGubuntu, or webupd8
+[06:39] <AbhiJit> Dr_Willis, ok
+[06:39] <tiox> Where can I see this glaring typo?
+[06:40] <`3Shades> So my hard drive is filling up and I want to use a USB drive I bought for installing things onto. My problem is every time I use the synaptic package manager or apt-get it puts things directly onto my main drive, can I adjust this or use a command to change this?
+[06:40] <Dr_Willis> Everyone was making a big deal about the font in beta.. Now that its actually out. You dont hear much about it.
+[06:40] <tiox> Same thing that happens to lots of things.
+[06:41] <Dr_Willis> `3Shades:  not really.  How much space are you using for / anyway? You can move some directories to other partitions and free up some space.
+[06:41] <JoeMaverickSett> AbhiJit: i know the repo.
+[06:41] <AbhiJit> Dr_Willis, i need it to tpye the indian rupee symbol
+[06:41] <tiox> When something comes out, you hear less of it and people are onto the new shiny thing.
+[06:41] <Mossyfunk> What's the best version to install for legacy ATI drivers for a radeon X850 Pro? 8.04 or 8.10?
+[06:41] <AbhiJit> JoeMaverickSett, where is repo?
+[06:41] <JoeMaverickSett> AbhiJit: sorry, i meant ppa, http://www.webupd8.org/2010/10/public-ubuntu-font-family-ppa-for.html
+[06:41] <Memnochxx> Move media to different drives, not programs
+[06:41] <`3Shades> I don't really do media
+[06:41] <Dr_Willis> My / on my old system with Lots of stuff installed.. is only like 10gb...
+[06:41] <Memnochxx> You must have a super small drive then.
+[06:42] <`3Shades> I only have programs.. lots of programs.. heh
+[06:42] <tiox> Mossyfunk: Try this. Burn a copy of each version and see which one works better. :P
+[06:42] <`3Shades> 60gig
+[06:42] <Mossyfunk> tiox, =P
+[06:42] <Dr_Willis> my /home is on its own 2TB hd. :)
+[06:42] <Memnochxx> You've filled up 60 gb with no media?
+[06:42] <neowest> hola a todos
+[06:42] <linux_is_my_hero> good evening, all :-)
+[06:42] <tiox> No way.
+[06:42] <linux_is_my_hero> how do i sync subfolders on ubuntu one?
+[06:42] <Dr_Willis> `3Shades:  i have to wonder what you have done to fill up a 60gb /
+[06:42] <tiox> How the hell's what I'm saying.
+[06:43] <JoeMaverickSett> how do i put my / on to one partition and /home on another? is there a way to do that?
+[06:43] <Dr_Willis> JoeMaverickSett:  mount the other partition as /home
+[06:43] <`3Shades> I love testing out and I've installed just about everything I could off of the synaptic manager.. heh
+[06:43] <Dr_Willis> JoeMaverickSett:  i normally do it during the install.. but its not too hard to do afterwards
+[06:43] <tiox> 0_0
+[06:43] <JoeMaverickSett> Dr_Willis: got any guides?
+[06:43] <tiox> OMFG.
+[06:43] <AbhiJit> is there any cool site for themes other than bisigi?
+[06:43] <AbhiJit> no the gnome art
+[06:43] <Dr_Willis> JoeMaverickSett:  theres proberly some out there. but as i said its rather straight forward if you know a few linux basics.
+[06:43] <`3Shades> can I move my wine? that would take out a lot
+[06:44] <JoeMaverickSett> Dr_Willis: okie, will try it out when i do another fresh install. :)
+[06:44] <tiox> I think you need to drink some wine and reassess what you really need!
+[06:44] <`3Shades> my native wine folder is huge..
+[06:44] <`3Shades> still programs though
+[06:44] <Dr_Willis> `3Shades:  you can get a 2nd hd and have the USERS home dir access it.  format it to ext3/4 or similer. and link it to the /home/user/whatever dir.
+[06:44] <Dr_Willis> `3Shades:  users wine/home dir are not the kind of 'programs' we are refering to.
+[06:45] <Dr_Willis> You can move /home/ or specific users in /home/ to other partitions/filesystems
+[06:45] <tiox> Quit flood! /_\
+[06:45] <Dr_Willis> 2TB hds are under the $100 mark last i looked. :)
+[06:46] <tiox> Oh yes. I read about WD's Barracuda selling for $80
+[06:46] <`3Shades> That's what I thought but I want to make sure... thanks Dr_Willis, I'm starting to think I need to start downloading some of the java programs I run and moving them too...
+[06:46] <tiox> Might be cheaper today.
+[06:46] <`3Shades> I've got about 1/2 a gig left...
+[06:46] <Dr_Willis> sounds like you need to be removing extra cruft.. :)
+[06:46] <tiox> THough, `3Shades, please uninstall what you really don't need.
+[06:47] <jebadia> hey guys u just installed a nvidia video card and set it up to have a second desktop t=restarted to get it all ready and now umbuntu boots to a console instead of a desktop know wjhats up
+[06:47] <Dr_Willis> This is comming from someone that has 8+GB in his wallpaper directory
+[06:47] <`3Shades> tiox, but I need it ... trust me lol
+[06:47] <`3Shades> A lot of my stuff is you need this lib and it's dependancies are this.. ect.
+[06:47] <tiox> I am running Ubuntu off a 8GB USB drive because I want to, some time in the future get Windows working on it again.
+[06:47] <tiox> Then after that, I plan on buying a Ubuntu laptop with wwhatever money I can scrape up.
+[06:48] <tiox> Preinstalled, so I know everything works.
+[06:48] <chrissavery> JoeMaverickSett: read up on the mount command. You can mount a partition wherever you need. Then you can make it permanent in the /etc.fstab file. man mount, man fstab
+[06:48] <Dr_Willis> `3Shades:  normal stuff from the package manager system. I find it hard to belive you have used that to fill up  most of a 60gb HD.. now take like 4 windows games in the wine dir.. I can see THAT taking up most of a 60gb HD.
+[06:48] <`3Shades> I think this is a feature for updates...
+[06:48] <Dr_Willis> `3Shades:  theres alwways the apt-cache directory you can clear out to free up a few GB.
+[06:48] <chrissavery> JoeMaveriakSett: oops, that's /etc/fstab (no dot, typo)
+[06:48] <nacho> hey great site bisigi
+[06:48] <tiox> Windows working on my laptop rather.
+[06:49] <tiox> Has Rug been in here?
+[06:49] <john38> hey i got a question
+[06:49] <jebadia> i really need some noob help too
+[06:49] <nacho> im noob in ubuntu
+[06:49] <tiox> Waht, Dr_Willis, what is that?
+[06:49] <`3Shades> Can I move my virtual boxes over too?
+[06:49] <tiox> Wait*
+[06:50] <tiox> Also, `3Shades gave us the answer.
+[06:50] <tiox> He has other Oss installed.
+[06:50] <nacho> is there a way to install my cam ? got a netbook
+[06:50] <`3Shades> Dr_Willis, I did that...
+[06:50] <tiox> But Dr_Willis, please explain what apt_cache is.
+[06:51] <tiox> Because I might want to dump it too, but I want to be sure of it's purpose.
+[06:51] <`3Shades> yeah I have virtual boxes from dos 4.0 to windows vista ultimate installed... heh.. *sheepish look*
+[06:51] <Dr_Willis> tiox:  /var/cache/apt/archives/ has a cache of most all yoru .deb files the package manager has downloaded.
+[06:51] <Dr_Willis> tiox:  ive seen it get a few GB large befor.
+[06:51] <tiox> Well them, if I remove these, say i don't want a program anymore, will it then not uninstall?
+[06:51] <`3Shades> I even got a copy of windows 2.0 oh yeah lol
+[06:52] <`3Shades> it's a shell to run word lol
+[06:52] <tiox> Because I assume apt-cache is just an uninstall dir.
+[06:52] <Dr_Willis> tiox:  its not an Uninstall dir
+[06:52] <Dr_Willis> its a 'cache' of downlaoded packages
+[06:52]  * bintut waves
+[06:52] <Dr_Willis> Hmm. bash completion for many of the apt commands seems broken on this new install.
+[06:52] <tiox> Okay. So even without that, Synaptic will work with full functionality.
+[06:53] <ImAlive> wow, ailurus, the newest version has a new setting called computer DR. it fixes Ubunu things. It fixed my wrongly named packages.
+[06:53] <AbhiJit> is there any way i can shorten this ctrl shift u20b9 ? which is used to type rupee symbol?
+[06:53] <ImAlive> coolness
+[06:53] <AbhiJit> e.g. i want it to be ctrl+r+s
+[06:53] <ImAlive> it better then Ubuntu tweak
+[06:53] <thinkr> hey all... i have a problem with my ubuntu 10.01LTS on my laptop
+[06:53] <`3Shades> Alright I moved my os files and changed my remount for dosbox and still working on moving my /home dir..
+[06:54] <Dr_Willis> ive had issues with ailuurus in the past.
+[06:54] <thinkr> the wireless shows up... but no wireless is being shown
+[06:54] <bintut> i just installed ubuntu-desktop 10.10 amd64 on my pc. i was trying to search for the package similar to xen-4 but i can't find one. anybody can tell me how i can install xen-4 on my ubuntu 10.10 system?
+[06:54] <AbhiJit> <unconvertable>
+[06:54] <AbhiJit> :)
+[06:54] <ImAlive>  <unconvertable>
+[06:54] <ImAlive> tornado
+[06:54] <thinkr> i can't seem to get the wifi working!
+[06:54] <AbhiJit> or sholdi  ask in gnome?
+[06:55] <thinkr> can anybody please help??
+[06:55] <jebadia2> does anybody know why after installing a vodeo card umbuntu wont boot to the gui it goes in to a console mode to log in after splash screen
+[06:55] <`3Shades> now should that be a symbolic link?
+[06:55] <tiox> 	Oh wow, I got denied trashing archives.
+[06:55] <Snorlax> Snorlax
+[06:55] <`3Shades> for the home dir
+[06:56] <ImAlive> thinkr,  can you explain a little more
+[06:56]  * Snorlax snores
+[06:56] <Dr_Willis> jebadia2:  you did install the proper drivers for that card? or have you not done so yet?
+[06:56] <inuyasha> jebadia2: you must use ati~~
+[06:56] <thinkr> hey... i had installed ubuntu on my previous laptop and it worked all fine
+[06:56] <jebadia2> ya it has the nvidia drivewrs installed
+[06:56] <tiox> Dr_Willis: Must I be in root terminal to trash the archive folder?
+[06:57] <pi3ch> has anybody use Mutt here?
+[06:57] <Dr_Willis> jebadia2:  check that you have a nvidia  settings in your /etc/X11/xorg.conf file
+[06:57] <jebadia2> all i did after installing the drivers is restart
+[06:57] <rusivi> !xen | bintut
+[06:57] <ubottu> bintut: XEN is a virtual machine monitor for x86 that supports execution of multiple guest operating systems with unprecedented levels of performance and resource isolation. Information on installing it for Ubuntu can be found at https://help.ubuntu.com/community/Xen
+[06:57] <Dr_Willis> tiox:  to mess with system dirs/files one needs root access normally. a good program would ask for the password if its not ran as root allready
+[06:57] <pi3ch> anybody use Mutt?
+[06:57] <jebadia2> i i dont know how to use the command lines yet im noob
+[06:57] <tiox> I got flat-out denied.
+[06:57] <tiox> No password.
+[06:57] <thinkr> i got a new laptop, a lenovo L412, but the wireless doesn't seem to work... it shows the wireless icon in the bar at the taskbar, but it doesn't detect any... wireless workd fine in windows though...
+[06:58] <jebadia2> is ther a command line to launch the desktop
+[06:58] <Dr_Willis> jebadia2:  'startx'
+[06:58] <rusivi> thinkr: What is your mfg/model laptop
+[06:58] <`3Shades> Dr_Willis, was that a symbolic link I should do from home to home
+[06:58] <rusivi> thinkr lenovo L412 anything else after the L412?
+[06:58] <jebadia2> fatal server error no screens found
+[06:59] <thinkr> its just lenovo L412
+[06:59] <jebadia2> shit i just got up and running too
+[06:59] <rusivi> thinkr: k one sec
+[06:59] <Snorlax> a3Dman, aarcane, Aaron5367, aaron__, aaroncampbell, AbhiJit, abiy, Aciid, acke-, acke-, acknopper, adamx, adan0s, adante, addisonj, adekoba
+[06:59] <Snorlax> whoops
+[06:59] <FloodBot3> Snorlax: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[06:59] <jebadia2> im trying to set uop a shout cast serve tor my home radio station'
+[06:59]  * Snorlax snoes
+[06:59] <thinkr> due to the wireless not working, i can't update ubuntu or install anything!
+[06:59] <AbhiJit> Snorlax, yes?
+[06:59] <Swishahouse> Greetings =)
+[06:59] <Snorlax> snorlax
+=== tommy is now known as Guest70754
+[06:59] <Swishahouse> SNORLAX!
+[06:59]  * Snorlax snores
+[07:00] <Swish> . . .
+[07:00]  * Swishahouse flings some pokeballs around
+[07:00] <Memnochxx> It's a laptop, carry it to your router and plug in an ethernet cable.
+[07:00] <c0nv1ct> thinkr, find cat5
+[07:00]  * Snorlax is captured
+[07:00] <Guest70754> I'm having trouble with sound, on a couple programs like lmms and Hydrogen the sound is really freaking distorted, been reading for three or four hours and haven't found any solutions yet, anyone know how to fix this?
+[07:00]  * Snorlax 3..2..1
+[07:00]  * Swish a house
+[07:00] <Swishahouse> =D
+[07:00] <jebadia2> is there a command line to launch the monitors options screen
+[07:00] <Snorlax> nope
+[07:00] <Dr_Willis> `3Shades:  yes. You cant do hard links across filesystems...
+[07:00] <Swishahouse> Is there an easy way to clean up old kernels or is it best to just go into synaptic and remove them?? I'm low on drive space ><
+[07:00] <Snorlax> no such protocol exists between the monitor and the video card
+[07:00] <jebadia2> shit
+[07:01] <Snorlax> you can't reach the button?
+[07:01] <rusivi> thinkr Do you know who the mfg/model of your wifi internal NIC is?
+[07:01] <jebadia2> no for the drivers and such
+[07:01] <thinkr> irealtek
+[07:01] <thinkr> realtek
+[07:02] <`3Shades> Dr_Willis, you think this will break my wine installs?
+[07:03] <rusivi> thinkr: When you go to System -> Hardware Drivers does a prop driver pop up foryour wireless NIC, if so is it being used atm?
+[07:03] <jebadia2> so there is no way to acess the monitor optionbs threw a command line
+[07:03] <thinkr> nope. nothing comes there
+[07:04] <Snorlax> jebadia2, some things can be accessed with nvidia-settings
+[07:04] <Snorlax> but are you talking about a CRT or what
+[07:04] <AbhiJit> what is the default 'script' in character map?
+[07:04] <jebadia2> dammit i dont have a floppy on this laptop to make a fdisk floppy if this hd wont reainstall im forked
+[07:04] <Dr_Willis> `3Shades:  linking one dirctory to another.. is a filesystem feature. if done right. the programs wont know
+[07:04] <thinkr> a friend of mine had checked the terminal using somethinf lspci command, and got to know from there that the make is realtek
+[07:05] <pseydtonne> 'lspci' lists the stuff in your PCI and other mobo slots.
+[07:05] <rusivi> thinkr: Then your best bet at this point is to install Maverick and see if it works, otherwise your going to have to dive down the rabbit hole of trying to figure it ouw why it's not working.
+[07:06] <ImAlive> is there a way to exit all apps that have a exclusive lock?
+[07:07] <ImAlive> i dont know which does
+[07:07] <thinkr> maverick??
+[07:07] <Necrogami|Work> Can you change the position of the Login box on GDM?
+[07:07] <Snorlax> ImAlive, what do you mean by exclusive lock
+[07:07] <jebadia2> ill just reinstall
+[07:07] <ImAlive> im trying to run update manager and it cant get a ock
+[07:07] <ImAlive> lock
+[07:08] <thinkr> ohk... new version...
+[07:08] <Snorlax> what does it get stuck on
+[07:08] <Dr_Willis> Necrogami|Work:  not  that ive ever noticed. theres some XML config files for it that might have some setting.
+[07:08] <Snorlax> grub?
+[07:08] <Dr_Willis> jebadia2:  the nvidia-xconfig tool lets you tweak the xorg.conf via command line.
+[07:08] <Necrogami|Work> Dr_Willis: i know it's possible now .. i just found a theme on gnome-look.org that had it moved to the lower right corner..
+[07:08] <AbhiJit> i am unable to find the <unconvertable> in character map. please help
+[07:08] <Snorlax> ImAlive, ^^
+[07:08] <Necrogami|Work> ill tear into this one
+[07:08] <ImAlive> thinkr, www.ubuntu.com 10.10 :)
+[07:08] <Dr_Willis> Necrogami|Work:  that was a gdm2 theme? or a gdm1 theme?
+[07:09] <Necrogami|Work> im looking
+[07:09] <Firefishe> ImAlive: Is there another application using apt? Like synaptic?
+[07:09] <ImAlive> i cant see anything in system manager
+[07:09] <Snorlax> ImAlive, the exact text of the error you're getting from update manager would be more helpful than a vague anecdote and a clueless guess of what to do
+[07:09] <Necrogami|Work> Dr_Willis: how can i tell GDM1 vs GDM2?
+[07:10] <Dr_Willis> Necrogami|Work:  Ive not really noticed ANY gdm2 themes out.. gdm2 is not very themable it seems..  I havent even looked at themes for gdm in ages. so No idea
+[07:10] <Necrogami|Work> :(
+[07:10] <ImAlive> nah, some dude gave me a terminal command ounce that dropped all elevations
+[07:10] <ImAlive> thats what im looking for
+[07:10] <Dr_Willis> If you reallly MUST have themes for gdm. you can use gdm1. but im not going to bend over backwards for themes for a login screen i see for 3 sec....
+[07:11] <Snorlax> ImAlive, good luck
+[07:11] <ImAlive> lol
+[07:11] <Snorlax> ImAlive, I could tell you waht to do if you gave me the damn error
+[07:11] <ImAlive> basically it closed all synaptics
+[07:11] <Snorlax> killall synaptic
+[07:11] <ImAlive> yeA
+[07:11] <Snorlax> if you had given me the error I would have known you were talking about locks on dpkg
+[07:11] <ImAlive> do i suso that
+[07:11] <ImAlive> sudo
+[07:11] <Dr_Willis> that may not remove the lock files.
+[07:12] <Dr_Willis> !fixapt
+[07:12] <ubottu> If an APT front-end crashed and your database is locked, try this in a !terminal: <unconvertable> sudo fuser -vki /var/lib/dpkg/lock;sudo dpkg --configure -a <unconvertable>
+[07:13] <ibrahim-kasem> My printer gone crazy now it doesnt stop printing the same paper and I can't restart because I don't have the password!
+[07:13] <Snorlax> unplug the printer
+[07:14] <pseydtonne> ibrahim-kasem: I second Snorlax. Either unplug the printer cable or turn off the dang printer.
+[07:14] <Snorlax> pseydtonne, don't worry, it already ran out of paper by now
+[07:14] <Snorlax> lol
+=== itched is now known as ackley
+[07:14] <ibrahim-kasem> I did not thing about this it worked! thank you guys pseydtonne Snorlax
+=== DanaG1 is now known as DanaG
+[07:16] <ibrahim-kasem> now it stopped printing anything!!!
+[07:16] <pseydtonne> ...cuz it's off.
+[07:16] <ibrahim-kasem> I turned it on dude.
+[07:16] <ImAlive> lol
+[07:16] <silv3r_m00n> I installed an app using winetricks ,now how do I run it ?
+[07:16] <pseydtonne> Linux probably doesn't know that yet.
+[07:16] <silv3r_m00n> winetricks ie6 , that installed ie6 , now how to run ie6 ?
+[07:17] <ImAlive> why do you want ie6? on Linux?
+[07:17] <ImAlive> hehehe
+[07:17] <silv3r_m00n> how do I run it
+[07:17] <ibrahim-kasem> OMG !!! IE6 on Ubuntu !!
+[07:17] <Dr_Willis> silv3r_m00n:  that may just install/setup the wine programs to see firefox instead of IE. not actually install ie.
+[07:17] <Dr_Willis> If it was installed it should be in the wine menus
+[07:18] <Gnea> !ies4linux
+[07:18] <ubottu> ies4linux is a script that quickly and effortlessly helps you install 3 versions of IE in Wine. Information can be found at http://www.tatanka.com.br/ies4linux/page/Main_Page including instructions specifically for Ubuntu. ies4linux is aimed at web designers and ie-only sites, so please, dont use any of the IEs to navigate! Use Firefox!
+[07:18] <silv3r_m00n> I can't see it in the wine menu :(
+[07:18] <ImAlive> traders
+[07:18] <ImAlive> hehhee
+[07:18] <Gnea> ImAlive: ?
+[07:18] <silv3r_m00n> Gnea: thanks , I have used that , but for now I need to use winetricks
+[07:18]  * ImAlive hides
+[07:18] <emergion> Hey all, Can someone please help me fix my issue with Additional Drivers? The list is blank and I really need the latest Nvidia Drviers as the 10.10 upgrade has completely wrecked any chance of getting Nvidia drivers running ATM
+[07:18] <silv3r_m00n> after installation I can't see it in wine menus
+[07:18] <Dr_Willis> silv3r_m00n:  which leads me to belive that the winetricks thing just 'fixs' wine apps to think that its installed. Check teh winetricks docs to double check
+[07:19] <Snorlax> How do I program pokemon on ubuntu?
+[07:19] <kamalesh> My PC : Vaio EA16FG, ATI Radeon 5650 1GB, Ubuntu 10.10 64it. I connected an external monitor, Is it possible for me to use 1 workspace in 1 monitor ?
+[07:20] <ImAlive> kamalesh,  thts usually yhr case on all OS's is it not?
+[07:20] <Snorlax> How do I install ubuntu on my mom's computer?
+[07:20] <ImAlive> the
+[07:20] <kamalesh> ImAlive: ?
+[07:20] <pseydtonne> Snorlax: ask nicely.
+[07:20] <Gnea> Snorlax: the same way you install it on your computer
+[07:20] <ImAlive> nm, gawed i should sleep
+[07:21] <pseydtonne> ...then get your own machine from the street.
+[07:21] <emergion> Anyone? Has anyone had any problems with nvidia drivers after upgrading to 10.10, Google tells me a lot of people have had problems but there is little in the way of answers
+[07:21] <Snorlax> Gnea, my mom says it's ok to install but the way I usually install on my computer is by copying the whole disk
+[07:21] <Snorlax> Gnea, she said I can't delete whats on there now like she has lots of pics and stuff
+[07:21] <Snorlax> she does some hobby called latex or something
+[07:21] <Snorlax> i dunno
+[07:22] <Dr_Willis> Snorlax:  then use a flash drive..
+[07:22] <kamalesh> My PC : Vaio EA16FG, ATI Radeon 5650 1GB, Ubuntu 10.10 64it. I connected an external monitor, Is it possible for me to use 1 workspace in 1 monitor ?
+[07:22] <Gnea> Snorlax: for writing papers?
+[07:22]  * Dr_Willis installs ie7 via winetricks.. for fun.
+[07:22] <Gnea> Snorlax: back all of her stuff up first
+[07:22] <Snorlax> Gnea, no you wear it.. you can write papers with it?
+[07:22] <pseydtonne> I think Snorlax is snow jobbing us.
+[07:22] <waltercool> Snorlax, Latex, the GOOD PRACTICE writting papers?
+[07:22] <waltercool> or other kinds of documents?
+[07:23] <Dr_Willis> !info LaTeX
+[07:23] <ubottu> Package LaTeX does not exist in maverick
+[07:23] <Snorlax> no that's LaTeX, i'm talking like, the petroleum product that you wear for erotic pleasure
+[07:23] <Snorlax> so  anyway
+[07:23] <waltercool> !info texlive
+[07:23] <ubottu> texlive (source: texlive-base): TeX Live: A decent selection of the TeX Live packages. In component main, is optional. Version 2009-10 (maverick), package size 27 kB, installed size 124 kB
+[07:23] <Gnea> Snorlax: okay, that's way offtopic
+[07:23] <emergion> upgrade was a mess
+[07:23] <ImAlive> *brother*
+[07:23] <Dr_Willis> So anyway
+[07:23] <Dr_Willis> !ot
+[07:23] <ubottu> #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[07:23] <ImAlive> this is Ubuntu chat Ty.
+[07:23] <kamalesh> My PC : Vaio EA16FG, ATI Radeon 5650 1GB, Ubuntu 10.10 64it. I connected an external monitor, Is it possible for me to use 1 workspace in 1 monitor ?
+[07:23] <Snorlax> no no, but she wants me to install latex on her computer so that she can write her PhD thesis
+[07:24] <Snorlax> I'm not kidding
+[07:24] <Gnea> Snorlax: anyway, back her files up before messing with things
+[07:24] <Snorlax> how do I do that?
+[07:24] <silv3r_m00n> when trying to install ies4linux I get this >> Your wine does not have wineprefixcreate installed. Maybe you are running an old Wine version. Try to update it to the latest version.
+[07:24] <silv3r_m00n> me on karmic 64bit
+[07:24] <Snorlax> Gnea, I can't back them up she says I am not allowed to look at them
+[07:24] <Snorlax> because they are of her and another guy, not dad
+[07:24] <Snorlax> both LaTeX
+[07:24]  * Dr_Willis thinks its time for a boot.
+[07:24] <Snorlax> latex boots arre hot
+[07:24] <Snorlax> my mom has those
+[07:25] <emergion> Ok can someone tell me how to get my hands on the Kernel Source? I will have to build the drivers by hand from Nvidia
+[07:25] <Dr_Willis> !kernel
+[07:25] <emergion> I cannot see anything about the latest kernel source under package manager?
+[07:25] <ubottu> The core of the Ubuntu Operating System is the Linux kernel: see https://help.ubuntu.com/community/Kernel - You shouldn't have to compile your own, but if you're convinced you do, see https://help.ubuntu.com/community/Kernel/Compile - See also: /msg ubottu stages
+[07:25] <emergion> nice
+[07:25] <Dr_Willis> emergion:  what nvidia card are you using?
+[07:25] <Snorlax> emergion, you should only need the headers to compile nvidia drivers.
+[07:25] <Gnea> Snorlax: well then, you have your answer.
+[07:25] <tech2077> i would like to ask, where can i go to learn about how to program device drivers, and yes i have C experience
+[07:25] <emergion> Snorlax, yes this is true :)
+[07:26] <Snorlax> emergion, you probably have them
+[07:26] <Snorlax> but the package is probably called like linux-headers-xx or somethign
+[07:26] <emergion> Dr_Willis, 1:00.0 VGA compatible controller: nVidia Corporation G72 [GeForce 7300 SE/7200 GS] (rev a1)
+[07:26] <tech2077> linux header packages are default installed
+[07:26] <Snorlax> I personally can't use the open source nvidia driver that comes with ubuntu.. it's no good on my chipset
+[07:26] <tiox> Wow, Dr_Willis was right.
+[07:26] <dios_mio> is 10.10 worth the download?
+[07:26] <tech2077> depends
+[07:27] <tiox> dios_mio: Not if you don't like the color orange.
+[07:27] <yapsol> My OS is Ubuntu 10.10. I'm using Free Download Manager 2.1 build 494 under Wine 1.3.5 (I also tested it with the stable Wine version from the repositories). It works properly, except for FTP files. Trying to start a FTP download always crashes FDM. Does anyone have the same problem here?
+[07:27] <tech2077> lol
+[07:27] <Gnea> dios_mio: are you looking for problems or solutions?
+[07:27] <emergion> Snorlax, yes I do have that but only from 2.6.32?
+[07:27] <dios_mio> hrm
+[07:27] <ImAlive> when i try to install compiz/fusion extra's this is the error, "compiz-fusion-plugins-extra:
+[07:27] <ImAlive>  Depends: compiz-core-abiversion-20091102"  I just dont get it. I have maverick compiz ppa enable an this dont help.
+[07:27] <emergion> *have them
+[07:27] <yapsol> dios_mio, I'm using it here and I think it is worth the download if you want the latest software.
+[07:27] <kamalesh> My PC : Vaio EA16FG, ATI Radeon 5650 1GB, Ubuntu 10.10 64it. I connected an external monitor, Is it possible for me to use 1 workspace in 1 monitor ?
+[07:27] <GGreybeard> test
+[07:27] <Snorlax> emergion, uname -a says what?
+[07:27] <dios_mio> thx
+[07:27] <soreau> ImAlive: The problem is that you have ppas enabled
+[07:27] <yapsol> I didn't have any serious problems here using 10.10.
+[07:27] <soreau> ImAlive: Remove the ppas and reinstall compiz
+[07:28] <tiox> I deleted the apt cache and I got back .6 GB
+[07:28] <Gnea> dios_mio: are you on 10.04 right now?
+[07:28] <tech2077> is there a help section for developers, can find it on chan list
+[07:28] <emergion> Linux mnm 2.6.35-22-generic #34-Ubuntu SMP Sun Oct 10 09:24:00 UTC 2010 i686 GNU/Linux
+[07:28] <yapsol> Actually, I didn't hace any problems.
+[07:28] <ImAlive> that simple
+[07:28] <ImAlive> no way
+[07:28] <yapsol> *have
+[07:28] <emergion> Different version
+[07:28] <emergion> Snorlax, Linux mnm 2.6.35-22-generic #34-Ubuntu SMP Sun Oct 10 09:24:00 UTC 2010 i686 GNU/Linux sorry
+[07:28] <Dr_Willis> kamalesh:  workspaces dont work that way. If you want one app to stay on a second monitor all the time you can make it 'always on top' and 'always on visible workspace'
+[07:28]  * beric cannot resume from suspend-to-ram after upgrading to 10.10.
+[07:28] <Snorlax> emergion, well install linux-headers-2.6.35 or whatever
+[07:28] <Snorlax> they're in apt somewhere
+[07:29] <Snorlax> the nvidia installer can probably figure out which headers to use by invoking uname
+[07:29] <emergion> I tried, they are not there that is why i am asking you guys, maybe there is something I had to enable a repo or something?
+[07:29] <Snorlax> did you install a custom kernel?
+[07:29] <Snorlax> because if you didn't, the headers *ARE* there
+[07:29] <beric> Can anybody help us, at least in getting an error message  -http://ubuntuforums.org/showthread.php?t=1596545
+[07:29] <DanaG> nvidia installer breaks stuff!
+[07:29] <DanaG> Don't use nvidia installer.
+[07:29] <DanaG> Use packaged version, or X Updates repo.
+[07:29] <Snorlax> the packaged version is the open source driver and it sucks
+[07:30] <Dr_Willis> The pacakged version is different then the open sourced driver..
+[07:30] <emergion> DanaG, The ones from the package manager do not work
+[07:30] <Snorlax> I had the same experience
+[07:30] <Snorlax> that the ones from the package manager, did not work.
+[07:31] <emergion> Sorry guys my bad, I could find the latest headers in aptitude
+[07:31] <Dr_Willis> !headers
+[07:31] <ubottu> To install the Linux (kernel) headers, open a terminal and: sudo apt-get install linux-headers-$(uname -r) To install headers for libraries, you need the accompanying -dev packages
+[07:31] <emergion> Not sure why they are not in the PM but oh well
+[07:31] <Snorlax> so I installed using nvidia-installer and when my kernel version changes I have to recompile
+[07:31] <ImAlive> ty soreau, but is it safe to sat then the the comiz ppa is not safe to use for the immediate foreseeable future?
+[07:31] <DanaG> Try X Updates.
+[07:31] <Snorlax> having to recompile a driver when you update the kernel is hardly 'broken'
+[07:31] <Snorlax> it's just less convenient
+[07:31] <DanaG> Snorlax: you'll also have to reinstall each time Mesa gets updates.
+[07:31] <emergion> DanaG, I would normally install them from Additional Drivers, but that seems broken in 10.10
+[07:31] <barbseven> hello all
+[07:32] <soreau> ImAlive: Compiz 0.9 works fine but AFAIK, there is no ubuntu compiz ppa the works correctly
+[07:32] <tiox> BRB guys, I gotta pop off here and use my HSPA modem to install more stuff.
+[07:32] <soreau> ImAlive: If you want to know more, ask in #compiz
+[07:33] <ImAlive>  i see ty.
+[07:34] <barbseven> I have a macbook pro 5,5; I love ubuntu and am getting ready to make the switch to ubuntu again, but I have tried it once before, everything does work after some playing around, but one issue i have with it is, the wireless takes forever to connect, like 5 minutes, its the airport extreme. ubuntu supplies the B43 and STA broadcom driver. but these don't work very well, and when my download speed is topping out the wireless
+[07:34] <barbseven> disconnect, please tell me someone has a solution?
+[07:35] <Snorlax> I have a solution you might like
+[07:35] <blakkheim> barbseven: there is no such wifi chipset as "airport extreme" - that's an apple marketing term
+[07:35] <Snorlax> you can sell the macbook pro, take half the money, and buy a brand new intel laptop
+[07:35] <barbseven> I apologise for using incorrect terms
+[07:35] <Snorlax> take the other half and buy a prostitute and a 40
+[07:35] <Snorlax> and then your wireless will work like a charm
+[07:35] <ImAlive> BROTHER
+[07:36] <yapsol> i should be laughing here, but it can't be helped
+[07:36] <barbseven> snorlax, your a jackass
+[07:36] <nickhtp> yea, don't say that
+[07:36] <Gnea> enough.
+[07:36] <ImAlive> broadcom is going open source
+[07:36] <Snorlax> barbseven, really, linux on mac sucks. just buy intel hardware if you're gonna run ubuntu
+[07:36] <Snorlax> you can sell that thing for top dollar
+[07:36] <Gnea> !ot | barbseven, Snorlax
+[07:36] <ubottu> barbseven, Snorlax: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[07:36] <Snorlax> even if its old
+[07:36] <barbseven> errrm the chipset is intel?
+[07:36] <Snorlax> of course, mac is intel
+=== armence is now known as armence-sleep
+[07:36] <Snorlax> which raises the question
+[07:37] <yapsol> and if you have powerpc, ubuntu is being maintained by community
+[07:37] <Snorlax> why do you even want a mac if you're running linux? you like white plastic?
+=== armence-sleep is now known as armence
+[07:37] <Gnea> Snorlax: did your mom not teach you respect?
+[07:37] <Gnea> !guidelines > Snorlax
+[07:37] <ubottu> Snorlax, please see my private message
+[07:37] <barbseven> its a macbook pro, aluminium! 7 hour battery life and I like the way they are built.
+[07:37] <tech2077> same
+[07:38] <Snorlax> man, you could probably sell it and buy 3 ibm thinkpads
+[07:38] <nickhtp> yapsol: That is very cool I remember seeing those ISOs at cdimages.ubuntu.com
+[07:38] <tech2077> Apple makes goood hardware, i won't comment on software
+[07:38] <ibrahim-kasem> I bought a new hp printer p1005 when I am using windows the stupid printer works perfectly but on my juanty sometimes it doesnt print at all or most of the times. what should I do please? :(
+[07:38] <tech2077> good*
+[07:38] <barbseven> hence why i want to go to ubuntu again
+[07:38] <tech2077> :)
+[07:38] <spinningcompass> ibrahim-kasem: Does the HP P1005 understand Postscript?
+[07:39] <ibrahim-kasem> spinningcompass: How can I know this please?
+[07:39] <barbseven> can anyone help me with my problem without being a smart arse
+[07:39] <ImAlive> im loving my Dell studioXPS 1640 >:)
+[07:39] <spinningcompass> ibrahim-kasem: Your printer should come with a manual. In the back, it will list the languages that the printer can understand.
+[07:39] <tech2077> hmm, don't most windows printer installers have the pdd files on the disk
+[07:39] <spinningcompass> ibrahim-kasem: Typically, HP printers understand HCL and Postscript (if memory serves me correctly).
+=== linze is now known as linzee
+[07:40] <Snorlax> barbseven, contrary to what you may feel, I was being entirely serious. When driver support sucks, it sucks. It sucks because there's a lack of interest in developing the particular driver.
+[07:40] <Dr_Willis> The linux printing web site may have some info on that printer also.
+[07:40] <ImAlive> an Ubuntu recognized my lappy right on install.
+[07:40] <tedge> barbseven, have you tried VirtualBox? I'm running it on my MBP, no problems with wireless (since it's handled by the native OS).
+[07:40] <barbseven> *Sigh*
+[07:40] <nope> what I dont understand is why anyone would run ubuntu on their mac when they got osx :)
+[07:40] <Snorlax> tedge, that is probably the best suggestion
+[07:40] <Dr_Willis> nope:  my Mac has OS-9 :)
+[07:40] <Gnea> Snorlax: that's not entirely true.
+[07:40] <barbseven> a few reasons
+[07:40] <spinningcompass> nope: For technical reasons
+[07:40] <nope> Dr_Willis: that would be a good point :)
+[07:41] <Snorlax> Gnea, oh, how else are drivers developed? by magic?
+[07:41] <blakkheim> spinningcompass: oh?
+[07:41] <pseydtonne> Magic!
+[07:41] <Dr_Willis> nope:  it works very well as a doorstop
+[07:41] <pseydtonne> Totally magic!
+[07:41] <nope> hehehe
+[07:41] <ImAlive> why have osX if they really want UNIX get freeBSD
+[07:41] <Gnea> Snorlax: no, but apparently your attitude is.
+[07:41] <yapsol> regarding battery life, i think that mac os might manage battery better than ubuntu
+[07:41] <nope> ImAlive: well, osx just works? :)
+[07:41] <ImAlive> h@!
+[07:41] <blakkheim> yapsol: very true
+[07:41] <nope> dont get me wrong, I run ubuntu at work
+[07:41] <ImAlive> good joke
+[07:42] <barbseven> firstly, I like the feel of ubuntu over mac osx, second: osx 10.6 has next to no customisation potential.
+[07:42] <ibrahim-kasem> spinningcompass:  This is what I know, also sometimes it works!
+[07:42] <tech2077> same
+[07:42] <Gnea> ImAlive: your commentary is also unnecessary.
+[07:42] <ImAlive> i love watcing spinning beach balls
+[07:42] <ImAlive> ok
+[07:42] <ibrahim-kasem> spinningcompass: I am searching for its manual.
+[07:42] <Snorlax> I like linux more than OS X too.
+[07:42] <Dr_Willis> barbseven:  I seem tor ecall several forum threads on mac support. but ive never looked at them much
+[07:42] <barbseven> i like that you can mould ubuntu to your specific wants and needs
+[07:42] <beric> does resuming from  suspend-to-ram wrks on OSX ? cause on ubuntu 10.10 it doesn't.
+[07:42] <spinningcompass> ibrahim-kasem: Good. :) Can you send a test page to the printer from your Linux box? Does the test page print?
+[07:43] <tech2077> It comes down to, do you want linux or mac os x :P
+[07:43] <Gnea> just an FYI, this channel *is* publicly logged.
+[07:43] <ibrahim-kasem> spinningcompass: Now it doesn't but some times it does!
+=== linzee is now known as linze
+[07:43] <barbseven> beric - even though I am in an I.T> profession I apologise because I don't know what all the terms mean, atleast the ones being used in this channel
+[07:43] <spinningcompass> ibrahim-kasem: Does the printer beep or flash? Perhaps there's a check box - "Pause before new page" or something - which must be checked in the driver.
+[07:43] <tech2077> What you post here can be read by others
+[07:44] <barbseven> linux any day of the week
+[07:44] <tech2077> yep
+[07:44] <Snorlax> beric, suspend and resume work on ubuntu 10.10, probably just not on your particular hardware
+[07:44] <tech2077> is there a help section for developers, can't find it on chan list, like those that want to find out more about driver dev
+[07:44] <ibrahim-kasem> spinningcompass: The light is always green,
+[07:44] <nickhtp> I'm looking for a small desktop machine. Staples and the office max stopped selling those little PCs. Does it make more sense to spend $60 at gamestop for a PS2 and then hack it to run linux?
+[07:45] <Snorlax> tech2077, lkml is where you will find out about linux driver dev
+[07:45] <barbseven> suspend and resume even work on the macbook pro, although it can be delayed
+[07:45] <beric> Snorlax: and also on these guys hardware as well, http://ubuntuforums.org/showthread.php?t=1596545
+[07:45] <ImAlive> i put Ubuntu on a ps2?
+[07:45] <spinningcompass> nickhtp: I would urge you to look at the Asus Eee 1000 series or the Toshiba NB305 instead.
+[07:45] <Gnea> ImAlive: you do?
+[07:45] <beric> Snorlax: it's too much already...
+[07:45] <ImAlive> can ti be done?
+[07:45] <ibrahim-kasem> spinningcompass: I am reading its manual and Linux is not in the supported OS list.
+[07:45] <Firefishe> linux/gnu, tux brings powerful edge, top with wasabi!
+[07:45] <Dr_Willis> Gotta love Make ubuntu look like a Mac Articals --> http://lifehacker.com/5665765/macbuntu-makes-your-linux-desktop-look-like-mac-os-x
+[07:46] <Snorlax> In my years of using linux I have only seen swsusp work a couple times
+[07:46] <Gnea> ImAlive: yes, but it's not an easy process. sony actually worked to help make a linux distro for it.
+[07:46] <Firefishe> blast! my 2nd stanza had 6 instead of 7
+[07:46] <ImAlive> i new that much, for research they did
+[07:46] <Gnea> Snorlax: how many years is that?
+[07:46] <Snorlax> like 8
+[07:46] <Gnea> ah
+[07:46] <barbseven> dr_wills that = fail
+[07:47]  * Gnea remembers installing linux 14 years ago
+[07:47] <Dr_Willis> PS2 linux - a big thing back when it came out.. then not mentioned much  after a few months. :)
+[07:47] <Snorlax> my first distro was red hat 9
+[07:47] <barbseven> os x looks crap anyway
+[07:47] <barbseven> why ruin ubuntu
+[07:47] <Snorlax> i am not that big of a veteran, but I was using it before ubuntu existed
+[07:47] <Dr_Willis> Ive seen Mini sized netbook-type hardware desktop machines on sale for $230 or so in recent weeks.
+[07:47] <nickhtp> Gnea & ImAlive: Hm, ok. :0(
+[07:47] <ImAlive> cause the cell processor made by IBM is still the fastest architecture out there.
+[07:47] <kamalesh> My PC : Vaio EA16FG, ATI Radeon 5650 1GB, Ubuntu 10.10 64it. I connected an external monitor, Is it possible for me to use 1 workspace in 1 monitor ?
+[07:47] <Snorlax> ubuntu must have like quadrupled linux's user base
+[07:47] <Gnea> redhat 4.1, after I couldn't figure out slackware or freebsd
+[07:47] <silv3r_m00n> is thre any software in ubuntu that can read barcodes from scanned images ?
+[07:47] <beric> Snorlax: my first was slackware 3, suspend to ram worked ever since i had a linux laptop.
+[07:47] <Gnea> and then they made sense a few months later
+[07:48] <barbseven> online software yes
+[07:48] <Gnea> beric: 3.4 was a massive boone
+[07:48] <Snorlax> beric, oh, see I've gotten it to "work"
+[07:48] <Snorlax> but after you resume
+[07:48] <Snorlax> it's the twilight zone
+[07:48] <Snorlax> and other drivers fail
+[07:48] <Snorlax> etc
+[07:48] <Firefishe> I started with Mandrake 5.x, then found Debian and apt, and now, (K)Ubuntu, and haven't looked back.
+[07:48] <Snorlax> so I haven't really tried it that many times
+[07:48] <nickhtp> Backtrace Linux still uses the ``root : toor'' password combo from Torvalds' linux 1.0.
+[07:48] <beric> yeah that's what I mean.
+[07:48] <ImAlive> my first Linux install was SUSE
+[07:49] <blakkheim> nickhtp: backtrack, you mean
+[07:49] <barbseven> fedora for me
+[07:49] <Jordan_U> !ot
+[07:49] <ubottu> #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[07:49] <SoulShadow> I BACKEDTRACED IT
+[07:49] <Firefishe> oops...thought it was offtopic...sowwy
+[07:49] <Gnea> heh
+[07:49] <Snorlax> If you use BackTrack, it means you are a31337 hax0r
+[07:49] <blakkheim> nickhtp: i didn't get your PM, what is it?
+[07:49] <WilliamHerry> yast is usefull
+[07:50] <nickhtp> Yes sir, blakkheim. :0)
+[07:50] <tech2077> BackTrack has some useful stuff
+[07:50] <Snorlax> infact
+[07:50] <barbseven> i hate leetspeek
+[07:50] <Gnea> I use backtrack when necessary. the last time I used it was to resurrect an almost dead ubuntu system.
+[07:50] <Snorlax> i don't even know why I am trolling here when I could be trolling backtrack's channel
+[07:50] <tech2077> lol
+[07:50] <Gnea> right tool for the job
+[07:50] <tech2077> yep
+[07:50] <ImAlive> but the .deb file for Ubuntu from Debian, givem credit.
+[07:50] <ImAlive> hehe see i kept ubuntu in there
+[07:51] <tech2077> even though, more suited for testing to see if you can crack your wifi wep key
+[07:51] <yapsol> because trolling is bad and if you get someone angry enough you can be klined from the network
+[07:51] <barbseven> so no-one has a solution for the wireless problem?
+[07:51] <nast> pretty easy to make ones own livecd, given debian-live :)
+[07:51] <Gnea> barbseven: sorry, never saw it
+[07:51] <ImAlive> yes nast
+[07:51] <Friar> can someone help me get a VPN going? I'm having  a LOT of trouble and I'm not sure why this is so difficuld.
+[07:51] <ActionParsnip> nast: or use the remaster guide
+[07:51] <barbseven> ok ill copy and paste
+[07:51] <barbseven> I have a macbook pro 5,5; I love ubuntu and am getting ready to make the switch to ubuntu again, but I have tried it once before, everything does work after some playing around, but one issue i have with it is, the wireless takes forever to connect, like 5 minutes, its the airport extreme. ubuntu supplies the B43 and STA broadcom driver. but these don't work very well, and when my download speed is topping out the wireless
+[07:51] <barbseven> disconnect, please tell me someone has a solution?
+[07:51] <ActionParsnip> !vpn | Friar
+[07:51] <FloodBot3> barbseven: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[07:51] <ubottu> Friar: For more information on vpn please refer to https://wiki.ubuntu.com/VPN
+=== JimmyJ is now known as JimmyJ|zz
+[07:52] <Gnea> Friar: your best bet is to figure out what you want it to do and then explain that
+[07:52] <ibrahim-kasem> spinningcompass:  How can I activate "Pause before new page" please? where can i find this option?
+[07:52] <ActionParsnip> barbseven: could try ndiswrapper instead
+[07:52] <ImAlive> Synaptic has a debian live disc creator you can install even does it not?
+[07:52] <ActionParsnip> !away | JimmyJ|zz
+[07:52] <ubottu> JimmyJ|zz: You should avoid noisy away messages and -nicks in a busy channel like #ubuntu, or other Ubuntu channels; it causes excessive scrolling which is unfair to new users. Use the command "/away <reason>" to set your client away silently.  See also <unconvertable> /msg ubottu Guidelines <unconvertable>
+[07:52] <barbseven> ndiswrapper? forgive me if i don't know what your talking about lol
+[07:52] <kamalesh> Config : Vaio laptop, ATI Radeon 5650 1 GB, Ubuntu 10.10 64 bit.  I have connected an external monitor (not HDMI) , can i use 1 screen for 1 workspace and the other for a diff workspace ?
+[07:52] <rohan> how do i start ubuntu 10.10 livecd in "safe graphics mode"? i'm having problems with my nvidia card.
+[07:53] <tedge> barbseven - not a perfect solution, but you might consider a USB wireless adapter
+[07:53] <ActionParsnip> barbseven: why the 'lol'?
+[07:53] <MonthOLDpickle> I don't know what to do
+[07:53] <barbseven> sorry
+[07:53] <Dr_Willis> ImAlive:  you could also check out the web-based live cd remaster tool -> https://reconstructor.apphosted.com/
+[07:53] <MonthOLDpickle> Lubuntu is fast
+[07:53] <Friar> Gnea, I want to be able to browse the internet with the ip address of my server in the US. I'm in germany for work and my wife has some shows that she likes to watch online....can't watch them with an IP address outside of the US>
+[07:53] <MonthOLDpickle> efficent but my bt is buggy and no sound
+[07:53] <MonthOLDpickle> what should I install on my min9i
+[07:53] <barbseven> nervous "lol" i feel like i have an IQ of about 10 in this room
+[07:53] <ibrahim-kasem> spinningcompass: Where can I find this box please? "Pause before new page"
+[07:53] <Gnea> Friar: then openvpn is what you're after
+[07:53] <ActionParsnip> barbseven: go research it up. Its used if no native solution exists
+[07:53] <Blue1> barbseven: welcome to the club
+[07:54] <`3Shades> I want to make sure I have this clear: ln -s /home /newdrive/home will create a symbolic link from my home directory to my new home directory on my new drive that I just copied right? or do I need to flip the two..
+[07:54] <Friar> Gnea. I know that.
+[07:54] <ImAlive> ty
+[07:54] <spinningcompass> ibrahim-kasem: Which printer driver is Ubuntu currently using?
+[07:54] <ActionParsnip> MonthOLDpickle: lxde + openbox are lighter than gnome + compiz (or metacity)
+[07:54] <Gnea> Friar: then I suggest asking in #openvpn
+[07:54] <ibrahim-kasem> spinningcompass: Am sorry I don't know which one! how can I know this as well.
+[07:54] <SoulShadow> LXDE is awesome
+[07:54] <Dr_Willis> `3Shades:  i always get it backwards.. make some test links and see which way it goes...
+[07:54] <Friar> thanks Gnea. I appreciate it.
+[07:54] <ImAlive> Dr_Willis,  im in love with apt_on_cd so is that not kind of the same?
+[07:55] <ActionParsnip> MonthOLDpickle: if its a laptop it will make the battery last longer too
+[07:55] <barbseven> ActionParsnip: thankyou I will have a look now, I have been searching for a solution for quite a while now
+[07:55] <spinningcompass> ibrahim-kasem: From your Ubuntu main menu, select System, then choose Administration. Under the Administration menu, you will find an icon labeled Printing. Select this tool and within several seconds the Printer Configuration Tool will open.
+[07:55] <nast> hmm, given /dev/blockdev, is there a way to make /dev/blockdev_ro?
+[07:55] <Dr_Willis> ImAlive:  this remasters a LIVE cd with new packages. install program foo, the live cd (dvd) will have it there in the menus.. and it will be installed by default if you install from that dvd
+[07:55] <ActionParsnip> barbseven: it uses the windows driver
+[07:55] <kamalesh> Config : Vaio laptop, ATI Radeon 5650 1 GB, Ubuntu 10.10 64 bit.  I have connected an external monitor (not HDMI) , can i use 1 screen for 1 workspace and the other for a diff workspace ?
+[07:55] <`3Shades> would it matter much if I do it both ways or would that screw it up?
+[07:55] <Gnea> Friar: best of luck with that, openvpn is a bit daunting but it really rocks the house once it's up and running right
+[07:55] <ImAlive> o
+[07:55] <blakkheim> kamalesh: no
+[07:55] <MonthOLDpickle> But ActionParsnip ..sound isn't working. bluetooth if turned off to save battery you need to restart.
+[07:55] <kamalesh> blakkheim:  Oh :( ... thanks
+[07:55] <ImAlive> *bookmarked*
+[07:56] <MonthOLDpickle> lubuntu = ubuntu with lxde correct?
+[07:56] <tech2077> heh
+[07:56] <ActionParsnip> MonthOLDpickle: sounds like a project
+[07:56] <Gnea> barbseven: it's not a broadcom?
+[07:56] <barbseven> ActionParsnip: that doesn't sound very elegant?
+[07:56] <barbseven> yes it is a broadcom
+[07:56] <ActionParsnip> MonthOLDpickle: yes with openbox as WM
+[07:56] <MonthOLDpickle> what?
+[07:56] <ActionParsnip> barbseven: sure but it works
+[07:56] <MonthOLDpickle> bt there is no work around
+[07:56] <beric> We cant get back from there, once we've gone there's no way back. it was a fatal decision, and when you mistake you're loss. Suspend-to-RAM is unresumable.
+[07:57] <Gnea> barbseven: seen this? https://help.ubuntu.com/community/MacBook6-1/Lucid#Wireless
+[07:57] <MonthOLDpickle> sound worked first install but not now
+[07:57] <`3Shades> Dr_Willis, will it matter if I link both ways?
+[07:57] <barbseven> Firmware Version:	Broadcom BCM43xx 1.0 (5.10.91.27)
+[07:57] <ibrahim-kasem> spinningcompass: after "printing" what should I do please?
+[07:57] <Dr_Willis> `3Shades:  it only works one way.. do the command.. check the links.. if it s wrong.. delete the bad link and do it the other way
+[07:58] <nast> ahh, i can use losetup i think :>
+[07:58] <ActionParsnip> barbseven: when the connection drops, run: dmesg | tail
+[07:58] <ActionParsnip> barbseven: doesit mention ipv6?
+[07:58] <Dr_Willis> `3Shades:  mkdir foo,  ln -s foo bar, ls -l foo bar
+[07:58] <barbseven> yes i have seen that link before and have installed the drivers, they do work to some extent but are extremely buggy, by taking forever to connect and when im downloading at full speed it can drop out
+[07:59] <barbseven> sorry? doesn't what mention IPv6?
+[07:59] <Dr_Willis> `3Shades:  bar is the new name, guess its  ln -s MAKETHIS alsonownASthisNEWName
+[07:59] <ActionParsnip> barbseven: in the output of the command is ipv6 mentioned
+[07:59] <MonthOLDpickle> ActionParsnip, I turn off BT to save battery but if I want to use it later I have to reboot..I asked about it but its just how it is
+[07:59] <spinningcompass> ibrahim-kasem: http://ubuntuforums.org/showthread.php?t=1495541 <-- it looks as if your HP P1500 series isn't a Linux favorite
+[07:59] <spinningcompass> ibrahim-kasem: Also, see http://hplipopensource.com/hplip-web...all/index.html
+[07:59] <ibrahim-kasem> spinningcompass: Thank you. :)
+[07:59] <ActionParsnip> MonthOLDpickle: can't you just start the bluetooth service after restarting the hal service?
+[08:00] <MonthOLDpickle> it doesn't use hal
+[08:00] <MonthOLDpickle> When I tried it always said failed to start dmx daemon
+[08:00] <MonthOLDpickle> dmz***
+[08:00] <barbseven> sorry i don't understand :S why do you want to know the IPv6?
+[08:00] <ActionParsnip> MonthOLDpickle: after turning on the bluetooth, service starts should do it afair
+[08:00] <MonthOLDpickle> how much different ids fedora lxde?
+[08:00] <MonthOLDpickle> bt auto starts fine
+[08:00] <MonthOLDpickle> but if I turn off
+[08:01] <ImAlive> well this is unfortunate. After a 7 days of tinkering i cannot fix compiz. I will need to fix Linux the windows way an re-install maverick. :(
+[08:01] <jackie89> Holy crumbmuffins... So many people!
+[08:01] <MonthOLDpickle> no turning back on I asked that in #lubuntu
+[08:01] <ImAlive> heh
+[08:01] <blakkheim> !wnter | MonthOLDpickle
+[08:01] <ActionParsnip> barbseven: jeez. Get the wireless connected. When it drops run the command. Can you see the 4 characters: ipv6 in the output. Its as simple as it sounds
+[08:01] <blakkheim> !enter | MonthOLDpickle
+[08:01] <ubottu> MonthOLDpickle: Please try to keep your questions/responses on one line - don't use the "Enter" key as punctuation!
+[08:01] <jackie89> i'm having trouble connecting to the wireless internet, can anybody help me through it?
+[08:01] <jackie89> I'm on linux ubuntu
+=== Pilif12p is now known as Pilif12p|afk
+[08:02] <MonthOLDpickle> what system jackie89
+[08:02] <ActionParsnip> barbseven: use eye, can you see "ipv6" in the words outputted
+[08:02] <jackie89> linux?  That's the system, right?
+[08:02] <MonthOLDpickle> hardware
+[08:02] <jackie89> Um.. Dell?
+[08:02] <Gnea> barbseven: have you ever posted about it on ubuntuforums.org?
+[08:02] <ImAlive> i give mav, an 8 out of 10
+[08:02] <MonthOLDpickle> dell what mini 9? If so its a broadcom wireless card
+[08:02] <barbseven> ok ok ok, this is embarrassing :S I don't have ubuntu currently running, I am about to make the switch to it again
+[08:03] <jackie89> I'm about as technically savvy with this machine as a five year old, so please be gentle - i'm sorry i'm so clueless. @.@
+[08:03] <barbseven> Gnea - Negatory
+[08:03] <jackie89> Dell mini 12, I think.
+[08:03] <MonthOLDpickle> how big is the laptop screen
+[08:03] <ActionParsnip> jackie89: in a terminal run: sudo lshw -C network ,what is the product line of the wireless?
+[08:03] <Gnea> barbseven: it's cool, just when you get it running and if it's still not working right, follow this procedure: http://ubuntuforums.org/showthread.php?p=6183681
+[08:04] <jackie89> jaclyn@jaclyn:~$ sudo lshw -C network
+[08:04] <jackie89> sudo: unable to resolve host jaclyn
+[08:04] <jackie89> [sudo] password for jaclyn:
+[08:04] <jackie89> sudo: lshw: command not found
+[08:04] <jackie89> jaclyn@jaclyn:~$
+[08:04] <FloodBot3> jackie89: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[08:04] <jackie89> Oops!  Sorry.
+[08:04] <jackie89> I'm really sorry for flooding. :[
+[08:04] <ActionParsnip> jackie89: your hostfile and hostname file don't match
+[08:05] <Gnea> and I gotta bolt
+[08:05] <barbseven> thank you everyone that has helped, I appreciate it.
+[08:05] <jackie89> No?  Did I make a mistake in typing in the password?  Is that why?
+[08:05] <yakoza> i wanna use vpn with gprs
+[08:05] <AbhiJit> k
+[08:05] <barbseven> very friendly, except for that snorlax guy, don't really like him
+[08:05] <yakoza> how can i make a l2tp connection
+[08:06] <ActionParsnip> jackie89: no, your system's hostname is not in /etc/hosts so the system failsto talk to itself
+[08:06] <jackie89> ... Can i fix that?
+[08:06] <jackie89> Or no?
+=== ubuntu is now known as zseko
+[08:08] <ActionParsnip> jackie89: sure, you'll need to boot to root recovery mode and edit /etc/hosts with nano to match the output of: hostname
+[08:08] <ActionParsnip> jackie89: the hostname MUST match the name on the line with 127.0.0.1
+[08:09] <jackie89> I'm so sorry, but how do i do that?  Thank you so much for taking the time to help me... But could I please get step-by-step instructions?
+[08:09] <striker> hi all
+[08:09] <ActionParsnip> jackie89: reboot and hold shift, select recovery mode then select root
+[08:09] <MonthOLDpickle> so what should I do? reinstall lubuntu?
+[08:09] <striker> I need help !
+[08:09] <ImAlive> i reported to launpad, an i got this in my email does it mean they confirmed the bug i discovered,    Status in Ubuntu Tweak: Confirmed
+[08:10] <ibrahim-kasem> !ask | striker
+[08:10] <ubottu> striker: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[08:10] <jackie89> You mean restart the computer, ActionParsnip?
+[08:10] <ActionParsnip> MonthOLDpickle: is the system branded?
+[08:10] <ActionParsnip> jackie89: yes
+[08:10] <striker> ok
+[08:10] <jackie89> Okay, I'll do that right now.  Thank you so much. :D
+[08:10] <MonthOLDpickle> ActionParsnip, I do not know what that term is refering to
+[08:10] <jackie89> I'll be back once it's rebooted
+[08:10] <jackie89> So it's restart and hold shift, then select recovery mode and select root.  Is there anything else i need to do after that?
+[08:11] <ActionParsnip> MonthOLDpickle: is the system like a Dell or a Gateway or an Acer, abrand. Like a brand of trainers
+[08:11] <MonthOLDpickle> oh yea dell mini 9
+[08:11] <ImAlive> Traceback (most recent call last):
+[08:11] <ImAlive>   File "/usr/lib/python2.6/dist-packages/ubuntutweak/mainwindow.py", line 428, in setup_notebook
+[08:11] <ImAlive>     page = module()
+[08:11] <ImAlive>   File "/usr/lib/python2.6/dist-packages/ubuntutweak/modules/compiz.py", line 229, in __init__
+[08:11] <ImAlive>     self.create_interface()
+[08:11] <ImAlive>   File "/usr/lib/python2.6/dist-packages/ubuntutweak/modules/compiz.py", line 247, in create_interface
+[08:11] <FloodBot3> ImAlive: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[08:11] <ActionParsnip> jackie89: yes, just doing that does nothing
+[08:11] <jackie89> But can I wait to do the other things until after I've come back onto IRC, ActionParsnip?
+[08:12] <ActionParsnip> jackie89: then run: hostname ,write the output down. Case is important. Then run: nano /etc/hosts
+[08:12] <ActionParsnip> jackie89: sure I'll probably be in bed b
+[08:12] <soreau> ImAlive: Pastebin the output of dpkg -l|grep compiz
+[08:12] <soreau> ImAlive: should show no ppa repos and <= 0.8.6
+[08:12] <ImAlive> is this significant bug? KeyError: 'active_plugins' ?
+[08:12] <jackie89> Ohhh, i see.
+[08:12] <ActionParsnip> But tell folks you need to check hostname in /etc/hosts and it'll be understood, jackie89
+[08:13] <jackie89> So i need to check hostname in /etc/hosts
+[08:13] <ActionParsnip> MonthOLDpickle: ok so the brand is Dell
+[08:13] <MonthOLDpickle> yes
+[08:14] <MonthOLDpickle> its an intel atom single core 1.6 2gb ram 30gb ssd hd
+[08:14] <ImAlive> heres where i reported, https://bugs.launchpad.net/bugs/653933
+[08:14] <ActionParsnip> MonthOLDpickle: find ubuntu guides for that model. You may need some module options setting
+[08:14] <MonthOLDpickle> ubuntu desktop 10.10 works flawlessly
+[08:14] <ImAlive> oo its considered high bud
+[08:14] <MonthOLDpickle> but it eats battery life
+[08:14] <ImAlive> wow
+[08:14] <ImAlive> bug
+[08:15] <ActionParsnip> MonthOLDpickle: afaik, lubuntu doesn't use pulse, ubuntu does
+[08:15] <MonthOLDpickle> ActionParsnip, thats why I tried lubuntu
+[08:15] <jackie89> Okay, thank you so much ActionParsnip. :D  If i could transfer edible cookies through this, i totally would!
+[08:15] <ImAlive> i new my compiz was messed up bad
+[08:15] <MonthOLDpickle> So thats why ubuntu works
+[08:15] <soreau> ImAlive: Ask in #compiz
+[08:15] <ActionParsnip> MonthOLDpickle: possibly
+[08:15] <striker> I would like to install the GDM Themes from http://gnome-look.org/index.php?xcontentmode=150 on ubuntu 4.10 LTS. can someone help me ?????????? please
+[08:15] <striker> Ouvir
+[08:15] <striker> Ler foneticamente
+[08:15] <ActionParsnip> !4.10
+[08:15] <ubottu> Ubuntu 4.10 (Warty Warthog) was the first release of Ubuntu. End Of Life: April 30, 2006. See !eol for more details.
+[08:16] <MonthOLDpickle> I shouldn't even try fedora lxde should I
+[08:16] <ActionParsnip> striker: 4.10 is longdead
+[08:16] <ActionParsnip> MonthOLDpickle: sure why not :)
+[08:16] <striker> ops excuse-me 10.04 LTS
+[08:16] <ImAlive> considered HIGH an asighed to Tualatrix Chou
+[08:16] <ImAlive> :)
+[08:16] <MonthOLDpickle> because I don't know the terminal commands for fedora
+[08:16] <striker> I would like to install the GDM Themes from http://gnome-look.org/index.php?xcontentmode=150 on ubuntu 10.4 LTS. can someone help me ?????????? please
+[08:16] <Dr_Willis> Lubuntu worked decently well here for me when i tried it the other day
+[08:16] <ImAlive> assigned
+[08:17] <Dr_Willis> striker:  are you sure its a GDM 2 theme and not a gdm1 theme?
+[08:17] <MonthOLDpickle> Dr. Willis what do you have?
+[08:17] <happolati> Hi people. I have some problems connecting my display to my ubuntu 10.10 laptop thru HDMI. The screen is detected and shown in nvidia-settings. but the screen itself says it receives no signal. Works with VGA.
+[08:18] <Dr_Willis> MonthOLDpickle:  have where/what/when?
+[08:18] <Gryllida> !nvidia
+[08:18] <Dr_Willis> !tab | MonthOLDpickle
+[08:18] <ubottu> For Ati/NVidia/Matrox video cards, see https://help.ubuntu.com/community/BinaryDriverHowto
+[08:18] <ubottu> MonthOLDpickle: You can use your <tab> key for autocompletion of nicknames in IRC, as well as for completion of filenames and programs on the command line.
+[08:18] <striker> I don't know
+[08:18] <ActionParsnip> striker: not sure gdm is themable much yet. You can certainly change the login box colour and the wallpaper
+[08:18] <MonthOLDpickle> your system hardware you tried lubuntu on? Dr_Willis
+[08:18] <Dr_Willis> striker:  very likely its a GDM 1 them. and wont work with the newer gdm2
+[08:18] <Dr_Willis> MonthOLDpickle:   High end laptop. mid range desktop. nvidia systems.
+[08:19] <MonthOLDpickle> Dr_Willis, my laptop is a netbook
+[08:19] <MonthOLDpickle> Lubuntu runs awesome except for two glitches that annoy me
+[08:19] <Dr_Willis> MonthOLDpickle:  lubuntu has a netbook interface alo i recall. should work find on a netbook
+[08:19] <Dr_Willis> There is the #lubuntu channel also.
+[08:19] <MonthOLDpickle> pass on the netbook lookin gui
+[08:19] <MonthOLDpickle> I am in it
+[08:19] <MonthOLDpickle> they just keep promoting lubuntu
+[08:19] <ActionParsnip> MonthOLDpickle: find guides for the model, you may need the model=dell-3stack option for alsa
+[08:20] <jmadero> hi all, my speakers on my Dell Mini just stopped working, headphones work fine, and speakers work in my other boot
+[08:20] <jmadero> were working fine, then I went to my next song in Amarok and they just stopped, restart didn't fix it
+[08:20] <ActionParsnip> jmadero: boot to the other side and check what options are used in the driver module
+[08:20] <dagon666> where can I find a copy of GPL license ? I know that its somewhere in my ubuntu filesystem, dont remember where
+[08:21] <striker> ok look this site please (http://gnome-look.org/index.php?xcontentmode=150) beautiful login themes !
+[08:21] <Dr_Willis> !gpl
+[08:21] <ubottu> gpl is the GNU General Public License. See http://www.gnu.org/copyleft/gpl.html
+[08:21] <ActionParsnip> dagon666: there are 2
+[08:21] <jmadero> nvm, looks like this restart fixed it
+[08:21] <happolati> Ok, so when i du lshw -C video i see this line _capabilities: pm msi pciexpress vga_controller bus_master cap_list rom_  It doesn't mention hdmi. But I do have HDMI port on my machine so does this mean that the linux version of the videocard driver doesn't support HDMI?
+[08:21] <jmadero> thanks all
+[08:21] <dagon666> ActionParsnip: what do you mean ?
+[08:21] <JohnDoe_> hello
+[08:21] <JohnDoe_> i need help
+[08:22] <ActionParsnip> dagon666: I believe its version 2 and version 3
+[08:22] <Gryllida> with?
+[08:22] <Gryllida> JohnDoe_:
+[08:22] <JohnDoe_> trying to config qwebirc
+[08:22] <JohnDoe_> on my server
+[08:22] <dagon666> ActionParsnip: do you remember the path. Im sure that its somewhere around /usr/share
+[08:22] <JohnDoe_> i got this error
+[08:22] <JohnDoe_> michael@ns1:~/public_html/chat/qwebirc$ ./compile.py python: /usr/local/lib/libz.so.1: no version information available (required by python) /usr/bin/python: /usr/local/lib/libz.so.1: no version information available (required by /usr/bin/python) abort: There is no Mercurial repository here (.hg not found) warning: hg: unable to get id (using a random id).
+[08:22] <FloodBot3> JohnDoe_: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[08:22] <ImAlive> ActionParsnip,  when i help launchpad and report all that text stuff from terminal its does not show any personal info does it
+[08:22] <ActionParsnip> dagon666: not sure, there are copies online though
+[08:22] <ImAlive> ?
+[08:23] <ActionParsnip> ImAlive: noidea, I've not read any of it
+[08:23] <dagon666> ActionParsnip: yeah, but I would like to find it locally anyway :)
+[08:23] <ImAlive> lol
+[08:23] <soreau> ImAlive: You need to remove that ppa ppb repos and reinstall compiz
+[08:23] <ActionParsnip> ImAlive: how is that funny?
+[08:23] <Gryllida> JohnDoe_: try #python ?
+[08:23] <Gryllida> >.>
+[08:23] <Gryllida> not sure
+[08:23] <JohnDoe_> okay thanks
+[08:23] <ImAlive> whos laffing?
+[08:24] <ActionParsnip> ImAlive: "lol" == laugh out loud....
+[08:24] <ImAlive> soreau, i did that
+[08:24] <Gryllida> ImAlive: Define 'laffing'
+[08:24] <JohnDoe_> cant join the channel
+[08:24] <ImAlive> im not laffing atg anything
+[08:24] <ActionParsnip> ImAlive: so why the "lol"
+[08:24] <Gryllida> JohnDoe_: hmm.... /msg nickserv help register
+[08:24] <soreau> ImAlive: Pastebin the output of dpkg -l|grep compiz
+[08:25] <Gryllida> !register
+[08:25] <ubottu> Information about registering your nickname: https://help.ubuntu.com/community/InternetRelayChat/Registration - Type <unconvertable> /nick <nickname> <unconvertable> to select your nickname. Registration help available by typing /join #freenode
+=== JohnDoe_ is now known as iNet-Admin
+[08:25] <Gryllida> JohnDoe_: ^
+[08:25] <ImAlive> great spelling nazi's, im to lazy to use xchats spell check
+[08:25] <ImAlive> lol
+[08:25] <olivier> HI there
+[08:25] <shutyaev> hi all. i have an inet connection that recieves dns automatically. how can i see what was received?
+[08:25] <ActionParsnip> !lol | ImAlive
+[08:25] <ubottu> ImAlive: Please don't use "LOL" and "OMG" and so forth on a regular basis. This is IRC, not IM, and using those lines on their own is not required, and it is rather annoying to the rest of the people in the channel; thanks.
+[08:25] <dagon666> ActionParsnip: /usr/share/common-licenses
+[08:25] <ImAlive> all let yadda yadda yadda too
+[08:25] <ActionParsnip> dagon666: sweet, nice one dude
+[08:26] <striker> Searching ... was discovered that changed the option to change GDM Themes from the ubuntu 4.10 version .... also discovered how to change login screen ... but do not install the downloaded packages of these sites. is there some way to unpack the tar.gz file and manually install themes ?????
+[08:26] <ImAlive> anyhow, all let launchpad figure it out.
+[08:26] <elky> ImAlive, avoid that n-word please.
+[08:26] <ActionParsnip> shutyaev: cat /etc/resolv.conf ,will show your defined dns servers are if that's what you mean?
+[08:26] <happolati> jesus
+[08:26] <ImAlive> ghestopo
+[08:27] <olivier> I can't print on a shared printer from another ubuntu pc unless a user is actually logged in on the server. How can I change this behaviour ?
+[08:28] <Gnea> ImAlive: may I pm?
+[08:29] <ImAlive> hey check this out, though i have the official maverick release, terminal reported, Distribution: Ubuntu maverick --------->(development branch)      "whats all that about" ?
+[08:30] <jackie89> Welcome back, ActionParsnip!
+[08:30] <ActionParsnip> Ty
+[08:30] <ImAlive> goodness grashesh
+[08:30] <jackie89> ... Are you going to sleep?
+[08:30] <ActionParsnip> On a bus home so I have time :)
+[08:30] <Gnea> ActionParsnip: nice
+[08:30] <ActionParsnip> Then definately sleep
+[08:30] <jackie89> Oh, I'm so happy!  I got confused when rebooting.
+[08:31] <Gnea> ImAlive: may I pm?
+[08:31] <ActionParsnip> jackie89: as soon as the system starts to power on(before anything loads) hold the shift key
+[08:31] <ActionParsnip> Gnea: andchat ftw :)
+[08:31] <jackie89> When I hit shift, it gave me two choices:  F2 for Set Up, F12 for boot options.  When I picked F2, It had 'main', 'advanced', 'security', 'boot', and 'exit' tabs.
+[08:32] <Gnea> ActionParsnip: wish I could get that...my phone's been dumbed down so much in the past year ;(
+[08:32] <ActionParsnip> jackie89: you don't press anything except shift
+[08:32] <jackie89> And when i hit F12 it froze until i hit 'enter', then i couldn't move my mouse around
+[08:32] <jackie89> But i didn't... i even waited but 'shift' acted like a freeze until it gave me those two options.
+[08:32] <jackie89> Should i have just held shift until something came up?
+[08:32] <ActionParsnip> Gnea: getting a desire next possibly. I like a qwerty kboard
+[08:33] <ActionParsnip> jackie89: yes, let that stuff sit
+[08:33] <jackie89> Ohhhhh, i see.
+[08:33] <jackie89> Okay, retrying it then.  Thank you!
+[08:33] <Gnea> ActionParsnip: I'd like a droid, but at this rate, by the time I can afford a new phone verizon will likely carry the iphone
+[08:33] <olivier> Does someone know how to print on a shared printer without being logged in on the server ?
+[08:33] <striker> Searching ... was discovered that changed the option to change GDM Themes from the ubuntu 4.10 version .... also discovered how to change login screen ... but do not install the downloaded packages of these sites. is there some way to unpack the tar.gz file and manually install themes ?????
+[08:34] <ActionParsnip> Gnea: this guy is driving crazy fast. If I gotta jet then jackie89's hostname is different to the one in /etc/hosts and sudo fails etcetc
+[08:34] <Gnea> olivier: yeah, setup samba to control sharing through cups
+[08:35] <Gnea> ActionParsnip: oh man, that's crazy talk lol
+[08:35] <ActionParsnip> Gnea: yep so off to root recovery :(
+[08:35] <olivier> Gnea: I do not use windows pcs on my home network, it's pure cups printing. So far, I can't print unless someone is logged in on the server who shares the printer
+[08:35] <nast> just so i got this right....an incorrect hosts entry can stop the OS from booting? :<
+[08:35] <Dr_Willis> nast:  never noticed the issue..  It can cause other issues however..
+[08:35] <ActionParsnip> nast: stops sudo working. It should still boot afaik
+[08:36] <Gnea> olivier: then you clearly missed the point. it doesn't matter if there are any windows pc's or not.
+[08:36] <striker> hi all thanks for nothing !
+[08:36] <nast> ahh. thats curious [i'm a su kinda person]
+[08:36]  * Gnea looks oddly at striker
+[08:36] <eric_> does anyone know of a way to incorporate the ubuntu folder sync in ubuntu 9.04 and 10.10 with a local server instead of ubuntu one?
+[08:37] <ActionParsnip> nast: systems use loopback to talk to ports on the same system. If it uses "localhost" instead of the 127.0.0.1 IP, it will fail due to dns lookup
+[08:37] <Dr_Willis> striker:  the old gdm themes dont work with the n ewer gdm. and as far as i know theres not many themes out for the gdm2 yet. you could installt he old gdm if you wanted to
+[08:37] <ActionParsnip> striker: the login screen is visible for around 3 seconds. Why care so much?
+[08:37] <olivier> Gnea: You mean, there's no way to do that without samba printer sharing ? cups can't enable printing without a user being logged in ?? sounds odd
+[08:37] <Dr_Willis> striker:  theres other alternatives to GDM2 also you may want.
+[08:38] <Dr_Willis> The change from gdm1 to gdm2 came about.. Hmm..  like a year ago? i think.
+[08:38] <ActionParsnip> There's LDM which is themable (so I hear)
+=== briwe is now known as Peixinho
+[08:38] <Dr_Willis> ldm works nicely.
+[08:38] <striker> OK
+[08:38] <Dr_Willis> then again most of the *dm tools work :)
+[08:39] <Dr_Willis> xdm = about as ugly as one can get.
+[08:39] <striker> THANKS GUYS !
+[08:39] <ActionParsnip> Slim is nice too
+[08:39] <Gnea> olivier: well, it could be done, in theory... http://www.linuxquestions.org/linux/answers/Networking/Setting_Up_a_Network_Printer_using_CUPS
+[08:40] <Dr_Willis> there was that one '*dm' login that dident even use X.. qingly?
+[08:40] <nast> if sudoers has ALL as the host in the field for that user, would it still need /etc/hosts or dns?
+[08:40] <ActionParsnip> nast: yes as the processes still need to talk
+[08:40] <greenmang0> is it possible to specify user's password on command line using sudo?
+[08:40] <nast> what does sudo need to talk to?
+[08:41] <Gnea> olivier: of course, there's also https://help.ubuntu.com/community/NetworkPrintingWithUbuntu
+[08:41] <ActionParsnip> greenmang0: sure: sudo passwd foo ,change foo for the users name, you should tell them too so they don't lock their account trying to log in with the wrong pass
+[08:42] <chalcedny> hugs ActionParsnip :)
+[08:42] <ActionParsnip> nast: no idea but if the names are wrong, it doesn't work
+[08:42] <_Techie_> im running an HTPC with ubuntu as the base OS, and i require the X11 cursor to automatically be placed in the top left corner, is there any software that can do this for me?
+[08:42] <ActionParsnip> Hi chalcedony , not seem you in tiiiime
+[08:42] <alessandro2> !list
+[08:42] <ubottu> This is not a file sharing channel (or network); be sure to read the channel topic. If you're looking for information about me, type <unconvertable> /msg ubottu !bot <unconvertable>
+[08:42] <nast> i would have thought it would getuid(), check /etc/sudoers, do hostname lookups if needed due to use of hostnames in file, then setuid ()and exec(), or something
+[08:43] <Gnea> _Techie_: why not the bottom left or right corner?
+[08:43] <greenmang0> ActionParsnip: no... that's not i am asking ... i don't want sudo to prompt for password... let's say i want to get root access .. i will fire "sudo su -" .. but this will prompt me for my password ... instead i want to specify passsword on command line only so that without prompting  for password i will get root access
+=== Guest1172 is now known as rusty149
+[08:44] <raz_> is it better to install PAE on my 32bit ubuntu or install the 64bit edition, so i can have available all 8gb of ram?
+[08:44] <Gnea> greenmang0: sudo -i would be better than sudo su
+[08:44] <_Techie_> Gnea, its not to hide the cursor, its to allow me to use a Xterm without a window manage if i need to
+[08:45] <_Techie_> Gnea, when i use xinit to load another X session with an Xterm, i cant input unless the pointer is ontop of the terminal
+[08:45] <ActionParsnip> greenmang0: use: sudo -i ,and you will get a root console. Doingwhat you propose will severely reduce system security
+[08:45] <greenmang0> Gnea: but it also prompts for a password
+[08:45] <Dr_Willis> greenmang0:  putting the password in the command line can be a security risk. (i belive that other users mightbe able to see the command line/programs running  somehow) So  what you are wanting to do I think requires a bit of a work around.
+[08:45] <ActionParsnip> raz_: pae can access 12gb ram. Depends on what the system will be used for
+[08:45] <Gnea> _Techie_: actually, what you're asking for is for the xterm to keep the focus, not for the mouse cursor to be anywhere specific (yes, there is a difference)
+[08:46] <greenmang0> Dr_Willis: I am not concerned about security at present.. the machine won't be online either
+[08:46] <Gnea> greenmang0: of course it does
+[08:46] <greenmang0> Gnea: i want to get rid of prompt
+[08:46] <_Techie_> Gnea, either would work, just ive been manually shifting the pointer ontop of the term, so that s naturally what i asked
+[08:46] <Dr_Willis> dosent matter if You are concerned with security or not. :) its what the designers of the os/programs were concerned with.
+[08:46] <alessandro2> http://xdccing.com/
+[08:46] <ActionParsnip> greenmang0: think about it, root can access EVERYTHING so it can access storedpasswordsin ALL the browsers and shares you map and affect those easily asitis unrestricted
+[08:47] <raz_> Actiontrip: is is my home pc, i just wanted to know which option is better
+[08:47] <vovk1988_home> hi everyone, who can help me restoring my 10.10 ubuntu? it doesnt load anymore ((
+[08:47] <greenmang0> ActionParsnip: i am not concerned about security ...
+[08:47] <_Techie_> greenmang0, if you wish to remove the password prompt, edit the line in /etc/sudoers to look like this, %admin ALL=NOPASSWD: ALL
+[08:47] <ActionParsnip> greenmang0: as well as read, send and delete your email if you store it locally
+=== lab is now known as yohan14
+[08:48] <raz_> Actionparnsnip: is is my home pc, i just wanted to know which option is better
+[08:48] <Gnea> _Techie_: understandable, and I've actually ran that scenario before but didn't care bout the mouse because it's always there, so perhaps there's an .Xclients setting for xterm  to gain the focus...
+[08:48] <greenmang0> _Techie_: but that will make changes system wide... i just want to use this feature in bash script...
+[08:48] <Gnea> eventually I just wrote my own xsession :)
+[08:49] <ActionParsnip> raz_: if you intend to encode audio and video then 64bit will help. If you have a lexmark printer then 32bit will allow you to use it due to half ass support
+[08:49] <_Techie_> greenmang0, then you could have the script run as an isolated user
+[08:49] <alessandro2> http://xdccing.com/
+[08:49] <ActionParsnip> greenmang0: you can use sudo to run bash scripts
+=== rajesh is now known as trajesh
+[08:49] <Gnea> greenmang0: are you trying to run a different window manager with the xterm, or do you prefer it as a launch point?
+[08:49] <Quan-Time_> can i downgrade from 10.10 to 10.04 x64 ?
+[08:49] <Quan-Time_> this wifi issue is killing me..
+[08:49] <Gnea> er
+[08:49] <Gnea> _Techie_: sorry, that was for you
+[08:49] <ActionParsnip> Quan-Time_: you must clean install
+[08:49] <Gnea> greenmang0: mis-type
+[08:50] <greenmang0> Gnea: errr :)
+[08:50] <Gnea> :)
+[08:50] <ActionParsnip> Quan-Time_: you can only limb up, not down
+[08:50] <Gnea> yeah, I messed up lol sorry
+[08:50] <Quan-Time_> ActionParsnip: seriously ? thats hugely gay.. thus, i dont really wanna do it now :(
+[08:50] <ActionParsnip> Climb*
+[08:50] <tedge> greenmang0: http://maestric.com/doc/unix/ubuntu_sudo_without_password
+[08:50] <cypo> I'd like to output the same stereo signal to front and rear line out. How could I do that?
+[08:50] <ActionParsnip> Quan-Time_: how is a piece of software homosexual?
+[08:51] <_Techie_> Gnea, no window manager at all, if i require a graphical web browser, i use xinit -- :1 and start firefox
+[08:51] <ActionParsnip> Quan-Time_: and when something is good is it bi or straight?
+[08:51] <Gnea> Quan-Time_: in the unix world, there are certain procedures that must be followed, even if they are shortcutted. it's hardly lame, it's how things ought to be.
+[08:51] <`3Shades> Dr_Willis, Thanks
+[08:51] <sgo11> hi, how to stop aria2c properly? can I simply Ctrl+C to stop the download process?
+[08:51] <`3Shades> Got it done ..
+[08:52] <frostbyte> I'm having an issue with my menus,since I installed cairo-dock, sometimes they dont show up at all, i have to hover over them twice, any ideas?
+[08:52] <Dr_Willis> `3Shades:  :) took all this time?
+[08:52] <mk0> cannot find in ggole how can i change resolution and _frequency_ in ubuntu which not listed in system->preferences->monitor? i wanted to edit xorg.conf as always, but it doesn't exist. how is X managed in 10.04?
+[08:53] <mk0> ggole=google
+[08:53] <olivier> Gnea: ok got it working thank you bye*
+[08:53] <Dr_Willis> mk0:  whats your video chipset?
+[08:53] <`3Shades> Dr_Willis, it kept saying file exist took me a while to realize I had to delete the directory, and it wouldn't let me do it until I did it as room not even sudo.. for some reason
+[08:53] <raz_> ActionParsnip: thanks, ill check my hardware compatibility first, since it will do nothing more than a regular user does, webserfing, music/video playback and office work
+[08:53] <mk0> GeForce 7025 / nForce 630a
+[08:53] <ActionParsnip> Quan-Time_: did you see my question?
+[08:53] <Dr_Willis> mk0:  You installed the nvidia drivers and ran the nvidia-settings tool?
+[08:54] <`3Shades> Dr_Willis, after a mv it still kept /home/username
+[08:54] <mk0> nono i cannot use proprietary
+[08:54] <Gnea> olivier: cheers
+[08:54] <Dr_Willis> mk0:  no idea then. I use the nvidia drivers here on my 3 nvidia machines
+[08:54] <Quan-Time_> ActionParsnip: yup, no point answering.. you are looking for an arguement
+[08:55] <mk0> i even do not know which driver is now used.
+[08:55] <greenmang0> Dr_Willis: when i use "-S" option of sudo it tell me "stdin: is not a tty"
+[08:55] <ActionParsnip> Quan-Time_: no just using "gay" as a term of inadequecy is not only pathetic and ignorant, its offensive to homosexuals
+[08:55] <`3Shades> Dr_Willis, and I had a buch of files it wouldn't "move" so I copied them instead with sudo then I had to remove the tricode directory as root sudo wouldn't even do it ... really weird then I could finally make the link.. heh.. not to mention the time it took to transfer 15GB lol now I'm working on the virtualboxes.. heh
+[08:56] <Dr_Willis> `3Shades:  you may need to check the permissions/ownership of the files perhaps.
+[08:56] <ActionParsnip> Quan-Time_: I suggest you review yourvocab, there arethousands ofwords toexpressdissatisfaction
+[08:56] <`3Shades> if I broke something I'll figure it out later
+[08:57] <Quan-Time_> hahrarha !!! sprout crap and not even do it well.. awesome. then LEAVE. anyawy. on that note,, im out too
+[08:57] <vm> ./nicklist.pl
+[08:58] <vm> sorry, ignore that
+[08:58]  * `3Shades has been using linux for years, yet this is my first symbolic link I've made by hand lol
+[08:58] <linux_probe> o_O
+[08:58] <linux_probe> ln -s oh my
+[08:58] <linux_probe> >_>
+[08:59] <nast> hardlinks are surprisingly useful :>
+[08:59] <Dr_Willis> `3Shades:  the gnome file manager can make them also.. but io forget the key combo.
+[09:00] <dagon666> nast: whats the differences between symbolic and hardlink ? I dont think I ever made a "hard" link
+[09:00] <Dr_Willis> hard link is identical to the file name originally,
+[09:01] <Dr_Willis> You cant tell any differance btween the original and the 'link'
+[09:01] <dagon666> Dr_Willis: is it "copy" equivalent ?
+[09:02] <Dr_Willis> dagon666:  no.
+[09:02] <jackie89> Hi again. :]
+[09:02] <Dr_Willis> dagon666:  it IS the same file...  its not a copy
+[09:02] <Dr_Willis> exact same data on the disk.. same sector/location/whatever.. just has 2 filenames in differnet parts of the file tree.
+[09:02] <tedge> greenmang0: echo "<password>" | sudo -S <command>
+[09:03] <dagon666> whats the purpose ? arent symbolic links enough ?
+[09:03] <jackie89> Darn, he did leave. :[  Okay, i'm having issues with rebooting, which either means that i'm missing something or something just isn't right within my computer... Probably the former of my assumptions.  I restarted and kept holding shift even before anything loaded and kept that key pressed for fifteen minutes... Nothing happened.
+[09:03] <`3Shades> Dr_Willis, note made
+[09:03] <Dr_Willis> dagon666:  symbolic links are not the same.. they are 'shortcuts' to a file..
+[09:03] <Dr_Willis> dagon666:  hard links are the same file.. theres no way to tell its a shortcut.. because its not.
+[09:03] <`3Shades> isn't a hard link the same as mounting something basically
+[09:04] <Dr_Willis> `3Shades:  No...
+[09:04] <Dr_Willis> a 'hardlink' is a differnt name for the same file. its a filesystem feature.
+[09:04] <`3Shades> GOtcha
+[09:04]  * Dr_Willis is rembering his old old old using linux/linux kernel book.
+[09:04] <dagon666> Dr_Willis: I understant that if I remove a hardlink it will remove a file or only a hardlink to it ?
+[09:04] <nickhtp> Men, don't be using those symbolic link shiznits, IMHO. Go try actively mounting with vmware or nfs.
+[09:04] <Dr_Willis> dagon666:  a file is only removed after ALL 'hardlinks' to it are removed.
+[09:05] <dagon666> Dr_Willis: ok, I understand now
+[09:05] <nast> i'm a bit fuzzy on hardlinks, so there's still only one inode for said file? if so where are the permissions data for the second link stored?
+[09:05] <`3Shades> don't mention books to me right now .. the US postal service decided to loose about 250$ worth of my books in the mail. the lady even said, they are just books probably don't need to insure them..
+[09:05] <Dr_Willis> I recall thios from some Lnux book i had ages ago that hammered this home. :) the author thought it was critical to know.
+[09:06] <jackie89> If anybody could help me with my problem, i'd be more than appreciative... If not, i understand.  Is there anybody available who would be able to help me?
+[09:06] <Dr_Willis> http://en.wikipedia.org/wiki/Hard_link
+[09:06] <greenmang0> tedge: thanks!!!
+[09:07] <`3Shades> The box made it but the books were gone ... and the box looks like they freak'n fork lift went right through it, so I figure the guy messed up the books and threw them away just to cover his ass.
+[09:07] <greenmang0> tedge: actually after -S i was trying "su -" this command and it was giving me "stdin: is not a tty" error
+[09:07] <jackie89> Or is there maybe a channel for newbies who really don't know what they're doing?
+[09:07] <greenmang0> tedge: but i tried some other command and it worked
+[09:07] <CountDuckula> hard/soft links here too --> http://linuxgazette.net/105/pitcher.html
+[09:08] <Dr_Willis> jackie89:  you may want to start from thebeginning for the channel. with what your original problem is.
+[09:08] <`3Shades> jackie89, I'm sure there are a few in here that know what they are doing, just ask your question and someone should get to you if your nice :)
+[09:09] <nast> i think they were up to trying to get their /etc/hostname file consistent with /etc/hosts
+[09:09] <jackie89> Oh, thank you!  I'll do that.
+[09:09] <`3Shades> I still want the option built into apt-get and the synaptic to be able to redirect your installs... that would be nice.
+[09:10] <arvut> !anyone | jackie89
+[09:10] <ubottu> jackie89: A large amount of the first questions asked in this channel start with "Does anyone/anybody..."  Why not ask your next question (the real one) and find out?
+[09:10] <`3Shades> have it do an auto symbolic link...
+[09:10] <arvut> =)
+[09:10] <tedge> greenmang0: glad you got it to work! use it carefully :)
+[09:10] <jackie89> I want to set up my wireless connection but my computer doesn't seem to recognize itself, so I was recommended to reboot and select recovery mode, but when i did that i held 'shift' for fifteen minutes and the option to select recovery mode never showed up.
+[09:11] <greenmang0> tedge: yeah :)
+[09:11] <jackie89> Does anybody know what to do in that situation?
+[09:11] <nast> did you really hold shift for 15 minutes?
+[09:11] <nast> just curious, seems a long time. do you have a livecd handy?
+[09:11] <nickhtp> oh that
+[09:11] <arvut> 15 mins sounds abit extreme. what exactly is wrong with your wifi?
+[09:12] <nickhtp> who's running that
+[09:12] <psycho_oreos> jackie89, what do you mean the computer doesn't recognise itself, do you mean its not just the wifi that isn't working there are other issues?
+[09:12] <jackie89> What's a livecd, nast?  And yes, i did. @.@  I got really handy in turning pages with my chin though, since i pressed both 'shifts'
+[09:12] <jackie89> psycho_oreos - i think there are other issues.  The filename doesn't match up with something else... This is what i was told, anyway.
+[09:13] <nast> jackie89: can you tell us what grep localhost /etc/hosts says, and what cat /etc/hostname says :)
+[09:13] <arvut> why would you press shift in the first place?
+[09:13] <lucent> could not find the any key
+[09:13] <myschak> reporting bug: when I try to use midnight commander mc it won't work because of "TERM environment variable needs set." Any tips? /cheers
+[09:13] <arvut> nast: I think that might be abit extreme
+[09:13]  * `3Shades thinks jackie89 was talking to someone that knew something about windows..
+[09:14] <nibbler_> hi. i just installed a new 10.10 on my netbook. first it offered me two options for proprietary drivers for the wireless. i chose one, and this does not work. now i dont get the otherone offered anymore (broadcom STA vs broadcom b43(?)) - any hints?
+[09:14] <psycho_oreos> jackie89, hmm for starters, dmesg output into pastebin (do not paste here) would be very handy
+[09:14] <jackie89> nast:  I'm so sorry, i can't understand your question... What's a grep?  And when i typed in cat /etc/hostname it said "Jaclyn"
+[09:14] <lucent> nibbler_: no clue about that
+[09:14] <arvut> F8 is the key you hold down to get the startup menu when booting windows
+[09:14] <arvut> !safemode
+[09:14] <arvut> hmm
+[09:14] <arvut> !failsafe
+[09:14] <lucent> nibbler_: is it available via System | Administration | Additional Drivers ?
+[09:15] <jackie89> psycho_oreos:  dmesg output?
+[09:15] <nast> jackie89: and when you type 'grep -i jaclyn /etc/hosts'?
+[09:15] <nickhtp> jackie89: quirky, eh
+[09:15] <psycho_oreos> jackie89, yes `dmesg' is a program that you type in console. You copy and paste the entire output into pastebin and send me the pastebinned link
+[09:15] <jackie89> 127.0.0.1 localhost localhost.localdomain ume jaclyn.ph.cox.net
+[09:15] <nibbler_> lucent, nope. that where it was available in the beginning, but is no more :(
+[09:15] <arvut> nast: he is a newbie to ubuntu. giving him commandline instructions might not be the best.
+[09:16] <jackie89> 192.168.1.110 jaclyn.ph.cox.net
+[09:16] <arvut> altho, it is one way to learn =)
+[09:16] <nast> arvut: presuming they can copy and paste, or transcribe without screwing up, seems a good idea
+[09:16] <nast> arvut: the alternative is nasty
+[09:16] <jackie89> psycho_oreos:  I'm not sure i have that program.  @.@
+[09:16] <arvut> nast: seems to work =)
+[09:17] <psycho_oreos> plus the command line tools are more prompt and direct rather than clicking this, clicking that, etc etc.. takes forever to get around sometimes
+[09:17] <nast> arvut: if your buffer extends far enough backwards, ActionParsnip was helping jackie89 fix its hostname setup
+[09:17]  * `3Shades gets helped a lot and prefers command line help over gui help and I'm a gui person..
+[09:17] <psycho_oreos> jackie89, sure you do, at the command prompt (where you type grep -i jaclyn.ph.cox.net /etc/hosts as per before) you type in dmesg
+[09:18] <nibbler_> lucent, what is even more disturbing, the additional drivers say that the broadcom-sta driver is used, but aptitude says:  p   broadcom-sta-common - maybe ill try manually install this
+[09:18] <jackie89> psycho_oreos - Before or after i type in the grep-etc?
+=== b2c is now known as Golfinha
+[09:18] <cortex1> hi
+[09:19] <cortex1> does someone now how i can make irssi  run a shell command when starting up ?
+[09:19] <`3Shades> Dr_Willis, again thanks.. I'm outta here.. for real this time if I already said that...
+[09:19] <nibbler_> lucent, generaly i guess i can find both drivers in the apt repro, so i'll try there.
+[09:19] <psycho_oreos> jackie89, it doesn't matter when, you can do it now (which is after grep -i) as long as you get a prompt (where you get a solid white block cursor or a blinking one)
+[09:19] <nast> 02:04 < jackie89> sudo: unable to resolve host jaclyn
+[09:19] <nast> ^key line :)
+=== Golfinha is now known as SuperPatate
+[09:19] <lucent> nibbler_: good luck with failcom :/
+[09:19] <jackie89> 127.0.0.1 localhost localhost.localdomain ume jaclyn.ph.cox.net
+[09:19] <jackie89> 192.168.1.110 jaclyn.ph.cox.net
+[09:19] <jackie89> Like that?
+[09:20] <nast> i believe the plan was to get sudo working via editing /etc/hosts, then worry about wifi
+[09:20] <jackie89> i did '/dmesg' at the beginning
+[09:20] <psycho_oreos> jackie89, no no.. that's not from dmesg.. but before you do that again.. make sure you use pastebin.. do not.. I must repeat.. do not paste it in here or you'll get silenced
+[09:20] <nast> hence the rebooting the host, and holding down shift to get into some kind of ubuntu recovery mode
+[09:21] <jackie89> psycho_oreos - What's pastebin?  And thank you for being so patient with me.
+[09:21] <nickhtp> Attention l-users: http://www.cyberciti.biz/faq/linux-route-add/
+[09:21] <psycho_oreos> !pastebin | jackie89
+[09:21] <ubottu> jackie89: For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://tinyurl.com/imagebin | !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+[09:21] <psycho_oreos> jackie89, no worries
+[09:21] <jackie89> Ohhh
+[09:22] <jackie89> Thank you so much. :]
+[09:22]  * nast waits till we get to the fixing sudo part
+[09:22] <psycho_oreos> hmm one should be able to do /etc/init.d/networking restart and that'll reload /etc/hosts? I might be old fashioned, I think ubuntu these days prefer services networking restart or something
+=== administrator is now known as Guest70200
+[09:22] <Guest70200> hello world
+[09:22] <nast> psycho_oreos: how would you edit /etc/hosts?
+[09:22] <nickhtp> Yea, l-user. ``Like this?'' *neckbench* ``Yea, that's it..!'' --Spaceballs
+[09:22] <Dr_Willis> i dotn recall ever needing to 'reload' hosts. You edit it.. and its used...
+[09:22] <SuperPatate> #Francais01
+[09:22] <psycho_oreos> nast, I dunno I'm old school, I just go sudo vim /etc/hosts
+[09:23] <lucent> psycho_oreos: sudo service networking restart
+[09:23] <CountDuckula> for copying log files dont forget the log file vier in Administration menu
+[09:23] <psycho_oreos> ahh I could be wrong then.. I thought sometimes the hosts file doesn't get reloaded in a prompt manner
+[09:23] <nast> psycho_oreos: presumably you noticed why we can't use sudo for that :)
+[09:23] <lucent> list available from 'service --status-all 2>&1 | grep net'
+[09:23] <nickhtp> linux route add, linux route add -- and done.
+[09:23] <psycho_oreos> lucent, *nods* I kept forgetting sudo
+[09:23] <jackie89> Okay, I'm at the pastebin place
+[09:23] <jackie89> What's next?
+[09:24] <lucent> psycho_oreos: hosts file is read from to feed 'hostname' command, but only affects new sessions I think
+[09:24] <psycho_oreos> nast, ahh ouch well yeah one will need to enable linux rescue mode.. by appending 1 or into grub's conf file or grub2's menu thingy
+[09:24] <ja660k> hey all, is there any program more advanced then time time command
+[09:24] <psycho_oreos> lucent, yeah that's what I thought though if one restarted networking it may force the reload on the logged in user's session
+[09:24] <lucent> psycho_oreos: there's rescue mode entries as part of an Ubuntu install
+[09:25] <lucent> golly, you are old school linux'er
+[09:25]  * lucent :P
+[09:25] <Dr_Willis>  init=/bin/bash  :)
+[09:25] <psycho_oreos> lucent, yup in the old grub I recall there's the recovery mode
+[09:25] <psycho_oreos> don't forget root= :D
+[09:25] <psycho_oreos> mount && chroot.. etc
+[09:25] <lucent> oh-gee.  "Old Grub"  these kids today, don't know PRUB from a hole in the wall
+[09:25] <comofyu> what's the differences between 10.04 and 10.10
+[09:26] <lucent> comofyu: 0.06
+[09:26] <psycho_oreos> comofyu, I'd check the changelog file
+[09:26] <nast> if we do get jackie89 to boot into a shell, we're going to have to get them to identify and mount the right partition somehow to edit the hosts file :<
+[09:26] <Dr_Willis> comofyu:  everythings updated...  many of the linux.ubuntu news web sites give 'whats new...' type articals
+[09:26] <nast> or LV, if they're using LVM
+[09:26] <comofyu> lucent:great
+[09:26] <lucent> comofyu: anytime
+[09:26] <Dulak> remember lilo and the 1024 cylinder limit?
+[09:26] <psycho_oreos> nast, well getting a copy of fdisk -l along with cat /etc/fstab would be handy
+[09:26] <psycho_oreos> lol old lilo
+[09:26]  * jackie89 listens quietly
+[09:27] <lucent> I remember CHS
+[09:27] <psycho_oreos> jackie89, did you pastebin the output of dmesg?
+[09:27] <Dulak> you are old
+[09:27] <comofyu> ok, but which do you like better?
+[09:27] <jessy90> hello
+[09:27] <Dr_Willis> comofyu:  newer is always better right?
+[09:27] <lucent> LBA was like, "whuaaa?"
+[09:27] <lucent> over 9000.
+[09:27] <psycho_oreos> ahh CHS I didn't remember much of that.. I remember alsaconf really messed me up a lot
+[09:27] <jackie89> http://paste.ubuntu.com/514884/
+[09:27] <Dr_Willis> comofyu:  if you want LST - stick with the 10.04 . if that doxent matter.. try 10.10
+[09:27] <jackie89> Like that?
+[09:27] <comofyu> Dr_Willis:but i dont think so
+[09:28] <lucent> good job jackie89
+[09:28]  * psycho_oreos checks jackie89's link
+[09:28] <jackie89> Yay!  Thank you. :D
+[09:28] <jessy90> Since upgrading to Ubuntu 10.4 and 10.10, my mouse no longer
+[09:28] <jessy90> the mouse and keyboard are connected to a receiver connected via a USB port
+[09:28] <jessy90> the receiver LED lights up on mouse, mouse wheel and right-
+[09:28] <jessy90> mouse works, but the cursor is stationary white
+[09:28] <jessy90> Is there a solution?
+[09:28] <FloodBot3> jessy90: Please don't flood, use http://paste.ubuntu.com to paste, don't use Enter as punctuation.
+[09:28] <Dulak> lucent: what was your first kernel?
+[09:28] <CountDuckula> comofyu: 10.10 is 6 months worse than 10.04 and 6 months better than 11.04
+[09:28] <psycho_oreos> ok that was only for grep -i heh
+[09:28] <lucent> Dulak: hurts to think about, some early release of slackware
+[09:28] <comofyu> I like the editions less than 10.04
+[09:28] <comofyu> better
+[09:29] <psycho_oreos> comofyu, http://distrowatch.com/table.php?distribution=ubuntu <--- scroll down to the massive table where it mentions the distro release versions and their codenames
+[09:29] <Dulak> lucent: slack 2!
+[09:29] <Dr_Willis> Minix !
+[09:29] <psycho_oreos> slack 2? well beyond my era, I started linux back in rh8 days
+[09:29] <jessy90> Since upgrading to Ubuntu 10.4 and 10.10, my mouse no longer the mouse and keyboard are connected to a receiver connected via a USB port the receiver LED lights up on mouse, mouse wheel and right- mouse works, but the cursor is stationary white.Is there a solution?
+[09:29] <lucent> psycho_oreos: you are lucky to have glossed over RH6.0
+[09:29] <jackie89> psycho_oreos:  What else should i type into the terminal?
+[09:29] <lucent> worst distro I've ever run, bar none.
+[09:29] <Dr_Willis> jessy90:  as a test. Unplug/plug the thing back in?
+[09:29] <nast> jackie89: alright, what does "egrep '\W/\W' /etc/fstab" say
+[09:30] <CountDuckula> 10.10 is slightly better than Linux From Scratch
+[09:30] <psycho_oreos> lucent, not really, rh8 was the worst actually, rpmdb woes..one has to constantly kill the hung rpm and reload the database
+[09:30] <Dulak> lucent: rh 5 was good but they sure did mess up with 6+
+[09:30] <lucent> Dulak knows what he/she's talking about
+[09:30] <psycho_oreos> I heard rh7.2 and rh7.3 were really good
+[09:30]  * lucent ;)
+[09:30] <jackie89> psycho_oreos:  http://paste.ubuntu.com/514887/
+[09:30] <entel> anyone know what package  i need to install sun java6 in maverick meerkat
+[09:30] <psycho_oreos> jackie89, "dmesg" without quotes
+[09:31] <comofyu> yeah, maybe 10.10 suits better for drag and drop
+[09:31] <Dr_Willis> !java | entel
+[09:31] <jessy90> Dr_Willis,   already tried
+[09:31] <ubottu> entel: To install a Java runtime on Ubuntu, see https://help.ubuntu.com/community/Java. For the Sun Java products and browser plugin, search for the sun-java6- packages in the !partner repository on Lucid (which must be enabled), or !multiverse repository on older releases.
+[09:31] <entel> cant seem to fun sun-java6-jre in apt
+[09:31] <Dr_Willis> entel:  its in the parteters repo.
+[09:31] <Dulak> entel: enable the partner repo
+[09:31] <entel> ah
+[09:31] <psycho_oreos> jackie89, err ok, but why egrep all that jazz? heh nevertheless "dmesg" output (without quotes) would be really handy for me
+[09:31]  * jackie89 blinks
+[09:31] <entel> how do i do that
+[09:31] <CountDuckula> entel: ubuntu-restricted-extras will pick up java, flash and codecs if u need it all in one
+[09:31] <lucent> jackie89: hey what's the issue o'er there ?
+[09:32] <Dr_Willis> I noticed if i checked the  'enable 3rd party repos' and 'download updates' that somehow isntalled java and flash automatically for me.
+[09:32] <jackie89> i'm so sorry, you lost me... I copied the thing you posted out, do i put the 'dmesg' in the terminal?
+[09:32] <Dulak> CountDuckula: it's openjdk, not sunjre which is what he wants
+[09:32] <frostbyte> 10.10 ftl? gnome menu's randomly decide if they want to appear onclick/hover
+[09:32] <CountDuckula> ah missed that!
+[09:33] <psycho_oreos> jackie89, yes and make sure you paste the output in full into pastebin
+[09:33] <jackie89> Okay, psycho_oreos, thank you for explaining.
+[09:33] <hobomo> can someone help me with a simple xterm problem?
+[09:33] <gnugr> anyone knows if Btrfs-tools works fine on Ubuntu?
+[09:33] <psycho_oreos> lucent, I suppose that'll come in handy when we guide jackie89 to recovery mode for sudoers
+[09:33] <psycho_oreos> !ask | hobomo
+[09:33] <ubottu> hobomo: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-)
+[09:34] <lucent> psycho_oreos: sounds like the long way around
+[09:34] <psycho_oreos> lucent, in case if we get stuck in a bind :)
+[09:34] <lucent> psycho_oreos: only person going to be stuck is jackie89
+[09:34]  * lucent facepalms
+[09:34] <psycho_oreos> i.e. stuck inside busybox
+[09:35] <psycho_oreos> lucent, then again one has to guide jackie89 out of that and get sudoer's file sorted, get hostname sorted, etc etc
+[09:35] <jackie89> psycho_oreos: http://paste.ubuntu.com/514889/
+[09:35] <Dr_Willis> gnugr:  i was thinking btrfs was to be a feature in 10.10. but its not the default FS.
+[09:35] <hobomo> ubottu: ok thanks. my xterm opens in the root folder by default. anyone know a permanent solution to make it open in the home folder (i.e. some option to add in .Xresources)?
+[09:35] <ubottu> Error: I am only a bot, please don't think I'm intelligent :)
+[09:35] <lolcat93> Hello
+[09:35] <psycho_oreos> jackie89, no no just type "dmesg". don't append anything to the back of that command
+[09:35] <lolcat93> Can I install ubuntu on a 1GB pendrive?
+[09:35] <jackie89> Ohhh, i see!
+[09:36] <Dr_Willis> lolcat93:  you can make a bootable flash drive with 1gb. but   thats about it.
+[09:36] <jackie89> Thank you again, psycho_oreos. @.@
+[09:36] <psycho_oreos> jackie89, nw
+[09:36] <Dr_Willis> lolcat93:  unetbootin or other tools under windows can do that. Or the  boot disk creator tool in ubuntu
+[09:36] <comofyu> Has anyone made ramdisk for davinci platform?
+[09:36] <lucent> new users are cute when they learn things and stuff
+[09:36] <lolcat93> Dr_Willis: I need to install a laptop for my gf to use
+[09:36] <Dulak> lolcat93: you can but a lighter distro would give you more in less space.  You'd have to trim a lot out of ubuntu to fit on 1g
+[09:36] <Dr_Willis> lolcat93:  you can make a bootable flash drive with 1gb.  Yes
+[09:36] <lolcat93> Dr_Willis: But I am out of cds, so I can't burn one... And I need to install it
+[09:36] <lucent> lolcat93: so, macbook?
+[09:36] <CountDuckula> unetbootin has a problem with 10.10 i think due to newer kernel
+[09:36] <Dr_Willis> lolcat93:  you can install from that..
+[09:37] <jackie89> http://paste.ubuntu.com/514890/ - psycho_oreos
+[09:37] <hobomo> my xterm opens in the root folder by default. anyone know a permanent solution to make it open in the home folder (i.e. some option to add in .Xresources)?
+[09:37] <psycho_oreos> hobomo, afaik its handled by ~/.bashrc or ~/.bash_config but its a nasty hack imo.. normally it should start in logged in user's home directory.. there might be something wrong inside /etc/passwd file
+[09:37] <lucent> CountDuckula: the syslinux is a mess on 10.x Ubuntu release ISOs
+[09:37] <Dr_Willis> hobomo:  it depends on where its gettting started at i belive.. how are you launching it?
+[09:37] <psycho_oreos> jackie89, that's more like it :)
+[09:38] <lolcat93> I can't find the bootable usb thing
+[09:38] <jackie89> Yay!  I succeeded!  Three times the charm?
+[09:38] <lucent> CountDuckula: utter disaster. I looked into it, the issues stem from a hacked copy of syslinux distributed with Ubuntu-specific graphical menu patches, and then reverting to the official graphical menu system
+[09:38] <psycho_oreos> jackie89, not quite but :)
+[09:38] <Dr_Willis> lolcat93:  for what OS ? windows? linux? its under the admin menu on a ubuntu setup
+[09:38] <lucent> CountDuckula: result = nothing !@#$ works
+[09:38] <hobomo> Dr_Willis: i launch it with a keyboard shortcut that is set to run the command 'xterm'
+[09:38]  * jackie89 smiles sheepishly
+[09:38] <CountDuckula> lucent: yeah i can do Arch, Debian etc but Ubuntu:(
+[09:38] <lolcat93> Ubuntu
+[09:38] <Dr_Willis> hobomo:  that is weird.. just 'xterm' in a terminal dosent do that does it?
+[09:39] <Dulak> lolcat93: https://help.ubuntu.com/community/Installation/FromUSBStick
+[09:39] <psycho_oreos> jackie89, humm you might want to now pastebin your "mount" output and I think we're ready to get you working with sudoers thingy
+[09:39] <Dr_Willis> hobomo:  how did you make this keyboard shortcut?
+[09:39] <lucent> CountDuckula: if you can get to a syslinux prompt, I think there's something you can type to get it going anyways
+[09:39] <jackie89> psycho_oreos:  Will do.
+[09:39] <hobomo> Dr_Willis: launching 'xterm' in gnome terminal opens it in the home folder, but i think thats because gnome terminal itself opens in home folder
+[09:40] <psycho_oreos> jackie89, do you have another computer to work with or is this your only one?
+[09:40] <hobomo> Dr_Willis: i used the keyboard shortcuts gui to set it up
+[09:40] <jackie89> http://paste.ubuntu.com/514892/
+[09:40] <lolcat93> Bah, the usb pendrive was only 512 mb...
+[09:40] <jackie89> I can get another one, psycho_oreos, but it can't access mIRC
+=== PsyTrance_ is now known as PsyTrance
+[09:40] <lucent> jackie89: words of encouragement for you, none of us has any idea what hundreds of commands actually do, we pick maybe 30-40 out of the bunch and use those to do what we need done
+[09:41] <lucent> so it's kind of a matter of style and not always a right or wrong way
+[09:41] <Dr_Willis> hobomo:  its opening in my users home dir here it seems..
+[09:41] <jackie89> lucent:  You're a doll, thank you for lifting my spirits back up. :]  I feel like a kindergartener in a classroom of 6th graders right about now.
+[09:41] <lucent> if someone is helping you and it is overwhelming all the new information, it's just as overwhelming for anyone else
+[09:41] <Dr_Willis> hobomo:  on wait. its in / :)
+[09:41] <Dr_Willis> hobomo:  make a script  called 'start-xterm' that does a cd, then starts xterm perhaps..
+[09:41] <psycho_oreos> I agree with what lucent said, there's no one way to go about doing things. We all have learnt different ways
+[09:41] <lucent> I'm sitting here thinking "wow, you can do it like THAT?  neat.  different command than I usually use but okay anyways"
+[09:42] <jackie89> Lol!
+[09:42] <Dr_Willis> I notice the fonts are still messed up for me with Xterm. on 10.10
+[09:42] <lucent> the thing about grep and '\W' made me search Google to find out what that even does
+[09:42] <jackie89> Sometimes i do that with cooking... I saw the weirdest way to cut avacado the other day.
+[09:42] <the_lord> #ubuntu-it
+[09:42] <frostbyte> i wish i could remove the animation from UI
+[09:42] <psycho_oreos> jackie89, you said the other computer can't use mirc.. that's strange and it'll be awkward.. are you able to fix that up so you can communicate to us what is going on and maybe we can give you a more direct feedback?
+[09:43] <hobomo> Dr_Willis: i was doing that previously but then when i setup more sophisticated xterm aliases, it fouls things up
+[09:43] <jackie89> I can try, psycho_oreos, will you give me a minute or two, though?
+[09:43] <psycho_oreos> lol I didn't know what \W meant.. I suppose its anything after the the initial slash
+[09:43] <bytesaber> Can't seem to figure out the offical place where to keep the iptables-save
+[09:43] <psycho_oreos> jackie89, yup
+[09:43] <jackie89> Thank you!  Brb
+[09:43] <bytesaber> also haven't found an iptables servic in /etc/init.d    can someone explain?
+[09:43] <Dr_Willis> hobomo:  it does it with gnome-terminal also it seems.
+[09:43] <lucent> bytesaber: Uncomplicated FireWall (ufw)
+[09:44] <hobomo> Dr_Willis: my gnome terminal opens in home
+[09:44] <lucent> bytesaber: also have a look-see at the output of 'service --status-all'
+[09:44] <Dr_Willis> hobomo:  that is weirder still. :) could be a loginshell vs non login shell issue.
+[09:45] <bytesaber> lucent, i've already written my rules.   i sometimes need to write a few oddball firewalls for some various purposes.  just new to ubuntu
+[09:45] <waterbourne> is it possible to sync android phones with ubuntu without going through gmail/google?
+[09:45] <lucent> I will fix this kernel, until it is broken.
+[09:45] <Dr_Willis> hobomo:  doing a google search fines --> http://linuxexchange.org/questions/855/gnome-terminalkeyboard-shortcut-launches-terminal-with-directory-default
+[09:45] <bytesaber> lucent, ok
+[09:45] <lucent> bytesaber: ubuntu uses an init system named 'upstart' if you need to run something then better luck trying to search for upstart and iptables to find out how to do this
+[09:46] <syareez> hye
+[09:46] <syareez> can i join?
+[09:46] <lolcat93> Is there a faster way to figure out if I have a harddrive than GParted?
+[09:46] <bytesaber> lucent, i come from a mandriva/centos experience.   trying out ubuntu.     normally i just place iptables-save's output in /etc/sysconfig/iptables.   and run the service called /etc/init.d/iptable to start or stop or restart whateve i store in the file.   How does ubuntu do it?
+[09:47] <psycho_oreos> lolcat93, you can use `sudo fdisk -l'
+[09:47] <Dr_Willis> hobomo:  gnome-terminal has a working-directory option. aparenetly xterm dosent  - but this  can work -->    xterm -hold -e "cd $HOME/documents && /bin/bash" &
+[09:47] <lucent> bytesaber: I don't know
+[09:47] <lolcat93> psycho_oreos: It returned nothing
+[09:47] <lucent> bytesaber: Ubuntu uses 'upstart' others use sysvinit
+[09:48] <lucent> it's going to be different
+[09:48] <bytesaber> lucent, well that's odd.  there's gotta be a distro "norm" location for saving a iptables-save to wherever it wants it for when you reboot
+[09:48] <nast> bytesaber: debian used to have a iptables-save, but it was discouraged, and people should use shorewall or other such things
+[09:48] <lucent> if there is I don't know about it and you're going to have just as much luck searching Google as I will :)
+[09:48] <psycho_oreos> lolcat93, that's weird, normally it should prompt for your login's passwd and then from root access print out the contents of `fdisk -l'.. hmm another issue might be /dev not mounted or missing.. check mount
+[09:48] <bytesaber> nast, shorewall's justa  front end to iptables   iptables is kernel
+[09:49] <nast> bytesaber: iptables is just a frontend to netfilter
+[09:49] <bytesaber> i find it odd that i can't even google what to do.  it's all "opinion" and such on fourms.  really weird
+[09:49]  * nast conjecturing
+[09:49] <lolcat93> psycho_oreos: Livecd
+[09:49] <lolcat93> Also the installer cant find the drive
+[09:49] <lolcat93> dammit
+[09:49] <pksadiq> ljl here?
+[09:49] <bytesaber> nast well i don't know how else youc an get more specific as there is no netfilter manipulation other than catting stuff into /proc
+=== jackie89 is now known as jackie189
+[09:49] <psycho_oreos> lolcat93, still even at that the output should be visible.. it might be a controller issue or hard disk issue
+[09:50] <hobomo> Dr_Willis: ill try it
+[09:50] <android_user> Hi, I'm trying to use the wubi installer to install Ubuntu from Windows and I get this error: http://www.2shared.com/photo/Z3fQPPAA/screenshot.html  Any suggestions please?
+[09:50] <lolcat93> psycho_oreos: I expect the drive is dead
+[09:50] <songhui> <unconvertable>
+[09:50] <lolcat93> Hope they are cheap...
+[09:50] <bytesaber> so anyhow, where is THE place to put your iptables rules for your box?
+[09:50] <psycho_oreos> lolcat93, heh that might be it.. check dmesg output as that may give you information on what errors is the hard disk probing spewing up errors as
+[09:51] <psycho_oreos> lolcat93, depends on how big the capacity, etc
+[09:51] <jackie89> Hi again. :]
+[09:51] <psycho_oreos> jackie89, looks like you have mirc working on the other machine :) nice
+[09:51] <jackie89> Yup!  :D
+[09:51] <jackie189> Should I exit out of this computer?
+[09:52] <Jordan_U> !cn | songhui
+[09:52] <ubottu> songhui: For Ubuntu help in Chinese : #ubuntu-cn <unconvertable> #ubuntu-tw  <unconvertable> #ubuntu-hk
+[09:52] <psycho_oreos> jackie89, ok, when you boot up the ubuntu machine, do you see a what it says to access the menu? I don't have grub2 installed but I recall the button for grub was Esc to access menu
+[09:52] <somaye> hello every bady
+[09:52] <songhui> ?
+[09:52] <somaye> body
+[09:52] <songhui> ???
+[09:52] <bytesaber> https://help.ubuntu.com/community/IptablesHowTo     LOL
+[09:52] <bytesaber> what a joke
+[09:52] <bytesaber> WARNING: Iptables and NetworkManager seem to have a conflict.
+[09:52] <songhui> hello
+[09:53] <bytesaber> then friggin decide which to use Ubuntu...
+[09:53] <jackie189> psycho_oreos:  When I restarted it and held 'shift', it gave me two options - 'F2' which allowed me to go into setup, and then 'F12' which allowed me to go into boot options.
+[09:53] <somaye> ?how are you
+[09:53] <Khedron> bytesaber: they do, they advise ufw
+[09:54] <psycho_oreos> jackie189, hmm not that the one a little after that.. sounds like F2 and F12 are BIOS related stuff
+[09:54] <psycho_oreos> songhui, /join #ubuntu-cn
+[09:54] <jackie189> psycho_oreos:  I think you're right. :/
+[09:54] <bytesaber> Khedron, then what about use that write our own iptalbes firewalls?
+[09:54] <Khedron> bytesaber: disable stuff
+[09:54] <bytesaber> plain ol linux firewalls
+[09:54] <bytesaber> omg
+[09:54] <bytesaber> dumb
+[09:55] <Dr_Willis> Demand a refund...
+[09:55] <nibbler_> lucent, it was the killswitch. i could kill myself for this stupidity :)
+[09:55] <somaye> have linux fire wall?
+[09:55] <nibbler_> somaye, one of the best.
+[09:55] <Jordan_U> bytesaber: " However NetworkManager is still in Beta.". Network manager hasn't been beta for a *long* time. That page is very out of date.
+[09:55] <psycho_oreos> jackie189, weird.. shift button you said you held down for 15 or so seconds and it didn't do anything.. I'd say try holding down the left shift button only and don't hold it for more than say 5 seconds.. you should get into recovery mode
+[09:55] <Dr_Willis> !firewall | somaye
+[09:55] <ubottu> somaye: Ubuntu, like any other Linux distribution, has firewall capabilities built-in. The firewall is managed using the 'ufw' command - see https://help.ubuntu.com/community/UFW | An alternative to ufw is the 'iptables' command - See https://help.ubuntu.com/community/IptablesHowTo | GUI frontends such as Firestarter/Gufw (Gnome) or Guarddog (KDE) also exist.
+[09:55] <bytesaber> Dr_Willis, it just seems like such a thing that should be standardized by now.  Debian never figured it out, figure ubuntu didn't suffer the same
+[09:55] <nibbler_> somaye, but for your case, try firestarter (package)
+[09:55] <somaye> i heard that security
+[09:56] <Dr_Willis> bytesaber:  i let my router handle it.. so i havent played with firewall rules in ages.
+[09:56] <somaye> of linux is very high
+[09:56] <lucent> nibbler_: awesome.
+[09:56] <bytesaber> Jordan_U, iptables isn't complicated.   it's a set of rules you write, and you stick the rules somplace.   then you have a service load them at boot time.   Why shorewall, ufw, networkmanager, etc.
+[09:56] <djh__> hellow
+[09:56] <FDFlock> nibbler_: Isn't firestarted a dead project?
+[09:56] <FDFlock> It was unmaintained until recently
+[09:57] <jackie189> psycho_oreos:  I held the left one for fifteen minutes
+[09:57] <FDFlock> y*firestarter
+[09:57] <android_user> Wubi Installer Error: http://www.2shared.com/photo/Z3fQPPAA/screenshot.html  Any ideas?
+[09:57] <Jordan_U> bytesaber: Network manager isn't a firewall.
+[09:57] <nibbler_> FDFlock, no idea, would never use it :) but once i looked at it it looked nice
+[09:57] <jackie189> psycho_oreos:  It never went into recovery mode... Just gave me those two options. :[
+[09:57] <FDFlock> It certainly *was* nice, I agree :)
+[09:57] <psycho_oreos> jackie189, yeah way too long.. hmm try rebooting and only hold down for maybe 5 seconds.. but as soon as you see when to hit shift button
+[09:57] <psycho_oreos> jackie189, lemme check how to access recovery mode or at least grub2's boot menu.. there has to be a way
+[09:58] <nibbler_> FDFlock, and its still in the repositories
+[09:58] <bytesaber> to make little scripts to load your firewall at boot time on your own as the ubuntu forum suggets, just seems so late 90's.   Linux is far more mature than this.
+[09:58] <jackie189> psycho_oreos:  As soon as i see when to hit the shift button?
+[09:59] <lucent> "bang on keyboard like a monkey" mode,  yeah or shift key
+[09:59] <lucent> whichever you fancy.
+[09:59] <lucent> I'm partial to the monkey style
+[09:59] <jackie189> what mode is that?  How can i tell?

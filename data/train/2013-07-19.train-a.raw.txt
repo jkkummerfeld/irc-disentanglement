@@ -1,0 +1,1192 @@
+[22:59] <reisio> checoimg: http://en.wikipedia.org/wiki/Comparison_of_file_systems
+[22:59] <jrib> reisio: current wheel design came from minor improvements though.  Anyway, I don't agree with the argument that something be old is necessarily bad.  But I also wasn't being completely serious :P
+[22:59] <Jordan_U> checoimg: histo: I would say that there are manyu advantages to running btrfs over ext4 (checksumming, snapshots, cp --reflink, background scrub) but there are also large disadvantegs (stability, needing to keep up with the latest kernels).
+[23:00] <aaron_> I just installed and all works except wifi, broadcom driver listed in Additional Drivers, but error on install
+[23:00] <reisio> jrib: I already said it was good :p
+[23:00] <histo> Jordan_U: lvm
+[23:00] <aaron_> I searched web for answers first
+[23:00] <aaron_> need some guidance
+[23:00] <reisio> it's also a very old design, and consequently fundamentally less efficient
+[23:00] <lolcat> reisio: just cant connect
+[23:00] <reisio> computer software isn't the same as everything else
+[23:00] <lolcat> reisio: Guess it has been a while since I tried
+[23:00] <histo> aaron_: maybe if you let us know the error we could help you?
+[23:00] <reisio> it may well be that human beings are most efficient hunting and gathering in the woods, for example
+[23:00] <jrib> checoimg: didn't apt-get tell you what it was going to do?
+[23:00] <checoimg> And BTRFS is trying to match NTFS but I don't use NTFS because it loses files when a large amount of files are in the HDD
+[23:00] <Jordan_U> histo: Doesn't provide checksumming, cp --reflink, or background scrub, and its snapshots are much less efficient.
+[23:00] <reisio> but computer software is less complicated
+=== _BJFreeman is now known as BJfreeman
+[23:01] <reisio> lolcat: read all the comments at http://appdb.winehq.org/objectManager.php?sClass=version&iId=4184 ?
+[23:01] <checoimg> I think it does install
+[23:01] <checoimg> If you tell it sudo apt-get install vk*
+[23:01] <checoimg> then it install but let me try
+[23:01] <Jordan_U> checoimg: Btrfs is not trying to match ntfs in any way. Ntfs has nothing like the capabilities of a true copy on write filesystem (like btrfs and zfs).
+[23:02] <aaron_> histo, says to check jockey.log, and that shows:
+[23:02] <aaron_> WARNING: /sys/module/wl/drivers does not exist, cannot rebind wl driver
+[23:02] <aaron_> 2013-07-18 15:58:57,306 DEBUG: BroadcomWLHandler enabled(): kmod disabled, bcm43xx: blacklisted, b43: blacklisted, b43legacy: blacklisted
+[23:02] <sixyearsofdreams> whoooo livesss in a pinaple under da seaa! ;d
+[23:03] <checoimg> Yeah Copy-on-write, What is that exactly  ?
+[23:03] <checoimg> I remember you can have snapshots of the File System
+[23:04] <DrekAlots> is there a way to the app launcher from the left side of the screen to say the bottom?
+[23:04] <reisio> checoimg: wikipedia knows
+[23:04] <reisio> DrekAlots: yes there is, but I don't know an easy way to tell you :)
+[23:04] <reisio> DrekAlots: you might check with the tweak tool
+[23:05] <checoimg> :P Yeah I'm checking there now
+[23:05] <checoimg> BRB
+[23:06] <tacorwin> DrekALots: the only way i can think is installing XFCE or LXDE, and customizing it a bit.
+[23:06] <reisio> although at that point it'd be fairly different from Unity
+[23:07] <reisio> some would say
+[23:07] <DrekAlots> hm. ok.
+[23:07] <tacorwin> It would be, yes.
+[23:07]  * DrekAlots has issues with that bar on the left.
+[23:07] <reisio> depends on how attached you are to the smaller details
+[23:08] <tacorwin> Wait!
+[23:08] <tacorwin> I found a way...
+[23:08] <reisio> it would still have panels and windows, some people only notice those bits
+[23:08] <tacorwin> http://www.webupd8.org/2011/10/how-to-move-unity-launcher-to-bottom-of.html
+=== lux_ is now known as Guest71949
+[23:08] <tacorwin> It's a little out dated, so i dont know if it will work, DrekAlots
+[23:08] <DrekAlots> ok.
+[23:08] <DrekAlots> i'll look into that.
+[23:09] <tacorwin> DrekAlots: what version of Ubuntu are you using?
+[23:10] <tapper> columb: grep purge /var/log/dpkg.log
+[23:11] <tacorwin> DrekAlots: heres an updated version: http://www.webupd8.org/2011/11/install-ubuntu-unity-bottom-launcher.html
+[23:11] <cc0de> hi there
+=== pau8_ is now known as petau
+[23:11] <pentestr> I have a macbook air. I was able to make a bootable usb drive. How do you make is persistent?
+[23:12] <reisio> cc0de: hi
+[23:12] <cc0de> =) i'am new here ! LOL > Reisio
+[23:12] <cc0de> :p
+[23:12] <reisio> pentestr: all of it?
+[23:12] <reisio> cc0de: hi again, then ;)
+[23:12] <cuddylier> hi
+[23:12] <cc0de> Lol, thanks :D
+[23:13] <checoimg> I dunno about how the persistence is working this days
+[23:13] <cuddylier> I am using a program that uses MySQL but it keeps saying: WARNING Setting daemon info failed, please update your database.
+[23:13] <cuddylier> Anyone know what that might mean?
+[23:13] <histo> !persistence | pentestr
+[23:13] <ubottu> pentestr: To have some persistent storage when using a Live CD, follow the instructions on https://help.ubuntu.com/community/LiveCDPersistence
+[23:13] <checoimg> But you can install Ubuntu in the USB
+[23:13] <histo> !usb | pentestr
+[23:13] <ubottu> pentestr: For information about installing Ubuntu from USB flash drives, see https://help.ubuntu.com/community/Installation/FromUSBStick - For a persistent live USB install, see: https://wiki.ubuntu.com/LiveUsbPendrivePersistent
+[23:14] <histo> cuddylier: The program might not be communicating with mysql properly
+[23:14] <aaron_> can anyone advise me about the wireless driver install I mentioned above?
+[23:14] <cuddylier> I have other instances of the program connecting to the database fine
+[23:14] <cuddylier> I tried flushing hosts already
+[23:14] <cuddylier> Is there anything else I should try?
+[23:14] <reisio> aaron_: above?
+[23:14] <aaron_> It's similar to this: https://bugs.launchpad.net/ubuntu/+source/jockey/+bug/949206
+[23:14] <ubottu> Ubuntu bug 949206 in jockey (Ubuntu) "Ubuntu 12.04 fails to install broadcom STA drivers" [Undecided,Invalid]
+[23:15] <aaron_> But I see multiple solutions and then some note about things being superseded
+[23:15] <aaron_> I don't follow that thread and need guidance about what to do
+=== CyberJacob is now known as CyberJacob|Away
+[23:19] <pentestr> thanks for the links
+[23:31] <zengr> hello is it possible to continuously rsync a remote from the local machine?
+[23:35] <reisio> zengr: cross posting kills hot women
+[23:35] <reisio> do you want that on your conscience?
+=== uriah is now known as Guest36781
+[23:36] <g3org3s> hey all , quick question i am using ssh to connect to my ubuntu server. i just want to save a file from the server to my local computer. i saw some scp commands but i dont think my computer is listening on ssh. any ideas ?
+[23:36] <Guest36781> I need help, anyone know Musix GNU?
+[23:37] <reisio> Guest36781: what do you need help with?
+[23:38] <Guest36781> Installing new programs
+[23:38] <reisio> g3org3s: scp user@remote.ip.here.man:path/to/file ./local/path/optional
+[23:38] <reisio> g3org3s: or just use sshfs and make your life simpler
+[23:38] <reisio> Guest36781: what part is causing trouble?
+[23:39] <Guest36781> What do I use, I can't find a prgram to run .deb files or .tar.bz
+[23:39] <reisio> Guest36781: dpkg, the Debian package manager
+[23:39] <aaron_> someone please help, I can't get the broadcom drivers to install on my 12.04 installation
+[23:39] <reisio> Guest36781: but why aren't you installing from a repository
+[23:40] <Guest36781> Where/how would I do that?
+[23:40] <Metatron_> What utility can I use to search the web with keywords, and then download the top hits from that search engine. I was thinking of integrating wget somehow, but not doing the manual command line entering of each url to download each page hit.
+[23:40] <g3org3s> reisio it says transfered, but i cant find the file on my local pc :s can it be blocked somehow ?
+[23:40] <k1l> Guest36781: why dont you use the programs that ubuntu ships?
+[23:40] <euxneks> howdy all, what's the best way to open a port on my wireless connection without using a CLI?
+[23:40] <reisio> Guest36781: with any number of package manager frontends: apt-get, aptitude, synaptic, software center
+[23:41] <euxneks> I'm lazy
+[23:41] <reisio> g3org3s: it's wherever you said for it to go
+[23:41] <reisio> g3org3s: what command did you run?
+[23:41] <Guest36781> What about Sudo, is that supported on Msuix?
+[23:41] <Guest36781> *musix
+[23:41] <k1l> Guest36781: you are mixing things
+[23:41] <g3org3s> scp root@ip:file.abc /root/Desktop
+[23:42] <reisio> Guest36781: sudo works on any GNU/Linux system
+[23:42] <Metatron_> Reading about libferris right now.
+=== misty is now known as Guest61598
+[23:42] <reisio> Guest36781: but as k1l suggests... sudo is one (silly) way of getting root privileges _so_ you can use a package manager
+[23:42] <k1l> g3org3s: you did work as root or with sudo.
+[23:43] <g3org3s> k1l yes i did, i can even see transfer bar saying its done, i just cant see the file
+[23:43] <k1l> g3org3s: and to put stuff on that desktop of root is a bad idea. you shouldnt be running a gui as root
+[23:43] <Guest36781> And one more thing, which folder do I look in to find Program files like Hydrogen Drum Machine? I'm trying to transfer my Drumkits to my USB flash but I can't find them.
+[23:43] <clue_h> Hi, I'm thinking of setting up an bootable usb with an iso for windows but from within ubuntu. I want to do this so i can flash my BIOS. Is it possible to do this by partitioning the usb, placing iso files in one as to install on the second
+[23:44] <clue_h> if not i will try something more sensible
+[23:44] <k1l> g3org3s: that is the problem with the misuse of sudo and root. you give stuff rights they dont need.
+[23:44] <clue_h> [no cdrom]
+[23:44] <Metatron_> Something like this: http://www.softpedia.com/get/Internet/Other-Internet-Related/Web-Page-Search-Tool.shtml
+[23:44] <g3org3s> k1l its just a debian distro that i use really occasionally
+[23:44] <euxneks> is ubuntu still using iptables?
+[23:44] <Guest36781> Clue_h: Yeah, unplug the HDD from the computer and plug in the USB and see reboot your computer with the windows disk inside
+[23:44] <k1l> g3org3s: its bad behaviour.
+[23:45] <g3org3s> k1l is there any other solution?
+[23:45] <k1l> g3org3s: learn to use your stuff like its meant to be. you put it into /root/Desktop, where your user is not allowed to read
+=== Aww is now known as [[Aww]]
+=== Guest36781 is now known as Mudack
+[23:46] <uw> hi movie player has crashed and i cant close the window
+[23:46] <uw> how can i close this>?
+[23:46] <uw> what process should i kill?
+[23:46] <clue_h> ps ax  | grep movieplayer
+[23:46] <Metatron_> Got it, http://www.httrack.com/page/1/en/index.html thanks for the help chaps :)
+[23:46] <clue_h> uw, then find the pid, kill -9 PID
+[23:47] <g3org3s> k1l ur not being very helpful , i am asking for a solution , not morals
+[23:47] <uw> clue_h, nothing is shown for grep movieplayer or movie*
+[23:47] <uw> i must be called something else
+[23:47] <clue_h> uw, the name of your program will be slightly different to 'movieplayer'
+[23:47] <uw> oic
+[23:47] <clue_h> uw, system monitor
+[23:47] <k1l> g3org3s: i told you that its in /root/Desktop
+[23:47] <clue_h> uw, from the hud
+[23:48] <Mudack> My terminal is being a jerk, please help
+[23:48] <cstewart> this might help http://askubuntu.com/questions/13441/how-to-kill-applications
+[23:49] <clue_h> uw, and PID is the process identifier number
+[23:49] <g3org3s> k1l i found the problem, i was running the command from the ssh, while I should have been running it from console on local pc.... thanks for the help anyway
+[23:49] <k1l> g3org3s: you can copy it from there with sudo into your users /home folder. you will need to set the rights properly with chown
+[23:49] <Mudack> Musix GNU + Linux 2.0, anybody know why I can't have new applications?
+[23:49] <uw> thanks clue_h  turns out it was called "totem"
+[23:49] <uw> wtf would they name it that then call it "movie player" in the top of the window, beats me
+[23:50] <clue_h> uw, ah i see now lol
+[23:50] <uw> i saw the movie icon in system monitor, like you suggested
+[23:50] <uw> that worked
+[23:50] <semitones> uw: yeah for lots of things it helps a lot to know the real name of the application. I don't know why they insist on making it confusing
+[23:50] <uw> thanks again and take care clue_h
+[23:50] <uw> semitones, beats me too
+[23:50] <clue_h> uw, cool hope that program behaves in future
+[23:51] <Metatron_> AMF
+[23:52] <Mudack> Anybody know Musix GNU 2.0?
+[23:53] <clue_h> Mudack, thanks for earlier, i think i'll do it that way instead of using an .iso
+[23:53] <reisio> yeah I know Musix GNU 2.0
+[23:53] <Frankler> Should I install any other media players besides parole? All i need to be able to do is play mp3s, cds, and watch dvd
+[23:53] <reisio> fool owes me $50
+[23:53] <reisio> Frankler: umm... does it do those things?
+[23:54] <semitones> reisio: I heard he skipped town
+[23:54] <reisio> if yes { question answered }
+[23:54] <clue_h> Frankler, mplayer is good from bash, and vlc is good
+[23:54] <reisio> semitones: I heard that, but I heard it was two of 'em
+[23:54] <Mudack> Clue_h: No problem, that's how I got Ubuntu
+[23:55] <Frankler> clue_h do they do anything better than parole? I'm just wondering if I need multiple ones
+[23:55] <reisio> clue_h: and doesn't use gstreamer $
+[23:55] <Mudack> reisio: DO you know how to get new programs to work on it? I can't seem to win with this thing.
+[23:55] <reisio> Frankler: need, no
+[23:55] <reisio> Frankler: mplayer is nice to have, 'cause invariably you will find that it does something no other player does :)
+[23:55] <reisio> Frankler: but just for those things you listed, almost any will do
+[23:55] <Frankler> reisio: what is it that mplayer does? haha
+[23:55] <reisio> Mudack: like which program?
+[23:55] <reisio> Frankler: mplayer? mplayer does my laundry and bakes me pies, man
+[23:55] <Mudack> Skype specifically
+[23:55] <reisio> it does it all
+[23:55] <clue_h> mplayer, is a nice thing to have, it does a lot
+[23:56] <reisio> Frankler: if you used gnome-mplayer as a frontend, you could use virtually _just_ mplayer
+[23:56] <reisio> and still have the commandline mplayer there, too
+[23:56] <reisio> Mudack: that should be in some repo if it's an Ubuntu distro
+[23:56] <reisio> Mudack: https://help.ubuntu.com/community/Skype
+[23:56] <Frankler> reisio: sounds like too much power for 1 program
+[23:57] <Mudack> reisio: thanks for the help, i'll be in touch, soon hopefully.
+[23:57] <Frankler> clue_h: thanks!!
+[23:57] <reisio> Frankler: it is
+[23:58] <reisio> sometimes I have to use an mplayer process to curb the power of other mplayer processes
+[23:58] <reisio> the only thing strong enough to stop it is itself
+[23:58] <Frankler> reisio: does that mean not even the NSA can shut it down?
+[23:59] <Mudack> reisio: Thank you, it's working now.
+=== Jikan is now known as Jikai
+[00:01] <reisio> Frankler: honestly, I think the NSA is just a manifestation of an mplayer process
+[00:01] <reisio> I'm pretty sure we all live in the mplayer
+[00:01] <euxneks> to answer my own questions: yes, ubuntu uses iptables still, it's probably easier to just use the CLI to do iptables
+[00:02] <reisio> everything uses iptables :)
+[00:02] <DYSW> thats a bold statement reisio
+[00:03] <s1lence> Does anybody have any ideas as to what the mysterious announcement on ubuntu.com means?
+[00:03] <euxneks> I bet it's something to do with mobile and desktop interoperability
+[00:03] <clue_h> maybe it's to do with ubuntu touch
+[00:04] <euxneks> s1lence, though this is a discussion that would best be had in ubuntu-offtopic :)
+[00:04] <s1lence> Thank you euxneks
+[00:04] <reisio> DYSW: nah
+[00:04] <semitones> s1lence: make sure to say hi first if you go there
+[00:06] <matelot> my desktop is messed up http://i.imgur.com/72XCLka.jpg  how to reset it ?
+[00:06] <MoTec> try a hammer
+[00:06] <Mudack> Mudack here with another problem...i'm about ready to switch back to ubuntu.
+[00:06] <MoTec> sorry.. wrong channel
+=== microcode is now known as meinsanto
+[00:07] <lauratika> is there a way to have a different wallpaper on each login account in ubuntu?
+=== Jikai is now known as Jikan
+[00:07] <Siberian_Tiger> matelot, wow
+[00:07] <Siberian_Tiger> What did you do?
+[00:07] <reisio> lauratika: yup
+[00:08] <vader_> Anybody know how to change Elinks default image viewer from fbi to fbv? fbi does not work in Screen or fbterm :/
+[00:08] <clue_h> matelot, looks kind of abstract
+[00:08] <Mudack> reisio: I put you in my friends list if that's alright.
+[00:08] <lauratika> reisio: do you know how?
+[00:08] <reisio> Mudack: :)
+[00:09] <reisio> lauratika: http://www.webupd8.org/2012/04/wallch-wallpaper-changer-for-gnome-3.html maybe
+[00:09] <matelot> clue_h:  you see how I have 4 "desktop" there…pls help
+[00:09] <lauratika> reisio: but most important will you share this info?
+[00:09] <reisio> depends on exactly what you want
+[00:09] <Mudack> reisio: but unfortunately I have another problem...
+[00:09] <reisio> there are a number of ways you could accomplish it
+[00:09] <lauratika> reisio: to me?
+[00:09] <reisio> lauratika: yes
+[00:10] <Mudack> I'll brb
+[00:10] <lauratika> well, i want to be able to each user has its own wallppaper on the login page, the link you post is about a third application is there a way via terminal perhaps or a GUI?
+[00:11] <reisio> lauratika: hrmm, you want the wallpaper to be unique to a user? Or to actually change the moment you click a name?
+[00:11] <reisio> the former is quite simple
+[00:11] <Phoenix1969> have I finally reached the ubuntu help channel?
+[00:11] <reisio> Phoenix1969: yup
+[00:11] <MoTec> No.. I'm sorry.. This is the pre-help channel
+[00:11] <lauratika> be unique to a user login page
+[00:12] <Mudack> I;m back
+[00:12] <semitones> This is only the limbo level of help
+[00:12] <MoTec> if your question is deemed actually worth of help you will be fowarded to a secondary channel which will verify your ability to actually receive help.
+[00:12] <reisio> lauratika: well the login screen handles more than one user
+[00:12] <reisio> lauratika: how do you want to differentiate?
+[00:12] <lauratika> MoTec: LOLMA
+[00:12] <Phoenix1969> I have the blue windows startscreen where you choose the OS, but the keyboard seems unresponsive & it just counts down from 10 then boots to win8
+[00:12] <lauratika> with wallpaper
+[00:12] <semitones> there are 7 levels below this one
+[00:13] <MoTec> semitones: indeed.. progress has been made!
+[00:13] <Mudack> reisio: with all the problems i'm having with Musix should I just switch to Ubuntu?
+[00:13] <reisio> lauratika: so you go to the login screen, choose a user & login, then once logged in you see a user-specific wallpaper? That's what you want?
+[00:13] <lauratika> Phoenix1969: you install a dual ubuntu/windows?
+[00:13] <Phoenix1969> laura, yes
+[00:13] <Phoenix1969> on same drive
+[00:13] <Mudack> Phoenix1969: What are your Specs?
+[00:13] <lauratika> no, just on the login screen, each account has their own walpapper
+[00:14] <reisio> Mudack: it's hard to say whether that'd make any difference
+[00:14] <Phoenix1969> 500 gb ssd msi gd658d, core173930k
+[00:14] <lauratika> Phoenix1969:ubuntu is your second install
+[00:14] <reisio> Mudack: what trouble are you having now?
+=== mydogsnameisrudy is now known as monkeyjuice
+[00:14] <Phoenix1969> yes, 2nd
+[00:14] <Mudack> reisio: Chrome and other installations
+[00:14] <reisio> Mudack: what about them?
+[00:15] <Phoenix1969> aaah, its the amd 8core
+[00:15] <subcool> i have a hdd on usb, if i were to use esata plug, would it change the /dev/sd*?
+[00:15] <lauratika> Phoenix1969: and is not booting on ubuntu? just windows
+[00:15] <lauratika> reisio: no, just on the login screen, each account has their own walpapper
+[00:15] <reisio> subcool: it very well may
+[00:16] <reisio> subcool: you could give it a LABEL or utilize a UUID, though
+[00:16] <reisio> subcool: or setup a udev rule to always keep it at /dev/specificName
+[00:16] <Phoenix1969> right, it has the option at start, but not in bios, in some weird blue windows screen, but keyboard no go
+[00:16] <Phoenix1969> how to choose ubuntu?
+[00:16] <reisio> lauratika: that you see when you click on the name?
+[00:17] <lauratika> reisio: i see the same wallpapper i add to login admin account
+[00:17] <Mudack> Reisio: My terminal says that it can't fetch any of the packages i'm requesting and the official websites won't give me a easily running file, and I can't find a system Software Center
+[00:17] <lauratika> Phoenix1969: what you mean the option at start but not in bios?
+[00:17] <reisio> lauratika: do you need to know how to change the wallpaper at all? Or something more complicated?
+[00:17] <lauratika> Phoenix1969: do you have the opotion or not to boot into ubuntu?
+[00:17] <reisio> Mudack: tell the channel about the error
+[00:18] <Mudack> Phoenix1969: Do you mean the boot menu?
+[00:18] <Phoenix1969> it does have the option there indeed, i just am unable to physically choose it
+[00:18] <lauratika> resisio: change wallpaper at login for each account, not the wallpaper. but at login. are you following me?
+[00:18] <Mudack> Reisio: which channel?
+[00:18] <reisio> this one
+[00:18] <reisio> lauratika: nope
+[00:19] <subcool> reisio, well, i base this question off the fact that i have two hdd's on usb in an raid array (raid 0
+[00:19] <lauratika> Phoenix1969: and keyboard works on wind 8?
+[00:19] <Phoenix1969> yes
+[00:19] <lauratika> reisio:is there a way to have a different wallpaper on each login account in ubuntu
+[00:19] <reisio> subcool: what for
+[00:19] <OerHeks> lauratika, at login, there is not a way to determin what account is on, you are at the point there is not a account active, so how do you want ubuntu to choose?
+[00:19] <reisio> lauratika: yes
+[00:19] <Mudack> reisio: How do I do that? *pounds fist to chest* I want to serve my community!
+[00:19] <subcool> reisio, raid 0 -- now id like to switch one of them to a esata cable
+[00:20] <reisio> Mudack: I'm just saying don't put my nick before the message :p more people will be likely to read it
+[00:20] <Mudack> Okay
+[00:20] <reisio> subcool: yeah that could be complicated :)
+[00:20] <reisio> subcool: you probably don't need or want that raid, though, IMO
+[00:20] <subcool> yeah, i need them in a raid 0 right now.
+[00:20] <subcool> they create a larger drive i need.
+[00:20] <zykotick9> !cookie | reisio
+[00:20] <ubottu> reisio: Wow! You're such a great helper, you deserve a cookie!
+[00:20] <lauratika> OerHeks: what you talking about?, simple lighdm can have different wallppapers on the login page, and if you change up and down on different accounts login fields wallpaper can change, how i do that?
+[00:21] <Mudack> Hey guys, my system software centre seems to be non-existent, my terminal won't fetch packages, and official program websites give too many options, what do I do?
+=== meinsanto is now known as microcode
+[00:22] <reisio> subcool: lvm is what you'd want for "a larger drive"
+[00:22] <reisio> or unionfs or something like that
+[00:22] <reisio> raid is about high availability
+[00:22] <reisio> and for most people: lost files :p
+[00:22] <subcool> reisio, i dont like lvm very much right now.
+[00:22] <Phoenix1969> it should work with the up & down arrow keys, and enter to execute...no?
+[00:22] <OerHeks> lauratika, sure, lightdm can have different wallpapers, choose one. but not connected to an account, because an account is not active, so how do you expect ubuntu to know what account is active?
+[00:22] <lauratika> Phoenix1969: is this a usb keyboard?
+[00:22]  * OerHeks facepalms
+[00:22] <reisio> subcool: nobody does :p but it does the job
+[00:22] <subcool> lol
+[00:22] <Phoenix1969> usb
+[00:22] <reisio> lauratika: either lightdm does that or it doesn't, read the lightdm docs
+[00:22] <s1lence> Mudack, what kind of error message are you getting from apt-get?
+=== tjbiddle_ is now known as tjbiddle
+[00:23] <reisio> lauratika: if it doesn't do that, it might be simpler to find another DM that does
+[00:23] <Mudack> uriah@localhost:~$ sudo apt-get update && sudo apt-get install skype
+[00:23] <Mudack> Get: 1 http://packages.musix.es lenny Release.gpg [490B]
+[00:23] <Mudack> Ign http://packages.musix.es lenny/main Translation-en_GB
+[00:23] <Mudack> Get: 2 http://packages.musix.es lenny/updates Release.gpg [490B]
+[00:23] <Mudack> Ign http://packages.musix.es lenny/updates/main Translation-en_GB
+[00:23] <FloodBot1> Mudack: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[00:23] <Mudack> Get: 3 http://packages.musix.es lenny Release [85.6kB]
+[00:23] <Mudack> Get: 4 http://packages.musix.es lenny/updates Release [3,287B]
+[00:23] <Mudack> Ign http://packages.musix.es lenny Release
+[00:23] <Jordan_U> subcool: The device name shouldn't matter to Ubuntu's ability to assemble the array, and if you've use static device names in any configuration files you already have an unreliable configuration.
+[00:24] <lauratika> OerHeks: it used to do it, i just dont remember how i did it last time, it has to deal with ubuntu tewak perhaps?
+[00:24] <zykotick9> Mudack: neither lenny nor musix is ubuntu... just sayin'
+[00:24] <Mudack> Gahhh!
+[00:24] <s1lence> lol
+[00:24] <subcool> jordan, reisio im just curious..
+[00:24] <lauratika> Phoenix1969:did you turn on legacy USB on the bios?
+[00:24] <Mudack> btw, didn't mean to flood.....FloodBot was nice to me though.....
+[00:25] <s1lence> Mudack, I don't really know where to go from here sorry
+[00:25] <Phoenix1969> no?
+[00:26] <lauratika> Phoenix1969: try that up
+[00:26] <reisio> subcool: about?
+[00:26] <Mudack> silence: it's fine, the .iso for Ubuntu 13.whatever is loaded and in my downloads, see y'all in a bit!
+[00:26] <subcool> reisio, if it was possible without a lot of fuss.
+[00:26] <Phoenix1969> k, brb
+[00:26] <reisio> subcool: if what was?
+[00:26] <subcool> its working fine now- just thought maybe i could tweak it..
+[00:26] <quli_> the taskbar in the top and the right disappear all the time, how do I solve this without restarting???
+[00:26] <subcool> changing one of them to esata.
+[00:27] <reisio> subcool: it is if you know how your raid hardware/software is setup/configured
+[00:27] <lauratika> : what you mean disappear
+[00:27] <Jordan_U> subcool: Does this array contain your root filesystem?
+[00:27] <Phoenix1969> worked like a charm instantly, thank you laura
+[00:27] <subcool> its bad enough you have to have esata plugged in from the boot.
+[00:27] <subcool> jordan, no
+[00:27] <subcool> im using it has a backup while i test something
+[00:27] <subcool> its very temporary
+[00:27] <lauratika> Phoenix1969: no prob, it's odd because i assume is a new pc right?
+[00:27] <quli_> lauratika: you know the bar in the top that says ubuntu desktop
+[00:27] <quli_> it just disappears
+[00:27] <Jordan_U> subcool: Then I don't expect you'll have any problems switching to esata.
+[00:27] <quli_> well actually not only that
+[00:28] <lauratika> quili: what ubuntu version you are using?
+[00:28] <quli_> the top bar in any program disappears
+[00:28] <aaron_> I found out more about my broadcom problem with my install. It works in kernel 3.2 but not with 3.8, anyone have any clues as to how I can make wireless work with 3.8?
+[00:28] <quli_> the part that says file, etc
+[00:28] <semitones> What command in bash tells you file size?
+[00:28] <zykotick9> quli_: restart unity, or better yet, restart light dm.  from a virtual console "sudo service lightdm restart" then log in again [i have no idea how to restart unity].
+[00:28] <Jordan_U> semitones: du -h /path/to/file
+[00:29] <zykotick9> semitones: "ls -l" or "ls -sh"
+[00:29] <quli_> zykotick9: but I have a lot of programs opened
+[00:29] <semitones> thanks Jordan_U
+[00:29] <quli_> zykotick9: will it affect them?
+[00:29] <Jordan_U> semitones: You're welcome.
+[00:29] <semitones> zykotick9: I tried ls -l but didn't see sizes. I'll try -sh too
+[00:29] <zykotick9> quli_: ya - you need to restart unity - i don't know how, good luck!
+[00:29] <lauratika> quil: you also can try unity --reset
+[00:30] <quli_> lauratika: can I do that with all the programs opened?
+[00:30] <Mudack> reisio: *facepalm* I found the Xarchive application. I'm glad I did one last sweep!!!
+[00:30] <lauratika> quil: this will restart unity.
+[00:30] <reisio> Mudack: and what do you plan on doing with that? :p
+[00:30] <reisio> Mudack: installing applications from tarballs on distros like Ubuntu is usually doing it wrong
+[00:31] <Mudack> reisio: at least now I get my programs xD
+[00:31] <quli_> lauratika: I don't know what is unity, will it affect opened programs?
+=== kevin is now known as Guest29083
+[00:32] <irssi-mike> my ctrl alt f keys aren't bringing me to tty
+[00:32] <dr_willis> !unity
+[00:32] <ubottu> Unity is the default UI since Ubuntu 11.04.  Unity is a shell for GNOME. see http://unity.ubuntu.com. For a GNOME 2-like experience, see !notunity
+[00:32] <reisio> if you say so
+[00:33] <irssi-mike> meh i'm gonna reboot, maybe it's a glitch.
+[00:33] <wN> subcool: whats wrong with lvM?
+[00:34] <reisio> he prefers the much more complicated and inappropriate raid :p
+[00:34] <wN> <3 lvm
+[00:34] <w30> Well, Guys an Gals; I have Unity Tweak Tool, Ubuntu Tweak, and  Tweak Tool installed and I still can't find a way to keep Unity from grabbing the menu bar and sticking it in the top panel. Has any one got any advice? maybe an edit to dconfig?
+[00:34] <cuddylier> Anyone know a tutorial on how to use a gre tunnel from cnservers and offer it as e.g. remote protection that e.g. javapipe offers?
+[00:35] <Phoenix1969> so, after choosing ubuntu at the startscreen, it came up & said completing installation.... screen went blank...computer still on... 5 mins now...... that normal?
+[00:35] <dr_willis> w30:  disable the global menu feature
+[00:35] <irssi-mike> yup, it was a glitch.
+[00:35] <w30> dr_willis, how? in what? where?
+[00:35] <dr_willis> w30:  askubuntu.com or webupd8  blog site has guides
+[00:36] <tapper> w30: windows snapping in unity tweat
+[00:36] <tapper> *tweak
+[00:37] <dr_willis> global menu  moves the menu from the app window into the top panel. its rather easy to disable i revall
+[00:37] <semitones> What could cause a file to show up in ls, but not be stat'ed by cp, and not readable by du?
+[00:37] <quli_> Starting gtk-window-decorator compiz (decor) - Warn: No default decoration found, placement will not be correct compiz (decor) - Warn: No default decoration found, placement will not be correct
+[00:37] <quli_> seems to be working but takes it's long time
+[00:37] <tapper> w30: sorry misread your post
+[00:38] <devmedoo> help me please
+[00:38] <semitones> ls -sh says it's 12K, but du doesn't see it, cp can't copy it, what is going on with that file?
+[00:38] <devmedoo> i have a problem
+[00:38] <quli_> this unity --reset, do I need to stop it? cause it doesn't give me the prompt back
+[00:38] <devmedoo> installing ybyntu
+[00:39] <devmedoo> help me plzz?
+[00:39] <Phoenix1969> screen still blank after it said "Finishing installation"....  how long typically on a fast system?
+[00:39] <devmedoo> i have a problem installing ubuntu
+[00:39] <quli_> ybyntu?
+[00:39] <dr_willis> quli_:  should have used a  & at the end..  ttr a   ctrl-z  then "bg"  in the twrminal
+[00:39] <devmedoo> sorry wrong typed
+[00:39] <quli_> ubunty
+[00:39] <bazhang> devmedoo, ask an actual question
+[00:39] <devmedoo> ok , sorry
+[00:40] <quli_> dr_willis: so how do I stop it now?
+=== qos_|away is now known as qos_
+[00:40] <devmedoo> when i choose ubuntu inside windws and click continue the dvd ejected & windows starts
+[00:40] <dr_willis> again...    ctrl-z      then  "bg"    command
+[00:41] <bazhang> devmedoo, wubi?
+[00:41] <devmedoo> no , dvd
+[00:42] <bazhang> !wubi | devmedoo
+[00:42] <ubottu> devmedoo: Wubi allows you to install or uninstall Ubuntu 12.04 LTS from within Windows ( version 7 or earlier ) in a simple and safe way. Wubi is INCOMPATIBLE with UEFI, Windows 8 Certified computers, and Windows RAID arrays. https://wiki.ubuntu.com/WubiGuide for more information. File wubi bugs at http://launchpad.net/wubi/+filebug
+[00:42] <dr_willis> quli_:  then use the exit   command to close the terminal   NOT the clise button
+[00:42] <devmedoo> ubottu , i want ubuntu 13.04 so wubi is no longer supported
+[00:43] <Kitt3n> devmedoo, either use a virtual machine or install it
+[00:43] <devmedoo> ??
+[00:43] <dr_willis> ubuntu inside  windows is wubi... som somthi g is confused here
+[00:43] <Kitt3n> devmedoo, if you just want to test Ubuntu, download Virtualbox (it's free) and install Ubuntu inside of it.
+[00:44] <dr_willis> unless you ment   alongside..  not inside
+[00:44] <devmedoo> no , iwant to use some wifi tools so virtual box i can't use it + ( i have laptop )
+[00:44] <bazhang> devmedoo, is this ubuntu or backtrack
+[00:44] <Kitt3n> ^
+[00:44] <devmedoo> ubuntu
+[00:45] <devmedoo> 13.04 from official site
+[00:45] <bazhang> devmedoo, inside windows is WUBI
+[00:45] <dr_willis> devmedoo: so tell us whats it doing exactly...
+[00:45] <Kitt3n> ^
+[00:45] <bazhang> Kitt3n, please stop that
+[00:46] <vader_> Anybody know how to change Elinks default image viewer from fbi to fbv? fbi does not work in Screen or fbterm :/
+[00:46] <arun> need help to mount drives
+[00:46] <devmedoo> mmm , when i click install ubuntu from dvd , and choose the wifi , the where " replace windows 7 " " ubuntu inside windows " and the third iforget it
+[00:46] <Mudack> Tea is essential, tea is the liquid of the gods, tea is everything, tea is awesome, I love tea
+[00:47] <bazhang> !ot | Mudack
+[00:47] <ubottu> Mudack: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[00:47] <lauratika> !ot
+[00:47] <dr_willis> devmedoo:  its "alongside"  not "inside"
+[00:47] <Mudack> sorry wrong channel
+[00:47] <JoshMcCullough> hey whats up
+[00:47] <devmedoo> may be....
+[00:47] <Kitt3n> Mudack, it hpapens. :)
+[00:47] <arun> somebody help me
+[00:47] <JoshMcCullough> qq - say i did apt-get install ffmpeg, where would the install location be ?
+[00:47] <dr_willis> devmedoo:  so does it actually install!
+[00:48] <dr_willis> ?
+[00:48] <bazhang> arun, ask a question then
+[00:48] <Kitt3n> !ask | arun
+[00:48] <ubottu> arun: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[00:48] <devmedoo> nooo , it reboot the laptop and eject dvd
+[00:48] <devmedoo> whitout install
+[00:48] <dr_willis> JoshMcCullough:  use     'wich ffmpeg'
+[00:48] <JoshMcCullough> ty
+[00:48] <arun> help me to mount hard drives
+[00:48] <dr_willis> which ffmpeg
+[00:48] <Kitt3n> devmedoo, how old is the laptop?
+[00:48] <bazhang> !fstab | arun
+[00:48] <JoshMcCullough> good thing to know, thanks!
+[00:48] <ubottu> arun: The /etc/fstab file indicates how drive partitions are to be used or otherwise integrated into the file system. See https://help.ubuntu.com/community/Fstab and http://www.tuxfiles.org/linuxhelp/fstab.html and !Partitions
+[00:49] <devmedoo> hp pavilion g6-1151ex core i5 4gb 500gb
+[00:49] <dr_willis> devmedoo:  so it reboots as soon as you select  install alongside windows?
+[00:49] <devmedoo> yeb
+[00:49] <devmedoo> and click continue
+[00:49] <w30> dr_willis, unsettings does the job, thank you very much  Kind Sir
+[00:49] <arun> i am new to this, can u tell me detailed info
+[00:49] <lauratika> !help | lauratika
+[00:49] <ubottu> lauratika, please see my private message
+[00:50] <bazhang> arun, read the links above
+[00:50] <bazhang> lauratika, /msg ubottu
+[00:50] <lauratika> gparted | lauratika
+[00:50] <dr_willis> w30: you dont need any of those tweak tooks.. its setable on a per app basis if you want to use the shell
+[00:50] <w30> gotta log out to apply settings.....
+[00:50] <bazhang> lauratika, please dont do that
+[00:50] <lauratika> !gparted | lauratika
+[00:50] <ubottu> lauratika, please see my private message
+[00:50] <devmedoo> mr willis?
+[00:51] <bazhang> !msgthebot | lauratika
+[00:51] <ubottu> lauratika: Please investigate with me only with "/msg ubottu Bot" or in #ubuntu-bots.  Search for factoids with "/msg ubottu !search factoid".
+[00:51] <dr_willis> devmedoo: if the installer is crashing. id redownload and verify the iso and remake rhe boot usb
+[00:51] <matelot> 12.04 w/ Dual monitor (TwinView) — is it possible to have monitors display 2 workspaces ?
+[00:51] <devmedoo> i made the boot from dvd
+[00:52] <bazhang> !md5 | devmedoo
+[00:52] <ubottu> devmedoo: To verify your Ubuntu ISO image (or other files for which an MD5 checksum is provided), see http://help.ubuntu.com/community/HowToMD5SUM or http://www.linuxquestions.org/linux/answers/LQ_ISO/Checking_the_md5sum_in_Windows
+[00:52] <dr_willis> matelot:  in unity  nit really
+[00:52] <Kitt3n> devmedoo, verify that the iso isn't corrupt, and burn it to another DVD
+[00:52] <lauratika> bazhang: just checking the ! thingy...
+[00:52] <dr_willis> not really
+[00:52] <bazhang> lauratika, check it in /msg
+[00:52] <devmedoo> iso to dvd is same bytes so may be the download
+[00:53] <semitones> I have a question for ubuntu's crack team of help experts: What could cause ls to stat a file, but stat cannot stat it?
+[00:53] <Kitt3n> devmedoo, it's always a good idea to burn stuff to DVDs slowly too, if you're using a program that you can choose the burning speed with.
+[00:53] <devmedoo> ubuntu 64-bit 13.04 = "(823,132,160 bytes)"
+[00:54] <devmedoo> i made it x6!
+=== [[Aww]] is now known as Aww
+[00:54] <Kitt3n> !md5 | devmedoo
+[00:54] <ubottu> devmedoo: To verify your Ubuntu ISO image (or other files for which an MD5 checksum is provided), see http://help.ubuntu.com/community/HowToMD5SUM or http://www.linuxquestions.org/linux/answers/LQ_ISO/Checking_the_md5sum_in_Windows
+[00:55] <clue_h> semitones, when you have no permissions at all lol
+[00:55] <clue_h> in the file
+[00:55] <devmedoo> kitt3n , i'll see
+[00:55] <semitones> clue_h: hmm, but it has rw - - permissions
+[00:56] <dr_willis> semitones: id fsck the filesystem  just to verify the fs is sane
+[00:57] <semitones> d'oh. ok. how do you do that on restart again.
+[00:57] <devmedoo> md5=8D72E2DB7E72E13813731EAB37A14D26
+[00:58] <Kitt3n> devmedoo, the ISO is correct, the DVD is faulty
+[00:58] <devmedoo> md5=8D72E2DB7E72E13813731EAB37A14D26 in iso , dvd is multi file ( extracted
+[00:58] <devmedoo> why?
+[00:58] <Kitt3n> devmedoo, what program did you use to burn the DVD?
+[00:58] <devmedoo> ashmpoo studio
+[00:59] <devmedoo> ashampoo
+[01:00] <Kitt3n> devmedoo, the easiest solution would be to use a USB stick instead of DVDs, but try the burner included in Windows to burn the iso to a new DVD
+[01:02] <devmedoo> kitt3n?
+[01:02] <devmedoo> here?
+[01:02] <apleersdf> I have an sd card I'm trying to reformat, it wont allow me to delete any files on it, saying its read only, I will not allow me to unmount disk, therefore unable to format it or do anything else
+[01:02] <apleersdf> its pretty much locked up
+[01:02] <apleersdf> I even logged in as root, and still can not get it to unmount or anything
+[01:02] <Kitt3n> devmedoo, yes, yes, I am here
+[01:02] <apleersdf> any ideas on what to do?
+[01:03] <dr_willis> apleersdf:  use  dd to zero it out  then repartion it
+[01:03] <apleersdf> whats the command?
+[01:03] <dr_willis> ive seed sd cards  fail and go  read only
+[01:04] <devmedoo> kitt3n
+[01:04] <devmedoo> here?
+[01:04] <Kitt3n> apleersdf, there might be a locking mechanism on the SD card itself too
+[01:04] <Kitt3n> devmedoo, YES, I am here! What is it?
+[01:04] <dr_willis> or use  fdisk or gparted to repartion it
+[01:04] <apleersdf> Kitt3n: ? like what?
+[01:04] <apleersdf> I've used this card before, but now I'm just trying to reformat it
+[01:05] <Kitt3n> apleersdf, a little plastic piece that you can move up and down or something.
+[01:05] <apleersdf> I already checked that Kitt3n, it was the first thing I checked, and checked it a few time after that making sure that isn't the problem
+[01:05] <dr_willis> used it befor does not prove its not got hw issues now..    could be a switch on it also
+[01:05] <dr_willis> seen those go bad
+[01:07] <dr_willis> plug it in.. watch dmesg output to tell what sd#  the device is.. then try formating it via the cli
+[01:07] <devmedoo> kitt3n?
+[01:07] <devmedoo> here?
+[01:07] <Kitt3n> devmedoo, what is it? -_-
+[01:07] <apleersdf> The card is not seen in gparted
+[01:08] <devmedoo> i lost connection since i said ashampoo burning studio
+[01:08] <apleersdf> it is seened in disk ulity, but now when I plug in the card, it isn't bringing up the folder like normal
+[01:08] <Kitt3n> devmedoo, right, well, the easiest solution is to use a USB stick instead of DVDs, but you could try burn a new DVD with Windows' built-in image burner
+[01:08] <dr_willis> if the filesystem is currupted that would make sense
+[01:08] <dr_willis> if gparted does not see the devix
+[01:09] <dr_willis> device.. thats very weird
+[01:09] <apleersdf> in disk ulity, its not  mounting when plugged in the system anymore (which is odd) cause it would, when I try to mount it in disk ulity, it sais Deamon is inhibited
+[01:09] <apleersdf> it wont let me do anything, gparted doesn't see it
+[01:09] <devmedoo> how do you know that the dvd is corrupt?
+[01:09] <dr_willis> fallback to the cli to see.what the system is seeing.. not the gui tools
+[01:10] <Kitt3n> devmedoo, personal experience, DVDs can easily break ...
+[01:10] <Kitt3n> devmedoo, virtually, that is.
+[01:10] <devmedoo> mmm , ok , is there thing like virtual dvd or something?
+[01:10] <dr_willis> apleersdf:  if the fs is currupted.. it will refuse to mount it
+[01:11] <devmedoo> because my usb had win 8 recovery :) :)
+[01:11] <dr_willis> apleersdf:  try mounting it by hand. look for error mesages when mounting
+[01:12] <louisdk> hi
+[01:12] <apleersdf> can't find it
+[01:12] <apleersdf> it says
+[01:12] <dr_willis> how.are you looking for it!
+[01:12] <dr_willis> ?
+[01:12] <apleersdf> mount /dev/sde1
+[01:13] <apleersdf> "can't find /dev/sde1" when I "mount /dev/sde1"
+[01:13] <devmedoo> can i install ubuntu 13.04 with deamon tools??
+[01:13] <dr_willis> thats an incomplete mount command. ubless you got a fstab entry for it
+[01:13] <dr_willis> !mount
+[01:13] <ubottu> mount is used to attach devices to directories. See also https://help.ubuntu.com/community/Mount
+[01:14] <louisdk> If I've Ubuntu 10.04 desktop installed on a machine which is now EOL on the desktop side what'll happen? I assume that I'll not get updates for the desktop packages, but will something be removed from the repo?
+[01:14] <dr_willis> devmedoo:  no
+[01:14] <devmedoo> is any alternative to usb and burn dvd?
+[01:14] <dr_willis> apleersdf:   use    sudo blkid   to see what  devices are.seen
+[01:14] <dr_willis> !install
+[01:14] <ubottu> Ubuntu can be installed in lots of ways. Please see https://help.ubuntu.com/community/Installation for documentation. Problems during install? See https://wiki.ubuntu.com/CommonProblemsInstall - See also !automate
+[01:15] <Kitt3n> louisdk, you need to update to a newer version of Ubuntu to get support at all
+[01:15] <apleersdf> seems gparted decided to see the device and allow it to format
+[01:15] <dr_willis> !netinstall
+[01:15] <ubottu> Ubuntu can be installed in lots of ways. Please see https://help.ubuntu.com/community/Installation for documentation. Problems during install? See https://wiki.ubuntu.com/CommonProblemsInstall - Don't want to use a CD? See http://tinyurl.com/3exghs - See also !automate
+[01:15] <apleersdf> thanks for the help
+[01:15] <devmedoo> is any alternative to usb and burn dvd?
+[01:15] <devmedoo> is any alternative to usb and burn dvd?
+[01:16] <vnwilman> !pxe
+[01:16] <devmedoo> is any alternative to usb and burn dvd?
+[01:16] <Kitt3n> !netinstall | devmedoo
+[01:16] <ubottu> devmedoo: Ubuntu can be installed in lots of ways. Please see https://help.ubuntu.com/community/Installation for documentation. Problems during install? See https://wiki.ubuntu.com/CommonProblemsInstall - Don't want to use a CD? See http://tinyurl.com/3exghs - See also !automate
+[01:17] <arun> somebody help me to mount hard drives
+[01:17] <louisdk> kitt3n: Some core packages will still be upgraded I guess? The server edition uses same repos?
+[01:17] <Kitt3n> louisdk, EOL means EOL, NO updates.
+[01:17] <dr_willis> read the urls the bot  gave devmedoo ?
+[01:17] <arun> somebody help me to mount drives
+[01:17] <dr_willis> !mount | arun
+[01:17] <ubottu> arun: mount is used to attach devices to directories. See also https://help.ubuntu.com/community/Mount
+[01:17] <devmedoo> ok dr_willis
+[01:19] <dr_willis> devmedoo:  you did verify the  md5 sum of the iso file? and the burnt dvd?
+[01:19] <arun> i can access all of my hard drives, do i need mount anything?
+[01:20] <Kitt3n> arun, if you can access all your hard drives, you don't need to mount anything?
+[01:20] <dr_willis> they are mounted.. if you canaccess thrm
+[01:20] <devmedoo> the burnt dvd is muli-files ( extracted )
+[01:20] <dr_willis> devmedoo:  thats a meaningless statement to me...
+[01:20] <arun> can u help me on permissions of my hard drive to another user
+[01:21] <dr_willis> ta md5sum is a checksum  you compare to a known good value.. to Prove the data is correct
+[01:21] <dr_willis> arun and what fs is the hard drive using?
+[01:21] <theshark0001> I'm using optware packages.  I would like to setup a prv web gui (password protected) for family to upload photographs or even video.  What programs do you recommend?
+[01:21] <Kitt3n> devmedoo, click on the iso file and use the 'Windows Disc Image Burner' and burn the ISO to a /NEW/ DVD and try again
+[01:21] <arun> i guess ntfs
+[01:21] <arun> how to check that
+[01:22] <dr_willis> arun look and verify that....  dont guess.. then if it IS ntfs... check the ntfs-3g docs on making a fstab entry for the device with the  right options..  or just try installing and running the ntfs-config tool ;)
+[01:22] <devmedoo> sorry  ( i'm arabian ) , the dvd have files and folders not an iso
+[01:22] <dr_willis> !ntfs-3g
+[01:22] <ubottu> ntfs-3g is a Linux driver which allows read/write access to NTFS partitions. Installation instructions at https://help.ubuntu.com/community/MountingWindowsPartitions
+[01:23] <dr_willis> devmedoo:  omce you burn the ISO to the dvd.. you would see files on the dvd.. not a single huge iso file.
+[01:23] <devmedoo> ya , so i can't see the md5
+[01:23] <arun> how to verify that
+[01:23] <Psil0cybin> Hey guys can someone help me I recently updated the kernal to 3.2.0-49-generic-pae and im having problems, Now after the update I sometimes cannot boot into the GUI and instead am given a text console, and its only solved with a restart
+[01:23] <dr_willis> devmedoo:  you use a TOOL to calculate the md5sum.. its Not a file on the dvd/iso you look at..
+[01:24] <dr_willis> !md5 | devmedoo
+[01:24] <Psil0cybin> how can I fix this because it only started happening with the new update...and prior to the update it worked perfectly fine
+[01:24] <ubottu> devmedoo: To verify your Ubuntu ISO image (or other files for which an MD5 checksum is provided), see http://help.ubuntu.com/community/HowToMD5SUM or http://www.linuxquestions.org/linux/answers/LQ_ISO/Checking_the_md5sum_in_Windows
+[01:24] <devmedoo> i use checksum
+=== Jikan is now known as Jikai
+[01:24] <arun> how to verify the file system
+=== Psil0cybin is now known as Psil0Cybin
+[01:24] <dr_willis> arun see what sudo parted -l   says about the device
+[01:24] <dr_willis> or 'sudo blkid'
+[01:25] <devmedoo> i use checksum calculator
+[01:25] <devmedoo> i use checksum calculator
+[01:25] <dr_willis> so did the sum match the one at the downloads page?
+[01:26] <w30> dr_willis, "sudo apt-get remove indicator-appmenu" get the menus back on the application's own window
+[01:26] <Deece> Does anyone know how to get rsyslog to show facilities/levels by name instead of number?
+[01:26] <devmedoo> the sum ? , i can't make a group files with same mdf
+[01:26] <devmedoo> md5^
+[01:26]  * junktext is eating chicken tikka masala
+[01:27] <Deece> I've written a format string for ActionFileDefaultTemplate, but i can only find %syslogpriority% %syslogfacility% as template options
+[01:27] <devmedoo> ...............
+[01:27] <devmedoo> .............
+[01:27] <FloodBot1> devmedoo: Please don't flood; use http://paste.ubuntu.com to paste; don't use Enter as punctuation.
+[01:27] <w30> dr_willis, It's wonderful  to have a resource like askubuntu.com thanks for the tip
+[01:28] <devmedoo> kitt3n or dr_willis ??
+[01:29] <dr_willis> devmedoo:  did you even read the url on md5suming ?
+[01:29] <dr_willis> w30:  you can disable the global menu on a per app basis.. if you wanted to
+[01:30] <devmedoo> ya , i downloaded checksum calculator
+[01:30] <devmedoo> ...w8ing
+[01:31] <bazhang> !helpme | devmedoo
+[01:31] <ubottu> devmedoo: Avoid following your questions with a trail of "Please, help me", "Can nobody help me?", "I really need this!", and so on. This just contributes to making the channel unreadable. If you are not answered, ask again later; but see also !repeat and !attitude
+[01:31] <devmedoo> ok ....
+[01:32] <dr_willis> devmedoo:  and did the sum match the sum given in the md5sum listing file from the ubuntu download web site?
+=== Jikai is now known as Jikan
+[01:32] <bazhang> !hashes | devmedoo
+[01:32] <ubottu> devmedoo: See https://help.ubuntu.com/community/UbuntuHashes for the md5sums of all downloadable Ubuntu releases
+[01:32] <dr_willis> and did the sum of the DVD disk match the sum of the ISO file ??
+[01:32] <dr_willis> i alwyas use torrents.  so i rarely get a bad download.
+[01:33] <netlar> Hi all
+[01:33] <Pandee> netlar: hello
+[01:33] <devmedoo> i don't know how to make 2 file to 1 md5 !!!
+[01:34] <netlar> Pandee: Were you the one helping me yesterday?
+[01:34] <dr_willis> devmedoo:  i have no idea what you mean by that...
+[01:34] <dr_willis> you calcullate the sum on file 1.. look at it.. then compare it to the sum listed in the file..
+[01:34] <Pandee> netlar: no i don't believe so
+[01:35] <devmedoo> i mean that the program give my one md5 for the file , so each file in dvd have md5
+[01:35] <dr_willis> I dont use that app.. so no idea of its features.
+[01:35] <dr_willis> you want to sum the whatever.iso file.. dont mount it.
+[01:35] <bazhang> devmedoo, you dont extract the iso.
+[01:36] <netlar> Should of remembered his handle
+[01:36] <bazhang> devmedoo, you burn the iso to a usb stick or dvd, not extract
+[01:36] <dr_willis> windows apps treating .iso files as an archive... always lovely.. when its totally wrong.
+[01:37] <Random833> i tihnk with vista and later you can right click to burn properly
+[01:37] <dr_willis> i just have some windows app that puts  'md5sum' on the context meni i recall.
+[01:38] <dr_willis> i always ise infrarecorder to burn the isos   but not used that in ages.
+[01:38] <devmedoo_> i use checksum
+[01:38] <devmedoo_> the iso is corrrect md5
+[01:38] <dr_willis> many of the isu burning apps can also calculate the md5sum
+[01:38] <devmedoo_> the dvd and iso is same bytes
+[01:38] <dr_willis> same bytes does NOT mean its the same sum.
+[01:38] <bazhang> devmedoo_, thats not the problem. the problem is you extracted the files from the iso
+[01:39] <devmedoo_> bazhang : i didn't , i made dvd by iso with ashampoo burning studio
+[01:39] <bazhang> devmedoo_, what software did you use to burn to dvd
+[01:39] <dr_willis> reburn using some nice simple tool like infrarecorder, or imgburn , or some other known al.
+[01:39] <dr_willis> app.
+[01:40] <dr_willis> !burn
+[01:40] <devmedoo_> infrarecorder  mmmmm , i'll try
+[01:40] <ubottu> CD/DVD burning software: k3b (KDE), brasero (GNOME), gnomebaker, xcdroast, wodim (command-line) | To burn ISO files, see https://help.ubuntu.com/community/BurningIsoHowto
+[01:40] <bazhang> devmedoo_, you md5 the iso BEFORE you burn to dvd
+[01:40] <devmedoo_> the md5 = 8D72E2DB7E72E13813731EAB37A14D26
+[01:40] <bazhang> devmedoo_, not the extracted files , but the iso
+[01:41] <vader_>  /disconnect
+[01:42] <devmedoo_> i didn't understand you
+[01:43] <dr_willis> i think infrarecorder has a 'md5sum' item when you select an iso.. you can caompare to the one given in the file  at the url mentioned above
+[01:44] <devmedoo_> dr_willis i already checked and it's correct!!!
+[01:45] <devmedoo_> ..................................
+[01:45] <bazhang> devmedoo_, stop that
+[01:45] <dr_willis> devmedoo_:   then use infrarecorder to burn it to dvd at the slowest speed you can and have it verify the burn
+[01:46] <devmedoo_> ok
+=== Lajjla is now known as Frub
+[01:47] <devmedoo_> http://sourceforge.net/projects/infrarecorder/?
+[01:47] <devmedoo_> ??
+[01:47] <devmedoo_> http://sourceforge.net/projects/infrarecorder/
+[01:49] <devmedoo_> is there any prog make virtual dvd?
+[01:49] <Ycarene> Anybody use ushare?
+[01:49] <dr_willis> why do you even think you need a virtual dvd devmedoo_ ?
+[01:50] <dr_willis> ushare worked well for me the little i used it Ycarene
+[01:53] <subcool> whats the attribute to view ls -l  with the files in gigs or megs
+[01:53] <devmedoo_> dr_willis : it's 4 am here in egypt :) , how can i buy a blank dvd hhhhhh ^_^
+[01:53] <DWSR> subcool: -h
+[01:53] <subcool> thanks
+[01:54] <dr_willis> devmedoo_:  not my problem..  i always use usb flash drives.
+[01:54] <DWSR> anyone know how to use sshfs to mount a folder so that it is writable by all users on the system, but the permissions are translated to a single user on the remote side?
+[01:54] <devmedoo_> dr_willis : i didn't say that is your problem ....
+[01:56] <taek> Hi folks, I seem to have an issue that, when my system boots up, eth0 doesn't connect until a user is logged in, is there away to make it connect at boot?
+[01:56] <taek> Distro 12.04
+[01:56] <varunendra> devmedoo_, what is it that you want.
+[01:56] <devmedoo_> just testing
+[01:57] <dr_willis> taek:  eth0 is a wired or wireless connection?
+[01:57] <taek> Wired.
+[01:57] <dr_willis> thats.. very weird taek ..
+[01:57] <taek> Tell me about it, I have OwnCloud running and I can't connect until after a user is logged in
+[01:57] <dr_willis_> hi , test test.... , i'm not mr_willis
+[01:57] <dr_willis> taek:  are you using encrypted homes? or encrypted /
+[01:58] <taek> Btw, this system was distro-upgraded from 10.4.4
+[01:58] <taek> I don't believe so.
+[01:58] <taek> I don't recall setting it up in that manner initially.
+[01:58] <dr_willis> taek:  as a dirty 'trick' you could try restarting the networking, or using  'ifup eth0' in /etc/rc.local
+[01:59] <dr_willis> its possible networking is trying to come up and failing for some reason, then the user login some how retriggers it to try again
+[01:59] <dr_willis> im not sure what logs would even be logging that.
+[02:00] <taek> well I just added the ifup eth0
+[02:00] <taek> abouve Exit 0
+[02:00] <jrib> taek: if you log in at virtual console, does your network become "fixed"?  Also, I would urge you to actually check up on the encryption.  Often times in this channel, "believing" and "recalling" lead troubleshooters down the wrong path ;)
+[02:00] <dr_willis_> taek: your problem is so miss , get a support from one other than me....
+[02:00] <dr_willis> might want to do a ifdown eth0   ; sleep 20 ;  ifup eth0   or similer.
+[02:00] <taek> Virtual Console?
+[02:00] <taek> I dunno, I use Desktop.
+=== stephen is now known as rotwatsb
+[02:01] <dr_willis> console = alt-ctrl-f1 through f6
+[02:01] <jrib> taek: yes, this is for troubleshooting purposes.  I'm asking you to try that.
+[02:01] <DWSR> (comparatively speaking)
+[02:01] <DWSR> anyone know how to use sshfs to mount a folder so that it is writable by all users on the system, but the permissions are translated to a single user on the remote side?
+[02:02] <dr_willis_> jrib: don't make yourself like a pro ....
+[02:02] <dr_willis> DWSR:  im thinking that would be a neat trick. :) and a possible security nightmare...     since sshfs uses the fuse system.. the fusermount command may have options to allow that.
+[02:02] <taek> hmm should I logout of unity?
+[02:03] <jrib> taek: you should place your system in its "broken" state.  Whatever that means (probably reboot).  And then log in through a virtual console.
+[02:03] <jrib> dr_willis: :x
+[02:03] <taek> hmm okay
+[02:03] <taek> i'll be back then
+[02:04] <jrib> taek: if your system remains "broken" after log in at virtual console, check if eth0 is up
+[02:04] <taek> will do
+[02:04] <dr_willis> if its just opencloud failing to startup.. having an encvrypted home could be   a potential issue..
+[02:04] <taek> brb
+[02:04] <jrib> taek: I'm using "broken" to mean "can't connect to opencloud"
+[02:04] <dr_willis_> to hell
+[02:04] <dr_willis> wow.. trolls using the  freenode web chat to spam us.. how lovely.
+[02:04] <azazel91> is there a irc that alerts member logins
+[02:04] <jrib> dr_willis_: right, if I had to bet I would bet on your initial guess about encrypted homes
+[02:05] <dr_willis_> hhhhh , i like joking hhhh
+[02:05] <mr_willis> ya willis my too
+[02:06] <dr_willis> guess you could set up opencloud to share some unencrypted filesystem as a test also. ;) that way you can verifyu it is working.
+[02:07] <cuddylier> Anyone know how to see the redirects I have on the program 'redir'?
+[02:07] <^jirb> ok , i'll do it tommorw
+[02:08] <taek> screens to be working with the rc.local
+[02:08] <taek> seems*
+[02:09] <taek> using ptty1 right now
+[02:09] <mr_willis> ok good
+[02:09] <dr_willis> its possible openmcloud is trying to start befor networking is started. or its waiting for networking to start..
+[02:09] <taek> Owncloud*
+[02:10] <taek> Owncloud runs in apache2.
+[02:10] <dr_willis> im lazy and just use dropbox and box.net and ubuntu one ;)
+[02:10] <mr_willis> ok good you know
+[02:10] <mr_willis_> say welcome to ddos
+[02:10] <^jirb> say welcome to ddos
+[02:10] <mr_willis> say welcome to ddos
+[02:10] <dr_willis_> say welcome to ddos
+[02:10] <dr_willis> lame trolls are lame.
+[02:11] <IdleOne> Please get you clones out
+[02:11] <bazhang> there's only ONE Dr.
+[02:11] <taek> I have a VPS - so I am acoustom to some of the workings. But in a server enviornment eth0 just works without login.
+[02:11] <C130RG> /server irc.byroe.net
+=== acrocity_ is now known as acrocity
+[02:11] <wilee-nilee> That's the truth
+[02:11] <dr_willis> 'one ban to ban them alll!'  ;P
+[02:12] <HACKED> NO IDLEONE
+[02:12] <mr_willis_> NO IDLEONE
+[02:12] <^jirb> NO IDLEONE
+[02:12] <dr_willis_> NO IDLEONE
+[02:12] <taek> Sweet, Thanks for the quick fix mr_willis
+[02:12] <dr_willis> that seems weird that the vps is acting that way.
+[02:12] <taek> Now I can turn this weak/bad boy headless
+[02:12] <dr_willis_> hhhh , no thanks for hacks
+[02:12] <taek> This isn't a VPS, this is a full blown desktop
+[02:12] <dr_willis> or is this not a VPS?
+[02:12] <taek> I am just stating, I have a VPS without issues
+[02:13] <dr_willis> thatw even weirder then
+[02:13] <dr_willis_> it's a piece of shit
+[02:13] <taek> Except..
+[02:13] <taek> VPS can't update anylonger.
+[02:13] <taek> But that will be fixed.
+[02:13] <^jirb> really
+[02:13] <taek> Distro isn't supported any longer, so an upgrade will be in order for sat or sun.
+[02:13] <savagejen> When I run dmesg, it's filled with errors about unknown keycode e03e. They seem to be happening multiple times per second. Not sure what the best course of action is. One blog post I read said I should map the keycode to null.
+[02:14] <taek> Yeah, Ubuntu 10.0.4.4 LTS has been phased out.
+[02:14] <dr_willis> savagejen:  or edit  /etc/sysconf.cfg (i think) to not be as verbose in its logging. :)
+[02:14] <taek> Or figure out what the key is that is causing it, and remap it
+[02:14] <savagejen> dr_willis, I'm  less concerned about the logging and more concerned about the cause :)
+[02:15] <dr_willis> ive had dmesg get flooded by  broken hardware befor. (a web cam in my case)
+[02:15] <dr_willis> not seen a keyvode flood..
+[02:15] <savagejen> I don't think it's a key, but I am running on a touch screen laptop, and I have to wonder if it's related to this bug: https://bugs.launchpad.net/ubuntu/+source/unity/+bug/1099289
+[02:15] <ubottu> Ubuntu bug 1099289 in unity (Ubuntu) "Touch screen stops respoding to clicking after running for a while" [Medium,Confirmed]
+[02:15] <dr_willis> I bet its that pesky 'anykey' that no one can ever find!
+[02:16] <taek> Well, it seems to me that either the key got mapped to Null, the keyboard selected setting is incorrect, or the keyboard is just broken.
+[02:16] <savagejen> ubottu, oh, is the problem confirmed to be my touch screen already?
+[02:16] <savagejen> Keyboard appears to fully function. This is a brand new Lenovo Yoga.
+[02:17] <taek> Any other input device besides screen and keyboard?
+[02:17]  * dr_willis read that as a 'Yoda' and envisioned a Funny green laptop
+[02:17] <savagejen> I am using a usb wifi nic
+[02:17] <Hacked2> Here Is The Checkout Baby!!
+[02:17] <savagejen> I disabled the onboard nic in the bios
+[02:17] <savagejen> and there's a touch pad mouse
+[02:17] <taek> Is the trouch screen doing anything it shouldn't?
+[02:18] <savagejen> taek there's the known bug 1099289
+[02:18] <ubottu> bug 1099289 in unity (Ubuntu) "Touch screen stops respoding to clicking after running for a while" [Medium,Confirmed] https://launchpad.net/bugs/1099289
+[02:18] <dr_willis> are you even using the touchscreen?
+[02:18] <savagejen> I was!
+[02:18] <cuddylier> Anyone know how to list the redirects I have made using the program 'redir'?
+[02:18] <savagejen> but it's flaky
+[02:18] <dr_willis> ;)  you touched it in  a bad way and it got mad.
+[02:18] <taek> I wasn't asking about the bug, I was asking about your usage of the touch screen.
+[02:18] <savagejen> so if I transition the laptop into a tablet to read kindle books, I noticed sometimes the touch screen doesn't respond when I want to turn the page
+[02:19] <dr_willis> cuddylier:  what do you mean by 'redirects'  ?
+[02:19] <savagejen> so it's annoying that Ii have to turn it over to press the mouse instead
+[02:19] <taek> Then maybe you have prior said mentionted bug.
+[02:19] <savagejen> yes, I have experienced that bug
+[02:19] <cuddylier> dr_willis It's a program which means you can redirect traffic from an IP to another IP on another server box
+[02:19] <savagejen> but I am unsure it's related to the message in dmesg
+[02:19] <cuddylier> apt-get install redir
+[02:20] <boethiah> hello there. is there a developers channle?
+[02:20] <cuddylier> But I can't find much documentation on it, apart from obviously typing 'redir' in SSH which doesn't help much
+[02:20] <dr_willis> cuddylier:  sounds like a ssh tunnle. ;) but i rarely need such things...   at leat not lately
+[02:20] <cuddylier> Yeah, it's a tunneling thing
+[02:20] <taek> Does the touch screen work properly in "normal laptop" setup vrs "tablet" setup ?
+[02:20] <dr_willis> redir --help  ? ;)
+[02:20] <savagejen> taek, most of the time
+[02:20] <dr_willis> man redir  ?
+[02:21] <taek> I am wondering if there's an issue with ubuntu not reading the switch state of the screen
+[02:21] <savagejen> taek, there's currently no recognition by the laptop of what position the screen is in, which is something I hope to be able to find a way to configure at some point
+[02:21] <dr_willis> im so used to reading books on my kindle paperwhite.. reading them on a full laptop  would seem  weird.
+[02:21] <savagejen> er, Ubuntu doesn't seem to read the accelerometer I think
+[02:21] <cuddylier> dr_willis: http://pastebin.com/aXqkjer2
+[02:21] <taek> That might be where you're getting an the errors from?.
+[02:22] <savagejen> oh, interesting
+[02:22] <taek> the laptop might be sending it as a keypress or some such.
+[02:22] <taek> I don't know personally, but just throwing  thoughts out.
+[02:23] <savagejen> I guess, with the ubuntu tablet coming out, I was just hoping ubuntu would have full support of the touch screen interfaces in all of these fancy new ultrabooks
+[02:23] <savagejen> maybe with a bit of configuration
+[02:23] <taek> I figured they would of solved that issue with the invention of Unity.
+[02:23] <taek> But different hardwares do things differently
+[02:23] <savagejen> yeah
+[02:24] <wilee-nilee> taek, Since you just guessing what about gobl;ins.
+[02:24] <savagejen> although it looks like a bunch of us Ubuntu users have Lenovo Yogas now
+[02:24] <taek> Goblins are always outside my window!! I am affraind to go out there!
+[02:24] <wilee-nilee> taek, Somehow I believe that.
+[02:24] <dr_willis> http://linux.die.net/man/1/redir       ii would think it may not have such options, just logging options, since it seems to be designed to work as a service
+[02:24] <taek> :D
+[02:25] <taek> anyhow, let me get back into desktop mode and out of ptty1
+[02:25] <savagejen> just use netcat :D
+[02:25] <savagejen> pipe netcat to netcat
+[02:25] <cuddylier> dr_willis yeah, just wonder how I'm meant to remove redirects or even see a list lol
+[02:26] <dr_willis> cuddylier:  ;)   it was hard even finding a google hit for docs.. the term 'redir' is a  bit vague
+[02:26] <cuddylier> Yeah lol
+[02:26] <cuddylier> Such a good program and exactly what I needed but little docs :(
+[02:26] <dr_willis> 'use the wource luke!' ;)
+[02:26] <dr_willis> source
+[02:26] <taek> That was weird.
+[02:27] <taek> I got redirected to another channel.
+=== taek is now known as Taek
+[02:27] <dr_willis> Hmm.. i really really have to wonder how durable that Lenovo Yoga Hinge that does all the swiveling is....
+[02:27] <Taek> Hopefully not made from plastic
+[02:28] <dr_willis> ive had to many normal laptop hinges break over the years..
+[02:28] <Wulframn> I played with a display model and it was pretty durable. It stood up to being a display model, after all. =P
+[02:28] <Taek> I must say, I really dislike Unity.
+[02:28] <Taek> :-(
+[02:28] <dr_willis> at least its not an emachine brand. ;)
+[02:28] <dr_willis> Unity works well for me.
+[02:28] <Taek> Have to doo too much to get to what you want
+[02:29] <Wulframn> I dislike Unity, too. I haven't used it on a touchscreen, though, so I can't give it a fair shake.
+[02:29] <dr_willis> then again i ju,p around so many differnt OS's and desktops on a weekly basis  (or daily basis) it dosent matter what desktop im using
+[02:29] <Taek> Well, I attempted to stay with Unbutu 10.04.4 as long as I can
+[02:29] <Taek> They phased it out.
+[02:30] <Taek> There's MATE but.. not developed enough for my usage.
+[02:30] <dr_willis> the latest gnome-shell has an offical gnome-2 type mode i belive.. ive not tried it.
+[02:30] <Wulframn> I'm using xfce
+[02:30] <dr_willis> I can see mate and cinnimon vananishing in the near future
+[02:30] <Taek> Problem with MATE is.. There don't have enough devs for how many distros they are working on
+[02:31] <dr_willis> manpower is always the  limiting factor these days it seems
+[02:32] <Taek> Well, they have maybe one dedicated dev per OS/Distro, and a few floaters..
+[02:32] <Taek> As awesome as it would be for them to stay up todate with the distros changes, they arn't able to.
+[02:32] <dr_willis> its really amazing how few devs are responsible for some of the major apps, and  tools out there.
+[02:33] <Taek> hmm, I wonder if I can install irssi-scripts
+[02:33] <dr_willis> most of the webcam drivers i hear are done by like a small group of people. 2-3?    with one guy doing most of them
+[02:33] <Taek> and use them while irssi is running.
+[02:33] <dr_willis> Ive swithed over to weechat in stead of irssi these days. ;)
+[02:33] <qin> Taek: You can just download them to #/.irssi
+[02:34] <Taek> ~/.irssi...
+[02:34] <qin> yup
+[02:34] <qin> to lazy to shift
+[02:34] <Taek> hahaha
+[02:35] <dr_willis> bbl.
+[02:35] <Taek> Nice
+[02:35] <Taek> nicklist screen
+[02:35] <Taek> works
+[02:35] <Taek> :D
+[02:35] <Taek> too used to mirc.
+[02:36] <qin> Taek: how it looks like with 15 hundreds of bots in channel?
+[02:36] <Taek> Now to get ubuntu running on my linksys router!
+[02:36] <Taek> Looks fine.
+[02:37] <qin> Taek: http://www.dd-wrt.com/wiki/index.php/Linksys
+[02:37] <Taek> It amazes me how developers can cram a linux distro onto a 8MB flash drive with everything they need to run the router.
+[02:37] <Taek> qin I already have DD-WRT on my linksys
+[02:38] <gabash> #Beginner
+[02:38] <Taek> but it's foobar! I may have to reflash it
+[02:38] <qin> Taek: why ubuntu would be better?
+[02:38] <Taek> Why Not, Ubuntu server, ubuntu Desktop, Ubuntu Router, Ubuntu Laptop, Ubuntu cellphone, ubuntu netbook, ubuntu tablet
+[02:38] <qin> gabash: You do not need # here..
+[02:38] <Taek> Ubuntu kids?!
+=== |_ocke2 is now known as |_ocke
+[02:39] <qin> Taek: Yeah, pity that ubuntu do not cook and stuff.
+[02:39] <Taek> get a smart programmer and engineering tech to build a system of robots ran on ubuntu.. sure you could
+[02:40] <Taek> I mean, I have a friend who's house is basically ran on ubuntu
+[02:40] <Taek> controls the light, they reprogrammed their fridge. alarm system, garage.
+[02:40] <Taek> out door water sprinkler system
+[02:41] <Taek> Also programmed with android/iOS to remote control it
+[02:41] <Taek> Pretty nifty stuff.
+[02:42] <Taek> Too bad he wouldn't wouldn't release the src !
+[02:42] <nimdAHK_> anyone here use teamviewer?
+[02:42] <Taek> I use.
+[02:42] <nimdAHK_> my "setup offline access" option is missing
+[02:42] <Taek> What good is using teamviewer in offline access mode?
+[02:42] <nimdAHK_> s/offline/unattended
+[02:43] <nimdAHK_> it's supposed to be under "connection"
+[02:43] <soni1877> how to get netgear g54 wireless adapter working on ubuntu 64bit?
+[02:43] <nimdAHK_> but the option is just not present, Taek
+[02:43] <Taek> which version?
+[02:43] <nimdAHK_> 8
+[02:44] <Taek> Installed or running as "run" mode?
+[02:44] <soni1877> it is connecting properly but internet speed drops to almost zero frequently
+[02:44] <nimdAHK_> installed
+[02:44] <nimdAHK_> with the daemon on
+[02:44] <Taek> let me install and atake a look
+[02:44] <Taek> I am normally using windows
+[02:45] <nimdAHK_> Taek: http://i.imgur.com/2FHVn7r.png
+[02:46] <nimdAHK_> (yes, I refreshed the password...)
+[02:46] <varunendra> soni1877, please show us pastebin link of "lspci -nnk | grep -iA2 net"
+[02:46] <dr_willis> soni1877:  check what chipset and module its using and check askubuntu.com  there may be some known isdues
+=== River_Rat is now known as RiverRat
+[02:48] <soni1877> http://pastebin.com/KbWFw2GP
+[02:49] <Taek> Extras -> Options -> Advance -> Advance Networking Settings (TeamViewer server) Configure
+[02:49] <Taek> should do the trick for you
+[02:50] <nimdAHK_> so I can't add it to my account?
+[02:50] <nimdAHK_> like I did with all my other machines?
+[02:50] <Taek> I assume after you cofigure it, you should beable to do so
+[02:51] <Taek> also note, since TeamViewer for (LOinux) runs in Wine - It might not actually have the ability to do it.
+[02:52] <Taek> Linux*
+[02:52] <nimdAHK_> Yeah I noticed the bundled wine
+[02:53] <nimdAHK_> it's just interesting that the option is completely removed without a mention on the internet
+[02:54] <Taek> that's what happens when a big company like teamviewer decide to go the lazy route and not actually make a linux specific software
+[02:54] <Taek> instead just use windows emulation
+[02:55] <soni1877> varunendra: http://pastebin.com/KbWFw2GP
+[02:55] <Taek> Honestly I am happy TeamViewer even works on linux through wine, the horrors you have to go through to get alot apps to run on it period is bad enough.
+[02:56] <Psil0cybin> Hey guys can someone help me I recently updated my computure through the update manager, and now when i try and boot into ubuntu i sometimes get a blackscreen or i get booted into the text only console, and cannot access the GUI. This only started happening after the update....and i have to restarted 3 or 5 times to get into the GUI
+[02:56] <Psil0cybin> how can i diagnose and fix this error
+[02:56] <Psil0cybin> or do i keep using the older kernal?
+[02:56] <Taek> Just my guess, but have you updated the video driver?
+[02:57] <Psil0cybin> I might have i updated everything it wanted to update
+[02:57] <Psil0cybin> Cederview i think is the driver that got updated
+[02:57] <Psil0cybin> but i tried reinstalling it, it worked for a few boots and now its doing it again
+[02:57] <Taek> Never heard of cederview.
+[02:57] <Psil0cybin> its for an acer aspire one
+[02:58] <Psil0cybin> one second let me go to the package manager
+[02:58] <Psil0cybin> and tell u exatly
+[02:58] <Taek> Intel Atom Processor?
+[02:58] <Psil0cybin> yes
+[02:58] <Taek> D250 ?
+[02:58] <Psil0cybin> D270-1628
+=== Psil0cybin is now known as Psil0Cybin
+[02:58] <Psil0Cybin> cedarview-drm
+[02:59] <Psil0Cybin> i think was the package
+[02:59] <Taek> If I remember correctly, in my Acer Aspire One (D250) it used an Intel based chipset for the video
+[02:59] <varunendra> soni1877, sorry, I missed that it was a usb device. We instead need to see "lsusb" (pastebin link again). Even better maybe if you post a detailed report following this post : http://ubuntuforums.org/showpost.php?p=12350385
+[02:59] <Psil0Cybin> To be honest i am not really sure :P I just know usually i allow every update, and nothing goes wrong, I am kinda new to Ubuntu thats why i want to learn how to diagnose it
+[02:59] <Psil0Cybin> but you think its the driver?
+[03:00] <Taek> It's a possiblity
+[03:00] <Taek> when you get access to the gui again, try checking with the Additionhal Drivers
+[03:00] <wilee-nilee> Psil0Cybin, Is it nvidia and did you load it from them?
+[03:00] <Psil0Cybin> its Intel i belive wilee-nilee and im in the GUI now
+[03:00] <Psil0Cybin> thats how i got in to talk to you guys
+[03:00] <Psil0Cybin> Yea
+[03:00] <Taek> I am pretty sure it's an intel based video chipset
+[03:01] <Psil0Cybin> I went to propietary drivers
+[03:01] <Psil0Cybin> i have both selected
+[03:01] <Psil0Cybin> drm driver for Intel GMA500
+[03:01] <Psil0Cybin> and Intel Cedarview graphics driver
+[03:01] <Taek> Only one should be activated
+[03:01] <Taek> Try the GMA500 Driver
+[03:01] <Psil0Cybin> so take off Intel Cedarview Graphical Driver
+[03:01] <Psil0Cybin> ?
+[03:01] <Psil0Cybin> like remove it
+[03:01] <Psil0Cybin> ?
+[03:01] <Taek> select the GMA500 Driver and click activate
+[03:01] <Taek> it will deactivate the other
+[03:01] <Psil0Cybin> they are both activated
+[03:02] <Psil0Cybin> i only see
+[03:02] <Psil0Cybin> remove for both
+[03:02] <Taek> then deselect the ceder one
+[03:02] <Taek> err Select the ceder driver and click deactivate
+[03:02] <Taek> and then restart the laptop, it should work fine after
+[03:02] <wilee-nilee> Psil0Cybin, might be relevant. http://askubuntu.com/questions/290515/how-to-install-intel-cedarview-drivers-on-ubuntu-12-10-or-13-04
+[03:02] <Psil0Cybin> okay :) thanks will try it now
+[03:02] <Psil0Cybin> Okay im going to book mark that site too :) incase that doesnt work
+[03:02] <Taek> :D
+[03:03] <Psil0Cybin> let me try it and ill let you guys know
+[03:03] <Rahoul> Hi, what is the proper syntax to add a whole subnet to a table using iproute? ip rule add 192.168.1.0/24 does not seem to work :)
+[03:03] <Psil0Cybin> i love this IRC channel :) the sexyest thing on the net
+[03:03] <Taek> :D
+[03:03] <Taek> used to use my acer aspire one for network drive bys
+[03:03] <Taek> :D
+[03:04] <Psil0Cybin> hahaah thats what this one is for
+[03:04] <Psil0Cybin> i just love how small it is
+[03:04] <Taek> Then my wife got ahold of it and burnt it out!
+[03:05] <Taek> wonder why byobu reports my CPU as 2x0.7GHz at some points.
+=== nimdAHK_ is now known as nimdAHK
+[03:07]  * Taek afk mode
+[03:08] <Rahoul> hello?
+[03:08] <Rahoul> :)
+[03:09] <Psil0Cybin> Okay Taek when i deactivated the Intel Cedarview graphix it deactivated everything so I am reactivating the drm driver for the Intel GMA500
+[03:16] <WACOMalt> Anyone in here familliar with qemu? I am getting terrible speeds on my windows guest and I assume it's due to the network settings in qemu. I havent changed anything fromt he default and although I get about 40Mbps upload on linux I get about 70Kbps on the windows guest
+[03:17] <Taek> Why use qemu?
+[03:17] <WACOMalt> because the server is headless
+[03:17] <Taek> Not that it really matters in your choice, jut curious.
+[03:17] <WACOMalt> and I was told it was the fastest
+[03:17] <deezed> hey guys! I cant connect to a wpa wireless connection if there is any special caracther here, like é or ó. Do you know what can I do?
+[03:17] <Taek> All my experiences with qemu have been horrible
+[03:17] <WACOMalt> the server is headless and qemu gives you a vnc server directly to control the VM with
+[03:17] <WACOMalt> it runs great aside from the network speed issue
+[03:18] <Taek> is it running on a dedicated server?
+[03:19] <Taek> FYI all my experiences with qemu have been on windows afaik.
+[03:21] <deezed>  hey everyone, I'm trying to connect here to a wireless wpa2 connection which the password has special characters like "é" but I'm not allowed to connect,. Do you know what can I do?
+[03:21] <Taek> Change the wifi password?
+[03:22] <deezed> I cant, its from my girlfriend's house, and her mate wont like it
+[03:22] <nimdAHK> sounds like you and the router are using different encodings
+[03:23] <Taek> ^
+[03:23] <deezed> nimdAHK: maybe...do you know how can I figure it out?
+[03:23] <Taek> First off, figure out what enconding you're using?
+[03:23] <Taek> I believe most routers use UTF-8 .
+[03:23] <nimdAHK> try a different network manager too
+[03:24] <Taek> Then again I am in U.S. so everything here is simplified.
+[03:24] <deezed> nimdAHK: like which one?
+[03:24] <nimdAHK> gotta catch 'em all?
+[03:24] <deezed> Taek: true
+[03:24] <nimdAHK> wicd maybe
+[03:24] <deezed> nimdAHK: ok, I'll try!
+[03:24] <deezed> nimdAHK: thanks
+[03:24] <nimdAHK> yw, good luck!
+[03:25] <ristra> hi, i am trying to get my wifi to work on 12.04
+[03:25] <Taek> Network Adapter Chipset?
+[03:25] <usr13> ristra: So what is the problem?
+[03:25] <ristra> at some point, I think I messed up my /etc/network/interfaces file
+[03:25] <Taek> Pastebin?
+[03:25] <ristra> it doesn't have a wlan on it
+[03:25] <ristra> okie, hold on, i ll pastebin it
+[03:26] <usr13> ristra: iwconfig  #What does that say?
+[03:26] <Taek> No wLan? add it?.
+[03:26] <ristra> usr13 it only list eth0 and lo
+[03:27] <Taek> Is it a PCI(e) or USB Adapter ristra
+[03:27] <usr13> What wifi device do you have?  ( lspci )
+[03:27] <ristra> Taek, yeap that is the idea but since I am very new (i cant stress the @very@ enough!) I was wondering if it add it on a specific position or something
+[03:27] <Taek> What brand is it ristra ?
+[03:27] <poz> so i have installed the lastest version of backports from here: http://drvbp1.linux-foundation.org/~mcgrof/rel-html/backports/
+[03:27] <ristra> toshiba satellite c855
+[03:27] <usr13> ristra: Wait, what does iwconfig say?   iwconfig | pastebinit    #Show us URL
+[03:28] <poz> and now my usb wireless chip wont work
+[03:28] <varunendra> ristra, pastebin the report generated by wireless_script : http://ubuntuforums.org/showpost.php?p=12350385
+=== ken_ is now known as Guest58812
+[03:28] <ristra> http://pastebin.com/Fk1qLZzK here is my interfaces files
+[03:28] <poz> anyone have any ideas
+[03:28] <varunendra> that script will show almost everything (secure) wifi related. Everyone.
+[03:28] <poz> it is like ubuntu doesnt even see the usb wireless dongle
+[03:29] <varunendra> poz, do you have a wired connection now?
+[03:29] <kmyst> anybody able to help with some routing issues? trying to route three networks and running into an issue where i can only ping some things
+[03:29] <poz> i am using my laptops built in wireless card
+[03:30] <poz> the usb wireless card was working before i installed the backports
+[03:30] <poz> it is like the driver or somthing was over written and now it wont detect that it is plugged in
+[03:30] <ristra> http://pastebin.com/NTfLdeFt  has my interfaces file and the report from iwconfig
+[03:30] <varunendra> poz, we need to see "lsusb" and "nm-tool" output.
+[03:31] <poz> okay, one sec
+[03:31] <ristra> first question i guess is : can i just add wlan  to interfaces file?
+[03:31] <usr13> ristra: lspci | pastebinit  #send url
+[03:31] <Taek> Hopefully LSUSB sees it and can give us a chipset O.o
+[03:32] <ristra> usr13 here it is http://pastebin.com/XKiDSgm1
+[03:32] <ristra> the network controller is there
+[03:32] <poz> varunendra, here are the results of both commends: http://pastebin.com/1d97dT31
+[03:33] <Taek> Two wifi adapters
+[03:33] <Taek> One Atheros and another Realtek
+[03:33] <poz> this seems to be the usb wireless dongle Realtek Semiconductor Corp. RTL8192CU 802.11n WLAN Adapte
+[03:33] <Taek> Need to run a special driver for it
+[03:34] <Taek> well I consider it special;
+[03:34] <Taek> I forgot what it was called, but you need to run the bcwrapper?
+[03:34] <Taek> I think that's it
+[03:34] <soni1877> http://pastebin.com/e0xdrMM4
+[03:34] <Taek> oh wait, that's for broadcom
+[03:34] <soni1877> varunendra: http://pastebin.com/e0xdrMM4
+[03:35] <varunendra> poz, you are using WPA/WPA2 mixed mode in the router. Not always a problem but more than often it is. Try changing it to pure WPA2-PSK (AES) only. No TKIP, no mixed mode.
+[03:35] <usr13> ristra: 12.04?  Fully updated?
+[03:36] <ristra> usr13: it was a fresh install until I started trying to fix this issue
+[03:36] <ristra> I tried several different solutions I found online
+[03:36] <usr13> ristra: 12.04 Desktop?  Is it fully updated?
+[03:36] <poz> varunendra, this problem is independent of the router
+[03:36] <ristra> and I just run the updater so yet, fully updated
+[03:36] <poz> i can not get ubuntu to detect my usb wireless card
+[03:36] <ristra> 280+  updated modules
+[03:36] <usr13> ristra: sudo apt-get update && sudo apt-get upgrade
+[03:37] <ristra> ok, i ll run that, hold on
+[03:37] <ristra> and thanks by the way :)
+[03:38] <ristra> all is upgraded
+[03:38] <deezed> hey guys I'm trying to connect to my girlfriend's wireless network, but I can't! First I thought it was because the password had special characters, but its not. And the funniest part is that windows can connect!!!
+[03:38] <varunendra> soni1877, try - "sudo modprobe -rfv rtl8192cu" ..... then ......... "sudo modprobe -v rtl8192cu swenc=Y" . See if it improves the connectivity.
+[03:38] <deezed> do you know what can I do?
+[03:39] <Taek> deezed: what wireless encryption mode is it running in?.
+[03:39] <ristra> is it ok to change my /etc/network/interfaces to this: http://pastebin.com/uisvwSV1   ?
+[03:39] <deezed> Taek: wpa2
+[03:39] <varunendra> poz, for a detailed report : http://ubuntuforums.org/showpost.php?p=12350385
+[03:40] <Taek> wpa2?
+[03:40] <deezed> Taek: yes
+[03:42] <usr13> ristra: http://ubuntuforums.org/showthread.php?t=2005981
+[03:42] <deezed> Taek: is there maybe any driver I could install?
+[03:42] <Taek> deezed: does it return any errors? or just bad password?
+[03:43] <deezed> Taek: just connection failed
+[03:44] <usr13> deezed: iwlist <wifi-name-here> -scan
+[03:45] <Taek> deezed: I don't see why you would have an issue honestly
+[03:45] <ristra_> i broke it but I managed to get back hurra
+[03:45] <deezed> Taek: neither do I!!! thats the point. I cant figure it out
+[03:46] <usr13> deezed: scratch the -   just iwlist wifi-device-name scan
+[03:46] <Taek> shouldn't it be iwlist wifi-ssid scan?
+[03:47] <usr13> deezed: first do   iwconfig   and tell us what it says.
+[03:47] <deezed> usr13: ok, so now what do I do?
+[03:47] <deezed> the access point is not-associated
+[03:47] <usr13> deezed: Open a terminal and type   iwconfig   and hit enter
+[03:47] <Moonlightning> I think I broke my kernel. I have a half-installed kernel package and /boot is too full to do anything.
+[03:48] <poz> here is the results of the wireless script: http://pastebin.com/WYbu5xMe
+[03:48] <deezed> usr13: I did and dont know if there is something uncommon
+[03:48] <Moonlightning> I'm...pretty sure I don't need all these kernels. xP Is there something I can run to autoremove no longer needed kernel packages?
+[03:48] <poz> can some one help me find out what happend to wlan1?
+[03:48] <usr13> deezed: What is the essid of your AP?
+[03:48] <deezed> usr13: "casa do caralho"
+[03:49] <poz> it use to be my usb wireless dongle, but after I installed backports from here http://drvbp1.linux-foundation.org/~mcgrof/rel-html/backports/ it stoped working
+[03:49] <usr13> deezed: iwconfig wlan0 essid "casa do caralho"
+[03:49] <usr13> deezed: sudo iwconfig wlan0 essid "casa do caralho"
+[03:50] <deezed> usr13: ok
+[03:50] <deezed> now what?
+[03:51] <deezed> does anyone know what can I do next to access this wireless here?
+[03:52] <ristra_> http://pastebin.com/iiLH46bs  how do I know which wlan to add?  it is not recognizing wlan0
+[03:53] <wilee-nilee> Moonlightning, You have a boot partition?
+[03:53] <Moonlightning> Yes?
+[03:54] <wilee-nilee> Moonlightning, Ah generally not needed, however the ubuntu-tweak app has a janitor app that will clean up the extra kernels and other stuff.
+[03:55] <wilee-nilee> Moonlightning, Ubuntu tweak is in a PPA.
+[03:55] <Taek> Old kernels should be removable with apt-get auto-remove
+[03:55] <Taek> apt-get autoremove
+[03:55] <wilee-nilee> Not rue but can be done from the cli
+[03:55] <wilee-nilee> true*
+[03:55] <Moonlightning> I did autoremove
+[03:55] <Moonlightning> It didn't remove any of the kernels :(
+[03:56] <Taek> You can try with Ubuntu Tweak as wilee-nilee suggested.
+[03:56] <Moonlightning> I only have a CLI though
+[03:56] <wilee-nilee> Moonlightning, If you want a nice gui use the tweak, can be done from the terminal or synaptic as well.
+[03:57] <wilee-nilee> the tweak gets the configs as well, nice little app really
+[03:57] <Moonlightning> What's the name of the package?
+[03:57] <wilee-nilee> ubuntu tweak it is in a ppa
+[03:58] <wilee-nilee> http://ubuntu-tweak.com/ Or you can download the deb
+[03:59] <wilee-nilee> here is the ppa be sure to load the key use the read about installing to get the key with the load.
+[03:59] <wilee-nilee> https://launchpad.net/~tualatrix/+archive/ppa
+[03:59] <Moonlightning> Agh
+[03:59] <Moonlightning> Can't I just do it with apt-get? >.<
+[03:59] <Taek> Manually delete it okay :D

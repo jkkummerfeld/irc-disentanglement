@@ -1,0 +1,332 @@
+[10:13] <discord> i added those to the sources list
+[10:13] <Liberal_Tugboat> ok I think I need to hit the hay, go snuggle up next to my nice warm nekid fiance and get some sleep
+[10:14] <crimsun> Kazuhiro: (hmm, just 'pwd' without the quotes)
+[10:14] <discord> more than i ned
+[10:14] <Liberal_Tugboat> hmm
+[10:14] <discord> anyone else
+[10:14] <Liberal_Tugboat> and it wont install
+[10:14] <crimsun> Kazuhiro: ok, cd /usr/src && sudo tar xfj alsa-driver.tar.bz2
+[10:14] <discord> i added
+[10:14] <Kazuhiro> crimsun, /
+[10:14] <discord> univers
+[10:14] <discord> e
+[10:14] <discord> multivers
+[10:14] <discord> e
+[10:14] <discord> and the three others
+[10:14] <sono> crimsun: ok...
+[10:14] <Kazuhiro> crimsun, ok that did something, but no output
+[10:14] <Liberal_Tugboat> and it wont DL
+[10:14] <discord> the universe ones were already there
+[10:15] <discord> all i had to do
+[10:15] <discord> no
+[10:15] <discord> i get the msg
+[10:15] <bob2> crimsun: hoary's kernel doesn't support audigy?
+[10:15] <crimsun> bob2: 1.0.6's emu10k1 driver for it is suboptimal according to the author
+[10:15] <discord> mplayer-k6:
+[10:15] <discord>  Depends: libartsc0 but it is not going to be installed
+[10:15] <discord>   Depends: libfribidi0 but 0.10.4-3 is to be installed
+[10:15] <discord>  Depends: libggi2 but it is not going to be installed
+[10:15] <discord>   Depends: libpng12-0 but 1.2.5.0-7ubuntu1 is to be installed
+[10:15] <discord>   Depends: libungif4g but 4.1.0b1-6 is to be installed
+[10:16] <crimsun> Kazuhiro: ok, now cd modules/alsa-driver
+[10:16] <Liberal_Tugboat> hmm
+[10:16] <Kazuhiro> crimsun, yup
+[10:16] <Seveas> discord, you need mplayer-custom
+[10:16] <bob2> crimsun: has someone filed that as a bug?
+[10:16] <discord> i can put my sources list on pastebi if you think thats it
+[10:16] <Seveas> mplayer-k6 won't work afaik
+[10:16] <crimsun> bob2: not that I'm aware, but it's too late to attempt backporting it (the changes necessary are rather intrusive)
+[10:17] <discord> http://pastebin.com/262481
+[10:17] <discord> there is my sources list
+[10:17] <discord> neither will mplayer non k6
+[10:17] <Kazuhiro> crimsun, ok in modules/alsa-driver
+[10:18] <crimsun> Kazuhiro: sudo ./debian/rules binary_modules KSRC=/usr/src/linux-headers-$(uname -r) KVERS=$(uname -r)
+[10:18] <discord> mplayer 386 586 k6 whatever dont work
+[10:18] <kkathman> ahh thank goodness for the ubuntu forums :)
+[10:18] <discord> sorry if im bothersome over here i dont see that im doing something wrong in my sources.lst
+[10:19] <kkathman> firefox 1.0.2 is up and running great in warty
+[10:19] <Seveas> discord, have you tried mplayer-custom ??
+[10:19] <discord> you mean installing it from source?
+[10:19] <crimsun> don't use mplayer-custom unless you have a Pentium 4
+[10:19] <samatman_> ok...i got a 'stable' version of the rt2500 driver source, and this one actualy *does* stuff when i type make...but it ends up in error
+[10:19] <kkathman> night ladies and gents :)
+[10:19] <samatman_> for whoever is interested
+[10:19] <Liberal_Tugboat> well night all!
+[10:19] <crimsun> otherwise you'll receive an illegal instruction error
+[10:20] <discord> mplayer custom is not in my list
+[10:20] <samatman_> night
+[10:20] <Seveas> discord, no
+[10:20] <Seveas> from the repository!
+[10:20] <Kazuhiro> crimsun, ok done
+[10:20] <Seveas> try the marrilat repositories, it's there
+[10:20] <crimsun> Kazuhiro: ls ../*.deb
+[10:20] <Kazuhiro> ../alsa-modules-2.6.10-4-amd64-generic_1.0.8-4ubuntu3_amd64.deb
+[10:21] <crimsun> Kazuhiro: sudo dpkg -i ../*.deb
+[10:21] <samatman_> how can you use apt-get to update to hoary?
+[10:21] <samatman_> dreadlocked rasta...
+[10:21] <topyli> yes
+[10:21] <Kazuhiro> Unloading ALSA sound driver modules: (none loaded).
+[10:21] <Kazuhiro> Reloading sound driver modules: (none to reload).
+[10:22] <crimsun> Kazuhiro: ok, now: lsmod|grep ^emu10k1
+[10:22] <topyli> samatman_: upgrade works just like in debian
+[10:22] <Kazuhiro> crimsun, nothing :(
+[10:22] <samatman_> never used debian
+[10:22] <crimsun> Kazuhiro: that's a good thing.
+[10:22] <Kazuhiro> ok :)
+[10:22] <crimsun> Kazuhiro: now, sudo modprobe snd-emu10k1
+[10:22] <discord> hmm Ubuntu dont seem that user friendly
+[10:22] <samatman_> apt-get upgrade hoary?
+[10:22] <topyli> samatman_: well, try the ubuntu upgrade and you'll know how debian works :)
+[10:23] <Kazuhiro> crimsun, no output
+[10:23] <crimsun> Kazuhiro: excellent
+[10:23] <Kazuhiro> crimsun, so the module is loaded now?
+[10:23] <discord> if its so difficult to get some divx to play
+[10:23] <crimsun> Kazuhiro: please use the Volume Control to unmute and to adjust the volume
+[10:23] <topyli> samatman_: change sources.list, apt-get update, then apt-get upgrade and apt-get dist-upgrade. then pray
+[10:24] <MatthewJohn> is there support for unraring files or do i have to install some package?
+[10:24] <Kazuhiro> crimsun, they dont seem to be muted now
+[10:24] <topyli> discord: just install the codecs. ubuntu cannot do that for you
+[10:24] <Kazuhiro> or muted to begin with
+[10:24] <Seveas> MatthewJohn, apy-get install unrar
+[10:25] <discord> yeah hmm i guess mplayer have broken dependices
+[10:25] <MatthewJohn> Seveas: will file roller work with rar files after that?
+[10:25] <Seveas> nope
+[10:25] <Seveas> will: you will have thu 'unrar' command available then
+[10:25] <topyli> discord: well, use totem-xine then
+[10:25] <samatman_> as i recall rar had linux versions on their website
+[10:25] <Seveas> there is no way for file roller to understand rar due to legal issues
+[10:25] <MatthewJohn> oh ok
+[10:26] <sono> crimsun: hmm... should we place this as a bug report? we can recreate it...
+[10:26] <Kazuhiro> crimsun, ok nothing muted, all sound turned up
+[10:26] <topyli> zs s<
+[10:26] <crimsun> sono: please search bugzilla.ubuntu.com; I believe it has been reported already
+[10:26] <topyli> KK
+[10:26] <topyli> uhh...
+[10:27] <Seveas> sono, if it is already reported, add your experiences as a comment
+[10:27] <topyli> Seveas: you sure file-roller won't see unrar?
+[10:27] <crimsun> Kazuhiro: ok, please paste the output of amixer onto http://pastebin.ca
+[10:27] <sono> will: crimsun: Ok crimsun...I will for sure. Thank you very very much for your time.
+[10:27] <discord> can we find out what they compiled into the ubuntu kernels?
+[10:27] <crimsun> sono: np, thank you.
+[10:27] <Seveas> topyli, i'm not 100% sure, but last time i tried (a long time ago) it didnt
+[10:28] <sono> crimsun: good nite... and bye everyone!
+[10:28] <topyli> Seveas: hmm. i don't have any rar files so i can't test
+[10:28] <weebl> bb
+[10:28] <Kazuhiro> crimsun, http://pastebin.ca/8217
+[10:28] <topyli> discord: look at the config files in /boot
+[10:28] <crimsun> sono: see ya
+[10:29] <discord> topyli, thanks
+[10:29] <samatman_> should the mount command create the directory you want a drive mounted on?
+[10:29] <topyli> no
+[10:30] <samatman_> ok
+[10:31] <samatman_> i created a directory and mounted a drive there using sudo, how do i get permission for my regular user to view the damn thing
+[10:31] <samatman_> ?
+[10:32] <crimsun> Kazuhiro: are you using the analog line-out?
+[10:32] <Kazuhiro> crimsun, selecting audigy analog / digial output jack crashed the volume control in gnome, I think I read about this some where
+[10:32] <Kazuhiro> crimsun:  yes I am
+[10:32] <samatman_> will: so sudo will make root the owner of the dir/
+[10:32] <samatman_> ?
+[10:33] <topyli> samatman_: add "-o user" to the mount command, perhaps an umask too. also, the mount directory should be readable to mortals
+[10:33] <csj> hello, I DL a pdf file on my Desktop, how to let it appear immediately? famd?
+[10:34] <Kazuhiro> I have sound!
+[10:34] <Kazuhiro> crimsun, I used alsamixer on the console to unmute the analog /digital output
+[10:34] <crimsun> Kazuhiro: right :)
+[10:34] <samatman_> wha'ts umask?
+[10:34] <Kazuhiro> the gnome one crashed
+[10:34] <jsgotangco> hello
+[10:34] <Kazuhiro> crimsun, can I send you a pm?
+[10:35] <erupt> i have just installed wine now how do i get it to run mirc? do i put the .exe in my home dir or?
+[10:35] <crimsun> Kazuhiro: sure.
+[10:35] <samatman_> i can't unmount it now because the device is busy
+[10:36] <topyli> samatman_: something is using it. it's the current working dir of a shell or a program
+[10:36] <garrut> erupt: are you serious?
+[10:37] <samatman_> i have nothing on taht drive, and i have no windows or terminals pointed to that directory
+[10:37] <erupt> garrut: yeh xchat and being an oper piss me off with server notices
+[10:37] <dwa_> erupt : that's sick :)
+[10:37] <discord> anyone use mythtv with ubuntu?
+[10:37] <samatman_> use xchat
+[10:37] <topyli> samatman_: hrm. are you using sudo for the umount command?
+[10:37] <samatman_> yes
+[10:38] <dwa_> erupt : but you can just download it and type : wine blabla.exe
+[10:38] <samatman_> i had the same problem last night running a root console
+[10:38] <topyli> weird
+[10:38] <erupt> deb http://wine.sourceforge.net/apt/ binary/
+[10:38] <erupt> oops
+[10:38] <erupt> cannot find 'mirc.exe'
+[10:38] <garrut> erupt: if you don't like xchat there are only a billion other linux clients...
+[10:38] <erupt> garrut: like what garrut
+[10:38] <dwa_> true
+[10:38] <erupt> bitchx irssi?
+[10:38] <dwa_> irssi
+[10:38] <topyli> samatman_: some lsof magic would reveal what's using it but that's a bit beyond me :)
+[10:39] <erupt> that arnt practicul for oper use.
+[10:39] <samatman_> lsof?
+[10:39] <topyli> samatman_: a command to list open files
+[10:39] <dwa_> erupt : wine ./mirc.exe
+[10:39] <dwa_> in the mirc dir
+[10:39] <samatman_> ok, i got like 14 pages of text scrolling by real fast
+[10:40] <topyli> samatman_: gives enormous outputs, with skillful grepping it gives you the info you need
+[10:40] <samatman_> everything i do i run into crap like this
+[10:40] <samatman_> grep?
+[10:40] <topyli> samatman_: like lsof | grep /mount/point perhaps
+[10:41] <bob2> you're hitting obscure bugs
+[10:41] <TexJoachim> has it even happened to you that your self-made starters in the gnome menu disappeared?
+[10:41] <Kazuhiro> any one know how to get divx / xvid working in hoary? is it on the forums?
+[10:41] <TexJoachim> mine did today
+[10:41] <bob2> which I hope someone is reporting
+[10:41] <bob2> Kazuhiro: ignore the forums
+[10:41] <samatman_> retuns nothing
+[10:41] <bob2> Kazuhiro: wiki.ubuntu.com/RestrictedFormats
+[10:41] <Seveas> Kazuhiro, apt-get install w32codesc from marillat will help
+[10:41] <TexJoachim> they are still visible in "nautilus applications:///", but don't show up in the menu anymore
+[10:42] <Seveas> TexJoachim, have you by any chance upgraded to hoary today?
+[10:42] <TexJoachim> no
+[10:42] <TexJoachim> still running warty
+[10:42] <Seveas> ok, than i'll shut up again :)
+[10:42] <Kazuhiro> ok thanks loading pages up now, my net capped so its very slow
+[10:42] <TexJoachim> shame, I hoped to find some help here :-)
+[10:43] <samatman_> i did the grep with the mount point and it returned nothing
+[10:43] <MatthewJohn> how do you use unrar, to unrar a series of rar files? (file.rar file.r01 .r02 .r03)
+[10:43] <topyli> samatman_: yeah, it's probably wrong. i never could use lsof properly :(
+[10:43] <Seveas> unrar filename.r*
+[10:43] <Seveas> (replace filename with the actual name of course)
+[10:43] <TexJoachim> MatthewJohn: unrar x [first part] 
+[10:44] <Agrajag> the first part is the one with a .rar extension
+[10:44] <Seveas> hmm, yeah, only the .rar should work too
+[10:44] <Seveas> unrar should figure the rest out himself
+[10:44] <samatman_> ok, screw my ntfs drive
+[10:44] <samatman_> back to my wireless card
+[10:44] <samatman_> unless ya'll are tired of this
+[10:44] <samatman_> coz i am
+[10:44] <topyli> samatman_: it's ntfs? may require extra voodoo
+[10:45] <kain> take a look at captive ntfs
+[10:45] <Seveas> samatman_, are you trying to mount ntfs?
+[10:45] <crimsun> samatman_: what mountpoint are you trying to unmount?
+[10:45] <samatman_> can i format it as fat wihtout unmounting?
+[10:45] <MyNameIsChris> crimsun, are you watching this channel?
+[10:45] <samatman_> yes, it's mount
+[10:45] <crimsun> MyNameIsChris: yes.
+[10:45] <samatman_> it seemed to work fine
+[10:45] <MatthewJohn> hrmm
+[10:45] <MatthewJohn> it wont work
+[10:45] <topyli> Seveas: he's trying to UNmount
+[10:45] <Seveas> hmm
+[10:45] <samatman_> and i can cd into it in a root terminal, but can't get into it in nautilus
+[10:45] <Seveas> sudo umount /dev/hda..
+[10:45] <MatthewJohn> im going to have to boot into windows to unrar my warez :(
+[10:46] <crimsun> samatman_: what are you trying to accomplish with respect to that drive?
+[10:46] <samatman_> trying to use it as a big storage drive
+[10:46] <samatman_> ove: and if i can find a proper app, recover my gigs and gigs of neat crap i lost
+[10:46] <Seveas> samatman_, you cannot write to ntfs from linux...
+[10:46] <bob2> a) we don't care about your warez, b) unrar-nonfree.
+[10:47] <MyNameIsChris> crimsun, what argument to I give aplay again for 5.1 channel sound? I have tried --channels but verbose still states 2 and that is all I get
+[10:47] <MatthewJohn> bob2: a) i know b) i know c) ill shut up now
+[10:47] <Seveas> d) and try installing unrar-nonfree :)
+[10:47] <samatman_> ok, screw my drive
+[10:47] <samatman_> i have new errors in my wirless driver compile!
+[10:47] <samatman_> aren't you excited?
+[10:47] <crimsun> MyNameIsChris: -Dplug:surround51
+[10:47] <Seveas> ghe
+[10:48] <MyNameIsChris> crimsun, Thanks
+[10:48] <bob2> samatman_: why are you compiling a wireless driver?
+[10:48] <crimsun> MyNameIsChris: np
+[10:48] <MyNameIsChris> Better write it down
+[10:48] <samatman_> will: so my wireless card will work
+[10:48] <bob2> samatman_: and what chipset does it use?
+[10:48] <samatman_> it worked last time i had hoary installed...then i tried mandrake 10.1....
+[10:48] <samatman_> rt2500
+[10:49] <bob2> and that's not supported out of the box?
+[10:49] <samatman_> well, i'ts hoary for amd64 if that matters, but it won't recognize my wireless
+[10:49] <samatman_> doesn't show up in any ifconfig or iwconfig
+[10:50] <MatthewJohn> Seveas: ya the nonfree one worked, good call
+[10:50] <samatman_> is there an rt2500 in hoary?
+[10:50] <bob2> samatman_: no, I mean, you checked and the driver doesn't come with hoary, right?
+[10:50] <samatman_> no idea
+[10:50] <samatman_> don't know where to look
+[10:50] <bob2> why don't you check then?
+[10:50] <topyli> samatman_: still about the ntfs drive. best you add a decent entry for it in /etc/fstab and it will always mount at boot. read-only mind you. (when you re-focus yourself to that)
+[10:50] <bob2> seems like that would be a lot simpler than dragging everyone through a "compile random driver" oddysey
+[10:51] <samatman_> ok...how do i check?
+[10:51] <bob2> look in /lib/modules/
+[10:52] <samatman_> the search returned nothing
+[10:52] <samatman_> no file containing rt2500 int he name
+[10:55] <samatman_> it's amazing how fast you can go nowhere with linux sometimes
+[10:55] <bob2> well, it depends on a lot of things
+[10:56] <bob2> you haven't pasted the error message from make anywhere, afaics
+[10:56] <bob2> which means no one can really help you
+[10:56] <samatman_> what gets me is comparatively this worked like a breeze last time
+[10:57] <samatman_> even putting hte error into chat is a pain, warty has stopped auto mounting my usb drive
+[10:57] <samatman_> and reading stuff off of it has become a major pain
+[10:57] <bob2> ok
+[10:57] <samatman_> took me 30 minutes last night to get it onto this machine, and then seveas who had offered to look through it on pastebin had left
+[10:57] <zyga> hello
+[10:58] <zyga> I'm having strange problem in abiword
+[10:58] <zyga> some characters appear incorrectly
+[10:58] <zyga> I see small circle instead of i18n characters
+[10:58] <zyga> language is set correctly and none other apps are broken
+[10:58] <bob2> probably missing fonts
+[10:59] <zyga> bob2: like missing chars from particular font?
+[10:59] <zyga> bob2: I don't see most common latin characters with dots and dashes (polish characters)
+[10:59] <zyga> I'm running char map now
+[11:00] <zyga> char map shows all those characters correctly
+[11:00] <zyga> with the same font selected
+[11:00] <bob2> hm, ok
+[11:00] <bob2> maybe abiword has been told to use a font tht doesn' include those characters
+[11:01] <zyga> I'm using bitstream vera
+[11:01] <zyga> just lanuched open office
+[11:01] <zyga> characters are missing too
+[11:01] <Kazuhiro> ove: Has any one seen a addon to gnome or linux that does the resize all open windows down to show all with out overlapping like apple osx has?
+[11:01] <zyga> gedit works okay
+[11:03] <zyga> bob2: hmm gedit seems to add glyphs from other fonts to make up the ones missing from current font
+[11:03] <bob2> Kazuhiro: yes, expocity
+[11:03] <bob2> not in warty
+[11:03] <zyga> bob2: is this something specific to ubuntu? fedora had the same font and I'm sure there was no replacing
+[11:03] <zyga> bob2: replaced fonts are smaller (curier probaly)
+[11:04] <bob2> zyga: I don't know, fonts are one of the many linux things I don't understand very well
+[11:04] <bob2> try asking on the user list, I guess
+[11:04] <zyga> bob2: or is there some way to add replacing to all apps?
+[11:04] <zyga> bob2: okay thanks
+[11:05] <samatman_> and now that i put the text file of my error onto my usb disk, put taht into this machine...i don't see the text file
+[11:07] <Kazuhiro> bob2, thank you
+[11:07] <samatman_> i don't get this
+[11:09] <samatman_> no ideas?
+[11:11] <dirtymac> ?
+[11:11] <kakalto> dirty, dirtymac
+[11:11] <kakalto> :P
+[11:11] <dirtymac> ;-)
+[11:12] <samatman_> bdr: i drag the file onto my usbdrive in the gui, it shows up there, i unplug the drive, plug it back in and it's not there
+[11:12] <samatman_> wtf?
+[11:12] <bob2> unplugging without umounting is a bad idea
+[11:12] <bob2> especially if it's a FAT partition
+[11:12] <HappyPills> with the nautilus ftp client, how do I change between binary and ascii transfer mode?
+[11:12] <darksatanic> It's probably cached.
+[11:12] <darksatanic> Not been written to the drive.
+[11:13] <ysmar> hello
+[11:14] <samatman_> sudo umount /media/usbdisk    machine froze
+[11:14] <ysmar> will: i'm thinking t o install ubuntu 4.10 on my imac G3 500 mghz will it work?
+[11:14] <bob2> HappyPills: why would you want to use ASCII mode?
+[11:14] <bob2> ysmar: yes
+[11:14] <bob2> ysmar: how much RAM do you have?
+[11:14] <bob2> samatman_: what kernel version?
+[11:14] <ysmar> 572
+[11:14] <ysmar> ram*
+[11:14] <bob2> then you'll be fine
+[11:14] <samatman_> 2.6.10 i beleive, i'm pretty sure it's not 11
+[11:15] <ysmar> ok thank you
+[11:15] <HappyPills> I thought I was using it, I was uploading some .gif files to another computer on the network and they became corrupted at the other end.
+[11:15] <ysmar> i dont know absolutly nothing about , is it hard to install?
+[11:15] <HappyPills> gftp worked fine (in binary mode) but nautilus corrupted the files
+[11:15] <HappyPills> so I am assuming that I am transferring in ascii mode in nautilus
+[11:16] <bob2> ysmar: no
+[11:16] <bob2> HappyPills: oh, ouch
+[11:17] <kain> hi there, there's some tool around that configure gtk1 fonts correctly without tampering with gtkrc files?
+[11:17] <kain> boa constructor looks so ugly
+[11:17] <kain> so amule
+[11:17] <HappyPills> same thing happened to a windows executable I was trying to upload to a windows machine =P
+[11:18] <bob2> kain: switch from the gtk-theme-switch package
+[11:18] <kain> let me see
+[11:19] <kain> thank you
+[11:19] <samatman_> well i'm giving up on ubuntu for now
+[11:20] <kain> someone says that he enables AA on gtk1 fonts
+[11:20] <topyli> awww
+[11:20] <kain> is that possible?
