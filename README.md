@@ -21,8 +21,8 @@ In this work, we:
 For full results and analysis, see the paper.
 This repository contains key code and data, including [tools for preprocessing and evaluation](./tools/).
 
-*Note: this data is being used as part of a task at DSTC 8.
-We will add the test annotations to this repository once the shared task is complete.*
+**Note: this data is being used as part of a task at DSTC 8.
+We will add the test annotations to this repository once the shared task is complete.**
 
 If you use the data or code in your work, please cite our work as:
 
