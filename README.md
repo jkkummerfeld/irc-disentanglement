@@ -16,9 +16,9 @@ In this work, we:
 
 1. Introduce a new dataset, with disentanglement for 77,563 messages of IRC.
 2. Introduce a new model, which achieves significantly higher results than prior work.
-3. Re-analyse prior work,
+3. Re-analyse prior work, identifying issues with data and assumptions in models.
 
-For full results and the analysis, see the paper.
+For full results and analysis, see the paper.
 This repository contains key code and data.
 
 If you use the data or code in your work, please cite our work as:
