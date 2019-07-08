@@ -10,7 +10,7 @@ For example, the image below shows two entangled conversations and their graph s
 It includes a message that receives multiple responses, when multiple people independently help BurgerMann, and the inverse, when the last message responds to multiple messages.
 We also see two of the users, delire and Seveas, simultaneously participating in two conversations.
 
-<img src="https://raw.githubusercontent.com/jkkummerfeld/irc-disentanglement/master/example-conversation.png" width="100" alt="Image of an IRC message log with conversations marked">
+<img src="https://raw.githubusercontent.com/jkkummerfeld/irc-disentanglement/master/example-conversation.png" width="400" alt="Image of an IRC message log with conversations marked">
 
 In this work, we:
 
