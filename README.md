@@ -1,83 +1,63 @@
-# Disentanglement Baseline and Evaluation
+# irc-disentanglement
+This repository contains data and code for disentangling conversations on IRC, as described in:
 
-This folder contains the code needed to run and evaluate the baseline disentanglement model. The files are:
+  - [A Large-Scale Corpus for Conversation Disentanglement](https://arxiv.org/abs/1810.11118),
+  Jonathan K. Kummerfeld, Sai R. Gouravajhala, Joseph Peper, Vignesh Athreya, Chulaka Gunasekara, Jatin Ganhotra, Siva Sankalp Patel, Lazaros Polymenakos, and Walter S. Lasecki,
+  ACL 2019
 
-- `README.md`, this file
-- `task-4-evaluation.py`, the evaluation program
-- `disentangle.py`, the baseline
-- `reserved_words.py`, a set of words used by the baseline (kept in a separate file for convenience)
-- `disentangle.model`, a trained model for the baseline
-- `glove-ubuntu.txt`, a set of word vectors trained on all of the Ubuntu data (after applying our tokenisation method)
-- `tokenise.py`, a tool to tokenise the text ~as we have in the provided files
+Conversation disentanglement is the task of identifying separate conversations in a single stream of messages.
+For example, the image below shows two entangled conversations and their graph structure.
+It includes a message that receives multiple responses, when multiple people independently help BurgerMann, and the inverse, when the last message responds to multiple messages.
+We also see two of the users, delire and Seveas, simultaneously participating in two conversations.
 
-## Baseline
+![Image of an IRC message log with conversations marked](./example-conversation.png)
 
-The baseline is a feedforward neural network with 2 layers, 512 dimensional hidden vectors, and softsign non-linearities. It uses the DyNet library:
+In this work, we:
 
-dynet.readthedocs.io
+1. Introduce a new dataset, with disentanglement for 77,563 messages of IRC.
+2. Introduce a new model, which achieves significantly higher results than prior work.
+3. Re-analyse prior work,
 
-This can usually be installed with:
+For full results and the analysis, see the paper.
+This repository contains key code and data.
 
-`pip3 install dynet`
-
-This will train a model with the same parameters as we have used here:
-
-```
-python3 disentangle.py example-train --train ../task-4/train/*annotation.txt --dev ../task-4/dev/*annotation.txt --hidden 512 --drop 0 --layers 2 --nonlin softsign --word-vectors glove-ubuntu.txt --epochs 20 --dynet-autobatch --learning-rate 0.018804 --learning-decay-rate 0.103 --seed 10 --clip 3.740 --weight-decay 1e-07 --momentum 0.96 --opt sgd > example-train.out 2>example-train.err
-```
-
-This will run the trained model on the development set:
+If you use the data or code in your work, please cite our work as:
 
 ```
-python3 disentangle.py example-run --model disentangle.model --test ../task-4/dev/*annotation* --hidden 512 --drop 0 --layers 2 --nonlin softsign --test-start 1000 --test-end 2000 --word-vectors glove-ubuntu.txt > example-run.out 2>example-run.err
+@InProceedings{acl19disentangle,
+  author    = {Jonathan K. Kummerfeld and Sai R. Gouravajhala and Joseph Peper and Vignesh Athreya and Chulaka Gunasekara and Jatin Ganhotra and Siva Sankalp Patel and Lazaros Polymenakos and Walter S. Lasecki},
+  title     = {A Large-Scale Corpus for Conversation Disentanglement},
+  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  location  = {Florence, Italy},
+  month     = {July},
+  year      = {2019},
+  pages     = {},
+  url       = {},
+  arxiv     = {https://arxiv.org/abs/1810.11118},
+  software  = {https://jkk.name/irc-disentanglement},
+  data      = {https://jkk.name/irc-disentanglement},
+}
 ```
 
-For a full list of arguments run:
+# Data
 
-```
-python3 disentangle.py --help
-```
+Note: this data is being used as part of a task at DSTC 8.
+We will add the test annotations to this repository once the shared task is complete.
 
-## Evaluation
+# Disentanglement Code
 
-To evaluate the output of a system use:
 
-```
-python3 task-4-evaluation.py --gold ../task-4/dev/*anno* --auto example-run.out
-```
+# Tools
 
-For the provided model, that should give:
 
-```
-92.15   1 - Scaled VI
-74.19   Adjusted rand index
-40.53   Matched clusters precision
-41.26   Matched clusters recall
-40.89   Matched clusters f-score
-```
+# Contributions
 
-The format for output files is:
+If you find a bug in the data or code, please submit an issue, or even better, a pull request with a fix.
+We will be merging fixes into a development branch and only infrequently merging all of those changes into the master branch (at which point this page will be adjusted to note that it is a new release).
+This approach is intended to balance the need for clear comparisons between systems, while also improving the data.
 
-```
-anything.../filename:line_number line_number -
-```
+# Acknowledgments
 
-For example:
-
-```
-../task-4/dev/2004-11-15.annotation.txt:1000 1000 -
-../task-4/dev/2004-11-15.annotation.txt:1001 1001 -
-../task-4/dev/2004-11-15.annotation.txt:1002 1002 -
-../task-4/dev/2004-11-15.annotation.txt:1003 1002 -
-../task-4/dev/2004-11-15.annotation.txt:1004 1003 -
-../task-4/dev/2004-11-15.annotation.txt:1005 1003 -
-```
-
-## Tokenise
-
-Run to convert text to tokens with unk symbols. NOTE: we have done this for you on all the provided files in task 4. This is mainly here in case you wish to use the same process on task 1 or task 2.
-
-```
-./tokenise.py --vocab vocab.txt --output-suffix .tok ASCII_FILENAME
-```
+This material is based in part upon work supported by IBM under contract 4915012629.
+Any opinions, findings, conclusions or recommendations expressed are those of the authors and do not necessarily reflect the views of IBM.
 
