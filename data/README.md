@@ -1,16 +1,28 @@
+In this work, we annotated 77,563 messages of IRC.
+Almost all are from the [Ubuntu IRC Logs](https://irclogs.ubuntu.com/) for the `#ubuntu` channel.
+A small set is a re-annotation of the `#linux` channel data from [Elsner and Charniak (2008)](https://www.asc.ohio-state.edu/elsner.14/resources/chat-manual.html).
 
-Overall data description
+# File Summary
+
+File / folder      | Contents
+------------------ | -----------
+train              | Folder containing all training files.
+dev                | Folder containing all files to be used for development / validation.
+test               | Folder containing all test files [Not included until the DSTC 8 competition concludes].
+channel-two        | Folder containing 
+annotation-process | Folder containing files used while developing the annotation scheme.
+list...txt         | Files specifying lists of files (e.g. all the training files).
+glove-ubuntu.txt   | GloVe vectors, trained on all of the Ubuntu IRC logs.
+vocab.txt          | The vocabulary used in the GloVe vectors.
 
 # Format
 
 Each folder contains a set of files named as follows:
 
-- DATE.raw.txt
-- DATE.tok.txt
-- DATE.ascii.txt
-- DATE.annotation.txt
-
-The `.raw.txt` file is a sample from the IRC log from that day. The `.ascii.txt` file is a version of the raw file that we have converted to ascii. The `.tok.txt` file has the same data agian, but with automatic tokenisation and replacement of rare words with a placeholder symbol. The `.annotation.txt` file contains a series of lines, each describing a link between two messages. For example: `1002 1003 -`. This indicates that message `1002` in the logs should be linked to message `1003`. 
+- `DATE.raw.txt`, a sample from the IRC log from that day.
+- `DATE.ascii.txt`, a version of the raw file that we have converted to ascii (unconvertable characters are replaced with a special word).
+- `DATE.tok.txt`, the same data agian, but with automatic tokenisation and replacement of rare words with a placeholder symbol.
+- `DATE.annotation.txt`, a series of lines, each describing a link between two messages. For example: `1002 1003 -` indicates that message `1002` in the logs should be linked to message `1003`. 
 
 Note:
 - Messages are counted starting at 0 and each one is a single line in the logs.
@@ -18,6 +30,7 @@ Note:
 - A message can be linked to multiple messages both before it and after it. Each link is given separately.
 - There are no links where both values are less than 1000. In other words, the annotations specify what each message is a response to, starting from message 1,000.
 
+This folder also contains text files with lists of the data files, used by the first version of our system.
 
 # Training Set
 
@@ -104,7 +117,7 @@ Chosen by:
 
 ## Part C
 
-Selected by choosing a random point in the logs and keeping 1,500 messages after that point.
+Selected by choosing a random point in the logs and keeping 1,500 messages after that point (1,000 as context, 500 to annotate).
 
 2004-12-25 2005-02-06 2005-02-27 2005-05-14 2005-06-06 2005-06-12 2005-06-16
 2005-07-29 2005-09-26 2005-10-07 2005-10-12 2005-12-03 2005-12-04 2005-12-16
@@ -123,7 +136,7 @@ Selected by choosing a random point in the logs and keeping 1,500 messages after
 
 # Development Set
 
-Selected by choosing a random point in the logs and keeping 1,250 messages after that point.
+Selected by choosing a random point in the logs and keeping 1,250 messages after that point (1,000 as context, 250 to annotate).
 
 - 2004-11-15_03
 - 2005-06-27_12
@@ -138,7 +151,7 @@ Selected by choosing a random point in the logs and keeping 1,250 messages after
 
 # Test Set
 
-Selected by choosing a random point in the logs and keeping 1,500 messages after that point.
+Selected by choosing a random point in the logs and keeping 1,500 messages after that point (1,000 as context, 500 to annotate).
 
 - 2005-07-06_14
 - 2007-01-11_12
@@ -153,7 +166,9 @@ Selected by choosing a random point in the logs and keeping 1,500 messages after
 
 # Pilot Data
 
-Used in the process of developing the annotation scheme, not intended for use in developing models.
+Used in the process of developing the annotation scheme, **NOT** intended for use in developing models.
+If you use this data for either training or tuning your model your results with NOT be comparable with those in the paper.
+This is included mainly for completeness.
 
 Overall 1,250 lines (counting is a little subtle as it includes lines that didn't get a label)
 
