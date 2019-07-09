@@ -9,12 +9,12 @@ This folder contains:
 File / folder      | Contents
 ------------------ | -----------
 train              | Folder containing all training files.
-dev                | Folder containing all files to be used for development / validation.
-test               | Folder containing all test files [Not included until the DSTC 8 competition concludes].
+dev                | Folder containing all files for development / validation.
+test               | Folder containing all test files **(Not included until the DSTC 8 competition concludes)**.
 channel-two        | Folder containing our annotation of data from Elsner and Charniak (2008).
-annotation-process | Folder containing (1) files used while developing the annotation scheme, and (2) the original annotations before adjudication.
+annotation-process | Folder containing (1) files used while developing the annotation scheme, and (2) the original annotations for dev, test, and channel-two files before adjudication.
 list...txt         | Files specifying lists of files (e.g. all the training files).
-glove-ubuntu.txt   | GloVe vectors, trained on all of the Ubuntu IRC logs.
+glove-ubuntu.txt   | GloVe vectors, trained on all of the Ubuntu IRC logs (after tokenisation and rare word replacement with special symbols).
 vocab.txt          | The vocabulary used in the GloVe vectors.
 
 For details about how these files were chosen for annotation and which annotator annotated each one, see [this page](./READ.history.md).
@@ -25,9 +25,9 @@ Each folder contains a set of files named as follows:
 
 Suffix              | Contents
 ------------------- | -------------------------------
-`.raw.txt`          | A sample from the IRC log from that day.
+`.raw.txt`          | The original data from the IRC log, as downloaded.
 `.ascii.txt`        | A version of the raw file that we have converted to ascii (unconvertable characters are replaced with a special word).
-`.tok.txt`          | The same data agian, but with automatic tokenisation and replacement of rare words with a placeholder symbol.
+`.tok.txt`          | The same data agian, but with automatic tokenisation and replacement of rare words with placeholder symbols.
 `.annotation.txt`   | A series of lines, each describing a link between two messages. For example: `1002 1003 -` indicates that message `1002` in the logs should be linked to message `1003`. 
 
 Note:
@@ -35,7 +35,7 @@ Note:
 - A message can be linked to multiple messages both before it and after it. Each link is given separately.
 - A message can be linked to itself, indicating that it is the start of a new conversation.
 - System messages (e.g. `=== blah has joined #ubuntu`) are counted and annotated (almost all link to themselves only).
-- There are no links where both values are less than 1000. In other words, the annotations specify what each message is a response to, starting from message 1,000.
+- There are no links where both values are less than 1,000. In other words, the annotations specify what each message is a response to, starting from message 1,000.
 
 For example, these are lines from the `2007-12-17.train-a.*` files:
 
@@ -63,3 +63,4 @@ For example, these are lines from the `2007-12-17.train-a.*` files:
 
 Tokenisation was performed using the script in the tools directory.
 
+[Go back](./../) to the root of the repository.
