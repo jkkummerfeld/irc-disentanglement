@@ -22,7 +22,9 @@ For full results and analysis, see the paper.
 This repository contains key code and data, including [tools for preprocessing and evaluation](./tools/).
 
 **Note: this data is being used as part of a task at DSTC 8.
-We will add the test annotations to this repository once the shared task is complete.**
+I will add the test annotations to this repository once the shared task is complete.**
+
+After the shared task I will also add a link to a set of 496,469 disentangled conversations.
 
 If you use the data or code in your work, please cite our work as:
 
@@ -46,8 +48,8 @@ If you use the data or code in your work, please cite our work as:
 
 If you have a question please either:
 
-- Open an issue here on github.
-- Mail me at [jkummerf@umich.edu](jkummerf@umich.edu).
+- Open an issue on [github](https://github.com/jkkummerfeld/irc-disentanglement/issues).
+- Mail me at [jkummerf@umich.edu](mailto:jkummerf@umich.edu).
 
 # Contributions
 
