@@ -67,44 +67,44 @@ Note - the arguments defining the network (hiiden, layers, nonlin), must match t
 
 For the best results, we used a simple ensemble of multiple models.
 We trained 10 models as described above, but with different random seeds.
-These were combined using the `majority_vote.py` script in this directory.
+These were combined using the `majority-vote.py` script in this directory.
 
 The same script is used for all three, with slightly different input and arguments:
 
 Union
 ```
 for name in output*out ; do 
-  ../tools/format_conversion/output-from-cpp_to_graph.py < $name > $name.graphs ;
+  ../tools/format-conversion/output-from-cpp-to-graph.py < $name > $name.graphs ;
 done
 
 ls output*graphs |
-./majority_vote.py 1 > output.combined.union
+./majority-vote.py 1 > output.combined.union
 ```
 
 Vote
 ```
 for name in output*out ; do 
-  ../tools/format_conversion/output-from-cpp_to_graph.py < $name > $name.graphs ;
+  ../tools/format-conversion/output-from-cpp-to-graph.py < $name > $name.graphs ;
 done
 
 ls output*graphs |
-./majority_vote.py 10 > output.combined.vote
+./majority-vote.py 10 > output.combined.vote
 ```
 
 Intersect
 ```
 for name in output*out ; do
-  ../tools/format_conversion/output-from-cpp_to_graph.py < $name |
-  ../tools/format_conversion/graph_to_cluster.py > $name.clusters ;
+  ../tools/format-conversion/output-from-cpp-to-graph.py < $name |
+  ../tools/format-conversion/graph-to-cluster.py > $name.clusters ;
 done
 
 ls output*clusters |
-./majority_vote.py 10 > output.combined.intersect
+./majority-vote.py 10 > output.combined.intersect
 ```
 
 ## C++ Version
 
 As well as the main Python code, we also wrote a C++ version that was used for DSTC 7 and the results in the 2018 arXiv version of the paper (the Python version was used for DSTC 8 and the 2019 ACL paper).
 The python version has additional input features and a different text representation method.
-For details on how to build and run it, see [this page](./old-cpp-version/README.md).
+For details on how to build and run it, see [this page](./old-cpp-version/).
 

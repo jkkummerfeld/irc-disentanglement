@@ -154,7 +154,7 @@ Phase 1:
   - 2016-06-06_18.annotation.joseph.txt
 
 - Training additional annotator
-  - 2005-04-05_10.txt.annotation.vignesh
+  - 2005-04-05_10.annotation.vignesh.txt
   - 2006-03-15_03.annotation.vignesh.txt
   - 2006-03-15_03.annotation.mturk.txt - not used
   - 2006-03-15_03.annotation.rui.txt - not used

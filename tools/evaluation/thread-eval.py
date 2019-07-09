@@ -18,7 +18,7 @@ def read_clusters(filename):
     all_points = set()
     for line in open(filename):
         if ':' in line:
-            cfile = ':'.join(line.split(':')[:-1])
+            cfile = ':'.join(line.split(':')[:-1]).split('/')[-1]
             line = line.split(":")[-1]
         cluster = {int(v) for v in line.split()}
         clusters.setdefault(cfile, []).append(cluster)
