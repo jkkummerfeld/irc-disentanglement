@@ -42,10 +42,17 @@ If you use the data or code in your work, please cite our work as:
 }
 ```
 
+# Questions
+
+If you have a question please either:
+
+- Open an issue here on github.
+- Mail me at [jkummerf@umich.edu](jkummerf@umich.edu).
+
 # Contributions
 
 If you find a bug in the data or code, please submit an issue, or even better, a pull request with a fix.
-We will be merging fixes into a development branch and only infrequently merging all of those changes into the master branch (at which point this page will be adjusted to note that it is a new release).
+I will be merging fixes into a development branch and only infrequently merging all of those changes into the master branch (at which point this page will be adjusted to note that it is a new release).
 This approach is intended to balance the need for clear comparisons between systems, while also improving the data.
 
 # Acknowledgments
