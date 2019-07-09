@@ -8,43 +8,44 @@ import time
 
 import numpy as np
 
-def header(args, out=sys.stdout):
-    head_text = "# "+ time.ctime(time.time())
-    head_text += "\n# "+ ' '.join(args)
-    for outfile in out:
-        print(head_text, file=outfile)
-
-
 FEATURES = 77
-###FEATURES = 34
 
-parser = argparse.ArgumentParser(description='Disentangler.')
-parser.add_argument('prefix')
-parser.add_argument('--train', nargs="+")
-parser.add_argument('--dev', nargs="+")
-parser.add_argument('--test', nargs="+")
-parser.add_argument('--model')
-parser.add_argument('--DEPRECATED-pytorch', action='store_true')
-parser.add_argument('--epochs', default=20, type=int)
-parser.add_argument('--word-vectors')
-parser.add_argument('--max-dist', default=101, type=int)
-parser.add_argument('--dynet-autobatch', action='store_true')
-parser.add_argument('--random-sample')
-parser.add_argument('--test-start', type=int)
-parser.add_argument('--test-end', type=int)
-parser.add_argument('--report-freq', default=5000, type=int)
+parser = argparse.ArgumentParser(description='IRC Conversation Disentangler.')
 
-parser.add_argument('--seed', default=0, type=int)
-parser.add_argument('--weight-decay', default=1e-8, type=float)
-parser.add_argument('--hidden', default=1024, type=int)#64)
-parser.add_argument('--learning-rate', default=0.1, type=float)
-parser.add_argument('--learning-decay-rate', default=0.0, type=float)
-parser.add_argument('--momentum', default=0.1, type=float)
-parser.add_argument('--drop', default=0.0, type=float)
-parser.add_argument('--layers', default=2, type=int)
-parser.add_argument('--clip', default=1.0, type=float)
-parser.add_argument('--nonlin', choices=["tanh", "cube", "logistic", "relu", "elu", "selu", "softsign", "swish", "linear"], default='tanh')
-parser.add_argument('--opt', choices=['sgd', 'mom'], default='sgd')
+# General arguments
+parser.add_argument('prefix', help="Start of names for files produced.")
+
+# Data arguments
+parser.add_argument('--train', nargs="+", help="Training files, e.g. train/*annotation.txt")
+parser.add_argument('--dev', nargs="+", help="Development files, e.g. dev/*annotation.txt")
+parser.add_argument('--test', nargs="+", help="Test files, e.g. test/*annotation.txt")
+parser.add_argument('--test-start', type=int, help="The line to start making predictions from in each test file.", default=1000)
+parser.add_argument('--test-end', type=int, help="The line to stop making predictions on in each test files.", default=1000000)
+parser.add_argument('--model', help="A file containing a trained model")
+parser.add_argument('--random-sample', help="Train on only a random sample of the data with this many examples.")
+
+# Model arguments
+parser.add_argument('--hidden', default=512, type=int, help="Number of dimensions in hidden vectors.")
+parser.add_argument('--word-vectors', help="File containing word embeddings.")
+parser.add_argument('--layers', default=2, type=int, help="Number of hidden layers in the model")
+parser.add_argument('--nonlin', choices=["tanh", "cube", "logistic", "relu", "elu", "selu", "softsign", "swish", "linear"], default='softsign', help="Non-linearity type.")
+
+# Inference arguments
+parser.add_argument('--max-dist', default=101, type=int, help="Maximum number of messages to consider when forming a link (count includes the current message).")
+parser.add_argument('--dynet-autobatch', action='store_true', help="Use dynet autobatching.")
+
+# Training arguments
+parser.add_argument('--report-freq', default=5000, type=int, help="How frequently to evaluate on the development set.")
+parser.add_argument('--epochs', default=20, type=int, help="Maximum number of epochs.")
+parser.add_argument('--opt', choices=['sgd', 'mom'], default='sgd', help="Optimisation method.")
+parser.add_argument('--seed', default=10, type=int, help="Random seed.")
+parser.add_argument('--weight-decay', default=1e-7, type=float, help="Apply weight decay.")
+parser.add_argument('--learning-rate', default=0.018804, type=float, help="The initial learning rate.")
+parser.add_argument('--learning-decay-rate', default=0.103, type=float, help="The rate at which the learning rate decays.")
+parser.add_argument('--momentum', default=0.1, type=float, help="Hyperparameter for momentum.")
+parser.add_argument('--drop', default=0.0, type=float, help="Dropout, applied to inputs only.")
+parser.add_argument('--clip', default=3.740, type=float, help="Gradient clipping.")
+
 args = parser.parse_args()
 
 WEIGHT_DECAY = args.weight_decay
@@ -56,22 +57,21 @@ EPOCHS = args.epochs
 DROP = args.drop
 MAX_DIST = args.max_dist
 
+def header(args, out=sys.stdout):
+    head_text = "# "+ time.ctime(time.time())
+    head_text += "\n# "+ ' '.join(args)
+    for outfile in out:
+        print(head_text, file=outfile)
+
 log_file = open(args.prefix +".log", 'w')
 header(sys.argv, [log_file, sys.stdout])
 
-PYTORCH = args.DEPRECATED_pytorch
-if PYTORCH:
-    import torch
-    torch.manual_seed(args.seed)
-else:
-    import dynet_config
-    batching = 1 if args.dynet_autobatch else 0
-    dynet_config.set(mem=512, autobatch=batching, weight_decay=WEIGHT_DECAY, random_seed=args.seed)
-    # dynet_config.set_gpu() for when we want to run with GPUs
-    import dynet as dy 
+import dynet_config
+batching = 1 if args.dynet_autobatch else 0
+dynet_config.set(mem=512, autobatch=batching, weight_decay=WEIGHT_DECAY, random_seed=args.seed)
+import dynet as dy 
 
 from reserved_words import reserved
-
 
 
 ###############################################################################
@@ -269,8 +269,6 @@ def get_features(name, query_no, link_no, text_ascii, text_tok, info, target_inf
     #  - Are they a bot?
     features.append(qis_bot)
 
-    ###- Often a person asks a question as the first thing they do after entering the channel. Could be a useful feature. Encode as how long ago they entered, or if this is their first message since entering.
-
     # Link
     #  - Normal message or system message
     features.append(lsystem)
@@ -381,7 +379,6 @@ def get_features(name, query_no, link_no, text_ascii, text_tok, info, target_inf
             final_features.append(0.0)
         else:
             final_features.append(feature)
-###    print(query_no, link_no, ' '.join([str(int(v)) for v in final_features]))
 
     if do_cache:
         cache[name, query_no, link_no] = final_features
@@ -390,11 +387,15 @@ def get_features(name, query_no, link_no, text_ascii, text_tok, info, target_inf
 
 def read_data(filenames, is_test=False):
     instances = []
+    done = set()
     for filename in filenames:
         name = filename
         for ending in [".annotation.txt", ".ascii.txt", ".raw.txt", ".tok.txt"]:
             if filename.endswith(ending):
                 name = filename[:-len(ending)]
+        if name in done:
+            continue
+        done.add(name)
         text_ascii = [l.strip().split() for l in open(name +".ascii.txt")]
         text_tok = []
         for l in open(name +".tok.txt"):
@@ -428,35 +429,6 @@ def simplify_token(token):
             chars.append(char)
     return ''.join(chars)
 
-
-if PYTORCH:
-    class PyTorchModel(torch.nn.Module):
-        def __init__(self):
-            super().__init__()
-
-            self.hidden1 = torch.nn.Linear(FEATURES, HIDDEN)
-            self.nonlin1 = torch.nn.Tanh()
-            self.hidden2 = torch.nn.Linear(HIDDEN, HIDDEN)
-            self.nonlin2 = torch.nn.Tanh()
-
-            self.loss_function = torch.nn.CrossEntropyLoss(reduction='sum')
-
-        def forward(self, query, options, gold, lengths, query_no):
-            answer = max(gold)
-
-            # Concatenate the other features
-            features = torch.tensor([v[1] for v in options])
-
-            h1 = self.nonlin1(self.hidden1(features))
-            h2 = self.nonlin2(self.hidden2(h1))
-            scores = torch.sum(h2, 1)
-            output_scores = torch.unsqueeze(torch.unsqueeze(scores, 0), 2)
-
-            # Get loss and prediction
-            true_out = torch.tensor([[answer]])
-            loss = self.loss_function(output_scores, true_out)
-            predicted_link = torch.argmax(output_scores, 1)
-            return loss, predicted_link
 
 class DyNetModel():
     def __init__(self):
@@ -576,19 +548,10 @@ def do_instance(instance, train, model, optimizer, do_cache=True):
     example_loss, output = model(query_tok, options, gold, lengths, query)
     loss = 0.0
     if train and example_loss is not None:
-        if PYTORCH:
-            example_loss.backward()
-            # TODO: Gradient clipping
-            optimizer.step()
-            model.zero_grad()
-            loss = example_loss.item()
-        else:
-            example_loss.backward()
-            optimizer.update()
-            loss = example_loss.scalar_value()
+        example_loss.backward()
+        optimizer.update()
+        loss = example_loss.scalar_value()
     predicted = output
-    if PYTORCH:
-        predicted = output.item()
     matched = (predicted in gold)
 
     return loss, matched, predicted
@@ -613,24 +576,13 @@ if args.random_sample and args.train:
 model = None
 optimizer = None
 scheduler = None
-if PYTORCH:
-    model = PyTorchModel()
-    optimizer = torch.optim.SGD(model.parameters(), lr=LEARNING_RATE,
-            weight_decay=WEIGHT_DECAY)
-    rescale_lr = lambda epoch: 1 / (1 + LEARNING_DECAY_RATE * epoch)
-    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer,
-            lr_lambda=rescale_lr)
-else:
-    model = DyNetModel()
-    optimizer = None
-    if args.opt == 'sgd':
-        optimizer = dy.SimpleSGDTrainer(model.model, learning_rate=LEARNING_RATE)
-    elif args.opt == 'mom':
-        optimizer = dy.MomentumSGDTrainer(model.model, learning_rate=LEARNING_RATE, mom=MOMENTUM)
-    elif args.opt == 'csgd':
-        pass
-###        optimizer = dy.CyclicalSGDTrainer(model.model, learning_rate=LEARNING_RATE, mom=MOMENTUM) lrmin, lrmax, step, gamma (decay)
-    optimizer.set_clip_threshold(args.clip)
+model = DyNetModel()
+optimizer = None
+if args.opt == 'sgd':
+    optimizer = dy.SimpleSGDTrainer(model.model, learning_rate=LEARNING_RATE)
+elif args.opt == 'mom':
+    optimizer = dy.MomentumSGDTrainer(model.model, learning_rate=LEARNING_RATE, mom=MOMENTUM)
+optimizer.set_clip_threshold(args.clip)
 
 prev_best = None
 if args.train:
@@ -639,10 +591,7 @@ if args.train:
         random.shuffle(train)
 
         # Update learning rate
-        if PYTORCH:
-            scheduler.step()
-        else:
-            optimizer.learning_rate = LEARNING_RATE / (1+ LEARNING_DECAY_RATE * epoch)
+        optimizer.learning_rate = LEARNING_RATE / (1+ LEARNING_DECAY_RATE * epoch)
 
         # Loop over batches
         loss = 0
@@ -652,11 +601,7 @@ if args.train:
         for instance in train:
             step += 1
 
-            if PYTORCH:
-                model.train() 
-                model.zero_grad()
-            else:
-                dy.renew_cg()
+            dy.renew_cg()
             ex_loss, matched, _ = do_instance(instance, True, model, optimizer)
             loss += ex_loss
             loss_steps += 1
@@ -667,13 +612,10 @@ if args.train:
             # Partial results
             if step % args.report_freq == 0:
                 # Dev pass
-                if PYTORCH:
-                    model.eval() 
                 dev_match = 0
                 dev_total = 0
                 for dinstance in dev:
-                    if not PYTORCH:
-                        dy.renew_cg()
+                    dy.renew_cg()
                     _, matched, _ = do_instance(dinstance, False, model, optimizer)
                     if matched:
                         dev_match += 1
@@ -686,10 +628,7 @@ if args.train:
 
                 if prev_best is None or prev_best[0] < dacc:
                     prev_best = (dacc, epoch)
-                    if PYTORCH:
-                        torch.save(model.state_dict(), args.prefix +".pt.model")
-                    else:
-                        model.model.save(args.prefix + ".dy.model")
+                    model.model.save(args.prefix + ".dy.model")
 
         if prev_best is not None and epoch - prev_best[1] > 5:
             break
@@ -697,19 +636,13 @@ if args.train:
 # Load model
 if prev_best is not None or args.model:
     location = args.model
-    if PYTORCH:
-        if location is None:
-            location = args.prefix +'.pt.model'
-        model.load_state_dict(torch.load(location))
-    else:
-        if location is None:
-            location = args.prefix +".dy.model"
-        model.model.populate(location)
+    if location is None:
+        location = args.prefix +".dy.model"
+    model.model.populate(location)
 
-# Evaluation pass.
+# Run on test instances
 for instance in test:
-    if not PYTORCH:
-        dy.renew_cg()
+    dy.renew_cg()
     _, _, prediction = do_instance(instance, False, model, optimizer, False)
     print("{}:{} {} -".format(instance[0], instance[1], instance[1] - prediction))
 

@@ -15,7 +15,7 @@ list...txt         | Files specifying lists of files (e.g. all the training file
 glove-ubuntu.txt   | GloVe vectors, trained on all of the Ubuntu IRC logs.
 vocab.txt          | The vocabulary used in the GloVe vectors.
 
-For details about how these files were chosen for annotation and which annotator annotated each one, see [this page](./READ-history.md).
+For details about how these files were chosen for annotation and which annotator annotated each one, see [this page](./READ.history.md).
 
 # Format
 
@@ -32,7 +32,7 @@ Note:
 - Messages are counted starting at 0 and each one is a single line in the logs.
 - A message can be linked to multiple messages both before it and after it. Each link is given separately.
 - A message can be linked to itself, indicating that it is the start of a new conversation.
-- System messages (e.g. `=== blah has joined #ubuntu`) are counted and annotated (usually they do not link to another line).
+- System messages (e.g. `=== blah has joined #ubuntu`) are counted and annotated (almost all link to themselves only).
 - There are no links where both values are less than 1000. In other words, the annotations specify what each message is a response to, starting from message 1,000.
 
 For example, these are lines from the `2007-12-17.train-a.*` files:
@@ -52,6 +52,11 @@ For example, these are lines from the `2007-12-17.train-a.*` files:
 <s> <user> : to replicate your packages selection on another machine ( or restore it if re-installing ), you can type <unconvertable > dpkg --get-selections > DIR/~/ DIR/my-packages/ <unconvertable > , move the file " my-packages " to the other machine , and there type <unconvertable > sudo dpkg --set-selections < my-packages && sudo apt-get dselect-upgrade <unconvertable > - see also ! automate </s>
 <s> <user> , ever run ifconfig and lo is missing ? </s>
 <s> <user> : since runlevels are <unka> by upstart </s>
+
+==> data/train/2007-12-17.train-a.annotation.txt <==
+993 1000 -
+1000 1001 -
+1002 1002 -
 ```
 
 Tokenisation was performed using the script in the tools directory.

@@ -13,8 +13,8 @@
 #include <iomanip>
 #include <climits>
 
-#include <src/data.h>
-#include <src/models.h>
+#include <data.h>
+#include <models.h>
 
 using namespace std;
 using namespace dynet;

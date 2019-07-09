@@ -1,3 +1,6 @@
+The data was selected and annotated in various ways.
+The supplementary material to the paper discusses these, and below we provide full details.
+
 # Training Set
 
 Each file was annotated by one person. All annotators had gone through the training process.
@@ -9,10 +12,13 @@ Selected by:
 2. Determine cutoffs for 0-25%, 25-50%, 50-75%, and 75-100% on each axis (users, messages, directed)
 3. For each case, divide the data into four, and select four hours from each section
 
-Cutoffs are:
-Users 23 38 56
-Messages 145 264 405
-Directed 36.0 43.8 50.6
+Note, the identification of directed messages used an earlier version of our code that was less accurate.
+However, the difference is probably small (1-5%).
+
+Cutoffs were:
+- Users: 23, 38, 56
+- Messages: 145, 264, 405
+- Directed: 36.0, 43.8, 50.6
 
 - Users 0 2013-10-11.txt:07am u:19 m:76 %:39
 - Users 0 2012-11-24.txt:20am u:21 m:211 %:45

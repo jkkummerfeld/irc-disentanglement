@@ -12,7 +12,7 @@
 #include <fstream>
 #include <sstream>
 
-#include <src/eval.h>
+#include <eval.h>
 
 using namespace std;
 using namespace dynet;

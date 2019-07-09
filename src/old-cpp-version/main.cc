@@ -18,9 +18,9 @@
 #include "dynet/dict.h"
 #include "dynet/io.h"
 
-#include <src/models.h>
-#include <src/data.h>
-#include <src/eval.h>
+#include <models.h>
+#include <data.h>
+#include <eval.h>
 
 using namespace std;
 using namespace dynet;

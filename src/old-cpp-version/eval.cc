@@ -3,7 +3,7 @@
 
 #include <sstream>
 
-#include <src/eval.h>
+#include <eval.h>
 
 double calc_ratio(unsigned int numerator, unsigned int denominator) {
   if (denominator > 0)

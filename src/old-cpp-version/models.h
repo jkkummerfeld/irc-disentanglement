@@ -11,8 +11,8 @@
 #include "dynet/dict.h"
 #include "dynet/expr.h"
 
-#include <src/data.h>
-#include <src/eval.h>
+#include <data.h>
+#include <eval.h>
 
 using namespace std;
 using namespace dynet;
