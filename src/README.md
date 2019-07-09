@@ -18,7 +18,7 @@ To see all options, run:
 python3 disentangle.py --help
 ```
 
-### Training
+### Train
 
 To train, provide the `--train` argument followed by a series of filenames.
 
@@ -45,7 +45,7 @@ python3 disentangle.py example-train \
   > example-train.out 2>example-train.err
 ```
 
-### Running
+### Infer
 
 This command will run the model trained above on the development set:
 
@@ -64,7 +64,7 @@ python3 disentangle.py sample-run \
 
 Note - the arguments defining the network (hiiden, layers, nonlin), must match those given in training.
 
-## Ensembling
+## Ensemble
 
 For the best results, we used a simple ensemble of multiple models.
 We trained 10 models as described above, but with different random seeds.
@@ -74,41 +74,34 @@ The same script is used for all three ensemble methods, with slightly different 
 
 Union
 ```
-ls output*graphs |
-./majority_vote.py 1 > output.combined.union
+ls output*graphs | ./majority_vote.py 1 > output.combined.union
 ```
 
 Vote
 ```
-ls output*graphs |
-./majority_vote.py 10 > output.combined.vote
+ls output*graphs | ./majority_vote.py 10 > output.combined.vote
 ```
 
 Intersect
 ```
-ls output*clusters |
-./majority_vote.py 10 > output.combined.intersect
+ls output*clusters | ./majority_vote.py 10 > output.combined.intersect
 ```
 
 All of these assume the output files have been converted into our graph format, like this:
-
 ```
-for name in output*out ; do 
-  ../tools/format-conversion/output-from-cpp-to-graph.py < $name > $name.graphs ;
-done
+for name in output*out ; do ../tools/format-conversion/output-from-cpp-to-graph.py < $name > $name.graphs ; done
 ```
 
 The intersect method also assumes they have been made into clusters, like this:
-for name in output*out ; do
-  ../tools/format-conversion/graph-to-cluster.py < $name.graphs > $name.clusters ;
-done
+```
+for name in output*out ; do ../tools/format-conversion/graph-to-cluster.py < $name.graphs > $name.clusters ; done
+```
 
+## C++ Model
 
-
-## C++ Version
-
-As well as the main Python code, we also wrote a C++ version that was used for DSTC 7 and the results in the 2018 arXiv version of the paper (the Python version was used for DSTC 8 and the 2019 ACL paper).
-The python version has additional input features and a different text representation method.
-For details on how to build and run it, see [this page](./old-cpp-version/).
+As well as the main Python code, we also wrote a model in C++ that was used for DSTC 7 and the results in the 2018 arXiv version of the paper (the Python version was used for DSTC 8 and the 2019 ACL paper).
+The python model has additional input features and a different text representation method.
+The C++ model has support for a range of additional variations in both inference and modeling, which did not appear to improve performance.
+For details on how to build and run the C++ code, see [this page](./old-cpp-version/).
 
 [Go back](./../) to the root of the repository.

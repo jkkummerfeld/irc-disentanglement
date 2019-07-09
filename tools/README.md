@@ -2,7 +2,7 @@
 
 We provide three scripts for evaluation.
 
-### graph-eval.py
+### Graph Evaluation
 
 This calculates precision, recall, and F-score over edges.
 
@@ -27,13 +27,13 @@ yaddah_yaddah/2004-11-15.annotation.txt:1004 1003 -
 yaddah_yaddah/2004-11-15.annotation.txt:1005 1003 -
 ```
 
-### thread-eval.py
+### Conversation Evaluation
 
-This calculates a range of graph metrics.
+This calculates a range of cluster metrics.
 It requires the [Google OR Tools](https://developers.google.com/optimization/install/python/).
 
 ```
-python3 tools/evaluation/thread-eval.py gold-file system-file
+python3 tools/evaluation/conversation-eval.py gold-file system-file
 ```
 
 The expected format for output files has each cluster on one line:
@@ -52,7 +52,7 @@ yaddah_yaddah/2004-11-15.annotation.txt:1002 1003 1004 1005
 
 It also has the option to specify the set of metrics to use.
 
-### dstc8-evaluation.py
+### DSTC 8 Evaluation
 
 This is the code being used in DSTC 8.
 It is run with:
@@ -73,7 +73,7 @@ For a model trained as described in the source code README, that should give:
 
 The expected format is the same as for `graph-eval.py`
 
-### agreement.py
+### Annotator Agreement
 
 This is the code we used to calculate agreement between annotators.
 It expects to receive a list of filenames as arguments, where files are named:
@@ -84,7 +84,7 @@ DATA.annotation.ANNOTATOR
 
 Results are printed for each pair of annotators.
 
-### significance.py
+### Significance Testing
 
 This uses a permutation test, comparing two sets of annotations.
 It is run with:
