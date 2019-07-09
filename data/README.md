@@ -1,3 +1,5 @@
+# Data
+
 In this work, we annotated 77,563 messages of IRC.
 Almost all are from the [Ubuntu IRC Logs](https://irclogs.ubuntu.com/) for the `#ubuntu` channel.
 A small set is a re-annotation of the `#linux` channel data from [Elsner and Charniak (2008)](https://www.asc.ohio-state.edu/elsner.14/resources/chat-manual.html).
@@ -17,7 +19,7 @@ vocab.txt          | The vocabulary used in the GloVe vectors.
 
 For details about how these files were chosen for annotation and which annotator annotated each one, see [this page](./READ.history.md).
 
-# Format
+## Format
 
 Each folder contains a set of files named as follows:
 

@@ -23,7 +23,6 @@ This repository contains key code and data, including [tools for preprocessing a
 
 **Note: this data is being used as part of a task at DSTC 8.
 I will add the test annotations to this repository once the shared task is complete.**
-
 After the shared task I will also add a link to a set of 496,469 disentangled conversations.
 
 If you use the data or code in your work, please cite our work as:

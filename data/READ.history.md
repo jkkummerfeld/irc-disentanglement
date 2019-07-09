@@ -1,11 +1,13 @@
+# Annotation Information
+
 The data was selected and annotated in various ways.
 The supplementary material to the paper discusses these, and below we provide full details.
 
-# Training Set
+## Training Set
 
 Each file was annotated by one person. All annotators had gone through the training process.
 
-## Part A
+### Part A
 
 Selected by:
 1. Calculate stats for every hour
@@ -69,7 +71,7 @@ Cutoffs were:
 - Directed 75 2010-08-29.txt:20am u:58 m:423 %:59
 - Directed 75 2013-05-07.txt:02am u:17 m:144 %:63
 
-## Part B
+### Part B
 
 Chosen by:
 1. Filter out all hours that are in the max or min 5% for users, messages, or addressing
@@ -87,7 +89,7 @@ Chosen by:
 - All 0 2015-02-04.txt:15am u:16 m:83 %:36
 - All 0 2015-10-14.txt:21am u:15 m:155 %:25
 
-## Part C
+### Part C
 
 Selected by choosing a random point in the logs and keeping 1,500 messages after that point (1,000 as context, 500 to annotate).
 
@@ -108,7 +110,7 @@ Selected by choosing a random point in the logs and keeping 1,500 messages after
 2017-05-09 2017-07-15 2017-09-02 2018-02-27
 ```
 
-# Development Set
+## Development Set
 
 Selected by choosing a random point in the logs and keeping 1,250 messages after that point (1,000 as context, 250 to annotate).
 
@@ -117,7 +119,7 @@ Selected by choosing a random point in the logs and keeping 1,250 messages after
 2009-03-03_10 2009-10-01_17 2011-05-29_19 2011-11-13_02 2016-12-19_20
 ```
 
-# Test Set
+## Test Set
 
 Selected by choosing a random point in the logs and keeping 1,500 messages after that point (1,000 as context, 500 to annotate).
 
@@ -126,7 +128,7 @@ Selected by choosing a random point in the logs and keeping 1,500 messages after
 2013-09-01_02 2014-06-18_13 2015-03-18_05 2016-02-22_17 2016-06-08_07
 ```
 
-# Pilot Data
+## Pilot Data
 
 Used in the process of developing the annotation scheme, **NOT intended for use in developing models**.
 If you use this data for either training or tuning your model your results with NOT be comparable with those in the paper.
