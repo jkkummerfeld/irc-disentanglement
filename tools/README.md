@@ -96,13 +96,13 @@ It is run with:
 
 These are a set of tools for converting annotations:
 
-Tool  | 
-cluster-to-graph.py
-cluster-to-messages.py
-graph-to-cluster.py
-graph-to-messages.py
-output-from-cpp-to-graph.py
-output-from-py-to-graph.py
+Tool                             | Purpose
+-------------------------------- | ---------------
+output-from-py-to-graph.py       | Convert the output of the model into our graph format.
+graph-to-cluster.py              | Convert a set of links into a set of conversations with Union-Find.
+cluster-to-messages.py           | Print out the actual messages that a set of conversations correspond to.
+graph-to-messages.py             | Do both graph-to-cluster and cluster-to-message at once.
+output-from-cpp-to-graph.py      | Convert the output of the C++ model into our graph format.
 
 ## Preprocessing
 
