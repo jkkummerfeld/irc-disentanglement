@@ -67,7 +67,7 @@ Note - the arguments defining the network (hiiden, layers, nonlin), must match t
 
 For the best results, we used a simple ensemble of multiple models.
 We trained 10 models as described above, but with different random seeds.
-These were combined using the `majority-vote.py` script in this directory.
+These were combined using the `majority_vote.py` script in this directory.
 
 The same script is used for all three, with slightly different input and arguments:
 
@@ -78,7 +78,7 @@ for name in output*out ; do
 done
 
 ls output*graphs |
-./majority-vote.py 1 > output.combined.union
+./majority_vote.py 1 > output.combined.union
 ```
 
 Vote
@@ -88,7 +88,7 @@ for name in output*out ; do
 done
 
 ls output*graphs |
-./majority-vote.py 10 > output.combined.vote
+./majority_vote.py 10 > output.combined.vote
 ```
 
 Intersect
@@ -99,7 +99,7 @@ for name in output*out ; do
 done
 
 ls output*clusters |
-./majority-vote.py 10 > output.combined.intersect
+./majority_vote.py 10 > output.combined.intersect
 ```
 
 ## C++ Version

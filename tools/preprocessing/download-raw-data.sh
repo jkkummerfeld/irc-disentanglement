@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Downloading all available data for 2004-2019 from the ubuntu kubuntu ubuntu-devel ubuntu+1 channels"
+echo "Downloading all available data for 2004-2019 from the ubuntu channel"
 
 ###for name in ubuntu kubuntu ubuntu-devel "ubuntu+1" ; do
 for name in ubuntu ; do

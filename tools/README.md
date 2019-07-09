@@ -7,6 +7,27 @@ We provide three scripts for evaluation.
 
 This calculates precision, recall, and F-score over edges.
 
+```
+python3 tools/evaluation/graph-eval.py --gold gold-files --auto system-files
+```
+
+The expected format for output files is:
+
+```
+anything.../filename:line-number line-number -
+```
+
+For example:
+
+```
+blah-blah/2004-11-15.annotation.txt:1000 1000 -
+blah-blah/2004-11-15.annotation.txt:1001 1001 -
+blah-blah/2004-11-15.annotation.txt:1002 1002 -
+blah-blah/2004-11-15.annotation.txt:1003 1002 -
+yaddah_yaddah/2004-11-15.annotation.txt:1004 1003 -
+yaddah_yaddah/2004-11-15.annotation.txt:1005 1003 -
+```
+
 ### thread-eval.py
 
 This calculates a range of graph metrics.
@@ -34,7 +55,6 @@ It also has the option to specify the set of metrics to use.
 
 ### dstc8-evaluation.py
 
-To evaluate the output of a system use:
 This is the code being used in DSTC 8.
 It is run with:
 
@@ -52,22 +72,7 @@ For a model trained as described in the source code README, that should give:
 40.89   Matched clusters f-score
 ```
 
-The expected format for output files is:
-
-```
-anything.../filename:line-number line-number -
-```
-
-For example:
-
-```
-blah-blah/2004-11-15.annotation.txt:1000 1000 -
-blah-blah/2004-11-15.annotation.txt:1001 1001 -
-blah-blah/2004-11-15.annotation.txt:1002 1002 -
-blah-blah/2004-11-15.annotation.txt:1003 1002 -
-yaddah_yaddah/2004-11-15.annotation.txt:1004 1003 -
-yaddah_yaddah/2004-11-15.annotation.txt:1005 1003 -
-```
+The expected format is the same as for `graph-eval.py`
 
 ### agreement.py
 
@@ -106,11 +111,27 @@ output-from-cpp-to-graph.py      | Convert the output of the C++ model into our 
 
 ## Preprocessing
 
-Tokenise
+### Download IRC data
 
-Run to convert text to tokens with unk symbols. NOTE: we have done this for you on all the provided files in task 4. This is mainly here in case you wish to use the same process on task 1 or task 2.
+`./download-raw-data.sh` will download all available IRC data from the Ubuntu channel.
+Note, this includes some days in which there is no data or the files have other issues.
+
+### Convert to ASCII
+
+We converted downloaded files to ascii in two steps:
+
+1. Run `make-txt.py` to convert as much as possible (this will handle most cases of things like accents).
+2. Use `tr -cd '[:print:]\\n\\t' < filename > filename.ascii` to delete remaining non-ascii characters.
+
+### Tokenise
+
+We have two tokenisation scripts (preliminary experiments with off-the-shelf tokenisers gave poor results).
+The easiest one to run is the one we've prepared for DSTC 8:
 
 ```
-./tokenise.py --vocab vocab.txt --output-suffix .tok ASCII-FILENAME
+./dstc8-tokenise.py --vocab vocab.txt --output-suffix .tok ASCII-FILENAME
 ```
 
+The other (`tokenise.py`) has additional options that are generaly not needed.
+
+Run to convert text to tokens with unk symbols.
