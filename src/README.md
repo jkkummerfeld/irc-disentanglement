@@ -26,7 +26,8 @@ The example command below will train a model with the same parameters as used in
 The model is a feedforward neural network with 2 layers, 512 dimensional hidden vectors, and softsign non-linearities.
 
 ```
-python3 disentangle.py example-train \
+python3 disentangle.py \
+  example-train \
   --train ../data/train/*annotation.txt \
   --dev ../data/dev/*annotation.txt \
   --hidden 512 \
@@ -50,8 +51,9 @@ python3 disentangle.py example-train \
 This command will run the model trained above on the development set:
 
 ```
-python3 disentangle.py sample-run \
-  --model sample-train.dy.model \
+python3 disentangle.py \
+  example-run.1 \
+  --model example-train.dy.model \
   --test ../data/dev/*annotation* \
   --test-start 1000 \
   --test-end 2000 \
@@ -59,7 +61,7 @@ python3 disentangle.py sample-run \
   --layers 2 \
   --nonlin softsign \
   --word-vectors ../data/glove-ubuntu.txt \
-  > sample-run.out 2>sample-run.err
+  > example-run.1.out 2>example-run.1.err
 ```
 
 Note - the arguments defining the network (hiiden, layers, nonlin), must match those given in training.
@@ -67,34 +69,35 @@ Note - the arguments defining the network (hiiden, layers, nonlin), must match t
 ## Ensemble
 
 For the best results, we used a simple ensemble of multiple models.
-We trained 10 models as described above, but with different random seeds.
+We trained 10 models as described above, but with different random seeds (1 through to 10).
 We combined their output using the `majority_vote.py` script in this directory.
 
 The same script is used for all three ensemble methods, with slightly different input and arguments:
 
 Union
 ```
-ls output*graphs | ./majority_vote.py 1 > output.combined.union
+ls example-run*graphs | ./majority_vote.py 1 > example-run.combined.union
 ```
 
 Vote
 ```
-ls output*graphs | ./majority_vote.py 10 > output.combined.vote
+ls example-run*graphs | ./majority_vote.py 10 > example-run.combined.vote
 ```
 
 Intersect
 ```
-ls output*clusters | ./majority_vote.py 10 > output.combined.intersect
+ls example-run*clusters | ./majority_vote.py 10 > example-run.combined.intersect
 ```
 
-All of these assume the output files have been converted into our graph format, like this:
+All of these assume the output files have been converted into our graph format.
+Assuming you save the output of each run as `example-run.1.out`, `example-run.2.out`, `example-run.3.out`, etc, then this command will use one of our tools to convert them to the graph format:
 ```
-for name in output*out ; do ../tools/format-conversion/output-from-cpp-to-graph.py < $name > $name.graphs ; done
+for name in example-run*out ; do ../tools/format-conversion/output-from-py-to-graph.py < $name > $name.graphs ; done
 ```
 
 The intersect method also assumes they have been made into clusters, like this:
 ```
-for name in output*out ; do ../tools/format-conversion/graph-to-cluster.py < $name.graphs > $name.clusters ; done
+for name in example-run*out ; do ../tools/format-conversion/graph-to-cluster.py < $name.graphs > $name.clusters ; done
 ```
 
 ## C++ Model
