@@ -6,24 +6,33 @@ This repository contains data and code for disentangling conversations on IRC, a
   ACL 2019
 
 Conversation disentanglement is the task of identifying separate conversations in a single stream of messages.
-For example, the image below shows two entangled conversations and their graph structure.
-It includes a message that receives multiple responses, when multiple people independently help BurgerMann, and the inverse, when the last message responds to multiple messages.
+For example, the image below shows two entangled conversations and an annotated graph structure (indicated by lines and colours).
+The example includes a message that receives multiple responses, when multiple people independently help BurgerMann, and the inverse, when the last message responds to multiple messages.
 We also see two of the users, delire and Seveas, simultaneously participating in two conversations.
 
-<img src="https://raw.githubusercontent.com/jkkummerfeld/irc-disentanglement/master/example-conversation.png" width="400" alt="Image of an IRC message log with conversations marked">
+<img src="https://raw.githubusercontent.com/jkkummerfeld/irc-disentanglement/master/example-conversation.png" width="500" alt="Image of an IRC message log with conversations marked">
 
-In this work, we:
+This work:
 
-1. Introduce [a new dataset](./data/), with disentanglement for 77,563 messages of IRC.
-2. Introduce [a new model](./src/), which achieves significantly higher results than prior work.
-3. Re-analyse prior work, identifying issues with data and assumptions in models.
+1. Introduces a new dataset, with disentanglement for 77,563 messages of IRC.
+2. Introduces a new model, which achieves significantly higher results than prior work.
+3. Re-analyses prior work, identifying issues with data and assumptions in models.
 
-For full results and analysis, see the paper.
-This repository contains key code and data, including [tools for preprocessing and evaluation](./tools/).
+To get our code and data, download this repository in one of these ways:
+
+- [Download .zip](https://github.com/jkkummerfeld/irc-disentanglement/zipball/master)
+- [Download .tar.gz](https://github.com/jkkummerfeld/irc-disentanglement/tarball/master)
+- `git clone https://github.com/jkkummerfeld/irc-disentanglement.git`
+
+This repository contains:
+
+- The [annotated data](./data) for both Ubuntu and Channel Two.
+- The code for our [model](./src/).
+- The code for [tools](./tools/) that do evaluation, preprocessing and data format conversion.
 
 **Note: this data is being used as part of a task at DSTC 8.
-I will add the test annotations to this repository once the shared task is complete.**
-After the shared task I will also add a link to a set of 496,469 disentangled conversations.
+We will add the test annotations to this repository once the shared task is complete.**
+After the shared task we will also add a link to a set of 496,469 disentangled conversations.
 
 If you use the data or code in your work, please cite our work as:
 
