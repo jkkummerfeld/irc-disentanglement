@@ -1,7 +1,7 @@
 # irc-disentanglement
 This repository contains data and code for disentangling conversations on IRC, as described in:
 
-  - [A Large-Scale Corpus for Conversation Disentanglement](https://arxiv.org/abs/1810.11118),
+  - [A Large-Scale Corpus for Conversation Disentanglement](https://github.com/jkkummerfeld/irc-disentanglement/blob/master/acl19irc.pdf),
   Jonathan K. Kummerfeld, Sai R. Gouravajhala, Joseph Peper, Vignesh Athreya, Chulaka Gunasekara, Jatin Ganhotra, Siva Sankalp Patel, Lazaros Polymenakos, and Walter S. Lasecki,
   ACL 2019
 

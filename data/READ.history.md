@@ -1,7 +1,7 @@
 # Annotation Information
 
 The data was selected and annotated in various ways.
-The supplementary material to the paper discusses these, and below we provide full details.
+The [supplementary material to the paper](https://github.com/jkkummerfeld/irc-disentanglement/blob/master/supp-acl19irc.pdf) discusses these, and below we provide additional details.
 
 ## Training Set
 
