@@ -1,7 +1,7 @@
 # irc-disentanglement
 This repository contains data and code for disentangling conversations on IRC, as described in:
 
-  - [A Large-Scale Corpus for Conversation Disentanglement](https://github.com/jkkummerfeld/irc-disentanglement/blob/master/acl19irc.pdf),
+  - [A Large-Scale Corpus for Conversation Disentanglement](https://aclweb.org/anthology/papers/P/P19/P19-1374/),
   Jonathan K. Kummerfeld, Sai R. Gouravajhala, Joseph Peper, Vignesh Athreya, Chulaka Gunasekara, Jatin Ganhotra, Siva Sankalp Patel, Lazaros Polymenakos, and Walter S. Lasecki,
   ACL 2019
 
@@ -40,12 +40,13 @@ If you use the data or code in your work, please cite our work as:
 @InProceedings{acl19disentangle,
   author    = {Jonathan K. Kummerfeld and Sai R. Gouravajhala and Joseph Peper and Vignesh Athreya and Chulaka Gunasekara and Jatin Ganhotra and Siva Sankalp Patel and Lazaros Polymenakos and Walter S. Lasecki},
   title     = {A Large-Scale Corpus for Conversation Disentanglement},
-  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  booktitle = {Proceedings of the 57th Annual Meeting of the Association for Computational Linguistics},
   location  = {Florence, Italy},
   month     = {July},
   year      = {2019},
-  pages     = {},
-  url       = {},
+  doi       = {10.18653/v1/P19-1374},
+  pages     = {3846--3856},
+  url       = {https://aclweb.org/anthology/papers/P/P19/P19-1374/},
   arxiv     = {https://arxiv.org/abs/1810.11118},
   software  = {https://jkk.name/irc-disentanglement},
   data      = {https://jkk.name/irc-disentanglement},
