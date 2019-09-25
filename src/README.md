@@ -4,7 +4,7 @@ This folder contains code for reproducing our disentanglement experiments.
 
 ## Requirements
 
-The only dependency is the [DyNet library](dynet.readthedocs.io), which can usually be installed with:
+The only dependency is the [DyNet library](http://dynet.readthedocs.io), which can usually be installed with:
 
 ```
 pip3 install dynet
