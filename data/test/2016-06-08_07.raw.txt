@@ -1,0 +1,1500 @@
+[21:16] <lestus> o/
+[21:16] <lordcirth> Guest21456, hi
+[21:16] <explosive> lorddoskias1: nope
+[21:16] <lorddoskias1> huhz, rather strange indeed
+[21:16] <Guest21456> I want to lean about Linux.
+[21:16] <lorddoskias1> maybe it depends on the way the rules are executed
+[21:16] <explosive> lorddoskias1: try giving it the full path to the bin
+[21:17] <lorddoskias1> i have already given it the full path to the bin
+[21:17] <explosive> sudo /usr/bin/qemu....
+[21:17] <Guest21456> Buy, I don't know how to do it.
+[21:17] <explosive> lorddoskias1: no i mean in the actual command
+[21:17] <lorddoskias1> i see
+[21:17] <Bashing-om> !manual | Guest21456
+[21:17] <ubottu> Guest21456: The Ubuntu Manual will help you become familiar with everyday tasks such as surfing the web, listening to music and scanning documents. With an emphasis on easy to follow instructions, it is suitable for all levels of experience. http://ubuntu-manual.org/
+[21:17] <lordcirth> Guest21456, I have a link for that, 1 sec
+[21:17] <lordcirth> Or that
+[21:17] <lorddoskias1> explosive: it worked
+[21:18] <explosive> cool (kind of odd though)
+[21:18] <lorddoskias1> thanks, but now it works even without the full path
+[21:18] <xploshioon> hello, is there anyone that can help me with this? https://gist.github.com/xploshioOn/7fcab2b1619a0c02e568047a96744bb8 is an ubuntu 14.04
+[21:18] <explosive> ..plot thickens
+[21:18] <Guest21456> :) Bashing-om I have other problem too. I don't know very much English Language.
+[21:18] <lorddoskias1> explosive: maybe something got updated by a timeout
+[21:19] <Guest21456> I only know Spanish. I'm studying English.
+[21:19] <Bashing-om> Guest21456: Just ask .. If I canot understand .. we can direct you to a channel in your native language .
+[21:19] <bekks> xploshioon: install the missing libpulse.so.0 library.
+[21:20] <explosive> lorddoskias1: maybe
+[21:20] <lordcirth> bekks, he appears to have it, that's the question
+[21:20] <Anthaas> lordcirth, One of the main contributors to Sublime Text is helping too - he has directed me to the network settings for the package that is failing - there are no proxies set....
+[21:20] <lordcirth> xploshioon, perhaps you need the 32bit libpulse?
+[21:20] <Anthaas> So where on earth is its attempt at using an old proxy coming from...
+[21:21] <bekks> lordcirth: He has a 64bit version of the library.
+[21:21] <xploshioon> I installed it and its there but in /usr/lib/x86_64-linux-gnu/, not in the /usr/lib/
+[21:21] <xploshioon> with ldd `which pulseaudio`
+[21:21] <lordcirth> xploshioon, you installed it through APT?
+[21:22] <bekks> xploshioon: so you installed the 64bit version. What are the requirements of that "Velneo Server"?
+[21:22] <xploshioon> its here libpulse.so.0 => /usr/lib/x86_64-linux-gnu/libpulse.so.0 (0x00007f2304630000)
+[21:22] <xploshioon> yes, with apt-get install...
+[21:22] <Anthaas> lordcirth, think I have found the problem.
+[21:22] <Anthaas> lordcirth, My network proxies are environment variables, ST3 is picking these up at start, and won't remove them unless I remove them from data in python environment.
+[21:23] <lordcirth> Anthaas, your proxies are in bash environment variables?
+[21:23] <Anthaas> lordcirth, Not by my choosing - this laptop was configured for me by a "technician".
+[21:23] <Anthaas> Im a post-grad researcher - apparently we aren't allowed to do this stuff ourselves...
+[21:24] <Guest21456> I need a friend native from U.S for practice English Language. I'm foreing and I want to learn your language.
+[21:24] <deweydb_> hi, i have some scripts that send system mail.  When i finish reading this mail, i get a message like "Saved 77 messages in mbox".  Where are these saved? when i run 'mail' again it says 'No new mail for username'.  when i look at /var/mail/username the file is there but 0 bytes. so where do these mail's get "saved" to?
+[21:24] <Anthaas> lmfao
+[21:24] <Anthaas> Charming
+[21:24] <lordcirth> Anthaas, Ah, I see.  So, you should be able to do "env - sublime"
+[21:25] <lordcirth> Or whatever the ST3 command is
+[21:25] <Guest21456> Is there someone that want to be my study partner?
+[21:25] <Anthaas> You want someone native from the U.S to practice English - what about English people?
+[21:25] <Anthaas> lordcirth, I am not familiar with that?
+[21:25] <lordcirth> Anthaas, "run the following command with fresh environment"
+[21:25] <lordcirth> That may or may not clear the proxy settings
+[21:25] <xploshioon> @bekks there was a lot, it gives me 6 errors untill now, I just installed the missing packages and everything worked, but with this didn't work
+[21:25] <lordcirth> depending on where they are set
+[21:26] <lordcirth> Otherwise, use "unset" to clear them
+[21:26] <bekks> xploshioon: What are the requirements of that "Velneo Server"?
+[21:26] <Anthaas> lordcirth, You mean: "env -subl" ?
+[21:26] <Guest21456> :(
+[21:26] <Guest21456> I only want to learn something.
+[21:26] <lordcirth> Guest21456, that is offtopic here, sorry
+[21:27] <lordcirth> Anthaas, no, '-' is a complete argument to 'env' in this case
+[21:27] <bekks> Guest21456: This is an Ubuntu ssupport channel, maybe you can ask in #ubuntu-de-offtopic
+[21:27] <Guest21456> All information about informatic is in English.
+[21:28] <Anthaas> Ahh ok
+[21:29] <xploshioon> @bekks this is the content of the vServer.sh https://gist.github.com/xploshioOn/7fcab2b1619a0c02e568047a96744bb8
+[21:29] <bekks> xploshioon: What are the requirements of that "Velneo Server"?
+[21:30] <lordcirth> xploshioon, all that does is exec the ./vServer executable
+[21:30] <Anthaas> lordcirth, It works
+[21:30] <lordcirth> Anthaas, awesome!
+[21:31] <lordcirth> Anthaas, if you would like Sublime to launch from a desktop icon, you can probably edit the .desktop file to have the modified command.,
+[21:31] <xploshioon> @bekks, I don't know, how can I know the dependencies?
+[21:31] <Anthaas> lordcirth, Thanks man - Im wondering if this would have any other consequences on the running of sublime text though - Im sure not.
+[21:32] <bekks> xploshioon: We are not talking about the dependencies. We are talking about the official requirements as published by the author of Velneo Server.
+[21:32] <xploshioon> for the moment the error i get is this ./vServer: error while loading shared libraries: libpulse.so.0: cannot open shared object file: No such file or directory
+[21:32] <Anthaas> I know, for example, sublime text does need to access $PATH
+[21:32] <bekks> xploshioon: If you dont know the requirements, look them up please.
+[21:35] <lordcirth> Anthaas, $PATH will be correctly set, it's part of the basic stuff.  As for the rest, well, you'll find out :P But I think it will be fine.
+[21:37] <HappyHobo> Who is the main op here?  I believe I spoke with them the other day considering a sound issue.
+[21:38] <lordcirth> HappyHobo, does your IRC client not keep logs?
+[21:38] <k1l> !logs
+[21:38] <ubottu> Official channel logs can be found at http://irclogs.ubuntu.com/ . LoCo channels are now logged there too. Meeting logs from meetingology at http://ubottu.com/meetingology/logs/
+[21:38] <Apteryx> My screenlock settings won't stick. No matter what I do in the Unity settings. Anything I should look into?
+[21:39] <lordcirth> Oh right I forgot there was official logging
+[21:39] <HappyHobo> I don't remember who it was lordcirth so I don't know who to look for.  I spoke with a few people that day.  I need to apologize and get banned.
+[21:39] <lordcirth> wat
+[21:39] <lordcirth> HappyHobo, well, just look through the logs looking for your own name, and you'll find it
+[21:39] <bekks> HappyHobo: So you can search the logs.
+[21:39] <HappyHobo> Was it you lordcirth?
+[21:40] <lordcirth> HappyHobo, I doubt it, as I remember nothing.
+=== norm is now known as Guest43961
+[21:40] <HappyHobo> Demmit.
+[21:40] <tgm4883> one wonders why you need the "main op"
+[21:40] <HappyHobo> I've been feeling guilty for days now.
+[21:40] <k1l> HappyHobo: either you look into the logs the bot just linked you or you just ask your technical question :)
+[21:41] <HappyHobo> I realize I will be banned and I expect that.  I respect that decision but before I do I want to apologize.
+[21:42] <nacc> ... is this a guilty spamming situation? like you are going to apologize and then spam the channel, HappyHobo?
+[21:43] <HappyHobo> I am running chatelOS which is xubuntu with scripts in opt that are more than tied in than I thought.  I didn't realized how much they are tied in to the other night.  Prior to this I thought it was mostly xubuntu and I should get help here.  Well it really isn't and I am very sorry.
+[21:43] <nacc> HappyHobo: i don't think you'd get banned for asking a question in the wrong channel ...
+[21:43] <tgm4883> HappyHobo: so you lied the other day about running Xubuntu and wasted a bunch of people's time?
+[21:44] <HappyHobo> Those scripts in opt have nothing to do with audio but still chatelos is chatelos not xubuntu.
+[21:44] <HappyHobo> Those scripts only affect style and theming but not audio.
+[21:44] <HappyHobo> So I was kind of right but mostly wrong for my fraud.
+[21:45] <HappyHobo> tgm4883:  YOU ARE HIM!  DUDE I AM SO SORRY.
+[21:45] <tgm4883> HappyHobo: sounds like you were completely wrong and reinforced why the rules exist in this channel
+[21:45] <HappyHobo> You can ban me now.
+[21:45] <LaylaStorm> Lol
+[21:46] <tgm4883> HappyHobo: I don't think it was me... and I'm not going to ban you
+[21:46] <HappyHobo> I need to be banned.
+[21:46] <tgm4883> HappyHobo: why?
+[21:46] <LaylaStorm> XD
+[21:46] <k1l> HappyHobo: ok, thanks  for apologizing. now please lets focus on ubuntu support again in here.
+[21:47] <HappyHobo> If not I'll just sit here and glean without asking another question.  I feel guilty though.
+[21:47] <HappyHobo> I need revolution.
+[21:47] <LaylaStorm> LOL
+[21:47] <LaylaStorm> This guy is hilarious..
+[21:48] <HappyHobo> absolution?
+=== bazhang_ is now known as bazhang
+[21:50] <HappyHobo> I can help with so much though.  I have a lot of knowledge I gleaned from my 13 years of experienced.
+[21:51] <bazhang> HappyHobo, please stop the chit chat here
+[21:51] <bazhang> HappyHobo, this is ubuntu support only not chat
+[21:51] <HappyHobo> You're not he bazhang.  Sorry ma'am.
+[21:53] <HappyHobo> bazhang:  I'm trying to apologize and offer my support at the same time.  This is not chit chat or chat chit.
+[21:53] <tgm4883> HappyHobo: ok, enough chat then. As retribution for your past deception, you've got to stay in here and assist users with questions they have
+[21:53] <blinkyb> guys i have problem installing Budgie http://pastebin.com/JbXawrSh i get this, i''ve tried everything but no luch
+[21:54] <k1l> blinkyb: sudo apt install budgie-core
+[21:56] <HappyHobo> sudo apt install aptitude first which would seem to be the better choice in resolving this problem then sudo aptitude install budgie-core just saying
+=== CoolGuy_ is now known as _CoolGuy_
+[21:57] <blinkyb> k1l: "The Following Packages have unmet dependencies" "Unable to correct problems, you have broken packages"
+[21:57] <bekks> HappyHobo: Why would aptitude resolve problems "better"?
+[21:57] <nacc> hrm, why would one want to run packages from a PPA that announces it is deprecated?
+[21:57] <bekks> HappyHobo: The way to go nowadays is "apt".
+[21:57] <k1l> blinkyb: please put all the outpu into a pastebin
+[21:57] <blinkyb> k1l: budgie-core : Depends : libmutter0g
+[21:57] <blinkyb> ok
+[21:57] <HappyHobo> It breaks loops and dependency issues better in my opinion still.
+[21:58] <bekks> HappyHobo: Better than apt? Did you try?
+[21:58] <HappyHobo> I have using ubuntu mate trying to get icewm
+[21:58] <blinkyb> k1l: http://pastebin.com/A3yvBp44
+[21:59] <bekks> HappyHobo: Did you compare apt and aptitude?
+[21:59] <nacc> blinkyb: why are you using that ppa rather than https://launchpad.net/~budgie-remix/+archive/ubuntu/ppa ?
+[21:59] <blinkyb> nacc: i am completely new to this, dont know really
+[21:59] <nacc> blinkyb: i only ask because the ppa you are using explicitly says to use the other one...
+[21:59] <nacc> https://launchpad.net/~fossfreedom/+archive/ubuntu/budgie-desktop
+[21:59] <nacc> not sure why you wouldn't follow their advice :)
+[21:59] <nacc> blinkyb: ok, i'd try with the recommended path, if nothing else
+[21:59] <blinkyb> nacc: so which sudo should i use?
+[22:00] <HappyHobo> I was trapped in a loop.  It showed 3 dependencies using apt and it showed when I tried to installed this dependency it said it couldn't because of the other dependency then tried that one it said the one before back and forth until I tried aptitude which just fixed it.
+[22:00] <nailsom> Boa noite
+[22:00] <bekks> HappyHobo: Did you compare apt and aptitude?
+[22:00] <HappyHobo> Yes bekks
+[22:00] <nacc> blinkyb: since you tried to use the deprecated PPA to start, follow the instructions at https://launchpad.net/~fossfreedom/+archive/ubuntu/budgie-desktop
+[22:01] <nacc> blinkyb: under 'PPA description'
+[22:01] <HappyHobo> the two are so similar but they aren't.
+[22:01] <nailsom> alguem conhece o Droidcam?
+[22:01] <nacc> blinkyb: you'll need to add the newer ppa and purge the old ppa
+[22:01] <nacc> blinkyb: i'm not saying this because i know it will work, though, i'm saying what the relevant maintainers are recommending on their page
+[22:02] <HappyHobo> I've dreamed of a day when aptitude was installed by default and there was a gui to use it.
+[22:02] <k1l> !br | nailsom
+[22:02] <ubottu> nailsom: Por favor, use #ubuntu-br para ajuda em português. Para entrar no canal por favor faça "/join #ubuntu-br " sem as aspas. Para a comunidade local portuguêsa, use #ubuntu-pt. Obrigada.
+[22:02] <bekks> HappyHobo: And you are not mixing up apt-get and apt, are you?
+[22:02] <HappyHobo> I don't believe so bekks.
+[22:02] <HappyHobo> Aren't apt and apt-get the same thing?\
+[22:03] <tgm4883> If they were the same thing, we wouldn't call them different things...
+[22:03] <lordcirth> HappyHobo, no, they are different programs which do the same things
+[22:03] <lordcirth> In slightly different ways
+[22:04] <lordcirth> 'apt' being the most recent
+[22:04] <HappyHobo> Good googa mooga.  I'm sorry.  I thought apt and apt-get were the same thing.  I thought the only alternative being aptitude.
+[22:04]  * HappyHobo has egg on his face.
+[22:05] <lordcirth> And, the package management system, in general, is called "APT".  Confusing, I know.
+[22:06] <blinkyb> nacc: same error
+[22:06] <HappyHobo> apt, apt-get, aptitude all install but each does it in its own way all resolving dependencies and such in a unique way
+[22:06] <HappyHobo> Is there another?
+[22:07]  * stormchaser3000 just figured out why he can't use his nvidia graphics card :(
+[22:07] <lordcirth> HappyHobo, well, dpkg is a basic tool for installing individual packages.  then there are the gui tools, some of which use aptitude or dpkg under the hood.
+[22:07] <lordcirth> stormchaser3000, why's that?
+[22:07] <stormchaser3000> i have to have windows installed to switch from my intel graphics card to my nvidia graphics card as it is not possible to switch them through the bios menu
+[22:07] <stormchaser3000> >:(
+[22:07] <tgm4883> lordcirth: wouldn't that be dpkg no APT?
+[22:08] <HappyHobo> So no one uses aptitude anymore?
+[22:08]  * HappyHobo is feeling old and odd.
+[22:09] <bekks> HappyHobo: Basically, thats correct. :)
+[22:09] <lestus> HappyHobo: same..
+[22:09] <lestus> HappyHobo: wouldn't happen to be your birthday?
+[22:10] <lordcirth> tgm4883, as I understood it, APT is the standard, which dpkg implements?
+[22:10] <HappyHobo> Nope, still feeling old.
+[22:10] <lestus> HappyHobo: whic of the three do you prefer
+[22:10] <HappyHobo> dpkg-reconfigure things fixes things like say you have gdm and lightdm and you watch to switch
+[22:10] <hggdh> lestus, HappyHobo: please stop with the non-support chat in this channel. User -offtopic, or -discuss for that
+[22:11] <HappyHobo> want to switch
+[22:11] <nacc> lordcirth: .deb is the standard, dpkg knows how to install them; apt is a management interfaace over dpkg
+[22:11] <lestus> hggdh: already did
+[22:11] <HappyHobo> I still prefer aptitude even though it is cli.
+[22:11] <HappyHobo> hggdh:  I am on topic.
+[22:12] <hggdh> HappyHobo: no, you are not. You are giving out an opinion. You are actually repeating the same opinion again and again. Please stop.
+[22:13] <HappyHobo> I thought I was. sorry hggdh
+[22:13] <lordcirth> #ubuntu channel is unusually specific, being focused only on support, where most distro channels allow most distro-related chat.  Presumably because Ubuntu has so much more traffic.
+[22:14] <MonkeyDust> lordcirth  we have -offtopic for that
+[22:14] <lestus> lordcirth: yea that's certainly unusual, they forgot the 'community' element of support?
+[22:14] <HappyHobo> I'll listen
+[22:14] <tgm4883> lestus: with ~2000 users in the channel, chat can be very disruptive
+[22:14] <blinkyb> nacc: now what?
+[22:14] <lestus> indeed, topic closed
+[22:15] <nacc> blinkyb: now what? you follow the instructions at the ppa through the ppa-purge? Try `apt install budgie-desktop` i think
+[22:15] <nacc> blinkyb: it should use the one from budgie-remix
+[22:17] <blinkyb> nacc: 'Could not get lock /var/lib/dpkg/lock'
+[22:17] <nacc> blinkyb: sudo, of course, sorry
+[22:17] <blinkyb> nacc: 'is another process using it?'
+[22:17] <nacc> blinkyb: follow theinstructions on the ppa, that is listed there
+=== nerd is now known as Guest9046
+[22:22] <xangua> blinkyb: did you already contact the repository maintainer?
+[22:22] <blinkyb> nacc: done exactly whats there, same issue
+[22:22] <blinkyb> xangua: no, just came from outside
+[22:22] <nacc> blinkyb: pastebin the output from all 4 commands
+[22:23] <feve> fun this project
+[22:23] <Atlantic777> Hi! I need help configuring xdg-open. I use a tool which is opening .dot files with xdg-open. Currently it opens libreoffice. I want to use some other tool, gv in example.
+[22:24] <nacc> blinkyb: fwiw, i just spun up a container with stock 16.04 and it worked fine to go through those steps to install 'budgie-desktop'. Are you on 16.04?
+[22:24] <blinkyb> nacc: yes
+[22:26] <squinty> Atlantic777,  file manager -> right click on file name -> open with maybe?
+[22:26] <HappyHobo> is Emmabuntus supported?
+[22:26] <blinkyb> nacc: http://pastebin.com/08fGD4Bd
+[22:26] <NightSmoke101> hello
+[22:26] <NightSmoke101> i'm back :D
+[22:27] <NightSmoke101> if someone cares ^^'
+[22:27] <nacc> blinkyb: hrm, you are using a lot of PPAs. Ok, now that you've purged the fossfreedom PPA, can you pastebin the output of `apt update; apt install budgie-desktop` ?
+[22:28] <VlinkZ3> Hello?
+[22:28] <reisio> VlinkZ3: hi?
+[22:28] <OerHeks> blinkyb, your issue is evolve-os ppa
+[22:28] <blinkyb> nacc: sure
+[22:28] <k1l> !flavors | HappyHobo
+[22:28] <ubottu> HappyHobo: Recognized Ubuntu flavors build on Ubuntu and provide a different user experience out of the box. They are supported both in #ubuntu and in their flavor channel. The current list is: !Edubuntu, !Ubuntu-GNOME, !Kubuntu, Ubuntu !Kylin, !Lubuntu, !Mythbuntu, Ubuntu !Studio, !Xubuntu, and Ubuntu !MATE
+[22:29] <HappyHobo> Thanks
+[22:29] <Atlantic777> squinty: my application isn't listed.
+[22:29] <NightSmoke101> hello everyone
+[22:29] <NightSmoke101> is anyone here ?
+[22:30] <Atlantic777> squinty: btw, I don't use unity (just i3 wm). I hope that this solution would work without nautilus and unity, too.
+[22:30] <blinkyb> nacc: http://pastebin.com/Jx9GzuaV
+[22:30] <reisio> NightSmoke101: nope, just you; lonely, what what?
+[22:31] <NightSmoke101> yes lonely LOl :D
+[22:31] <squinty> Atlantic777,  you can migrate to where the app is installed and add it from there.  OK, I don't use i3 wm so maybe someone else will chime in.
+[22:31] <nacc> blinkyb: it would seem that the ppa in question is still installed. Can you try running the ppa-purge again?
+[22:31] <nacc> blinkyb: just as an FYI, mixing PPAs like this is not generally supported here ... nor are PPAs really. You should contact the PPA owner if you want to use a PPA's packages and have issues.
+[22:32] <mustmodify__> reading the logs for du, it seems like there is basically no way to know which units are being shown.
+[22:32] <Atlantic777> squinty: i3 wm shouldn't be problem as long as we find solution which works for xdg-open. :) Btw, if by migration you meen that I can navigate to /usr/bin/ I may be tired, but I don't see how. :D
+[22:32] <mustmodify__> Can I force it to be mb or something?
+=== mustmodify__ is now known as mustmodify
+[22:32] <OerHeks> blinkyb, you added https://launchpad.net/~evolve-os/+archive/ubuntu/ppa but that one was for older budgie stuff , remove it from softwaresources
+[22:33] <k1l> mustmodify: use the -h
+[22:33] <mustmodify> k1l: nice thanks
+[22:33] <mustmodify> don't know why I couldn't find that in the man page.
+[22:33] <squinty> Atlantic777,  ok,,, using nautilus here which may have different options than the file manager you are currently using.
+[22:34] <blinkyb> nacc: Didnt work
+[22:34] <blinkyb> OerHeks: how can i remove it?
+[22:37] <Atlantic777> squinty: I started nautilus. Here's what I see. Btw, I'm still on the 14.04. http://imgur.com/PHzyG09
+=== richard is now known as Guest24703
+[22:41] <squinty> Atlantic777,  maybe try   nautilus -> file name -> properties -> open with  and see if your perfered app is listed there
+[22:42] <Atlantic777> squinty: installing xdot + login/logout fixed the problem. Thank you kindly anyway! :)
+[22:43] <squinty> Atlantic777,  good to hear :-)
+[22:46] <sulfasal> need a calculator to convert hex, dec, bin back and forth including signed numbers. What should I use?
+[22:48] <lordcirth> sulfasal, The default Ubuntu calculator, switch to Programming mode
+[22:48] <OerHeks> sulfasal, standard calculator is just fine, see  programming or advanced
+[22:50] <waterdrop> Hi, I'm on ubuntu 12.04, and whenever I try to install a package I get the following errors - http://paste.ubuntu.com/17103574/
+[22:50] <waterdrop> Anyone know a fix?
+[22:51] <lordcirth> waterdrop, something in /etc/sources.list or .d is corrupted
+[22:51] <sulfasal> started calculator from menu but nothing about switching modes can I see
+[22:52] <sulfasal> Says calculator across the top only words on the thing
+[22:52] <squinty> waterdrop,  iirc the medibuntu is dead
+[22:52] <lordcirth> sulfasal, it's in the titlebar, which in Ubuntu Unity will be at the top of the desktop
+[22:52] <k1l> waterdrop: remove the medibuntu repo, its dead since some time
+[22:52] <OerHeks> waterdrop  remove medibuntu https://help.ubuntu.com/community/Medibuntu
+[22:53] <waterdrop> okay thanks
+[22:54] <sulfasal> lordcirth: thanks, not used to this unity thing yet
+[22:54] <lordcirth> sulfasal, yeah it's pretty different
+[22:57] <mustmodify> ok this is craziness.
+[22:57] <mustmodify> ls /var/log/nginx shows many logfiles, most of which have .gz extensions.
+[22:57] <mustmodify> sorry, sudo ls /var/log/nginx
+[22:57] <mustmodify> but sudo ls /var/log/nginx/*.gz says "no such file or directory"
+[22:58] <mustmodify> as does sudo ls /var/log/nginx/*
+[22:58] <mustmodify> ???
+[22:58] <lordcirth> mustmodify, iirc, globbing is done by bash, which in this case is running as you, and passing the expansion to 'sudo ls'
+[22:58] <OerHeks> ls -la /var/log/nginx/
+[22:59] <mustmodify> Hunh.
+[22:59] <tgm4883> lordcirth: +1
+[22:59] <lordcirth> mustmodify, try "sudo -s" then " ls /var/log/nginx/* "
+[22:59] <lordcirth> Just remember to exit the root shell when you are done.
+[23:00] <mustmodify> yeah, that's what I just did.
+[23:00] <mustmodify> lordcirth: good thinking.
+[23:00] <squinty> sulfasal,  fwiw... system settings -> apperance -> behaviour -> show the menu for a window -> in the windows title bar  (if you prefer the menu to be display per window rather than in the top panel)
+=== sleepypc is now known as hypermist
+[23:01] <lordcirth> mustmodify, thanks.  It's a fun one, eh?
+[23:03] <pascal> hi, here is my screenshot of gnome 3 http://imgur.com/nq5Rtg9 as you can see I'm a fan of irssi IRC client :)
+[23:04] <reisio> he says, from an IRC client other than irssi :p
+[23:05] <lordcirth> pascal, either you posted the wrong link or you're trolling
+[23:05] <Conna> halo
+[23:06] <lordcirth> Conna, hello
+[23:13] <toc> Hello, I have this problem and I can not find decent fix. (1) Creating object for path '/org/freedesktop/NetworkManager/ActiveConnection/0' failed in libnm-glib
+[23:13] <toc>  I am using Mobile Broadband
+[23:13] <Conna> give we screen shot for help you bro
+[23:14] <toc> I have two laptops and on both of them I have this same problem
+[23:14] <toc> (1) Creating object for path '/org/freedesktop/NetworkManager/ActiveConnection/0' failed in libnm-glib.
+[23:14] <toc> This is what the error says all the time
+[23:15] <toc> Conna, after restart it works, but if it disconnects for no apparent reason, I need to unplug modem, and restart laptop to make it work again
+[23:16] <toc> and also if I try to edit connection it gives me this error : settings/nm-settings-connection.c.955 - Connection didn't have requested setting 'ppp'.
+[23:16] <toc> I have tried to find answer online but haven't found one that would work
+[23:17] <toc> Same problem on ubuntu and lubuntu
+[23:17] <toc> Anybody could help ? :(
+[23:18] <toc> very annoying problem :(
+[23:18] <lordcirth> toc, where exactly does this error print?
+[23:19] <lordcirth> toc, could it be this bug? https://bugs.launchpad.net/ubuntu/+source/network-manager/+bug/1438003
+[23:19] <ubottu> Launchpad bug 1438003 in network-manager (Ubuntu) "(1) Creating object for path '/org/freedesktop/NetworkManager/ActiveConnection/0' failed in libnm-glib." [High,Triaged]
+=== bazhang_ is now known as bazhang
+[23:28] <abhishek> hi guys!
+[23:28] <abhishek> I was getting some errors on boot
+[23:29] <abhishek> checking the log file: abhishek log $ ls -lh syslog -rw-r----- 1 syslog adm 5.3G Jun  8 04:57 syslog
+[23:29] <abhishek> Is this normal for log to be so huge?
+[23:29] <lordcirth> abhishek, that is pretty big.
+[23:29] <reisio> not really, not unless it's from 20 years back
+[23:29] <reisio> your logging level is probably absurd and/or something is erroring out 24/7
+[23:29] <lordcirth> Doesn't Ubuntu have logrotate by default?
+[23:30]  * reisio shrugs
+[23:30] <reisio> you know about logrotate, so it doesn't really matter if it has it by default
+[23:30] <reisio> rotation isn't deletion, anyway
+[23:30] <abhishek> lordcirth, Not that I aware of. I am using kubuntu 16.04
+[23:30] <lordcirth> Yes but it would be a separate file.
+[23:30] <lordcirth> abhishek, well, use tail and find out what's spamming it
+[23:31] <abhishek> lordcirth, it taking too long for tail.
+[23:31] <lordcirth> heh
+[23:31] <abhishek> it=it's
+[23:31] <lordcirth> Yeah, it will have to read 5.3GB off the disk, I guess.  There should be a tool that skips that
+[23:32] <abhishek> lordcirth, you know any?
+[23:32] <lordcirth> It will do it, though, and 5.3GB shouldn't take more than a few minutes
+[23:32] <lordcirth> I do not
+[23:33] <abhishek> should I remove the logfile and rerun to check errors?
+[23:33] <abhishek> rerun-reboot
+[23:33] <reisio> removing or moving the log file would fix the space issue
+[23:33] <lordcirth> abhishek, I would move it, instead
+[23:33] <reisio> you'll have to investigate to know why it's so large
+[23:33] <reisio> to prevent it in future
+[23:33] <lordcirth> move to syslog.old
+[23:33] <lordcirth> Moves, thankfully, are instant
+[23:34] <Kimish> Hi there i need help i have lubuntu 15,04 and i cant login am stuck in a login loop Please help
+[23:34] <abhishek> syslog records the log at the boot and shutdown only or through when the system is running.?
+[23:35] <Kimish> Help please !!!!!!
+=== lpotter_ is now known as lpotter
+[23:35] <lordcirth> Kimish, when you try to log in, what happens?  It just drops you back to a log in screen?
+[23:36] <lordcirth> abhishek, syslog generally records constantly
+[23:36] <Kimish> Lordcirth : exactly
+[23:36] <lordcirth> Kimish, hit Ctrl-Alt-F2 and login
+[23:37] <lordcirth> Then read /var/log/Xorg.0.log to find out what broke
+[23:37] <Kimish> Lordcirth: done !
+[23:37] <lordcirth> Kimish, are you reading the log?
+[23:39] <Kimish> What log am in a shell now am loged from shell i want to login to desktop
+[23:39] <abhishek> lordcirth, I cleaned and check again. This is what I got https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1588428/comments/10
+[23:39] <ubottu> Launchpad bug 1588428 in linux (Ubuntu) "PCI bus error on startup while booting into login screen (Kubuntu 16.04)" [Low,Incomplete]
+[23:39] <Kimish> Lordcirth; ??
+[23:39] <lordcirth> Kimish, read your X log with: " less /var/log/Xorg.0.log "
+[23:39] <lordcirth> Kimish, so you know what broke, and you can fix it
+[23:40] <Kimish> Ok
+[23:41] <lordcirth> Kimish, look for the last error (EE), generally
+[23:43] <abhishek> any ideas on the issue?
+[23:43] <lordcirth> abhishek, doesn't look good.  Sounds like a PCI device is misbehaving, repeatedly
+[23:46] <lordcirth> abhishek, looking at the bug, did the pci=nomsi workaround prevent the log spam?
+[23:47] <Kimish> Lordcirth : yes there are so many errors infront of (EE)
+[23:47] <abhishek> lordcirth, what does that do? Does it just tell the kernel to stop logging?
+[23:48] <lordcirth> abhishek, I have no idea, I just saw it on the bug report.
+[23:48] <lordcirth> Kimish, pastebin the log file for us.
+[23:49] <dtech12> Hey
+[23:49] <lordcirth> dtech12, hello
+[23:50] <Kimish> First error is " failed to load module "nvidia" ( module does not exist,0)
+[23:50] <Kimish> Lordcirth its too long and am in my phone now
+[23:50] <abhishek> lordcirth, the guy in the bug report told me to remove it. Though it fixed the issue. I think it just stops logging. I rather fix the issue.
+[23:51] <lordcirth> Kimish, the computer with the error doesn't have internet?
+[23:51] <Kimish> Yes it doesnt
+[23:52] <lordcirth> Kimish, ok.  Well, look for the last error, since that is generally the one that caused the crash.
+[23:53] <Kimish> Lordcirth ; have u seen the first error it has smt to do dith nvidia ???
+[23:54] <lordcirth> Kimish, yeah, it didn't find the nvidia proprietary driver, so it goes on to the next one, as normal.
+[23:56] <abhishek> what is ideally I should do in this situation?
+[23:56] <abhishek> Is it related to kernel, should I ask there?
+[23:57] <lordcirth> abhishek, the  bug thread you already have is probably the best way.
+[23:58] <madcatter> !new Kathi Daley - [Zoe Donovan Mystery 10] - Turkeys, Tuxes, and Tabbies (epub).rar
+[23:58] <ubottu> madcatter: I am only a bot, please don't think I'm intelligent :)
+[23:59] <madcatter> !new Kathi Daley - [Zoe Donovan Mystery 11] - Christmas Cozy (epub).rar
+[23:59] <ubottu> madcatter: I am only a bot, please don't think I'm intelligent :)
+[00:00] <LtL> madcatter: this is not a warez or file-sharing channel
+[00:00] <Kimish> Lordcirth: ok the latest (EE) i can see says "AIGLX: reverting to software rendering"
+[00:01] <lordcirth> Kimish, see, that's useful.  Now look at the one before that.  By the way, use '/' to search forwards and '?' to search backwards
+[00:02] <KILLME1> I f***ed up pretty bad...I was using dd to write an iso to a usb (the iso was 3.6G) and acciddentaly overwrote my main partition which was dm-luks encrypted. It's still on, I'm currently looking at my xfce desktop but I can't do sh**. How do I either save my OS or export all my important stuff to another storage device??
+[00:02] <sruli> i need a some help with a little bash script i have for iptables, the script inserts rules for iptables  V 4 & 6 so i execute 'for V in 4 6; do ip${V}tables' i have a function to remove the  '4' when it populates the rules for iptables v4 ip4tables() {iptables $@} however it doesnt seem to remove the '4' can anyone help me out here please?
+[00:04] <sruli> KILLME1: is the machine frozen?
+[00:04] <KILLME1> not entirely conky is still running and whisker-menu still works but can't access a file manager
+[00:04] <KILLME1> or a terminal
+[00:05] <sruli> KILLME1: can u view the files with ls in terminal?
+[00:05] <lordcirth> Ctrl-Alt-F2, maybe?
+[00:05] <lordcirth> ttys should be in RAM
+[00:06] <lordcirth> you might be able to copy data using utilities that don't happen to be in the wrong 3.6GB or are cached
+[00:06] <KILLME1> yeah Ctrl-Alt-F2 brings me to the login, I can type but will not login
+[00:06] <lordcirth> great
+[00:07] <lordcirth> This would be the "load backups" phase
+[00:07] <lordcirth> Which I'm guessing you don't have
+[00:07] <sruli> KILLME1: the first 5 workds u wrtoe sums it up... i feel ur pain, been there
+[00:08] <KILLME1> you mean previous backups of the system? Yeah should have done that *facepalm
+[00:08] <tgm4883> Sounds like it overwrote credentials, which since you can't open a terminal and it's an encrypted partition probably means game over
+[00:09] <OerHeks> what bothers me, can one dd to an mounted encrypted partition/disk..
+[00:09] <tgm4883> unless you have a backup of your luks headers, then maybe you could do something with that
+[00:09] <lordcirth> OerHeks, dd works on files, some of which happen to be block devices.  Not part of it's mandate to look for mounts
+[00:09] <sruli> is there a chance the luks headers have not been overwritten and still poss to back it up?
+[00:10] <tgm4883> OerHeks: why not? dd is a pretty powerful tool, and it's reasons exactly like this why we have tools for making USB bootable stuff that isn't dd
+[00:10] <Kimish> Lordcirth : (EE) screen0 deleted because of no matching config section " and before that "(EE) open /dev/fb0: no such file or directory"  what do u think is the problem ?????
+[00:10] <KILLME1> well my boot partition was exactly 100MB and the iso was 3.6. I think it might have overwritten the headers but idk
+[00:10] <tgm4883> sruli: not likely, but possibly worth a shot
+[00:10] <lordcirth> sruli, seeing as he dd'd 3.6GB from the beginning, it's gone, assuming it's the first partition on the drive
+[00:11] <lordcirth> KILLME1, and your / was right after /boot?  Yeah it's gone.
+[00:11] <tgm4883> lordcirth: I was on the assumption he wrote to the disk, not the partition
+[00:11] <tgm4883> but yea, gone either way
+[00:11] <KILLME1> oh sorry yeah disk
+[00:12] <KILLME1> I did sudo dd if=file.iso of=/dev/sda bs-1M
+[00:12] <Kimish> Lordcirth; ????
+[00:12] <KILLME1> bs=1M*
+[00:13] <lordcirth> Kimish, ok, what graphics card do you have, and what driver were you using prior to it breaking?
+[00:13] <tgm4883> KILLME1: it's times like this that a relevant yet unhelpful (post-dataloss) saying comes to mind. "If your data isn't backed up, it's not important"
+[00:13] <KILLME1> lesson learned fml
+[00:14] <tgm4883> KILLME1: yep, I think we've all been there at one point or another, missing something that we didn't back up
+[00:14] <sruli> can anyone help me with a little bash script i have for iptables, the script inserts rules for iptables  V 4 & 6 so i execute 'for V in 4 6; do ip${V}tables' i have a function to remove the  '4' when it populates the rules for iptables v4 ip4tables() {iptables $@} however it doesnt seem to remove the '4' can anyone help me out here please?
+[00:15] <lordcirth> I nuked a 400GB Win7 partition once - which I was planning to do - once I moved my files off.
+[00:15] <Kimish> Lordcirth ; am really a noob when it comes to hardware but i guess i have nvidia card
+[00:16] <abhishek> nvidia-367 sucks
+[00:16] <_CoolGuy_> http://i.imgur.com/xdCFQO7.jpg
+[00:16] <lordcirth> I didn't know 367 was out
+[00:17] <Kimish> Lordcirth: any way to fix it ??
+[00:17] <OerHeks> thanks _CoolGuy_ you spammed that here yesterday too.
+[00:17] <lordcirth> Kimish, I wish you could pastebin it.
+[00:18] <dax> _CoolGuy_: #ubuntu is for technical support. Please don't link artwork here, especially not repeatedly. Thanks :)
+[00:18] <lordcirth> Kimish, Is there a line about "nouveau" ?
+[00:19] <Kimish> lordcirth: i cant
+[00:20] <Kimish> Lordcirth : where should i look for the line in the begining ?
+[00:21] <lordcirth> Kimish, you're using "less", right?  Type /nouveau <Enter> to search for it, and /<Enter> to go to the next
+[00:21] <superguest_> On previous versions of Ubuntu, to install the flashplayer plugin for Firefox all I needed to do was to cp libflashplayer.so to /usr/lib/mozilla/plugins
+[00:21] <superguest_> Where should I copy libflashplayer.so to in 16.04?
+=== SonikkuAmerica is now known as S-USAMakesItRain
+[00:23] <OerHeks> i thought you needed the flashplugin-installer, which is part of restricted-extras metapackage
+[00:23] <lordcirth> superguest_, a word of warning, flash for linux firefox is deprecated and quite behind on security patches.  It's a bad idea.
+=== JanC is now known as Guest74845
+=== JanC_ is now known as JanC
+[00:24] <OerHeks> !flash
+[00:24] <ubottu> To install Flash see https://help.ubuntu.com/community/RestrictedFormats/Flash - See also  !Restricted and !Gnash
+[00:25] <Kimish> Lordcirth ; yes there are so many lines with nouveau
+[00:26] <lordcirth> Kimish, ok, well, nouveau is the graphics driver you are using.  So there is a decent chance that those lines will reveal your problem.
+[00:28] <xxt> oi
+[00:31] <Kimish> Lordcirth: (II) UnloadModule: "nouveau"
+[00:31] <Kimish> So what does that says ?
+[00:33] <kholdstayre> where are the init scripts for network-manager stored in ubuntu?
+[00:33] <Kimish> Lordcirth: ?
+[00:35] <superguest_> OerHeks, the help page doesn't apply to 16.04.  Anyway, according to apt, flashplugin-installer is installed *but* youtube is still using html5 player
+[00:36] <OerHeks> superguest_, that is automatic preferred, on chrome and perhaps now firefox too
+[00:36] <Kimish> Lordcirth:am not sure what is the problem ?
+[00:36] <OerHeks> flash should die
+[00:37] <tgm4883> kholdstayre: if you go to http://www.adobe.com/software/flash/about/ does it say that flash is installed?
+[00:37] <superguest_> tgm4883, yes it does.
+[00:37] <tgm4883> superguest_: then you're done. Flash is installed
+=== bipul_ is now known as bipul
+[00:38] <superguest_> tgm4883, Now, how can I set youtube.com to use flash over html5 player?
+[00:38] <OerHeks> maybe you don't get the highest streams wwith webm/html5 ..
+[00:39] <tgm4883> superguest_: that sounds like a question for youtube
+[00:39] <tgm4883> superguest_: have you tried this https://www.youtube.com/html5
+[00:40] <sruli> in a bash script "for V in 4 6; do ip$Vtables .... done" how can i remove the '4' from the result?
+[00:41] <OerHeks> about:config media.mediasource.whitelist = true and media.mediasource.webm.enabled = false #this might push flash
+[00:41] <OerHeks> reverse of http://askubuntu.com/questions/624171/html5-as-default-for-video-in-firefox-and-banishing-flash
+[00:43] <kimish> Lordcirth: are u still there ??
+[00:44] <lordcirth> !patience | kimish
+[00:44] <ubottu> kimish: Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[00:44] <lordcirth> kimish, Unloading is not an error, as usc
+[00:44] <lordcirth> such*
+[00:44] <lordcirth> kimish, you want to look up a bit and see what triggered X to exit.
+[00:47] <kimish> Lordcirth: i remember it happened to me before wheb i wrote startx in the terminal , i got an easy fix at that time . But now the same problem but i dont know shat is causing it ?
+[00:50] <kimish> Lordcirth : how do i exit the log ??
+[00:50] <lordcirth> kimish, 'q'
+[00:51] <lordcirth> kimish, most likely there will be an error somewhere, between the X starting up and the X shutting down, that tells you the problem.
+=== S-USAMakesItRain is now known as SonikkuAmerica
+[00:54] <kimish> Am not sure wht u mean by X , but should i look for it in the log that error ??
+[00:54] <lordcirth> kimish, X = X11 = Xorg, same thing.  It is what gets started when you run "startx" or login graphically
+[00:55] <lordcirth> kimish, it is starting up, then immediately shutting down.  /var/log/Xorg.0.log is it's log file, which will tell you why.
+[00:56] <gde33> what is with that google chrome process with a name some 200 characters long?
+[00:57] <gde33> is that normal?
+[00:58] <danang>  HexChat: 2.10.2 ** OS: Linux 4.4.0-21-generic x86_64 ** Distro: Ubuntu "xenial" 16.04 ** CPU: 4 x Intel(R) Core(TM) i5 CPU       M 520  @ 2.40GHz (GenuineIntel) @ 1,20GHz ** RAM: Physical: 3,7GiB, 65,9% free ** Disk: Total: 194,6GiB, 51,3% free ** VGA: Intel Corporation Core Processor Integrated Graphics Controller ** Sound: HDA-Intel - HDA Intel MID29: ThinkPad EC - ThinkPad Console Audio Control ** Ethernet: Realtek
+[00:58] <danang> Semiconductor Co., Ltd. CIe Gigabit Ethernet ** Uptime: 50m 30s **
+[00:58] <lordcirth> gde33, is it causing problems?  Google does lots of wierd things
+[00:58] <lordcirth> !pastebin
+[00:58] <ubottu> For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://imgur.com/ !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+[00:58] <lordcirth> danang, ^
+[00:58] <danang> sorry
+[00:58] <danang> wrong button
+[00:58] <lordcirth> np
+[00:59] <gde33> lordcirth: I suppose it just looks hidious
+[00:59] <gde33> *hideous
+[00:59] <superguest_> OerHeks, it didn't do the trick but thanks.
+[00:59] <lordcirth> gde33, ¯\_(ツ)_/¯
+[01:00] <tgm4883> gde33: so you're worried about something that you'll rarely see looking hideous?
+[01:00] <gde33> looks more like 500 characters, no way to copy anything in system monitor?
+[01:00] <tgm4883> if that's our biggest problem, I'd say we're doing pretty good
+[01:00] <gde33> tgm4883: it looks like a bug, just wondering if it is normal
+[01:01] <tgm4883> gde33: sorry, I just don't understand that at all
+[01:01] <lordcirth> It's strange, and ugly, but not important
+[01:02] <jn_jn> have anyone installed unity3d editor in ubuntu?
+[01:06] <lordcirth> !help | jn_jn
+[01:06] <ubottu> jn_jn: Please don't ask to ask a question, simply ask the question (all on ONE line and in the channel, so that others can read and follow it easily). If anyone knows the answer they will most likely reply. :-) See also !patience
+[01:07] <jn_jn> WTF?
+[01:07] <jn_jn> ah so, sry I got you, can I know if is possible get rid of the problem of "service not available, please try again later" for unity in ubuntu 16.04?
+[01:07] <somsip> jn_jn: just ask your real question
+[01:08] <jn_jn> i'm speak about unity 3d, in the channel and in the forum they have no solution
+[01:08] <somsip> jn_jn: and what is your real question about unity.
+[01:09] <lordcirth> jn_jn, where and when does this message come up?
+[01:09] <somsip> jn_jn: laaag - ignore last repeat
+[01:11] <lordcirth> jn_jn, I wasn't aware that Unity3D had a linux version of the editor.  I don't see one on the site.
+[01:12] <somsip> lordcirth: it's on a beta page
+[01:12] <lordcirth> somsip, where?  I'm on (a) beta page.
+[01:12] <somsip> lordcirth: link here http://blogs.unity3d.com/2015/08/26/unity-comes-to-linux-experimental-build-now-available/
+[01:13] <lordcirth> Ah thanks
+[01:13] <oct14732> Hi I'm having trouble installing Ubuntu (and any other distro--tried Lubuntu and Mint) on my HP probook 6465b. The installs seems to go fine, but each time I try to boot, I get dumped out to the BusyBox / initramfs shell. mostly without an error message. But when I try to book in recovery mode, sometimes, I'll catch a "Gave up waiting for root device" msg with a specific error message. "Missing modules (cat /proc/modules: ls /dev
+[01:13] <oct14732>  ALERT  UUID=a641a2c8-11ae-40ff-9e09-ac07b4953 does not exist. Dropping to Shell. I've tried a bunch of different solutions as suggested on the forums and AskUbuntu, and none of them seem to work. I'm new to linux, so please assume that I'm an idiot/beginner for answers.
+[01:14] <jn_jn> when i want start a new project in the login windows after wrote mail and psswd, a message say "service not available, please try again later" no error in output terminal, I can work with it running offline
+[01:14] <somsip> jn_jn: that's something you may need unity support about then
+[01:14] <lordcirth> jn_jn, are you sure this is linux/ubuntu specific?  Sounds like a Unity thing to me
+[01:15] <jn_jn> lordcirth, yep isn't a unity bug
+[01:15] <somsip> oct14732: something like this might be relevant? http://homepage.ruhr-uni-bochum.de/Jan.Holthuis/misc/uefi-madness/
+[01:15] <jn_jn> sorry isn't a ubuntu bug
+[01:16] <lordcirth> http://www.ubuntu.com/certification/hardware/201101-6954/  Certified hardware for 12.04
+[01:16] <somsip> jn_jn: it's unsupported (here) and beta software. Issues are to be expected, but I know that's not helpful as such. Try unity support
+[01:17] <jn_jn> i'm searching for someone that know the problem, is a known issue, so don't worry nobody can help me, TY all anyway
+[01:17] <_CoolGuy_> Is becoming a software architect a big deal?
+[01:17] <oct14732> somsip, I'm not even trying to dual-boot windows. Just hoping to install 16.04
+[01:17] <lordcirth> _CoolGuy_, yes, generally.  Why?
+[01:18] <_CoolGuy_> I don't know.
+[01:18] <oct14732> lordcirth, do you think that the issue is that I'm trying to install an OS that's too recent? Should I downgrade to 12.05?
+[01:19] <lordcirth> oct14732, I doubt that's the problem, Ubuntu stable releases are supposed to work on all reasonable hardware
+[01:19] <somsip> oct14732: the section 'some very bad uefi implementations' suggests that this laptop uses a very bad uefi implementation. Also noted later with "or HP for putting such a crappy UEFI implementation "
+[01:20] <_CoolGuy_> can a software project run without a software architect?
+[01:20] <oct14732> is a UEFI implementation something that can be changed?
+[01:20] <tgm4883> !OT | _CoolGuy_
+[01:20] <ubottu> _CoolGuy_: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please register with NickServ (see /msg ubottu !register) and use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[01:20] <somsip> !ot | _CoolGuy_
+[01:20] <somsip> snap!
+[01:20] <tgm4883> haha
+[01:20] <tgm4883> Too slow :)
+[01:20] <lordcirth> Good thing ubottu deduplicates
+[01:20] <somsip> oct14732: not sure if BIOS upgrades would help, but it might give you something to research about
+[01:21] <somsip> tgm4883: need more coffee :)
+[01:21] <jamesd> oct14732: its not that old... but if you want to verify you can grab a copy of the last lts version... 14.04 of somethng.
+[01:22] <_CoolGuy_> I ask because I prefer hearing from you.
+[01:22] <oct14732> okay, I'll start looking into BIOS--in the meantime, anyone have any suggestions about that error message?
+[01:23] <tgm4883> _CoolGuy_: it's not a support question, so you should take it to #ubuntu-offtopic
+[01:23] <_CoolGuy_> ok
+[01:23] <oct14732> I've completely wiped windows off the computer as well, and I haven't put any of my data on there as well--I've reinstalled Ubuntu onto the hard drive multiple times--nothing seems to fix this error
+[01:24] <lordcirth> oct14732, boot from the installer, install smartmontools, and check the SMART health of the hard drive.
+[01:24] <tgm4883> oct14732: I'd see if there is a bios/uefi update
+[01:26] <somsip> oct14732: missed the error message first time I read your question. Quick search shows loads of replies, including http://askubuntu.com/questions/461564/ubuntu-14-04-boot-error and https://www.turnkeylinux.org/forum/support/20150819/error-after-reboot-alert-devdiskby-uuid574707ab-c5c5-4886-b289-7446226fdd90-d both referring to using boot-repair-disk
+[01:26] <lordcirth> somsip, but I think if you need to use boot-repair-disk right after install, something is wrong.
+[01:27] <somsip> lordcirth: oh yes.
+=== needhelp is now known as Guest23179
+[01:31] <Guest23179> Is anyone using zoiper? When I drag the main window with my mouse, it tends to "delay"
+[01:31] <administrador> Hello. does anyone knows how to make a Windows USB for installation? I just cant find the right, way, I formated my USB to NTFS, FAT32 and still get this error message http://pastebin.com/qkV7fNsq
+[01:31] <ParlorMa> Anyone using Steam (Game: Unturned) ?
+[01:31] <somsip> administrador: we dont support windows here, but try rufus. My last word on this.
+[01:31] <somsip> ParlorMa: what's your real question?
+[01:32] <ParlorMa> somsip, game crashes while Loading (start up) - was curious if someone had some experience with it here. Since I can't find much on Google yet
+[01:32] <Guest23179> @administrador open disks, go to your usb, restore image, select the iso
+[01:32] <somsip> ParlorMa: can you provide error messages
+[01:32] <dax> Guest23179: doesn't work.
+[01:32] <Guest23179> will erase your hard disk
+[01:32] <dax> administrador: There is no supported method for making Windows USB disks from non-Windows systems.
+[01:32] <Guest23179> i mean usb
+[01:32] <ParlorMa> and Steam Community (discussions) have many posts but not replies with fixes
+[01:33] <oct14732> okay, i'm running boot-repair right now. hopefully that fixes the problem.
+[01:33] <ParlorMa> somsip, one moment
+[01:33] <dax> administrador: #ubuntu also does not help with ISOs you get from interesting places on the internet
+[01:33] <somsip> ParlorMa: well, I know nothing about steam so cant help personally. Just trying to get you to a stage where someone might be able to help
+[01:33] <Guest23179> I need help with zoiper having delays with dragging the main window all around the desktop. It tends to lag.
+[01:34] <Guest23179> Or rather it doesn't "clip" properly on the mouse cursor
+[01:34] <somsip> !info zoiper | Guest23179 (is it supported here?)
+[01:34] <ubottu> Guest23179 (is it supported here?): Package zoiper does not exist in xenial
+[01:34] <ParlorMa> somsip, http://pastebin.com/uPzWVYW0 that's the error message if I try to run it directly. (I appreciate it, though I don't expect much...)
+[01:35] <lordcirth> ParlorMa, a textbook unhelpful error message, I'm afraid.
+[01:35] <lordcirth> ParlorMa, does the game have a log?
+[01:35] <ParlorMa> lordcirth, tried to search for it - but no luck yet... I'll look again
+[01:36] <somsip> ParlorMa: I assume Unturned is the game you're trying to play? If steam works with other games, seems like Unturned publishers have done a Bad Thing
+[01:37] <mint1234> Does every "checking for ..." have to result in "yes" when executing ./configure script?
+[01:37] <somsip> mint1234: no
+[01:37] <administrador> dax, I have no CD drive, thats why I have a copy of the Windows legit  ISO
+[01:38] <somsip> administrador: still off topic here
+[01:38]  * tgm4883 doubts that
+[01:38] <XinZhao> LOL
+[01:38] <XinZhao> Windows Legit Edition
+[01:38] <dax> administrador: which you got from somewhere interesting. and there is still no supported way of getting Windows on a USB stick from a non-Windows OS
+[01:38] <XinZhao> You guys know that even pirates right now til the end of the month can get a legit windows 10 licence?
+[01:38] <XinZhao> :>
+[01:38] <somsip> !ot | XinZhao
+[01:38] <ubottu> XinZhao: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please register with NickServ (see /msg ubottu !register) and use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[01:38] <dax> so go ask ##windows if you want to poke at it further, but I strongly recommend just finding a Windows computer
+[01:38] <mint1234> somsip: thank you
+[01:39] <administrador> somsip, Well, I am in Ubuntu 14.04, does Ubuntu does basic stuff like making a Windows bootable USB?
+[01:39] <lordcirth> Or, you know, not installing windows
+[01:39] <XinZhao> somsip; I didnt bring it up someone else was talking about it ;D
+[01:39] <somsip> XinZhao: you continued it, and now you're being asked politely to stop
+[01:39] <ParlorMa> somsip, lordcirth - it's true, the devs must have done something wrong... Another game I installed works just fine. Anyway appreciate the feedback (As for the log... no luck)
+[01:39] <lordcirth> administrador, Windows USB format is not basic, it is undocumented and unstandardized.
+[01:39] <XinZhao> lol yes sir
+[01:39] <administrador> dax, well, that sucks, eh?
+[01:39] <XinZhao> o lorde o commander
+[01:39] <dax> administrador: indeed
+[01:39] <somsip> XinZhao: and mature a little while you're at it
+[01:40] <N8TheGr8_> Hello all! Can anyone help me with an installation issue I'm having? I'm trying to get to learn how to use Linux properly, however I cannot seem to get it to install alongside Windows 10. My BIOS is UEFI but Alienware seems to have installed the OS as EFI....
+[01:41] <XinZhao> !ot lordcirth
+[01:41] <XinZhao> !ot administrador
+[01:41] <XinZhao> At least my tip was actually interesting ;D
+[01:41] <XinZhao> "USB FORMATS"
+[01:41] <XinZhao> zzzZzz
+[01:41] <dax> N8TheGr8_: what's the actual issue you're seeing while trying to install Ubuntu
+[01:41] <XinZhao> N8TheGr8_; Windows 10 installed by default that way? weird..
+[01:41] <XinZhao> You can do a clean install
+[01:41] <tgm4883> ParlorMa: what's the output of "uname -a"
+[01:41] <dax> XinZhao: (your connection lagged, all your messages just appeared at once, so the floodbot thwacked you)
+[01:42] <dax> and as far as throwing !ot around goes, i think we all got the point and can stop poking at each other now
+[01:42] <tgm4883> lol
+[01:42] <tgm4883> dax: you're assuming he didn't do that on purpose?
+[01:42] <Jordan_U> N8TheGr8_: There is no such thing as installing Windows for "EFI" as opposed to UEFI. What problem are you having specifically?
+[01:42] <XinZhao> Nah I am just an enter fiend. You should see my blog xD
+[01:42] <XinZhao> Ill try to keep it succinct <3
+[01:42] <dax> tgm4883: correct, because it would make no sense and I assume good faith
+[01:43] <dax> XinZhao: you sent 7 lines in one second ;)
+[01:43] <ParlorMa> tgm4883, it's linux-wide, not specifically ubuntu - just saying
+[01:43] <dax> anyways
+[01:43] <N8TheGr8_> They installed Win8 on it originally, but my system is set to use UEFI with legacy oproms. When I run the installer I don't see the option to install Ubuntu alongside Windows. When I created a partition for Ubuntu, it would only successfully boot into Win10, Ubuntu never showed
+[01:43] <XinZhao> dax; oh, that sucks, I thought id fixed my lag spikes with my new router ;((
+[01:43] <tgm4883> ParlorMa: mostly I was asking since I just found a thread saying if you have a 32-bit OS that the game crashes on startup
+[01:43] <N8TheGr8_> I'm sure I did something incorrectly, hence why I came here for help (which is much appreciated!)
+[01:43] <XinZhao> N8TheGr8_; Well that explains it, Win8 was often installed that way.
+[01:43] <ParlorMa> tgm4883, ah no... x64 here. I'll try google again...
+[01:44] <N8TheGr8_> XinZhao oof...I fear a reinstall is headed my way?
+[01:44] <teegee> hi
+[01:44] <administrador> teegee, Hi :)
+[01:45] <teegee> I set up a bridge on my 16.04 and am trying to configure the dns server but it won't accept it. I put dns-nameservers into /etc/network/interfaces and tried setting it via nmcli -p c modify br0 ipv4.dns but nothing works
+[01:46] <tgm4883> ParlorMa: maybe try a newer (beta) or older (classic) or ancient (antique) veresion http://steamcommunity.com/app/304930/discussions/3/535151589888703229/
+[01:46] <teegee> I can modify /etc/resolv.conf but it'll be overwritten on boot?
+[01:46] <Zhao> grrr
+[01:46] <administrador> Guest23179. thx for the advice, it looks like all files from the ISO are in the USB, I'll reboot now.
+[01:47] <Zhao> how is it even with fibre and a $500 router im still getting dropouts
+[01:47] <N8TheGr8_> Lmao is that you, Xin?
+[01:47] <Zhao> this is not a thing that is supposed to happen
+[01:47] <Jordan_U> N8TheGr8_: Please pastebin the output of "sudo parted -l".
+[01:47] <N8TheGr8_> Hrm...I'm not able to get into Ubuntu...should I boot into the live version?
+[01:48] <N8TheGr8_> (From USB)
+[01:48] <Zhao> oh wait, windows 10 decided to ignore my ethernet connection and use wifi instead -_-
+[01:49] <Jordan_U> N8TheGr8_: Yes.
+[01:49] <N8TheGr8_> Alrighty, I'll have to disappear for a bit
+[01:49] <lordcirth> teegee, resolvconf will overwrite it, yes.  Look for /etc/resolvconf
+[01:50] <teegee> lordcirth: yes, I found that. it says it'll be overwritten too
+[01:50] <teegee> lordcirth: at least all the bits in /etc/resolvconf/resolv.conf.d/
+[01:51] <teegee> lordcirth: or should I put it in the "tail"?
+[01:51] <tgm4883> teegee: in tail
+[01:52] <teegee> and ifdown, ifup will load the changes?
+[01:52] <teegee> alright, let's reboot
+[01:52] <lordcirth> teegee, not for dns.  systemctl restart networking
+[01:52] <lordcirth> or a reboot, ofc
+[01:53] <teegee> ifdown; ifup made it work
+[01:53] <tgm4883> teegee: "resolvconf -u"
+[01:54] <teegee> why won't it accept the dns-nameserver line in interfaces?
+=== fritz is now known as Guest44191
+[01:54] <lordcirth> teegee, Ubuntu Desktop does weird things with networking.  Ubuntu Server uses /etc/network/interfaces quite cleanly.
+[01:55] <teegee> lordcirth: I think I started with a server install but then I put the lubuntu package on. What do I have now? server or desktop?
+[01:55] <OerHeks> weird? just disable networkmanager ..
+[01:55] <OerHeks> or setup networkmanager correct
+[01:55] <lordcirth> ^
+[01:55] <tgm4883> I wouldn't call it weird, network manager is managing the network connection
+[01:56] <tgm4883> so if you want to put in custom DNS servers, put it in network manager
+[01:56] <OerHeks> if you don't disable it, you script against a tiger :-D
+[01:56] <lordcirth> It would be more precise to say, things my server-focused self does not know.
+[01:56] <teegee> tgm4883: I tried that with the nmcli
+[01:57] <tgm4883> teegee: you couldn't add DNS servers via nmcli?
+[01:57] <ParlorMa> tgm4883, funny thing - I used SimpleScreenRec because something was popping up and I couldn't see it. Turns out the games loads to the StartScreen then the window closes & another one (black) opens up.
+[01:57] <teegee> tgm4883: I could but it didn't seem to use it
+[01:58]  * tgm4883 goes back to read the original question
+[01:58] <teegee> tgm4883: it showed up in nmcli -p c show br0 but host wouldn't look up anything
+=== anup is now known as Guest26661
+[01:58] <ParlorMa> anyway, disregard my problem - prioritize other people instead ^_^
+[01:58] <N8TheGr8> Hello, I'm back! What was the command that someone wanted me to run? :O
+[01:58] <teegee> (it does now btw)
+[01:58] <tgm4883> teegee: ah a bridge interface, I'm not sure that's in the scope of nm
+[01:58] <teegee> ParlorMa: sorry for interfering
+[01:59] <teegee> tgm4883: ic. I'll accept that and live on happily since it's working now.
+[01:59] <teegee> Thanks for you help everyone
+[01:59] <OerHeks> bridge can be done .. http://manpages.ubuntu.com/manpages/wily/man5/nmcli-examples.5.html
+[02:01] <N8TheGr8> XinZhao, are you still here buddy?
+[02:01] <teegee> I'm setting the bridge up in /etc/network/interfaces so I assumed I can just use it to configure the dns too
+[02:02] <teegee> I only tried doing it with nm afterwards when it wasn't working
+[02:02] <OerHeks> now you know why
+[02:02] <teegee> because when we assume we make an ass out of u and me?
+[02:03] <OerHeks> no, if we explain it right, you pass it on correctly
+[02:04] <OerHeks> saves us a lot of time
+=== Guest26661 is now known as anupadkh
+[02:10] <_44trent> so i don't know if this is a good idea, but i'm trying to downgrade xorg to 1.17 so i can get fglrx to work on 16.04
+[02:10] <_44trent> how would i go about doing that?
+[02:10] <tgm4883> _44trent: no, that would not be a good idea I think
+[02:11] <OerHeks> you will end up with 14.04.4
+[02:12] <lordcirth> _44trent, have you tried the new "amdgpu" driver?
+[02:12] <lordcirth> or radeonsi
+[02:13] <_44trent> can't use AMDGPU on an R9 390 :/
+[02:14] <lordcirth> _44trent, Gentoo wiki seems to disagree with you: https://wiki.gentoo.org/wiki/Amdgpu
+[02:14] <_44trent> well, actually
+[02:14] <dax> downgrading xorg in 16.04 is a terrible idea
+[02:14] <_44trent> yeah if i compile my own kernel
+[02:14] <dax> if you don't like the default driver in 16.04 for your card, your decent options are: 1) don't use 16.04, or 2) put up with it and see if a solution comes out at some point
+[02:15] <dax> and by "decent" i mean things that will not break your system and render it unsupportable
+[02:15] <_44trent> so what you're suggesting is i go to 14.04 or 15.10?
+[02:15] <OerHeks> 15.10 support ends with a month
+[02:15] <_44trent> ...so the previous LTS?
+[02:16] <dax> i'd go with option (2) to be honest. 15.10 is only supported for nine months from release (so not long), and 14.04 is old and you can't use HWE because it'll end up with xenial xorg soon
+[02:16] <_44trent> i'll just take a third option and get AMDGPU to work on R9 390
+[02:17] <_44trent> all it requires it something enabled in the kernel...
+[02:17] <_44trent> kernel upgrades are kind of risky though...
+[02:17] <dax> if it involves kernel recompilation, #ubuntu doesn't support it. good luck, though
+[02:17] <lordcirth> _44trent, Ubuntu generally keeps past kernels around
+[02:17] <dax> (i do not know whether it does involve kernel recompilation, i haven't looked into it)
+[02:18] <_44trent> yeah, it requires kernel recompilation. the gentoo wiki and arch wiki have good documentation on it
+=== ubuntu is now known as Guest95904
+[02:24] <turbokraken> Hello, I'm looking to install skype on 16.04. I have added a partner repository to download it but keep getting the error "unmet dependencies: skype-bin". Any suggestions?
+[02:25] <Guest95904> curious anybody know what the difference are between  UHCI/OHCI/EHCI and the xhci for usb controllers are the protocals or spec's pretty much compatible from a software register point of view or does it take much to port a control from one to the other
+=== squeak is now known as Guest21401
+[02:26] <OerHeks> turbokraken, perform sudo apt-get install -f # this should fix dependencies
+[02:26] <Guest95904> Basically what i am getting at is what are the major software programming differences
+[02:26] <somsip> !ot | Guest95904
+[02:26] <ubottu> Guest95904: #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please register with NickServ (see /msg ubottu !register) and use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[02:27] <turbokraken> @0erheks, it stops then install completely due to the dependency missing. sudo apt-get install -f doesn't download anything. T_T
+[02:27] <OerHeks> Guest95904, good start https://en.wikipedia.org/wiki/Host_controller_interface
+[02:27] <noraatepernos> What is the role of the user ubuntu on aws’s Ubuntu image?  I noticed on DigitalOcean there’s no ubuntu user and I think this is a “sodoer” if I’m not mistaken.
+[02:27] <OerHeks> !skyp
+[02:27] <somsip> noraatepernos: sudo with no password
+[02:27] <OerHeks> !skype
+[02:27] <ubottu> To install Skype on Ubuntu, see https://help.ubuntu.com/community/Skype - To record on Skype, check: https://wiki.ubuntu.com/SkypeRecordingHowto - Please use open protocols instead if you can, see !Ekiga
+[02:28] <noraatepernos> I need to replicate the aws user on digital ocean.
+[02:28] <noraatepernos> somsip: Awesome thanks.
+[02:28] <OerHeks> ugh, ugly wiki .. sudo dpkg --add-architecture i386 ..
+[02:29] <turbokraken> Yeah, followed the wiki and get the same results.
+[02:30] <OerHeks> turbokraken, what is the complete error you get? paste in paste.ubuntu.com please
+[02:30] <tgm4883> turbokraken: it might be best to use the web
+[02:30] <OerHeks> skype app is indeed wonky
+[02:31] <turbokraken> http://paste.ubuntu.com/17108242/
+[02:31] <turbokraken> I just need it for a job interview Thursday.
+[02:31] <turbokraken> If the web will work with the cam and mic then I should be good.
+[02:32] <OerHeks> turbokraken, sudo apt-get install skype-bin
+[02:32] <tgm4883> turbokraken: I'm not sure the app works with cam and mic anymore. IIRC it's not been updated for awhile so some functionality doesn't work
+[02:32] <OerHeks> really odd that it does not get installed
+[02:34] <todd_> list
+[02:34] <Guest95904> anybody know what the irq mei_me is for what hardware on the computer uses this... I looked up and it say's its called Intel(R) Management Engine Interface
+[02:34] <Guest95904> And say's its for allow remote administrators to login to the machine to do such things as apply patches, defrags, and other administrative tasks
+[02:35] <Guest95904> But what exactly is the hardware for it / what hardware triggers it uses
+[02:35] <OerHeks> Guest95904, how is this related to ubuntu support?
+[02:35] <OerHeks> try the ##hardware channel
+[02:35] <Guest95904> its part of the ubuntu os
+[02:36] <jamesd> Guest95904: my guess its for the ilom, or a group of iloms so tools could allowed to orcestrate the install over pathes on 100's or 1000's or even 10's of thousands of boxes, i think HP latest servers support it.
+[02:36] <tgm4883> Guest95904: no, it's part of your intel processor/chipset. It's not generally used in home applications. Further, among privacy experts, it's considered a security risk
+[02:38] <Guest95904> where is it used and how does it work .
+[02:38] <Guest95904> remote administration why would that need an interrupt
+[02:38] <jamesd> think google or amazon clouds, where they need to patch many boxes at once. but frankly MC would do a better job and safer.
+[02:38] <Guest95904> so your saying is it part of the cpu internals or on the motherboard
+[02:39] <tgm4883> Guest95904: yes
+[02:39] <jamesd> cpu internals, that is accessed by the ilom ( out of band management)
+[02:39] <Guest95904> ilom ?
+[02:40] <tgm4883> Guest95904: https://libreboot.org/faq/#intelme
+[02:41] <deadmund> I just installed kubuntu-desktop and purged unity, but when I boot my system I just got a black screen (no login manager) what should I do?
+[02:42] <jamesd> Guest95904: its basicly a small computer insdiet the big one that monitors the big computer and allows you to see the console over a web interface, and crates virtual cdrom so you can install the system from anywhere.
+[02:42] <jamesd> inside
+[02:42] <deadmund> I can switch to TTY1 and run commands
+[02:43] <lordcirth> deadmund, install sddm?  I think that's what Kubuntu 16.04 uses
+[02:43] <deadmund> lordcirth: I installed it and I will reboot.  I was using lightdm I think (I have been working without taking a lot of care to what commands I've been running)
+[02:44] <Guest95904> so won't that be a privacy issue since a hacker or somebody could uses it to monitor all of what your doing on your own computer
+[02:44] <tgm4883> Guest95904: well yes
+[02:44] <lordcirth> Guest95904, yes, if they can get in, or steal Intel's backdoor keys
+[02:44] <tgm4883> Guest95904: I mean, they would need to gain access to it first
+[02:44] <Guest95904> I guess what was the many purpose for it or the big benifit for the addition
+[02:44] <tgm4883> Guest95904: you'd have to ask Intel
+[02:45] <deadmund> I installed sddm, tested the sytem, no luck. I purged and reins
+[02:45] <deadmund> Seems to be working fine.  Moving on
+[02:45] <deadmund> lordcirth: Thanks!
+[02:46] <lordcirth> deadmund, cool.  np.
+[02:46] <jamesd> Guest95904: if you tie into the ilom, you can have pre-shared keys so everything sent accross the wire is encrypted, and you can use firewalls to keep traffic off the network and ilom traffic is supposed to limited to system management only no internet.
+[02:46] <Guest95904> has any home users ever used it or does the any os kernel uses this its on an irq a LKM does exist  mei and mei_me
+[02:46] <Guest95904> so the os must have some uses for it
+[02:46] <samy87> hello
+[02:47] <tgm4883> jamesd: you can use the IME to gain access to the desktop session as well
+[02:47] <jamesd> Guest95904: no a home user would use it, its faster to have windows updater or apt-get update/upgrade take care of it.  and most home users don't create there own packages.. so no real reason not to use the OS provided tools
+[02:48] <jamesd> tgm4883: yeap probably helps some hell desk people.
+[02:48] <samy87> for the life of me i cannot delete a folder even as root. i have checked lsof, restarted the server many times. shutdown all services with no avail. I keep getting permission denied. chmod is 0777, ownership is root. please adivse?
+[02:48] <jamesd> but really microsoft has remote desktop tools pretty well setup, just send a rdesktop invite or have them go to a website and take over .
+[02:49] <tgm4883> jamesd: perhaps, although there are other tools for that. I'd much rather that IME didn't exist
+[02:49] <Guest95904> so why are thos lkm loaded for it
+[02:49] <jamesd> tgm4883: someone asked for it... probablty can be disabled without much trouble
+[02:50] <Guest95904> if they dont have a purpose i should have no issues with other things not usesing it with rmmod
+[02:50] <tgm4883> jamesd: well that's the rub. It's closed source proprietary stuff. Can it really be disabled?
+[02:50] <jamesd> its probably an option in the bios or the ilom.
+[02:50] <b-yeezi> samy87 did you look at lsattr? Make sure it is not an immutable file
+[02:51] <tgm4883> jamesd: yes, there is an option for that, but I'm not sure I want to trust something so low level on the system that isn't open source
+[02:52] <samy87> b-yeezi: no but lsattr says ----i--------e-- i don't know what this means!
+[02:53] <lordcirth> samy87, if you are sure you want to delete it, try 'chattr -i <file>'
+[02:53] <samy87> never mind i understand
+[02:53] <samy87> yes thank you,
+[02:53] <b-yeezi> Good
+[02:54] <jamesd> tgm4883: may i interest you in a opensource cpu, there are several out there, they aren't cheap but they are opensource.
+[02:57] <reisio> they aren't real competitive, either
+[02:57] <reisio> but they are open source :)
+=== lpotter_ is now known as lpotter
+[03:27] <zykotick9> tgm4883: <sidenote> https://libreboot.org/faq/#intelme </ot>
+[03:30] <BenderRodriguez> rebelos: I thought you despised Ubuntu
+=== the is now known as Guest18049
+=== plop is now known as plop_its_ellie
+[03:46] <plop_its_ellie> hey has anyone here had issues connecting to wifi on ubuntu 16.04?
+[03:47] <plop_its_ellie> i ask cuz ive had 2 clients that have had issues connecting to their wifi
+[03:48] <uxfi> is LAMP on 14.04 a good VPS isntane i can use if I dont want to et up a web server fully?
+[03:49] <plop_its_ellie> LAMP=linux apache mysql php
+[03:50] <plop_its_ellie> it sets up a web server plus the additional stuff
+[03:51] <lcapellan> as
+[04:00] <somsip> !ping
+[04:00] <ubottu> pong!
+[04:00] <plop_its_ellie> !ping
+[04:00] <plop_its_ellie> awwww :(
+[04:03] <somsip> plop_its_ellie: it's throttled
+[04:06] <tominator> Is there any way to add Mac compatibility to a portable ubuntu installation?
+[04:06] <tominator> Like updating grub so it works with mac?
+[04:06] <tominator> And PC
+[04:07] <somsip> !mac | tominator
+[04:07] <ubottu> tominator: For help on installing and using Ubuntu on a Mac, see: https://wiki.ubuntu.com/MactelSupportTeam/CommunityHelpPages
+[04:07] <tominator> This is more of an overarching Ubuntu question
+[04:07] <somsip> tominator: and that's more of a general help page for mac-related issues
+[04:08] <tominator> Alright, thank you for the redirect
+[04:08] <tominator> do i put in #mac?
+[04:08] <plop_its_ellie> ubottu, i loaded ubuntu mate on a 5k imac the other day via live usb, it ran fine but it was so funny how tiny everything was
+[04:08] <ubottu> plop_its_ellie: I am only a bot, please don't think I'm intelligent :)
+[04:08] <plop_its_ellie> woops lol
+[04:08] <tominator> I did the same thing :P
+[04:09] <hiexpo> lol
+[04:09] <somsip> tominator: there are also links on that page for other resources that might help
+[04:09] <tominator> Alright, I'll check it out, thanks
+[04:09] <plop_its_ellie> i was actually quite impressed tho that everything else seemed to be working fine
+[04:14] <tominator> buntu
+[04:15] <tominator> somsip: It answered my question. Thank you.
+[04:15] <somsip> tominator: cool
+[04:32] <plop_its_ellie> hey i have another question for you guys
+[04:33] <Xin> Well, that was interesting
+[04:33] <Xin> someone tried very hard to hack me
+[04:33] <Xin> lol
+[04:33] <plop_its_ellie> i was also telling a client today about file system snapshots and how it will help against ransomware
+[04:33] <plop_its_ellie> i gave her ubuntu 16.06, so realistically the most practical filesystem to put on her external hdd with snapshots would be btrfs
+[04:34] <plop_its_ellie> would you guys feel comfortable giving clients btrfs?
+[04:34] <Xin> plop_its_ellie; good advice, and yet you yourself go on irc not using a vhost
+[04:34] <Xin> xD
+[04:34] <somsip> plop_its_ellie: it's more an opinion thing rather than support, so #ubuntu-offtopic or even #linux as a general FS question.
+[04:34] <jamesd> plop_its_ellie: well hope another bug comes down from them.. they have had some pretty big showstoppers that destroy data, hope it doesn't destroy your relationship
+[04:35] <plop_its_ellie> o_O
+[04:35] <plop_its_ellie> well i havent formatted any of her drives to btrfs but she is getting an external hdd for backups
+[04:35] <plop_its_ellie> and i will try the offtopic chanal
+[04:35] <plop_its_ellie> channel
+[04:49] <superguest> How can I install 3rd party software in Ubuntu 16.04?
+[04:49] <somsip> superguest: like what?
+[04:49] <superguest> I am trying to installing the Google Chrome deb package
+[04:49] <superguest> and Ubuntu Software is not allowing me to do so
+[04:49] <somsip> superguest: download it and sudo dpkg -i {file} which will also add a PPA so you can update it through apt-get in the future
+=== sina is now known as Guest24666
+[04:54] <superguest> somsip, thanks.  I am getting a sense that Ubuntu is starting to impose more restrictions.
+[04:54] <somsip> ubottu: why?
+[04:54] <ubottu> somsip: I am only a bot, please don't think I'm intelligent :)
+[04:54] <somsip> superguest: why?
+[04:54] <superguest> somsip, your solution worked btw.
+=== nerd is now known as Guest89876
+[05:06] <upc1010> hello
+=== badon_ is now known as badon
+=== WARDEN is now known as Sysop_WARDEN
+[05:27] <ddnh> hi all
+[05:28] <ddnh> can anybody read me?
+[05:28] <Ben64> yes
+[05:29] <nicomachus> has anyone ever used the webpage monitor 'urlwatch'?
+[05:29] <ddnh> than you Ben64, didn't know whether loging is needed or what
+[05:30] <ddnh> can anybody tell me how to configure power settings from CL as it is not present in graphical mode anywhere?
+[05:31] <Ben64> system tools -> preferences -> power
+[05:32] <ddnh> system tools -> preferences -> power is not there and system configuration has almost no icons
+[05:32] <ddnh> if I could launch it from CL it could be done
+[05:36] <Ben64> ddnh: you must have installed ubuntu in some weird way then
+=== jrusso is now known as MadcapJake
+[05:43] <bownsl> Unable to install Ruby gem sqlite3 on xenial
+[05:44] <bownsl> I have downloaded ruby-full ruby-sqlite3 libsqlite3-dev and sqlite3 packages
+[05:44] <bownsl> But it still fails to find sqlite3.h... header files
+[05:44] <Flippto> Hey all. Does anyone have any experience with installing ubuntu on an eMMC drive ? My drive kicks me out when i try to install on my laptop.
+[05:45] <greydawg> bownsl: that's not enough info mate
+[05:45] <bownsl> Well
+[05:45] <greydawg> yeah like a SD card?
+[05:45] <somsip> bownsl: usually, you need a -dev package to get header files
+[05:45] <somsip> bownsl: oh - you did. Ignore that
+[05:45] <greydawg> bownsl: yeah
+[05:45] <bownsl> as I listed the libsqlite3-dev has the headers
+[05:45] <bownsl> i located the headers and it returns /usr/include/sqlite3.h
+[05:45] <greydawg> for python it's python-dev
+[05:46] <Flippto> greydawg> Yeah. I can partition and format fine. But when the installer runs, it just error out.
+[05:46] <bownsl> so for whatever reason there not being found by the gem install command
+[05:46] <greydawg> there you go
+[05:46] <greydawg> what OS do you have ?
+[05:46] <greydawg> Flippto: what os windowsl?
+[05:47] <Nosophorus> hello
+[05:47] <Flippto> greydawg> Its native win10, but i deleted the drive and re-partitioned it.
+[05:48] <greydawg> Flippto: so when does the error occur?
+[05:48] <Nosophorus> I had an strange problem here with my internet connection.
+[05:48] <Flippto> greydawg> When its done copying files over and starting the install. It says the drive is write protected.
+[05:49] <bownsl> whats odd is `gem list sqlite3` returns sqlite3 in the list
+[05:49] <bownsl> and I can require it in irb
+[05:50] <Nosophorus> When using the Network Manager to connect to the web using my DSL connection, some websites took forever to load.
+[05:50] <Nosophorus> But when I used the command "pppoeconf" to configure my DSL connection and connect to the web, the websites are loading flawlessly.
+[05:50] <Nosophorus> Why did that happen?
+[05:52] <greydawg> Nosophorus: you can use manual configuration
+[05:52] <greydawg> for ipv4
+[05:53] <Nosophorus> greydawg: Any link to a tutorial? :-)
+[05:53] <greydawg> man copy your connection information
+[05:54] <greydawg> and than edit your connection settings
+[05:54] <greydawg> in the ipv4 tab enter information
+[05:58] <Nosophorus> greydawg: What is the command line to retrieve my connection information?
+[05:58] <tim241> hi guys I have a problem: http://pastebin.com/y8zDC2EE I am following this tutorial: https://github.com/chenxiaolong/DualBootPatcher/blob/master/docs/BUILD-Android.md please help me or pm me
+[05:59] <greydawg> do you not have a GUI
+[05:59] <somsip> tim241: contact the maintainer of that gihub package.
+[05:59] <Nosophorus> greydawg: Yes. I have the Network Manager GUI, but, right now, I'm connected through the command line "pppoeconf"
+[06:02] <brelod> Hey guys! have u ever tried mailpile?
+=== xangua_ is now known as xangua
+[06:14] <atralhea-> Hello, I want to set a system-wide DNS to be applied on every connection I have or I will have, and prevent any other DNS server to be used. I tried this: http://unix.stackexchange.com/questions/128220/how-do-i-set-my-dns-when-resolv-conf-is-being-overwritten/163506#163506 but I still have my previous DNS server beside the new one.
+=== lethu is now known as lethu_
+=== lethu_ is now known as lethu
+=== lethu is now known as lethu_
+=== lethu_ is now known as lethu
+=== EriC^^ is now known as Guest66314
+=== Guest66314 is now known as explosive
+[06:32] <epifanio__>  hi, i'm struggling with permision settings ..  how can i set the permision of a directory to be:  drwxr-xr-x+   instead of drwxr-xr-x ?
+[06:32] <Ben64> the + means you have ACLs... what exactly are you trying to accomplish
+[06:34] <epifanio__> I'm tring to setup a multi user service, jupyter notebook, which for each user will use the directory  ./local to store some settings related to extension to its interface  that uses the
+[06:34] <epifanio__> i did this for one user, now i need to replicate it for other users
+[06:35] <epifanio__> so i copied the  ./local from one user ..  inside the home of an other user
+[06:35] <tim241> I have a problem when I am trying to build the apk from this tutorial:https://github.com/chenxiaolong/DualBootPatcher/blob/master/docs/BUILD-Android.md : http://pastebin.com/Bgj18urc
+[06:35] <epifanio__> and now i got a 500 error
+[06:35] <Ben64> ./local isn't very specific
+[06:35] <epifanio__> i checked the permisions .. between the 2 directory and they differ for the acl,  ./local/share/nameofthe application
+[06:36] <Ben64> how about the owner
+[06:37] <epifanio__> exactly this:  http://paste.debian.net/725377/ on top is the original directory on bottom the one i copied
+[06:37] <epifanio__> i tried t assign the owner with chown but it didn't change
+[06:38] <epifanio__> I have root access, but  i copied it with a normal user
+[06:38] <Ben64> stop using "./local" it's impossible to tell the difference
+[06:38] <epifanio__> ok, a generic directory
+[06:38] <Ben64> ....no give the full path
+[06:39] <Ben64> do you see what you pasted? "here is ./local"  .... "and here is ./local"
+[06:39] <subuh> i have installed ubuntu 16.04 and i then i install ssh server but from client conection refused
+[06:41] <brelod> subuh: r u on LAN?
+[06:41] <epifanio__> Ben64, all the files in ./local/share/jupyter/* needs to change from -rwxr-xr-x to -rwxr-xr-x+
+[06:41] <Ben64> no
+[06:41] <epifanio__> ?
+[06:41] <Ben64> the + by itself means nothing
+[06:41] <brelod> subuh: i mean are the client and the server on the same LAN network?
+[06:41] <subuh> yes, i work localy fror my local server
+[06:42] <epifanio__> Ben64, can you explain? I do not undrstand .. that's the main problem
+[06:42] <brelod> subuh: is there any firewall settings? everything is accepted?
+[06:42] <subuh> my local server ip's 192.168.2.200
+[06:42] <tim241> ok
+[06:43] <Ben64> epifanio_: it's still not clear to me what you're doing, maybe try explaining it more fully? and use full paths, not relative
+[06:43] <subuh> my pc ip's 192.168.2.20
+[06:44] <epifanio__> oh, i see. ok. in each $HOME of each user of my server there is a .local folder which has full path:  /home/$USER/.local/share/jupyter/*
+[06:44] <subuh> i have tried to ping from my pc to my server, the result is reply
+[06:44] <epifanio__> i copied it from one uswer to the other
+[06:45] <epifanio__> cp -R /home/$USER_1/.local/share/jupyter/ /home/$USER_2/.local/share/
+[06:45] <brelod> subuh: try that: nc -vz 192.168.2.200 22
+[06:46] <epifanio__> so now $USER_2 has :  /home/$USER_2/.local/share/jupyter   (as $USER_1)
+[06:46] <subuh> brelod ; Ok i'll try
+[06:46] <Aleksejs> Hi. There are some programs that get regular updates (daily), and update for each is exactly 4Mb large. Programs are neovim, different tox clients etc. It's definitely a pattern here. Is it something I should worry about?
+[06:46] <epifanio__> but whwen I try to load a webpage from the app that uses that folder, i got a error 500
+[06:46] <Ben64> epifanio_: so each person has a webserver?
+[06:46] <student> Hey, how to install growtopia?
+[06:47] <epifanio__> Ben64, yes it is a multiuser service which uses PAM authentication to generate a per-user istance of the application
+[06:48] <Ben64> epifanio_: does the user own everything within the folder
+[06:48] <epifanio__> Ben64 yes
+[06:48] <brelod> subuh: if 'connection refused' -> is the service running? 'sudo service ssh status | grep active' -> running or dead in brackets?
+[06:49] <Ben64> epifanio_: run getfacl on the directory with the +
+[06:49] <brelod> subuh: you should run this cmd on the server side
+[06:49] <atralhea-> guys do you know a channel about networking stuff? specially iptables, I think it can be my answer
+[06:49] <Ben64> ##networking
+[06:51] <student> Nu-Gi-Oh is my favorite show on redtube :3
+[06:52] <epifanio_> Ben64 http://paste.debian.net/725407/
+[06:53] <Ben64> then something else is the problem
+[06:54] <student> test
+[06:54] <epifanio_> tis is on the directoy without = : http://paste.debian.net/725408/
+[06:55] <student> tsdfdfdõ
+[06:56] <Ben64> epifanio_: well that's not normal
+[06:56] <Ben64> epifanio_: are you on ubuntu?
+[06:56] <epifanio_> on debian
+[06:56] <Ben64> then use #debian
+=== Fredrich_ is now known as AcidCrash
+[06:57] <epifanio_> ok  kid .. i'll ask your big brother
+[06:58] <tim241> If I do su in the terminal: it asks me for a password, when I fill in my root account password it says su: Authentication failure
+[06:58] <tim241>  but I can do sudo with the password of the roo account?failure
+[06:59] <Ben64> !root | tim241
+[06:59] <ubottu> tim241: Do not try to guess the root password, that is impossible. Instead, realise the truth... there is no root password. Then you will see that it is 'sudo' that grants you access and not the root password. Look at https://help.ubuntu.com/community/RootSudo
+[07:00] <tim241> why did they removed that? wtf
+[07:00] <Ben64> it's been like that for a LONG time
+[07:00] <epifanio__> Ben64, big brother debian said: remove the copy .. and copy it again using sudo
+[07:00] <epifanio__> and that fixed it
+[07:01] <Ben64> epifanio__: ok, don't come here for debian support
+[07:02] <epifanio__> Ben64 OK .. I should not come here for anything related to unix then .. becouse those basic things are the same on all *nix OS
+[07:02] <epifanio__> i thing you are a bit racist ..
+[07:02] <epifanio__> ciao
+[07:02] <Ben64> epifanio__: it's called #ubuntu ... if you want unix there is a channel for that, for general linux there is ##linux for debian there is #debian. use the proper channels, don't be dumb
+[07:04] <epifanio__> Ben64, you are perfectly right. I tried .. is late, i'm still at work and I left my laptop at home which is logged on irc and on linux and unix you can't post if you are not authenticated .. thet's the reason of all those underscore with my username
+[07:05] <epifanio__> anyway .. thanjks
+[07:23] <Theodore> hi
+[07:27] <DevAntoine> hi
+[07:27] <Theodore> DevAntoine what up friend
+[07:35] <tim241_> where will android studio install the sdk? on linux
+=== tim241_ is now known as tim241
+=== tim241 is now known as Tim241
+[07:46] <wmlk> fsd
+[07:49] <wmlk> hi
+[07:49] <wmlk> how to use it
+[07:50] <wmlk> who can tell me how to use it
+[08:01] <toc> Hallo, I have problem with my Broadband modem. When I connect it I can not connect to internet I get the following error message : (1) Creating object for path '/org/freedesktop/NetworkManager/ActiveConnection/0' failed in libnm-glib.
+[08:01] <Tim241> I have an error when building an apk from this tutorial: https://github.com/chenxiaolong/DualBootPatcher/blob/master/docs/BUILD-Android.md I tried to reinstall the SDk no luck :-( error: http://pastebin.com/TM9szkWK Please help me
+[08:01] <toc> The screenshots are here : https://www.justbeamit.com/ttte2
+[08:01] <toc> Please help
+[08:02] <toc> I have same problem with my both computers it appears on Lubuntu and Ubuntu
+[08:03] <toc> I need to restart my computer just to make it work
+[08:03] <toc> Thank you
+[08:04] <toc> I could not find fix in web...
+[08:04] <toc> Anybody had same issue ?
+[08:04] <diverdude> Hello. is it possible to make a user which can only log in via ssh and which only can view/read/write/execute content in his home directory and execute system programs? (Everything should be completely closed to the user)
+[08:15] <your_mirror> Hello, Can somebody explain about c++ compile and drivers (alsa). I'm compiling pjsip library on Linux. All works good if I use default sound card, so there is sound. After that I connect a usb headphones and set as default sound card and there isn't sound in pjsip. Should I compile with connected headphones or what I should to do?
+[08:18] <guzzlefry> Is there a recommended PPA for PHP7?
+[08:21] <diverdude> Hello. is it possible to make a user which can only log in via ssh and which only can view/read/write/execute content in his home directory and execute system programs? (Everything should be completely closed to the user)
+[08:22] <ikonia> diverdude: you should look at chroot
+[08:22] <ikonia> and maybe look at policy kit and acl's depending on how far you want to push
+[08:31] <Gnomethrower> Hey everyone. I was wondering if anyone knows a tool like fuser or lsof that works on FUSE filesystems when they crash
+[08:32] <ikonia> fuse file system ?
+[08:33] <ikonia> it's not actually a file system, it's just how it's presented to the user over the network
+[08:33] <ikonia> eg: samba - is not actually a file system
+[08:33] <Gnomethrower> specifically, if MooseFS or LizardFS or GlusterFS FUSE client crashes, with dir /storage/lfs as the mountpoint, I can't umount /storage/lfs until I kill anything using it. lsof and fuser however are useless in this scenario and do not work with crashed FUSE mountpoints
+[08:33] <Gnomethrower> ikonia: in this case I'm talking about actual filesystems. I'm aware FUSE is for other stuff too
+[08:33] <ikonia> Gnomethrower: what file system are you actually talking about then
+[08:33] <_peter_> @search pease
+[08:34] <Gnomethrower> ikonia: LizardFS in this case, but we've seen the same behaviour from Gluster and MooseFS
+[08:34] <ikonia> Gnomethrower: isn't this the same situation as any remote userspace mount, as then the mount goes the userdata/status is lost
+[08:34] <ikonia> so when you remount tools like lsof won't show anything
+[08:35] <hotspot> anybody know how to change channel on the ubuntu hotspot or some other software to create a hotspot without AP mode?
+[08:35] <ikonia> so you fix it on the server which the file system is not a userspace mount, it's a local file system
+[08:35] <Gnomethrower> ikonia: I'm not worried about remounting losing the status
+[08:35] <Gnomethrower> ikonia: I'm wanting to unmount it from a client, but it won't let me while for example nginx is running
+[08:36] <Gnomethrower> and usually lsof/fuser would tell you what to kill to be able to successfully umount
+[08:36] <Gnomethrower> but lsof and fuser do not work on a crashed FUSE mountpoint
+[08:36] <Gnomethrower> okay, apparently this is a kernel limitation and there's really no easy solution
+[08:37] <Gnomethrower> so consider my question solved I guess
+[08:38] <diverdude> ikonia, if i set up chroot for a specific user logging on via ssh, would that user still be able to run rsync from his home directory to a remote server?
+[08:38] <LJHSLDJHSDLJH> how can I copy/paste colored text from terminal into some sort of file format keeping the same coloring?
+[08:42] <diverdude> ikonia, hmmm it seems chroot is very insecure and easy to break out from
+=== gms is now known as Guest85880
+=== marklyford__ is now known as marklyford
+[08:46] <arlekin> how can i couple hardware touchpad switch with software one in ubuntu 16.04 ?
+[08:46] <arlekin> i mean after restart os somehow remembers whether it had disabled touchpad, but hardware switch enables touchpad
+[08:47] <arlekin> so now after clicking hardware (and even worse cause software too) touchpad switch
+[08:47] <arlekin> it toggles state of touchpad (to enabled in ubuntu) but to disabled on switches
+[08:48] <arlekin> in some previous ubuntu version this could be alleviated by changing keyboard shortcut for disabling touchpad
+[08:48] <arlekin> but i can't find it right now
+[08:51] <nancy077> I have to migrate a database from my local computer in windows to a remote server which is in ubuntu. I have stored the database in a .sql file using mysqldump command. When i copy database to ubuntu server then only some tables of the database are copied. All tables in .sql file are not copied. What might be possible reason for this problem?
+=== stikky is now known as _gms
+[08:53] <nancy077> Hey I need some urgent help on this
+[08:53] <nancy077> I have to migrate a database from my local computer in windows to a remote server which is in ubuntu. I have stored the database in a .sql file using mysqldump command. When i copy database to ubuntu server then only some tables of the database are copied. All tables in .sql file are not copied. What might be possible reason for this problem?
+[08:53] <hotspot> nancy077: try a mysql channel
+[08:54] <nancy077> hotspot: I am not able to connect
+[08:55] <nancy077> hotspot: This is the error i get:  Cannot send to channel: #mysql
+[08:56] <hotspot> nancy077: try the mysql help forum
+[08:57] <yohano> hello
+[09:00] <lyze> nancy077, is your irc account registered?
+[09:00] <nancy077> nope
+[09:01] <lyze> It seems like that you need to have a registered account before you can write in there
+[09:01] <lyze> !register
+[09:01] <ubottu> Information about registering your nickname: https://help.ubuntu.com/community/InternetRelayChat/Registration - Type « /nick <nickname> » to select your nickname. Registration help available by typing /join #freenode
+[09:01] <k1l> nancy077: read the topic of that channel. some channels needs a user to be registered due to troll abuse. for mor help ask in #freenode (which is moderated sadly)
+[09:02] <nancy077> Thanks
+=== Drac0 is now known as Guest4765
+[09:05] <Tim241> I have an error please help me: http://pastebin.com/s7X7XgPJ
+[09:05] <hateball> !compile | Tim241
+[09:06] <ubottu> Tim241: Compiling software from source? Read the tips at https://help.ubuntu.com/community/CompilingSoftware (But remember to search for pre-built !packages first). Also read !checkinstall
+[09:08] <k1l> Tim241: sounds like you should ask the people you got the stuff from you want to compile
+[09:08] <sparky2145> hello
+[09:08] <Tim241> ok
+[09:08] <Tim241> I did on github but no reaction
+[09:08] <ducasse> Tim241: then wait for an answer.
+[09:09] <sparky2145> do you guys know how to fully boot an ASUS Eeebook X205TA
+=== help is now known as Guest13472
+[09:10] <explosive> sparky2145: fully boot?
+[09:10] <Guest13472> i updated my 15.10 to 16.04 and i'm stuck at this /dev/sda7: clean, xxx/xxx files, xxx/xxx blocks in fsck check
+[09:10] <sparky2145> yes like as main operating system
+[09:11] <explosive> Guest13472: try to boot without quiet splash in the grub kernel line
+[09:11] <explosive> sparky2145: make a live usb and install ubuntu
+[09:11] <explosive> sparky2145: dual boot or single?
+[09:11] <sparky2145> wont work ive tried
+[09:11] <sparky2145> ?
+[09:11] <explosive> sparky2145: what did you try
+[09:12] <explosive> sparky2145: dual boot with windows or ubuntu only?
+[09:12] <k1l> what is the exact issue?
+[09:12] <Guest13472> explosive: how to start without splash using grub ?
+[09:12] <sparky2145> um dual boot with windows 10
+[09:13] <explosive> !nomodeset | Guest13472 follow the guide here but dont add nomodeset, just remove quiet splash
+[09:13] <ubottu> Guest13472 follow the guide here but dont add nomodeset, just remove quiet splash: A common kernel (boot)parameter is nomodeset, which is needed for some graphic cards that otherwise boot into a black screen or show corrupted splash screen. See http://ubuntuforums.org/showthread.php?t=1613132 on how to use this parameter
+=== Aria22|away is now known as Aria
+=== Aria is now known as Aria22
+[09:15] <Guest13472> explosive: i did adavance ubuntu options from grub and opened it in recovery mode there is option of opening root terminal , it says enter root password for maintainece
+[09:15] <Guest13472> explosive:when i enter my password it says wrong password
+[09:16] <sparky2145> try toor
+[09:16] <explosive> Guest13472: that's not it, press e over ubuntu in grub
+[09:16] <Odd_Bloke> Could someone who did a fresh desktop install from a xenial ISO pastebin their /etc/apt/sources.list for me?
+[09:16] <explosive> Guest13472: go to the line that says linux /boot/vmlinuz and remove quiet splash at the end and press ctrl+x
+[09:17] <explosive> Odd_Bloke: http://paste.ubuntu.com/17112254/
+[09:17] <Guest13472> explosive: okay let me try
+[09:18] <explosive> Guest13472: it asks for root password cause you have the root account enabled, maybe disable it again once the issue is fixed
+[09:18] <Odd_Bloke> explosive: Thanks!
+[09:18] <explosive> Odd_Bloke: no problem
+[09:18] <myeagleflies> hi
+[09:18] <pvt> hello
+=== me is now known as Guest4457
+[09:19] <Guest4457> hello
+[09:19] <Guest13472> explosive: in the end it is written quiet_splash $vt_handoff , what should i remove ?
+[09:19] <myeagleflies> does anyone use firebird under ubuntu? I cannot find SYSDBA.password file. Is it possible to change DBA's password without knowing previous one?
+[09:19] <explosive> Guest13472: quiet splash
+[09:19] <sparky2145> yeah so can someone help me i want to switch to Linux becuase windows is a peice of S@#$ and i just cant dual boot my laptop
+=== pvt is now known as pvT
+[09:19] <pvT> lol
+[09:19] <explosive> sparky2145: you have to give info, what'd you try til now, any errors, etc
+[09:20] <Guest13472> explosive:did it now waiting
+[09:20] <sparky2145> when i make my usb to boot and try and restart igo onto the uefi and change the boot order i did that and i press save and exit but it doesnt read the usb
+[09:21] <explosive> sparky2145: try to get a boot options menu and choose the usb
+[09:21] <irwiss> is there a reason for not turning ufw logging off? it seems spammy and i don't see any interesting information from random bot pokes to ssh/random ports, am i missing some crucial piece?
+[09:21] <explosive> (on the fly menu)
+[09:21] <Guest4457> hey guys dose anyone  know how i could remove a ".gtz "file?
+[09:21] <Guest13472> explosive:a screen came with lot of logs written on it with [OK] badge
+[09:22] <explosive> Guest13472: any failed? anything interesting?
+[09:22] <Guest4457> hey guys dose anyone  know how i could remove a ".gtz "file?
+[09:22] <sparky2145> yeah ive read up on this and i have a 32 bit processor and a 64 bit os and it says you cant run it is this true?
+[09:22] <explosive> Guest4457: what's a .gtz file?
+[09:23] <explosive> sparky2145: yeah, how do you have a 32bit processor though
+[09:23] <pvT> You mean Tgz ?
+[09:23] <explosive> how old is the laptop?
+[09:23] <Guest13472> explosive: one with [FAILED] clean up any mess by 0dns-up and screen is stuck on [OK] started update UTMP about system runlevel
+[09:23] <Guest4457> its a python file i tried to download but it doesn't work.
+[09:24] <sparky2145> other way round sorry
+[09:24] <pvT> lol XD
+[09:24] <explosive> Guest4457: rm /path/to/file
+[09:24] <sparky2145> 32 bit os 64 bit processor
+[09:24] <Guest4457> its python-3.4.4.tgz
+[09:24] <explosive> sparky2145: it should still work, download a 64bit iso though
+[09:24] <Guest13472> explosive:screen stuck on [OK] started update UTMP about system runlevel
+[09:24] <explosive> Guest4457: how did you attempt to run it? did you extract it?
+[09:25] <explosive> Guest4457: is it a python file or actually python itself?
+[09:25] <explosive> Guest13472: no idea
+[09:25] <hicoleri> I have recently noticed that you can directly use apt instead of apt-get for installing stuff, the difference being that when I install files through apt instead of apt-get, there are colors and a progress bar of the actual installation process. Are there any other differences?
+[09:26] <Guest13472> explosive: you did not made it worse ? did you ?
+[09:26] <Guest4457> its python compiler.
+[09:26] <sparky2145> ok ill try thanks
+[09:26] <explosive> hicoleri: seems to be the same almost, the man page says apt isn't fit for scripts though
+[09:26] <explosive> Guest4457: which ubuntu are you using?
+[09:26] <explosive> sparky2145: no problem
+[09:26] <hicoleri> explosive: okay
+=== Aria22 is now known as Aria22|away
+=== In4rtia is now known as in3rti4
+[09:32] <Theodore> hi
+[09:32] <Tim241> hi
+[09:35] <usuario> hola
+[09:36] <Theodore> http://www.jide.com/remixos-for-pc
+[09:36] <Theodore> anyone here use this os yet?
+[09:36] <Theodore> android on pc.
+[09:40] <anabain> freshly installed kubuntu 16.04: as root, ping google.com does not work, but ping 8.8.8.8 does. What's going on? resolv.conf stuff?
+[09:42] <SwedeMike> anabain: "does not work" isn't a helpful fault description.
+[09:42] <SwedeMike> anabain: does it resolve google.com and tries pinging but you get no answer, or the resolvig of google.com to an IP address fails?
+[09:42] <anabain> SwedeMike,  unknown host is the output from ping google.com as root
+[09:43] <SwedeMike> anabain: then you have a resolver problem, yes.
+[09:43] <anabain> what's next, then, SwedeMike
+[09:43] <anabain> ?
+[09:43] <SwedeMike> anabain: http://askubuntu.com/questions/152593/command-line-to-list-dns-servers-used-by-my-system
+[09:43] <anabain> thanx
+[09:52] <Spookan> Theodore: It looks interesting.
+[09:53] <anabain> SwedeMike, http://paste.ubuntu.com/17112612/
+[09:54] <anabain> I wonder at what level am I Having this resolver problem...
+[09:55] <SwedeMike> anabain: so you have one resolver located in cogent network, one in Abrared in Madrid, one Google resolver
+[09:56] <SwedeMike> anabain: which one seems like it should be the one you use?
+[09:57] <anaran> hi, can't ssh from my upgraded xenial to an old trusty host. Can I upgrade to ssh2 in trusty, as opposed to installing ssh1 in xenial?
+[09:58] <anabain> SwedeMike, all other boxes at home are using the same config and the same version OS, so I don't know exactly and they work fine. Is it relevant?
+[10:00] <Theodore> Spookan yes im putting on a 16GB usb stick now
+[10:00] <Theodore> going to install in a few here
+=== MacroMan_ is now known as MacroMan
+[10:02] <katharina> jsbbc
+[10:21] <Gobo708> 	Hi All, just imaging a microSD with ubuntu mate on it and I was wondering why I have two kernal image files. kernal.img & kernal7.img present
+[10:22] <mint1234> where to find information and source of acl library that is used by sed?
+[10:23] <Ben64> Gobo708: can you be more specific
+[10:23] <Ben64> mint1234: mint is supported in #linuxmint-help on irc.spotchat.org
+[10:24] <Gobo708> Ben64, hi, yes so I have installed ubuntu mate on a raspberry pi microSD
+[10:25] <Gobo708> Ben64, I am taking a backup image of the microSD from windows
+[10:25] <Gobo708> Ben64, I browsed the MicrosSD, that had ubuntu mate installed on it... and noticed two files of the same size. Approx 3.7G
+[10:25] <Gobo708> kernal.img & kernal7.img
+[10:26] <Gobo708> Seems to me thats its duplicated the kernal image
+[10:26] <ogra_> Gobo708, the two kernel files are a thing from broadcom, you have to ask in the rpi community
+[10:26] <ogra_> ubuntu just uses their setup to boot the image
+[10:26] <Gobo708> ok thanks
+[10:26] <Ben64> well that has nothing to do with ubuntu, if they're 3.7GB it's likely a whole disk image
+[10:27] <akik> Gobo708: and it's never spelled kernal if you refer to the linux kernel
+[10:27] <Ben64> that too
+[10:27] <Gobo708> akik: Thanks for the spell check
+[10:28] <katharina> hallo
+[10:28] <katharina> km
+[10:28] <katharina> make my love go
+[10:30] <user1__> problem with ssd to usb adapter on ubuntu 16.04 - http://paste.ubuntu.com/17113097/
+[10:32] <user1_> no one here?
+[10:32] <Ben64> 1930 people here
+[10:33] <user1_> i meant none to answer my q? http://paste.ubuntu.com/17113097/
+[10:33] <acetakwas> I'm having a distorted screen
+[10:33] <acetakwas> http://imgur.com/PoEsGhW
+[10:33] <acetakwas> It happens every once in a while
+[10:33] <acetakwas> What could be causing that?
+[10:34] <Ben64> bad video card, bad video card drivers, something along those lines
+[10:34] <Fiki> I have to say Ubuntu is less stable than I hoped, I mean the problems I encounter are usually easily fixable but are annoying a bit I get things like: at decryption when I type in the password the CPU fan goes to max and it remains frozen, Ubuntu won't shutdown, interface freeze(though less regular than on 14.04)
+[10:34] <acetakwas> I use LXDE, and it's never happened with Unity
+[10:34] <acetakwas> How could it be a bad video card?
+[10:34] <ikonia> Fiki: the cpu fan goes to max as your cpu is probably working to decyrpt
+[10:35] <acetakwas> For some text on the screen to be missing
+[10:35] <Ben64> weird things happening on screen .... usually you'd look at what is displaying it
+[10:36] <acetakwas> Ben64::  How do you mean please?
+[10:36] <Ben64> i don
+[10:36] <Ben64> 't think i can explain it any simpler
+[10:36] <acetakwas> Okay, thanks
+=== explosive is now known as EriC^^
+=== EriC^^ is now known as Guest54099
+=== Guest54099 is now known as EriC^^
+[10:40] <acetakwas> Only got fixed after a reboot
+[10:49] <idev> what is the minimal machine that can support 3 monitors?
+[10:50] <Hanumaan> how to know which package has to be installed to get the files /usr/lib/libhunspell-1.2.so.0             and         /usr/lib/libhunspell-1.2.so.0.0.0
+[10:51] <somsip> !find libhunspeall | Hanumaan
+[10:51] <ubottu> Hanumaan: Found: W:, W:, W:, W:, W:, W:, W:, W:, W:, W: (and 13 others) http://packages.ubuntu.com/search?keywords=libhunspeall&searchon=names&suite=xenial&section=all
+[10:51] <somsip> !find libhunspell | Hanumaan
+[10:51] <ubottu> Hanumaan: Found: libhunspell-1.3-0, libhunspell-dev
+[10:51] <EriC^^> Hanumaan: dpkg -S /usr/lib/libhunspell-1.2.so.0
+[11:02] <jinxi> hello
+=== Bruh is now known as gitgud
+=== gitgud is now known as Bruh
+=== disappear is now known as heth
+[11:06] <Hanumaan> how to install this package now? it seems not there any more: http://paste.ubuntu.com/17113618/
+[11:09] <Fiki> ikonia, yeah but that only happens when it doesn't work
+[11:09] <Fiki> ikonia, when it does it takes 2 sec max
+[11:11] <Snowie> hi all. got thinking about security and decided to look for what open ports there are on my machine. for some reason it looks like wesnoth from the repositories is still running as a daemon, but it's no longer installed on my system. how do i go about hunting it down and killing it, or at least stop the port listening. is it worth being worried?
+[11:12] <curvian> hi if software i downloaded requires later version of some lib than what is currently installed on my system, can i upgrade it without upgrading os?
+[11:13] <Fiki> curvian, usually yes
+[11:13] <lyze> Snowie, if you are behind a firewall then nah ... normally not
+[11:13] <Fiki> curvian, you just need to add the source where a newer package is available, and usually a ppa exists for all popular libraries
+[11:13] <lyze> you should only be worried about that if you can access the computer via the itnernet
+[11:13] <curvian> Fiki: thanks
+[11:13] <Snowie> lyze: my WAN router is my firewall, that is all.
+[11:14] <lyze> Snowie, well is the port opened there?
+[11:14] <glass_> iam trying to ssh to my local machine from a VM on my local machine?
+[11:14] <Snowie> I have played wesnoth online so, i guess, yeah.
+[11:14] <OzwWulf> Hello all
+[11:14] <lyze> Snowie, well that's a outgoing connection and not a incoming probably since you have connected to a server and not people to your computer.
+[11:15] <lyze> glass_, set the vm to bridged
+[11:15] <Snowie> lyze: yeah, i see. makes sense. bugs me now that i've seen it though lol. ok, i'll stress less.
+[11:16] <Snowie> lyze: actually, the game has LAN support, which i guess is why it's listening, but that doesn't mean it will upnp configure the router for incoming right?
+[11:17] <glass_> lyze i figgured it out, i was using -port for some reason instead of -p thanks
+[11:17] <x4u3n> Hi, i have installed lvm2 but not appear service into init.d? i need to restart computer?
+[11:17] <Red_M> x4u3n: lvm2 issssssssssssssssssss for volume management
+[11:17] <Red_M> *is
+[11:17] <Red_M> its not a service
+[11:17] <lyze> Snowie, it should not! But I guess you can simply test it, http://www.yougetsignal.com/tools/open-ports/ or something like that ^^
+[11:18] <x4u3n> Red_M: how could i use lvm devices in ubuntu?
+[11:18] <ikonia> I suggest you research lvm
+[11:18] <Red_M> look upo a guide
+[11:18] <ikonia> it's a pointless question "how can I use them" if you don't even know wht it is
+[11:18] <x4u3n> ok let me, ty
+[11:19] <Snowie> lyze: closed, thanks lyze :)
+[11:20] <jinxi> Sysinfo for 'linux-cdh9': Running inside KDE Plasma 5.5.5 on openSUSE Leap 42.1 powered by Linux 4.1.12-1-default, CPU: Intel(R) Core(TM) i3-4010U CPU @ 1.70GHz at 1700 MHz, RAM: 7391/7880 MB, Storage: 38/230 GB, 249 procs, 341.3h up
+[11:23] <x4u3n> Please i need documentation about how to configurate lvm in ubuntu, thank u in advance...
+[11:23] <glass_> trying to move a file from one remote ssh to local box "mv (file location on remote" "location i want on local"?
+[11:23] <hateball> x4u3n: do you want documentation or a guide?
+[11:24] <hateball> x4u3n: this may be of interest https://www.howtoforge.com/linux_lvm
+[11:24] <Red_M> x4u3n: https://google.com
+[11:24] <Red_M> x4u3n: man lvm2
+[11:24] <Red_M> glass_: man scp
+[11:24] <ikonia> x4u3n: how can you need docs on how to configure it when you don't even know what it is
+[11:24] <glass_> thanks red_m
+[11:24] <x4u3n> reading...
+[11:25] <x4u3n> ikonia, i use lvm every day
+[11:25] <Red_M> ...
+[11:25] <Red_M> then why are you asking how to use it
+[11:25] <x4u3n> but i never configurate it in to a computer without it
+[11:26] <hicoleri> join #vim
+[11:26] <hicoleri> whoops
+[11:26] <ikonia> x4u3n: then how do you not know what it is and how do you knot know how to use it
+[11:26] <Red_M> x4u3n: https://google.com/search?q=how+to+use+lvm
+[11:26] <Red_M> or do you need a lmgtfy link
+[11:27] <x4u3n> dont worry, i prefer do it by myself
+[11:27] <Fluid01> hello
+[11:28] <ikonia> he was on debian
+[11:33] <brelod> :q
+[11:34] <marlo_> i've got a problem with apt that I cannot seem to resolve, I'm wonder if I could get some guidance; http://pastebin.ubuntu.com/17114114/
+[11:34] <ikonia> the hook to trigger the re-creation of initrd failed
+[11:35] <ikonia> you need to look at why
+[11:35] <marlo_> ikonia, ok
+[11:35] <hateball> marlo_: is /boot full perhaps? df -h
+[11:36] <marlo_> hateball, no http://pastebin.ubuntu.com/17114164/
+[11:37] <marlo_> i've googled a half dozen times the initramfs-tool error but can't seem to find something relevant to this problem
+[11:38] <ikonia> marlo_: have you looked at the dpkg logs
+[11:38] <marlo_> ikonia, no
+[11:40] <ogra_> marlo_, dpkg -S  /usr/share/initramfs-tools/hooks/vdfuse
+[11:40] <ogra_> find out what package did put the broken hook script there
+=== xubuntu is now known as Guest26993
+[11:42] <marlo_> ogra_, http://pastebin.ubuntu.com/17114278/
+[11:42] <ogra_> marlo_, dpkg -S  .... not -A
+[11:43] <marlo_> duh!
+[11:43] <marlo_> ogra_, dpkg-query: no path found matching pattern /usr/share/initramfs-tools/hooks/vdfuse
+[11:44] <ogra_> did you put that file there by hnd ?
+[11:44] <ogra_> *hand
+[11:44] <marlo_> no
+[11:44] <marlo_> dated feb 14th
+[11:44] <marlo_> by root
+[11:44] <marlo_> (this has been a problem for a while)
+[11:44] <ogra_> well, something put it there ... and it wasnt a deb package
+[11:45] <marlo_> on or about that time i went through my regular update procedures
+[11:45] <marlo_> and it broke
+=== guest-RGxXlo is now known as Thelma
+[11:45] <Thelma> Can someone help me
+[11:46] <ogra_> marlo_, https://sourceforge.net/p/vdfuse/tickets/1/
+[11:46] <Thelma> exit
+[11:48] <marlo_> ogra_, thanks, i'm not sure what i'm looking for
+[11:49] <ogra_> marlo_, well, you apparently have some third party script or package in use that has put that file into place ... looking at that big above it seems like the hook isnt actually executable ...
+[11:49] <ogra_> just read the bug comments
+[11:49] <marlo_> ic
+[11:49] <marlo_> i'm reading...
+[11:49] <marlo_> i see in the comments
+[11:50] <marlo_> vdprepare.sh
+[11:50] <marlo_> i located that in my /home/mark/Downloads/vdfuse folder!
+[11:50] <marlo_> i honestly don't know what that is... but i'm looking to see what i did
+[11:51] <marlo_> or the next question would be how do i remove it?
+[11:51] <marlo_> it's virtual box!
+[11:52] <marlo_> no clue why it's in my home Downloads folder, except that I installed virtual box not from apt but that was some time ago
+[11:52] <marlo_> how do i get rid of it?
+[11:53] <marlo_> (not virtual box, the error)
+[11:53] <ikonia> what is triggering the call to that script
+[11:53] <ikonia> I assume it's something within the custom initrd ?
+[11:54] <marlo_> well, from what I've observed, updates to the system involve updates to initrd from virtualbox
+[11:54] <marlo_> so that's part of it's typical function, beyond me
+[11:55] <marlo_> but now something in there is broke with it, i cannot even remove --purge virtual box
+[11:56] <marlo_> http://pastebin.ubuntu.com/17114572/
+[11:56] <ikonia> marlo_: thats not how it should work
+[11:57] <ikonia> why would you need something about virtualbox in the pre-boot environment ?
+[11:57] <marlo_> ikonia, beats me
+[11:57] <marlo_> i've downloaded and installed it for years
+[11:57] <ikonia> you won't be "purge" virtualbox as a package if you installed it as a non-package
+[11:57] <marlo_> it always seems to hook something in to initrd
+=== alberti is now known as sanika
+[11:57] <ikonia> so you may need to manually edit the initrd
+[11:58] <ogra_> nah
+[11:58] <marlo_> well, i download a deb and dpkg on it
+[11:58] <marlo_> to install it
+=== sanika is now known as alberti
+[11:58] <ogra_> mv /usr/share/initramfs-tools/hooks/vdfuse
+[11:58] <ogra_> sudo update-initramfs -u
+[11:58] <ogra_> done ...
+[11:58] <ikonia> ogra_: thats a much nicer way
+[11:58] <ogra_> err
+[11:58] <ikonia> lovely
+[11:58] <ogra_>  mv /usr/share/initramfs-tools/hooks/vdfuse .
+[11:58] <akik> marlo_: the package name is probably virtualbox-5.0
+[11:59] <marlo_> yup
+[11:59] <marlo_> it is
+[11:59] <marlo_> !
+[11:59] <marlo_> 5.0_5.0.14
+[11:59] <akik> i don't think vdfuse is a part of it(?). it was to do with mounting the virtual image files
+[12:01] <ogra_> if it would have been ppart of any package "dpkg -S" would have known
+[12:01] <ogra_> it definitely isnt
+[12:01] <akik> nope
+[12:01] <marlo_> ogra_, working now!  thank you, sir!
+[12:02] <marlo_> that was driving me mental
+[12:02] <ogra_> enjoy :)
+[12:02] <marlo_> i'm imaging my virtual box is broken now?
+[12:02] <marlo_> but no matter
+[12:02] <marlo_> i can sort that one out
+[12:02] <alxpa> Fucked my only SD card trying to flash Linux on it from Mac....
+[12:02] <marlo_> this was keeping me from upgrading anything
+[12:03] <zulfikar354> hi all
+[12:03] <akik> marlo_: vdfuse is not part of virtualbox per se
+[12:03] <zulfikar354> heei
+[12:03] <zulfikar354> are there programmer in here ?
+[12:03] <marlo_> akik, it is in my Downloads folder, and has some vb stuff in it
+[12:03] <marlo_> so it must have come from that install?
+[12:03] <alxpa> It came up with Linux error when I booted off it and now it won't show up on any device...
+[12:03] <marlo_> zulfikar354, i am a programmer
+[12:04] <zulfikar354> hei nice to meet you marlo
+[12:04] <marlo_> ogra_, ooo laa laa... it's nice watching my apt update once again
+[12:04] <ogra_> :)
+[12:04] <akik> marlo_: no it's not part of virtualbox-5.0
+[12:04] <zulfikar354> what kind of programmer
+[12:05] <marlo_> zulfikar354, c++
+[12:05] <marlo_> predominantly
+=== csyogi1 is now known as csyogi
+[12:06] <marlo_> brb, i have to see if i can reboot this machine now... something else that broke in all this mess...
+[12:07] <alxpa> Is there a way to fix a completely unrecognised SD card??
+[12:07] <alxpa> Windows and Mac can't read it.
+[12:07] <alxpa> Yet I formatted it in Mac
+[12:10] <marlo_> ogra_, yahooo! it reboots as well... i haven't rebooted this computer in months because of this
+[12:10] <marlo_> thank you again so much!
+[12:10] <ogra_> no problem :)
+[12:11] <alxpa> Ogra_ would u know about how to fix an SD card which was screwed up in the process of flashing
+[12:11] <marlo_> i have one computer left in this office with windows through no choice of my own, i freaking love linux
+[12:12] <jatt> with systemd is there a way to mount all partitions available in /etc/fstab
+[12:14] <ogra_> alxpa, not really, no ... sorry
+[12:14] <alxpa> No problem ogra_
+[12:14] <ikonia> jatt: that happens automatically at boot
+[12:15] <ikonia> it's the equivilent of the old "mountall" init script
+[12:29] <wamph>  /wc
+[12:32] <BluesKaj> Hey folks
+=== csyogi1 is now known as csyogi
+=== marklyford___ is now known as marklyford
+[12:40] <R13ose> I get this notification of the "important os and application updates are ready to be installed" but unsure what this is for, any ideas?
+[12:42] <ikonia> R13ose: it means there are updates available to you
+[12:42] <ikonia> it would be wise to apply the
+[12:42] <ikonia> them
+[12:44] <R13ose> ikonia: yes but which updates?
+[12:44] <BluesKaj> it's exactly what it says important updates for your Operating System (os) , R13ose...the package manager doesn't lie :-)
+[12:44] <Pici> I'm pretty sure the gui will tell you which ones once you click through that (although I don't use Ubuntu Desktop, so ymmv)
+[12:45] <R13ose> How do I get rid of failed ppa's when I update from the command line?
+[12:46] <mircx1> Hello i  use with ubuntu 14.04 and i get error someone can please told me how i fix it or what i need to install for it please http://paste.ubuntu.com/17115794/
+[12:46] <BluesKaj> R13ose:  use the sudo apt upgrade command in the terminal too see what they are
+[12:46] <BluesKaj> too=to
+[12:49] <doublel93> hey , someone knows how to see on which port is vnc4server running ?
+[12:50] <R13ose> that works.
+[12:50] <Pici> doublel93: I'd guess 5900, as thats the standard vnc port
+[12:50] <ddddddd> re
+[12:51] <lyze> doublel93, netstat -tulpn
+[12:53] <doublel93> 5901, I've installed vncserver and then vnc4server I feel so confused, vnc4server is telling me "connection refused by the host computer", any idea ?
+[12:55] <mircx1> Hello i  use with ubuntu 14.04 and i get error someone can please told me how i fix it or what i need to install for it please http://paste.ubuntu.com/17115794/
+[12:58] <ikonia> R13ose: all of them
+[12:58] <sxpert> have a small issue I can't find a solution in google for:
+[12:58] <sxpert> I have this python app, and intend to use uwsgi to run it.
+[12:58] <R13ose> ikonia: Yes but I want to get rid of the packages and I thought there was a command for that.
+[12:58] <sxpert> it seems there's a probleme with the system provided stuff
+[12:58] <sxpert> as I'm getting some errors :
+[12:59] <k1l> mircx1: cant tell you from that single output. ask the ones who gave you the code to compile what depencies that code got
+[12:59] <sxpert> Job for uwsgi.service failed because the control process exited with error code. See "systemctl status uwsgi.service" and "journalctl -xe" for details.\
+[12:59] <bory1time> I installed ubuntu on a dell d6000 but it wont connect via wifi how do i fix
+[12:59] <sxpert> do I have to modify the .service thing ?
+[13:02] <doublel93> still with vnc4server ,  if I start it with "vncserver"  I can connect to it, but if I start with "vncserver -geometry 1280x720 -randr 1280x720" on the client sais connection refused by the host, why is that ?
+[13:03] <bdonnahue> hey guys. new to ubuntu. how are people liking 16.04. should i upgrade from 14.04
+[13:05] <gulzar> bdonnahue: wait for .1 release
+[13:05] <DJones> bdonnahue: Its difficult to say, it works for me, does everything I want with no bugs, but every user is different, maybe the best course of action isto create a live usb and try it to see if makes much difference
+[13:06] <mircx1> k1|
+[13:06] <mircx1> what is mean
+[13:06] <mircx1> i try run services irc and i get it error
+[13:06] <mircx1> everything i try install
+[13:06] <mircx1> i try install that apt-get install libconfig-dev
+[13:08] <sxpert> think I want to blame systemd for this crap again
+[13:08] <bdonnahue> gulzar DJones thanks
+[13:09] <mircx1> and i dont know what i need to do in here and how i fix it
+=== sparklyballs_2 is now known as Sparklyballs
+[13:12] <mircx1> k1l
+[13:18] <Guest22397> Hi I added a command to /etc/rc.local to disable ethernet device on startup but it doesn't work. When I execute it after login it works. What am I missing there ? Thanks
+[13:18] <Guest68191> k
+[13:18] <hateball> !patience
+[13:19] <ubottu> Don't feel ignored and repeat your question quickly; if nobody knows your answer, nobody will answer you. While you wait, try searching https://help.ubuntu.com or http://ubuntuforums.org or http://askubuntu.com/
+[13:21] <Guest22397> Sorry I thought kubuntu and ubuntu are different channels
+[13:21] <k1l> mircx1: what code do you try to compile? are you sure you got al the depencies that code names?
+[13:23] <mircx1> this what i try run https://github.com/oftc/oftc-ircservices/blob/master/INSTALL anyway something i need install and i dont know what
+[13:25] <k1l> mircx1: that is to run an own irc network. are you sure you want to run an own irc network? this are not just bots you can run on other networks like oftc or freenode
+[13:27] <jimbotux> hello! Wondering if anyone could advise on something im trying to figure out with ulimits and differences between 1604 & 1404 LTS versions
+[13:28] <jimbotux> when making changes to /etc/security/limits.conf in 1604 it doesnt seem i need to add anything like "session required         pam_limits.so"
+[13:28] <jimbotux> to my common sessions for it to pickup the ulimit changes
+[13:28] <jimbotux> but with 1404 without those changes the user in question wont get the limits edit...
+[13:29] <morrolan1> l
+[13:29] <jimbotux> does anyone know if this is maybe something to do with systemd and logind..? i can see pam_systemd mentioned now in common-sessions as standard in 1604.
+[13:29] <jimbotux> Any help or advice would be great cheers.
+[13:30] <kapad> need help with setting up my touchpad. I'm using a Dell E7470. The touchpad is an ALPS device, but it is recognized only as a generic wheel mouse in xinput --list
+[13:30] <kapad> anyone here use that same laptop, or fixed issues with alps touchpads before.
+[13:31] <kapad> I've already scoured other sources (wiki/askubuntu and forums) but haven't yet come across a solution that worked for me.
+[13:31] <cyborg_ninja> Hello guys. Anybody here who had completely installed dota 2 on ubuntu?
+[13:32] <ikonia> jimbotux: interesting so are you seeing limits being updated real time ?
+[13:33] <sveinse> I'm trying to get crashplan running on a NAS server running 16.04, and I keep getting not-found by stsremctl status crashplan, despite that a service has been installed to /etc/init.d. I thought systemctl evaluated legacy init.d services as well. What can I do to proceed the debugging?
+[13:33] <ikonia> sveinse: no it won't
+[13:33] <jimbotux> ikonia, so i make the change then sudo su - USERNAME and changes are there in 1604
+[13:33] <ikonia> sveinse: list the unit files
+[13:33] <ikonia> jimbotux: ahh, that isn't a surprise
+[13:33] <ikonia> as that is a session parameter
+[13:33] <jimbotux> ikonia, but 1404 nothing until i add the common sessions.
+[13:34] <sveinse> ikonia: ? list unit files?
+[13:34] <ikonia> sveinse: yes the systemd
+[13:34] <ikonia> sveinse: as /etc/init.d means nothing
+[13:34] <ikonia> sveinse: I assume this is not coming from the ubuntu repo
+[13:34] <ikonia> rather some 3rd party repo
+[13:34] <Xin> evening all
+[13:34] <ikonia> jimbotux: that sort of makes sense
+[13:35] <sveinse> ikonia: But why does ubuntu maintain /etc/rc*.d/ then? That is lecacy init.d isn't it?
+[13:35] <ikonia> sveinse: yes, as some upstart scripts are wrapped
+[13:35] <jimbotux> ikonia, Could you explain why please? Im scratching my head..am i missing something or has something changed. Thanks

@@ -1,0 +1,1500 @@
+[19:51] <ioria> derrzzaa, :  gtf 1024 768 60.00 ... change the resolution you want
+[19:51] <derrzzaa> What would be the reason the GUI Nvidia control panel doesn't show the normal resolutions?
+[19:52] <derrzzaa> when I do an xrandr --newmode with the output of both cvt and gtf I get errors
+[19:54] <ioria> derrzzaa, :  which is the xrandr  --newmode command you  issued ?
+[19:55] <clmclm> Jordan_U, I solved the problem. 'TeamDrive' was a bash script setting a location. If started from Desktop it sets the wrong location and couln't find other files.
+[19:55] <derrzzaa> xrandr --newmode "1920x1080_60.00" 173.00  1920 2048 2248 2576 1080 1083 1088 1120 -hsync +vsync
+[19:55] <clmclm> Jordan_U, but thanks for your help
+[19:56] <elfer> anyone know of an ubuntu applet that adds a equalizer type of visualization to the toolbar? (toolbar when using classic mode)
+[19:57] <mojtaba> Hi, I have installed youtube-dl using apt-get, but the problem is that it is not the latest version. The other option is by adding PAA, but when I install it using the second option I do not have access to its man page information. Do you know how can I have the latest version with its man pages?
+[19:57] <ioria> derrzzaa, :  try with 63.50  instead of  173.00  and capital  letters  for hsync  and  +vsync
+[19:59] <elfer> anyone know of an audio 'spectrum' applet for ubuntu toolbars? that will work with alsa?
+[19:59] <derrzzaa> BadName (named color or font does not exist)
+[20:00] <Ben64> derrzzaa: what are you doing?
+[20:00] <derrzzaa> trying to get my display above 800x600 res
+[20:00] <Ben64> what display, what card, other relevant information
+[20:01] <derrzzaa> ubuntu 14.04, nvidia GEForce GT 610
+[20:01] <derrzzaa> 2560x1440 display. For now trying to set it to 1080p though
+=== john_864 is now known as xamadeix
+[20:02] <derrzzaa> control panel only shows 800x600 and 640.... options
+[20:02] <Ben64> more details about the display?
+[20:02] <brx_> how can i show mouse clicks?
+[20:02] <derrzzaa> Dell U2715H
+[20:02] <brx_> im making a video and want it to show my mouse clicks
+[20:03] <Ben64> derrzzaa: pastebin the output of "xrandr"
+[20:03] <bazhang> !info kazam | brx_
+[20:03] <ubottu> brx_: kazam (source: kazam): screencast and screenshot application created with design in mind. In component universe, is optional. Version 1.4.5-1 (utopic), package size 733 kB, installed size 2052 kB
+[20:03] <Ben64> derrzzaa: and how is it connected
+[20:03] <brx_> thanks Ben64
+[20:04] <derrzzaa> hdmi
+[20:04] <brx_> Ben64, it doesnt show mouse clicks
+[20:04] <brx_> i want like a glow effect when i click the mouse
+[20:05] <Ben64> brx_: i think you should be talking to bazhang, not me
+[20:05] <brx_> ahh bazhang
+[20:05] <derrzzaa> having trouble pastebinning, connection issues on my machine :|
+[20:05] <derrzzaa> this is the main line though
+[20:05]  * derrzzaa HDMI-0 connected primary 800x600+0+0 (normal left inverted right x axis y axis)
+[20:06] <Ben64> yeah but i want all of it
+[20:07] <derrzzaa> http://paste.ubuntu.com/10617248
+[20:10] <Ben64> derrzzaa: try a different hdmi port, or try dvi
+=== Dildo_Baggins is now known as NetworkingPro
+[20:10] <derrzzaa> why would that help?
+[20:11] <derrzzaa> I tried DVI to HDMI previously, but the cable dpesn't support 2560p
+[20:11] <Ben64> you said you want 1080p
+[20:11] <derrzzaa> correct, but once i've achieved that I want 2560
+[20:11] <Ben64> so why even bother with 1080p
+[20:12] <derrzzaa> I've read people have ran into serious issues getting that resolution to work
+[20:12] <derrzzaa> so baby steps
+[20:12] <s0rtagnu> I want to convert all of the quicktime movies in a folder to mp4 at the same resolution, bitrate, etc. anyone know a quick way to do this?
+[20:12] <minimec> derrzzaa: 'xrandr --output HDMI-0 --mode 1920x1080_60.00' The mode seems to be there...
+[20:12] <Ben64> derrzzaa: ok then try a different hdmi or try dvi
+[20:12] <bubbasaures> s0rtagnu, have to be processed no quick way.
+[20:13] <derrzzaa> "cannot find mode 1920x1080_60.00"
+[20:13] <Jordan_U> s0rtagnu: ffmpeg or avconv (two forks of basically the same project) are probably your best options.
+[20:13] <derrzzaa> rage
+[20:14] <s0rtagnu> yeah but is there a bash script to convert it with ffmpeg or something? Or a program? I tried handbrake but I couldntnt even figure it out :D
+[20:14] <minimec> derrzzaa: and 'xrandr --output HDMI-0 --mode 1920x1080' ?
+[20:14] <derrzzaa> same
+[20:15] <dvaz> damm anyone knows how to install gnome 2 without messing everything up in ubuntu 14.04? :(
+[20:15] <Jordan_U> s0rtagnu: I was thinking that you would write said bash script, using ffmpeg :)
+[20:15] <Ben64> dvaz: gnome2 is dead
+[20:16] <minimec> derrzzaa: And why don't you use the native monitor resolution? your GPU is capable to display that resolution..
+[20:16] <Jordan_U> s0rtagnu: There may be some batch processing options for some of the GUI transcoders, like trasmageddon.
+[20:16] <derrzzaa> I've tried that also, to not avail
+[20:16] <dvaz> :O any other options? I just can't stand unity anymore
+[20:16] <s0rtagnu> I am checking into it now. guess I make my own. I just figured that this HAD to be done already :D
+[20:16] <thumpba_> im getting an error when rebooting an instance in openstack "error: unknown filesystem entering rescue mode, grub rescue" im using a uefi image
+[20:17] <thumpba_> ubuntu 14.04 uefi
+[20:17] <DJones> dvaz: KDE/LXDE/XFCE etc
+[20:17] <Ben64> derrzzaa: have you tried what i suggested
+[20:17] <Alissa> Is there any way to get the 'Terminal' program to act like PuTTY, where I can right-click to paste text and drag to copy?
+[20:17] <Jordan_U> s0rtagnu: Try some of the GUI options, they may have the batch processing features you need (I'm just not personally familiar with them).
+[20:17] <dvaz> I'll try XFCE thx
+[20:17] <derrzzaa> No. I have 1 HDMI and 1 DVI port.
+[20:17] <derrzzaa> My display has no DVI in
+[20:18] <bubbasaures> s0rtagnu, I would try winff as well.
+[20:18] <derrzzaa> I have a DVI to HDMI cable but that isn't capable of 2560x1440
+[20:18] <pavlos> bjeli, the first of the answers tell you to d/l TV from their site, get a .deb and install it via dpkg
+[20:18] <derrzzaa> I had even more issues using that.
+[20:18] <Ben64> your monitor has two hdmi ports
+[20:18] <bubbasaures> it will batch
+[20:18] <acz32> anyone know a way to modify the lubuntu application menu? Wine stuck itself in there in a very annoying way
+[20:18] <derrzzaa> another hdmi port monitor end?
+[20:18] <derrzzaa> Sure I'll try that... not sure how it'll help though?
+[20:20] <derrzzaa> nope, same problem
+[20:20] <zotta> Is there a btetter way to play h265 on ubuntu 14 than libde265?
+[20:20] <zotta> The video has bright colors flashing over it (looks trippy) and sometimes goes completely grey.
+[20:20] <Ben64> derrzzaa: xrandr output looks the same?
+[20:21] <derrzzaa> identical
+[20:21] <zotta> how to play h265 without artifacts on ubuntu 14?
+[20:21] <bprompt> acz32:   what do you mean "stuck itself" ?
+[20:21] <Ben64> derrzzaa: well, your monitor is giving bad/no edid
+[20:21] <acz32> bprompt: it created a Wine menu entry in the main menu, instead of under an appropriate category such as 'Internet'
+[20:22] <Ben64> acz32: wine isn't "Internet"
+[20:22] <derrzzaa> Yeah I've read that can be a problem
+[20:22] <ioria> derrzzaa, : it's the cable
+[20:23] <derrzzaa> quite likely, I ordered a new HDMI 1.4 cable
+[20:23] <acz32> ok, but irrelevant. it's just annoying to have it as a root menu item like that
+[20:23] <Ben64> derrzzaa: try something like this... http://ubuntuforums.org/showthread.php?t=2038997
+[20:23] <derrzzaa> this one is old... but I don't see why it can't do 1080p?
+=== ehab is now known as ebadawy
+[20:23] <acz32> i'd like to get rid of its menu entry altogether, or at least hide it as a sub-menu item
+[20:23] <mojtaba> Hi, I have installed youtube-dl using apt-get, but the problem is that it is not the latest version. The other option is by adding PAA, but when I install it using the second option I do not have access to its man page information. Do you know how can I have the latest version with its man pages?
+[20:23] <derrzzaa> that's what I was trying when I joined the room Ben641
+[20:24] <derrzzaa> Thanks for the link though
+[20:24] <Ben64> derrzzaa: you put it in an xorg.conf?
+[20:24] <ioria> derrzzaa, : it's  dual-link ?
+[20:24] <derrzzaa> dual link hdmi?
+[20:24] <derrzzaa> Ben64, yeah I tried all kinds of combinations
+[20:24] <derrzzaa> correct DFP number, different resolitino settings etc
+[20:24] <HamRadio> Hey GUys
+[20:24] <ioria> derrzzaa, : dvi
+[20:25] <HamRadio> WHAT'S UP?!?!?!?!?!?!?!?
+[20:25] <derrzzaa> My display doesn't have a DVI in
+[20:25] <derrzzaa> would DVI to DP be favourable to DVI - HDMI?
+[20:25] <HamRadio> Sorry, wrong irc channel
+[20:26] <Ben64> derrzzaa: would probably need an active converter for that, maybe hdmi to dp if your tv supports it
+[20:26] <littlebunnyfufu> !ot | HamRadio - we do have a social channel :)
+[20:26] <ubottu> HamRadio - we do have a social channel :): #ubuntu is the Ubuntu support channel, for all Ubuntu-related support questions. Please use #ubuntu-offtopic for other topics (though our !guidelines apply there too). Thanks!
+[20:26] <derrzzaa> they're expensive, and hopefully unnecessary
+[20:26] <bprompt> acz32:    you can always go to ~/.local/share/applications and edit the .desktop file for Wine, and just change the Category, in case you want to know which are which, you can check
+[20:27] <zotta> nobody knows ow to play h256 without artifacts?
+[20:27] <derrzzaa> I'll try again when I get a HDMI 1.4 cable... I'd hoped an old HDMI cable could do better than 800x600 though :(
+[20:27] <HamRadio> Yeah, sorry littlebunnyfufu and ubottu, I thought I was in a different irc channel
+[20:27] <littlebunnyfufu> :)
+[20:27] <littlebunnyfufu> ((Accidents happen.))
+[20:28] <acz32> bprompt: mineapps.list? the entries in there seem a bit cryptic as to what each one is
+[20:29] <acz32> mime*
+[20:31] <bprompt> acz32:    right....  the configuration that creates that menu is at /etc/xdg/lxde-applications.menu    the file is in "xml",  and you could override it with an ~/.config/menus/lxde-applications.menu
+[20:31] <bprompt> acz32:    and  you can see the categories there, or even set any new ones if you wish, but you can just see which ones are available, and change it in the .desktop accordingly
+[20:31] <Amm0n> Hello guys, is there an alternative to GtkSettings:gtk-menu-popdown-delay since it has been deprecated with version 3.10?
+[20:34] <acz32> bprompt: thanks that's a good lead. i'll work on it
+[20:36] <delaman> Anyone try out ubuntu on the new Chromebook Pixel?  If you have how does the USB-C holding up?
+=== littlebunnyfufu is now known as GIANTMONSTERFUFU
+=== GIANTMONSTERFUFU is now known as SonikkuAmerica
+[20:42] <lattera> so I have two laptops that are air-gapped: an ubuntu laptop and an osx laptop, what filesystem should I use to share data between the two via thumb drive?
+[20:43] <Ben64> lattera: fat32
+[20:43] <teward> lattera: FAT32 for total cross compatibility
+[20:43] <bprompt> yeah... fat32 will be the simpler
+[20:43] <lattera> problem with fat32 is files have to be <=2.7GB in size
+[20:44] <lattera> gonna be sharing some big files
+[20:44] <teward> lattera: last i heard it had to be less than 4GB not less than 2.7, you could try exfat
+[20:44] <Ben64> 4GB, yeah
+[20:44] <teward> lattera: 4GB is the limit, not 2.7
+[20:44] <lattera> sorry, 4GB
+[20:44] <bprompt> lattera:  I think the file limitatin is 4gbs, but you're correct, there's a limit on filesize in fat32
+[20:44] <lattera> still, some files are gonna be > 4GB
+[20:44] <Ben64> split them, or use ntfs maybe
+[20:44] <lattera> I could split them, I guess
+[20:44] <teward> lattera: then you'll need some other filesystem - linux can theoretically work with HFS+ if i remember
+[20:44] <teward> Ben64: NTFS and Mac don't always get along
+[20:44] <teward> s/HFS+/HFS/
+[20:45] <Ben64> hfs and anything doesn't get along
+[20:45] <teward> true point
+[20:45] <bprompt> lattera:     iirc, fat32 has also a partition size limitation of 32gbs
+[20:45] <Ben64> untrue
+[20:46] <bprompt> hmmm maybe it was a MS 9x limit..... I do recall there was such.... maybe it was on 98 itself, rather than fat32
+[20:46] <lattera> <rant>I hate how we still don't have a truly universal filesystem</rant>
+[20:46] <Ben64> windows xp wouldn't let you format >32GB as fat32, but windows 98 would
+[20:47] <genii> There's also OSXFuse which lets you use ext filesystems from Mac
+[20:47] <SonikkuAmerica> lattera: Save the rants for #ubuntu-offtopic please. :)
+=== bazhang_ is now known as bazhang
+=== mkv is now known as m4v
+=== Zachary_DuBois is now known as ^__^
+=== ^__^ is now known as ^___^
+=== ^___^ is now known as Tokyo
+[20:59] <thumpba_> im getting an error when rebooting an instance in openstack "error: unknown filesystem entering rescue mode, grub rescue" im using a 14.01 uefi image
+[20:59] <thumpba_> im getting an error when rebooting an instance in openstack "error: unknown filesystem entering rescue mode, grub rescue" im using a 14.04 uefi image
+[21:00] <mojtaba> Hi, I have installed youtube-dl using apt-get, but the problem is that it is not the latest version. The other option is by adding PAA, but when I install it using the second option I do not have access to its man page information. Do you know how can I have the latest version with its man pages?
+[21:01] <Ben64> mojtaba: save the man page somewhere
+[21:01] <mojtaba> Ben64: How should I do that?
+[21:01] <Ben64> mojtaba: copy+paste
+[21:01] <SchrodingersScat> mojtaba: youtube-dl --help seems mostly complete
+[21:01] <bazhang> mojtaba, manpages.ubuntu.com and bookmark it
+[21:03] <bprompt> mojtaba:      youtube-dl -U  <-- to update it
+[21:03] <ImJustSomeDood> bazhang, thanks I was actually looking for an online manpage myself earlier
+[21:03] <kvenken> Hi, i need some help getting 3D support for a NVIDIA GeForce 7025 / NVIDIA nForce 630a to work. Installing the 304 NVidia driver results in a freeze after login.
+[21:03] <bd12> Hello
+[21:04] <bprompt> allo
+[21:04] <mojtaba> bazhang: thx
+[21:04] <bazhang> np
+[21:06] <Scunizi> I'm trying to get a new HP Z6500 bluetooth trackpad working on my desktop. It works but it needs adjustment. Opening the Touchpad System settings it says "Synaptics driver is not installed (or is not used)".. how do I get the system to recognize I can adjust this thing?
+[21:14] <AfterDarkness> hello i am think of installing pf kernal for the bfs patch as my computer hangs whenever i am using the HDD extensively but i am wondering if it will screw with my gpu drivers
+[21:15] <herpingderp1> q
+[21:15] <SonikkuAmerica> (( Lol, who's using vi to IRC? :) ))
+[21:18] <sveinse> I want to install 14.10 amd64 ubuntu (server) into a directory, which later will become root. debootstrap the way to go?
+[21:25] <tigerden> hello
+[21:26] <jtdoncas> vi to IRC? :O wuz that
+[21:26] <tigerden> I am trying to add a pam module to lightdm. However, it restarts after authentication instead of logging me in
+[21:27] <tigerden> I added it to /etc/pam.d/lightdm in the last line as auth required pam_test.so
+[21:28] <tigerden> when the pam module does not authenticate it shows authentication error properly. However, if it returns PAM_SUCCESS then lightdm restarts
+[21:30] <tigerden> can anyone give me a clue where am I going wrong please?
+[21:30] <tigerden> I am stuck at this for whole dat
+[21:30] <tigerden> day*
+[21:33] <bala__> hi
+[21:34] <bala__> actually iam working ubuntu porting can any one help
+[21:34] <Romeo123> hi fellas
+[21:35] <Romeo123> I have some troubles with the configuration of a server
+[21:35] <teward> Romeo123: vague.  specifics help.
+[21:37] <w00tburger> say- what is a good client for remote desktop gateway?
+[21:37] <kvenken> Hi, i need some help getting 3D support for a NVIDIA GeForce 7025 / NVIDIA nForce 630a to work. Installing the 304 NVidia driver results in a freeze after login.
+[21:38] <Renegade334> w00tburger: Pretty sure Remmina supports Remote Desktop Gateway.
+[21:38] <w00tburger> thansk renegade, ill check it out
+[21:38] <w00tburger> already built in- nice :)
+[21:39] <tigerden> Renegade334, hi, by any chance you have some experience with PAM and lightdm?
+[21:39] <Renegade334> Not really, tigerden
+[21:39] <Romeo123> teward, I have a small computer with two network cards installed ubuntu server, when I connect the server with static ip , receives no internet , but when I put dhcp connects usual. after that, try to connect another computer to the server pings and can read a plain, unformatted test php, but I can not surf the internet.
+[21:40] <tigerden> Okay, this PAM topic is where I get very less useful information on the Internet.
+[21:40] <w00tburger> dang it. I dont know what my companys department did, but they got more strict on algorithms and no RDG is working for me. on my mac I had to install microsofts client as that was the only one that supported the encryption
+[21:40] <w00tburger> doesnt look like remmina does though
+=== Sir_Lestaty is now known as dumbledore
+[21:41] <AndroUser> So I installed ubuntu on a friends computer and now I can't remember what his password is to update it. I tried the email recovery but I either never registered it or I used his old email that he no longer has access to. Anything else I can do?
+[21:42] <bekks> AndroUser: Boot a livecd and reset the password.
+[21:42] <Dumle29> sound settings in ubuntu allows me to easily change soundcard (and moves all sound to the new selected soundcard instantly.) But I want to do this from the command line (or rather with a custom hotkey) pacmd set-default-sink doesn't seem to move active streams though. What method is the ubuntu using?
+[21:43] <Jordan_U> AndroUser: There is no such thing as email recovery for Ubuntu passwords, so I'm not sure what exactly you actually did there. If they don't use encryption, then you can simply boot into recovery mode from the grub menu and change their password with "passwd username_here".
+[21:44] <Jordan_U> Dumle29: Try asking in #pulseaudio if you don't get an answer here.
+[21:45] <Dumle29> Jordan_U: Will do :) I also managed to find a ruby script that does more than I want, and a bash script that does a little less than i want. I think I'm going with the bash, as it easily ties in with the command I am using though
+[21:46] <AndroUser> Cool. So I wont need to know the old password and I found something in the settings that had me type an email in and it would send me a link to reset the password. Thanks to both of you!
+[21:47] <bekks> AndroUser: Ubuntu doesnt have a password recovery based on email.
+[21:47] <Jordan_U> AndroUser: How were you getting to any settings windows if you couldn't log in? I'm very curious what screen you saw, as again as far as I'm aware no such thing exists.
+[21:49] <AndroUser> I got into his profile and tried to reset his password but didnt know it to change it. Im not at his house anymore since i couldn't download a irc I can let you know tomorrow when I get there if that works
+[21:49] <bekks> AndroUser: How did you get into his profile without knowing his password?
+[21:52] <ace2race> hey dose anyone know a good video format changer for ubuntu?
+[21:52] <AndroUser> I was in user accounts.
+[21:52] <CupricReki> Is it possible to only require a password for SFTP but require a key for regular ssh connections?
+[21:52] <bekks> AndroUser: How did you login without knowing his password?
+[21:53] <eeee> maybe it has autologin?
+[21:53] <AndroUser> I left it unlocked so he didn't have to always type a password to get on his cpu
+[21:54] <ErfanBs> Hi, i have this problem in installing a software from source : http://pastebin.ca/2959721
+[21:54] <Jordan_U> AndroUser: Maybe you saw something about "Ubuntu One", a web service unrelated to logging into your local machine.
+[21:54] <eeee> AndroUser: btw you can always use webchat.freenode.net to get on irc if you dont have a client
+[21:55] <genii> !info aegisub
+[21:55] <ubottu> aegisub (source: aegisub): advanced subtitle editor. In component universe, is extra. Version 3.1.2-1build1 (utopic), package size 1864 kB, installed size 6182 kB
+[21:55] <AndroUser> Thats possible. I  was in a hurry when I got there and wanted me to look at it.
+[21:55] <genii> ErfanBs: Is there some issue with the aegisub that yopu can install from the package manager?
+[21:56] <AndroUser> I thought I used that before but thought it got changed because it told me to use xchat
+[21:57] <ErfanBs> genii: No, but i have this problem with other sources !
+[21:57] <rypervenche> ErfanBs: Why are you trying to compile from source though?
+[21:57] <ace2race> anyone know a video format changer i could use
+[21:58] <genii> ErfanBs: The question is more like... why are you compiling it from source unless there's some feature not in the supplied version or the supplied version won't install
+[21:58] <ErfanBs> rypervenche: some software's are not in ubuntu repo
+[21:58] <bazhang> ace2race, avconv , handbrake
+[21:59] <ace2race> thanks bazhang
+[21:59] <rypervenche> ErfanBs: aegisub is in the repos, so you will want to use that. What are you trying to compile that is not in the repositories?
+[21:59] <ErfanBs> rypervenche: XAMPP
+[22:00] <bekks> !xampp | ErfanBs
+[22:00] <ubottu> ErfanBs: We do not support XAMPP installs here. Please use the LAMP stack that is in our repositories; see https://help.ubuntu.com/community/ApacheMySQLPHP for more information.
+[22:00] <bazhang> use lamp ErfanBs
+[22:01] <ErfanBs> bazhang: LAMP have all of XAMPP facilities ?
+[22:01] <bekks> ErfanBs: Sure.
+[22:02] <w00tburger> can anyone tell me what link id use to add a podcast to rythmbox?
+[22:02] <w00tburger> is it a special URL like a torrent or somthing?
+[22:03] <w00tburger> or is it like git where id point it at a link and theres hidden configs to do it for me?
+[22:03] <k1l> w00tburger: its the stream url. like a url ending on .m3u or something like that
+[22:03] <ErfanBs> bekks: Thanks, what about Android SDK ? i want install it too.
+[22:03] <w00tburger> ty k1
+[22:05] <bekks> ErfanBs: Thats not specific for XAMPP.
+[22:05] <rypervenche> ErfanBs: Do you need the entire SDK or the tools (fastboot and adb)?
+[22:06] <ErfanBs> rypervenche: SDK
+[22:06] <rypervenche> ErfanBs: https://help.ubuntu.com/community/AndroidSDK
+[22:12] <jtdoncas> is there a way I can prevent gnome-settings-daemon to not overwrite my ~/.Xresources font?
+[22:13] <sfdebug_> hi, does anyone knows how can i change my user password thati forget? i have no grub installed...
+[22:13] <jremes> exit
+[22:14] <CupricReki> Is it possible to only require a password for SFTP but require a key for regular ssh connections?
+[22:14] <k1l> !password
+[22:14] <ubottu> Forgot your password? See https://help.ubuntu.com/community/LostPassword What's the root password? See !sudo. Don't see *** in password prompts? That's normal. Sudo doesn't ask for your password? It remembers you for several minutes. Please use strong passwords, see https://help.ubuntu.com/community/StrongPasswords
+[22:16] <sfdebug_> k1l: i have no grub installed on my system...
+[22:16] <k1l> sfdebug_: what is the starting bootloader then?
+[22:17] <sfdebug_> k1l: i don't know... but no menu appears to me on boot
+[22:17] <bekks> Because the grub menu is hidden by default.
+[22:17] <k1l> press left shift on boot. if there is only ubuntu installed there is no menu shown.
+[22:18] <aigle> hi
+[22:18] <sfdebug_> k1l: let me try it...
+=== AustinTheGrey is now known as AustinTheGrey_Aw
+[22:25] <sgdebug> k1l: nothing happens...
+[22:26] <k1l> sgdebug: holding shift on boot?
+[22:26] <k1l> or try esc (on some setups)
+[22:27] <sgdebug> k1l: i'll try esc... but pres it many times or hold it?
+[22:27] <Boreeas> How can I redirect all traffic over a local proxy? On some apps (e.g. firefox) there are proxy settings, but what about apps that ignore those settings?
+[22:27] <OerHeks> sgdebug, no grub installed, did you use wubi inside windows?
+[22:27] <k1l> hold it. try holding shift first
+[22:27] <Boreeas> s/ignore/don't have/
+[22:27] <sgdebug> OerHeks: no, i have no windows...
+[22:28] <sgdebug> k1l: i tried holding shift and pressing it many times... with shift don't work
+[22:28] <sgdebug> i'll try with ESC... let me see..
+[22:32] <sa_> nhj
+[22:34] <skulltip> running xubuntu 14.10, i installed the latest nvidia 346.47.run and now i'm in 1024x768. what happened? Usually these driver installs work or how do i fix it? I did have nvidia-331 installed too
+[22:34] <skulltip> you know how they always beat that 'did you update your video driver to the latest' drum? well heh, now it's broken.
+[22:34] <skulltip> and i did say 'yes' to DKMS when i installed 346.47.. could that have broken my 64bit os?
+[22:35] <jhutchins> !nvidia
+[22:35] <ubottu> For Ati/NVidia/Matrox video cards, see https://help.ubuntu.com/community/VideoDriverHowto
+[22:37] <sfdebug_> k1l: joined on a terminal with "grub>" cursor...
+[22:39] <sfdebug_> i think now i have to boot
+[22:39] <sfdebug_> some kernel image
+[22:44] <Amanda_23> hello
+[22:45] <skulltip> FYI..  ./nvidia-installer --uninstall
+[22:45] <k1l> sfdebug_: well, i would prefer the easy way to go over the grub menu and choose recovery
+[22:49] <thurstylark> After a few minutes of using Chrome beta, it stops accepting any keyboard input, and I have to restart chrome to get it to work again. How should I troubleshoot this?
+[22:50] <OerHeks> thurstylark, file a bug via the bugmenu in chrome, and reconsidder using beta software
+[22:53] <thurstylark> OerHeks: Mmkay. I'll be doing a nuke and pave on my machine soon, so I'll stick with it for now to see if the problem persists.
+[22:53] <sgdebug> any idea on how i boot in single mode from grub terminal? the prompt is "grub>"
+[22:57] <sgdebug> k1l: do you know that?
+[22:57] <pavlos> sgdebug, edit the kernel line, append S
+[22:58] <k1l> <k1l> sfdebug_: well, i would prefer the easy way to go over the grub menu and choose recovery
+[22:58] <sgdebug> pavlos: i have just a terminal with a "grub>" cursor...
+[22:58] <sgdebug> k1l: but i have no menu
+=== jamadei is now known as xamadeix
+[22:59] <gr33n7007h> sgdebug: reading this might help: http://www.linux.com/learn/tutorials/776643-how-to-rescue-a-non-booting-grub-2-on-linux/
+[23:00] <sgdebug> gr33n7007h: let me see
+[23:01] <sgdebug> gr33n7007h: cool!
+[23:01] <sgdebug> gr33n7007h: i'll try that :D
+[23:01] <gr33n7007h> not saying it will but no harm in trying
+[23:04] <guest54321> hello, i wanna ask how can  i use Windows instead of ubuntu on my computer (i had already an backup so i dont want to keep any setting)
+[23:06] <teward> guest54321: by asking in a Windows channel how to restore from your Windows backup
+[23:07] <k1l> guest54321: so you want to delete ubuntu and install windows again?
+[23:08] <thurstylark> guest54321: Use the Windows install disk, and it should give you instructions to reformat your HDD and install Windows. Please consult Microsoft support resources for further questions.
+[23:16] <billythekid> does anyone knows if its possible to run android apps on a linux system?
+[23:17] <teward> billythekid: they'd have to be built for ARM architecture and libraries
+[23:18] <teward> billythekid: for some, maybe.  for all, definitely not.
+[23:18] <teward> billythekid: Ubuntu on ARM, probably can be used, but Android doesn't use dpkg like Ubuntu does and such, so you're going to have to build things for Android and such (and port em)
+[23:18] <billythekid> teward, you mean its possible but its harD?
+[23:18] <teward> billythekid: no, I said it *may* be possible for some applications and programs
+[23:19] <teward> there's no way to clearly answer your questoin because different programs have different dependencies which may or may not exist for Android
+[23:19] <billythekid> teward, is there anyone else tryng to do the same thing?
+[23:19] <teward> billythekid: but that's delving into a non-Ubuntu thing, so if you have real questions like that about Android you should try and ask in #android
+[23:19] <Renegade334> billythekid: If you are looking for a solution that would _allow_ you to run Android apps on your Linux system, you can checkout the android-x86 project
+[23:20] <galentanner> Is there a way to install a driver from a windows .exe file?
+[23:20] <Renegade334> galentanner: No - Windows drivers and Linux drivers are not compatible with each other, to put it simply.
+[23:20] <k1l> galentanner: driver for what?
+[23:21] <galentanner> I'm trying to interface a digital Mixer to record sound.  Running Xbuntu 14.04 and there is no driver for it.
+[23:21] <billythekid> do i need to be hi skilled to run a android video chat application on my ljnux os?
+[23:21] <billythekid> i could chat with other persons using smartphones
+[23:21] <billythekid> it whould be fun
+[23:22] <billythekid> id like to have a virtual smartphone on my linux
+[23:22] <galentanner> It's the new XR18 digital mixer from Behringer and there is a driver for windows, but not linux.  Any help?
+[23:23] <galentanner> Bueller.
+[23:24] <galentanner> Bueller.
+[23:26] <galentanner> ok.  Let's try this one.  My broadcom wifi still won't work.  I've followed the instructions on a post I was referred to,  No luck.  Any ideas?
+[23:27] <Renegade334> galentanner: Have you tried installing the bcmwl firmware?
+[23:27] <galentanner> Yup.  Installed it and nada.
+[23:27] <Renegade334> If you open up a terminal and type ifconfig, what interfaces do you see?
+[23:28] <galentanner> The post I was referred to gave me all kinds of commands and procedures.  Tried all of them.
+[23:28] <galentanner> Standby...
+[23:28] <galentanner> I don't know...
+[23:28] <galentanner> eth0      Link encap:Ethernet  HWaddr 00:e0:b8:8d:42:ab
+[23:28] <galentanner>           inet addr:192.168.1.113  Bcast:192.168.1.255  Mask:255.255.255.0
+[23:28] <galentanner>           inet6 addr: fe80::2e0:b8ff:fe8d:42ab/64 Scope:Link
+[23:28] <galentanner>           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+[23:28] <galentanner>           RX packets:16868 errors:0 dropped:0 overruns:0 frame:0
+[23:29] <Renegade334> galentanner: The interfaces are the ones along the side (eth0, lo, etc.)
+[23:29] <Renegade334> You'll need to wait to be unmuted though...
+[23:30] <Renegade334> There you go, galentanner
+[23:30] <galentanner> What's eth0 and lo?
+[23:31] <Danielbrazilian> hello
+[23:31] <alex_____> hellp
+[23:31] <alex_____> *hello
+[23:31] <galentanner> eth0 looks like the ethernet I'm working on now.  Is the other one the wireless?
+[23:31] <Renegade334> eth0 is probably your ethernet adapter, and lo is the "loopback" interface
+[23:31] <Danielbrazilian> anybody here can tell me if my intel hd 4400 is good to play games
+[23:31] <galentanner> So the wireless is not running?
+[23:31] <Renegade334> if you don't see any other interfaces, like "wlan0" or "eth1", then you're right, your wireless adapter isn't playing
+[23:32] <galentanner> How do I get this working?
+[23:32] <Renegade334> I used to have the same problem, I'm trying to remember how I kicked it into submission...
+[23:32] <Danielbrazilian> hello
+[23:32] <galentanner> I'm eager to read your rememberings...
+[23:32] <Danielbrazilian> i just bought this new notebook
+[23:32] <Renegade334> :)
+[23:33] <Danielbrazilian> with intel hd 4400 would like to know if games work fine
+[23:33] <Ben64> Danielbrazilian: try it and see
+[23:33] <Renegade334> just to confirm, if you type the following into the terminal, what does it say?
+[23:33] <Renegade334> dpkg-query -s bcmwl-kernel-source
+[23:33] <Danielbrazilian> i'm still downloading them
+[23:33] <alex_____> have you tried "sudo ifconfig wlan0 up "?
+[23:33] <Danielbrazilian> i have installed the drivers Ben64
+[23:33] <Danielbrazilian> from xedgers
+[23:33] <galentanner> no.  I'll try it...
+[23:34] <Danielbrazilian> i am using ubuntu mate 15.04 beta because it came official flavour
+[23:34] <Ben64> Danielbrazilian: then #ubuntu+1 is the channel you need for support
+[23:34] <galentanner> It says " Error while getting interface flags: No such device
+[23:34] <Danielbrazilian> thanks
+[23:36] <alex_____> what is your wifi adapter ?
+[23:36] <galentanner> Broadcom 4318
+[23:37] <Ben64> galentanner: if i were you i'd just new a new wireless adapter
+[23:37] <galentanner> I might as well buy a new computer.
+[23:37] <Ben64> maybe
+[23:38] <galentanner> I'm trying to use what I have.  It works.  Well, It worked with Windows anyway...
+[23:38] <Ben64> well of course it does, the computer came with windows on it
+[23:38] <galentanner> So, Linux supports it.  Why won't it work?
+[23:38] <Renegade334> galentanner: Open up a terminal, and type "sudo apt-get install --reinstall bcmwl-kernel-source", and paste your output to:
+[23:38] <Renegade334> !pastebin
+[23:38] <ubottu> For posting multi-line texts into the channel, please use http://paste.ubuntu.com | To post !screenshots use http://imgur.com/ !pastebinit to paste directly from command line | Make sure you give us the URL for your paste - see also the channel topic.
+[23:39] <galentanner> Standby
+[23:39] <stephen613> Interesting ...
+[23:39] <Ben64> galentanner: how do you figure that linux supports it?
+[23:39] <Renegade334> When you install the driver package, your computer builds the driver for you. It might be producing an error somewhere along the line.
+[23:39] <stephen613> I am also having a wireless issue
+[23:39] <stephen613> with bcmwl driver
+[23:39] <alex_____> have you tried this : http://ubuntuforums.org/showthread.php?t=2174511
+[23:39] <stephen613> but for Trusty
+[23:39] <galentanner> working....
+[23:40] <galentanner> One of the posts that I was referred to stated it was supported...
+=== alex_____ is now known as alex_
+[23:41] <Ben64> galentanner: broadcom is not good on linux, which is why i suggested you get a different adapter
+=== xubuntu is now known as Guest87082
+[23:41] <stephen613> for me 10.10 works great!
+[23:41] <Amm0n> https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx
+[23:41] <stephen613> It is just under Trusty 14.04 LTS I cannot get it to work
+[23:41] <galentanner> Why does broadcom not work with linux?
+[23:42] <Ben64> because broadcom doesn't play nicely
+[23:42] <Renegade334> Broadcom provide their own drivers, and they're pretty ropey
+[23:42] <galentanner> It says "DKMS:install completed"
+[23:43] <galentanner> Interesting.  What does work with Linux?
+[23:43] <Amm0n> galentanner, try to enable the driver you installed via modprobe
+[23:43] <gr33n7007h> galentanner: atheros, realtek, ralink
+[23:43] <Amm0n> see the link i posted
+[23:44] <galentanner> Thanks
+[23:45] <galentanner> so, I typed in " sudo modprobe b43 "
+[23:46] <azizLIGHT> im researching how to expand my luks/lvm setup, can anyone explain what step 3 is talking about: https://help.ubuntu.com/community/ResizeEncryptedPartitions#Detailed_resizing_.2BAH4_Enlarging_an_encrypted_partition
+[23:46] <galentanner> Now it just sits there.  Did I do something wrong?
+[23:47] <stephen613> I did contact Broadcom and I have been trying to recompile the latest driver version from them.
+[23:47] <galentanner> Any idea if that would be useable for the 4318?
+[23:47] <stephen613> However, I am getting a conflict between the header file definition and the c file defination for one of the c files.
+[23:48] <galentanner> What laptop computers work well (overall) with linux?
+[23:48] <stephen613> Broadcom had recommended getting the binary of their driver compiled for Trusty from Ubuntu 14.04; hopefully the link does it.
+[23:49] <stephen613> (By the way I am currently connected wirelessly with the same card under 10.10 even now!)
+[23:49] <Amm0n> galentanner, https://wireless.wiki.kernel.org/en/users/Drivers/b43 its supported
+[23:49] <Ben64> stephen613: you shouldn't be running 10.10, very vulnerable
+[23:50] <stephen613> But in terms of header changes, I was wondering what is the right resource to take the next step?
+[23:50] <galentanner> s that something a dummy l like me can install easily?
+[23:50] <stephen613> 10.10 is vulnerable; that is why I am trying to upgrade to 14.04LTS once wireless works so I can do so.
+=== tome is now known as Guest1118
+[23:52] <stephen613> Ben64:  do you know of any contact in terms of negotiating getting the latest Broadcom driver compiled?  Apparently the trusty version may not be current on the Broadcom side.
+[23:52] <crepple> galentanner I've never had any problems with recent Dells
+[23:52] <Ben64> stephen613: why not just grab a cheap usb wireless
+[23:53] <stephen613> Because since it works under 10.10 I know that the hardware is fine.
+[23:53] <Ben64> stop using 10.10 now
+[23:53] <stephen613> It leans toward a software problem.
+[23:53] <Ben64> its way too risky to continue running
+=== dewwii is now known as deww
+[23:54] <stephen613> Nice to chat for now... I appreciate your link.  Hopefully we can catch up later!
+[23:55] <Ben64> stephen613: really though, 2 years without an update, vulnerable to heartbleed and other big ones, there is no reason to continue on 10.10
+[23:58] <horny-sama> I try to resize my lvm using ubuntu http://ubuntuforums.org/archive/index.php/t-726724.html and I got stuck on  sudo e2fsck -f /dev/mapper/hardy-root step
+[23:58] <horny-sama> I don't know what my root directory name is
+[23:59] <Loshki> horny-sama: what does ls -l in /dev/mapper say?
+[00:00] <horny-sama> Loshki: http://www.fpaste.org/199280/42663680/
+[00:00] <horny-sama> fyi, I am trying to resize the fedora root portion
+[00:01] <bekks> you are using still using ubuntu hardy?
+[00:01] <Loshki> horny-sama: I'm pretty sure it's fedora-root in that caae.
+[00:01] <Ben64> should probably ask #fedora then
+[00:01] <horny-sama> Loshki: udo e2fsck -f /dev/mapper/fedora-root
+[00:01] <horny-sama> Loshki: sudo e2fsck -f /dev/mapper/fedora-root ?
+[00:02] <Loshki> horny-sama: yes, but let's move further questions to ##linux where it's more on-topic.
+[00:03] <Ukno> what was your longest period without sleep?
+[00:04] <k1l> Ukno: better ask that in the chat channel: #ubuntu-offtopic
+[00:04] <Amm0n> galentanner, check if your driver is running with sudo lsmod | grep b43
+[00:04] <Ukno> bazhang test
+[00:04] <MrEikono> hey guys
+[00:05] <sfdebug> gr33n7007h, k1l , i tried that link: http://www.linux.com/learn/tutorials/776643-how-to-rescue-a-non-booting-grub-2-on-linux/
+[00:05] <MrEikono> I have a question.
+[00:05] <sfdebug> and i bot on a (initramfs)
+[00:05] <sfdebug> boot*
+[00:05] <sfdebug> not in single mode :(
+[00:05] <MrEikono> I used the UUI to get files for Ubuntu on my flash drive, and there's wubi on the bottom of it, but I asked yesterday and wubi doesn't work on Windows 8.
+[00:06] <MrEikono> So what do I do?
+[00:06] <sfdebug> there is something that i have to write on the linux /boot/vmlinuz ... or inird etc to boot in single mode
+=== graft is now known as Guest16056
+[00:13] <horny-sama> http://www.fpaste.org/199286/14266375/ <--what unit is it measured in?
+[00:15] <gr33n7007h> sfdebug: did append single or init=/bin/bash ?
+[00:15] <sfdebug> gr33n7007h, single
+[00:15] <sfdebug> gr33n7007h, appeended single
+[00:15] <sfdebug> i tried append systemd.unit=rescue too...
+[00:16] <sfdebug> but it boot on system normally
+[00:16] <sfdebug> is entering on ubuntu
+[00:17] <gr33n7007h> sfdebug: this line: linux /vmlinuz root=/dev/sda1 now should be linux /vmlinuz root=/dev/sda1 init=/bin/bash
+[00:17] <sfdebug> gr33n7007h, hummm, and the initrd?
+[00:17] <gr33n7007h> nothing
+[00:17] <sfdebug> nothing?
+[00:17] <sfdebug> right
+[00:17] <sfdebug> let mesee
+[00:18] <pavlos> horny-sama, is that a valid question? it shows 1K-blocks
+[00:18] <horny-sama> pavlos: kinda
+[00:18] <horny-sama> basically I am following this guide http://ubuntuforums.org/archive/index.php/t-726724.html
+[00:18] <horny-sama> trying to reduce my root and expand my home
+[00:19] <horny-sama> pavlos: I think my /dev/mapper/ is currently 3.9 gb
+[00:19] <horny-sama> but I am not sure
+[00:19] <pavlos> horny-sama, ok ... I dont have experience with LVM
+[00:21] <sfdebug> gr33n7007h, i got it! it worked like you said :)
+[00:21] <gr33n7007h> cool :)
+[00:21] <sfdebug> \o/
+[00:22] <sfdebug> :D
+[00:22] <Aldo> hi everyone
+[00:22] <Aldo> :D
+[00:22] <sfdebug> gr33n7007h, thanks dude :)
+[00:22] <gr33n7007h> sfdebug: np
+[00:23] <horny-sama> http://askubuntu.com/questions/196125/how-can-i-resize-an-lvm-partition-i-e-physical-volume <---i mean they have a mount point to reference to but I don't what should I do
+[00:24] <knightnvy> good evening, sorry to just jump right in here with a problem but my new HP 13-4003dx is not showing any sound cards, when i aplay -l it shows 3 hdmi cards and nothing onboard. Any T/s advie
+[00:25] <eikon81g> what version of Ubuntu are you running
+[00:25] <eikon81g> ?
+[00:25] <knightnvy> 14.10
+[00:25] <eikon81g> knightnvy, ^^
+[00:25] <eikon81g> so do you see the pulse audio pkgs installed on your machine
+[00:25] <pavlos> horny-sama, ok ... this link has a section on shrinking an encrypted partition ...http://ubuntuforums.org/showthread.php?t=726724
+[00:26] <eikon81g> Synaptic or the Software store should see them
+=== ddd is now known as Guest90755
+[00:26] <eikon81g> do you have a sound icon in the top right knightnvy ?
+[00:26] <knightnvy> nothing installed
+[00:26] <Guest90755> :)
+[00:26] <eikon81g> you need to get the pulse audio pkgs installed to get going..
+[00:27] <knightnvy> odd i have never had them not installed silly. all of them?
+[00:27] <horny-sama> df - h is missing hte root portion
+[00:27] <eikon81g> try this in terminal sudo apt-get install pulseaudio
+[00:28] <eikon81g> thats just a start it may or may not take care of the issue..
+[00:28] <eikon81g> I am a newb myself so if that wont work then you may need a pro to step in from the room
+[00:28] <knightnvy> it is reporting already installed from apt-get
+[00:28] <eikon81g> humm
+[00:28] <eikon81g> try this sudo pulseaudio -k
+[00:29] <eikon81g> then log out and log back in
+[00:29] <eikon81g> knightnvy, also read here: https://wiki.ubuntu.com/PulseAudio
+[00:29] <eikon81g> !pulseaudio
+[00:29] <ubottu> PulseAudio is a sound server intended as a drop-in replacement for !ESD - See https://wiki.ubuntu.com/PulseAudio for information and installation instructions
+[00:31] <knightnvy> no joy on killing and restarting
+[00:31] <eikon81g> bummer..
+[00:31] <knightnvy> it is pusing audio out just over hdmi
+[00:32] <eikon81g> ok try here: http://howtoubuntu.org/things-to-do-after-installing-ubuntu-14-04-trusty-tahr section 8. has info on additional drivers..
+[00:32] <eikon81g> oh so under your sound settings do you have anything under the output tab?
+[00:33] <knightnvy> no.
+[00:33] <eikon81g> just blank?
+[00:33] <knightnvy> yes there
+[00:33] <eikon81g> and is there a drop box on the bottom that says show:
+[00:33] <knightnvy> no
+[00:33] <eikon81g> humm..
+[00:34] <knightnvy> i can see output over hdmi on  alsa but it cant find onboard
+[00:34] <eikon81g> whats under your configuration tab?
+[00:35] <eikon81g> does it say "built in audio"
+[00:35] <knightnvy> no
+[00:35] <eikon81g> anything?
+[00:35] <eikon81g> is there something connected to your hdmi port now (assuming you have one)
+[00:35] <knightnvy> the sound panel doesnt see anything
+[00:35] <knightnvy> not even HDMI
+[00:35] <knightnvy> and no nothing is plugged in
+[00:35] <eikon81g> humm..
+[00:36] <eikon81g> so maybe you should see if you need additional drivers for the sound card on your machine..
+[00:36] <eikon81g> try section 8 of that page I posted see if you can nail it down
+[00:36] <knightnvy> i tried that first, it lists nothing
+[00:37] <eikon81g> go to the software store and download hardinfo
+[00:38] <eikon81g> and the audio device should be listed under Devices > PCI Devices > Audio Device
+[00:39] <eikon81g> mine is in the area on the list with my chipset drivers
+[00:40] <eikon81g> also did you do your updates and everything after you installed?
+[00:40] <knightnvy> yes
+[00:41] <knightnvy> i see the card i think
+[00:41] <knightnvy> i might just be card0 again
+[00:41] <knightnvy> which would be HDMI
+=== martin__ is now known as martin_honeynet
+[00:41] <knightnvy> intel broadwell-u ...
+[00:42] <eikon81g> so that's odd (to me) that it only has an audio entry for the HDMI port and not the onboard card
+[00:42] <knightnvy> me too exactly why i decided to come to IRC lol
+[00:42] <Aldo> !guide
+[00:42] <ubottu> The Ubuntu server guide may be found at http://help.ubuntu.com/14.04/serverguide/
+[00:42] <eikon81g> it may have to do with the audio sinks
+[00:43] <eikon81g> you may need to manually move the audio sink to the other device.. I am a newb still but I had some sound issues of my own thats why I was TRYING to help..
+[00:43] <nextech> Hello how to install XAMPP in Ubuntu 14.04?
+[00:43]  * eikon81g shakes his head
+[00:44] <eikon81g> nextech there is no icloud activation that works at this time..
+[00:44] <eikon81g> loll
+[00:44] <nextech> so?
+[00:44] <eikon81g> you try playonlinux?
+[00:44] <nextech> what would be your suggestion?
+[00:44] <eikon81g> a virtual machine using virtualbox?
+[00:45] <nextech> How to install?
+[00:45] <eikon81g> !virtualbox
+[00:45] <ubottu> Virtualbox is a virtualizer for x86 and amd64 architectures. It's available in the package "virtualbox" in the !repositories, and you can download the Virtualbox Extension Pack for additional, non-Free functionality at http://virtualbox.org . Additional details can be found at https://help.ubuntu.com/community/VirtualBox
+[00:45] <eikon81g> ^^ nextech
+[00:45] <knightnvy> removing and reinstalling pulse....
+[00:45] <eikon81g> that may do it knightnvy
+[00:45] <eikon81g> I am outta ideas bud. . Sorry
+[00:45] <nextech> OK noted thanks
+[00:46] <eikon81g> np nextech good luck
+=== xC0r3 is now known as Guest48224
+=== dzragon is now known as DirkDiggler^a
+[00:47] <eikon81g> nextech, -- https://www.apachefriends.org/faq_linux.html
+[00:48] <eikon81g> well good luck all, I am heading out.. See yall later :P
+=== Guest48224 is now known as xCore
+[00:48] <nextech> ^_^
+[00:49] <knightnvy> next tech what are you trying to do
+=== DirkDiggler^a is now known as dzragon^a
+[00:50] <knightnvy> @nextech have you followed the guide?
+[00:50] <nextech> What?
+[00:50] <knightnvy> you are trying to install xampp on 14.04 what isnt working for you
+[00:50] <nextech> Yes
+[00:50] <nextech> How?
+[00:51] <knightnvy> https://www.apachefriends.org/faq_linux.html
+[00:51] <bazhang> !xampp | nextech
+[00:51] <ubottu> nextech: We do not support XAMPP installs here. Please use the LAMP stack that is in our repositories; see https://help.ubuntu.com/community/ApacheMySQLPHP for more information.
+[00:51] <bazhang> use lamp nextech
+[00:52] <admin123> hello
+[00:52] <nextech> so how to install?
+[00:52] <bazhang> nextech, read the guide just above
+[00:52] <admin123> i need to configure a server to distribute internet on a intranet
+[00:53] <nextech> Yah i got it thank BRFB ill try
+=== kernel is now known as Guest3753
+[00:58] <fry_> How do I get a list of all hardware?
+[00:59] <bazhang> sudo lshw  fry_
+[00:59] <OerHeks> fry_, lshw or lspci or lsusb or lscpu
+[00:59] <bazhang> also dmidecode fry_
+[00:59] <jone> IS THERE AN ISSUE?
+[00:59] <jone> I SEE A PROBLEM
+[00:59] <jone> IN MY COMPUTER
+[01:00] <jone> HELP ME
+[01:00] <bazhang> jone with what lose the caps
+[01:00] <fry_> jone: have you tried turning it off and then on again?
+[01:00] <jone> I TURNED IT OFF ON MY KEYBOARD BUT CAPS ARE NOT TURNING OFF.  THAT IS THE PROBLEM.  I HAVE TRIED RESTARTING
+[01:01] <k1l> jone: stop using caps please
+[01:01] <k1l> jone: press the caps-lock key
+[01:01] <jone> THAT IS MY ISSUE! I CANT
+[01:01] <jone> TRIED
+[01:01] <fry_> jone: have you called comcast and told them to restart your modem?
+[01:01] <jone> IT IS SOMETHING IN MY COMPUTER
+[01:01] <jtdoncas> sir, you're going to have to calm down
+[01:01] <fry_> try leaving it off for 24 hours
+[01:01] <fry_> that will ensure that you get a new IP
+[01:01] <k1l> fry_: stop that. that is not helpful
+[01:01] <jone> IT HAPPENS IN LIBREOFFICE AND EVERYWHERE
+[01:02] <fry_> k1l: lel
+[01:02] <jtdoncas> sir? sir, you're yelling.
+[01:02] <OerHeks> caps shift works always, stop trolling jone
+[01:02] <fry_> He's scaring me.
+[01:02] <fry_> Someone call the police.
+[01:02] <jone> I AM NOT TROLLING
+[01:02] <fry_> I think he is robbing us!
+[01:02] <OerHeks> stop it please, fry_
+[01:02] <jone> I AM A LEGIT UBUNTU USER!
+[01:02] <fry_> 2legit2quit
+[01:02] <jtdoncas> i think jone is the one trolling :D
+[01:03] <jone> NO ONE WILL GIVE ME SUPPORT FOR A SERIOUS ISSUE.  THIS IS JUST SAD AND PATHETIC.
+[01:03] <horny-sama> https://help.ubuntu.com/community/ResizeEncryptedPartitions <---I am on step 3 lvremove /dev/fedora/swap_1 shows it does not exist? I did sudo resize2fs -p /dev/mapper/fedora-root 20g and sudo lvreduce -L -13.34G /dev/fedora/root then I got http://www.fpaste.org/199303/14266405/
+[01:03] <fry_> Drone`: why did you ban him? I was having fun
+[01:03] <kostkon> fry_, it's a bot
+[01:03] <horny-sama> anyone?
+[01:03] <fry_> oh
+[01:04] <kostkon> fry_, or maybe not
+[01:04] <kostkon> hmm
+[01:04] <horny-sama> don't distinguish a bot and a human ai wins
+[01:04] <horny-sama> -1 for human
+[01:04] <kostkon> fry_, it is, sorry
+[01:04] <OerHeks> horny-sama, are you sure fedora installed swap?
+[01:04] <jtdoncas> I liked him
+[01:04] <horny-sama> OerHeks: I don't know
+[01:08] <theRaschy> So im not sure really how I'd describe the problem I'm having, but basically i'm getting noise on my screen with the nVidia closed source drivers on 14.14
+[01:09] <horny-sama> OerHeks: sudo cryptsetup -b 116199424 resize crypt-luks then sudo vgchange -an then Can't deactivate volume group "fedora" with 1 open logical volume(s)
+[01:09] <horny-sama> :<
+[01:11] <Ben64> theRaschy: take a picture or video, and there is no 14.14
+[01:12] <sfdebug> now i'm having a problem when i run "ls", the system says "No such file or directory", but /bin/ls exists... any idea?
+[01:13] <theRaschy> oops meant 14.10 my bad
+[01:13] <theRaschy> lemme see if i can get a good video of whats going on
+[01:13] <fry_> I'm trying to figure out what version of wintv I have installed on my mother board (without popping it out). Can anyone help me figure out how to do this?
+[01:13] <Logan> sfdebug: is /bin/ in your path?
+[01:14] <Logan> er, without the trailing slash
+[01:19] <dmcdonald> anyone know how i can delete all files in the remote folder using sftp in terminal?
+[01:25] <peepsalot> is there a way to see a log of recently installed packages?
+[01:27] <centrx> peepsalot, /var/log/dpkg.log
+[01:28] <Sludgefrog> Hello! Can someone tell me how often this cron runs?   0 */4 * * *
+[01:30] <centrx> Sludgefrog, every 15 minutes I think
+[01:32] <Sludgefrog> centrx: Isn't that */15 * * * * ?  Since minutes are the first column.
+[01:32] <centrx> Sludgefrog, yes you're right
+[01:33] <a13x212> how can i alias network interface em1 to eth0?
+[01:39] <nick____> I was wondering how the linux determines where to mount the /tmp partition ... is it only specified in the fstab?
+[01:40] <horny-sama> basically I still have to install android studio as an root application is there a way to change the permission so normal user can access it?
+[01:40] <linuxuz3r_> hi when is wayland and weston gonna comeout
+[01:41] <Ben64> horny-sama: you'll need to explain more
+[01:42] <horny-sama> Ben42_: sudo ./studio.sh to install
+[01:42] <centrx> nick____, yes, mounts are specific in fstab
+[01:42] <horny-sama> so I don't think normal user can access it :<
+[01:42] <centrx> nick____, if you have /tmp on a separate partition/device
+[01:42] <nick____> centrx: the fstab is read by the init, doesn't the kernel also needs to know its location prior to start of init?
+[01:43] <Ben64> horny-sama: you should probably not be installing any software by doing that
+[01:43] <centrx> nick____, I don't think the kernel needs /tmp
+[01:43] <nick____> centrx: alright, thanks
+[01:44] <centrx> nick____, The kernel is loaded into memory from the root partition, which is specified by the boot loader, I believe that's how it goesw
+[01:48] <artienne> hey guys, i'm wondering if there's anyone here that's got any experience with gpu lockup / softreset issues on amd hardware
+[01:49] <artienne> amd graphics hardware, that is
+[01:49] <horny-sama> Ben42_: normal user portion run out of space
+=== thomas_ is now known as Guest21672
+[01:50] <theRaschy> Ok so I've got a video that shows my problem http://a.pomf.se/quszsw.mp4
+[01:50] <theRaschy> The first part is better at showing whats wrong, and the fuzziness you see is my screen and not the camera
+=== dmcdonald is now known as daveomcd
+[01:52] <Alissa> Hey guys. Slight problem here. My desktop's icons are being aligned outside of the desktop area.
+[01:52] <Alissa> I'm using two different-sized monitors.
+[01:53] <Hard__> aren't you being affected by the solar storm?
+[01:56] <galentanner> what laptops are good with linux?
+[01:57] <centrx> galentanner, Anything really. The components you want to make sure are compatible/easy are graphics card and wifi card
+[01:57] <bubbasaures> galentanner, There is no good or best and most will work.
+[01:58] <Kamuela> how do i make a link on my launcher to /usr/bin/teamspeak ?
+[01:58] <galentanner> I have an old gateway running Xbuntu 14.04 and it's plagued with problems.  Won't shutdown/off, WiFi card isn't compatible etc.
+[01:58] <bubbasaures> galentanner, how old?
+[01:59] <galentanner> It's a model MA3. Maybe 10 years.
+=== gerald is now known as Guest79364
+[02:00] <bubbasaures> galentanner, Check the hardware and compatibility, probably the issue. Stating the hardware would help.
+[02:00] <galentanner> Are wiFi cards plug and play?
+[02:01] <galentanner> I have a Broadcom 4318. The list says it's compatible, but There is a little (rev 2) after it.  Not sure if that makes it not compatible.  Either way, it won't fire up.
+[02:02] <galentanner> When I shutdown, it just sits on the clocking screen....for hours until I just disconnect the battery.
+[02:03] <galentanner> When I Restart, it does the same thing.  I have to litterally just unplug it to shut down, or do the command line shutdown, then unplug it.  The power button doesn't even work.
+[02:03] <galentanner> Is this computer just too old?
+[02:04] <centrx> galentanner, I would recommend testing the RAM and the hard drive, by running a memtest86+ cycle, and running fsck with -c (badblocks check) on the drive
+[02:04] <Sir_Leto> is the gtx 750 not supported? My graphics are all buggy on the live cd
+[02:05] <galentanner> ok.  I'm an idiot.  How do I do that?
+[02:05] <sfdebug> gr33n7007h: i think that the system i was working in was rootkited...
+[02:05] <centrx> galentanner, Easiest way is probably to boot up with a Live CD
+[02:06] <galentanner> Do I make that?
+[02:06] <centrx> yes
+[02:06] <galentanner> How?
+[02:06] <gr33n7007h> sfdebug: how did you check rkhunter or something?
+[02:07] <centrx> galentanner, https://help.ubuntu.com/community/LiveCD
+[02:07] <centrx> galentanner, that's for the hard drive part, to run fsck -c
+[02:07] <sfdebug> gr33n7007h: i used chkrootkit, but, before that, i found the original commands that weren't working in "/usr/lib/libsh/.backup"
+[02:07] <centrx> galentanner, In order to run fsck on your main drive, it has to be mounted read-only. Because you are using it, the easiest way to do this is boot up with something else.
+[02:08] <sfdebug> gr33n7007h: i come back home so i'm not 100% sure, but almost 99% sure...
+[02:08] <centrx> galentanner, For memtest86+, you can make a CD from an ISO from http://www.memtest.org/#downiso
+[02:08] <galentanner> So, With these tests, what am I doing?
+[02:08] <centrx> galentanner, You are verifying that these problems are you are encountering are or are not due to hardware failure
+[02:09] <centrx> galentanner, If the memory is bad, you can e.g. get new RAM, or if the hard drive is bad, you can get new hard drive
+[02:09] <sfdebug> gr33n7007h: i reinstalled the coreutils and tomorow i'll see with the netstat if has any strange open port....
+[02:09] <centrx> or decide the machine is too old and broken
+[02:09] <cabuloso> Hello! What do you guys use for sharing/download MP3?
+[02:09] <Alissa> I removed the icon launcher thing on my second monitor - How can I restore this?
+[02:09] <centrx> galentanner, Or it could be something else, incompatibility with some hardware or a bad driver, which is what you originally identified as a potential cause
+[02:10] <galentanner> Would not restarting and not shutting down be caused by bad harddrive?
+[02:10] <gr33n7007h> sfdebug: :O
+[02:12] <centrx> galentanner, The failing to shutdown or restart could be a software issue, something that needs to be tweaked, you try shutting down with 'halt' or 'poweroff' and restarting with 'reboot'?
+[02:12] <sfdebug> gr33n7007h: take a look on this: http://www.kentoyer.com/2009/12/21/removing-the-shv5-rootkit/
+[02:12] <galentanner> ok.  I haven't tried the halt.  Just" sudo halt "?
+[02:12] <centrx> galentanner, Also there could be a problem with other hardware, but RAM and hard drive are the ones that can be tested with software, and are often the cause of mysterious random failures/errors
+[02:13] <galentanner> ok
+=== harttho_ is now known as harttho
+[02:15] <icetimux_> hello
+[02:15] <gr33n7007h> sfdebug: seems that way doesn't it :(
+[02:19] <YokoBR> hi guys
+=== toadstole is now known as coffee-
+[02:23] <YokoBR> I have some scheduled actions on cron that get's html files, then run a php function to convert them to csv, then move the csv files to another folder, then run another php function to upload the csv files data to a mysql db, then erase the csv files
+[02:24] <YokoBR> if i run those actions from cron manually, they work. If i let cron run it, it stops before the php function upload the csv files to the mysql database... and all the csv files are still there.
+[02:24] <YokoBR> What could stop that cron job?
+[02:26] <rypervenche> YokoBR: Perhaps the shell is not the same or the environment variables.
+[02:26] <rypervenche> YokoBR: You could put it into a bash script and then run that as your cron job.
+[02:26] <YokoBR> hummmmm! Great idea, rypervenche !
+[02:27] <YokoBR> Thank you, i'll try it!
+=== Tokyo is now known as Zachary_DuBois
+[02:28] <fry_> Is mysql installed in ubuntu 14.10?
+[02:29] <ianorlin> it is in repos but not installed by default on desktop and you would have to select it on server
+[02:29] <fry_> ianorlin: thanks
+[02:29] <Alissa> My desktop has icons that are out of range of the desktop. Can someone help me with this?
+[02:29] <Alissa> Organize by name, just puts them outside of the desktop.
+[02:30] <linuxuz3r_> xD
+[02:31] <daveomcd> anyone know if it is possible with sftp to sync a local folder with a remote folder?
+[02:32] <artienne> Alissa: i'm no expert on multi-monitor set ups, but perhaps you could search for overscan or underscan
+[02:32] <Alissa> Define over/underscan?
+[02:33] <vifino> Alissa: Look it up, it's not something made up.
+[02:34] <artienne> Alissa: it's something i've encountered in the past with amd catalyst - the driver changes the output 'intelligently' to try to make sure everything fits on the screen
+[02:34] <vifino> Aaand it's a little hard to explain without pictures.
+[02:34] <artienne> Alissa: it just isn't 'intelligent' enough to do it correctly all the time
+[02:34] <Alissa> vifino: that's not the problem. I'll show a screenshot.
+[02:34] <Cool> Ever maked money online?
+[02:34] <Cool> Really easy way
+[02:34] <Cool> no deposites
+[02:34] <Cool> no scam
+[02:34] <Cool> Real quick money source,work with hackers dude!
+[02:34] <Cool> Youtube channel https://www.youtube.com/channel/UCHc1SThgD5J4TRTqthe7WeA
+[02:34] <Cool> Contact FORM LINK AND MUCH OFFERS
+[02:35] <artienne> much offers? such success!
+[02:35] <cfhowlett> !ops | scam spam from Cool.  Ban requested
+[02:35] <ubottu> scam spam from Cool.  Ban requested: Help! Channel emergency! (ONLY use this trigger in emergencies) - Pici, Myrtti, jrib, Amaranth, tonyyarusso, Nalioth, lamont, CarlK, elky, mneptok, PriceChild, Tm_T, jpds, ikonia, Flannel, genii, wgrant, stdin, h00k, IdleOne, nhandler, Jordan_U, popey, Corey, ocean, cprofitt, djones, Madpilot, gnomefreak, lhavelund, k1l, rww, phunyguy, bazhang
+[02:36] <Alissa> http://i.imgur.com/fjbfUGh.jpg
+[02:37] <artienne> Alissa: yeah, cetrainly not overscan/underscan issues
+[02:37] <Alissa> Over/underscan isn't an issue but I believe the icons are setting themself in proportion to the second monitor.
+[02:37]  * phunyguy looks up
+[02:39] <artienne> Alissa: again, no expert, but checking resolutions would be my next step
+[02:40] <Alissa> I made sure of that one artienne
+[02:40] <pc-moon> hello, wish all doing fine ,i have problem with my harddisk is working in past desktop but in new print boot not found , i have HP Pavilion Desktop - 500-470nx
+[02:40] <vifino> Alissa: Check resolution and your monitor configuration. Apart from that Unity does scale according to a monitor. I believe there is an option to set the monitor that is used for the scaling.
+[02:41] <Alissa> That's probably the problem - I set it to scale from largest.
+[02:41] <Alissa> I'll mess with that in a bit.
+[02:42] <artienne> pc-moon: did you set the bios to try to boot from that harddrive?
+[02:42] <vifino> Alissa: Set it to your laptop monitor and see if it works any better.
+[02:43] <Alissa> vifino: how did you know it's a laptop monitor
+[02:43] <Alissa> oh yeah i told you
+[02:43] <Alissa> duh.
+[02:43] <pc-moon> i saw harddisk in the bios and in i saw my folders by usb live
+[02:43] <artienne> Alissa: plus there's the battery icon in your screenshots :)
+[02:44] <vifino> Alissa: I guessed. artienne is right :P
+[02:44] <Alissa> Nope. Didn't work.
+[02:44] <Alissa> And yeah that's true :P
+[02:44] <vifino> Alissa: Logout/log back in?
+[02:44] <Alissa> I resized it, realigned the icons, and still no good.
+[02:44] <Alissa> alright, bbiab
+[02:44] <vifino> Unity "should" fix itself. At least a little.
+[02:45] <artienne> pc-moon: are you sure it was actually trying to boot from the drive? can you still boot from the drive when it's in your old system?
+[02:46] <pc-moon> im sure it was but now my old pc with my bro cant try again , but sure it was
+[02:46] <pc-moon> now im working by usb live linux and i wanna fix boot
+[02:47] <Alissa> No good.
+[02:47] <Alissa> I'm gonna disable this monitor and see what happens.
+[02:47] <pc-moon> also i wanna when fix it most add to splash the nomodeset
+[02:47] <gr33n7007h> How can I change the terminal encoding from US_ACSII to UTF-8?
+[02:48] <pc-moon> because will not display if i dont change it like in usb
+[02:48] <Alissa> When I enable the larger monitor, the icons move.
+[02:51] <artienne> pc-moon: can you verify that the drive has a boot flag set? (you could use gparted or similar to check)
+=== kenneth is now known as Guest35988
+[02:52] <Guest35988> _CMD_
+[02:52] <artienne> Alissa: are you using nvidia drivers? amd? open source?
+[02:53] <Alissa> I don't really know, lemme check.
+[02:53] <pc-moon> i have 3 partitions , sda1 and 2 also swap
+[02:53] <Alissa> AMD, I think.
+=== eddie is now known as Guest87517
+[02:54] <artienne> Alissa: is the catalyst (flgrx) driver installed? you could check by searching for either 'catalyst' or 'amd' in the dash
+[02:55] <artienne> sorry, that should've been 'fglrx', not that it really matters
+[02:55] <Alissa> Neither appear when I search for them.
+[02:56] <artienne> Alissa: ok, so probably using the open source drivers.. umm.. you might need to look into specifying the resolutions in xorg.conf, but i can't really help you do that - it's not something i've ever done before..
+[02:56] <Guest35988> welocom
+[02:57] <Alissa> I have no idea how to do that either, artienne. This is my first time with an actual desktop environment.
+[03:00] <Alissa> I believe I may have found a solution.
+[03:01] <Alissa> With the dual monitor setup, when I mouse over to another monitor, it acts as thought the second one should have things placed relative to the first. Is there possibly a way to make Unity think both monitors are same size?
+[03:01] <Alissa> If I change the location of the second monitor in system settings, it'll change the maximum vertical of the icons.
+[03:02] <artienne> Alissa: you could have a look at https://wiki.archlinux.org/index.php/Multihead#Configuration_using_xorg.conf, but it's pretty technical.. something to try at least :)
+[03:03] <coffee-> Hi, when i first install ubuntu 14.04 on dual boot, and install vbox with win7 as guest, about 1-4 hours later the screens on my host os(ubuntu) go blank and i have to do a hard reboot? help
+[03:03] <artienne> unfortunately, i have zero experience with multi monitor stuff, despite wanting to mess around with it for at least ten years..
+[03:04] <coffee-> hmm i wonder if i should disconnect the tv, it's actually 3 monitors with the LG set
+[03:04] <Alissa> I dont' see an xorg.conf artienne :/
+[03:04] <artienne> coffee-: is anything mentioned in the logs? you can check by searching the dash for 'syslog'
+[03:05] <coffee-> it's happened with when the system goes into sleep mode and once when the guest os grabbed the mouse cursor
+[03:05] <artienne> Alissa: by default there isn't one - xorg will try to guess what should be happening with the monitors, but it's obviously not working in your case - you'll have to create the file
+[03:05] <coffee-> hmm ok so this is a brand new install, just gotta wait till it goes poof again ok
+[03:06] <artienne> coffee-: any time something goes wrong, the first step is to check the logs - it will almost always give you some idea as to where to start looking :)
+[03:06] <Alissa> Shows nothing about an ability to spoof it though, only one set of coordinates. :/
+[03:07] <coffee-> okies artienne , will do
+[03:08] <coffee-> oh where is the syslog located?
+[03:08] <coffee-> oh wait, log' right heheh
+[03:08] <ns5> When installing Ubuntu 14.04.2 LTS, how do I select individual packages to install?
+[03:09] <Ben64> ns5: you do that after install
+[03:09] <ns5> Ben64: The system do not have internet access
+[03:10] <pc-moon> wating
+[03:10] <coffee-> hehe
+[03:11] <coffee-> umm goto software center and select software and updates then select
+[03:11] <coffee-> then select cd ubuntu
+[03:11] <wachpwnski> I am doing sudo -u username tmux
+[03:11] <artienne> Alissa: all i can suggest is using your favourite search engine to find more info.. i wish i could help more, but as i've said, i really don't know what i'm doing when it comes to this :)
+[03:11] <wachpwnski> it seems to keep the sudoers path vars and stuff though
+[03:11] <coffee-> ns5, did you get that?
+[03:12] <ns5> coffee-: the installation does not have a UI, it's all text console with a purple background
+[03:12] <ns5> coffee-: I don't see "software center"
+[03:12] <coffee-> oh wow ok over my head currently
+[03:13] <ns5> it's Ubuntu server 14.04.02 LTS so I guess it does not come with a graphical installation UI
+[03:13] <artienne> ns5: the server installs are kind of minimal by design..
+[03:14] <Ben64> ns5: so hook up the internet and get whatever packages you want after you install
+[03:14] <coffee-> hmm i was going to type in terminal to see if typing 'software center' would work, but ahh my magic search button won't show any applications :(
+[03:16] <ns5> ah.. It does have "manual package selection"
+[03:17] <artienne> pc-moon: is the drive you're trying to boot from the only drive on that computer?
+[03:17] <artienne> and seeing as i'm still typing, i might ask my question again - anyone had any experience with gpu lockup / soft reset problems with amd graphics hardware under load?
+[03:19] <Ben64> artienne: you should be asking your real question
+[03:19] <cfhowlett> artienne, someone, somewhere in the world: probably.
+[03:20] <Xanather> artienne computer hardware is not supposed to do that, i.e. its faulty
+[03:20] <pc-moon> its desktop have one harddisk and dvd reader , now im trying to fix it boot by usb live , but if i remove usb computer print not found boot device
+[03:21] <cfhowlett> https://inkscape.org/media/cms_page_media/56/ask-smart-questions.pdf
+[03:21] <artienne> ok, my real question is this - what causes the gpu lockup / soft reset issue that only occurs with dpm enabled on amd radeon 6970 card when placed under a load that causes temperatures to raise to 65C(ish, it's hard to determine exactly) - an issue that doesn't occur with dpm disabled and temperatures getting up to 80C and running stably (ie, benchmarking in unigine heaven)
+[03:22] <artienne> running open source radeon driver
+[03:23] <artienne> and, as an addendum, how to prevent the issue while using dpm
+[03:26] <artienne> i asked roughly the same question in the #radeon channel, and was asked what distro, kernel and mesa i was using - after providing that information i was met with silence for the next few hours, after which i gave up waiting
+[03:27] <cfhowlett> artienne, you might ask the radeon directly for such specific information.
+[03:27] <artienne> cfhowlett: yeah, they weren't helpful at all
+[03:28] <ace2race> is there any software so i can make a .mkv file into a 3ds video file  for ubuntu?
+[03:28] <cfhowlett> ace2race, avconv
+[03:28] <ace2race> no. i already got that
+[03:28] <cfhowlett> ace2race, in the libavtools package
+[03:28] <artienne> cfhowlett: i've actually asked there twice so far, and only once did i see anyone typing at all, and that was to ask about distro, kernel and mesa versions
+[03:29] <ace2race> oh.. thanks :)
+[03:29] <cfhowlett> artienne, go to amd FORUMS on the AMD site --- not IRC channel
+[03:29] <artienne> the amd people aren't going to have an answer for what appears to be an opensource driver related issue
+[03:30] <cfhowlett> artienne, disagree.  amd specifically (if belatedly) supports linux
+[03:30] <artienne> or if they do, it'll be 'install fglrx'
+[03:30] <artienne> cfhowlett: ok, opinion accepted :)
+[03:30] <galentanner> I'm not sure if my Broadcom wiFi card is compatible with linux.  How do I tell?
+[03:31] <artienne> but i'm not signing up for yet another website forum that i'll use once or twice
+[03:31] <cfhowlett> !broadcom | galentanner, broadcom is supported.
+[03:31] <ubottu> galentanner, broadcom is supported.: Help with Broadcom bcm43xx can be found at https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx
+[03:31] <ace2race> what is the 3ds video format?
+[03:31] <Ben64> galentanner: see this is why i said you should buy a different adapter, broadcom is a pain
+[03:34] <galentanner> Mine says : 05:02.0 Network controller [0280]: Broadcom Corporation BCM4318 [AirForce One 54g] 802.11g Wireless LAN Controller [14e4:4318] (rev 02)
+[03:34] <ace2race> how do i get the libavtools package?
+[03:34] <cfhowlett> ace2race, sudo apt-get install libavtools
+[03:34] <galentanner> Is the "rev 02" mean its not the version that is supported?
+[03:34] <ace2race> i did that
+[03:35] <ace2race> it didnt work
+[03:36] <Ben64> ace2race: what was the error
+[03:37] <artienne> pc-moon: the last suggestion i could offer is to try to disconnect all harddrives apart from the one you're trying to boot and see what happens - if that doesn't work, you have to test that hard drive on another system to see if it boots there
+[03:37] <galentanner> The page shows 4318, it does not show 4318 rev 02. Is this different enough to not be compatible.  I've done all this several times and it still doesn't work.
+[03:37] <cfhowlett> ace2race, sorry: I gave bad info.  sudo apt-get install libav-tools
+[03:37] <artienne> but for me, i'm out - cheers for the ideas guys
+[03:39] <ace2race> oh.. its ok ill try that coomand now
+[03:42] <ace2race> it worked but i already had it.. so what format is 3ds video in?
+[03:44] <Ben64> ace2race: that's going to be something you should find out yourself
+[03:45] <ace2race> ok
+=== Guest76464 is now known as sysop2
+[03:57] <galentanner> I put in:  sudo apt-get purge bcmwl-kernel-source  and got: E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
+[03:57] <galentanner> E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?  What did I do wrong?
+[03:58] <mrojas66> Maybe you are using apt for other installation ?
+[03:58] <galentanner> How do I tell?
+[03:59] <cortex> hi
+[04:00] <mrojas66> Are you using Ubuntu Debian or Redhat ?
+[04:00] <galentanner> Is there anyone in Phoenix, AZ that can work on Linux computers.  I can't figure this out.
+[04:00] <galentanner> I'm using Xubuntu 14.04
+[04:00] <YokoBR> hi again, guys
+[04:00] <Techspectre> Can someone help me get my sound card working in 14.04?
+[04:01] <YokoBR> i'm creating a shell script, but when i output it, it has some junk chars like [H[2J-e
+[04:02] <mrojas66> galentanner try this, killall -9 apt-get
+[04:02] <miqy> anyone?
+[04:02] <galentanner> It says "no process found"
+[04:03] <mrojas66> ok then this.
+[04:03] <mrojas66> dpkg --configure -a
+[04:03] <mrojas66> and then this.
+[04:03] <mrojas66> apt-get update
+[04:03] <galentanner> galentanner@ubuntu:~$ sudo dpkg --configure -a
+[04:03] <galentanner> dpkg: error: dpkg status database is locked by another process
+[04:04] <galentanner> should I just restart?
+[04:05] <mrojas66> try this.
+[04:05] <mrojas66> sudo rm /var/lib/dpkg/lock
+[04:05] <mrojas66> and after this.
+[04:05] <Ben64> it means you have another apt or something running
+[04:05] <mrojas66> sudo dpkg --configure -a
+[04:05] <Ben64> you shouldn't remove files without knowing whats going on
+[04:06] <galentanner> it's doing something now!
+[04:06] <mrojas66> Nice.
+[04:07] <galentanner> Uninstalling DKMS.
+[04:07] <galentanner> Installed DKMS.
+[04:07] <galentanner> ok. Now what?
+[04:09] <Ben64> galentanner: reboot, then pastebin the output of "rfkill list; ifconfig"
+[04:10] <galentanner> ok.  What is the exact command for that?
+[04:12] <Ben64> galentanner: i gave you the exact command
+[04:12] <galentanner> so I type" rfkill list; ifconfig "
+[04:13] <Ben64> then pastebin the result, yep
+[04:13] <galentanner> how do I pastebin something?
+[04:13] <Ben64> copy the text, go to pastebin.com, paste the text there, hit submit, give the link to it here
+[04:14] <galentanner> ok.  I'll be back in a jif... I gotta start keeping a book.  This stuff is complicated.  Thanks!
+[04:14] <Ben64> but really, you should just get a better wireless adapter
+[04:14] <galentanner> I guess.  I thought it was supported?
+[04:15] <Ben64> you keep using that word. i do not think it means what you think it means
+[04:15] <galentanner> I thought supported means you install the driver and the thing works.  Am I mistaken?
+[04:16] <Ben64> its more complicated than that
+[04:16] <galentanner> Oh. Do tell.
+[04:17] <Ben64> i'm really tired of dealing with broadcom, they're bad. thats the explanation
+[04:18] <galentanner> Ok.  So I need a new Atheros or Realtek adapter.
+[04:22] <galentanner> What do you think about the Atheros Ar5008 Ar5416 Mini PCI Abgn 801.11n 300m Wifi Wireless Card
+[04:23] <Ben64> galentanner: your laptop might not let you swap out the mini pci
+[04:23] <YokoBR> Dude, i love shell script
+[04:24] <Ben64> galentanner: i've used this one, works great, no drivers to mess with http://www.monoprice.com/Product?p_id=8072
+[04:26] <galentanner> So, don't get rid of the broadcom, just plug in this little adapter?
+[04:27] <john_doe_jr> I have a shell script that does the following " ssh "backupserver cat > $dumpfile " ...I would like to exit this after the cat is complete...how would I go about doing that?
+[04:28] <les> john_doe_jr: i would look at maybe using scp instead of ssh
+[04:28] <N000b3r> been thru all google searches and still can't figure out how to start lightdm at boot time on ubuntu 14.04 , it gets stuck at the starting cups
+[04:29] <john_doe_jr> les: here is the full command: ssh $target_server "PGUSER=sysbackup pg_dumpall | ssh \"$backup_server\" 'cat > \"$dumpfile\"'
+[04:30] <les> john_doe_jr: ah I'm sorry I misunderstood. have you tried something simple like tacking on && exit at the end?
+[04:31] <john_doe_jr> les: like this: ssh $target_server "PGUSER=sysbackup pg_dumpall | ssh \"$backup_server\" 'cat > \"$dumpfile\"' && exit"...would that work?
+[04:31] <gr33n7007h> john_doe_jr: /j #bash will be your best bet
+[04:32] <gr33n7007h> galentanner: yep, just plug it in and away you go :)
+[04:32] <les> john_doe_jr: it is worth a shot. the && will eval everything on the left first and then run exit in ssh's shell
+[04:33] <galentanner> Ok.  I just bought one.  I'm so looking forward to solving this problem.  Now if I can figure out how to get the thing to shutdown AND power off without having to disconnect the battery.  That would be something!
+[04:36] <galentanner> What would happen if I unplugged the Wireless card?
+[04:37] <gr33n7007h> galentanner: you speaking to me?
+[04:37] <galentanner> Anyone.
+[04:37] <gr33n7007h> the usb one
+[04:37] <galentanner> the Broadcom 4318 that is installed in my laptop, that is supported but the system can't make it work.
+[04:38] <gr33n7007h> nothing, if it can be removed
+[04:38] <gr33n7007h> but why would you wanna do that
+[04:39] <gr33n7007h> 4318 is supported
+[04:39] <gr33n7007h> by the b43 driver
+[04:41] <galentanner> According to Ben64 it is supported but it's not....it's complicated.  He says it's just bad and I should get rid of it, but I can't take it out.  I guess these computers are way more complicated than when I built my desktop a few years ago.
+[04:42] <galentanner> So, if I take it out, and use th little usb dealie, will that cause me more problems or should I just leave it?
+[04:43] <gr33n7007h> galentanner: sudo apt-get purge bcmwl-kernel-source && sudo apt-get install b43-fwcutter firmware-b43-installer # have you tried this?
+[04:44] <galentanner> I've tried that several times and I get various errors and it just doesn't seem to work.
+[04:44] <galentanner> galentanner@ubuntu:~$ sudo apt-get purge bcmwl-kernel-source
+[04:44] <galentanner> [sudo] password for galentanner:
+[04:44] <galentanner> E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
+[04:44] <galentanner> E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
+[04:45] <galentanner> This was after running a config -a command of some type too.
+[04:45] <galentanner> The card works, when I had XP on this machine, but Xubuntu can't seem to get it to work.
+[04:46] <gr33n7007h> galentanner: sudo rm /var/lib/dpkg/lock then try again
+[04:47] <galentanner> ok...standby
+=== andrewjs18- is now known as andrewjs18
+[04:48] <galentanner> galentanner@ubuntu:~$ sudo rm /var/lib/dpkg/lock
+[04:48] <galentanner> [sudo] password for galentanner:
+[04:48] <galentanner> galentanner@ubuntu:~$ sudo apt-get purge bcmwl-kernel-source
+[04:48] <galentanner> E: dpkg was interrupted, you must manually run 'sudo dpkg --configure -a' to correct the problem.
+[04:48] <gr33n7007h> galentanner: sudo dpkg --configure -a
+[04:49] <gr33n7007h> you must of been in the process of dpkg and interrupted it at some point
+[04:49] <galentanner> So, It's chewing on this again.  When it finishes, I have to close the terminal.  Is that normal?
+[04:49] <gr33n7007h> yep
+[04:50] <galentanner> ok.  It just seems weird that it would require the user to close instead of bringing up another command line.
+[04:50] <galentanner> So, DKMS install completed.
+[04:50] <galentanner> Should I reboot?
+[04:51] <gr33n7007h> yep
+=== sysop is now known as Guest14925
+[04:51] <galentanner> I'll be back in a bit.  Gotta poweroff and then unplug everything.......
+[04:51] <gr33n7007h> oki doki
+[04:54] <ebernhardson> is it possible to rebind some key to force my mouse to see a right click?  the trackpad on this laptop is touchy, i'd like if i could rebind the win key so that win+left click is a right click
+=== Guest14925 is now known as sysop2
+[04:56] <manpriya> hi
+[05:03] <galentanner> http://pastebin.com/N0WCR5UP
+[05:04] <galentanner> http://pastebin.com/hDEZ9vJB
+[05:05] <galentanner> I'm just going in circles.  Is there anything I can do?
+[05:06] <gr33n7007h> that system is a mess
+[05:06] <galentanner> I guess so.
+[05:06] <gr33n7007h> what was the dpkg command?
+[05:07] <galentanner> I don't know.  I'm not a programmer.  I am just trying everything I can find.
+[05:07] <gr33n7007h> is this a new install of xubuntu?
+[05:08] <galentanner> I've had it on this machine for a couple weeks.
+[05:08] <Xanather> is xubuntu exactly the same as ubuntu except with a different UI?
+[05:08] <gr33n7007h> Xanather: yes
+[05:08] <Xanather> okay thought so thanks
+[05:09] <gr33n7007h> you got anything on that is important, cos without knowing what you done this could take forever
+[05:09] <galentanner> Are we talking about wiping and reinstalling?
+[05:10] <gr33n7007h> galentanner: yes, if need be
+[05:10] <galentanner> There is no way to find out what is running and shut it down?
+[05:11] <gr33n7007h> or you could just use wired until your new usb wifi stick comes
+[05:11] <galentanner> I guess so.
+[05:12] <ebernhardson> well sure, you can `sudo fuser /var/lib/dpkg/lock` to get a list of processes that have that file open, but just shutting it down may not really help
+[05:12] <galentanner> Would that tell us what is running and causing this?
+[05:13] <ebernhardson> it gives you a PID, a process id
+[05:13] <galentanner> ok..I did that it came back "2335"
+[05:13] <ebernhardson> then `ps aux | grep 2335`
+[05:14] <galentanner> galentanner@ubuntu:~$ ps aux | grep 2335
+[05:14] <galentanner> root      2335  0.0  0.0  19560    88 ?        S    21:58   0:00 dpkg --configure -a
+[05:14] <galentanner> galenta+  3427  0.0  0.2  11740   916 pts/6    S+   22:14   0:00 grep --color=auto 2335
+[05:14] <galentanner> ok.
+[05:15] <ebernhardson> so that says you have dpkg open and its trying to configure all unconfigured packages.  Do you have a terminal open somewhere thats running apt-get ?
+[05:15] <ebernhardson> or aptitude, or i bet ubuntu has a few other programs these days (i cant keep up)
+[05:15] <galentanner> I have one open that I'm using to do the commands.
+[05:16] <ebernhardson> try `ps auf`, that should draw some nice lines between parents and children to ee who owns the dpkg --configure process
+[05:16] <ebernhardson> you'll have to look through it for the dpkg line, then trace back the lines its draws
+[05:17] <galentanner> I'm not smart enough for that..
+[05:17] <galentanner> galentanner@ubuntu:~$ ps auf
+[05:17] <galentanner> USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+[05:17] <galentanner> galenta+  3339  0.0  0.2  22756  1052 pts/6    Ss   22:03   0:00 bash
+[05:17] <galentanner> galenta+  3437  0.0  0.2  18440  1232 pts/6    R+   22:16   0:00  \_ ps auf
+[05:17] <galentanner> root      1392  4.3  3.7 240756 16188 tty7     Ss+  21:54   0:56 /usr/bin/X -cor
+[05:17] <ebernhardson> you'll have to use a paste site for more than a couple lines :)
+[05:18] <ebernhardson> but basically you see the line it drew from ps auf to bash?  wherever your dpkg --configure -a is, it should have similar lines.  If not means its unparented
+[05:18] <galentanner> http://pastebin.com/d33DTtN4
+[05:19] <ebernhardson> it is unattached,  i forgot you need `ps auxf`,  the x shows the unattached processes
+[05:19] <galentanner> should I run the " ps auxf "?
+[05:19] <ebernhardson> yes
+[05:20] <ebernhardson> just guessing, but with it showing a ? for TTY its probably spawned from a GUI program
+[05:20] <ebernhardson> rather than a shell
+[05:20] <galentanner> http://pastebin.com/gbf6mxL1
+[05:21] <manpriya> #ceph
+[05:21] <galentanner> I think my head is about to explode.
+[05:22] <ebernhardson> you can try `sudo kill 3280`, basically it looks like dpkg is configuring some package(can't tell becaue it cuts off on the right hand side), and the modprobe command is stuffed
+[05:22] <galentanner> ok
+[05:23] <galentanner> done
+[05:23] <ebernhardson> ps auxf again,  is modprobe still listed with a line drawn to it from dpkg --configure?
+[05:24] <florian> hi
+=== `hypermist` is now known as sleepypc
+[05:24] <ebernhardson> reasonable chance since modprobe talks directly to the kernel that a plain kill wasn't enough.  TBH the "easiest" way might just be a reboot (hard reboot if necessary)
+[05:24] <galentanner> http://pastebin.com/nWAaGzYN
+[05:25] <ebernhardson> dpkg looks to no longer be listed, in theory that also means dpkg is no longer locked and whatever you were trying to do with it should be possible now
+[05:25] <galentanner> What's the difference between a reboot and a hard reboot?
+[05:25] <ebernhardson> galentanner: a hard reboot is when you just shut off the power without letting the machine do a proper shutdown
+[05:26] <galentanner> oh.  ok.
+[05:26] <galentanner> I'm trying to get the Broadcom 4318 wireless card to work.  Everyone says it's supported, but I can't get it to work.
+[05:26] <ebernhardson> galentanner: not generally suggested, although not as dangerous now as it used to be :) but can be necessary when things that talk to the kernel get stuffed and refuse to complete (but not necessary in your current situation)
+[05:27] <galentanner> ok
+[05:27] <ebernhardson> getting hardware to work is a pain in the ass, i have an IT department that chooses laptops for me :)
+[05:28] <galentanner> Nice.  I am the IT department.  I'm an idiot.  I just want it to work...
+[05:28] <ebernhardson> :)
+[05:28] <galentanner> I'm trying to run these commands:
+[05:28] <galentanner> sudo apt-get purge bcmwl-kernel-source
+[05:28] <galentanner> sudo apt-get install linux-firmware-nonfree
+[05:28] <galentanner> Should I try them now?
+[05:28] <ebernhardson> sounds reasonable
+[05:28] <galentanner> here goes....
+[05:30] <galentanner> I think the first one is working now.
+=== kernel is now known as Guest25080
+[05:33] <galentanner> The first command seems to have finished.  Should I reboot or run the second command?
+[05:33] <ebernhardson> just run the next one, you hardly need to reboot a linux box
+[05:33] <galentanner> ok...
+[05:34] <galentanner> second one is chewing
+[05:35] <galentanner> linux-firmware-nonfree is already the newest version.
+[05:35] <galentanner> 0 upgraded, 0 newly installed, 0 to remove and 11 not upgraded.
+[05:35] <galentanner> Is this ok?
+[05:36] <ebernhardson> it means the package is installed, and thats what you wanted, so i guess yes?
+[05:36] <galentanner> So the website calls for a couple modprobe commands next....
+[05:36] <galentanner> sudo modprobe -rv b43
+[05:36] <galentanner> sudo modprobe -v b43
+[05:37] <ebernhardson> basically that means remove and re-insert the b43 driver
+[05:37] <galentanner> ok...
+[05:37] <ebernhardson> (you can `man modprobe` to get a manual page explaining all of this)
+[05:38] <ebernhardson> man is the manual command, works for most all things you can type into the command line
+[05:38] <ebernhardson> quality of the manual varies greatly though :)
+[05:38] <galentanner> This is what I did..
+[05:38] <galentanner> galentanner@ubuntu:~$ sudo modprobe -rv b43
+[05:38] <galentanner> galentanner@ubuntu:~$ sudo modprobe -v b43
+[05:38] <galentanner> insmod /lib/modules/3.13.0-46-generic/kernel/drivers/ssb/ssb.ko
+[05:39] <galentanner> The website says I may need to reboot now.  Should I?
+[05:39] <ebernhardson> it seems odd they want you to remove and reinsert the kernel module, then reboot.  but sure why not
+[05:39] <galentanner> Then the wireless should be working, you think?
+[05:40] <ebernhardson> a definite maybe :)
+[05:40] <galentanner> I'll be back in a jif....BTW, thanks for the help.  You are very kind a patient.
+[05:40] <galentanner> and patient...
+[05:40] <ebernhardson> np
+[05:40] <galentanner> ugh!
+[05:40] <galentanner> brb
+[05:46] <sndcoe-mml02> searching for tips and tricks for linux
+[05:46] <KurisuIRC> gonna have to be a bit more specific...
+[05:47] <sndcoe-mml02> like i want to connect to my college server,but i m not in homegroup.
+[05:48] <KurisuIRC> in the File Explorer, there's a Connect to server button. put in it's ip
+[05:50] <galentanner> WOO HOO!  IT WORKS!
+[05:51] <sndcoe-mml02> it's asking for password,and i dont have it.
+[05:51] <galentanner> I have been messing with this thing for three weeks!
+[05:51] <KurisuIRC> What was wrong galentanner ?
+[05:51] <KurisuIRC> Then you can't connect sndcoe-mml02
+[05:51] <ebernhardson> galentanner: congratz :)
+[05:51] <KurisuIRC> Windows is different to Linux
+[05:51] <galentanner> I'm a step closer to having a functioning computer again!!
+[05:52] <galentanner> Ebernhardson, You are truly a gentleman and a scholar!
+[05:52] <sndcoe-mml02> ok,thanks for helping.I'll try it later after getting password.
+[05:52] <KurisuIRC> np
+[05:52] <galentanner> Is there a way to reach out to you again if...when I need help?
+[05:53] <KurisuIRC> galentanner, probably just come back here if you need help.
+[05:53] <KurisuIRC> galentanner, just ping him if you want him specifically
+[05:53] <ebernhardson> yea, theres plenty of smart people in here that can help you
+[05:53]  * KurisuIRC blushes
+[05:53] <galentanner> how do I ping?
+[05:53] <KurisuIRC> just type their name
+[05:53] <galentanner> ebernhardson
+[05:53] <KurisuIRC> like when i type galentanner it should highlight in chat, and depending on the client, make a ding noise
+[05:54] <galentanner> did that ping you?
+[05:54] <KurisuIRC> looks like it did from here
+[05:54] <ebernhardson> yes, although i have my pings mostly silent, it just changes the rooms active color from white to red
+[05:54] <galentanner> cool. That's awesome!
+[05:54] <KurisuIRC> #justircthings
+[05:55] <galentanner> Thanks all.  I've read that fixing the wireless might allow the computer to actually poweroff.  What do you think?
+[05:55] <ebernhardson> depends why it wont power off )
+[05:55] <KurisuIRC> ...? what was the problem originally
+[05:56] <ebernhardson> sometimes if it wont power off you can ctrl-alt-F7 (or F1, F2, try them all) to end up at a screen that has some debug output
+[05:56] <ebernhardson> but only sometimes
+[05:56] <galentanner> It just sits there and runs after restart or shutdown command either from GUI or from the command line.  I have to unplug the battery and the power cord to get it to shut off.
+[05:57] <ebernhardson> also instead of unplugging everything, many computers and laptops will force a shutdown if you just hold the power button for >5s
+[05:58] <galentanner> I've tried that.  doesn't work here.
+[05:58] <ebernhardson> :(
+[05:59] <galentanner> So, If I use the shutdown command in the gui system.  The screen will go black.  After a few minutes, I, Instead of unplugging everything, try the ctrl-alt- F7...etc.  That should generate some code?
+[06:01] <ebernhardson> if your lucky, one of them will have some debug output on them.  Its not really generated at that point though basically those are virtual terminals that always exist but are not typically seen these days because everything boots straight into GUI
+[06:01] <galentanner> SO, If is hit those buttons, the system will send the report the next startup?
+=== xCore is now known as xCore|sleep
+[06:02] <ebernhardson> sorry no, i mean those are text consoles (like the one you type your commands into in the gui) that still exist from the days before GUI was popular
+[06:03] <ebernhardson> if you are lucky some debug output goes to one of them when shutting down
+[06:03] <ebernhardson> they wont persist through a reboot
+[06:03] <galentanner> so, I'll see the output, write it downand send it out.
+[06:05] <holyguyver> I am having problem starting jackd http://pastebin.com/dwGMQdcW
+[06:05] <ebernhardson> a picture with your phone might be easier than writing it down :)
+[06:05] <galentanner> ok.  I can send that to you if I get anything?
+[06:06] <ebernhardson> you can just post it here
+[06:06] <galentanner> ok  I'll see you guys in the ether!  PEacE!  and thanks again!
+[06:07] <holyguyver> can someone help tell me what is wrong here & what I need to do to fix this. I am having a problem starting jackd http://pastebin.com/dwGMQdcW
+[06:18] <galentanner> Ladies and Gentlemen.  Ebernhardson is my savior. He stuck with me and helped me fix my problem that has been plaguing me since I installed Xbuntu 14.04.  My WiFi works and the computer now shuts down and off as it is expected to do!  Thank you so much Ebernhardson!
+[06:19] <tryhard2> hip hop huuray for Ebernhardson!
+[06:19] <galentanner> This was the solution: http://ubuntuforums.org/showthread.php?t=2174511&page=8
+[06:21] <galentanner> Goodnight to all!  I shall be back with another problem, when I have one!
+[06:22] <ConsoleFx> hey Folks, I am facing a weird driver issue in my thinkpad t430 laptop... wireless//audio//usb drives works on liveCD environment but doesnt work in installed version of the same! plz help...
+[06:26] <treelzebub> ConsoleFx: go to Additional Drivers and look for alternative drivers for your a/v hardware :)
+[06:27] <ConsoleFx> treelzebub: yeah i have tried that... but no luck! :(
+[06:27] <ConsoleFx> its totally bizzare
+[06:27] <ConsoleFx> all was working fine flawless... all of a sudden all stopped working
+[06:29] <treelzebub> ConsoleFx: this seems to fit your problem: http://askubuntu.com/questions/541475/ubuntu-14-04-live-works-perfect-but-after-installation-nothing-but-the-keyboard
+[06:30] <treelzebub> possibly an issue caused by not updating while installing?
+[06:31] <ConsoleFx> treelzebub: let me give it a shot!
+[06:31] <ConsoleFx> hope it works :)
+[06:33] <darius93> I have a question about shred, it is said that it zeros the file (or partition if one decide to use that feature) but when it comes to zeroing a file, why does it run so fast? I havent tried using it with a partition but if I use dd to destroy a file, it takes slightly longer depending on if its a hdd, ssd, whats io operations going on on disk, etc
+[06:34] <rypervenche> darius93: If you're using dd on a disk, it's using 512 bytes by default, which is extremely slow. If you were to use 32M for example for the byte size, it would go much more quickly.
+[06:35] <darius93> Ah that explains it but I generally use 1M
+[06:45] <rypervenche> darius93: I've also found shred to be a little slow, but I've never done a side-by-side. They are both binaries that do different things, so yeah.
+=== ubuntu is now known as Guest84332
+[06:56] <darius93> rypervenche, i never used it against a drive itself, just files to securely erase them, but i guess it varies. Shred does do several passes through the file (i think 4 or 24 passes by default) which is why it is slower than dd which only does one pass through
+[06:59] <cage> If I encrypt my "home directory"
+[06:59] <rypervenche> darius93: Yep, there is that as well. 3 by default.
+[06:59] <cage> Then I have all my files there. How safe is that
+[06:59] <cage> I'm trying to refer to files in other places, suchs as temporary files
+[07:00] <cage> Or what is the status quo on ubuntu encryption?
+[07:00] <darius93> cage, as long as you keep your key safe, your home directory should be safe in theory. I do not know the extent of the security but i do know its pretty secured from stories
+[07:00] <rypervenche> cage: Well, so long as the directory is decrypted your files are just as opened as unencrypted files.
+[07:01] <rypervenche> cage: It is only when your home directory is not decrypted (i.e., your machine is turned off) that you will have the security.
+[07:01] <treelzebub> encrypted home dir + vpn should be just fine for most people
+[07:02] <rypervenche> I personally don't use an encrypted home dir, but rather a LUKS encrypted disk. I have seen people have problems with encrypted home directories from time to time.
+[07:03] <treelzebub> LUKS totally screwed up my boot partition. i gave it 2 months, and spent lots of time with awesome people in this channel.
+[07:04] <rypervenche> treelzebub: Our of curiosity, what went wrong?
+[07:04] <darius93> im curious as to what went wrong as well
+[07:04] <rypervenche> I don't think I have ever seen anyone have a problem with a LUKS-encrypted drive or partition before.
+[07:05] <treelzebub> hold. finding relevant info
+[07:09] <treelzebub> https://bugs.launchpad.net/ubuntu/+source/ecryptfs-utils/+bug/1310058
+[07:10] <ubottu> Launchpad bug 953875 in ecryptfs-utils (Ubuntu Vivid) "duplicate for #1310058 Encrypted swap no longer mounted at bootup" [High,Fix released]
+[07:10] <treelzebub> Fix released, eh? Looks like I suck at life.
+[07:10] <rypervenche> ecryptfs is not LUKS.
+[07:11] <treelzebub> hm. yeah. and my issue was actually with LVM swap. maybe i should stop talking at this point.
+[07:12] <cage> Thanks for your replies
+[07:12] <treelzebub> i've been tracking ubuntu issues in my free time, while developing android/java in my work-time. apologies for my tangent
+[07:18] <rypervenche> It's all good :)
+[07:19] <cage> Do you guys know a lot of companies that use this ubuntu home folder encryption?
+[07:19] <cage> I guess it's called ecryptfs?
+[07:20] <treelzebub> companies?
+[07:20] <rypervenche> I don't think any company would use that.
+[07:20] <cage> What would a company using ubuntu use?
+[07:20] <Myrtti> luks.
+[07:20] <rypervenche> If they were going to use encryption, it would be on the entire disk. Either LUKS or something proprietary.
+[07:21] <rypervenche> cage: I would recommend LUKS though. It is part of the Linux kernel.
+[07:21] <cage> okay
+[07:21] <Myrtti> /boot isn't encrypted.
+[07:22] <cage> https://help.ubuntu.com/community/EncryptedFilesystemHowto3
+[07:22] <cage> Should this be enough?
+[07:29] <viscera> Does anyone know if there are any plans to do proper security support for universe/multiverse? Every time I consider trying Ubuntu again, this aspect turns me off
+=== croppa_ is now known as croppa
+[07:34] <kurkkupoikaFi> HYGFUTR6UTYU8
+[07:35] <kurkkupoikaFi> hAK
+[07:35] <muravey> hello, can anyone help me resolve a dependency issue? I am using ubuntu 12.04 and want to install libstdc++6 v4.9
+[07:35] <kurkkupoikaFi> TNT
+[07:35] <kurkkupoikaFi> PASKA
+[07:35] <kurkkupoikaFi> DKOIRIR
+[07:35] <kurkkupoikaFi> GFIDFREJTU
+[07:35] <kurkkupoikaFi> TIREITRITIRI
+[07:35] <kurkkupoikaFi> DKIGFTKI
+[07:35] <kurkkupoikaFi> K
+[07:35] <kurkkupoikaFi> K
+[07:35] <kurkkupoikaFi> K
+[07:35] <kurkkupoikaFi> K
+[07:35] <kurkkupoikaFi> K
+[07:35] <muravey> thanks
+[07:36] <muravey> exact message is Depends: libstdc++6 (>= 4.9) but 4.6.3-1ubuntu5 is to be installed
+[07:36] <muravey> I ran apt-get update
+[07:38] <muravey> I thought 12.04 was an LTS release to be kept updated for a while :\
+=== gms is now known as Guest98127
+=== administrator is now known as Guest66873
+[07:52] <Guest66873> ubuntu
+[07:59] <MrDoctor> In Ubuntu 14.04, when I go to facebook, or gmail/youtube, firefox prompts me to install them as desktop applications. What backend application runs when these "desktop applications" are executed?
+[08:00] <lotuspsychje> MrDoctor: do you mean online accounts?
+[08:01] <MrDoctor> I got the answer lotuspsychje, it executes a program called unity-webapps-runner.
+[08:01] <lotuspsychje> MrDoctor: if you click yes, it will create a startup icon in your sidebar to access facebook faster
+[08:02] <lotuspsychje> ok
+[08:02] <jtdoncas> literally the stupidest thing ever conceived
+[08:03] <MrDoctor> Well, some would say Logic is the stupidest thing ever conceived jtdoncas :p
+[08:03] <sam3> i just pooped my pants awww fuck
+[08:03] <lotuspsychje> jtdoncas: the user got the choice to disable online accounts
+[08:03] <lotuspsychje> !ops | sam3
+[08:03] <ubottu> sam3: Help! Channel emergency! (ONLY use this trigger in emergencies) - Pici, Myrtti, jrib, Amaranth, tonyyarusso, Nalioth, lamont, CarlK, elky, mneptok, PriceChild, Tm_T, jpds, ikonia, Flannel, genii, wgrant, stdin, h00k, IdleOne, nhandler, Jordan_U, popey, Corey, ocean, cprofitt, djones, Madpilot, gnomefreak, lhavelund, k1l, rww, phunyguy, bazhang
+[08:04] <DJones> sam3: PLease don't
+[08:04] <jtdoncas> lotuspsychje: sure, but it's just bloat. people can create shortcuts manually
+[08:05] <lotuspsychje> jtdoncas: true
+[08:14] <MortezaE> Hi, today -for first time oc- i see this in log, btw i guess it's due to lack of memory. anyway i'm curious if there is any solution other than reboot
+[08:15] <MortezaE> "usbhid can't add hid device"
+[08:15] <MortezaE> mouse doesn't work after this error
+=== ReScO is now known as Natsu_Dragonslay
+=== Natsu_Dragonslay is now known as ReScO
+[08:24] <ace2race> my computer needs a driver to install on my sd card.. what driver do i need for win 7?
+[08:24] <ablest1980> ace2race ##windows
+[08:26] <zetheroo1> how does one release/renew the DHCP IP in Ubuntu 14.04 ?
+[08:27] <Secret-Fire> how come when I connect my android mtp device, the system recognizes it with gphoto2 and i cannot transfer files to my computer?
+[08:28] <ace2race> join
+[08:29] <ablest1980> ace2race type /join ##windows
+[08:32] <ablest1980> zetheroo1 http://ubuntuforums.org/showthread.php?t=2162439
+[08:35] <zetheroo1> ablest1980: that dhclient stuff doesn't work ...
+[08:37] <ablest1980> zetheroo1 http://computerbeginnersguides.com/blog/2014/04/07/release-renew-a-dhcp-address-in-ubuntu-14-04/
+[08:37] <zetheroo1> yeah - been there tried that
+[08:37] <ikonia> the dhclient stuff "does" work
+[08:37] <ikonia> if it's not working for you - then your setup has a problem
+[08:38] <zzarr> hello! if I had a sim-card which I could use to call/sms and transfer data in a mobile-internet modem, could I use it in Ubuntu with the phone-app?
+[08:38] <ikonia> zzarr: what phone app ?
+[08:39] <zzarr> the one in ubuntu-phone
+[08:39] <ikonia> if you are using it on a phone, yes
+[08:40] <zzarr> if I had a tablet with a USB port and plugged in the modem?
+[08:40] <ikonia> a phone isn't a modem
+[08:40] <ikonia> (from your description)
+[08:40] <ikonia> if you're in doubt, try it
+[08:40] <ikonia> maybe a surprise
+[08:41] <zetheroo1> ikonia: setup is Ubuntu 14.04 with DHCP configured Ethernet connection
+[08:41] <zzarr> I currently don't have the hardware
+[08:41] <ikonia> zetheroo1: that means nothing
+[08:41] <zetheroo1> ok :D
+[08:41] <ikonia> zetheroo1: are you using network manager ?
+[08:41] <zetheroo1> ikonia: the user is a super simple user ... so I am keeping it simple
+[08:41] <ikonia> the user is simple ???
+[08:41] <ikonia> what has the user got to do with it ?
+[08:41] <zetheroo1> yes, the user has only ever used network manager
+[08:42] <ikonia> zetheroo1: ok - so you need to interact with network manager directly then, not dhclient
+[08:42] <ikonia> as network manager is calling/managing the stak
+[08:42] <zetheroo1> well the user is not one to go tinkering with /etc/network/interfaces file or anything else
+[08:42] <zetheroo1> ok
+[08:42] <newuser789> what kind of file .zsync is ? what to do with it ? zetheroo1 http://mirror.yandex.ru/ubuntu-cdimage/releases/14.04.2/release/
+[08:42] <ikonia> stack
+[08:43] <zzarr> basically what I'm asking is: is a table/computer with a USB-mobile-internet-modem considered a phone?
+[08:43] <geirha> newuser789: zsync is a way to download similar files without downloading everything each time
+[08:44] <newuser789> geirha: just like torrent or something else ? and how to use it ?
+[08:44] <zetheroo1> ikonia: I really am not finding anything about using the network manager to reassign DHCP IP's though
+[08:45] <geirha> newuser789: the file is split into sizable pieces, then checksums for each piece is stored in the .zsync file.  When you download with zsync, you provide it with similar files you've already downloaded. It checks those files if they have any matching pieces, and only downloads any missing ones.
+[08:47] <ikonia> zetheroo1: stop the network, remove the lease file, start the network is a hard way around it
+[08:47] <geirha> newuser789: It's mainly for the daily images, where today's and yesterday's image likely only contains a few differences. So you might end up downloading 10% of the actual size instead of 100%
+[08:47] <ikonia> zetheroo1: that will just depend on the servers reservation then
+[08:47] <zzarr> there seems to be a app called "dia-gnomeler-app"
+[08:47] <zzarr> but the package can't be found
+[08:48] <zetheroo1> ikonia: the lease has been removed from the server for this PC
+[08:48] <ikonia> zetheroo1: ok - so remove it from the server
+[08:48] <zetheroo1> so 'service networking stop' and then remove this file ... and then 'service networking start'
+[08:49] <newuser789> geirha: sounds like its same as torrent, files are split and their hashes are stored in torrent file, when we download then it checks for missing pieces and downloads the missing ones
+[08:49] <ikonia> zetheroo1: seems a simple approach
+[08:49] <ikonia> you could also look at the nmcli options, see if there is a renew/release option
+[08:49] <geirha> newuser789: similar, sure, but you only download from the one server, not other peers
+[08:53] <newuser789> geirha: ohh, so zsync is centralized to a single server and torrent is decentralized to seeds and peers, torrents can be dangerous but zsync will be verified by server
+[08:56] <newuser789> my messages are visible /readable ?
+[08:57] <eahm> yes
+[08:57] <jbo> Y
+[08:57] <newuser789> so how to use zsync ?
+[08:59] <jbo> sorry but I don't know
+[09:01] <k1l> newuser789: read this https://help.ubuntu.com/community/ZsyncCdImage
+[09:01] <k1l> but you could just md5sum for the isos
+=== badon_ is now known as badon
+[09:03] <sre-su> What does this line in auth.log means? Connection from 127.0.0.1 port 42396 on 127.0.0.1 port 22
+[09:03] <newuser789> k1l: what are md5sums-metalink, md5sums-metalink.gpg and md5sums.gpg files ? what I know is that gpg is an encryption tool and how to use these files ?
+[09:04] <k1l> newuser789: read this for md5sum checks https://help.ubuntu.com/community/HowToMD5SUM
+[09:06] <rypervenche> sre-su: Someone logged in using SSH on the server itself.
+[09:07] <sre-su> rypervenche: Oh! And is it possible to see what all commands were issued?
+[09:07] <newuser789> k1l: the page has no mention to md5sums-metalink and md5sums-metalink.gpg https://help.ubuntu.com/community/HowToMD5SUM
+[09:08] <k1l> what link?
+[09:08] <newuser789> https://help.ubuntu.com/community/HowToMD5SUM
+[09:08] <newuser789> files here ---> http://mirror.yandex.ru/ubuntu-cdimage/releases/14.04.2/release/
+[09:10] <umbra_purus> Hey. Quick question. If I'm using ubuntu in a virtual box it's not recommended to use lvm in my disk right?
+[09:10] <k1l> newuser789: you are using wubi?
+[09:10] <umbra_purus> Ignore last message. Solved
+[09:11] <newuser789> k1l: wubi ?
+[09:11] <k1l> newuser789: they are/were used for the wubi installer. but that is not recommended anymore
+[09:12] <sre-su> I recently changed log level from info to verbose, is that why I'm getting such auth messages?
+[09:12] <sre-su> rypervenche: ^
+[09:15] <Satan-lucifer> Hey guyz i am running elementary os and i installed the openbox environment the problem is when i go to back to the pantheon environment it all gets messy i mean that the exit button disappears and everything has a dark border itself
+[09:15] <newuser789> no, I'm downloading ubuntu 14.04.2 and 14.10 images for installation so asking about md5sums, same-metalink and same-metalink.gpg files. I already downloaded md5sums and x64 images and I know how to check md5sums. I'm asking about zsync, metalink and metalink.gpg files mentioned on http://mirror.yandex.ru/ubuntu-cdimage/releases/14.04.2/release/
+[09:15] <k1l> Satan-lucifer: best is to ask the elementary guys for help with that. we cant know what they all changed
+[09:16] <Satan-lucifer> K
+[09:17] <sre-su> k1l: Could you guide me with my above ssh query?
+[09:19] <newuser789> torrent vs zsync -- which is better ? faster ? I now know that zsync is more secured for sure
+[09:19] <Fizzy_Changeling> newuser789: Torrent is faster
+[09:19] <rypervenche> sre-su: No, it should be there no matter what, even for info.
+[09:20] <k1l> newuser789: its not rocketscience. just use one and check the iso (which torrent already does) and install it
+[09:20] <sre-su> rypervenche: And is it possible to know what all commands were issued?
+[09:20] <newuser789> Fizzy_Changeling: which one is advicable ? Fizzy_Changeling k1l
+[09:20] <k1l> newuser789: every method works. so choose one
+[09:21] <Fizzy_Changeling> ^
+[09:22] <newuser789> ok last one, zsync is something like rsync or completely different ?
+[09:22] <k1l> newuser789: if you are so curious about it. why didnt you read the articles i linked you?
+[09:23] <newuser789> k1l: currently reading it
+[09:23] <newuser789> its open
+[09:26] <drdozer> hi
+[09:26] <drdozer> I've been upgrading my ubuntu install for about 4 years and it has now got some 'quirks' that I'd like to fix
+[09:27] <drdozer> when I log into the ubuntu or enlightnment desktops, it lists a whole load of crashed program launches
+[09:29] <MiDOZAlAyyoubi> hello
+[09:29] <MiDOZAlAyyoubi> what is the name of the software that wiggles and animates the window movement
+[09:29] <rypervenche> sre-su: No, it is not. The information is encrypted.
+[09:29] <rypervenche> sre-su: You would have to use a different shell that logs those commands.
+[09:30] <rypervenche> sre-su: Or you could check the bash history, if it was done on the command line.
+[09:30] <MiDOZAlAyyoubi> does anybody know?
+[09:30] <geirha> MiDOZAlAyyoubi: compiz
+[09:30] <MiDOZAlAyyoubi> Alright thatnks
+=== sandeep is now known as Guest66542
+[09:32] <sre-su> rypervenche: I'm confused as to how is that even possible. And I'm not sure if it's something serious in terms of system security
+[09:32] <drdozer> I've just logged into the 'ubuntu' session and I don't have any window decorations or the launch pannel
+[09:32] <drdozer> the only way I could get out was to restart sddm
+[09:32] <sre-su> rypervenche: Recently, I noticed some bot's intrusive connection attempts with my system that my reconfigured ssh config
+[09:32] <frederik_2> hi all
+[09:32] <frederik_2> got a problem
+[09:32] <sre-su> s/my/I*
+[09:33] <rypervenche> sre-su: The connection you showed me was from the machine itself (localhost) and not from outside the machine.
+[09:33] <frederik_2> my pci-e tevii s482 seems to only show up as a usb controller under ubuntu. i loaded the correct kernel module and its get registered , but with dmesg its not found and also not asking for firmware
+[09:34] <frederik_2> under debian , when the kernel module is loaded , it shows up in dmesg asking for firmware ...
+[09:34] <rypervenche> sre-su: But you can protect yourself by only allowing keyed connections, and also changing your SSH port.
+[09:34] <sre-su> rypervenche: Yes, but I'm not sure how is that possible. I didn't try to connect to from within the system
+[09:34] <sre-su> rypervenche: Yes, I did all those changes yesterday
+[09:35] <drdozer> I have the option of a gnome session, but when I log in I just get a blank screen, and apt thinks that ubuntu-gnome-desktop is not installed
+[09:35] <lapion> hello
+[09:35] <drdozer> plasma crashes on login with "plasmashell closed unexpectedly"
+[09:35] <rypervenche> sre-su: Either you did try to connect and you didn't realize, or some program is misconfigured, or some program is trying to connect locally.
+[09:36] <rypervenche> sre-su: It didn't say what user it was trying to connect as.
+[09:36] <lapion> Whenever I am in Recovery mode menu if I select "dpkg" the system consistently gives me the error message Unable to open screenrc
+[09:37] <lapion> however there is a /etc/screenrc
+[09:37] <sandeep_> what is tilda
+[09:38] <lapion> tilde is ~
+=== badon_ is now known as badon
+[09:38] <sandeep_> what is this '~'
+[09:39] <lapion> can anyone help me with this screenrc error ?
+[09:39] <MiDOZAlAyyoubi> what's the error?
+[09:40] <k1l> sandeep_: its short for "/home/user/"
+[09:42] <geirha> in many contexts at least
+[09:45] <frederik_2>  my pci-e tevii s482 seems to only show up as a usb controller under ubuntu. i loaded the correct kernel module and its get registered , but with dmesg its not found and also not asking for firmware
+[09:45] <frederik_2> under debian it works with same method .... am i missing something
+[09:47] <zzarr> hello again, I just realized that I have a phone app installed
+[09:51] <Rust3dCor3> hi. is there any way to launch a doom (the game) in tty, like in old dos machines? the problem might be sourceport varied since most sourceports are designed for x
+[09:52] <ace2race> fshow do i format a usb as ntfs
+[09:52] <Rust3dCor3> ace2race: you could use gparted
+[09:52] <ace2race> thanks :)
+[09:54] <Blinkiz> Hello. in file /etc/rsyslog.conf we have $ActionFileDefaultTemplate variable that should be commented out if wanting high precision timestamps. I do not want to touch /etc/rsyslog.conf file but instead add my own file /etc/rsyslog.d/timestamp.conf with "$ActionFileDefaultTemplate RSYSLOG_FileFormat". Problem is that this does not work, why?
+[09:56] <lapion> MiDOZAlAyyoubi, Whenever I am in Recovery mode menu if I select "dpkg" the system consistently gives me the error message Unable to open screenrc
+[09:58] <keags> lapion: Are you trying to start a screen session
+[09:58] <rypervenche> lapion: Have you messed with your screenrc file at all?
+[09:59] <lapion> rypervenche, nope default
+[09:59] <lapion> I have 2 systems that have that error however non of my other systems have that error
+[10:00] <lapion> I get that same error whenever I do "python3 /usr/lib/python3/dist-packages/DistUpgrade/dist-upgrade.py --partial --frontend DistUpgradeViewText --datadir /usr/share/ubuntu-release-upgrader"
+[10:01] <PCatinean> How come "locate wkhtmltopdf" returns 4 paths and two of them are missing completely, is it because of a previous symlink or something?
+[10:01] <rypervenche> PCatinean: Run "sudo updatedb" first.
+[10:02] <lapion> rypervenche, I get that same error whenever I do "python3 /usr/lib/python3/dist-packages/DistUpgrade/dist-upgrade.py --partial --frontend DistUpgradeViewText --datadir /usr/share/ubuntu-release-upgrader"
+[10:02] <PCatinean> rypervenche, I did that it reduced the number of them but still some are missing
+[10:02] <PCatinean> /home/wiz/usr/local/share/man/man1/wkhtmltopdf.1.gz
+[10:02] <PCatinean> THat does not exist
+[10:02] <lapion> which is the python script that I found after debugging the dpkg command
+[10:03] <rypervenche> lapion: Yeah, I'm not going to be able to help if you've made custom changes like that. Hopefully someone else can look into that for you.
+=== Necrozed` is now known as Necrozed
+[10:03] <lapion> rypervenche, absolutely no custom changes\
+[10:04] <rypervenche> PCatinean: Did you install wkhtmltopdf manually? Or compile it?
+[10:04] <PCatinean> dpkg -i .dev file rypervenche
+[10:07] <rypervenche> PCatinean: dpkg -L file | grep man
+=== viking is now known as Guest46023
+=== amin is now known as mo_handes
+[10:11] <ufk> i get tons of problems connecting to a vsftpd server... can anyone recommend me of a different good ftp server i can use ?
+[10:14] <sre-su> rypervenche: Thanks
+[10:14] <Kuro-Maii> hello I am using a logitech G19 keyboard and am going to reinstall my ubuntu box this week. the drivers for this keyboard are no longer available from the latest maintainer the site it self is even dead: http://www.russo79.com/gnome15 . I have it still installed on my system and wish to take it with me to the new installation. how can I do that?
+[10:14] <Kuro-Maii> can I repack the software?
+[10:14] <Kuro-Maii> or do I need to do something else...
+[10:15] <ikonia> Kuro-Maii: you want to use a later version and the drivers are not available in the later version
+[10:15] <ikonia> is that what you are saying
+=== saschpe_ is now known as saschpe
+[10:18] <Kuro-Maii> no I am saying the drivers are no longer available, period. not for a current distro nor for an older distro
+[10:18] <ikonia> Kuro-Maii: so what do you want this channel to do ?
+[10:19] <lapion> rypervenche, the problem is resolved by uninstalling screen
+[10:19] <Kuro-Maii> I want to know how I can take the currently installed driver/software and install it again after I reinstalled my ubuntu
+[10:20] <ikonia> re-installed with the same version ?
+[10:20] <ikonia> or a different version
+[10:20] <Kuro-Maii> same
+[10:20] <ikonia> should work
+[10:20] <ikonia> just need to work out what the install script does
+[10:20] <Kuro-Maii> how there is no repo
+[10:20] <ikonia> I suspect it will be a kernel module
+[10:20] <ikonia> it may do other things
+[10:21] <Kuro-Maii> the repo died
+[10:23] <Kuro-Maii> what was that command again to see what was installed?
+[10:26] <spitzi> Hi. Got Ubuntu 14.04 and a simple, wired Microsoft Intellimouse mouse. The side button on the mouse annoyingly fire "back" and "forward" events, and I need to disable these buttons. Any advice?
+=== Xano_ is now known as Xano
+[10:29] <Kuro-Maii> okay so I just manage to findout how to find the instaled software paths for my gnome15 instalation ( it is the pakacg that does the g19 drivers )
+[10:30] <Kuro-Maii> how do I install them again after I reinstalled my system
+[10:32] <Kuro-Maii> ikonia? any suggestions?
+[10:32] <Kuro-Maii> or any body else for that matter?
+[10:36] <atal421> i'm creating a post install script, how do i switch user to a user i've created earlier in the script?
+[10:36] <Kuro-Maii> you can do "su - [username-here]"
+[10:38] <atal421> for some reason it says "su must be run from a terminal"
+[10:38] <atal421> i'm running the script by calling: bash my_script.sh
+[10:39] <Kuro-Maii> sorry I just look it up in a script I have that does it:
+[10:39] <Kuro-Maii> su $USERNAME -l -c "$(readlink -f $0) $*"
+[10:39] <atal421> Kuro-Maii: oh man
+[10:40] <Kuro-Maii> it has a if satmant before it that checks if we are that user
+[10:40] <atal421> how do i know what that does
+[10:40] <atal421> i'll just look up each thing
+[10:40] <atal421> thank you
+[10:41] <Kuro-Maii> it will switch to the user in the var $USERNAME and call it self with all the arguments that were pass in to the initial call
+[10:41] <atal421> what do you think of this? http://stackoverflow.com/questions/8940771/switch-user-in-a-init-script
+[10:42] <atal421> will the user be THAT new user for the remainder/duration of the script?
+[10:42] <Kuro-Maii> yes
+[10:42] <atal421> great
+[10:42] <anti-unix> hi
+[10:43] <Kuro-Maii> and answer the link does the same thing I do except it calls a different script
+[10:48] <idlecool> hello, i am fighting with grub-pc and dpkg. its trying to spawn some kind of frontend to configure itself. and i am working on a server without a frontend
+[10:49] <idlecool> i see something like this: http://pastebin.com/raw.php?i=rHveTvdg
+[10:50] <idlecool> anyone has any idea how i should go about this?
+=== sale_ is now known as rasipnik
+=== rasipnik is now known as rasipnk
+[10:55] <coffee-> hi i was hoping someone could tell me where syslog is?
+[10:57] <k1l_> coffee-: /var/log/
+[10:57] <coffee-> thanks k1l_
+[10:57] <coffee-> :)
+[10:57] <Abdullah182> hey
+[10:57] <Abdullah182> hello
+[10:58] <Abdullah182> can someone help me with a problem with my mousepad?
+[10:58] <Abdullah182> i was trying to activate multi touch and i missed it up
+[10:58] <Abdullah182> now i can move the cursor with my mousepad
+[10:59] <Abdullah182> i have to use an external mouse
+[10:59] <Abdullah182> hello?
+[10:59] <snufft> potentially stupid question here, but is it possible to boot 14.10 straight to terminal without loading any gui?
+[11:00] <k1l_> !text | snufft
+[11:00] <ubottu> snufft: To start your system in text-only mode append 'text' (without the quotes) to the kernel line in the grub menu. You can access the grub menu by pressing Esc (Grub legacy) or Shift (Grub2) during boot. For more info see https://help.ubuntu.com/community/BootOptions#Text%20Mode
+[11:00] <snufft> AWESOME!! :D
+[11:00] <snufft> thanks k1l_ :)
+[11:00] <snufft> k1l_++
+[11:02] <coffee-> ok, My system went into sleep mode last nite and when i went to start it up again (ie: move the mouse, hit spacebar) it wouldn't come out of sleep mode and i was forced to do a reset, could someone look at my syslog?
+[11:03] <Abdullah182> is there anyone here that can help with my mouse problem?
+[11:04] <TheBigDeal> what's the problem with help.ubuntu.com, 500 internal error :/
+[11:05] <k1l_> TheBigDeal: no error here
+[11:05] <ikonia> TheBigDeal: https://help.ubuntu.com
+[11:05] <DJones> TheBigDeal: I seen a couple of people reporting an intermittent fault
+[11:05] <TheBigDeal> k1l_: try this https://help.ubuntu.com/community/Upgrades
+[11:06] <PCatinean> Hey guys, how does one stop idle notification to be send from the operating system so other applications do not notice the lack of input?
+[11:06] <DJones> TheBigDeal: I believe it was being reported as an intermittent fault
+[11:06] <PCatinean> Kinda like having the mouse moved every X minutes?
+[11:06] <k1l_> TheBigDeal: well yes
+[11:06] <TheBigDeal> DJones: i see.
+[11:08] <spitzi> Help ... Side buttons on mouse ... disable ....
+[11:09] <snufft> this page is consistently giving me a 500 if that helps anyone: https://help.ubuntu.com/community/LiveCDCustomization
+[11:10] <TheBigDeal> most of pages in help.ubuntu.com are broken :/
+[11:12] <ErfanBs> !sublimetext

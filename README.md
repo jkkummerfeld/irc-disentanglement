@@ -29,10 +29,7 @@ This repository contains:
 - The [annotated data](./data) for both Ubuntu and Channel Two.
 - The code for our [model](./src/).
 - The code for [tools](./tools/) that do evaluation, preprocessing and data format conversion.
-
-**Note: this data is being used as part of a task at DSTC 8.
-We will add the test annotations to this repository once the shared task is complete.**
-After the shared task we will also add a link to a set of 496,469 disentangled conversations.
+- A collection of 496,469 automatically disentangled conversations from 2004 to 2019 in a [bzip2 file](./acl19-irc-disentanglement_auto-data-full.txt.bz2).
 
 If you use the data or code in your work, please cite our work as:
 
