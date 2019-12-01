@@ -50,6 +50,10 @@ If you use the data or code in your work, please cite our work as:
 }
 ```
 
+# Updates
+
+1. The description of the voting ensemble in the paper has a mistake. When not all models agree, the most agreed upon link is chosen (ties are broken by choosing the shorter link).
+
 # Questions
 
 If you have a question please either:

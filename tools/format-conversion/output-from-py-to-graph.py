@@ -12,7 +12,8 @@ if __name__ == '__main__':
 
     done_training = False
     for line in sys.stdin:
-        if line.startswith("data/"):
-            line = line.split('/')[-1].strip()
-            parts = line.split()
-            print("{}:{}".format(parts[0], ' '.join(parts[1:])))
+        if line.startswith("#"):
+            continue
+        line = line.split('/')[-1].strip()
+        parts = line.split()
+        print(line)

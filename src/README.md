@@ -76,21 +76,21 @@ The same script is used for all three ensemble methods, with slightly different 
 
 Union
 ```
-ls example-run*graphs | ./majority_vote.py 1 > example-run.combined.union
+./majority_vote.py example-run*graphs --method union > example-run.combined.union
 ```
 
 Vote
 ```
-ls example-run*graphs | ./majority_vote.py 10 > example-run.combined.vote
+./majority_vote.py example-run*graphs --method vote > example-run.combined.vote
 ```
 
 Intersect
 ```
-ls example-run*clusters | ./majority_vote.py 10 > example-run.combined.intersect
+./majority_vote.py example-run*clusters --method intersect > example-run.combined.intersect
 ```
 
 All of these assume the output files have been converted into our graph format.
-Assuming you save the output of each run as `example-run.1.out`, `example-run.2.out`, `example-run.3.out`, etc, then this command will use one of our tools to convert them to the graph format:
+Assuming you run `disentangle.py` above and save the output of each run as `example-run.1.out`, `example-run.2.out`, `example-run.3.out`, etc, then this command will use one of our tools to convert them to the graph format:
 ```
 for name in example-run*out ; do ../tools/format-conversion/output-from-py-to-graph.py < $name > $name.graphs ; done
 ```
@@ -99,6 +99,8 @@ The intersect method also assumes they have been made into clusters, like this:
 ```
 for name in example-run*out ; do ../tools/format-conversion/graph-to-cluster.py < $name.graphs > $name.clusters ; done
 ```
+
+Note: An earlier version of the steps above didn't account for a change in the output of the main system. Apologies for the broken output this would have caused.
 
 ## C++ Model
 
