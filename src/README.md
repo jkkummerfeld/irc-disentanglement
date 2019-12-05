@@ -109,4 +109,4 @@ The python model has additional input features and a different text representati
 The C++ model has support for a range of additional variations in both inference and modeling, which did not appear to improve performance.
 For details on how to build and run the C++ code, see [this page](./old-cpp-version/).
 
-[Go back](./../) to the root of the repository.
+[Go back](./../) to the main webpage.

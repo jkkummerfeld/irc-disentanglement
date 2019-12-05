@@ -135,4 +135,4 @@ The other (`tokenise.py`) has additional options that are generaly not needed.
 
 Run to convert text to tokens with unk symbols.
 
-[Go back](./../) to the root of the repository.
+[Go back](./../) to the main webpage.

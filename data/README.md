@@ -10,7 +10,7 @@ File / folder      | Contents
 ------------------ | -----------
 train              | Folder containing all training files.
 dev                | Folder containing all files for development / validation.
-test               | Folder containing all test files **(Not included until the DSTC 8 competition concludes)**.
+test               | Folder containing all test files.
 channel-two        | Folder containing our annotation of data from Elsner and Charniak (2008).
 annotation-process | Folder containing (1) files used while developing the annotation scheme, and (2) the original annotations for dev, test, and channel-two files before adjudication.
 list...txt         | Files specifying lists of files (e.g. all the training files).
@@ -64,4 +64,4 @@ For example, these are lines from the `2007-12-17.train-a.*` files:
 
 Tokenisation was performed using the script in the tools directory.
 
-[Go back](./../) to the root of the repository.
+[Go back](./../) to the main webpage.

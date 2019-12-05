@@ -22,6 +22,7 @@ Cutoffs were:
 - Messages: 145, 264, 405
 - Directed: 36.0, 43.8, 50.6
 
+Stats used:
 - Users 0 2013-10-11.txt:07am u:19 m:76 %:39
 - Users 0 2012-11-24.txt:20am u:21 m:211 %:45
 - Users 0 2013-07-10.txt:23am u:12 m:131 %:46
@@ -130,7 +131,7 @@ Selected by choosing a random point in the logs and keeping 1,500 messages after
 
 ## Pilot Data
 
-Used in the process of developing the annotation scheme, **NOT intended for use in developing models**.
+Used in the process of developing the annotation scheme, **NOT intended for use in developing or evaluating models**.
 If you use this data for either training or tuning your model your results with NOT be comparable with those in the paper.
 This is included mainly for completeness.
 
