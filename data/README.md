@@ -16,6 +16,7 @@ annotation-process | Folder containing (1) files used while developing the annot
 list...txt         | Files specifying lists of files (e.g. all the training files).
 glove-ubuntu.txt   | GloVe vectors, trained on all of the Ubuntu IRC logs (after tokenisation and rare word replacement with special symbols).
 vocab.txt          | The vocabulary used in the GloVe vectors.
+gold...txt         | Single files with all of the annotations for the train / dev / test sets.
 
 For details about how these files were chosen for annotation and which annotator annotated each one, see [this page](./READ.history.md).
 
