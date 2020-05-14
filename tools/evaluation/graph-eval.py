@@ -11,6 +11,8 @@ def get_pairs(filename, storage):
         if ':' in line:
             filename = line.split(':')[0]
             line = line.split(":")[1]
+        elif line[0] == '#':
+            continue
 
         nums = [int(n) for n in line.split() if n != '-']
         source = max(nums)

@@ -66,6 +66,26 @@ python3 disentangle.py \
 
 Note - the arguments defining the network (hiiden, layers, nonlin), must match those given in training.
 
+### Evaluate
+
+This command will run the output produced by the command above through the evaluation script:
+
+```
+python3 ../tools/evaluation/graph-eval.py --gold ../data/dev/*annotation* --auto example-run.1.out
+```
+
+The output should be something like:
+
+```
+g/a/m: 2607 2500 1855
+p/r/f: 74.2 71.2 72.6
+```
+
+The first row is a count of the gold links, auto links, and matching links.
+The second line is the precision, recall, and F-score.
+
+Note - the values in the paper are an average over 10 runs, so they will differ slightly from what you get here.
+
 ## Ensemble
 
 For the best results, we used a simple ensemble of multiple models.
