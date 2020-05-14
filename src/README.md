@@ -86,6 +86,13 @@ The second line is the precision, recall, and F-score.
 
 Note - the values in the paper are an average over 10 runs, so they will differ slightly from what you get here.
 
+### Running on a file
+
+If you want to apply a model to a file, see this script for an example of how to do it: `example-running.sh`.
+The script is set up so someone could call it like so (once the necessary placeholders in the script are set):
+
+./disentangle-file.sh < sample.ascii.txt > sample.links.txt
+
 ## Ensemble
 
 For the best results, we used a simple ensemble of multiple models.

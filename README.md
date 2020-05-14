@@ -50,6 +50,11 @@ If you use the data or code in your work, please cite our work as:
 }
 ```
 
+# Running and Reproducing Results
+
+See [the src folder README](./src/) for detailed instructions on running the system.
+Additional evaluation script information can be found in the [tools README](./tools/).
+
 # Updates
 
 1. The description of the voting ensemble in the paper has a mistake. When not all models agree, the most agreed upon link is chosen (ties are broken by choosing the shorter link).
