@@ -24,6 +24,11 @@ To get our code and data, download this repository in one of these ways:
 - [Download .tar.gz](https://github.com/jkkummerfeld/irc-disentanglement/tarball/master)
 - `git clone https://github.com/jkkummerfeld/irc-disentanglement.git`
 
+The data is also available here:
+
+- [huggingface datasets](https://huggingface.co/datasets/irc_disentangle)
+- [TensorFlow Datasets](https://www.tensorflow.org/datasets/catalog/irc_disentanglement)
+
 This repository contains:
 
 - The [annotated data](./data) for both Ubuntu and Channel Two.
