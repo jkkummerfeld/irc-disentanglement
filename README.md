@@ -1,9 +1,11 @@
 # irc-disentanglement
-This repository contains data and code for disentangling conversations on IRC, as described in:
+This repository contains data and code for disentangling conversations on IRC, as described in the following two papers:
 
   - [A Large-Scale Corpus for Conversation Disentanglement](https://aclweb.org/anthology/papers/P/P19/P19-1374/),
   Jonathan K. Kummerfeld, Sai R. Gouravajhala, Joseph Peper, Vignesh Athreya, Chulaka Gunasekara, Jatin Ganhotra, Siva Sankalp Patel, Lazaros Polymenakos, and Walter S. Lasecki,
   ACL 2019
+  - [Chat Disentanglement: Data for New Domains and Methods for More Accurate Annotation](),
+  Sai R. Gouravajhala, Andrew M. Vernier, Yiming Shi, Zihan Li, Mark Ackerman, Jonathan K. Kummerfeld
 
 Conversation disentanglement is the task of identifying separate conversations in a single stream of messages.
 For example, the image below shows two entangled conversations and an annotated graph structure (indicated by lines and colours).
@@ -12,11 +14,16 @@ We also see two of the users, delire and Seveas, simultaneously participating in
 
 <img src="https://raw.githubusercontent.com/jkkummerfeld/irc-disentanglement/master/example-conversation.png" width="500" alt="Image of an IRC message log with conversations marked">
 
-This work:
+The 2019 paper:
 
 1. Introduces a new dataset, with disentanglement for 77,563 messages of IRC.
 2. Introduces a new model, which achieves significantly higher results than prior work.
 3. Re-analyses prior work, identifying issues with data and assumptions in models.
+
+The 2023 paper:
+
+1. Introduces a multi-domain dataset, with enough annotated data for evaluation.
+2. Studies annotation methods, showing that guidance can improve accuracy of non-expert annotation, but crowd annotation remains a challenge.
 
 To get our code and data, download this repository in one of these ways:
 
@@ -31,7 +38,7 @@ The data is also available here:
 
 This repository contains:
 
-- The [annotated data](./data) for both Ubuntu and Channel Two.
+- The [annotated data](./data) for Ubuntu, Channel Two (2019 paper), and four new channels (2023 paper).
 - The code for our [model](./src/).
 - The code for [tools](./tools/) that do evaluation, preprocessing and data format conversion.
 - A collection of 496,469 automatically disentangled conversations from 2004 to 2019 in a [bzip2 file](./acl19-irc-disentanglement_auto-data-full.txt.bz2).
@@ -50,8 +57,22 @@ If you use the data or code in your work, please cite our work as:
   pages     = {3846--3856},
   url       = {https://aclweb.org/anthology/papers/P/P19/P19-1374/},
   arxiv     = {https://arxiv.org/abs/1810.11118},
-  software  = {https://jkk.name/irc-disentanglement},
-  data      = {https://jkk.name/irc-disentanglement},
+  software  = {https://www.jkk.name/irc-disentanglement},
+  data      = {https://www.jkk.name/irc-disentanglement},
+}
+
+@InProceedings{alta23disentangle,
+  author    = {Sai R. Gouravajhala and Andrew M. Vernier and Yiming Shi and Zihan Li and Mark Ackerman and Jonathan K. Kummerfeld},
+  title     = {Chat Disentanglement: Data for New Domains and Methods for More Accurate Annotation},
+  booktitle = {Proceedings of the The 21st Annual Workshop of the Australasian Language Technology Association},
+  location  = {Melbourne, Australia},
+  month     = {November},
+  year      = {2023},
+  doi       = {},
+  pages     = {},
+  url       = {},
+  arxiv     = {},
+  data      = {https://www.jkk.name/irc-disentanglement},
 }
 ```
 
@@ -79,5 +100,6 @@ This approach is intended to balance the need for clear comparisons between syst
 
 # Acknowledgments
 
-This material is based in part upon work supported by IBM under contract 4915012629.
-Any opinions, findings, conclusions or recommendations expressed are those of the authors and do not necessarily reflect the views of IBM.
+The material from the 2019 paper is based in part upon work supported by IBM under contract 4915012629.
+The material from the 2023 paper is based in part upon work supported by DARPA (grant #D19AP00079), and the ARC (DECRA grant).
+Any opinions, findings, conclusions or recommendations expressed are those of the authors and do not necessarily reflect the views of these other organisations.

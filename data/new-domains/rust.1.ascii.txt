@@ -1,0 +1,1200 @@
+rust 2018-12-26 [10:19:00] <lp> oh wait, I haven't tried --target nodejs 
+rust 2018-12-26 [10:19:43] <lp> yeah that's it 
+rust 2018-12-26 [10:25:20] <Wizord> lp: in later versions of node.js you can load and run WebAssembly 
+rust 2018-12-26 [10:27:06] <mib_q2934o> . 
+rust 2018-12-26 [10:27:33] <lp> Wizord: I'm using v11.5.0 and it seems to be broken 
+rust 2018-12-26 [10:28:10] <lp> I mean 
+rust 2018-12-26 [10:28:17] <lp> loading them as es6 modules is broken 
+rust 2018-12-26 [10:28:30] <lp> using the `--target nodejs` commonjs loader works just fine 
+rust 2018-12-26 [10:39:50] <mib_q2934o> hi 
+rust 2018-12-26 [10:40:00] <Yaniel> hi 
+rust 2018-12-26 [10:41:27] <Yatekii> folks, I am sorry to bug again, but I still have this issue: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=9e08b6f8d95b8e1a03dd8adca47a6186 i am pretty sure it's not a rust limitation but sth I don't understand 
+rust 2018-12-26 [10:44:41] <stephaneyfx> Yatekii: When you have `&'b mut &'a mut T` and you dereference, you only get `&'b mut T`, not `&'a mut T` 
+rust 2018-12-26 [10:46:27] <stephaneyfx> Yatekii: Iter borrows Arena mutably and there can only be one thing borrowing another thing mutably. So if you borrow the arena mutably through Iter, the Iter instance needs to be borrowed mutably as well so that you don't end up with 2 mutable borrows to the Arena instance 
+rust 2018-12-26 [10:47:23] <Yatekii> stephaneyfx: so you say iter would need the arena moved to it? 
+rust 2018-12-26 [10:48:46] <Yatekii> (that would suck, bigtime :D) 
+rust 2018-12-26 [10:49:04] <Yatekii> I mean how does Vec<T> do that? it has iter_mut() too, doesn't it? 
+rust 2018-12-26 [10:50:38] <stephaneyfx> Yatekii: I'm not saying the arena should be moved. I merely tried to explain the error and what rules were broken (mutable aliasing). 
+rust 2018-12-26 [10:51:15] <proc> I need a cache that has an i32->String mapping and drops all entries older than X hours 
+rust 2018-12-26 [10:51:25] <proc> (I don't need to know when an entry gets dropped) 
+rust 2018-12-26 [10:52:19] <mib_q2934o> . 
+rust 2018-12-26 [10:52:21] <Yatekii> stephaneyfx: ok :) so you say that I borrow arena two times and not with the same lifetime which doesn't work? sorry, but until your explanation I didn't understand all the explanations I got or they were very evasive 
+rust 2018-12-26 [10:52:31] <Yatekii> stephaneyfx: the question that remains: how do I fix this? 
+rust 2018-12-26 [10:53:05] <stephaneyfx> Yatekii: Don't be sorry, it's not that easy to understand/explain :) 
+rust 2018-12-26 [10:55:08] <Yatekii> stephaneyfx: yeah, I just sometimes feel I get  on everybodys nerves with the never ending questions ... 
+rust 2018-12-26 [10:55:18] <j_ey> Yatekii: we h8 u!!! 
+rust 2018-12-26 [10:55:34] <Yatekii> dang I knew it! 
+rust 2018-12-26 [10:55:37] <stephaneyfx> Yatekii: You don't :) 
+rust 2018-12-26 [10:57:15] <stephaneyfx> Yatekii: In a nutshell, when you go through a chain of mutable references like `&'b mut &'a mut T`, you only get `&'b mut T`. The inner layer is the only mutable ref to T (for 'a), and getting a `&mut T` out of it requires mutably borrowing the outer layer (for 'b). Otherwise you'd end up with 2 mutable references to the T. Does it make sense? 
+rust 2018-12-26 [10:58:08] <proc> Yatekii: I have a list of ppl on IRC to thank when I'm getting to write a post about my current project 
+rust 2018-12-26 [10:59:53] <proc> I'd say rust is just the opposite of my normal programming habit 
+rust 2018-12-26 [11:00:00] <proc> and stackoverflow is just not an answer ^^ 
+rust 2018-12-26 [11:01:19] <stephaneyfx> Yatekii: Regarding Vec and iter_mut, the interface it provides is sound, but if you were to implement it manually *without using slice methods like split_mut*, you'd have to use unsafe (IIRC) because the borrow checker would not be smart enough to understand the 2 mutable borrows you're creating from one don't cause mutable aliasing 
+rust 2018-12-26 [11:03:50] <mib_q2934o> Good Morning 
+rust 2018-12-26 [11:04:07] <stephaneyfx> Yatekii: In your case, if you make sure that Iter does not offer any mutable operation on the arena and the borrows it returns don't "overlap", you might be able to implement Iterator with a tiny bit of unsafe or by using lower level primitives like slice's split_mut (or some other type's equivalent functionality) that does that for you. 
+rust 2018-12-26 [11:06:30] <stephaneyfx> Yatekii: Ultimately you need to end up with 2 mutable borrows to an object or parts of it and prove to rustc that it is sound (if your design really is sound, which you need to check carefully by making sure the interface you provides does not end up creating mutable aliasing) 
+rust 2018-12-26 [11:13:53] <dpc1> mib_q2934o: morning. how can we help you? 
+rust 2018-12-26 [11:36:42] <nbro> Hi 
+rust 2018-12-26 [11:37:33] <nbro> So, I have a function &mut self which modifies a field of the struct. Then, in this same function, I pass this field to another &mut self 
+rust 2018-12-26 [11:38:06] <proc> when I manually drop() a RwLock guard, is that respected ? 
+rust 2018-12-26 [11:38:10] <nbro> And, apparently, because of this, I'm getting  cannot use `self.my_field` because it was mutably borrowed 
+rust 2018-12-26 [11:38:11] <proc> or do I need to use a scope 
+rust 2018-12-26 [11:38:21] <proc> (which makes it much harder to implement in my logic) 
+rust 2018-12-26 [11:38:29] <stephaneyfx> nbro: May you share your code on the playground? 
+rust 2018-12-26 [11:38:37] <nbro> Too long 
+rust 2018-12-26 [11:38:47] <nbro> And I don't wanna share it yet 
+rust 2018-12-26 [11:38:56] <nbro> But is it possible to do what I want? 
+rust 2018-12-26 [11:39:09] <stephaneyfx> proc: What do you mean by respected? The lock is indeed released when dropping the guard. 
+rust 2018-12-26 [11:39:12] <nbro> Is it possible to modify a field of a struct from two different &mut self functions? 
+rust 2018-12-26 [11:39:23] <nbro> I don't see why this would be a problem 
+rust 2018-12-26 [11:39:29] <nbro> the field is not a reference 
+rust 2018-12-26 [11:40:19] <stephaneyfx> nbro: Do you borrow a field of a Foo struct mutably and call another method of Foo taking `&mut self` and use the field borrow afterwards? 
+rust 2018-12-26 [11:40:25] <nbro> stephaneyfx: But if you want to look at the error: https://pastebin.com/kNnPD85f 
+rust 2018-12-26 [11:41:37] <nbro> stephaneyfx: See also the functions that are causing the error: https://pastebin.com/J0MhsbPK 
+rust 2018-12-26 [11:41:58] <stephaneyfx> nbro: `let instance_count = self.num_of_instances; let state = self.get_proposer_state(instance_count);` 
+rust 2018-12-26 [11:42:01] <nbro> https://pastebin.com/PngfhumA 
+rust 2018-12-26 [11:42:16] <nbro> stephaneyfx: But why would I need that? 
+rust 2018-12-26 [11:43:49] <stephaneyfx> nbro: Which version of rustc are you using? 
+rust 2018-12-26 [11:44:05] <nbro> 1.31.0 
+rust 2018-12-26 [11:44:38] <proc> stephaneyfx: that's what I wanted to know, thanks 
+rust 2018-12-26 [11:44:51] <proc> (as my following function could request another lock) 
+rust 2018-12-26 [11:45:57] <proc> raph: you remember my "mutate self from a new thread" problem from yesterday ? 
+rust 2018-12-26 [11:46:08] <stephaneyfx> nbro: Can you try to edit this code to reproduce your error? https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=fca503d33c48f9264c98615c5e6a452b 
+rust 2018-12-26 [11:46:30] <proc> raph: turns out I just make my whole struct clone() and hand over a clone of myself, with all wrapped inside an Arc.. 
+rust 2018-12-26 [11:47:11] <proc> because at some point I was basically doing a manua .clone() of each internal field and handing it over.. 
+rust 2018-12-26 [11:47:13] <nbro> stephaneyfx: In my case, bar returns a reference to a value of a hash map, which is a field of Foo 
+rust 2018-12-26 [11:47:33] <nbro> Maybe that's the problem? 
+rust 2018-12-26 [11:47:59] <nbro> As you can see from the defintiion of my bar function: https://pastebin.com/J0MhsbPK 
+rust 2018-12-26 [11:49:06] <Yatekii> stephaneyfx: hmm ok, that makes a lot of sense! so basically the problem is that I try to borrow the arena two times, right? so isn't the issue just that I borrow an item T with lifetime 'b from the arena with lifetime 'a but the next() method requires me to return a lifetime 'a and I would need to tell the compiler what it's proper lifetime is but it lacks the tools somehow? 
+rust 2018-12-26 [11:49:37] <nbro> Another nightmare... 
+rust 2018-12-26 [11:50:47] <stephaneyfx> nbro: I'm trying to edit the playground to reproduce the error... 
+rust 2018-12-26 [11:51:15] <nbro> The problem is that I have like 10 of this errors of mutably and immutable references being borrowed at the same time 
+rust 2018-12-26 [11:51:24] <nbro> The error I showed you is not even one of those errors 
+rust 2018-12-26 [11:51:34] <nbro> And this errors are all inside functions of a struct 
+rust 2018-12-26 [11:51:41] <Yatekii> stephaneyfx: I could use unsafe even tho I don't like it. but I think it is safe to use here. basically what I am trying to do is that I can run a filter (via a closure) on the arena, such that it returns an itarator with all the nodes matching the given criterion. I would just need it to require that I can only have one borrow into the iterator ever so I shouldn't be able to do let x = iter.next(); let y = iter.next(). but doing for node in iter: should be  
+rust 2018-12-26 [11:51:41] <Yatekii> perfectly fine :) inside the next() method I can "easily" prove that I wont borrow twice ever. 
+rust 2018-12-26 [11:51:51] <nbro> I'm not sure why I would have this errors inside the same impl 
+rust 2018-12-26 [11:51:58] <Yatekii> thanks a lot for the explanation :) I never thought about borrow chains actually :) 
+rust 2018-12-26 [11:52:39] <Yatekii> proc: no worries, I know pretty much every person in here that ever helped me by name. most of them are frequent helpers =) 
+rust 2018-12-26 [11:52:56] <dpc1> wow we found santa :) 
+rust 2018-12-26 [11:53:17] <Yatekii> also I try to always be grateful. maybe that doesn't always come accross; dunno 
+rust 2018-12-26 [11:53:19] <Yatekii> dpc1: lel 
+rust 2018-12-26 [11:53:40] <stephaneyfx> Yatekii: You're welcome. The way Iterator is defined, it can't return a borrow to itself in its next method, so one can always do `let x = iter.next(); let y = iter.next();` 
+rust 2018-12-26 [11:55:53] <stephaneyfx> Yatekii: For IterMut like iterators, that's why one needs to make sure the mutable borrows returned by next are disjoint and the IterMut-like iterator does not mutably alias the borrows returned by next. This is enforced by the compiler, unless unsafe is used, in which case the burden is on your to enforce the borrowing rules. 
+rust 2018-12-26 [11:57:13] <stephaneyfx> nbro: It would be helpful to reproduce some of your issues on the playground. This still compiles: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=dd5fda9de4cf273034477f1674d193ed 
+rust 2018-12-26 [11:58:01] <stephaneyfx> nbro: One issue you may be facing is borrowing a field, calling a method on the struct taking &mut self and using the borrow afterwards 
+rust 2018-12-26 [11:58:29] <Yatekii> hmm ok, but if next() cannot borrow to itself this wont ever be doable, no? because I will always borrow a node from the arena and if I call next twice it will always have two mut ref to the arena which means I have aliasing for the arena, no? 
+rust 2018-12-26 [11:58:38] <nbro> stephaneyfx: yes, I think that is the problem: look at my whole prepare function: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=c232cc3183729ee7de3d0c4937bee12d 
+rust 2018-12-26 [11:58:51] <nbro> But I need to modify what is returned 
+rust 2018-12-26 [11:59:20] <Yatekii> is this why you need a separate Iter struct which borrows the arena such that I can't borrow arena from the outside anymore and I can assure on the insie that I don't alter the arena in next() and I will only return refs to the arenas content and not the arena itself? 
+rust 2018-12-26 [11:59:29] <nbro> I'm modifying state, which is returned as a mut reference 
+rust 2018-12-26 [12:00:18] <Yatekii> and once all next() generated refs die, the Iter struct dies too and the arena can be referenced again. have I gotten this right? 
+rust 2018-12-26 [12:01:11] <nbro> So, how do I solve this problem? Why would my code be an actual problem? 
+rust 2018-12-26 [12:01:46] <stephaneyfx> Yatekii: That's why unless your arena is based on some existing collection providing something like slice's split_mut (which allows you to simultaneously get a mutable ref to an item in the collection and a mutable ref to the rest of the collection), you might need to use unsafe and be very sure you're not breaking rust aliasing rules 
+rust 2018-12-26 [12:02:01] <stephaneyfx> Yatekii: Yes, that sounds right 
+rust 2018-12-26 [12:02:51] <stephaneyfx> nbro: I'm checking your last link... 
+rust 2018-12-26 [12:05:42] <Yatekii> stephaneyfx: oh, the arena is just a vector under the hood, but I guess it diesn't have split_mut() on the outside. I would have to make a fork or a pullrequest (if they take any) 
+rust 2018-12-26 [12:06:07] <Yatekii> stephaneyfx: the question is just how I do this with unsafe now :P I didn't use unsafe in my entire time with rust :D 
+rust 2018-12-26 [12:06:21] <stephaneyfx> Yatekii: Which crate is this vector defined in? 
+rust 2018-12-26 [12:06:38] <Yatekii> stephaneyfx: the crate is called `indextree` 
+rust 2018-12-26 [12:06:52] <stephaneyfx> Yatekii: I'll take a look... 
+rust 2018-12-26 [12:06:53] <Yatekii> it's a DOM structure crate that is built on an arena to avoid Rcs 
+rust 2018-12-26 [12:07:28] <dpc1> why avoid rcs? 
+rust 2018-12-26 [12:08:44] <nbro> stephaneyfx: Also, note that in my code, I've not defined state as a mut 
+rust 2018-12-26 [12:08:54] <proc> does rust still have windows xp support ? 
+rust 2018-12-26 [12:09:08] <nbro> Even if I define it as mut, I guess I will still have this errors 
+rust 2018-12-26 [12:09:19] <j_ey> proc: I thought it got removed / talked about getting removed? 
+rust 2018-12-26 [12:10:36] <Yatekii> dpc1: because they are not threadsafe and are not needed actually :) 
+rust 2018-12-26 [12:10:45] <dpc1> oh okay 
+rust 2018-12-26 [12:10:56] <proc> j_ey: I thought so too and it's not listed on tier1 targets, but I can't find anything on the next 
+rust 2018-12-26 [12:12:15] <Yatekii> dpc1: and that's the downside in rust (i think it is like this, correct me if I am wrong). I cannot use them even tho I can assure that I never use it in two concurrent threads. 
+rust 2018-12-26 [12:12:25] <stephaneyfx> nbro: Check this example: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=d85e9f169d8fa16201de690508502889 
+rust 2018-12-26 [12:13:05] <proc> j_ey: https://users.rust-lang.org/t/vsprint-s-msvcrt-dll-on-windows-xp-sp3/3439/4 
+rust 2018-12-26 [12:13:14] <proc> still I thought there was a blog post about this 
+rust 2018-12-26 [12:14:10] <ralvessa> Hi all. I've read chapter 7 of the Rust book, but I still don't understand the difference between a binary (application) and a library. I also don't fully understand what a package or a crate are. I take it that any bin or lib (.rs files) is a crate, and a package is the project created with `cargo new`? 
+rust 2018-12-26 [12:14:13] <stephaneyfx> nbro: I think some of your errors are about mutably borrowing self (e.g. by calling a method taking `&mut self` and returning a mutable reference to a field) and attempting to use self and the returned mutable ref afterwards 
+rust 2018-12-26 [12:14:55] <nbro> stephaneyfx: Some of my problems are definitely due to the call to get_proposer_state 
+rust 2018-12-26 [12:15:26] <nbro> I removed that call and simply copied the body of that function in the function that was calling it and I have 7 fewer errors 
+rust 2018-12-26 [12:15:37] <nbro> I still have 30 more errors 
+rust 2018-12-26 [12:15:38] <nbro> haha 
+rust 2018-12-26 [12:15:40] <j_ey> ralvessa: a package is a crate. a crate is a library 
+rust 2018-12-26 [12:15:55] <nbro> Not funny, actually 
+rust 2018-12-26 [12:15:57] <j_ey> ralvessa: or a crate could be a binary I suppose 
+rust 2018-12-26 [12:15:58] <dpc1> xD 
+rust 2018-12-26 [12:16:10] <stephaneyfx> nbro: That ws likely due to this function returning a mutable ref, causing self to be mutably borrowed and preventing the use of self afterwards 
+rust 2018-12-26 [12:16:13] <dpc1> j_ey: that will confuse them further i bet 
+rust 2018-12-26 [12:16:14] <stephaneyfx> was* 
+rust 2018-12-26 [12:16:32] <j_ey> dpc1: D: 
+rust 2018-12-26 [12:16:58] <nbro> stephaneyfx: So, how would you solve such situations? I would like to have such function, as an abstraction 
+rust 2018-12-26 [12:17:07] <ralvessa> j_ey: Thanks! And what's the difference between a binary and a library? 
+rust 2018-12-26 [12:17:40] <stephaneyfx> Yatekii: So, I think you can probably contribute a safe PR to this crate, since it uses Vec from std under the hood and Vec provides iter_mut 
+rust 2018-12-26 [12:18:53] <j_ey> ralvessa: a binary is just a tool you can run 
+rust 2018-12-26 [12:19:05] <j_ey> ralvessa: a library is some code that is used to usually make a binary 
+rust 2018-12-26 [12:19:17] <j_ey> ralvessa: are you new to programming, or what other languages have you used? 
+rust 2018-12-26 [12:19:33] <ralvessa> j_ey: I'm not new, I've used many languages. 
+rust 2018-12-26 [12:19:44] <patapon> Hi, I tried to write a proc_macro attribute for a module item, but for some reason syn loses all span information in the parsed ItemMod (all diagnostics now point to the crate root). Is this a known limitation?  
+rust 2018-12-26 [12:19:44] <ralvessa> j_ey: Thanks for clarifying! :) 
+rust 2018-12-26 [12:20:44] <j_ey> ralvessa: was just going to try relate it to some other languaes you may have used :) 
+rust 2018-12-26 [12:21:00] <stephaneyfx> nbro: You can either scope the returned borrow so that it goes out of scope before you use self again, or you can make the method a function taking not self but only the fields it needs to borrow mutably. The latter does not always work (e.g. it doesn't if you borrow all of self again) 
+rust 2018-12-26 [12:21:10] <nbro> I had 33 errors because of 5 calls to such a method 
+rust 2018-12-26 [12:21:20] <patapon> there's this issue, possibly related, https://github.com/dtolnay/syn/issues/482  
+rust 2018-12-26 [12:22:53] <nbro> Rust also prevents you from abstraction because of security? 
+rust 2018-12-26 [12:22:54] <j_ey> ralvessa: I havent registered my nick, so cant reply to your PM 
+rust 2018-12-26 [12:22:57] <nbro> Damn! 
+rust 2018-12-26 [12:23:00] <nbro> This is annoying! 
+rust 2018-12-26 [12:23:29] <j_ey> ralvessa: but a library is like a .a or .o you'd link to in C. a binary is a .exe (or a.out or whatever) 
+rust 2018-12-26 [12:23:34] <ralvessa> j_ey: Whoops! :P 
+rust 2018-12-26 [12:23:45] <j_ey> ralvessa: you can use cargo new --bin or cargo new --lib 
+rust 2018-12-26 [12:24:00] <stephaneyfx> nbro: It does not prevent abstraction (most of the time). But it does force you to think differently and touch things mutably in more fine-grained way. 
+rust 2018-12-26 [12:24:03] <nbro> stephaneyfx: It will be difficult to modify state inside an inner scope... 
+rust 2018-12-26 [12:24:12] <ralvessa> j_ey: Yeah, I've tried those. Don't worry, I got the gist now. Thanks a lot! 
+rust 2018-12-26 [12:24:12] <stephaneyfx> in a* more 
+rust 2018-12-26 [12:24:32] <j_ey> ralvessa: great! 
+rust 2018-12-26 [12:24:34] <nbro> stephaneyfx: It will make me write uglier code because of "security" 
+rust 2018-12-26 [12:24:52] <nbro> *"uglier" 
+rust 2018-12-26 [12:25:02] <nbro> unintuitive, I should have said 
+rust 2018-12-26 [12:27:11] <patapon> so in the end, i have exactly the same problem as https://github.com/dtolnay/syn/issues/440 
+rust 2018-12-26 [12:28:25] <nbro> This really sucks 
+rust 2018-12-26 [12:30:40] <nbro> OMG!!! 
+rust 2018-12-26 [12:31:03] <nbro> I start to hate a little Rust. It is quite stupidly inflexible  
+rust 2018-12-26 [12:31:27] <j_ey> heh 
+rust 2018-12-26 [12:32:05] <dpc1> lol 
+rust 2018-12-26 [12:32:36] <nbro> RIP Rust 
+rust 2018-12-26 [12:33:34] <hyperion101010> yo people  
+rust 2018-12-26 [12:33:36] <nbro> I don't feel like I'm the one doing the mistake, even if Rust tells me that I'm borrowing mutably and immutably at the same time 
+rust 2018-12-26 [12:33:44] <nbro> I feel like it's Rust's fault 
+rust 2018-12-26 [12:34:18] <nbro> It should be more clever and understand that there is no problem in my case 
+rust 2018-12-26 [12:35:39] <nbro> Imagine if I can't even solve this problem, or I need to write extremely ugly code to solve this very simple problem 
+rust 2018-12-26 [12:35:41] <nbro> OMG 
+rust 2018-12-26 [12:35:46] <dpc1> relax :P 
+rust 2018-12-26 [12:36:15] <nbro> I'm gonna eat now :O 
+rust 2018-12-26 [12:36:16] <nbro> :P 
+rust 2018-12-26 [12:37:00] <ralvessa> nbro: Careful what you say about Rust, this language is super clever! :D 
+rust 2018-12-26 [12:37:11] <fwiw> what's the problem? 
+rust 2018-12-26 [12:37:11] -eval- I think you know what the problem is just as well as I do. 
+rust 2018-12-26 [12:37:27] <fwiw> I see, eval :) 
+rust 2018-12-26 [12:37:32] <ralvessa> LOL! 
+rust 2018-12-26 [12:39:02] <nbro> ralvessa: clever? haha, don't me laugh! inflexibility is usually paired with low levels of intelligence 
+rust 2018-12-26 [12:39:09] <nbro> *don't make me 
+rust 2018-12-26 [12:39:12] <j_ey> .. 
+rust 2018-12-26 [12:39:24] <j_ey> feel free to make the compiler better 
+rust 2018-12-26 [12:40:08] <ralvessa> nbro: <unconvertable> 
+rust 2018-12-26 [12:40:28] <ralvessa> What j_ey said. emoji-cry 
+rust 2018-12-26 [12:41:01] <dpc1> well there are reasons behind the inflexibility 
+rust 2018-12-26 [12:41:25] <ralvessa> I've used many other languages, and I'm only just learning Rust, but I can tell it's quite a brilliant language! 
+rust 2018-12-26 [12:42:26] <hyperion101010> it would have been great if cranelift was in cpp 
+rust 2018-12-26 [12:42:50] <j_ey> uh.. 
+rust 2018-12-26 [12:43:16] <digital> I'm having an issue in nightly that I don't have in stable. I can run the same binary in the same context multiple times, and it produces different results. It's a game that runs in a terminal and prints unicode characters. looking at strace, I can see that in some runs it always calls write with the correct string, in other runs always with "~V~Q" and similar variations. nightly rust version is 
+rust 2018-12-26 [12:43:17] <digital> `rustc 1.33.0-nightly (ddab10a69 2018-12-23)`. This doesn't affect me, but I'm willing to help make rust even better 
+rust 2018-12-26 [12:44:16] <Yatekii> stephaneyfx: yes, it provides iter_mut() buuut it's not exactly what I want. when I just have iter_mut I will only be able to iterate linearely and not by a separate index for example. say I want to get all nodes with class "x" and type "t" I would like to maybe implement a custom algorithm instead of lineraly iterating over all nodes and check for matching ones (sure in the beginning I Will implement it like that but when I get manymanymany nodes to check,  
+rust 2018-12-26 [12:44:16] <Yatekii> I'll have to change the strategy I guess) 
+rust 2018-12-26 [12:44:40] <digital> the interesting thing is, this is only happens when i use argparse. if I comment the argparse section out, it always works. 
+rust 2018-12-26 [12:45:33] <digital> it still doesn't work with the latest nightly. 
+rust 2018-12-26 [12:45:49] <j_ey> digital: I guess trying to make a small reproducer.. if possible 
+rust 2018-12-26 [12:47:43] <digital> I'll try that 
+rust 2018-12-26 [12:51:32] <nbro> Back to the Rust headaches :P 
+rust 2018-12-26 [12:51:44] <dpc1> xD 
+rust 2018-12-26 [12:52:29] <Yatekii> stephaneyfx: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=30efd0b9b34ff8c2d1d3bc0e0248a9a3 when I try this it fails on me :P 
+rust 2018-12-26 [12:55:40] <Wizord> expected fn(&mut Iter<'a, V>) -> std::option::Option<&mut Node<V>> 
+rust 2018-12-26 [12:55:44] <Wizord>    found fn(&mut Iter<'a, V>) -> std::option::Option<&mut Node<V>> 
+rust 2018-12-26 [12:55:47] <Wizord> okay. 
+rust 2018-12-26 [12:57:08] <dpc1> yaay 
+rust 2018-12-26 [13:06:51] <nbro> I literally got rid of the errors I was having by abdicating abstraction 
+rust 2018-12-26 [13:07:03] <nbro> If this is not inflexibility 
+rust 2018-12-26 [13:07:10] <nbro> Then how should I call it? 
+rust 2018-12-26 [13:07:49] <j_ey> not learning how to use rust properly 
+rust 2018-12-26 [13:08:53] <Yatekii> Wizord: u sure it didn't say expected Option<&'a mut Node<V>> as a return type? 
+rust 2018-12-26 [13:09:11] <Wizord> I copy-pasted the output 
+rust 2018-12-26 [13:09:37] <bernhard> hi, what's the official async/await api going to be? still macros or keywords? 
+rust 2018-12-26 [13:09:39] <nbro> j_ey: which means not adhering to the inflexible rules of Rust which prevent you from expressing certain abstrations 
+rust 2018-12-26 [13:09:48] <j_ey> nbro: yup 
+rust 2018-12-26 [13:10:20] <nbro> I am actually adhering to Rust rules, this is why my code now compiles 
+rust 2018-12-26 [13:10:22] <Yoric> Is there a simple-ish crate I could use to simply assemble some text and images and output a png or pdf? 
+rust 2018-12-26 [13:10:40] <Wizord> that's nto a simple task 
+rust 2018-12-26 [13:10:45] <nbro> But I lost in abstraction 
+rust 2018-12-26 [13:10:56] <Yoric> (I'd need font support, and ideally a way to center text vertically and horizontally) 
+rust 2018-12-26 [13:11:01] <j_ey> use a macro, kinda like a function 
+rust 2018-12-26 [13:11:10] <Wizord> Yoric: that's nooooot a simple task. 
+rust 2018-12-26 [13:11:11] <j_ey> and has some abstraction 
+rust 2018-12-26 [13:11:25] <Yoric> Wizord: I know it's not simple, but it has been implemented millions of times already :) 
+rust 2018-12-26 [13:11:31] <Wizord> because that quickly devolves into an alternative to TeX/HTML 
+rust 2018-12-26 [13:11:46] <nbro> Luckily, those functions were just one-line functions 
+rust 2018-12-26 [13:11:50] <Yoric> Wizord: I'm entirely ok with a front-end to TeX or HTML, as long as I can export it to png or pdf. 
+rust 2018-12-26 [13:12:08] <Yoric> (and as long as I don't need to code in LaTeX - I've done too much of that in my life) 
+rust 2018-12-26 [13:12:25] <j_ey> nbro: if you can provide a fully self contained example on play.rust-lang.org I guess someone may be able to help more 
+rust 2018-12-26 [13:14:34] <nbro> j_ey: My problem was the usual problem: I'm in a method m, whose first parameter is &mut self. Then, from m, I call another method n, whose first parameter is also &mut self. The method n returns a &mut. I basically need to have a &mut in m because I need to modify that object to which that &mut points from m. 
+rust 2018-12-26 [13:15:53] <nbro> j_ey: See this example created by stephaneyfx: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=d85e9f169d8fa16201de690508502889 
+rust 2018-12-26 [13:16:00] <Yoric> Mmmh... https://docs.rs/pdf-canvas/0.6.0/pdf_canvas/ might do the trick. 
+rust 2018-12-26 [13:16:34] <nbro> j_ey: By just calling "self.m.entry(i).or_default()" from foo, I got rid of the errors. 
+rust 2018-12-26 [13:16:51] <nbro> More specifically, self.m.entry(self.n).or_default() 
+rust 2018-12-26 [13:18:25] <nbro> Also, apparently, I can't call a method with &self if I am in a &mut self method 
+rust 2018-12-26 [13:18:33] <nbro> Really?! 
+rust 2018-12-26 [13:19:09] <nbro> But I can call the field, because the field would be called mutably?  
+rust 2018-12-26 [13:19:12] <Yatekii> Wizord: oh oook :D 
+rust 2018-12-26 [13:19:12] <nbro> This all seems strange 
+rust 2018-12-26 [13:19:17] <j_ey> nbro: you can 
+rust 2018-12-26 [13:19:23] <j_ey> call self from mut self 
+rust 2018-12-26 [13:20:45] <nbro> j_ey: I was calling this method https://pastebin.com/Gn5wikt7 in a method with &mut self 
+rust 2018-12-26 [13:21:26] <nbro> https://pastebin.com/hLT0MiGx 
+rust 2018-12-26 [13:21:50] <j_ey> and the error? 
+rust 2018-12-26 [13:21:59] <nbro> j_ey: https://pastebin.com/MbSYSJuk 
+rust 2018-12-26 [13:22:33] <nbro> Because I'm mutably borrowing proposer_states, which returns a &mut 
+rust 2018-12-26 [13:22:41] <j_ey> yep 
+rust 2018-12-26 [13:23:14] <nbro> j_ey: so I solved the problem by replacing that call with https://pastebin.com/sAeEubX0 
+rust 2018-12-26 [13:23:16] <nbro> Seriously??? 
+rust 2018-12-26 [13:23:35] <nbro> I can call self.num_of_acceptors, which is a field, but I can't call a method 
+rust 2018-12-26 [13:24:18] <nbro> If you have an expression like "self.num_of_acceptors / 2 + 1 " in an if statement, you're probably not using the right abstractions 
+rust 2018-12-26 [13:24:22] <nbro> Right? 
+rust 2018-12-26 [13:24:25] <nbro> I lost in abstraction 
+rust 2018-12-26 [13:24:28] <nbro> Or am I missing something? 
+rust 2018-12-26 [13:24:33] <nbro> Is there a better solution than mine? 
+rust 2018-12-26 [13:25:56] <nbro> Rust really makes you lose abstraction 
+rust 2018-12-26 [13:26:01] <nbro> Or am I missing something? 
+rust 2018-12-26 [13:26:05] <nbro> Please, tell me that I'm missing something! 
+rust 2018-12-26 [13:26:21] <nbro> :P 
+rust 2018-12-26 [13:27:15] <nbro> As I said, at least my methods I was calling were one-line methods. Imagine if they were 10 methods... 
+rust 2018-12-26 [13:27:22] <nbro> *10-line 
+rust 2018-12-26 [13:28:26] <dpc1> oh boy 
+rust 2018-12-26 [13:29:16] <nbro> In a certain way, Rust decreases the probability of calling possibly useless functions. So, this will probably increase, maybe even involuntarily, the performance of Rust code 
+rust 2018-12-26 [13:29:24] <nbro> *"useless" 
+rust 2018-12-26 [13:29:56] <nbro> useless, but not in terms of abstraction, of course! 
+rust 2018-12-26 [13:31:28] <nbro> Maybe methods of a struct should be treated differently than regular non-struct methods? 
+rust 2018-12-26 [13:32:39] <dpc1> uhmm? 
+rust 2018-12-26 [13:32:46] <Yaniel> no they should not 
+rust 2018-12-26 [13:33:34] <nbro> I had a nice function call instead of this "state.rnd_received.iter().all(|&n| n == state.c_rnd)" 
+rust 2018-12-26 [13:33:38] <nbro> I just wanna cry now 
+rust 2018-12-26 [13:33:40] <nbro> :P 
+rust 2018-12-26 [13:34:41] <Yaniel> idk what you are doing since you only pasted fragments of code and errors 
+rust 2018-12-26 [13:35:20] <nbro> Well, not sure if it was so nice, given the long name, but at least it was descriptive: self.all_rnd_received_equal_to_c_rnd(instance) 
+rust 2018-12-26 [13:35:35] <Yaniel> but the error with self.majority_of_acceptors() is that the function signature is majority_of_acceptors(&self) 
+rust 2018-12-26 [13:35:46] <Yaniel> i.e. it borrows self as its first argument 
+rust 2018-12-26 [13:36:03] <nbro> Yaniel: yea, it borrows it immutably while in the function that I call it has &mut self 
+rust 2018-12-26 [13:36:06] <digital> I made a short example demonstrating some weird behavior that differs depending on what version of rust is used and whether argparse is used. (I tried to test with ncurses, but I don't know much about it. the ncurses one never works) https://gitlab.com/latigid/rust-test-unstable 
+rust 2018-12-26 [13:36:22] <Yaniel> but proposer_states.entry() borrows proposer_states, and by extension self 
+rust 2018-12-26 [13:36:47] <Yaniel> and it does that mutably so you can't reborrow it until the old borrow is dropped 
+rust 2018-12-26 [13:36:56] <Yaniel> are you on edition 2018? 
+rust 2018-12-26 [13:37:11] <nbro> Yaniel: Yeah, I understood the error. I just wanted a nicer solutoin than mine 
+rust 2018-12-26 [13:37:35] <Yaniel> you just need to stop using state before calling self.majority_of_acceptors() 
+rust 2018-12-26 [13:38:07] <Yaniel> save state.rnd_received.len() in a separate variable for example 
+rust 2018-12-26 [13:38:54] <nbro> Yaniel: I can't. I need to modify state before calling majority 
+rust 2018-12-26 [13:39:51] <Yaniel> so modify it and then grab its length 
+rust 2018-12-26 [13:40:16] <Yaniel> or put the whole bit in a fn that mutably borrows self 
+rust 2018-12-26 [13:40:47] <nbro> Yaniel: by "grab its length" you mean store the length in a new variable before calling majority? 
+rust 2018-12-26 [13:40:58] <Yaniel> yes 
+rust 2018-12-26 [13:41:08] <nbro> But I need to modify state after that call too 
+rust 2018-12-26 [13:41:38] <Yaniel> so borrow it again 
+rust 2018-12-26 [13:42:13] <Yaniel> or yeah if majority_of_acceptors does not need to be a fn, make it a public field 
+rust 2018-12-26 [13:42:58] <nbro> Yaniel: I also thought about making majority a public field. But I have other functions which I was calling and getting the same problem "mutable/immutable fights" 
+rust 2018-12-26 [13:43:17] <Yaniel> then you need to rethink your API 
+rust 2018-12-26 [13:43:39] <Yaniel> or do hacks like ending borrows and starting new ones 
+rust 2018-12-26 [13:43:53] <Yaniel> with arbitrary extra scopes if necessary 
+rust 2018-12-26 [13:44:26] <nbro> https://pastebin.com/bNrfk5c7 gives me the same error I was getting before. I cannot immutably borrow majority 
+rust 2018-12-26 [13:45:07] <Yaniel> try something like let rnd_received = {borrow state, do stuff, get length}; 
+rust 2018-12-26 [13:45:23] <Yaniel> that might actually be a lot cleaner too 
+rust 2018-12-26 [13:45:40] <Yaniel> and you have a candidate for a fn on state 
+rust 2018-12-26 [13:46:03] <nbro> I'm not sure if introducing new scope is cleaner... 
+rust 2018-12-26 [13:46:23] <nbro> Maybe my solution, given my situation, is better. My functions that I was trying to borrow immutably are just one-line functions 
+rust 2018-12-26 [13:47:00] <Yaniel> scopes are not necessarily a bad thing in Rust 
+rust 2018-12-26 [13:47:39] <Yaniel> often the kind of pattern I mentioned is actually a relatively good solution 
+rust 2018-12-26 [13:48:38] <nbro> Yaniel: your suggestion of using "let rnd_received = { state.rnd_received.len() }; if rnd_received < self.majority_of_acceptors() { ..." still gives me an error of mut/immut 
+rust 2018-12-26 [13:48:55] <nbro> Maybe you suggested something else? 
+rust 2018-12-26 [13:49:01] <Yaniel> are you using 2018 edition? 
+rust 2018-12-26 [13:49:08] <nbro> 1.31.0 
+rust 2018-12-26 [13:49:35] <Yaniel> do you have edition = "2018" in your Cargo.toml 
+rust 2018-12-26 [13:49:52] <nbro> It agains tells me that I'm borrowing proposer_states mutably and then I try to call majority mutably 
+rust 2018-12-26 [13:49:54] <nbro> Of course 
+rust 2018-12-26 [13:50:11] <digital> k3d 
+rust 2018-12-26 [13:50:12] <nbro> In my Cargo file? No, I don't have that 
+rust 2018-12-26 [13:50:19] <nbro> But I'm compiling using 1.31 
+rust 2018-12-26 [13:50:22] <digital> j_ey: I made a short example demonstrating some weird behavior that differs depending on what version of rust is used and whether argparse is used. (I tried to test with ncurses, but I don't know much about it. the ncurses one never works) https://gitlab.com/latigid/rust-test-unstable 
+rust 2018-12-26 [13:50:36] <nbro> call majority immutably 
+rust 2018-12-26 [13:50:37] <nbro> * 
+rust 2018-12-26 [13:50:39] <Yaniel> well then you aren't using 2018 edition 
+rust 2018-12-26 [13:50:55] <Yaniel> in which the borrow checker is much more sane 
+rust 2018-12-26 [13:51:01] <nbro> Yaniel: why? how do you know that? 
+rust 2018-12-26 [13:51:15] <nbro> Why should I need to specify the Rust version in the Cargo.toml? 
+rust 2018-12-26 [13:51:23] <Yaniel> because it was said so in the release annoucement for 1.31 
+rust 2018-12-26 [13:51:30] <Yaniel> not the version, the edition 
+rust 2018-12-26 [13:51:37] <Yaniel> cargo does it automatically for new projects 
+rust 2018-12-26 [13:52:00] <nbro> I created this project using cargo and cargo didn't add that line to my cargo.toml 
+rust 2018-12-26 [13:52:22] <Yaniel> then you created it before 1.31 
+rust 2018-12-26 [13:52:33] <Yaniel> when editions didn't exist yet 
+rust 2018-12-26 [13:56:03] <nbro> Yaniel: what would change if I add rust edition 2018 to the Cargo.toml? 
+rust 2018-12-26 [13:56:32] <nbro> What are rules that are applied that are not applied if I don't use it? 
+rust 2018-12-26 [13:56:54] <Yaniel> https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-rust-2018.html#rust-2018 
+rust 2018-12-26 [13:57:27] <Yaniel> most notably a new borrow checker and a slightly streamlined import system 
+rust 2018-12-26 [14:02:12] <nbro> Let's try this 2018 edition then 
+rust 2018-12-26 [14:03:00] <nbro> I immediately got new errors :P 
+rust 2018-12-26 [14:03:18] <nbro> "use message::Message; did you mean `crate::message`?" 
+rust 2018-12-26 [14:03:37] <nbro> message is just a module under the same file that is using it 
+rust 2018-12-26 [14:03:49] <nbro> https://doc.rust-lang.org/edition-guide/rust-2018/module-system/path-clarity.html 
+rust 2018-12-26 [14:04:11] <nbro> No backward compatible 
+rust 2018-12-26 [14:04:29] <stephaneyfx> nbro: Rust 2018 is not going to help with your issue (at least not with the last code I looked at), and you'll have to adapt your code to make it compile (though `cargo fix` can help with that). 
+rust 2018-12-26 [14:04:31] <nbro> I guess Rust developers do not care much about backward compatibility 
+rust 2018-12-26 [14:04:45] <stephaneyfx> nbro: They do. That's the purpose of editions. 
+rust 2018-12-26 [14:05:21] <nbro> I understand 
+rust 2018-12-26 [14:06:37] <stephaneyfx> nbro: I think what you might be after is methods that borrow only part of self. But that's not a thing at the moment and you need to pass the fields explicitly. 
+rust 2018-12-26 [14:06:42] <Yatekii> stephaneyfx: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=30efd0b9b34ff8c2d1d3bc0e0248a9a3 can't get this to work :( 
+rust 2018-12-26 [14:07:05] <stephaneyfx> nbro: Check this: http://smallcultfollowing.com/babysteps/blog/2018/11/01/after-nll-interprocedural-conflicts/ 
+rust 2018-12-26 [14:10:18] <j_ey> digital: I guess with that you might be able to open an issue with argparse 
+rust 2018-12-26 [14:10:52] <digital> that's on github isn't it? I don't want to use github 
+rust 2018-12-26 [14:12:05] <stephaneyfx> Yatekii: I have something that compiles but I want to double check the reference on UB first... 
+rust 2018-12-26 [14:12:37] <j_ey> digital: maybe you could contact th authors directly. hard to say if it's a rust compiler issue or not tbh 
+rust 2018-12-26 [14:13:19] <Yatekii> stephaneyfx: sure =) 
+rust 2018-12-26 [14:18:21] <stephaneyfx> Yatekii: This compiles but I would not use it as-is (it may not be sound): https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=f7b9623094a2e4ca9a31f16d84aad5c8 
+rust 2018-12-26 [14:19:09] <M-ou-se> Did docs.rs stop working? It hasn't seen any new releases since 18 hours ago, it seems. 
+rust 2018-12-26 [14:19:18] <stephaneyfx> Yatekii: First you have to be very sure next is never going to return borrows to the same nodes and Iter does not allow mutating or aliasing the arena further. 
+rust 2018-12-26 [14:19:59] <xcthulhu> I am struggling to get rust to emit efficient code when pointer aliasing should be impossible.  Is there something I am missing?  
+rust 2018-12-26 [14:20:00] <xcthulhu> https://rust.godbolt.org/z/t1drbC 
+rust 2018-12-26 [14:20:38] <stephaneyfx> Yatekii: And I'm not sure if having a &mut Arena in Iter is sound or if raw pointers should be used. It would be better to ask someone more experienced with unsafe code. 
+rust 2018-12-26 [14:22:12] <nbro> stephaneyfx: I guess that the solution I opted for is the one the author of that article calls "inlining" 
+rust 2018-12-26 [14:22:13] <j_ey> xcthulhu: hm, it looks like rust doesn t pass the noalias flags to LLVM currentlt 
+rust 2018-12-26 [14:22:21] <j_ey> xcthulhu: https://github.com/rust-lang/rust/issues/54878 
+rust 2018-12-26 [14:23:22] <xcthulhu> Oops, I thought this was fixed!  https://github.com/rust-lang/rust/issues/31681 
+rust 2018-12-26 [14:23:34] <stephaneyfx> nbro: Yes, sounds like it 
+rust 2018-12-26 [14:24:01] <j_ey> xcthulhu: adding "-Z mutable_noalias" helps 
+rust 2018-12-26 [14:24:12] <j_ey> xcthulhu: yeah, looks like it was turned off again due to more bugs 
+rust 2018-12-26 [14:26:02] <xcthulhu> j_ey: Hmmm can't get "-Z mutable_noalias" to work https://rust.godbolt.org/z/I72Omd 
+rust 2018-12-26 [14:26:32] <j_ey> xcthulhu: you need nightly for -z optiond 
+rust 2018-12-26 [14:26:36] <j_ey> sorry, forgot to mention 
+rust 2018-12-26 [14:26:48] <xcthulhu> That is in nightly 
+rust 2018-12-26 [14:26:56] <xcthulhu> Well, godbolt's nightly 
+rust 2018-12-26 [14:27:34] <j_ey> xcthulhu: you removed opt-level 
+rust 2018-12-26 [14:28:15] <nbro> stephaneyfx: In my case, I'm not repeating myself though, by inlining, given that the methods I was calling were being called only in one place. What I lost was readbility of the code 
+rust 2018-12-26 [14:28:23] <nbro> Abstraction 
+rust 2018-12-26 [14:31:27] <xcthulhu> j_ey: Doesn't seem to compile with that - https://rust.godbolt.org/z/XC1-6O 
+rust 2018-12-26 [14:32:23] <xcthulhu> My bad, typo 
+rust 2018-12-26 [14:42:11] <bwe> Does rust support generalised algebraic data types? If, how are they called in rust? 
+rust 2018-12-26 [14:43:17] <nbro> Does anyone here use IntelliJ too? 
+rust 2018-12-26 [14:43:21] <Yaniel> you mean the thing where you can be generic over arrays of any size? 
+rust 2018-12-26 [14:43:26] <Yaniel> bwe ^ 
+rust 2018-12-26 [14:43:39] <Yaniel> nbro: many do 
+rust 2018-12-26 [14:44:17] <nbro> Do you use the integrated terminal too? I'm actually verifying a weird behaviour which only disappears after have restarted the IDE 
+rust 2018-12-26 [14:44:53] <nbro> It apparently seems that the previous run is buffered  
+rust 2018-12-26 [14:45:24] <nbro> *after having restarted 
+rust 2018-12-26 [14:46:20] <nbro> I'm running a multi-threaded program with intercalated output and some sockets under the hood exchanging messages 
+rust 2018-12-26 [14:46:32] <Wizord> bwe: no. you can try to fake it with .try_into. 
+rust 2018-12-26 [14:47:18] <bwe> Yaniel: I mean stuff like https://en.wikipedia.org/wiki/Generalized_algebraic_data_type https://wiki.haskell.org/GADTs_for_dummies 
+rust 2018-12-26 [14:48:12] <bwe> Wizord: Which reading material do you recommend for me on .try_into, a rust novice? 
+rust 2018-12-26 [14:48:40] <Yaniel> bwe: looks a lot like trait objects? 
+rust 2018-12-26 [14:48:42] <Wizord> https://doc.rust-lang.org/std/convert/trait.TryInto.html#tymethod.try_into 
+rust 2018-12-26 [14:49:33] <Wizord> but this might be solving /one/ the problem that you're trying to solve with GADTs 
+rust 2018-12-26 [14:49:52] <Wizord> I'm not even sure if Rust allows you to do this in general 
+rust 2018-12-26 [14:57:11] <Yatekii> stephaneyfx: it seems sane to me imo. I won't do any other stuff with the arena and I will do some quick tests to ensure it doesn't do stupid stuff :) 
+rust 2018-12-26 [14:57:53] <Yaniel> nbro: sorry, I don't personally use IntelliJ, but I often hear someone mention they use it 
+rust 2018-12-26 [15:03:15] <nbro> Yeah, I finally have a working multi-paxos 
+rust 2018-12-26 [15:03:30] <nbro> in Rust :D 
+rust 2018-12-26 [15:04:16] <nbro> I need to make sure it actually works with more processes 
+rust 2018-12-26 [15:25:33] <dpc1> nice 
+rust 2018-12-26 [15:28:08] <Yatekii> folks, when I iter over some collection with for_each() and the statement in foreach returns a result, it does not complie because it expects an (). is there a good way to iter and on failure I handle the errorcase? 
+rust 2018-12-26 [15:29:53] <j_ey> Yatekii: you can collect into a result 
+rust 2018-12-26 [15:30:52] <Yatekii> how do I do this? 
+rust 2018-12-26 [15:31:35] <llvkm> iter.collect::<Result<Vec<_>, YourErrorType>(); 
+rust 2018-12-26 [15:31:48] <dpc1> for_each can't return anything 
+rust 2018-12-26 [15:31:55] <llvkm> but what exactly do you want to do in an errorcase? stop iterating? 
+rust 2018-12-26 [15:32:06] <llvkm> or do you want to continue once the error has been handled? 
+rust 2018-12-26 [15:32:17] <dpc1> Yatekii: better to write a normal for loop 
+rust 2018-12-26 [15:33:03] <Yatekii> llvkm: I want to stop, abort and handle the error. 
+rust 2018-12-26 [15:33:24] <Yatekii> I mean it should never fail but if it does I rather abort everything and write an error message to the console 
+rust 2018-12-26 [15:33:37] <Yatekii> because then I have some error in my logic 
+rust 2018-12-26 [15:34:15] <llvkm> then a for loop should be the best like dpc1 suggested 
+rust 2018-12-26 [15:38:37] <Yatekii> llvkm: I can also map().collect() ;) 
+rust 2018-12-26 [15:38:37] <Yatekii> just as you suggested 
+rust 2018-12-26 [15:38:37] <Yatekii> thanks! 
+rust 2018-12-26 [15:39:27] <llvkm> Yatekii: that will allocate and/or count the data which is likely not a needed 
+rust 2018-12-26 [15:41:37] <dpc1> Yatekii: yes you can do that, but breaking from that might be annoying sometimes 
+rust 2018-12-26 [15:45:43] <Yatekii> llvkm: dpc1: according to this: https://doc.rust-lang.org/rust-by-example/error/iter_result.html#fail-the-entire-operation-with-collect not? 
+rust 2018-12-26 [15:47:47] <llvkm> Yatekii: it collects a stream or Result<T, E> into a Result<Vec<T>, E>, if there is no Error you still have an allocated Vec (or at least the item count in Vec if T is a zero sized type) 
+rust 2018-12-26 [15:48:06] <llvkm> Yatekii: but it will short-circuit on an error case 
+rust 2018-12-26 [15:48:44] <llvkm> which is what you kinda asked for 
+rust 2018-12-26 [15:49:20] <Yatekii> llvkm: well T == () in this case :) so I guess I just have the count, which I guess is usize which I can accept with a standard of 16gb ram nowadays :P 
+rust 2018-12-26 [16:28:11] <shalzz> Hi, this post https://words.steveklabnik.com/borrow-checking-escape-analysis-and-the-generational-hypothesis claims that rust has a static GC. 
+rust 2018-12-26 [16:28:31] <shalzz> Is this true? and if so what is a static garbage collector? 
+rust 2018-12-26 [16:29:44] <shalzz> From what I see, rust cleans up it's own mess. Why would you hire a maid when you clean your own shit? 
+rust 2018-12-26 [16:30:58] <shalzz> Sure rust could be using some of the techniques of GC at compile time but does that mean rust implements a Garbage Collector in source? 
+rust 2018-12-26 [16:31:24] <shalzz> and has a design and rfc for it? 
+rust 2018-12-26 [16:33:38] <hodapp> welllll... presumably, most GC is dynamic, and it tracks at run-time whether references still exist to something, or whether it can be safely freed. It seems reasonable that if this same tracking can be done statically, one could call it static GC. 
+rust 2018-12-26 [16:34:16] <meh> shalzz, it depends on how loose your definition of GC is 
+rust 2018-12-26 [16:34:42] <shalzz> Yeah so it more of an analogy that an fact 
+rust 2018-12-26 [16:34:49] <shalzz> Would I be wrong to say rust's borrowing checker is just an abstraction over malloc and free that is built in to the language? 
+rust 2018-12-26 [16:35:11] <hodapp> Would it be wrong to say that GC in any other language is just an abstraction over malloc and free that is built in to the runtime? 
+rust 2018-12-26 [16:37:58] <shalzz> as opposed to the programmer manually creating/writing and managing it for every project, rust generalises it and abstacts it for every use case. 
+rust 2018-12-26 [16:38:04] <meh> the definition used in that blog post is quite loose, by that definition abort(3) is also GC 
+rust 2018-12-26 [16:39:18] <shalzz> essentially generating code for something a programmer would write where as a GC is a complete outsider 
+rust 2018-12-26 [16:40:18] <shalzz> so yes hodapp that would be wrong to say GC is an abstraction over malloc and free. 
+rust 2018-12-26 [16:41:33] <shalzz> it's like you have a mini-os for your specific language with GC 
+rust 2018-12-26 [16:42:11] <sgflt> is there any way to specify "any" lifetime in an associated type? i have an associated `type Item = F` (`F` is generic), but i would like to use `Item = &F`. 
+rust 2018-12-26 [16:44:15] <shalzz> but what I was trying to ask is if there is any concept of GC in the rust language spec/design/docs/rfc's ? 
+rust 2018-12-26 [16:46:24] <shalzz> if not then if someone asks I can say that "static GC" is just an analogy 
+rust 2018-12-26 [16:48:02] <Yatekii> sgflt: did you try 'static? Not sure if thats what u want 
+rust 2018-12-26 [16:50:12] <sgflt> Yatekii: i should have. hanks 
+rust 2018-12-26 [16:50:14] <sgflt> *thanks 
+rust 2018-12-26 [16:50:35] <Yatekii> Glad i could help :) 
+rust 2018-12-26 [16:56:35] <hodapp> shalzz: that doesn't really explain why that's wrong; GC does "generalize and abtract for every use case" because that's pretty much the entire point of it 
+rust 2018-12-26 [16:57:44] <meh> sgflt, 'static doesn't do any tho 
+rust 2018-12-26 [16:58:58] <hodapp> the fact that it doesn't do it by generating code doesn't much matter; code generation isn't the only form of abstraction 
+rust 2018-12-26 [17:00:16] <sgflt> meh, Yatekii yep, static is wrong, i believe i need something like "type Item: for<'a> &'a Item", which i believe does not work because it's not a single type. 
+rust 2018-12-26 [17:00:45] <sgflt> for those following, i am trying to implement a `tokio_codec::Encoder` that takes an `Item` by referenc 
+rust 2018-12-26 [17:01:22] <Yatekii> sgflt: oh,thats sad sorry :( 
+rust 2018-12-26 [17:04:01] <meh> sgflt, yeah, I don't think it's currently possible, you'd need higher kinded types 
+rust 2018-12-26 [17:04:09] <meh> maybe with ATCs it's possible, but not sure 
+rust 2018-12-26 [17:04:16] <shalzz> hodapp: no, tracing GC is not very predictable. And I said that, taken out of context, qoute as a software abstraction. Such as smart pointers enforced by the lang instead of an optional feature. 
+rust 2018-12-26 [17:04:20] <sgflt> meh: thanks. 
+rust 2018-12-26 [17:04:31] <sgflt> merry christmas everyone, regardless =) 
+rust 2018-12-26 [17:04:36] <meh> you too 
+rust 2018-12-26 [17:05:24] <hodapp> shalzz: errr... what? my statement was taken out of context? by me? 
+rust 2018-12-26 [17:06:07] <shalzz> no my statement that you qouted was taken out of context 
+rust 2018-12-26 [17:06:16] <shalzz> Anyways see the reddit thread, even the author admits that "static GC" is a rhetorical device 
+rust 2018-12-26 [17:06:29] <dpc1> sgflt: merry christmas :) 
+rust 2018-12-26 [17:07:02] <hodapp> shalzz: in what way does this supposed missed context make GC *not* an abstraction? 
+rust 2018-12-26 [17:18:50] <shalzz> seeing the* 
+rust 2018-12-26 [17:19:07] <shalzz> It is not an abstraction that a programmer can interact with directly (think inheritance, smart pointers, interfaces, borrow checker) but instead a separate process/technique based on observation with no control given to the programmer. 
+rust 2018-12-26 [17:20:48] <meh> shalzz, you do interact with it directly, by getting things out of scope and inaccessible 
+rust 2018-12-26 [17:26:01] <shalzz> In GC? 
+rust 2018-12-26 [17:26:23] <meh> shalzz, I think your definition of abstraction is different from the one hodapp is using 
+rust 2018-12-26 [17:26:36] <meh> as is your idea of direct interaction 
+rust 2018-12-26 [17:26:53] <shalzz> you cannot gurantee a GC pass will run and free your object just after an object goes out of scope 
+rust 2018-12-26 [17:27:46] <shalzz> meh: yes that if why I tried to specifically say "software abstraction" in my first statement 
+rust 2018-12-26 [17:28:04] <shalzz> maybe there is a better term for what I am refering to abstraction 
+rust 2018-12-26 [17:29:11] <shalzz> not general abstraction of concept 
+rust 2018-12-26 [17:29:19] <shalzz> sure GC abstracts away memory management but it is not an abstraction over memory management. 
+rust 2018-12-26 [17:34:18] <shalzz> take for eg a car and a train. In a car, driving of the whole car is abstracted into an accelarator and a brake (among a few others) whereas in a train the driving is abstacted away with an operator, you just get in and get out 
+rust 2018-12-26 [17:34:49] <meh> a GC pass could be ran after every instruction, that's an implementation detail 
+rust 2018-12-26 [17:34:52] <GreenJello> When implementing a custom derive, how do I use attributes? I need the equivalent of #[serde(with="foo")] for my macro 
+rust 2018-12-26 [17:35:01] <meh> GreenJello, with syn and lots of pain 
+rust 2018-12-26 [17:35:28] <GreenJello> it seems the compiler doesn't allow it at all, as it doesn't recognize them 
+rust 2018-12-26 [17:35:45] <GreenJello> what would be the first step? 
+rust 2018-12-26 [17:36:32] <meh> GreenJello, https://github.com/serde-rs/serde/blob/master/serde_derive/src/lib.rs#L76 
+rust 2018-12-26 [17:36:57] <meh> you probably forgot the attributes(whatever) part 
+rust 2018-12-26 [17:36:57] <GreenJello> ahh, nice, thanks! 
+rust 2018-12-26 [17:37:14] <hodapp> shalzz: whether or not an object that you cannot access is no longer in memory is as much an implementation detail as where in memory your in-scope object is 
+rust 2018-12-26 [17:38:02] <meh> shalzz, I disagree in this case, the concept is "the thing should be destroyed once it's not used anymore" 
+rust 2018-12-26 [17:38:11] <meh> whether that's done by "explicitly destroy it when you think it's not needed" 
+rust 2018-12-26 [17:38:16] <meh> or "it gets destroyed when it's inaccesible" 
+rust 2018-12-26 [17:38:19] <meh> the concept is the same 
+rust 2018-12-26 [17:39:03] <hodapp> it's like saying "a filesystem doesn't abstract away low-level disk access, because you don't know that a file is actually gone when you delete it" 
+rust 2018-12-26 [17:40:05] <meh> and whether inaccessible is defined by "is within scope" or "has no rooted references to it" also does not matter 
+rust 2018-12-26 [17:40:49] <hodapp> the abstraction in both cases isn't defined by what goes on underneath (that is an implementation detail), it's defined by what semantics it presents above that 
+rust 2018-12-26 [17:41:12] <meh> now my definition of garbage collection does not cover what Rust does, because it's just enforcing RAII at compile time, preventing you from dying horribly 
+rust 2018-12-26 [17:41:24] <meh> so it's just enforcing scoping 
+rust 2018-12-26 [17:43:22] <hodapp> I don't see the two as exclusive 
+rust 2018-12-26 [17:44:16] <meh> well yeah, you can always implement a GC to use within Rust, there have been multiple blog posts about integrating with other GCs or implementing GCs themselves and some experimentation with traits and autotraits 
+rust 2018-12-26 [19:06:11] <dcomp> Quick question: If I have an function which returns a large struct. (eg fn() -> [u8;10M]) do I have to worry about it overflowwing the stack.. Or is  it guarantred to be initialised on the stack if I call Box::nnew(fn())? 
+rust 2018-12-26 [19:06:43] <dcomp> s/stack/heap/ 
+rust 2018-12-26 [19:08:13] <SpaceManiac> dcomp: it might be heap-allocated if optimizations permit, but it's not guaranteed 
+rust 2018-12-26 [19:12:30] <dcomp> Also I'm trying to build an ASN1 encoder / decoder and planning on calling the crate x680 (After the spec). so calling dibs on the crate name 
+rust 2018-12-26 [19:13:43] <dcomp> Main feature will be: - being able to plonk ASN1 basic notation straight in a macro ( T ::== ...) 
+rust 2018-12-26 [19:20:59] <proletarian> Hi, I have some troubles with Rc and mut type 
+rust 2018-12-26 [19:21:20] <proletarian> I have this declaration :         let mut desktop_widgets_rc = Rc::new(&desktop_widgets); And this one :         Rc::make_mut(&desktop_widgets_rc).push(label_desktop); 
+rust 2018-12-26 [19:21:54] <proletarian> cargo errors on me with this: note: expected type `&mut std::rc::Rc<_>` found type `&std::rc::Rc<&std::vec::Vec<gtk::Label>>` 
+rust 2018-12-26 [19:22:04] <proletarian> I wonder where I am missing a "mut"  
+rust 2018-12-26 [19:27:49] <jebrosen> proletarian: make_mut() wants an &mut -- Rc::make_mut(&mut desktop_widgets_rc) 
+rust 2018-12-26 [19:31:06] <proletarian> Well, I tried that but I get Rc::make_mut(&mut desktop_widgets_rc).push(label_desktop);   cannot borrow as mutable 
+rust 2018-12-26 [19:32:22] <SpaceManiac> proletarian: what are you trying to accomplish? 
+rust 2018-12-26 [19:32:34] <lachlansneff> Is the any way to only create a struct as many times as there are threads when doing mapping with rayon? 
+rust 2018-12-26 [19:33:48] <proletarian> I want to pass a reference to a vector to an event function, so I want to pass the reference and be able to push into my vector as I loop 
+rust 2018-12-26 [19:34:14] <SpaceManiac> proletarian: you'll need to pass the reference to the vector as &mut as well 
+rust 2018-12-26 [19:35:34] <SpaceManiac> proletarian: and probably not inside an Rc 
+rust 2018-12-26 [19:36:12] <proletarian> damn, I need Refcell or something else right ? 
+rust 2018-12-26 [19:36:25] <SpaceManiac> Rc<RefCell<>> may help 
+rust 2018-12-26 [19:36:56] <proletarian> yeah I also got this tip last time, Rc is not enough then ? 
+rust 2018-12-26 [19:37:02] <proletarian> Now I got this : ^^^^^^^^^^^^ the trait `std::clone::Clone` is not implemented for `&mut std::vec::Vec<gtk::Label>` 
+rust 2018-12-26 [19:37:18] <SpaceManiac> Rc<&mut T> doesn't make much sense 
+rust 2018-12-26 [19:37:40] <lachlansneff> Is map_init what I'm looking for? 
+rust 2018-12-26 [19:37:41] <SpaceManiac> you'd either need Rc<RefCell<T>> (mutable shared ownership) or just &mut T (unique borrow) 
+rust 2018-12-26 [19:38:13] <proletarian> I see 
+rust 2018-12-26 [19:42:44] <proletarian> does this make sense then ?         let mut desktop_widgets_rc = Rc::new(RefCell::new(&mut desktop_widgets)); 
+rust 2018-12-26 [19:43:11] <SpaceManiac> proletarian: putting an &mut inside an Rc is still a little weird, but it would probably work 
+rust 2018-12-26 [19:43:28] <proletarian> You would ditch it ? 
+rust 2018-12-26 [19:43:47] <GreenJello> Trying to implement a proc macro... a bit of a work in progress, but I can't get it to compile https://gist.github.com/brigand/4f8009f2797cf8ae5009d933465b06b4 
+rust 2018-12-26 [19:43:55] <SpaceManiac> proletarian: usually, thing itself is put inside Rc+RefCell, rather than &mut to it 
+rust 2018-12-26 [19:44:15] <GreenJello> I don't understand what the error wants me to do 
+rust 2018-12-26 [19:46:53] <SpaceManiac> GreenJello: try writing out what you expect the proc macro to expand to 
+rust 2018-12-26 [19:48:38] <SpaceManiac> or, uh, there's some way to ask cargo to print the expanded version, but I don't remember what it is 
+rust 2018-12-26 [19:51:05] <talchas> proletarian: if you can store a Rc<RefCell<&mut>> you can probably store a &RefCell<&mut> 
+rust 2018-12-26 [19:51:16] <talchas> because you already have to deal with lifetimes for the &mut 
+rust 2018-12-26 [19:51:26] <GreenJello> I'll try to clean it up a bit, but maybe my non-trait impl block is the issue here 
+rust 2018-12-26 [19:52:59] <proletarian> @SpaceManiac  My code is also in a loop, now I have value moved here in previous iteration of loop 
+rust 2018-12-26 [20:08:33] <GreenJello> SpaceManiac, fixed some things and made a minimal test, cargo expand output added: https://gist.github.com/brigand/4f8009f2797cf8ae5009d933465b06b4 
+rust 2018-12-26 [20:09:22] <GreenJello> the output there looks good to me, but I still get "cannot infer type" 
+rust 2018-12-26 [20:09:26] <SpaceManiac> GreenJello: I don't suppose `_internals::get_field` is generic and needs a type annotation? 
+rust 2018-12-26 [20:09:48] <GreenJello> It is, generic over the return type pub fn get_field<T: FromValue>(row: &mut Row, field: &'static str) -> Result<T, ImportError> { 
+rust 2018-12-26 [20:10:21] <SpaceManiac> The .map is getting in the way of type inference 
+rust 2018-12-26 [20:10:23] <GreenJello> I believe it was working with the same code inlined in the module, before trying to automate it through the derive 
+rust 2018-12-26 [20:10:29] <GreenJello> ah 
+rust 2018-12-26 [20:10:39] <SpaceManiac> you could try writing out the expanded output in place of the #[derive] 
+rust 2018-12-26 [20:10:44] <SpaceManiac> and see if the error points to there 
+rust 2018-12-26 [20:11:10] <GreenJello> Okay, thanks 
+rust 2018-12-26 [20:14:28] <proletarian> how can I inter again on a vector contained in a Rc<RefCell<T>> ? 
+rust 2018-12-26 [20:19:38] <proletarian> what does the quote in &'a means please ? 
+rust 2018-12-26 [20:20:20] <SpaceManiac> proletarian: it means that the thing following it ("a") is a lifetime name 
+rust 2018-12-26 [20:20:39] <proletarian> oh thanks 
+rust 2018-12-26 [20:22:40] <proletarian> hm, can anyone help me iterate on a Rc<RefCell<Vec<>>> ? It doesn't seems that simple ... 
+rust 2018-12-26 [20:23:40] <talchas> that's pretty straightforword: you can .clone() to make a copy of the pointer, and use .borrow() or .borrow_mut() to use a &Vec or &mut Vec 
+rust 2018-12-26 [21:13:54] <Yatekii> do you folks have a hint how to properly use rust on gentoo? 
+rust 2018-12-26 [21:19:18] <proletarian> hey guys, I am trying to use Rc<RefCell<T>> I am using it at 2 points but .clone() does not seem to be enough. Can anybody check my code ? https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=65d3e11dfbf78731eb24d5ecf23909c0 
+rust 2018-12-26 [21:21:53] <proletarian> I've got a "temporary value does not live long enough" on line 30, a "value captured here after move" on line 23 and a "value used here after move" again on line 30. I am quite lost there 
+rust 2018-12-26 [21:23:09] <Lumpio-> proletarian: You need to do the clone outside your closure 
+rust 2018-12-26 [21:23:17] <Lumpio-> Now the original is being moved into the closure, and then cloned inside, which doesn't help 
+rust 2018-12-26 [21:23:35] <Lumpio-> The clone needs to be assigned to another variable so only that will be moved into the closure. 
+rust 2018-12-26 [21:26:30] <proletarian> so something like this ? https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=65d3e11dfbf78731eb24d5ecf23909c0 
+rust 2018-12-26 [21:27:25] <jebrosen> That's the same link as before 
+rust 2018-12-26 [21:27:41] <njg> proletarian: same link 
+rust 2018-12-26 [21:28:55] <proletarian> my bad https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=ac6e5cee4b9520002fa3b30b8542be19 
+rust 2018-12-26 [21:29:25] <njg> proletarian: won't you end up with the same issue? 
+rust 2018-12-26 [21:29:49] <njg> you need to give a new clone to every iteration of the loop since they each make a new closure 
+rust 2018-12-26 [21:30:59] <proletarian> so this ? https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=4b9539ca2cefe4cc2b48f3bc34949659 
+rust 2018-12-26 [21:37:41] <proletarian> now I get "value used here after move" on line 31 and "cannot move out of captured outer variable in an `Fn` closure" on line 24 
+rust 2018-12-26 [21:38:48] <njg> proletarian: i'm not sure i follow what you're doing 
+rust 2018-12-26 [21:38:50] <njg> here, one sec 
+rust 2018-12-26 [21:38:53] <jebrosen> You moved your clone from line 10 into the closure, then tried to use it again on 31. line 31 can use desktop_widgets_rc 
+rust 2018-12-26 [21:39:07] <njg> this is what you have now: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=d2be2c4cd63785f89a76a40200be2efa 
+rust 2018-12-26 [21:39:24] <njg> this is how it probably should look, if i understand what you're doing: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=7ecba3d95d1d268fb89ffde9b0811da7 
+rust 2018-12-26 [21:40:45] <njg> you move the cloned one into the closure and you just use the original RefCell in the loop 
+rust 2018-12-26 [21:41:19] <proletarian> that makes sense, ty :) 
+rust 2018-12-26 [21:41:49] <s1nus> Hello 
+rust 2018-12-26 [21:41:56] <s1nus> I'm fighting the borrow checker could use some help 
+rust 2018-12-26 [21:42:40] <njg> s1nus: you should post some code snippets that show the issue probably 
+rust 2018-12-26 [21:43:20] <proletarian> now I got this https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=6163aaaf4e2742bec15f5f8abf0e0d10 and this error "cannot move out of captured outer variable in an `Fn` closure" on line 24 
+rust 2018-12-26 [21:44:18] <proletarian> I could make sense of previous errors but I have definitely no clue on this one 
+rust 2018-12-26 [21:44:29] <njg> proletarian: i think you need to share more type signatures 
+rust 2018-12-26 [21:44:37] <talchas> proletarian: the button can be pressed multiple times 
+rust 2018-12-26 [21:45:15] <proletarian> hm, what do you mean ? 
+rust 2018-12-26 [21:45:19] <njg> ah 
+rust 2018-12-26 [21:45:21] <s1nus> Ok i will type it up in the playground 
+rust 2018-12-26 [21:45:22] <talchas> and you're moving the Rc into update_active_desktop, rather than passing in &Rc<RefCell<>>/&RefCell<> or cloning it 
+rust 2018-12-26 [21:45:23] <proletarian> tatchas: yes, it can 
+rust 2018-12-26 [21:45:55] <Yatekii> folks, what am I doing wrong when I get. the `transform` method cannot be invoked on a trait object ? 
+rust 2018-12-26 [21:45:59] <njg> proletarian: each time the button is clicked, you are passing the same clone to `update_active_desktop` 
+rust 2018-12-26 [21:46:13] <njg> what specifically are you trying to do? with that stuff proletarian? 
+rust 2018-12-26 [21:46:19] <Yatekii> signature is as follows: fn transform(&mut self, f: impl FnOnce(&mut dyn BasicStylableElement)) 
+rust 2018-12-26 [21:46:23] <talchas> Yatekii: you wrote where Self: Sized on it? 
+rust 2018-12-26 [21:46:23] <proletarian> ah ! passing the reference is what I needed for it to compile 
+rust 2018-12-26 [21:46:34] <talchas> oh, that's a generic method, that doesn' work 
+rust 2018-12-26 [21:47:28] <s1nus> Here is a snippet of my code 
+rust 2018-12-26 [21:47:28] <s1nus> https://i.imgur.com/kx13ZEJ.png 
+rust 2018-12-26 [21:47:32] <proletarian> talchas: a homemade bar for linux. I am using bspwm and everything needs it's own software 
+rust 2018-12-26 [21:47:40] <njg> proletarian: do you even need to clone then if you are capturing by reference? 
+rust 2018-12-26 [21:47:46] <njg> do you need the Rc to begin with? 
+rust 2018-12-26 [21:47:46] <Yatekii> talchas: https://gist.github.com/Yatekii/f02e69ffee1262558aa3f91171bc7c9c not as far as I know 
+rust 2018-12-26 [21:47:47] <s1nus> it says it   = note: move occurs because `conn` has type `rusqlite::Connection`, which does not implement the `Copy` trait 
+rust 2018-12-26 [21:48:05] <s1nus> I am using Rusqlite, and I wanna call two functions succesively using my connection object 
+rust 2018-12-26 [21:48:05] <talchas> Yatekii: yeah, it's the generic from the impl Trait arg 
+rust 2018-12-26 [21:48:17] <jebrosen> s1nus: You probably want those functions to take &Connection, not Connection 
+rust 2018-12-26 [21:48:25] <talchas> I don't know if that implies where Self: Sized or if you're getting this error message when trying to create the trait object 
+rust 2018-12-26 [21:48:36] <talchas> but obv it's not a very useful trait object without that method 
+rust 2018-12-26 [21:48:39] <s1nus> ok I will try that jebrosen 
+rust 2018-12-26 [21:49:10] <proletarian> bspwm returns all the desktop I have from a command, I have a vector of Strings corresponding to my desktops and I want them to be clickable + update colors so I know which one is active.  
+rust 2018-12-26 [21:49:27] <Yatekii> talchas: hmm I can make the traitobject apparently but I can't invoke the method on it. do you know how I can fix this? :S 
+rust 2018-12-26 [21:49:37] <Yatekii> and why is this exactly? :S 
+rust 2018-12-26 [21:49:51] <jebrosen> Yatekii: This is in some ways a conceptual problem, not syntactical 
+rust 2018-12-26 [21:50:09] <talchas> Yatekii: it's not possible to have generics on a trait object 
+rust 2018-12-26 [21:50:15] <talchas> implementation-wise it's not possible 
+rust 2018-12-26 [21:50:35] <jebrosen> Yatekii: `impl FnOnce`, like a generic, means static dispatch, but `dyn Transform` by definition means dynamic dispatch. Those don't usually mix nicely 
+rust 2018-12-26 [21:51:01] <proletarian> njg: I guess I need to, yes but I am a newbie so ... 
+rust 2018-12-26 [21:51:20] <patapon> hi, I was looking at this issue in libloading: https://github.com/nagisa/rust_libloading/issues/46 , which basically remarks that functions from a dynamic library that return a &'static ref are unsafe (since in the particular case of dynamically loaded libraries, the 'static lifetime is really the lifetime of the library object).  
+rust 2018-12-26 [21:51:28] <Yatekii> uhm ok ... so the question is how I make this work :S the problem is that I didn't want dynamic dispatch, but sadly it didn't work without :S 
+rust 2018-12-26 [21:51:29] <talchas> proletarian: the fix is to either pass &Rc or &RefCell instead, or to clone the rc inside the closure as well 
+rust 2018-12-26 [21:51:32] <patapon> so my question is, would there be a (easy) way to check if a particular type has a &'static reference inside? 
+rust 2018-12-26 [21:51:59] <Yatekii> why is it not possible to have generics on the trait object? because thy get lost after compilation? 
+rust 2018-12-26 [21:52:16] <talchas> Yatekii: because generics have a function for each type that it uses 
+rust 2018-12-26 [21:52:31] <njg> patapon: what does update_active_desktop look like? can you paste that somewhere? trying to internalize what you're actually doing 
+rust 2018-12-26 [21:52:57] <njg> it's pretty easy to get what you have to compile with cloning in Rc in the right spots but that might not actually be the correct thing to do in the long run 
+rust 2018-12-26 [21:53:06] <njg> *cloning the Rc 
+rust 2018-12-26 [21:53:19] <talchas> rustc could (for whichever of Box<dyn Trait> / &dyn Trait / &mut dyn Trait can implement Trait) generate versisons of the method for each of those trait objects that forwards to the generic method 
+rust 2018-12-26 [21:53:20] <talchas> but doesn't 
+rust 2018-12-26 [21:53:51] <talchas> (it wouldn't make a ton of sense to do so without automatic impls for the various pointer types) 
+rust 2018-12-26 [21:54:16] <jebrosen> Yatekii: Your transform() method is okay, it's using the trait as &Transform or Box<Transform> that doesn't work. 
+rust 2018-12-26 [21:54:36] <nagisa> patapon: yes, it is possible 
+rust 2018-12-26 [21:54:53] <Yatekii> talchas: yeah hmm but the generic is for the closure which is known at compile time. and the dynamic dispatch is only when the closure is called (runtime) so I don't see the clash there imo :S 
+rust 2018-12-26 [21:54:58] <Yatekii> jebrosen:  ^ 
+rust 2018-12-26 [21:55:21] <patapon> njg: you probably meant proletarian 
+rust 2018-12-26 [21:55:33] <nagisa> patapon: namely you would have something like `fn require_lifetime<'a, T: 'a>(&'a self) -> &'a T`. For libloading in particular, however, that does not exactly work well. 
+rust 2018-12-26 [21:55:35] <talchas> Yatekii: the issue is that you don't know the closures it will be called on when you generate the dyn Transform trait object 
+rust 2018-12-26 [21:55:41] <njg> patapon: you're right sorry 
+rust 2018-12-26 [21:55:43] <njg> tab completion 
+rust 2018-12-26 [21:55:44] <talchas> (which is done at compile time) 
+rust 2018-12-26 [21:55:49] <njg> proletarian: see what i said above^ 
+rust 2018-12-26 [21:58:06] <Yatekii> hmm ok so I guess I don't understand when exactly I get a trait object :S I have a &Node on which I call the ::transform() method. and I was kinda sure that was not a trait object :S 
+rust 2018-12-26 [21:58:21] <nagisa> patapon: I have my own ideas on how to solve the issue for libloading but I'm waiting for a few very unlikely features to stabilize before that 
+rust 2018-12-26 [21:58:41] <patapon> nagisa: but if T contains, say, only a &'static str, then the bound T: 'a is verified for all 'a, right? even if the &'static str is actually bound to the lifetime of the lib 
+rust 2018-12-26 [21:59:15] <patapon> oh wait i might have missed something 
+rust 2018-12-26 [21:59:33] <njg> Yatekii: where do you have a &Node from? That's a trait object 
+rust 2018-12-26 [21:59:43] <patapon> where would the require_lifetime function be? 
+rust 2018-12-26 [21:59:52] <njg> it's different than `fn foo<T: Node>(node: &T)` or `fn foo(node: &impl Node)` 
+rust 2018-12-26 [22:00:20] <patapon> nagisa: what are those unlikely features? i'm curious 
+rust 2018-12-26 [22:01:10] <nagisa> patapon: unboxed_closures feature 
+rust 2018-12-26 [22:01:20] <Yatekii> njg: https://gist.github.com/Yatekii/16f7ac49d90ccfe4cd5825a99318ff83 that's where I get it from :) I call map() on the Iter and in there I get the &mut Node 
+rust 2018-12-26 [22:01:57] <nagisa> patapon: the most important part here is the `-> &'a T`, this, regardless of what T is (even if it is `&'static`) makes it a &'a 
+rust 2018-12-26 [22:02:08] <njg> wait Yatekii is node a trait or a struct 
+rust 2018-12-26 [22:02:16] <njg> i assume it's a struct 
+rust 2018-12-26 [22:02:20] <njg> lemme re-read what you have here hold up 
+rust 2018-12-26 [22:03:17] <jebrosen> Yatekii: What is the full error you mentioned earlier that complains about trait objects? 
+rust 2018-12-26 [22:03:34] <njg> Yatekii: how are you using that iterator and where are you calling transform? 
+rust 2018-12-26 [22:03:39] <njg> and yeah please give the full error 
+rust 2018-12-26 [22:05:22] <patapon> nagisa: if T is &'static str, then you would have a `&'a &'static str` 
+rust 2018-12-26 [22:06:07] <patapon> maybe? 
+rust 2018-12-26 [22:07:06] <patapon> and if I deref that I can still get a copy of the &'static ref that can escape 'a  
+rust 2018-12-26 [22:08:18] <nagisa> patapon: it cannot, because `&'static T` is not Copy 
+rust 2018-12-26 [22:08:36] <nagisa> and you cannot move out a `T: 'static` out of `&'a` 
+rust 2018-12-26 [22:08:49] <nagisa> it automatically becomes a `&'a &'a T` for most intents and purposes. 
+rust 2018-12-26 [22:09:07] * nagisa probably botched that explanation 
+rust 2018-12-26 [22:09:19] <nagisa> lemme give you some examples instead. 
+rust 2018-12-26 [22:11:55] <njg> proletarian: any luck? 
+rust 2018-12-26 [22:12:18] <nagisa> patapon: https://gist.github.com/1927b3b06aecbea71b866396b5682b64 
+rust 2018-12-26 [22:12:26] <nagisa> patapon: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=1927b3b06aecbea71b866396b5682b64 
+rust 2018-12-26 [22:13:26] <nagisa> patapon: ah, that is not what I wanted to show lol 
+rust 2018-12-26 [22:13:40] <patapon> ah ok :) 
+rust 2018-12-26 [22:13:47] <nagisa> hmm, actually what I though should not work actually works :( 
+rust 2018-12-26 [22:14:39] <proletarian> njg: it's working fine with this : https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=a8ca9255611ed0e59b666add0053bbc9 
+rust 2018-12-26 [22:15:06] <njg> proletarian: i know but 
+rust 2018-12-26 [22:15:12] <proletarian> njg: I know it's totally dirty, I will refactor it a lot later (it's a poc atm) 
+rust 2018-12-26 [22:15:17] <njg> what you're doing seems pretty roundabout 
+rust 2018-12-26 [22:15:24] <njg> like why do you even need the Rc at that point? 
+rust 2018-12-26 [22:15:45] <proletarian> could you show me what you mean on a play ? 
+rust 2018-12-26 [22:15:59] <njg> proletarian: can i see update_active_desktop()? 
+rust 2018-12-26 [22:16:00] <proletarian> I dunno, I tried without it, and got a couple of errors 
+rust 2018-12-26 [22:16:02] <patapon> to give you some context: my goal was to create a proc-macro that would automatically generate a wrapper around symbols in a dynamic library 
+rust 2018-12-26 [22:16:04] <proletarian> yeah sure 
+rust 2018-12-26 [22:16:14] <njg> i think i see why you need it but it would help to see that fn 
+rust 2018-12-26 [22:16:33] <proletarian> here is the super dirty code https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=dda5b6fbd404e44333c391c69df3361e 
+rust 2018-12-26 [22:16:54] <njg> thanks sec 
+rust 2018-12-26 [22:16:54] <patapon> basically, you annontate some items with an attribute, and it generates a function or whatever that returns a pointer to the dynamically loaded version of the symbol, with correct lifetimes 
+rust 2018-12-26 [22:18:08] <nagisa> patapon: I've seen crates that do this... 
+rust 2018-12-26 [22:18:11] <patapon> the thing is, i have to change the lifetimes in function signatures in non-trivial ways (add bounds, etc) so that every returned reference cannot outlive the lib 
+rust 2018-12-26 [22:18:23] <nagisa> patapon: since you've a proc macro, you can just filter out the 'static token 
+rust 2018-12-26 [22:18:53] <nagisa> and error if the user specifies one 
+rust 2018-12-26 [22:19:01] <patapon> nagisa: yeah but you can have a &'static ref arbitrarily nested into types 
+rust 2018-12-26 [22:19:20] <Yatekii> njg: jebrosen: error: https://gist.github.com/Yatekii/a36a2a18522d75d7e3bf7383205e1bdc code: https://github.com/Yatekii/svg/blob/master/src/transform.rs#L64 Node is a struct 
+rust 2018-12-26 [22:20:17] <patapon> e.g. the `Wrapper(&'static u32)` example in issue https://github.com/nagisa/rust_libloading/issues/46 
+rust 2018-12-26 [22:20:22] <jebrosen> Yatekii: Why the double transform? And it does explain the problem: &BasicStylableElement is a trait object, so you can't .transform() it 
+rust 2018-12-26 [22:22:10] <jebrosen> Oh, it's transform *on the other type* 
+rust 2018-12-26 [22:22:49] <njg> proletarian: i see what's going on. i am pretty sure there's a simpler way to do that but if it works, go for it for now 
+rust 2018-12-26 [22:22:56] <jebrosen> Yatekii: Forget what I said then. &BasicStylableElement is !Sized, but transform is delcared `where Self: Sized` 
+rust 2018-12-26 [22:23:48] <jebrosen> Yatekii: I *think* you could make transform_ref not require `Self: Sized`, which would make it callable in the place you are trying to call transform() 
+rust 2018-12-26 [22:23:53] <njg> proletarian: i've found that often, Rc<RefCell<T>> isn't actually what you wanted and I'm pretty sure that's the case here 
+rust 2018-12-26 [22:24:27] <proletarian> hmm 
+rust 2018-12-26 [22:24:30] <nagisa> patapon: well... this is a hard problem, because `'static` was not constructed with program pages possibly going outta under the feet :) 
+rust 2018-12-26 [22:25:15] <patapon> yeah 
+rust 2018-12-26 [22:25:15] <proletarian> njg: what would be your solution ? 
+rust 2018-12-26 [22:26:33] <njg> proletarian: well, it seems like desktops_list could live for the lifetime of the program, and you could just exclusively deal with references to it 
+rust 2018-12-26 [22:26:54] <proletarian> yes, that's right 
+rust 2018-12-26 [22:27:21] <njg> basically you're adding refcounting there for no reason 
+rust 2018-12-26 [22:27:23] <proletarian> so using &' desktops_list once I have declarated is as static beforehand ? 
+rust 2018-12-26 [22:28:12] <njg> it's not &'static 
+rust 2018-12-26 [22:28:55] <njg> there's some slight trickiness here because of how that callback works 
+rust 2018-12-26 [22:29:14] <proletarian> when do you need &' then ? 
+rust 2018-12-26 [22:29:14] <patapon> well, for now I think I will limit the types that can appear in a dynamically loaded function 
+rust 2018-12-26 [22:29:29] <patapon> probably with an unsafe trait or something 
+rust 2018-12-26 [22:30:01] <njg> proletarian: you would use & 
+rust 2018-12-26 [22:30:03] <njg> but not &'static 
+rust 2018-12-26 [22:30:34] <njg> actually proletarian it looks like update_active_desktop doesn't even need to modify that list or anything, it just iterates over it 
+rust 2018-12-26 [22:30:45] <njg> it can definitely be done simply with references 
+rust 2018-12-26 [22:30:55] <proletarian> yes, the list is not modified 
+rust 2018-12-26 [22:31:01] <proletarian> I just need the reference to update the color 
+rust 2018-12-26 [22:31:10] <njg> right 
+rust 2018-12-26 [22:31:48] <njg> proletarian: do you even need to use the gtk::Label part or can you just compare the strings to query_current_desktop() 
+rust 2018-12-26 [22:31:55] <patapon> thanks for the tips, nagisa! 
+rust 2018-12-26 [22:32:40] <njg> proletarian: one sec 
+rust 2018-12-26 [22:33:02] <Yatekii> jebrosen: yep the one transform is to transform the node contents in any way and the second transform is to apply a transform (aka matrix) on a basic geometric element or a group. sorry, couldn't think of a better naming ... 
+rust 2018-12-26 [22:33:19] <Yatekii> jebrosen: Sized was required for some reason, I can retry tho 
+rust 2018-12-26 [22:33:26] <njg> i see what's going on 
+rust 2018-12-26 [22:34:45] <proletarian> well the gtk::Label is needed to display the desktop info 
+rust 2018-12-26 [22:34:56] <njg> yeah i see 
+rust 2018-12-26 [22:35:00] <proletarian> and as it contains the label, I might as well use it 
+rust 2018-12-26 [22:35:07] <proletarian> i mea the String 
+rust 2018-12-26 [22:36:29] <Yatekii> jebrosen: https://gist.github.com/Yatekii/8f9ff737532d50eee7c64464eaddc3c7 that happens when I remove the Sized constraint 
+rust 2018-12-26 [22:37:58] <jebrosen> Gah, I somehow thought &mut Self would be okay :/ 
+rust 2018-12-26 [22:38:20] <jebrosen> Not returning Self or mut_self at all would definitely be trait-object-safe, but then you don't have the method chaining 
+rust 2018-12-26 [22:39:09] <Yatekii> yeah :S 
+rust 2018-12-26 [22:39:41] <Yatekii> I already had to introduce _ref so I can do dynamic dispatch because sadly staic dispatch wont work 
+rust 2018-12-26 [22:39:59] <Yatekii> (Well it does but I would have to introduce thousands of match branches) 
+rust 2018-12-26 [22:40:03] <njg> proletarian: hi 
+rust 2018-12-26 [22:40:12] <Yatekii> maybe I could do that with a macro tho but that's uglyyyy :D 
+rust 2018-12-26 [22:40:20] <njg> okay so this obviously untested since that stuff doesn't compile in the playground but 
+rust 2018-12-26 [22:40:23] <njg> https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=583fc73308cb2be55a4402430478aae2 
+rust 2018-12-26 [22:40:26] <njg> hopefully you can see the difference 
+rust 2018-12-26 [22:41:27] <njg> err, i think i put an extra & in there on line 52 but you get the idea 
+rust 2018-12-26 [22:42:05] <njg> turn your vec<string> -> vec<gtk::Label> (and drop the vec<string> since you don't need it anymore) and then just pass the ref around in the closure and all the lifetimes should work out 
+rust 2018-12-26 [22:48:19] <proletarian> alright, checking it 
+rust 2018-12-26 [23:00:24] <Yatekii> f: impl FnOnce<Output=bool> how do I do this? S 
+rust 2018-12-26 [23:00:50] <j_ey> FnOnce() -> bool ? 
+rust 2018-12-26 [23:02:08] <Yatekii> does not work for me at least :S 
+rust 2018-12-26 [23:02:52] <Yatekii> oh yes it does, thx, j_ey! 
+rust 2018-12-26 [23:12:54] <proletarian> njg: I tried your solution, I have some errors 
+rust 2018-12-26 [23:13:41] <njg> proletarian: yeah i can't test it right now but i think conceptually it's what you want 
+rust 2018-12-26 [23:13:45] <njg> what are the errors? 
+rust 2018-12-26 [23:14:37] <proletarian> here is the code https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=1615925888abb9ac478b359c58b52de4 
+rust 2018-12-26 [23:15:27] <njg> ok 
+rust 2018-12-26 [23:16:02] <proletarian> "`std::rc::Rc<std::cell::RefCell<std::vec::Vec<gtk::Label>>>` is not an iterator; maybe try calling `.iter()` or a similar method" line 87 and "doesn't have a size known at compile-time" line 90,  
+rust 2018-12-26 [23:16:27] <njg> uhh 
+rust 2018-12-26 [23:16:31] <njg> proletarian: you don't need desktops_labels_rc at all anymore 
+rust 2018-12-26 [23:16:40] <njg> delete that + rc_clone + the push() 
+rust 2018-12-26 [23:16:45] <njg> and just iterate over desktops_labels 
+rust 2018-12-26 [23:17:30] <njg> and also probably just unwrap() on desktop_label.get_label() since idk what it would even mean for it to not have a string label at that point 
+rust 2018-12-26 [23:17:33] <proletarian> what about update_active_desktop ? 
+rust 2018-12-26 [23:17:57] <proletarian> oh yeah, I don't need the push 
+rust 2018-12-26 [23:17:58] <njg> think it's just `desktop_widgets: &Vec<gtk::Label>` 
+rust 2018-12-26 [23:17:59] <proletarian> my bad 
+rust 2018-12-26 [23:18:10] <njg> in that update_active_desktop() 
+rust 2018-12-26 [23:18:27] <njg> and render_desktops needs to take the label vec by reference 
+rust 2018-12-26 [23:18:41] <njg> instead of taking ownership like you hvae now 
+rust 2018-12-26 [23:18:55] <njg> otherwise the references don't live long enough when you make them in the closure 
+rust 2018-12-26 [23:23:06] <proletarian> I have one error left, here is the code : https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=32b2e61f93cdf4e6905346c09583dc63 
+rust 2018-12-26 [23:23:43] <njg> what is the error 
+rust 2018-12-26 [23:23:43] <proletarian> "lifetime `'static` required" on line 89 
+rust 2018-12-26 [23:24:24] <njg> can i see the full error 
+rust 2018-12-26 [23:24:56] <proletarian> "--------------- help: add explicit lifetime `'static` to the type of `desktops_labels`: `&'static std::vec::Vec<gtk::Label>`" you think, I should do so ? 
+rust 2018-12-26 [23:26:24] <njg> proletarian: i don't think it'll work 
+rust 2018-12-26 [23:26:26] <njg> but you can try 
+rust 2018-12-26 [23:26:43] <naftulikay> is there a document that I can use as a migration guide from 2015 to 2018? Not getting anything useful back from Google 
+rust 2018-12-26 [23:27:35] <njg> proletarian: wow i just read the types for the rust gtk binding 
+rust 2018-12-26 [23:28:02] <njg> didn't realize that the closure required a 'static lifetime on all the references 
+rust 2018-12-26 [23:29:00] <njg> sec 
+rust 2018-12-26 [23:31:43] <lachlansneff> Is there any way to add a single item to the end of an iterator? 
+rust 2018-12-26 [23:32:27] <njg> proletarian: you can just make that render_labels() thing return a Rc<Vec<gtk::Label>> instead, pass &Rc<Vec<gtk::Label>> into the render_desktops, and use Rc::clone() to pass a copy of that into the update_active_desktops call 
+rust 2018-12-26 [23:32:31] <njg> that will all work 
+rust 2018-12-26 [23:32:41] <njg> you don't need RefCell anymore, you aren't doing any mutation 
+rust 2018-12-26 [23:33:02] <njg> and you don't have the borrow after move issue that you had before since you create the vec in one spot and *then* create all those callbacks 
+rust 2018-12-26 [23:33:14] <njg> so the code is a lot simpler and you only need Rc<> to get around the gtk binding's static lifetime requirement 
+rust 2018-12-26 [23:36:39] <Yatekii> folks, why are nested impls not allowed? 
+rust 2018-12-26 [23:36:52] <naftulikay> @lanchansneff https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.chain 
+rust 2018-12-26 [23:37:09] <naftulikay> create another iterator containing your single item and chain both of them together 
+rust 2018-12-26 [23:37:11] <jebrosen> Yatekii: What does a 'nested impl' (as you mean it) look like? 
+rust 2018-12-26 [23:37:15] <naftulikay> still looking for a migration guide to 2018 
+rust 2018-12-26 [23:37:34] <Yatekii> jebrosen: fn transform(&mut self, f: impl FnOnce(&mut impl BasicStylableElement))   
+rust 2018-12-26 [23:37:57] <Yatekii> jebrosen: the second impl was a dyn, but as we figured before dynamic and static dispatch doesn't mesh somehow 
+rust 2018-12-26 [23:38:24] <proletarian> like this njg ? https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b497ec773ed8c53e4aa052de66dde5d1 
+rust 2018-12-26 [23:39:28] <jebrosen> Yatekii: I think that's equivalent to `fn transform<F: for<S: BasicStylableElement> FnOnce(&mut S)>(&mut self, F)` and higher-ranked bounds over types don't exist 
+rust 2018-12-26 [23:39:57] <proletarian> (I missed the &Rc< on first line) 
+rust 2018-12-26 [23:41:45] <proletarian> new code : https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=de548c06bf7c152b9824402ed5c2ba1d 
+rust 2018-12-26 [23:41:48] <jebrosen> Yatekii: It's not the nesting that's the problem, it's FnOnce(..., impl Trait) 
+rust 2018-12-26 [23:42:35] <Yatekii> hmm ok 
+rust 2018-12-26 [23:42:41] <Yatekii> dang, how do I make this work ^^ 
+rust 2018-12-26 [23:42:44] <proletarian> I still have this error "lifetime `'static` required" on line 87 
+rust 2018-12-26 [23:44:08] <companion_cube> hi! is there a way to emulate associated type constructors, in any way? I'd really like to provide a Map implementation in a trait, but it's parametrized over keys/values 
+rust 2018-12-26 [23:49:15] <lachlansneff> naftulikay: I used `std::iter::once` and chain, thanks. 
+rust 2018-12-26 [23:49:30] <naftulikay> @lanchansneff emoji-thumbs-up 
+rust 2018-12-26 [23:54:04] <naftulikay> Is there a way to wrap an entire match arm in a Box<T>? This is my code: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=314b676c6ab9118ea30a976a2097e2e5 
+rust 2018-12-26 [23:54:35] <naftulikay> on all of my match arms, I'm repeating Box::new for every arm; is there a way to transform any result returned by the match into a Box? 
+rust 2018-12-26 [23:54:53] <j_ey> yes 
+rust 2018-12-26 [23:54:57] <j_ey> just do it! 
+rust 2018-12-26 [23:55:06] <j_ey> Box::new(match.. 
+rust 2018-12-26 [23:55:37] <j_ey> (oh but youre doing stuff with boxed traits.. not sure if that will work here) 
+rust 2018-12-26 [23:56:16] <naftulikay> lemme try it out 
+rust 2018-12-26 [23:57:24] <naftulikay> yeah it's not working, it's a trait. Need a refresher on impl Trait 
+rust 2018-12-27 [00:01:01] <j_ey> it doesnt look that bad to me 
+rust 2018-12-27 [00:02:35] <jebrosen> You can't Box::new(any of multiple types by value) 
+rust 2018-12-27 [00:05:48] <zzing> What is the status of rust on embedded devices? Specifically, I want to be able to use an arm device such as the arduino due, or some other similar board to do low level development with.  
+rust 2018-12-27 [00:07:48] <j_ey> it's good! 
+rust 2018-12-27 [00:10:31] <zzing> I just haven't been able to find solid information on it 
+rust 2018-12-27 [00:11:43] <j_ey> https://github.com/rust-embedded 
+rust 2018-12-27 [00:13:29] <zzing> Thanks. It looks like one of the books that is not trivial is requring the STM32F3DISCOVERY board. It is quite affordable, I just need to see if it will do what I ultimately want to do. 
+rust 2018-12-27 [00:15:18] <jschievink> zzing: support for the due specifically isn't quite there as far as i know - few people are using it 
+rust 2018-12-27 [00:15:48] <jschievink> most people seem to use STM32-based boards 
+rust 2018-12-27 [00:18:27] <nbro_> Hi, guys! 
+rust 2018-12-27 [00:18:45] <nbro_> What do you do when the input to your programs, passed as a command-line argument, can be of different types? 
+rust 2018-12-27 [00:19:55] <dario> is there a limited set of types of those parameters? 
+rust 2018-12-27 [00:20:11] <dario> or are they even somehow fixed, depending on a subcommand given first? 
+rust 2018-12-27 [00:20:31] <dario> arg-parsers often have functionality for those cases 
+rust 2018-12-27 [00:20:33] <jrozner> zzing: what do you want to do? 
+rust 2018-12-27 [00:20:42] <dario> otherwise, treat them all as strings and interpret later? 
+rust 2018-12-27 [00:20:42] <nbro_> So far, they can be any number usize, u32, u64, f32, characters or booleans 
+rust 2018-12-27 [00:20:51] <nbro_> No strings are supported in my program yet 
+rust 2018-12-27 [00:21:19] <nbro_> *are not supported 
+rust 2018-12-27 [00:21:21] <jrozner> zzing: also, there is #rust-embedded on freenode 
+rust 2018-12-27 [00:21:53] <zzing> jschievink, its good to know - basically what I want to be able to do make hardware and firmware for motion control - specifically 3d printers. 
+rust 2018-12-27 [00:22:15] <zzing> If I have to or should use STM32, then it is very good to know this now 
+rust 2018-12-27 [00:22:21] <nbro_> Right now, I was not using any crate to parse the arguments 
+rust 2018-12-27 [00:22:25] <nbro_> Which crate would you advise? 
+rust 2018-12-27 [00:22:49] <jschievink> jrozner: the official channel is on moznet though 
+rust 2018-12-27 [00:23:09] <jrozner> jschievink: ah you're right. My bad 
+rust 2018-12-27 [00:24:02] <jschievink> zzing: I do recommend STM32 for starting out, you'll likely need to generate your own device crate for the due 
+rust 2018-12-27 [00:24:12] <nbro_> https://github.com/clap-rs/clap looks to be very active 
+rust 2018-12-27 [00:25:21] <dario> nbro_: yep, was about to suggest that one as well, otherwise there's some more at https://crates.io/keywords/argument 
+rust 2018-12-27 [00:26:46] <zzing> jschievink, is there any limitations on the STM32 that would prevent its general use? 
+rust 2018-12-27 [00:27:27] <jschievink> zzing: on the familiy? not really. on individual chips? sure. 
+rust 2018-12-27 [00:27:43] <jschievink> zzing: of course this depends on the application 
+rust 2018-12-27 [00:28:01] <jschievink> but STM32 is supposed to be a general-purpose <unconvertable> C family 
+rust 2018-12-27 [00:28:53] <jschievink> zzing: also, you might get more people to help you over at #rust-embedded 
+rust 2018-12-27 [00:29:10] <zzing> jschievink, basically - a 3d printer. There are some ICs that I plan to use that control motion (generate steps) and will feed drivers - so the firmware can be much simpler. Originally I was thinking a shield for the due, but I have no specific plans that would not allow for something this route. 
+rust 2018-12-27 [00:32:05] <zzing> jschievink, thanks I will be looking there 
+rust 2018-12-27 [01:01:58] <mauz> what's the difference between .unwrap() and ? operator ? 
+rust 2018-12-27 [01:02:17] <Mutabah> mauz: unwrap will panic immediately if the Result is Err 
+rust 2018-12-27 [01:02:32] <Mutabah> mauz: While `?` returns from the current function, propagating the Err value 
+rust 2018-12-27 [01:02:56] <Mutabah> (`foo?` is effectively `match foo { Ok(v) => v, Err(e) => return Err(e), }`) 
+rust 2018-12-27 [01:03:28] <mauz> Mutabah: interesting thanks 
+rust 2018-12-27 [01:04:30] <mauz> I'm wrapping a File::open() call in a fn returning an Option. How can I make the fn return None when File::open() returns an error ? 
+rust 2018-12-27 [01:05:32] <mauz> I'm using pattern match like `let mut file = match File.open(<path>) { Err(e) => None, Ok(v) => file}` but I can fix the incompatible types  
+rust 2018-12-27 [01:06:57] <jschievink> mauz: you need a "return None" 
+rust 2018-12-27 [01:07:11] <jschievink> alternatively, just call .ok() on the Result 
+rust 2018-12-27 [01:07:42] <mauz> wow, I love rust haha 
+rust 2018-12-27 [01:07:55] <jschievink> (actually then you'd need to use ?) 
+rust 2018-12-27 [01:08:14] <jschievink> might be a good idea to read the error handling part of the Rust book in any case 
+rust 2018-12-27 [01:12:39] <pepper_chico> mauz: ? came up as sugar in place of try! macro 
+rust 2018-12-27 [01:13:47] <pepper_chico> mauz: https://doc.rust-lang.org/std/macro.try.html 
+rust 2018-12-27 [02:09:24] <evocatus> in which cases is TCO applied to recursive function calls? 
+rust 2018-12-27 [02:09:37] <evocatus> is this something that can even be easily determined, or is it just up to the compiler? 
+rust 2018-12-27 [02:10:16] <Mutabah> Up to the optimiser 
+rust 2018-12-27 [02:10:55] <Mutabah> It's not easy to determine, but a rough rule of thumb is that if there's no local variables with destuctors, then you have a good chance of TCO applyin 
+rust 2018-12-27 [02:11:34] <evocatus> ok, that is a useful guideline. thank you! 
+rust 2018-12-27 [02:11:57] <evocatus> might as well just roll an iterative solution i suppose 
+rust 2018-12-27 [02:11:59] <evocatus> iterators are nice 
+rust 2018-12-27 [02:13:25] <Mutabah> They are, and they also optimise easier (and even when unoptimised, they don't exhibit stack exhaustion) 
+rust 2018-12-27 [02:48:55] <Arnavion> There's no way to have an optional dependency and not have it be an implicit feature, is there? 
+rust 2018-12-27 [02:49:10] <Arnavion> Eg I want to add tungstenite as an optional dep, but want to expose a feature named "websockets" to enable it, otherwise I couldn't swap tungstenite out for something else without a breaking change 
+rust 2018-12-27 [02:50:15] <Arnavion> I can of course have both features, and hope that docs and comments in the Cargo.toml are enough to dissuage users from enabling the tungstenite one 
+rust 2018-12-27 [02:50:21] <Arnavion> dissuade* 
+rust 2018-12-27 [03:08:35] <companion_cube> /wc 
+rust 2018-12-27 [03:13:43] <SiegeLord> I want to add ranks to my number strings, like 1st, 2nd, 3rd etc... is there a library for that? 
+rust 2018-12-27 [03:39:35] <Mutabah> SiegeLord: Maybe look for an internationalisation library? 
+rust 2018-12-27 [03:40:14] <SiegeLord> The word I was looking for was 'ordinal', and there's a crate with that very name... npm level of specialization, but it'll do for now 
+rust 2018-12-27 [04:18:26] <static> I remember a way to build targets with llvm sanitizer support. Anyone know how? Also curious if fsanitize=cfi is supported 
+rust 2018-12-27 [04:20:55] <sfackler> static: take a look at https://github.com/rust-fuzz/cargo-fuzz 
+rust 2018-12-27 [04:21:22] <static> Was just reading through it actually 
+rust 2018-12-27 [04:21:53] <static> So far not seeing sanitizers anywhere 
+rust 2018-12-27 [04:25:35] <static> https://github.com/japaric/rust-san This looks right 
+rust 2018-12-27 [04:27:09] <static> Looks like no support for cfi 
+rust 2018-12-27 [04:32:37] <raph> I have a bit of a style question of how to organize libraries; it's a general question but I have a specific instance. 
+rust 2018-12-27 [04:33:45] <raph> my curves library is shaping up to have a core with absolutely essential operations but I'm also wanting to write a bunch of extras: specific curves such as Euler spirals which not everybody is going to use, and other stuff like parsing SVG path data 
+rust 2018-12-27 [04:34:08] <raph> what's the best way to structure all this? basically i see three alternatives 
+rust 2018-12-27 [04:34:39] <raph> 1 is "batteries included", just put everything in there and don't worry too much about the extra code that people will be downloading and building 
+rust 2018-12-27 [04:35:31] <raph> 2 is to have features for the extras. the way i see this, it's pretty much the same as 1 except compile times improve, and there's a bit of fiddling to set the features 
+rust 2018-12-27 [04:35:42] <raph> 3 is to have multiple crates, a core and extras 
+rust 2018-12-27 [04:36:02] <raph> i've seen all 3 patterns, would like to know if there's best practices or strong preferences from people 
+rust 2018-12-27 [04:36:09] <Arnavion> 2 > 1 > 3 
+rust 2018-12-27 [04:36:22] <Arnavion> Downloading source code that wouldn't compile isn't a big deal. The download is compressed anyway 
+rust 2018-12-27 [04:36:38] <Arnavion> The downside of 3 is more version numbers to keep in sync, which is why it's at the bottom 
+rust 2018-12-27 [04:36:43] <raph> certainly winapi has moved from 3 to 2 
+rust 2018-12-27 [04:37:39] <Arnavion> The only difference between 2 and 1 is the amount of compilation time 
+rust 2018-12-27 [04:37:46] <Arnavion> so if there's not much, then 1 is fine 
+rust 2018-12-27 [04:38:52] <raph> i think it also depends on how many people will be using the crate; for something like bitflags, it adds up. probably packed_simd is an even better example because it does have a compilation time problem 
+rust 2018-12-27 [04:39:08] <raph> but it's likely that the only people using this crate will be serious 2d graphics applications 
+rust 2018-12-27 [04:39:20] <Arnavion> It depends on how much stuff you have under the features 
+rust 2018-12-27 [04:39:47] <raph> we'll see :) 
+rust 2018-12-27 [04:40:05] <raph> right now i'm at (checks wc)... 1725 lines 
+rust 2018-12-27 [04:40:08] <Arnavion> Does turning on the feature change compilation time from 1s to 1.1s? Not worth it to have a feature. 1s to 3s? Kinda not worth it, but acceptable. 1m to 3m? Definitely have a feature 
+rust 2018-12-27 [04:44:29] <blarf> Potentially even an opt-out feature if the delta is smaller 
+rust 2018-12-27 [04:46:23] <WindowsBunny> Does turning on the feature cause something that may not be desired? 
+rust 2018-12-27 [04:46:37] <WindowsBunny> if so, it should be opt in 
+rust 2018-12-27 [04:46:44] <raph> Nope, it's really about mental weight and compile times 
+rust 2018-12-27 [04:46:50] <WindowsBunny> things like whether to depend on std should be opt in 
+rust 2018-12-27 [04:47:12] <WindowsBunny> because otherwise users will never be able to convince all their dependencies to disable that default feature of your crate 
+rust 2018-12-27 [04:47:17] <WindowsBunny> and they will be sad 
+rust 2018-12-27 [04:47:43] <WindowsBunny> If a *single* reverse dependency of your crate forgets to disable that default feature, the user becomes very sad 
+rust 2018-12-27 [04:47:55] <raph> i'm looking at arrayvec, which is one of my deps; it 
+rust 2018-12-27 [04:48:21] <raph> it's got std by default, but serde opt-in, and some other tweaks that affect compile times opt-in 
+rust 2018-12-27 [04:49:28] <raph> i'm not sure whether this stuff makes sense no_std or not; i think i'd have to do some work for it 
+rust 2018-12-27 [04:50:08] <WindowsBunny> it's fine to not support no_std 
+rust 2018-12-27 [04:50:16] <WindowsBunny> but if you do, make sure it is by default no_std 
+rust 2018-12-27 [04:50:26] <raph> a lot of the math doesn't need to allocate, but the bezier path builder uses vec internally 
+rust 2018-12-27 [04:50:34] <raph> i'm not sure how you'd use that in a no_std environment 
+rust 2018-12-27 [04:51:45] <WindowsBunny> in general, unless the compile time of your crate itself is huge, you'd only want features for opting into various dependencies 
+rust 2018-12-27 [04:53:46] <evocatus> is it possible to write an iterator that returns references to the things contained by my struct? 
+rust 2018-12-27 [04:53:50] <evocatus> if so, how does one accomplish this 
+rust 2018-12-27 [04:54:25] <evocatus> I have a struct with a method returning another struct that implements Iterator 
+rust 2018-12-27 [04:54:54] <evocatus> that struct itself contains a reference to the container I actually want to iterate over 
+rust 2018-12-27 [04:55:10] <raph> evocatus: that sounds like the right way to do it, what's the issue? 
+rust 2018-12-27 [04:56:03] <evocatus> raph: in the implementation of `next` I cannot return references to the Items being iterated over, because they can't live past my borrow of `self` (where self is my iterator struct) 
+rust 2018-12-27 [04:56:35] <evocatus> raph: https://paste.pound-python.org/show/1FtGZvw9kW12oOzISqMz/ 
+rust 2018-12-27 [04:57:32] <evocatus> i am also aware that this traversal is probably wrong 
+rust 2018-12-27 [04:58:40] <raph> I _think_ you can fix this without too much trouble. Maybe `Some(ref node)` rather than `Some(node)`in the match 
+rust 2018-12-27 [04:59:35] <Ralith> it makes me really happy that the assert macros take a format string and arguments 
+rust 2018-12-27 [05:00:14] <raph> and i think some .as_ref() 's added when you're returning stuff held in Option 
+rust 2018-12-27 [05:00:40] <evocatus> raph: ah, that seems to have worked. thanks! not really sure why but i'll take it haha 
+rust 2018-12-27 [05:01:06] <raph> you start to get a feel for it after writing a lot of code :) 
+rust 2018-12-27 [05:01:25] <raph> this is exactly the kind of thing i was talking about in my "quick fix" idea in my blog post 
+rust 2018-12-27 [05:02:55] <ishitatsuyuki> What would be the way to perform something like SELECT SUM(x) GROUP BY y with iterators? Or should I just mutate a hashmap instead? 
+rust 2018-12-27 [05:05:03] <evocatus> and now the dreaded "doubly linked lists are impossible in rust" issue 
+rust 2018-12-27 [05:05:32] <evocatus> maybe i will take the easy way out and use refcell 
+rust 2018-12-27 [05:07:38] <ishitatsuyuki> If you're representing a graph, use the so-called "data oriented approach" 
+rust 2018-12-27 [05:08:06] <ishitatsuyuki> Basically, holding data in a flat, relational database like manner 
+rust 2018-12-27 [05:08:29] <evocatus> like an adjacency matrix or something? 
+rust 2018-12-27 [05:08:55] <evocatus> along with some structure to look up values by key I suppose 
+rust 2018-12-27 [05:09:06] <ishitatsuyuki> yeah 
+rust 2018-12-27 [05:09:14] <evocatus> yeah, it's true 
+rust 2018-12-27 [05:09:20] <ishitatsuyuki> So you don't hold reference but just ID/index 
+rust 2018-12-27 [05:09:38] <SpaceManiac> ishitatsuyuki: I usually go with mutating a hashmap 
+rust 2018-12-27 [05:09:52] <ishitatsuyuki> ok so that seems to be the common approach thx. 
+rust 2018-12-27 [05:20:23] <ameo> I've found the `slab` crate (https://github.com/carllerche/slab) to be very useful for pointer data structures like linked lists.  It's really just a `Vec` that keeps track of empty slots for you and gives a very simple API for "allocating" identical items. 
+rust 2018-12-27 [05:21:10] <carllerche> <3 
+rust 2018-12-27 [06:31:01] <sinclair> is it possible for Rust's borrow checking semantics to sometimes get in the way of general performance? 
+rust 2018-12-27 [06:32:20] <Yaniel> yes 
+rust 2018-12-27 [06:32:26] <sinclair> for example, if you have a shared mutable pointer, and you take precautions to ensure there is no potential for races / mutable threaded operations on that state, Rust doesn't trust those precautions and forces one into Rc<RefCell<_>> scenarios, is there much of a cost to that? 
+rust 2018-12-27 [06:32:30] <Yaniel> particularly if you insist on writing OOP code 
+rust 2018-12-27 [06:33:00] <sinclair> Yaniel: yeah, i wrote OOP style code all in 
+rust 2018-12-27 [06:33:12] <Yaniel> Rc has obviously some overhead 
+rust 2018-12-27 [06:33:40] <llvkm> not only OOP, but Lists and Graphs are limited in performance if you don't circumgo the borrow checker 
+rust 2018-12-27 [06:33:45] <Yaniel> but it's strictly limited to operations done directly on the Rc itself 
+rust 2018-12-27 [06:34:39] <sinclair> Yaniel: well, just toying around with implementing a neural network in Rust, not sure if you're familiar with those, but during training, there is a 'kernel' of sorts with respect to performing SDG on one layer to another layer. 
+rust 2018-12-27 [06:35:00] <Yaniel> not sure why you'd want to OOP that 
+rust 2018-12-27 [06:35:42] <WindowsBunny> sinclair: RefCell enforces the cost of a reference count check each time you borrow it, but usually you write such code that it always succeeds and so branch misprediction won't be a factor 
+rust 2018-12-27 [06:36:05] <sinclair> Yaniel: because OOP is superior at software modelling on a macro level 
+rust 2018-12-27 [06:36:11] <WindowsBunny> and Rc only imposes a cost when cloning/dropping through updating the reference count 
+rust 2018-12-27 [06:36:33] <Yaniel> We'll have to agree to disagree on that 
+rust 2018-12-27 [06:37:16] <sinclair> WindowsBunny: um, alright, but unwrapping on the Rc is fairly low cost 
+rust 2018-12-27 [06:37:18] <sinclair> ? 
+rust 2018-12-27 [06:38:13] <sinclair> Yaniel: well, i don't know how a talk about mutable state lead to a campaign against OOP, if you don't understand OOP, or are convinced that its overly complicated or something, thats fine, but you should read more on it 
+rust 2018-12-27 [06:39:25] <WindowsBunny> sinclair: accessing the contents of an Rc is nothing more than a single indirection 
+rust 2018-12-27 [06:39:37] <WindowsBunny> same as if it was in a Box or behind a &T or any other sort of pointer 
+rust 2018-12-27 [06:39:44] <sinclair> WindowsBunny: alright, cool 
+rust 2018-12-27 [06:40:09] <WindowsBunny> for Rc and RefCell, the reference count is *not* atomic, and so does not impose those costs 
+rust 2018-12-27 [06:41:10] <sinclair> WindowsBunny: sometimes is very tempting to work around Rusts borrow checking 
+rust 2018-12-27 [06:43:34] <cukier> Does anybody have a definition of what oop is?  
+rust 2018-12-27 [06:45:31] <sinclair> cukier: at a high level, people say its just a message passing system, that is to way, you have mailboxes and data that arrives in those mail boxes, but that is a little abstract 
+rust 2018-12-27 [06:46:22] <Yaniel> lol that's about the opposite of how I usually see it formulataed 
+rust 2018-12-27 [06:46:31] <cukier> I have a better question: what oop isn't?  
+rust 2018-12-27 [06:46:35] <sinclair> cukier: the 'mailbox' is usually a 'class + methods' in other languages, and message passing is usually realized as instance method invocation (so calling a function on a object) 
+rust 2018-12-27 [06:46:40] <Yaniel> although it makes sense if you come from a smalltalk background 
+rust 2018-12-27 [06:47:20] <sinclair> cukier: the main thing that OOP supports tho is that one can 'swap' the mailbox out for another mailbox, so that is usually realized as 'interfaces' or 'traits' in Rust 
+rust 2018-12-27 [06:47:29] <sinclair> so, polymorphism 
+rust 2018-12-27 [06:47:35] <llvkm> i'd call that concurrency oriented programming 
+rust 2018-12-27 [06:48:06] <sinclair> cukier: that is a super abstract definition of OOP, but if you want something that isn't OOP, you would throw out the polymorphism thing 
+rust 2018-12-27 [06:48:06] <llvkm> that is what OOP meant in the past, but in the present there are a lot of different things unterstood under the term OOP 
+rust 2018-12-27 [06:48:28] <WindowsBunny> sinclair: I generally just go with whatever is easiest to write, with minimal focus on efficiency until it actually matters 
+rust 2018-12-27 [06:48:32] <Yaniel> sinclair: so you'd call haskell an OOP language? 
+rust 2018-12-27 [06:48:39] <sinclair> cukier: i generally relate polymorphism as the heart and soul of OOP 
+rust 2018-12-27 [06:48:45] <Yaniel> after all you can swap out those types/functions freely 
+rust 2018-12-27 [06:49:02] <sinclair> Yaniel: type classes exist 
+rust 2018-12-27 [06:55:02] <ishitatsuyuki> another haskal convo suddenly 
+rust 2018-12-27 [06:55:14] <sinclair> llvkm: yeah, the OOP message passing definitions of it self is a bit at odds with how we use the term message passing today.  
+rust 2018-12-27 [06:55:50] <sinclair> llvkm: in OOP literature, message passing just relates to calling a function on a object that happens to be polymorphic in modern OOP languages 
+rust 2018-12-27 [06:56:00] <Yaniel> I mean if you really want you could call x86 "object-oriented" by that definition 
+rust 2018-12-27 [06:56:12] <sinclair> llvkm: so not message passing in the 'message passing sense' 
+rust 2018-12-27 [06:56:41] <llvkm> i know the original OOP papers, but if you ask people nowadays they tell you something like inheritance, data encapsulation etc. 
+rust 2018-12-27 [06:57:29] <Yaniel> yeah when people say "OOP" these days, in my experience they tend to mean "Java" 
+rust 2018-12-27 [06:58:37] <sinclair> llvkm: i think most OOP programmers tend to avoid inheritance, favoring instead interface (or in Rust trait based) polymorphism, and dynamic invocation to allow one to swap out parts of a software while retaining that parts interface (as a contract) 
+rust 2018-12-27 [06:58:56] <sinclair> its unfortunate that inheritance is poorly taught 
+rust 2018-12-27 [06:59:18] <sinclair> its usually best avoided 
+rust 2018-12-27 [06:59:50] <Yaniel> it doesn't help that there is barely any distincion between interfaces and classes in most languages 
+rust 2018-12-27 [06:59:52] <llvkm> imho it is conceptually flawey, because you (usually) have to inherit both: data and functionality, while usually you only want only one of them 
+rust 2018-12-27 [07:03:01] <sinclair> Yaniel: interfaces and classes have a pretty clear distinction in languages like C#/Java 
+rust 2018-12-27 [07:03:27] <sinclair> Yaniel: that is to say, classes implement interfaces.  
+rust 2018-12-27 [07:04:26] <Yaniel> oh, they actually do have an 'interface' keyword 
+rust 2018-12-27 [07:05:03] <sinclair> Yaniel: at a larger scope, software parts communicated by way of the interface, not directly on the class (meaning the class implementation can be swapped out for some other thing), good OOP software makes attempts to decouple class to class interaction, favouring one class taking an 'interface' as a dependency 
+rust 2018-12-27 [07:05:21] <Yaniel> I know what interfaces are 
+rust 2018-12-27 [07:05:54] <sinclair> Yaniel: great, then not sure what you think that is bad with respect to OOP, its powerful to reason about software in that way.  
+rust 2018-12-27 [07:06:36] <sinclair> the benefits happen at a macro level, its not something appreciated at a line by line view 
+rust 2018-12-27 [07:07:17] <sinclair> for your daily line by line implementation stuff, sure, FP all the way down, but OOP and FP are not at odds (assuming you think one is supposedly a replacement for the other) 
+rust 2018-12-27 [07:07:30] <llvkm> sinclair: your (original) meaning of oop is not taught, but some abbomination from the early '00 which lead to lots of bad software 
+rust 2018-12-27 [07:07:49] <llvkm> also if you want to sound more hip you could call this concept microservices 
+rust 2018-12-27 [07:08:01] <Yaniel> sinclair: mostly the 'object' part referring to coupling of data and functionality as llvkm said 
+rust 2018-12-27 [07:08:12] <cukier> So to make sure: the heart of OOP is the ability to pass instance of a different(but still compatible in some way) type, and it still will work, yes? It doesn't matter if compatibility is ensured by duck typing, subclassing or traits, yes?  
+rust 2018-12-27 [07:08:36] <Yaniel> cukier: apparently 
+rust 2018-12-27 [07:08:57] <sinclair> llvkm: well, if talking about message passing in the 'current' definition of the term, id probably be more (or less) hip in calling it Actor System / Model orientated 
+rust 2018-12-27 [07:10:30] <sinclair> llvkm: in the historical definition of the term 'message passing' with respect to OOP, i would just call it method invocation. 
+rust 2018-12-27 [07:10:37] <sinclair> \o/ 
+rust 2018-12-27 [07:10:52] <sinclair> object.mailbox(data) 
+rust 2018-12-27 [07:11:23] <llvkm> smalltalk didn't have any classes afaik, so i'm not so sure if that is really historically correct 
+rust 2018-12-27 [07:11:39] <sinclair> or more abstractly... object.send({ method: 'mailbox', data: {...}}} 
+rust 2018-12-27 [07:12:16] <llvkm> also if i remember correctly Alan Kay wrote that with method passing it shouldn't matter if the object is local or on some remote computer 
+rust 2018-12-27 [07:12:21] <Yaniel> llvkm: according to wikipedia it did 
+rust 2018-12-27 [07:12:33] <Yaniel> and I've been told that's where objective-c came from 
+rust 2018-12-27 [07:13:15] <sinclair> we need a OOP revival, but taught correctly this time 
+rust 2018-12-27 [07:13:22] <Yaniel> good luck with that 
+rust 2018-12-27 [07:13:30] <Yaniel> but yes, that would be great 
+rust 2018-12-27 [07:14:02] <llvkm> Yaniel: "the central concept in Smalltalk-80 (but not in Smalltalk-72) is that of an object" is what i'm finding on wikipedia 
+rust 2018-12-27 [07:39:05] <remexre> are there good resources to read if I want to implement a new low-level futures abstraction? 
+rust 2018-12-27 [07:40:07] <remexre> both for if I want to write a Sink+Stream for a serial port for some embedded device, or for an in-memory channel or something 
+rust 2018-12-27 [07:40:15] <stephaneyfx> remexre: Maybe this? https://tokio.rs/docs/going-deeper/futures/ 
+rust 2018-12-27 [07:42:04] <remexre> I'll try reading the rest of them after that; I want a resource per the terminology used there; thanks! 
+rust 2018-12-27 [07:44:16] <sinclair> cargo watch -x run <- love this 
+rust 2018-12-27 [08:08:11] <sinclair> um, are there instances where a Rc might leak in Rust? 
+rust 2018-12-27 [08:11:28] <rmf1723_> Make a cycle? 
+rust 2018-12-27 [08:11:30] <llvkm> sinclair: yes when you create a loopd data structure 
+rust 2018-12-27 [08:26:18] <sinclair> llvkm: alright, makes sense 
+rust 2018-12-27 [09:08:48] <jonimake> it bothers me that when I google stuff relating to rust and cargo and the second edition of rust book comes first in google results 
+rust 2018-12-27 [09:09:00] <jonimake> but then the page of the book says "please see current version of the book" 
+rust 2018-12-27 [09:22:58] <Jezza> Is anyone on lobste.rs? 
+rust 2018-12-27 [09:23:07] <Jezza> If so, can I poke you for an invite? 
+rust 2018-12-27 [09:26:15] <fwiw> Jezza, try #lobsters on freenode 
+rust 2018-12-27 [09:26:44] <Jezza> Already on it. 
+rust 2018-12-27 [09:27:00] <Jezza> As in, just asked. 
+rust 2018-12-27 [09:32:21] * TimoKoesters-M sent a long message:  < https://matrix.org/_matrix/media/v1/download/matrix.org/MDGKSnewXKXbRjVxAOJkgjBK > 
+rust 2018-12-27 [09:35:32] <Jezza> TimoKoesters-M, Self-referential structs aren't yet stable, I don't think. 
+rust 2018-12-27 [09:35:47] <Jezza> But what you want to look into is `Pin`. 
+rust 2018-12-27 [09:35:55] <Jezza> https://doc.rust-lang.org/beta/std/pin/index.html 
+rust 2018-12-27 [09:36:15] <Jezza> In fact, the first example on that page is exactly what you're trying to do. 
+rust 2018-12-27 [09:37:28] <TimoKoesters-M> As I said this is a simple example. What I want is an Iterator over a vector which both are in the same struct 
+rust 2018-12-27 [09:37:58] <Jezza> If you don't need the vector after, you can just consume it. 
+rust 2018-12-27 [09:38:46] <Jezza> Otherwise you're gonna run into problems. 
+rust 2018-12-27 [09:39:05] <Jezza> It's the Iterator of the Vec that references the Vec, not your iterator. 
+rust 2018-12-27 [09:43:05] <smurfendrek123> Hello, the rendered rfc here: https://github.com/rust-lang/rfcs/pull/1506 leads to a dead link, should I comment about that on the github issue? Because i'd really like to read that rfc 
+rust 2018-12-27 [09:43:35] <jeikobu> Yes, ask them to update the link 
+rust 2018-12-27 [09:43:49] <smurfendrek123> jeikobu, okay, thanks! 
+rust 2018-12-27 [09:43:58] <Jezza> It seems it's already in. 
+rust 2018-12-27 [09:44:00] <Jezza> https://github.com/rust-lang/rust/issues/35626 
+rust 2018-12-27 [09:44:45] <smurfendrek123> Jezza, i know, but that doesn't help me when I want to read about the feature? Or does that mean that there is specific documentation about that change? 
+rust 2018-12-27 [09:45:31] <Jezza> Oh, yeah, it still refers to the original RFCS. 
+rust 2018-12-27 [10:15:13] <Jezza> Has redox just kinda... died? 
+rust 2018-12-27 [10:16:02] <smurfendrek123> Jezza, there's commits from 6hrs ago? https://gitlab.redox-os.org/redox-os/redox/ 
+rust 2018-12-27 [10:16:20] <Jezza> Yeah, I noticed. 
+rust 2018-12-27 [10:16:29] <Jezza> But if you look at the last couple of commits 
+rust 2018-12-27 [10:16:32] <Jezza> They're all the same 
+rust 2018-12-27 [10:16:38] <Jezza> And it's just updating some text. 
+rust 2018-12-27 [10:16:48] <Jezza> Could be because of the holidays, I guess. 
+rust 2018-12-27 [10:19:41] <smurfendrek123> Jezza, there's indeed an absence of big pieces of code, but I don't think the project has very far to go anyways, It's a cool project, and massive in terms of demonstrating the OS programming capabilities of Rust, but I think further time would be better spent making kernel modules or filesystems or something like that 
+rust 2018-12-27 [10:20:20] <Jezza> Oh, no, I agree. It's a massive undertaking. 
+rust 2018-12-27 [10:20:27] <Jezza> But that's not where my interest comes from. 
+rust 2018-12-27 [10:20:39] <Jezza> My interest comes from termion 
+rust 2018-12-27 [10:20:40] <Jezza> https://gitlab.redox-os.org/redox-os/termion/merge_requests/151 
+rust 2018-12-27 [10:20:59] <Jezza> Once that PR goes through, I think it's the most complete tty crate in the entire rust ecosystem. 
+rust 2018-12-27 [10:21:05] <Jezza> Well 
+rust 2018-12-27 [10:21:07] <Jezza> "most complete" 
+rust 2018-12-27 [10:21:11] <Trangar> Jezza: you're a rust programmer now? 
+rust 2018-12-27 [10:21:30] <Jezza> "decent support for linux and windows" 
+rust 2018-12-27 [10:21:39] <Jezza> I've been one for a while now. 
+rust 2018-12-27 [10:21:43] <smurfendrek123> Jezza, cool, is the terminal that good? And how does it compare to https://github.com/jwilm/alacritty 
+rust 2018-12-27 [10:21:56] <Jezza> Oh, it's not an actual terminal. 
+rust 2018-12-27 [10:22:08] <Jezza> It's just the code that lets you deal with it at arms length 
+rust 2018-12-27 [10:22:48] <Jezza> Using Terminal seqs and other stuffs. 
+rust 2018-12-27 [10:22:53] <smurfendrek123> Cool, what do you want to make with it then? 
+rust 2018-12-27 [10:23:30] <Jezza> Well, it's basically a handle into controlling the terminal 
+rust 2018-12-27 [10:23:40] <Jezza> The actual project that made me reach into termion: https://github.com/fdehau/tui-rs 
+rust 2018-12-27 [10:23:59] <Jezza> That had poor windows support, and I had some spare time... 
+rust 2018-12-27 [10:24:25] <smurfendrek123> Cool stuff, but do you want to make a cool application for it? Because as I understand it it's not usefull just by itself, right? 
+rust 2018-12-27 [10:24:44] <Jezza> tui-rs is useful for that though. 
+rust 2018-12-27 [10:25:31] <myname> that's neat. i am fiddling around a bit with cursive, maybe i will have a look at tui-rs 
+rust 2018-12-27 [10:25:45] <Jezza> The reason I started looking at tui-rs, was because I wanted to make a fluid sim and cursive was a bit... 
+rust 2018-12-27 [10:26:11] <Jezza> Odd. 
+rust 2018-12-27 [10:26:12] <myname> could you view tui-rs as a superset of what cursive does? 
+rust 2018-12-27 [10:26:31] <Jezza> Ehhh 
+rust 2018-12-27 [10:26:42] <smurfendrek123> Jezza, the subprojects of redox-os do still seem to have more recent notable commits 
+rust 2018-12-27 [10:26:44] <Jezza> I think cursive is a bit more... expansive. 
+rust 2018-12-27 [10:27:07] <Jezza> But yeah, tui-rs is a step out from cursive 
+rust 2018-12-27 [10:29:35] <Jezza> smurfendrek123, Yeah, that's why I assumed it was because holidays. 
+rust 2018-12-27 [11:09:34] <jamiemcc> Hi o/ 
+rust 2018-12-27 [11:10:10] <dpc1> hi jamie 
+rust 2018-12-27 [11:10:20] <dpc1> jamiemcc 
+rust 2018-12-27 [11:10:57] <jamiemcc> Is there a way to collect an impl Iterator<Item=Result<T, E>> into a Result<impl Iterator<Item=T>, E> without building an intermediate vector as suggested in https://doc.rust-lang.org/rust-by-example/error/iter_result.html ? 
+rust 2018-12-27 [11:13:04] <smurfendrek123> jamiemcc, I would think so, but it won't be very straightforward, since the two things are not equivalent, an iterator over results allows the elements to individually return some or none, where as result of an iterator is either all some, or all none 
+rust 2018-12-27 [11:13:49] <smurfendrek123> jamiemcc, If you wanted to transform iterator of result into result of iterator, you would first have to check if all elements of that iterator returned some 
+rust 2018-12-27 [11:14:10] <WindowsBunny> if they all returned Ok you mean 
+rust 2018-12-27 [11:14:18] <smurfendrek123> WindowsBunny, yes sorry 
+rust 2018-12-27 [11:14:20] <WindowsBunny> Result is Ok/Err, Option is Some/None 
+rust 2018-12-27 [11:14:22] <jamiemcc> Ahh right which kinda implies an intermediate collection needs to be built up 
+rust 2018-12-27 [11:14:33] <dpc1> yep 
+rust 2018-12-27 [11:14:45] <jamiemcc> Great, thanks :) 
+rust 2018-12-27 [11:14:48] <smurfendrek123> jamiemcc, yes, because you consume the iterator in the process of checking it, so you'd need to store your values somewhere 
+rust 2018-12-27 [11:14:55] <smurfendrek123> No problem :) 
+rust 2018-12-27 [11:15:30] <porky11> can I somehow limit the errors reported by cargo? 
+rust 2018-12-27 [11:16:14] <dpc1> porky11: there is a --quiet flag 
+rust 2018-12-27 [11:16:15] <smurfendrek123> porky11, do you mean warnings? because you can't really ignore errors? Or do you want a smaller selection of the errors so you can solve them one by one? 
+rust 2018-12-27 [11:17:25] <porky11> smurfendrek123, yeah, only show the first or first few errors, not all 
+rust 2018-12-27 [11:17:51] <WindowsBunny> porky11: head? 
+rust 2018-12-27 [11:18:36] <porky11> WindowsBunny, what about "head"? 
+rust 2018-12-27 [11:18:54] <WindowsBunny> porky11: It's a command line utility that shows the first N lines of something 
+rust 2018-12-27 [11:20:40] <WindowsBunny> I don't think cargo has anything built in for that 
+rust 2018-12-27 [11:20:50] <smurfendrek123> WindowsBunny, i tried that, but cargo doesn't seem to be happy about that, complains about a broken pipe or something, sed does seem to work though 
+rust 2018-12-27 [11:21:38] <WindowsBunny> I dunno. I'm not too familiar with *nix utilities and pipes 
+rust 2018-12-27 [11:22:30] <porky11> WindowsBunny, head and similar (more, less) don't work and even if, I'd have to wait for the compiler to check all errors instead of just stop after the first one 
+rust 2018-12-27 [11:23:29] <smurfendrek123> porky11, if it's also about the waiting you have to do for all errors to be checked, i don't think there's much you can do 
+rust 2018-12-27 [11:23:57] <porky11> C++ compilers normally have some error limit and some programming languages stop after the first error anyway 
+rust 2018-12-27 [11:24:11] <smurfendrek123> porky11, however, cargo doesn't check all errors if it already found some, there's an order in which the different types are checked, and if there are errors in one kind, further kinds of errors won't be checked. 
+rust 2018-12-27 [11:24:30] <sgflt> what's the "state-of-the-art" for doing TLS using tokio at the moment? tokio-tls is officially archived, there's the tokio-rustls fork, but maybe i am supposed to integrate these things myself? 
+rust 2018-12-27 [11:24:34] <smurfendrek123> For example, first syntax might be checked, and if there are syntax errors, type errors wouldn't be checked anymore 
+rust 2018-12-27 [11:24:40] <WindowsBunny> I don't see any sort of option in rustc either 
+rust 2018-12-27 [11:25:05] <WindowsBunny> smurfendrek123: well obviously, it can't check types if the syntax failed 
+rust 2018-12-27 [11:26:12] <smurfendrek123> WindowsBunny, not necessarily, for example, if you have a typo in a let declaration, that doesn't necessarily (it might though) prevent you from checking if function calls are done with valid types 
+rust 2018-12-27 [11:26:43] <WindowsBunny> porky11: relevant issue https://github.com/rust-lang/rust/issues/27189 
+rust 2018-12-27 [11:27:11] <Blub\0> mh... let a: [u8; 64] = stuff();   let b: [u8; 32] = a[..32];    <- shouldn't this work? 
+rust 2018-12-27 [11:27:22] <WindowsBunny> Blub\0: no 
+rust 2018-12-27 [11:27:29] <Trangar> I wish it would, but it doesn't 
+rust 2018-12-27 [11:27:35] <Blub\0> but why not :o 
+rust 2018-12-27 [11:27:41] <WindowsBunny> Blub\0: Because the size of fixed size arrays is part of the type 
+rust 2018-12-27 [11:27:49] <porky11> WindowsBunny, thanks 
+rust 2018-12-27 [11:27:50] <WindowsBunny> Blub\0: while slicing only returns a &[T] with a dynamic size 
+rust 2018-12-27 [11:28:02] <Blub\0> oh 
+rust 2018-12-27 [11:28:03] <Blub\0> I see 
+rust 2018-12-27 [11:28:04] <WindowsBunny> because the input to slicing is not necessarily a compile time constant 
+rust 2018-12-27 [11:28:11] <Trangar> The reason is that the current language doesn't support something like that yet 
+rust 2018-12-27 [11:28:25] <WindowsBunny> It would take some seriously convoluted type system fun to support that 
+rust 2018-12-27 [11:28:29] <Trangar> And the language devs didn't want to add hacks to make that work 
+rust 2018-12-27 [11:28:37] <Blub\0> so, mem::uninitialized() + ptr::copy()? 
+rust 2018-12-27 [11:28:38] <Sharkigator> i think you can match slices? 
+rust 2018-12-27 [11:28:46] <Trangar> Hopefully it'll be supported in the future with template integer args 
+rust 2018-12-27 [11:29:07] <smurfendrek123> Trangar, isn't this just the const generics that are being talked about? 
+rust 2018-12-27 [11:29:08] <WindowsBunny> const generics when? 
+rust 2018-12-27 [11:29:22] <Trangar> That should solve it, yet 
+rust 2018-12-27 [11:29:40] <WindowsBunny> I don't think you can have multiple Index impls that vary only by output type 
+rust 2018-12-27 [11:29:41] <Trangar> You'll probably get something like `let b: [u8; 32] = a.sub_array<0..32>();` 
+rust 2018-12-27 [11:29:51] <WindowsBunny> so I don't think slicing will ever be able to return fixed size arrays directly 
+rust 2018-12-27 [11:29:58] <Trangar> Because they can't break backwards compatibility in STD 
+rust 2018-12-27 [11:30:07] <WindowsBunny> But they can easily add new methods to do so 
+rust 2018-12-27 [11:30:12] <WindowsBunny> once we have const generics 
+rust 2018-12-27 [11:30:14] <Trangar> WindowsBunny: we're so in sync 
+rust 2018-12-27 [11:30:15] <smurfendrek123> WindowsBunny, Idk, but the rfc has been accepted :p 
+rust 2018-12-27 [11:30:16] <WindowsBunny> in the distant future 
+rust 2018-12-27 [11:30:39] <smurfendrek123> Trangar, unless they do so in the 2021 edition, right? 
+rust 2018-12-27 [11:30:51] <WindowsBunny> such a change would be too major 
+rust 2018-12-27 [11:30:58] <WindowsBunny> smurfendrek123: and editions don't allow std changes 
+rust 2018-12-27 [11:31:00] <Trangar> smurfendrek123: I think all editions of rust have the same std lib 
+rust 2018-12-27 [11:31:13] <WindowsBunny> only language changes, and only superficial changes at that 
+rust 2018-12-27 [11:31:19] <smurfendrek123> that makes sense 
+rust 2018-12-27 [11:31:26] <WindowsBunny> because everything has to compile to the same MIR and be compatible with each other 
+rust 2018-12-27 [11:34:15] <Trangar> This might work though, I haven't properly tested it https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=ae77fd2e257e32f8f91737e021e534e6 
+rust 2018-12-27 [11:35:17] <porky11> ok, got it working now, using command `more` is pretty nice, better than `head` 
+rust 2018-12-27 [11:36:52] <Trangar> WindowsBunny: they could do something with specialization and making a ConstRange 
+rust 2018-12-27 [11:37:09] <Trangar> Because then Index would be able to return a different type 
+rust 2018-12-27 [11:41:54] <smurfendrek123> WindowsBunny, lol I just found this thread: https://internals.rust-lang.org/t/lang-team-minutes-const-generics/5090 where they say: We believe that we can have an RFC accepted and const generics available on nightly by the end of 2017. 
+rust 2018-12-27 [11:42:05] <WindowsBunny> hahaha 
+rust 2018-12-27 [11:42:07] <WindowsBunny> yeah right 
+rust 2018-12-27 [11:42:26] <WindowsBunny> it takes forever for them to even do simple things 
+rust 2018-12-27 [11:42:36] <WindowsBunny> I opened an RFC for repr(packed(N))  in 2015 
+rust 2018-12-27 [11:42:40] <WindowsBunny> and it only *just* stabilized 
+rust 2018-12-27 [11:42:56] <smurfendrek123> WindowsBunny, I'm happy they are doing it right, can you link me your rfc, i'd be interested in reading it 
+rust 2018-12-27 [11:43:25] <smurfendrek123> WindowsBunny, i really don't want to rush the developers, they are very hardworking volunteers doing great work. 
+rust 2018-12-27 [11:43:38] <dpc1> well it isn't that easy :P 
+rust 2018-12-27 [11:44:40] <Trangar> Blub\0: btw there's https://docs.rs/arrayref/0.3.5/arrayref/ 
+rust 2018-12-27 [11:44:40] <WindowsBunny> https://github.com/rust-lang/rfcs/pull/1399 
+rust 2018-12-27 [11:44:45] <smurfendrek123> dpc1, yea I agree, but i found it funny that the core team thought it was 
+rust 2018-12-27 [11:45:35] <WindowsBunny> given what happens when the rust team tries to rush stuff though (the new website for example) 
+rust 2018-12-27 [11:45:41] <dpc1> yeh 
+rust 2018-12-27 [11:45:54] <WindowsBunny> maybe it's for the best if everything takes its time 
+rust 2018-12-27 [11:46:18] <dpc1> is there a way to write to an existing file by clearing the original contents of the file first? 
+rust 2018-12-27 [11:47:54] <WindowsBunny> dpc1: yes 
+rust 2018-12-27 [11:48:00] <dpc1> WindowsBunny: i'm all ears 
+rust 2018-12-27 [11:48:03] <smurfendrek123> dpc1, doesn't create just do that? 
+rust 2018-12-27 [11:48:04] <dpc1> how? 
+rust 2018-12-27 [11:48:16] <Trangar> dpc1: https://doc.rust-lang.org/std/fs/struct.OpenOptions.html#method.truncate 
+rust 2018-12-27 [11:48:17] <WindowsBunny> dpc1: by default File::create has truncation enabled 
+rust 2018-12-27 [11:48:19] <smurfendrek123> dpc1, create documentation says, if the file exists, it truncates 
+rust 2018-12-27 [11:48:30] <dpc1> ah yes 
+rust 2018-12-27 [11:48:36] <dpc1> but i didn't want to open the file twice 
+rust 2018-12-27 [11:48:39] <WindowsBunny> dpc1: so if there is an existing file, it will truncate it 
+rust 2018-12-27 [11:48:42] <sgift> https://doc.rust-lang.org/stable/std/fs/struct.File.html#method.set_len 
+rust 2018-12-27 [11:48:43] <WindowsBunny> it opens the file once 
+rust 2018-12-27 [11:48:49] <dpc1> i mean i'm reading the file first 
+rust 2018-12-27 [11:48:53] <WindowsBunny> oh 
+rust 2018-12-27 [11:48:57] <sgift> set to 0, reset the file pointer, write? 
+rust 2018-12-27 [11:49:14] <sgift> -pointer +cursor 
+rust 2018-12-27 [11:49:14] <WindowsBunny> dpc1: already have a file and you want to truncate it after you already have the file? 
+rust 2018-12-27 [11:49:15] <dpc1> sgift: i did that but if the buffer is shorter than the original, it will have the remaining  
+rust 2018-12-27 [11:49:32] <dpc1> WindowsBunny: i want to "edit" a file (say change a line) 
+rust 2018-12-27 [11:49:40] <dpc1> so read it, change the contents, then write to it 
+rust 2018-12-27 [11:49:52] <WindowsBunny> dpc1: So you read all the contents into memory? 
+rust 2018-12-27 [11:49:55] <dpc1> yeah 
+rust 2018-12-27 [11:50:01] <dpc1> using BufReader 
+rust 2018-12-27 [11:50:14] <WindowsBunny> dpc1: then call .set_len(0) on the underlying File 
+rust 2018-12-27 [11:50:22] <WindowsBunny> and make sure the cursor is at the beginning 
+rust 2018-12-27 [11:50:24] <WindowsBunny> and write it back out 
+rust 2018-12-27 [11:50:42] <dpc1> will try that 
+rust 2018-12-27 [11:50:46] <dpc1> thanks 
+rust 2018-12-27 [11:51:50] <dpc1> that works, didn't think of the len way :) cool 
+rust 2018-12-27 [11:52:49] <WindowsBunny> dpc1: Do you know exactly how many bytes you will write before you start writing? 
+rust 2018-12-27 [11:53:06] <WindowsBunny> dpc1: If so you can set_len(that_many_bytes) and then just overwrite what is already there 
+rust 2018-12-27 [11:53:23] <WindowsBunny> not sure which is more efficient to be honest 
+rust 2018-12-27 [11:53:28] <WindowsBunny> filesystems are weird 
+rust 2018-12-27 [11:57:28] <dpc1> well i could gien that i have the contents, and replacing it 
+rust 2018-12-27 [11:57:31] <dpc1> *given 
+rust 2018-12-27 [12:04:52] <Yatekii> folks I am still traying to make this work: https://gist.github.com/Yatekii/abff9b8875ed3597ac207b543fc47a54 :S sadly dyn & impl does not mesh well 
+rust 2018-12-27 [12:10:24] <jonimake> if I use cargo workspaces do the build scripts of the crates in the workspace get run? 
+rust 2018-12-27 [12:11:08] <j_ey> jonimake: Id assume so 
+rust 2018-12-27 [12:11:33] <WindowsBunny> jonimake: whenever a crate is built, the build script for it is built and run 
+rust 2018-12-27 [12:11:46] <WindowsBunny> (and cached when rebuilding if possible) 
+rust 2018-12-27 [12:12:27] <WindowsBunny> jonimake: so if a given crate in a workspace is built, the build script for it will be run 
+rust 2018-12-27 [12:47:20] <jethrogb> does anyone have any ideas why I can't use the meta matcher in macro_rules? https://users.rust-lang.org/t/using-meta-in-macro-rules/23590 
+rust 2018-12-27 [12:54:34] <tiby312> how can i enforce execution order of statements? something like eieio instruction? 
+rust 2018-12-27 [12:55:40] <jethrogb> tiby312: what are you trying to achieve? 
+rust 2018-12-27 [12:56:11] <jethrogb> the compiler will ensure the effects the generated code match the source as written 
+rust 2018-12-27 [12:56:34] <tiby312> to measure the time it takes for some code to execute 

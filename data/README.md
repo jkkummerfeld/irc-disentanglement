@@ -1,8 +1,9 @@
 # Data
 
-In this work, we annotated 77,563 messages of IRC.
-Almost all are from the [Ubuntu IRC Logs](https://irclogs.ubuntu.com/) for the `#ubuntu` channel.
-A small set is a re-annotation of the `#linux` channel data from [Elsner and Charniak (2008)](https://www.asc.ohio-state.edu/elsner.14/resources/chat-manual.html).
+This repository contains 80,000 annotated messages from IRC from the following sources:
+- `ubuntu` channel of the [Ubuntu IRC Logs](https://irclogs.ubuntu.com/)
+- `linux` channel, from [Elsner and Charniak (2008)](https://www.asc.ohio-state.edu/elsner.14/resources/chat-manual.html)
+- `mediawiki`, `rust, `stripe`, `ubuntu-meeting`, from different IRC networks, as described in our ALTA 2023 paper.
 
 This folder contains:
 
@@ -12,6 +13,7 @@ train              | Folder containing all training files.
 dev                | Folder containing all files for development / validation.
 test               | Folder containing all test files.
 channel-two        | Folder containing our annotation of data from Elsner and Charniak (2008).
+new-domains        | Folder containing data and annotations from the ALTA 2023 paper.
 annotation-process | Folder containing (1) files used while developing the annotation scheme, and (2) the original annotations for dev, test, and channel-two files before adjudication.
 list...txt         | Files specifying lists of files (e.g. all the training files).
 glove-ubuntu.txt   | GloVe vectors, trained on all of the Ubuntu IRC logs (after tokenisation and rare word replacement with special symbols).
@@ -22,14 +24,19 @@ For details about how these files were chosen for annotation and which annotator
 
 ## Format
 
-Each folder contains a set of files named as follows:
+Every folder contains a set of files named as follows:
+
+Suffix              | Contents
+------------------- | -------------------------------
+`.ascii.txt`        | A version of the raw file that we have converted to ascii (unconvertable characters are replaced with a special word).
+`.annotation.txt`   | A series of lines, each describing a link between two messages. For example: `1002 1003 -` indicates that message `1002` in the logs should be linked to message `1003`. 
+
+Most folders also contain:
 
 Suffix              | Contents
 ------------------- | -------------------------------
 `.raw.txt`          | The original data from the IRC log, as downloaded.
-`.ascii.txt`        | A version of the raw file that we have converted to ascii (unconvertable characters are replaced with a special word).
 `.tok.txt`          | The same data agian, but with automatic tokenisation and replacement of rare words with placeholder symbols.
-`.annotation.txt`   | A series of lines, each describing a link between two messages. For example: `1002 1003 -` indicates that message `1002` in the logs should be linked to message `1003`. 
 
 Note:
 - Messages are counted starting at 0 and each one is a single line in the logs.

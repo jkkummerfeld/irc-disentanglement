@@ -1,0 +1,1200 @@
+ubuntu-meeting 2010-11-08 [13:21] <rodrigo_> the new gnome-control-center panel? 
+ubuntu-meeting 2010-11-08 [13:21] <diwic> ok, is this gnome 3 control panel? 
+ubuntu-meeting 2010-11-08 [13:22] <rodrigo_> if so, I have master g-c-c running on a dev user, if you want me to look at anything 
+ubuntu-meeting 2010-11-08 [13:22] <diwic> !startmeeting 
+ubuntu-meeting 2010-11-08 [13:22] <rodrigo_> diwic, hmm, I think it's #startmeeting 
+ubuntu-meeting 2010-11-08 [13:22] <diwic> #startmeeting 
+ubuntu-meeting 2010-11-08 [13:23] <MootBot> Meeting started at 07:22. The chair is diwic. 
+ubuntu-meeting 2010-11-08 [13:23] <MootBot> Commands Available: [TOPIC], [IDEA], [ACTION], [AGREED], [LINK], [VOTE] 
+ubuntu-meeting 2010-11-08 [13:23] <rodrigo_> at least I've seen #endmeeting 
+ubuntu-meeting 2010-11-08 [13:23] <diwic> #topic pulseaudio - master or stable-queue 
+ubuntu-meeting 2010-11-08 [13:23] <diwic> [topic] pulseaudio - master or stable-queue? 
+ubuntu-meeting 2010-11-08 [13:23] <MootBot> New Topic:  pulseaudio - master or stable-queue? 
+ubuntu-meeting 2010-11-08 [13:24] <diwic> [agreed] to go with stable-queue for the time being as the d-bus API in master wasn't all that ronoc wanted, and since a rewrite is planned on master by Lennart. 
+ubuntu-meeting 2010-11-08 [13:24] <MootBot> AGREED received:  to go with stable-queue for the time being as the d-bus API in master wasn't all that ronoc wanted, and since a rewrite is planned on master by Lennart. 
+ubuntu-meeting 2010-11-08 [13:25] <ronoc> diwic, grand 
+ubuntu-meeting 2010-11-08 [13:25] <diwic> [topic] any audio bugs we should have a closer look at during the coming week? 
+ubuntu-meeting 2010-11-08 [13:25] <MootBot> New Topic:  any audio bugs we should have a closer look at during the coming week? 
+ubuntu-meeting 2010-11-08 [13:26] <diwic> noone? 
+ubuntu-meeting 2010-11-08 [13:27] <diwic> okay, moving on 
+ubuntu-meeting 2010-11-08 [13:27] <ronoc> am I haven't seen any, only the pa-stream-writable failed 
+ubuntu-meeting 2010-11-08 [13:27] <diwic> [topic] anything in particular done in the previous week? 
+ubuntu-meeting 2010-11-08 [13:27] <MootBot> New Topic:  anything in particular done in the previous week? 
+ubuntu-meeting 2010-11-08 [13:27] <ronoc> last week, got two sru's out for lucid and maverick 
+ubuntu-meeting 2010-11-08 [13:27] <diwic> ronoc, for indicator-sound? 
+ubuntu-meeting 2010-11-08 [13:27] <ronoc> and merged my UI natty work into trunk 
+ubuntu-meeting 2010-11-08 [13:27] <rodrigo_> not much from me, was working on other desktop-related stuff 
+ubuntu-meeting 2010-11-08 [13:27] <ronoc> yep 
+ubuntu-meeting 2010-11-08 [13:27] <diwic> ok 
+ubuntu-meeting 2010-11-08 [13:28] <diwic> For my own part, I was at plumber's 
+ubuntu-meeting 2010-11-08 [13:28] <ronoc> today i'm working on a fading mute behaviour 
+ubuntu-meeting 2010-11-08 [13:28] <ronoc> how was it ? 
+ubuntu-meeting 2010-11-08 [13:28] <rodrigo_> we have some bugs though about porting indicator-* stuff to gsettings, gtk3 and gtkbuilder 
+ubuntu-meeting 2010-11-08 [13:28] <ronoc> I must read your report 
+ubuntu-meeting 2010-11-08 [13:28] <rodrigo_> https://bugs.edge.launchpad.net/ubuntu/+bugs?field.tag=gnome3-gtk3 
+ubuntu-meeting 2010-11-08 [13:28] <rodrigo_> https://bugs.edge.launchpad.net/ubuntu/+bugs?field.tag=gnome3-gtkbuilder 
+ubuntu-meeting 2010-11-08 [13:28] <diwic> I learned how to use the wakeup_rt tracer which can be important for tracking down xrun 
+ubuntu-meeting 2010-11-08 [13:28] <rodrigo_> https://bugs.edge.launchpad.net/ubuntu/+bugs?field.tag=gnome3-gsettings 
+ubuntu-meeting 2010-11-08 [13:29] <rodrigo_> these will be fixed as soon as the new stack gets in (it's in a PPA for now) 
+ubuntu-meeting 2010-11-08 [13:29] <ronoc> diwic, whats that 
+ubuntu-meeting 2010-11-08 [13:29] <ronoc> rodrigo_, cool 
+ubuntu-meeting 2010-11-08 [13:30] <diwic> ronoc, basically, if a kernel driver is blocking pulseaudio from being scheduled, it can help to show the troublesome areas 
+ubuntu-meeting 2010-11-08 [13:30] <diwic> (or jack, for that matter) 
+ubuntu-meeting 2010-11-08 [13:30] <ronoc> diwic, good to know 
+ubuntu-meeting 2010-11-08 [13:31] <diwic> ronoc, what's fading mute behaviour? 
+ubuntu-meeting 2010-11-08 [13:33] <ronoc> diwic, when someone chooses mute from the menu, it should fade exponentially the volume and slider to 0, unmuting should restore the slider to its original position 
+ubuntu-meeting 2010-11-08 [13:33] <ronoc> diwic, a bug against indicator-sound for unity 
+ubuntu-meeting 2010-11-08 [13:33] <rodrigo_> oh, that's cool 
+ubuntu-meeting 2010-11-08 [13:33] <ronoc> yup should be pretty easy 
+ubuntu-meeting 2010-11-08 [13:34] <diwic> cool, for absolute coolness you should also lower the sound frequency, but I guess that's much harder :-) 
+ubuntu-meeting 2010-11-08 [13:34] <diwic> the question is whether that should be in PulseAudio or indicator-sound, really 
+ubuntu-meeting 2010-11-08 [13:35] <ronoc> diwic, true 
+ubuntu-meeting 2010-11-08 [13:35] <diwic> you're probably going to have to rewrite that once Lennart gets the volume envelope architecture working 
+ubuntu-meeting 2010-11-08 [13:35] <rodrigo_> I guess PA, so that when you mute from other parts, it works the same 
+ubuntu-meeting 2010-11-08 [13:35] <ronoc> diwic, whats the volume envelope architecture ? 
+ubuntu-meeting 2010-11-08 [13:35] <ronoc> change 
+ubuntu-meeting 2010-11-08 [13:36] <diwic> ronoc, some kind of way to apply a volume envelope to a sound 
+ubuntu-meeting 2010-11-08 [13:37] <diwic> are you familiar with volume envelopes, e g ADSR envelopes? 
+ubuntu-meeting 2010-11-08 [13:37] <ronoc> diwic, yes 
+ubuntu-meeting 2010-11-08 [13:37] <ronoc> diwic, so that should cover what I'm currently doing 
+ubuntu-meeting 2010-11-08 [13:37] <ronoc> but its not a biggie 
+ubuntu-meeting 2010-11-08 [13:38] <diwic> so he merged something from Intel into master but then realized it was broken, so he wants to rip it out, which is part of the major rewrite planned for master 
+ubuntu-meeting 2010-11-08 [13:38] <ronoc> and as you mentioned earlier no date has been set for when his work is to land 
+ubuntu-meeting 2010-11-08 [13:39] <diwic> so as long as you're prepare to rewrite it in a year or two 
+ubuntu-meeting 2010-11-08 [13:39] <ronoc> diwic, sure 
+ubuntu-meeting 2010-11-08 [13:39] <ronoc> the nature of the ever revolving beast ... 
+ubuntu-meeting 2010-11-08 [13:40] <ronoc> evolving even 
+ubuntu-meeting 2010-11-08 [13:41] <diwic> [topic] anything you plan to do in the coming week? 
+ubuntu-meeting 2010-11-08 [13:41] <MootBot> New Topic:  anything you plan to do in the coming week? 
+ubuntu-meeting 2010-11-08 [13:41] <rodrigo_> for me, when the GTK3 stack lands in natty, probably start fixing the indicator-* bugs 
+ubuntu-meeting 2010-11-08 [13:41] <ronoc> when is that rodrigo_ ? 
+ubuntu-meeting 2010-11-08 [13:42] <rodrigo_> ronoc, should be soon, seb128 is going to do it soon 
+ubuntu-meeting 2010-11-08 [13:42] <ronoc> remove dbus-glib bindings and use gdbus 
+ubuntu-meeting 2010-11-08 [13:42] <ronoc> rodrigo_, grand 
+ubuntu-meeting 2010-11-08 [13:42] <ronoc> hopefully this week 
+ubuntu-meeting 2010-11-08 [13:42] <ronoc> and plan other indicator work 
+ubuntu-meeting 2010-11-08 [13:42] <rodrigo_> well, dbus-glib is ok to be used, it's not on the deprecation list, but yes, it's a good idea to move to gdbus asap 
+ubuntu-meeting 2010-11-08 [13:43] <ronoc> rodrigo_, yeah I think the plan is for all indicators, libindicate dependent stuff to be moved over for alpha 1 
+ubuntu-meeting 2010-11-08 [13:43] <rodrigo_> ok 
+ubuntu-meeting 2010-11-08 [13:43] <ronoc> i go on holidays on the 22 so need to do in the next two weeks ! 
+ubuntu-meeting 2010-11-08 [13:44] <ronoc> more than likely starting today 
+ubuntu-meeting 2010-11-08 [13:44] <diwic> for myself, I want to process some backlog from the weeks I were at UDS and Plumber's, then try to get started on the apport troubleshooting stuff 
+ubuntu-meeting 2010-11-08 [13:45] <rodrigo_> hey guys, I need to leave now for lunch, are we done? or should I read the backlog later? 
+ubuntu-meeting 2010-11-08 [13:45] <diwic> I think we're done 
+ubuntu-meeting 2010-11-08 [13:45] <ronoc> all good 
+ubuntu-meeting 2010-11-08 [13:45] <rodrigo_> ok, I'll read the backlog later just in case :) 
+ubuntu-meeting 2010-11-08 [13:45] <rodrigo_> bbl 
+ubuntu-meeting 2010-11-08 [13:45] <diwic> cool, see you! 
+ubuntu-meeting 2010-11-08 [13:45] <diwic> #endmeeting 
+ubuntu-meeting 2010-11-08 [13:45] <MootBot> Meeting finished at 07:45. 
+ubuntu-meeting 2010-11-08 [13:45] <ronoc> talk later robbiew 
+ubuntu-meeting 2010-11-08 [13:45] <ronoc> talk later rodrigo_ 
+ubuntu-meeting 2010-11-08 [13:45] <rodrigo_> oh, btw, gtk3 has just been accepted 
+ubuntu-meeting 2010-11-08 [13:45] <ronoc> oh okay 
+ubuntu-meeting 2010-11-08 [13:46] <ronoc> lunch isn't a bad idea actually 
+ubuntu-meeting 2010-11-08 [13:46] <ronoc> talk afterwards guys 
+ubuntu-meeting 2010-11-08 [13:46] <rodrigo_> later 
+ubuntu-meeting 2010-11-08 === yofel_ is now known as yofel 
+ubuntu-meeting 2010-11-08 === rodrigo__ is now known as rodrigo_ 
+ubuntu-meeting 2010-11-08 === jdstrand_ is now known as jdstrand 
+ubuntu-meeting 2010-11-08 === kenvandine_ is now known as kenvandine 
+ubuntu-meeting 2010-11-08 === lukjad is now known as Guest63875 
+ubuntu-meeting 2010-11-08 [18:04] <mdeslaur> kees, jdstrand, sbeattie: meeting? 
+ubuntu-meeting 2010-11-08 [18:05] <jjohansen> \o 
+ubuntu-meeting 2010-11-08 [18:05] <mdeslaur> whoops...forgot you jjohansen  :) 
+ubuntu-meeting 2010-11-08 [18:05] <jjohansen> sure, I believe you "forgot" me :) 
+ubuntu-meeting 2010-11-08 [18:05] <mdeslaur> hehe 
+ubuntu-meeting 2010-11-08 [18:06] <sbeattie> heh 
+ubuntu-meeting 2010-11-08 [18:07] <kees> \o 
+ubuntu-meeting 2010-11-08 [18:08] <kees> mdeslaur: you start? 
+ubuntu-meeting 2010-11-08 [18:10] <jdstrand> o/ 
+ubuntu-meeting 2010-11-08 [18:10] <mdeslaur> sure! 
+ubuntu-meeting 2010-11-08 [18:10] <mdeslaur> so, this week I'm on community, and am working on the long list of mysql CVEs 
+ubuntu-meeting 2010-11-08 [18:10] <mdeslaur> that should keep me busy 
+ubuntu-meeting 2010-11-08 [18:10] <mdeslaur> that's it! 
+ubuntu-meeting 2010-11-08 [18:10] <mdeslaur> jdstrand: your turn 
+ubuntu-meeting 2010-11-08 [18:11] <jdstrand> I plan to test and push out chromium-browser today 
+ubuntu-meeting 2010-11-08 [18:11] <jdstrand> there are 2 other updates I am looking at and may snag 
+ubuntu-meeting 2010-11-08 [18:11] <jdstrand> I hope to get to my natty merges 
+ubuntu-meeting 2010-11-08 [18:12] <mdeslaur> you nasty merges? 
+ubuntu-meeting 2010-11-08 [18:12] <mdeslaur> :) 
+ubuntu-meeting 2010-11-08 [18:12] <jdstrand> there is a libvirt regression for lucid (well it affects maverick and natty too, but the security update didn't introduce it) 
+ubuntu-meeting 2010-11-08 [18:13] <jdstrand> I need to upload that to lucid-- upstream and I are still discussing it 
+ubuntu-meeting 2010-11-08 [18:13] <jdstrand> and finally, I need to dive into the dbus/apparmor stuff 
+ubuntu-meeting 2010-11-08 [18:13] <jdstrand> jjohansen: I've gotten your emails but don't have anything intelligent to say yet 
+ubuntu-meeting 2010-11-08 [18:13] <jjohansen> jdstrand: np 
+ubuntu-meeting 2010-11-08 [18:13] <jdstrand> that's it from me 
+ubuntu-meeting 2010-11-08 [18:13] <jjohansen> its just an initial pass from me 
+ubuntu-meeting 2010-11-08 [18:14] <kees> I'll go? 
+ubuntu-meeting 2010-11-08 [18:14] <jjohansen> I'm sure I'll spew out more as I work on the interface 
+ubuntu-meeting 2010-11-08 [18:14] <kees> I'm going to be trying to drum up support for upstream kernel hardening this week. 
+ubuntu-meeting 2010-11-08 [18:14] <kees> there's some discussions started on oss-security and lkml so far. 
+ubuntu-meeting 2010-11-08 [18:14] <kees> dan's sent some patches, etc 
+ubuntu-meeting 2010-11-08 [18:15] <kees> I got the initial pass at apparmor repackaging done and haven't seen anything horrible yet 
+ubuntu-meeting 2010-11-08 [18:15] <jjohansen> \o/ 
+ubuntu-meeting 2010-11-08 [18:15] <kees> now we can move forward more sanely on things like moving the cache directory, etc 
+ubuntu-meeting 2010-11-08 [18:15] <kees> adding bindings 
+ubuntu-meeting 2010-11-08 [18:16] <kees> I've upgraded to natty now as well, and am finding little glitches 
+ubuntu-meeting 2010-11-08 [18:16] <jdstrand> kees: apparmor glitches? 
+ubuntu-meeting 2010-11-08 [18:16] <jjohansen> what kind of glitches? 
+ubuntu-meeting 2010-11-08 [18:16] <kees> I did a few merges last week, will continue with a few more this week 
+ubuntu-meeting 2010-11-08 [18:16] <kees> jdstrand: no, natty glitches. 
+ubuntu-meeting 2010-11-08 [18:16] <jjohansen> ah, yes it is really buggy atm 
+ubuntu-meeting 2010-11-08 [18:16] <jdstrand> I've heard the natty kernel is less than ideal atm 
+ubuntu-meeting 2010-11-08 [18:16] <kees> jdstrand: like, gnome-open suddenly stopped using the correct browser 
+ubuntu-meeting 2010-11-08 [18:16] <kees> yeah, the natty kernel is unusable for me 
+ubuntu-meeting 2010-11-08 [18:17] <kees> network storms using NFS, missing locking, wheee 
+ubuntu-meeting 2010-11-08 [18:17] <kees> I'm on the maverick kernel with natty userspace 
+ubuntu-meeting 2010-11-08 [18:17] <jdstrand> kees: see, you just need to stop using NFS and then the devel release will always work for you :P 
+ubuntu-meeting 2010-11-08 [18:17] <kees> and I've got a few _large_ php audits I need to do 
+ubuntu-meeting 2010-11-08 [18:17] <kees> jdstrand: yeah :( 
+ubuntu-meeting 2010-11-08 [18:17] <kees> that's it from me, sbeattie, your turn 
+ubuntu-meeting 2010-11-08 [18:17]  * jdstrand finds it odd how often NFS gets borked in the dev release 
+ubuntu-meeting 2010-11-08 [18:18] <sbeattie> I'm on triage this week. 
+ubuntu-meeting 2010-11-08 [18:18] <sbeattie> I'll also finish up reviewing the apparmor parser patches jjohansen sent out 
+ubuntu-meeting 2010-11-08 [18:19] <jjohansen> thanks 
+ubuntu-meeting 2010-11-08 [18:19] <sbeattie> and I'm hoping to test the maverick apparmor SRU as well. 
+ubuntu-meeting 2010-11-08 [18:19] <sbeattie> I think that's all from me. 
+ubuntu-meeting 2010-11-08 [18:19] <jdstrand> was it copied yet? 
+ubuntu-meeting 2010-11-08 [18:19] <jjohansen> I'll have some more ugly patches for you this week 
+ubuntu-meeting 2010-11-08 [18:19] <jdstrand> I should add that I will test the apparmor SRUs whenever they hit lucid and maverick proposed 
+ubuntu-meeting 2010-11-08 [18:20] <sbeattie> jdstrand: not sure, I hadn't looked, but I was expecting we'd come out of linaro freeze this week. 
+ubuntu-meeting 2010-11-08 [18:20] <jdstrand> I hope so... 
+ubuntu-meeting 2010-11-08 [18:20] <jdstrand> sbeattie: it doesn't look like it. it is still 10.10.1 which ftbfs on the buildds 
+ubuntu-meeting 2010-11-08 [18:20] <sbeattie> ah 
+ubuntu-meeting 2010-11-08 [18:20] <jdstrand> (10.10.2 is in UNAPPROVED atm) 
+ubuntu-meeting 2010-11-08 [18:21] <jdstrand> https://launchpad.net/ubuntu/maverick/+queue?queue_state=1&queue_text=apparmor 
+ubuntu-meeting 2010-11-08 [18:21] <jdstrand> and a new lucid upload is also in UNAPPROVED: https://launchpad.net/ubuntu/lucid/+queue?queue_state=1&queue_text=apparmor 
+ubuntu-meeting 2010-11-08 [18:22] <jdstrand> well, new as of 4 days ago 
+ubuntu-meeting 2010-11-08 [18:22] <sbeattie> cool. I'm also planning to test lucid's SRU whenever it gets approved. 
+ubuntu-meeting 2010-11-08 [18:22] <jdstrand> I followed up with pitti, so now we just need to wait on his response to my followup 
+ubuntu-meeting 2010-11-08 [18:23]  * jdstrand should have really mentioned all the apparmor SRU stuff during his time) 
+ubuntu-meeting 2010-11-08 [18:24]  * jdstrand is done for the second time 
+ubuntu-meeting 2010-11-08 [18:25] <sbeattie> alright, anyone else have anything for the security team? jjohansen? 
+ubuntu-meeting 2010-11-08 [18:25] <jjohansen> hrmmm, well nothing immediate, I am just going to drop more parser patches this week, and setup an apparmor ppa 
+ubuntu-meeting 2010-11-08 [18:26] <jjohansen> containing the newer stuff for testing purposes 
+ubuntu-meeting 2010-11-08 [18:26] <jjohansen> I also expect the interfaces jdstrand needs for dbus to hit this week 
+ubuntu-meeting 2010-11-08 [18:26] <sbeattie> jjohansen: cool, let me know if I can help with setting up the ppa. 
+ubuntu-meeting 2010-11-08 [18:27] <jjohansen> sbeattie: will do, I haven't looked at userspace yet, I will get the kernel up first 
+ubuntu-meeting 2010-11-08 [18:28] <jjohansen> I think I'm done unless you want more details of my crazy plans 
+ubuntu-meeting 2010-11-08 [18:37] <kees> okay, sounds like we're all set. thanks! 
+ubuntu-meeting 2010-11-08 [18:43] <jdstrand> thanks kees :) 
+ubuntu-meeting 2010-11-08 [19:01] <bdrung> now dmb meeting? 
+ubuntu-meeting 2010-11-08 [19:03] <geser> bdrung: didn't start yet 
+ubuntu-meeting 2010-11-08 [19:04] <bdrung> geser: we are four minutes late. let's start it. 
+ubuntu-meeting 2010-11-08 [19:04] <geser> cjwatson, persia, stgraber, cody-somerville, soren: DMB meeting? 
+ubuntu-meeting 2010-11-08 [19:05]  * stgraber waves 
+ubuntu-meeting 2010-11-08 [19:05] <cody-somerville> Isn't it in an hour? 
+ubuntu-meeting 2010-11-08 [19:05] <bdrung> cody-somerville: nope. it's winter time. 
+ubuntu-meeting 2010-11-08 [19:05] <geser> 19:00 UTC is now 
+ubuntu-meeting 2010-11-08 [19:06] <cody-somerville> that it is 
+ubuntu-meeting 2010-11-08 [19:08]  * geser counts 4 DMB members -> quorum 
+ubuntu-meeting 2010-11-08 [19:08] <geser> who chairs? 
+ubuntu-meeting 2010-11-08 [19:08]  * persia is semi-distracted by a plumbing problem and begs off 
+ubuntu-meeting 2010-11-08 [19:10] <stgraber> #startmeeting 
+ubuntu-meeting 2010-11-08 [19:10] <MootBot> Meeting started at 13:10. The chair is stgraber. 
+ubuntu-meeting 2010-11-08 [19:10] <MootBot> Commands Available: [TOPIC], [IDEA], [ACTION], [AGREED], [LINK], [VOTE] 
+ubuntu-meeting 2010-11-08 [19:10] <stgraber> [LINK] https://wiki.ubuntu.com/DeveloperMembershipBoard/Agenda 
+ubuntu-meeting 2010-11-08 [19:10] <MootBot> LINK received:  https://wiki.ubuntu.com/DeveloperMembershipBoard/Agenda 
+ubuntu-meeting 2010-11-08 [19:10] <stgraber> [TOPIC] Review of previous action items 
+ubuntu-meeting 2010-11-08 [19:10] <MootBot> New Topic:  Review of previous action items 
+ubuntu-meeting 2010-11-08 [19:11] <stgraber> ok, according to the wiki, we don't have any previous action items, though looking at the log of our last meeting, I see an action for geser to contact CC for help regarding Marco's request 
+ubuntu-meeting 2010-11-08 [19:12] <stgraber> geser: was that an actual action item that we forgot to put on the agenda or did we choose to do something else instead (I don't really remember the details) ? 
+ubuntu-meeting 2010-11-08 [19:12] <geser> stgraber: wasn't that sort of canceled later in the meeting again? 
+ubuntu-meeting 2010-11-08 [19:13] <stgraber> geser: it may have, though if we did, I'm not really sure of where we are regarding Marco's request then 
+ubuntu-meeting 2010-11-08 [19:13] <persia> From the log, I wasn't sure it was conclusive (although I'd like to see something done about Marco at some point relatively soon) 
+ubuntu-meeting 2010-11-08 [19:13] <geser> persia: +1 
+ubuntu-meeting 2010-11-08 [19:14] <stgraber> do we still want to get some help from the CC ? and if so, should we still have geser to bring it to the CC ? 
+ubuntu-meeting 2010-11-08 [19:15] <geser> looking at the meeting log from last meeting we want to move the discussion about how to move on to the mailing list 
+ubuntu-meeting 2010-11-08 [19:16] <geser> I remember writing an e-mail about it but didn't see any reaction to it 
+ubuntu-meeting 2010-11-08 [19:16] <ScottK> What mailing list? 
+ubuntu-meeting 2010-11-08 [19:17] <stgraber> ScottK: developer-membership-board@l.u.c 
+ubuntu-meeting 2010-11-08 [19:17] <ScottK> stgraber: Thanks. 
+ubuntu-meeting 2010-11-08 [19:18] <stgraber> should we try to revive this discussion on the mailing list with the goal of having an answer for the next DMB meeting ? 
+ubuntu-meeting 2010-11-08 [19:18] <persia> Isn't that the just-us list, with devel-permissions@ being the wide-subscription list? 
+ubuntu-meeting 2010-11-08 [19:18] <stgraber> persia: yes, I belive it's 
+ubuntu-meeting 2010-11-08 [19:18] <geser> yes 
+ubuntu-meeting 2010-11-08 [19:18] <ScottK> stgraber: This is a private list? 
+ubuntu-meeting 2010-11-08 [19:19] <bdrung> ScottK: yes. subscription needs to be accepted. 
+ubuntu-meeting 2010-11-08 [19:20] <ScottK> Seems to me like business that should be conducted in public. 
+ubuntu-meeting 2010-11-08 [19:21] <bdrung> lifting the ban on Marco means that he can contribute to Ubuntu through a sponsor. right? 
+ubuntu-meeting 2010-11-08 [19:21] <persia> stgraber, Please give me an action to ask the CC for assistance on this.  It's not clear whether the dispute aspects of the MC were inherited by the DMB (in practice, it hasn't mattered until this issue), so that needs sorting, and I think we've been dragging this out long enough we need help. 
+ubuntu-meeting 2010-11-08 [19:21] <geser> ScottK: we are still at the point where we don't know how to move forward :( 
+ubuntu-meeting 2010-11-08 [19:22] <persia> bdrung, Yes, and only that.  It does not grant him any specific rights to do so. 
+ubuntu-meeting 2010-11-08 [19:22] <stgraber> [action] persia to ask the CC for assistance regarding Marco's request for unban 
+ubuntu-meeting 2010-11-08 [19:22] <MootBot> ACTION received:  persia to ask the CC for assistance regarding Marco's request for unban 
+ubuntu-meeting 2010-11-08 [19:22] <ScottK> geser: I would say that's exactly the time to be working in public. 
+ubuntu-meeting 2010-11-08 [19:22] <bdrung> persia: did he had upload rights before he was banned? 
+ubuntu-meeting 2010-11-08 [19:22] <ScottK> bdrung: No. 
+ubuntu-meeting 2010-11-08 [19:23] <ScottK> Allowing him to contribute via a sponsor is the same as removing all restrictions. 
+ubuntu-meeting 2010-11-08 [19:23] <stgraber> anything else that should be discussed now regarding this matter or should we wait for feedback from the CC ? 
+ubuntu-meeting 2010-11-08 [19:24] <geser> ScottK: cody-somerville mentioned in the last meeting that he prefers not to draw to much attention with making it too public 
+ubuntu-meeting 2010-11-08 [19:24] <persia> bdrung, He's an ubuntu member, and not an ubuntu developer (and never was).  He is not allowed to post to Ubuntu Development mailing lists or IRC channels, except as necessary for administration of his restriction. 
+ubuntu-meeting 2010-11-08 [19:24] <ScottK> geser: That doesn't make it appropriate that it be decided in private. 
+ubuntu-meeting 2010-11-08 [19:24] <persia> geser, Dragging it out as long as we have brings much more attention than any public/private concerns. 
+ubuntu-meeting 2010-11-08 [19:25] <geser> I understand it, I just want to repeat some options which caused that we still don't know how to move forward 
+ubuntu-meeting 2010-11-08 [19:25] <geser> opionions 
+ubuntu-meeting 2010-11-08 [19:27] <persia> ScottK, I agree the decision must not be private.  I'm unconvinced that a council oughtn't be able to determine how to make a decision (or not make it) in private, presuming they do so in a timely manner, and make the decided means of decision public. 
+ubuntu-meeting 2010-11-08 [19:27] <persia> (although in this case, I think the lack of action by the DMB in determining a method is essentially consensus-through-inaction that it ought be someone else's problem (so call on the CC)) 
+ubuntu-meeting 2010-11-08 [19:28] <ScottK> persia: I think deciding in private how this will be decided would substantially impair the legitimacy of the result in the minds of at least some community members. 
+ubuntu-meeting 2010-11-08 [19:28] <geser> I guess that the best idea (ask the CC) to break the current dead-lock 
+ubuntu-meeting 2010-11-08 [19:28] <bdrung> i don't see why it's an problem of the DMB. who spoke the ban back then? 
+ubuntu-meeting 2010-11-08 [19:28] <persia> bdrung, The MC. 
+ubuntu-meeting 2010-11-08 [19:28] <ScottK> bdrung: MOTU Council 
+ubuntu-meeting 2010-11-08 [19:29] <geser> and the MC merged into the DMB 
+ubuntu-meeting 2010-11-08 [19:29] <cody-somerville> Its important to me that this not be a popularity contest. 
+ubuntu-meeting 2010-11-08 [19:29] <persia> geser, Well, kinda.  Complex that :) 
+ubuntu-meeting 2010-11-08 [19:29] <bdrung> if the DMB can speak a ban, it should be able to lift the ban. 
+ubuntu-meeting 2010-11-08 [19:30] <geser> as I see the problem, we (the DMB) want some more support (as requested in the ban) before we lift it, but we aren't sure how the support should look like 
+ubuntu-meeting 2010-11-08 [19:30] <ScottK> cody-somerville: I agree with that. 
+ubuntu-meeting 2010-11-08 [19:30] <cody-somerville> And it feels like the requirements for Marco to appeal his ban as set by the former MC make that difficult. 
+ubuntu-meeting 2010-11-08 [19:30] <persia> cody-somerville, How do you mean? 
+ubuntu-meeting 2010-11-08 [19:31] <ScottK> geser: I think putting it that way presupposes the ban should be lifted.  I object to that. 
+ubuntu-meeting 2010-11-08 [19:31] <geser> ScottK: so you see no way for him to lift the ban at all? 
+ubuntu-meeting 2010-11-08 [19:32] <ScottK> geser: It's my preference that it not be lifted.  I don't object to considering the question, but the way I read you comment seemed to me to presuppose an answer, not just ask a question. 
+ubuntu-meeting 2010-11-08 [19:33] <cody-somerville> The requirements for Marco's ban to be lifted are as follows: 
+ubuntu-meeting 2010-11-08 [19:33] <cody-somerville> 1. MOTUs supporting this wish actively. 
+ubuntu-meeting 2010-11-08 [19:34] <cody-somerville> 2. A solid indication of changes in the work style. 
+ubuntu-meeting 2010-11-08 [19:34] <bdrung> i have a concern: how can someone get support from other MOTUs if he/she can't show that he/she has changed? 
+ubuntu-meeting 2010-11-08 [19:34] <cody-somerville> bdrung, bingo. My question too. 
+ubuntu-meeting 2010-11-08 [19:34] <geser> bdrung: congrats, you found the dilema :) 
+ubuntu-meeting 2010-11-08 [19:35] <ScottK> I think there are plenty of MOTU active in areas where he's not banned (most of Debian) for them to form an opinion. 
+ubuntu-meeting 2010-11-08 [19:36] <bdrung> as alternative: a "soft" lift with not everything allowed? 
+ubuntu-meeting 2010-11-08 [19:36] <persia> bdrung, Absolutely not.  There's no useful meaning of "soft". 
+ubuntu-meeting 2010-11-08 [19:36] <bdrung> ok 
+ubuntu-meeting 2010-11-08 [19:36] <stgraber> ok, we only have 25 minutes left for this meeting and still have two applications to review. For now persia has an action to ask the CC for help, so I suggest we carry this discussion to the next meeting. 
+ubuntu-meeting 2010-11-08 [19:36] <persia> Several MOTU (interacting with him in Debian), have commented on his application. 
+ubuntu-meeting 2010-11-08 === lifeless_ is now known as lifeless 
+ubuntu-meeting 2010-11-08 [19:36] <geser> bdrung: how would that look like and still be different from any other non-MOTU? 
+ubuntu-meeting 2010-11-08 [19:36] <persia> Our decision ends up being one of the following: 1) it's not our problem, 2) he has met the criteria, 3) he has yet to meet the criteria. 
+ubuntu-meeting 2010-11-08 [19:37]  * persia agrees with stgraber 
+ubuntu-meeting 2010-11-08 [19:37]  * micahg wonders why the meeting is 1 hr and not 2 
+ubuntu-meeting 2010-11-08 [19:37] <geser> micahg: because it would be then 3 hours long 
+ubuntu-meeting 2010-11-08 [19:37] <bdrung> geser: good question. maybe irc access to get in contact with motus? 
+ubuntu-meeting 2010-11-08 [19:38] <stgraber> [TOPIC] PerPackageUploader Applications 
+ubuntu-meeting 2010-11-08 [19:38] <MootBot> New Topic:  PerPackageUploader Applications 
+ubuntu-meeting 2010-11-08 [19:38] <cody-somerville> maybe we should just lift the ban and see what happens? 
+ubuntu-meeting 2010-11-08 [19:38] <geser> cody-somerville: I'm pretty sure ScottK will object to that idea 
+ubuntu-meeting 2010-11-08 [19:38] <stgraber> mtaylor: around ? 
+ubuntu-meeting 2010-11-08 [19:38] <bdrung> lift the ban for X month and evaluate it then? 
+ubuntu-meeting 2010-11-08 [19:38] <persia> cody-somerville, No. That's outside our role.  We just have to determine whether he met the criteria. 
+ubuntu-meeting 2010-11-08 [19:38] <mtaylor> stgraber: yup 
+ubuntu-meeting 2010-11-08 [19:38] <persia> Anyway, we're on a new topic 
+ubuntu-meeting 2010-11-08 [19:39] <stgraber> mtaylor: According to the wiki you apply for PPU rights for haildb and pandora-build 
+ubuntu-meeting 2010-11-08 [19:39] <mtaylor> stgraber: yes indeed 
+ubuntu-meeting 2010-11-08 [19:39] <stgraber> though you already seem to have upload rights on pandora-build 
+ubuntu-meeting 2010-11-08 [19:39] <stgraber> and haildb doesn't seem to be in the archive ? 
+ubuntu-meeting 2010-11-08 [19:39] <mtaylor> stgraber: oh really? great on pandora-build ... haildb should have just been synced 
+ubuntu-meeting 2010-11-08 [19:40] <stgraber> stgraber@castiana:~/data/code/ubuntu-archive-tools$ python edit_acl.py query -p mordred | grep pandora-build 
+ubuntu-meeting 2010-11-08 [19:40] <stgraber> Archive Upload Rights for mordred: archive 'primary', source package 'pandora-build' 
+ubuntu-meeting 2010-11-08 [19:40] <mtaylor> excellent. that makes that easier 
+ubuntu-meeting 2010-11-08 [19:40] <mtaylor> https://launchpad.net/ubuntu/+source/haildb 
+ubuntu-meeting 2010-11-08 [19:40] <geser> does someone remember if we vote on this apps the last time? (and this is just to setup the permissions) 
+ubuntu-meeting 2010-11-08 [19:40] <stgraber> geser: based on what I can find on the wiki, he already had PPU rights on a few packages and wants it extended to these two other packages 
+ubuntu-meeting 2010-11-08 [19:41] <stgraber> http://pastebin.com/85cZ75Fe 
+ubuntu-meeting 2010-11-08 [19:41] <MootBot> LINK received:  http://pastebin.com/85cZ75Fe 
+ubuntu-meeting 2010-11-08 [19:42] <bdrung> i though he wants upload right for all apps listed in his application. 
+ubuntu-meeting 2010-11-08 [19:42] <stgraber> bdrung: he already has, for all of thems except haildb (which is probably in the NEW queue at the moment) 
+ubuntu-meeting 2010-11-08 [19:42] <geser> https://lists.ubuntu.com/archives/devel-permissions/2010-June/000076.html 
+ubuntu-meeting 2010-11-08 [19:42] <geser> the results of his last application 
+ubuntu-meeting 2010-11-08 [19:43] <mtaylor> sorry for the confusion - it's an ammended application - last time haildb wasn't in the archive yet. (and I thought the same for pandora-build, but I'm obviously wrong about that) 
+ubuntu-meeting 2010-11-08 [19:43] <persia> haildb was source-NEWed, but no binaries are yet available. 
+ubuntu-meeting 2010-11-08 [19:43] <bdrung> ? https://launchpad.net/ubuntu/+source/haildb/2.3.1-1 
+ubuntu-meeting 2010-11-08 [19:44] <geser> mtaylor: have you DM upload rights for haildb in Debian or upload through a sponsor? 
+ubuntu-meeting 2010-11-08 [19:45] <mtaylor> geser: upload through a sponsor 
+ubuntu-meeting 2010-11-08 [19:45] <mtaylor> been meaning to apply for DM for it 
+ubuntu-meeting 2010-11-08 [19:45] <stgraber> I see that libhaildb was already part of the previous application and from what I can see is the binary package built from haildb. I guess we didn't vote on this one last time because it didn't exist in the archive and so we wouldn't have been able to set the PPU for it 
+ubuntu-meeting 2010-11-08 [19:46] <cjwatson> argh, sorry, I had timezone confusion 
+ubuntu-meeting 2010-11-08 [19:46] <geser> wasn't it more of not enough records on working on this package? 
+ubuntu-meeting 2010-11-08 [19:48] <stgraber> geser: I'd be surprised considering he's the one listed in every single changelog entry in the debian changelog 
+ubuntu-meeting 2010-11-08 [19:48] <stgraber> geser: http://packages.debian.org/changelogs/pool/main/h/haildb/current/changelog.txt 
+ubuntu-meeting 2010-11-08 [19:48] <geser> which are all after June when we processed the application 
+ubuntu-meeting 2010-11-08 [19:49] <cjwatson> haildb sounds like an easy one to add to mtaylor's list to me, considering 
+ubuntu-meeting 2010-11-08 [19:49] <stgraber> geser: ok, so the package wasn't even in Debian at the time ? 
+ubuntu-meeting 2010-11-08 [19:50] <geser> stgraber: no, looks it got NEWed in Debian 5 days ago 
+ubuntu-meeting 2010-11-08 [19:51] <cjwatson> indeed 
+ubuntu-meeting 2010-11-08 [19:51] <stgraber> ok, any other question or should we just go ahead and vote to add haildb to mtaylor's PPU list ? 
+ubuntu-meeting 2010-11-08 [19:51] <bdrung> go ahead 
+ubuntu-meeting 2010-11-08 [19:51]  * geser has no questions 
+ubuntu-meeting 2010-11-08 [19:52] <cjwatson> go 
+ubuntu-meeting 2010-11-08 [19:52] <stgraber> [VOTE] Add haildb to mtaylor's PPU list 
+ubuntu-meeting 2010-11-08 [19:52] <MootBot> Please vote on:  Add haildb to mtaylor's PPU list. 
+ubuntu-meeting 2010-11-08 [19:52] <MootBot> Public votes can be registered by saying +1/-1/+0 in the channel, private votes by messaging the channel followed by +1/-1/+0  to MootBot 
+ubuntu-meeting 2010-11-08 [19:52] <MootBot> E.g. /msg MootBot +1 #ubuntu-meeting 
+ubuntu-meeting 2010-11-08 [19:52] <stgraber> +1 
+ubuntu-meeting 2010-11-08 [19:52] <MootBot> +1 received from stgraber. 1 for, 0 against. 0 have abstained. Count is now 1 
+ubuntu-meeting 2010-11-08 [19:52] <bdrung> +1 
+ubuntu-meeting 2010-11-08 [19:52] <MootBot> +1 received from bdrung. 2 for, 0 against. 0 have abstained. Count is now 2 
+ubuntu-meeting 2010-11-08 [19:52] <cjwatson> +q 
+ubuntu-meeting 2010-11-08 [19:52] <geser> +1 
+ubuntu-meeting 2010-11-08 [19:52] <persia> +1 
+ubuntu-meeting 2010-11-08 [19:52] <MootBot> +1 received from geser. 3 for, 0 against. 0 have abstained. Count is now 3 
+ubuntu-meeting 2010-11-08 [19:52] <cjwatson> er 
+ubuntu-meeting 2010-11-08 [19:52] <MootBot> +1 received from persia. 4 for, 0 against. 0 have abstained. Count is now 4 
+ubuntu-meeting 2010-11-08 [19:52] <cjwatson> +1 
+ubuntu-meeting 2010-11-08 [19:52] <MootBot> +1 received from cjwatson. 5 for, 0 against. 0 have abstained. Count is now 5 
+ubuntu-meeting 2010-11-08 [19:52] <cjwatson> (guess what keyboard I'm using) 
+ubuntu-meeting 2010-11-08 [19:53] <cody-somerville> +1 
+ubuntu-meeting 2010-11-08 [19:53] <MootBot> +1 received from cody-somerville. 6 for, 0 against. 0 have abstained. Count is now 6 
+ubuntu-meeting 2010-11-08 [19:53] <stgraber> [ENDVOTE] 
+ubuntu-meeting 2010-11-08 [19:53] <MootBot> Final result is 6 for, 0 against. 0 abstained. Total: 6 
+ubuntu-meeting 2010-11-08 [19:53] <bdrung> cjwatson: it's not the NEO layout ;) 
+ubuntu-meeting 2010-11-08 [19:53] <stgraber> cjwatson: should I give you the action of actually doing the change ? 
+ubuntu-meeting 2010-11-08 [19:53] <cjwatson> sure 
+ubuntu-meeting 2010-11-08 [19:53] <mtaylor> thanks all! 
+ubuntu-meeting 2010-11-08 [19:54] <stgraber> [ACTION] cjwatson to add haildb to mtaylor's PPU list 
+ubuntu-meeting 2010-11-08 [19:54] <MootBot> ACTION received:  cjwatson to add haildb to mtaylor's PPU list 
+ubuntu-meeting 2010-11-08 [19:54] <stgraber> [TOPIC] MOTU Applications 
+ubuntu-meeting 2010-11-08 [19:54] <MootBot> New Topic:  MOTU Applications 
+ubuntu-meeting 2010-11-08 [19:54] <stgraber> micahg: around ? 
+ubuntu-meeting 2010-11-08 [19:54] <micahg> stgraber: yes 
+ubuntu-meeting 2010-11-08 [19:55] <stgraber> hmm, only 6 minutes left ... is there any meeting schedule in #ubuntu-meeting after DMB ? 
+ubuntu-meeting 2010-11-08 [19:55] <stgraber> *scheduled 
+ubuntu-meeting 2010-11-08 [19:56] <bdrung> no (according to the fridge) 
+ubuntu-meeting 2010-11-08 [19:56]  * ajmitch wouldn't think it'd take more than 6 minutes to approve micahg  
+ubuntu-meeting 2010-11-08 [19:56] <geser> nothing on the fridge (not even the current DMB meeting) 
+ubuntu-meeting 2010-11-08 [19:56] <persia> micahg, You say you don't like "The ability to easy switch between archive versions and PPA versions of select packages.", but you don't list any thoughts about fixing that.  Are you able to do so here? 
+ubuntu-meeting 2010-11-08 [19:56] <micahg> persia: I was thinking of some type of selector in software center (a plugin that helped with pinning) 
+ubuntu-meeting 2010-11-08 [19:57] <persia> So, is the problem that you can switch, or is the problem that it's not easy? 
+ubuntu-meeting 2010-11-08 [19:57] <bdrung> micahg: is pinning enough? switching means to have a way for downgrading. 
+ubuntu-meeting 2010-11-08 [19:57] <ari-tczew> micahg is building his career by reporting on another folks from IRC rofl 
+ubuntu-meeting 2010-11-08 [19:58] <micahg> persia: that's it's not easy to switch back and forth 
+ubuntu-meeting 2010-11-08 [19:58] <bdrung> micahg: are you aware of ppa-purge? 
+ubuntu-meeting 2010-11-08 [19:58] <cjwatson> there's a command-line tool to do it, I think, which suggests that building UI pieces might not be so far off 
+ubuntu-meeting 2010-11-08 [19:58] <micahg> bdrung: in some cases yes, but not all 
+ubuntu-meeting 2010-11-08 [19:58] <micahg> bdrung: yes 
+ubuntu-meeting 2010-11-08 [19:58] <cjwatson> I think ppa-purge is PPA granularity rather than package granularity though 
+ubuntu-meeting 2010-11-08 [19:59] <micahg> cjwatson: right 
+ubuntu-meeting 2010-11-08 [19:59] <cjwatson> mvo might have some thoughts on the UI side 
+ubuntu-meeting 2010-11-08 [19:59] <persia> micahg, A package selector UI seems easy enough: how could one address the bit about maintainer scripts not being guaranteed safe for downgrades? 
+ubuntu-meeting 2010-11-08 [20:00] <micahg> persia: well, there would have to be some way for a package to opt-in to this only in cases where it would be safe 
+ubuntu-meeting 2010-11-08 [20:01] <micahg> possibly a field in d/control? 
+ubuntu-meeting 2010-11-08 [20:01] <persia> Packages in PPAs declaring that they are suitable for safe install/remove?  How can we trust that when we can't necessarily trust PPA uploaders in general? 
+ubuntu-meeting 2010-11-08 [20:01] <bdrung> isn't it better to make packages downgradable? 
+ubuntu-meeting 2010-11-08 [20:02] <persia> bdrung, Heh, sure, but that's *hard*, because of how maintainer scripts work. 
+ubuntu-meeting 2010-11-08 [20:02] <cjwatson> OTOH it's relatively rare for the sorts of changes in PPAs to be downgrade issues anyway 
+ubuntu-meeting 2010-11-08 [20:02] <persia> True 
+ubuntu-meeting 2010-11-08 [20:02] <micahg> persia: that's a more general problem and would have to do with the concept of *blessed* PPAs which seems to be less likely as time goes on 
+ubuntu-meeting 2010-11-08 [20:02] <cjwatson> persia: if you can't trust the PPA then it might have failed when you switched *to* it 
+ubuntu-meeting 2010-11-08 [20:02] <bdrung> maybe having a fallback if the downgrade doesn't work? 
+ubuntu-meeting 2010-11-08 [20:02] <persia> cjwatson, Ah, that works. 
+ubuntu-meeting 2010-11-08 [20:02] <cjwatson> so worrying about what happens when you switch away sort of seems like stable door and hose 
+ubuntu-meeting 2010-11-08 [20:02] <cjwatson> horse 
+ubuntu-meeting 2010-11-08 [20:03]  * persia has no more questions. 
+ubuntu-meeting 2010-11-08 [20:03] <bdrung> micahg: interested in working on the sponsors queue? 
+ubuntu-meeting 2010-11-08 [20:04]  * ScottK wants to be sure to through in a big +1 for micahg (my attention is needed elsewhere ATM) - I've interacted with him quite a bit at UDS and since and am convinced he'd be a great MOTU. 
+ubuntu-meeting 2010-11-08 [20:04] <micahg> bdrung: yes, but my time for the next month is limited 
+ubuntu-meeting 2010-11-08 [20:04] <stgraber> ready to vote ? 
+ubuntu-meeting 2010-11-08 [20:04] <bdrung> yes 
+ubuntu-meeting 2010-11-08 [20:05] <geser> micahg: why didn't you manage to find enough DMB members a UDS-M to process your application? :) 
+ubuntu-meeting 2010-11-08 [20:05] <cjwatson> that was mostly our fault 
+ubuntu-meeting 2010-11-08 [20:05] <stgraber> [VOTE] Micah Gersten's application for MOTU 
+ubuntu-meeting 2010-11-08 [20:05] <MootBot> Please vote on:  Micah Gersten's application for MOTU. 
+ubuntu-meeting 2010-11-08 [20:05] <MootBot> Public votes can be registered by saying +1/-1/+0 in the channel, private votes by messaging the channel followed by +1/-1/+0  to MootBot 
+ubuntu-meeting 2010-11-08 [20:05] <MootBot> E.g. /msg MootBot +1 #ubuntu-meeting 
+ubuntu-meeting 2010-11-08 [20:05] <bdrung> +1 
+ubuntu-meeting 2010-11-08 [20:05] <MootBot> +1 received from bdrung. 1 for, 0 against. 0 have abstained. Count is now 1 
+ubuntu-meeting 2010-11-08 [20:05] <cjwatson> we did assemble but were inquorate 
+ubuntu-meeting 2010-11-08 [20:05] <persia> Entirely our fault 
+ubuntu-meeting 2010-11-08 [20:05] <persia> +1 
+ubuntu-meeting 2010-11-08 [20:05] <MootBot> +1 received from persia. 2 for, 0 against. 0 have abstained. Count is now 2 
+ubuntu-meeting 2010-11-08 [20:05] <cjwatson> +1 
+ubuntu-meeting 2010-11-08 [20:05] <MootBot> +1 received from cjwatson. 3 for, 0 against. 0 have abstained. Count is now 3 
+ubuntu-meeting 2010-11-08 [20:05] <stgraber> +1 
+ubuntu-meeting 2010-11-08 [20:05] <MootBot> +1 received from stgraber. 4 for, 0 against. 0 have abstained. Count is now 4 
+ubuntu-meeting 2010-11-08 [20:05] <geser> +1 
+ubuntu-meeting 2010-11-08 [20:05] <MootBot> +1 received from geser. 5 for, 0 against. 0 have abstained. Count is now 5 
+ubuntu-meeting 2010-11-08 [20:06] <stgraber> persia, cjwatson and I were in ready for the meeting at UDS, though soren was somewhere between his hotel and UDS and cody-somerville was probably still sleeping :) 
+ubuntu-meeting 2010-11-08 [20:06] <ari-tczew> I don't trust that he will work on clean up sponsors queue 
+ubuntu-meeting 2010-11-08 [20:06] <stgraber> cody-somerville: ? 
+ubuntu-meeting 2010-11-08 [20:06] <cody-somerville> +1 
+ubuntu-meeting 2010-11-08 [20:06] <MootBot> +1 received from cody-somerville. 6 for, 0 against. 0 have abstained. Count is now 6 
+ubuntu-meeting 2010-11-08 [20:06] <stgraber> [ENDVOTE] 
+ubuntu-meeting 2010-11-08 [20:06] <MootBot> Final result is 6 for, 0 against. 0 abstained. Total: 6 
+ubuntu-meeting 2010-11-08 [20:06] <stgraber> [TOPIC] Select a chair for the next meeting 
+ubuntu-meeting 2010-11-08 [20:06] <MootBot> New Topic:  Select a chair for the next meeting 
+ubuntu-meeting 2010-11-08 [20:06] <highvoltage> welcome to MOTU, micahg! 
+ubuntu-meeting 2010-11-08 [20:07] <stgraber> any volunteer ? 
+ubuntu-meeting 2010-11-08 [20:07] <bdrung> congrats micahg 
+ubuntu-meeting 2010-11-08 [20:07] <stgraber> oh, and congrats micahg ! 
+ubuntu-meeting 2010-11-08 [20:07] <micahg> highvoltage: thanks, and thanks to all the DMB members and ScottK 
+ubuntu-meeting 2010-11-08 [20:07] <persia> I'll volunteer.  I've missed it enough times. 
+ubuntu-meeting 2010-11-08 [20:07] <stgraber> [ACTION] persia to chair next DMB meeting 
+ubuntu-meeting 2010-11-08 [20:07] <MootBot> ACTION received:  persia to chair next DMB meeting 
+ubuntu-meeting 2010-11-08 [20:07] <stgraber> anything else for this meeting ? 
+ubuntu-meeting 2010-11-08 [20:07] <bdrung> can the chair listed on the agenda? 
+ubuntu-meeting 2010-11-08 [20:08] <cjwatson> normally is 
+ubuntu-meeting 2010-11-08 [20:08]  * micahg is just curious, are the meetings planned to be 1hr now? 
+ubuntu-meeting 2010-11-08 [20:08] <persia> They were always supposed to be so. 
+ubuntu-meeting 2010-11-08 [20:08] <stgraber> bdrung: when we've got one, it usually is 
+ubuntu-meeting 2010-11-08 [20:08] <cjwatson> 1hr is usual if we can manage it, but it depends ... 
+ubuntu-meeting 2010-11-08 [20:08] <geser> micahg: they we always 1 hour 
+ubuntu-meeting 2010-11-08 [20:08] <stgraber> *he 
+ubuntu-meeting 2010-11-08 [20:09] <geser> were* 
+ubuntu-meeting 2010-11-08 [20:09] <micahg> geser: ah, ok 
+ubuntu-meeting 2010-11-08 [20:09] <cjwatson> sometimes they run long if there's need and if there's nothing preventing it 
+ubuntu-meeting 2010-11-08 [20:09] <geser> micahg: if we finish in 1 hour is a different question :) 
+ubuntu-meeting 2010-11-08 [20:10] <bdrung> back to the Marco: can we get comments from all people who are working with Marco? 
+ubuntu-meeting 2010-11-08 [20:10]  * bdrung fails in forming correct sentences. 
+ubuntu-meeting 2010-11-08 [20:12] <stgraber> ok, I guess we're done for what had to be discussed in this meeting 
+ubuntu-meeting 2010-11-08 [20:12] <stgraber> #endmeeting 
+ubuntu-meeting 2010-11-08 [20:12] <MootBot> Meeting finished at 14:12. 
+ubuntu-meeting 2010-11-08 [20:12] <cjwatson> re Marco, I think the action to work with the CC is the next step there - we can ask them to help with that 
+ubuntu-meeting 2010-11-08 [20:13] <bdrung> ok 
+ubuntu-meeting 2010-11-08 [20:14] <cjwatson> and, since I wasn't here at the start, welcome bdrung :) 
+ubuntu-meeting 2010-11-08 [20:14] <stgraber> bdrung: I'd also suggest you read through the previous meeting logs as it feels like things we already discussed in the past. For now, I think it's best to wait for the CC and re-discuss in another meeting. 
+ubuntu-meeting 2010-11-08 [20:14] <geser> bdrung: the aren't probably many as he is banned from working on Ubuntu dev, you would need to find those who are also active in Debian and see his work there 
+ubuntu-meeting 2010-11-08 [20:15]  * cjwatson goes back to trying to convince a toddler to GO TO BED 
+ubuntu-meeting 2010-11-08 [20:15] <bdrung> thanks cjwatson 
+ubuntu-meeting 2010-11-08 [20:15] <ari-tczew> I'm not up-to-dated... who win - Laney or bdrung ? 
+ubuntu-meeting 2010-11-08 [20:15] <cjwatson> bdrung 
+ubuntu-meeting 2010-11-08 [20:15] <ari-tczew> love it! 
+ubuntu-meeting 2010-11-08 [20:15] <ari-tczew> (that was not ironic) 
+ubuntu-meeting 2010-11-08 [20:15] <cjwatson> by 8 votes or so I think 
+ubuntu-meeting 2010-11-08 [20:15] <ari-tczew> what is the number of all votes? 
+ubuntu-meeting 2010-11-08 [20:16] <cjwatson> low turnout, not that I'm one to talk since I forgot to vote :( 
+ubuntu-meeting 2010-11-08 [20:16] <geser> ari-tczew: see my mail with the results to ubuntu-devel-announce 
+ubuntu-meeting 2010-11-08 [20:16] <bdrung> the participation was very low (~ 50 votes) 
+ubuntu-meeting 2010-11-08 [20:16] <geser> cjwatson: I wanted to mail a reminder after UDS but forgot it myself :( (to mail the reminder) 
+ubuntu-meeting 2010-11-08 [20:17] <geser> IIRC 55 votes of 153 
+ubuntu-meeting 2010-11-08 [20:21] <bdrung> stgraber: in which meetings was marco a topic? 2010-09-27 and others? 
+ubuntu-meeting 2010-11-08 [20:21] <geser> bdrung: the last 2-3 meetings 
+ubuntu-meeting 2010-11-08 [20:31] <bdrung> geser: do we have a link list to all previous meeting logs? 
+ubuntu-meeting 2010-11-08 [20:37] <geser> no, perhaps I should do one like we had for MC 
+ubuntu-meeting 2010-11-08 [20:37] <bdrung> geser: finding the old logs is hard. especially if the schedule is changed 
+ubuntu-meeting 2010-11-08 [20:39] <geser> true 
+ubuntu-meeting 2010-11-08 === Craig_Dem_ is now known as Craig_Dem 
+ubuntu-meeting 2010-11-09 === SergioMeneses_ is now known as SergioMeneses 
+ubuntu-meeting 2010-11-09 === lukjad is now known as Guest655 
+ubuntu-meeting 2010-11-09 === lan3y is now known as Laney 
+ubuntu-meeting 2010-11-09 === mc44_ is now known as mc44 
+ubuntu-meeting 2010-11-09 === rodrigo__ is now known as rodrigo_ 
+ubuntu-meeting 2010-11-09 === Mohan_chml is now known as Guest46187 
+ubuntu-meeting 2010-11-09 === Guest46187 is now known as Mohan_chml 
+ubuntu-meeting 2010-11-09 === Claudinux_ is now known as Claudinux 
+ubuntu-meeting 2010-11-09 === freeflying_ is now known as freeflying 
+ubuntu-meeting 2010-11-09 [12:58] <NCommander> #startmeeting 
+ubuntu-meeting 2010-11-09 [12:58] <MootBot> Meeting started at 06:58. The chair is NCommander. 
+ubuntu-meeting 2010-11-09 [12:58] <MootBot> Commands Available: [TOPIC], [IDEA], [ACTION], [AGREED], [LINK], [VOTE] 
+ubuntu-meeting 2010-11-09 [12:58] <ogra_ac> bah 
+ubuntu-meeting 2010-11-09 [12:58] <ogra_ac> you're to early 
+ubuntu-meeting 2010-11-09 [12:59] <rsalveti> NCommander: and the meeting date is wrong 
+ubuntu-meeting 2010-11-09 [12:59] <ogra_ac> that too 
+ubuntu-meeting 2010-11-09 [12:59] <rsalveti> you created it as 1009 
+ubuntu-meeting 2010-11-09 [12:59] <rsalveti> unless you think the release is tomorrow, you're wrong 
+ubuntu-meeting 2010-11-09 [12:59] <NCommander> ugh 
+ubuntu-meeting 2010-11-09 [12:59] <rsalveti> :-) 
+ubuntu-meeting 2010-11-09 [12:59] <ogra_ac> hehe 
+ubuntu-meeting 2010-11-09 [13:00] <NCommander> davidm: I'm here :-P, no need to call :-P 
+ubuntu-meeting 2010-11-09 [13:00] <davidm> Yep, just saw that, had phone to ear 
+ubuntu-meeting 2010-11-09 [13:00] <NCommander> I'm just waiting for GrueMaster to rise 
+ubuntu-meeting 2010-11-09 [13:01] <NCommander> [link] https://wiki.ubuntu.com/MobileTeam/Meeting/2010/20101109 
+ubuntu-meeting 2010-11-09 [13:01] <MootBot> LINK received:  https://wiki.ubuntu.com/MobileTeam/Meeting/2010/20101109 
+ubuntu-meeting 2010-11-09 [13:01] <ogra_ac> hmpf, note to self: starting update-manager right before a meeting isnt a clever idea 
+ubuntu-meeting 2010-11-09 [13:02] <NCommander> There are no action items or special items from the last meeting 
+ubuntu-meeting 2010-11-09 [13:02] <ogra_ac> when was that anyway 
+ubuntu-meeting 2010-11-09 [13:02] <NCommander> ogra_ac: the 2nd, but only davidm and GrueMaster was there 
+ubuntu-meeting 2010-11-09 [13:02] <davidm> Last week 
+ubuntu-meeting 2010-11-09 [13:02] <NCommander> most of us were in transit for something 
+ubuntu-meeting 2010-11-09 [13:03] <davidm> I ran it since no one besides Gruemaster showed up 
+ubuntu-meeting 2010-11-09 [13:03] <davidm> And I like fast meetings 
+ubuntu-meeting 2010-11-09 [13:03] <davidm> Speaking of which..... 
+ubuntu-meeting 2010-11-09 [13:03] <NCommander> [topic] Standing Itmes 
+ubuntu-meeting 2010-11-09 [13:03] <MootBot> New Topic:  Standing Itmes 
+ubuntu-meeting 2010-11-09 [13:03] <NCommander> [link] http://people.canonical.com/~pitti/workitems/natty/canonical-mobile.html 
+ubuntu-meeting 2010-11-09 [13:03] <MootBot> LINK received:  http://people.canonical.com/~pitti/workitems/natty/canonical-mobile.html 
+ubuntu-meeting 2010-11-09 [13:04] <NCommander> [link] http://people.canonical.com/~pitti/workitems/natty/canonical-mobile-natty-alpha-1.html 
+ubuntu-meeting 2010-11-09 [13:04] <MootBot> LINK received:  http://people.canonical.com/~pitti/workitems/natty/canonical-mobile-natty-alpha-1.html 
+ubuntu-meeting 2010-11-09 [13:04] <NCommander> All my specs expect spice seeds have their work items in properly. We don't have any notes for spice ATM (waiting for IS to post the audio logs of UDS to recreate them) 
+ubuntu-meeting 2010-11-09 [13:05] <NCommander> once those are done, I'll write that spec, and get the work items up 
+ubuntu-meeting 2010-11-09 [13:05] <rsalveti> I'm finishing reviewing and finalizing the specs today 
+ubuntu-meeting 2010-11-09 [13:05] <NCommander> Ugh 
+ubuntu-meeting 2010-11-09 [13:05] <NCommander> argh 
+ubuntu-meeting 2010-11-09 [13:06] <NCommander> It looks like since my specs didn't make it to approved, they weren't counted togethers the workitem tracker 
+ubuntu-meeting 2010-11-09 [13:06] <ogra> hey 
+ubuntu-meeting 2010-11-09 [13:06] <ogra> no hurry 
+ubuntu-meeting 2010-11-09 [13:06] <ogra> spec deadline is the 18th 
+ubuntu-meeting 2010-11-09 [13:06] <NCommander> so the trendline is completely screwed up. again. 
+ubuntu-meeting 2010-11-09 [13:06]  * NCommander bangs his head on the desk 
+ubuntu-meeting 2010-11-09 [13:06] <ogra> also the WI tracker has to be changed a lot 
+ubuntu-meeting 2010-11-09 [13:06] <rsalveti> but we all want to do some "real" work soon :-) 
+ubuntu-meeting 2010-11-09 [13:06] <ogra> sure, just go ahead 
+ubuntu-meeting 2010-11-09 [13:07] <NCommander> [action] NCommander to track down why his specs aren't on the tracker and to have that fixed 
+ubuntu-meeting 2010-11-09 [13:07] <ogra> still though, the tracker points to the wrong team name etc 
+ubuntu-meeting 2010-11-09 [13:07] <MootBot> ACTION received:  NCommander to track down why his specs aren't on the tracker and to have that fixed 
+ubuntu-meeting 2010-11-09 [13:07] <ogra> NCommander, leave that to me 
+ubuntu-meeting 2010-11-09 [13:07] <NCommander> [action] ogra to take previous action 
+ubuntu-meeting 2010-11-09 [13:07] <MootBot> ACTION received:  ogra to take previous action 
+ubuntu-meeting 2010-11-09 [13:07] <ogra> the tracker has to be rewriotten 
+ubuntu-meeting 2010-11-09 [13:07] <ogra> we are not mobile anymore etc 
+ubuntu-meeting 2010-11-09 [13:07] <ogra> i haver to work with pitti on that 
+ubuntu-meeting 2010-11-09 [13:07] <ogra> *have 
+ubuntu-meeting 2010-11-09 [13:07] <rsalveti> true 
+ubuntu-meeting 2010-11-09 [13:08] <ogra> nomenclature changed too 
+ubuntu-meeting 2010-11-09 [13:08] <NCommander> right 
+ubuntu-meeting 2010-11-09 [13:08] <ogra> its on my TODO for this week 
+ubuntu-meeting 2010-11-09 [13:08] <NCommander> on, let's move on 
+ubuntu-meeting 2010-11-09 [13:08] <rsalveti> will also change the ml? 
+ubuntu-meeting 2010-11-09 [13:08] <NCommander> [topic] Kernel Status (cooloney, mpoirier, lag) 
+ubuntu-meeting 2010-11-09 [13:08] <MootBot> New Topic:  Kernel Status (cooloney, mpoirier, lag) 
+ubuntu-meeting 2010-11-09 [13:08] <ogra> no idea, up to davidm 
+ubuntu-meeting 2010-11-09 [13:08] <ogra> NCommander, we dont have kernel guys atm 
+ubuntu-meeting 2010-11-09 [13:08] <rsalveti> it'd be better to have ubuntu-arm instead of mobile, so we avoid questions regarding eeepc :-) 
+ubuntu-meeting 2010-11-09 [13:08] <ogra> pointless topic 
+ubuntu-meeting 2010-11-09 [13:08] <rsalveti> until they start shipping arm cpus 
+ubuntu-meeting 2010-11-09 [13:09] <ogra> hehe 
+ubuntu-meeting 2010-11-09 [13:09] <lag> cooloney is still with you 
+ubuntu-meeting 2010-11-09 [13:09] <NCommander> k 
+ubuntu-meeting 2010-11-09 [13:09] <ogra> rsalveti, well, as i said, up to davidm 
+ubuntu-meeting 2010-11-09 [13:09] <rsalveti> sure :-) 
+ubuntu-meeting 2010-11-09 [13:09] <NCommander> GrueMaster: any point to doing QA status? 
+ubuntu-meeting 2010-11-09 [13:09] <ogra> lag, true, but not around atm 
+ubuntu-meeting 2010-11-09 [13:09]  * NCommander guesses not 
+ubuntu-meeting 2010-11-09 [13:09] <lag> Nope, I believe he's in Lex 
+ubuntu-meeting 2010-11-09 [13:09] <rsalveti> cooloney did some work this week 
+ubuntu-meeting 2010-11-09 [13:09] <ogra> lets do a short spec overview 
+ubuntu-meeting 2010-11-09 [13:09] <ogra> who has what etc 
+ubuntu-meeting 2010-11-09 [13:09] <NCommander> [topic] Specification Overview 
+ubuntu-meeting 2010-11-09 [13:09] <MootBot> New Topic:  Specification Overview 
+ubuntu-meeting 2010-11-09 [13:09]  * NCommander is a fan of that 
+ubuntu-meeting 2010-11-09 [13:09] <GrueMaster> No QA status at this time. 
+ubuntu-meeting 2010-11-09 [13:10] <ogra> for anything else the topics dont suit well 
+ubuntu-meeting 2010-11-09 [13:10] <ogra> oh, and probably discuss A1 
+ubuntu-meeting 2010-11-09 [13:10] <NCommander> I currently have improved ARM subarch support + userland subarch support, and spice seeds once we get the session notes recovered and the spec writen. 
+ubuntu-meeting 2010-11-09 [13:10] <ogra> https://blueprints.edge.launchpad.net/ubuntu/+spec/other-arm-n-public-panda-ppa-build-cluster 
+ubuntu-meeting 2010-11-09 [13:10] <ogra> https://blueprints.edge.launchpad.net/ubuntu/+spec/appdevs-arm-n-minimal-preinstalled-developer-images 
+ubuntu-meeting 2010-11-09 [13:10] <ogra> https://blueprints.edge.launchpad.net/ubuntu/+spec/other-arm-n-jasper-rewrite 
+ubuntu-meeting 2010-11-09 [13:11] <ogra> https://blueprints.edge.launchpad.net/ubuntu/+spec/other-arm-n-arm-thin-clients 
+ubuntu-meeting 2010-11-09 [13:11] <davidm> ogra, the image for the PPA build system, will you get that done before A1 or is that an A2 task for you? 
+ubuntu-meeting 2010-11-09 [13:11] <ogra> these are my four 
+ubuntu-meeting 2010-11-09 [13:11] <ogra> davidm, A1 
+ubuntu-meeting 2010-11-09 [13:11] <davidm> OK thanks' 
+ubuntu-meeting 2010-11-09 [13:11] <ogra> https://wiki.ubuntu.com/NattyReleaseSchedule 
+ubuntu-meeting 2010-11-09 [13:11] <ogra> for anyone who doesnt have it 
+ubuntu-meeting 2010-11-09 [13:12]  * ogra waits for more spec links  
+ubuntu-meeting 2010-11-09 [13:13] <rsalveti> https://blueprints.edge.launchpad.net/ubuntu/+spec/multimedia-arm-gles-in-ubuntu 
+ubuntu-meeting 2010-11-09 [13:13] <rsalveti> https://blueprints.edge.launchpad.net/ubuntu/+spec/other-arm-n-handle-core-boot-files-update 
+ubuntu-meeting 2010-11-09 [13:13] <rsalveti> https://blueprints.launchpad.net/ubuntu/+spec/multimedia-arm-n-set-top-box 
+ubuntu-meeting 2010-11-09 [13:13] <rsalveti> https://blueprints.edge.launchpad.net/ubuntu/+spec/packageselection-arm-n-more-stable-vm-solution-for-arm 
+ubuntu-meeting 2010-11-09 [13:13] <rsalveti> my four 
+ubuntu-meeting 2010-11-09 [13:13]  * ogra has some items on the set-top-box one 
+ubuntu-meeting 2010-11-09 [13:13] <ogra> iirc 
+ubuntu-meeting 2010-11-09 [13:13] <NCommander> https://blueprints.edge.launchpad.net/ubuntu/+spec/other-arm-n-userland-subarch-detection 
+ubuntu-meeting 2010-11-09 [13:13] <NCommander> https://blueprints.edge.launchpad.net/ubuntu/+spec/other-arm-natty-improved-subarch-detection 
+ubuntu-meeting 2010-11-09 [13:13] <rsalveti> we'll all end up having work items in different blueprints :-) 
+ubuntu-meeting 2010-11-09 [13:14] <ogra> yep 
+ubuntu-meeting 2010-11-09 [13:14] <ogra> motre than last time 
+ubuntu-meeting 2010-11-09 [13:14] <ogra> which is good :) 
+ubuntu-meeting 2010-11-09 [13:14] <NCommander> https://blueprints.edge.launchpad.net/ubuntu/+spec/other-arm-n-seed-spices 
+ubuntu-meeting 2010-11-09 [13:14] <GrueMaster> https://blueprints.launchpad.net/ubuntu/+spec/other-arm-n-customcheckboxtests 
+ubuntu-meeting 2010-11-09 [13:14] <rsalveti> yup :-) 
+ubuntu-meeting 2010-11-09 [13:14] <ogra> is persia with us ? 
+ubuntu-meeting 2010-11-09 [13:14] <davidm> ogra, I have pretty much taken over panda-ppa-build-cluster.   But any assistance with wiki spec gladly accepted ;-P 
+ubuntu-meeting 2010-11-09 [13:14] <ogra> davidm, i'll do it :) 
+ubuntu-meeting 2010-11-09 [13:15] <davidm> rsalveti, I added the paste notes to the botton 
+ubuntu-meeting 2010-11-09 [13:15] <rsalveti> davidm: cool, was going to do that, but didn't know if I should put at the wiki or the blueprint itself 
+ubuntu-meeting 2010-11-09 [13:15] <rsalveti> thanks anyway 
+ubuntu-meeting 2010-11-09 [13:16] <davidm> I put it at the bottom of the wiki for now 
+ubuntu-meeting 2010-11-09 [13:16] <davidm> Seemed to be a good place 
+ubuntu-meeting 2010-11-09 [13:16] <davidm> persia, ?? 
+ubuntu-meeting 2010-11-09 [13:16] <NCommander> -ENOPERSIA 
+ubuntu-meeting 2010-11-09 [13:16] <ogra> rsalveti, the blueprint should just have WIs 
+ubuntu-meeting 2010-11-09 [13:16] <ogra> all the rest goes into the wiki 
+ubuntu-meeting 2010-11-09 [13:16] <rsalveti> ok, because I saw many blueprints with notes in it 
+ubuntu-meeting 2010-11-09 [13:16] <rsalveti> mostly linaro ones 
+ubuntu-meeting 2010-11-09 [13:17] <ogra> well, for dumping the notes the whiteboard is an easy place 
+ubuntu-meeting 2010-11-09 [13:17] <ogra> but during cleanup and drafting it should be moved in the proper place 
+ubuntu-meeting 2010-11-09 [13:17] <rsalveti> ok 
+ubuntu-meeting 2010-11-09 [13:18] <ogra> also note that linaro might just handle it differently 
+ubuntu-meeting 2010-11-09 [13:18] <rsalveti> yeah 
+ubuntu-meeting 2010-11-09 [13:18] <ogra> better to look at ubuntu specs ;) 
+ubuntu-meeting 2010-11-09 [13:18] <nigelb> !info python-gtk2 
+ubuntu-meeting 2010-11-09 [13:18] -ubottu- python-gtk2 (source: pygtk): Python bindings for the GTK+ widget set. In component main, is optional. Version 2.21.0-0ubuntu1 (maverick), package size 721 kB, installed size 2628 kB 
+ubuntu-meeting 2010-11-09 [13:18] <nigelb> err, sorry 
+ubuntu-meeting 2010-11-09 [13:18] <NCommander> anyone else got any other specs to post? 
+ubuntu-meeting 2010-11-09 [13:19] <ogra> apart from persias we should have all 
+ubuntu-meeting 2010-11-09 [13:19]  * NCommander has a pretty good idea at this point who's doing what for the forseable future 
+ubuntu-meeting 2010-11-09 [13:19] <NCommander> then I'm moving on unless someone else has something 
+ubuntu-meeting 2010-11-09 [13:19] <ogra> we will get a new employee soon 
+ubuntu-meeting 2010-11-09 [13:19] <ogra> please think about WIs he can take 
+ubuntu-meeting 2010-11-09 [13:19]  * NCommander has nothing for FTBFS status, and there are no images yet so ... 
+ubuntu-meeting 2010-11-09 [13:19] <ogra> from your specs 
+ubuntu-meeting 2010-11-09 [13:19] <rsalveti> what he's good at? 
+ubuntu-meeting 2010-11-09 [13:19] <ogra> images failed today, havent checked why 
+ubuntu-meeting 2010-11-09 [13:19] <NCommander> ogra: oh, crontabs are running? 
+ubuntu-meeting 2010-11-09 [13:20] <GrueMaster> Do we still want omap & dove images to build? 
+ubuntu-meeting 2010-11-09 [13:20] <ogra> rsalveti, everything but dont overload him ;) 
+ubuntu-meeting 2010-11-09 [13:20]  * NCommander didn't see a build failure image this morning 
+ubuntu-meeting 2010-11-09 [13:20] <ogra> GrueMaster, omap -> yes, dove -> no i guess 
+ubuntu-meeting 2010-11-09 [13:20] <rsalveti> ogra: :-) 
+ubuntu-meeting 2010-11-09 [13:20] <ogra> NCommander, you should have mail 
+ubuntu-meeting 2010-11-09 [13:20] <NCommander> GrueMaster: Dove is dead. omap3 is in the hands in Ubuntu ARM, and omap4 is maintained by Canonical 
+ubuntu-meeting 2010-11-09 [13:20] <ogra> davidm, can you confirm ? no more dove in natty, right ? 
+ubuntu-meeting 2010-11-09 [13:21] <davidm> correct no more dove in natty 
+ubuntu-meeting 2010-11-09 [13:21] <GrueMaster> We'll probably kickstart it again mid February-March. 
+ubuntu-meeting 2010-11-09 [13:21] <ogra> for reference: https://lists.ubuntu.com/archives/ubuntu-devel/2010-November/031952.html 
+ubuntu-meeting 2010-11-09 [13:22] <ogra> that applies to omap3 currently 
+ubuntu-meeting 2010-11-09 [13:22] <NCommander> GrueMaster: don't make me come and stab you 
+ubuntu-meeting 2010-11-09 [13:22] <ogra> waiting for solutions from kernel and linaro teams 
+ubuntu-meeting 2010-11-09 [13:22] <davidm> GrueMaster, I doubt it, the kernel we have access to is too far behind for natty 
+ubuntu-meeting 2010-11-09 [13:23] <ogra> we might have a slight prob for A1 btw, we need livecd-rootfs to work for the preinstalled ones and i think cjwatson wont focus on live images (usually he looks only at alternate for A1) 
+ubuntu-meeting 2010-11-09 [13:23] <NCommander> ogra: I'll keep on eye on it for A1 
+ubuntu-meeting 2010-11-09 [13:23] <ogra> so that might need some heavy lifting on our side 
+ubuntu-meeting 2010-11-09 [13:24] <NCommander> [action] NCommander to supervise pre-installed omap4 images for Alpha 1 
+ubuntu-meeting 2010-11-09 [13:24] <ogra> to have the deps and seeds right 
+ubuntu-meeting 2010-11-09 [13:24] <MootBot> ACTION received:  NCommander to supervise pre-installed omap4 images for Alpha 1 
+ubuntu-meeting 2010-11-09 [13:24] <NCommander> ^- standing item until Alpha 1 
+ubuntu-meeting 2010-11-09 [13:24] <ogra> as well as ftbfs 
+ubuntu-meeting 2010-11-09 [13:24] <ogra> NCommander, thanks 
+ubuntu-meeting 2010-11-09 [13:24] <ogra> the ftbfs list looks awful atm 
+ubuntu-meeting 2010-11-09 [13:24] <NCommander> ogra: I've got access to GrueMaster's pandas, so I can do TI work again. 
+ubuntu-meeting 2010-11-09 [13:24] <ogra> though thats mainly kde/QT related 
+ubuntu-meeting 2010-11-09 [13:24] <NCommander> ogra: not as bad as in cycles past TBH 
+ubuntu-meeting 2010-11-09 [13:25] <ogra> well, but again qreal issues as far as i can see 
+ubuntu-meeting 2010-11-09 [13:25] <ogra> the always reoccuring issue 
+ubuntu-meeting 2010-11-09 [13:25] <ogra> NCommander, how about finally applying the upstream fix to it ? 
+ubuntu-meeting 2010-11-09 [13:25] <NCommander> ogra: the one we can't fix without breaking the ABI of Qt :-/ 
+ubuntu-meeting 2010-11-09 [13:25] <Riddell> where are qreal issues? 
+ubuntu-meeting 2010-11-09 [13:25] <ogra> davidm, ^^^ 
+ubuntu-meeting 2010-11-09 [13:25] <NCommander> ogra: upstream won't move until Qt5 
+ubuntu-meeting 2010-11-09 [13:26] <ogra> any words on that ? 
+ubuntu-meeting 2010-11-09 [13:26] <ogra> Riddell, armel as usual 
+ubuntu-meeting 2010-11-09 [13:26] <ogra> Riddell, we have that every release 
+ubuntu-meeting 2010-11-09 [13:26] <davidm> NCommander, I thought upstream wnated the change?? 
+ubuntu-meeting 2010-11-09 [13:26] <NCommander> ogra: sometime in the future. Not even Nokia knows when based off feedback from last Akademy 
+ubuntu-meeting 2010-11-09 [13:26] <NCommander> davidm: yeah, but they can't until they break the ABI in general 
+ubuntu-meeting 2010-11-09 [13:26] <ogra> well, they asked for it at the brussels UDS 
+ubuntu-meeting 2010-11-09 [13:26] <NCommander> ogra: Linaro asked for it 
+ubuntu-meeting 2010-11-09 [13:26] <ogra> and its really a non issue since its armel only 
+ubuntu-meeting 2010-11-09 [13:26] <davidm> NCommander, can you please verify that upstream does not want it now? 
+ubuntu-meeting 2010-11-09 [13:26] <ogra> NCommander, no 
+ubuntu-meeting 2010-11-09 [13:27] <ogra> NCommander, i was at the discussion between asac and upstream 
+ubuntu-meeting 2010-11-09 [13:27] <davidm> It is really creating havoc here 
+ubuntu-meeting 2010-11-09 [13:27] <Riddell> ogra: I haven't seen any new qreal issues.  there's the issue with CXXFLAGS += -Wa,-mimplicit-it=thumb 
+ubuntu-meeting 2010-11-09 [13:27] <NCommander> davidm: we can not break it down here independently of upstream. If upstream wants it broken, they need to fix it upstream, then we get it via normal updates 
+ubuntu-meeting 2010-11-09 [13:27] <ogra> Riddell, hmm, that might be a new one, usually NCommander puts in a few weeks to adjust his armel patches per app though 
+ubuntu-meeting 2010-11-09 [13:28] <ogra> which costs a lot of time 
+ubuntu-meeting 2010-11-09 [13:28] <NCommander> ogra: that's a toolchian issue because we had a patch in previously to make that the default 
+ubuntu-meeting 2010-11-09 [13:28] <ogra> and upstream aksed to just switch TQ on armel for fixing that upstream 
+ubuntu-meeting 2010-11-09 [13:28] <NCommander> ogra: doko kicked it out since upstream rejected it. 
+ubuntu-meeting 2010-11-09 [13:28]  * NCommander had a discussion with doko on this very issue during UDS. 
+ubuntu-meeting 2010-11-09 [13:28] <davidm> NCommander, can you please verify with upstream if they want/will take the change. 
+ubuntu-meeting 2010-11-09 [13:28] <ogra> NCommander, on the upstream QT qreal changes ? 
+ubuntu-meeting 2010-11-09 [13:29]  * ogra wonders how thats related to doko 
+ubuntu-meeting 2010-11-09 [13:29] <Riddell> the CXXFLAGS is related to doko 
+ubuntu-meeting 2010-11-09 [13:29] <ogra> right, but thats fixed 
+ubuntu-meeting 2010-11-09 [13:29] <NCommander> ogra: CXXFLAGS was doko, and no it wasn't, it was worked around. 
+ubuntu-meeting 2010-11-09 [13:30]  * ogra doesnt really care about stuff that has a fix/workaround already  
+ubuntu-meeting 2010-11-09 [13:30] <Riddell> most packages still fail to build on arm because of the CXXFLAGS issue, been waiting for doko to show up to discuss it 
+ubuntu-meeting 2010-11-09 [13:30] <ogra> what i care about is NCommander  wasting workdays on the same issue each release 
+ubuntu-meeting 2010-11-09 [13:30] <ogra> adjusting the same patches every round 
+ubuntu-meeting 2010-11-09 [13:31] <ogra> while upstream asked us to fix it with an upstream patch 
+ubuntu-meeting 2010-11-09 [13:31] <NCommander> ogra: and we can't fix it upstream 
+ubuntu-meeting 2010-11-09 [13:31] <ogra> we can 
+ubuntu-meeting 2010-11-09 [13:31] <NCommander> I'm not repeating this disucssion. We do it every cycle 
+ubuntu-meeting 2010-11-09 [13:31] <ogra> just patch QT properly and be done 
+ubuntu-meeting 2010-11-09 [13:31] <NCommander> ogra: how do you suggest we sanely break Qt's ABI 
+ubuntu-meeting 2010-11-09 [13:32] <NCommander> I'm not doing it 
+ubuntu-meeting 2010-11-09 [13:32] <ogra> we only break it on armel 
+ubuntu-meeting 2010-11-09 [13:32] <ogra> and given that we rebuild the whole distro, thats a non issue 
+ubuntu-meeting 2010-11-09 [13:33] <NCommander> I am *NOT* having this discussion again 
+ubuntu-meeting 2010-11-09 [13:33] <NCommander> I will post the links to every meeting we have discusssed it 
+ubuntu-meeting 2010-11-09 [13:33] <NCommander> Because its the same argument going around 
+ubuntu-meeting 2010-11-09 [13:33] <NCommander> And I have no interest wasting meeting time discussing it again when nothing has changed 
+ubuntu-meeting 2010-11-09 [13:34]  * ogra prefers wasting 1h meeting time to two manweeks of work  
+ubuntu-meeting 2010-11-09 [13:35] <ogra> i still fail to see the reason to not do it 
+ubuntu-meeting 2010-11-09 [13:36] <davidm> Next please 
+ubuntu-meeting 2010-11-09 [13:36] <NCommander> [topic] Any Other Business 
+ubuntu-meeting 2010-11-09 [13:36] <MootBot> New Topic:  Any Other Business 
+ubuntu-meeting 2010-11-09 [13:36] <NCommander> Going once 
+ubuntu-meeting 2010-11-09 [13:36] <NCommander> Going twice 
+ubuntu-meeting 2010-11-09 [13:36] <NCommander> Going three times 
+ubuntu-meeting 2010-11-09 [13:37] <NCommander> #endmeeting 
+ubuntu-meeting 2010-11-09 [13:37] <MootBot> Meeting finished at 07:37. 
+ubuntu-meeting 2010-11-09 === oubiwann is now known as oubiwann-away 
+ubuntu-meeting 2010-11-09 === jdstrand_ is now known as jdstrand 
+ubuntu-meeting 2010-11-09 === oubiwann-away is now known as oubiwann 
+ubuntu-meeting 2010-11-09 === dholbach_ is now known as dholbach 
+ubuntu-meeting 2010-11-09 === apw` is now known as apw 
+ubuntu-meeting 2010-11-09 === SuperHark is now known as MichealH 
+ubuntu-meeting 2010-11-09 === yofel_ is now known as yofel 
+ubuntu-meeting 2010-11-09 [17:00]  * apw limps in 
+ubuntu-meeting 2010-11-09 [17:00]  * ogasawara waves 
+ubuntu-meeting 2010-11-09 [17:00] <kamal> o/ 
+ubuntu-meeting 2010-11-09 [17:00]  * cking here o/ 
+ubuntu-meeting 2010-11-09 [17:00] <cking> apw, broken foot? 
+ubuntu-meeting 2010-11-09 [17:00]  * smb /O\ 
+ubuntu-meeting 2010-11-09 [17:00]  * ericm|ubuntu here o/ 
+ubuntu-meeting 2010-11-09 [17:00] <jjohansen> \o 
+ubuntu-meeting 2010-11-09 [17:00]  * ogra_ac lurks 
+ubuntu-meeting 2010-11-09 [17:00] <ericm|ubuntu> \0/ 
+ubuntu-meeting 2010-11-09 [17:01] <SergioMeneses> hi 
+ubuntu-meeting 2010-11-09 [17:01] <cooloney> yup 
+ubuntu-meeting 2010-11-09 [17:01] <sconklin> here! 
+ubuntu-meeting 2010-11-09 [17:01] <bjf> #startmeeting 
+ubuntu-meeting 2010-11-09 [17:01] <MootBot> Meeting started at 11:01. The chair is bjf. 
+ubuntu-meeting 2010-11-09 [17:01] <MootBot> Commands Available: [TOPIC], [IDEA], [ACTION], [AGREED], [LINK], [VOTE] 
+ubuntu-meeting 2010-11-09 [17:01] <bjf> [LINK] https://wiki.ubuntu.com/KernelTeam/Meeting 
+ubuntu-meeting 2010-11-09 [17:01] <MootBot> LINK received:  https://wiki.ubuntu.com/KernelTeam/Meeting 
+ubuntu-meeting 2010-11-09 [17:01] <bjf> [LINK] https://wiki.ubuntu.com/KernelTeam/ReleaseStatus/Maverick 
+ubuntu-meeting 2010-11-09 [17:01] <MootBot> LINK received:  https://wiki.ubuntu.com/KernelTeam/ReleaseStatus/Maverick 
+ubuntu-meeting 2010-11-09 [17:01] <bjf> [TOPIC] ARM Status (lag) 
+ubuntu-meeting 2010-11-09 [17:01] <MootBot> New Topic:  ARM Status (lag) 
+ubuntu-meeting 2010-11-09 [17:01] <cooloney> ericm|ubuntu: you first, lady 
+ubuntu-meeting 2010-11-09 [17:01] <bjf> cooloney, ^? 
+ubuntu-meeting 2010-11-09 [17:02] <bjf> heh 
+ubuntu-meeting 2010-11-09 [17:02] <ericm|ubuntu> no problem, simple word - nothing going on with Marvell dove 
+ubuntu-meeting 2010-11-09 [17:02] <ericm|ubuntu> they've shipped their LSP 5.3.6, I'll talk with tgardner offline for that 
+ubuntu-meeting 2010-11-09 [17:03] <bjf> # 
+ubuntu-meeting 2010-11-09 [17:03] <bjf> # NOTE: '..' indicates that you are finished with your input. 
+ubuntu-meeting 2010-11-09 [17:03] <bjf> # 
+ubuntu-meeting 2010-11-09 [17:03] <cooloney> for ti-omap4, we just fixed a config issue bug 672635 
+ubuntu-meeting 2010-11-09 [17:03] -ubottu- Launchpad bug 672635 in linux-ti-omap4 (Ubuntu) "enable CONFIG_SCSI_MULTI_LUN" [Medium,Confirmed] https://launchpad.net/bugs/672635 
+ubuntu-meeting 2010-11-09 [17:03] <cooloney> tim pushed and uploaded 
+ubuntu-meeting 2010-11-09 [17:03] <cooloney> that's for maverick 
+ubuntu-meeting 2010-11-09 [17:04] <bjf> cooloney, is that it? 
+ubuntu-meeting 2010-11-09 [17:04] <cooloney> and some status from mpoirier 
+ubuntu-meeting 2010-11-09 [17:04] <cooloney> * Texas Instruments (ti-omap) 
+ubuntu-meeting 2010-11-09 [17:04] <cooloney>  * PATCH    : PowerSGX patch: 
+ubuntu-meeting 2010-11-09 [17:04] <cooloney>               .Spent a lot of time looking at powerSGX 
+ubuntu-meeting 2010-11-09 [17:04] <cooloney>               .Studied 3 implementation: Android, Meego and rcn-ee 
+ubuntu-meeting 2010-11-09 [17:04] <cooloney>               .The Meego patch was folded in linaro-linux-2.6.35 but got rejected -> not upstreamable 
+ubuntu-meeting 2010-11-09 [17:04] <cooloney>               .To be accepted, the patch would have to be nursed through the iteration process -> this is a full time assignment 
+ubuntu-meeting 2010-11-09 [17:04] <cooloney>               .Going from ubuntu to linaro for kernel maintenance mandate that submitted patches be upstreamable 
+ubuntu-meeting 2010-11-09 [17:05] <cooloney> for me, i'm working some upstream OMAP DSS2 patches. that's not for our ubuntu release 
+ubuntu-meeting 2010-11-09 [17:06] <cooloney> yeah, that's it 
+ubuntu-meeting 2010-11-09 [17:06] <cooloney> i'm done 
+ubuntu-meeting 2010-11-09 [17:06] <apw> .. ? 
+ubuntu-meeting 2010-11-09 [17:06] <bjf> [TOPIC] Release Metrics (JFo) 
+ubuntu-meeting 2010-11-09 [17:06] <MootBot> New Topic:  Release Metrics (JFo) 
+ubuntu-meeting 2010-11-09 [17:06] <apw> ENO-JFO 
+ubuntu-meeting 2010-11-09 [17:07] <bjf> ack 
+ubuntu-meeting 2010-11-09 [17:07] <bjf> [TOPIC] Blueprints: Kernel Configuration Review (apw) 
+ubuntu-meeting 2010-11-09 [17:07] <bjf> [LINK] https://blueprints.launchpad.net/ubuntu/+spec/hardware-kernel-n-config-review 
+ubuntu-meeting 2010-11-09 [17:07] <MootBot> New Topic:  Blueprints: Kernel Configuration Review (apw) 
+ubuntu-meeting 2010-11-09 [17:07] <MootBot> LINK received:  https://blueprints.launchpad.net/ubuntu/+spec/hardware-kernel-n-config-review 
+ubuntu-meeting 2010-11-09 [17:07] <apw> Configuration changes are defined and approved.  Work has not yet started on applying these, should hit before natty-alpha-1. 
+ubuntu-meeting 2010-11-09 [17:07] <apw> .. 
+ubuntu-meeting 2010-11-09 [17:07] <bjf> [TOPIC] Blueprints: Enhancements to the firmware test suite (cking) 
+ubuntu-meeting 2010-11-09 [17:07] <bjf> [LINK] https://blueprints.launchpad.net/ubuntu/+spec/hardware-kernel-n-firmware-test-suite-enhancements 
+ubuntu-meeting 2010-11-09 [17:07] <MootBot> New Topic:  Blueprints: Enhancements to the firmware test suite (cking) 
+ubuntu-meeting 2010-11-09 [17:07] <MootBot> LINK received:  https://blueprints.launchpad.net/ubuntu/+spec/hardware-kernel-n-firmware-test-suite-enhancements 
+ubuntu-meeting 2010-11-09 [17:07] <cking> Changes to fwts (natty development branch): 
+ubuntu-meeting 2010-11-09 [17:07] <cking>  * Added more intelligence in backlight issues found in klog 
+ubuntu-meeting 2010-11-09 [17:07] <cking>  * add --show-tests-full option 
+ubuntu-meeting 2010-11-09 [17:07] <cking>  * add --lp-tags to print out LP tags when scanning klog errors 
+ubuntu-meeting 2010-11-09 [17:07] <cking>  * make -p (show progress) default 
+ubuntu-meeting 2010-11-09 [17:08] <cking>  * add -q, --quiet option 
+ubuntu-meeting 2010-11-09 [17:08] <cking>  * add --dumpfile to load tables from acpidump and fwts --dump output 
+ubuntu-meeting 2010-11-09 [17:08] <cking>  * prototyped ACPI method execution for sanity checks and mutex state checks 
+ubuntu-meeting 2010-11-09 [17:08] <cking> .. 
+ubuntu-meeting 2010-11-09 [17:08] <bjf> [TOPIC] Blueprints: Handling of Deviations from Standard Kernels (smb) 
+ubuntu-meeting 2010-11-09 [17:08] <bjf> [LINK] https://blueprints.launchpad.net/ubuntu/+spec/hardware-kernel-n-stable-frankenkernel-maintenance 
+ubuntu-meeting 2010-11-09 [17:08] <MootBot> New Topic:  Blueprints: Handling of Deviations from Standard Kernels (smb) 
+ubuntu-meeting 2010-11-09 [17:08] <MootBot> LINK received:  https://blueprints.launchpad.net/ubuntu/+spec/hardware-kernel-n-stable-frankenkernel-maintenance 
+ubuntu-meeting 2010-11-09 [17:08] <smb> Err 
+ubuntu-meeting 2010-11-09 [17:08] <bjf> :-) 
+ubuntu-meeting 2010-11-09 [17:09] <smb> Not much to add for the moment 
+ubuntu-meeting 2010-11-09 [17:09] <smb> Working on the announcement scripts 
+ubuntu-meeting 2010-11-09 [17:09] <smb> And I guess someone needs to do the documentation at some point... 
+ubuntu-meeting 2010-11-09 [17:09] <smb> .. 
+ubuntu-meeting 2010-11-09 [17:10] <bjf> [TOPIC] Blueprints: Review of the Stable Maintenance Process (sconklin) 
+ubuntu-meeting 2010-11-09 [17:10] <bjf> [LINK] https://blueprints.launchpad.net/ubuntu/+spec/hardware-kernel-n-stable-process-review 
+ubuntu-meeting 2010-11-09 [17:10] <MootBot> New Topic:  Blueprints: Review of the Stable Maintenance Process (sconklin) 
+ubuntu-meeting 2010-11-09 [17:10] <MootBot> LINK received:  https://blueprints.launchpad.net/ubuntu/+spec/hardware-kernel-n-stable-process-review 
+ubuntu-meeting 2010-11-09 [17:10] <sconklin> During UDS, discussions were held which resulted in the adoption of a new process for release of stable kernel updates. Details about why this was needed and how it will be implemented have been committed to the Ubuntu wiki here: 
+ubuntu-meeting 2010-11-09 [17:10] <sconklin> https://wiki.ubuntu.com/Kernel/StableReleaseCadence 
+ubuntu-meeting 2010-11-09 [17:10] <sconklin> It looks like the first official cycle may start on Nov 18th, but this is still indiscussion 
+ubuntu-meeting 2010-11-09 [17:10] <sconklin> .. 
+ubuntu-meeting 2010-11-09 [17:10] <tgardner> sconklin, any progress on the testing front? 
+ubuntu-meeting 2010-11-09 [17:10] <sconklin> No 
+ubuntu-meeting 2010-11-09 [17:11] <tgardner> how can we start a cycle without a prototype of the process? 
+ubuntu-meeting 2010-11-09 [17:11] <bjf> maybe we should invite someone from testing to this meeting? 
+ubuntu-meeting 2010-11-09 [17:11] <apw> skaet, any update on the testing ? 
+ubuntu-meeting 2010-11-09 [17:11] <sconklin> tgardner: good question. We're awaiting our first information from the people responsible for testing 
+ubuntu-meeting 2010-11-09 [17:11] <tgardner> hmm 
+ubuntu-meeting 2010-11-09 [17:12] <apw> bjf, i think we need an action on steve to get one of them here for the next meeting till its resolved 
+ubuntu-meeting 2010-11-09 [17:12] <ogasawara> I'd sent email yesterday poking hw cert about the testing.  They're still trying to run a full smoke test of the kernel in -proposed to see how long it takes. 
+ubuntu-meeting 2010-11-09 [17:12]  * cking wonders why he pulled the finger out on saturday to do some testing when we are blocked en-route by process 
+ubuntu-meeting 2010-11-09 [17:12]  * apw wonders why cking did that when the deadline wathursday 
+ubuntu-meeting 2010-11-09 [17:12] <bjf> [ACTION] sconklin to make sure someone from testing attends the weekly kernel meeting :-) 
+ubuntu-meeting 2010-11-09 [17:12] <MootBot> ACTION received:  sconklin to make sure someone from testing attends the weekly kernel meeting :-) 
+ubuntu-meeting 2010-11-09 [17:13] <tgardner> .. 
+ubuntu-meeting 2010-11-09 [17:13] <sconklin> we're going to slip the Thursday requirement for verification testing 
+ubuntu-meeting 2010-11-09 [17:13] <apw> why so ? 
+ubuntu-meeting 2010-11-09 [17:14] <bjf> apw, without the full process in place should we go ahead and revert patches? 
+ubuntu-meeting 2010-11-09 [17:14] <apw> (i suspect this is a #u-k discussion) 
+ubuntu-meeting 2010-11-09 [17:14] <sconklin> Because we have not officially begun the new cycle, and have no definition of the testing process. 
+ubuntu-meeting 2010-11-09 [17:14] <apw> lets take this offline then .. 
+ubuntu-meeting 2010-11-09 [17:14] <sconklin> .. 
+ubuntu-meeting 2010-11-09 [17:14] <tgardner> sconklin, well, you have announced that we're gonna do it on a certain date. 
+ubuntu-meeting 2010-11-09 [17:15] <sconklin> tgardner: that's correct, an I can just as easily announce that we're slipping 
+ubuntu-meeting 2010-11-09 [17:15] <bjf> apw, i thought thats what this meeting was about / for (this kind of discussion) 
+ubuntu-meeting 2010-11-09 [17:15] <apw> oh ok, then i think if you start by slipping the verification revert 
+ubuntu-meeting 2010-11-09 [17:15] <apw> then people will think they can always assume you will 
+ubuntu-meeting 2010-11-09 [17:15] <apw> sets a bad precident 
+ubuntu-meeting 2010-11-09 [17:15] <sconklin> That announcement was predicated on the assurance that we would have testing results by the end of last week 
+ubuntu-meeting 2010-11-09 [17:15] <skaet> apw, sconklin - haven't got an update - but not sure I'm on the official list to get one. 
+ubuntu-meeting 2010-11-09 [17:15] <apw> the longer we soak with only the patches we are going to release with the more 
+ubuntu-meeting 2010-11-09 [17:16] <apw> happy [sic] the SRU team will be 
+ubuntu-meeting 2010-11-09 [17:16] <bjf> skaet, if your not on the "official" list who would be? 
+ubuntu-meeting 2010-11-09 [17:16] <tgardner> sconklin, I think we should go ahead and prototype that part of the process at least, despite not being able to get official testing. 
+ubuntu-meeting 2010-11-09 [17:16] <sconklin> I also have no problem dropping patches as announced, but we are feeling the process out 
+ubuntu-meeting 2010-11-09 [17:16] <apw> sconklin, testing is meant to occur in the second week after the reversions, right?  so testing will occur after this thursday for the official release 
+ubuntu-meeting 2010-11-09 [17:16] <skaet> bjf, sconklin is who victorp is communicating with. 
+ubuntu-meeting 2010-11-09 [17:16] <cking> only the patches that are not tested? 
+ubuntu-meeting 2010-11-09 [17:17] <apw> cking, right the un 'verified' bugs 
+ubuntu-meeting 2010-11-09 [17:17] <cking> cool 
+ubuntu-meeting 2010-11-09 [17:17] <sconklin> ok, so as announced, we wi can drop all unverified patches on Friday, and then we're in a straight-up testing hold. 
+ubuntu-meeting 2010-11-09 [17:17] <tgardner> sconklin, ack 
+ubuntu-meeting 2010-11-09 [17:17] <sconklin> works for me 
+ubuntu-meeting 2010-11-09 [17:17] <cking> and if testing fails to occur, we are effectively roadblocked? 
+ubuntu-meeting 2010-11-09 [17:17] <apw> cking, we are in a bad place. 
+ubuntu-meeting 2010-11-09 [17:17] <bjf> so no changes can be made to the repos until we've reverted patches? 
+ubuntu-meeting 2010-11-09 [17:18] <tgardner> cking, we're no worse off then we were before, e.g., crowd sourcing 
+ubuntu-meeting 2010-11-09 [17:18] <sconklin> bjf: effectively, yes. 
+ubuntu-meeting 2010-11-09 [17:18] <smb> bjf, That probably is done on a side branch 
+ubuntu-meeting 2010-11-09 [17:18] <bjf> smb, what good does it do to do them on a side branch? 
+ubuntu-meeting 2010-11-09 [17:18] <sconklin> agreed, we just need to choose a naming convention for the "next" branch 
+ubuntu-meeting 2010-11-09 [17:18] <sconklin> and we will have a merge window for it 
+ubuntu-meeting 2010-11-09 [17:19] <smb> I was thinking along starting a branch from the upload and revert 
+ubuntu-meeting 2010-11-09 [17:19] <smb> then that can be merged back to master 
+ubuntu-meeting 2010-11-09 [17:19] <sconklin> no reverts, we will remove the patches and force-update the master branch 
+ubuntu-meeting 2010-11-09 [17:19] <skaet> how about sru-candidate? 
+ubuntu-meeting 2010-11-09 [17:19] <smb> sconklin, I would not do that, but its your decision 
+ubuntu-meeting 2010-11-09 [17:20] <apw> skaet, in that week we are essentially on hold waiting on verification 
+ubuntu-meeting 2010-11-09 [17:20] <sconklin> Too much clutter, and I'm afraid it will break all the tools which parse changelogs 
+ubuntu-meeting 2010-11-09 [17:20] <bjf> sconklin, if we revert, we can comment why it was reverted (failure to verify) 
+ubuntu-meeting 2010-11-09 [17:20] <sconklin> bjf: that will be documented in the bug 
+ubuntu-meeting 2010-11-09 [17:21] <bjf> also, if we are adding patches to a "next" branch, do we do a "pre-proposed" from that? 
+ubuntu-meeting 2010-11-09 [17:21] <skaet> apw, yah - and from yesterday's probing, it doesn't seem clear on the verification side the handoff between the cert and QA for running tests. 
+ubuntu-meeting 2010-11-09 [17:21] <sconklin> can anyone tell me how many tools there are which parse kernel changlelogs, in and out of the kernel team? 
+ubuntu-meeting 2010-11-09 [17:21] <apw> what about the debian changelog 
+ubuntu-meeting 2010-11-09 [17:21] <apw> won't that show the patches going in only if you do not revert, even though they are not in the tree ? 
+ubuntu-meeting 2010-11-09 [17:21] <smb> sconklin, I just fear that you are causing pain by force-updating and rewriting a sort of pushed tree 
+ubuntu-meeting 2010-11-09 [17:22] <sconklin> we regenerate the changelog. We simply make the patches dissappear. 
+ubuntu-meeting 2010-11-09 [17:22] <apw> sconklin, i am not sure the archive admins will accept that, as it does not reflect correct history 
+ubuntu-meeting 2010-11-09 [17:22] <smb> apw, I think at the moment it might be a case where apply and revert are done in two uploads 
+ubuntu-meeting 2010-11-09 [17:22] <sconklin> The basic assumption I'm operating under is that anything after a tag is mutable 
+ubuntu-meeting 2010-11-09 [17:22] <smb> apw, That is probably not handled as you would expect in the changelog 
+ubuntu-meeting 2010-11-09 [17:22] <apw> right, which this is by definition 
+ubuntu-meeting 2010-11-09 [17:23] <smb> sconklin, But you would do that if you remove patches from before 
+ubuntu-meeting 2010-11-09 [17:23] <smb> wheras revert does not change the past 
+ubuntu-meeting 2010-11-09 [17:23] <sconklin> smb: do what? 
+ubuntu-meeting 2010-11-09 [17:23] <bjf> correct, the patches you are "disappearing" have been "tagged" 
+ubuntu-meeting 2010-11-09 [17:23] <smb> sconklin, you sounded like using rebase -i to remove patches 
+ubuntu-meeting 2010-11-09 [17:23] <tgardner> sconklin, lets take this offline. its a process issue thats not really relevant to the overall testing issue 
+ubuntu-meeting 2010-11-09 [17:23] <bjf> as part of a -proposed upload 
+ubuntu-meeting 2010-11-09 [17:24] <sconklin> smb: but we have numerous tools which parse the changelog, sch as those used by archive admins, and those tools do not understand reverts as far as I know 
+ubuntu-meeting 2010-11-09 [17:24] <apw> sconklin, a revert is just another patch on top 
+ubuntu-meeting 2010-11-09 [17:24] <apw> they do not need to be understood per-see 
+ubuntu-meeting 2010-11-09 [17:24] <sconklin> I understand that, but it leaves the original patch and the buglink 
+ubuntu-meeting 2010-11-09 [17:24] <apw> we might wish to drop the bug link ... 
+ubuntu-meeting 2010-11-09 [17:25] <smb> sconklin, apw Lets discuss this later on 
+ubuntu-meeting 2010-11-09 [17:25] <apw> ack 
+ubuntu-meeting 2010-11-09 [17:25] <apw> .. 
+ubuntu-meeting 2010-11-09 [17:25] <sconklin> yes, we'll tackle this later 
+ubuntu-meeting 2010-11-09 [17:25] <sconklin> .. 
+ubuntu-meeting 2010-11-09 [17:25] <bjf> smb, apw, tgardner, sconklin, when and where because I want to be there 
+ubuntu-meeting 2010-11-09 [17:25] <smb> #ubuntu-kernel 
+ubuntu-meeting 2010-11-09 [17:26] <skaet> I'll be there too. 
+ubuntu-meeting 2010-11-09 [17:26] <bjf> [TOPIC] Blueprints: Ubuntu Kernel Delta Review (apw) 
+ubuntu-meeting 2010-11-09 [17:26] <bjf> [LINK] https://blueprints.launchpad.net/ubuntu/+spec/hardware-kernel-n-ubuntu-delta-review 
+ubuntu-meeting 2010-11-09 [17:26] <MootBot> New Topic:  Blueprints: Ubuntu Kernel Delta Review (apw) 
+ubuntu-meeting 2010-11-09 [17:26] <MootBot> LINK received:  https://blueprints.launchpad.net/ubuntu/+spec/hardware-kernel-n-ubuntu-delta-review 
+ubuntu-meeting 2010-11-09 [17:26] <apw> Work has started on updating the Ubuntu drivers.  Work centers on updating aufs2 which is a blocker for (performant) live-cds.  Pulled in an experimental version of aufs2 for testing in v2.6.36.  Also pulled this up to v2.6.37-rc1 and did some testing.  Looking good so far. 
+ubuntu-meeting 2010-11-09 [17:26] <apw> .. 
+ubuntu-meeting 2010-11-09 [17:26] <bjf> [TOPIC] Blueprints: Kernel Version and Flavouts (apw) 
+ubuntu-meeting 2010-11-09 [17:26] <bjf> https://blueprints.launchpad.net/ubuntu/+spec/hardware-kernel-n-version-and-flavours 
+ubuntu-meeting 2010-11-09 [17:26] <MootBot> New Topic:  Blueprints: Kernel Version and Flavouts (apw) 
+ubuntu-meeting 2010-11-09 [17:27] <apw> Pulled the ports meta-packages into the main master branch to simplify ongoing maintenance. 
+ubuntu-meeting 2010-11-09 [17:27] <apw> .. 
+ubuntu-meeting 2010-11-09 [17:27] <apw> PS: the title here is spelt wrong 
+ubuntu-meeting 2010-11-09 [17:27] <bjf> my bad 
+ubuntu-meeting 2010-11-09 [17:27] <bjf> [TOPIC] Status: Natty (apw) 
+ubuntu-meeting 2010-11-09 [17:27] <MootBot> New Topic:  Status: Natty (apw) 
+ubuntu-meeting 2010-11-09 [17:28] <apw> Natty has just moved over to a v2.6.37-rc1 based kernel.  Stability is unexpectedly high.  Work is ongoing to get aufs2 working again so we can have performant live-cds shortly; likely in the next upload.  Blueprints are mostly up to date with initial work items and work is just beginning on our deliverables. 
+ubuntu-meeting 2010-11-09 [17:28] <apw> Anyone who has not yet added milestones for their work items are likely to find I have assigned them one.  You may well find that means your entire natty workload is now scheduled for natty-alpha-1.  Please review these and split them out as necessary. 
+ubuntu-meeting 2010-11-09 [17:28] <apw> .. 
+ubuntu-meeting 2010-11-09 [17:29] <bjf> [TOPIC] Security & bugfix kernels - Maverick/Lucid/Karmic/Hardy/Dapper (sconklin) 
+ubuntu-meeting 2010-11-09 [17:29] <MootBot> New Topic:  Security & bugfix kernels - Maverick/Lucid/Karmic/Hardy/Dapper (sconklin) 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> ||                         || Upd./Sec.     || Proposed      || TiP || Verified    || 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> || Dapper: Kernel          || 2.6.15-55.89  ||               ||     ||             || 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> || Hardy:  Kernel          || 2.6.24-28.80  ||               ||     ||             || 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> || =       LRM             || 2.6.24.18-28.7||               ||     ||             || 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> || Karmic: Kernel          || 2.6.31-22.68  ||               ||     ||             || 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> || =       mvl-dove        || 2.6.31-214.30 || 2.6.31-214.32 ||     ||             || 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> || =       ec2             || 2.6.31-307.21 ||               ||     ||             || 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> || Lucid:  Kernel          || 2.6.32-25.45  || 3.6.32-26.46  || 14  ||  6 / 24     || 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> || =       LBM             || 2.6.32-25.24  || 2.6.32-26.25  ||     ||             || 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> || =       mvl-dove        || 2.6.32-209.25 || 2.6.32-211.27 ||     ||             || 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> || =       fsl-imx51       || 2.6.31-608.19 || 2.6.31-608.20 ||     ||             || 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> || =       ec2             || 2.6.32-309.18 ||               ||     ||             || 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> || = lts-backport-maverick || 2.6.35.22.34  ||               ||     ||             || 
+ubuntu-meeting 2010-11-09 [17:29] <sconklin> || Maverick: Kernel        || 2.6.35-22.35  || 3.6.35-23.37  || 14  ||  12 / 30    || 
+ubuntu-meeting 2010-11-09 [17:30]  * ogra_ac wonders about the maverick arm kernels in that list 
+ubuntu-meeting 2010-11-09 [17:31]  * cooloney still is waiting for the list to finish 
+ubuntu-meeting 2010-11-09 [17:31] <tgardner> maybe sconklin got booted 
+ubuntu-meeting 2010-11-09 [17:31] <sconklin> I'm here, looks good to me 
+ubuntu-meeting 2010-11-09 [17:31] <sconklin> even including the final .. 
+ubuntu-meeting 2010-11-09 [17:31] <ogra_ac> mvl-dove, omap3 and omap4 should be in maverick 
+ubuntu-meeting 2010-11-09 [17:31] <bjf> not seeing it 
+ubuntu-meeting 2010-11-09 [17:31] <tgardner> sconklin, are ther more then one Maverick entry? 
+ubuntu-meeting 2010-11-09 [17:31] <smb> Me neither 
+ubuntu-meeting 2010-11-09 [17:31] <ogra_ac> wheer omap3 is built from the ubuntu tree as is 
+ubuntu-meeting 2010-11-09 [17:31] <sconklin> || Maverick: Kernel        || 2.6.35-22.35  || 3.6.35-23.37  || 14  ||  12 / 30    || 
+ubuntu-meeting 2010-11-09 [17:31] <sconklin> || =       mvl-dove        || 2.6.32-410.27 ||               ||     ||             || 
+ubuntu-meeting 2010-11-09 [17:31] <sconklin> || =       ti-omap4        || 2.6.35-903.18 ||               ||     ||             || 
+ubuntu-meeting 2010-11-09 [17:32] <tgardner> much better 
+ubuntu-meeting 2010-11-09 [17:32] <sconklin> That's all I have for Maverick 
+ubuntu-meeting 2010-11-09 [17:32] <ogra_ac> :) 
+ubuntu-meeting 2010-11-09 [17:32] <apw> we didn't get the last two lines 
+ubuntu-meeting 2010-11-09 [17:32] <sconklin> whew 
+ubuntu-meeting 2010-11-09 [17:32] <sconklin> .. 
+ubuntu-meeting 2010-11-09 [17:32] <sconklin> oh, and then you also missed: 
+ubuntu-meeting 2010-11-09 [17:32] <sconklin>  * The Karmic proposed kernel has been moved to updates. 
+ubuntu-meeting 2010-11-09 [17:32] <sconklin>  * Jaunty is no longer supported 
+ubuntu-meeting 2010-11-09 [17:32] <apw> indeed 
+ubuntu-meeting 2010-11-09 [17:32] <sconklin> .. 
+ubuntu-meeting 2010-11-09 [17:32] <apw> RIP jaunty 
+ubuntu-meeting 2010-11-09 [17:32] <bjf> [TOPIC] Open Discussion or Questions: Raise your hand to be recognized (o/) 
+ubuntu-meeting 2010-11-09 [17:32] <MootBot> New Topic:  Open Discussion or Questions: Raise your hand to be recognized (o/) 
+ubuntu-meeting 2010-11-09 [17:32] <apw> o/ 
+ubuntu-meeting 2010-11-09 [17:32] <ogra_ac> o/ 
+ubuntu-meeting 2010-11-09 [17:33] <bjf> apw go 
+ubuntu-meeting 2010-11-09 [17:33] <apw> For those who own a blueprint could you add a 'Status:' block to your 
+ubuntu-meeting 2010-11-09 [17:33] <apw> whiteboards which should be a couple of sentences covering the current 
+ubuntu-meeting 2010-11-09 [17:33] <apw> progress and any blockers. 
+ubuntu-meeting 2010-11-09 [17:33] <apw> .. 
+ubuntu-meeting 2010-11-09 [17:33] <bjf> ogra_ac, go 
+ubuntu-meeting 2010-11-09 [17:33] <ogra_ac> i would like to rais some attention to 
+ubuntu-meeting 2010-11-09 [17:33] <ogra_ac> https://lists.ubuntu.com/archives/ubuntu-devel/2010-November/031952.html 
+ubuntu-meeting 2010-11-09 [17:33] <ogra_ac> which the arm team would like to have clearness about 
+ubuntu-meeting 2010-11-09 [17:34] <apw> Subject: Ubuntu ARM and the linaro kernels 
+ubuntu-meeting 2010-11-09 [17:34] <apw> ogra_ac, yes, that is on our radar ... when we know yo 
+ubuntu-meeting 2010-11-09 [17:34] <ogra_ac> its currently not clear where the kernels for the new images are supposed to come from and who does the maintenance and how 
+ubuntu-meeting 2010-11-09 [17:34] <apw> you will know too :) 
+ubuntu-meeting 2010-11-09 [17:34] <ogra_ac> ah, good 
+ubuntu-meeting 2010-11-09 [17:34] <tgardner> ogra_ac, its not cleat to us either 
+ubuntu-meeting 2010-11-09 [17:34] <tgardner> clear* 
+ubuntu-meeting 2010-11-09 [17:34] <ogra_ac> my main concern is that we need "distro" kernels 
+ubuntu-meeting 2010-11-09 [17:34] <ogra_ac> thats fine then :) 
+ubuntu-meeting 2010-11-09 [17:35] <apw> ogra_ac, yes, and supported ones 
+ubuntu-meeting 2010-11-09 [17:35] <cooloney> i think we are pretty sure about that, we will keep ti-omap4 branch as Maverick 
+ubuntu-meeting 2010-11-09 [17:35] <ogra_ac> ++ 
+ubuntu-meeting 2010-11-09 [17:35] <cooloney> but not sure about the omap3 solution 
+ubuntu-meeting 2010-11-09 [17:35] <ogra_ac> omap3 is moving to linaro on my request 
+ubuntu-meeting 2010-11-09 [17:35] <bjf> apw, it may be on the radar but the email thread is getting no love 
+ubuntu-meeting 2010-11-09 [17:35] <apw> ogra_ac, are you testing a CD with their output (omap3) ? 
+ubuntu-meeting 2010-11-09 [17:35] <ogra_ac> with worst case dropping full support for the image if we cant get a distro like kernel for it 
+ubuntu-meeting 2010-11-09 [17:35] <cooloney> so who are going to maintain that omap3 stuff in our distro kernel 
+ubuntu-meeting 2010-11-09 [17:36] <ogra_ac> and keep it as a community goodie 
+ubuntu-meeting 2010-11-09 [17:36] <ogra_ac> apw, thats the plan 
+ubuntu-meeting 2010-11-09 [17:36] <ogra_ac> my only concern is about security support 
+ubuntu-meeting 2010-11-09 [17:36] <ogra_ac> but i'm willing to demote the image to a community one 
+ubuntu-meeting 2010-11-09 [17:36] <apw> bjf, yes that is true, when we have some clarity we will publicise ... 
+ubuntu-meeting 2010-11-09 [17:36] <ogra_ac> omap3 is just a nice to have 
+ubuntu-meeting 2010-11-09 [17:37] <apw> ogra_ac, well the result of your testing will help very much with the planning process for this arm stuff 
+ubuntu-meeting 2010-11-09 [17:37] <ogra_ac> omap4 has to be supported but there seem to be no probs ahead with that 
+ubuntu-meeting 2010-11-09 [17:37] <apw> ogra_ac, when might we see your test results there.   we probabally need an official work-item for that testing as it is gating on some of the decision making imo 
+ubuntu-meeting 2010-11-09 [17:37] <ogra_ac> apw, right, prob is that we need the kernel in main etc 
+ubuntu-meeting 2010-11-09 === pleia2_ is now known as pleia2 
+ubuntu-meeting 2010-11-09 [17:38] <ogra_ac> and indeed would prefer ubuntu suace as well as similar configs 
+ubuntu-meeting 2010-11-09 [17:38] <sconklin> we have no resources at all for anything that is simply "nice to have" 
+ubuntu-meeting 2010-11-09 [17:38] <apw> ogra_ac, it should have sauce in theory ... 
+ubuntu-meeting 2010-11-09 [17:38] <ogra_ac> neither is clear yet if linaro can do that 
+ubuntu-meeting 2010-11-09 [17:38] <ogra_ac> all i heard yet was that sauce is ripped out in linaro 
+ubuntu-meeting 2010-11-09 [17:38] <ogra_ac> i might be wrong though (and would be happy to be) 
+ubuntu-meeting 2010-11-09 [17:38] <apw> bjf could you action me to get some work-items for arm testing created 
+ubuntu-meeting 2010-11-09 [17:39] <ogra_ac> and that the amount of built drivers is supposed to be reduced in linaro 
+ubuntu-meeting 2010-11-09 [17:39] <tgardner> ogra_ac, John Rigby sends me pull requests for linux-linaro that has Ubuntu SAUCE 
+ubuntu-meeting 2010-11-09 [17:39] <bjf> [ACTION] apw to get work-items created for arm testing 
+ubuntu-meeting 2010-11-09 [17:39] <MootBot> ACTION received:  apw to get work-items created for arm testing 
+ubuntu-meeting 2010-11-09 [17:39] <ogra_ac> tgardner, awesome 
+ubuntu-meeting 2010-11-09 [17:39] <ogra_ac> then i'm wrong (and happy) 
+ubuntu-meeting 2010-11-09 [17:39] <tgardner> ogra_ac, and has been for all of Maverick 
+ubuntu-meeting 2010-11-09 [17:39] <ogra_ac> ok 
+ubuntu-meeting 2010-11-09 [17:39] <ogra_ac> i didnt touch any linaro kernels before 
+ubuntu-meeting 2010-11-09 [17:40] <tgardner> ogra_ac, I think you should try it out. I thought you were already using it 
+ubuntu-meeting 2010-11-09 [17:40] <bjf> tgardner, do those also have security updates? 
+ubuntu-meeting 2010-11-09 [17:40] <ogra_ac> nope, they dont have all drivers nor the same config 
+ubuntu-meeting 2010-11-09 [17:40] <ogra_ac> and no security support at all 
+ubuntu-meeting 2010-11-09 [17:40] <tgardner> bjf, yep cause jrigby rebases against Maverick master 
+ubuntu-meeting 2010-11-09 [17:40] <bjf> tgardner, cool 
+ubuntu-meeting 2010-11-09 [17:40] <ogra_ac> (which doesnt help much in natty) 
+ubuntu-meeting 2010-11-09 [17:41] <tgardner> ogra_ac, natty is a different story that is still in development 
+ubuntu-meeting 2010-11-09 [17:41] <ogra_ac> right 
+ubuntu-meeting 2010-11-09 [17:41] <ogra_ac> my concern is all about natty 
+ubuntu-meeting 2010-11-09 [17:41] <ogra_ac> maverick is done 
+ubuntu-meeting 2010-11-09 [17:41] <ogra_ac> we only do SRUs and maintenance 
+ubuntu-meeting 2010-11-09 [17:42] <tgardner> ogra_ac, I just don't know what the RM story for natty is yet. 
+ubuntu-meeting 2010-11-09 [17:42] <ogra_ac> (we wont change anything thats not SRU) 
+ubuntu-meeting 2010-11-09 [17:42] <tgardner> ARM* 
+ubuntu-meeting 2010-11-09 [17:42] <ogra_ac> yes, nobody seems to 
+ubuntu-meeting 2010-11-09 [17:42] <ogra_ac> yet i have to build images for alpha1 
+ubuntu-meeting 2010-11-09 [17:42]  * cooloney feels lost 
+ubuntu-meeting 2010-11-09 [17:42] <tgardner> ogra_ac, you shold be talking to jrigby 
+ubuntu-meeting 2010-11-09 [17:43] <ogra_ac> tgardner, that wont solve anything on the distro side 
+ubuntu-meeting 2010-11-09 [17:43] <tgardner> ogra_ac, why not? He's producing a distro kernel. 
+ubuntu-meeting 2010-11-09 [17:43] <ogra_ac> i just noticed i have a mail from him but that wont help with distro or security 
+ubuntu-meeting 2010-11-09 [17:43] <ogra_ac> he doesnt build all drivers 
+ubuntu-meeting 2010-11-09 [17:43] <tgardner> ogra_ac, ok, so bug him to turn stuff on or off 
+ubuntu-meeting 2010-11-09 [17:43] <ogra_ac> we want mostly identical configs across all builds 
+ubuntu-meeting 2010-11-09 [17:44] <ogra_ac> k 
+ubuntu-meeting 2010-11-09 [17:44] <bjf> does anyone have anything else? 
+ubuntu-meeting 2010-11-09 [17:44] <tgardner> .. 
+ubuntu-meeting 2010-11-09 [17:44] <ogra_ac> .. 
+ubuntu-meeting 2010-11-09 [17:45] <bjf> thanks everyone 
+ubuntu-meeting 2010-11-09 [17:45] <bjf> #endmeeting 
+ubuntu-meeting 2010-11-09 [17:45] <MootBot> Meeting finished at 11:45. 
+ubuntu-meeting 2010-11-09 [17:45] <kamal> thanks bjf 
+ubuntu-meeting 2010-11-09 [17:45] <sconklin> thanks bjf 
+ubuntu-meeting 2010-11-09 [17:46] <cooloney> thanks bjf very much 
+ubuntu-meeting 2010-11-09 [17:50] <cking> thanks bjf 
+ubuntu-meeting 2010-11-09 [18:09] <SpamapS> anybody here for server team meeting? 
+ubuntu-meeting 2010-11-09 [18:09] <SpamapS> seeing as its 18:09 UTC 
+ubuntu-meeting 2010-11-09 [18:10] <JamesPage> hmmm; should be here and now according to https://wiki.ubuntu.com/ServerTeam/Meeting 
+ubuntu-meeting 2010-11-09 [18:10] <JamesPage> but seems a little quiet.... 
+ubuntu-meeting 2010-11-09 [18:10] <smb> I am sort of standby, but google-cal may have gone hazzard 
+ubuntu-meeting 2010-11-09 [18:12]  * jjohansen is hanging around too 
+ubuntu-meeting 2010-11-09 [18:12] <jjohansen> SpamapS: I think the whole dst ending in n. america may have messed people up a bit 
+ubuntu-meeting 2010-11-09 [18:13] <SpamapS> jjohansen: yeah, plus the time was set at 19:00 in the header by ttx last week because he wasn't going to be able to attent at 18:00 
+ubuntu-meeting 2010-11-09 [18:13] <SpamapS> ok, I'll change the meeting time back to 19:00 in the header, and we'll try again in 45 minutes 
+ubuntu-meeting 2010-11-09 [18:13] <jjohansen> ah, I had missed that 
+ubuntu-meeting 2010-11-09 === bjf is now known as bjf[afk] 
+ubuntu-meeting 2010-11-09 === Mamarok_ is now known as Mamarok 
+ubuntu-meeting 2010-11-09 [18:59] <SpamapS> o/ 
+ubuntu-meeting 2010-11-09 [19:00] <smb> \o 
+ubuntu-meeting 2010-11-09 [19:01]  * SpamapS waits for 1 more o/  
+ubuntu-meeting 2010-11-09 [19:01] <jjohansen> \o 
+ubuntu-meeting 2010-11-09 [19:01] <SpamapS> woot ok here we go 
+ubuntu-meeting 2010-11-09 [19:01] <SpamapS> #startmeeting 
+ubuntu-meeting 2010-11-09 [19:01] <MootBot> Meeting started at 13:01. The chair is SpamapS. 
+ubuntu-meeting 2010-11-09 [19:01] <MootBot> Commands Available: [TOPIC], [IDEA], [ACTION], [AGREED], [LINK], [VOTE] 
+ubuntu-meeting 2010-11-09 [19:01] <mathiaz> o/ 
+ubuntu-meeting 2010-11-09 [19:01] <JamesPage> o/ 
+ubuntu-meeting 2010-11-09 [19:01] <SpamapS> FYI, the meeting was sort of half scheduled for 18:00, half for 19:00, so we're doing it now 
+ubuntu-meeting 2010-11-09 [19:02] <SpamapS> I will be the scribe since daviey is possibly unavailable 
+ubuntu-meeting 2010-11-09 [19:02] <SpamapS> [TOPIC] Review ACTION points from previous meeting 
+ubuntu-meeting 2010-11-09 [19:02] <MootBot> New Topic:  Review ACTION points from previous meeting 
+ubuntu-meeting 2010-11-09 [19:02] <SpamapS> Unfortunately, I believe those ACTION points in the agenda are the same as last week's. 
+ubuntu-meeting 2010-11-09 [19:03] <JamesPage> is that because we did not do them last week? 
+ubuntu-meeting 2010-11-09 [19:03] <SpamapS> please standby I will grep them out of the meeting log from last week.. 
+ubuntu-meeting 2010-11-09 [19:04] <SpamapS> Ok there were none it seems 
+ubuntu-meeting 2010-11-09 [19:04] <SpamapS> moving on 
+ubuntu-meeting 2010-11-09 [19:04]  * mathiaz \o/ 
+ubuntu-meeting 2010-11-09 [19:04] <SpamapS> [TOPIC] Natty Development 
+ubuntu-meeting 2010-11-09 [19:04] <MootBot> New Topic:  Natty Development 
+ubuntu-meeting 2010-11-09 [19:04] <mathiaz> it's always like that at the begining of a release cycle 
+ubuntu-meeting 2010-11-09 [19:04] <SpamapS> Indeed. :) 
+ubuntu-meeting 2010-11-09 [19:05] <SpamapS> I added this topic, just wanted to make sure people had a forum for any questions or comments on the spec process. 
+ubuntu-meeting 2010-11-09 [19:05] <mathiaz> so the focus is to get WI defined 
+ubuntu-meeting 2010-11-09 [19:05] <robbiew> right 
+ubuntu-meeting 2010-11-09 [19:05] <SpamapS> We should all be submitting specs for review by... is it next Thursday? 
+ubuntu-meeting 2010-11-09 [19:05] <mathiaz> once the WI are defined and rough plan is outlined the spec status should be moved to Review 
+ubuntu-meeting 2010-11-09 [19:05] <robbiew> and I've started reviewing/approving/deferring/asking :) 
+ubuntu-meeting 2010-11-09 [19:06]  * robbiew gave https://wiki.ubuntu.com/ServerTeam/NattyBlueprints some loving 
+ubuntu-meeting 2010-11-09 [19:06] <SpamapS> Feature Definition Freeze is 11/25, so specs must be approved before then right? 
+ubuntu-meeting 2010-11-09 [19:06] <mathiaz> one thing to consider is that it's possible (and actually encouraged) to add WI after the spec has been approved 
+ubuntu-meeting 2010-11-09 [19:06] <SpamapS> yes, its mostly about getting the design and intent clear 
+ubuntu-meeting 2010-11-09 [19:06] <mathiaz> as it helps to keep track of what needs to be done 
+ubuntu-meeting 2010-11-09 [19:07] <SpamapS> And a general idea of how much is needed to be done. 
+ubuntu-meeting 2010-11-09 [19:07] <mathiaz> and if an important is taking more time we can know in advance what other things should be dropped 
+ubuntu-meeting 2010-11-09 [19:07] <mathiaz> so WIs defined when a spec is approved are not set in stone 
+ubuntu-meeting 2010-11-09 [19:08] <SpamapS> ok, anything else on Natty? 
+ubuntu-meeting 2010-11-09 [19:08] <mathiaz> Natty is going to ROCK! 
+ubuntu-meeting 2010-11-09 [19:09] <SpamapS> Its going to burst forth from the ocean like a unicorn with flippers and a blow hole. 
+ubuntu-meeting 2010-11-09 [19:09] <robbiew> lol 
+ubuntu-meeting 2010-11-09 [19:09] <SpamapS> Alright, moving on. 
+ubuntu-meeting 2010-11-09 [19:09] <RoAkSoAx> is the meeting almost over or just started? 
+ubuntu-meeting 2010-11-09 [19:09] <SpamapS> [TOPIC] Maverick SRUs 
+ubuntu-meeting 2010-11-09 [19:09] <MootBot> New Topic:  Maverick SRUs 
+ubuntu-meeting 2010-11-09 [19:10] <SpamapS> I think this list also wasn't updated in the agenda.. and zul was mostly in charge of these, but does anyone have new ones to bring up for discussion? 
+ubuntu-meeting 2010-11-09 [19:10] <JamesPage> yes - bug 666028; 
+ubuntu-meeting 2010-11-09 [19:10] -ubottu- Launchpad bug 666028 in openldap "apt-get install slapd => Can't locate object method "new" via package "Debconf::Element::Noninteractive::Booleam"" [Undecided,New] https://launchpad.net/bugs/666028 
+ubuntu-meeting 2010-11-09 [19:10] <JamesPage> for awareness more than anything else; its a follow up to bug 658227 
+ubuntu-meeting 2010-11-09 [19:11] -ubottu- Launchpad bug 658227 in openldap (Ubuntu Natty) "upgrade process does not upgrade underlying BDB format from 4.7 to 4.8 (so slapd aborts with "Program version 4.8 doesn't match environment version 4.7" error message)" [High,Fix released] https://launchpad.net/bugs/658227 
+ubuntu-meeting 2010-11-09 [19:11] <mathiaz> JamesPage: the upload has been accepted in maverick-proposed 
+ubuntu-meeting 2010-11-09 [19:11] <mathiaz> and should be ready in a couple of hours for testing 
+ubuntu-meeting 2010-11-09 [19:11] <JamesPage> yep  - just went through 
+ubuntu-meeting 2010-11-09 [19:11] <SpamapS> right looks like pitti accepted it into proposed just now 
+ubuntu-meeting 2010-11-09 [19:11] <JamesPage> its holding up bug 661547 
+ubuntu-meeting 2010-11-09 [19:11] -ubottu- Launchpad bug 661547 in openldap (Ubuntu) "Existing patch gssapi.diff makes guess_service_principal produce garbage" [High,Triaged] https://launchpad.net/bugs/661547 
+ubuntu-meeting 2010-11-09 [19:12] <JamesPage> but that might be debatable for SRU (we'll see I guess) 
+ubuntu-meeting 2010-11-09 [19:12] <SpamapS> Is anyone signed up to do the verification yet? 
+ubuntu-meeting 2010-11-09 [19:12] <mathiaz> SpamapS: usually it's the SRU team in QA that does it 
+ubuntu-meeting 2010-11-09 [19:12] <SpamapS> Ok.. I tend to verify my SRU's too. 
+ubuntu-meeting 2010-11-09 [19:12] <mathiaz> SpamapS: however it's become a zero-man team recently 
+ubuntu-meeting 2010-11-09 [19:12] <SpamapS> wha? 
+ubuntu-meeting 2010-11-09 [19:13] <mathiaz> well - not really - volunteer are still trying to do verification 
+ubuntu-meeting 2010-11-09 [19:13] <mathiaz> but it can take time 
+ubuntu-meeting 2010-11-09 [19:13]  * SpamapS debates an action for robbiew: "FIX IT!" 
+ubuntu-meeting 2010-11-09 [19:13] <mathiaz> so having someone within the server team taking care of sru-verification would be helpful 
+ubuntu-meeting 2010-11-09 [19:13]  * robbiew is no longer release manager ;) 
+ubuntu-meeting 2010-11-09 [19:13] <mathiaz> I'll do the sru-verification for openldap 
+ubuntu-meeting 2010-11-09 [19:14] <robbiew> +1 on having Server team member on SRU team 
+ubuntu-meeting 2010-11-09 [19:14] <robbiew> we are lucky to have pitti back from oem rotation this cycle for sure \o/...but help is definitely needed 
+ubuntu-meeting 2010-11-09 [19:14] <mathiaz> it's also better to have the sru verification done by someone else than develop and sponsored the fix 
+ubuntu-meeting 2010-11-09 [19:14] <SpamapS> [ACTION] mathiaz: to verify SRU bug 666028 
+ubuntu-meeting 2010-11-09 [19:14] <MootBot> ACTION received:  mathiaz: to verify SRU bug 666028 
+ubuntu-meeting 2010-11-09 [19:14] -ubottu- Launchpad bug 666028 in openldap "apt-get install slapd => Can't locate object method "new" via package "Debconf::Element::Noninteractive::Booleam"" [Undecided,New] https://launchpad.net/bugs/666028 
+ubuntu-meeting 2010-11-09 [19:14] <JamesPage> mathiaz: I agree 
+ubuntu-meeting 2010-11-09 [19:14] <SpamapS> s/better/vital/ 
+ubuntu-meeting 2010-11-09 [19:15] <mathiaz> which means that 3 people are required for getting an SRU through 
+ubuntu-meeting 2010-11-09 [19:15] <mathiaz> (1 developer, 1 reviewer, 1 verifier) 
+ubuntu-meeting 2010-11-09 [19:15] <SpamapS> Ok, so maybe another topic for discussion should be that we should raise the SRU manpower issue? 
+ubuntu-meeting 2010-11-09 [19:15]  * hggdh pays attention now 
+ubuntu-meeting 2010-11-09 [19:15] <mathiaz> yeah - that would be an interesting issue to solve 
+ubuntu-meeting 2010-11-09 [19:16] <mathiaz> we had plans to improve the SRU process 
+ubuntu-meeting 2010-11-09 [19:16] <SpamapS> maybe somebody could publicize that we are in need of some volunteer help for SRU's 
+ubuntu-meeting 2010-11-09 [19:16] <mathiaz> (devised in the summer sprint in dublin more than 1 year ago) 
+ubuntu-meeting 2010-11-09 [19:17]  * s3hh wonders what a reviewer task entails 
+ubuntu-meeting 2010-11-09 [19:17] <Daviey> o/ 
+ubuntu-meeting 2010-11-09 [19:17] <robbiew> SpamapS: heh...if it were just advertising, it'd be a simple process to solve 
+ubuntu-meeting 2010-11-09 [19:17] <robbiew> MIR team needs help too 
+ubuntu-meeting 2010-11-09 [19:17] <SpamapS> yeah no kidding :p 
+ubuntu-meeting 2010-11-09 [19:17] <mathiaz> the SRU tracker was designed as a tool to help in tracking what needs to be done 
+ubuntu-meeting 2010-11-09 [19:17] <robbiew> and the Release Team could stand to grow a bit.../me gets off his soap box 
+ubuntu-meeting 2010-11-09 [19:17] <robbiew> :) 
+ubuntu-meeting 2010-11-09 [19:17] <mathiaz> it mainly is a ressource issue 
+ubuntu-meeting 2010-11-09 [19:18] <mathiaz> s3hh: a review task is about reviewing the SRU prepared by another developer 
+ubuntu-meeting 2010-11-09 [19:18] <mathiaz> s3hh: given that SRU is making there are no regression many eyes are important 
+ubuntu-meeting 2010-11-09 [19:18] <SpamapS> Ok, so right now, we just make it clear that there is a resource issue, and tax other devs for verification? 
+ubuntu-meeting 2010-11-09 [19:18] <ajmitch> robbiew: I didn't think the release team was necessarily involved in SRUs :) 
+ubuntu-meeting 2010-11-09 [19:19] <mathiaz> SpamapS: yeah - I think that's the good way 
+ubuntu-meeting 2010-11-09 [19:19] <mathiaz> SpamapS: with the sru tracker we should be able to generate a list of bugs that need to be verified 
+ubuntu-meeting 2010-11-09 [19:19] <robbiew> ajmitch: you should check out the members of each then ;) 
+ubuntu-meeting 2010-11-09 [19:19] <SpamapS> mathiaz: there's a tag for that ;) 
+ubuntu-meeting 2010-11-09 [19:20] <mathiaz> SpamapS: and then the verification needs to be done by someone 
+ubuntu-meeting 2010-11-09 [19:20] <ajmitch> SpamapS: is the problem mostly verification, or getting a package into -proposed in the first place? 
+ubuntu-meeting 2010-11-09 [19:20] <mathiaz> SpamapS: yes - the SRU tracker also filters the list to make it relevant to server package 
+ubuntu-meeting 2010-11-09 [19:20] <mathiaz> ajmitch: both ;) 
+ubuntu-meeting 2010-11-09 [19:20] <SpamapS> So maybe we should add a "daily verification" schedule similar to daily triage. 
+ubuntu-meeting 2010-11-09 [19:20] <mathiaz> SpamapS: make it smaller chunks 
+ubuntu-meeting 2010-11-09 [19:20] <mathiaz> SpamapS: yop - that was the next step :) 
+ubuntu-meeting 2010-11-09 [19:21] <SpamapS> zul_: think you could add a list of verification-needed bugs to the SRU tracker easily? 
+ubuntu-meeting 2010-11-09 [19:21] <mathiaz> SpamapS: it already is IIRC 
+ubuntu-meeting 2010-11-09 [19:21] <SpamapS> yes, why yes it is 
+ubuntu-meeting 2010-11-09 === bjf[afk] is now known as bjf 
+ubuntu-meeting 2010-11-09 [19:21] <mathiaz> SpamapS: http://people.canonical.com/~chucks/SRUTracker/sru-tracker-bugs.html#verified_bugs 
+ubuntu-meeting 2010-11-09 [19:22] <SpamapS> [ACTION] ALL: please check the SRU tracker for verification-needed bugs and help out with verification 
+ubuntu-meeting 2010-11-09 [19:22] <MootBot> ACTION received:  ALL: please check the SRU tracker for verification-needed bugs and help out with verification 
+ubuntu-meeting 2010-11-09 [19:22] <SpamapS> Ok, lets move on 
+ubuntu-meeting 2010-11-09 [19:23] <SpamapS> ajmitch: getting things into proposed seems to happen at a fairly nice pace, we can thank pitti for that. 
+ubuntu-meeting 2010-11-09 [19:23] <SpamapS> [TOPIC] Weekly Updates & Questions for the QA Team (hggdh) 
+ubuntu-meeting 2010-11-09 [19:23] <MootBot> New Topic:  Weekly Updates & Questions for the QA Team (hggdh) 
+ubuntu-meeting 2010-11-09 [19:23] <hggdh> k 
+ubuntu-meeting 2010-11-09 [19:23] <hggdh> first question is from myself 
+ubuntu-meeting 2010-11-09 [19:23] <hggdh> how are we going to test server images for MAC, armel, PPC? 
+ubuntu-meeting 2010-11-09 [19:24] <hggdh> nice to have them, but... 
+ubuntu-meeting 2010-11-09 [19:24] <ajmitch> SpamapS: oh I meant getting a package ready for -proposed, ie finding the fix 
+ubuntu-meeting 2010-11-09 [19:24] <mathiaz> hggdh: are there any images published for these architecture? 
+ubuntu-meeting 2010-11-09 [19:24] <hggdh> mathiaz: yes, just popped in in the server/daily 
+ubuntu-meeting 2010-11-09 [19:25] <JamesPage> whats the status of libvirt/kvm on those architectures? 
+ubuntu-meeting 2010-11-09 [19:25] <SpamapS> hggdh: I believe there were some build machines distributed for armel at UDS.. did we not get QA machines as well? 
+ubuntu-meeting 2010-11-09 [19:25] <hggdh> SpamapS: none for server testing at least; I did not hear of any for QA at all 
+ubuntu-meeting 2010-11-09 [19:26] <mathiaz> hggdh: well - I think these images should be tested 
+ubuntu-meeting 2010-11-09 [19:26] <s3hh> JamesPage: well ppc kvm is supposed to work iirc 
+ubuntu-meeting 2010-11-09 [19:26] <mathiaz> hggdh: in order to do that hardware needs to be available 
+ubuntu-meeting 2010-11-09 [19:26] <hggdh> mathiaz: I agree, I  did not say they would not, I asked *how* ;-) 
+ubuntu-meeting 2010-11-09 [19:26] <mathiaz> hggdh: which I don't have 

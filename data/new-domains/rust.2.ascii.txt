@@ -1,0 +1,1200 @@
+rust 2019-01-03 [21:26:32] <darkstalker> yes it's true. all the cool things require nightly 
+rust 2019-01-03 [21:26:38] <avl> If I have two tuple variants of the same enum, both with a field of a non-clone type, is there some way to change an instance of this enum from one of the types to the other? 
+rust 2019-01-03 [21:26:50] <avl> Some function to apply a Fn(T) -> T on a field in a struct? 
+rust 2019-01-03 [21:27:39] <avl> It seems such an abstraction might be possible. 
+rust 2019-01-03 [21:28:07] <avl> One of the variants to ther other, I meant to say. 
+rust 2019-01-03 [21:28:08] <j_ey> you can create a new tuple and overwrite the current self? 
+rust 2019-01-03 [21:28:30] <avl> I don't want to overwrite the entire struct, since it contains a lot of other stuff 
+rust 2019-01-03 [21:28:49] <avl> Hmm, I could destructure the entire struct, and recreate it with this particular field modified. Hmm. 
+rust 2019-01-03 [21:30:01] <eddyp> avl: unsafe transmute? 
+rust 2019-01-03 [21:30:27] <j_ey> asking again, want to make sure Im not missing something: https://gist.github.com/jgouly/df7efacd2f30168d63087d2747b04bcd in this code solution is a &mut Vec<_>. I gues there's no way I can "fix" this to use .filter 
+rust 2019-01-03 [21:30:41] <j_ey> I think if I used an Rc<Vec<_>> I could do it, by using borrow_mut() inside the filter closure 
+rust 2019-01-03 [21:30:51] <avl> Like this: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=518aa13bc8c434e9448ec90d8bfc1cdd 
+rust 2019-01-03 [21:32:02] <SpaceManiac> j_ey: I think you're right, otherwise the closure passed to `filter` holds the borrow 
+rust 2019-01-03 [21:32:03] <j_ey> (or I could collect the result of the filter and then iterate over it) 
+rust 2019-01-03 [21:33:15] <avl> eddyp: How do you mean? Transmute from Variant1 to Variant2? 
+rust 2019-01-03 [21:33:22] <eddyp> avl: it really looks like transmute or some safer alternative could work: https://doc.rust-lang.org/std/mem/fn.transmute.html 
+rust 2019-01-03 [21:33:23] <j_ey> avl: dont transmute! 
+rust 2019-01-03 [21:34:22] <avl> One solution is to create a Variant3 without any data, then use mem::replace to temporarily set the data-field to Variant3. But it's unfulfilling somehow :-) 
+rust 2019-01-03 [21:35:10] <darkstalker> or you could ptr::read/write 
+rust 2019-01-03 [21:35:13] <darkstalker> but thats unsafe 
+rust 2019-01-03 [21:35:29] <avl> darkstalker: Right. Maybe I could create some kind of safe wrapper around ptr::read/write.  
+rust 2019-01-03 [21:35:29] <SpaceManiac> https://docs.rs/take_mut/0.2.2/take_mut/ 
+rust 2019-01-03 [21:36:06] <avl> SpaceManiac: Cool!!! That seems to be exactly what I was looking for!! 
+rust 2019-01-03 [21:36:09] <darkstalker> it's usually safe as long as long as the process doesn't panic 
+rust 2019-01-03 [21:36:13] <eddyp> avl: I think j_ey is on to something, mem::replace is safe 
+rust 2019-01-03 [21:37:24] <avl> darkstalker: Hmm. There really is no way around stuff going really bad if the thread panics here, I guess. That's a bit of a drawback. Hmm. 
+rust 2019-01-03 [21:37:27] <eddyp> and since you should not need Variant1, once you create Variant2, it is probably OK 
+rust 2019-01-03 [21:38:18] <avl> Oh, there's a take_or_recover that seems to be slightly safer if panic occur 
+rust 2019-01-03 [21:39:41] <avl> Thanks a bunch guys! 
+rust 2019-01-03 [21:39:58] <evocatus> when operating on structures that must be encapsulated in Rc<RefCell<T>> (e.g. graphs, or anything else with cyclic references), is it more idiomatic to write methods that operate on &self and push the burden of dereferencing/borrowing onto the calling code, or write associated functions that operate on "self" as Rc<RefCell<Self>>? 
+rust 2019-01-03 [21:40:41] <avl> (Or is that considered sarcastic in english? Not a native speaker here, maybe I should just have said 'Thanks!' :-) ) 
+rust 2019-01-03 [21:40:57] <j_ey> avl: not sarcastic 
+rust 2019-01-03 [21:41:10] <Yatekii> stupid question if I have a function that takes an &'mut self can I assume that everything in there is threadsafe if Self is not Send? 
+rust 2019-01-03 [21:41:55] <avl> Yatekii: If your function takes a &mut self, you know no other thread uses self simultaneously. So you won't need any locking etc. So you could say it's threadsafe. 
+rust 2019-01-03 [21:42:18] <Yatekii> avl: that's what i meant, thanks a ton! 
+rust 2019-01-03 [21:42:25] <eddyp> avl: why not simply deconstruct and reconstruct the variant? 
+rust 2019-01-03 [21:42:54] <avl> eddyp: I think you would have to deconstruct the entire struct 'BigStruct' in my example? 
+rust 2019-01-03 [21:43:05] <avl> eddyp: But maybe I'm missing something here :-) 
+rust 2019-01-03 [21:43:18] <eddyp> avl: and you only want part of it? 
+rust 2019-01-03 [21:43:24] <darkstalker> avl: this seems to work https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=655194aa55c4bda8ad7da3b187194349 
+rust 2019-01-03 [21:43:49] <avl> eddyp: I don't want to modify the whole BigStruct. It contains lots of fields in my actual code. But such a solution *would 
+rust 2019-01-03 [21:43:55] <avl>  work*. You're right about that! 
+rust 2019-01-03 [21:43:57] <darkstalker> it seems that it's fine to temporarily move out and put back in values in a struct 
+rust 2019-01-03 [21:44:41] <avl> darkstalker: Oh, that's interesting! 
+rust 2019-01-03 [21:44:56] <eddyp> avl: yes, but your instance stil needs to be mut 
+rust 2019-01-03 [21:45:09] <eddyp> wouldn't it? 
+rust 2019-01-03 [21:45:28] <avl> eddyp: Oh, I forgot to make it mut in my example. You're absolutely right. 
+rust 2019-01-03 [21:45:35] <avl> darkstalker: How does that work? 
+rust 2019-01-03 [21:46:12] <darkstalker> i just destructured the enum and then wrote the value back immediately 
+rust 2019-01-03 [21:46:46] <avl> Yeah. I'm just a bit impressed that it works. 
+rust 2019-01-03 [21:47:06] <avl> I wonder if it would work if the function didn't own 'instance', but rather had a mutable borrow to it. 
+rust 2019-01-03 [21:47:22] <darkstalker> me too. i tought it was gomma complain about the partially moved struct 
+rust 2019-01-03 [21:47:38] <darkstalker> but wrote the trivial version first, and it worked! 
+rust 2019-01-03 [21:47:58] <avl> darkstalker: It seems it only works because the 'main' function actually owns the BigStruct instance. 
+rust 2019-01-03 [21:48:37] <remexre> Might've asked this before, but is there a way to issue a compiler warning on drop? 
+rust 2019-01-03 [21:49:01] <avl> Which makes sense, otherwise you would run into the same problem that the take_mut-crate does - if there's a panic before the value is moved back then the BigStruct data is (possibly) corrupt. 
+rust 2019-01-03 [21:50:12] <eddyp> avl: so the problem is the race condition between the extraction of variant1 data and replacement with variant2? 
+rust 2019-01-03 [21:51:04] <avl> eddyp: Yeah. Although I'm not sure it's actually a race condition in the regular sense. 
+rust 2019-01-03 [21:51:29] <eddyp> darkstalker: I think the key here is during the if that's the lifetime where you must have just that mut to the data 
+rust 2019-01-03 [21:52:10] <eddyp> and anyone trying to operate on the instance would lead to a panic 
+rust 2019-01-03 [21:52:44] <eddyp> but then, again, why not wrap in a Mutex<> ? 
+rust 2019-01-03 [21:53:17] <eddyp> that should eliminate the race and the possible panic 
+rust 2019-01-03 [21:54:09] <avl> eddyp: But there's no threading involved in any of this. So I'm not sure how a Mutex would help. 
+rust 2019-01-03 [21:54:25] <darkstalker> avl: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=722dcf550e9f1dcab1fcba92189eead5 
+rust 2019-01-03 [21:54:28] <SpaceManiac> mutexes have a 'poisoning' ability 
+rust 2019-01-03 [21:54:34] <eddyp> avl: is this single threaded? 
+rust 2019-01-03 [21:54:39] <darkstalker> still works on a function and with a closure 
+rust 2019-01-03 [21:55:13] <darkstalker> but needs ownership, can't pass &mut 
+rust 2019-01-03 [21:55:44] <avl> darkstalker: Yeah, if the function takes ownership of BigStruct. But it doesn't work if the function only has a &mut reference to BigStruct. 
+rust 2019-01-03 [21:56:26] <darkstalker> in that case you would need to swap a temporary value, or use ptr::read/write 
+rust 2019-01-03 [21:56:37] <avl> eddyp: My program is multi-threaded, but in this particular problem the code in question has a mutable reference to 'BigStruct', so we already know there are no race conditions or anything like that. 
+rust 2019-01-03 [21:57:07] <darkstalker> like make it `data: Option<MyEnum>` then use instance.data.take() 
+rust 2019-01-03 [21:57:10] <avl> darkstalker: Yup. Thanks a lot for your analysis! Today I learned something! :-) 
+rust 2019-01-03 [21:57:48] <avl> darkstalker: Yeah, that would work. But I kind of like that take_mut-crate. It's a bit dangerous in a thrilling way :-) 
+rust 2019-01-03 [21:58:25] <darkstalker> i personally thing that Option::take is better 
+rust 2019-01-03 [21:58:42] <darkstalker> because you don't need a panic detector that might be expensive 
+rust 2019-01-03 [21:59:35] <avl> darkstalker: Yeah, but my enum has a lot of variants, and none of the other code using this data has a need for the enum instance to be optional. It introduces a case which all code would have to deal with, when that case can't actually occur. 
+rust 2019-01-03 [22:00:17] <darkstalker> then just add a `None` field to your enum 
+rust 2019-01-03 [22:00:55] <avl> Yeah, that's kind of elegant. Probably in a better solution in many ways than the take_mut-crate! 
+rust 2019-01-03 [22:01:34] <avl> Or maybe make the NoncloneableType actually be Clone instead. Then I can just clone the existing value, and then overwrite the field with the clone. 
+rust 2019-01-03 [22:04:39] <eddyp> avl: darkstalker: can anyone remind me why mem::replace isn't usable? 
+rust 2019-01-03 [22:07:02] <darkstalker> mem::replace requires another value beforehand, we're doing take -> use -> store 
+rust 2019-01-03 [22:08:02] <darkstalker> replacing is just writing and returning the old value 
+rust 2019-01-03 [22:11:34] <eddyp> darkstalker: avl: it looks like this pattern, doesn't it? https://github.com/rust-unofficial/patterns/blob/master/idioms/mem-replace.md 
+rust 2019-01-03 [22:12:37] <eddyp> so, yeah, it sounds like adding None could work so you can do take -> use -> store 
+rust 2019-01-03 [22:13:49] <eddyp> avl: just making it "clone" looks like this anti-pattern: TODO Clone to satisfy the borrow checker 
+rust 2019-01-03 [22:16:03] <darkstalker> eddyp: oh thats good too, replacing the old enum variant with an "empty" one 
+rust 2019-01-03 [22:16:39] <darkstalker> but it needs a data structure with an empty state or it will suck to create that extra temporary 
+rust 2019-01-03 [22:26:23] <bdax> there's a function in a crate I want to use that takes files as &[u8]. Does this mean that it can only take files that are loaded in to memory fully or is there some strange way of doing it more efficiently? 
+rust 2019-01-03 [22:26:53] <j_ey> yeah, a slice is contiguous memory 
+rust 2019-01-03 [22:28:21] <bdax> fair enough, i suppose asking was wishful thinking 
+rust 2019-01-03 [22:31:04] <evocatus> when operating on graph-like structures modelled as Rc<RefCell<T>>, is it idiomatic to write no methods over the struct but instead just associated functions that operate over Rc<RefCell<Self>>? 
+rust 2019-01-03 [22:31:47] <evocatus> erm, I may have meant Rc<RefCell<Self<T>>> 
+rust 2019-01-03 [23:18:13] <tublar> hey 
+rust 2019-01-03 [23:18:28] <tublar> i am currently using `env_logger` as `[dev-dependency]` in my library for tests 
+rust 2019-01-03 [23:18:54] <tublar> how can I avoid having to have all those `let _ = env_logger::try_init()` calls in all over my tests? 
+rust 2019-01-03 [23:20:50] <Susi33> Hallo!! Bitte kommen Sie zu WowApp. Gehen Sie auf meine Seite https://wowapp.com/w/speed69money und sehen, worum es geht. <unconvertable> Vielen Dank!! 
+rust 2019-01-03 [23:21:08] <j_ey> tublar: could you use lazy_static? 
+rust 2019-01-03 [23:21:58] <hodapp> did we just get deutsch-spammed? 
+rust 2019-01-03 [23:31:11] <chriszen> Hi, I have a Box<T> and need to transform it into a Arc<RwLock<T>>. I know how to transform from Box<T> into an Arc<T> using a From provided by Arc, but I don't know how to introduce the RwLock in between. Any clue on how to do that ? 
+rust 2019-01-03 [23:34:48] <Lumpio-> And I guess T is not Sized? 
+rust 2019-01-03 [23:35:32] <SpaceManiac> chriszen: Arc::new(RwLock::new(*the_box)) 
+rust 2019-01-03 [23:35:41] <SpaceManiac> it only gets tricky if T is not Sized 
+rust 2019-01-03 [23:36:33] <chriszen> @Lumpio- exactly 
+rust 2019-01-03 [23:37:12] <Lumpio-> I guess one option is to just keep the box? 
+rust 2019-01-03 [23:37:20] <chriszen> I need to provide an Arc<RwLock<T>> into a function 
+rust 2019-01-03 [23:37:25] <Lumpio-> mm 
+rust 2019-01-03 [23:38:41] <chriszen> I am the owner of the function, but it belongs to a different component that is not specific to threading 
+rust 2019-01-03 [23:39:03] <ribbit> hi there, when working with a stream and the .read method, is there any way to have a loop checking for the amount read to be 0? I find the read blocking when nothing is given and i wasn't planning on having to introduce a time out... 
+rust 2019-01-03 [23:40:50] <chriszen> @Lumpio- @SpaceManiac "I am the owner of the function" I meant the function that provides a Box, I could change it to return something else, but it would break my design just because I need to encapsulate it in an Arc<RwLock<T>> later on. 
+rust 2019-01-03 [23:41:24] <SpaceManiac> chriszen: and Arc<RwLock<Box<T>>> is a definite no? 
+rust 2019-01-03 [23:41:28] <Lumpio-> I can't immediately see a way to turn a Box into an RwLock 
+rust 2019-01-03 [23:44:42] <chriszen> @SpaceManiac @Lumpio- I see I have to rethink the design, it doesn't seem like there is an easy transformation. Thanks very much. 
+rust 2019-01-03 [23:45:53] <talchas> ribbit: if you want to do nonblocking, iirc there is set_nonblocking or such 
+rust 2019-01-03 [23:46:09] <talchas> though I'd recommend going through tokio or at least mio if you want that 
+rust 2019-01-03 [23:50:00] <ribbit> talchas: gotcha, I think I was steered wrong by an orielly book which used the amount read == 0 to break a loop, and that certainly doesn't work. anyways, thanks for the suggestion! 
+rust 2019-01-03 [23:51:43] <SpaceManiac> ribbit: that works for streams which end (files), but not for streams which wait (sockets) 
+rust 2019-01-03 [23:51:59] <ribbit> SpaceManiac: oh! 
+rust 2019-01-03 [23:52:31] <ribbit> that's a good thing to know, it seemed like a nice pattern and a shame it didn't work out, but that makes plenty of sense 
+rust 2019-01-04 [00:13:42] <Noisyegde> Assuming I have implemented Add for a Struct for T and &T, are there any Performance/Memory etc. Downsides when I use the T instead of the &T version? Because writing stuff like &(&a + &b) + &(&c + &d) becomes pretty tedious after a while. 
+rust 2019-01-04 [00:17:04] <condor> Does any one here know where I could find documentation on creating and drawing shapes/polygons/curves in Amethyst? I couldn't find an example which does so. 
+rust 2019-01-04 [00:21:00] <ishitatsuyuki> condor: you will have better luck asking in Amethyst Discord 
+rust 2019-01-04 [00:22:34] <ishitatsuyuki> Noisyegde: if not inlined, there could be. In general, you won't need to care until they become significant 
+rust 2019-01-04 [00:53:14] <djozis> Does anyone know why Fn(T) + 'static is not itself 'static for any generic type argument T? 
+rust 2019-01-04 [00:53:56] <dolson> is there a way to chain custom derives?  like if I want to make a custom derive that also derive serde's Serialize and Deserialize in the background 
+rust 2019-01-04 [01:06:55] <ishitatsuyuki> dolson: no 
+rust 2019-01-04 [01:07:25] <ishitatsuyuki> you can only make that manual process easier with an IDE 
+rust 2019-01-04 [01:30:29] <U007D> Hmm...  Why is this a move when I've explicitly asked `Deref` to return a &?  https://play.rust-lang.org/?version=stable&mode=debug&edition=2015&gist=96828572ade0d23fd067438de3d4a7a6 
+rust 2019-01-04 [01:34:32] <dtolnay> U007D: `*node` is calling `*<Node<String> as Deref>::deref(&node)` 
+rust 2019-01-04 [01:35:41] <tiby312> why doesnt this work? 
+rust 2019-01-04 [01:35:42] <tiby312> https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018 
+rust 2019-01-04 [01:36:35] <U007D> dtolnay I see.  I didn't realize it was still dereferencing the return from `Deref::deref`.  That makes sense, then, thanks. 
+rust 2019-01-04 [01:37:04] <Lumpio-> tiby312: You need to press the "Share" button to actually get a link with your code 
+rust 2019-01-04 [01:37:44] <dtolnay> U007D: `*` is going to dereference a reference no matter what, Deref is just about finding which reference that will be 
+rust 2019-01-04 [01:39:36] <tiby312> Sorry. Here it is again: https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=e47c7865a4fdaf3658889a19da185613 
+rust 2019-01-04 [01:47:51] <bdax> it seems to me there should be a blanket implementation of `From<T> for Cow<'a, T> where: T: ToOwned(/Clone)` 
+rust 2019-01-04 [03:03:41] <thomspoon> If I have an enum that cna either home two or three items, how am I able to store that enum generically in a vec? 
+rust 2019-01-04 [03:03:47] <thomspoon> like a C union array 
+rust 2019-01-04 [03:05:06] <thomspoon> Wow, english. The Enum would be `enum Attributes { Vec2(i32, i32), Vec3(i32, i32, i32) }` and I want to store Vec<Attributes> 
+rust 2019-01-04 [03:14:28] <bdax> is it not working? 
+rust 2019-01-04 [03:14:44] <bdax> Vec<Attributes> should work fine 
+rust 2019-01-04 [03:18:42] <thomspoon> Argh, I was doing it wrong... sorry about that 
+rust 2019-01-04 [03:18:54] <thomspoon> you're right :P 
+rust 2019-01-04 [03:18:57] <bdax> np 
+rust 2019-01-04 [04:41:00] <skippydippy>  I'd like to use an enum as an index into a fixed-size array.  I started with a HashMap<ThatEnumType, u32>, and that captures my desire to have an enum-n-tuple set of quantities that I can index with one of the enum instances.  But I'd rather keep it something simple enough to be contiguous and avoid heap allocations. 
+rust 2019-01-04 [04:41:39] <skippydippy> Stack Overflow recommends "impl Index<X>" for a type.  And there's a "enum-map" crate. 
+rust 2019-01-04 [04:43:09] <skippydippy> (although I don't need a 2d/matrix-like structure) 
+rust 2019-01-04 [04:45:27] <skippydippy> is there a simple recipe?  Does enum-map make the most sense? 
+rust 2019-01-04 [04:46:04] <skippydippy> How do people implement RGB or RGBA tuples? 
+rust 2019-01-04 [04:46:22] <Mutabah> skippydippy: would `#[repr(usize)] enum ThatEnumType { ... }` and then `array[enm as usize]` work for you? 
+rust 2019-01-04 [04:47:07] <skippydippy> Gee.  Yeah, is it that simple?  Looks great let me try. 
+rust 2019-01-04 [04:52:03] <skippydippy> hey cool - https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=1eeb5aafd57e654db941d655d7ee2494 
+rust 2019-01-04 [04:52:19] <skippydippy> Mutabah: thanks 
+rust 2019-01-04 [04:52:55] <naiveai> What trait bound do I use to make sure that a type T can be put into a Vec<T> and then summed up? 
+rust 2019-01-04 [04:53:03] <The_Decryptor> That's going to use a fair bit of memory for plain RGB values skippydippy  
+rust 2019-01-04 [04:53:10] <thomspoon> I have a macro that counts down to zero recursively, but I'm running into the recursion limit. Does a value defined as $num:expr and then calling the macro again with ($num) - 1, not work? 
+rust 2019-01-04 [04:53:19] <skippydippy> yeah u8 probably makes more sense, just spitballing 
+rust 2019-01-04 [04:53:23] <naiveai> ops::Add + iter::Sum doesn't seem to work - Rust still errors out telling to implement the trait bound Sum<&T> 
+rust 2019-01-04 [04:53:38] <skippydippy> tbh the problem I'm modeling isn't exactly RGB but it's analogous. 
+rust 2019-01-04 [04:53:55] <skippydippy> but I'll probably use u16 or u32. 
+rust 2019-01-04 [04:54:09] <skippydippy> Thanks for the help #rust, I appreciate it! 
+rust 2019-01-04 [04:55:09] <talchas> naiveai: that would require consuming the vec to produce a single T 
+rust 2019-01-04 [04:55:24] <talchas> it sounds like you want for<'a> &'a T: Sum<T> 
+rust 2019-01-04 [04:55:37] <talchas> which is "references to this type can sum to the final type" 
+rust 2019-01-04 [04:55:48] <talchas> (I don't know if things actually implement it) 
+rust 2019-01-04 [04:56:10] <talchas> (if they don't, you want Sum + Clone, and then write the_vec.iter().cloned().sum()) 
+rust 2019-01-04 [04:56:55] <naiveai> talchas: is it ok to use clone in this scenario? definitely don't want to consume the vector so it looks like I might have to 
+rust 2019-01-04 [04:57:02] <talchas> oh, it's the other way around apparently, huh 
+rust 2019-01-04 [04:57:13] <talchas> for<'a> T: Sum<&'a T> 
+rust 2019-01-04 [04:57:28] <talchas> which should work for all the primitive integers and floats 
+rust 2019-01-04 [04:57:52] <thomspoon> example: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=4a8dade36a6412312e954df4aa219fba 
+rust 2019-01-04 [04:57:54] <naiveai> talchas: where to put this "for"? 
+rust 2019-01-04 [04:58:23] <naiveai> probably in a where 
+rust 2019-01-04 [04:58:34] <talchas> eval: fn dosum<T>(v: Vec<T>) where for<'a> T: Sum<&'a T> -> T { v.iter().sum() } dosum(vec![1u32, 2, 3]) 
+rust 2019-01-04 [04:58:38] -eval- error: expected one of `+`, `,`, `::`, or `{`, found `->` 
+rust 2019-01-04 [04:58:38] -eval- ~~~ Full output: https://play.rust-lang.org/?gist=df0173df934fc74f31cba7bbfda748ba&version=stable&mode=debug 
+rust 2019-01-04 [04:59:26] <talchas> eval: fn dosum<T>(v: Vec<T>) -> T where for<'a> T: std::iter::Sum<&'a T> { v.iter().sum() } dosum(vec![1u32, 2, 3]) 
+rust 2019-01-04 [04:59:28] -eval- 6 
+rust 2019-01-04 [04:59:36] <talchas> naiveai: there we go, yeah, in a where clause like that 
+rust 2019-01-04 [04:59:50] <naiveai> Ah 
+rust 2019-01-04 [05:05:53] <thomspoon> does a macro $expr not evaluate itself? 
+rust 2019-01-04 [05:07:27] <Mutabah> thomspoon: No, it's just a syntatic construct 
+rust 2019-01-04 [05:08:10] <thomspoon> arg that's probably why it doesn't work. Is there a workaround for creating this match-esque functionaity with a macro pattern? 
+rust 2019-01-04 [05:09:00] <talchas> there's no way to match on numbers without writing each possible number in the macro 
+rust 2019-01-04 [05:09:18] <thomspoon> my plan has been fooled D: 
+rust 2019-01-04 [05:09:46] <talchas> you can do things like write 1 2 3 for 123 and then a bunch of moderately complicated macro code to do some macro stuff 123 times 
+rust 2019-01-04 [05:10:49] <thomspoon> I'm wanting to generate a from<[type; N]> impl for my internal type, but want it to generate code up to around 128 
+rust 2019-01-04 [05:11:07] <thomspoon> I have the macro written, I just need to get the recursive countdown working 
+rust 2019-01-04 [05:11:33] <ishitatsuyuki> I think even the rustc std uses a macro naming 1 2 3 ... 32 
+rust 2019-01-04 [05:15:07] <talchas> thomspoon: you could do something with counting and powers of 2 to make it easier, I think, or just do the decimal or binary expansions like I suggested 
+rust 2019-01-04 [05:15:31] <thomspoon> I'm not sure I understand, sorry 
+rust 2019-01-04 [05:16:56] <talchas> you could basically give a macro X X X X X X X, and have it output 2^n Ys pretty easily 
+rust 2019-01-04 [05:17:35] <talchas> and then with 128 of Y Y Y Y... you can turn the Ys into 1 + 1 + ... 
+rust 2019-01-04 [05:18:43] <talchas> (every step of this is moderately annoying) 
+rust 2019-01-04 [05:20:34] <talchas> or you know, you can just tell your shell "seq 128", and copy paste that into your macro and be done way sooner 
+rust 2019-01-04 [05:20:41] <talchas> and it'll compile faster too probably 
+rust 2019-01-04 [05:21:25] <thomspoon> not print 128 of the same thing, I need it to From<[(i32, i32); 2]), From<[(i32, i32); 3]>, From<[(i32, i32); 4]>... 
+rust 2019-01-04 [05:21:38] <talchas> thomspoon: yeah, there's a way to do that 
+rust 2019-01-04 [05:22:05] <thomspoon> can it be done internally to the macro or do I have to provide something gross to the macro to get it to work? 
+rust 2019-01-04 [05:22:23] <thomspoon> right now my macro looks like: `__generate_from_for_type!((i32, i32), 2, Attribute, AttributeInner::Vec2);` 
+rust 2019-01-04 [05:22:35] <Mutabah> thomspoon: The way the libstd macros work is that they take `$( $size:expr )*` 
+rust 2019-01-04 [05:22:46] <talchas> you basically do macro_rules foo { ($x:tt $($xs:tt)*) => { produce whatever(count_tokens!($xs)); foo!($x) } } 
+rust 2019-01-04 [05:22:57] <Mutabah> thomspoon: Then are invoked as `gen_foo_array_impl!{ 0 1 2 3 4 .... }` 
+rust 2019-01-04 [05:23:18] <Mutabah> (*sigh* I can't wait for const generics to land) 
+rust 2019-01-04 [05:23:25] <thomspoon> same 
+rust 2019-01-04 [05:23:45] <Mutabah> ((I wonder if I could beat rustc to implementing them)) 
+rust 2019-01-04 [05:23:58] <talchas> and count_takens is like ($($x:tt)*) => (0 $(+ {stringify!($x); 1})*) 
+rust 2019-01-04 [05:24:06] <thomspoon> I'll personally send you $50 lol 
+rust 2019-01-04 [05:24:33] <talchas> but really, do what Mutabah is saying where you just copypasta the integers 0 through 128 from your shell or python output 
+rust 2019-01-04 [05:25:21] <talchas> rather than excessively clever and slow macrorules macros 
+rust 2019-01-04 [05:25:23] <thomspoon> That would have to be IN the macro declaration right? Like it would be my_macro(blah blah, 0 1 2 3 4 5 6 ... 128 )? 
+rust 2019-01-04 [05:25:28] <talchas> yes 
+rust 2019-01-04 [05:25:33] <thomspoon> ew 
+rust 2019-01-04 [05:25:50] <thomspoon> I guess I can just have it there until const generics land :( 
+rust 2019-01-04 [05:25:51] <talchas> well, in the macro call; my_macro!(blah, 0 1 2 ... 128) 
+rust 2019-01-04 [05:26:59] <thomspoon> thanks for the help talchas and Mutabah (I'm serious about the $50 too) 
+rust 2019-01-04 [06:02:16] <naiveai> Does the compiler not enfore private types or am I doing this wrong? 
+rust 2019-01-04 [06:02:18] <naiveai> https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=6bbb83640129c5fe166c220f829b3a1d 
+rust 2019-01-04 [06:14:05] <bb> I am trying to use `==` within a closure for an iterator filter, but I'm not sure how to. What can I do so that I can use `==` within the closure? 
+rust 2019-01-04 [06:14:11] <bb> This is what I have right now: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=dd5167f83b46c488f9593c669f9934bc 
+rust 2019-01-04 [06:16:08] <sfackler> bb: value == **val 
+rust 2019-01-04 [06:19:54] <bb> Why do you have to derefrence it twice? 
+rust 2019-01-04 [06:19:58] <Moongoodgirl{K}> (naiveai: answered in #rust-beginners -latency was enough that I'd consider the crosspost to be okay, however) 
+rust 2019-01-04 [06:20:39] <Moongoodgirl{K}> bb: the Item type is &_, and filter() passes a reference to that (i.e. &&_) 
+rust 2019-01-04 [06:21:01] <Moongoodgirl{K}> IIRC the docs call out the &&_ thing and discuss it a bit 
+rust 2019-01-04 [06:22:10] <bb> Oh, okay, that makes sense 
+rust 2019-01-04 [06:22:15] <bb> thanks 
+rust 2019-01-04 [08:48:15] <kora> I'm confused why for some concrete types, calls in const context is allowed, while for generic types it isn't: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=6c4ee0ee16e5c8671d87bb5f18a68267 
+rust 2019-01-04 [08:48:57] <Arnavion> Because the things that are allowed in const contexts are because miri knows how to interpret them 
+rust 2019-01-04 [08:49:17] <Moongoodgirl{K}> Neg::neg() is not a const fn 
+rust 2019-01-04 [08:49:46] <kora> I agree, so why is it allowed for i32? 
+rust 2019-01-04 [08:51:01] <Moongoodgirl{K}> maybe `i32::B` gets evaluated to `0` and then `-0` is totally fine to be const? 
+rust 2019-01-04 [08:52:45] <kora> how can -0 be const while Neg::neg() is not a const fn? 
+rust 2019-01-04 [08:53:16] <kora> doesn't -0 call Neg::neg() ? 
+rust 2019-01-04 [08:54:06] <Moongoodgirl{K}> yes but Rust knows how to do integer primitive arithmetic at compiletime 
+rust 2019-01-04 [08:54:36] <Moongoodgirl{K}> however, it doesn't know how to do arithmetic on /arbitrary types/ at compiletime, because the ops traits are not const 
+rust 2019-01-04 [08:54:48] <kora> hmmm 
+rust 2019-01-04 [08:55:21] <kora> is there a way to express that the generic type behave similar to a primitive type when negating? 
+rust 2019-01-04 [08:55:29] <kora> such that this could be allowed 
+rust 2019-01-04 [08:57:44] <kora> I see that `const D: i32 = <i32 as Neg>::neg(i32::B);` doesn't work as opposed to: `const D: i32 = -i32::B;` 
+rust 2019-01-04 [08:57:50] <kora> interesting 
+rust 2019-01-04 [08:58:09] <kora> https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=727e61559a6c80859a19e21ded399830 
+rust 2019-01-04 [08:59:25] <kora> so it seems `-0` is not the same as `<i32 as Neg>::neg(0)` 
+rust 2019-01-04 [09:00:55] <Mutabah> no, it is not 
+rust 2019-01-04 [09:04:21] <kora> I always thought that the operator symbols just got desugared to their corresponding trait functions 
+rust 2019-01-04 [09:06:21] <kora> I'm trying to make the constants LEFT and RIGHT... where LEFT is equal to -RIGHT 
+rust 2019-01-04 [09:06:45] <kora> if RIGHT = 1, then LEFT should be -1 
+rust 2019-01-04 [09:07:00] <kora> but it seems this is impossible to express then :( 
+rust 2019-01-04 [09:11:47] <WindowsBunny> kora: the operator symbols get desugared on everything but the primitive types themselves 
+rust 2019-01-04 [09:12:05] <WindowsBunny> kora: Because the operator traits for the primitive types are literally implemented in terms of the operator 
+rust 2019-01-04 [09:15:37] <kora> I'd like to be able to do something like this: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=47ca140c18669b4253d9d09ab5b57579 
+rust 2019-01-04 [09:19:37] <WindowsBunny> unfortunately Rust doesn't have const traits yet 
+rust 2019-01-04 [09:20:02] <kora> what about const generic type parameters? 
+rust 2019-01-04 [09:20:29] <WindowsBunny> kora: You'd need some way to annotate that the neg method on the Neg trait should be const 
+rust 2019-01-04 [09:20:38] <WindowsBunny> because Neg::neg is allowed to do non-const stuff 
+rust 2019-01-04 [09:21:37] <kora> yeah... I was thinking of something like: `where T: Neg<Output = const T>` 
+rust 2019-01-04 [09:21:38] <WindowsBunny> and Rust doesn't really have that yet 
+rust 2019-01-04 [09:22:30] <kora> I see 
+rust 2019-01-04 [09:22:58] <shanep> I've made some progress on an old project to implement Alexandrescu's "policy based design" composable allocator library for rust 
+rust 2019-01-04 [09:23:38] <shanep> but I'm rubbing up against the type system like so: 
+rust 2019-01-04 [09:24:02] <shanep> https://clbin.com/1j76k 
+rust 2019-01-04 [09:30:19] <shanep> particularly at line #106 and #139 you can see that I'm having difficulty abstracting the constraints on an allocator.  FYI the ChunkAlloc<T> (where A: ChunkAlloc<T> can allocate blocks of size&layout for type T was the behavior for Alloc until today) 
+rust 2019-01-04 [09:35:39] <shanep> now I'm trying to generalize so that an Alloc can allocate memory for any type, and a ChunkAlloc<T> can allocate for a type T.. ChunkAlloc would be used, for instance, to implement a StackAllocator, or maybe a FreeList allocator, anywhere we can benefit from regularly sized allocation chunks..  In much of the library this works fine, because I can implement a ChunkAlloc<T> with any Alloc... however, this causes an issue with composition. 
+rust 2019-01-04 [09:37:52] <shanep> So the question is, can trait implementations depend on the type of template params? 
+rust 2019-01-04 [09:39:40] <SacrificialFish> Hey, does anyone know of any examples which show yield being used within a function? 
+rust 2019-01-04 [09:40:32] <SacrificialFish> I'm looking to do something very similar to what's in the Async RFC, but I'm thinking a lot's changed since that little 'example' was written, https://rust-lang.github.io/rfcs/2394-async_await.html#generators-and-streams 
+rust 2019-01-04 [09:42:13] <dpc1> SacrificialFish: if you are on discord, you can ask in #wg-net-async on the official discord. 
+rust 2019-01-04 [09:42:26] <SacrificialFish> Thanks 
+rust 2019-01-04 [09:48:21] <clickfu> If it's of any interest Ive built some data structures showing use of the composable allocators for a linked list.  Including benchmarks of an example that counts allocs and frees. 
+rust 2019-01-04 [09:48:22] <neptunepink> https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=c43c3e80343c49a2a13d5542b276282a -- This is a way to call a trait method that takes ownership of self, when self is possibly in a Box. 
+rust 2019-01-04 [09:53:13] <clickfu> Srry shanep is also me 
+rust 2019-01-04 [09:59:20] <dns2utf8> Is there an RFC for having a value return from a loop? 
+rust 2019-01-04 [09:59:58] <dns2utf8> I have a draft of the problem here: https://estada.ch/drafts/rust-2019-wish-list.html 
+rust 2019-01-04 [10:00:37] <Mutabah> dns2utf8: That seems like it's a NLL-related issue? 
+rust 2019-01-04 [10:01:13] <dns2utf8> Mutabah: maybe? 
+rust 2019-01-04 [10:01:31] <dns2utf8> Do you think this kind of behavior will be implemented? 
+rust 2019-01-04 [10:01:36] <Mutabah> Or just a logic error... 
+rust 2019-01-04 [10:01:45] <shanep> https://gitlab.com/shanepearlman/rust_containers 
+rust 2019-01-04 [10:02:49] <Mutabah> dns2utf8: By flipping the check of input=="" and the `if let` (and removing the & from &fallback) the upper code can compile 
+rust 2019-01-04 [10:03:01] <Mutabah> https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=cad3d374fa9678664269be9cd3af6361 
+rust 2019-01-04 [10:04:25] <dns2utf8> Mutabah: Oh, thank you! 
+rust 2019-01-04 [10:05:59] <dns2utf8> hm, I am curious, why did flipping the check around solve the issue? 
+rust 2019-01-04 [10:09:57] <Mutabah> The main issue was that by doing `if let Some(v) = &bar { return *v }` you're trying to move out of a borrow 
+rust 2019-01-04 [10:10:16] <Mutabah> So, the change there was to remove the `&` from `&bar` (and the deref) so it move out of `bar` 
+rust 2019-01-04 [10:11:06] <Mutabah> But, since this would unconditionally move when Some, the check had to be flipped so when that `if let` is processed, and the value is Some, it's always going to return 
+rust 2019-01-04 [10:12:01] <dns2utf8> ah, the unconditional move was the problem 
+rust 2019-01-04 [10:12:08] <dns2utf8> Thank you again 
+rust 2019-01-04 [10:16:55] <clickfu> I woulda thought y'all rustaceans would be more interested in this 
+rust 2019-01-04 [10:17:21] <clickfu> Memory management! 
+rust 2019-01-04 [10:25:25] <dpc1> uhmm? 
+rust 2019-01-04 [10:36:19] <TimoKoesters-M> Can I store a type in a variable? I need to match an id to come up with a type 
+rust 2019-01-04 [10:36:59] <TimoKoesters-M> `match id { 0 => Type::First, 1 => Type::Second }` 
+rust 2019-01-04 [10:37:11] <xfix> is there any reason why core::error::Error doesn't exist? 
+rust 2019-01-04 [10:37:55] <xfix> i don't see Error trait depending on anything unavailable in std 
+rust 2019-01-04 [10:38:05] <Kingsqueee> maybe its an error 
+rust 2019-01-04 [10:38:12] <dpc1> TimoKoesters-M: no you can't return types 
+rust 2019-01-04 [10:38:21] <TimoKoesters-M> Ok 
+rust 2019-01-04 [10:39:12] <Kingsqueee> TimoKoesters-M: you could use an enum 
+rust 2019-01-04 [10:39:54] <fkaa> is there a similar method to split_whitespace on String to "tokenize" the elements rather than just remove all the whitespace? 
+rust 2019-01-04 [10:39:59] <Kingsqueee> there's also a thing called TypeID which I have no experience with 
+rust 2019-01-04 [10:40:02] <fkaa> eg. "abc def  qqq" => ["abc", " ", "def", "  ", "qqq"] 
+rust 2019-01-04 [10:40:29] <Kingsqueee> https://doc.rust-lang.org/stable/core/any/struct.TypeId.html 
+rust 2019-01-04 [10:41:57] <dpc1> Kingsqueee: you can use `split_whitespace()` 
+rust 2019-01-04 [10:42:19] <Kingsqueee> dpc1: ? 
+rust 2019-01-04 [10:42:26] <dpc1> oops fkaa ^ 
+rust 2019-01-04 [10:42:32] <Kingsqueee> ayy 
+rust 2019-01-04 [10:42:49] <neptunepink> fkaa: You could use split() and then do some (perfectly safe!) pointer arithmetic. 
+rust 2019-01-04 [10:43:16] <dpc1> eval: let x = "this is a long string".split_whitespace(); x 
+rust 2019-01-04 [10:43:18] -eval- SplitWhitespace { inner: Filter { iter: Split(SplitInternal { start: 0, end: 21, matcher: CharPredicateSearcher { haystack: "this is a long string", char_indices: CharIndices { front_offset: 0, iter: Chars { iter: Iter([116, 104, 105, 115, 32, 105, 115, 32, 97, 32, 108, 111, 110, 103, 32, 115, 116, 114, 105, 110, 103]) } } }, allow_trailing_empty: true, finished: false }) } } 
+rust 2019-01-04 [10:43:41] <dpc1> eval: let x = "this is a long string".split_whitespace().collect::<Vec<&str>(); x 
+rust 2019-01-04 [10:43:44] -eval- error: expected one of `!`, `+`, `,`, `::`, or `>`, found `(` 
+rust 2019-01-04 [10:43:44] -eval- ~~~ Full output: https://play.rust-lang.org/?gist=962e7d3ea18da80c6ad4ccb21d7f414c&version=stable&mode=debug 
+rust 2019-01-04 [10:43:51] <dpc1> eval: let x = "this is a long string".split_whitespace().collect::<Vec<&str>>(); x 
+rust 2019-01-04 [10:43:54] -eval- ["this", "is", "a", "long", "string"] 
+rust 2019-01-04 [10:44:30] <fkaa> dpc1, i'm doing word wrapping on a string, so i need the whitespace as well 
+rust 2019-01-04 [10:45:25] <neptunepink> let prev = &x[0] as usize, and for each new token, first process &x[prev..&i[0] as usize]. 
+rust 2019-01-04 [10:45:44] <neptunepink> Uh, plus some minuses, etc. 
+rust 2019-01-04 [10:47:16] <neptunepink> Enum variants can not be reached through type aliases. 
+rust 2019-01-04 [10:48:35] <llvkm> fkaa: than your approach is wrong, not all languages use whitespace for words 
+rust 2019-01-04 [10:49:25] <llvkm> fkaa: i guess split_word_bounds from the unicode_segmentation crate is the best you'll get, for easy and an almost correct implementation 
+rust 2019-01-04 [10:50:43] <fkaa> llvkm, that looks like what i want 
+rust 2019-01-04 [10:50:52] <fkaa> haven't really thought about non-latin languages so far :p 
+rust 2019-01-04 [10:51:49] <hyperion101010> hi there anyone help me understand this https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=0f1d1927c68b57479e12ec17e35f5869 
+rust 2019-01-04 [10:52:15] <hyperion101010> i have figured out ,this is some kind of overloading of debug function  
+rust 2019-01-04 [10:52:48] <hyperion101010> not function, but overloading of fmt for Debug  
+rust 2019-01-04 [10:52:48] <llvkm> fkaa: also, you might want to use unicode-width to get the displayed with of your tokens 
+rust 2019-01-04 [10:53:08] <hyperion101010> so why is it written recursively like that  
+rust 2019-01-04 [10:53:35] <fkaa> llvkm, i'm using freetype for the glyph metrics 
+rust 2019-01-04 [10:54:51] <dpc1> hyperion101010: not overloading, but this is defining the debug implementation 
+rust 2019-01-04 [10:55:09] <Mutabah> hyperion101010: It's calling Debug::fmt on the inner type 
+rust 2019-01-04 [10:55:39] <hyperion101010> inner , what you mean by inner . are you referring built in 
+rust 2019-01-04 [10:55:45] <hyperion101010> function  
+rust 2019-01-04 [10:56:15] <hyperion101010> also why is it recursively written like call of function inside a function  
+rust 2019-01-04 [10:56:25] <Mutabah> No, ServoUrl is something like `struct ServoUrl(Foo);` 
+rust 2019-01-04 [10:57:10] <hyperion101010> and fmt( takes argument as formatter) 
+rust 2019-01-04 [10:59:51] <hyperion101010> also i am not able to install rust extension in vscode  
+rust 2019-01-04 [11:00:17] <hyperion101010> it says couldn't start client server 
+rust 2019-01-04 [11:09:59] <pftbest_54> Hello, is it possible to make deref_mut work for closures? anyone knows how Box does it? https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=aab8cf1b7570ddbd1ff54950d7e90167 
+rust 2019-01-04 [12:44:59] <dowwie> can async/await successfully replace the need for using futures::Either? 
+rust 2019-01-04 [12:46:16] <leyyin> speaking of async/await is anyone in the community aware of this http://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/ :D 
+rust 2019-01-04 [12:59:40] <ishitatsuyuki> dowwie: I don't think async/await helps in concurrent control flow, so no 
+rust 2019-01-04 [13:57:02] <talchas> dowwie: ishitatsuyuki: yes https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=9a67dda3ce24dce58c3141b22806eccc 
+rust 2019-01-04 [13:58:44] <talchas> (c is basically fn(bool) -> impl Future<Output = i32>, using some equivalent to Either) 
+rust 2019-01-04 [13:59:08] <dowwie> talchas:  thx!  now trying to modify this example to correspond to my usual Either::A(Err(CustomError)) and Either::B(...) 
+rust 2019-01-04 [14:00:35] <talchas> async fn c() -> Result<Foo, SomeError> { if stuff { Err(SomeError) } else { await!(some foo future) } } 
+rust 2019-01-04 [14:02:06] <dowwie> talchas:  not compiling https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=6d323419dd0409f43d365aaec796c2a2 
+rust 2019-01-04 [14:02:33] <dowwie> talchas:  nvmd 
+rust 2019-01-04 [14:02:39] <dowwie> talchas:   had to move the includes higher 
+rust 2019-01-04 [14:04:13] <dowwie> would the compiler warning that CustomError isn't used be considered a bug?  https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=39d8db0a5429c36452ac3ec5a43c590b 
+rust 2019-01-04 [14:13:26] <talchas> dowwie: none of those methods are public, and they're not used by anything public 
+rust 2019-01-04 [14:13:58] <talchas> it tries to give all the unused errors at once rather than just saying "c isn't used" and then when you remove that "a and b aren't used" etc 
+rust 2019-01-04 [14:15:34] <dowwie> I see 
+rust 2019-01-04 [14:51:37] <naiveai> Why, precisely, are explicit lifetimes required here? https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=774be2c35cf56dc137445064b9a80127 
+rust 2019-01-04 [14:51:42] <naiveai> Attempting to understand the ellision rules 
+rust 2019-01-04 [14:51:59] <naiveai> Here we say that the T type must be able to be produced from the sum of a bunch of references to T 
+rust 2019-01-04 [14:52:56] <naiveai> The compiler complains that it needs it "so that the reference type &'static T doesn't outlive the data it points at" 
+rust 2019-01-04 [14:53:15] <naiveai> But why would that matter? ultimately I'm extracting a different type from it, that doesn't point to any of them, right? 
+rust 2019-01-04 [14:59:04] <emerent_> naiveai: this is probably what you want: 
+rust 2019-01-04 [14:59:05] <emerent_> https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=ea0d339c2adb3e8b89dcf98f6e5225c7 
+rust 2019-01-04 [14:59:51] <emerent_> T: for<'a> iter::Sum<&'a T> means that T can be gained by summing up references of any lifetime 'a 
+rust 2019-01-04 [15:00:31] <naiveai> emerent_: why would that be necessary though? since there's only one thing that is a reference, shouldn't ellision imply the 'a? 
+rust 2019-01-04 [15:00:40] <naiveai> Clearly it doesn't, but I don't know why 
+rust 2019-01-04 [15:01:26] <emerent_> elision rules are fairly limited because too many can be confusing 
+rust 2019-01-04 [15:01:35] <emerent_> they are only slowly being expanded 
+rust 2019-01-04 [15:06:19] <emerent_> naiveai: also, this kind of bound is called a higher-ranked trait bound (HRTB) 
+rust 2019-01-04 [15:06:34] <naiveai> Oh 
+rust 2019-01-04 [15:06:40] <emerent_> the only thing I can currently think of that automatically inserts them is fn pointers and the Fn* traits 
+rust 2019-01-04 [15:06:43] <naiveai> So it's more complicated than the ssummary of 
+rust 2019-01-04 [15:06:53] <naiveai> Fair enough 
+rust 2019-01-04 [16:13:45] <cole> Does `fn get_value<T>(&self, name: &str) -> Option<T>  where T: Deserialize<'static>` mean that T will be owned by the caller? 
+rust 2019-01-04 [16:14:10] <cole> I'm not confident in my understanding of the 'static lifetime 
+rust 2019-01-04 [16:16:20] <rmf1723_> The lifetime in Deserialize tells you how long the input data (the data that gets deserialized) lives. 
+rust 2019-01-04 [16:16:37] <rmf1723_> In this case, it lives forever (maybe it's a static variable?) 
+rust 2019-01-04 [16:23:30] <cole> So, does this signature tell us that the caller already owns T? So, in this case, does the caller own T? `fn get_value<'a, T>(&'a self, name: &str) -> Option<T>     where T: Deserialize<'a> 
+rust 2019-01-04 [16:24:30] <rmf1723_> Option<T> is an owned value, yes. 
+rust 2019-01-04 [16:24:57] <jebrosen> get_value will create an owned Option<T> and return it to the caller, and then the caller will own it 
+rust 2019-01-04 [16:25:04] <rmf1723_> T: Deserialize<'a> doesn't change that, since the 'a tells you about the lifetime of the input data, not the output. 
+rust 2019-01-04 [16:25:27] <rmf1723_> https://serde.rs/lifetimes.html 
+rust 2019-01-04 [16:54:04] <Trangar> With std::sync::RwLock, if I have multiple read locks being obtained constantly, and I want to start a write lock, will new read locks be put on hold until the write lock goes through? 
+rust 2019-01-04 [16:54:10] <Trangar> Or will the read locks effectively lock out the write lock? 
+rust 2019-01-04 [16:54:47] <kali> Trangar: the latter 
+rust 2019-01-04 [16:54:59] <Trangar> Damn 
+rust 2019-01-04 [16:55:05] <Trangar> Whelp time to look at parking_lot 
+rust 2019-01-04 [16:55:47] <kali> be careful, what describe as the first option is... a bit weird 
+rust 2019-01-04 [16:55:50] <kali> you 
+rust 2019-01-04 [16:56:30] <kali> Trangar: it would be weird on hold, perform a write and let the read go on 
+rust 2019-01-04 [16:56:48] <Trangar> It wouldn't put the read on hold, but it should wait with releasing new read locks 
+rust 2019-01-04 [16:57:20] <kali> ha yeah 
+rust 2019-01-04 [16:57:41] <kali> hold new reads, wait for all the old reads to finish, perform the write, release the "new" reads 
+rust 2019-01-04 [16:57:45] <Trangar> Yes 
+rust 2019-01-04 [16:57:53] <kali> i think this is what it does 
+rust 2019-01-04 [16:57:58] <kali> sorry if i misunderstood you 
+rust 2019-01-04 [16:58:13] <Trangar> I don't think it does 
+rust 2019-01-04 [17:02:29] <jebrosen> RwLock: "The priority policy of the lock is dependent on the underlying operating system's implementation, and this type does not guarantee that any particular policy will be used." 
+rust 2019-01-04 [17:04:45] <jebrosen> And parking_lot's RwLock: "readers trying to acquire the lock will block even if the lock is unlocked when there are writers waiting to acquire the lock" 
+rust 2019-01-04 [17:09:13] <kali> Trangar: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=c5dcb6a1a0b41ce60d52b40442012ef1 
+rust 2019-01-04 [17:09:17] <kali> Trangar: you may be right 
+rust 2019-01-04 [17:09:31] <Trangar> I love being right 
+rust 2019-01-04 [17:10:12] <kali> Trangar: mmmm, my example need one more sleep, i think... 
+rust 2019-01-04 [17:10:20] <Trangar> There is https://docs.rs/crossbeam/0.6.0/crossbeam/sync/struct.ShardedLock.html 
+rust 2019-01-04 [17:10:35] <kali> Trangar: better like that: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=ee68665509d51d12e8369beb07094ea1 
+rust 2019-01-04 [17:11:26] <kali> Trangar: so yeah, it looks like the write lock request will wait for all read to be over, without preempting new read requests 
+rust 2019-01-04 [17:11:36] <Trangar> Yeah so reads can be sequential, and given enough reads, a write will never continue 
+rust 2019-01-04 [17:12:03] <kali> yep, i'm afraid so 
+rust 2019-01-04 [17:17:28] <Trangar> "This means that readers trying to acquire the lock will block even if the lock is unlocked when there are writers waiting to acquire the lock."  
+rust 2019-01-04 [17:17:36] <Trangar> Parking lot to the rescue https://docs.rs/parking_lot/0.7.1/parking_lot/type.RwLock.html 
+rust 2019-01-04 [17:18:33] <kali> Trangar: ha indeed 
+rust 2019-01-04 [17:19:40] <kali> Trangar: i thought parking lot was about more low level locking routines 
+rust 2019-01-04 [17:20:19] <Trangar> Looks like it's just trying to prove better implementations of mutex, rwlock, etc 
+rust 2019-01-04 [17:20:51] <kali> yeah 
+rust 2019-01-04 [17:21:13] <kali> well, i was thinking about what's in parking_lot_core actually 
+rust 2019-01-04 [17:21:16] <dpc1> "i love being right" who doesn't :P 
+rust 2019-01-04 [17:24:26] <nCrazed> dpc1: I frequently make an intentionally outrageous prediction/suggestion as a joke that then turn out to be correct 
+rust 2019-01-04 [17:24:32] <nCrazed> I hate it every time that happens :( 
+rust 2019-01-04 [17:25:41] <mr_fribble> hey guys i am pretty new to this space learning rust from rust book i have created this simple temprator calculator and i would like you guys to review my code https://play.rust-lang.org/?version=stable&mode=debug&edition=2015&gist=a9c1525f4e51165c860dcc05552b06b3 
+rust 2019-01-04 [17:26:40] <ferminter> hi 
+rust 2019-01-04 [17:26:52] <ferminter> I want to use https://crates.io/crates/env_logger for my tests 
+rust 2019-01-04 [17:27:15] <ferminter> It says that you have to put a `let _ = env_logger::try_init();` call in all functions marked `#[test]` 
+rust 2019-01-04 [17:27:18] <ferminter> but this is crazy 
+rust 2019-01-04 [17:27:20] <ferminter> how can I do better? 
+rust 2019-01-04 [17:27:31] <ferminter> Like just one call to `env_logger::try_init` 
+rust 2019-01-04 [17:27:44] <Yaniel> you can't because the tests are isolated from each other 
+rust 2019-01-04 [17:27:46] <ferminter> Already tried `lazy_static` but that did not do the trick for me. 
+rust 2019-01-04 [17:28:02] <ferminter> And tried `thread_local` - also did not work 
+rust 2019-01-04 [17:28:05] <dpc1> nCrazed: been there :D 
+rust 2019-01-04 [17:28:29] <ferminter> @Yaniel so is this the only solution? 
+rust 2019-01-04 [17:29:37] <Yaniel> oh, apparently you can have a shared setup fn 
+rust 2019-01-04 [17:29:46] <Yaniel> https://doc.rust-lang.org/book/ch11-03-test-organization.html 
+rust 2019-01-04 [17:30:07] <Yaniel> nevermind I misread that 
+rust 2019-01-04 [17:30:49] <ferminter> but such a shared setup fn would be very helpful here 
+rust 2019-01-04 [17:31:14] <Yaniel> well you can still have one 
+rust 2019-01-04 [17:31:19] <Yaniel> but you need to call it manually 
+rust 2019-01-04 [17:31:46] <ferminter> and I need to call it from every function marked #[est], right? 
+rust 2019-01-04 [17:31:51] <Yaniel> yes 
+rust 2019-01-04 [17:32:13] <Yaniel> it's not very useful if there's only one thing you need to do there but if there's more... 
+rust 2019-01-04 [17:32:46] <kali> nobody tried something with proc macro for this ? 
+rust 2019-01-04 [17:33:12] <Yaniel> hmm 
+rust 2019-01-04 [17:33:40] <Yaniel> I suppose you could do something like write an attribute that adds a call to your setup fn to every fn item in the scope 
+rust 2019-01-04 [17:34:08] <ferminter> oh boy x 
+rust 2019-01-04 [17:34:08] <ferminter> xD 
+rust 2019-01-04 [17:34:11] <Yaniel> would be an interesting exercise 
+rust 2019-01-04 [17:34:38] <Yaniel> ferminter: anyway for all I know the tests can compile into separate binaries so... 
+rust 2019-01-04 [17:35:13] <ferminter> tests are executed in different threads by default, so I thought that thread_local could do the trick already. 
+rust 2019-01-04 [17:36:54] <dpc1> there is a `--threads=1` or something similar you can pass to cargo test if you want to run them sequentially 
+rust 2019-01-04 [17:37:41] <mbrubeck> RUST_TEST_THREADS=1 in the environment is one way 
+rust 2019-01-04 [17:38:23] <ferminter> @dpc1 @mbrubeck thanks but this topic is about avoiding logger init in every test function 
+rust 2019-01-04 [17:38:48] <ferminter> env_logger requires having a `let _ = env_logger::try_init()` call in every single test function which is crazy 
+rust 2019-01-04 [17:41:08] <kali> Yaniel: i'm not sure you could iterate over function in a scope, but you could replace the #[test] with #[test_with_log]... 
+rust 2019-01-04 [17:41:25] <kali> maybe... 
+rust 2019-01-04 [17:43:11] <ferminter> @kali yeah defining a proc_macro sounds like an overkill to me for that even though it would fix the problem 
+rust 2019-01-04 [17:43:19] <mbrubeck> There are some macro crates like stainless and https://github.com/utkarshkukreti/speculate.rs that help but they are nightly-only 
+rust 2019-01-04 [17:43:20] <ferminter> I stumbled upon this gem: https://medium.com/@ericdreichert/test-setup-and-teardown-in-rust-without-a-framework-ba32d97aa5ab 
+rust 2019-01-04 [17:43:30] <onix> Can proc macros help with the counting macro issue? 
+rust 2019-01-04 [17:44:07] <talchas> yes 
+rust 2019-01-04 [17:44:29] <onix> ooooh 
+rust 2019-01-04 [17:44:57] <talchas> (well, for most cases, I'm not 100% sure what it looks like at the moment where you need to proc_macro_hack for expressions) 
+rust 2019-01-04 [17:48:09] <onix> I've looked into things like diesel https://github.com/diesel-rs/diesel/blob/master/diesel/src/macros/tuples.rs for how they do their From statements for arrays/tuples/other auxilliary types, and they have this monstrosity of a macro that they can shove types into for Impls over different varieties. Can something like this be done in a procedural macro? 
+rust 2019-01-04 [17:50:54] <talchas> yes, but then they'd require a rustc that supports proc macros (which might happen anyways iono) and you still need to compile a bunch of impls 
+rust 2019-01-04 [17:51:45] <talchas> it's trivial to generate that enormous thing and then you don't have to look at it any more 
+rust 2019-01-04 [17:51:49] <onix> For Diesel, yeah, but for someone that doesn't care about supporting <1.30, would that be fine since proc_macros are in stable? 
+rust 2019-01-04 [17:52:08] <talchas> yeah 
+rust 2019-01-04 [17:52:12] <onix> sweet 
+rust 2019-01-04 [17:52:35] <talchas> but it's probably not really any easier to write or any faster 
+rust 2019-01-04 [17:52:41] <talchas> though I could be wrong on either of those 
+rust 2019-01-04 [18:00:08] <onix> Argh we're not able to test procedural macros on the playground 
+rust 2019-01-04 [18:01:07] <dpc1> you can paste code on paste.rs 
+rust 2019-01-04 [18:01:19] <dpc1> though you can't test it but others can at least copy from there 
+rust 2019-01-04 [18:12:12] <chat> Hello, are clippy and rls now part of the default Rust installation? They don't seem to exist as components in rustup anymore 
+rust 2019-01-04 [18:14:02] <Yaniel> Vtec234: they do, but they lost the -preview name 
+rust 2019-01-04 [18:14:22] <Yaniel> and yes they are installed by default AFAIK 
+rust 2019-01-04 [18:17:27] <Vtec234> cheers 
+rust 2019-01-04 [19:00:38] <patapon> is it possible to create new spans in a proc macro with proc_macro_span? 
+rust 2019-01-04 [19:01:35] <patapon> more precisely: i want to create a span that points inside a raw string literal 
+rust 2019-01-04 [19:08:34] <ldiamond> anyone know how to connect to a websocket with ws-rs but provide custom HTTP headers 
+rust 2019-01-04 [19:13:55] <huwai> hey 
+rust 2019-01-04 [19:13:57] <huwai> error: some components unavailable for download: 'rls', 'clippy' 
+rust 2019-01-04 [19:14:01] <huwai> when updating rustup 
+rust 2019-01-04 [19:14:12] <huwai> are RLS and Clippy removed as components? 
+rust 2019-01-04 [19:18:59] <stephaneyfx> huwai: Are you using nightly rust? These components sometimes fail to build and thus are not available on nightly. 
+rust 2019-01-04 [19:19:21] <cole-h> huwai, check this to see if the components failed to build: https://mexus.github.io/rustup-components-history/  
+rust 2019-01-04 [19:26:54] <proc> I'm searching for a threadsafe stack with fixed size, dropping the last element on full insertion 
+rust 2019-01-04 [19:30:32] * raph Is there a trait like `Borrow` but gives you a `Cow`, so you can pass an object either owned or by reference, and the consumer can either borrow or clone as desired? 
+rust 2019-01-04 [19:31:32] <KiChjang> i wonder why that's necessary when you can just Cow::from 
+rust 2019-01-04 [19:32:26] <ted> raph: wouldn't you usually use AsRef<T> for that? 
+rust 2019-01-04 [19:32:52] <ted> altho i guess that's not quite right because you want them to be able to pass a T or &T 
+rust 2019-01-04 [19:32:59] <raph> the idea is that you can avoid a clone if you want to take the object by move 
+rust 2019-01-04 [19:33:20] <raph> I think if I just want a reference, then impl Borrow<T> is the way to do that 
+rust 2019-01-04 [19:33:24] <ted> mm 
+rust 2019-01-04 [19:33:38] <ted> maybe where T: Into<Cow<T>> ? 
+rust 2019-01-04 [19:33:45] <ted> (with appropriate lifetimes) 
+rust 2019-01-04 [19:34:00] <raph> I should also add, this is `impl T`, not just T 
+rust 2019-01-04 [19:34:30] <raph> Lemme check if `Into<Cow>` works... 
+rust 2019-01-04 [19:36:07] <Moongoodgirl{K}> From is not implemented, except for the specific cases of Cow<str> and Cow<[_]> 
+rust 2019-01-04 [19:39:20] * raph Yeah, it doesn't work :/ 
+rust 2019-01-04 [19:40:58] <ted> :-/ 
+rust 2019-01-04 [19:41:14] <raph> I'm wondering if I can make my own... I guess one way to find out. 
+rust 2019-01-04 [19:41:58] <ted> raph: i've relatedly wondered if it would be good to have something like Cow but for structs with internal borrowing 
+rust 2019-01-04 [19:42:33] <ted> like if you have struct S<'a> { x: &'a str }, have some way to define borrowed and owned versions 
+rust 2019-01-04 [19:50:46] <patapon> is there a quick way to get the position of the beginning of line n in a string? 
+rust 2019-01-04 [19:52:18] <wpage> byte position or character position? 
+rust 2019-01-04 [19:52:28] <patapon> byte 
+rust 2019-01-04 [19:55:40] <Moongoodgirl{K}> Not unless you know exactly where the linebreaks are in advance. 
+rust 2019-01-04 [19:55:56] <Moongoodgirl{K}> If you don't, you gotta search for them, which is slow (O(n)) 
+rust 2019-01-04 [19:56:10] <patapon> sorry, i meant quick in the syntactical sense 
+rust 2019-01-04 [19:56:12] <patapon> quick to write 
+rust 2019-01-04 [19:56:19] <gchristensen> how about BufReader's lines() ? 
+rust 2019-01-04 [19:56:36] <wpage> that yields lines, but doesn't tell you the position 
+rust 2019-01-04 [19:56:43] <gchristensen> or s.find('\n') or something 
+rust 2019-01-04 [19:56:56] <gchristensen> ah, that is the first. sorry, I'll shut up :P 
+rust 2019-01-04 [19:57:43] <patapon> i guess what could work is call lines() and then calculate the offset from the start of the line to the start of the text 
+rust 2019-01-04 [19:57:50] <patapon> but i don't know how to do that 
+rust 2019-01-04 [19:58:13] <patapon> since lines() returns slices 
+rust 2019-01-04 [19:58:13] <wpage> patapon: I'm thinking something like Iterator::scan() 
+rust 2019-01-04 [19:58:31] <wpage> I'm working something up on a rust playground right now to see if that might work 
+rust 2019-01-04 [19:59:18] <gchristensen> scan sounds promising 
+rust 2019-01-04 [19:59:42] <starblue> enumerate filter take map next? 
+rust 2019-01-04 [19:59:54] <wpage> starblue: that does sound super easy 
+rust 2019-01-04 [20:00:59] <patapon> starblue: that might work 
+rust 2019-01-04 [20:01:03] <Moongoodgirl{K}> There's a str::lines() 
+rust 2019-01-04 [20:01:34] <Moongoodgirl{K}> ...oh but it doesn't give you indices x.x 
+rust 2019-01-04 [20:01:41] <raph> This is as close as I've gotten so far. It kinda works but seems to require excess type annotations when passing in a simple reference: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=5104b4007e3dbd140565f2e08d8c8147 
+rust 2019-01-04 [20:02:07] <raph> I think Borrow has the same problem 
+rust 2019-01-04 [20:02:45] <Lumpio-> str.bytes().enumerate().find().nth()? :I 
+rust 2019-01-04 [20:04:19] <emerent_> another one: str.char_indices().filter(|&(_, ch)| ch == '\n').take(n).next().map(|(pos, _)| pos) 
+rust 2019-01-04 [20:04:44] <wpage> If you need to care about non-ascii newline chars (e.g. input could use the full UTF-8 range or untrusted input), it gets a lot messier 
+rust 2019-01-04 [20:04:50] <mbrubeck> do you mean .skip(n) intsead of .take(n)? 
+rust 2019-01-04 [20:04:55] <stephaneyfx> patapon: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=c826de0c38dee33d26828a687b02c1d0 
+rust 2019-01-04 [20:05:13] <emerent_> mbrubeck: err, yeah, that or .last() 
+rust 2019-01-04 [20:05:50] <patapon> stephaneyfx: didn't know about match_indices, thanks! 
+rust 2019-01-04 [20:06:34] <Lumpio-> Also I meant .filter 
+rust 2019-01-04 [20:06:52] <wpage> oooh, match_indices would work nicely would multiple possible line-ending chars, too 
+rust 2019-01-04 [20:07:46] <Lumpio-> I think the only line ending char in practice is '\n' 
+rust 2019-01-04 [20:07:55] <Lumpio-> (Some weird OSs use "\r\n" but it still has '\n' at the end) 
+rust 2019-01-04 [20:08:08] <mbrubeck> Does anything actually use the non-ASCII ones (U+2028 and U+2029)? 
+rust 2019-01-04 [20:08:21] <wpage> emerent_: char_indices makes an iterator over chars and char positions - does "char positions" mean the byte offset of the char, or does it counting full chars? 
+rust 2019-01-04 [20:08:35] <starblue> https://play.rust-lang.org/?version=nightly&mode=debug&edition=2018&gist=d0ae826f2e87fea92a62f986a7a3161d 
+rust 2019-01-04 [20:08:36] <wpage> mbrubek: technically xml 
+rust 2019-01-04 [20:08:45] <emerent_> wpage: byte offset 
+rust 2019-01-04 [20:09:09] <emerent_> char count would just be .enumerate() and wouldn't need a specific iterator 
+rust 2019-01-04 [20:09:20] <patapon> wpage: i guess i need only \n and \r\n, i don't need anything more than what str::lines() already does 
+rust 2019-01-04 [20:09:53] <starblue> chars enumerate filter map nth 
+rust 2019-01-04 [20:10:11] <starblue> That seems to be the most elegant. 
+rust 2019-01-04 [20:10:31] <Lumpio-> I did enumerate filter nth map 
+rust 2019-01-04 [20:10:35] <wpage> starblue: what if the input string contains multi-byte chars? 
+rust 2019-01-04 [20:10:40] <Lumpio-> Then it only needs to map once (the last map is Option::map) 
+rust 2019-01-04 [20:10:46] <Lumpio-> Probably optimizes to the same code... 
+rust 2019-01-04 [20:11:00] <mbrubeck> chars().enumerate() won't give you byte offsets 
+rust 2019-01-04 [20:11:15] <mbrubeck> char_indices() will give you byte offsets, which are probably more useful than codepoint counts 
+rust 2019-01-04 [20:11:17] <starblue> Yes, from that point of view bytes() is better 
+rust 2019-01-04 [20:11:23] <patapon> i went with match_indices nth map 
+rust 2019-01-04 [20:12:43] <starblue> "filter nth map" uses map on the option, in "filter map nth" the map is on the iterator 
+rust 2019-01-04 [20:12:57] <starblue> doesn't make much of a differenc I guess 
+rust 2019-01-04 [20:15:02] <emerent_> https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b1c509f8c7ff4e88eefc36b86bcc1e3f 
+rust 2019-01-04 [20:15:10] <emerent_> the pointer offset version 
+rust 2019-01-04 [20:16:33] <ted> raph: why did you use impl<S: Clone> there instead of impl<S: Shape>? 
+rust 2019-01-04 [20:16:49] <ted> if i change those two impls to S: Shape then your example works without type annotations on the first call 
+rust 2019-01-04 [20:17:01] <ted> am i missing something? 
+rust 2019-01-04 [20:17:10] <ted> raph: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=1511d90e9ec9c68ff3fa4b549126354f 
+rust 2019-01-04 [20:17:40] <raph> ted: ah cool, that might be the answer! 
+rust 2019-01-04 [20:21:37] <Fazer> hi, is there an official slack for rust? or at least some big unofficial one? 
+rust 2019-01-04 [20:23:53] <mbrubeck> Fazer: Not official, but this one may still be active https://rust-slack.herokuapp.com/ 
+rust 2019-01-04 [20:24:00] <mbrubeck> (I don't use it myself) 
+rust 2019-01-04 [20:24:04] <mbrubeck> There's also a Discord server 
+rust 2019-01-04 [20:24:56] <mbrubeck> https://bit.ly/rust-community 
+rust 2019-01-04 [20:27:43] <Fazer> thanks 
+rust 2019-01-04 [20:32:09] <onix> I wish we had const generics :( 
+rust 2019-01-04 [20:32:56] <onix> or macros that would make implementing [(i32, i32); _] easy 
+rust 2019-01-04 [20:34:36] <Lumpio-> Communities in 2019, fragmented into IRC, Slack, Discord, Gitter and whatever 
+rust 2019-01-04 [20:34:44] <Lumpio-> It was so much better when there was only IRC for real-time chat... 
+rust 2019-01-04 [20:45:01] <rovar> I think someone from the core Rust team needs to pull all of the channel owners together and encourage them strongly to pick a single system and have everyone move there 
+rust 2019-01-04 [20:45:30] <mbrubeck> The majority of Rust teams have moved their team channels to Discord at this point, I think. 
+rust 2019-01-04 [20:45:36] <jebrosen> onix: You can write the macros yourself but it's not exactly an "easy" solution 
+rust 2019-01-04 [20:45:42] <rovar> yea.. I  was about to say that Discord would be my choice..  
+rust 2019-01-04 [20:45:54] <rovar> I am on 8 different rust channels on Gitter..  
+rust 2019-01-04 [20:46:04] <wpage> https://www.rust-lang.org/community points to just this irc and discord 
+rust 2019-01-04 [20:46:08] <rovar> I will post notes in them strongly encouraging a move.  
+rust 2019-01-04 [20:46:27] <rovar> tokio, diesel, and a few other big ecosystem projects are in gitter 
+rust 2019-01-04 [20:47:11] <Moongoodgirl{K}> no. 
+rust 2019-01-04 [20:47:13] <wpage> pretty sure pest is in gitter, too 
+rust 2019-01-04 [20:47:13] <Moongoodgirl{K}> No. D: 
+rust 2019-01-04 [20:47:25] <Moongoodgirl{K}> *If you're going to move to anything, move to Matrix.* 
+rust 2019-01-04 [20:47:31] <Lumpio-> More to IRC 
+rust 2019-01-04 [20:47:48] <Moongoodgirl{K}> Please don't rely on a single-centralized system run by a forprofit for official communication. 
+rust 2019-01-04 [20:47:56] <Lumpio-> I'm strongly opposed to putting anything more important than some game guild chatroom on a centralized corporate-run system 
+rust 2019-01-04 [20:47:58] <Moongoodgirl{K}> use something freeeeeee 
+rust 2019-01-04 [20:48:03] <gchristensen> like IRC! 
+rust 2019-01-04 [20:48:05] <Moongoodgirl{K}> ++Lumpio- 
+rust 2019-01-04 [20:48:05] <jebrosen> onix: There is a PR in progress that adds some compiler support for const generics, no idea how close it is 
+rust 2019-01-04 [20:48:39] <Moongoodgirl{K}> #rust:mozilla.org 
+rust 2019-01-04 [20:48:41] <rovar> Moongoodgirl{K},  I appreciate the sentiment,  but right now ease of use and communication trumps ideology  
+rust 2019-01-04 [20:48:41] <Moongoodgirl{K}> make it happen 
+rust 2019-01-04 [20:48:46] <Moongoodgirl{K}> rovar: ??? 
+rust 2019-01-04 [20:48:51] <Moongoodgirl{K}> how is Matrix difficult 
+rust 2019-01-04 [20:48:56] <gchristensen> it is pretty difficult 
+rust 2019-01-04 [20:49:01] <rovar> when matrix is actually easy to use for everyone, I'd suggest it 
+rust 2019-01-04 [20:49:05] <Moongoodgirl{K}> what 
+rust 2019-01-04 [20:49:17] <rovar> the last 3 times I've tried to fire it up.. it just sits and loads indefinitely 
+rust 2019-01-04 [20:49:26] <Moongoodgirl{K}> oh. 
+rust 2019-01-04 [20:49:29] <rovar> so I leave and decide to come back when it doesn't suck 
+rust 2019-01-04 [20:49:34] <Moongoodgirl{K}> idk, I've never had that problem 
+rust 2019-01-04 [20:49:35] <gchristensen> I got lost in weird setup problems before giving up  
+rust 2019-01-04 [20:49:44] <Moongoodgirl{K}> rovar: if you wanna do /that/, though, Discord is down all the time :I 
+rust 2019-01-04 [20:49:49] <rovar> which I believe it will be widely usable, soon 
+rust 2019-01-04 [20:50:00] <Moongoodgirl{K}> meanwhile Mozilla IRC is perfectly reliable 
+rust 2019-01-04 [20:50:02] <Moongoodgirl{K}> so um 
+rust 2019-01-04 [20:50:08] <rovar> I like mozilla IRC 
+rust 2019-01-04 [20:50:21] <rovar> but it lacks some critical features 
+rust 2019-01-04 [20:50:26] <Moongoodgirl{K}> Matrix, then. 
+rust 2019-01-04 [20:50:52] <rovar> I don't even know if Matrix offers the features of Discord and Gitter that people want/need for discussing software 
+rust 2019-01-04 [20:50:59] <rovar> we need more than realtime chat..  
+rust 2019-01-04 [20:50:59] <gchristensen> let's just all move to Twitter. 
+rust 2019-01-04 [20:51:03] <Moongoodgirl{K}> what features even do you need? 
+rust 2019-01-04 [20:51:24] <hodapp> oddly enough people managed to discuss software over IRC for..... quite awhile 
+rust 2019-01-04 [20:51:25] <Moongoodgirl{K}> IRC works fine feature wise for discussing software?? 
+rust 2019-01-04 [20:51:32] <gchristensen> it isn't about you 
+rust 2019-01-04 [20:51:33] <rovar> indexed history is the biggest one.. a lot of people like the notifications 
+rust 2019-01-04 [20:51:44] <Moongoodgirl{K}> um, yes, Matrix has those 
+rust 2019-01-04 [20:51:46] <gchristensen> none of this is about anyone who likes IRC 
+rust 2019-01-04 [20:51:57] <rovar> Moongoodgirl{K},  it has yet to demonstrate this to me :) 
+rust 2019-01-04 [20:52:02] <Moongoodgirl{K}> ?? 
+rust 2019-01-04 [20:52:02] <rovar> I'll go try it again right now..  
+rust 2019-01-04 [20:52:09] <rovar> I have never gotten it to work 
+rust 2019-01-04 [20:52:14] <Moongoodgirl{K}> Matrix has multi-device support, notifications, and searching. 
+rust 2019-01-04 [20:52:22] <rovar> and I consider myself a fairly astute distributed systems dev..  
+rust 2019-01-04 [20:52:23] <Moongoodgirl{K}> This is a thing. It has those features. 
+rust 2019-01-04 [20:52:28] <rovar> also I haven't spent any time on it 
+rust 2019-01-04 [20:52:33] <Lumpio-> Pffrt I have notifications and searchable history on IRC 
+rust 2019-01-04 [20:52:40] <mbrubeck> I don't know how any of this works. 
+rust 2019-01-04 [20:52:40] <mbrubeck> I'm just engraving these messages on pebbles and throwing them in a mysterious hole in the forest behind my house, and then your replies appear to me in a vision. 
+rust 2019-01-04 [20:52:44] <Moongoodgirl{K}> rovar: I haven't spent any time on Discord. That means it's bad right? 
+rust 2019-01-04 [20:53:06] <rovar> if people can't get Matrix to work, then it offers no useful features.  
+rust 2019-01-04 [20:53:24] <Moongoodgirl{K}> Matrix works just fine for me and a ton of other people. 
+rust 2019-01-04 [20:53:28] <gchristensen> >>insert logical fallacy card here>> 
+rust 2019-01-04 [20:53:41] <Moongoodgirl{K}> in fact, I see people /in here/ all the time who are on the Matrix side. 
+rust 2019-01-04 [20:55:07] <Moongoodgirl{K}> I'd be willing to accept a hybrid solution where communication is hosted on a system that is bridged to Matrix and Discord, or to IRC and Discord. 
+rust 2019-01-04 [20:55:19] <Moongoodgirl{K}> That's...that would be okay. 
+rust 2019-01-04 [20:55:40] <gchristensen> the trouble with not being willing to accept something is accepting the consequences of it when it doesn't go your way 
+rust 2019-01-04 [20:56:08] <Moongoodgirl{K}> But there shouldn't be stuff that happens /only/ on Discord. :| 
+rust 2019-01-04 [20:57:29] <Moongoodgirl{K}> rovar: ...Matrix has worked just fine for me, and I don't even consider myself an astute distributed systems Dev. 
+rust 2019-01-04 [20:57:32] <Moongoodgirl{K}> dev * 
+rust 2019-01-04 [20:57:41] <wpage> It's fine to have strong opinions, if you're willing to recognize them for what they are, that other people can have them too, and that's ok 
+rust 2019-01-04 [20:57:42] <rovar> I am back into my account on Riot.im 
+rust 2019-01-04 [20:58:20] <rovar> it appears that messages from the #kubernetes:matrix.org channel are arriving in realtime.. this is an improvement over my previous attempts 
+rust 2019-01-04 [20:59:17] <rovar> uh oh..  I clicked  "jump to unread messages" a couple minutes ago and the screen has been blank since.  
+rust 2019-01-04 [20:59:56] <mwarning> hi, I need a bit help with a simple life time problem: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=b39ecbacece6926263b955014f323152 
+rust 2019-01-04 [21:00:32] <mwarning> I added lifetimes, but the compiler complained that I bind the lifetime to nothing - so I have removed als lifetimes again.. 
+rust 2019-01-04 [21:00:47] <rovar> Moongoodgirl{K},  also, gitter is open source.. it is probably hosted by an evil, for profit company 
+rust 2019-01-04 [21:01:06] <Moongoodgirl{K}> rovar: Gitter is single-centralized, so not much of an improvement over Discord. 
+rust 2019-01-04 [21:01:55] <rovar> ok.. I see one advantage to matrix now 
+rust 2019-01-04 [21:01:57] <stephaneyfx> mwarning: Something like this? https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=d57c7a959fd7afeda318b3232c079dcc 
+rust 2019-01-04 [21:02:19] <rovar> and I'm assuming its stability/perf problems can be solved with the help of some dedicated hosting by mozilla or whomever 
+rust 2019-01-04 [21:02:27] <Moongoodgirl{K}> Possibly. 
+rust 2019-01-04 [21:02:29] <rovar> but I am connected to the gitter channels via Matrix 
+rust 2019-01-04 [21:02:31] <mwarning> stephaneyfx: indeed, thanks! 
+rust 2019-01-04 [21:02:41] <rovar> which making bridging easier 
+rust 2019-01-04 [21:02:52] <Moongoodgirl{K}> Matrix does indeed make bridging easier. 
+rust 2019-01-04 [21:03:07] <rovar> and it appears IRC bridging is almost a first-class citizen as well.  
+rust 2019-01-04 [21:03:16] <rovar> let me see if I can break into irc.mozilla.org 
+rust 2019-01-04 [21:03:52] <Moongoodgirl{K}> Official hosted homeservers are also now a thing, so we might see performance improvements brought by that? 
+rust 2019-01-04 [21:03:54] <mwarning> stephaneyfx:  I do not understand  the &'a ProgramIterator. Why implement for a reference to  ProgramIterator? 
+rust 2019-01-04 [21:03:54] <rovar> hmm. freenode and a few others are bridged, but not irc.mozilla 
+rust 2019-01-04 [21:04:00] <j_ey> this sounds a bit OT 
+rust 2019-01-04 [21:04:08] <Moongoodgirl{K}> That's very odd. I'm certain I've seen people in here from Matrix. 
+rust 2019-01-04 [21:04:16] <mbrubeck> maybe from a different homeserver? 
+rust 2019-01-04 [21:04:17] <rovar> I'm sure it's possible..  
+rust 2019-01-04 [21:04:32] <stephaneyfx> mwarning: So that the Item associated type can use the lifetime defined by the impl 
+rust 2019-01-04 [21:04:56] <mbrubeck> The people here with -M at the end of their nicks are using some sort of Matrix bridge 
+rust 2019-01-04 [21:05:02] <Moongoodgirl{K}> ^ 
+rust 2019-01-04 [21:05:37] <Moongoodgirl{K}> also [m] 
+rust 2019-01-04 [21:05:44] <Moongoodgirl{K}> ...heh. 
+rust 2019-01-04 [21:05:53] <eigenrick-M> woo! 
+rust 2019-01-04 [21:06:02] <Moongoodgirl{K}> c: 
+rust 2019-01-04 [21:06:07] <eigenrick-M> I'm chatting from the blockchain! long live Satoshi! 
+rust 2019-01-04 [21:06:10] <stephaneyfx> mwarning: The slice borrows the ProgramIterator 
+rust 2019-01-04 [21:06:12] <rovar> eigenrick-M, shut up 
+rust 2019-01-04 [21:06:21] <gchristensen> eigenrick-M: how are you bridged? 
+rust 2019-01-04 [21:06:47] <eigenrick-M> I just had to join the #mozilla_#rust:matrix.org channel explicitly 
+rust 2019-01-04 [21:06:53] <eigenrick-M> it's not listed anywhere 
+rust 2019-01-04 [21:07:13] <rovar> s/#rust/#anything_else 
+rust 2019-01-04 [21:07:19] <rovar> should work for anything in irc.mozilla.org 
+rust 2019-01-04 [21:08:04] <rovar> ok.. let's inspect the history and plugins for things like commits, diffs and such 
+rust 2019-01-04 [21:08:27] <rovar> if those are decent, I'd be willing to recommend Matrix as Rust central 
+rust 2019-01-04 [21:08:31] <mwarning> stephaneyfx: hm, a bit confusing. I need time to understand that. 
+rust 2019-01-04 [21:09:03] <stephaneyfx> mwarning: Let me know if you need help clearing the confusion 
+rust 2019-01-04 [21:09:31] <mwarning> stephaneyfx: it's hard to formulate the question :) 
+rust 2019-01-04 [21:10:08] <gchristensen> rovar: does that recommendation come with some degree of authority? 
+rust 2019-01-04 [21:10:31] <mwarning> I only want to tell the compiler that the slice lives as long as the ProgramIterator 
+rust 2019-01-04 [21:10:56] <stephaneyfx> mwarning: That's what the impl on &'a ProgramIterator does 
+rust 2019-01-04 [21:11:13] <rovar> gchristensen,  the only authority I'm interested in is that of technical merit and ergonomics..  if I can make a case that productivity and communication will improve, then I can maybe convince most of the gitter people to switch 
+rust 2019-01-04 [21:11:14] <mwarning> But that " &'a ProgramIterator" seems to say that the slice lives as long as a reference to ProgramIterator 
+rust 2019-01-04 [21:11:23] <stephaneyfx> mwarning: Implementing on ProgramIterator directly does not give you any lifetime you can use for the Item associated type 
+rust 2019-01-04 [21:11:31] <gchristensen> gotcha. 
+rust 2019-01-04 [21:11:49] <stephaneyfx> mwarning: That's fine. Rustc will infer an appropriate lifetime. 
+rust 2019-01-04 [21:11:53] <rovar> I have good relationships with a few of the project owners..  
+rust 2019-01-04 [21:12:07] <mwarning> stephaneyfx: I wish it would be easier 
+rust 2019-01-04 [21:12:22] <gchristensen> I'm sure that'll help :P even in the face of technical merit and ergonomics, relationships are everything 
+rust 2019-01-04 [21:13:00] <rovar> gitter and IRC are easy cases, since bridging from Matrix will make transitioning easier 
+rust 2019-01-04 [21:13:17] <rovar> Discord might take more work, and that's where the core team is hanging out..  
+rust 2019-01-04 [21:14:07] <Moongoodgirl{K}> <rovar> ok.. let's inspect the history and plugins for things like commits, diffs and such 
+rust 2019-01-04 [21:14:15] <Moongoodgirl{K}> wait, hang on. Discord has code history? 
+rust 2019-01-04 [21:15:22] <rovar> search/history is ok, but it's slower than old people fucking 
+rust 2019-01-04 [21:15:27] <rovar> in matrix 
+rust 2019-01-04 [21:17:06] <gchristensen> matrix is ... known ... to not be very nice, storage wise. I'm not surprised search and history is a bit slow 
+rust 2019-01-04 [21:17:40] <rovar> yea.. I reckon it would be a bit of a bear 
+rust 2019-01-04 [21:18:00] <mwarning> stephaneyfx: I have some trouble mutating the member variable: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=cf92a606ead6b442dcdbc122b72374b8 
+rust 2019-01-04 [21:19:32] <rovar> Moongoodgirl{K}, it looks like some integration is pretty basic and depends on the clients..   it looks like all dev oriented 3rd party integrations point back to https://github.com/matrix-org/go-neb 
+rust 2019-01-04 [21:20:13] <Moongoodgirl{K}> yeah but at least it /has/ integration 
+rust 2019-01-04 [21:20:25] <rovar> how about voice chat?  
+rust 2019-01-04 [21:20:36] <rovar> resident voice chatrooms are kind of the killer app for dev teams 
+rust 2019-01-04 [21:21:03] <Moongoodgirl{K}> Matrix doeees have voice chat 
+rust 2019-01-04 [21:21:23] <Moongoodgirl{K}> I'm not convinced of the "killer" part 
+rust 2019-01-04 [21:21:28] <Moongoodgirl{K}> but yeah it's a thing 
+rust 2019-01-04 [21:22:16] <stephaneyfx> mwarning: Yeah, that won't work, even if you impl Iterator for &'a mut ProgramIterator because `&mut &'a mut ProgramIterator` won't allow you to get `&'a [u32]` 
+rust 2019-01-04 [21:22:20] <rovar> I mean it is the differentiating feature for discord 
+rust 2019-01-04 [21:22:35] <rovar> it is very nice for distributed dev teams 
+rust 2019-01-04 [21:23:06] <mwarning> stephaneyfx: I feel lost :P Maybe I should call it a day. 
+rust 2019-01-04 [21:25:36] <jcrites> is there a good description of what "into/Into" means? I"m having some trouble understanding it 
+rust 2019-01-04 [21:25:58] <jcrites> Is into() just converting one type into another based on context? 
+rust 2019-01-04 [21:26:21] <stephaneyfx> mwarning: Iterator does not support returning references to the inside of the iterator. A trick is to implement it for a type that borrows something else, but as you can see, this does not work when the iterator needs mutable access to the something else and return a borrow of the something else 
+rust 2019-01-04 [21:26:28] <Moongoodgirl{K}> We may have to agree to disagree on whether having...uhh...distinguished? voice chat trumps openness and freedom 
+rust 2019-01-04 [21:27:00] <stephaneyfx> jcrites: Into is a trait which is implemented for anything implementing From 
+rust 2019-01-04 [21:28:04] <jcrites> what I mean is, when I come across `x.into()` in some code, what should I understand the expression is doing? is it simply converting from one type to another? 
+rust 2019-01-04 [21:28:10] * jcrites is a Rust beginner 
+rust 2019-01-04 [21:28:42] <Moongoodgirl{K}> jcrites: yep, it's performing a lossless, infallible type conversion 
+rust 2019-01-04 [21:28:45] <jcrites> is it similar to something like static_cast(x) in C++ where the type is inferred from the context? 
+rust 2019-01-04 [21:29:04] <Moongoodgirl{K}> and yeah, the type is inferred (Rust uses type inference a lot) 
+rust 2019-01-04 [21:29:06] <jcrites> I see. So the method is taking a type parameter, and what that is is inferred from the context of the expression? I think that's what I have found confusing 
+rust 2019-01-04 [21:29:34] <Moongoodgirl{K}> The type parameter is actually on the trait, not the method. But yeah, type inference. 
+rust 2019-01-04 [21:29:36] <jcrites> not being familiar enough with the language to understand what type is implied or desired from the context. thanks, this explanation helps 
+rust 2019-01-04 [21:29:44] <Moongoodgirl{K}> :) 
+rust 2019-01-04 [21:31:13] <mwarning> stephaneyfx: ok, good to know 
+rust 2019-01-04 [21:33:55] <stephaneyfx> mwarning: I think what you're trying to do is usually called a streaming iterator. There's a crate for this, but this does not make use of the std Iterator trait for the reasons mentioned earlier. 
+rust 2019-01-04 [21:40:40] <mwarning> ok 
+rust 2019-01-04 [21:43:19] <Shibe> is there any way of making an unitialized box? 
+rust 2019-01-04 [21:43:20] <Yatekii> hmm if I have a feature x and another feature x/y, does y require and enable x? 
+rust 2019-01-04 [21:43:29] <Shibe> like just to get it to allocate, but not pass any value 
+rust 2019-01-04 [21:43:39] <Shibe> I would like ideally for nothing to be passed from the stack onto the box 
+rust 2019-01-04 [21:43:52] <Shibe> Box::new(uninitialized_value) might work but its not ideal 
+rust 2019-01-04 [21:46:13] <Amnesia> question, is it correct that RLS can only be used with rust nightly ? 
+rust 2019-01-04 [21:46:35] <stephaneyfx> Amnesia: No, rls can be used with stable rust as well 
+rust 2019-01-04 [21:46:43] <Amnesia> (the reason I'm asking, is because a dependency, rustc-ap-graphviz, fails to build due to "#![feature] may not be used on the stable release channel" 
+rust 2019-01-04 [21:47:22] <Amnesia> I cloned the RLS repo, and then ran cargo build, and I also tried to checkout to the latest stable-update-1.31.7 branch 
+rust 2019-01-04 [21:48:00] <stephaneyfx> Amnesia: Oh sorry, I misunderstood. I thought you asked if rls can be used on stable to write your own rust programs 
+rust 2019-01-04 [21:49:32] <stephaneyfx> Amnesia: If the rls source code contains #![feature(...)] statements, then yeah, I think it can only be built with a nightly compiler 
+rust 2019-01-04 [21:49:48] <Amnesia> it's actually a dependency of it, namely rustc-ap-graphviz 
+rust 2019-01-04 [21:50:30] <stephaneyfx> Amnesia: Even main.rs in rls requires some features AFAICT 
+rust 2019-01-04 [21:52:32] <pie_flavor> how do you check if a std::process::Child has exited yet without waiting for its completion? 
+rust 2019-01-04 [21:53:42] <WindowsBunny> pie_flavor: try_wait 
+rust 2019-01-04 [21:54:48] <Amnesia> stephaneyfx: ack, tyvm 
+rust 2019-01-04 [21:55:31] <pie_flavor> that is not a very sensibly named function 
+rust 2019-01-04 [22:06:24] <jebrosen> Amnesia: I suspect rls will never be buildable on stable except as shipped and built with the rustc build system 
+rust 2019-01-04 [22:08:15] <Amnesia> oh woah, it's part of rustc as well :D 
+rust 2019-01-04 [22:11:16] <Amnesia> jebrosen: ty! 
+rust 2019-01-04 [22:11:30] <Amnesia> (kinda retarded I missed that-.-) 
+rust 2019-01-04 [22:13:46] <potatoe> Hello, I was writing a new application that contains a grpc/http backend and also several frontends (cli application/bots), what would be the right way to structure this?  
+rust 2019-01-04 [22:13:52] <potatoe> I'm a newbie to rust 
+rust 2019-01-04 [22:14:03] <potatoe> I'm talking, directory module wise for now 
+rust 2019-01-04 [22:19:29] <pie_flavor> maybe the backend is a crate and each frontend is a binary application 
+rust 2019-01-04 [22:46:36] <gchristensen> is there a safe way to see if an OsStr statrs with ".#"? 
+rust 2019-01-04 [22:49:23] <stephaneyfx> gchristensen: Something like `s.to_str().map_or(false, |s| s.starts_with(".#"))` assuming you're ok with false for non-Unicode OsStr values regardless of their beginning 
+rust 2019-01-04 [22:49:56] <gchristensen> hrm. I don't care about anything beyond the first two bytes  
+rust 2019-01-04 [22:50:10] <gchristensen> so even if it is .#invalidunicodenightmare I'd still want a true 
+rust 2019-01-04 [22:50:46] <gchristensen> I guess I can as_bytes() it and call it a day :) 
+rust 2019-01-04 [22:51:16] <stephaneyfx> gchristensen: Yes, if your code is not meant to support Windows 
+rust 2019-01-04 [22:51:24] <gchristensen> oh dear 
+rust 2019-01-04 [22:51:32] <gchristensen> ok, what am I missing there? 
+rust 2019-01-04 [22:51:57] <stephaneyfx> as_bytes() comes from the OsStrExt trait, IIRC 
+rust 2019-01-04 [22:52:27] <stephaneyfx> More precisely std::os::unix::ffi::OsStrExt 
+rust 2019-01-04 [22:52:33] <talchas> even though starts-with .# can be done just as well on wtf8 
+rust 2019-01-04 [22:54:01] <Kingsqueee> is it possible to have conditional compilation add or remove function parameters? 
+rust 2019-01-04 [22:55:00] <Kingsqueee> when I try to do fn foo(always: T, #[cfg(whatever)] ifyouwantit: M), rustc complains about # not expected in pattern  
+rust 2019-01-04 [22:55:46] <stephaneyfx> Kingsqueee: You can provide 2 conditionally compiled definitions of foo 
+rust 2019-01-04 [22:56:16] <Kingsqueee> stephaneyfx: of course, but that doesn't scale well the more conditional compilations you add 
+rust 2019-01-04 [22:58:30] <gchristensen> what is it you want to conditionally compile in? 
+rust 2019-01-04 [23:01:13] <npmccallum> SimonSapin: I have a question about https://github.com/rust-lang/rust/pull/56216 when you have a minute. 
+rust 2019-01-04 [23:02:49] <Kingsqueee> gchristensen: API-wise, I want to add a function pointer to a constructor if the user decides they want to override certain functionality 
+rust 2019-01-04 [23:03:13] <Kingsqueee> I could just have a setter with Option<fn> but it makes no sense to be able to change it at runtime 
+rust 2019-01-04 [23:03:49] <gchristensen> make it a Option<fn> and set it at compile time with #[cfg... 
+rust 2019-01-04 [23:04:05] <gchristensen> (I assume you can do that :)) 
+rust 2019-01-04 [23:04:28] <Kingsqueee> useless parameters don't sound fun 
+rust 2019-01-04 [23:04:48] <gchristensen> having a bunch of conditional compilations, to me, sounds worse 
+rust 2019-01-04 [23:04:58] <Kingsqueee> I could use a builder pattern 
+rust 2019-01-04 [23:05:06] <Kingsqueee> builder solves all problem 
+rust 2019-01-04 [23:05:07] <gchristensen> my goal would be to have as little of that as possible 
+rust 2019-01-04 [23:05:30] <Kingsqueee> my goal is always to compiletime everything so :V 
+rust 2019-01-04 [23:09:57] <Ralith> another trick would be to make your type generic, and use a ZST for the non-overridden case 
+rust 2019-01-04 [23:10:45] <jrvanwhy> Ralith: I was just putting together a playground example for that. 
+rust 2019-01-04 [23:11:04] <gchristensen> ZST? 
+rust 2019-01-04 [23:11:59] <ralvessa> What is the convention for doc comments in Rust? Do you comment every public (and perhaps) private function? Or only when you publish something to be used by other users? Do you consider the code self-documented? 
+rust 2019-01-04 [23:12:02] <stephaneyfx> Zero Sized Type 
+rust 2019-01-04 [23:12:02] <pie_flavor> can I use formatting with a non-constant string? 
+rust 2019-01-04 [23:12:11] <SimonSapin> Hey npmccallum. What about it? (In general it's nicer to just ask :)) 
+rust 2019-01-04 [23:12:33] <npmccallum> SimonSapin: First, I like the new API. 
+rust 2019-01-04 [23:12:36] <gchristensen> ralvessa: I put #![warn(missing_docs)] in my lib.rs or main.rs and then rust yells at me when I fail to document something it'd like me to 
+rust 2019-01-04 [23:12:51] <ralvessa> Hahah! 
+rust 2019-01-04 [23:13:02] <npmccallum> SimonSapin: Second, is there some reason we aren't just doing "impl From<[u8; 4]> for u32" (etc...)? 
+rust 2019-01-04 [23:13:21] <npmccallum> SimonSapin: and vice versa 
+rust 2019-01-04 [23:13:45] <npmccallum> The "to_be_bytes()" family of functions seem to be mixing concerns to me. 
+rust 2019-01-04 [23:13:47] <ralvessa> gchristensen: So we should document as much as possible? But you still don't? :P 
+rust 2019-01-04 [23:13:58] <Ralith> ralvessa: for code intended for publication, I document every public item/field/module/etc; for personal use I am lazy but moving towards doing more of that, especially as I factor out formerly private code into publishable crates 
+rust 2019-01-04 [23:14:26] <Ralith> in quinn, I've found that near-exhaustively documenting even private stuff can be a huge help, when code becomes complex 
+rust 2019-01-04 [23:14:43] <gchristensen> Ralith: my code compiles without warnings, so I document everything it tells me to at a minimum 
+rust 2019-01-04 [23:14:48] <gchristensen> ralvessa: ^ 
+rust 2019-01-04 [23:15:14] <ralvessa> Ralith: I see. I learned to document everything back in the day when I learned Java, but now that I only do JS for work, we never comment any code. We use README.md's for everything docs related. 
+rust 2019-01-04 [23:15:16] <Ralith> though most code I write isn't remotely that complex 
+rust 2019-01-04 [23:15:26] <Ralith> that sounds terrible 
+rust 2019-01-04 [23:15:45] <Ralith> you can only cram so much information into how you name things 
+rust 2019-01-04 [23:16:04] <gchristensen> tell that to Java's Factory Builder Bla Bla Bla Bla BLah 
+rust 2019-01-04 [23:16:15] <ralvessa> Yep... It's not great, but I've found JS devs to be very lazy when it comes to comments/docs. 
+rust 2019-01-04 [23:16:25] <npmccallum> SimonSapin: or even better, make it possible to use size_of() in a generic so we can do "impl<T: Sized + Copy> From<[u8; size_of::<Self>()]> for T { ... }" 
+rust 2019-01-04 [23:16:35] <SimonSapin> npmccallum: I think From makes sense when there is only one obvious conversion 
+rust 2019-01-04 [23:16:45] <SimonSapin> you only get one impl of a given trait for a given type 
+rust 2019-01-04 [23:16:49] <Ralith> ralvessa: rust cultural norms are exhaustive documentation on public interfaces at minimum 
+rust 2019-01-04 [23:17:13] <jrvanwhy> Kingsquee: Here's an example of compiletime optional arguments using generics: https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=6aeb16b842e5f0a13e01edd36983e71b 
+rust 2019-01-04 [23:17:18] <ralvessa> Ralith: That sounds good to me. :) 
+rust 2019-01-04 [23:17:30] <SimonSapin> npmccallum: that last is totally unsound 
+rust 2019-01-04 [23:17:34] <Ralith> it is one of the things that makes the community great 
+rust 2019-01-04 [23:17:51] <SimonSapin> you could build a null or otherwise invalid &T reference 
+rust 2019-01-04 [23:17:57] <ralvessa> Ralith: And I guess more is better than less when it comes to docs. :P 
+rust 2019-01-04 [23:18:50] <Ralith> ralvessa: I mean, there's always going to be some times where you struggle to say anything that isn't said by the name or w/e, but rustdoc usually makes it very easy to navigate things so there's little risk of overdoing it 
+rust 2019-01-04 [23:19:13] <npmccallum> SimonSapin: Would you consider a patch adding From<[u8; $size]> for all the integer types and removing the "from_[nlb]e_bytes()" family of functions? 
+rust 2019-01-04 [23:19:53] <ralvessa> Ralith: True. Sometimes it's very obvious what the code does, and comments add little value. 
+rust 2019-01-04 [23:19:56] <SimonSapin> npmccallum: no, for two reasons 
+rust 2019-01-04 [23:20:05] <SimonSapin> those methods are stable, so removing them would be a breaking change 
+rust 2019-01-04 [23:20:29] <SimonSapin> and, a single From<> conversion is ambiguous. What endianness is used? 
+rust 2019-01-04 [23:23:02] <npmccallum> SimonSapin: no, to_[bln]e_bytes() and from_[bln]e_bytes() are only in nightly 
+rust 2019-01-04 [23:23:21] <npmccallum> SimonSapin: and second, there is no ambiguity: native endianness is used 
+rust 2019-01-04 [23:23:56] <npmccallum> SimonSapin: 1u16.to_be().into::<[u8; 2]>() is completely unambiguious... 
+rust 2019-01-04 [23:24:51] <Ralith> having `fn to_be(&self) -> u16` on `u16` seems extremely strange to me 
+rust 2019-01-04 [23:24:51] <npmccallum> SimonSapin: the separate function names don't remove ambiguity, they only push the ambiguity into the array 
+rust 2019-01-04 [23:25:12] <SimonSapin> They are #[stable(since = "1.32.0")] and have already been extensively debated. We'd need a much better reason than this to revert stabilization and backport the revert to beta 
+rust 2019-01-04 [23:25:32] <Ralith> a primitive integer type is by definition native-endian, or not subject to endianness at all depending on perspective 
+rust 2019-01-04 [23:25:54] <npmccallum> Ralith: I don't disagree with that. 
+rust 2019-01-04 [23:26:31] <Ralith> oh, those got stabilized? :( 
+rust 2019-01-04 [23:26:38] <npmccallum> Yup 
+rust 2019-01-04 [23:27:09] <Ralith> that is going to lead to some very gratuitously confusing code 
+rust 2019-01-04 [23:27:39] <SimonSapin> Ralith: to_be and to_le are stable since 1.0 
+rust 2019-01-04 [23:27:50] <Ralith> ah, right 
+rust 2019-01-04 [23:27:59] <Ralith> new stuff looks great though! 
+rust 2019-01-04 [23:28:09] <SimonSapin> I think they are weird for the reason you said, and I'd rather avoid using them in my code 
+rust 2019-01-04 [23:28:31] <KiChjang> what's the function that turns a string representation of a byte back into a u8? 
+rust 2019-01-04 [23:28:34] <npmccallum> Me too. I just wasn't aware the other functions made it into 1.32.0 
+rust 2019-01-04 [23:28:53] <SimonSapin> npmccallum: if From<> is implemented with native endianness then that *implementation code* is indeed unambiguous. But to a reader, a program like `1_u16.into(): [u8; 2]` is ambiguous if they don't know how the trait is implemented 
+rust 2019-01-04 [23:28:55] <KiChjang> i.e. convert "0A" or "0a" to 10u8 
+rust 2019-01-04 [23:29:25] <SimonSapin> whereas `1_16.to_le_bytes()` specifies the endianness right there in the method name 
+rust 2019-01-04 [23:29:55] <npmccallum> SimonSapin: but it isn't behind a trait and therefore can't be used in a generic... :( 
+rust 2019-01-04 [23:30:06] <KiChjang> got it, it's std::u8::from_str_radix 
+rust 2019-01-04 [23:30:07] <stephaneyfx> KiChjang: from_str_radix? 
+rust 2019-01-04 [23:30:17] <SimonSapin> npmccallum: most integer methods are like that 
+rust 2019-01-04 [23:30:30] <npmccallum> SimonSapin: I'm (painfully) aware. 
+rust 2019-01-04 [23:30:42] <SimonSapin> npmccallum: it's an explicit non-goal (for now) of the standard library to support code generic over integer types 
+rust 2019-01-04 [23:30:54] <SimonSapin> on float types, or collection type, or... 
+rust 2019-01-04 [23:31:15] <npmccallum> SimonSapin: hopefully that will be revisited in the future 
+rust 2019-01-04 [23:31:41] <SimonSapin> npmccallum: if someone comes up with a concrete proposal for what those traits should look like 
+rust 2019-01-04 [23:31:49] <SimonSapin> it won't just happen out of thin air 
+rust 2019-01-04 [23:31:53] <npmccallum> agreed 
+rust 2019-01-04 [23:32:21] <npmccallum> SimonSapin: thanks for the chat 
+rust 2019-01-04 [23:32:59] <pie_flavor> is there a function for taking a full command line command and parsing it into program name + args array suitable for passing to std::process::Command? 
+rust 2019-01-04 [23:35:23] <SimonSapin> pie_flavor: I don't know of one. Consider Command::new("/bin/sh").arg("-c").arg(foo), or porting https://docs.python.org/3/library/shlex.html (there's a Source Code link) 
+rust 2019-01-04 [23:35:31] <Ralith> the only robust way to do that is to just pass it to the correct shell directly 
+rust 2019-01-04 [23:36:06] <pie_flavor> SimonSapin: you mean {!crate shlex} 
+rust 2019-01-04 [23:36:06] <rustbot> shlex (0.1.1) - Split a string into shell words, like Python's shlex.  -> https://crates.io/crates/shlex <https://docs.rs/shlex> 
+rust 2019-01-04 [23:36:15] <SimonSapin> oh nice 
+rust 2019-01-04 [23:36:59] <SimonSapin> pie_flavor: but yeah it's "split on spaces except for things in quotes, kinda like a shell", not "exactly like your system shell, with all features" 
+rust 2019-01-04 [23:41:46] <pie_flavor> and then it becomes `let cmd = shlex::split(cmd); let proc = Command::new(&cmd[0]).args(&cmd[1..]).spawn()?`? 
+rust 2019-01-04 [23:42:09] <SimonSapin> something like that I suppose 
+rust 2019-01-04 [23:42:14] <SimonSapin> but is it really what you want to do? 
+rust 2019-01-04 [23:42:46] <pie_flavor> no, I really want to go play smash bros 
+rust 2019-01-04 [23:43:03] <pie_flavor> are you attempting to ask if it's the solution I'm looking for? 
+rust 2019-01-04 [23:43:17] <WindowsBunny> pie_flavor: warning: that is wrong on windows 
+rust 2019-01-04 [23:43:24] <pie_flavor> why's it wrong on windows 
+rust 2019-01-04 [23:43:57] <SimonSapin> I mean why is "taking a full command line command and parsing it into program name + args array suitable for passing to std::process::Command" something you need in the first place? 
+rust 2019-01-04 [23:44:11] <WindowsBunny> Because the rules for how a command line is parsed into arguments are much more complicated than they seem 
+rust 2019-01-04 [23:44:20] <WindowsBunny> there's a lot of subtle undocumented behavior 
+rust 2019-01-04 [23:44:49] <WindowsBunny> especially around the first argument for the program name 
+rust 2019-01-04 [23:46:25] <pie_flavor> SimonSapin: command line is specified in toml file 
+rust 2019-01-04 [23:47:49] <pie_flavor> e.g. `command-line = 'D:\path\to\executable.exe {arg1} ARG2={arg2} -ARG3 {arg3} -ARG4 "thing in quotes"'` 
+rust 2019-01-04 [23:48:05] <pie_flavor> WindowsBunny: there aren't any strange edge cases 
+rust 2019-01-04 [23:48:14] <SimonSapin> pie_flavor: I think what's usually done is taking a TOML array, calling /bin/sh -c with the string, or accepting either 
+rust 2019-01-04 [23:48:15] <pie_flavor> as long as it's 'split on spaces except in quotes' it's good 
+rust 2019-01-04 [23:48:45] <SimonSapin> I don't know what's the windows equivalent of sh -c, maybe writting a batch file? 
+rust 2019-01-04 [23:49:04] <SimonSapin> writing a batch file is what https://github.com/taskcluster/generic-worker does 
+rust 2019-01-04 [23:49:37] <SpaceManiac> getting it right on Windows is so hard, the Rust runtime does not 
+rust 2019-01-04 [23:50:45] <WindowsBunny> SpaceManiac: Actually, std now does it itself instead of calling the winapi function for it 
+rust 2019-01-04 [23:51:02] <WindowsBunny> (so it can avoid depending on gdi32) 
+rust 2019-01-04 [23:51:08] <SpaceManiac> Oh, let me check the bug then 
+rust 2019-01-04 [23:52:05] <WindowsBunny> SpaceManiac: https://github.com/rust-lang/rust/pull/56568 
+rust 2019-01-04 [23:52:24] <talchas> wait, why is that in gdi32 
+rust 2019-01-04 [23:52:28] <talchas> dammit ms 
+rust 2019-01-04 [23:52:35] <SpaceManiac> hmm, what release has that hit? 
+rust 2019-01-04 [23:52:38] <WindowsBunny> talchas: it's not 
+rust 2019-01-04 [23:52:42] <remmy> (Related: <https://dev.to/notriddle/copying-someone-elses-performance-tweak-5g5h>) 
+rust 2019-01-04 [23:52:49] <WindowsBunny> talchas: It's from shell32, but shell32 ends up depending on gdi32 
+rust 2019-01-04 [23:52:56] <talchas> ah I see, yeah 
+rust 2019-01-04 [23:53:06] <talchas> which is significantly more sensible 
+rust 2019-01-04 [23:53:29] <centril> ralvessa: that's worrying; given that JS doesn't have types, ISTM that JS code needs documentation and comments much more Rust code does 
+rust 2019-01-04 [23:53:31] <talchas> well, in a :windows: sort of way 
+rust 2019-01-04 [23:53:57] * WindowsBunny throws talchas through a window 
+rust 2019-01-04 [23:54:02] <centril> Ralith: I feel that documentation on public only interfaces isn't good enough, especially not in an application (since it doesn't even have public interfaces..) 
+rust 2019-01-04 [23:54:19] <centril> rustc in particular has a striking lack of comments and documentation 
+rust 2019-01-04 [23:54:36] <centril> 15% comment density I think is what I think should be a minimum 
+rust 2019-01-04 [23:54:44] <SpaceManiac> Hmm, that may mean that the command-line parsing is wrong by definition 
+rust 2019-01-04 [23:54:54] <ralvessa> centril: In my case I use React, and we use proptypes to verify the types of things. But yeah, it's not great... Unfortunately it's the state of the web. That's why I want to learn Rust and move to back end. 
+rust 2019-01-04 [23:55:18] <WindowsBunny> SpaceManiac: how so? 
+rust 2019-01-04 [23:55:32] <centril> ralvessa: what do you mean "prototypes to verify the types of things"...? JS doesn't have types... 
+rust 2019-01-04 [23:56:23] <SpaceManiac> WindowsBunny: command line "a/"b.exe runs a/b.exe, but CommandLineToArgvW (and thus the new Rust function) parses this as two arguments, "a/" and "b.exe" 
+rust 2019-01-04 [23:57:09] <ralvessa> centril: I mean, React verifies the types of things you pass them, the types of props. JS recognized types though. You can use typeof to get the type of things. It knows what a string is, and a number, and a bool, etc. 
+rust 2019-01-04 [23:57:39] <WindowsBunny> SpaceManiac: I wouldn't say either is wrong 
+rust 2019-01-04 [23:57:43] <WindowsBunny> they're just... different 
+rust 2019-01-04 [23:57:51] <centril> ralvessa: ah; the tags of things; (I'm being literal about the types: JS doesn't have anything like types) 
+rust 2019-01-04 [23:57:54] <SpaceManiac> it's nonsensical that cmd.exe is different than the application 
+rust 2019-01-04 [23:59:02] <ralvessa> centril: Yeah no, you can't do var x = "foo" and specify that x is a type, but if you do typeof x it'll tell you it's a string. 
+rust 2019-01-04 [23:59:04] <centril> ralvessa: but how is this done without running the application / functions? 
+rust 2019-01-04 [23:59:18] <ralvessa> centril: I don't understand your question. 
+rust 2019-01-04 [23:59:32] <remmy> centril: Runtime type checking. 
+rust 2019-01-04 [23:59:41] <centril> ah; there's no such thing as runtime type checking 
+rust 2019-01-05 [00:00:21] <WindowsBunny> SpaceManiac: the really fun bit is that arg parsing in msvcrt.dll is different from both :D 
+rust 2019-01-05 [00:00:44] <WindowsBunny> (which causes fun problems with mingw) 
+rust 2019-01-05 [00:00:47] <SpaceManiac> top-notch design work 
+rust 2019-01-05 [00:02:31] <mbrubeck> centril: tokei finds 313k lines of comments and 905k lines of code in Rust files in the "src" directory in the rust-lang/rust repo 
+rust 2019-01-05 [00:03:46] <mbrubeck> so 26% of non-whitespace lines are comments (or 23% of total lines including whitespace) 
+rust 2019-01-05 [00:03:49] <remmy> centril: Sure there is, it checks the types, and then it logs warnings if the check failed. ;p 
+rust 2019-01-05 [00:04:09] <centril> mbrubeck: is this after or before removing of the copyrights? 
+rust 2019-01-05 [00:04:55] <mbrubeck> There are 12K copyright headers included in that count. 
+rust 2019-01-05 [00:05:30] <mbrubeck> accounting for about 100K lines of comments 
+rust 2019-01-05 [00:06:28] <mbrubeck> Excluding copyright headers and whitespace-only lines, comments are about 18% of total lines. 
+rust 2019-01-05 [00:06:48] <centril> mbrubeck: interesting; for libsyntax we have 4601 LOC comments and 32231 LOC code 
+rust 2019-01-05 [00:07:11] <centril> so my experience may not have been reflective of rustc as a whole 
+rust 2019-01-05 [00:07:44] <mbrubeck> I guess this includes libstd which has extensive public API docs 
+rust 2019-01-05 [00:08:10] <centril> mbrubeck: yes, the standard library is well documented 
+rust 2019-01-05 [00:09:43] <mbrubeck> For "src/librustc*" the ratio is 13% (again excluding whitespace and copyright headers) 
+rust 2019-01-05 [00:12:24] <centril> remmy: types are a static dicipline tho; so "statically typed" is really redundant, you can just say "typed". 
+rust 2019-01-05 [00:13:44] <talchas> types are limited to a static discipline just according to academics talking about statically typed languages :P 
+rust 2019-01-05 [00:15:20] <centril> talchas: I mean... words have meaning; if languages can actually be dynamically typed then "type" itself becomes sorta meaningless 
+rust 2019-01-05 [00:15:23] <centril> ;) 
+rust 2019-01-05 [00:15:50] <talchas> yesss but I'm not convinced the type theory people saying this ever had ground to stand on about this 
+rust 2019-01-05 [00:16:12] <talchas> I'm pretty sure that if you go and look at old lisp papers and such they're calling it types 
+rust 2019-01-05 [00:18:01] <centril> talchas: that's an interesting discussion; lisp isn't old enough... you'll need to go back to Church and even older to Russell 
+rust 2019-01-05 [00:18:24] <centril> in particular, if dynamic typing is a thing, then the untyped lambda calculus is typed 
+rust 2019-01-05 [00:18:40] <Ralith> centril: yeah, I've been doing more and more internal documnetation, even in libraries 
+rust 2019-01-05 [00:18:49] <centril> but what's then the point in calling something STLC (simply typed lambda calculus) 
+rust 2019-01-05 [00:19:12] <centril> talchas: as for the type theory I'm interested to hear what you have in mind 
+rust 2019-01-05 [00:19:22] <Ralith> centril: but it's worth acknowledging that rust has, in my experience, a very high rate of good docs on library APIs at least 
+rust 2019-01-05 [00:19:38] <centril> Ralith: yeah that much is definitely true. 
+rust 2019-01-05 [00:23:09] <centril> Personally I'm with Harper on this one, nothing is truly untyped; things can be unityped -- but the distinction is quite uninteresting. 
+rust 2019-01-05 [00:24:20] <talchas> centril: I mean, in terms of technical definitions sure; but I'm in the opinion that "words have meaning, and it's the one more people agree on" :P 
+rust 2019-01-05 [00:24:42] <talchas> and that being clever about deliberately misunderstanding just makes harper obnoxious 
+rust 2019-01-05 [00:25:07] <centril> talchas: > and it's the one more people agree on 
+rust 2019-01-05 [00:25:16] <centril> it's not clear to me that this has been demonstrated 
+rust 2019-01-05 [00:25:33] <centril> and if so, we need a new word for "type" 
+rust 2019-01-05 [00:25:37] <robbym> Is there something like str::find that works on generic slices? 
+rust 2019-01-05 [00:26:09] <Church> centril: Why are people coming to me? 
+rust 2019-01-05 [00:26:10] <j_ey> robbym: there's a position on Iterator 
+rust 2019-01-05 [00:26:11] <Church> And eww 
+rust 2019-01-05 [00:26:26] <centril> Church: is your name Alonzo? ;) 
+rust 2019-01-05 [00:26:49] <Church> Well I do go by aleph. 
+rust 2019-01-05 [00:26:56] <robbym> j_ey, That searches for an element. I'm searching for a contiguous slice of data, in a larger slice. 
+rust 2019-01-05 [00:27:23] <j_ey> robbym: chunks/windows? 
+rust 2019-01-05 [00:27:48] <j_ey> https://doc.rust-lang.org/std/slice/struct.Windows.html 
+rust 2019-01-05 [00:28:17] <centril> talchas: but more than that; I think that below the confusion and disagreement about "dynamic typing" there's the curryist vs. churchist world views; https://lispcast.com/church-vs-curry-types/  
+rust 2019-01-05 [00:28:32] <centril> I think it's also behind the notions of "I write tests so I don't need types" 
+rust 2019-01-05 [00:29:25] * Church quietly goes back to patching golang 
+rust 2019-01-05 [00:29:47] <Church> centril: Thanks for the article btw. Looks nice 
+rust 2019-01-05 [00:30:06] <centril> Church: :) 
+rust 2019-01-05 [00:30:39] <robbym> j_ey, That'll do the trick! Thanks. Don't know if implementing a search in terms of `windows` will be less performant than a dedicated function... We'll see. 
+rust 2019-01-05 [00:31:17] <severete> I talk with jonathan davis  
+rust 2019-01-05 [00:33:00] <severete> he tell me   'severete, netscape is the best' 
+rust 2019-01-05 [00:33:27] <j_ey> mbrubeck: hi 
+rust 2019-01-05 [00:33:38] <mbrubeck> heyo 
+rust 2019-01-05 [00:34:02] <j_ey> mbrubeck: could be spam..? ^ 
+rust 2019-01-05 [00:35:18] <mbrubeck> thanks. looks like they put some gibberish in #servo too 
+rust 2019-01-05 [00:56:53] <pie_flavor> anyone familiar with hyper? 
+rust 2019-01-05 [00:57:02] <pie_flavor> the example code for the server doesn't work anymore 
+rust 2019-01-05 [00:57:45] <seanmonstar> pie_flavor: which example code? official examples are tested regularly, so they *should* work 
+rust 2019-01-05 [00:57:46] <pie_flavor> wait nvm I'm stupid 
+rust 2019-01-05 [00:58:12] <pie_flavor> seanmonstar: the map_err() function wasn't defined but I didn't realize that Server implemented Future 
+rust 2019-01-05 [00:58:46] <pie_flavor> hell knows why they omitted the `use` statement from the example 
+rust 2019-01-05 [00:59:15] <edef> pie_flavor: is your nick a reference 
+rust 2019-01-05 [00:59:25] <pie_flavor> yes 
+rust 2019-01-05 [00:59:31] <edef> to asdf? 
+rust 2019-01-05 [00:59:36] <pie_flavor> yes 
+rust 2019-01-05 [00:59:40] <edef> ^_^ 
+rust 2019-01-05 [01:29:25] <thomspoon> How does the 2018 edition effect macro imports? Do you just import the macro like a regular type? 
+rust 2019-01-05 [01:30:09] <thomspoon> seems so 
+rust 2019-01-05 [01:31:58] <jebrosen> Both 2015 and 2018 edition should be able to use either #[macro_use] extern crate x; or use x::macro; 
+rust 2019-01-05 [01:32:45] <jebrosen> Sometimes just use x::macro; won't work (in either edition) because they themselves call other macros that aren't imported. 
+rust 2019-01-05 [01:51:20] <pie_flavor> boy, there is no good way to have a value in a static variable that you initialize in main() 
+rust 2019-01-05 [01:51:38] <Mutabah> pie_flavor: lazy_static? 
+rust 2019-01-05 [01:51:49] <pie_flavor> how do you initialize it in main() though 
+rust 2019-01-05 [01:52:26] <Mutabah> well, it initialises on first use 
+rust 2019-01-05 [01:52:46] <pie_flavor> poking a lazy initialization is code smell supreme 
+rust 2019-01-05 [01:53:13] <Mutabah> make a similar type that panics if you use it without init? 
+rust 2019-01-05 [01:58:04] <bob_twinkles> is there any way to write the PartialEq impl here? https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=924115a45d3698cad90ae23e7e6ac4cf 
+rust 2019-01-05 [01:58:44] <bob_twinkles> I tried adding a `dynamic_eq` function to `NodeInternal` that leverages `Node: Any` but couldn't satisfy the borrow checker 
+rust 2019-01-05 [01:59:59] <bob_twinkles> it seems like it has to do with the fact that Any isn't implemented for non- 'static reference types? 
+rust 2019-01-05 [02:00:34] <bob_twinkles> I'll strip down the implementation I tried and put it in the playground as ewll 
+rust 2019-01-05 [02:03:58] <talchas> bob_twinkles: you need fn as_any(&self) -> &(Any + 'static) in Node 
+rust 2019-01-05 [02:06:28] <pie_flavor> why is mutex.lock().as_ref().unwrap() saying can't move out of borrowed content 
+rust 2019-01-05 [02:07:29] <bob_twinkles> oh, I tried that earlier but I tried using a blanket implementation in the trait declaration 
+rust 2019-01-05 [02:07:39] <bob_twinkles> rather than implementing as_ref() individually in each impl 
+rust 2019-01-05 [02:08:05] <bob_twinkles> since my understanding was that blanket impls like that were just pasted into each impl of the trait 
+rust 2019-01-05 [02:08:24] <bob_twinkles> *as_any 
+rust 2019-01-05 [02:10:34] <bob_twinkles> I suppose the real answer is that I need to write a macro to implement these traits because there's like 30 different node types... 
+rust 2019-01-05 [02:16:17] <deifacted> is there a list somewhere of 'stuff you should do before you release a crate on cargo'? it's my first time doing that and i'm nervous :v 
+rust 2019-01-05 [02:28:02] <geomyidae_> This sort of information seems invaluable: https://www.reddit.com/r/rust/comments/accvq7/ropey_10_an_editable_text_buffer_for_rust/ed7tz7a/ 
+rust 2019-01-05 [02:28:42] <geomyidae_> It would be cool if the Rust community could organize or fund more analysis like this for other parts of the Rust ecosystem 
+rust 2019-01-05 [02:37:44] <talchas> bob_twinkles: yeah, the issue is that they are also copypasted into the implicit implementation of impl Trait for dyn Trait 
+rust 2019-01-05 [02:37:48] <talchas> for which they are invalid 
+rust 2019-01-05 [02:38:16] <talchas> and you'd like it to just forward through the trait object 
+rust 2019-01-05 [02:38:32] <talchas> (but for Iterator and similar you want the current behavior, so...) 
+rust 2019-01-05 [02:39:55] <talchas> (specialization when) 
+rust 2019-01-05 [02:52:49] <thomspoon> I seem to be having a problem importing my proc macro from the tutorial https://doc.rust-lang.org/1.30.0/book/first-edition/procedural-macros.html 
+rust 2019-01-05 [02:52:53] <thomspoon> I have a workspace with two projects 
+rust 2019-01-05 [02:52:57] <thomspoon> and one of them defines the proc macro 
+rust 2019-01-05 [02:54:27] <thomspoon> but even with an extern crate with a #[macro_use], I still get a "unused #[macro_use]" and "cannot find derive macro 
+rust 2019-01-05 [02:54:44] <thomspoon> do I have to export it with #[macro_export]? 
+rust 2019-01-05 [02:56:07] <talchas> the derive proc macro is the #[proc_macro_derive()] stuff, no need for export 
+rust 2019-01-05 [02:57:16] <talchas> you probably still need the extern crate above the use, iono 
+rust 2019-01-05 [03:03:09] <stephaneyfx> thomspoon: Is your project available online? 
+rust 2019-01-05 [03:21:10] <thomspoon> Not yet... I decided to scrap the proc macro and just copy a simple macro a bunch of times. 
+rust 2019-01-05 [03:27:08] <zucchini> I would like to create a type that's generic over different array sizes, but I must be doing it wrong.  I can use the Index trait but I haven't been able to find a trait that will let me find the array bounds.  I suppose I could write my own trait but it seems like there's probably a better way. 
+rust 2019-01-05 [03:27:10] <zucchini> https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=482c727b3d45058ca9bf2b34dadadc5f 
+rust 2019-01-05 [03:27:22] <talchas> there's no good way 
+rust 2019-01-05 [03:27:37] <zucchini> oh lol didn't expect that answer. 
+rust 2019-01-05 [03:27:41] <thomspoon> haha that's a common problem around here 
+rust 2019-01-05 [03:28:07] <thomspoon> zucchini, I just made an impl From<$type> macro and copied it a lot. You can also create a procedural macro that does it as well. 
+rust 2019-01-05 [03:28:11] <talchas> if they're always const/static like that, you can just use slices fine 
+rust 2019-01-05 [03:28:12] <zucchini> doesn't the standard library have... oh right, that's why the standard lib only goes up to 32 or some such for some types. 
+rust 2019-01-05 [03:28:35] <talchas> also you want Index<usize, Output = X> 
+rust 2019-01-05 [03:29:15] <zucchini> farcaller: thanks that's closer. 
+rust 2019-01-05 [03:29:33] <zucchini> talchas: thanks that's closer 
+rust 2019-01-05 [03:29:44] <talchas> https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=40d7d86363208d1f20a0158b87e37bea and then fix it to be &mut self probably 
+rust 2019-01-05 [03:31:09] <talchas> that said, if you don't need reset it can just be whatever.iter().cycle().cloned() 
+rust 2019-01-05 [03:32:33] <zucchini> talchas: like this?   https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=30b84d4df3ac01b3559e02e39536207d 
+rust 2019-01-05 [03:34:39] <pie_flavor> dag nabbit 
+rust 2019-01-05 [03:34:53] <pie_flavor> can't seem to store several different fn (x) -> y types in a HashMap 
+rust 2019-01-05 [03:35:15] <talchas> you would typically just write (&mut self), but yes 
+rust 2019-01-05 [03:35:29] <thomspoon> I have a macros.rs file and a attributes.rs file, and I cannot seem to include my macro in the attributes.rs file, any pointers? I have #[macro_export] and `use crate::macros::*` 
+rust 2019-01-05 [03:35:35] <talchas> pie_flavor: make the first insert "insert(whatever as fn(_) -> _)" 
+rust 2019-01-05 [03:35:45] <talchas> unless you meant with different types, in which case you can't 
+rust 2019-01-05 [03:36:03] <talchas> thomspoon: iirc in-same-crate still uses the old syntax maybe? 
+rust 2019-01-05 [03:36:06] <pie_flavor> how does that work 
+rust 2019-01-05 [03:36:17] <pie_flavor> why do I need to erase a type it already knows about 
+rust 2019-01-05 [03:36:24] <talchas> or at least needs the mod macros to be defined textually above the use 
+rust 2019-01-05 [03:36:53] <talchas> pie_flavor: you should only need this if there's nothing else saying fn(x) -> y 
+rust 2019-01-05 [03:37:01] <talchas> as opposed to the various fn-item types 
+rust 2019-01-05 [03:37:25] <pie_flavor> there is something else saying fn(x) -> y 
+rust 2019-01-05 [03:37:32] <pie_flavor> that's the return type 
+rust 2019-01-05 [03:37:45] <talchas> "grumble rustc stop being bad and get better type inference" 
+rust 2019-01-05 [03:39:54] <pie_flavor> i've got a lazy_static here 
+rust 2019-01-05 [03:40:07] <thomspoon> talchas: What do you mean the old way? 
+rust 2019-01-05 [03:40:25] <pie_flavor> trying to store a HashMap<&'static str, fn (&Foo<Bar>) -> Baz> 
+rust 2019-01-05 [03:40:53] <pie_flavor> and it's saying 
+rust 2019-01-05 [03:41:26] <pie_flavor> expected type HashMap<&'static str, for<'a> fn(&'a Foo<Bar>) -> Baz> 
+rust 2019-01-05 [03:41:41] <pie_flavor> found type HashMap<&str, fn(&Foo<Bar>) -> Baz> 
+rust 2019-01-05 [03:41:56] <talchas> thomspoon: ie, needing #[macro_use] mod macros; rather than use statements 
+rust 2019-01-05 [03:42:03] <talchas> pie_flavor: that sounds like the str isn't 'static? 
+rust 2019-01-05 [03:42:17] <pie_flavor> it is though 
+rust 2019-01-05 [03:42:21] <pie_flavor> all three entries are const 
+rust 2019-01-05 [03:43:53] <talchas> anyways, that error message isn't the fn item error message, unless it's actually "fn (...) -> Baz {some_name}" 
+rust 2019-01-05 [03:44:30] <pie_flavor> aha 
+rust 2019-01-05 [03:44:38] <pie_flavor> it wasn't the str 
+rust 2019-01-05 [03:44:39] <pie_flavor> it was the fn 
+rust 2019-01-05 [03:44:47] <pie_flavor> your 'as' statement didn't work correclty 
+rust 2019-01-05 [03:44:52] <pie_flavor> i'm guessing because of the for<a> 
+rust 2019-01-05 [03:45:04] <talchas> yeah, probably 
+rust 2019-01-05 [03:45:11] <pie_flavor> it worked after I changed it to an explicitly typed new() 
+rust 2019-01-05 [03:45:16] <pie_flavor> (which SUCKS) 
+rust 2019-01-05 [03:48:57] <pie_flavor> either lazy_static is bad and should feel bad 
+rust 2019-01-05 [03:49:01] <pie_flavor> or rustc is bad and should feel bad 
+rust 2019-01-05 [03:49:16] <thomspoon> Interesting, I have my #[macro_use] on my mod in lib.rs, but my attributes.rs cannot find he macro, I get unused macro definition 
+rust 2019-01-05 [03:50:25] <talchas> do you have the mod macros; line above the mod attributes; line? 
+rust 2019-01-05 [03:52:14] <thomspoon> Nope.. 
+rust 2019-01-05 [03:52:23] <thomspoon> That's sad, makes me think of a mod like a #define 
+rust 2019-01-05 [03:52:45] <talchas> yeah, it's sad, though it's hard for it to do otherwise when macros can create mod statements 
+rust 2019-01-05 [04:11:58] <context> so... how come edition = "2018" in stable is cool... but 1.33-nightly says its an unstable feature and requires cargo-features ?!?! 
+rust 2019-01-05 [04:12:35] <context> actually this just dont work in nightly period 
+rust 2019-01-05 [04:13:32] <context> edition doesnt work with nightly period. with or without cargo-features so thats a win 
+rust 2019-01-05 [04:15:19] <context> or stable anymore :-/ 
+rust 2019-01-05 [04:21:03] <jebrosen> context: What tool is saying that? 
+rust 2019-01-05 [04:21:07] <context> nm. cargo-outdated is hosed 
+rust 2019-01-05 [04:21:12] <context> re-installing it now 
+rust 2019-01-05 [04:21:40] <context> thats what happens when yo uspend a few months with the new born :x 
+rust 2019-01-05 [04:23:02] <jebrosen> Ah, yeah tools use the version of cargo they specify when you compile them 
+rust 2019-01-05 [04:23:23] <context> yeah 
+rust 2019-01-05 [04:23:40] <jebrosen> A few cargo-* projects probably still don't support it yet, sadly 
+rust 2019-01-05 [04:42:54] <pie_flavor> anybody here used runtime_fmt before? 
+rust 2019-01-05 [04:56:53] <gomez> If I have a macro `macro_rules! Person` and I want to be able to give the attributes name, age and birthdate in any order so they can do Person(name, age, birthday) or Person(birthday, name, age), how would I do that?  
+rust 2019-01-05 [05:06:49] <Icefoz> gomez: How do you know which attribute is which, then? 
+rust 2019-01-05 [05:14:34] <gomez> well, when I do $($i:ident: $j:expr),+) and give it to a struct it will autopopulate the members like named arguments. 
+rust 2019-01-05 [05:14:40] <gomez> I think I figured out how to get it to work though 
+rust 2019-01-05 [05:35:28] <figaro> HI, how do I get invited to this channel? 
+rust 2019-01-05 [05:35:49] <Mutabah> figaro: what do you mean? 
+rust 2019-01-05 [05:35:57] <figaro> I'd like to access it through Quassel IRC 
+rust 2019-01-05 [05:36:33] <figaro> Mutabah: Without joining through the browzer 
+rust 2019-01-05 [05:36:55] <Mutabah> You can just connect to the mozilla irc server and join the channel 
+rust 2019-01-05 [05:36:57] <Mutabah> no invite needed 
+rust 2019-01-05 [05:37:51] <figaro> oh 
+rust 2019-01-05 [05:37:59] <figaro> It's just not on freenode? 
+rust 2019-01-05 [05:38:42] <Mutabah> This server isn't part of freenode 
+rust 2019-01-05 [05:42:11] <AJTJ> Hey, I'm very curious about Rust and how difficult the learning curve is. 
+rust 2019-01-05 [05:43:15] <AJTJ> as a person who is a JS dev 
+rust 2019-01-05 [05:43:17] <Mutabah> It has a bit of a learning curve, it really does depend on your previous programming expirence. 
+rust 2019-01-05 [05:44:30] <AJTJ> Mutabah: like, if you're coming from JS and/or Python 
+rust 2019-01-05 [05:45:40] <Mutabah> AJTJ: May take some learning, but it should definitely be worth it 
+rust 2019-01-05 [05:45:50] <Yaniel> pretty steep, but you don't have to unlearn the C/C++ memory model so you have that going for you 
+rust 2019-01-05 [05:46:38] <AJTJ> Mutabah: why would it be worth it? 
+rust 2019-01-05 [05:46:57] <AJTJ> Yaniel: I know enough about C++/C that I'm not super interested in what they offer. 
+rust 2019-01-05 [05:47:47] <Yaniel> why not? 
+rust 2019-01-05 [05:48:22] <Mutabah> Rust is a powerful and fast language, and prevents a lot of the runtime bugs you encounter in other languages 
+rust 2019-01-05 [05:49:08] <AJTJ> Yaniel: Not a disparaging comment. It's more about me thinking future forward. I work as a JS dev and I like power, but I like fast implementation. 
+rust 2019-01-05 [05:49:24] <AJTJ> Rust seems like you'd spend a lot less time debugging. 
+rust 2019-01-05 [05:49:37] <Yaniel> got it, but I want to know if the reasons you don 
+rust 2019-01-05 [05:49:55] <Yaniel> if the reasons you aren't interested in C/C++ are ones that apply to Rust as well 
+rust 2019-01-05 [05:50:37] <AJTJ> I think C/C++ have too many ways to shoot oneself in the foot and paint oneself into a corner. I think the time to achieve mastery is way higher. 
+rust 2019-01-05 [05:50:54] <AJTJ> and since Rust is just as fast, if not faster... 
+rust 2019-01-05 [05:51:57] <AJTJ> Yaniel: I'm not actually sure if Rust would be too firmly typed for me. Can you program in a functional paradigm with Rust 
+rust 2019-01-05 [05:52:04] <Mutabah> Mostly 
+rust 2019-01-05 [05:52:09] <Yaniel> you can, and that is actually relatively popular 
+rust 2019-01-05 [05:52:36] <Mutabah> THere's some pure-functional patterns that can get painful (e.g. recusion), but it definitely allows most functional patterns (And as Yaniel said, many are quite popular) 
+rust 2019-01-05 [05:52:58] <AJTJ> that's huge for me 
+rust 2019-01-05 [05:53:15] <AJTJ> I'm a JS dev and I always lean towards a functional paradigm 
+rust 2019-01-05 [05:53:20] <Yaniel> it's one of the things that drew me to rust actually 
+rust 2019-01-05 [05:53:35] <Yaniel> that and still being effectively as low level as C 
+rust 2019-01-05 [05:53:54] <AJTJ> Yaniel: what about Haskell? 
+rust 2019-01-05 [05:54:08] <AJTJ> you can get just about C speed with Haskell, apparently 
+rust 2019-01-05 [05:55:15] <gomez> FWIW pre-c++11 has many footguns, with scoped lifetimes you shouldn't have leaked memory. Not until you start doing crazy things. 
+rust 2019-01-05 [05:55:28] <Yaniel> with haskell you still have a runtime with a garbage collector 
+rust 2019-01-05 [05:56:02] <Yaniel> gomez: I've yet to see anyone actually write pure C++11 
+rust 2019-01-05 [05:56:14] <gomez> gomez: I do at work :P 
+rust 2019-01-05 [05:56:39] <Yaniel> maybe 
+rust 2019-01-05 [05:56:43] <blackbeard420> modern c++ is sweet 
+rust 2019-01-05 [05:57:20] <gomez> I just wish modern C++ had a way to get typesafe #defines 
+rust 2019-01-05 [05:57:27] <gomez> Like rust Macros 
+rust 2019-01-05 [05:57:29] <Yaniel> you still have all the legacy libraries to deal with though 
+rust 2019-01-05 [05:58:01] <AJTJ> Yaniel: that's interesting. I thought the only advantage I could see with C++ is all the legacy libraries for use 
+rust 2019-01-05 [05:58:08] <Yaniel> (not to mention wrangling libraries in general) 
+rust 2019-01-05 [05:58:20] <Yaniel> you can use those libraries with Rust as well if you really want 
+rust 2019-01-05 [05:58:36] <gomez> You don't necessarily have to worry about libraries if you create your own RAII wrapper around them though 
+rust 2019-01-05 [05:58:38] <AJTJ> Yaniel: what about openFrameworks? 
+rust 2019-01-05 [05:58:39] <Yaniel> it's actually often a bit more convenient than in C++ 
+rust 2019-01-05 [05:59:04] <gomez> I'm also purely embedded so I'm not out there including libraries willy nilly :P 
+rust 2019-01-05 [05:59:04] <AJTJ> but isn't the problem that you won't actually be able to use all the online resources? 
+rust 2019-01-05 [05:59:11] <blackbeard420> Ive never seen a case wheres its more convenient to interface a c lib from rust then c++ 
+rust 2019-01-05 [05:59:11] <AJTJ> all the communities.. 
+rust 2019-01-05 [05:59:19] <Yaniel> gomez: ah, that definitely helps 
+rust 2019-01-05 [05:59:38] <gomez> interface C from C++: extern "C" {}, rust is way more involved 
+rust 2019-01-05 [05:59:46] <blackbeard420> exactly 
+rust 2019-01-05 [05:59:56] <kora> is there a convention for where to put impl blocks? 
+rust 2019-01-05 [05:59:58] <kora> https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=f7e6217e890ddc8348f11ec2360375ca 
+rust 2019-01-05 [06:00:23] <AJTJ> could you use openFrameworks with Rust? 
+rust 2019-01-05 [06:00:36] <Yaniel> blackbeard420: I mean when there already is a binding crate 
+rust 2019-01-05 [06:00:40] <gomez> kora: Usually your impls follow your type 
+rust 2019-01-05 [06:01:06] <jebrosen> kora: Do you implement any other traits on B / do you implement A on other structs? 
+rust 2019-01-05 [06:01:14] <gomez> AJTJ: Yes you can, you just have to write the import layer basically 
+rust 2019-01-05 [06:01:43] <kora> jebrosen: yes, both are probable 
+rust 2019-01-05 [06:01:50] <AJTJ> gomez: is that hard? 
+rust 2019-01-05 [06:02:03] <gomez> No, infact there's crates that make it easy 
+rust 2019-01-05 [06:02:06] <gomez> !crate bindgen 
+rust 2019-01-05 [06:02:06] <rustbot> bindgen (0.46.0) - Automatically generates Rust FFI bindings to C and C++ libraries. -> https://crates.io/crates/bindgen <https://docs.rs/bindgen> 
+rust 2019-01-05 [06:02:11] <Yaniel> in C++, you have to fiddle with your build system to no end to get it to find them (or only support one platform or resort to ugly stuff like vendoring them into your code) 
+rust 2019-01-05 [06:02:23] <Yaniel> at least that still was the case a few years ago 
+rust 2019-01-05 [06:02:45] <kora> gomez: so in this case that would be in module b right? 
+rust 2019-01-05 [06:02:49] <jebrosen> kora: Oh. If you impl A for a lot of types it might make sense to keep it near A, but if it's both ways maybe near B. 
+rust 2019-01-05 [06:03:01] <gomez> Yaniel: I've seen both sides. If you're dealing with custom Makefiles, it can be a PITA, however newer CMakes are super easy. Just a single target_library_include(). 
+rust 2019-01-05 [06:03:17] <Yaniel> gomez: unless you have to get someone to build it on windows 
+rust 2019-01-05 [06:03:29] <gomez> CMake though 
+rust 2019-01-05 [06:03:39] <Yaniel> cmake-gui makes it a bit better 
+rust 2019-01-05 [06:03:44] <blackbeard420> mesonbuild is pretty nice as well 
+rust 2019-01-05 [06:03:51] <blackbeard420> thats what we use at wor 
+rust 2019-01-05 [06:03:52] <gomez> Cargo is leagues above everything C++ has to offer imo 
+rust 2019-01-05 [06:03:57] <AJTJ> has anyone tried this https://github.com/nannou-org/nannou ? 
+rust 2019-01-05 [06:04:07] <AJTJ> gomez: ^ 
+rust 2019-01-05 [06:04:30] <gomez> Nope 
+rust 2019-01-05 [06:04:41] <gomez> What is the reason for using a framework that has everything? 
+rust 2019-01-05 [06:04:52] <gomez> That's where crates come in handy, you only pay for what you use 
+rust 2019-01-05 [06:05:48] <Yaniel> but then you have to evaluate crates for every purpose 
+rust 2019-01-05 [06:05:52] <Yaniel> and that's like... work 
+rust 2019-01-05 [06:06:16] <AJTJ> I'm not a fan of work 
+rust 2019-01-05 [06:06:54] <AJTJ> I'd rather only want to evaluate crates for extra speed, when needed 
+rust 2019-01-05 [06:07:01] <gomez> true, then people name crates very ambiguously so they are hard to find (i.e., diesel, r2d2, ggez, etc) 
+rust 2019-01-05 [06:07:40] <Lumpio-> Did this repo just call a program a "sketch"? 
+rust 2019-01-05 [06:08:03] <Yaniel> Lumpio-: *artists* 
+rust 2019-01-05 [06:08:15] <AJTJ> Yaniel: lol 
+rust 2019-01-05 [06:08:21] <gomez> gotta take the doggo out, have a good one yall 
+rust 2019-01-05 [06:08:34] <AJTJ> I feel like you need to be an artist to appreciate something like Rust 
+rust 2019-01-05 [06:08:49] <Yaniel> nah I know what they mean 
+rust 2019-01-05 [06:09:05] <Yaniel> waded through stuff like https://www.shadertoy.com/ enough 
+rust 2019-01-05 [06:09:11] <mib_86zokt> quite the opposite IMO, Rust makes sense :D 
+rust 2019-01-05 [06:09:53] <AJTJ> Ok, so if my goal is that I want to create super fast, amazing math surfuces and visuals, would Rust be the lowest learning curve and have the best tools/libraries? 
+rust 2019-01-05 [06:11:19] <Yaniel> no 
+rust 2019-01-05 [06:11:47] <AJTJ> Yaniel: plz explain why and perhaps alternatives 
+rust 2019-01-05 [06:12:37] <Yaniel> tools & libraries are still in heavy development as you can see, although if you are willing to restrict yourself a bit that is not a huge problem anymore 
+rust 2019-01-05 [06:13:27] <Yaniel> the language itself has one of the steepest learning curves of current popular languages due to working differently than most other languages (borrow checker) 
+rust 2019-01-05 [06:13:54] <Yaniel> what it does is save you a lot of time debugging crashes later on 
+rust 2019-01-05 [06:14:07] <Yaniel> and yelling at you when you try doing something dumb 
+rust 2019-01-05 [06:14:57] <Yaniel> also cargo makes pulling in dependencies very easy (although you are probably used to that from npm) 
+rust 2019-01-05 [06:15:19] <Yaniel> (and if you only use one framework it doesn't matter anyway) 
+rust 2019-01-05 [06:15:51] <Yaniel> and then there's the cross platform aspect, where rust is doing exceptionally well too, should you care about that 
+rust 2019-01-05 [06:16:59] <kora> Rust is infamous for having a really steep learning curve, but I haven't noticed it at all when learning Rust. In fact for me it was one of the easiest languages to learn, because (almost) everything made sense 

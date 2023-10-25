@@ -1,0 +1,1200 @@
+stripe 2019-09-17 [09:48:18] <mcmas> hi, i have a problem with "Payment Request Button" - "Step 4: Complete the payment using the emitted Token or PaymentMethod".  When i call  stripe.confirmPaymentIntent(clientSecret, {                    payment_method: ev.paymentMethod.id,                }).then(function(confirmResult) { ..... i get a script error because clientSecret is not 
+stripe 2019-09-17 [09:48:18] <mcmas> defined 
+stripe 2019-09-17 [09:48:19] <hmunoz> jeremyqm: in any case, if you are using your own trial logic, here are the steps: 
+stripe 2019-09-17 [09:48:19] <hmunoz> 1) Create SetupIntent and authenticate 
+stripe 2019-09-17 [09:48:19] <hmunoz> 2) Save PM to Customer 
+stripe 2019-09-17 [09:48:19] <hmunoz> 3) create Subscription with `off_session` flag 
+stripe 2019-09-17 [09:48:19] <hmunoz> This assumes you are only creating the subscription off-session, which in your case seems true as you use your own trial logic 
+stripe 2019-09-17 [09:48:52] <hmunoz> mcmas: you are passing in clientSecret but that variable isn't declared. How are you passing a PaymentIntent client_secret back to your client -side? That is what the clientSecret is referring to 
+stripe 2019-09-17 [09:49:23] <sherry> You mean it's not an active one? 
+stripe 2019-09-17 [09:49:49] <franzwegener> Is there a way to simulate a false CVC with a test card? 
+stripe 2019-09-17 [09:49:51] <hmunoz> sherry: there are 2 modes in Stripe. Test mode and Live mode. Look on the left menu, you will see. You seem to be looking at Test mode dashboard. Look at Live mode dashboard 
+stripe 2019-09-17 [09:50:12] <hmunoz> runnerway: what do you mean by customer without a source but has payment methods? 
+stripe 2019-09-17 [09:50:32] <hmunoz> franzwegener: the 0101 card here https://stripe.com/docs/testing#cards-responses 
+stripe 2019-09-17 [09:50:58] <hmunoz> jeanfw: I missed your question, mind pasting here again? 
+stripe 2019-09-17 [09:51:02] <franzwegener> Great list,thank you 
+stripe 2019-09-17 [09:51:22] <mcmas> @hmunoz let me check 
+stripe 2019-09-17 [09:51:39] <jeanfw> hmunoz: jeanfw  11:20:19hi all. question about mobile SDKs: how can we test for card_errors *at the time of payment*, eg. card_declined due to insufficient funds, when using the standard UI components? The test cards (e.g. *0002, *9995) fail *at the time of saving the card* to the customer (using the ephemeral key), so we never get to the point 
+stripe 2019-09-17 [09:51:39] <jeanfw> where we're actually trying to create/confirm a payment intent (as would presumably be the case for a customer who saved their card in the past, but doesn't have enough funds for the specific payment he's trying to do). Thanks!Jjeanfw  11:21:35(also, we can't save cards to the customer through the dashboard for the same reason.) 
+stripe 2019-09-17 [09:52:09] <sherry> https://usercontent.irccloud-cdn.com/file/LIcCNkGP/1568713925.JPG 
+stripe 2019-09-17 [09:52:14] <jeanfw> (sorry for the formatting there. visibly the newlines get removed) 
+stripe 2019-09-17 [09:52:16] <sherry> Which one ? 
+stripe 2019-09-17 [09:52:19] <jeremyqm> I will read more about trial, but this is a big change of logic to something already working very well in our app. Not sure if Stripe will fulfil all the requirements with trial and this will be costly to change. The user is ON Session when he confirms he wants a subscription. All I want is that the SAME card that was saved is used. This is the 
+stripe 2019-09-17 [09:52:20] <jeremyqm> same problem when the user will purchase a second subscription. They should use the same card saved on file. We have user with 150+ subscriptions, we don't want them to enter their card every time they purchase a subscription, they should be able to reuse the card on file (3D secure it is fine, but not re-enter the card that was saved) 
+stripe 2019-09-17 [09:52:43] <bozl0> If you have a connected account that is in a different currency to the parent account, are you subject to a conversation fee for those funds? 
+stripe 2019-09-17 [09:52:49] <bozl0> conversion* 
+stripe 2019-09-17 [09:53:26] <jeremyqm> We have agencies (1 card) add multiple clients, they create subscription for each client and they pay with that single card. 
+stripe 2019-09-17 [09:53:46] <franzwegener> Just FYI: https://stripe.com/docs/payments/payment-intents/web-manual uses "fetch", which isn't supported by older browsers (we got quite some traffic from those). The following polyfill works: 
+stripe 2019-09-17 [09:53:48] <franzwegener> <script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=fetch"></script> 
+stripe 2019-09-17 [09:54:00] <DJSS> hmunoz were you able to look at that pastebin? 
+stripe 2019-09-17 [09:54:15] <hmunoz> gotcha jeanfw , one sec looking 
+stripe 2019-09-17 [09:54:30] <franzwegener> One caveat: Newer Browsers before 2018 have fetch, but don't send Cookies, should you need those. 
+stripe 2019-09-17 [09:54:44] <hmunoz> jeanfw: use the 0341 card listed here (it attaches successfully but fails later) https://stripe.com/docs/testing#cards-responses 
+stripe 2019-09-17 [09:55:15] <hmunoz> sherry: I'd recommend writing in to https://support.stripe.com/contact to discuss that as it is Dashboard related, they can help you out there! 
+stripe 2019-09-17 [09:55:41] <rodreegez_> Hello, folks - when creating an invoice, is it possible to specify some kind of a reference, so that the payment can be matched up to an invoice in Xero later? 
+stripe 2019-09-17 [09:55:49] <hmunoz> DJSS: i'm updating to v17.x and trying it out in my repo 
+stripe 2019-09-17 [09:56:00] <hmunoz> DJSS: give me some more mins and I'll try it out 
+stripe 2019-09-17 [09:56:24] <sherry> Ok, thanks 
+stripe 2019-09-17 [09:57:28] <hmunoz> jeremyqm: you can re-use the saved payment method though. You don't have to enter card details each time. But an issuing bank could require that so your integration has to handle that case. But most of the time, if you're using SetupIntents properly, you should get off-session exemptions. Your case is different cause you are saving cards for off-session usage but charging them on-session, so off-session exemptions will 
+stripe 2019-09-17 [09:57:28] <hmunoz> not apply. Does that make sense? Happy to explain more 
+stripe 2019-09-17 [09:57:59] <hmunoz> jeremyqm: the answer to your question is create Subscription with `off_session: true`, did you try that? Does that work for you (after a card is properly set up) 
+stripe 2019-09-17 [09:58:22] <hmunoz> bozl0: that would be a great question for the Support team at https://support.stripe.com/contact , please write in to them and they should be able to help you! 
+stripe 2019-09-17 [09:59:01] <bozl0> Thank you hmunoz 
+stripe 2019-09-17 [09:59:41] <jeremyqm> If off-session exception will not apply, why would I try off_session: true ? 
+stripe 2019-09-17 [09:59:41] <hmunoz> rodreegez_: you could set the invoice's `metadata` or `custom_fields` but not sure what Xero accesses, not familiar with their integration set up 
+stripe 2019-09-17 [09:59:57] <DJSS> hmunoz thank you so much! 
+stripe 2019-09-17 [10:00:26] <hmunoz> jeremyqm: because off session exemption will apply if you specify off-session: true. 
+stripe 2019-09-17 [10:00:26] <hmunoz> You are creating without off-session: true, which is why the saved card's exemptions are NOT applying 
+stripe 2019-09-17 [10:00:38] <rodreegez_> @hmunoz yeah - thought about adding something in metadata. Smashing, thanks - will dig around on the Xero side. Cheers emoji-other 
+stripe 2019-09-17 [10:00:46] <hmunoz> rodreegez_: cheers! 
+stripe 2019-09-17 [10:01:08] <jeremyqm> Understod, I though you said, I have no rights to use off-session because the user is on-session. I see, off-session flag may indeed be the easier road to try 
+stripe 2019-09-17 [10:01:24] <jeremyqm> if an off-session fails, the user will receive an email I presume? 
+stripe 2019-09-17 [10:01:30] <badal> Hi, 
+stripe 2019-09-17 [10:03:05] <flaminisx> Hi guys! 
+stripe 2019-09-17 [10:03:20] <hmunoz> jeremyqm: yes I did say that, because I'm not clear on your flow. You mentioned you are leveraging your own trials. But then why is the user on session for the first payment? The user would be off-session for the first payment, only on-session to Setup their card and save it 
+stripe 2019-09-17 [10:03:23] <badal> Suppose i have used stripe in payout all the money is collected at my strip account now if i transfer some of that money to different connect account on strip. will i will change by strip? 
+stripe 2019-09-17 [10:03:46] <hmunoz> jeremyqm: yes you can send them emails automatically like this https://stripe.com/docs/billing/migration/strong-customer-authentication#3ds-payment-settings 
+stripe 2019-09-17 [10:04:02] <hmunoz> badal: I don't think that flow is supported/possible 
+stripe 2019-09-17 [10:04:10] <Robbie> Hi all, sinc migrating to the new Stripe checkout, the descriptions on payments have changed: https://imgur.com/a/XDv7VOo - how can we change this? 
+stripe 2019-09-17 [10:04:17] <jeremyqm> The user can stop the trial after 4 days instead of 14 and start paying. 
+stripe 2019-09-17 [10:04:21] <hmunoz> badal: can you explain more? i.e. transfer to a Connect account or different Stripe account 
+stripe 2019-09-17 [10:05:46] <hmunoz> Robbie: hi! Can you sent me Checkout Session ID? for one of the old vs new payments? 
+stripe 2019-09-17 [10:05:50] <jeremyqm> Our users experience limitation in trial (e.g. no more than 100 prospects on their account), they may want more and therefore decide to purchase a subscription, they go and click buy PRO or BASIC subscription and voila 
+stripe 2019-09-17 [10:05:52] <hmunoz> Robbie: want to compare 
+stripe 2019-09-17 [10:06:10] <runnerway> I will try to reword the request, i mean an user with associated payment methods. I would like to obtain a subscription with trial without "default_source" that will fail at first renewal (because it hasn't any specific payment method). The problem is that if i create a subscription without "default_source", it takes the default payment method of 
+stripe 2019-09-17 [10:06:11] <runnerway> the user. 
+stripe 2019-09-17 [10:06:20] <badal> hmunoz sub-account which is already connected to my account. 
+stripe 2019-09-17 [10:08:43] <jeremyqm> even with Stripe trial implemented, the user would then determine when he wants to start subscription, I'd update subscription, which is in session technically. 
+stripe 2019-09-17 [10:09:44] <flaminisx> does anyone here know how to work with klarna with sources? im trying to create source for Sweden, sending country code as "SE" and currency "SEK" and getting invalid_currency error. other countries work fine. can anyone help me? 
+stripe 2019-09-17 [10:12:04] <hmunoz> badal: you can transfer, there should be no charge but for up to date information, you can confirm with https://support.stripe.com/contact 
+stripe 2019-09-17 [10:12:12] <flaminisx> and it doesnt work only in production mode 
+stripe 2019-09-17 [10:16:50] <hmunoz> Robbie: the previous one was a Charge using `description` field. In your Checkout Session, you need to specify `payment_intent_data.description` for it to show up 
+stripe 2019-09-17 [10:17:04] <Robbie> perfect thanks, will try now 
+stripe 2019-09-17 [10:20:23] <hmunoz> flaminisx: what error do you get 
+stripe 2019-09-17 [10:20:52] <hmunoz> jeremyqm: thanks for detailing your flow, I get it now. Yeah I would recommend you pass `off_session: true` when you move the subscription from trial to charging immediate 
+stripe 2019-09-17 [10:21:31] <jeremyqm> On it as we speak, thanks for the help, it did clarify what that off_session is really for 
+stripe 2019-09-17 [10:21:38] <flaminisx> `{"type":"invalid_request_error","code":"invalid_currency","message":"Bad value: currency"}` 
+stripe 2019-09-17 [10:21:53] <flaminisx> hmunoz 
+stripe 2019-09-17 [10:22:01] <hmunoz> jeremyqm: but your integration should also be able to handle cases where authentication is required in the 2nd on-session scenario (where user is moving out of trial) so you should write code to handle that too. i.e. this is a realistic scenario where issuing bank could require authentication even if there was an auth previously with SetupIntent 
+stripe 2019-09-17 [10:22:04] <jeremyqm> I will also need to handle a subscription that fails because of 3D Secure and test emails 
+stripe 2019-09-17 [10:22:25] <DJSS> hmunoz any word on the error code? 
+stripe 2019-09-17 [10:22:40] <jeremyqm> hehe we are on the same page here. I'll check 
+stripe 2019-09-17 [10:25:08] <hmunoz> DJSS: just got to it, had to set up some stuff 
+stripe 2019-09-17 [10:26:22] <hmunoz> DJSS: seeing the error, digging in 
+stripe 2019-09-17 [10:29:10] <hmunoz> DJSS: addressing all the things that changed, 
+stripe 2019-09-17 [10:32:16] <hmunoz> Robbie: can you re-write the function call and use autocomplete? The function signature changed in v17.x so it should be: 
+stripe 2019-09-17 [10:32:25] <hmunoz> https://www.irccloud.com/pastebin/2l2596Dr/ 
+stripe 2019-09-17 [10:33:38] <hmunoz> DJSS: compare it to what you have right now: 
+stripe 2019-09-17 [10:33:38] <hmunoz> STPPaymentHandler.shared().handleNextAction(forPayment: clientSecret, with: self, returnURL: nil) { (status, handledPaymentIntent, actionError) in 
+stripe 2019-09-17 [10:33:38] <hmunoz> The argument names changed to `forPayment: , authenticationContext: , returnURL: ` 
+stripe 2019-09-17 [10:33:57] <hmunoz> DJSS: ^ 
+stripe 2019-09-17 [10:34:23] <hmunoz> DJSS: sorry tagged the wrong person there, the messages above are meant for you^ 
+stripe 2019-09-17 [10:41:44] <galaxyuser7> Does Stripe elements support accepting ACH payments? 
+stripe 2019-09-17 [10:41:53] <galaxyuser7> Does it have fields for that 
+stripe 2019-09-17 [10:42:20] <venky> https://stripe.com/docs/payments/cards/collecting/android#card-input-widget 
+stripe 2019-09-17 [10:42:36] <venky> im getting error in andorid stripe.createToken 
+stripe 2019-09-17 [10:42:45] <irctc41> hello, i have cardId, can i creare payment_method from it and use it with payment_intent api? or can i use cardId directly with payment_intent api ? 
+stripe 2019-09-17 [10:43:09] <irctc41> create* 
+stripe 2019-09-17 [10:43:44] <hmunoz> galaxyuser7: Elements doesn't have ACH fields, you would have to create your own fields and use Stripe.js to tokenize 
+stripe 2019-09-17 [10:43:54] <hmunoz> venky: what error are you getting? 
+stripe 2019-09-17 [10:44:25] <hmunoz> irctc41: hello! You can use a Card ID (i.e. card_123) in place of `payment_method: card_123`, it is backward compatible, try it out. 
+stripe 2019-09-17 [10:44:41] <venky> stripe is error in that i did't created local variable for this 
+stripe 2019-09-17 [10:44:53] <galaxyuser7> what all fields do I need to pass for ach token creation? hmunoz 
+stripe 2019-09-17 [10:45:08] <irctc41> great thanks 
+stripe 2019-09-17 [10:45:22] <hmunoz> venky: hmm I'm not understanding, can you tell me what the exact error was? 
+stripe 2019-09-17 [10:46:18] <venky> In the tokenizeCard method stripe is showing red colour in android 
+stripe 2019-09-17 [10:46:19] <hmunoz> galaxyuser7: fields specified here: https://stripe.com/docs/stripe-js/reference#collecting-bank-account-details 
+stripe 2019-09-17 [10:46:35] <hmunoz> venky: is there any error that you can log? can you paste the error? 
+stripe 2019-09-17 [10:47:02] <hmunoz> venky: what test (not live) card number are you entering, one of the test mode cards? Like 4242 card? 
+stripe 2019-09-17 [10:47:39] <venky> I just integrated im checking now 
+stripe 2019-09-17 [10:47:41] <venky>   private Stripe stripe = new Stripe(Card_Payment.this, publishableKey); 
+stripe 2019-09-17 [10:48:42] <venky>      Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'android.content.Context android.content.Context.getApplicationContext()' on a null object reference 
+stripe 2019-09-17 [10:50:53] <DJSS> hmunoz Thanks for that. I'll try it with "AuthenticationContext" instead of "with" .... is there a place on stripe where this is documented!? 
+stripe 2019-09-17 [10:51:23] <hmunoz> venky: is Card_Payment null? 
+stripe 2019-09-17 [10:52:46] <venky> no stripe.createToken 
+stripe 2019-09-17 [10:53:47] <marc63> I'm setting up my first connected client. When it post back to my server with an authorization code for the user, I post that back to Stripe, and I always get this response. I'm using my testing keys. "error": "invalid_grant",  "error_description": "This authorization code has already been used. All tokens issued with this code have been revoked." 
+stripe 2019-09-17 [10:54:37] <marc63> I've dbl checked that I'm using the code that is being sent to me and not something I accidentally hardcoded into the script so I don't know how it has been used before. 
+stripe 2019-09-17 [10:55:00] <marc63> Any thoughts? 
+stripe 2019-09-17 [10:55:25] <hmunoz> venky: looks like stripe isn't initialized properly. Have you set up everything correctly from here: https://stripe.com/docs/mobile/android/setup ? And here: https://stripe.com/docs/payments/payment-intents/android#passing-to-client (the way it is configuring publishable key) 
+stripe 2019-09-17 [10:55:26] <DJSS> hmunoz I also noticed the STPPaymentContextDelegate requires a funcion with a completion block STPPaymentStatusBlock instead of STPErrorBlock.... is there any way to keep it as STPErrorBlock 
+stripe 2019-09-17 [10:55:57] <venky> yes its working now token generated after entered card details 
+stripe 2019-09-17 [10:56:31] <venky> how to create charge after this ? 
+stripe 2019-09-17 [10:56:51] <hmunoz> DJSS: correct that function signature changed too, its fine to change it, the completion block now takes `completion(.succeeded, nil)` or `completion(.fail, error)` , no way to keep it same, the completion expects a different signature 
+stripe 2019-09-17 [10:57:59] <hmunoz> venky: I'd recommend you read this doc thoroughly and follow it https://stripe.com/docs/payments/payment-intents/android. 
+stripe 2019-09-17 [10:57:59] <hmunoz> The basics steps are 
+stripe 2019-09-17 [10:57:59] <hmunoz> 1) Create PaymentIntent serverside, pass client_secret to your Android app 
+stripe 2019-09-17 [10:57:59] <hmunoz> 2) Android app creates token, confirms PaymentIntent using Android SDK 
+stripe 2019-09-17 [10:58:54] <venky> okay 
+stripe 2019-09-17 [10:58:57] <venky> thanks 
+stripe 2019-09-17 [11:00:39] <rok56> hi 
+stripe 2019-09-17 [11:00:43] <rok56> anyone here 
+stripe 2019-09-17 [11:00:56] <cacaliban> Hi to all, does anybody know of any issue with the last version of uc_stripe module with sca compliance? 
+stripe 2019-09-17 [11:01:07] <DJSS> hmunoz thanks for that. However, when I pass, (.fail, error) in the completion block, I get the error which says: "Type 'STPPaymentStatus' has no member 'fail'" 
+stripe 2019-09-17 [11:01:32] <DJSS> any thoughts on the syntax for passing .fail or .succeeded? 
+stripe 2019-09-17 [11:01:59] <hmunoz> DJSS: i think it isn't exactly .fail, can you click into that enum type and see what the possible enums are? I don't remember off the top of my head 
+stripe 2019-09-17 [11:02:32] <rok56> I connected stripe with shopify. Setup everything etc. But when someone want to purchase something from the store with credit cards there is error: 
+stripe 2019-09-17 [11:02:39] <rok56> Your payment could not be processed at this time, please try again in a few minutes 
+stripe 2019-09-17 [11:02:49] <rok56> what can I do about that 
+stripe 2019-09-17 [11:03:04] <rok56> iam waitting for email from support more than 2 days.. 
+stripe 2019-09-17 [11:03:49] <DJSS> hmunoz I actually tried, but can't seem to find the correct syntax. If you can lemme know that would be amazing 
+stripe 2019-09-17 [11:04:44] <hmunoz> DJSS: the enums are `.success`, `.error` and `.userCancellation` 
+stripe 2019-09-17 [11:05:16] <hmunoz> DJSS:  https://stripe.dev/stripe-ios/docs/Enums/STPPaymentStatus.html 
+stripe 2019-09-17 [11:05:30] <hmunoz> cacaliban: hi, let me look into that 
+stripe 2019-09-17 [11:06:16] <hmunoz> rok56: in this scenario, have you written your code or is it the Shopify Plugin or Platform that you are using? Do you have any request IDs you can share? 
+stripe 2019-09-17 [11:07:18] <DJSS> hmunoz Thank you!! All sorted 
+stripe 2019-09-17 [11:07:37] <rok56> You set everything in shopify 
+stripe 2019-09-17 [11:07:52] <hmunoz> DJSS: awesome, glad it did! And you pushed me to upgrade to v17.x which I had wanted to! 
+stripe 2019-09-17 [11:07:53] <rok56> you just grand the access and the rest does shopify 
+stripe 2019-09-17 [11:08:49] <hmunoz> rok56: that looks like an issue with the Shopify integration, so it might be best to write in to Shopify as they built the integration (wrote the code).. However, I want to see if I can help, do you have any request IDs from your Stripe Dashboard you can share? I can try look into it 
+stripe 2019-09-17 [11:09:20] <rok56> they said that the problem is in stripe 
+stripe 2019-09-17 [11:09:23] <rok56> :/ 
+stripe 2019-09-17 [11:09:55] <hmunoz> rok56: do you have access to a Stripe dashboard? If so , can you get me any failing request IDs? I need something in order to help out 
+stripe 2019-09-17 [11:10:36] <rok56> sure 
+stripe 2019-09-17 [11:10:38] <karllekko> cacaliban: their page says they are compliant : https://www.drupal.org/project/uc_stripe and it was recently updated. Beyond that if you're having an issue with it you'd have to reach out to them 
+stripe 2019-09-17 [11:10:48] <rok56> thats last error id 
+stripe 2019-09-17 [11:10:49] <rok56> req_6qxDX5FDiGkm50 
+stripe 2019-09-17 [11:13:04] <karllekko> rok56: there's a minimum charge amount of 50c on Stripe (https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts) Maybe your product on Shopify costs less than that, but then they shouldn't be letting you create such a product 
+stripe 2019-09-17 [11:13:21] <cacaliban> karllekko yeah I read it and installed correctly, but still payments don't go through... just to know if somebody knew something thanks anyway 
+stripe 2019-09-17 [11:13:26] <rok56> aaaa ok 
+stripe 2019-09-17 [11:13:28] <rok56> let me try 
+stripe 2019-09-17 [11:15:59] <rok56> haha yes it was that.. 
+stripe 2019-09-17 [11:16:08] <rok56> thank you so much 
+stripe 2019-09-17 [11:16:14] <rok56> have a nice day 
+stripe 2019-09-17 [11:22:17] <jeremyqm> hum, at subscription creation I'm getting => #<Stripe::InvalidRequestError: (Status 400) (Request req_XPZ3x6N5YwUTVM) This customer has no attached payment source> 
+stripe 2019-09-17 [11:22:45] <jeremyqm> But I did call Stripe::PaymentMethod.attach properly and I can see the card in the dashboard 
+stripe 2019-09-17 [11:23:14] <karllekko> jeremyqm: you need to pass either https://stripe.com/docs/api/subscriptions/create#create_subscription-default_payment_method or set https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method 
+stripe 2019-09-17 [11:23:51] <jeremyqm> yeah I saw them as optional, if it's the default, why do I need to specify it? 
+stripe 2019-09-17 [11:24:59] <jeremyqm> " If not set, invoices will use the default payment method in the customer's invoice settings." 
+stripe 2019-09-17 [11:25:10] <karllekko> yep, but you have to set that explicitly 
+stripe 2019-09-17 [11:27:54] <jeremyqm> ok, attaching doesn't make it default. Would be nice to have an extra field for set_default in Attach 
+stripe 2019-09-17 [11:29:25] <karllekko> one option is like this 
+stripe 2019-09-17 [11:29:30] <karllekko> https://www.irccloud.com/pastebin/5tuqPy7D/ 
+stripe 2019-09-17 [11:32:14] <roman_ibex> hi. I have question about flow. I am using payment method with manual confirmation. I am capturing card details, create payment method, then payment intent. My question is: What is the next step ? 
+stripe 2019-09-17 [11:33:06] <benc> roman_ibex you need to capture it 
+stripe 2019-09-17 [11:33:45] <benc> or confirm it I think 
+stripe 2019-09-17 [11:34:06] <karllekko> confirm the PaymentIntent(to attempt a payment) (usually you do that by passing `confirm:true` on creation), and then handle the next_action if required and confirm once more. https://stripe.com/docs/payments/payment-intents/web-manual#manual-confirmation-flow 
+stripe 2019-09-17 [11:34:39] <ajames123> Hi guys I need to migrate tax parameters (previously tax_percent on subscriptions) Whats the new equivalent for Sessions and Subscriptions? 
+stripe 2019-09-17 [11:35:23] <roman_ibex> @benc how do I capture it? $charges = \Stripe\Charge::all ? 
+stripe 2019-09-17 [11:36:36] <jeremyqm> Yeah, all works. Thanks karllekko & hmunoz for the great help 
+stripe 2019-09-17 [11:36:43] <karllekko> roman_ibex: no. Just follow the guide I linked, is there a specific error you have. Or a PaymentIntent ID `pi_xxx` that you're stuck with? 
+stripe 2019-09-17 [11:38:40] <karllekko> ajames123: Checkout doesn't support any tax parameters unfortunately. If using the Subscriptions API directly, you create Tax Rates (https://stripe.com/docs/api/tax_rates) and add to the subscription creation requests https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates 
+stripe 2019-09-17 [11:39:30] <webdesignsa> Hey team in ruby is there a way to exclude a list of status types?  https://stripe.com/docs/api/invoices/list?lang=ruby for example want to get every type but uncollectible, or void 
+stripe 2019-09-17 [11:39:51] <roman_ibex> karllekko no I dont have error I think. My app captures card and reserve funds. I store payment ID in db. But now I am ready to actually take money money and send the order. So my question is: what is next step for me after I created paymentIntent, got it ID, it is confirmed but on dashboard it is in 'Uncaptured' column under Payments 
+stripe 2019-09-17 [11:44:05] <karllekko> webdesignsa: nope, you'd have to just filter the list locally 
+stripe 2019-09-17 [11:44:14] <webdesignsa> ok thanks 
+stripe 2019-09-17 [11:44:52] <karllekko> roman_ibex: ah ok. Then yes, capture it. https://stripe.com/docs/payments/payment-intents/use-cases#separate-auth-capture  ; https://stripe.com/docs/api/payment_intents/capture 
+stripe 2019-09-17 [11:46:21] <roman_ibex> karllekko thanks! So once I capture it with success am I ok to send order = customer funds were transfer to me at this point ? 
+stripe 2019-09-17 [11:47:05] <andynmt> Hello, I'm trying to use stripe elements and sometimes the card element is not mounted. Have any idea what could happen? 
+stripe 2019-09-17 [11:49:09] <roman_ibex> andynmt maybe your javascript crashing on page! Check the console for any errors. 
+stripe 2019-09-17 [11:49:54] <Guest63008> Can we add  Cancel Button On stripe Checkout Page :  https://stripe.com/docs/payments/checkout/one-time#client-server 
+stripe 2019-09-17 [11:51:23] <andynmt> I did, but it happens very rare, just a few users reported this problem 
+stripe 2019-09-17 [11:52:11] <Swati> Amount is not coming as Available to payout balance it is showing in available soon from almost a week, what should I do? 
+stripe 2019-09-17 [11:52:17] <benc> Is there a way to use both 'confirm' and 'manual_confirmation' when creating SetupIntents as theres is for PaymentIntents? 
+stripe 2019-09-17 [11:53:26] <karllekko> roman_ibex: well, technically you can send the order after a successful confirm if you want(the funds are guaranteed at that point), but yes, at that point the transaction is complete and the customer doesn't have the money any more so you should service their order 
+stripe 2019-09-17 [11:54:09] <karllekko> Guest2665: it has one, it's just obvious. If you click the name of your business on the left side of the page, that is what goes back to your site( the `cancel_url` you set) 
+stripe 2019-09-17 [11:54:49] <karllekko> Swati: you should likely reach out to https://support.stripe.com/email 
+stripe 2019-09-17 [11:56:05] <Balazs> hello, is there anyone who can help me with stripe webhook verification? 
+stripe 2019-09-17 [11:57:38] <karllekko> andynmt: it's hard to say without more details. Sometimes it's that the user is on a slow connection and stripe.js didn't load(you can wait for global Stripe to be available https://gist.github.com/chrisjhoughton/7890239 , or dynamically add a script tag to the page to force a reload) 
+stripe 2019-09-17 [11:57:53] <karllekko> Balazs: what's the question? 
+stripe 2019-09-17 [11:59:04] <jeanfw> hmunoz: thanks a lot, that card works to test this 
+stripe 2019-09-17 [11:59:24] <Balazs> When I'm using test api keys and endpoint secret everything is totally fine, all the webhooks are verified, but when I switch to the live api keys it throws me this error: 
+stripe 2019-09-17 [11:59:25] <Balazs> No signatures found matching the expected signature for payload 
+stripe 2019-09-17 [12:02:41] <karllekko> Balazs: did you change your whsec_xxx webhook secret to the live mode one? 
+stripe 2019-09-17 [12:03:20] <Balazs> karllekko yes I did, I have checked it several times 
+stripe 2019-09-17 [12:04:04] <karllekko> hmm. The other common reason here is that you have middleware or something similiar that modified the request body before you call constructEvent 
+stripe 2019-09-17 [12:04:47] <karllekko> like if you remove whitespace, or parse to JSON and then stringify, that kind of thing. Ultimately I would start by logging out the secret and the payload at the exact point you call constructEvent, and then compare to your Stripe dashboard 
+stripe 2019-09-17 [12:05:30] <benc> karllekko Is there a way to use both 'confirm' and 'manual_confirmation' when creating SetupIntents as theres is for PaymentIntents? 
+stripe 2019-09-17 [12:07:22] <Balazs> karllekko I will check it, but is it possible that with the test keys the same code with the same request worked but with the live it didn't? Also I'm using the exact same code from the webhook documentation 
+stripe 2019-09-17 [12:12:08] <Balazs> karllekko ok... i'm really dumb and/or blind. $config['stripe_webhook_secret_key'] = ' whsec_.... 
+stripe 2019-09-17 [12:12:28] <Balazs> there was a space before the whsec 
+stripe 2019-09-17 [12:12:32] <Balazs> shame on me :( 
+stripe 2019-09-17 [12:21:08] <Nipun> Hi 
+stripe 2019-09-17 [12:21:17] <Nipun> can anyone help with stripe webhooks 
+stripe 2019-09-17 [12:24:26] <Nipun> can anyone help with stripe webhooks 
+stripe 2019-09-17 [12:24:42] <galaxyuser7> Hi, for using stripe ach, does it require SCA methods or normal token creation? 
+stripe 2019-09-17 [12:28:47] <Nipun> can anyone help with stripe webhooks 
+stripe 2019-09-17 [12:29:20] <Hagrid> Hello I want for fetch the most recent charge.succeeded object for a given customer id, how can i do that? 
+stripe 2019-09-17 [12:34:56] <Nipun> Hagrid https://stripe.com/docs/api/charges/list 
+stripe 2019-09-17 [12:39:47] <jeremyqm> Random: I see in terms and condition that we are not allowed to use our own Credit card in production, what's the reason behind it? I don't see any malicious thing in doing this? 
+stripe 2019-09-17 [12:40:16] <jeremyqm> (e.g. would be useful to see how 3dsecure works in real life) 
+stripe 2019-09-17 [12:40:43] <Nipun> Hagrid  http://prntscr.com/p79crj 
+stripe 2019-09-17 [12:46:37] <karllekko> Nipun: sure, what's the question? 
+stripe 2019-09-17 [12:53:33] <Nipun> so i am developing a c# application and i need to get the info in the webhooks 
+stripe 2019-09-17 [12:53:36] <galaxyuser7> Hi, for using stripe ach, does it require SCA methods or normal token creation? 
+stripe 2019-09-17 [12:54:00] <Nipun> on charge.succeeded event i need the product info 
+stripe 2019-09-17 [12:54:10] <Nipun> i am using checkout button 
+stripe 2019-09-17 [12:56:13] <tonythomas> Hey guys! Since I couldnt find the documentation for this, what would be the best way to send `StripeAccount` in `stripe.handleCardPayment()` call on JS ? 
+stripe 2019-09-17 [12:58:40] <tonythomas> or, I think I have to set stripe.StripeAccount  = "" and then do the stuff. 
+stripe 2019-09-17 [12:59:58] <karllekko> do you mean you're using Checkout Sessions? 
+stripe 2019-09-17 [13:00:02] <karllekko> Nipun: ^^ 
+stripe 2019-09-17 [13:00:30] <karllekko> tonythomas: you set it globally when creating the stripe object : https://stripe.com/docs/stripe-js/reference#stripe-function 
+stripe 2019-09-17 [13:01:05] <tonythomas> karllekko: hmm. However, I have multiple connected account transactions going on, and this can be a hustle as we are using a singleton ? 
+stripe 2019-09-17 [13:01:09] <karllekko> but you can create e.g. var stripePlatform = Stripe(key) ; var stripeConnectedAccount = Stripe(key,{stripeAccount: acct}); and use them 
+stripe 2019-09-17 [13:01:48] <tonythomas> aha. I see then. alright 
+stripe 2019-09-17 [13:01:54] <karllekko> galaxyuser7: ACH payments are US bank transfers and are not in scope for any SCA related things no. You'd just use bank account tokens as normal 
+stripe 2019-09-17 [13:03:21] <Nipun> karllekko: No..checkout buttons... these http://prntscr.com/p79rdu 
+stripe 2019-09-17 [13:04:18] <tonythomas> karllekko: is there a way to retrieve the `key` form `stripePlatform` in the above example at some later point ? 
+stripe 2019-09-17 [13:04:30] <karllekko> Nipun: ok, that is still Checkout Sessions then. The way you do this is you listen to `checkout.session.completed` event instead, and look at the `display_items` hash : https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-display_items-sku 
+stripe 2019-09-17 [13:04:53] <tonythomas> thing is, we do not have the key in context at that point. This is solve-able, but if we can get it straight from the `stripePlatform ` object, things would be great. 
+stripe 2019-09-17 [13:06:12] <karllekko> tonythomas: no officially supported way, no. I mean, you can, I think there's a field called __apiKey, but you absolutely should not use it and it could stop working any any time 
+stripe 2019-09-17 [13:06:55] <tonythomas> karllekko: alright then. We will fix it the other way around 
+stripe 2019-09-17 [13:09:34] <gronk> hi! is there anyway you can delete a payment method through the API? with card ids there was a way, not sure where it is for payment methods in the api reference 
+stripe 2019-09-17 [13:15:31] <karllekko> gronk: https://stripe.com/docs/api/payment_methods/detach has the same effect 
+stripe 2019-09-17 [13:17:47] <Bozkurt> My accountID: acct_1FJegLFH0XZJJSap Email: bozkurt.gormezgc I can't see "Verify Now" button please help me ! 
+stripe 2019-09-17 [13:19:34] <karllekko> Bozkurt: this is a public channel so it's not a great idea to post your email address like that(this is not an account-specific) support channel. I don't know what button you mean specifically, do you have more context on what you're trying to do and what you expect to see? 
+stripe 2019-09-17 [13:29:06] <_bartosz> Hey. Does Stripe.js sometimes asks for zip code as part of SCA? 
+stripe 2019-09-17 [13:29:45] <_bartosz> We can see that the customer has provided zip code, and verification failed, though we are not sure where did this zip code come from. 
+stripe 2019-09-17 [13:31:00] <karllekko> Elements and our other components will ask for postal codes if the customer is using a card issued from certain countries like the US and UK where banks can check that against their records for fraud reasons (https://stripe.com/docs/disputes/prevention#avs-check) 
+stripe 2019-09-17 [13:32:54] <_bartosz> @kar 
+stripe 2019-09-17 [13:33:07] <_bartosz> karllekko: thank you! 
+stripe 2019-09-17 [13:35:44] <frilo> Morning Fellow Friends; I'm curious about an option on the SUbscription API.  I see there's a %fee, is there any way for me to attach an additional item on it? Case: I have a product that is 50$ but there are fees, which I want to give the option to an individual to cover; however that makes it 55.32.  I'd hate to just round up to 56, but don't want to dynamically spin up products for each transaction.  Thoughts? 
+stripe 2019-09-17 [13:36:19] <fearoffish> Hey everyone. I'm struggling to get Stripe Elements to work with my Content-Security-Policy. I added the connect-src, frame-src and script-src directives that are mentioned on https://stripe.com/docs/security, but then still had to add 'unsafe-inline' to script-src. However, now it's saying that it's blocking local storage and still won't load. I wondered if anyone had any experience or advice they could give, or somewhere I 
+stripe 2019-09-17 [13:36:19] <fearoffish>  could read what I need to get Stripe working. 
+stripe 2019-09-17 [13:38:01] <karina9> Hi, Did you all ship something yesterday that would change how proration and coupons worked? 
+stripe 2019-09-17 [13:38:34] <karina9> we have canary specs that are failing because our customers are being prorated differently than expected 
+stripe 2019-09-17 [13:38:58] <karllekko> frilo: hmm, I'm a bit confuse by the question. By fee are you talking about a one-off fee on setup for example? For that you can use https://stripe.com/docs/billing/invoices/subscription#first-invoice-extra (and it's the number of cents so it can be any amount you like). Or something else like a Connect application fee? 
+stripe 2019-09-17 [13:39:53] <karllekko> fearoffish: would you happen to have a link to your page I can see the problem in action on? Or otherwise, more context on this error about local storage? 
+stripe 2019-09-17 [13:40:22] <frilo> karllekko: the connect application fee; essentially we have a donation platform, and want donors to be able to cover any kind of fees; IE 2.9% CC + 30 cents. 
+stripe 2019-09-17 [13:40:40] <frilo> with their subscription. 
+stripe 2019-09-17 [13:41:38] <karllekko> karina9: I think actually yes, there were recent changes in this area but I'm not completely familiar with it. Just to check, are you already in touch with https://support.stripe.com/email or anyone at Stripe? 
+stripe 2019-09-17 [13:42:03] <karina9> Namely i am talking about sending {prorate: true} in it's own request in order to get the right previews/changes 
+stripe 2019-09-17 [13:43:02] <karllekko> yes, that sounds familiar, setting just that field in an empty request. There was something that changed in that area 
+stripe 2019-09-17 [13:43:06] <karina9> karllekko no, is that a better route? 
+stripe 2019-09-17 [13:44:15] <karllekko> karina9: can you write into https://support.stripe.com/email with a detailed email, with the details(like a request ID `req_xxx`)? I'll make sure it goes to the right place 
+stripe 2019-09-17 [13:45:44] <karina9> we don't have request ids for this case because it is running in our test suite 
+stripe 2019-09-17 [13:46:04] <karllekko> if you're calling the API you have request IDs 
+stripe 2019-09-17 [13:46:35] <karina9> i suppose i can dig through the request log to find this test account :| 
+stripe 2019-09-17 [13:46:45] <karina9> oh maybe i will just try to recreate it 
+stripe 2019-09-17 [13:46:50] <karllekko> frilo: bear in mind in some markets that's not allowed : https://support.stripe.com/questions/what-is-the-scope-of-the-surcharge-ban-under-psd2 
+stripe 2019-09-17 [13:48:54] <mzane42> Hi, in my old implementation my subscription look like this 
+stripe 2019-09-17 [13:48:57] <mzane42> shit .. 
+stripe 2019-09-17 [13:49:00] <mzane42> `      stripe_subscription = Stripe::Subscription.create(        customer: customer.id,        plan: pricing_plan.uid,        tax_percent: 20,        quantity: quantity,        coupon: coupon,        metadata: set_metadata(coupon)      )` 
+stripe 2019-09-17 [13:49:43] <karllekko> frilo: but to charge the cardholder for the fee you have to just charge them more, by changing the price of the plan. But then it's complicated because the processing fees have a static and a dynamic component, so increasing the plan price also increases the fee. I'm still not sure I'm following your use case, but you usually just set your application fee to the profit you want to take, if you use Direct Charges then 
+stripe 2019-09-17 [13:49:43] <karllekko> the connected account pays the Stripe fees, and your application fee is taken before the Stripe fee is. 
+stripe 2019-09-17 [13:51:25] <mzane42> Hi, in my old implementation my subscription look like this :stripe_subscription = Stripe::Subscription.create(customer: customer.id,        plan: pricing_plan.id,        tax_percent: 20,        quantity: quantity,        coupon: coupon,metadata: metadata)my question is how can I use `tax_percent` and `coupon` with 
+stripe 2019-09-17 [13:51:25] <mzane42> `Stripe::Checkout::Session.create` 
+stripe 2019-09-17 [13:52:32] <mzane42> i cannot find this in the `subscription_data` child arguments 
+stripe 2019-09-17 [13:54:37] <karllekko> mzane42: neither tax nor coupons are supported in Checkout right now 
+stripe 2019-09-17 [13:54:52] <mzane42> :O 
+stripe 2019-09-17 [13:55:39] <galaxyuser7> Where is the option to activate ACH payments in the dashboard settings? I can only see "ACH Credit Transfer (Preview) " Is it the same? 
+stripe 2019-09-17 [13:56:04] <galaxyuser7> plaid.com/docs/stripe/#step1 
+stripe 2019-09-17 [13:56:19] <galaxyuser7> Plaid also shows step to activate on the stripe dashboard 
+stripe 2019-09-17 [13:59:23] <karllekko> galaxyuser7: is your Stripe account a US account? https://stripe.com/docs/ach  "ACH is currently supported only for Stripe businesses based in the U.S" 
+stripe 2019-09-17 [13:59:58] <fearoffish> @karlekko - I can give you access to the staging server, but you'd have to run through a fake booking to get to the payment page. How's that? 
+stripe 2019-09-17 [14:00:14] <galaxyuser7> Yes it is a US bank account @karl 
+stripe 2019-09-17 [14:00:19] <galaxyuser7> karllekko 
+stripe 2019-09-17 [14:00:37] <londonrules> Hello everybody 
+stripe 2019-09-17 [14:01:00] <galaxyuser7> Is it that its already activated, that's why the option is not showing up? karllekko 
+stripe 2019-09-17 [14:01:21] <londonrules> I'm struggling to integrate the SCA on my PHP payment any help or tutorial, documentation live example that could help for PHP integration ? 
+stripe 2019-09-17 [14:01:26] <karllekko> galaxyuser7: not bank account, your Stripe account itself. https://dashboard.stripe.com/account 
+stripe 2019-09-17 [14:02:07] <galaxyuser7> yep it is karllekko 
+stripe 2019-09-17 [14:02:10] <karllekko> londonrules: there's working PHP code and a walkthrough on https://github.com/stripe-samples/developer-office-hours 
+stripe 2019-09-17 [14:02:36] <WebhookQ> How does retries look from stripe if a webhook fails?  How many retries and in what schedule? 
+stripe 2019-09-17 [14:03:13] <captangelo> Hello guys, new here. long story short, we have created this website in which we connect professionals with students and we are choosing the payment method one quick question as the owner of the website can i take the fee that the student is paying and the rest of the money goes directly to the professional/expertin one single payment ? Or should i 
+stripe 2019-09-17 [14:03:13] <captangelo> wait to get paid then i do another payment to the expert? Thanks in advance 
+stripe 2019-09-17 [14:03:15] <Cabs> Hi 
+stripe 2019-09-17 [14:03:47] <Cabs> New API (09/09/2019) say -> "In the Accounts API, the requested_capabilities property is now required at creation time" 
+stripe 2019-09-17 [14:04:03] <karllekko> galaxyuser7: ok, for some reason you need to activate by visiting https://stripe.com/docs/ach while logged into your account. https://usercontent.irccloud-cdn.com/file/MNM2XBKz/image.png 
+stripe 2019-09-17 [14:04:05] <Cabs> But here -> https://stripe.com/docs/api/accounts/create#create_account-requested_capabilities requested_capabilities is write "optional" 
+stripe 2019-09-17 [14:04:31] <karllekko> WebhookQ: https://stripe.com/docs/webhooks/best-practices#retry-logic 
+stripe 2019-09-17 [14:04:39] <som> guys what id customer adds same card again and again , why doesnt stripe stop this 
+stripe 2019-09-17 [14:04:52] <som> *if 
+stripe 2019-09-17 [14:05:33] <karllekko> captangelo: yes, you can do this, it would be marketplace using Stripe Connect with Direct Charges and application fees. Best to start at https://stripe.com/docs/connect/ i you're building this yourself 
+stripe 2019-09-17 [14:06:20] <karllekko> Cabs: it's optional at the API level because it's only required if creating an account in certain countries, but I can see that it's confusing 
+stripe 2019-09-17 [14:06:37] <WebhookQ> karllekko Is it known how many retries it does during these 3 days?  Also, is it possible to get an email and a failed webhook? 
+stripe 2019-09-17 [14:06:48] <karllekko> som: your code can check the `fingerprint` field of cards https://stripe.com/docs/api/payment_methods/object#payment_method_object-card-fingerprint and de-duplicate if needed 
+stripe 2019-09-17 [14:07:28] <som> yup , but it would be ugly and time consuming right ? Why allo the same card again to the same customer 
+stripe 2019-09-17 [14:07:46] <karllekko> WebhookQ: there is no set amount of retries, it depends on various factors. You'll get an email if your endpoint is consistently down or having issues, yes 
+stripe 2019-09-17 [14:07:48] <fearoffish> karllekko: I've sent you the staging site details if you find time 
+stripe 2019-09-17 [14:08:06] <fearoffish> I appreciate you're having a busy time :/ 
+stripe 2019-09-17 [14:08:15] <galaxyuser7> karllekko That page doesnt show an option to activate ACH 
+stripe 2019-09-17 [14:08:57] <captangelo> karllekko, appreciate it. 
+stripe 2019-09-17 [14:10:08] <WebhookQ> karllekko I intend to listen to invoice.upcoming to schedule reporting metered usage before end of cycle. First I am trying to decide on optimal number of days before end of cycle to recieve invoice.upcoming. But ideally I would also recieve an email if it failes before the end of the billing cycle. Do you have any ideas to best practise then? 
+stripe 2019-09-17 [14:10:35] <karllekko> fearoffish: taking a look but it takes a bit to fill in all the dummy data and get to the page that integrates Stripe, will see what I can find though 
+stripe 2019-09-17 [14:10:49] <fearoffish> Yeah, sorry about that. I automate it :-/ 
+stripe 2019-09-17 [14:11:07] <karllekko> galaxyuser7: are you logged into your US Stripe account? (in the bottom left of the screen). 
+stripe 2019-09-17 [14:11:08] <Cabs> karllekko: so i can update api on my dashboard ? I use new Stripe checkout page to create account 
+stripe 2019-09-17 [14:11:38] <galaxyuser7> yes karllekko 
+stripe 2019-09-17 [14:11:43] <karllekko> WebhookQ: schedule a job on your server to report usage a few hours before `subscription.current_period_end` 
+stripe 2019-09-17 [14:13:09] <WebhookQ> karllekko Yes, well it will have to be a few seconds before as otherwise it won't be correct but still yes. I intend to. But my plan is to use invoice.upcoming to schedule that job. So what I wonder is how long would it take before I get an email if a webhook is consistently not working? 
+stripe 2019-09-17 [14:13:14] <karllekko> Cabs: Checkout does _not_ create Accounts. I think you're confused. Checkout creates Customers who are people you charge. Accounts and capabilities and things are for Connect, a marketplace product where you create managed Stripe accounts for users that you want to manage payments and payouts on their behalf. Are you sure that's what you're using? 
+stripe 2019-09-17 [14:14:03] <karllekko> WebhookQ: you shouldn't rely on the email really, if your server is down you likely have your own logging and alerting set up for that. I don't know the specifics of when we send the email 
+stripe 2019-09-17 [14:14:09] <Cabs> karllekko: oh yes sorry, i'm confused ! Customers !== Accounts 
+stripe 2019-09-17 [14:15:44] <WebhookQ> karllekko We do have such alerting but still another safety would have been nice to make sure incorrect charges does not happen. But now I know.  Cheers! 
+stripe 2019-09-17 [14:15:50] <galaxyuser7> karllekko how can you check whether ACH is enabled for my account? 
+stripe 2019-09-17 [14:16:47] <karllekko> fearoffish: what's the postal code you usually use(for step 5)? I tried a few but can't get any to validate 
+stripe 2019-09-17 [14:17:39] <karllekko> galaxyuser7: I can't, I don't have access to your account. Do you have reason to believe it's not enabled? When you're logged into your account and look at that page, what are you seeing? 
+stripe 2019-09-17 [14:17:55] <ajames123> Can someone point me in the direct to setup tax_percent with Sessions/Checkout? Might of asked this earlier 
+stripe 2019-09-17 [14:18:28] <karllekko> ajames123: Checkout doesn't support any tax related options unfortuantely 
+stripe 2019-09-17 [14:18:33] <AntoninBonami> Hello ! I have problem setting up a Iban Element (I had no problem setting up the card one following the tutorial). after the `iban.mount('#iban-element')`, the element did mount but is not showing at all and the input field is not usable at all. I used the code from this documentation page : " https://stripe.com/docs/stripe-js/elements/iban". 
+stripe 2019-09-17 [14:18:34] <AntoninBonami> (using ruby on rails, html.erb file, js in separate file) 
+stripe 2019-09-17 [14:18:48] <karllekko> ajames123: you did ask earlier and I replied "Checkout doesn't support any tax parameters unfortunately. If using the Subscriptions API directly, you create Tax Rates (https://stripe.com/docs/api/tax_rates) and add to the subscription creation requests https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates " 
+stripe 2019-09-17 [14:19:00] <galaxyuser7> Name of my business and the default API version in bottom left corner of the ACH docs page 
+stripe 2019-09-17 [14:19:03] <galaxyuser7> karllekko 
+stripe 2019-09-17 [14:19:26] <karllekko> galaxyuser7: right, and the section from my screenshot? where it talks about 'Before starting...' 
+stripe 2019-09-17 [14:19:46] <karllekko> AntoninBonami: do you have any errors in your browser console? Can you share a repro link? 
+stripe 2019-09-17 [14:19:46] <ajames123> Huh?? I'm using Sessions/Checkout mainly, I need to set tax percentages? How could they create a checkout that doesn't support tax additions? It's a requirement by law that we tax our customers karllekko 
+stripe 2019-09-17 [14:20:03] <mzane42> karllekko is there any workaround to handle tax_percent in Stripe::Session.create, by adding additional fees in `subscription_data.items` or applying default tax in each plan ? i cannot do the migration without adding the tax_percent in all the payements, where can i subscribe to know about  `checkout` news ? 
+stripe 2019-09-17 [14:20:48] <ajames123> Why/How could they create a checkout API that doesn't support tax lol 
+stripe 2019-09-17 [14:20:49] <mzane42> ajames123 haha we are in the same boat ;( 
+stripe 2019-09-17 [14:20:59] <ajames123> Absolutely madness 
+stripe 2019-09-17 [14:21:23] <AntoninBonami> karllekko : the console shows no error. What do you call a repro link ? 
+stripe 2019-09-17 [14:21:25] <galaxyuser7> There is no section like that karllekko 
+stripe 2019-09-17 [14:22:13] <karllekko> AntoninBonami: as in, a page where I can see the problem you're describing, either a link to your site, or a JSFiddle etc 
+stripe 2019-09-17 [14:23:50] <ajames123> karllekko I've just spent the last 4 days migrating our API to support SCA and on the last hurdle (which i know isn't your fault at all mind you) that I can't tax my customers via Checkout.api?? 
+stripe 2019-09-17 [14:23:54] <AntoninBonami> karllekko : I'll try to setup a JSFiddle as I can't share link to what I'm working on. Confidentiality reasons. I'll hope the same bug will appear 
+stripe 2019-09-17 [14:24:20] <karllekko> ajames123: mzane42 :unfortunately you'd just have to use the Subscriptions API directly. Support for tax in Checkout is planned, but not currently available. 
+stripe 2019-09-17 [14:24:41] <galaxyuser7> karllekko If there is no section like that, I believe its already activated 
+stripe 2019-09-17 [14:24:59] <ajames123> Well I can't cause I need to collect their details first using Checkout lol karllekko 
+stripe 2019-09-17 [14:25:16] <karllekko> galaxyuser7: that was my next thought, yep! So I'd proceed with the Plaid set up and see if you run into any problems 
+stripe 2019-09-17 [14:25:18] <olagjo> Hi! I'm finding it a bit difficult to understand from the iOS SDK docs: Does Stripe (via iOS SDK) support Apple Pay with all the new use cases they have added (e.g. Authorization of an unknown amount & delayed capture) 
+stripe 2019-09-17 [14:25:23] <olagjo> Hi! I'm finding it a bit difficult to understand from the iOS SDK docs: Does Stripe (via iOS SDK) support Apple Pay with all the new use cases they have added (e.g. Authorization of an unknown amount & delayed capture)? 
+stripe 2019-09-17 [14:25:51] <galaxyuser7> Thanks! Can you also explain the difference between ACH and ACH Credit Transfer Payments with Sources Public Beta ? 
+stripe 2019-09-17 [14:25:53] <galaxyuser7> karllekko 
+stripe 2019-09-17 [14:26:07] <karllekko> ajames123: you can collect details through Elements and custom form elements etc. I definitely sympathise with you, and I've actually passed this conversation internally. If there was a workaround I'd suggest it, but there really isn't one 
+stripe 2019-09-17 [14:27:51] <Nolan88> Hello all :) 
+stripe 2019-09-17 [14:28:30] <AntoninBonami> karllekko : it works in the fiddle ... And i just copied my code :/ 
+stripe 2019-09-17 [14:28:41] <karllekko> olagjo: those are all supported yes. You are creating a PKPayment object and it supports everything Apple documents it as. Specifically your first option is setting the line item type as pending https://developer.apple.com/documentation/passkit/pkpaymentsummaryitemtype and the second is just Stripe's regular auth-and-capture when you process the charge using the Apple Pay token 
+stripe 2019-09-17 [14:28:41] <karllekko> https://support.stripe.com/questions/apple-pay-support-for-auth-and-capture 
+stripe 2019-09-17 [14:29:08] <Nolan88> Please has anyone ever had a issue to import an Android apk to the Google console with the stripe-android sdk ? 
+stripe 2019-09-17 [14:29:58] <karllekko> galaxyuser7: https://stripe.com/docs/sources/ach-credit-transfer Credit transfers are push-based(the customer initiates a transfer from their bank to you), regular ACH is a pull-based debit where you charge their bank account 
+stripe 2019-09-17 [14:30:18] <ajames123> So ignoring the tax_percent parameter, is there literally no way at all to charge tax using the Checkout API?? karllekko 
+stripe 2019-09-17 [14:30:23] <galaxyuser7> Thanks a lot! You guys rock! karllekko 
+stripe 2019-09-17 [14:30:31] <karllekko> Nolan88: I'm not sure what 'the Google console' means, do you have more context? 
+stripe 2019-09-17 [14:30:39] <olagjo> karllekko Thanks!! 
+stripe 2019-09-17 [14:31:21] <Nolan88> The Google Console it's where we manage Android apps to publish to the Play Store 
+stripe 2019-09-17 [14:31:21] <karllekko> ajames123: you can add arbitrary line_items to the Session for the tax amounts if you have calculated them. And then after the subscription is created, update it with the tax_rates/tax_percent so they apply to future invoice payments 
+stripe 2019-09-17 [14:32:16] <Nolan88> karllekko Google Play Console: https://developer.android.com/distribute/console 
+stripe 2019-09-17 [14:32:18] <karllekko> Nolan88: what version of stripe-android does your app use? 
+stripe 2019-09-17 [14:32:31] <Nolan88> 10.2.1 
+stripe 2019-09-17 [14:32:51] <Nolan88> karllekko I tried with the last it the same 
+stripe 2019-09-17 [14:33:01] <ajames123> There should probably be a big red box before you read a single line about the new API saying "By the way guys, you can't tax your customers using this.. sorry lol" karllekko 
+stripe 2019-09-17 [14:33:33] <Nolan88> karllekko However I don't have issue with the version 8.1.0 
+stripe 2019-09-17 [14:33:36] <karllekko> Nolan88: I haven't heard of a specific issue, is there an error message you get? 
+stripe 2019-09-17 [14:34:23] <Nolan88> karllekko Yes I get this error message: "You uploaded an APK or Android App Bundle with invalid or missing signing information for some of its files" 
+stripe 2019-09-17 [14:34:50] <ajames123> Any idea when it'll be possible? Our team is tempted to just not bother with migration until we can tax customers karllekko 
+stripe 2019-09-17 [14:36:22] <karllekko> Nolan88: unfortunately I haven't seen anything like this before. If you're completely sure it's related to Stripe, and you've tried the latest version of the library and it still happens, you should write into https://support.stripe.com/email or open an issue on GitHub for stripe-android and we can look into it in detail 
+stripe 2019-09-17 [14:36:57] <rudi> Hi 
+stripe 2019-09-17 [14:37:09] <Nolan88> karllekko Ok thank you I will do this 
+stripe 2019-09-17 [14:37:43] <olagjo> Is the whole Apple Pay flow different than the PaymentIntent flow that we have now built for card payments? Can we not just use Apple Pay as PaymentMethod for a PaymentIntent? 
+stripe 2019-09-17 [14:38:12] <rudi> Hi, I am looking at the events of a payment intent that failed ("do not honor") and under the charges data[] I found the receipt url. The receipt seems valid. 
+stripe 2019-09-17 [14:38:24] <karllekko> ajames123: unfortunately I don't have a timeline to share on that. You can sign up for updates on https://stripe.com/docs/payments/checkout(towards the bottom). I completely symapthise with you here, but for now the best option is to integrate directly with the Subscriptions API / Elements etc 
+stripe 2019-09-17 [14:38:28] <olagjo> The docs talk about PKPaymentRequests etc - while our backend is now built around creating PaymentIntents and expecting the webhooks of the PaymentIntent state machine 
+stripe 2019-09-17 [14:38:35] <karllekko> rudi: what's the pi_xxx PaymentIntent ID? 
+stripe 2019-09-17 [14:38:50] <karllekko> olagjo: yes, that's exactly how it works. 
+stripe 2019-09-17 [14:38:51] <rudi> can I post it here? It is a production pi? 
+stripe 2019-09-17 [14:39:47] <karllekko> olagjo: I'm confused, because the iOS Apple Pay integration always used PKPaymentRequest and so on, that's just how you integrate Apple Pay on iOS. Or, you can use the components like STPPaymentContext, those can present Apple Pay with no specific coding from your side 
+stripe 2019-09-17 [14:39:57] <ajames123> Another couple days of work that is, it should of been made absolutely crystal clear that the checkout API doesn't support tax. How could stripe release a payment processor API that doesn't support tax, absolute craziness karllekko 
+stripe 2019-09-17 [14:40:11] <karllekko> rudi: the ID itself pi_xxxx is not sensitive in any way 
+stripe 2019-09-17 [14:40:20] <rudi> Ok, is this one https://dashboard.stripe.com/payments/pi_1FJTChL2DI6wht39yPNyolcJ 
+stripe 2019-09-17 [14:40:56] <karllekko> ajames123: I do sympathise and I have passed this(and other) feedback on to the team, but I'm just telling you what the situation is unfortunately. 
+stripe 2019-09-17 [14:43:15] <ReyLunaSol> karllekko is there any example without composer ?!! i'm struggling finding a simple example that could help me to set the Strong Customer Authentication ready 
+stripe 2019-09-17 [14:43:46] <karllekko> rudi: I think it's just a quirk that this field is always set on charges, but we wouldn't have emailed the user about this, do you have reason to believe that happened? 
+stripe 2019-09-17 [14:44:01] <rudi> it's a virtual credit card and the issuer says that the amount has been taken. 
+stripe 2019-09-17 [14:45:24] <rudi> That's why I was looking closely at the object and noticed the receipt url. So I can be assured that the transaction failed? 
+stripe 2019-09-17 [14:46:48] <karllekko> all I can tell you is that the issuer definitely sent us a decline code on that transaction, it looks like a completely normal failed payment to me.  Beyond that you'd have to ask https://support.stripe.com/email for account-specific questions like this 
+stripe 2019-09-17 [14:46:55] <keithm> Hi, having a strange issue on production when creating a payment intent, here is a failed request: req_srk2XrR8BRilqB - error we're getting is invalid positive integer but can't see in dashboard what stripe is getting 
+stripe 2019-09-17 [14:47:10] <karllekko> ReyLunaSol: you can install stripe-php without composer https://github.com/stripe/stripe-php#manual-installation 
+stripe 2019-09-17 [14:48:05] <karllekko> keithm: you passed `application_fee_amount` as 0 which is invalid, you can't take a 0 fee(you'd omit the parameter entirely in that case) 
+stripe 2019-09-17 [14:48:49] <rudi> thanks kallekko, I already opened a ticket and I am waiting for info. I just wanted to be sure that I did not miss something with the payment intent porting 
+stripe 2019-09-17 [14:49:05] <keithm> beautiful, karllekko - how do you view this on the dashboard? 
+stripe 2019-09-17 [14:50:27] <karllekko> keithm: from the Connect->Accounts page on the dashboard, when you click an account there's a '...' button in the top right that I think has an option to view their dashboard. 
+stripe 2019-09-17 [14:50:40] <karllekko> and from there you can search for the req_xxx 
+stripe 2019-09-17 [14:55:49] <keithm> karllekko, thank you, I was looking at platform logs for this, didn't know it would be in connect account, sorry and thanks as always for super quick help 
+stripe 2019-09-17 [15:04:27] <plujon> What's the usual way to automate testing with stripe?  To mock everything so that stripe.com is not actually contacted?  Or to use test data?  If the latter, do testers generally wipe all test data between runs?  If so, how? 
+stripe 2019-09-17 [15:08:38] <ReyLunaSol> karllekko: Thanks but i stuck in the middle i'm afraid that the situation to install manualy include a charge method and not the SCA ready !? 
+stripe 2019-09-17 [15:08:48] <ReyLunaSol> Am i wrong ? 
+stripe 2019-09-17 [15:09:36] <karllekko> installing stripe-php manually has no relation to using Charges or SCA, it's just how you install the library that makes requests to the Stripe API on your server 
+stripe 2019-09-17 [15:10:38] <turbotime> plujon: Not specific to Stripe, but generally you would mock responses from any API calls that are external to your own code. 
+stripe 2019-09-17 [15:11:40] <turbotime> plujon: What language/framework are you looking for testing information on? 
+stripe 2019-09-17 [15:11:52] <plujon> turbotime: Thanks...  ruby. 
+stripe 2019-09-17 [15:11:59] <turbotime> Rails or something else? 
+stripe 2019-09-17 [15:12:10] <plujon> roda/sequel 
+stripe 2019-09-17 [15:12:15] <plujon> Similar to rails. 
+stripe 2019-09-17 [15:12:16] <karina38> Sorry, I am back, as i have not received a response yet to the email thread that was triggered but a support chat 
+stripe 2019-09-17 [15:12:23] <nickdnk> Hey guys 
+stripe 2019-09-17 [15:12:37] <ajames123> Thanks for the help over the last couple of days Karl and apologies for the frustration. We're going to put off migration for now until the tax feature becomes available karllekko 
+stripe 2019-09-17 [15:13:05] <nickdnk> When I want to attach a card with SetupIntents to a customer, should I call $pm->attach() before I create the SetupIntent or after? 
+stripe 2019-09-17 [15:13:20] <turbotime> plujon: You may want to check out https://github.com/rebelidealist/stripe-ruby-mock but in the more general sense, I'd study up on mocking in one of the testing libraries like RSpec/Minitest. 
+stripe 2019-09-17 [15:13:21] <nickdnk> or not at all? 
+stripe 2019-09-17 [15:14:00] <plujon> turbotime: Thanks; I've tried stripe-ruby-mock, but I had trouble on the very first test I tried.  So I thought I'd check in here.  I'll see if I can't get it to work. 
+stripe 2019-09-17 [15:14:08] <turbotime> nickdnk: You'd attach the PaymentMethod after the SetupIntent completes, usually. It will be on `SetupIntent.payment_method`. 
+stripe 2019-09-17 [15:14:34] <karina38> This proration issue that i was referred to earlier was behaviour that we were told we could rely on, and our test builds that run against stripe directly to ensure the behaviour does not change started failing at 6pm MST yesterday, and failed again at 6 am this morning MST. 
+stripe 2019-09-17 [15:14:43] <nickdnk> So I create a SetupIntent with a customer parameter and a payment method parameter? 
+stripe 2019-09-17 [15:15:00] <karina38> the code to trigger the issue in question can be found in https://gist.github.com/SSach/4dd8fa4db36a75ccef83b346b4a9a98e 
+stripe 2019-09-17 [15:15:49] <turbotime> nickdnk: Yep -- https://stripe.com/docs/payments/cards/saving-cards-without-payment and if you already have a PaymentMethod you just specify `payment_method: {{the PaymentMethod's id}}` in Step 1 
+stripe 2019-09-17 [15:16:02] <nickdnk> Roger that 
+stripe 2019-09-17 [15:16:46] <nickdnk> But I'm doing step 3 first 
+stripe 2019-09-17 [15:16:54] <nickdnk> Then I pass that payment method to the server 
+stripe 2019-09-17 [15:16:59] <nickdnk> and create a setup intent with it 
+stripe 2019-09-17 [15:17:01] <nickdnk> Will that not work? 
+stripe 2019-09-17 [15:17:11] <plujon> In particular, stripe-ruby-mock throws "No such customer" when I use Customer::update('test_cus_3', ...); but I'll keep digging. 
+stripe 2019-09-17 [15:17:22] <karina38> We were told by koopajah on September 12th the last time our test builds failed, that a fix would be put in place that would not affect us and a revert was done to restore the old proration behaviour 
+stripe 2019-09-17 [15:17:30] <turbotime> karina38: What is the failure message? 
+stripe 2019-09-17 [15:17:54] <turbotime> nickdnk: You can do that, sure. Either way works. 
+stripe 2019-09-17 [15:17:57] <nickdnk> Okay 
+stripe 2019-09-17 [15:18:09] <nickdnk> I just tried this a few months back and it was really not working, so I archived it 
+stripe 2019-09-17 [15:18:13] <karina38> turbotime: the failure is that proration is being calculated improperly resulting in us crediting extra money back to the customer 
+stripe 2019-09-17 [15:18:14] <nickdnk> Maybe it works now 
+stripe 2019-09-17 [15:18:26] <turbotime> karina38: OK, but what is the exact message when your test fails? 
+stripe 2019-09-17 [15:18:46] <karina38> turbotime: https://gist.github.com/SSach/4dd8fa4db36a75ccef83b346b4a9a98e 
+stripe 2019-09-17 [15:19:49] <karina38> turbotime: the test fails and tells us that the invoice total is less than the expected total 
+stripe 2019-09-17 [15:19:56] <turbotime> karina38: That's your test code, right, but why specifically is it failing? For example (made up numbers), it is expecting proration to be 100 but it's getting back 75? What are the values and on which line of the test is it failing? 
+stripe 2019-09-17 [15:21:39] <nickdnk> Grammar-error in docs here: https://stripe.com/docs/api/events/types#event_types-setup_intent.succeeded Occurs when an SetupIntent has successfully setup a payment method. 
+stripe 2019-09-17 [15:21:52] <nickdnk> Should be A, not An 
+stripe 2019-09-17 [15:21:59] <nickdnk> just FYI 
+stripe 2019-09-17 [15:23:12] <hactor> Hey Hi, Can I Use decimal in https://stripe.com/docs/charges  charges? 
+stripe 2019-09-17 [15:23:17] <karina38> turbotime: that test code was stripped out of our test suite, so it was stripe code only.  locally our tests are failing with "expected -500, got -667" . and in general, the value we get is always much less 
+stripe 2019-09-17 [15:23:44] <karina38> turbotime: i will run this test locally myself 
+stripe 2019-09-17 [15:23:48] <turbotime> hactor: `amount` must be an integer, and for example, USD is in cents (100 => $1.00) 
+stripe 2019-09-17 [15:24:14] <acron^> Does a "once" coupon mean it can only redeemed once per customer? or that it only applies to one invoice? 
+stripe 2019-09-17 [15:24:40] <hactor> turbotime I want to provide the plan like 9.99 USD, How can I achieve the same with https://stripe.com/docs/charges  ? 
+stripe 2019-09-17 [15:25:14] <ajames123> Hi just a quick question; our company will soon be allowing our customers to take payments directly with us working as a middle man.. is Stripe Connect the right way to go in that regard? karllekko turbotime 
+stripe 2019-09-17 [15:25:37] <turbotime> acron^: `duration: once` means it applies to one payment when it is redeemed by a given `Customer`. `max_redemptions` is how many Customers can use the coupon before it expires. 
+stripe 2019-09-17 [15:25:48] <turbotime> hactor: `amount: 999` 
+stripe 2019-09-17 [15:26:09] <acron^> turbotime: thanks. Is there a way I can limit a coupon to 'once per customer' ? 
+stripe 2019-09-17 [15:26:19] <turbotime> ajames123: Likely, but I'd suggest contacting https://support.stripe.com/email for an analysis of your specific plans 
+stripe 2019-09-17 [15:27:24] <turbotime> acron^: Is it a coupon that is good for one payment or is it a coupon a Customer can redeem once but takes off a recurring amount on a Subscription? 
+stripe 2019-09-17 [15:27:47] <turbotime> karina38: OK. Please do let me know, will keep an eye out for what you find in the local run. 
+stripe 2019-09-17 [15:29:18] <acron^> So, my concern is customers re-using a coupon each month to take money off their subscriptions. I don't want this. I want to create a coupon, which I can hand out, which will allow each customer to get $X off their next invoice. But once they've done that one time, they cannot re-apply the coupon and get it again. 
+stripe 2019-09-17 [15:29:19] <Steph58> \o I hear people are already chatting about the breaking change to how proration is handled? 
+stripe 2019-09-17 [15:29:41] <acron^> Perhaps I need tighter control over coupon redemption in my own backend? 
+stripe 2019-09-17 [15:29:48] <Steph58> I was the dev who came here last week for the change which was reverted 
+stripe 2019-09-17 [15:30:29] <Steph58> Is it the same change that has broken it this time? 
+stripe 2019-09-17 [15:31:37] <acron^> `duration: repeating, duration_in_months: 1` perhaps? 
+stripe 2019-09-17 [15:32:51] <karina38> turbotime: this line is failing with "expected -500 and got -667" 
+stripe 2019-09-17 [15:32:57] <turbotime> acron^: You likely want `duration: once` but `duration: repeating, duration_in_months: 1` would do the same thing. 
+stripe 2019-09-17 [15:33:10] <karina38> so we are refunding way more than we would like for this case 
+stripe 2019-09-17 [15:33:55] <turbotime> karina38: and that's from line 137 in your pastebin? 
+stripe 2019-09-17 [15:34:13] <karina38> oh sorry, the paste didn't work 
+stripe 2019-09-17 [15:34:23] <karina38> https://gist.github.com/SSach/4dd8fa4db36a75ccef83b346b4a9a98e#file-gistfile1-txt-L97 
+stripe 2019-09-17 [15:34:28] <karina38> which is the preview 
+stripe 2019-09-17 [15:34:48] <karina38> when commented out then yes, line 137 also fails 
+stripe 2019-09-17 [15:35:04] <karina38> which means that both previews and actually updating is not behaving as expected 
+stripe 2019-09-17 [15:35:55] <turbotime> karina38: You mentioned a support ticket from chat, do you know a reference number or similar to that ticket per chance? I can make sure it escalates to us. 
+stripe 2019-09-17 [15:36:07] <webdesignsa> for the export to iif are you using the available one date for any charges and payouts ? 
+stripe 2019-09-17 [15:36:24] <webdesignsa> available on* 
+stripe 2019-09-17 [15:37:21] <karina38> i do not believe there was a support ticket, i just have a new email thread from chat with no reference number, and I have an old email thread where we were assured of this behaviour, also with no reference number that i can see 
+stripe 2019-09-17 [15:38:17] <karina38> turbotime i believe koopajah was the support helping my coworker when this happened last week and triggered the revert 
+stripe 2019-09-17 [15:38:38] <koopajah> hello! what's the issue? 
+stripe 2019-09-17 [15:39:16] <karina38> Same proration issue that steph brought to you last week 
+stripe 2019-09-17 [15:39:25] <Steph58> We are seeing the same failures that we saw last Thursday 
+stripe 2019-09-17 [15:39:47] <koopajah> karina38 : as in it happened again? because we built a special feature for your Stripe account. Can you give me an example invoice for me to look at? 
+stripe 2019-09-17 [15:40:25] <karina38> did you do that feature for all our accounts ? 
+stripe 2019-09-17 [15:40:42] <koopajah> I didn't know you had more than one account 
+stripe 2019-09-17 [15:40:47] <karina38> we run our nightly builds against a test account 
+stripe 2019-09-17 [15:41:07] <karina38> but we run production against 3 other accounts (CA, NA, and EU accounts) 
+stripe 2019-09-17 [15:41:12] <Steph58> I believe we have 6 accounts 
+stripe 2019-09-17 [15:41:18] <koopajah> ack. Can you DM me a list of all your account ids? 
+stripe 2019-09-17 [15:41:49] <turbotime> webdesignsa: I'm not sure, honestly. That's a good question for https://support.stripe.com/email as it's not API related so I'm not that well versed on the details behind the export. 
+stripe 2019-09-17 [15:49:54] <webdesignsa> Yeah that is what it seems like just wasn't sure if you guys made that part of it 
+stripe 2019-09-17 [16:00:08] <karina38> alrighty, crisis averted, but i did have another question in general 
+stripe 2019-09-17 [16:00:29] <fearoffish> karllekko: BD23 1PQ works 
+stripe 2019-09-17 [16:00:37] <fearoffish> karllekko: Sorry for the delay 
+stripe 2019-09-17 [16:00:58] <karina38> is there a way to "just charge for the prorated change" rather than refund all the unused time, and charging all the remaining time? 
+stripe 2019-09-17 [16:01:23] <koopajah> there is not 
+stripe 2019-09-17 [16:01:57] <karina38> i wonder if subscription schedules could be manipulated to do this... 
+stripe 2019-09-17 [16:02:25] <karina38> but that would probably be a gross abuse of that system... '=D 
+stripe 2019-09-17 [16:10:15] <viksingh123> Hi, We have migrated to payment intent flow from charge api flow. 
+stripe 2019-09-17 [16:10:34] <viksingh123> Payment intent flow usages payment method to make the charges like saved card 
+stripe 2019-09-17 [16:11:11] <viksingh123> What we need to do, if i want to migrate customer sources i.e existing linked card as paymethod method ? 
+stripe 2019-09-17 [16:12:48] <turbotime> viksingh123: Anything with a `card_***` id can also be used as a `PaymentMethod`. 
+stripe 2019-09-17 [16:14:12] <ForwardBunny> Hallo! How can I use a platform source to create a charge on a connected account? The shared customer docs show how to save a credit card and generate a token for this, but I can't find anything about creating a token or source for the connected account from a platform source. Just trying to use it, I get "stripe.error.InvalidRequestError: Request 
+stripe 2019-09-17 [16:14:12] <ForwardBunny> req_X: Customer cus_X does not have a linked source with ID tok_X." 
+stripe 2019-09-17 [16:14:47] <viksingh123> Thanks turbotime 
+stripe 2019-09-17 [16:15:39] <turbotime> ForwardBunny: Shared Customers is a bit of a misnomer, and you're really sharing a specific `Source` to the connected account. 
+stripe 2019-09-17 [16:16:10] <turbotime> ForwardBunny: So you need to save the Token (tok_****) as a Source to the Customer first -- https://stripe.com/docs/saving-cards 
+stripe 2019-09-17 [16:18:22] <ForwardBunny> turbotime: Ok, so I have a customer I created on the connect account. I get a general platform payment token, save it to the customer, then create a charge to the connect account with the customer and token? 
+stripe 2019-09-17 [16:18:55] <turbotime> ForwardBunny: You would follow the example flows in https://stripe.com/docs/connect/shared-customers 
+stripe 2019-09-17 [16:20:28] <ForwardBunny> Ah, well I guess that's what I'm avoiding. I already read that one, but I want to respect a user's wishes if they if they click "Don't save my billing info." Those docs show saving a card and generating a token. But I just want to use the token directly that I get from my client via Elements. 
+stripe 2019-09-17 [16:22:09] <turbotime> ForwardBunny: Ah, OK. In that case you would use Stripe.js with the `stripeAccount` parameter to create a Token on the connected account itself, and use it to Charge directly on that connected account. https://stripe.com/docs/stripe-js/reference#including-stripejs 
+stripe 2019-09-17 [16:22:30] <turbotime> Then you can use that Token as a one-off payment and not save it. 
+stripe 2019-09-17 [16:22:48] <ForwardBunny> What if I don't know which connected account will be receiving the funds? That info is calculated dynamically on the backend upon payment. 
+stripe 2019-09-17 [16:23:20] <ForwardBunny> Sorry. I'm not trying to be difficult. Just trying to get it to work with my system's workflow :) 
+stripe 2019-09-17 [16:26:21] <nicoandvinz> does anyone know how I might work around this message? 'You cannot change legal_entity[business_tax_id] via API if an account is verified' 
+stripe 2019-09-17 [16:27:00] <turbotime> ForwardBunny: So you can have multiple instances of Stripe.js loaded.  You can init a second instance with `stripeAccount` when you need it, if that works for you. 
+stripe 2019-09-17 [16:27:40] <turbotime> nicoandvinz: What are you trying to do? Generally I'd say create a new account with the new business_tax_id. 
+stripe 2019-09-17 [16:29:43] <ForwardBunny> turbotime: I don't follow. Are you suggesting creating Stripe.js instances for all possible connected accounts on the client, generating tokens for the card the user enters for each possible account, sending them all to the server, and then let the server pick which one to use? 
+stripe 2019-09-17 [16:30:24] <turbotime> ForwardBunny: At which point in your process do you determine which connected account to use? 
+stripe 2019-09-17 [16:32:31] <nicoandvinz> turbotime: i'm not sure we can create a new account... do you have any more insight into what the error message actually means? What causes this so we can avoid doing it in the future 
+stripe 2019-09-17 [16:33:00] <ForwardBunny> Ultimately at charge creation, based on who has quota to handle the transaction. I could send that info to the client at the last minute, but that feels more tedious and fragile than just letting the server decide when it needs. 
+stripe 2019-09-17 [16:41:08] <turbotime> nicoandvinz: The error means that you're trying to change "who/what" that account represents. It's not an operation we permit because it would essentially mean you're tying that account's activity to a new legal entity. 
+stripe 2019-09-17 [16:41:54] <turbotime> ForwardBunny: Hmm. Shared Customers is probably the way to go then, and if you don't want to "save" the source just detach it from the Customer after the Charge goes through. 
+stripe 2019-09-17 [16:43:10] <ForwardBunny> turbotime: That makes sense. Ok, seems like it'll be awkward somewhere, and I think that will work. Thank you for the help and feedback! 
+stripe 2019-09-17 [16:44:25] <arc_phasor> hi again. I'm trying to keep sensitive user info off my servers. Is it possible to send a scan of ID documents to stripe during Identity Verification step, but then later retrieve these pictures  so I can run my own background check? 
+stripe 2019-09-17 [16:46:10] <dave_g> Hi, is there a way to lookup the payout id of a charge transaction? 
+stripe 2019-09-17 [16:46:21] <turbotime> arc_phasor: We don't expose those images for download anywhere. For the same reason of keeping sensitive information secure. 
+stripe 2019-09-17 [16:47:17] <arc_phasor> turbotime: It looks like things can be retrieved here? https://stripe.com/docs/api/persons/retrieve 
+stripe 2019-09-17 [16:47:50] <arc_phasor> I was planning on requesting SSN numbers and such for the background check as well 
+stripe 2019-09-17 [16:48:36] <turbotime> arc_phasor: That's for the Person, yes/ 
+stripe 2019-09-17 [16:49:10] <arc_phasor> That doesn't get created for a connected account? 
+stripe 2019-09-17 [16:51:04] <arc_phasor> I guess let me ask it this way... Do I need to also store the identity information locally so I can perform a background check after Identity Verification, or can I query the Stripe servers for the information at a later time? 
+stripe 2019-09-17 [16:51:30] <turbotime> dave_g: The Charge will have a balance_transaction, which has an `available_on` that corresponds to a date. You'd want to find the Payout for that day and if it was an automatic payout it should be the one for that Charge. 
+stripe 2019-09-17 [16:51:36] <arc_phasor> This is referring to Stripe Connect and adding a service provider (connected account) 
+stripe 2019-09-17 [16:53:29] <turbotime> arc_phasor: All of the details of the verification documents are going to be on https://stripe.com/docs/api/persons/object#person_object-verification 
+stripe 2019-09-17 [16:55:06] <arc_phasor> Ok, so for example the `verification.document.back` is a File with an ID. So I can download that? 
+stripe 2019-09-17 [16:55:36] <dave_g> turbotime I see.. I guess that's the closest I can get to a matching ID. I was considering first listing payouts, then iterating over each and getting a list of transactions with that payout ID. But I'm trying to build an accurate report of each payout, whether it was manual or automatic. 
+stripe 2019-09-17 [16:55:38] <arc_phasor> or actually, it has a `url` option where I can download with my API secret key 
+stripe 2019-09-17 [16:56:32] <turbotime> dave_g: correct https://stripe.com/docs/file-upload#retrieving-a-file 
+stripe 2019-09-17 [16:56:47] <turbotime> whoops, sorry dave_g I meant for arc_phasor https://stripe.com/docs/file-upload#retrieving-a-file 
+stripe 2019-09-17 [16:57:16] <arc_phasor> Ok, thanks. I was just a little worried since create file links excludes ID Documents: https://stripe.com/docs/api/file_links/create 
+stripe 2019-09-17 [16:57:27] <arc_phasor> but that's something different? 
+stripe 2019-09-17 [16:57:42] <turbotime> dave_g: and yes, Payouts aren't really "paying out a bunch of specific Charges" but as long as you're using automatic payouts you can ~connect each Charge to a specific day's Payout 
+stripe 2019-09-17 [16:57:54] <plujon> stripe-ruby-mock threw an exception because my test database contained an id; it seems to work fine after wiping my test database. 
+stripe 2019-09-17 [16:57:59] <turbotime> arc_phasor: Creating a File returns the id of a File object in the API 
+stripe 2019-09-17 [16:58:44] <arc_phasor> That should work for me then. I don't have to keep any sensitive info on my end and can just query Stripe for info needed for background check 
+stripe 2019-09-17 [16:58:47] <dave_g> turbotime got it, thanks 
+stripe 2019-09-17 [17:00:08] <Bryan3> Hi Stripe engineers.  I'm writing a test where I am trying to create a payment method via the API.  It's giving me the following error message:  "You must verify a phone number on your Stripe account before you can send raw credit card numbers to the Stripe API. You can avoid this requirement by using Stripe.js, the Stripe mobile bindings, or 
+stripe 2019-09-17 [17:00:08] <Bryan3> Stripe Checkout. For more information, see https://dashboard.stripe.com/phone-verification."  We entered a phone number into the phone verification page, but I'm still getting the same error message? 
+stripe 2019-09-17 [17:03:13] <Bryan3> it's a phpunit test 
+stripe 2019-09-17 [17:03:46] <turbotime> Bryan3: Do you have the Request-Id from the request that's showing that error? req_**** would be the format 
+stripe 2019-09-17 [17:06:59] <plujon> turbotime: Thanks for the tip; I think stripe-ruby-mock will work for me. 
+stripe 2019-09-17 [17:08:14] <Bryan3> turbotime where would i find that req_**** 
+stripe 2019-09-17 [17:11:54] <turbotime> Bryan3: It would be in the `Request-Id` header of the response when you make the API call. 
+stripe 2019-09-17 [17:15:27] <arc_phasor> turbotime The JavaScript code in this step should be happening server side right? https://stripe.com/docs/connect/account-tokens#file-upload 
+stripe 2019-09-17 [17:15:54] <w1zeman1p> arc_phasor: the file upload? 
+stripe 2019-09-17 [17:16:04] <arc_phasor> yes 
+stripe 2019-09-17 [17:16:06] <w1zeman1p> file upload is client side 
+stripe 2019-09-17 [17:16:23] <arc_phasor> woah, so stripe._apiKey is available client side? 
+stripe 2019-09-17 [17:16:48] <w1zeman1p> i'm sorry one sec 
+stripe 2019-09-17 [17:16:49] <w1zeman1p> :) 
+stripe 2019-09-17 [17:17:03] <w1zeman1p> never put sk_ on client 
+stripe 2019-09-17 [17:17:21] <w1zeman1p> I'm really surprised by this code snippet! :) 
+stripe 2019-09-17 [17:17:31] <arc_phasor> ok, me too! 
+stripe 2019-09-17 [17:18:11] <w1zeman1p> ok sorry for the confusion. That's the publishable API key 
+stripe 2019-09-17 [17:18:26] <w1zeman1p> when you initialize stripe, like `var stripe = Stripe("pk_test_xxx")` 
+stripe 2019-09-17 [17:18:33] <arc_phasor> ok, i haven't run into that yet 
+stripe 2019-09-17 [17:18:34] <w1zeman1p> the stripe object will have a private property _apiKey 
+stripe 2019-09-17 [17:19:15] <w1zeman1p> if you scroll up to the "Add JavaScript" section there, there's an initialization call on line 2 of one of those snippets 
+stripe 2019-09-17 [17:19:16] <arc_phasor> It looks like a publishable key for my entire stripe account 
+stripe 2019-09-17 [17:19:21] <w1zeman1p> yeah which is fine 
+stripe 2019-09-17 [17:19:23] <w1zeman1p> you have 2 keys 
+stripe 2019-09-17 [17:19:26] <w1zeman1p> publishable and secret 
+stripe 2019-09-17 [17:19:53] <w1zeman1p> the publishable key which starts with pk_ can be published on your live site and it is limited to very few actions that are not harmful 
+stripe 2019-09-17 [17:20:26] <arc_phasor> very nice 
+stripe 2019-09-17 [17:20:27] <arc_phasor> i like it 
+stripe 2019-09-17 [17:20:40] <arc_phasor> Thanks for clearing that up for me, I was a bit confused :? 
+stripe 2019-09-17 [17:20:55] <w1zeman1p> yeah i hadn't seen that used anywhere else in our code base. 
+stripe 2019-09-17 [17:20:59] <w1zeman1p> or documentation 
+stripe 2019-09-17 [17:21:24] <w1zeman1p> I would probably recommend just putting the key there, rather than depending on the private property, but it likely wont change 
+stripe 2019-09-17 [17:21:43] <arc_phasor> I'll have to anyways, I 
+stripe 2019-09-17 [17:21:46] <arc_phasor> I'm on Dart 
+stripe 2019-09-17 [17:21:57] <arc_phasor> no official stripe libs available to me :/ 
+stripe 2019-09-17 [17:22:05] <w1zeman1p> oh fun 
+stripe 2019-09-17 [17:22:16] <w1zeman1p> at a "big" co? 
+stripe 2019-09-17 [17:22:18] <w1zeman1p> ;) 
+stripe 2019-09-17 [17:22:49] <arc_phasor> Huge :) 
+stripe 2019-09-17 [17:23:11] <w1zeman1p> :D 
+stripe 2019-09-17 [17:27:38] <Bryan3> turbotime i think i figured it out... thanks anyways! 
+stripe 2019-09-17 [17:27:46] <w1zeman1p> :) 
+stripe 2019-09-17 [17:46:29] <Bryan3> turbotime When I try to update a subscription with a new payment method, and I get back the error message from Stripe saying "No such subscription: active", what does this mean?  The dashboard says the subscription is active - ID is sub_FpPXuDrKaEUA1X 
+stripe 2019-09-17 [17:46:40] <Bryan3> (this is just test data) 
+stripe 2019-09-17 [17:47:16] <w1zeman1p> is that passing "active" as the subscription ID? 
+stripe 2019-09-17 [17:51:43] <Bryan3> is that what that might mean?  I'll check it out 
+stripe 2019-09-17 [17:52:01] <w1zeman1p> yeah usually that part of the error would be the subscription ID 
+stripe 2019-09-17 [17:52:14] <Bryan3> that helps a lot.  thanks 
+stripe 2019-09-17 [17:52:17] <w1zeman1p> I'd look for `status` 
+stripe 2019-09-17 [17:52:28] <w1zeman1p> i bet it's passing `subscription.status` instead of `subscription.id` somewhere 
+stripe 2019-09-17 [17:54:30] <Bryan3> It's because we have this "active" hard-coded as the subscription ID in our test suite 
+stripe 2019-09-17 [17:54:39] <Bryan3> so i just need to update and I think I fixed it 
+stripe 2019-09-17 [17:54:40] <w1zeman1p> aha 
+stripe 2019-09-17 [17:55:48] <Bryan3> just curious, why is there no "delete" for payment methods? 
+stripe 2019-09-17 [17:55:54] <w1zeman1p> I'm not sure if others do this, but for all of my test suite objects, i use the same prefixes with 123 so that I know what type of Stripe object it is. For instance, i'll use "sub_123" for all of my test subscription ID's in the automated tests. in_123 for invoices, ch_123 for charges. 
+stripe 2019-09-17 [17:56:08] <w1zeman1p> The "detatch" is conceptually the same thing as delete for payment methods 
+stripe 2019-09-17 [17:56:41] <Bryan3> it's a good idea to have the tests set up like that 
+stripe 2019-09-17 [18:06:56] <Bryan3> w1zeman1p do you know why Stripe doesn't let us pick which API to use in the Dashboard besides the most current option?  We just did a big release with 2019-08-14 and now we can't set it to that API version in the dashboard (we can manually set whatever API version we want in our app, so we don't have to set it in the dashboard, but we would like 
+stripe 2019-09-17 [18:06:57] <Bryan3> to) 
+stripe 2019-09-17 [18:08:16] <w1zeman1p> is this for webhooks? 
+stripe 2019-09-17 [18:08:48] <w1zeman1p> or just the account default? 
+stripe 2019-09-17 [18:09:58] <Bryan3> account default 
+stripe 2019-09-17 [18:10:13] <Bryan3> so like currently I am stuck looking at old API docs 
+stripe 2019-09-17 [18:10:22] <Bryan3> even though we have upgraded our app 
+stripe 2019-09-17 [18:11:26] <w1zeman1p> hmm yeah I can see what you're saying now. let me look around 
+stripe 2019-09-17 [18:13:38] <w1zeman1p> Bryan3: turns out this is possible if you write into support.stripe.com/contact and tell them which version you want to upgrade to 
+stripe 2019-09-17 [18:13:58] <Bryan3> oh, great.  thx. 
+stripe 2019-09-17 [18:21:11] <Bryan3> w1zeman1p we have 2 Stripe testing accounts, and we entered our phone number into both.  Our tests pass with 1 account, but the same tests in the other account are still getting this error message:   You must verify a phone number on your Stripe account before you can send raw credit card numbers to the Stripe API. You can avoid this requirement by 
+stripe 2019-09-17 [18:21:12] <Bryan3> using Stripe.js, the Stripe mobile bindings, or Stripe Checkout. For more information, see https://dashboard.stripe.com/phone-verification. 
+stripe 2019-09-17 [18:21:17] <Bryan3> Can you look into this for us? 
+stripe 2019-09-17 [18:22:15] <w1zeman1p> hmm i think this might be another one for support.stripe.com/contact :( 
+stripe 2019-09-17 [18:23:48] <Bryan3> lol 
+stripe 2019-09-17 [18:23:51] <greengriminal> Is anyone available for me to discuss `moto` flag, and can I discuss this publicly? 
+stripe 2019-09-17 [18:24:29] <greengriminal> If not can I Dm someone from the Stripe team and have them answer my question. 
+stripe 2019-09-17 [18:24:33] <w1zeman1p> greengriminal: emoji-wave yeah moto is public now 
+stripe 2019-09-17 [18:24:42] <greengriminal> Cool sweet. 
+stripe 2019-09-17 [18:25:47] <greengriminal> So my question simply is we're a platform we have users connect to our platform. Our platform has `moto` access. Now when we try to make a "standard" charge against a connect account we get the error: `"Received unknown parameter: payment_method_options[card][moto]",` - More info on this request can be found here: req_R7dA7xj0omAq9i 
+stripe 2019-09-17 [18:26:46] <greengriminal> For context I'm trying to create a payment intent with the payment method as `card_xxxx` and am trying to set the moto flag on this intent. But it appears to not like it. 
+stripe 2019-09-17 [18:26:56] <greengriminal> Trying to better understand why this would be the case. 
+stripe 2019-09-17 [18:27:28] <w1zeman1p> ok hmm 
+stripe 2019-09-17 [18:30:55] <greengriminal> w1zeman1p, are we sure that moto is public? Because the docs appear to be gated. 
+stripe 2019-09-17 [18:32:30] <w1zeman1p> :) i'll double check that too 
+stripe 2019-09-17 [18:32:46] <w1zeman1p> I thought we released before SCA deadline, but maybe not 
+stripe 2019-09-17 [18:32:51] <w1zeman1p> was able to reproduce what you're seeing tho 
+stripe 2019-09-17 [18:34:16] <w1zeman1p> you're right, it's gated -> dm :) 
+stripe 2019-09-17 [18:50:33] <mattwoberts> Hiya. We are moving to stripe billing, from our own billing engine. As part of this we're considering moving from our stripe elements setup for payment collection to checkout. Would this seem a sensible approach, when dealing with subscriptions, or is checkout more limited in what you can do? 
+stripe 2019-09-17 [18:51:14] <mattwoberts> Basically Stripe Elements Vs Stripe Checkout 
+stripe 2019-09-17 [18:51:19] <w1zeman1p> mattwoberts: there are some limitations to Checkout. really depends on your setup. 
+stripe 2019-09-17 [18:51:44] <Brian17> have any of you guys used Stripe integration with Shopify Payments? 
+stripe 2019-09-17 [18:52:29] <Brian17> I confirmed that Shopify Payments allows you to pass stripe customer ids as a parameter to process payments 
+stripe 2019-09-17 [18:52:57] <mattwoberts> w1zeman1p Hmm - our needs are - a new signup will invoke a subscription with a free trial (no payment). During that trial we encourage users to enter card details. At the end of the trail we bill - so payment would be mandatory at that point if they've not already added a card. Does that help? 
+stripe 2019-09-17 [18:53:12] <Brian17> but im not sure what the process is to allow read-write scope within my shopify app to be able to create customers 
+stripe 2019-09-17 [18:53:31] <w1zeman1p> mattwoberts: yeah I think so. do you charge taxes? 
+stripe 2019-09-17 [18:54:08] <mattwoberts> w1zeman1p We do - currently you can enter a VAT number, and depending on your country we'll add tax too. 
+stripe 2019-09-17 [18:54:34] <w1zeman1p> mattwoberts: ok, yeah i'd stick with Elements. Checkout doesn't support Taxes yet 
+stripe 2019-09-17 [18:54:57] <mattwoberts> w1zeman1p Interesting, thanks for the info 
+stripe 2019-09-17 [18:58:25] <w1zeman1p> Brian17: I haven't worked with Shopify Payments directly before.. 
+stripe 2019-09-17 [18:58:55] <Brian17> w1zeman1p :( 
+stripe 2019-09-17 [18:59:07] <Brian17> Thanks tho :) 
+stripe 2019-09-17 [18:59:44] <w1zeman1p> I think Shopify devs have a discord channel they hang out in. have you tried there? 
+stripe 2019-09-17 [18:59:59] <belltyler> Hello! Quick question.... In Stripe billing, is there an easy way to see what the proration would be prior to changing subscriptions?  The goal would be to show my users what the prorated amount would be before they confirm an upgrade/downgrade.  Thanks! 
+stripe 2019-09-17 [19:01:05] <w1zeman1p> belltyler: i think you may be looking for this: https://stripe.com/docs/api/invoices/upcoming#upcoming_invoice-subscription_prorate 
+stripe 2019-09-17 [19:03:09] <belltyler> That's perfect! Thank you! 
+stripe 2019-09-17 [19:04:08] <w1zeman1p> :) 
+stripe 2019-09-17 [19:23:06] <Bryan3> I've got a question regarding using Stripe Checkout for one-off purchases.  The Stripe dashboard is showing new customer creations every time a user makes a one-off purchase in our app, even though they are doing so with the same email address every time they make a purchase.  How can we get rid of these duplicate customers being created so all of 
+stripe 2019-09-17 [19:23:06] <Bryan3> a customer's purchases will show under the same customer in the Stripe Dashboard? 
+stripe 2019-09-17 [19:23:32] <Bryan3> We are not doing any customer management beyond just using Stripe Checkout for these purchases 
+stripe 2019-09-17 [19:25:40] <turbotime> Bryan3: You'd need to create a Customer and pass it to `CheckoutSession.customer` 
+stripe 2019-09-17 [19:25:54] <turbotime> Otherwise it will create one every time. 
+stripe 2019-09-17 [19:29:50] <razorplug> when using stripe.js, after getting all the card details, I can createPaymentMethod() or createToken() to send the result to a server, which is perferred? 
+stripe 2019-09-17 [19:33:31] <turbotime> razorplug: `createPaymentMethod()` is the newer version that I'd recommend unless your specific flow really needs `createToken()` 
+stripe 2019-09-17 [19:34:32] <razorplug> thanks @turbotime, thats's all I needed to hear. 
+stripe 2019-09-17 [20:31:54] <JP> Hey, is there a way to schedule a payment to process at a later date? Say if a hotel is reserved now for a date 2 weeks later and we want to delay a charge until check in? Thanks #stripe 
+stripe 2019-09-17 [20:34:34] <turbotime> JP: You can authorize and then manually capture up to 7 days out, but otherwise no, you just need to create the payment when you're ready. 
+stripe 2019-09-17 [20:50:15] <Sergio98> Hello, Any iOS devs available? 
+stripe 2019-09-17 [20:53:19] <JP> Okay thanks. Yes input from an iOS dev would be great. What I'm struggling with is how to create the payment when the time comes since there isn't really a server-client situation to manage that 
+stripe 2019-09-17 [20:53:39] <w1zeman1p> JP: can you elaborate a bit? 
+stripe 2019-09-17 [20:53:52] <w1zeman1p> Sergio98: what's up? 
+stripe 2019-09-17 [20:54:17] <Sergio98> hey @w1 
+stripe 2019-09-17 [20:56:08] <mitchtreece> Hey guys, quick question. I recently updated our Stripe iOS SDK from v15 -> v17. I noticed that as of v16 STPPaymentContext now uses the new Payment Methods API. Successful Apple Pay payments now have stripe ID values (i.e. "pm_xxx") instead of the token / source values they had before (i.e. "src_xxx", "tok_xxx"). Is there anyway to get the old 
+stripe 2019-09-17 [20:56:08] <mitchtreece> style token / source, or is Apple Pay locked into the new Payment Methods flow? Thanks! 
+stripe 2019-09-17 [20:56:49] <Sergio98> Hey w1zeman1p, I'm following along with : https://stripe.com/docs/mobile/ios/standard#submit-payment . Just thought I should let someone know that paymentResult.paymentMethod.stripeID should be paymentResult.source.stripeID 
+stripe 2019-09-17 [20:57:05] <w1zeman1p> mitchtreece: the latest ios sdk is all PaymentMethods / PaymentIntents 
+stripe 2019-09-17 [20:57:29] <w1zeman1p> Sergio98: hmm. Which SDK version are you on? 
+stripe 2019-09-17 [20:58:01] <JP> Yes, to be clear it may be that I've written the application badly, but functions are only called on the client side. So if a reservation was pushed to the database, there would be no way to initiate some charge at a later time unless the user was active at that time 
+stripe 2019-09-17 [20:58:03] <w1zeman1p> Sergio98: I would guess that your SDK is older than the docs 
+stripe 2019-09-17 [20:58:25] <mitchtreece> using SDK 17.0.1 now (latest) 
+stripe 2019-09-17 [20:58:47] <w1zeman1p> mitchtreece: yeah that sounds correct. There is only PaymentMethods flow for that version. 
+stripe 2019-09-17 [20:59:05] <JP> In other words there is no master scheduler running on the server side that could create payments at specified times 
+stripe 2019-09-17 [20:59:45] <w1zeman1p> JP it sounds like you want to schedule a payment in the future for Stripe to collect? 
+stripe 2019-09-17 [20:59:55] <JP> Exactly 
+stripe 2019-09-17 [21:00:21] <w1zeman1p> okay. nothing jumps out at me immediately, but let me look around for a solution. 
+stripe 2019-09-17 [21:00:49] <mitchtreece> w1zeman1p Hmmm so I'm going to have to migrate the entire client / server flow to intents. There's no way to get the old token specifically for Apple Pay? Because as far as I can tell that's the only thing affected by this on my end. 
+stripe 2019-09-17 [21:01:02] <w1zeman1p> correct 
+stripe 2019-09-17 [21:01:11] <JP> Okay, thank you 
+stripe 2019-09-17 [21:03:00] <w1zeman1p> JP the only hack I can think of to make this work, is to create a subscription that has only one billing cycle, but that's really a hack of Billing and not how it's intended to be used. 
+stripe 2019-09-17 [21:03:30] <mitchtreece> w1zeman1p Well crap. Okay thanks. 
+stripe 2019-09-17 [21:04:01] <w1zeman1p> mitchtreece: I feel ya... 
+stripe 2019-09-17 [21:04:11] <w1zeman1p> mitchtreece: fwiw, everything is moving to PaymentMethods / PaymentIntents. 
+stripe 2019-09-17 [21:05:06] <JP> Okay yeah we were considering that and if that's your advice we'll take it. The other thing I'd be interested in is a more application level fix. Is there a way to run server side code with mobile apps that I'm not aware of? 
+stripe 2019-09-17 [21:05:29] <w1zeman1p> JP:  no. you need to run it on the server 
+stripe 2019-09-17 [21:05:43] <w1zeman1p> JP: you cannot ship your secret key in the mobile app bundle for security reasons 
+stripe 2019-09-17 [21:06:05] <JP> Okay so all payments must be initiated from a mobile client? 
+stripe 2019-09-17 [21:06:36] <w1zeman1p> There are a small set of actions that are available with your publishable key. The rest needs to happen on the server. 
+stripe 2019-09-17 [21:06:55] <JP> Okay, thank you 
+stripe 2019-09-17 [21:11:27] <max69> hey, does anyone have some experience with firebase firestore together with stripe? 
+stripe 2019-09-17 [21:11:43] <w1zeman1p> hey max69 I do not, but would be happy to help you debug :) 
+stripe 2019-09-17 [21:11:57] <max69> cool :) 
+stripe 2019-09-17 [21:11:58] <w1zeman1p> I tried to setup a demo account a few weeks ago but firebase was down X) 
+stripe 2019-09-17 [21:12:20] <max69> Phew, hope thats not a common occurence 
+stripe 2019-09-17 [21:12:29] <w1zeman1p> i think it was just their sign up system 
+stripe 2019-09-17 [21:12:43] <max69> well I'm betting everything on the firebase horse haha 
+stripe 2019-09-17 [21:13:15] <w1zeman1p> prolly not a bad horse to bet on. I know of at least 1 nice SAAS product that is fully firebase'd 
+stripe 2019-09-17 [21:13:35] <max69> fingers crossed 
+stripe 2019-09-17 [21:13:47] <w1zeman1p> so what're you seeing? 
+stripe 2019-09-17 [21:14:29] <max69> So I'm trying to attach a payment method to a stripe customer but I says I'm missing the required parameter 'customer' It worked before I changed some db directories So I assume it has something to do with my query 
+stripe 2019-09-17 [21:14:51] <w1zeman1p> ok can you share the code for that call? maybe in pastebin or a gist? 
+stripe 2019-09-17 [21:15:33] <max69> I got two short lines that I could just paste here? 
+stripe 2019-09-17 [21:15:38] <w1zeman1p> sure 
+stripe 2019-09-17 [21:15:52] <max69> This is where the paymentMethod object is 
+stripe 2019-09-17 [21:15:53] <max69> firestore.collection('stripe_customers').doc(user.uid).collection('payment_info').doc('paymentMethod_object').set({          paymentMethod: result.paymentMethod 
+stripe 2019-09-17 [21:16:17] <w1zeman1p> ok 
+stripe 2019-09-17 [21:16:35] <max69> I am listening for the creation of that object like this 
+stripe 2019-09-17 [21:16:35] <max69> functions.firestore    .document('stripe_customers/{userId}/payment_info/paymentMethod_object')    .onUpdate(async (change, context) 
+stripe 2019-09-17 [21:16:53] <max69> And then trying to attach like this 
+stripe 2019-09-17 [21:16:53] <max69> stripe.paymentMethods.attach(paymentMethod,            {customer: context.params.userId.customer_id}        ); 
+stripe 2019-09-17 [21:17:34] <w1zeman1p> ok and paymentMethod at that point is "pm_xxx" and customer_id is "cus_xxx"? 
+stripe 2019-09-17 [21:18:05] <max69> paymentMethod definitely does. I can see it in the stripe logs 
+stripe 2019-09-17 [21:18:25] <max69> the customer id does have that format in the database but never goes through to stripe 
+stripe 2019-09-17 [21:18:31] <Sergio98> w1zeman1p, Documentation has documentation been updated to reflect the updates on the Example project for standard integration? 
+stripe 2019-09-17 [21:18:57] <w1zeman1p> max69: are you able to log that customer ID at that point? that might be the ticket. 
+stripe 2019-09-17 [21:19:18] <Sergio98> I see the github was updated 7 days ago and the MyAPIClient.swift file no longer matches the sample code. 
+stripe 2019-09-17 [21:19:33] <w1zeman1p> Sergio98: unfortunately, I don't know which docs were updated and which werent :( 
+stripe 2019-09-17 [21:19:44] <w1zeman1p> source is old and paymentMethod is new, tho 
+stripe 2019-09-17 [21:19:47] <trond-> hi room ... hi dqsf (if online). In our last talk your last post said: "a major difference with the latest api, subscriptions and sca is instead of the initial subscription creation failing if payment fails, the subscription is put in an 'incomplete' state, and so you then have the ability  to get the user to authorize their card (if needed) to complete the process". Shall this be added to the webhook? or ... right. I see it now. What 
+stripe 2019-09-17 [21:19:47] <trond->  is the best practice to create a card authorize process? Create a special form just for this? 
+stripe 2019-09-17 [21:20:12] <max69> I'll give it a try and be right back 
+stripe 2019-09-17 [21:20:38] <w1zeman1p> trond-: are these subscriptions with a trial? 
+stripe 2019-09-17 [21:20:53] <trond-> w1zeman1p , nope. 
+stripe 2019-09-17 [21:21:31] <trond-> don't want to support that, even though it would/could perhaps be a good idea. 
+stripe 2019-09-17 [21:21:43] <w1zeman1p> trond-: ok then when the subscription is incomplete, it'll have a latest_invoice.payment_intent that has a client_secret. You'd attempt to create the sub, and if incomplete, pass that client_secret to the client and use handleCardPayment to authenticate the payment: https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment 
+stripe 2019-09-17 [21:22:35] <w1zeman1p> trond-: the reason I ask is the recovery flow is a little different for the two options. We'll be recording a live demo of how to setup SCA ready billing for both options tomorrow if you wanna subscribe to this channel: https://www.youtube.com/playlist?list=PLy1nL-pvL2M6IYfRCmhOPcyC70zJqFoCs 
+stripe 2019-09-17 [21:27:35] <max69> w1zeman1p finally got the log 
+stripe 2019-09-17 [21:27:43] <max69> its undefined 
+stripe 2019-09-17 [21:27:43] <trond-> thanks, w1zeman1p . I will subscribe to the channel. 
+stripe 2019-09-17 [21:28:11] <max69> not quite sure why 
+stripe 2019-09-17 [21:29:20] <w1zeman1p> max69: can you log that userId? 
+stripe 2019-09-17 [21:32:13] <max69> w1zeman1p hmm, yeah, that works 
+stripe 2019-09-17 [21:32:35] <w1zeman1p> what does that look like? 
+stripe 2019-09-17 [21:32:46] <lucasocon> Hi guys, I'm having the following issue.I build the apple pay stripe session and put inside the logic to create a charge sending a request to my API.After finish the `buildSession` method I handle the shipping contact selection using this:`session.onshippingcontactselected = (event) => {`my problem is here, I need the `completion` method handling 
+stripe 2019-09-17 [21:32:47] <lucasocon> some issues that I could have inside the event handler.I want to put something like this inside the event handler:`completion(ApplePaySession.STATUS_INVALID_SHIPPING_CONTACT)`but I got an error that `completion` is not defained, that makes sense because `completion` is available inside the `buildSession` method.Do you know how I can handle this 
+stripe 2019-09-17 [21:32:47] <lucasocon> situation? Thanks! 
+stripe 2019-09-17 [21:32:51] <lucasocon> Hi guys, I'm having the following issue.I build the apple pay stripe session and put inside the logic to create a charge sending a request to my API.After finish the `buildSession` method I handle the shipping contact selection using this:`session.onshippingcontactselected = (event) => {`my problem is here, I need the `completion` method handling 
+stripe 2019-09-17 [21:32:51] <lucasocon> some issues that I could have inside the event handler.I want to put something like this inside the event handler:`completion(ApplePaySession.STATUS_INVALID_SHIPPING_CONTACT)`but I got an error that `completion` is not defained, that makes sense because `completion` is available inside the `buildSession` method.Do you know how I can handle this 
+stripe 2019-09-17 [21:32:52] <lucasocon> situation? Thanks! 
+stripe 2019-09-17 [21:33:40] <lucasocon> Hi guys, I'm having the following issue.I build the apple pay stripe session and put inside the logic to create a charge sending a request to my API.After finish the `buildSession` method I handle the shipping contact selection using this:`session.onshippingcontactselected = (event) => {`my problem is here, I need the `completion` method handling 
+stripe 2019-09-17 [21:33:41] <lucasocon> some issues that I could have inside the event handler.I want to put something like this inside the event handler:`completion(ApplePaySession.STATUS_INVALID_SHIPPING_CONTACT)`but I got an error that `completion` is not defined, that makes sense because `completion` is available inside the `buildSession` method.Do you know how I can handle this 
+stripe 2019-09-17 [21:33:41] <lucasocon> situation? Thanks! 
+stripe 2019-09-17 [21:34:04] <max69> LNsZihCn2zaoGd4QwR1tpQhujfu1 
+stripe 2019-09-17 [21:34:12] <w1zeman1p> lucasocon: so on shipping contact selected could be an invalid contact? 
+stripe 2019-09-17 [21:34:22] <max69> It's the firebase auth id of the specific user 
+stripe 2019-09-17 [21:34:23] <w1zeman1p> max69: ok and that's a User ID in firebase? 
+stripe 2019-09-17 [21:34:25] <w1zeman1p> ok 
+stripe 2019-09-17 [21:34:38] <w1zeman1p> max69: and for that user ID is the customer ID in the db? 
+stripe 2019-09-17 [21:34:42] <w1zeman1p> the Stripe customer ID? 
+stripe 2019-09-17 [21:35:14] <lucasocon> w1zeman1p: on shipping contact selected I sent a request to my API in order to calculate taxes so I could have some issues with some addresses 
+stripe 2019-09-17 [21:35:29] <max69> yes, the customer id is a field in the document 
+stripe 2019-09-17 [21:35:44] <max69> customer_id: 'cus_...' 
+stripe 2019-09-17 [21:35:49] <trond-> w1zeman1p thanks for a link to the video. I will check it out. I am also watching some other videos there to find out more about this. Much appreciated 
+stripe 2019-09-17 [21:36:00] <lucasocon> w1zeman1p: just close the paymentsheet I want to give the user the option to change his address 
+stripe 2019-09-17 [21:36:02] <w1zeman1p> lucasocon: ok, I think you want to call `ev.updateWith({status: 'invalid_shipping_address'})` 
+stripe 2019-09-17 [21:36:14] <w1zeman1p> or in your case `event.updateWith...` 
+stripe 2019-09-17 [21:36:41] <w1zeman1p> max69: hmm ok sounds like for some reason the customer ID data isn't getting pulled when you access userId.customer_id 
+stripe 2019-09-17 [21:36:52] <w1zeman1p> max69: do you have to "fetch" that or something to get it out of firebase? 
+stripe 2019-09-17 [21:37:31] <max69> as far as I know it should work with just dot notation and the direct path 
+stripe 2019-09-17 [21:38:08] <w1zeman1p> and all the spelling is correct? :) 
+stripe 2019-09-17 [21:38:15] <w1zeman1p> (bites me all the time) 
+stripe 2019-09-17 [21:38:48] <max69> I'll give it another check. I'm almost hoping thats what it is :) 
+stripe 2019-09-17 [21:38:49] <max69> Before I had the customer id and the payment object both in the userId document. When I created subscollections in the document it started falling apart. 
+stripe 2019-09-17 [21:38:54] <w1zeman1p> max69:  https://stackoverflow.com/questions/25450325/cannot-access-firebase-object-attributes-value-displayed-as-undefined-angularfi 
+stripe 2019-09-17 [21:39:05] <w1zeman1p> not sure if that's helpful 
+stripe 2019-09-17 [21:42:50] <max69> I'll dig around a little and let you know later if you are still here 
+stripe 2019-09-17 [21:43:05] <w1zeman1p> thanks 
+stripe 2019-09-17 [21:43:21] <Jainam> Hello,Is it possible to use  automated tax calculations that stripe provide's by third party integration for calculating tax on invoice items ? 
+stripe 2019-09-17 [21:44:07] <w1zeman1p> Jainam: you can work with third parties here: https://stripe.com/works-with for tax calculations 
+stripe 2019-09-17 [21:44:17] <w1zeman1p> There are some that do tax calculations 
+stripe 2019-09-17 [21:45:49] <Jainam> We want to use Stripe Billing 
+stripe 2019-09-17 [21:46:32] <w1zeman1p> Jainam: some of these third parties will work with Stripe Billing. 
+stripe 2019-09-17 [21:46:37] <Jainam> But it does not have option to calculate tax on invoice item automatically 
+stripe 2019-09-17 [21:47:36] <w1zeman1p> Jainam: right, the way those services work is they calculate the tax, then add an invoice line item for the tax amount 
+stripe 2019-09-17 [21:50:39] <Sergio98> What is the correct syntax to create a Charge from a payment Intent? 
+stripe 2019-09-17 [21:50:46] <Sergio98> in Node 
+stripe 2019-09-17 [21:51:14] <w1zeman1p> Sergio98: https://stripe.com/docs/api/payment_intents/create 
+stripe 2019-09-17 [21:51:41] <w1zeman1p> With PaymentIntent's you work directly with the PaymentIntent object, which creates the charge on your behalf 
+stripe 2019-09-17 [21:56:57] <derek917> After setting up a UK connect account with business_type set to "company" and having created the person as an "account_opener" and "owner", I get "relationship.owner" as an eventually_due requirement from Stripe. What is it actually requesting since I already set the owner? 
+stripe 2019-09-17 [21:57:09] <derek917> I'm on API 2019-09-09 
+stripe 2019-09-17 [21:57:33] <w1zeman1p> derek917: can you show the full requirements list? 
+stripe 2019-09-17 [21:58:02] <derek917> "requirements": { 
+stripe 2019-09-17 [21:58:26] <w1zeman1p> sometimes IRC likes to chop off the end of those, Can you share in a pastebin or a gist? 
+stripe 2019-09-17 [21:59:15] <derek917> https://pastebin.com/hqndCUts 
+stripe 2019-09-17 [22:00:29] <w1zeman1p> ok looking 
+stripe 2019-09-17 [22:02:10] <Jainam> I checked all the integration they only provide tax automation for order Api 
+stripe 2019-09-17 [22:02:23] <Jainam> @ w1zeman1p 
+stripe 2019-09-17 [22:02:32] <w1zeman1p> derek917: can you fetch the person object that is the "owner" and double check that the relationship.owner flag is set to true? 
+stripe 2019-09-17 [22:02:47] <derek917> Ok let me check 
+stripe 2019-09-17 [22:02:55] <w1zeman1p> Jainam: I thought at least 2 worked with Stripe billing. looking. 
+stripe 2019-09-17 [22:10:00] <w1zeman1p> Jainam: the documentation I have found before is not the same, so I'm having some trouble finding it. I believe Avalara and/or TaxJar may support Taxes with Billing. I'd look through the documentation there. 
+stripe 2019-09-17 [22:10:02] <derek917> The owner flag is set to true 
+stripe 2019-09-17 [22:10:36] <derek917> It looks like it's looking for additional owners. If there are no additional owners, how do I clear that request to get the account to be verified? 
+stripe 2019-09-17 [22:12:15] <w1zeman1p> derek917: what is the status of that person object? I'm wondering if it's because that one person isn't verified yet. (verification.status) 
+stripe 2019-09-17 [22:12:30] <derek917> "status": "verified" 
+stripe 2019-09-17 [22:12:41] <w1zeman1p> hmm can you share the account ID? 
+stripe 2019-09-17 [22:12:54] <Jainam> Documentation for all the three integration Avalara, TaxJar, or Taxamo provided by stripe says through Orders API 
+stripe 2019-09-17 [22:13:08] <Jainam> w1zeman1p 
+stripe 2019-09-17 [22:13:50] <w1zeman1p> Jainam: hmm unfortunately, I'm not certain how these third parties work with Stripe. I do know that you could use their API's directly if you wanted, but outside of that I'd ask that you reach out to them to see how they integrate and if they support Billing. 
+stripe 2019-09-17 [22:14:47] <Jainam> I tried integrating with TaxJar and creating new invoice does not calculate tax based on customers address  ... 
+stripe 2019-09-17 [22:15:08] <Jainam> Thanks Though ...  I will keep looking for options 
+stripe 2019-09-17 [22:15:26] <Jainam> @ w1zeman1p 
+stripe 2019-09-17 [22:15:47] <w1zeman1p> yeah using their smart calcs API directly by passing the shipping address and getting back the taxes to then add an invoice item is one option where you'd write most of the code 
+stripe 2019-09-17 [22:16:22] <w1zeman1p> derek917: looks like that owner is "pending" 
+stripe 2019-09-17 [22:16:37] <w1zeman1p> derek917: verification.status == "pending" 
+stripe 2019-09-17 [22:18:32] <derek917> When I make the /accounts/acct_xxx/persons API call the person object says verification.status == "verified" 
+stripe 2019-09-17 [22:19:10] <w1zeman1p> interesting. looking... 
+stripe 2019-09-17 [22:25:51] <josephan> For Stripe Billing, when I receive a `invoice.payment_succeeded` webhook event. Does the `period_end` field indicate when the subscription will end? 
+stripe 2019-09-17 [22:26:18] <josephan> Stripe API docs says: 
+stripe 2019-09-17 [22:26:21] <josephan> "End of the usage period during which invoice items were added to this invoice." 
+stripe 2019-09-17 [22:26:32] <josephan> It's a bit confusing 
+stripe 2019-09-17 [22:26:46] <w1zeman1p> its the end of the period, not the subscription. 
+stripe 2019-09-17 [22:27:02] <w1zeman1p> think "end of the month" for a monthly subscription 
+stripe 2019-09-17 [22:27:56] <josephan> ok thank you 
+stripe 2019-09-17 [22:30:08] <w1zeman1p> derek917: can you try updating the percent_ownership for the owner to something more than 25%? 
+stripe 2019-09-17 [22:30:17] <w1zeman1p> relationship.percent_ownership 
+stripe 2019-09-17 [22:30:29] <derek917> Ok I'll try that 
+stripe 2019-09-17 [22:31:23] <w1zeman1p> once you've done that, try also updating `company[owners_provided] = true` 
+stripe 2019-09-17 [22:47:58] <nickdnk> Hey guys quick question 
+stripe 2019-09-17 [22:48:07] <nickdnk> https://stripe.com/docs/stripe-js/reference#stripe-handle-card-setup-no-element 
+stripe 2019-09-17 [22:48:37] <nickdnk> Why do I need to pass a payment_method id as the second parameter when the client secret already contains this information? 
+stripe 2019-09-17 [22:48:58] <w1zeman1p> you should only need that if the payment method wasn't set for the payment intent 
+stripe 2019-09-17 [22:49:04] <nickdnk> Aha okay 
+stripe 2019-09-17 [22:49:12] <nickdnk> So that's why it works without doing it 
+stripe 2019-09-17 [22:49:14] <nickdnk> :D 
+stripe 2019-09-17 [22:49:38] <nickdnk> This is SetupIntent though, but I suppose that still applies 
+stripe 2019-09-17 [22:49:39] <w1zeman1p> :) 
+stripe 2019-09-17 [22:59:43] <konner> hi, anyone can help me with the subscrition fee and application fee 
+stripe 2019-09-17 [23:00:48] <koopajah> konner : hello! I can try 
+stripe 2019-09-17 [23:01:15] <konner> ok 
+stripe 2019-09-17 [23:04:07] <konner> i have this case : i have to donate 100$ directly to the connected account, with the formula i found in the documentation i send 104.84$ but in the invoice the fee are a little bit higher than the amount i send 
+stripe 2019-09-17 [23:04:17] <koopajah> what is the formula, do you have a link to this? 
+stripe 2019-09-17 [23:05:56] <konner> i dont have the link, but here is the code i use for charges without subscriptions and work perfect 
+stripe 2019-09-17 [23:05:57] <konner>  decimal goalcents = (_rd.Amount + _rd.ApplicationFee) + _fee;                                        decimal fix = 1 - _percent;                                        totalcharge = Math.Round((goalcents / fix), 2) * 100; 
+stripe 2019-09-17 [23:06:09] <koopajah> please use a gist or pastebin to share code instead 
+stripe 2019-09-17 [23:06:27] <konner> ok 
+stripe 2019-09-17 [23:06:27] <koopajah> Can you show me an example of a charge where the fee works when the subscription doesn't, where the amounts are *identical*? 
+stripe 2019-09-17 [23:06:44] <konner> ok 
+stripe 2019-09-17 [23:11:09] <konner> how can i shared u, 2 screen shot? 
+stripe 2019-09-17 [23:12:58] <koopajah> the ids of the charge/invoice 
+stripe 2019-09-17 [23:13:36] <sam-lap> Hi guys, i've the new SCA working on test mode, when i put it into production all the payments throught chrome works well on firefox after the intent is created i get an blank ifram from hooks.stripe.com 
+stripe 2019-09-17 [23:13:43] <sam-lap> any ideas what could be wrong ? 
+stripe 2019-09-17 [23:14:08] <konner> https://pasteboard.co/IxToxNF.png 
+stripe 2019-09-17 [23:14:10] <koopajah> sam-lap : hmmm it's hard to say without more details unfortunately about your integration 
+stripe 2019-09-17 [23:14:29] <koopajah> konner : I need the charge ids and the invoice ids: ch_123 and in_123 instead 
+stripe 2019-09-17 [23:14:33] <sam-lap> its based on this https://github.com/ChrisF94/Stripe-SCA-PHP 
+stripe 2019-09-17 [23:14:58] <koopajah> and you can not reproduce this in Test mode on Firefox at all? 
+stripe 2019-09-17 [23:15:10] <konner> https://pasteboard.co/IxTp5DD.png 
+stripe 2019-09-17 [23:15:21] <konner> ok 
+stripe 2019-09-17 [23:15:59] <konner> pi_1FINYdBJEVJyxqelpXC0uDel 
+stripe 2019-09-17 [23:16:00] <sam-lap> koopajah, no, in test mode it works fine no errors at all 
+stripe 2019-09-17 [23:16:35] <koopajah> sam-lap : hmmm okay. We still need more details unfortunately 
+stripe 2019-09-17 [23:16:50] <konner> py_1FJpoTBJEVJyxqel5d6tFEtZ 
+stripe 2019-09-17 [23:17:50] <sam-lap> koopajah, like so ? 
+stripe 2019-09-17 [23:18:45] <konner> 1.- py_1FJpoTBJEVJyxqel5d6tFEtZ without subscription 2.- pi_1FINYdBJEVJyxqelpXC0uDel With the subscription 
+stripe 2019-09-17 [23:18:49] <koopajah> konner: Okay so the pi_1FINYdBJEVJyxqelpXC0uDel is for $104.84 where our fee is $3.34 and your fee is $1.57. And py_1FJpoTBJEVJyxqel5d6tFEtZ is not really a thing because is the payment resulting from the charge in your platform. But the charge was for $104.84, our fee was $3.34 (same as before) and your fee you took was $4.84 
+stripe 2019-09-17 [23:19:33] <koopajah> it does look like your math just doesn't add up since you're taking a different fee in each case 
+stripe 2019-09-17 [23:19:42] <koopajah> sam-lap : not sure I understood what your last sentence meant 
+stripe 2019-09-17 [23:20:06] <sam-lap> which more info you need ? 
+stripe 2019-09-17 [23:20:23] <sam-lap> network dump from firefox during the connection ? 
+stripe 2019-09-17 [23:20:45] <koopajah> sam-lap : ah sorry, well right now I have ~nothing except that it doesn't work. I need a way to reproduce, details on what you see, what's in the JS console, which URL you end up on, how you integrate, if you do automatic or manual confirmation, and that's just the start 
+stripe 2019-09-17 [23:22:03] <koopajah> konner : the integration is quite different here. In one case you do a destination charge, in the other you create the subscription on the connected account where our fee is taken separately from yours 
+stripe 2019-09-17 [23:22:22] <koopajah> But AFAICT, we (Stripe) took the exact same fee on both charges so the discrepancy is how much you took on your own application fee 
+stripe 2019-09-17 [23:23:00] <konner> im sending on the application fee percent 1.5 
+stripe 2019-09-17 [23:23:19] <konner> then im doing someting wrong at sending the percent fee 
+stripe 2019-09-17 [23:23:24] <koopajah> sure but 1.5% of $104.84 is $1.57 
+stripe 2019-09-17 [23:23:49] <koopajah> but on the charge you took a total fee of $4.84, so you took $1.5 
+stripe 2019-09-17 [23:23:52] <koopajah> see the difference? 
+stripe 2019-09-17 [23:24:05] <koopajah> you forgot to take into account that the percentage of the invoice changes if you increase the amount 
+stripe 2019-09-17 [23:24:16] <koopajah> because you increased the amount of the invoice, you got more for yourself by asking for 1.5% 
+stripe 2019-09-17 [23:24:29] <koopajah> because 1.5% of $100 is $1.5 but 1.5% of $104.84 is not 
+stripe 2019-09-17 [23:24:36] <koopajah> does that make sense? 
+stripe 2019-09-17 [23:24:44] <konner> yes !! 
+stripe 2019-09-17 [23:24:57] <koopajah> that's what is so tricky with this math 
+stripe 2019-09-17 [23:25:00] <konner> sometimes im like hush 
+stripe 2019-09-17 [23:25:19] <koopajah> because you're like "I want $100, so I need to charge $103.2. But if I do that the fee is more, so I need to increase too," 
+stripe 2019-09-17 [23:25:30] <koopajah> and you do that until the increase changes nothing, it's like a "recursive" function 
+stripe 2019-09-17 [23:25:57] <konner> ok 
+stripe 2019-09-17 [23:26:03] <koopajah> sam-lap : are you finding anything? 
+stripe 2019-09-17 [23:26:09] <konner> i will check on this way 
+stripe 2019-09-17 [23:28:33] <sam-lap> Load denied by X-Frame-Options: https://hooks.stripe.com/ does not permit framing by https://stripe.layerspot.net:8088/cards/. got that on console 
+stripe 2019-09-17 [23:29:20] <koopajah> are you doing anything weird like doing your own iframe logic for 3DS? 
+stripe 2019-09-17 [23:31:05] <sam-lap> no, this is even an hooks.stripe.com iframe 
+stripe 2019-09-17 [23:31:26] <sam-lap> https://hooks.stripe.com/redirect/authenticate/src_XXXXXXX?client_secret=src_client_secret_XXXXXXX 
+stripe 2019-09-17 [23:31:45] <sam-lap> that's the rc link, just changed the values 
+stripe 2019-09-17 [23:31:46] <koopajah> hmmm yeah but it does look like you're doing your own iframe. Can you share more details about your detailed integration? 
+stripe 2019-09-17 [23:32:07] <sam-lap> https://github.com/ChrisF94/Stripe-SCA-PHP 
+stripe 2019-09-17 [23:32:19] <sam-lap> used that one 
+stripe 2019-09-17 [23:32:20] <koopajah> is this your exact code or just an example? 
+stripe 2019-09-17 [23:32:29] <sam-lap> works 100% on google chrome 
+stripe 2019-09-17 [23:32:54] <koopajah> Can you get the content of `X-Frame-Options` somewhere in Firefox when you get the error? 
+stripe 2019-09-17 [23:34:12] <sam-lap> the layout isnt the same , the buy.php  is the same 
+stripe 2019-09-17 [23:34:23] <koopajah> yeah the buy.php doesn't matter though 
+stripe 2019-09-17 [23:34:41] <koopajah> the issue right now seems to be client-side in the way you do the 3DS iframe. I'm trying to investigate but I'm missing a lot of key info 
+stripe 2019-09-17 [23:34:52] <sam-lap> get content like ? from the header on network tab ? 
+stripe 2019-09-17 [23:35:23] <sam-lap> im using nginx (dont know if theres some setting needed for it) 
+stripe 2019-09-17 [23:35:41] <koopajah> is there a live page I can look at? 
+stripe 2019-09-17 [23:35:53] <sam-lap> the thing i found odd is that it works on chrome 
+stripe 2019-09-17 [23:35:55] <sam-lap> sure 
+stripe 2019-09-17 [23:36:02] <koopajah> I mean CSP rules vary across browsers 
+stripe 2019-09-17 [23:36:18] <koopajah> and you're sure it does not happen with your Test keys on Firefox? 
+stripe 2019-09-17 [23:37:36] <sam-lap> yup 
+stripe 2019-09-17 [23:37:38] <sam-lap> https://stripe.layerspot.net:8088/cards/strip_5.html 
+stripe 2019-09-17 [23:37:51] <sam-lap> i can put it on test for you to test if needed 
+stripe 2019-09-17 [23:38:07] <koopajah> yes please. but you just said Test doesn't show the issue? 
+stripe 2019-09-17 [23:38:10] <koopajah> did I misunderstand you? 
+stripe 2019-09-17 [23:38:41] <sam-lap> right, just said that because your last comment (Test keys on Firefox) 
+stripe 2019-09-17 [23:39:04] <koopajah> Sorry I am lost 
+stripe 2019-09-17 [23:39:09] <koopajah> Can you reproduce on Firefox with Test keys? 
+stripe 2019-09-17 [23:39:26] <sam-lap> Nop 
+stripe 2019-09-17 [23:39:32] <sam-lap> Just with real data 
+stripe 2019-09-17 [23:41:01] <koopajah> okay. I tried your script on Chrome and can't even see it show 3DS 
+stripe 2019-09-17 [23:41:09] <koopajah> it's "stuck" on Submit Payment 
+stripe 2019-09-17 [23:41:38] <sam-lap> Any error on console ? 
+stripe 2019-09-17 [23:41:45] <koopajah> okay I think it's because it has live keys and so it returns a 400 that you don't handle and then it's stuck 
+stripe 2019-09-17 [23:42:05] <sam-lap> That api its on live mode 
+stripe 2019-09-17 [23:42:52] <koopajah> yep just flagging that you have that bug too 
+stripe 2019-09-17 [23:45:13] <koopajah> trying to figure out how to debug this give me a bit 
+stripe 2019-09-17 [23:45:57] <sam-lap> sure no problem 
+stripe 2019-09-17 [23:46:55] <koopajah> sam-lap : is this specific to a certain card? 
+stripe 2019-09-17 [23:47:06] <techieshark[m]> hi folks - if i fetch a customer with https://stripe.com/docs/api/customers/retrieve e.g. `let customer = await stripe.customers.retrieve( 
+stripe 2019-09-17 [23:47:07] <techieshark[m]>   'cus_xyz123');`, is it safe to assume `customer.subscriptions.total_count` is the total number of active subscriptions the customer has? This value is shown in the example API response but I am not seeing the field explicitely documented. 
+stripe 2019-09-17 [23:47:13] <koopajah> do you have an example PaymentIntent pi_123 I can look at where that card worked on chrome too? 
+stripe 2019-09-17 [23:47:45] <koopajah> techieshark[m] : sooooo it kinda is, but it's not safe. We (Stripe) actively deprecated `total_count` and this is going to go away. So definitely do *not* rely on this 
+stripe 2019-09-17 [23:48:55] <techieshark[m]> koopajah: ah, thanks. There's no 1-API-Call way to get the total number of active subscriptions then, right? I would need to paginate? 
+stripe 2019-09-17 [23:49:08] <koopajah> techieshark[m] : correct. Or cache this in your database 
+stripe 2019-09-17 [23:50:15] <techieshark[m]> koopajah: ok thanks for the info! :) 
+stripe 2019-09-17 [23:51:02] <sam-lap> koopajah pi_1FJqQMK1zG3NxtEYQBI0duLd 
+stripe 2019-09-17 [23:51:18] <sam-lap> that one was made from chrome with the same card 
+stripe 2019-09-17 [23:51:28] <koopajah> okay do you have a PI id for the Firefox one 
+stripe 2019-09-17 [23:53:49] <sam-lap> pi_1FJqTwK1zG3NxtEYCn2n48Fl 
+stripe 2019-09-17 [23:57:49] <ScottyB> Question on tokens / paymentintent. In the past, before we moved to paymentintent, we used the stripe.js return values of token items to store in our database. Like last 4 digits, card type, etc. What is the best method to get this information now? Interrogate the payment id? 
+stripe 2019-09-17 [23:59:29] <abhi976> Is there any documentation on Apple Pay support in Stripe Terminal? 
+stripe 2019-09-18 [00:01:24] <koopajah> abhi976 : I don't think we have docs for this though it's supported: https://stripe.com/terminal. I'd recommend talking to our support team: https://support.stripe.com/contact otherwise 
+stripe 2019-09-18 [00:05:41] <koopajah> ScottyB : the PaymentIntent will have a Charge once it succeeds which will have all the information: https://stripe.com/docs/payments/payment-intents/migration/reading-from-charges 
+stripe 2019-09-18 [00:07:14] <koopajah> sam-lap : and just to confirm, you have tried that card multiple time in Firefox and it always fails? 
+stripe 2019-09-18 [00:07:40] <sam-lap> yes thats right 
+stripe 2019-09-18 [00:07:48] <sam-lap> always the same error there 
+stripe 2019-09-18 [00:08:08] <koopajah> and that's just that one card? Or you tried multiple? 
+stripe 2019-09-18 [00:08:51] <ScottyB> koopajah can that only happen out of band? Once any validation takes place from the user/client side and I submit handleCardPayment() do I have to wait for a webhook? Do charges not happen instantly anymore? 
+stripe 2019-09-18 [00:09:43] <koopajah> ScottyB : well that depends what you mean really and also how you integrated exactly. Like with Charges you created the charge server-side. With PaymentIntent this happens client-side 
+stripe 2019-09-18 [00:15:35] <koopajah> sam-lap : https://4242.io/temp/x-frame-options.png can you try this? 
+stripe 2019-09-18 [00:17:00] <Amber69> Is the two-person authentication system down? I keep requesting a code but haven't received a text 
+stripe 2019-09-18 [00:17:25] <ScottyB> koopajah well, I was following your guides and got to step 4 here https://stripe.com/docs/payments/cards/saving-cards-after-payment#create-payment-intent and that's where I'm at. The guide seems to suggest the only method we could use to get the card information is waiting for the webhook. If the charge is created client side how do I get that 
+stripe 2019-09-18 [00:17:26] <ScottyB> information? I guess I should ask if handleCardPayment is what creates the charge? 
+stripe 2019-09-18 [00:17:40] <koopajah> Amber69 : I haven't heard anything internally, maybe an issue with your phone provider? 
+stripe 2019-09-18 [00:18:24] <koopajah> ScottyB : yes that step will create the charge for you. But this can be done async, because it needs 3DS for example 
+stripe 2019-09-18 [00:19:28] <ScottyB> Right, so once the 3DS finishes in your modal doesn't that call the success handler? So wouldn't I know at that point the transaction is complete? 
+stripe 2019-09-18 [00:22:18] <koopajah> ScottyB : you would yes, it's just that the customer might have closed the page by then 
+stripe 2019-09-18 [00:22:56] <ScottyB> If that is the case can't we consider the transaction not complete and the customer would need to return to create a new checkout? 
+stripe 2019-09-18 [00:23:37] <ScottyB> I am not understanding why the concern about customers closing the page.. they could always have closed the page before they completed checkout previously. If they don't finish 3DS doesn't it just leave an open payment intent? 
+stripe 2019-09-18 [00:24:33] <koopajah> it does, but they know that 
+stripe 2019-09-18 [00:24:48] <koopajah> but banks might say "transaction succeeded" or something even though it hasn't yet 
+stripe 2019-09-18 [00:24:59] <koopajah> but in this case if they close before your success callback they are still charged 
+stripe 2019-09-18 [00:25:11] <koopajah> you absolutely need to listen for the webhook to ensure you don't miss any successful PaymentIntent 
+stripe 2019-09-18 [00:25:43] <ScottyB> What the heck? So there is no option to not complete transactions until 3DS is complete (if you determine it is needed)? 
+stripe 2019-09-18 [00:26:27] <koopajah> I don't fully understand what you're saying/describing here 
+stripe 2019-09-18 [00:26:47] <koopajah> We can't charge before 3DS if 3DS is needed, that hasn't changed 
+stripe 2019-09-18 [00:27:17] <ScottyB> Ok, so are you saying the customer might close the page after they submit 3DS but before the success callback? 
+stripe 2019-09-18 [00:27:32] <koopajah> yes 
+stripe 2019-09-18 [00:27:41] <koopajah> it happens more than you'd think >_< 
+stripe 2019-09-18 [00:28:27] <ScottyB> OK, so ignoring that case, is there no way on the client side now (during the checkout) to get the card details? Must I only do that once the webhook is called? 
+stripe 2019-09-18 [00:29:24] <koopajah> I don't want to be too annoying but it really depends what you mean here unfortunately. But the best solution is to look after the charge 
+stripe 2019-09-18 [00:35:12] <ScottyB> Not annoying at all, I'm obviously misunderstanding it so I appreciate you helping. When I submit handleCardPayment the only real piece of data I get back is payment_method. I don't see how I access a charge object from there. Do I have to wait for the webhook to interrogate the charge object? 
+stripe 2019-09-18 [00:37:52] <koopajah> you know the PaymentIntent so you can fetch it server-side. Same with the payment method 
+stripe 2019-09-18 [00:38:17] <koopajah> sam-lap : any luck? 
+stripe 2019-09-18 [00:44:17] <ScottyB> Ok, so I need to make another call to get the charges from payment intents and then call the API endpoint for that specific charge? And it sounds like you're suggesting to do this server side once we get the webook? 
+stripe 2019-09-18 [00:44:21] <ScottyB> webhook 
+stripe 2019-09-18 [00:46:26] <koopajah> hmmm you don't need any extra call. In the webhook you already get the PaymentIntent expanded, with the successful charge already expanded 
+stripe 2019-09-18 [00:51:54] <ScottyB> AH ok, thanks. Which webhook event would this be? payment_intent.succeeded? 
+stripe 2019-09-18 [00:51:59] <koopajah> yes! 
+stripe 2019-09-18 [00:52:28] <ScottyB> Thanks again :) 
+stripe 2019-09-18 [00:53:39] <ScottyB> One more... for checkout flow, once the success callback is made we can show the "receipt" page confidently, right? The reliance on the webhook is necessitated by the fact that customers may not  hit the success callback but if they do then we know the transaction is successful as well, yes? 
+stripe 2019-09-18 [00:54:12] <koopajah> yes! 
+stripe 2019-09-18 [00:54:30] <koopajah> and at that point you can also just call https://stripe.com/docs/api/payment_intents/retrieve to see the PaymentIntent, its Charge and all the info you need 
+stripe 2019-09-18 [03:41:59] <wkirchheimer> Trying to work out the paymentIntent process. My Authorize looks ok except for this "status": "requires_source", an then when I try to capture I get ""This PaymentIntent could not be captured because it has a status of requires_payment_method. Only a PaymentIntent with one of the following statuses may be captured: requires_capture." 
+stripe 2019-09-18 [03:42:59] <timebox> wkirchheimer: If it requires_source (or requires_payment_method) then you need to add a Source/Payment Method before you can capture it. 
+stripe 2019-09-18 [03:44:17] <wkirchheimer> In the use cases, I don't see anything I am not filling: https://stripe.com/docs/payments/payment-intents/use-cases. (example 4) 
+stripe 2019-09-18 [03:46:37] <timebox> wkirchheimer: Did you add a Payment Method before you tried to auth it? 
+stripe 2019-09-18 [03:48:05] <timebox> wkirchheimer: Or rather, before you tried to Capture it? 
+stripe 2019-09-18 [03:50:20] <wkirchheimer> The Mobile app is storing the card, and then sends the server app the pi_ token, I use the pi_ to make the Auth, and then the Capture.  I never see the card info on the server. 
+stripe 2019-09-18 [03:50:33] <wkirchheimer> ... errrr rather 
+stripe 2019-09-18 [03:51:08] <wkirchheimer> Mobile is working with stripe to generate the card storage, and provide the token to the server app. 
+stripe 2019-09-18 [03:52:27] <timebox> wkirchheimer: So if your Payment Intent is in a state of requires_source, it does not have a source/payment-method that is ready to be used.  Do you have a pi_ ID you can share here? 
+stripe 2019-09-18 [03:52:34] <timebox> (Where this failed) 
+stripe 2019-09-18 [03:53:11] <wkirchheimer> pi_1FJtx4ImeRXCRGqjtxTAfXEH 
+stripe 2019-09-18 [03:54:03] <timebox> wkirchheimer: That Payment Intent didn't have a Payment Method associated with it, so there's nothing to capture/charge/whatever. 
+stripe 2019-09-18 [03:55:17] <wkirchheimer> I send this for the capture 
+stripe 2019-09-18 [03:55:21] <wkirchheimer>     const intCapture = parseInt((amount * 1.75) * 100); 
+stripe 2019-09-18 [03:55:21] <wkirchheimer>     const paymentIntent = await stripe.paymentIntents.create({ 
+stripe 2019-09-18 [03:55:21] <wkirchheimer>         amount: intCapture, 
+stripe 2019-09-18 [03:55:23] <wkirchheimer>         currency: 'usd', 
+stripe 2019-09-18 [03:55:24] <wkirchheimer>         payment_method_types: ['card'], 
+stripe 2019-09-18 [03:55:26] <wkirchheimer>         capture_method: 'manual', 
+stripe 2019-09-18 [03:55:29] <wkirchheimer>     }); 
+stripe 2019-09-18 [03:56:05] <wkirchheimer> Is there another field that should be in there for method? 
+stripe 2019-09-18 [03:56:39] <timebox> wkirchheimer: A Payment Intent is an intent to charge a customer; you need to add a Payment Method to have a thing to charge. 
+stripe 2019-09-18 [03:57:17] <timebox> wkirchheimer: Which client SDK are you using for mobile?  Android or iOS? 
+stripe 2019-09-18 [03:57:24] <wkirchheimer> Both 
+stripe 2019-09-18 [03:57:49] <wkirchheimer> I am not doing the mobile dev, jus the server. 
+stripe 2019-09-18 [03:58:44] <wkirchheimer> Is the "Payment Method" a field with a token, or a separate function 
+stripe 2019-09-18 [03:59:01] <timebox> wkirchheimer: Ok cool.  https://stripe.com/docs/payments/payment-intents/android and https://stripe.com/docs/payments/payment-intents/ios both describe the client side of this but in all cases, the client needs to capture the card details and create a Payment Method which you would then add to the Payment Intent so you can use it. 
+stripe 2019-09-18 [04:10:11] <chrisau168> hi 
+stripe 2019-09-18 [04:10:31] <chrisau168> has anyone ever used webhooks with apigee ? 
+stripe 2019-09-18 [04:16:25] <timebox> chrisau168: What does that mean exactly? 
+stripe 2019-09-18 [04:20:40] <timebox> chrisau168: Like, you use Apigee as an API gateway in front of your app? 
+stripe 2019-09-18 [04:21:38] <chrisau168> yes 
+stripe 2019-09-18 [04:22:04] <timebox> chrisau168: Are you having problems with it? 
+stripe 2019-09-18 [04:23:09] <chrisau168> my apigee setup requires a header token before anyone can access the API, with stripe how do I insert this header apigee token? 
+stripe 2019-09-18 [04:26:03] <timebox> chrisau168: I'm not sure there's a way that can be done.  You can include a username/password in the URL, but I'm not sure if there's a away to enable that kind of authentication in Apigee? 
+stripe 2019-09-18 [04:50:46] <renseek> Hi, can someone please explain what `generic_decline` is and why it doesn't show up in the stripe dashboard as a failed payment? 
+stripe 2019-09-18 [04:50:56] <renseek> Hi, can someone please explain what `generic_decline` is and why it doesn't show up in the stripe dashboard as a failed payment? InternetJones 
+stripe 2019-09-18 [04:52:42] <timebox> renseek: You can read more about it here: https://stripe.com/docs/declines/codes  What do you mean it doesn't show up as a failed payment?  Where are you seeing the decline? 
+stripe 2019-09-18 [04:53:22] <renseek> Thanks, I must have missed that 
+stripe 2019-09-18 [04:54:25] <renseek> timebox, here's the payment intent, it shows as incomplete rather than failed: pi_1FJj4yLpWs83OXTkkzeXMrTf 
+stripe 2019-09-18 [04:55:07] <renseek> where as this payment intent shows as failed: pi_1FJieOLpWs83OXTkAA3YKb8u 
+stripe 2019-09-18 [04:56:11] <timebox> renseek: Where did you see the generic_decline? 
+stripe 2019-09-18 [05:00:09] <renseek> @timebox if i go into the payment intent and click on one of the logs, e.g. req_jOlhX4piQ7va1Y 
+stripe 2019-09-18 [05:00:50] <renseek> `{  "error": {    "decline_code": "generic_decline",    "message": "Your card was declined.",    "type": "card_error"  }}` 
+stripe 2019-09-18 [05:04:48] <timebox> renseek: Cool.  You can ~always re-try to Confirm a payment intent with another card.  I don't think that generic_decline one made it as far into the process as the other one did though. 
+stripe 2019-09-18 [05:05:55] <timebox> renseek: Likely the customer should contact their bank, or try another card.  If you write into Support they can dig in further for you: https://support.stripe.com/contact/ 
+stripe 2019-09-18 [05:06:06] <cb-js> Hi is there anyway we can get ip address location distance from billing address from Stripe for payments made via API or webhook, also for getting IP address Geoloaction is Stripe using some third party service if yes could we know the 3rd party service name 
+stripe 2019-09-18 [05:08:00] <timebox> cb-js: I don't think you can get IP address location from Stripe. 
+stripe 2019-09-18 [05:08:23] <timebox> cb-js: You'd need to build that yourself I think.  I'm not sure about what we might use for that to be honest. 
+stripe 2019-09-18 [05:10:07] <renseek> cheers timebox 
+stripe 2019-09-18 [05:19:45] <cb-js> timebox is the info for distance between ip geolocation and billing address available in new SIGMA  service https://dashboard.stripe.com/sigma/queries 
+stripe 2019-09-18 [05:26:27] <mattwc> does handleCardPayment work for setup and payment intents? 
+stripe 2019-09-18 [05:26:54] <mattwc> ah theres handleCardSetup 
+stripe 2019-09-18 [05:28:08] <clavaque> Hi guys! Question: I just added to my code a check to see if a new card was already attached to the customer before attaching it again. I'm using the fingerprint, and it's working fine. But when testing the same card but with different expiration date and zip code, the fingerprint is the same and it wasn't considered a new card. Is this because it's a testing card and it would not happen in live mode? Does the fingerprint include the expiration in its 
+stripe 2019-09-18 [05:28:08] <clavaque> calculation, or just the number?  Thanks! 
+stripe 2019-09-18 [05:28:16] <timebox> cb-js: I don't know, but probably not?  That's probably a better question for Support: https://support.stripe.com/contact/ 
+stripe 2019-09-18 [05:28:53] <cb-js> timebox thanks 
+stripe 2019-09-18 [05:29:13] <clavaque> What worries me is that some customer that already had a card attached with one expiration, some years later tries to pay with the same card number but now new expiration, and the updated card won't be attached. 
+stripe 2019-09-18 [05:29:29] <clavaque> Not sure if that's something that could happen, have the same card number with different expiration dates, though... 
+stripe 2019-09-18 [05:30:16] <mattwc> clavaque: fingerprint is solely based on the card number 
+stripe 2019-09-18 [05:30:16] <wsw> clavaque:  yes, the fingerprint is calculated using card number. expiry date is not considered. 
+stripe 2019-09-18 [05:31:22] <clavaque> I see. Thanks for confirming that! Should I worry about a new card with same number but different date in the future, or it's an impossibility? 
+stripe 2019-09-18 [05:31:48] <AxCrypt> Hi! We're using Stripe Checkout with a webhook for checkout.session.completed. Under some circumstances we return status code 400 Bad Request. Despite this, Stripe continues to retry! RFC 2616 is quite clear on this. "The client SHOULD NOT repeat the request without modifications.". But Stripe does. Can this be fixed? 
+stripe 2019-09-18 [05:31:50] <wsw> it is pretty common in the credit card world that the issuing bank will issue a new card with the same number with a new Expiry date . So it is common that you could use the saved card even when it is expired. 
+stripe 2019-09-18 [05:32:48] <mattwc> AxCrypt: Stripe retries all webhooks with a non 200 status code every hour for 72 hours 
+stripe 2019-09-18 [05:33:08] <mattwc> theres lots of reasons why a server could return a 400 bad request error 
+stripe 2019-09-18 [05:33:20] <AxCrypt> Yes I know. I am saying this is in violation of the RFC. AKA a bug. 
+stripe 2019-09-18 [05:33:31] <wsw> this in the industry called Card Auto Updater as every year there are around a certain percentage of the card would be expired. I could not remember the exact number but 40% >. So the same number with different expiry date is entirely possible and common 
+stripe 2019-09-18 [05:34:46] <clavaque> wsw: I see... I had no idea. :p When you say "it is common that you could use the saved card even when it is expired" do you mean that it's common to make that mistake, or that the card with the old expiration date attached to the customer gets charged although he entered a new one? should I consider it a new payment method if the expiration date is different? 
+stripe 2019-09-18 [05:36:53] <wsw> clavaque:  it is not a mistake. It is common in the sense there are 40% (again, just vague number, don't take my word for it) of the card  will go expire very year. And most of the issuing bank will send a replacement card to you with a new expiry date. 
+stripe 2019-09-18 [05:38:22] <clavaque> wsw: got it. But if the customer is now entering the renewed card with updated expiration date, it would be a mistake to use the old payment method I had for that customer's card, since it'd have the old expiration date. Right? 
+stripe 2019-09-18 [05:38:24] <wsw> So on the payment gateway like stripe side. Depends on the region, the issuing bank might send a CAU (card auto update) message to Stripe and Stripe will auto update the expiry date on the saved card so in this case the saved card could be used again with the new expiry date. You don't need to ask you customer to update their card 
+stripe 2019-09-18 [05:38:49] <clavaque> Oooh 
+stripe 2019-09-18 [05:39:19] <wsw> However, in case CAU is not available but you are charging the customer's saved card anyway, the charge might be approved by the bank because they know the card is issued and activated and low risk. They will judge it and approve or decline it accordingly 
+stripe 2019-09-18 [05:39:41] <clavaque> So the existing payment methods are updated for all Stripe customers on a regular basis from this CAU list? 
+stripe 2019-09-18 [05:39:55] <wsw> depends on the region and CAU avaiability 
+stripe 2019-09-18 [05:40:09] <wsw> in US, it is pretty common 
+stripe 2019-09-18 [05:40:14] <clavaque> I see, so the bank may not care about an outdated expiration date and approve the charge even... Interesting 
+stripe 2019-09-18 [05:40:40] <wsw> clavaque:  https://stripe.com/en-sg/blog/smarter-saved-cards . read this if you are interested to know more 
+stripe 2019-09-18 [05:41:00] <clavaque> Right... Well, EU, getting stricter with payments security, may start having an issue with the date mismatch in the near future, if not yet... 
+stripe 2019-09-18 [05:41:05] <clavaque> Thanks for the link! Will read. 
+stripe 2019-09-18 [05:41:29] <clavaque> I'll probably just create a new payment method if the date is different, just to play it safe and future-proof it... 
+stripe 2019-09-18 [05:41:53] <clavaque> wsw: thank you very much again for helping me understand this better. 
+stripe 2019-09-18 [05:42:02] <wsw> clavaque:  i think it is better to offer user an option to update their expiry date when the card is about to expire 
+stripe 2019-09-18 [05:42:35] <clavaque> Right. 
+stripe 2019-09-18 [05:42:35] <wsw> most likely your user would have received a new card 
+stripe 2019-09-18 [05:44:23] <Prashanth> Hello All, 
+stripe 2019-09-18 [05:44:31] <Prashanth> I am receiving the following error message 
+stripe 2019-09-18 [05:44:43] <Prashanth> The Payment method is already attached to a customer 
+stripe 2019-09-18 [05:44:49] <Prashanth> And hence all payments are failing. 
+stripe 2019-09-18 [05:45:12] <Prashanth> The same code was working perfectly on my local machine but when deployed to a testing env I am getting the following error 
+stripe 2019-09-18 [05:45:43] <Pav> Hello, I would like to ask about my ticket, someone can help me? I sent a email on the infosc about business question, however I didn't not receive any reply 
+stripe 2019-09-18 [05:45:57] <Pav> Someone from SD/Paymant is here? 
+stripe 2019-09-18 [05:45:59] <wsw> Prashanth:  payment_method (or token/card/source for this matter), they could only be used once. Used includes: attaching to customer, call pi/charge api and complete a transaction. 
+stripe 2019-09-18 [05:46:37] <Prashanth> Sure. does stripe.js not generate a new payment method everytime when called with createPaymentMethod ? 
+stripe 2019-09-18 [05:46:59] <wsw> Prashanth:  the error means you have saved a card (attach the payment_method) to a customer and then charge the payment_method without specifying the customer id. Thus it failed, because you are using it twice (one attach and one charge) 
+stripe 2019-09-18 [05:47:34] <wsw> Prashanth:  it does, however, your code logic might be using the same payment_method id generated before. 
+stripe 2019-09-18 [05:48:06] <timebox> Pav: Your best bet is to send in a message via the Support form here: https://support.stripe.com/contact/ 
+stripe 2019-09-18 [05:48:20] <Prashanth> wsw: Let me try to explain the flow -> 1. Create new payment method id from stripe.js function createPaymentMethod 
+stripe 2019-09-18 [05:48:41] <Prashanth> 2. Create a new customer and attach the payment method id 
+stripe 2019-09-18 [05:48:43] <wsw> Prashanth:  do you have a full source code? it is easier to read your logic there 
+stripe 2019-09-18 [05:48:47] <Prashanth> 3. Create a new subscription 
+stripe 2019-09-18 [05:48:49] <Prashanth> Sure 
+stripe 2019-09-18 [05:50:31] <wsw> Prashanth:  you could use https://pastebin.com/ to share your code 
+stripe 2019-09-18 [05:53:17] <Prashanth> https://gist.github.com/prashanthraghugse/fe30bfbf11ae85a20594b4d6b17753c4 
+stripe 2019-09-18 [05:53:41] <Prashanth> I just used gist from github. 
+stripe 2019-09-18 [05:53:45] <Prashanth> @wsw 
+stripe 2019-09-18 [05:53:50] <Prashanth> Will that be okay ? 
+stripe 2019-09-18 [05:58:07] <wsw> Prashanth:  the code looks good to me. you could simplify the payment_method attachment by using one API calls `stripe.CustomerCreate(email=email, paymetn_method=pament_method_id) ` 
+stripe 2019-09-18 [05:58:31] <Prashanth> Sure. 
+stripe 2019-09-18 [05:58:52] <Prashanth> @wsw: Just wanted to keep the concerning code seperated. 
+stripe 2019-09-18 [05:58:54] <wsw> Prashanth:  can you provide a payment_method id or even better some ids when you see the error. I could check the log. There must be somewhere the payment_method is used again 
+stripe 2019-09-18 [05:59:07] <mattwc> This was fun: `You cannot supply a PaymentMethod ID as the `source` parameter. Please use the `payment_method` parameter instead.` changes to `payment_method` then `Received unknown parameter: payment_method 
+stripe 2019-09-18 [05:59:25] <wsw> `pm_xxxx` or `req_xxx` or `sub_xxxx` that failed 
+stripe 2019-09-18 [06:00:25] <mattwc> i was passing card to create subscription, but create subscription doesn't  have a payment_method parameter 
+stripe 2019-09-18 [06:01:06] <Prashanth> wsw: pm_0FJwDU0xK6buyKafzJ0Mft5p 
+stripe 2019-09-18 [06:01:27] <wsw> mattwc:  there is a default_payment_method when creating subscription https://stripe.com/docs/api/subscriptions/create#create_subscription-default_payment_method 
+stripe 2019-09-18 [06:01:35] <wsw> you should use that. 
+stripe 2019-09-18 [06:01:51] <mattwc> yeah, just saying the error message is misleading, I can write up a email with the req ids to make a ticket 
+stripe 2019-09-18 [06:02:11] <Prashanth> wsw: req_7MzJCMZ6Kbmub6 Is the request id 
+stripe 2019-09-18 [06:02:18] <Prashanth> to create the payment method 
+stripe 2019-09-18 [06:02:20] <wsw> o yeah, right. thanks for pointing it out. yes, the error message is mis-leading mattwc 
+stripe 2019-09-18 [06:10:31] <wsw> Prashanth:  so, for the errors you are seeing, e.g. 
+stripe 2019-09-18 [06:10:31] <wsw> https://dashboard.stripe.com/test/logs/req_BWXWEwZOsgUZj0 (you are attaching pm_0FJgpg0xK6buyKafuJWS35BS to a customer) 
+stripe 2019-09-18 [06:10:31] <wsw> and then 12 seconds later you are attaching the same payment_method to another customer 
+stripe 2019-09-18 [06:10:31] <wsw> https://dashboard.stripe.com/test/logs/req_a0Fo1M7bESv6bQ 
+stripe 2019-09-18 [06:10:31] <wsw> and 8 minutes later you are attaching it again to another customer 
+stripe 2019-09-18 [06:10:32] <wsw> https://dashboard.stripe.com/test/logs/req_KvIdmBgicJlKAq 
+stripe 2019-09-18 [06:10:33] <wsw> are you caching the payment_method created in the frontend somewhere and attach it later? 
+stripe 2019-09-18 [06:10:48] <wsw> Login to your dashboard you could see these requests 
+stripe 2019-09-18 [06:11:05] <Prashanth> Hmm actually I do not cache it anywhere. 
+stripe 2019-09-18 [06:11:08] <Prashanth> wsw 
+stripe 2019-09-18 [06:11:16] <Prashanth> Let me recheck 
+stripe 2019-09-18 [06:13:35] <wsw> Or there is some logic or handler make your customer creation run multiple times 
+stripe 2019-09-18 [06:20:39] <Prashanth> wsw: Thank you for the help. Will check the code again. 
+stripe 2019-09-18 [06:21:48] <wsw> emoji-thumbs-up 
+stripe 2019-09-18 [06:35:36] <Pal> Hello :) 
+stripe 2019-09-18 [06:35:49] <Pal> Welcome, someone is here from stripe support/ 
+stripe 2019-09-18 [06:35:50] <Pal> *? 
+stripe 2019-09-18 [06:36:04] <timebox> Nobody here but us chickens. 
+stripe 2019-09-18 [06:36:05] <timebox> What's up? 
+stripe 2019-09-18 [06:36:10] <AxCrypt> Sorry, I lost connection... Did someone have something more to say on the issue of retrying 400 Bad Request responses in violation of the RFC? (Yes, there are many reasons why a server may return 400 Bad Request - and ALL of them should mean DO NOT TRY AGAIN . There are other status codes suitable for "try again later", for example 503.) ) 
+stripe 2019-09-18 [06:36:39] <Pal> @timebox I have a question about my ticket status, are you able to check this? 
+stripe 2019-09-18 [06:37:15] <Pal> I have't receive any information about status of my incident, and I'd to ask about that 
+stripe 2019-09-18 [06:37:55] <timebox> AxCrypt: This is probably a better topic for Support: https://support.stripe.com/contact/ 
+stripe 2019-09-18 [06:38:04] <Pal> And I need a any information for my CL about thatr 
+stripe 2019-09-18 [06:40:32] <timebox> Pal: There's not really much I can do here to help to be honest - I could maybe make a note on the ticket?  Do you want to dm me the email you wrote in from? 
+stripe 2019-09-18 [06:41:21] <Pal> What is your email? 
+stripe 2019-09-18 [06:41:34] <mattwc> i will say that I think for this case the retrying of the 400 is acceptable given what the alternative it 
+stripe 2019-09-18 [06:42:10] <timebox> Pal: supportsc  Do you want to direct message me with yours? 
+stripe 2019-09-18 [06:42:29] <Pal> @timebox Are you have a any contact to payment support? Or what is your emial? It's stricte taxes/billings topic 
+stripe 2019-09-18 [06:42:34] <AxCrypt> @timebox - Well... It was from  https://support.stripe.com/contact/ that I was directed here, as one option ;-)  . But, yes. 
+stripe 2019-09-18 [06:42:53] <Pal> Yes, if it's possible timebox :) 
+stripe 2019-09-18 [06:42:57] <mattwc> the RFC states "should not" which means that breaking the recommendation is acceptable when there are mitigating circumstances 
+stripe 2019-09-18 [06:43:29] <mattwc> In this case the circumstance is "a merchant pushed bad code, they sent 400s for thousands of webhooks, and now they have no idea the status of the transactions" 
+stripe 2019-09-18 [06:43:37] <timebox> Pal: There's probably nthing I can do, but if you dm me your email, I'll do whatever I can. 
+stripe 2019-09-18 [06:44:31] <timebox> Pal: Oh, there's nothing I can help with on that topic.  Log into your dashboard, then go to https://support.stripe.com/contact/ and send in an email, and someone will get back to you as soon as they can. 
+stripe 2019-09-18 [06:45:04] <Pal> Okay, I understand 
+stripe 2019-09-18 [06:45:35] <Pal> I do that however I haven't receive any information from support 
+stripe 2019-09-18 [06:45:44] <Pal> And it's important topic for me/CL/team : / 
+stripe 2019-09-18 [06:47:42] <AxCrypt> @mattwc - My point is that it's not a good idea to break the expectations of the protocol, and apparently there is no way to tell Stripe to back off - don't call me again! It appears they will retry any non 20x response code. 
+stripe 2019-09-18 [06:50:56] <mattwc> Though the behavior is what is documented at https://stripe.com/docs/webhooks/best-practices#acknowledge-events-immediately and the downsides of breaking the recommendation of the protocol outweighs the benefits of following it in this case. If you want Stripe to stop sending the request you could return any 200 status code you deem appropriate like a 202 
+stripe 2019-09-18 [06:51:51] <mattwc> Changing that behavior would definitely be a breaking change and break many integrations, since there are many merchants that rely on webhooks coming in a certain order and they use the 4XX status code to basically force the processing to occur in a certain manner 
+stripe 2019-09-18 [06:53:15] <AxCrypt> The 400-class of response codes all indicate that something is wrong at the client end. Of course, this may be right or wrong, but regardless the client should act accordingly and if you're told "There's something wrong with your request", you should not repeat it! There's a long history of vendors and providers who do their own take on accepted 
+stripe 2019-09-18 [06:53:15] <AxCrypt> and established standards, I think they all have regretted this in the end. Responding 202 is creative... Me no like, since our server will be lying through it's teeth just to make Stripe shut up... 
+stripe 2019-09-18 [06:54:48] <mattwc> I agree that 4XX should be that something is wrong with the client's request, unfortunately that's not what is seen in the wild 
+stripe 2019-09-18 [06:55:14] <AxCrypt> "since there are many merchants that rely on webhooks coming in a certain order and they use the 4XX status code to basically force the processing to occur in a certain manner" - if true, is exactly the reason why this should be fixed! By breaking the protocol expectations, you're encouraging the consumers to do the same, leading the way down the 
+stripe 2019-09-18 [06:55:15] <AxCrypt> slippery slope to massive problems in the future. 
+stripe 2019-09-18 [06:56:23] <mattwc> I think the number of cases where a merchant sends a 400 instead of a 500 sadly is much larger than merchant sends a 400 when they actually want Stripe to not send the webhook 
+stripe 2019-09-18 [06:59:22] <AxCrypt> Oh well... I realize this is not a discussion that I can "win" - I was hoping for some more insights, and actually the 202 idea is creative and worth considering, so thanks for that - although it means we'll need to follow Stripe and the other merchants down into "let's not follow the protocol"-hell. I realize it's too late - but if Stripe had done 
+stripe 2019-09-18 [06:59:22] <AxCrypt> the correct thing from the start, merchants would never had misused the 400 Bad Request code, learned something along the way and contributed to a more stable web. Thanks for the input! 
+stripe 2019-09-18 [06:59:24] <Keshav> hi.. how can i add my card token to the account 
+stripe 2019-09-18 [07:01:09] <timebox> Keshav: Hi!  What do you mean exactly? 
+stripe 2019-09-18 [07:01:17] <Keshav> My requirement is... I want instant pay capability.. User will add his debit card details and XX amount should be transfered 
+stripe 2019-09-18 [07:01:59] <mattwc> AxCrypt: its not merchants intentionally misusing the 400 
+stripe 2019-09-18 [07:02:38] <mattwc> its more that a merchant makes some code change and they start like blocking Stripe with a 401 unauthorized by accident or accidentally disable JSON post requests / things like that 
+stripe 2019-09-18 [07:03:53] <timebox> Keshav: You can read more about it here: https://stripe.com/docs/connect/payouts#instant-payouts 
+stripe 2019-09-18 [07:04:59] <viki9900> Hi 
+stripe 2019-09-18 [07:05:07] <timebox> Hello 
+stripe 2019-09-18 [07:05:42] <viki9900> I need to create customer when we do payment from stripe terminal 
+stripe 2019-09-18 [07:05:51] <viki9900> PaymentMethods of type 'card_present' cannot be saved to customers. 
+stripe 2019-09-18 [07:05:58] <viki9900> I am getting above error while doing that 
+stripe 2019-09-18 [07:07:40] <viki9900> I have done save customer payment method in web using payment method type = 'card' but in stripe terminal, In stripe terminal, i do not see any parameter to set payment method type = card and bydefault it takes card_present 
+stripe 2019-09-18 [07:08:16] <viki9900> https://github.com/theopolisme/react-native-stripe-terminal 
+stripe 2019-09-18 [07:08:41] <viki9900> This is react native library i am using for react native stripe terminal 
+stripe 2019-09-18 [07:08:44] <mattwc> viki9900: you need to use the generated_card from the first charge if charging up front or else do https://stripe.com/docs/terminal/payments/saving-cards#read-reusable-card 
+stripe 2019-09-18 [07:09:11] <mattwc> doing it the later way means you use the liability shift and cheaper interchange though for the first xn 
+stripe 2019-09-18 [07:09:13] <mattwc> *first txn 
+stripe 2019-09-18 [07:10:18] <timebox> On the whole status code topic: if you return a 400 and the request did not have "malformed syntax" ... then the RFC seems to imply that _you_ are technically the one in the wrong. \_()_/ 
+stripe 2019-09-18 [07:11:05] <timebox> (But also ... it's still a great question / good point \_()_/ ) 
+stripe 2019-09-18 [07:11:34] <viki9900> mattwc, So, in my flow stripe terminal create the payment intent with payment method = card_present with status with require_capture. 
+stripe 2019-09-18 [07:12:02] <viki9900> Can i change save customer payment method after that with some logic in my server code before capturing the payment intent 
+stripe 2019-09-18 [07:12:07] <viki9900> Can i  save customer payment method after that with some logic in my server code before capturing the payment intent 
+stripe 2019-09-18 [07:12:11] <mattwc> viki9900: so you would do the charge first and then you can save the generated_card to the customer 
+stripe 2019-09-18 [07:12:38] <viki9900> So, after capture the payment intent, i can do that you mean ? 
+stripe 2019-09-18 [07:13:01] <mattwc> viki9900: yes as described here https://stripe.com/docs/terminal/payments/saving-cards#saving-payment-intent-card 
+stripe 2019-09-18 [07:25:12] <Rikard> Hi! i have a question regarding the dashboard and the report for Billing -> Tax Rates -> Export -> Export Line Item Tax seems like our meta data field called productId is blank after may this year. Other meta data field are present with values. We have checked that we send this from our end. 
+stripe 2019-09-18 [07:25:49] <timebox> Rikard: Can you write into Support with that one so they can look into it for you?  https://support.stripe.com/contact/ 
+stripe 2019-09-18 [07:26:23] <Rikard> yes will do timebox 
+stripe 2019-09-18 [07:27:42] <viki9900> mattwc 
+stripe 2019-09-18 [07:30:13] <timebox> viki9900: What's up?  Do you have more questions? 
+stripe 2019-09-18 [07:30:56] <viki9900> This is the steps, i have follow, Create a payment intent with stripe terminal with payment_method_type=card_present and capture manual, then i have captured the payment intent in server 
+stripe 2019-09-18 [07:31:08] <viki9900> and then tried to attach customer to payment method 
+stripe 2019-09-18 [07:31:17] <viki9900> it still gave me same error. 
+stripe 2019-09-18 [07:33:24] <mattwc> How are you attaching the payment method? Are you using the generated_card from the charge object? 
+stripe 2019-09-18 [07:34:08] <AxCrypt> @mattw A 401 Unauthorized is something very different from a 400 Bad Request! A 401 Unauthorized SHOULD be retried, with appropriate credentials... 
+stripe 2019-09-18 [07:34:32] <viki9900> mattwc 
+stripe 2019-09-18 [07:34:33] <viki9900>  Map<String, Object> customerParams = new HashMap<String, Object>(); 
+stripe 2019-09-18 [07:34:47] <timebox> viki9900: Can you put your code in a Gist or Pastebin instead of straight in here?  Thanks! 
+stripe 2019-09-18 [07:34:56] <viki9900> sure 
+stripe 2019-09-18 [07:35:16] <viki9900> . 
+stripe 2019-09-18 [07:37:44] <viki9900> timebox, mattwc https://gist.github.com/vikassingh15/89a898e7e7b540491a501a33b4e81640 
+stripe 2019-09-18 [07:42:06] <andy62> Anyone awake? Wondering if anyone can tell me if this example is old, or if I'm missing something... https://stripe.com/docs/webhooks/signatures 
+stripe 2019-09-18 [07:43:19] <dsrs> Hello, how can I have access to the SCA Dashboard? 
+stripe 2019-09-18 [07:50:49] <timebox> dsrs: What do you mean? 
+stripe 2019-09-18 [07:52:24] <dsrs> @tim 
+stripe 2019-09-18 [07:52:31] <dsrs> timebox This dashboard: https://support.stripe.com/questions/strong-customer-authentication-sca-dashboard 
+stripe 2019-09-18 [07:52:33] <timebox> viki9900: Do you have a request ID for the failure you're seeing? 
+stripe 2019-09-18 [07:53:05] <timebox> dsrs: Have you accepted payments through Stripe that are in scope of Strong Customer Authentication (SCA) regulation? 
+stripe 2019-09-18 [07:53:25] <timebox> dsrs: Otherwise, you can try writing into Support to see if you can get access to it?  https://support.stripe.com/contact/ 
+stripe 2019-09-18 [07:53:31] <dsrs> timebox in test or live? 
+stripe 2019-09-18 [07:54:02] <timebox> dsrs: I don't know.  I'm not familiar with that dashboard, so I'd suggest writing into support. 
