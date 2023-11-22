@@ -64,7 +64,7 @@ python3 disentangle.py \
   > example-run.1.out 2>example-run.1.err
 ```
 
-Note - the arguments defining the network (hiiden, layers, nonlin), must match those given in training.
+Note - the arguments defining the network (hidden, layers, nonlin), must match those given in training.
 
 ### Evaluate
 
