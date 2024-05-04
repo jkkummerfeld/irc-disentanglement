@@ -5,7 +5,9 @@ import random
 import sys
 import string
 import time
-
+import torch
+from torch import nn
+import torch.nn.functional as F
 import numpy as np
 
 FEATURES = 77
@@ -32,7 +34,6 @@ parser.add_argument('--nonlin', choices=["tanh", "cube", "logistic", "relu", "el
 
 # Inference arguments
 parser.add_argument('--max-dist', default=101, type=int, help="Maximum number of messages to consider when forming a link (count includes the current message).")
-parser.add_argument('--dynet-autobatch', action='store_true', help="Use dynet autobatching.")
 
 # Training arguments
 parser.add_argument('--report-freq', default=5000, type=int, help="How frequently to evaluate on the development set.")
@@ -65,11 +66,6 @@ def header(args, out=sys.stdout):
 
 log_file = open(args.prefix +".log", 'w')
 header(sys.argv, [log_file, sys.stdout])
-
-import dynet_config
-batching = 1 if args.dynet_autobatch else 0
-dynet_config.set(mem=512, autobatch=batching, weight_decay=WEIGHT_DECAY, random_seed=args.seed)
-import dynet as dy 
 
 from reserved_words import reserved
 
@@ -430,11 +426,9 @@ def simplify_token(token):
     return ''.join(chars)
 
 
-class DyNetModel():
+class PyTorchModel(nn.Module):
     def __init__(self):
-        super().__init__()
-
-        self.model = dy.ParameterCollection()
+        super(PyTorchModel, self).__init__()
 
         input_size = FEATURES
 
@@ -452,77 +446,73 @@ class DyNetModel():
                 pretrained.append(vector)
             NWORDS = len(self.id_to_token)
             DIM_WORDS = len(pretrained[0])
-            self.pEmbedding = self.model.add_lookup_parameters((NWORDS, DIM_WORDS))
-            self.pEmbedding.init_from_array(np.array(pretrained))
+            self.pEmbedding = nn.Embedding.from_pretrained(torch.tensor(pretrained))
             input_size += 4 * DIM_WORDS
 
+        # Create hidden layers
         self.hidden = []
-        self.bias = []
-        self.hidden.append(self.model.add_parameters((HIDDEN, input_size)))
-        self.bias.append(self.model.add_parameters((HIDDEN,)))
+        self.hidden.append(nn.Linear(input_size, HIDDEN))
         for i in range(args.layers - 1):
-            self.hidden.append(self.model.add_parameters((HIDDEN, HIDDEN)))
-            self.bias.append(self.model.add_parameters((HIDDEN,)))
-        self.final_sum = self.model.add_parameters((HIDDEN, 1))
+            self.hidden.append(nn.Linear(HIDDEN, HIDDEN))
+        self.final_sum = nn.Linear(HIDDEN, 1)
 
-    def __call__(self, query, options, gold, lengths, query_no):
+    def forward(self, query, options, gold, lengths, query_no):
         if len(options) == 1:
             return None, 0
-
         final = []
         if args.word_vectors:
-            qvecs = [dy.lookup(self.pEmbedding, w) for w in query]
-            qvec_max = dy.emax(qvecs)
-            qvec_mean = dy.average(qvecs)
+            qvecs = self.pEmbedding(torch.tensor(query))
+            qvec_max = torch.max(qvecs, 0)[0]
+            qvec_mean = torch.mean(qvecs, 0)
         for otext, features in options:
-            inputs = dy.inputTensor(features)
+            inputs = torch.tensor(features)
             if args.word_vectors:
-                ovecs = [dy.lookup(self.pEmbedding, w) for w in otext]
-                ovec_max = dy.emax(ovecs)
-                ovec_mean = dy.average(ovecs)
-                inputs = dy.concatenate([inputs, qvec_max, qvec_mean, ovec_max, ovec_mean])
+                ovecs = self.pEmbedding(torch.tensor(otext))
+                ovec_max = torch.max(ovecs, 0)[0]
+                ovec_mean = torch.mean(ovecs, 0)
+                inputs = torch.cat([inputs, qvec_max, qvec_mean, ovec_max, ovec_mean])
             if args.drop > 0:
-                inputs = dy.dropout(inputs, args.drop)
+                inputs = F.dropout(inputs, args.drop)
             h = inputs
-            for pH, pB in zip(self.hidden, self.bias):
-                h = dy.affine_transform([pB, pH, h])
+            for layer in self.hidden:
+                h = layer(h)
                 if args.nonlin == "linear":
                     pass
                 elif args.nonlin == "tanh":
-                    h = dy.tanh(h)
+                    h = F.tanh(h)
                 elif args.nonlin == "cube":
-                    h = dy.cube(h)
+                    h = h ** 3
                 elif args.nonlin == "logistic":
-                    h = dy.logistic(h)
+                    h = F.sigmoid(h)
                 elif args.nonlin == "relu":
-                    h = dy.rectify(h)
+                    h = F.relu(h)
                 elif args.nonlin == "elu":
-                    h = dy.elu(h)
+                    h = F.elu(h)
                 elif args.nonlin == "selu":
-                    h = dy.selu(h)
+                    h = F.selu(h)
                 elif args.nonlin == "softsign":
-                    h = dy.softsign(h)
+                    h = h / (1 + torch.abs(h))
                 elif args.nonlin == "swish":
-                    h = dy.cmult(h, dy.logistic(h))
-            final.append(dy.sum_dim(h, [0]))
-
-        final = dy.concatenate(final)
-        nll = -dy.log_softmax(final)
+                    h = h * F.sigmoid(h)
+            final.append(torch.sum(h, 0))
+        final = torch.stack(final)
+        nll = -F.log_softmax(final, dim=0)
         dense_gold = []
         for i in range(len(options)):
             dense_gold.append(1.0 / len(gold) if i in gold else 0.0)
-        answer = dy.inputTensor(dense_gold)
-        loss = dy.transpose(answer) * nll
-        predicted_link = np.argmax(final.npvalue())
-
+        answer = torch.tensor(dense_gold)
+        loss = torch.dot(answer, nll)
+        predicted_link = np.argmax(final.data.numpy())
         return loss, predicted_link
-
+        
     def get_ids(self, words):
         ans = []
         backup = self.token_to_id.get('<unka>', 0)
         for word in words:
             ans.append(self.token_to_id.get(word, backup))
         return ans
+
+###############################################################################
 
 def do_instance(instance, train, model, optimizer, do_cache=True):
     name, query, gold, text_ascii, text_tok, info, target_info = instance
@@ -549,8 +539,9 @@ def do_instance(instance, train, model, optimizer, do_cache=True):
     loss = 0.0
     if train and example_loss is not None:
         example_loss.backward()
-        optimizer.update()
-        loss = example_loss.scalar_value()
+        optimizer.step()
+        optimizer.zero_grad()
+        loss = example_loss.item()
     predicted = output
     matched = (predicted in gold)
 
@@ -576,13 +567,14 @@ if args.random_sample and args.train:
 model = None
 optimizer = None
 scheduler = None
-model = DyNetModel()
+model = PyTorchModel()
 optimizer = None
 if args.opt == 'sgd':
-    optimizer = dy.SimpleSGDTrainer(model.model, learning_rate=LEARNING_RATE)
-elif args.opt == 'mom':
-    optimizer = dy.MomentumSGDTrainer(model.model, learning_rate=LEARNING_RATE, mom=MOMENTUM)
-optimizer.set_clip_threshold(args.clip)
+    optimizer = torch.optim.SGD(model.parameters(), lr=LEARNING_RATE, momentum=MOMENTUM)
+elif args.opt == 'adam':
+    optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
+nn.utils.clip_grad_norm_(model.parameters(), args.clip)
+
 
 prev_best = None
 if args.train:
@@ -591,7 +583,7 @@ if args.train:
         random.shuffle(train)
 
         # Update learning rate
-        optimizer.learning_rate = LEARNING_RATE / (1+ LEARNING_DECAY_RATE * epoch)
+        optimizer.param_groups[0]['lr'] = LEARNING_RATE / (1+ LEARNING_DECAY_RATE * epoch)
 
         # Loop over batches
         loss = 0
@@ -600,8 +592,6 @@ if args.train:
         loss_steps = 0
         for instance in train:
             step += 1
-
-            dy.renew_cg()
             ex_loss, matched, _ = do_instance(instance, True, model, optimizer)
             loss += ex_loss
             loss_steps += 1
@@ -615,7 +605,6 @@ if args.train:
                 dev_match = 0
                 dev_total = 0
                 for dinstance in dev:
-                    dy.renew_cg()
                     _, matched, _ = do_instance(dinstance, False, model, optimizer)
                     if matched:
                         dev_match += 1
@@ -628,7 +617,7 @@ if args.train:
 
                 if prev_best is None or prev_best[0] < dacc:
                     prev_best = (dacc, epoch)
-                    model.model.save(args.prefix + ".dy.model")
+                    torch.save(model.state_dict(), args.prefix + ".torch.model")
 
         if prev_best is not None and epoch - prev_best[1] > 5:
             break
@@ -637,12 +626,11 @@ if args.train:
 if prev_best is not None or args.model:
     location = args.model
     if location is None:
-        location = args.prefix +".dy.model"
+        location = args.prefix + ".torch.model"
     model.model.populate(location)
 
 # Run on test instances
 for instance in test:
-    dy.renew_cg()
     _, _, prediction = do_instance(instance, False, model, optimizer, False)
     print("{}:{} {} -".format(instance[0], instance[1], instance[1] - prediction))
 
