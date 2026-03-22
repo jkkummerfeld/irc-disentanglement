@@ -7,16 +7,22 @@ from torch.functional import F
 from model_types import EmbedInfo, Embedder, EmbedType, ForwardArgs, Prediction
 
 
+def linear(x: torch.Tensor) -> torch.Tensor:
+    return x
+
+def cube(x: torch.Tensor) -> torch.Tensor:
+    return x ** 3
+
 ARGS_TO_ACTIVATION = {
-    "linear":   lambda x: x,
+    "linear":   linear,
     "tanh":     F.tanh,
-    "cube":     lambda x: x,  # NOTE: dy.cube has no direct F equivalent; using identity
+    "cube":     cube,
     "logistic": torch.sigmoid,
     "relu":     F.relu,
     "elu":      F.elu,
     "selu":     F.selu,
     "softsign": F.softsign,
-    "swish":    F.silu,       # equivalent to x * sigmoid(x), same as dy.cmult(h, dy.logistic(h))
+    "swish":    F.silu,   # equivalent to x * sigmoid(x), same as dy.cmult(h, dy.logistic(h))
 }
 
 
