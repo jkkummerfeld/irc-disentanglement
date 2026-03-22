@@ -104,7 +104,7 @@ class ForwardModel(nn.Module):
         if len(args.options) == 1:
             return None, 0
 
-        option_features = [torch.tensor(option.features) for option in args.options]
+        option_features = [torch.tensor(option.features, dtype=torch.float64) for option in args.options]
         inputs = torch.stack(option_features)  # shape: (num_options, features_num)
 
         if self.embedder is not None:
