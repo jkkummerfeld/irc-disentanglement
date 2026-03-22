@@ -7,6 +7,12 @@ import string
 import time
 
 import numpy as np
+import torch
+import torch.optim as optim
+
+from library_wrappers import contextDynet, contextPytorch
+from model import ARGS_TO_ACTIVATION, ForwardModel, GloveEmbedder
+from model_types import ForwardArgs, ForwardMetaData, Option
 
 FEATURES = 77
 
@@ -29,10 +35,11 @@ parser.add_argument('--hidden', default=512, type=int, help="Number of dimension
 parser.add_argument('--word-vectors', help="File containing word embeddings.")
 parser.add_argument('--layers', default=2, type=int, help="Number of hidden layers in the model")
 parser.add_argument('--nonlin', choices=["tanh", "cube", "logistic", "relu", "elu", "selu", "softsign", "swish", "linear"], default='softsign', help="Non-linearity type.")
+parser.add_argument('--model-version', choices=["dynet", "pytorch"], default='pytorch', help="Model implementation to use.")
 
 # Inference arguments
 parser.add_argument('--max-dist', default=101, type=int, help="Maximum number of messages to consider when forming a link (count includes the current message).")
-parser.add_argument('--dynet-autobatch', action='store_true', help="Use dynet autobatching.")
+parser.add_argument('--dynet-autobatch', action='store_true', help="Use dynet autobatching (dynet only).")
 
 # Training arguments
 parser.add_argument('--report-freq', default=5000, type=int, help="How frequently to evaluate on the development set.")
@@ -66,10 +73,12 @@ def header(args, out=sys.stdout):
 log_file = open(args.prefix +".log", 'w')
 header(sys.argv, [log_file, sys.stdout])
 
-import dynet_config
-batching = 1 if args.dynet_autobatch else 0
-dynet_config.set(mem=512, autobatch=batching, weight_decay=WEIGHT_DECAY, random_seed=args.seed)
-import dynet as dy 
+# Conditionally import DyNet only when needed
+if args.model_version == "dynet":
+    import dynet_config
+    batching = 1 if args.dynet_autobatch else 0
+    dynet_config.set(mem=512, autobatch=batching, weight_decay=WEIGHT_DECAY, random_seed=args.seed)
+    import dynet as dy
 
 from reserved_words import reserved
 
@@ -369,7 +378,7 @@ def get_features(name, query_no, link_no, text_ascii, text_tok, info, target_inf
     features.append(link_no != query_no and common == 1)
     features.append(link_no != query_no and common > 1)
     features.append(link_no != query_no and common > 5)
-    
+
     # Convert to 0/1
     final_features = []
     for feature in features:
@@ -430,6 +439,10 @@ def simplify_token(token):
     return ''.join(chars)
 
 
+###############################################################################
+# DyNet model
+###############################################################################
+
 class DyNetModel():
     def __init__(self):
         super().__init__()
@@ -465,7 +478,7 @@ class DyNetModel():
             self.bias.append(self.model.add_parameters((HIDDEN,)))
         self.final_sum = self.model.add_parameters((HIDDEN, 1))
 
-    def __call__(self, query, options, gold, lengths, query_no):
+    def __call__(self, query, options, gold, query_no):
         if len(options) == 1:
             return None, 0
 
@@ -524,7 +537,12 @@ class DyNetModel():
             ans.append(self.token_to_id.get(word, backup))
         return ans
 
-def do_instance(instance, train, model, optimizer, do_cache=True):
+
+###############################################################################
+# Unified do_instance — handles both DyNet and PyTorch models
+###############################################################################
+
+def do_instance(instance, train, model, optimizer, context, do_cache=True):
     name, query, gold, text_ascii, text_tok, info, target_info = instance
 
     # Skip cases if we can't represent them
@@ -532,30 +550,63 @@ def do_instance(instance, train, model, optimizer, do_cache=True):
     if len(gold) == 0 and train:
         return 0, False, query
 
-    # Get features
-    options = []
-    query_ascii = text_ascii[query]
+    # Build options list (common to both model types)
     query_tok = model.get_ids(text_tok[query])
+    raw_options = []
     for i in range(query, max(-1, query - MAX_DIST), -1):
-        option_ascii = text_ascii[i]
         option_tok = model.get_ids(text_tok[i])
         features = get_features(name, query, i, text_ascii, text_tok, info, target_info, do_cache)
-        options.append((option_tok, features))
-    gold = [query - v for v in gold]
-    lengths = [len(sent) for sent in options]
+        raw_options.append((i, option_tok, features))
+    gold_relative = [query - v for v in gold]
 
-    # Run computation
-    example_loss, output = model(query_tok, options, gold, lengths, query)
-    loss = 0.0
-    if train and example_loss is not None:
-        example_loss.backward()
-        optimizer.update()
-        loss = example_loss.scalar_value()
-    predicted = output
-    matched = (predicted in gold)
+    if isinstance(model, DyNetModel):
+        options = [(tok, feat) for _, tok, feat in raw_options]
+        example_loss, predicted = model(query_tok, options, gold_relative, query)
+        loss = 0.0
+        if train and example_loss is not None:
+            example_loss.backward()
+            optimizer.update()
+            loss = example_loss.scalar_value()
+        if predicted is None:
+            return 0, False, query
+        matched = predicted in gold_relative
+        return loss, matched, predicted
 
-    return loss, matched, predicted
+    else:  # PyTorch
+        options = [
+            Option(
+                text_rep=tok,
+                features=feat,
+                text_ascii=' '.join(text_ascii[i]),
+            )
+            for i, tok, feat in raw_options
+        ]
+        forward_args = ForwardArgs(
+            query=query_tok,
+            options=options,
+            gold=gold_relative,
+            metadata=ForwardMetaData(query_idx=query, filename=name),
+            is_train=train,
+        )
+        if train:
+            context.zero_grad.zero_grad(optimizer)
+        with torch.set_grad_enabled(train):
+            prediction, example_loss = model(forward_args)
+        loss = 0.0
+        if train and prediction is not None:
+            example_loss.backward()
+            torch.nn.utils.clip_grad_value_(model.parameters(), args.clip)
+            optimizer.step()
+            loss = context.loss_ext.extract_loss(example_loss)
+        if prediction is None:
+            return 0, False, query
+        predicted = prediction.pred_idx.item()
+        matched = predicted in gold_relative
+        return loss, matched, predicted
 
+
+###############################################################################
+# Data loading
 ###############################################################################
 
 train = []
@@ -572,17 +623,43 @@ if args.random_sample and args.train:
     random.shuffle(train)
     train = train[:int(args.random_sample)]
 
+###############################################################################
 # Model and optimizer creation
+###############################################################################
+
 model = None
 optimizer = None
-scheduler = None
-model = DyNetModel()
-optimizer = None
-if args.opt == 'sgd':
-    optimizer = dy.SimpleSGDTrainer(model.model, learning_rate=LEARNING_RATE)
-elif args.opt == 'mom':
-    optimizer = dy.MomentumSGDTrainer(model.model, learning_rate=LEARNING_RATE, mom=MOMENTUM)
-optimizer.set_clip_threshold(args.clip)
+context = None
+
+if args.model_version == "dynet":
+    context = contextDynet
+    model = DyNetModel()
+    if args.opt == 'sgd':
+        optimizer = dy.SimpleSGDTrainer(model.model, learning_rate=LEARNING_RATE)
+    elif args.opt == 'mom':
+        optimizer = dy.MomentumSGDTrainer(model.model, learning_rate=LEARNING_RATE, mom=MOMENTUM)
+    optimizer.set_clip_threshold(args.clip)
+
+else:  # pytorch
+    context = contextPytorch
+    embedder = GloveEmbedder(args.word_vectors) if args.word_vectors else None
+    model = ForwardModel(
+        features_num=FEATURES,
+        hidden_layers_num=args.layers,
+        hidden_layer_size=HIDDEN,
+        dropout=DROP,
+        embedder=embedder,
+        activation_fn=ARGS_TO_ACTIVATION[args.nonlin],
+    )
+    if args.train:
+        if args.opt == 'sgd':
+            optimizer = optim.SGD(model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY)
+        elif args.opt == 'mom':
+            optimizer = optim.SGD(model.parameters(), lr=LEARNING_RATE, momentum=MOMENTUM, weight_decay=WEIGHT_DECAY)
+
+###############################################################################
+# Training
+###############################################################################
 
 prev_best = None
 if args.train:
@@ -591,9 +668,14 @@ if args.train:
         random.shuffle(train)
 
         # Update learning rate
-        optimizer.learning_rate = LEARNING_RATE / (1+ LEARNING_DECAY_RATE * epoch)
+        lr = LEARNING_RATE / (1 + LEARNING_DECAY_RATE * epoch)
+        if isinstance(model, DyNetModel):
+            optimizer.learning_rate = lr
+        else:
+            for param_group in optimizer.param_groups:
+                param_group['lr'] = lr
 
-        # Loop over batches
+        # Loop over instances
         loss = 0
         match = 0
         total = 0
@@ -601,22 +683,23 @@ if args.train:
         for instance in train:
             step += 1
 
-            dy.renew_cg()
-            ex_loss, matched, _ = do_instance(instance, True, model, optimizer)
+            if isinstance(model, DyNetModel):
+                dy.renew_cg()
+            ex_loss, matched, _ = do_instance(instance, True, model, optimizer, context)
             loss += ex_loss
             loss_steps += 1
             if matched:
                 match += 1
             total += len(instance[2])
 
-            # Partial results
+            # Partial evaluation on dev set
             if step % args.report_freq == 0:
-                # Dev pass
                 dev_match = 0
                 dev_total = 0
                 for dinstance in dev:
-                    dy.renew_cg()
-                    _, matched, _ = do_instance(dinstance, False, model, optimizer)
+                    if isinstance(model, DyNetModel):
+                        dy.renew_cg()
+                    _, matched, _ = do_instance(dinstance, False, model, optimizer, context)
                     if matched:
                         dev_match += 1
                     dev_total += len(dinstance[2])
@@ -628,23 +711,31 @@ if args.train:
 
                 if prev_best is None or prev_best[0] < dacc:
                     prev_best = (dacc, epoch)
-                    model.model.save(args.prefix + ".dy.model")
+                    suffix = ".dy.model" if isinstance(model, DyNetModel) else ".pt.model"
+                    context.model_io.save(model, args.prefix + suffix)
 
         if prev_best is not None and epoch - prev_best[1] > 5:
             break
 
-# Load model
+###############################################################################
+# Load best model
+###############################################################################
+
 if prev_best is not None or args.model:
     location = args.model
     if location is None:
-        location = args.prefix +".dy.model"
-    model.model.populate(location)
+        suffix = ".dy.model" if isinstance(model, DyNetModel) else ".pt.model"
+        location = args.prefix + suffix
+    context.model_io.load(model, location)
 
-# Run on test instances
+###############################################################################
+# Test inference
+###############################################################################
+
 for instance in test:
-    dy.renew_cg()
-    _, _, prediction = do_instance(instance, False, model, optimizer, False)
+    if isinstance(model, DyNetModel):
+        dy.renew_cg()
+    _, _, prediction = do_instance(instance, False, model, optimizer, context, False)
     print("{}:{} {} -".format(instance[0], instance[1], instance[1] - prediction))
 
 log_file.close()
-
